@@ -1,0 +1,441 @@
+[
+ {
+  "id": "republique_cest_moi",
+  "qui": "Mélenchon",
+  "phrase": "la république c'est moi",
+  "recherches": [
+   "Mélenchon La République c'est moi perquisition"
+  ]
+ },
+ {
+  "id": "personne_sacree",
+  "qui": "Mélenchon",
+  "phrase": "ma personne est sacrée",
+  "recherches": [
+   "Mélenchon ma personne est sacrée perquisition"
+  ]
+ },
+ {
+  "id": "accent_toulouse",
+  "qui": "Mélenchon",
+  "phrase": "qu'est-ce que ça veut dire",
+  "recherches": [
+   "Mélenchon se moque accent journaliste toulousaine"
+  ]
+ },
+ {
+  "id": "hologrammes",
+  "qui": "Mélenchon",
+  "phrase": "le temps des hologrammes",
+  "recherches": [
+   "Mélenchon hologramme Aubervilliers",
+   "Il est venu le temps des hologrammes Mélenchon"
+  ]
+ },
+ {
+  "id": "casse_toi",
+  "qui": "Sarkozy",
+  "phrase": "casse-toi pauvre con",
+  "recherches": [
+   "Sarkozy casse toi pauvre con salon de l'agriculture 2008"
+  ]
+ },
+ {
+  "id": "karcher",
+  "qui": "Sarkozy",
+  "phrase": "nettoyer au kärcher",
+  "recherches": [
+   "Sarkozy kärcher La Courneuve 2005"
+  ]
+ },
+ {
+  "id": "racaille",
+  "qui": "Sarkozy",
+  "phrase": "cette bande de racailles",
+  "recherches": [
+   "Sarkozy racaille Argenteuil 2005"
+  ]
+ },
+ {
+  "id": "amie_tchadienne",
+  "qui": "Morano",
+  "phrase": "plus noire qu'une arabe",
+  "recherches": [
+   "Nadine Morano meilleure amie tchadienne plus noire qu'une arabe",
+   "Nadine Morano C à vous je ne suis pas raciste amis arabes"
+  ]
+ },
+ {
+  "id": "race_blanche",
+  "qui": "Morano",
+  "phrase": "pays de race blanche",
+  "recherches": [
+   "Nadine Morano race blanche On n'est pas couché"
+  ]
+ },
+ {
+  "id": "pisse_dessus",
+  "qui": "Glucksmann",
+  "phrase": "on leur pisse dessus",
+  "recherches": [
+   "Glucksmann on leur pisse dessus Le Média",
+   "Glucksmann pisse dessus Mélenchon Le Pen"
+  ]
+ },
+ {
+  "id": "une_ministre_libre",
+  "qui": "Schiappa",
+  "phrase": "disposer de son corps",
+  "recherches": [
+   "Schiappa Playboy",
+   "Marlène Schiappa couverture Playboy réagit"
+  ]
+ },
+ {
+  "id": "probite_intacte",
+  "qui": "Schiappa",
+  "phrase": "probité",
+  "recherches": [
+   "Schiappa fonds Marianne probité",
+   "Marlène Schiappa commission d'enquête Sénat fonds Marianne"
+  ]
+ },
+ {
+  "id": "pas_de_facebook",
+  "qui": "Bardella",
+  "phrase": "compte facebook",
+  "recherches": [
+   "Bardella pas de compte Facebook Mediapart réaction",
+   "Bardella je n'ai pas de compte Facebook"
+  ]
+ },
+ {
+  "id": "fellation",
+  "qui": "Dati",
+  "phrase": "fellation",
+  "recherches": [
+   "Rachida Dati lapsus inflation Dimanche Plus",
+   "Dati lapsus fellation"
+  ]
+ },
+ {
+  "id": "siege_ciotti",
+  "qui": "Ciotti",
+  "phrase": "je suis le président",
+  "recherches": [
+   "Ciotti siège LR fermé président des Républicains juin 2024"
+  ]
+ },
+ {
+  "id": "effondrement_russe",
+  "qui": "Le Maire",
+  "phrase": "effondrement de l'économie russe",
+  "recherches": [
+   "Bruno Le Maire effondrement de l'économie russe franceinfo"
+  ]
+ },
+ {
+  "id": "ca_rigole_plus",
+  "qui": "Zemmour",
+  "phrase": "ça rigole plus",
+  "recherches": [
+   "Zemmour fusil Milipol journalistes ça rigole plus"
+  ]
+ },
+ {
+  "id": "bien_profond",
+  "qui": "Zemmour",
+  "phrase": "bien profond",
+  "recherches": [
+   "Zemmour doigt d'honneur Marseille et bien profond"
+  ]
+ },
+ {
+  "id": "barbecue",
+  "qui": "Rousseau",
+  "phrase": "symbole de virilité",
+  "recherches": [
+   "Sandrine Rousseau barbecue symbole de virilité"
+  ]
+ },
+ {
+  "id": "homme_deconstruit",
+  "qui": "Rousseau",
+  "phrase": "homme déconstruit",
+  "recherches": [
+   "Sandrine Rousseau je vis avec un homme déconstruit"
+  ]
+ },
+ {
+  "id": "sexe_escalopes",
+  "qui": "Roussel",
+  "phrase": "sexe des escalopes",
+  "recherches": [
+   "Roussel escalopes barbecue Rousseau",
+   "Fabien Roussel barbecue virilité réaction"
+  ]
+ },
+ {
+  "id": "traverse_la_rue",
+  "qui": "Macron",
+  "phrase": "je traverse la rue",
+  "recherches": [
+   "Macron je traverse la rue et je vous en trouve un"
+  ]
+ },
+ {
+  "id": "pognon_de_dingue",
+  "qui": "Macron",
+  "phrase": "pognon de dingue",
+  "recherches": [
+   "Macron pognon de dingue vidéo Élysée"
+  ]
+ },
+ {
+  "id": "gaulois_refractaires",
+  "qui": "Macron",
+  "phrase": "gaulois réfractaires",
+  "recherches": [
+   "Macron Gaulois réfractaires au changement Danemark"
+  ]
+ },
+ {
+  "id": "emmerder",
+  "qui": "Macron",
+  "phrase": "emmerder",
+  "recherches": [
+   "Macron j'ai très envie de les emmerder non vaccinés"
+  ]
+ },
+ {
+  "id": "cest_notre_projet",
+  "qui": "Macron",
+  "phrase": "c'est notre projet",
+  "recherches": [
+   "Macron meeting 2016 c'est notre projet Porte de Versailles"
+  ]
+ },
+ {
+  "id": "machiste_polluant",
+  "qui": "Doucet",
+  "phrase": "machiste",
+  "recherches": [
+   "Grégory Doucet Tour de France machiste et polluant"
+  ]
+ },
+ {
+  "id": "arbre_mort",
+  "qui": "Hurmic",
+  "phrase": "arbre mort",
+  "recherches": [
+   "Pierre Hurmic sapin de Noël arbre mort Bordeaux"
+  ]
+ },
+ {
+  "id": "bravitude",
+  "qui": "Royal",
+  "phrase": "bravitude",
+  "recherches": [
+   "Ségolène Royal bravitude Grande Muraille Chine 2007"
+  ]
+ },
+ {
+  "id": "blancos",
+  "qui": "Valls",
+  "phrase": "blancos",
+  "recherches": [
+   "Valls blancos Evry",
+   "Valls blancs whites blancos vidéo Direct 8"
+  ]
+ },
+ {
+  "id": "moi_president",
+  "qui": "Hollande",
+  "phrase": "moi président",
+  "recherches": [
+   "Hollande moi président débat 2012 anaphore"
+  ]
+ },
+ {
+  "id": "adversaire_finance",
+  "qui": "Hollande",
+  "phrase": "mon véritable adversaire",
+  "recherches": [
+   "Hollande discours du Bourget mon véritable adversaire la finance"
+  ]
+ },
+ {
+  "id": "courbe_chomage",
+  "qui": "Hollande",
+  "phrase": "inverser la courbe",
+  "recherches": [
+   "Hollande inverser la courbe du chômage fin 2013"
+  ]
+ },
+ {
+  "id": "tes_une_merde",
+  "qui": "Hanouna",
+  "phrase": "t'es une merde",
+  "recherches": [
+   "Hanouna Boyard t'es une merde TPMP"
+  ]
+ },
+ {
+  "id": "paquets_heures",
+  "qui": "Oudéa-Castéra",
+  "phrase": "paquets d'heures",
+  "recherches": [
+   "Oudéa-Castéra Stanislas paquets d'heures pas remplacées",
+   "Amélie Oudéa-Castéra école publique heures non remplacées"
+  ]
+ },
+ {
+  "id": "attaque_hopital",
+  "qui": "Castaner",
+  "phrase": "attaqué un hôpital",
+  "recherches": [
+   "Castaner Pitié-Salpêtrière attaque hôpital 1er mai"
+  ]
+ },
+ {
+  "id": "faux_billets",
+  "qui": "Darmanin",
+  "phrase": "faux billets",
+  "recherches": [
+   "Darmanin Stade de France 30 000 40 000 faux billets"
+  ]
+ },
+ {
+  "id": "conditions_lecornu",
+  "qui": "Lecornu",
+  "phrase": "conditions n'étaient",
+  "recherches": [
+   "Lecornu démission Matignon déclaration 6 octobre",
+   "Sébastien Lecornu démission discours conditions"
+  ]
+ },
+ {
+  "id": "mentir_president",
+  "qui": "Ndiaye",
+  "phrase": "formule maladroite",
+  "recherches": [
+   "Sibeth Ndiaye commission Sénat masques mentir",
+   "Sibeth Ndiaye j'assume de mentir"
+  ]
+ },
+ {
+  "id": "pain_au_chocolat",
+  "qui": "Copé",
+  "phrase": "pain au chocolat",
+  "recherches": [
+   "Copé pain au chocolat ramadan 2012"
+  ]
+ },
+ {
+  "id": "prix_pain_chocolat",
+  "qui": "Copé",
+  "phrase": "pain au chocolat",
+  "recherches": [
+   "Copé prix d'un pain au chocolat 2016 Europe 1"
+  ]
+ },
+ {
+  "id": "quand_il_y_en_a_un",
+  "qui": "Hortefeux",
+  "phrase": "quand il y en a un",
+  "recherches": [
+   "Hortefeux quand il y en a un ça va Auvergnat"
+  ]
+ },
+ {
+  "id": "de_gaulle_mis_en_examen",
+  "qui": "Fillon",
+  "phrase": "général de gaulle mis en examen",
+  "recherches": [
+   "Fillon qui imagine le général de Gaulle mis en examen Sablé"
+  ]
+ },
+ {
+  "id": "farine_francaise",
+  "qui": "Fillon",
+  "phrase": "la farine était française",
+  "recherches": [
+   "Fillon enfariné Strasbourg j'espère que la farine était française"
+  ]
+ },
+ {
+  "id": "pecressethon",
+  "qui": "Pécresse",
+  "phrase": "cinq millions",
+  "recherches": [
+   "Valérie Pécresse appel aux dons endettée 5 millions"
+  ]
+ },
+ {
+  "id": "debat_2017_dossiers",
+  "qui": "Le Pen",
+  "phrase": "alstom",
+  "recherches": [
+   "Le Pen Macron débat 2017 SFR Alstom",
+   "débat Macron Le Pen 2017 vous confondez"
+  ]
+ },
+ {
+  "id": "immunite_ouvriere",
+  "qui": "Poutou",
+  "phrase": "immunité ouvrière",
+  "recherches": [
+   "Poutou immunité ouvrière débat 2017 Le Pen"
+  ]
+ },
+ {
+  "id": "se_canto",
+  "qui": "Lassalle",
+  "phrase": "se canto",
+  "recherches": [
+   "Lassalle chante Assemblée nationale Sarkozy 2003",
+   "Jean Lassalle chant béarnais Assemblée"
+  ]
+ },
+ {
+  "id": "minable",
+  "qui": "Cohn-Bendit",
+  "phrase": "minable",
+  "recherches": [
+   "Cohn-Bendit Bayrou minable À vous de juger 2009"
+  ]
+ },
+ {
+  "id": "castro_ppda",
+  "qui": "PPDA",
+  "phrase": "fidel castro",
+  "recherches": [
+   "PPDA fausse interview Fidel Castro TF1 1991"
+  ]
+ },
+ {
+  "id": "punaises_de_lit",
+  "qui": "Praud",
+  "phrase": "punaises de lit",
+  "recherches": [
+   "Pascal Praud punaises de lit immigration CNews"
+  ]
+ },
+ {
+  "id": "saint_pierre",
+  "qui": "Wauquiez",
+  "phrase": "saint-pierre-et-miquelon",
+  "recherches": [
+   "Wauquiez enfermer les OQTF à Saint-Pierre-et-Miquelon",
+   "Wauquiez OQTF Saint-Pierre-et-Miquelon interview JDNews"
+  ]
+ },
+ {
+  "id": "trump_de_chez_wish",
+  "qui": "Bernard Briand",
+  "phrase": "trump de chez wish",
+  "recherches": [
+   "Bernard Briand Wauquiez Donald Trump de chez Wish Saint-Pierre-et-Miquelon"
+  ]
+ }
+]

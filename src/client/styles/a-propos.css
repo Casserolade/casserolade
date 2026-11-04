@@ -1,0 +1,60 @@
+/* The "À propos" page: a plain page outside the game, with the game's tokens and fonts. */
+@import './tokens.css';
+@import './fonts.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: radial-gradient(ellipse at 50% 0%, var(--color-surface-raised), var(--color-background) 70%) fixed;
+  color: var(--color-text);
+  font-family: var(--font-card);
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4) 4rem;
+}
+
+.masthead { display: flex; flex-direction: column; align-items: center; }
+.logo { margin: 0; line-height: 0; }
+.logo img { width: min(100%, 38rem); height: auto; filter: drop-shadow(0 18px 30px rgb(0 0 0 / 0.65)); }
+.tagline {
+  margin: -0.4rem 0 0;
+  color: var(--color-accent);
+  font: 400 1.6rem / 1 var(--font-number);
+  letter-spacing: 1px;
+  text-align: center;
+  -webkit-text-stroke: 5px var(--color-ink);
+  paint-order: stroke fill;
+}
+
+.note p { margin: 0; font-size: 1.15rem; line-height: 1.65; }
+.note p + p { margin-top: 1.1em; }
+.note .lead { font-size: 1.45rem; font-weight: 700; line-height: 1.4; }
+
+.contribute { width: 100%; padding: var(--space-5); border-radius: 22px; border: 3px solid var(--color-border); background: var(--color-surface); }
+.contribute h2 { margin: 0 0 0.6em; color: var(--color-accent); font: 400 1.9rem / 1.05 var(--font-number); letter-spacing: 1px; }
+.contribute ul { margin: 1em 0; padding-left: 1.2em; font-size: 1.1rem; line-height: 1.55; }
+.contribute li + li { margin-top: 0.5em; }
+.contribute a { color: var(--color-accent); font-weight: 700; }
+
+.play {
+  padding: 0.55em 1.8em;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+  font: 400 1.6rem / 1 var(--font-number);
+  letter-spacing: 1px;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgb(0 0 0 / 0.5);
+  transition: transform 0.15s ease;
+}
+.play:hover { transform: scale(1.05); }
+.play:focus-visible { outline: 3px solid var(--color-text); outline-offset: 3px; }

@@ -1,0 +1,48 @@
+# Casserolade en production sur webgourou.fr : un conteneur non root, derrière Traefik.
+# Traefik (projet compose « docker » de /home/debian/docker) fait le HTTPS avec Let's Encrypt
+# et rejoint les conteneurs par le réseau docker_default : aucun port n'est publié ici.
+services:
+  casserolade:
+    build: .
+    image: casserolade:latest
+    container_name: casserolade
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      ALLOWED_ORIGINS: https://casserolade.fr,https://www.casserolade.fr
+      TRUST_PROXY: "1"
+    volumes:
+      - mmr:/app/data/serveur
+    networks:
+      - traefik
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: docker_default
+      traefik.http.routers.casserolade.rule: "Host(`casserolade.fr`) || Host(`www.casserolade.fr`)"
+      traefik.http.routers.casserolade.entrypoints: websecure
+      traefik.http.routers.casserolade.tls.certresolver: leresolver
+      traefik.http.routers.casserolade.middlewares: casserolade-www,casserolade-gzip
+      traefik.http.middlewares.casserolade-www.redirectregex.regex: "^https://www\\.casserolade\\.fr/(.*)"
+      traefik.http.middlewares.casserolade-www.redirectregex.replacement: "https://casserolade.fr/$${1}"
+      traefik.http.middlewares.casserolade-www.redirectregex.permanent: "true"
+      traefik.http.middlewares.casserolade-gzip.compress: "true"
+      traefik.http.services.casserolade.loadbalancer.server.port: "8080"
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+networks:
+  traefik:
+    external: true
+    name: docker_default
+
+volumes:
+  mmr:

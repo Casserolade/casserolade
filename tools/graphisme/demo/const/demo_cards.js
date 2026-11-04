@@ -1,0 +1,40 @@
+// Demo only: in the game, card text is generated from src/data/cards.ts (session B).
+// Each quote is what the clip actually says. The clips still have to be listened to by the user.
+export const DEMO_CARDS = [
+  {
+    id: 'macron',
+    name: 'Emmanuel Macron',
+    camp: 'macronie',
+    tier: '5',
+    attack: 9,
+    health: 10,
+    text: 'Ni droite ni gauche.\n49.3 : +2/+2 à tous les alliés.',
+    quote: 'On met un pognon de dingue dans des minima sociaux.',
+    quoteSource: 'Vidéo de l’Élysée, juin 2018',
+    sound: 'pognon_de_dingue',
+  },
+  {
+    id: 'sarkozy',
+    name: 'Nicolas Sarkozy',
+    camp: 'republicains',
+    tier: '5',
+    attack: 7,
+    health: 8,
+    text: 'Immunité.\n49.3 : +1/+1 à tous les alliés.',
+    quote: 'Vous en avez assez de cette bande de racailles ?',
+    quoteSource: 'Argenteuil, octobre 2005',
+    sound: 'racaille',
+  },
+  {
+    id: 'lepen',
+    name: 'Marine Le Pen',
+    camp: 'rn',
+    tier: '5',
+    attack: 6,
+    health: 7,
+    text: 'Héritage : transmet ses forces à l’allié suivant.\n49.3 : +1/+1 aux voisins.',
+    quote: 'Pour Alstom, vous avez dit à M. Dupont-Aignan, c’est pas moi.',
+    quoteSource: 'Débat d’entre-deux-tours, mai 2017',
+    sound: 'debat_2017_dossiers',
+  },
+];

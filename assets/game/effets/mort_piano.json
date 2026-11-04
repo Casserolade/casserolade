@@ -1,0 +1,16 @@
+{
+ "atlas": "effets/mort_piano.webp",
+ "cols": 6,
+ "rows": 4,
+ "images": 24,
+ "cell": [
+  384,
+  480
+ ],
+ "fps": 12,
+ "ancre": [
+  0.5,
+  1.0
+ ],
+ "impact": 3
+}

@@ -1,0 +1,6348 @@
+[
+ {
+  "id": "republique_cest_moi",
+  "qui": "Mélenchon",
+  "phrase": "la république c'est moi",
+  "recherches": [
+   "Mélenchon La République c'est moi perquisition"
+  ],
+  "candidats": [
+   {
+    "video": "ObgDNk2GXEk",
+    "duree": "110",
+    "chaine": "euronews (en français)",
+    "titre": "Mélenchon and the \"political police\": images of the brawl",
+    "url": "https://www.youtube.com/watch?v=ObgDNk2GXEk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 17.6,
+    "fin": 20.1,
+    "texte": "policier la republique chez moi c est"
+   },
+   {
+    "video": "Ex_j9_KHRpI",
+    "duree": "173",
+    "chaine": "INA Politique",
+    "titre": "Jean-Luc Mélenchon « La République, c’est moi !  C’était ridicule, je le sais bien » | INA adn",
+    "url": "https://www.youtube.com/watch?v=Ex_j9_KHRpI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 86.9,
+    "fin": 88.0,
+    "texte": "ou jeudi la republique c est moi"
+   },
+   {
+    "video": "U65CDIO03do",
+    "duree": "2454",
+    "chaine": "Quotidien",
+    "titre": "Perquisitions à la France Insoumise: l'intégralité des images de Quotidien. Sans montage.",
+    "url": "https://www.youtube.com/watch?v=U65CDIO03do",
+    "chaine_connue": true
+   },
+   {
+    "video": "fDqZ8Q-QAsM",
+    "duree": "319",
+    "chaine": "LeHuffPost",
+    "titre": "Philippe répond à la colère de Mélenchon après les perquisitions",
+    "url": "https://www.youtube.com/watch?v=fDqZ8Q-QAsM",
+    "chaine_connue": true
+   },
+   {
+    "video": "i0hN9OC2yIs",
+    "duree": "113",
+    "chaine": "LeHuffPost",
+    "titre": "Le coup de colère de Jean-Luc Mélenchon face aux perquisitions de police",
+    "url": "https://www.youtube.com/watch?v=i0hN9OC2yIs",
+    "chaine_connue": true
+   },
+   {
+    "video": "KQiSMszaLcA",
+    "duree": "168",
+    "chaine": "LeHuffPost",
+    "titre": "Le double visage de Jean-Luc Mélenchon lors des perquisitions chez lui et à LFI",
+    "url": "https://www.youtube.com/watch?v=KQiSMszaLcA",
+    "chaine_connue": true
+   },
+   {
+    "video": "hnfvyaCd79g",
+    "duree": "153",
+    "chaine": "Le Monde",
+    "titre": "Mélenchon filme la perquisition de son domicile",
+    "url": "https://www.youtube.com/watch?v=hnfvyaCd79g",
+    "chaine_connue": true
+   },
+   {
+    "video": "DZBw9seomL4",
+    "duree": "72",
+    "chaine": "CNEWS",
+    "titre": "Perquisitions à LFI : Jean-Luc Mélenchon et ses proches fixés sur leur sort lundi",
+    "url": "https://www.youtube.com/watch?v=DZBw9seomL4",
+    "chaine_connue": true
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/republique_cest_moi/ObgDNk2GXEk.mp3",
+    "video": "ObgDNk2GXEk",
+    "url": "https://www.youtube.com/watch?v=ObgDNk2GXEk&t=17s",
+    "chaine": "euronews (en français)",
+    "titre": "Mélenchon and the \"political police\": images of the brawl",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "policier la republique chez moi c est",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/republique_cest_moi/Ex_j9_KHRpI.mp3",
+    "video": "Ex_j9_KHRpI",
+    "url": "https://www.youtube.com/watch?v=Ex_j9_KHRpI&t=86s",
+    "chaine": "INA Politique",
+    "titre": "Jean-Luc Mélenchon « La République, c’est moi !  C’était ridicule, je le sais bien » | INA adn",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "ou jeudi la republique c est moi",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "personne_sacree",
+  "qui": "Mélenchon",
+  "phrase": "ma personne est sacrée",
+  "recherches": [
+   "Mélenchon ma personne est sacrée perquisition"
+  ],
+  "candidats": [
+   {
+    "video": "ObgDNk2GXEk",
+    "duree": "110.0",
+    "chaine": "euronews (en français)",
+    "titre": "Mélenchon and the \"political police\": images of the brawl",
+    "url": "https://www.youtube.com/watch?v=ObgDNk2GXEk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "i0hN9OC2yIs",
+    "duree": "113.0",
+    "chaine": "LeHuffPost",
+    "titre": "Le coup de colère de Jean-Luc Mélenchon face aux perquisitions de police",
+    "url": "https://www.youtube.com/watch?v=i0hN9OC2yIs",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 104.0,
+    "fin": 105.6,
+    "texte": "regarder ca a ma personne est"
+   },
+   {
+    "video": "hnfvyaCd79g",
+    "duree": "153.0",
+    "chaine": "Le Monde",
+    "titre": "Mélenchon filme la perquisition de son domicile",
+    "url": "https://www.youtube.com/watch?v=hnfvyaCd79g",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 17.0,
+    "fin": 19.0,
+    "texte": "me touche ma personne est sacree"
+   },
+   {
+    "video": "U65CDIO03do",
+    "duree": "2454.0",
+    "chaine": "Quotidien",
+    "titre": "Perquisitions à la France Insoumise: l'intégralité des images de Quotidien. Sans montage.",
+    "url": "https://www.youtube.com/watch?v=U65CDIO03do",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 1907.3,
+    "fin": 1908.6,
+    "texte": "personne des parlementaires elle est sacree"
+   },
+   {
+    "video": "QgAtm73r4_8",
+    "duree": "70.0",
+    "chaine": "LeHuffPost",
+    "titre": "Jean-Luc Mélenchon, énervé après une question sur sa vie privée",
+    "url": "https://www.youtube.com/watch?v=QgAtm73r4_8",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "i--3EH46KfM",
+    "duree": "90.0",
+    "chaine": "JEAN-LUC MÉLENCHON",
+    "titre": "«ON NE PEUT CROIRE EN LA PAROLE DE PERSONNE, ICI» - Mélenchon",
+    "url": "https://www.youtube.com/watch?v=i--3EH46KfM",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "upWu3-4DA9g",
+    "duree": "9.0",
+    "chaine": "Top Memes France",
+    "titre": "Jean-Luc Mélenchon - \"Don't touch me, I am inviolable\"",
+    "url": "https://www.youtube.com/watch?v=upWu3-4DA9g",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 4.1,
+    "fin": 6.1,
+    "texte": "me touche ma personne est sacree"
+   },
+   {
+    "video": "BqDAfoa61bE",
+    "duree": "198.0",
+    "chaine": "Jean Robert",
+    "titre": "J.-L. Mélenchon diffuse en direct la perquisition à son domicile",
+    "url": "https://www.youtube.com/watch?v=BqDAfoa61bE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/personne_sacree/upWu3-4DA9g.mp3",
+    "video": "upWu3-4DA9g",
+    "url": "https://www.youtube.com/watch?v=upWu3-4DA9g&t=4s",
+    "chaine": "Top Memes France",
+    "titre": "Jean-Luc Mélenchon - \"Don't touch me, I am inviolable\"",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "me touche ma personne est sacree",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "accent_toulouse",
+  "qui": "Mélenchon",
+  "phrase": "qu'est-ce que ça veut dire",
+  "recherches": [
+   "Mélenchon se moque accent journaliste toulousaine"
+  ],
+  "candidats": [
+   {
+    "video": "fpoaodwmkJc",
+    "duree": "48.0",
+    "chaine": "LeHuffPost",
+    "titre": "Jean-Luc Mélenchon se moque de l’accent d’une journaliste",
+    "url": "https://www.youtube.com/watch?v=fpoaodwmkJc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 8.2,
+    "fin": 11.7,
+    "texte": "la republique qu est ce que ca veut dire"
+   },
+   {
+    "video": "Zk7Yq4cxoUI",
+    "duree": "79.0",
+    "chaine": "BFMTV",
+    "titre": "Dans le sud, la moquerie de Jean-Luc Mélenchon sur l'accent d'une journaliste fait réagir",
+    "url": "https://www.youtube.com/watch?v=Zk7Yq4cxoUI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.71
+   },
+   {
+    "video": "q9M38VPnzi0",
+    "duree": "43.0",
+    "chaine": "LeHuffPost",
+    "titre": "Mélenchon s'excuse de s'être moqué de l'accent d'une journaliste",
+    "url": "https://www.youtube.com/watch?v=q9M38VPnzi0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.43
+   },
+   {
+    "video": "P0BjLhXdVvU",
+    "duree": "42.0",
+    "chaine": "BFMTV",
+    "titre": "\"Qu'esseuh-que ça veut direuh ?\", gêné par une question, Mélenchon moque l'accent d'une journaliste",
+    "url": "https://www.youtube.com/watch?v=P0BjLhXdVvU",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "Ot43lQvewCg",
+    "duree": "246.0",
+    "chaine": "France Inter",
+    "titre": "Jean-Luc Mélenchon s'est moqué de l'accent d'une journaliste - Le journal de presque 17h17",
+    "url": "https://www.youtube.com/watch?v=Ot43lQvewCg",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "xgXxhLAvCzc",
+    "duree": "65.0",
+    "chaine": "INA Politique",
+    "titre": "2018 : Jean-Luc Mélenchon, méprisant avec l'accent du sud ? | Archive INA",
+    "url": "https://www.youtube.com/watch?v=xgXxhLAvCzc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 20.5,
+    "fin": 23.7,
+    "texte": "week end qu est ce que ca veut dire"
+   },
+   {
+    "video": "bw-dlammJFs",
+    "duree": "37.0",
+    "chaine": "BFMTV",
+    "titre": "\"You are very unpleasant.\" Mélenchon's latest jab at a journalist before his hearing",
+    "url": "https://www.youtube.com/watch?v=bw-dlammJFs",
+    "chaine_connue": true
+   },
+   {
+    "video": "PzGV53-aF1Q",
+    "duree": "89.0",
+    "chaine": "On Vidéo",
+    "titre": "Encore un dérapage : J-L Mélenchon a ouvertement moqué une journaliste et la réponse de la \"SNJ\"",
+    "url": "https://www.youtube.com/watch?v=PzGV53-aF1Q",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/accent_toulouse/fpoaodwmkJc.mp3",
+    "video": "fpoaodwmkJc",
+    "url": "https://www.youtube.com/watch?v=fpoaodwmkJc&t=8s",
+    "chaine": "LeHuffPost",
+    "titre": "Jean-Luc Mélenchon se moque de l’accent d’une journaliste",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "la republique qu est ce que ca veut dire",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/accent_toulouse/xgXxhLAvCzc.mp3",
+    "video": "xgXxhLAvCzc",
+    "url": "https://www.youtube.com/watch?v=xgXxhLAvCzc&t=20s",
+    "chaine": "INA Politique",
+    "titre": "2018 : Jean-Luc Mélenchon, méprisant avec l'accent du sud ? | Archive INA",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "week end qu est ce que ca veut dire",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "hologrammes",
+  "qui": "Mélenchon",
+  "phrase": "le temps des hologrammes",
+  "recherches": [
+   "Mélenchon hologramme Aubervilliers",
+   "Il est venu le temps des hologrammes Mélenchon"
+  ],
+  "candidats": [
+   {
+    "video": "wIZzltJqW20",
+    "duree": "83",
+    "chaine": "CNEWS",
+    "titre": "Le meeting en hologramme de Jean-Luc Mélenchon",
+    "url": "https://www.youtube.com/watch?v=wIZzltJqW20",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "TRfCQkkF418",
+    "duree": "292",
+    "chaine": "France Inter",
+    "titre": "L’hologramme de Jean-Luc Mélenchon - Le Moment Meurice",
+    "url": "https://www.youtube.com/watch?v=TRfCQkkF418",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "m_aZqvzmpHE",
+    "duree": "75",
+    "chaine": "CNEWS",
+    "titre": "Le meeting en hologramme réussi de Jean-Luc Mélenchon",
+    "url": "https://www.youtube.com/watch?v=m_aZqvzmpHE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "xUveOP-DdPg",
+    "duree": "56",
+    "chaine": "euronews (en français)",
+    "titre": "Hamon, Mélenchon et son hologramme projettent la campagne à gauche",
+    "url": "https://www.youtube.com/watch?v=xUveOP-DdPg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "jQlX3SrRqfk",
+    "duree": "175",
+    "chaine": "euronews (en français)",
+    "titre": "Vidéo 360° : une plongée au coeur des meetings de Macron, Mélenchon et Le Pen",
+    "url": "https://www.youtube.com/watch?v=jQlX3SrRqfk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "6MyVQ_K2Cm4",
+    "duree": "34",
+    "chaine": "BFMTV",
+    "titre": "Présidentielle: Jean-Luc Mélenchon à Dijon et dans six autres villes en hologramme",
+    "url": "https://www.youtube.com/watch?v=6MyVQ_K2Cm4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "HzB7rT5_Ur4",
+    "duree": "80",
+    "chaine": "CNEWS",
+    "titre": "Mélenchon se dédouble, en hologramme",
+    "url": "https://www.youtube.com/watch?v=HzB7rT5_Ur4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "EyB-NHspN-E",
+    "duree": "82",
+    "chaine": "Public Sénat",
+    "titre": "Jean-Luc Mélenchon doubles as a hologram in Paris",
+    "url": "https://www.youtube.com/watch?v=EyB-NHspN-E",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "7byx-4kJ4G8",
+    "duree": "4858",
+    "chaine": "Abdelkader Bensadat",
+    "titre": "Jean-Luc Mélenchon à Lyon (et en hologramme à Aubervilliers)",
+    "url": "https://www.youtube.com/watch?v=7byx-4kJ4G8",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "mGXcu6DaVCs",
+    "duree": "148",
+    "chaine": "Le Point",
+    "titre": "Dans les coulisses du meeting en hologramme de Mélenchon",
+    "url": "https://www.youtube.com/watch?v=mGXcu6DaVCs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "73iwwqOufTw",
+    "duree": "115",
+    "chaine": "Etudiants Insoumis",
+    "titre": "Meeting en hologramme de JEAN-LUC MÉLENCHON : Qu'en avez-vous pensé ?",
+    "url": "https://www.youtube.com/watch?v=73iwwqOufTw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "_oqWpFFS8dI",
+    "duree": "7577",
+    "chaine": "JEAN-LUC MÉLENCHON",
+    "titre": "MÉLENCHON : MULTI-MEETING EN HOLOGRAMME - #LaForceDuPeuple",
+    "url": "https://www.youtube.com/watch?v=_oqWpFFS8dI",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "H5ABEnpqccQ",
+    "duree": "6487",
+    "chaine": "JEAN-LUC MÉLENCHON",
+    "titre": "Multi-meeting hologram of Jean-Luc Mélenchon - #MelenchonHolograms",
+    "url": "https://www.youtube.com/watch?v=H5ABEnpqccQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "9m4csPd0QM4",
+    "duree": "79",
+    "chaine": "L'Express",
+    "titre": "How Mélenchon’s hologram works",
+    "url": "https://www.youtube.com/watch?v=9m4csPd0QM4",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "eKMqN1ipQaQ",
+    "duree": "155",
+    "chaine": "CGTN Français",
+    "titre": "Meeting en hologrammes de Jean-Luc Mélenchon",
+    "url": "https://www.youtube.com/watch?v=eKMqN1ipQaQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "d7djLxIsLzA",
+    "duree": "43",
+    "chaine": "Sceptile",
+    "titre": "JEAN LUC MÉLENCHON - HOLOGRAMME APPARITION.",
+    "url": "https://www.youtube.com/watch?v=d7djLxIsLzA",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/hologrammes/HzB7rT5_Ur4.entier.mp3",
+    "video": "HzB7rT5_Ur4",
+    "url": "https://www.youtube.com/watch?v=HzB7rT5_Ur4",
+    "chaine": "CNEWS",
+    "titre": "Mélenchon se dédouble, en hologramme",
+    "chaine_connue": true,
+    "score": 0.5,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/hologrammes/wIZzltJqW20.entier.mp3",
+    "video": "wIZzltJqW20",
+    "url": "https://www.youtube.com/watch?v=wIZzltJqW20",
+    "chaine": "CNEWS",
+    "titre": "Le meeting en hologramme de Jean-Luc Mélenchon",
+    "chaine_connue": true,
+    "score": 0.25,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": null
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "casse_toi",
+  "qui": "Sarkozy",
+  "phrase": "casse-toi pauvre con",
+  "recherches": [
+   "Sarkozy casse toi pauvre con salon de l'agriculture 2008"
+  ],
+  "candidats": [
+   {
+    "video": "8ZJqUxbyNJQ",
+    "duree": "196",
+    "chaine": "webtvnice",
+    "titre": "Sarkozy : casse toi pauvre con! Salon Agriculture 2008",
+    "url": "https://www.youtube.com/watch?v=8ZJqUxbyNJQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "K2eMVdxNhOg",
+    "duree": "46",
+    "chaine": "ZeDedalus",
+    "titre": "Sarkozy au salon de l'agriculture : \"Casse-toi pauvre con\"",
+    "url": "https://www.youtube.com/watch?v=K2eMVdxNhOg",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "Piu9J-_GZRI",
+    "duree": "46",
+    "chaine": "luigi91150",
+    "titre": "SARKO au salon de l'agriculture 2008 \"Casse toi pauvre con\"",
+    "url": "https://www.youtube.com/watch?v=Piu9J-_GZRI",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "G4dShMeu34A",
+    "duree": "46",
+    "chaine": "hugo cohen",
+    "titre": "Sarkozy au salon de l'agriculture : \"Casse toi pauvre con !\"",
+    "url": "https://www.youtube.com/watch?v=G4dShMeu34A",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "7mIIu59M_Z0",
+    "duree": "135",
+    "chaine": "torapamavoa404",
+    "titre": "Sarkozy Casse toi Pauvre Con Salon Agriculture",
+    "url": "https://www.youtube.com/watch?v=7mIIu59M_Z0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "jgO1Obkkr_0",
+    "duree": "85",
+    "chaine": "LaNouille974",
+    "titre": "\"Casse-toi pôv con\" : Nicolas Sarkozy insulté par un manifestant à La Réunion",
+    "url": "https://www.youtube.com/watch?v=jgO1Obkkr_0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 21.4,
+    "fin": 22.5,
+    "texte": "petite phrase casse toi pauv con"
+   },
+   {
+    "video": "vQCSoZaCGcA",
+    "duree": "97",
+    "chaine": "LaNouille974",
+    "titre": "\"Casse-toi pôv con\" : Nicolas Sarkozy en campagne à La Réunion - TF1",
+    "url": "https://www.youtube.com/watch?v=vQCSoZaCGcA",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "rFQ0OqVNth8",
+    "duree": "178",
+    "chaine": "webnoz",
+    "titre": "SARKOZY au Salon de l'AGRICULTURE",
+    "url": "https://www.youtube.com/watch?v=rFQ0OqVNth8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/casse_toi/jgO1Obkkr_0.mp3",
+    "video": "jgO1Obkkr_0",
+    "url": "https://www.youtube.com/watch?v=jgO1Obkkr_0&t=21s",
+    "chaine": "LaNouille974",
+    "titre": "\"Casse-toi pôv con\" : Nicolas Sarkozy insulté par un manifestant à La Réunion",
+    "chaine_connue": false,
+    "score": 0.75,
+    "texte": "petite phrase casse toi pauv con",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "karcher",
+  "qui": "Sarkozy",
+  "phrase": "nettoyer au kärcher",
+  "recherches": [
+   "Sarkozy kärcher La Courneuve 2005"
+  ],
+  "candidats": [
+   {
+    "video": "9RF7m_HQsCs",
+    "duree": "116",
+    "chaine": "Ina Styles",
+    "titre": "Nicolas Sarkozy à La Courneuve | Archive INA",
+    "url": "https://www.youtube.com/watch?v=9RF7m_HQsCs",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "1hqKgYdWRfI",
+    "duree": "150",
+    "chaine": "INA Politique",
+    "titre": "Quand Nicolas Sarkozy voulait nettoyer la banlieue au Kärcher | Archive INA",
+    "url": "https://www.youtube.com/watch?v=1hqKgYdWRfI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "L3uKF7ex0dc",
+    "duree": "598",
+    "chaine": "INA Actu",
+    "titre": "Why did Nicolas Sarkozy promise to \"clean the Cité des 4000 with a pressure washer\"?",
+    "url": "https://www.youtube.com/watch?v=L3uKF7ex0dc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "7FPr4VbBOBg",
+    "duree": "145",
+    "chaine": "INA Société",
+    "titre": "Nicolas Sarkozy at the Cité des 4000 | INA Archive",
+    "url": "https://www.youtube.com/watch?v=7FPr4VbBOBg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "2VK19JZUV9A",
+    "duree": "430",
+    "chaine": "INA Arditube",
+    "titre": "Jamel Debbouze : Sarkozy et le Kärcher en banlieue  chez Thierry Ardisson | INA Arditube",
+    "url": "https://www.youtube.com/watch?v=2VK19JZUV9A",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 129.9,
+    "fin": 130.8,
+    "texte": "vais vous nettoyer au karcher"
+   },
+   {
+    "video": "Vr5iQM2d4pE",
+    "duree": "271",
+    "chaine": "Ina Styles",
+    "titre": "[Plateau invité 1ère partie : Nicolas Sarkozy]",
+    "url": "https://www.youtube.com/watch?v=Vr5iQM2d4pE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "RMCuWdLz2Nk",
+    "duree": "133",
+    "chaine": "Ina Styles",
+    "titre": "Nicolas Sarkoszy promet de \"nettoyer\" La Courneuve | Archive INA",
+    "url": "https://www.youtube.com/watch?v=RMCuWdLz2Nk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "PLEHpjEdZ-A",
+    "duree": "117",
+    "chaine": "INA Politique",
+    "titre": "Controversy Surrounding Nicolas Sarkozy",
+    "url": "https://www.youtube.com/watch?v=PLEHpjEdZ-A",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/karcher/2VK19JZUV9A.mp3",
+    "video": "2VK19JZUV9A",
+    "url": "https://www.youtube.com/watch?v=2VK19JZUV9A&t=129s",
+    "chaine": "INA Arditube",
+    "titre": "Jamel Debbouze : Sarkozy et le Kärcher en banlieue  chez Thierry Ardisson | INA Arditube",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "vais vous nettoyer au karcher",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "racaille",
+  "qui": "Sarkozy",
+  "phrase": "cette bande de racailles",
+  "recherches": [
+   "Sarkozy racaille Argenteuil 2005"
+  ],
+  "candidats": [
+   {
+    "video": "JvS6eG0JFOk",
+    "duree": "117.0",
+    "chaine": "INA Société",
+    "titre": "Nicolas Sarkozy \"the scum of Argenteuil\" - INA video archive",
+    "url": "https://www.youtube.com/watch?v=JvS6eG0JFOk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 56.2,
+    "fin": 57.2,
+    "texte": "vous avez assez de cette bande"
+   },
+   {
+    "video": "oTtcc5zIrDw",
+    "duree": "142.0",
+    "chaine": "INA Société",
+    "titre": "Nicolas Sarkozy and the suburbs - INA video archive",
+    "url": "https://www.youtube.com/watch?v=oTtcc5zIrDw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 43.6,
+    "fin": 44.6,
+    "texte": "vous avez assz de cette bande"
+   },
+   {
+    "video": "a_ILan6LZYA",
+    "duree": "167.0",
+    "chaine": "France 3 Paris Ile-de-France",
+    "titre": "The Argenteuil Slab / “The Scum” of N. Sarkozy",
+    "url": "https://www.youtube.com/watch?v=a_ILan6LZYA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 10.5,
+    "fin": 11.3,
+    "texte": "vous avez assez de cette bande"
+   },
+   {
+    "video": "RTwPX8lt9Ns",
+    "duree": "100.0",
+    "chaine": "France Inter",
+    "titre": "Dix ans après la sortie de Sarkozy à Argenteuil \"On va vous débarrasser de cette racaille\"",
+    "url": "https://www.youtube.com/watch?v=RTwPX8lt9Ns",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "20S-vIkT_Vw",
+    "duree": "654.0",
+    "chaine": "france tv",
+    "titre": "“I was on the Argenteuil concrete slab during Nicolas Sarkozy’s visit in 2005.”",
+    "url": "https://www.youtube.com/watch?v=20S-vIkT_Vw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 10.0,
+    "fin": 10.6,
+    "texte": "en avez assez de cette bande"
+   },
+   {
+    "video": "Bs2TiewZWXI",
+    "duree": "8.0",
+    "chaine": "sterd007",
+    "titre": "Sarkozy racailles 26 octobre 2005 Argenteuil",
+    "url": "https://www.youtube.com/watch?v=Bs2TiewZWXI",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 3.4,
+    "fin": 4.4,
+    "texte": "vous avez assez de cette bande"
+   },
+   {
+    "video": "cOag817_1PU",
+    "duree": "3459.0",
+    "chaine": "france tv and slash enquêtes",
+    "titre": "On n'est pas des racailles - Documentaire complet | Avec Nicolas Sarkozy, Djamel Mazi…",
+    "url": "https://www.youtube.com/watch?v=cOag817_1PU",
+    "chaine_connue": false
+   },
+   {
+    "video": "UU9y6t9R_Vo",
+    "duree": "988.0",
+    "chaine": "Line Press",
+    "titre": "LP Archives. Nicolas Sarkozy on the Argenteuil slab / Argenteuil (95) - France October 25, 2005",
+    "url": "https://www.youtube.com/watch?v=UU9y6t9R_Vo",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/racaille/JvS6eG0JFOk.mp3",
+    "video": "JvS6eG0JFOk",
+    "url": "https://www.youtube.com/watch?v=JvS6eG0JFOk&t=56s",
+    "chaine": "INA Société",
+    "titre": "Nicolas Sarkozy \"the scum of Argenteuil\" - INA video archive",
+    "chaine_connue": true,
+    "score": 0.75,
+    "texte": "vous avez assez de cette bande",
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/racaille/Bs2TiewZWXI.mp3",
+    "video": "Bs2TiewZWXI",
+    "url": "https://www.youtube.com/watch?v=Bs2TiewZWXI&t=3s",
+    "chaine": "sterd007",
+    "titre": "Sarkozy racailles 26 octobre 2005 Argenteuil",
+    "chaine_connue": false,
+    "score": 0.75,
+    "texte": "vous avez assez de cette bande",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "amie_tchadienne",
+  "qui": "Morano",
+  "phrase": "plus noire qu'une arabe",
+  "recherches": [
+   "Nadine Morano meilleure amie tchadienne plus noire qu'une arabe",
+   "Nadine Morano C à vous je ne suis pas raciste amis arabes"
+  ],
+  "candidats": [
+   {
+    "video": "LGYxjAH94wo",
+    "duree": "49.0",
+    "chaine": "LCI",
+    "titre": "Ndiaye : Morano persiste et signe",
+    "url": "https://www.youtube.com/watch?v=LGYxjAH94wo",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.4
+   },
+   {
+    "video": "j-fmriNY60Q",
+    "duree": "27.0",
+    "chaine": "BFMTV",
+    "titre": "Tweet \"malheureux\" de l'équipe de Nadine Morano contre Fadela Amara",
+    "url": "https://www.youtube.com/watch?v=j-fmriNY60Q",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.2
+   },
+   {
+    "video": "vEtUT0fPx7E",
+    "duree": "134.0",
+    "chaine": "LeHuffPost",
+    "titre": "L'étonnante leçon d'antiracisme de Nadine Morano à Lilian Thuram",
+    "url": "https://www.youtube.com/watch?v=vEtUT0fPx7E",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.4
+   },
+   {
+    "video": "z4W7kQPFwUg",
+    "duree": "21.0",
+    "chaine": "BFMTV",
+    "titre": "Rama Yade se rappelle les \"petites phrases\" de Nadine Morano",
+    "url": "https://www.youtube.com/watch?v=z4W7kQPFwUg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.2
+   },
+   {
+    "video": "mWsMvYi76MY",
+    "duree": "1281.0",
+    "chaine": "BFMTV",
+    "titre": "Nadine Morano face à Jean-Jacques Bourdin en direct",
+    "url": "https://www.youtube.com/watch?v=mWsMvYi76MY",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.4
+   },
+   {
+    "video": "6_3r1cIXJsE",
+    "duree": "48.0",
+    "chaine": "SOS Racisme",
+    "titre": "Nadine Morano: \"I'm not racist, my best friend is even darker than an Arab!\"",
+    "url": "https://www.youtube.com/watch?v=6_3r1cIXJsE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 14.8,
+    "fin": 16.8,
+    "texte": "tchadienne donc plus noire qu une arabe"
+   },
+   {
+    "video": "T437P10y-dQ",
+    "duree": "7.0",
+    "chaine": "Top Memes France",
+    "titre": "Nadine Morano - \"Ma meilleure amie qui est tchadienne, donc plus noire qu'une arabe\"",
+    "url": "https://www.youtube.com/watch?v=T437P10y-dQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.8,
+    "debut": 2.2,
+    "fin": 4.3,
+    "texte": "tchadienne donc plus noir qu une arabe"
+   },
+   {
+    "video": "-TzjNbmLU1k",
+    "duree": "98.0",
+    "chaine": "Poitique",
+    "titre": "Morano N'est Pas Raciste, Elle \"Adore Le Couscous et Les Bricks à L'oeuf\" Le 27.06.2012",
+    "url": "https://www.youtube.com/watch?v=-TzjNbmLU1k",
+    "chaine_connue": false
+   },
+   {
+    "video": "j-9y9SuKEDM",
+    "duree": "531.0",
+    "chaine": "On n'est pas couché",
+    "titre": "Nadine Morano: \"Nous sommes un pays judéo-chrétien... de race blanche !\"",
+    "url": "https://www.youtube.com/watch?v=j-9y9SuKEDM",
+    "chaine_connue": false
+   },
+   {
+    "video": "v80MCDcmdh4",
+    "duree": "3760.0",
+    "chaine": "Tarmac",
+    "titre": "Je ne suis pas raciste! J'ai un ami noir • AH TFOU Demain c'est Lundi!",
+    "url": "https://www.youtube.com/watch?v=v80MCDcmdh4",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/amie_tchadienne/6_3r1cIXJsE.mp3",
+    "video": "6_3r1cIXJsE",
+    "url": "https://www.youtube.com/watch?v=6_3r1cIXJsE&t=14s",
+    "chaine": "SOS Racisme",
+    "titre": "Nadine Morano: \"I'm not racist, my best friend is even darker than an Arab!\"",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "tchadienne donc plus noire qu une arabe",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/amie_tchadienne/T437P10y-dQ.mp3",
+    "video": "T437P10y-dQ",
+    "url": "https://www.youtube.com/watch?v=T437P10y-dQ&t=2s",
+    "chaine": "Top Memes France",
+    "titre": "Nadine Morano - \"Ma meilleure amie qui est tchadienne, donc plus noire qu'une arabe\"",
+    "chaine_connue": false,
+    "score": 0.8,
+    "texte": "tchadienne donc plus noir qu une arabe",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "race_blanche",
+  "qui": "Morano",
+  "phrase": "pays de race blanche",
+  "recherches": [
+   "Nadine Morano race blanche On n'est pas couché"
+  ],
+  "candidats": [
+   {
+    "video": "TurvrxQ7p30",
+    "duree": "257",
+    "chaine": "Europe 1",
+    "titre": "On n'est pas couché : Nadine Morano fait scandale",
+    "url": "https://www.youtube.com/watch?v=TurvrxQ7p30",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 8.7,
+    "fin": 9.9,
+    "texte": "etant un pays de race blanche"
+   },
+   {
+    "video": "NeKX_rc9mqk",
+    "duree": "494",
+    "chaine": "RTL  ",
+    "titre": "\"White Race\": Nadine Morano's statement is not \"a political statement,\" according to Mgr. André...",
+    "url": "https://www.youtube.com/watch?v=NeKX_rc9mqk",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "NBj62XfN-Fo",
+    "duree": "120",
+    "chaine": "Europe 1",
+    "titre": "NKM : \"les propos de Morano sur la race blanche sont exécrables\"",
+    "url": "https://www.youtube.com/watch?v=NBj62XfN-Fo",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 0.5,
+    "fin": 2.0,
+    "texte": "pays judeo chretien de race blanche"
+   },
+   {
+    "video": "AGEZ6zqdZ48",
+    "duree": "30",
+    "chaine": "BFMTV",
+    "titre": "Morano: \"Il faut descendre d'un cran\" au sujet de ses propos polémiques",
+    "url": "https://www.youtube.com/watch?v=AGEZ6zqdZ48",
+    "chaine_connue": true
+   },
+   {
+    "video": "a2TXE_sWsz4",
+    "duree": "196",
+    "chaine": "RTL  ",
+    "titre": "\"White Race\": \"Morano is only the tree that hides the Bush,\" says Nicolas Domenach - RTL",
+    "url": "https://www.youtube.com/watch?v=a2TXE_sWsz4",
+    "chaine_connue": true
+   },
+   {
+    "video": "j-9y9SuKEDM",
+    "duree": "531",
+    "chaine": "On n'est pas couché",
+    "titre": "Nadine Morano: \"Nous sommes un pays judéo-chrétien... de race blanche !\"",
+    "url": "https://www.youtube.com/watch?v=j-9y9SuKEDM",
+    "chaine_connue": false
+   },
+   {
+    "video": "VcfcFsdNu4c",
+    "duree": "2765",
+    "chaine": "On n'est pas couché",
+    "titre": "Nadine Morano - On n’est pas couché 10 mai 2008 #ONPC",
+    "url": "https://www.youtube.com/watch?v=VcfcFsdNu4c",
+    "chaine_connue": false
+   },
+   {
+    "video": "-VTfFNGY3Do",
+    "duree": "130",
+    "chaine": "AFP",
+    "titre": "Valls critique les propos de Morano sur \"la race blanche\"",
+    "url": "https://www.youtube.com/watch?v=-VTfFNGY3Do",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/race_blanche/TurvrxQ7p30.mp3",
+    "video": "TurvrxQ7p30",
+    "url": "https://www.youtube.com/watch?v=TurvrxQ7p30&t=8s",
+    "chaine": "Europe 1",
+    "titre": "On n'est pas couché : Nadine Morano fait scandale",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "etant un pays de race blanche",
+    "ecoute": "autre"
+   },
+   {
+    "fichier": "assets/audio/raw/race_blanche/NBj62XfN-Fo.mp3",
+    "video": "NBj62XfN-Fo",
+    "url": "https://www.youtube.com/watch?v=NBj62XfN-Fo&t=0s",
+    "chaine": "Europe 1",
+    "titre": "NKM : \"les propos de Morano sur la race blanche sont exécrables\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "pays judeo chretien de race blanche",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "pisse_dessus",
+  "qui": "Glucksmann",
+  "phrase": "on leur pisse dessus",
+  "recherches": [
+   "Glucksmann on leur pisse dessus Le Média",
+   "Glucksmann pisse dessus Mélenchon Le Pen"
+  ],
+  "candidats": [
+   {
+    "video": "b0hghUJOhBI",
+    "duree": "557.0",
+    "chaine": "franceinfo",
+    "titre": "Propos de Raphaël Glucksmann : Jean-Luc Mélenchon et Ségolène Royal s'insurgent",
+    "url": "https://www.youtube.com/watch?v=b0hghUJOhBI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 53.6,
+    "fin": 54.9,
+    "texte": "rentrer dedans on leur pisse dessus"
+   },
+   {
+    "video": "1mQxNDpja9E",
+    "duree": "834.0",
+    "chaine": "C à vous - France Télévisions",
+    "titre": "Glucksmann’s victory: what is Mélenchon’s silence hiding?",
+    "url": "https://www.youtube.com/watch?v=1mQxNDpja9E",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "LwG31EnXXek",
+    "duree": "38.0",
+    "chaine": "À gauche",
+    "titre": "« On leur pisse dessus » Glucksmann se lâche sur Mélenchon et Le Pen en réunion privée @LeMédia-TV ",
+    "url": "https://www.youtube.com/watch?v=LwG31EnXXek",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 30.5,
+    "fin": 31.4,
+    "texte": "minutes mais on leur pisse dessus"
+   },
+   {
+    "video": "j1pK8Et_Smw",
+    "duree": "111.0",
+    "chaine": "Le Réveil Français",
+    "titre": "\"We piss on them\": Glucksmann caught red-handed in a slip-up?",
+    "url": "https://www.youtube.com/watch?v=j1pK8Et_Smw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 39.2,
+    "fin": 41.8,
+    "texte": "particulierement elegante on leur pisse dessus"
+   },
+   {
+    "video": "nOeWXnuNHS8",
+    "duree": "884.0",
+    "chaine": "Sud Radio",
+    "titre": "\"Mélenchon et Le Pen, on leur pisse dessus\" : les propos de Raphaël Glucksmann choquent",
+    "url": "https://www.youtube.com/watch?v=nOeWXnuNHS8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 289.2,
+    "fin": 290.9,
+    "texte": "pen dit on leur pisse dessus"
+   },
+   {
+    "video": "jh9SbyML3Rs",
+    "duree": "497.0",
+    "chaine": "VOIX DE FRANCE",
+    "titre": "« On leur pisse dessus »: la phrase de Glucksmann sur Mélenchon et Le Pen fait scandale",
+    "url": "https://www.youtube.com/watch?v=jh9SbyML3Rs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 1.4,
+    "fin": 2.4,
+    "texte": "minutes mais on leur pisse dessus"
+   },
+   {
+    "video": "k0b-vQZv_4g",
+    "duree": "458.0",
+    "chaine": "François COTARD",
+    "titre": "« On leur pisse dessus » : Raphaël Glucksmann se lâche sur Mélenchon et Le Pen.",
+    "url": "https://www.youtube.com/watch?v=k0b-vQZv_4g",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 126.7,
+    "fin": 127.8,
+    "texte": "symetrique mais on leur pisse dessus"
+   },
+   {
+    "video": "KNs_d-WKDEw",
+    "duree": "850.0",
+    "chaine": "Civicio",
+    "titre": "\"On leur P!SSE dessus !\" Ségolène Royale met fin à la carrière de Glucksmann",
+    "url": "https://www.youtube.com/watch?v=KNs_d-WKDEw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 258.9,
+    "fin": 261.0,
+    "texte": "abaya mais on leur pisse dessus"
+   },
+   {
+    "video": "yCBaIyBQJ6M",
+    "duree": "218.0",
+    "chaine": "Sud Radio",
+    "titre": "Françoise Degois : \"On a assisté à un naufrage de Raphaël Glucksmann\"",
+    "url": "https://www.youtube.com/watch?v=yCBaIyBQJ6M",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/pisse_dessus/LwG31EnXXek.mp3",
+    "video": "LwG31EnXXek",
+    "url": "https://www.youtube.com/watch?v=LwG31EnXXek&t=30s",
+    "chaine": "À gauche",
+    "titre": "« On leur pisse dessus » Glucksmann se lâche sur Mélenchon et Le Pen en réunion privée @LeMédia-TV ",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "minutes mais on leur pisse dessus",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "une_ministre_libre",
+  "qui": "Schiappa",
+  "phrase": "disposer de son corps",
+  "recherches": [
+   "Schiappa Playboy",
+   "Marlène Schiappa couverture Playboy réagit"
+  ],
+  "candidats": [],
+  "extraits": [],
+  "traite": true
+ },
+ {
+  "id": "probite_intacte",
+  "qui": "Schiappa",
+  "phrase": "probité",
+  "recherches": [
+   "Schiappa fonds Marianne probité",
+   "Marlène Schiappa commission d'enquête Sénat fonds Marianne"
+  ],
+  "candidats": [
+   {
+    "video": "PeYxl04gizo",
+    "duree": "164",
+    "chaine": "Le Monde",
+    "titre": "Fonds Marianne : Marlène Schiappa tente d’esquiver face aux sénateurs",
+    "url": "https://www.youtube.com/watch?v=PeYxl04gizo",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "Aj4B5rJyVpA",
+    "duree": "10796",
+    "chaine": "Public Sénat",
+    "titre": "Fonds Marianne : Marlène Schiappa devant la commission d'enquête du Sénat",
+    "url": "https://www.youtube.com/watch?v=Aj4B5rJyVpA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "cEXzov-Z4aE",
+    "duree": "184",
+    "chaine": "Public Sénat",
+    "titre": "Marianne Fund: Marlène Schiappa \"supports the opening of any possible commission of inquiry\"",
+    "url": "https://www.youtube.com/watch?v=cEXzov-Z4aE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 157.2,
+    "fin": 157.4,
+    "texte": "ont une probite"
+   },
+   {
+    "video": "xq6CVql4X0U",
+    "duree": "88",
+    "chaine": "Europe 1",
+    "titre": "Fonds Marianne : Marlène Schiappa sur le gril de la commission d'enquête du Sénat",
+    "url": "https://www.youtube.com/watch?v=xq6CVql4X0U",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "CTSZmGks4n0",
+    "duree": "608",
+    "chaine": "Psyhodelik",
+    "titre": "MARLÈNE SCHIAPPA SE DIT TOTALEMENT LAVER DE TOUT SOUPCONS MALGRÈS LE FIASCO DU FOND MARIANNE",
+    "url": "https://www.youtube.com/watch?v=CTSZmGks4n0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 39.8,
+    "fin": 40.9,
+    "texte": "et sa probite"
+   },
+   {
+    "video": "TbKQwF-uXmI",
+    "duree": "1129",
+    "chaine": "Juste Milieu.",
+    "titre": "La Farce Tranquille #110 : Mélenchon zinzin, remaniement, Rousseau et 60 degrés, RN silencieux",
+    "url": "https://www.youtube.com/watch?v=TbKQwF-uXmI",
+    "chaine_connue": false
+   },
+   {
+    "video": "gLem0mtKtgU",
+    "duree": "7014",
+    "chaine": "Rasavejo",
+    "titre": "L'hebdo du 16/07 : Europe, l'appaisement et le NPA",
+    "url": "https://www.youtube.com/watch?v=gLem0mtKtgU",
+    "chaine_connue": false
+   },
+   {
+    "video": "wo5fsL9eydk",
+    "duree": "5524",
+    "chaine": "Sénat",
+    "titre": "Drug shortages: hearing of consulting firms",
+    "url": "https://www.youtube.com/watch?v=wo5fsL9eydk",
+    "chaine_connue": false
+   },
+   {
+    "video": "jb6NmF3XmeQ",
+    "duree": "11501",
+    "chaine": "Sénat",
+    "titre": "Fonds Marianne : audition de Marlène Schiappa",
+    "url": "https://www.youtube.com/watch?v=jb6NmF3XmeQ",
+    "chaine_connue": false
+   },
+   {
+    "video": "KrUHY_lyvM4",
+    "duree": "9276",
+    "chaine": "Sénat",
+    "titre": "Fonds Marianne : audition de l'ancien directeur de cabinet de Marlène Schiappa",
+    "url": "https://www.youtube.com/watch?v=KrUHY_lyvM4",
+    "chaine_connue": false
+   },
+   {
+    "video": "iYFWjrj4Pko",
+    "duree": "154",
+    "chaine": "Adrien Pain",
+    "titre": "Fonds Marianne : Marlène Schiappa devant la commission d'enquête sénatoriale | Public Sénat",
+    "url": "https://www.youtube.com/watch?v=iYFWjrj4Pko",
+    "chaine_connue": false
+   },
+   {
+    "video": "VSJXfCN0GuU",
+    "duree": "234",
+    "chaine": "Sénat",
+    "titre": "Marlène Schiappa sur le \"Fonds Marianne\" : \"Je n'ai pas pris part au comité de sélection\"",
+    "url": "https://www.youtube.com/watch?v=VSJXfCN0GuU",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/probite_intacte/cEXzov-Z4aE.mp3",
+    "video": "cEXzov-Z4aE",
+    "url": "https://www.youtube.com/watch?v=cEXzov-Z4aE&t=157s",
+    "chaine": "Public Sénat",
+    "titre": "Marianne Fund: Marlène Schiappa \"supports the opening of any possible commission of inquiry\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "ont une probite",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/probite_intacte/CTSZmGks4n0.mp3",
+    "video": "CTSZmGks4n0",
+    "url": "https://www.youtube.com/watch?v=CTSZmGks4n0&t=39s",
+    "chaine": "Psyhodelik",
+    "titre": "MARLÈNE SCHIAPPA SE DIT TOTALEMENT LAVER DE TOUT SOUPCONS MALGRÈS LE FIASCO DU FOND MARIANNE",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "et sa probite",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "pas_de_facebook",
+  "qui": "Bardella",
+  "phrase": "compte facebook",
+  "recherches": [
+   "Bardella pas de compte Facebook Mediapart réaction",
+   "Bardella je n'ai pas de compte Facebook"
+  ],
+  "candidats": [
+   {
+    "video": "nmhmEdMEVNI",
+    "duree": "568",
+    "chaine": "TF1 INFO",
+    "titre": "Antisemitic writings attributed to Jordan Bardella by Mediapart: Charles Alloncle reacts｜TF1 INFO",
+    "url": "https://www.youtube.com/watch?v=nmhmEdMEVNI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "6DQ-g-zcLW8",
+    "duree": "77",
+    "chaine": "FRANCE 24",
+    "titre": "Propos antisémites de Jordan Bardella : Mediapart publie ses preuves après les démentis du RN",
+    "url": "https://www.youtube.com/watch?v=6DQ-g-zcLW8",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "V_msdi2PgN0",
+    "duree": "1038",
+    "chaine": "franceinfo",
+    "titre": "The Bardella Affair: \"Mediapart's initial accusations are grotesque\" (Andréa Kotarac)",
+    "url": "https://www.youtube.com/watch?v=V_msdi2PgN0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 121.4,
+    "fin": 121.8,
+    "texte": "a un compte facebook"
+   },
+   {
+    "video": "N0cTIqY2T1c",
+    "duree": "141",
+    "chaine": "franceinfo",
+    "titre": "Mediapart's Accusations Against Jordan Bardella: What Is the Report Based On?",
+    "url": "https://www.youtube.com/watch?v=N0cTIqY2T1c",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "ZhxA1PkUrm4",
+    "duree": "173",
+    "chaine": "FRANCE 24",
+    "titre": "Propos antisémites attribués à Bardella : l'enquête de Mediapart suscite de vives réactions",
+    "url": "https://www.youtube.com/watch?v=ZhxA1PkUrm4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "Y71CRmuyE7g",
+    "duree": "481",
+    "chaine": "franceinfo",
+    "titre": "\"The RN is caught up by its past\": Jordan Bardella accused of antisemitism by Mediapart",
+    "url": "https://www.youtube.com/watch?v=Y71CRmuyE7g",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "pcd_PG3BMEE",
+    "duree": "130",
+    "chaine": "franceinfo",
+    "titre": "Mediapart publie ses preuves, Jordan Bardella se défend",
+    "url": "https://www.youtube.com/watch?v=pcd_PG3BMEE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 63.6,
+    "fin": 64.1,
+    "texte": "bien le compte facebook"
+   },
+   {
+    "video": "yL_qGtKo1ac",
+    "duree": "66",
+    "chaine": "Europe 1",
+    "titre": "Accusations visant Jordan Bardella : Le président du RN affiche sa sérénité et attaque Mediapart",
+    "url": "https://www.youtube.com/watch?v=yL_qGtKo1ac",
+    "chaine_connue": true
+   },
+   {
+    "video": "zzWHO3ZaVHY",
+    "duree": "98",
+    "chaine": "Europe 1",
+    "titre": "Jordan Bardella répond à Kylian Mbappé : \"Je suis gêné de le voir donner des leçons\"",
+    "url": "https://www.youtube.com/watch?v=zzWHO3ZaVHY",
+    "chaine_connue": true
+   },
+   {
+    "video": "RCACd_hLNlw",
+    "duree": "93",
+    "chaine": "franceinfo",
+    "titre": "Marine le Pen et Jordan Bardella veulent faire taire les rumeurs",
+    "url": "https://www.youtube.com/watch?v=RCACd_hLNlw",
+    "chaine_connue": true
+   },
+   {
+    "video": "UAiTOTQxcog",
+    "duree": "686",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "The Bardella Affair: Behind the Scenes of the Mediapart Investigation",
+    "url": "https://www.youtube.com/watch?v=UAiTOTQxcog",
+    "chaine_connue": false
+   },
+   {
+    "video": "Zl_4n2DJP3Y",
+    "duree": "168",
+    "chaine": "Jordan Bardella",
+    "titre": "Our country has never welcomed so much immigration!",
+    "url": "https://www.youtube.com/watch?v=Zl_4n2DJP3Y",
+    "chaine_connue": false
+   },
+   {
+    "video": "1XjvrWqhqZs",
+    "duree": "224",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Jacques Chirac est mort : ses 10 phrases cultes",
+    "url": "https://www.youtube.com/watch?v=1XjvrWqhqZs",
+    "chaine_connue": false
+   },
+   {
+    "video": "wshDaLe58_Y",
+    "duree": "9439",
+    "chaine": "Jordan Bardella",
+    "titre": "Jordan Bardella face à BFM : « L'islamisme est une menace existentielle »",
+    "url": "https://www.youtube.com/watch?v=wshDaLe58_Y",
+    "chaine_connue": false
+   },
+   {
+    "video": "6kWMcWVYAHE",
+    "duree": "869",
+    "chaine": "Sud Radio",
+    "titre": "Jordan Bardella : \"J'invite Macron à descendre dans l'arène, répondre de son bilan\"",
+    "url": "https://www.youtube.com/watch?v=6kWMcWVYAHE",
+    "chaine_connue": false
+   },
+   {
+    "video": "65MwB-e9MhA",
+    "duree": "1216",
+    "chaine": "RMC",
+    "titre": "J.Bardella : “Le premier moyen pour rétablir la sécurité en France, c’est d’arrêter l’immigration”",
+    "url": "https://www.youtube.com/watch?v=65MwB-e9MhA",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/pas_de_facebook/V_msdi2PgN0.mp3",
+    "video": "V_msdi2PgN0",
+    "url": "https://www.youtube.com/watch?v=V_msdi2PgN0&t=121s",
+    "chaine": "franceinfo",
+    "titre": "The Bardella Affair: \"Mediapart's initial accusations are grotesque\" (Andréa Kotarac)",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "a un compte facebook",
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/pas_de_facebook/pcd_PG3BMEE.mp3",
+    "video": "pcd_PG3BMEE",
+    "url": "https://www.youtube.com/watch?v=pcd_PG3BMEE&t=63s",
+    "chaine": "franceinfo",
+    "titre": "Mediapart publie ses preuves, Jordan Bardella se défend",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "bien le compte facebook",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "fellation",
+  "qui": "Dati",
+  "phrase": "fellation",
+  "recherches": [
+   "Rachida Dati lapsus inflation Dimanche Plus",
+   "Dati lapsus fellation"
+  ],
+  "candidats": [
+   {
+    "video": "Lo6CejuI09w",
+    "duree": "119",
+    "chaine": "LeHuffPost",
+    "titre": "La ministre de la culture Rachida Dati s'en prend à ceux qui l’ont attaquée aux Molières",
+    "url": "https://www.youtube.com/watch?v=Lo6CejuI09w",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "jJqMeWjYo70",
+    "duree": "16",
+    "chaine": "CNEWS",
+    "titre": "Affaire Tapie: lapsus révélateur de Rachida Dati ?",
+    "url": "https://www.youtube.com/watch?v=jJqMeWjYo70",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "CXlHKrfoOp0",
+    "duree": "516",
+    "chaine": "INA Arditube",
+    "titre": "Rachida Dati, une femme politique indestructible chez Thierry Ardisson | INA Arditube",
+    "url": "https://www.youtube.com/watch?v=CXlHKrfoOp0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "e-GcjtlF5_U",
+    "duree": "40",
+    "chaine": "NRJ - Hit Music Only",
+    "titre": "Rachida Dati revient sur son labsus - Le 6/9 NRJ",
+    "url": "https://www.youtube.com/watch?v=e-GcjtlF5_U",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "Wc7h5z9BFp0",
+    "duree": "2846",
+    "chaine": "On n'est pas couché",
+    "titre": "Rachida Dati - On n’est pas couché 12 mai 2012 #ONPC",
+    "url": "https://www.youtube.com/watch?v=Wc7h5z9BFp0",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "aDmjkC2SMNw",
+    "duree": "147",
+    "chaine": "On n'est pas couché",
+    "titre": "Clash Rachida Dati / Mathieu Kassovitz - On n'est pas couché #ONPC",
+    "url": "https://www.youtube.com/watch?v=aDmjkC2SMNw",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "v5LlQG-TDL0",
+    "duree": "718",
+    "chaine": "Vivement Dimanche - France Télévisions",
+    "titre": "Rachida Dati, qu'a-t-elle fait de ses 20 ans ? - Vivement Dimanche 7 octobre 2007",
+    "url": "https://www.youtube.com/watch?v=v5LlQG-TDL0",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "OsEVBvkLPRA",
+    "duree": "264",
+    "chaine": "Vivement Dimanche - France Télévisions",
+    "titre": "Rachida Dati: ses anecdotes croustillantes sur les stars américaines! Vivement Dimanche 16 mars 2025",
+    "url": "https://www.youtube.com/watch?v=OsEVBvkLPRA",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/fellation/Lo6CejuI09w.entier.mp3",
+    "video": "Lo6CejuI09w",
+    "url": "https://www.youtube.com/watch?v=Lo6CejuI09w",
+    "chaine": "LeHuffPost",
+    "titre": "La ministre de la culture Rachida Dati s'en prend à ceux qui l’ont attaquée aux Molières",
+    "chaine_connue": true,
+    "score": 0,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/fellation/jJqMeWjYo70.entier.mp3",
+    "video": "jJqMeWjYo70",
+    "url": "https://www.youtube.com/watch?v=jJqMeWjYo70",
+    "chaine": "CNEWS",
+    "titre": "Affaire Tapie: lapsus révélateur de Rachida Dati ?",
+    "chaine_connue": true,
+    "score": 0,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "siege_ciotti",
+  "qui": "Ciotti",
+  "phrase": "je suis le président",
+  "recherches": [
+   "Ciotti siège LR fermé président des Républicains juin 2024"
+  ],
+  "candidats": [
+   {
+    "video": "Gz41Yu8Bzyw",
+    "duree": "128",
+    "chaine": "Le Figaro",
+    "titre": "Un parti au bord de l'implosion ?",
+    "url": "https://www.youtube.com/watch?v=Gz41Yu8Bzyw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "3uNUb0GOK0o",
+    "duree": "23",
+    "chaine": "Le Figaro",
+    "titre": "Cingle Valérie Pécresse en référence à Éric Ciotti",
+    "url": "https://www.youtube.com/watch?v=3uNUb0GOK0o",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "_a8JcT_ETPg",
+    "duree": "92",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Eric Ciotti exclu de LR : \"On appellera Bardella pour le sortir de son bureau\"",
+    "url": "https://www.youtube.com/watch?v=_a8JcT_ETPg",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "FcTrLyT7jPE",
+    "duree": "643",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "Macron s'explique, Ciotti s'obstine... la crise s'installe - Reportage #cdanslair 12.06.2024",
+    "url": "https://www.youtube.com/watch?v=FcTrLyT7jPE",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "f5mYoETB508",
+    "duree": "2508",
+    "chaine": "Trouble Fait",
+    "titre": "LÉGISLATIVES : Les coulisses d’une fin peu glorieuse pour LR et Reconquête.",
+    "url": "https://www.youtube.com/watch?v=f5mYoETB508",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 1821.6,
+    "fin": 1822.2,
+    "texte": "trop le choix je suis president"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/siege_ciotti/f5mYoETB508.mp3",
+    "video": "f5mYoETB508",
+    "url": "https://www.youtube.com/watch?v=f5mYoETB508&t=1821s",
+    "chaine": "Trouble Fait",
+    "titre": "LÉGISLATIVES : Les coulisses d’une fin peu glorieuse pour LR et Reconquête.",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "trop le choix je suis president",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "effondrement_russe",
+  "qui": "Le Maire",
+  "phrase": "effondrement de l'économie russe",
+  "recherches": [
+   "Bruno Le Maire effondrement de l'économie russe franceinfo"
+  ],
+  "candidats": [
+   {
+    "video": "Ntzacqlm-Ac",
+    "duree": "22.0",
+    "chaine": "FRANCE 24",
+    "titre": "\"Nous allons provoquer l'effondrement de l'économie russe\", affirme Bruno Le Maire • FRANCE 24",
+    "url": "https://www.youtube.com/watch?v=Ntzacqlm-Ac",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.8,
+    "debut": 18.1,
+    "fin": 20.5,
+    "texte": "donc provoque l effondrement de l economie"
+   },
+   {
+    "video": "_dedltKYXqs",
+    "duree": "55.0",
+    "chaine": "CNEWS",
+    "titre": "Bruno Le Maire: \"Russia has become our enemy\"",
+    "url": "https://www.youtube.com/watch?v=_dedltKYXqs",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.4
+   },
+   {
+    "video": "bpxzhDlpmZg",
+    "duree": "1645.0",
+    "chaine": "BFMTV",
+    "titre": "French debt: Bruno Le Maire asserts that the dissolution \"precipitated the chaos\"",
+    "url": "https://www.youtube.com/watch?v=bpxzhDlpmZg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.6
+   },
+   {
+    "video": "LWanKTRWw3U",
+    "duree": "3545.0",
+    "chaine": "Public Sénat",
+    "titre": "#Direct 🔴 Bruno Le Maire, ancien ministre de l'Economie et des Finances, invité du Grand Jury RTL...",
+    "url": "https://www.youtube.com/watch?v=LWanKTRWw3U",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.6
+   },
+   {
+    "video": "CK3WfsuRfWw",
+    "duree": "1440.0",
+    "chaine": "franceinfo",
+    "titre": "Heatwave, Iran, 2027... Bruno Le Maire on the 8:30 franceinfo",
+    "url": "https://www.youtube.com/watch?v=CK3WfsuRfWw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.6
+   },
+   {
+    "video": "kbVe2BVtx6E",
+    "duree": "1890.0",
+    "chaine": "LCI",
+    "titre": "Ukraine: \"We want to make Vladimir Putin pay the economic price\" - Bruno Le Maire",
+    "url": "https://www.youtube.com/watch?v=kbVe2BVtx6E",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.6
+   },
+   {
+    "video": "8Em6Bkm91BA",
+    "duree": "241.0",
+    "chaine": "franceinfo",
+    "titre": "Clément Viktorovitch : Bruno Le Maire, l’art de répondre à contretemps",
+    "url": "https://www.youtube.com/watch?v=8Em6Bkm91BA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.6
+   },
+   {
+    "video": "0QSlS8ifBbo",
+    "duree": "8589.0",
+    "chaine": "Thinkerview",
+    "titre": "Bruno Le Maire Sans Filtre [EN DIRECT]",
+    "url": "https://www.youtube.com/watch?v=0QSlS8ifBbo",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.6
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/effondrement_russe/Ntzacqlm-Ac.mp3",
+    "video": "Ntzacqlm-Ac",
+    "url": "https://www.youtube.com/watch?v=Ntzacqlm-Ac&t=18s",
+    "chaine": "FRANCE 24",
+    "titre": "\"Nous allons provoquer l'effondrement de l'économie russe\", affirme Bruno Le Maire • FRANCE 24",
+    "chaine_connue": true,
+    "score": 0.8,
+    "texte": "donc provoque l effondrement de l economie",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "ca_rigole_plus",
+  "qui": "Zemmour",
+  "phrase": "ça rigole plus",
+  "recherches": [
+   "Zemmour fusil Milipol journalistes ça rigole plus"
+  ],
+  "candidats": [
+   {
+    "video": "yROAB65N9aw",
+    "duree": "142",
+    "chaine": "LeHuffPost",
+    "titre": "Éric Zemmour pointe un fusil de sniper sur des journalistes au Milipol",
+    "url": "https://www.youtube.com/watch?v=yROAB65N9aw",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "Tgb0eeZuNeQ",
+    "duree": "847",
+    "chaine": "Europe 1",
+    "titre": "Une arme à feu pointée sur des journalistes : Éric Zemmour est-il toujours un polémiste ?",
+    "url": "https://www.youtube.com/watch?v=Tgb0eeZuNeQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "VSNp1BclqCY",
+    "duree": "83",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Eric Zemmour vise des journalistes avec un fusil au salon Milipol",
+    "url": "https://www.youtube.com/watch?v=VSNp1BclqCY",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "b-0xYhYxAsA",
+    "duree": "212",
+    "chaine": "moderne star",
+    "titre": "\"Ça rigole plus là, reculez !\" : l'incroyable et dérangeante séquence d'Éric Zemmour, armé, face aux",
+    "url": "https://www.youtube.com/watch?v=b-0xYhYxAsA",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 68.2,
+    "fin": 69.9,
+    "texte": "sur eux ca rigole plus"
+   },
+   {
+    "video": "TGuwAKRAxQQ",
+    "duree": "92",
+    "chaine": "Le Point",
+    "titre": "Quand Éric Zemmour pointe une arme sur des journalistes",
+    "url": "https://www.youtube.com/watch?v=TGuwAKRAxQQ",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "o3NIVp8Wg1M",
+    "duree": "51",
+    "chaine": "ٍVideo World",
+    "titre": "Eric Zemmour prêt à tirer sur des journalistes ? Il pointe un fusil sur la foule (vidéo)",
+    "url": "https://www.youtube.com/watch?v=o3NIVp8Wg1M",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/ca_rigole_plus/yROAB65N9aw.entier.mp3",
+    "video": "yROAB65N9aw",
+    "url": "https://www.youtube.com/watch?v=yROAB65N9aw",
+    "chaine": "LeHuffPost",
+    "titre": "Éric Zemmour pointe un fusil de sniper sur des journalistes au Milipol",
+    "chaine_connue": true,
+    "score": null,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/ca_rigole_plus/b-0xYhYxAsA.entier.mp3",
+    "video": "b-0xYhYxAsA",
+    "url": "https://www.youtube.com/watch?v=b-0xYhYxAsA",
+    "chaine": "moderne star",
+    "titre": "\"Ça rigole plus là, reculez !\" : l'incroyable et dérangeante séquence d'Éric Zemmour, armé, face aux",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "bien_profond",
+  "qui": "Zemmour",
+  "phrase": "bien profond",
+  "recherches": [
+   "Zemmour doigt d'honneur Marseille et bien profond"
+  ],
+  "candidats": [
+   {
+    "video": "a3NBxG99w3w",
+    "duree": "623",
+    "chaine": "Europe 1",
+    "titre": "Le doigt d'honneur « bien profond » de Zemmour en réponse à une passante fait polémique",
+    "url": "https://www.youtube.com/watch?v=a3NBxG99w3w",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "sk0EqC5ddN4",
+    "duree": "110",
+    "chaine": "Le Parisien",
+    "titre": "Eric Zemmour quitte Marseille sur un échange de doigts d'honneur",
+    "url": "https://www.youtube.com/watch?v=sk0EqC5ddN4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "ANZEFO_wGEk",
+    "duree": "187",
+    "chaine": "BFMTV",
+    "titre": "Éric Zemmour échange un doigt d'honneur avec une passante à Marseille",
+    "url": "https://www.youtube.com/watch?v=ANZEFO_wGEk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "EfWsGF38vRw",
+    "duree": "187",
+    "chaine": "ZVA JC",
+    "titre": "Éric Zemmour retour de doigt d'honneur et \"bien profond\" Marseille",
+    "url": "https://www.youtube.com/watch?v=EfWsGF38vRw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "n5bLor_blw0",
+    "duree": "220",
+    "chaine": "moderne star",
+    "titre": "“Bien profond !” : quand Eric Zemmour fait un doigt d'honneur à une femme lors de son déplacement à",
+    "url": "https://www.youtube.com/watch?v=n5bLor_blw0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 67.6,
+    "fin": 68.2,
+    "texte": "mots et bien profond"
+   },
+   {
+    "video": "_rgPIg8EJyw",
+    "duree": "67",
+    "chaine": "RMC",
+    "titre": "Après son doigt d'honneur, Zemmour reconnait un geste \"fort inélégant\"",
+    "url": "https://www.youtube.com/watch?v=_rgPIg8EJyw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "ZvftBLiMo9U",
+    "duree": "187",
+    "chaine": "Medias France",
+    "titre": "Éric Zemmour échange un doigt d'honneur avec une passante à Marseille",
+    "url": "https://www.youtube.com/watch?v=ZvftBLiMo9U",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "AUizlLMDjz0",
+    "duree": "205",
+    "chaine": "RMC",
+    "titre": "\"RMC politique: le journal du off\" : le doigt d’honneur d’Eric Zemmour ne passe pas",
+    "url": "https://www.youtube.com/watch?v=AUizlLMDjz0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/bien_profond/ANZEFO_wGEk.entier.mp3",
+    "video": "ANZEFO_wGEk",
+    "url": "https://www.youtube.com/watch?v=ANZEFO_wGEk",
+    "chaine": "BFMTV",
+    "titre": "Éric Zemmour échange un doigt d'honneur avec une passante à Marseille",
+    "chaine_connue": true,
+    "score": 0.5,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/bien_profond/sk0EqC5ddN4.entier.mp3",
+    "video": "sk0EqC5ddN4",
+    "url": "https://www.youtube.com/watch?v=sk0EqC5ddN4",
+    "chaine": "Le Parisien",
+    "titre": "Eric Zemmour quitte Marseille sur un échange de doigts d'honneur",
+    "chaine_connue": true,
+    "score": 0,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "barbecue",
+  "qui": "Rousseau",
+  "phrase": "symbole de virilité",
+  "recherches": [
+   "Sandrine Rousseau barbecue symbole de virilité"
+  ],
+  "candidats": [
+   {
+    "video": "Sn7RHdOwCZs",
+    "duree": "284",
+    "chaine": "RTL  ",
+    "titre": "Le barbecue \"symbole de virilité\" ? Rokhaya Diallo défend Sandrine Rousseau",
+    "url": "https://www.youtube.com/watch?v=Sn7RHdOwCZs",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "CqU0t7t_Lw8",
+    "duree": "108",
+    "chaine": "voxx",
+    "titre": "​🤣 The LUNAR DEBATE between Rousseau and Dupont-Moretti on GALLANTRY and BARBECUE",
+    "url": "https://www.youtube.com/watch?v=CqU0t7t_Lw8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "h58M7fdfsK0",
+    "duree": "298",
+    "chaine": "france tv",
+    "titre": "Barbecue et virilité : Sandrine Rousseau revient sur la polémique - Complément d'enquête",
+    "url": "https://www.youtube.com/watch?v=h58M7fdfsK0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 65.3,
+    "fin": 67.0,
+    "texte": "barbecue un symbole de virilite"
+   },
+   {
+    "video": "jf35QhY5BZ8",
+    "duree": "122",
+    "chaine": "Dom Mabb",
+    "titre": "Michel Onfray détruit Sandrine Rousseau sur le barbecue et la virilité : «Elle a 13 ans ou quoi?»",
+    "url": "https://www.youtube.com/watch?v=jf35QhY5BZ8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 9.9,
+    "fin": 10.9,
+    "texte": "est un symbole de virilite"
+   },
+   {
+    "video": "mDfDmsZOse4",
+    "duree": "75",
+    "chaine": "Alerte Info Clip",
+    "titre": "Sandrine Rousseau a Complètement Disjoncté ! les hommes, la viande barebecue",
+    "url": "https://www.youtube.com/watch?v=mDfDmsZOse4",
+    "chaine_connue": false
+   },
+   {
+    "video": "TwS0WNyo2ss",
+    "duree": "71",
+    "chaine": "Sandrine Rousseau",
+    "titre": "Qu'est-ce qu'un homme déconstruit? | Sandrine Rousseau répond à Eric Dupont Moretti",
+    "url": "https://www.youtube.com/watch?v=TwS0WNyo2ss",
+    "chaine_connue": false
+   },
+   {
+    "video": "U1s5o0O_Yeg",
+    "duree": "260",
+    "chaine": "Sud Radio",
+    "titre": "Guy Carlier :\"Le barbecue, dernier symbole de virilité ? c'est le combat Sandrine Rousseau\"",
+    "url": "https://www.youtube.com/watch?v=U1s5o0O_Yeg",
+    "chaine_connue": false
+   },
+   {
+    "video": "szusLaJJc_I",
+    "duree": "109",
+    "chaine": "TRED",
+    "titre": "Sandrine Rousseau en plein délire sur la viande de porc et l'islam !",
+    "url": "https://www.youtube.com/watch?v=szusLaJJc_I",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/barbecue/h58M7fdfsK0.mp3",
+    "video": "h58M7fdfsK0",
+    "url": "https://www.youtube.com/watch?v=h58M7fdfsK0&t=65s",
+    "chaine": "france tv",
+    "titre": "Barbecue et virilité : Sandrine Rousseau revient sur la polémique - Complément d'enquête",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "barbecue un symbole de virilite",
+    "ecoute": "autre"
+   },
+   {
+    "fichier": "assets/audio/raw/barbecue/jf35QhY5BZ8.mp3",
+    "video": "jf35QhY5BZ8",
+    "url": "https://www.youtube.com/watch?v=jf35QhY5BZ8&t=9s",
+    "chaine": "Dom Mabb",
+    "titre": "Michel Onfray détruit Sandrine Rousseau sur le barbecue et la virilité : «Elle a 13 ans ou quoi?»",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "est un symbole de virilite",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "homme_deconstruit",
+  "qui": "Rousseau",
+  "phrase": "homme déconstruit",
+  "recherches": [
+   "Sandrine Rousseau je vis avec un homme déconstruit"
+  ],
+  "candidats": [
+   {
+    "video": "WZqCD48PJps",
+    "duree": "123",
+    "chaine": "LeHuffPost",
+    "titre": "« Elle est con » : Michel Sardou s’en prend à Marine Tondelier qui lui répond",
+    "url": "https://www.youtube.com/watch?v=WZqCD48PJps",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "KAALgGg3hnM",
+    "duree": "215",
+    "chaine": "France Inter",
+    "titre": "Deconstructed - Words of the Year",
+    "url": "https://www.youtube.com/watch?v=KAALgGg3hnM",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "gYZ9A4_4CDU",
+    "duree": "157",
+    "chaine": "The Wheel",
+    "titre": "Qu'est-ce qu'un \"homme déconstruit\" ? Les explications de Sandrine Rousseau",
+    "url": "https://www.youtube.com/watch?v=gYZ9A4_4CDU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 12.7,
+    "fin": 13.2,
+    "texte": "avec un homme deconstruit"
+   },
+   {
+    "video": "Yf-_xn6nb7k",
+    "duree": "195",
+    "chaine": "Guillaume Pley",
+    "titre": "\"En France, les hommes devraient tous...\" Sandrine Rousseau nous répond",
+    "url": "https://www.youtube.com/watch?v=Yf-_xn6nb7k",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "CqU0t7t_Lw8",
+    "duree": "108",
+    "chaine": "voxx",
+    "titre": "​🤣 The LUNAR DEBATE between Rousseau and Dupont-Moretti on GALLANTRY and BARBECUE",
+    "url": "https://www.youtube.com/watch?v=CqU0t7t_Lw8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "J0IrNx5oAH4",
+    "duree": "294",
+    "chaine": "VA Plus",
+    "titre": "The WORST of Sandrine ROUSSEAU",
+    "url": "https://www.youtube.com/watch?v=J0IrNx5oAH4",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "r9Aq7GQNTfE",
+    "duree": "586",
+    "chaine": "VA (toujours) Plus",
+    "titre": "The Worst of Sandrine Rousseau",
+    "url": "https://www.youtube.com/watch?v=r9Aq7GQNTfE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "jHyz3B7E7jQ",
+    "duree": "316",
+    "chaine": "jordanix",
+    "titre": "UNE MUSULMANE APPREND A SANDRINE ROUSSEAU A SE DECONSTRUIRE",
+    "url": "https://www.youtube.com/watch?v=jHyz3B7E7jQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/homme_deconstruit/gYZ9A4_4CDU.mp3",
+    "video": "gYZ9A4_4CDU",
+    "url": "https://www.youtube.com/watch?v=gYZ9A4_4CDU&t=12s",
+    "chaine": "The Wheel",
+    "titre": "Qu'est-ce qu'un \"homme déconstruit\" ? Les explications de Sandrine Rousseau",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "avec un homme deconstruit",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "sexe_escalopes",
+  "qui": "Roussel",
+  "phrase": "sexe des escalopes",
+  "recherches": [
+   "Roussel escalopes barbecue Rousseau",
+   "Fabien Roussel barbecue virilité réaction"
+  ],
+  "candidats": [
+   {
+    "video": "TzAs-HrplJc",
+    "duree": "78",
+    "chaine": "Europe 1",
+    "titre": "Barbecue \"symbole de virilité\" : Fabien Roussel refuse qu'on parle du \"sexe des escalopes\"",
+    "url": "https://www.youtube.com/watch?v=TzAs-HrplJc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 26.4,
+    "fin": 27.2,
+    "texte": "parler du sexe des escalopes"
+   },
+   {
+    "video": "R4zfry9WiVc",
+    "duree": "545",
+    "chaine": "Europe 1",
+    "titre": "Sandrine Rousseau tacle Fabien Roussel : \"Tu ne gagneras pas avec un steak !\"",
+    "url": "https://www.youtube.com/watch?v=R4zfry9WiVc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "h58M7fdfsK0",
+    "duree": "298",
+    "chaine": "france tv",
+    "titre": "Barbecue et virilité : Sandrine Rousseau revient sur la polémique - Complément d'enquête",
+    "url": "https://www.youtube.com/watch?v=h58M7fdfsK0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 158.0,
+    "fin": 159.0,
+    "texte": "parler du sexe des escalopes"
+   },
+   {
+    "video": "jB2ylXFG5qk",
+    "duree": "334",
+    "chaine": "Dossiers Publics",
+    "titre": "Rousseau sort sa « TAXE SAUCISSON »… puis se fait DÉCOUPER en RONDELLES par le RN !",
+    "url": "https://www.youtube.com/watch?v=jB2ylXFG5qk",
+    "chaine_connue": false
+   },
+   {
+    "video": "1kRZKQtplFY",
+    "duree": "196",
+    "chaine": "Gossip Star Media",
+    "titre": "Le barbecue? Un objet maudit pour Sandrine Rousseau!",
+    "url": "https://www.youtube.com/watch?v=1kRZKQtplFY",
+    "chaine_connue": false
+   },
+   {
+    "video": "pALRL36XkNE",
+    "duree": "141",
+    "chaine": "M-X",
+    "titre": "Barbecue \"symbole de virilité\": Sandrine Rousseau soutenue par Bayou",
+    "url": "https://www.youtube.com/watch?v=pALRL36XkNE",
+    "chaine_connue": false
+   },
+   {
+    "video": "U1s5o0O_Yeg",
+    "duree": "260",
+    "chaine": "Sud Radio",
+    "titre": "Guy Carlier :\"Le barbecue, dernier symbole de virilité ? c'est le combat Sandrine Rousseau\"",
+    "url": "https://www.youtube.com/watch?v=U1s5o0O_Yeg",
+    "chaine_connue": false
+   },
+   {
+    "video": "J0IrNx5oAH4",
+    "duree": "294",
+    "chaine": "VA Plus",
+    "titre": "The WORST of Sandrine ROUSSEAU",
+    "url": "https://www.youtube.com/watch?v=J0IrNx5oAH4",
+    "chaine_connue": false
+   },
+   {
+    "video": "nqMJ-kNwlAM",
+    "duree": "523",
+    "chaine": "Veltar",
+    "titre": "Fabien Roussel VS Sandrine Rousseau | La Pinte Politique",
+    "url": "https://www.youtube.com/watch?v=nqMJ-kNwlAM",
+    "chaine_connue": false
+   },
+   {
+    "video": "SppSUnr3jC4",
+    "duree": "87",
+    "chaine": "RMC",
+    "titre": "Fabien Roussel: \"Ma France est populaire, aime la bonne bouffe et une société plus juste\"",
+    "url": "https://www.youtube.com/watch?v=SppSUnr3jC4",
+    "chaine_connue": false
+   },
+   {
+    "video": "IBQcG0EMSRU",
+    "duree": "5699",
+    "chaine": "KaLee Vision",
+    "titre": "Fabien Roussel est-il un MEME ? Une Analyse Sérieuse et Pertinente",
+    "url": "https://www.youtube.com/watch?v=IBQcG0EMSRU",
+    "chaine_connue": false
+   },
+   {
+    "video": "PCktvDw2UqI",
+    "duree": "808",
+    "chaine": "L'IDR",
+    "titre": "A FARMER destroys SANDRINE ROUSSEAU LIVE",
+    "url": "https://www.youtube.com/watch?v=PCktvDw2UqI",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/sexe_escalopes/TzAs-HrplJc.mp3",
+    "video": "TzAs-HrplJc",
+    "url": "https://www.youtube.com/watch?v=TzAs-HrplJc&t=26s",
+    "chaine": "Europe 1",
+    "titre": "Barbecue \"symbole de virilité\" : Fabien Roussel refuse qu'on parle du \"sexe des escalopes\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "parler du sexe des escalopes",
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/sexe_escalopes/h58M7fdfsK0.mp3",
+    "video": "h58M7fdfsK0",
+    "url": "https://www.youtube.com/watch?v=h58M7fdfsK0&t=158s",
+    "chaine": "france tv",
+    "titre": "Barbecue et virilité : Sandrine Rousseau revient sur la polémique - Complément d'enquête",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "parler du sexe des escalopes",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "traverse_la_rue",
+  "qui": "Macron",
+  "phrase": "je traverse la rue",
+  "recherches": [
+   "Macron je traverse la rue et je vous en trouve un"
+  ],
+  "candidats": [
+   {
+    "video": "FHMy6DhOXrI",
+    "duree": "71",
+    "chaine": "euronews (en français)",
+    "titre": "\"I'll just cross the street and find you one\": Macron turns into a job center advisor",
+    "url": "https://www.youtube.com/watch?v=FHMy6DhOXrI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 41.2,
+    "fin": 43.6,
+    "texte": "cafes restaurants je traverse la rue"
+   },
+   {
+    "video": "Xh9LLIZ4YYc",
+    "duree": "180",
+    "chaine": "RTL  ",
+    "titre": "\"I'll cross the street, I'll find you a job\": \"Unacceptable in form, less so in substance\"",
+    "url": "https://www.youtube.com/watch?v=Xh9LLIZ4YYc",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "0lV1QIInhIE",
+    "duree": "91",
+    "chaine": "BFMTV",
+    "titre": "Macron lui avait conseillé de \"traverser la rue\" pour trouver un emploi: qu'est devenu Jonathan?",
+    "url": "https://www.youtube.com/watch?v=0lV1QIInhIE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 12.3,
+    "fin": 16.5,
+    "texte": "la polemique je traverse la rue"
+   },
+   {
+    "video": "J055ZpEscEg",
+    "duree": "73",
+    "chaine": "Europe 1",
+    "titre": "Macron lui avait dit de \"traverser la rue pour trouver du travail\" : un an après, qu'est-il devenu ?",
+    "url": "https://www.youtube.com/watch?v=J055ZpEscEg",
+    "chaine_connue": true
+   },
+   {
+    "video": "bmmHjFcrl4Y",
+    "duree": "83",
+    "chaine": "euronews (en français)",
+    "titre": "\"Je traverse la rue et je vous en trouve\" : Macron se mue en conseiller Pôle emploi",
+    "url": "https://www.youtube.com/watch?v=bmmHjFcrl4Y",
+    "chaine_connue": true
+   },
+   {
+    "video": "We1mNGdBijg",
+    "duree": "324",
+    "chaine": "Célébrités Toute l'actualité",
+    "titre": "\"Je traverse la rue, je vous en trouve\" : les propos de Macron sur le travail font polémique",
+    "url": "https://www.youtube.com/watch?v=We1mNGdBijg",
+    "chaine_connue": false
+   },
+   {
+    "video": "K1VVkgC0N2s",
+    "duree": "160",
+    "chaine": "Sud Radio",
+    "titre": "« Je traverse la rue et je vous trouve un travail », Macron sort sa version Marseillaise",
+    "url": "https://www.youtube.com/watch?v=K1VVkgC0N2s",
+    "chaine_connue": false
+   },
+   {
+    "video": "QimAgxygoI0",
+    "duree": "163",
+    "chaine": "les monkeurs",
+    "titre": "Emmanuel Macron dit je traverse la rue et je vous trouverez du travail",
+    "url": "https://www.youtube.com/watch?v=QimAgxygoI0",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/traverse_la_rue/FHMy6DhOXrI.mp3",
+    "video": "FHMy6DhOXrI",
+    "url": "https://www.youtube.com/watch?v=FHMy6DhOXrI&t=41s",
+    "chaine": "euronews (en français)",
+    "titre": "\"I'll just cross the street and find you one\": Macron turns into a job center advisor",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "cafes restaurants je traverse la rue",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/traverse_la_rue/0lV1QIInhIE.mp3",
+    "video": "0lV1QIInhIE",
+    "url": "https://www.youtube.com/watch?v=0lV1QIInhIE&t=12s",
+    "chaine": "BFMTV",
+    "titre": "Macron lui avait conseillé de \"traverser la rue\" pour trouver un emploi: qu'est devenu Jonathan?",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "la polemique je traverse la rue",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "pognon_de_dingue",
+  "qui": "Macron",
+  "phrase": "pognon de dingue",
+  "recherches": [
+   "Macron pognon de dingue vidéo Élysée"
+  ],
+  "candidats": [
+   {
+    "video": "QlgIXoKko8g",
+    "duree": "134",
+    "chaine": "BFMTV",
+    "titre": "ÉDITO - Macron \"a raison\" avec le \"pognon de dingue\" pour les aides sociales",
+    "url": "https://www.youtube.com/watch?v=QlgIXoKko8g",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "79a-1d_g3S0",
+    "duree": "133",
+    "chaine": "LeHuffPost",
+    "titre": "Macron Stages His Social Philosophy: \"We Spend Crazy Amounts of Money and the Poor Remain Poor\"",
+    "url": "https://www.youtube.com/watch?v=79a-1d_g3S0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 38.3,
+    "fin": 38.9,
+    "texte": "met un pognon de dingue"
+   },
+   {
+    "video": "BeU0SHwA9Ko",
+    "duree": "30",
+    "chaine": "BFMTV",
+    "titre": "\"Pognon de dingue\": Sibeth Ndiaye explique avoir voulu \"montrer le président dans sa vérité\"",
+    "url": "https://www.youtube.com/watch?v=BeU0SHwA9Ko",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "s_eq4PJq7KI",
+    "duree": "710",
+    "chaine": "Le Média",
+    "titre": "\"UN POGNON DE DINGUE\" : LE RAPPORT QUI ÉPINGLE MACRON ET SES DÎNERS LUXUEUX",
+    "url": "https://www.youtube.com/watch?v=s_eq4PJq7KI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 390.4,
+    "fin": 391.1,
+    "texte": "met un pognon de dingue"
+   },
+   {
+    "video": "8WLHrLE-XqI",
+    "duree": "245",
+    "chaine": "Verlie Veitch",
+    "titre": "«Pognon de dingue»: Pourquoi l'Elysée a-t-il fait fuiter cette vidéo d'Emmanuel Macron?",
+    "url": "https://www.youtube.com/watch?v=8WLHrLE-XqI",
+    "chaine_connue": false
+   },
+   {
+    "video": "rKkUkUFbqmE",
+    "duree": "64",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Macron s'enflamme : \"On met un pognon de dingue dans les minima sociaux\"",
+    "url": "https://www.youtube.com/watch?v=rKkUkUFbqmE",
+    "chaine_connue": false
+   },
+   {
+    "video": "xT5WUX8yQk0",
+    "duree": "3865",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "Macron and the \"crazy cash\" of social welfare #cdanslair 06/13/2018",
+    "url": "https://www.youtube.com/watch?v=xT5WUX8yQk0",
+    "chaine_connue": false
+   },
+   {
+    "video": "WmD1Bz1iLsg",
+    "duree": "554",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "\"Pognon\", migrants : pourquoi Macron assume tout - Les questions SMS #cdanslair 16.06.2018",
+    "url": "https://www.youtube.com/watch?v=WmD1Bz1iLsg",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/pognon_de_dingue/79a-1d_g3S0.mp3",
+    "video": "79a-1d_g3S0",
+    "url": "https://www.youtube.com/watch?v=79a-1d_g3S0&t=38s",
+    "chaine": "LeHuffPost",
+    "titre": "Macron Stages His Social Philosophy: \"We Spend Crazy Amounts of Money and the Poor Remain Poor\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "met un pognon de dingue",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/pognon_de_dingue/s_eq4PJq7KI.mp3",
+    "video": "s_eq4PJq7KI",
+    "url": "https://www.youtube.com/watch?v=s_eq4PJq7KI&t=390s",
+    "chaine": "Le Média",
+    "titre": "\"UN POGNON DE DINGUE\" : LE RAPPORT QUI ÉPINGLE MACRON ET SES DÎNERS LUXUEUX",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "met un pognon de dingue",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "gaulois_refractaires",
+  "qui": "Macron",
+  "phrase": "gaulois réfractaires",
+  "recherches": [
+   "Macron Gaulois réfractaires au changement Danemark"
+  ],
+  "candidats": [
+   {
+    "video": "6UHrvADhJVk",
+    "duree": "36.0",
+    "chaine": "LeHuffPost",
+    "titre": "Macron ironise sur le \"Gaulois réfractaire au changement\"",
+    "url": "https://www.youtube.com/watch?v=6UHrvADhJVk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 16.9,
+    "fin": 19.9,
+    "texte": "exactement le gaulois refractaires"
+   },
+   {
+    "video": "ej5x5BsD9n4",
+    "duree": "51.0",
+    "chaine": "Europe 1",
+    "titre": "Au Danemark, Macron évoque le \"Gaulois réfractaire au changement\"",
+    "url": "https://www.youtube.com/watch?v=ej5x5BsD9n4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 8.2,
+    "fin": 9.0,
+    "texte": "a des gaulois refractaires"
+   },
+   {
+    "video": "rHhj7TuLZxM",
+    "duree": "21.0",
+    "chaine": "Le Figaro",
+    "titre": "Au Danemark, la phrase polémique de Macron",
+    "url": "https://www.youtube.com/watch?v=rHhj7TuLZxM",
+    "chaine_connue": true
+   },
+   {
+    "video": "2_to_fSgLR4",
+    "duree": "289.0",
+    "chaine": "Europe 1",
+    "titre": "Dyvéké Johansen : au Danemark, Macron \"est perçu comme une super star\"",
+    "url": "https://www.youtube.com/watch?v=2_to_fSgLR4",
+    "chaine_connue": true
+   },
+   {
+    "video": "xF4hwdgBw0k",
+    "duree": "39.0",
+    "chaine": "BFMTV",
+    "titre": "Macron et le \"gaulois réfractaire\": \"On est sur le registre de la maladresse\" pour Thierry Arnaud",
+    "url": "https://www.youtube.com/watch?v=xF4hwdgBw0k",
+    "chaine_connue": true
+   },
+   {
+    "video": "nC7WZ6pnE_A",
+    "duree": "465.0",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "Macron, les Gaulois... et l'impôt à la source - Les questions SMS #cdanslair 30.08.2018",
+    "url": "https://www.youtube.com/watch?v=nC7WZ6pnE_A",
+    "chaine_connue": false
+   },
+   {
+    "video": "qK8KY_8GrFU",
+    "duree": "4023.0",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "Macron, the Gauls... and the pay-as-you-earn tax #cdanslair 08/30/2018",
+    "url": "https://www.youtube.com/watch?v=qK8KY_8GrFU",
+    "chaine_connue": false
+   },
+   {
+    "video": "aYl2CqlGUCY",
+    "duree": "32.0",
+    "chaine": "Ramon Trofort",
+    "titre": "\"Gaulois réfractaires au changement\": Macron",
+    "url": "https://www.youtube.com/watch?v=aYl2CqlGUCY",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/gaulois_refractaires/6UHrvADhJVk.mp3",
+    "video": "6UHrvADhJVk",
+    "url": "https://www.youtube.com/watch?v=6UHrvADhJVk&t=16s",
+    "chaine": "LeHuffPost",
+    "titre": "Macron ironise sur le \"Gaulois réfractaire au changement\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "exactement le gaulois refractaires",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/gaulois_refractaires/ej5x5BsD9n4.mp3",
+    "video": "ej5x5BsD9n4",
+    "url": "https://www.youtube.com/watch?v=ej5x5BsD9n4&t=8s",
+    "chaine": "Europe 1",
+    "titre": "Au Danemark, Macron évoque le \"Gaulois réfractaire au changement\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "a des gaulois refractaires",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "emmerder",
+  "qui": "Macron",
+  "phrase": "emmerder",
+  "recherches": [
+   "Macron j'ai très envie de les emmerder non vaccinés"
+  ],
+  "candidats": [
+   {
+    "video": "jM-A9T1zD0k",
+    "duree": "83",
+    "chaine": "FRANCE 24",
+    "titre": "Emmanuel Macron: \"I really want to annoy the unvaccinated [...] That's the strategy.\"",
+    "url": "https://www.youtube.com/watch?v=jM-A9T1zD0k",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 15.4,
+    "fin": 15.7,
+    "texte": "pas pour emmerder"
+   },
+   {
+    "video": "X5Cmyzxua9A",
+    "duree": "59",
+    "chaine": "BFMTV",
+    "titre": "\"Emmerder\" les non-vaccinés: une citation \"sortie de son contexte\" selon Emmanuel Macron",
+    "url": "https://www.youtube.com/watch?v=X5Cmyzxua9A",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "rvPeLKF5iQg",
+    "duree": "329",
+    "chaine": "FRANCE 24",
+    "titre": "Emmanuel Macron: \"Les non-vaccinés, j'ai très envie de les emmerder\" • FRANCE 24",
+    "url": "https://www.youtube.com/watch?v=rvPeLKF5iQg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 22.4,
+    "fin": 22.9,
+    "texte": "de les emmerder"
+   },
+   {
+    "video": "_-zGyccWSzc",
+    "duree": "199",
+    "chaine": "RTBF Info",
+    "titre": "\"Les non-vaccinés, j'ai très envie de les emmerder\", sortie polémique d'Emmanuel Macron - RTBF Info",
+    "url": "https://www.youtube.com/watch?v=_-zGyccWSzc",
+    "chaine_connue": false
+   },
+   {
+    "video": "uEc734GKrLU",
+    "duree": "570",
+    "chaine": "EN MODE REPLAY",
+    "titre": "Macron takes aim at the unvaccinated: \"I really want to piss them off, and we're going to keep do...",
+    "url": "https://www.youtube.com/watch?v=uEc734GKrLU",
+    "chaine_connue": false
+   },
+   {
+    "video": "ZFSVxI4rDfs",
+    "duree": "115",
+    "chaine": "ZVA JC",
+    "titre": "🔴 E Macron : \"Les non-vaccinés, j’ai très envie de les emmerder, donc on va continuer de le faire\"",
+    "url": "https://www.youtube.com/watch?v=ZFSVxI4rDfs",
+    "chaine_connue": false
+   },
+   {
+    "video": "rX79x0yQOUo",
+    "duree": "125",
+    "chaine": "Situation Internationale",
+    "titre": "S.E. Emmanuel MACRON : \"Les non-vaccinés, j'ai très envie de les emmerder\". C'est grave en France...",
+    "url": "https://www.youtube.com/watch?v=rX79x0yQOUo",
+    "chaine_connue": false
+   },
+   {
+    "video": "V_B0ZWrLXjk",
+    "duree": "191",
+    "chaine": "RMC",
+    "titre": "Emmanuel Macron veut \"emmerder\" les non-vaccinés",
+    "url": "https://www.youtube.com/watch?v=V_B0ZWrLXjk",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/emmerder/jM-A9T1zD0k.mp3",
+    "video": "jM-A9T1zD0k",
+    "url": "https://www.youtube.com/watch?v=jM-A9T1zD0k&t=15s",
+    "chaine": "FRANCE 24",
+    "titre": "Emmanuel Macron: \"I really want to annoy the unvaccinated [...] That's the strategy.\"",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "pas pour emmerder",
+    "ecoute": "autre"
+   },
+   {
+    "fichier": "assets/audio/raw/emmerder/rvPeLKF5iQg.mp3",
+    "video": "rvPeLKF5iQg",
+    "url": "https://www.youtube.com/watch?v=rvPeLKF5iQg&t=22s",
+    "chaine": "FRANCE 24",
+    "titre": "Emmanuel Macron: \"Les non-vaccinés, j'ai très envie de les emmerder\" • FRANCE 24",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "de les emmerder",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "cest_notre_projet",
+  "qui": "Macron",
+  "phrase": "c'est notre projet",
+  "recherches": [
+   "Macron meeting 2016 c'est notre projet Porte de Versailles"
+  ],
+  "candidats": [
+   {
+    "video": "1mhb0LKAzpI",
+    "duree": "43.0",
+    "chaine": "Public Sénat",
+    "titre": "Macron veut « replacer l’humain au centre » de son projet",
+    "url": "https://www.youtube.com/watch?v=1mhb0LKAzpI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "JIYJFmtib08",
+    "duree": "89.0",
+    "chaine": "BFMTV",
+    "titre": "\"PARCE QUE C'EST NOTRE PROJET\": le coach vocal d'E. Macron raconte son échange avec le candidat",
+    "url": "https://www.youtube.com/watch?v=JIYJFmtib08",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "ACzyCuCZ-RA",
+    "duree": "39.0",
+    "chaine": "franceinfo",
+    "titre": "Emmanuel Macron, En marche, fait du porte-à-porte",
+    "url": "https://www.youtube.com/watch?v=ACzyCuCZ-RA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "a1r8Ad6nFSA",
+    "duree": "37.0",
+    "chaine": "Le Point",
+    "titre": "Extrait du discours d’Emmanuel Macron à la Porte de Versailles",
+    "url": "https://www.youtube.com/watch?v=a1r8Ad6nFSA",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 26.2,
+    "fin": 29.0,
+    "texte": "que c est notre musique projet"
+   },
+   {
+    "video": "vhGIo9ugC9U",
+    "duree": "228.0",
+    "chaine": "Fabien Obrier",
+    "titre": "J'étais... En Marche! - Emmanuel Macron meeting du 10 décembre 2016",
+    "url": "https://www.youtube.com/watch?v=vhGIo9ugC9U",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "MoJvWHW5zAo",
+    "duree": "9416.0",
+    "chaine": "Renaissance",
+    "titre": "Meeting à Paris du 10 Décembre I Emmanuel Macron",
+    "url": "https://www.youtube.com/watch?v=MoJvWHW5zAo",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "9rM1s5oLpio",
+    "duree": "216.0",
+    "chaine": "Ce qu'à dit Emmanuel Macron",
+    "titre": "Emmanuel Macron - Le Projet",
+    "url": "https://www.youtube.com/watch?v=9rM1s5oLpio",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "l7byXT1clnc",
+    "duree": "95.0",
+    "chaine": "EnMarche Présidentielle 2017",
+    "titre": "Emmanuel Macron - En Marche - Extract Discours Mutualite 20160712 - 20 ans de politique",
+    "url": "https://www.youtube.com/watch?v=l7byXT1clnc",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/cest_notre_projet/a1r8Ad6nFSA.mp3",
+    "video": "a1r8Ad6nFSA",
+    "url": "https://www.youtube.com/watch?v=a1r8Ad6nFSA&t=26s",
+    "chaine": "Le Point",
+    "titre": "Extrait du discours d’Emmanuel Macron à la Porte de Versailles",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "que c est notre musique projet",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "machiste_polluant",
+  "qui": "Doucet",
+  "phrase": "machiste",
+  "recherches": [
+   "Grégory Doucet Tour de France machiste et polluant"
+  ],
+  "candidats": [
+   {
+    "video": "PoOiyVB7M3Y",
+    "duree": "195.0",
+    "chaine": "RTL  ",
+    "titre": "Tour de France \"machiste et polluant\" : le maire de Lyon, un \"écolo décroissant\" selon Bost",
+    "url": "https://www.youtube.com/watch?v=PoOiyVB7M3Y",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "K37CzT3_pC4",
+    "duree": "112.0",
+    "chaine": "Europe 1",
+    "titre": "Le Tour de France \"machiste et polluant\" ? Guerini dénonce \"une vision trop idéologisée\"",
+    "url": "https://www.youtube.com/watch?v=K37CzT3_pC4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 20.7,
+    "fin": 21.1,
+    "texte": "une course machiste"
+   },
+   {
+    "video": "qtxAT9XLtH4",
+    "duree": "66.0",
+    "chaine": "CNEWS",
+    "titre": "Tour de France : «Une course machiste et populaire»",
+    "url": "https://www.youtube.com/watch?v=qtxAT9XLtH4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 29.4,
+    "fin": 30.0,
+    "texte": "france est machiste"
+   },
+   {
+    "video": "trk0PMMh130",
+    "duree": "574.0",
+    "chaine": "SeriActu",
+    "titre": "LE TOUR DE FRANCE C'EST MACHISTE ET POLLUANT SAUF SI C'EST DES FEMMES POUR LE MAIRE DE LYON",
+    "url": "https://www.youtube.com/watch?v=trk0PMMh130",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 139.0,
+    "fin": 140.4,
+    "texte": "france est machiste"
+   },
+   {
+    "video": "KsWXUSah1Rw",
+    "duree": "96.0",
+    "chaine": "RMC",
+    "titre": "\"On ne peut plus entendre que c'est acceptable qu'il n'y ait pas de Tour de France féminin\"",
+    "url": "https://www.youtube.com/watch?v=KsWXUSah1Rw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 11.5,
+    "fin": 12.1,
+    "texte": "france est machiste"
+   },
+   {
+    "video": "XHUm85FzwDo",
+    "duree": "212.0",
+    "chaine": "RMCSport",
+    "titre": "Tour de France : Prudhomme répond au maire de Lyon sur le \"sexisme\" dans le cyclisme",
+    "url": "https://www.youtube.com/watch?v=XHUm85FzwDo",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 8.9,
+    "fin": 9.3,
+    "texte": "une epreuve machiste"
+   },
+   {
+    "video": "OKNgoA72D5U",
+    "duree": "211.0",
+    "chaine": "Radio Nova",
+    "titre": "Sacrilège ! Qui ose critiquer le Tour de France ? | Un Nova jour se lève",
+    "url": "https://www.youtube.com/watch?v=OKNgoA72D5U",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 29.7,
+    "fin": 30.3,
+    "texte": "france est machiste"
+   },
+   {
+    "video": "idzWNdldhMI",
+    "duree": "119.0",
+    "chaine": "RMC",
+    "titre": "Le Tour de France \"machiste et polluant\": \"J'adore le Tour de France et il évolue\"",
+    "url": "https://www.youtube.com/watch?v=idzWNdldhMI",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 3.1,
+    "fin": 3.8,
+    "texte": "polluants et machiste"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/machiste_polluant/qtxAT9XLtH4.mp3",
+    "video": "qtxAT9XLtH4",
+    "url": "https://www.youtube.com/watch?v=qtxAT9XLtH4&t=29s",
+    "chaine": "CNEWS",
+    "titre": "Tour de France : «Une course machiste et populaire»",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "france est machiste",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "arbre_mort",
+  "qui": "Hurmic",
+  "phrase": "arbre mort",
+  "recherches": [
+   "Pierre Hurmic sapin de Noël arbre mort Bordeaux"
+  ],
+  "candidats": [
+   {
+    "video": "AVX0Sj4trA4",
+    "duree": "114.0",
+    "chaine": "France 3 Nouvelle-Aquitaine",
+    "titre": "Réponse de Pierre Hurmic à la polémique sur la disparition du sapin de Noël place Pey Berland",
+    "url": "https://www.youtube.com/watch?v=AVX0Sj4trA4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "jTOuCJbd_LQ",
+    "duree": "746.0",
+    "chaine": "LeHuffPost",
+    "titre": "Un sapin de Noël peut-il être écologique? Un conte de Noël pour le savoir",
+    "url": "https://www.youtube.com/watch?v=jTOuCJbd_LQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 126.5,
+    "fin": 126.9,
+    "texte": "d un arbre mort"
+   },
+   {
+    "video": "K0ZhGJqZ8IU",
+    "duree": "44.0",
+    "chaine": "Le Point",
+    "titre": "À Bordeaux, exit le sapin de Noël, « un arbre mort » pour le maire Pierre Hurmic",
+    "url": "https://www.youtube.com/watch?v=K0ZhGJqZ8IU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 0.0,
+    "fin": 0.7,
+    "texte": "sur l arbre mort"
+   },
+   {
+    "video": "0oqyOt_m5kg",
+    "duree": "446.0",
+    "chaine": "VA Plus",
+    "titre": "Bordeaux : que penser de l'absence \"d'arbre mort\" pour Noël ?",
+    "url": "https://www.youtube.com/watch?v=0oqyOt_m5kg",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 4.3,
+    "fin": 4.8,
+    "texte": "est un arbre mort"
+   },
+   {
+    "video": "L3Fj2e2gPhs",
+    "duree": "85.0",
+    "chaine": "RMC",
+    "titre": "À Bordeaux, le sapin de Noël ne sera pas un \"arbre mort\"",
+    "url": "https://www.youtube.com/watch?v=L3Fj2e2gPhs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 9.1,
+    "fin": 10.4,
+    "texte": "decorer un arbre mort"
+   },
+   {
+    "video": "67yFI6GHf7E",
+    "duree": "268.0",
+    "chaine": "24h News",
+    "titre": "Bordeaux : L’opposition a déposé la pétition pour le maintien du sapin de Noël au maire Pierre Hurmi",
+    "url": "https://www.youtube.com/watch?v=67yFI6GHf7E",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "P6FaDNM0SKs",
+    "duree": "231.0",
+    "chaine": "24h News",
+    "titre": "Bordeaux : L’opposition a déposé la pétition pour le maintien du sapin de Noël au maire Pierre Hurmi",
+    "url": "https://www.youtube.com/watch?v=P6FaDNM0SKs",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "fw905bY61do",
+    "duree": "271.0",
+    "chaine": "24h News",
+    "titre": "La mairie de Bordeaux envisage une consultation des habitants pour sortir de la crise de l'arbre de",
+    "url": "https://www.youtube.com/watch?v=fw905bY61do",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/arbre_mort/K0ZhGJqZ8IU.mp3",
+    "video": "K0ZhGJqZ8IU",
+    "url": "https://www.youtube.com/watch?v=K0ZhGJqZ8IU&t=0s",
+    "chaine": "Le Point",
+    "titre": "À Bordeaux, exit le sapin de Noël, « un arbre mort » pour le maire Pierre Hurmic",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "sur l arbre mort",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "bravitude",
+  "qui": "Royal",
+  "phrase": "bravitude",
+  "recherches": [
+   "Ségolène Royal bravitude Grande Muraille Chine 2007"
+  ],
+  "candidats": [
+   {
+    "video": "rgNoO9tqgBk",
+    "duree": "51.0",
+    "chaine": "INA Politique",
+    "titre": "2007 : La bravitude de Ségolène Royal | Archive INA",
+    "url": "https://www.youtube.com/watch?v=rgNoO9tqgBk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 32.5,
+    "fin": 33.7,
+    "texte": "conquiert la bravitude"
+   },
+   {
+    "video": "cQSX5g16tPs",
+    "duree": "139.0",
+    "chaine": "INA Société",
+    "titre": "Ségolène Royal's trip to China",
+    "url": "https://www.youtube.com/watch?v=cQSX5g16tPs",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 55.9,
+    "fin": 57.0,
+    "texte": "conquiert la bravitude"
+   },
+   {
+    "video": "tFBX9Lg8QxU",
+    "duree": "106.0",
+    "chaine": "segolene2007",
+    "titre": "Ségolène Royal en Chine - France 2 - 060107",
+    "url": "https://www.youtube.com/watch?v=tFBX9Lg8QxU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 37.5,
+    "fin": 39.6,
+    "texte": "conquiere la bravitude"
+   },
+   {
+    "video": "_GkjhWavV-U",
+    "duree": "30.0",
+    "chaine": "KalashUMP",
+    "titre": "Brave Royal !",
+    "url": "https://www.youtube.com/watch?v=_GkjhWavV-U",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 11.9,
+    "fin": 15.7,
+    "texte": "conquier la bravitude"
+   },
+   {
+    "video": "kw4hstbNt68",
+    "duree": "115.0",
+    "chaine": "Le Bal des Candidats🇫🇷",
+    "titre": "La Bravitude",
+    "url": "https://www.youtube.com/watch?v=kw4hstbNt68",
+    "chaine_connue": false
+   },
+   {
+    "video": "_1s9S-uXx6E",
+    "duree": "60.0",
+    "chaine": "SamLowry63",
+    "titre": "La bravitude",
+    "url": "https://www.youtube.com/watch?v=_1s9S-uXx6E",
+    "chaine_connue": false
+   },
+   {
+    "video": "wGC_ASBRodM",
+    "duree": "20.0",
+    "chaine": "AFP",
+    "titre": "La \"méprisance\" de Sarkozy",
+    "url": "https://www.youtube.com/watch?v=wGC_ASBRodM",
+    "chaine_connue": false
+   },
+   {
+    "video": "JFZHT7jAGjA",
+    "duree": "9.0",
+    "chaine": "iouri",
+    "titre": "Qui vient sur la Grande muraille conquiert la bravitude - Ségolène Royal",
+    "url": "https://www.youtube.com/watch?v=JFZHT7jAGjA",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/bravitude/rgNoO9tqgBk.mp3",
+    "video": "rgNoO9tqgBk",
+    "url": "https://www.youtube.com/watch?v=rgNoO9tqgBk&t=32s",
+    "chaine": "INA Politique",
+    "titre": "2007 : La bravitude de Ségolène Royal | Archive INA",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "conquiert la bravitude",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/bravitude/_GkjhWavV-U.mp3",
+    "video": "_GkjhWavV-U",
+    "url": "https://www.youtube.com/watch?v=_GkjhWavV-U&t=11s",
+    "chaine": "KalashUMP",
+    "titre": "Brave Royal !",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "conquier la bravitude",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "blancos",
+  "qui": "Valls",
+  "phrase": "blancos",
+  "recherches": [
+   "Valls blancos Evry",
+   "Valls blancs whites blancos vidéo Direct 8"
+  ],
+  "candidats": [
+   {
+    "video": "n5Kvzqy2SJo",
+    "duree": "332",
+    "chaine": "FRANCE 24",
+    "titre": "Culture: intermittent workers, Manuel Valls' outstretched hand",
+    "url": "https://www.youtube.com/watch?v=n5Kvzqy2SJo",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "cutneYh_SgE",
+    "duree": "369",
+    "chaine": "FRANCE 24",
+    "titre": "\"Apartheid\" according to Manuel Valls",
+    "url": "https://www.youtube.com/watch?v=cutneYh_SgE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "R4KpeRet-Co",
+    "duree": "333",
+    "chaine": "FRANCE 24",
+    "titre": "\"Valls: \"j'ai changé\"\"",
+    "url": "https://www.youtube.com/watch?v=R4KpeRet-Co",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "5n4NqSB_8eM",
+    "duree": "88",
+    "chaine": "BFMTV",
+    "titre": "Voyage à Berlin: Valls s’explique et prend en charge la part de ses enfants",
+    "url": "https://www.youtube.com/watch?v=5n4NqSB_8eM",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "m6T4f9kE9ds",
+    "duree": "2232",
+    "chaine": "Europe 1",
+    "titre": "\"C’est à vomir, c’est une humiliation !\" : Manuel Valls réagit aux alliances PS-LFI",
+    "url": "https://www.youtube.com/watch?v=m6T4f9kE9ds",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "QupAIuQ4Y4I",
+    "duree": "12003",
+    "chaine": "Public Sénat",
+    "titre": "Sénat 360 - Manuel Valls / Primaire de Gauche / Les femmes \"s'autocensurent\" (15/12/2016)",
+    "url": "https://www.youtube.com/watch?v=QupAIuQ4Y4I",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "AGmSQp22pQQ",
+    "duree": "20",
+    "chaine": "Contre Info",
+    "titre": "Manuel Valls: \"Get me a few white guys, a few whiteys, a few blancos\"",
+    "url": "https://www.youtube.com/watch?v=AGmSQp22pQQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "POA3fZaJypc",
+    "duree": "42",
+    "chaine": "Stanis Sw",
+    "titre": "Quelques blanc, Quelques white, Quelques Blancos Partie 1",
+    "url": "https://www.youtube.com/watch?v=POA3fZaJypc",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "ESXpTsAJQ-4",
+    "duree": "83",
+    "chaine": "Mrs Crow",
+    "titre": "manuel valls lui faut quelque white et quelque blancos",
+    "url": "https://www.youtube.com/watch?v=ESXpTsAJQ-4",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "O7OUDlL_e2I",
+    "duree": "92",
+    "chaine": "Stanis Sw",
+    "titre": "Quelques blanc, Quelques white, Quelques Blancos Partie 2",
+    "url": "https://www.youtube.com/watch?v=O7OUDlL_e2I",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "B4gyRlweeb4",
+    "duree": "51",
+    "chaine": "telessonne",
+    "titre": "Manuel Valls : \"Plus de Blancs à Evry\" -  La Polémique ...",
+    "url": "https://www.youtube.com/watch?v=B4gyRlweeb4",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "FjwePKQiaCs",
+    "duree": "48",
+    "chaine": "Front Français",
+    "titre": "Quand Valls veut du blancos, du white",
+    "url": "https://www.youtube.com/watch?v=FjwePKQiaCs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "INbTAxaOX0g",
+    "duree": "58",
+    "chaine": "AFP",
+    "titre": "Procès d'un universitaire pour avoir ironisé sur les \"blancos\"",
+    "url": "https://www.youtube.com/watch?v=INbTAxaOX0g",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "N3_g3e4z1GQ",
+    "duree": "811",
+    "chaine": "documentaire hd 7",
+    "titre": "Manuel Valls \"El Blancos\" is Prime Minister",
+    "url": "https://www.youtube.com/watch?v=N3_g3e4z1GQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 36.1,
+    "fin": 38.0,
+    "texte": "pareil promotion blancos"
+   },
+   {
+    "video": "aOcJN4DROT0",
+    "duree": "42",
+    "chaine": "Vérité Politique",
+    "titre": "Manuel Valls - Discrimination - Entretien sur France 2 (Extrait Vidéo Sur Direct 8) le 16/06/09",
+    "url": "https://www.youtube.com/watch?v=aOcJN4DROT0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/blancos/N3_g3e4z1GQ.mp3",
+    "video": "N3_g3e4z1GQ",
+    "url": "https://www.youtube.com/watch?v=N3_g3e4z1GQ&t=36s",
+    "chaine": "documentaire hd 7",
+    "titre": "Manuel Valls \"El Blancos\" is Prime Minister",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "pareil promotion blancos",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "moi_president",
+  "qui": "Hollande",
+  "phrase": "moi président",
+  "recherches": [
+   "Hollande moi président débat 2012 anaphore"
+  ],
+  "candidats": [
+   {
+    "video": "xyH_MRJ1C0s",
+    "duree": "10239.0",
+    "chaine": "INA Politique",
+    "titre": "Débat présidentiel 2012 : François Hollande - Nicolas Sarkozy | Archive INA",
+    "url": "https://www.youtube.com/watch?v=xyH_MRJ1C0s",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 8304.5,
+    "fin": 8306.2,
+    "texte": "de rien moi president"
+   },
+   {
+    "video": "53b-pBPvjmA",
+    "duree": "202.0",
+    "chaine": "Le Monde",
+    "titre": "Hollande : \"Moi président de la République...\"",
+    "url": "https://www.youtube.com/watch?v=53b-pBPvjmA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 14.7,
+    "fin": 16.5,
+    "texte": "de rien moi president"
+   },
+   {
+    "video": "2CvTMcpy83Y",
+    "duree": "60.0",
+    "chaine": "Public Sénat",
+    "titre": "What remains of Hollande's \"I, President of the Republic\"?",
+    "url": "https://www.youtube.com/watch?v=2CvTMcpy83Y",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 0.8,
+    "fin": 1.8,
+    "texte": "moi president de la"
+   },
+   {
+    "video": "PM_hRRXKJwM",
+    "duree": "202.0",
+    "chaine": "Casimira N",
+    "titre": "L'anaphore de François Hollande : Moi, Président de la République, je... .mp4",
+    "url": "https://www.youtube.com/watch?v=PM_hRRXKJwM",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 14.7,
+    "fin": 16.5,
+    "texte": "de rien moi president"
+   },
+   {
+    "video": "JW6-B0IlPuA",
+    "duree": "141.0",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Débat Hollande - Sarkozy : piques et piques et petit clash",
+    "url": "https://www.youtube.com/watch?v=JW6-B0IlPuA",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "_5JI1Izxloc",
+    "duree": "203.0",
+    "chaine": "Casimira N",
+    "titre": "L'anaphore de François Hollande moi président de la République je... bla bla bla !",
+    "url": "https://www.youtube.com/watch?v=_5JI1Izxloc",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 47.1,
+    "fin": 48.6,
+    "texte": "ce sens moi president"
+   },
+   {
+    "video": "_hsJL5xLK_A",
+    "duree": "359.0",
+    "chaine": "Edmond Guibe",
+    "titre": "François Hollande Moi Président - l'anaphore",
+    "url": "https://www.youtube.com/watch?v=_hsJL5xLK_A",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "Ch4DsAR5VfA",
+    "duree": "67.0",
+    "chaine": "marc Marco",
+    "titre": "Moi Président de la République",
+    "url": "https://www.youtube.com/watch?v=Ch4DsAR5VfA",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 1.4,
+    "fin": 2.8,
+    "texte": "de vainqueur moi president"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/moi_president/2CvTMcpy83Y.mp3",
+    "video": "2CvTMcpy83Y",
+    "url": "https://www.youtube.com/watch?v=2CvTMcpy83Y&t=0s",
+    "chaine": "Public Sénat",
+    "titre": "What remains of Hollande's \"I, President of the Republic\"?",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "moi president de la",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/moi_president/Ch4DsAR5VfA.mp3",
+    "video": "Ch4DsAR5VfA",
+    "url": "https://www.youtube.com/watch?v=Ch4DsAR5VfA&t=1s",
+    "chaine": "marc Marco",
+    "titre": "Moi Président de la République",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "de vainqueur moi president",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "adversaire_finance",
+  "qui": "Hollande",
+  "phrase": "mon véritable adversaire",
+  "recherches": [
+   "Hollande discours du Bourget mon véritable adversaire la finance"
+  ],
+  "candidats": [
+   {
+    "video": "tPjlxP3_l90",
+    "duree": "187.0",
+    "chaine": "INA Actu",
+    "titre": "\"My true adversary is the world of finance\" F. Hollande | Franceinfo INA",
+    "url": "https://www.youtube.com/watch?v=tPjlxP3_l90",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "e5vUEBIzqs4",
+    "duree": "270.0",
+    "chaine": "BFMTV",
+    "titre": "2012: François Hollande successfully passed his major oral exam as a candidate for the Élysée Pal...",
+    "url": "https://www.youtube.com/watch?v=e5vUEBIzqs4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "WO7A_kIFVxU",
+    "duree": "138.0",
+    "chaine": "BFMTV",
+    "titre": "François Hollande souhaite une vraie mise au pas de la finance",
+    "url": "https://www.youtube.com/watch?v=WO7A_kIFVxU",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 1.0,
+    "fin": 2.2,
+    "texte": "mon veritable adversaire dit francois"
+   },
+   {
+    "video": "cJf6rWhiQV4",
+    "duree": "321.0",
+    "chaine": "BFMTV",
+    "titre": "Le discours de François Hollande au Bourget",
+    "url": "https://www.youtube.com/watch?v=cJf6rWhiQV4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "oKSOyl97x0s",
+    "duree": "148.0",
+    "chaine": "laveriteavant",
+    "titre": "Hollande et la finance, au bourget (2012)",
+    "url": "https://www.youtube.com/watch?v=oKSOyl97x0s",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 4.2,
+    "fin": 6.4,
+    "texte": "est mon adversaire mon veritable"
+   },
+   {
+    "video": "bb9cKK9kn0A",
+    "duree": "44.0",
+    "chaine": "atelierdesarchives Best Of",
+    "titre": "Hollande on the world of finance at Le Bourget",
+    "url": "https://www.youtube.com/watch?v=bb9cKK9kn0A",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 17.9,
+    "fin": 20.0,
+    "texte": "est mon adversaire mon veritable"
+   },
+   {
+    "video": "ZE8pE2t__pc",
+    "duree": "40.0",
+    "chaine": "Arnaud Sylvain",
+    "titre": "Mon adversaire, c'est le monde de la finance",
+    "url": "https://www.youtube.com/watch?v=ZE8pE2t__pc",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 5.2,
+    "fin": 7.5,
+    "texte": "est mon adversaire mon veritable"
+   },
+   {
+    "video": "lh2JVxt6Ga8",
+    "duree": "32.0",
+    "chaine": "CestLaFinance",
+    "titre": "Mon véritable adversaire, c'est le monde de la finance.",
+    "url": "https://www.youtube.com/watch?v=lh2JVxt6Ga8",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/adversaire_finance/bb9cKK9kn0A.mp3",
+    "video": "bb9cKK9kn0A",
+    "url": "https://www.youtube.com/watch?v=bb9cKK9kn0A&t=17s",
+    "chaine": "atelierdesarchives Best Of",
+    "titre": "Hollande on the world of finance at Le Bourget",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "est mon adversaire mon veritable",
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/adversaire_finance/ZE8pE2t__pc.mp3",
+    "video": "ZE8pE2t__pc",
+    "url": "https://www.youtube.com/watch?v=ZE8pE2t__pc&t=5s",
+    "chaine": "Arnaud Sylvain",
+    "titre": "Mon adversaire, c'est le monde de la finance",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "est mon adversaire mon veritable",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "courbe_chomage",
+  "qui": "Hollande",
+  "phrase": "inverser la courbe",
+  "recherches": [
+   "Hollande inverser la courbe du chômage fin 2013"
+  ],
+  "candidats": [
+   {
+    "video": "Md5bCY_xwhQ",
+    "duree": "96.0",
+    "chaine": "BFMTV",
+    "titre": "Chômage: Hollande se montre flou quant à l'inversion de la courbe d'ici fin 2013 - 28/11",
+    "url": "https://www.youtube.com/watch?v=Md5bCY_xwhQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "FNHk6jQMvvg",
+    "duree": "80.0",
+    "chaine": "BFMTV",
+    "titre": "François Hollande peut-il inverser la courbe du chômage d'ici la fin de l'année? - 28/11",
+    "url": "https://www.youtube.com/watch?v=FNHk6jQMvvg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 1.7,
+    "fin": 3.3,
+    "texte": "impossible d inverser la courbe"
+   },
+   {
+    "video": "Hw1ZcltLRoo",
+    "duree": "71.0",
+    "chaine": "BFMTV",
+    "titre": "François Hollande peut-il inverser la courbe du chômage ?",
+    "url": "https://www.youtube.com/watch?v=Hw1ZcltLRoo",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 3.2,
+    "fin": 4.9,
+    "texte": "que coute inverser la courbe"
+   },
+   {
+    "video": "mpiFt593oio",
+    "duree": "74.0",
+    "chaine": "BFMTV",
+    "titre": "Inversion de la courbe du chômage: Hollande peut-il tenir son pari? - 25/10",
+    "url": "https://www.youtube.com/watch?v=mpiFt593oio",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 22.3,
+    "fin": 23.9,
+    "texte": "2 pour inverser la courbe"
+   },
+   {
+    "video": "LC0NIbwfSeY",
+    "duree": "48.0",
+    "chaine": "AFP",
+    "titre": "Ayrault: \"inversion\" de la courbe du chômage dès la fin 2013",
+    "url": "https://www.youtube.com/watch?v=LC0NIbwfSeY",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "cTbVuin5bVM",
+    "duree": "34.0",
+    "chaine": "AFP",
+    "titre": "Hollande maintient \"sa volonté\" d'inverser la courbe du chômage",
+    "url": "https://www.youtube.com/watch?v=cTbVuin5bVM",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 12.6,
+    "fin": 13.6,
+    "texte": "nous allons inverser la courbe"
+   },
+   {
+    "video": "E8GP1yAU9Kk",
+    "duree": "38.0",
+    "chaine": "AFP",
+    "titre": "Inversion courbe du chômage: mise au point de Hollande",
+    "url": "https://www.youtube.com/watch?v=E8GP1yAU9Kk",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "P9gK39KfapI",
+    "duree": "49.0",
+    "chaine": "AFP",
+    "titre": "Insee: pas d'inversion de la courbe du chômage en 2013",
+    "url": "https://www.youtube.com/watch?v=P9gK39KfapI",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/courbe_chomage/cTbVuin5bVM.mp3",
+    "video": "cTbVuin5bVM",
+    "url": "https://www.youtube.com/watch?v=cTbVuin5bVM&t=12s",
+    "chaine": "AFP",
+    "titre": "Hollande maintient \"sa volonté\" d'inverser la courbe du chômage",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "nous allons inverser la courbe",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "tes_une_merde",
+  "qui": "Hanouna",
+  "phrase": "t'es une merde",
+  "recherches": [
+   "Hanouna Boyard t'es une merde TPMP"
+  ],
+  "candidats": [
+   {
+    "video": "3BFqCINIzCQ",
+    "duree": "53.0",
+    "chaine": "Le Parisien",
+    "titre": "Insultes envers Louis Boyard : Mélenchon dénonce un Cyril Hanouna «à visage découvert»",
+    "url": "https://www.youtube.com/watch?v=3BFqCINIzCQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "sHEzqkP6qqY",
+    "duree": "6.0",
+    "chaine": "Le dinosaure de George Pig",
+    "titre": "Cyril Hanouna INSULTE le député LFI Louis Boyard sur TPMP - \"Toi t'es une m*rde !\"",
+    "url": "https://www.youtube.com/watch?v=sHEzqkP6qqY",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "O8ta_8WtDys",
+    "duree": "84.0",
+    "chaine": "Jugement Média",
+    "titre": "BFMTV HANOUNA À BOYARD : “T’ES UNE MERDE \"",
+    "url": "https://www.youtube.com/watch?v=O8ta_8WtDys",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "rcej100VYOE",
+    "duree": "53.0",
+    "chaine": "Mino Thor",
+    "titre": "Cyril Hanouna humilié par Théo Audace sur TPMP qui a pu \"éteindre cette émission de merde\"",
+    "url": "https://www.youtube.com/watch?v=rcej100VYOE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "dqQcnvhroME",
+    "duree": "345.0",
+    "chaine": "moderne star",
+    "titre": "\"Tu es une merde\" : furieux contre son invité et ex-chroniqueur, Cyril Hanouna le démolit en direct",
+    "url": "https://www.youtube.com/watch?v=dqQcnvhroME",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 270.4,
+    "fin": 275.3,
+    "texte": "actualite toi tu es une merde"
+   },
+   {
+    "video": "AaILVtXLmNw",
+    "duree": "8.0",
+    "chaine": "Laalalala Lalalalala",
+    "titre": "(TPMP) CLASH ENTRE LOUIS BOYARD ET CYRIL HANOUNA SUR BOLLORÉ",
+    "url": "https://www.youtube.com/watch?v=AaILVtXLmNw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   },
+   {
+    "video": "HhcaaS0MYLg",
+    "duree": "35.0",
+    "chaine": "CHASSEUR 2 NEWS",
+    "titre": "TPMP   Clash Cyril Hanouna qui insulte Louis Boyard qui est.....député!!!",
+    "url": "https://www.youtube.com/watch?v=HhcaaS0MYLg",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 19.4,
+    "fin": 20.5,
+    "texte": "connard tu es qu une merde"
+   },
+   {
+    "video": "DaSky4cuINw",
+    "duree": "84.0",
+    "chaine": "actubref",
+    "titre": "Cyril Hanouna - Louis Boyard : que risque l'animateur de TPMP pour ses insultes envers le député?",
+    "url": "https://www.youtube.com/watch?v=DaSky4cuINw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.25
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/tes_une_merde/HhcaaS0MYLg.mp3",
+    "video": "HhcaaS0MYLg",
+    "url": "https://www.youtube.com/watch?v=HhcaaS0MYLg&t=19s",
+    "chaine": "CHASSEUR 2 NEWS",
+    "titre": "TPMP   Clash Cyril Hanouna qui insulte Louis Boyard qui est.....député!!!",
+    "chaine_connue": false,
+    "score": 0.75,
+    "texte": "connard tu es qu une merde",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "paquets_heures",
+  "qui": "Oudéa-Castéra",
+  "phrase": "paquets d'heures",
+  "recherches": [
+   "Oudéa-Castéra Stanislas paquets d'heures pas remplacées",
+   "Amélie Oudéa-Castéra école publique heures non remplacées"
+  ],
+  "candidats": [
+   {
+    "video": "6lUm0jlPiGQ",
+    "duree": "132",
+    "chaine": "TF1 INFO",
+    "titre": "Amélie Oudéa-Castera : première polémique pour la ministre",
+    "url": "https://www.youtube.com/watch?v=6lUm0jlPiGQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 36.5,
+    "fin": 37.5,
+    "texte": "vu des paquets d heures"
+   },
+   {
+    "video": "wFVXUaIrEeg",
+    "duree": "694",
+    "chaine": "Le Média",
+    "titre": "MENSONGES, CONFLIT D’INTÉRÊTS ET ÉCOLE ULTRA-RÉAC : LA MINISTRE OUDÉA-CASTÉRA AU CŒUR D'UN SCANDALE",
+    "url": "https://www.youtube.com/watch?v=wFVXUaIrEeg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "jY_yjy_omv4",
+    "duree": "196",
+    "chaine": "Le Parisien",
+    "titre": "\"Anger that won't subside\": Amélie Oudéa-Castéra booed during her visit to the Littré school",
+    "url": "https://www.youtube.com/watch?v=jY_yjy_omv4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "8_59cyu5FDM",
+    "duree": "119",
+    "chaine": "LeHuffPost",
+    "titre": "La nouvelle ministre de l'éducation se justifie d'avoir scolarisé ses enfants dans le privé",
+    "url": "https://www.youtube.com/watch?v=8_59cyu5FDM",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "Nu6rxkvwoKA",
+    "duree": "871",
+    "chaine": "Télé Matin - France Télévisions",
+    "titre": "Les 4V - Amélie Oudéa-Castéra",
+    "url": "https://www.youtube.com/watch?v=Nu6rxkvwoKA",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "CsKG2d1uHkg",
+    "duree": "131",
+    "chaine": "20 Minutes France",
+    "titre": "Polémique Oudéa-Castéra : La ministre de l'Éducation dans l'embarras",
+    "url": "https://www.youtube.com/watch?v=CsKG2d1uHkg",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "OzWYb62m2rI",
+    "duree": "596",
+    "chaine": "Télé Matin - France Télévisions",
+    "titre": "Les 4V - Jean-Philippe Tanguy",
+    "url": "https://www.youtube.com/watch?v=OzWYb62m2rI",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "aRgTanVK4R8",
+    "duree": "151",
+    "chaine": "AGRS",
+    "titre": "EDUCATION - Oudéa-Castéra : la fin de la laïcité par Macron et Attal",
+    "url": "https://www.youtube.com/watch?v=aRgTanVK4R8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "tdYxVRu9xTE",
+    "duree": "34",
+    "chaine": "AGRS",
+    "titre": "EDUCATION - Oudéa-Castéra encore épinglée, mais cette fois-ci par la Justice pour ingérence.",
+    "url": "https://www.youtube.com/watch?v=tdYxVRu9xTE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "v2e389freWg",
+    "duree": "23",
+    "chaine": "Nadège Abomangoli",
+    "titre": "🏫 Les mensonges de la ministre sont un crachat dans la face de l'école publique",
+    "url": "https://www.youtube.com/watch?v=v2e389freWg",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "sD8Ah3d_R8w",
+    "duree": "33",
+    "chaine": "AGRS",
+    "titre": "EDUCATION - Oudéa-Castéra, antisémite ou laxiste ?",
+    "url": "https://www.youtube.com/watch?v=sD8Ah3d_R8w",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/paquets_heures/6lUm0jlPiGQ.mp3",
+    "video": "6lUm0jlPiGQ",
+    "url": "https://www.youtube.com/watch?v=6lUm0jlPiGQ&t=36s",
+    "chaine": "TF1 INFO",
+    "titre": "Amélie Oudéa-Castera : première polémique pour la ministre",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "vu des paquets d heures",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "attaque_hopital",
+  "qui": "Castaner",
+  "phrase": "attaqué un hôpital",
+  "recherches": [
+   "Castaner Pitié-Salpêtrière attaque hôpital 1er mai"
+  ],
+  "candidats": [
+   {
+    "video": "3Ye0Qdm3e1E",
+    "duree": "250",
+    "chaine": "FRANCE 24",
+    "titre": "May 1st at the Pitié-Salpêtrière: the scenario of an \"attack\" shattered",
+    "url": "https://www.youtube.com/watch?v=3Ye0Qdm3e1E",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 43.0,
+    "fin": 44.8,
+    "texte": "gens ont attaque un hopital"
+   },
+   {
+    "video": "550i0EnfsJU",
+    "duree": "80",
+    "chaine": "LeHuffPost",
+    "titre": "Christophe Castaner regrette d'avoir qualifié l'incident de la Pitié-Salpêtrière \"d'attaque\"",
+    "url": "https://www.youtube.com/watch?v=550i0EnfsJU",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "zop0xofeaAQ",
+    "duree": "66",
+    "chaine": "FRANCE 24",
+    "titre": "May 1st at the Pitié-Salpêtrière: Castaner regrets having spoken of an \"attack\"",
+    "url": "https://www.youtube.com/watch?v=zop0xofeaAQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "4hVWsbs5oEU",
+    "duree": "95",
+    "chaine": "CNEWS",
+    "titre": "Christophe Castaner revient sur ses propos après la tentative d'intrusion de la Pitié-Salpêtrière",
+    "url": "https://www.youtube.com/watch?v=4hVWsbs5oEU",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "vZDpiMFln_c",
+    "duree": "356",
+    "chaine": "RTL  ",
+    "titre": "1er mai : l'intrusion à la Pitié-Salpêtrière a été \"violente\", selon Marie-Anne Ruder",
+    "url": "https://www.youtube.com/watch?v=vZDpiMFln_c",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "6uIVPncGdhw",
+    "duree": "84",
+    "chaine": "CNEWS",
+    "titre": "La Pitié-Salpêtrière : Castaner vivement critiqué",
+    "url": "https://www.youtube.com/watch?v=6uIVPncGdhw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 10.9,
+    "fin": 12.8,
+    "texte": "gens ont attaque un hopital"
+   },
+   {
+    "video": "cQtV3SXERXs",
+    "duree": "95",
+    "chaine": "Le Nouvel Obs",
+    "titre": "\"Attaque\" à la Pitié-Salpêtrière : Castaner reconnaît qu'il n'aurait pas dû employer ce mot",
+    "url": "https://www.youtube.com/watch?v=cQtV3SXERXs",
+    "chaine_connue": false
+   },
+   {
+    "video": "a55wGJO0F8M",
+    "duree": "91",
+    "chaine": "Le Nouvel Obs",
+    "titre": "De Castaner à Mélenchon, qui a dit quoi sur la Pitié-Salpêtrière",
+    "url": "https://www.youtube.com/watch?v=a55wGJO0F8M",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/attaque_hopital/3Ye0Qdm3e1E.mp3",
+    "video": "3Ye0Qdm3e1E",
+    "url": "https://www.youtube.com/watch?v=3Ye0Qdm3e1E&t=42s",
+    "chaine": "FRANCE 24",
+    "titre": "May 1st at the Pitié-Salpêtrière: the scenario of an \"attack\" shattered",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "gens ont attaque un hopital",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/attaque_hopital/6uIVPncGdhw.mp3",
+    "video": "6uIVPncGdhw",
+    "url": "https://www.youtube.com/watch?v=6uIVPncGdhw&t=10s",
+    "chaine": "CNEWS",
+    "titre": "La Pitié-Salpêtrière : Castaner vivement critiqué",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "gens ont attaque un hopital",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "faux_billets",
+  "qui": "Darmanin",
+  "phrase": "faux billets",
+  "recherches": [
+   "Darmanin Stade de France 30 000 40 000 faux billets"
+  ],
+  "candidats": [
+   {
+    "video": "PRQympiTvUw",
+    "duree": "126.0",
+    "chaine": "Public Sénat",
+    "titre": "Stade de France : Gérald Darmanin dénonce « une fraude massive de faux billets »",
+    "url": "https://www.youtube.com/watch?v=PRQympiTvUw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 52.0,
+    "fin": 53.5,
+    "texte": "organisations des faux billets"
+   },
+   {
+    "video": "233Ijc0wbyU",
+    "duree": "106.0",
+    "chaine": "Europe 1",
+    "titre": "Violences au Stade de France : Darmanin dénonce les fraudes massives des supporters",
+    "url": "https://www.youtube.com/watch?v=233Ijc0wbyU",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 18.8,
+    "fin": 19.7,
+    "texte": "fraude aux faux billets"
+   },
+   {
+    "video": "MUGNXj461QM",
+    "duree": "199.0",
+    "chaine": "FRANCE 24",
+    "titre": "Violences au Stade de France : Darmanin dénonce une \"fraude massive\", Johnson demande une enquête",
+    "url": "https://www.youtube.com/watch?v=MUGNXj461QM",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 30.8,
+    "fin": 32.0,
+    "texte": "industrielle de faux billets"
+   },
+   {
+    "video": "DWLBK3H6G7c",
+    "duree": "2492.0",
+    "chaine": "Public Sénat",
+    "titre": "Stade de France : le fiasco français",
+    "url": "https://www.youtube.com/watch?v=DWLBK3H6G7c",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 313.0,
+    "fin": 314.4,
+    "texte": "quarante mille faux billets"
+   },
+   {
+    "video": "q40ehjDdebA",
+    "duree": "730.0",
+    "chaine": "RTL  ",
+    "titre": "Stade de France Incidents: \"With Fake and Ticketless Tickets, Between 30,000 and 40,000 People\"",
+    "url": "https://www.youtube.com/watch?v=q40ehjDdebA",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "ZroscVb8COc",
+    "duree": "212.0",
+    "chaine": "FRANCE 24",
+    "titre": "Chaos at the Stade de France: \"Things could have been better organized,\" admits Darmanin",
+    "url": "https://www.youtube.com/watch?v=ZroscVb8COc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 123.7,
+    "fin": 124.3,
+    "texte": "quarante mille faux billets"
+   },
+   {
+    "video": "OuSXs1TsyeE",
+    "duree": "220.0",
+    "chaine": "L'ÉQUIPE",
+    "titre": "Darmanin on the Stade de France fiasco: “A massive, industrial and organized fraud”",
+    "url": "https://www.youtube.com/watch?v=OuSXs1TsyeE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 131.5,
+    "fin": 132.4,
+    "texte": "organise de faux billets"
+   },
+   {
+    "video": "YFek0NPWo7E",
+    "duree": "48.0",
+    "chaine": "AFP",
+    "titre": "Stade de France: Darmanin dénonce une \"fraude massive, industrielle de faux billets\" | AFP Extrait",
+    "url": "https://www.youtube.com/watch?v=YFek0NPWo7E",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 5.2,
+    "fin": 6.2,
+    "texte": "organise de faux billets"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/faux_billets/YFek0NPWo7E.mp3",
+    "video": "YFek0NPWo7E",
+    "url": "https://www.youtube.com/watch?v=YFek0NPWo7E&t=5s",
+    "chaine": "AFP",
+    "titre": "Stade de France: Darmanin dénonce une \"fraude massive, industrielle de faux billets\" | AFP Extrait",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "organise de faux billets",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "conditions_lecornu",
+  "qui": "Lecornu",
+  "phrase": "conditions n'étaient",
+  "recherches": [
+   "Lecornu démission Matignon déclaration 6 octobre",
+   "Sébastien Lecornu démission discours conditions"
+  ],
+  "candidats": [
+   {
+    "video": "R-kTcRv-Oxk",
+    "duree": "458",
+    "chaine": "BFMTV",
+    "titre": "Démission de Sébastien Lecornu: le discours du Premier ministre démissionnaire en intégralité",
+    "url": "https://www.youtube.com/watch?v=R-kTcRv-Oxk",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "i7A5N1zcUAs",
+    "duree": "22571",
+    "chaine": "Le Figaro",
+    "titre": "Sébastien Lecornu démissionne de son poste de premier ministre",
+    "url": "https://www.youtube.com/watch?v=i7A5N1zcUAs",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 3472.6,
+    "fin": 3474.6,
+    "texte": "matin les conditions n etaient"
+   },
+   {
+    "video": "W8p5WdC1G9k",
+    "duree": "390",
+    "chaine": "FRANCE 24",
+    "titre": "REPLAY : Sébastien Lecornu s'exprime à l'Assemblée nationale sur la mobilisation lycéenne",
+    "url": "https://www.youtube.com/watch?v=W8p5WdC1G9k",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "10WEvfjwkIk",
+    "duree": "872",
+    "chaine": "BFMTV",
+    "titre": "High Schools: \"First decisions to be presented at the end of October,\" announces Sébastien Lecornu",
+    "url": "https://www.youtube.com/watch?v=10WEvfjwkIk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "FMf77gF5f7Q",
+    "duree": "1344",
+    "chaine": "Quotidien",
+    "titre": "Après Lecornu, c'est toujours Lecornu ! Retour sur son premier mandat",
+    "url": "https://www.youtube.com/watch?v=FMf77gF5f7Q",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "TIyGtw1STJY",
+    "duree": "452",
+    "chaine": "LCI",
+    "titre": "\"Les conditions ne sont pas remplies\" : le Premier ministre Sébastien Lecornu a démissionné｜LCI",
+    "url": "https://www.youtube.com/watch?v=TIyGtw1STJY",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 182.6,
+    "fin": 184.7,
+    "texte": "matin les conditions n etaient"
+   },
+   {
+    "video": "aSR4kjIigLA",
+    "duree": "489",
+    "chaine": "FRANCE 24",
+    "titre": "Démission de Lecornu : ce qu'il faut retenir de son discours à Matignon • FRANCE 24",
+    "url": "https://www.youtube.com/watch?v=aSR4kjIigLA",
+    "chaine_connue": true
+   },
+   {
+    "video": "WNhhWet_z-0",
+    "duree": "517",
+    "chaine": "C à vous - France Télévisions",
+    "titre": "Looking back at a wild and historic day: the resignation of Sébastien Lecornu",
+    "url": "https://www.youtube.com/watch?v=WNhhWet_z-0",
+    "chaine_connue": true
+   },
+   {
+    "video": "2oxrKE4xxsI",
+    "duree": "633",
+    "chaine": "FRANCE 24",
+    "titre": "France : Lecornu déplore \"les appétits partisans\" qui ont conduit à sa démission • FRANCE 24",
+    "url": "https://www.youtube.com/watch?v=2oxrKE4xxsI",
+    "chaine_connue": true
+   },
+   {
+    "video": "1uKY3st_dbo",
+    "duree": "2482",
+    "chaine": "FRANCE 24",
+    "titre": "Démission de Lecornu : que va faire Emmanuel Macron ? • FRANCE 24",
+    "url": "https://www.youtube.com/watch?v=1uKY3st_dbo",
+    "chaine_connue": true
+   },
+   {
+    "video": "8VfCnADeHXQ",
+    "duree": "322",
+    "chaine": "CNEWS",
+    "titre": "Sébastien Lecornu: \"There would be no drug trafficking if there were no consumption.\"",
+    "url": "https://www.youtube.com/watch?v=8VfCnADeHXQ",
+    "chaine_connue": true
+   },
+   {
+    "video": "vpKaHs7cg7Q",
+    "duree": "879",
+    "chaine": "Journal l'Humanité",
+    "titre": "Quels scénarios après la démission de Lecornu ?",
+    "url": "https://www.youtube.com/watch?v=vpKaHs7cg7Q",
+    "chaine_connue": false
+   },
+   {
+    "video": "fp2pdMAa-p8",
+    "duree": "396",
+    "chaine": "Le Point",
+    "titre": "Sébastien Lecornu renonce au 49.3, le discours intégral",
+    "url": "https://www.youtube.com/watch?v=fp2pdMAa-p8",
+    "chaine_connue": false
+   },
+   {
+    "video": "9gvaPA9pLQ8",
+    "duree": "1566",
+    "chaine": "CLPRESS / Agence de presse",
+    "titre": "Marine Tondelier réagit à la démission de Lecornu : point presse des Ecologistes",
+    "url": "https://www.youtube.com/watch?v=9gvaPA9pLQ8",
+    "chaine_connue": false
+   },
+   {
+    "video": "G38kc97ljwY",
+    "duree": "461",
+    "chaine": "Le Point",
+    "titre": "Démission de Sébastien Lecornu : le discours intégral du Premier Ministre",
+    "url": "https://www.youtube.com/watch?v=G38kc97ljwY",
+    "chaine_connue": false
+   },
+   {
+    "video": "oAW-F5hlJY4",
+    "duree": "52",
+    "chaine": "AFP",
+    "titre": "EXTRAIT I Le Premier ministre Sébastion Lecornu réaffirme ne pas \"être candidat à la présidentielle\"",
+    "url": "https://www.youtube.com/watch?v=oAW-F5hlJY4",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/conditions_lecornu/i7A5N1zcUAs.mp3",
+    "video": "i7A5N1zcUAs",
+    "url": "https://www.youtube.com/watch?v=i7A5N1zcUAs&t=3472s",
+    "chaine": "Le Figaro",
+    "titre": "Sébastien Lecornu démissionne de son poste de premier ministre",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "matin les conditions n etaient",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/conditions_lecornu/TIyGtw1STJY.mp3",
+    "video": "TIyGtw1STJY",
+    "url": "https://www.youtube.com/watch?v=TIyGtw1STJY&t=182s",
+    "chaine": "LCI",
+    "titre": "\"Les conditions ne sont pas remplies\" : le Premier ministre Sébastien Lecornu a démissionné｜LCI",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "matin les conditions n etaient",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "mentir_president",
+  "qui": "Ndiaye",
+  "phrase": "formule maladroite",
+  "recherches": [
+   "Sibeth Ndiaye commission Sénat masques mentir",
+   "Sibeth Ndiaye j'assume de mentir"
+  ],
+  "candidats": [
+   {
+    "video": "H4uEYSorN_Y",
+    "duree": "108",
+    "chaine": "Public Sénat",
+    "titre": "Masks: “At no time was I asked to lie” (Sibeth Ndiaye)",
+    "url": "https://www.youtube.com/watch?v=H4uEYSorN_Y",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "6_h6cHPE3X4",
+    "duree": "175",
+    "chaine": "LeHuffPost",
+    "titre": "Devant le Sénat, Sibeth NDiaye jure d'avoir dit toute la vérité, même sur les masques",
+    "url": "https://www.youtube.com/watch?v=6_h6cHPE3X4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "LQkn1qbky1U",
+    "duree": "87",
+    "chaine": "Public Sénat",
+    "titre": "Covid-19: “I had some awkward sentences,” admits Sibeth Ndiaye",
+    "url": "https://www.youtube.com/watch?v=LQkn1qbky1U",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "n00sVScvZos",
+    "duree": "54",
+    "chaine": "Public Sénat",
+    "titre": "René-Paul Savary to Sibeth Ndiaye: \"The word truth must stand out\"",
+    "url": "https://www.youtube.com/watch?v=n00sVScvZos",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "dKQ-eGrULT4",
+    "duree": "73",
+    "chaine": "LeHuffPost",
+    "titre": "Sibeth Ndiaye explique pourquoi elle a dit \"assumer mentir pour protéger Macron\"\"",
+    "url": "https://www.youtube.com/watch?v=dKQ-eGrULT4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "gveukvqUo94",
+    "duree": "113",
+    "chaine": "Public Sénat",
+    "titre": "« J’aborde mon rôle avec humilité » déclare Sibeth Ndiaye",
+    "url": "https://www.youtube.com/watch?v=gveukvqUo94",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "aPKgOLS6G7U",
+    "duree": "211",
+    "chaine": "Public Sénat",
+    "titre": "Sibeth Ndiaye's hearing: \"Did you lie to protect the president?\"",
+    "url": "https://www.youtube.com/watch?v=aPKgOLS6G7U",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "Okwfx8IrMyA",
+    "duree": "32",
+    "chaine": "BFMTV",
+    "titre": "Ayrault: \"J'assume d'avoir été obligé d'augmenter les impôts\" - 24/09",
+    "url": "https://www.youtube.com/watch?v=Okwfx8IrMyA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "IzNPiIlGbWE",
+    "duree": "133",
+    "chaine": "L'Opinion",
+    "titre": "Crise sanitaire: mea culpa pour Sibeth Ndiaye et Florence Parly, justifications pour Agnès Buzyn",
+    "url": "https://www.youtube.com/watch?v=IzNPiIlGbWE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "sO9jQ4baiqY",
+    "duree": "189",
+    "chaine": "Echoes of Love",
+    "titre": "✅  Sibeth Ndiaye auditionnée : sa déclaration tranchée sur les masques",
+    "url": "https://www.youtube.com/watch?v=sO9jQ4baiqY",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "co4gA3a7WL8",
+    "duree": "189",
+    "chaine": "Echoes of Love",
+    "titre": "✅  Sibeth Ndiaye a menti pour Emmanuel Macron à cause… d'une partie de tennis",
+    "url": "https://www.youtube.com/watch?v=co4gA3a7WL8",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "6VtGY6jZ0DE",
+    "duree": "249",
+    "chaine": "Echoes of Love",
+    "titre": "✅  Sibeth Ndiaye en guerre contre les fake news: une fâcheuse petite phrase la rattrape",
+    "url": "https://www.youtube.com/watch?v=6VtGY6jZ0DE",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "XoRsJwjx7lU",
+    "duree": "242",
+    "chaine": "Yvan Reekmans",
+    "titre": "La Macronie En Marche - La FLAMINE de JUPITER - S01E10",
+    "url": "https://www.youtube.com/watch?v=XoRsJwjx7lU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "7-2zfa1TlQk",
+    "duree": "112",
+    "chaine": "Le Point",
+    "titre": "Sur France 2, le « J'assume » de Jean Castex",
+    "url": "https://www.youtube.com/watch?v=7-2zfa1TlQk",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "wsOZpTeZta0",
+    "duree": "54",
+    "chaine": "L'Opinion",
+    "titre": "Hausse de la CSG: Edouard Philippe «assume»... même pour les retraités",
+    "url": "https://www.youtube.com/watch?v=wsOZpTeZta0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/mentir_president/LQkn1qbky1U.entier.mp3",
+    "video": "LQkn1qbky1U",
+    "url": "https://www.youtube.com/watch?v=LQkn1qbky1U",
+    "chaine": "Public Sénat",
+    "titre": "Covid-19: “I had some awkward sentences,” admits Sibeth Ndiaye",
+    "chaine_connue": true,
+    "score": 0.5,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/mentir_president/H4uEYSorN_Y.entier.mp3",
+    "video": "H4uEYSorN_Y",
+    "url": "https://www.youtube.com/watch?v=H4uEYSorN_Y",
+    "chaine": "Public Sénat",
+    "titre": "Masks: “At no time was I asked to lie” (Sibeth Ndiaye)",
+    "chaine_connue": true,
+    "score": 0,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "pain_au_chocolat",
+  "qui": "Copé",
+  "phrase": "pain au chocolat",
+  "recherches": [
+   "Copé pain au chocolat ramadan 2012"
+  ],
+  "candidats": [
+   {
+    "video": "cQfjqks-tVY",
+    "duree": "652.0",
+    "chaine": "RTL  ",
+    "titre": "UMP, François Fillon, pain au chocolat, laïcité : Jean-François Copé répond aux auditeurs de R - RTL",
+    "url": "https://www.youtube.com/watch?v=cQfjqks-tVY",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "WtIt0HTIVw0",
+    "duree": "170.0",
+    "chaine": "Europe 1",
+    "titre": "Deux euros pour voter Copé, le prix de quatre pains au chocolat",
+    "url": "https://www.youtube.com/watch?v=WtIt0HTIVw0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 69.6,
+    "fin": 70.8,
+    "texte": "monnaie un pain au chocolat"
+   },
+   {
+    "video": "u6ZPUSAWk38",
+    "duree": "42.0",
+    "chaine": "leNarquois",
+    "titre": "Jean-Francois Copé \"La complainte du pain au chocolat\" (Le Narquois)",
+    "url": "https://www.youtube.com/watch?v=u6ZPUSAWk38",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 19.4,
+    "fin": 20.2,
+    "texte": "arracher son pain au chocolat"
+   },
+   {
+    "video": "Q51T3gTDZrU",
+    "duree": "335.0",
+    "chaine": "BanlieueWebOfficiel",
+    "titre": "Pour répondre à Copé, le CCIF a organisé une distribution de pains au chocolat",
+    "url": "https://www.youtube.com/watch?v=Q51T3gTDZrU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 38.3,
+    "fin": 39.1,
+    "texte": "arracher son pain au chocolat"
+   },
+   {
+    "video": "0qAV0HhTx1U",
+    "duree": "666.0",
+    "chaine": "RadioLFMOfficiel",
+    "titre": "LFM Radio, Jean-François Copé s'explique sur \"les pains au chocolat\"",
+    "url": "https://www.youtube.com/watch?v=0qAV0HhTx1U",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 375.5,
+    "fin": 376.9,
+    "texte": "son fameux pain au chocolat"
+   },
+   {
+    "video": "M7opI_reK7M",
+    "duree": "122.0",
+    "chaine": "Billy ContreEmpire",
+    "titre": "Les pains au chocolat de J-F Copé - Réactions de la classe politique (droite et gauche)",
+    "url": "https://www.youtube.com/watch?v=M7opI_reK7M",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 3.7,
+    "fin": 4.3,
+    "texte": "le petit pain au chocolat"
+   },
+   {
+    "video": "1N7QhgqYHcg",
+    "duree": "64.0",
+    "chaine": "Erick Bernard - Lyon",
+    "titre": "Message à Mr Copé Jean François",
+    "url": "https://www.youtube.com/watch?v=1N7QhgqYHcg",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "wURDo8znajY",
+    "duree": "580.0",
+    "chaine": "Muslim United Actions",
+    "titre": "LE MUA TACLE COPÉ",
+    "url": "https://www.youtube.com/watch?v=wURDo8znajY",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 213.2,
+    "fin": 214.0,
+    "texte": "histoire du pain au chocolat"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/pain_au_chocolat/u6ZPUSAWk38.mp3",
+    "video": "u6ZPUSAWk38",
+    "url": "https://www.youtube.com/watch?v=u6ZPUSAWk38&t=19s",
+    "chaine": "leNarquois",
+    "titre": "Jean-Francois Copé \"La complainte du pain au chocolat\" (Le Narquois)",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "arracher son pain au chocolat",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "prix_pain_chocolat",
+  "qui": "Copé",
+  "phrase": "pain au chocolat",
+  "recherches": [
+   "Copé prix d'un pain au chocolat 2016 Europe 1"
+  ],
+  "candidats": [
+   {
+    "video": "jhkerAPrx4A",
+    "duree": "60.0",
+    "chaine": "Europe 1",
+    "titre": "Quand Jean-François Copé estimait le prix d’un pain au chocolat à 10 ou 15 centimes d’euros",
+    "url": "https://www.youtube.com/watch?v=jhkerAPrx4A",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 5.2,
+    "fin": 5.7,
+    "texte": "coute un pain au chocolat"
+   },
+   {
+    "video": "Jpgd7cUR7G4",
+    "duree": "177.0",
+    "chaine": "Europe 1",
+    "titre": "Copé devrait arrêter les pains au chocolat",
+    "url": "https://www.youtube.com/watch?v=Jpgd7cUR7G4",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 11.6,
+    "fin": 12.2,
+    "texte": "tout le pain au chocolat"
+   },
+   {
+    "video": "WtIt0HTIVw0",
+    "duree": "170.0",
+    "chaine": "Europe 1",
+    "titre": "Deux euros pour voter Copé, le prix de quatre pains au chocolat",
+    "url": "https://www.youtube.com/watch?v=WtIt0HTIVw0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 69.6,
+    "fin": 70.8,
+    "texte": "monnaie un pain au chocolat"
+   },
+   {
+    "video": "nK0Og7KeUx0",
+    "duree": "183.0",
+    "chaine": "Europe 1",
+    "titre": "Karime Duval : \"A côté, Copé et son pain au chocolat, c'est l'animateur du Juste Prix\"",
+    "url": "https://www.youtube.com/watch?v=nK0Og7KeUx0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 123.2,
+    "fin": 123.7,
+    "texte": "et son pain au chocolat"
+   },
+   {
+    "video": "6-_hyScB04Q",
+    "duree": "182.0",
+    "chaine": "Europe 1",
+    "titre": "Le juste prix : spéciale \"pain au chocolat\"",
+    "url": "https://www.youtube.com/watch?v=6-_hyScB04Q",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 76.1,
+    "fin": 78.5,
+    "texte": "viennoiserie appelee pain au chocolat"
+   },
+   {
+    "video": "biv2qOyibW8",
+    "duree": "40.0",
+    "chaine": "Europe 1",
+    "titre": "Teaser - JFC, les initiales de Jean-François Copé, ça fait très JFK",
+    "url": "https://www.youtube.com/watch?v=biv2qOyibW8",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "oYoD7b2PNr0",
+    "duree": "186.0",
+    "chaine": "Polynésie la 1ère",
+    "titre": "Lolo 5.0 - Jean-François Copé et le prix du pain au chocolat - 25/10/2016",
+    "url": "https://www.youtube.com/watch?v=oYoD7b2PNr0",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 19.3,
+    "fin": 19.7,
+    "texte": "d un pain au chocolat"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/prix_pain_chocolat/jhkerAPrx4A.mp3",
+    "video": "jhkerAPrx4A",
+    "url": "https://www.youtube.com/watch?v=jhkerAPrx4A&t=5s",
+    "chaine": "Europe 1",
+    "titre": "Quand Jean-François Copé estimait le prix d’un pain au chocolat à 10 ou 15 centimes d’euros",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "coute un pain au chocolat",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "quand_il_y_en_a_un",
+  "qui": "Hortefeux",
+  "phrase": "quand il y en a un",
+  "recherches": [
+   "Hortefeux quand il y en a un ça va Auvergnat"
+  ],
+  "candidats": [
+   {
+    "video": "Rug1ULJFvqY",
+    "duree": "114",
+    "chaine": "INA Politique",
+    "titre": "Propos racistes de Brice Hortefeux",
+    "url": "https://www.youtube.com/watch?v=Rug1ULJFvqY",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.83,
+    "debut": 75.2,
+    "fin": 76.6,
+    "texte": "des auas et quand il y en a"
+   },
+   {
+    "video": "uyAB3yqDUqk",
+    "duree": "90",
+    "chaine": "BFMTV",
+    "titre": "Hortefeux: \"une primaire est utile quand il n'y pas de candidat qui se détache\" - 05/06",
+    "url": "https://www.youtube.com/watch?v=uyAB3yqDUqk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "MlrSpRKThmg",
+    "duree": "64",
+    "chaine": "Proof Of Concept",
+    "titre": "Brice Hortefeux-Quand y'en a 1 ça va",
+    "url": "https://www.youtube.com/watch?v=MlrSpRKThmg",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "y9eTlHfVzrc",
+    "duree": "53",
+    "chaine": "Droit à l'oubli",
+    "titre": "Brice Hortefeux - Quand y'en a un ca va",
+    "url": "https://www.youtube.com/watch?v=y9eTlHfVzrc",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "bsclXGMX6GA",
+    "duree": "176",
+    "chaine": "Bdxenfreestyle",
+    "titre": "Quand y'en a qu'un, ça va... (Driss Hortefeux) - Fils du Béton",
+    "url": "https://www.youtube.com/watch?v=bsclXGMX6GA",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 90.2,
+    "fin": 91.8,
+    "texte": "ent quand il y en a qu un"
+   },
+   {
+    "video": "gyIEY5Z-LQQ",
+    "duree": "32",
+    "chaine": "François-Marie Aphathio",
+    "titre": "Marie Aphatie  C'est notre petit arabe",
+    "url": "https://www.youtube.com/watch?v=gyIEY5Z-LQQ",
+    "chaine_connue": false
+   },
+   {
+    "video": "B6VdanDaiss",
+    "duree": "151",
+    "chaine": "LeTorchondauphinois",
+    "titre": "Dieudonné répond à Brice Hortefeux",
+    "url": "https://www.youtube.com/watch?v=B6VdanDaiss",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/quand_il_y_en_a_un/Rug1ULJFvqY.mp3",
+    "video": "Rug1ULJFvqY",
+    "url": "https://www.youtube.com/watch?v=Rug1ULJFvqY&t=75s",
+    "chaine": "INA Politique",
+    "titre": "Propos racistes de Brice Hortefeux",
+    "chaine_connue": true,
+    "score": 0.83,
+    "texte": "des auas et quand il y en a",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/quand_il_y_en_a_un/bsclXGMX6GA.mp3",
+    "video": "bsclXGMX6GA",
+    "url": "https://www.youtube.com/watch?v=bsclXGMX6GA&t=90s",
+    "chaine": "Bdxenfreestyle",
+    "titre": "Quand y'en a qu'un, ça va... (Driss Hortefeux) - Fils du Béton",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "ent quand il y en a qu un",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "de_gaulle_mis_en_examen",
+  "qui": "Fillon",
+  "phrase": "général de gaulle mis en examen",
+  "recherches": [
+   "Fillon qui imagine le général de Gaulle mis en examen Sablé"
+  ],
+  "candidats": [
+   {
+    "video": "8oS1Dit_doM",
+    "duree": "42.0",
+    "chaine": "franceinfo",
+    "titre": "Après sa phrase à propos de De Gaulle, François Fillon persiste et signe",
+    "url": "https://www.youtube.com/watch?v=8oS1Dit_doM",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.17
+   },
+   {
+    "video": "RQVXAK5UiuE",
+    "duree": "194.0",
+    "chaine": "Public Sénat",
+    "titre": "When François Fillon was indicted (Retropolitics)",
+    "url": "https://www.youtube.com/watch?v=RQVXAK5UiuE",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.83,
+    "debut": 144.6,
+    "fin": 146.5,
+    "texte": "instant le general de gaulle mise en examen"
+   },
+   {
+    "video": "8PqH8H3JtPw",
+    "duree": "93.0",
+    "chaine": "franceinfo",
+    "titre": "De Gaulle : l'argument des candidats pour justifier tout et n'importe quoi - franceinfo",
+    "url": "https://www.youtube.com/watch?v=8PqH8H3JtPw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.83,
+    "debut": 68.5,
+    "fin": 72.6,
+    "texte": "seul instant le general de gaulle en examen"
+   },
+   {
+    "video": "zDyrRvNjrCI",
+    "duree": "44.0",
+    "chaine": "franceinfo",
+    "titre": "Les petites phrases assassines de François Fillon contre Nicolas Sarkozy et le gouvernement",
+    "url": "https://www.youtube.com/watch?v=zDyrRvNjrCI",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.17
+   },
+   {
+    "video": "QRvGXhXHYAs",
+    "duree": "55.0",
+    "chaine": "franceinfo",
+    "titre": "François Fillon (déjà) mis en examen : explications et premières précisions",
+    "url": "https://www.youtube.com/watch?v=QRvGXhXHYAs",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.67
+   },
+   {
+    "video": "D8Fs3cDgJiY",
+    "duree": "26.0",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "\"Who could imagine General de Gaulle under criminal investigation?\" François Fillon #cdanslair 08...",
+    "url": "https://www.youtube.com/watch?v=D8Fs3cDgJiY",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 21.7,
+    "fin": 21.7,
+    "texte": "instant le general de gaulle mis en examen"
+   },
+   {
+    "video": "aq9g0I3K524",
+    "duree": "3090.0",
+    "chaine": "François Fillon",
+    "titre": "\"Je veux faire pour les Français !\" - François Fillon à Sablé-sur-Sarthe",
+    "url": "https://www.youtube.com/watch?v=aq9g0I3K524",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "8fOaFB31P10",
+    "duree": "42.0",
+    "chaine": "KGB070272",
+    "titre": "François Fillon 28 août 2016",
+    "url": "https://www.youtube.com/watch?v=8fOaFB31P10",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/de_gaulle_mis_en_examen/D8Fs3cDgJiY.mp3",
+    "video": "D8Fs3cDgJiY",
+    "url": "https://www.youtube.com/watch?v=D8Fs3cDgJiY&t=21s",
+    "chaine": "C dans l'air - France Télévisions",
+    "titre": "\"Who could imagine General de Gaulle under criminal investigation?\" François Fillon #cdanslair 08...",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "instant le general de gaulle mis en examen",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "farine_francaise",
+  "qui": "Fillon",
+  "phrase": "la farine était française",
+  "recherches": [
+   "Fillon enfariné Strasbourg j'espère que la farine était française"
+  ],
+  "candidats": [
+   {
+    "video": "RDN1e8x1Pe0",
+    "duree": "100",
+    "chaine": "ActuPolitique",
+    "titre": "François Fillon s'exprime après avoir été enfariné : \"J'espère que la farine était française\"",
+    "url": "https://www.youtube.com/watch?v=RDN1e8x1Pe0",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "zSnKVwioRxY",
+    "duree": "9",
+    "chaine": "Un homme ordinaire",
+    "titre": "Fillon, j'espère au moins que la farine était française",
+    "url": "https://www.youtube.com/watch?v=zSnKVwioRxY",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "qVHEJ4hjudU",
+    "duree": "48",
+    "chaine": "L'Express",
+    "titre": "François Fillon enfariné à Strabourg",
+    "url": "https://www.youtube.com/watch?v=qVHEJ4hjudU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "ic-mbcDraPM",
+    "duree": "18",
+    "chaine": "LOLAPPETIT la chaine",
+    "titre": "François Fillon enfariné à STRASBOURG les crêpes à la pénelope",
+    "url": "https://www.youtube.com/watch?v=ic-mbcDraPM",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "PXZ8ZKL_ngs",
+    "duree": "84",
+    "chaine": "V.A.D.# • VOUS AVEZ DIT DÉMOCRATIE ? •",
+    "titre": "ENFARINAGE FILLON  • WWW.farine.PRO",
+    "url": "https://www.youtube.com/watch?v=PXZ8ZKL_ngs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 74.8,
+    "fin": 76.1,
+    "texte": "moins que la farine etait francaise"
+   },
+   {
+    "video": "Yoybrz0jIP0",
+    "duree": "110",
+    "chaine": "New News",
+    "titre": "François Fillon enfariné avant son meeting de Strasbourg.",
+    "url": "https://www.youtube.com/watch?v=Yoybrz0jIP0",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "CzfYgLX8hlw",
+    "duree": "112",
+    "chaine": "Creative Destruction pro",
+    "titre": "François fillon recois de la farine sur la tete mdr",
+    "url": "https://www.youtube.com/watch?v=CzfYgLX8hlw",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "pbe-2rbpjWc",
+    "duree": "15",
+    "chaine": "les infos de cloclo",
+    "titre": "Valls enfariné à Strasbourg  JE SUIS FARINE",
+    "url": "https://www.youtube.com/watch?v=pbe-2rbpjWc",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/farine_francaise/PXZ8ZKL_ngs.mp3",
+    "video": "PXZ8ZKL_ngs",
+    "url": "https://www.youtube.com/watch?v=PXZ8ZKL_ngs&t=74s",
+    "chaine": "V.A.D.# • VOUS AVEZ DIT DÉMOCRATIE ? •",
+    "titre": "ENFARINAGE FILLON  • WWW.farine.PRO",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "moins que la farine etait francaise",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "pecressethon",
+  "qui": "Pécresse",
+  "phrase": "cinq millions",
+  "recherches": [
+   "Valérie Pécresse appel aux dons endettée 5 millions"
+  ],
+  "candidats": [
+   {
+    "video": "oLTA_lR45m0",
+    "duree": "314",
+    "chaine": "LCI",
+    "titre": "V. Pécresse \"5 million euros in debt\", launches call for donations",
+    "url": "https://www.youtube.com/watch?v=oLTA_lR45m0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "SkL1XKk96Eg",
+    "duree": "75",
+    "chaine": "BFMTV",
+    "titre": "Valérie Pécresse: \"Je suis endettée personnellement à hauteur de 5 millions d'euros\"",
+    "url": "https://www.youtube.com/watch?v=SkL1XKk96Eg",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "SqrX81yuXWw",
+    "duree": "62",
+    "chaine": "Le Parisien",
+    "titre": "«Je suis endettée de 5 millions d'euros» : Pécresse lance un appel à l'aide pour la survie de LR",
+    "url": "https://www.youtube.com/watch?v=SqrX81yuXWw",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "OoQ8wydjRdQ",
+    "duree": "297",
+    "chaine": "Europe 1",
+    "titre": "L'avocat de Pécresse lance un appel au don : \"Sans vous on ne pourra pas payer les croquettes\"",
+    "url": "https://www.youtube.com/watch?v=OoQ8wydjRdQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "1gyjwqIDCWA",
+    "duree": "666",
+    "chaine": "C à vous - France Télévisions",
+    "titre": "Appels aux dons pour Jadot et Pécresse : qui va les aider ? - C à vous - 12/04/2022",
+    "url": "https://www.youtube.com/watch?v=1gyjwqIDCWA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 495.4,
+    "fin": 495.4,
+    "texte": "hauteur de cinq millions"
+   },
+   {
+    "video": "RTs6ov887MM",
+    "duree": "103",
+    "chaine": "Le Point",
+    "titre": "Valérie Pécresse a récolté 2,5 millions de dons, selon Jacob",
+    "url": "https://www.youtube.com/watch?v=RTs6ov887MM",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "MIDCpNm5mmU",
+    "duree": "138",
+    "chaine": "Mayotte la 1ère",
+    "titre": "Appel aux dons : les sympathisants LR vont-ils aider Valérie Pécresse ?",
+    "url": "https://www.youtube.com/watch?v=MIDCpNm5mmU",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "WqlYApQPk1o",
+    "duree": "75",
+    "chaine": "Money Libre™",
+    "titre": "Valérie Pecresse \"Je suis endetté personnellement à hauteur de 5millions d'euros\"",
+    "url": "https://www.youtube.com/watch?v=WqlYApQPk1o",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/pecressethon/1gyjwqIDCWA.mp3",
+    "video": "1gyjwqIDCWA",
+    "url": "https://www.youtube.com/watch?v=1gyjwqIDCWA&t=495s",
+    "chaine": "C à vous - France Télévisions",
+    "titre": "Appels aux dons pour Jadot et Pécresse : qui va les aider ? - C à vous - 12/04/2022",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "hauteur de cinq millions",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "debat_2017_dossiers",
+  "qui": "Le Pen",
+  "phrase": "alstom",
+  "recherches": [
+   "Le Pen Macron débat 2017 SFR Alstom",
+   "débat Macron Le Pen 2017 vous confondez"
+  ],
+  "candidats": [
+   {
+    "video": "ypQID7zfeRQ",
+    "duree": "157",
+    "chaine": "Public Sénat",
+    "titre": "▶Marine Le Pen accuses Emmanuel Macron of having favored the acquisition of SFR by Patrick Drahi",
+    "url": "https://www.youtube.com/watch?v=ypQID7zfeRQ",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 93.6,
+    "fin": 94.4,
+    "texte": "decision pour alstom"
+   },
+   {
+    "video": "EflGaAXgSjc",
+    "duree": "137",
+    "chaine": "Public Sénat",
+    "titre": "Alstom: \"An intelligent compromise\" according to Jean-Marie Le Guen",
+    "url": "https://www.youtube.com/watch?v=EflGaAXgSjc",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 47.6,
+    "fin": 48.1,
+    "texte": "passer a alstom"
+   },
+   {
+    "video": "dp4I9DIK_pk",
+    "duree": "360",
+    "chaine": "Le Monde",
+    "titre": "Présidentielle 2022 : le débat entre Macron et Le Pen résumé en 6 minutes",
+    "url": "https://www.youtube.com/watch?v=dp4I9DIK_pk",
+    "chaine_connue": true
+   },
+   {
+    "video": "ldQ0ioa-L8M",
+    "duree": "316",
+    "chaine": "RTL  ",
+    "titre": "Débat présidentiel : Dupont-Aignan dénonce \"une classe politique minable\"",
+    "url": "https://www.youtube.com/watch?v=ldQ0ioa-L8M",
+    "chaine_connue": true
+   },
+   {
+    "video": "zy8LmWivgZk",
+    "duree": "9798",
+    "chaine": "BFMTV",
+    "titre": "FORUM BFMTV - Blocages, vie chère: la poudrière française",
+    "url": "https://www.youtube.com/watch?v=zy8LmWivgZk",
+    "chaine_connue": true
+   },
+   {
+    "video": "FRh7VGa4yWM",
+    "duree": "66",
+    "chaine": "Public Sénat",
+    "titre": "The candidates do not want to discuss \"with the exception of Mr. Hamon\" declares Dupont-Aignan",
+    "url": "https://www.youtube.com/watch?v=FRh7VGa4yWM",
+    "chaine_connue": true
+   },
+   {
+    "video": "Za62yN-mZzo",
+    "duree": "408",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Débat de 2017 : trois moments où Marine Le Pen s'était ratée face à Emmanuel Macron",
+    "url": "https://www.youtube.com/watch?v=Za62yN-mZzo",
+    "chaine_connue": false
+   },
+   {
+    "video": "3qlvIkqM4E4",
+    "duree": "173",
+    "chaine": "Demos Kratein",
+    "titre": "Macron Le Pen la vente de SFR",
+    "url": "https://www.youtube.com/watch?v=3qlvIkqM4E4",
+    "chaine_connue": false
+   },
+   {
+    "video": "tpxFUE4wCW0",
+    "duree": "35",
+    "chaine": "Lucas Jeanne d'Arc",
+    "titre": "EMMANUEL MACRON FACE A MARINE LE PEN  LE COUP DE GRACE ULTIME",
+    "url": "https://www.youtube.com/watch?v=tpxFUE4wCW0",
+    "chaine_connue": false
+   },
+   {
+    "video": "em97OgbVAF8",
+    "duree": "80",
+    "chaine": "Affaires Alstom / Airbus",
+    "titre": "Marine Le Pen mélange les dossiers SFR et Alstom",
+    "url": "https://www.youtube.com/watch?v=em97OgbVAF8",
+    "chaine_connue": false
+   },
+   {
+    "video": "vvij3xcFTKM",
+    "duree": "144",
+    "chaine": "Question The News",
+    "titre": "Marine Le Pen le 29 avril 2014 - Alstom",
+    "url": "https://www.youtube.com/watch?v=vvij3xcFTKM",
+    "chaine_connue": false
+   },
+   {
+    "video": "oOq2Prd6SUk",
+    "duree": "109",
+    "chaine": "Reflexion Porter",
+    "titre": "l'avis de macron sur Alstom",
+    "url": "https://www.youtube.com/watch?v=oOq2Prd6SUk",
+    "chaine_connue": false
+   },
+   {
+    "video": "28XvX83iRas",
+    "duree": "836",
+    "chaine": "Nicolas Dupont-Aignan",
+    "titre": "NDA on LCI: \"Macron is bringing together all those who have been rejected by the French people.\"",
+    "url": "https://www.youtube.com/watch?v=28XvX83iRas",
+    "chaine_connue": false
+   },
+   {
+    "video": "pHIY9EB01J8",
+    "duree": "63",
+    "chaine": "Nicolas Dupont-Aignan",
+    "titre": "\"Vous confondez Union Européenne et Europe.\" Leçon de Nicolas Dupont à Henri Vernet sur BFM",
+    "url": "https://www.youtube.com/watch?v=pHIY9EB01J8",
+    "chaine_connue": false
+   },
+   {
+    "video": "hQG7uIZex5o",
+    "duree": "2282",
+    "chaine": "Nicolas Dupont-Aignan",
+    "titre": "\"At the debate, I will ask questions of the candidates who are constantly lying.\"",
+    "url": "https://www.youtube.com/watch?v=hQG7uIZex5o",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/debat_2017_dossiers/ypQID7zfeRQ.mp3",
+    "video": "ypQID7zfeRQ",
+    "url": "https://www.youtube.com/watch?v=ypQID7zfeRQ&t=93s",
+    "chaine": "Public Sénat",
+    "titre": "▶Marine Le Pen accuses Emmanuel Macron of having favored the acquisition of SFR by Patrick Drahi",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "decision pour alstom",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/debat_2017_dossiers/EflGaAXgSjc.mp3",
+    "video": "EflGaAXgSjc",
+    "url": "https://www.youtube.com/watch?v=EflGaAXgSjc&t=47s",
+    "chaine": "Public Sénat",
+    "titre": "Alstom: \"An intelligent compromise\" according to Jean-Marie Le Guen",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "passer a alstom",
+    "ecoute": "autre"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "immunite_ouvriere",
+  "qui": "Poutou",
+  "phrase": "immunité ouvrière",
+  "recherches": [
+   "Poutou immunité ouvrière débat 2017 Le Pen"
+  ],
+  "candidats": [
+   {
+    "video": "PyirE5qng1k",
+    "duree": "53",
+    "chaine": "Brut",
+    "titre": "Philippe Poutou on fire against Fillon and Le Pen",
+    "url": "https://www.youtube.com/watch?v=PyirE5qng1k",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "2NdrnH64-a8",
+    "duree": "11",
+    "chaine": "CNEWS",
+    "titre": "Poutou et \"l'immunité ouvrière\"",
+    "url": "https://www.youtube.com/watch?v=2NdrnH64-a8",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "0ljBAbYk19k",
+    "duree": "508",
+    "chaine": "Europe 1",
+    "titre": "Debate, National Front, program: Philippe Poutou answers questions from Fabien Namias",
+    "url": "https://www.youtube.com/watch?v=0ljBAbYk19k",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "x3uvbNCRh1g",
+    "duree": "85",
+    "chaine": "CNEWS",
+    "titre": "Philippe Poutou : \"Fillon, que des histoires, plus on fouille plus on sent la corruption\"",
+    "url": "https://www.youtube.com/watch?v=x3uvbNCRh1g",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "VBQ3ybTCHgQ",
+    "duree": "558",
+    "chaine": "Là-bas si j'y suis",
+    "titre": "The “Great Debate” of the “little ones”",
+    "url": "https://www.youtube.com/watch?v=VBQ3ybTCHgQ",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 326.2,
+    "fin": 326.6,
+    "texte": "pas d immunite ouvriere"
+   },
+   {
+    "video": "vMzJHCbpDqs",
+    "duree": "196",
+    "chaine": "MsArthur75",
+    "titre": "Philippe Poutou tacle et démonte Marine Le Pen sur son immunité de députée",
+    "url": "https://www.youtube.com/watch?v=vMzJHCbpDqs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 110.1,
+    "fin": 110.4,
+    "texte": "pas d immunite ouvriere"
+   },
+   {
+    "video": "uT0uFfgqDwI",
+    "duree": "72",
+    "chaine": "Déradicalisation des médias",
+    "titre": "Philippe Poutou to Le Pen: \"We don't have worker immunity\"",
+    "url": "https://www.youtube.com/watch?v=uT0uFfgqDwI",
+    "chaine_connue": false
+   },
+   {
+    "video": "7gvV8R2WJEA",
+    "duree": "22",
+    "chaine": "loitho2",
+    "titre": "POTG - Philippe Poutou VS Marine le Pen - Le grand débat",
+    "url": "https://www.youtube.com/watch?v=7gvV8R2WJEA",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/immunite_ouvriere/VBQ3ybTCHgQ.mp3",
+    "video": "VBQ3ybTCHgQ",
+    "url": "https://www.youtube.com/watch?v=VBQ3ybTCHgQ&t=326s",
+    "chaine": "Là-bas si j'y suis",
+    "titre": "The “Great Debate” of the “little ones”",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "pas d immunite ouvriere",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/immunite_ouvriere/vMzJHCbpDqs.mp3",
+    "video": "vMzJHCbpDqs",
+    "url": "https://www.youtube.com/watch?v=vMzJHCbpDqs&t=110s",
+    "chaine": "MsArthur75",
+    "titre": "Philippe Poutou tacle et démonte Marine Le Pen sur son immunité de députée",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "pas d immunite ouvriere",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "se_canto",
+  "qui": "Lassalle",
+  "phrase": "se canto",
+  "recherches": [
+   "Lassalle chante Assemblée nationale Sarkozy 2003",
+   "Jean Lassalle chant béarnais Assemblée"
+  ],
+  "candidats": [
+   {
+    "video": "WPKTeMZmi18",
+    "duree": "98",
+    "chaine": "INA Politique",
+    "titre": "2003 : Jean Lassalle, député chanteur du Béarn | Archive INA",
+    "url": "https://www.youtube.com/watch?v=WPKTeMZmi18",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "7_l5rJrINFY",
+    "duree": "112",
+    "chaine": "INA Politique",
+    "titre": "Assemblée Nationale : incident Sarkozy - Archive vidéo INA",
+    "url": "https://www.youtube.com/watch?v=7_l5rJrINFY",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "PdV6SjQ4PtA",
+    "duree": "139",
+    "chaine": "INA Société",
+    "titre": "Assemblée Nationale / Nicolas Sarkozy  provoque la colère des députés socialistes",
+    "url": "https://www.youtube.com/watch?v=PdV6SjQ4PtA",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "QnmJEHjPuIU",
+    "duree": "181",
+    "chaine": "BFMTV",
+    "titre": "Quand Jean Lassalle fait pleurer de rire les députés",
+    "url": "https://www.youtube.com/watch?v=QnmJEHjPuIU",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "rKHXM-XdgJk",
+    "duree": "118",
+    "chaine": "France 3 Nouvelle-Aquitaine",
+    "titre": "Le député Jean Lassalle est confiné chez lui en famille. Comment le vit-il dans sa vallée du Béarn?",
+    "url": "https://www.youtube.com/watch?v=rKHXM-XdgJk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "lH-9TSlwqCA",
+    "duree": "56",
+    "chaine": "envoiedugros",
+    "titre": "Jean Lassalle sings at the National Assembly",
+    "url": "https://www.youtube.com/watch?v=lH-9TSlwqCA",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "WlnT_Hbo9UE",
+    "duree": "16",
+    "chaine": "jacq35000",
+    "titre": "Jean lassalle drôle dintervention",
+    "url": "https://www.youtube.com/watch?v=WlnT_Hbo9UE",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0
+   },
+   {
+    "video": "eyiC0nrDLHs",
+    "duree": "349",
+    "chaine": "RTS Archives",
+    "titre": "Le fou rire de Gérard Lanvin et Benoît Poelvoorde en intégralité (2002)",
+    "url": "https://www.youtube.com/watch?v=eyiC0nrDLHs",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "1XjvrWqhqZs",
+    "duree": "224",
+    "chaine": "Le Nouvel Obs",
+    "titre": "Jacques Chirac est mort : ses 10 phrases cultes",
+    "url": "https://www.youtube.com/watch?v=1XjvrWqhqZs",
+    "chaine_connue": false,
+    "sous_titres": false
+   },
+   {
+    "video": "279Jhb_OJro",
+    "duree": "1692",
+    "chaine": "Jé-Rémi LS",
+    "titre": "Jean Lassalle - Le don de soi (interview)",
+    "url": "https://www.youtube.com/watch?v=279Jhb_OJro",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "dlbnE3Vl1S8",
+    "duree": "244",
+    "chaine": "pimentelyoann",
+    "titre": "chant de JEAN LASSALLE",
+    "url": "https://www.youtube.com/watch?v=dlbnE3Vl1S8",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "hreVI9ntk2Q",
+    "duree": "111",
+    "chaine": "Le Réveil Francais",
+    "titre": "PAPACITO: JEAN LASALLE",
+    "url": "https://www.youtube.com/watch?v=hreVI9ntk2Q",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.5
+   },
+   {
+    "video": "An5IsSU1LKk",
+    "duree": "103",
+    "chaine": "34Thel",
+    "titre": "Jean Lassalle chante Les Montagnards 16/01/19",
+    "url": "https://www.youtube.com/watch?v=An5IsSU1LKk",
+    "chaine_connue": false,
+    "sous_titres": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/se_canto/WPKTeMZmi18.entier.mp3",
+    "video": "WPKTeMZmi18",
+    "url": "https://www.youtube.com/watch?v=WPKTeMZmi18",
+    "chaine": "INA Politique",
+    "titre": "2003 : Jean Lassalle, député chanteur du Béarn | Archive INA",
+    "chaine_connue": true,
+    "score": 0.5,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/se_canto/7_l5rJrINFY.entier.mp3",
+    "video": "7_l5rJrINFY",
+    "url": "https://www.youtube.com/watch?v=7_l5rJrINFY",
+    "chaine": "INA Politique",
+    "titre": "Assemblée Nationale : incident Sarkozy - Archive vidéo INA",
+    "chaine_connue": true,
+    "score": 0.5,
+    "texte": "(vidéo entière : phrase non repérée)",
+    "entier": true,
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "minable",
+  "qui": "Cohn-Bendit",
+  "phrase": "minable",
+  "recherches": [
+   "Cohn-Bendit Bayrou minable À vous de juger 2009"
+  ],
+  "candidats": [
+   {
+    "video": "qFrg5Rj1BSk",
+    "duree": "123",
+    "chaine": "INA Politique",
+    "titre": "Clash entre François Bayrou et Daniel Cohn Bendit sur le plateau de \"A vous de juger\" - Archive INA",
+    "url": "https://www.youtube.com/watch?v=qFrg5Rj1BSk",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 84.4,
+    "fin": 84.7,
+    "texte": "es trop minable"
+   },
+   {
+    "video": "m2Svw3E4W-M",
+    "duree": "123",
+    "chaine": "INA Société",
+    "titre": "Lively exchange between François Bayrou and Daniel Cohn Bendit on the set of \"It's up to you to j...",
+    "url": "https://www.youtube.com/watch?v=m2Svw3E4W-M",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 84.2,
+    "fin": 84.6,
+    "texte": "est trop minable"
+   },
+   {
+    "video": "lLXmdjVu2cI",
+    "duree": "132",
+    "chaine": "Le Parisien",
+    "titre": "« Ordure ! » : Gilbert Collard et Daniel Cohn-Bendit s'insultent en direct sur TF1",
+    "url": "https://www.youtube.com/watch?v=lLXmdjVu2cI",
+    "chaine_connue": true
+   },
+   {
+    "video": "jMIjYyWE7FU",
+    "duree": "626",
+    "chaine": "Europe 1",
+    "titre": "Sarkozy est \"irresponsable\"",
+    "url": "https://www.youtube.com/watch?v=jMIjYyWE7FU",
+    "chaine_connue": true
+   },
+   {
+    "video": "YYPt8gos8Z8",
+    "duree": "495",
+    "chaine": "L'invité",
+    "titre": "Daniel Cohn-Bendit",
+    "url": "https://www.youtube.com/watch?v=YYPt8gos8Z8",
+    "chaine_connue": false
+   },
+   {
+    "video": "HhV00rT1Ykc",
+    "duree": "273",
+    "chaine": "danycohnbendit",
+    "titre": "Bon appetit Monsieur le Président",
+    "url": "https://www.youtube.com/watch?v=HhV00rT1Ykc",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/minable/qFrg5Rj1BSk.mp3",
+    "video": "qFrg5Rj1BSk",
+    "url": "https://www.youtube.com/watch?v=qFrg5Rj1BSk&t=84s",
+    "chaine": "INA Politique",
+    "titre": "Clash entre François Bayrou et Daniel Cohn Bendit sur le plateau de \"A vous de juger\" - Archive INA",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "es trop minable",
+    "ecoute": "bon"
+   },
+   {
+    "fichier": "assets/audio/raw/minable/m2Svw3E4W-M.mp3",
+    "video": "m2Svw3E4W-M",
+    "url": "https://www.youtube.com/watch?v=m2Svw3E4W-M&t=84s",
+    "chaine": "INA Société",
+    "titre": "Lively exchange between François Bayrou and Daniel Cohn Bendit on the set of \"It's up to you to j...",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "est trop minable",
+    "ecoute": "bon"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "castro_ppda",
+  "qui": "PPDA",
+  "phrase": "fidel castro",
+  "recherches": [
+   "PPDA fausse interview Fidel Castro TF1 1991"
+  ],
+  "candidats": [
+   {
+    "video": "fZBQm6VBwN0",
+    "duree": "348",
+    "chaine": "INA Arditube",
+    "titre": "La fausse interview de Fidel Castro par PPDA décryptée chez Thierry Ardisson | INA Arditube",
+    "url": "https://www.youtube.com/watch?v=fZBQm6VBwN0",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 70.0,
+    "fin": 70.8,
+    "texte": "interview de fidel castro"
+   },
+   {
+    "video": "2Mr3M-XIJ48",
+    "duree": "228",
+    "chaine": "Le Parisien",
+    "titre": "Whether as a vampire or in his underwear, Fidel Castro's embarrassing grandson",
+    "url": "https://www.youtube.com/watch?v=2Mr3M-XIJ48",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 9.8,
+    "fin": 11.0,
+    "texte": "fils de fidel castro"
+   },
+   {
+    "video": "DLj6uqmnXa0",
+    "duree": "61",
+    "chaine": "Le Monde",
+    "titre": "Patrick Poivre d'Arvor en 60 secondes",
+    "url": "https://www.youtube.com/watch?v=DLj6uqmnXa0",
+    "chaine_connue": true
+   },
+   {
+    "video": "8NT4vY-dyfQ",
+    "duree": "65",
+    "chaine": "Épingleur",
+    "titre": "La VRAIE ITW de Castro par PPDA",
+    "url": "https://www.youtube.com/watch?v=8NT4vY-dyfQ",
+    "chaine_connue": false
+   },
+   {
+    "video": "4UZlzM4GA3A",
+    "duree": "62",
+    "chaine": "Matthieu Riegler",
+    "titre": "PPDA lache un coup de gueule",
+    "url": "https://www.youtube.com/watch?v=4UZlzM4GA3A",
+    "chaine_connue": false
+   },
+   {
+    "video": "9Nnkujpn7Zs",
+    "duree": "110",
+    "chaine": "RMC",
+    "titre": "Affaire PPDA - \"C’est un mensonge !\" Jean-Pierre Pernaut",
+    "url": "https://www.youtube.com/watch?v=9Nnkujpn7Zs",
+    "chaine_connue": false
+   },
+   {
+    "video": "cj7bow9Yurc",
+    "duree": "697",
+    "chaine": "claude GUILLEMIN",
+    "titre": "VTS 01 ppda  et gloria  1986",
+    "url": "https://www.youtube.com/watch?v=cj7bow9Yurc",
+    "chaine_connue": false
+   },
+   {
+    "video": "sFxRnI-wo6k",
+    "duree": "64",
+    "chaine": "6Medias",
+    "titre": "\"Un jour, un destin\" : les douloureuses confidences de PPDA sur la mort de sa fille",
+    "url": "https://www.youtube.com/watch?v=sFxRnI-wo6k",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/castro_ppda/fZBQm6VBwN0.mp3",
+    "video": "fZBQm6VBwN0",
+    "url": "https://www.youtube.com/watch?v=fZBQm6VBwN0&t=70s",
+    "chaine": "INA Arditube",
+    "titre": "La fausse interview de Fidel Castro par PPDA décryptée chez Thierry Ardisson | INA Arditube",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "interview de fidel castro",
+    "ecoute": "rate"
+   },
+   {
+    "fichier": "assets/audio/raw/castro_ppda/2Mr3M-XIJ48.mp3",
+    "video": "2Mr3M-XIJ48",
+    "url": "https://www.youtube.com/watch?v=2Mr3M-XIJ48&t=9s",
+    "chaine": "Le Parisien",
+    "titre": "Whether as a vampire or in his underwear, Fidel Castro's embarrassing grandson",
+    "chaine_connue": true,
+    "score": 1.0,
+    "texte": "fils de fidel castro",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "punaises_de_lit",
+  "qui": "Praud",
+  "phrase": "punaises de lit",
+  "recherches": [
+   "Pascal Praud punaises de lit immigration CNews"
+  ],
+  "candidats": [
+   {
+    "video": "jtrdBEimX1A",
+    "duree": "106.0",
+    "chaine": "Florian (TrivialPanPan)",
+    "titre": "Pascal Praud tente de faire un parrallèle entre les punaises de lit et l'immigration",
+    "url": "https://www.youtube.com/watch?v=jtrdBEimX1A",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 0.4,
+    "fin": 1.1,
+    "texte": "plus de punaises de lit"
+   },
+   {
+    "video": "qwD0sqBfNLw",
+    "duree": "96.0",
+    "chaine": "jean-benoit Diallo",
+    "titre": "Pascal Praud et les Punaises de lit #pascalpraud #punaisedelit #cnews #immigration #standup #actu",
+    "url": "https://www.youtube.com/watch?v=qwD0sqBfNLw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 9.3,
+    "fin": 10.1,
+    "texte": "parlait des punaises de lit"
+   },
+   {
+    "video": "N8q3X9GyuNw",
+    "duree": "1498.0",
+    "chaine": "Badbugs - En finir avec les nuisibles",
+    "titre": "Punaises de lit : Les lieux publics sont ils envahis ? - L'Heure des Pros - CNews",
+    "url": "https://www.youtube.com/watch?v=N8q3X9GyuNw",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 8.4,
+    "fin": 10.6,
+    "texte": "question des punaises de lit"
+   },
+   {
+    "video": "nuImgWaaG-g",
+    "duree": "206.0",
+    "chaine": "Infonation",
+    "titre": "CNEWS, Pascal Praud, L'heure des Pros : Le racisme OKLM (2/4)",
+    "url": "https://www.youtube.com/watch?v=nuImgWaaG-g",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 0.33
+   },
+   {
+    "video": "EpmvE2NYIgI",
+    "duree": "112.0",
+    "chaine": "Alban LopezdeLens",
+    "titre": "Pascal Praud qui compare les migrants et les punaises de lit.",
+    "url": "https://www.youtube.com/watch?v=EpmvE2NYIgI",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 62.6,
+    "fin": 64.0,
+    "texte": "la les punaises de lit"
+   },
+   {
+    "video": "f8PqpmiFnGg",
+    "duree": "207.0",
+    "chaine": "L'invité",
+    "titre": "Edwy PLENEL s'en prend à Pascal PRAUD \"qui compare les migrants à des punaises de lit\"",
+    "url": "https://www.youtube.com/watch?v=f8PqpmiFnGg",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 65.8,
+    "fin": 66.8,
+    "texte": "a des punaises de lit"
+   },
+   {
+    "video": "drJxZT4xRdY",
+    "duree": "143.0",
+    "chaine": "Break News TV",
+    "titre": "🔴➡️ Les immigrés sont-ils responsablent des punaises de lit en 🇫🇷 ?",
+    "url": "https://www.youtube.com/watch?v=drJxZT4xRdY",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 2.2,
+    "fin": 3.4,
+    "texte": "invasion des punaises de lit"
+   },
+   {
+    "video": "g8KJTvLjtCc",
+    "duree": "56.0",
+    "chaine": "Francois Piquemal",
+    "titre": "Punaises de lit: Pascal Praud a tout faux",
+    "url": "https://www.youtube.com/watch?v=g8KJTvLjtCc",
+    "chaine_connue": false,
+    "sous_titres": true,
+    "score": 1.0,
+    "debut": 0.0,
+    "fin": 1.1,
+    "texte": "effectivement les punaises de lit"
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/punaises_de_lit/g8KJTvLjtCc.mp3",
+    "video": "g8KJTvLjtCc",
+    "url": "https://www.youtube.com/watch?v=g8KJTvLjtCc&t=0s",
+    "chaine": "Francois Piquemal",
+    "titre": "Punaises de lit: Pascal Praud a tout faux",
+    "chaine_connue": false,
+    "score": 1.0,
+    "texte": "effectivement les punaises de lit",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "saint_pierre",
+  "qui": "Wauquiez",
+  "phrase": "saint-pierre-et-miquelon",
+  "recherches": [
+   "Wauquiez enfermer les OQTF à Saint-Pierre-et-Miquelon",
+   "Wauquiez OQTF Saint-Pierre-et-Miquelon interview JDNews"
+  ],
+  "candidats": [
+   {
+    "video": "jNBe4ccL38g",
+    "duree": "89",
+    "chaine": "Public Sénat",
+    "titre": "Locking up the OQTFs in Saint-Pierre-et-Miquelon: Wauquiez is “outbidding”",
+    "url": "https://www.youtube.com/watch?v=jNBe4ccL38g",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 10.1,
+    "fin": 11.5,
+    "texte": "d oqtf a saint pierre et"
+   },
+   {
+    "video": "s-UlneKm7IY",
+    "duree": "1967",
+    "chaine": "RTL  ",
+    "titre": "Locking up the OQTF in Saint-Pierre and Miquelon: Laurent Wauquiez's shocking proposal",
+    "url": "https://www.youtube.com/watch?v=s-UlneKm7IY",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "-3gVpBvjnAo",
+    "duree": "711",
+    "chaine": "RTL  ",
+    "titre": "\"Locking up\" the OQTF in Saint-Pierre-et-Miquelon: \"A Competition for the craziest proposal\"",
+    "url": "https://www.youtube.com/watch?v=-3gVpBvjnAo",
+    "chaine_connue": true,
+    "sous_titres": false
+   },
+   {
+    "video": "TuI0nG7hpbU",
+    "duree": "251",
+    "chaine": "Europe 1",
+    "titre": "\"Enfermer les étrangers dangereux sous OQTF\" à Saint-Pierre-et-Miquelon ? Laurent Wauquiez critiqué",
+    "url": "https://www.youtube.com/watch?v=TuI0nG7hpbU",
+    "chaine_connue": true,
+    "sous_titres": true,
+    "score": 0.75,
+    "debut": 95.2,
+    "fin": 96.8,
+    "texte": "aux habitants de saint pierre et"
+   },
+   {
+    "video": "IRcv7zmXj9I",
+    "duree": "75",
+    "chaine": "Public Sénat",
+    "titre": "Locking up OQTFs in Saint-Pierre-et-Miquelon: “Lamentable” replies the territory’s senator",
+    "url": "https://www.youtube.com/watch?v=IRcv7zmXj9I",
+    "chaine_connue": true
+   },
+   {
+    "video": "tV3jqbbWCOI",
+    "duree": "85",
+    "chaine": "Europe 1",
+    "titre": "Enfermer les OQTF à Saint-Pierre-et-Miquelon : les politique dénonce le \"mépris\" de Laurent Wauquiez",
+    "url": "https://www.youtube.com/watch?v=tV3jqbbWCOI",
+    "chaine_connue": true
+   },
+   {
+    "video": "psVgDx94XHE",
+    "duree": "567",
+    "chaine": "LCP - Assemblée nationale",
+    "titre": "\"Enfermons les OQTF à Saint-Pierre-et-Miquelon\" : la proposition de Wauquiez provoque un tollé",
+    "url": "https://www.youtube.com/watch?v=psVgDx94XHE",
+    "chaine_connue": true
+   },
+   {
+    "video": "c0uIGu3IcMk",
+    "duree": "239",
+    "chaine": "Europe 1",
+    "titre": "OQTF à Saint-Pierre-et-Miquelon : «La proposition de Laurent Wauquiez est une proposition choc» a",
+    "url": "https://www.youtube.com/watch?v=c0uIGu3IcMk",
+    "chaine_connue": true
+   },
+   {
+    "video": "Hoy8uqjleWc",
+    "duree": "86",
+    "chaine": "Europe 1",
+    "titre": "«Envoyer les OQTF à Saint-Pierre-et-Miquelon» ? La proposition choc de Laurent Wauquiez fait réa",
+    "url": "https://www.youtube.com/watch?v=Hoy8uqjleWc",
+    "chaine_connue": true
+   },
+   {
+    "video": "aaIOi3tnyKQ",
+    "duree": "218",
+    "chaine": "Sud Radio",
+    "titre": "Wauquiez veut \"enfermer\" les OQTF à Saint-Pierre-et-Miquelon - L'édito de Jean-François Achilli",
+    "url": "https://www.youtube.com/watch?v=aaIOi3tnyKQ",
+    "chaine_connue": false
+   }
+  ],
+  "extraits": [
+   {
+    "fichier": "assets/audio/raw/saint_pierre/jNBe4ccL38g.mp3",
+    "video": "jNBe4ccL38g",
+    "url": "https://www.youtube.com/watch?v=jNBe4ccL38g&t=10s",
+    "chaine": "Public Sénat",
+    "titre": "Locking up the OQTFs in Saint-Pierre-et-Miquelon: Wauquiez is “outbidding”",
+    "chaine_connue": true,
+    "score": 0.75,
+    "texte": "d oqtf a saint pierre et",
+    "ecoute": "autre"
+   },
+   {
+    "fichier": "assets/audio/raw/saint_pierre/TuI0nG7hpbU.mp3",
+    "video": "TuI0nG7hpbU",
+    "url": "https://www.youtube.com/watch?v=TuI0nG7hpbU&t=95s",
+    "chaine": "Europe 1",
+    "titre": "\"Enfermer les étrangers dangereux sous OQTF\" à Saint-Pierre-et-Miquelon ? Laurent Wauquiez critiqué",
+    "chaine_connue": true,
+    "score": 0.75,
+    "texte": "aux habitants de saint pierre et",
+    "ecoute": "rate"
+   }
+  ],
+  "traite": true
+ },
+ {
+  "id": "trump_de_chez_wish",
+  "qui": "Bernard Briand",
+  "phrase": "trump de chez wish",
+  "recherches": [
+   "Bernard Briand Wauquiez Donald Trump de chez Wish Saint-Pierre-et-Miquelon"
+  ],
+  "candidats": [],
+  "extraits": [],
+  "traite": true
+ }
+]

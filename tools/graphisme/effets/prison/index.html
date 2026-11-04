@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=512, height=640" />
+  <title>Prison</title>
+  <script src="gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Bangers"; src: url("fontes/bangers.woff2") format("woff2"); }
+    html, body { margin: 0; background: transparent; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+    .layer { position: absolute; left: 0; top: 0; width: 512px; height: 640px; }
+    .word { position: absolute; left: 0; width: 512px; text-align: center; font-family: "Bangers"; font-weight: 400;
+      letter-spacing: 3px; color: #ffe01a; -webkit-text-stroke: 5px #111; paint-order: stroke fill; white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-width="512" data-height="640" data-duration="2">
+    <div class="clip layer" data-start="0" data-duration="2" data-track-index="0">
+      <svg class="layer" id="cage" viewBox="0 0 512 640">
+        <g id="bars"></g>
+        <rect x="48" y="150" width="416" height="30" rx="4" fill="#3a3f4a" stroke="#fff" stroke-width="6"/>
+        <rect x="48" y="150" width="416" height="30" rx="4" fill="none" stroke="#111" stroke-width="3"/>
+        <rect x="48" y="584" width="416" height="30" rx="4" fill="#3a3f4a" stroke="#fff" stroke-width="6"/>
+        <rect x="48" y="584" width="416" height="30" rx="4" fill="none" stroke="#111" stroke-width="3"/>
+        <g transform="translate(0 150)"><g id="lock">
+          <rect x="222" y="340" width="68" height="60" rx="6" fill="#f2b632" stroke="#111" stroke-width="4"/>
+          <path d="M238 340 V318 C238 294 274 294 274 318 V340" fill="none" stroke="#111" stroke-width="7"/>
+          <circle cx="256" cy="366" r="8" fill="#111"/><rect x="252" y="366" width="8" height="18" fill="#111"/>
+        </g></g>
+      </svg>
+      <div class="word" id="clang" style="top:44px;font-size:84px">CLANG !</div>
+    </div>
+  </div>
+  <script>
+    /* 12 fps. The cage lands on frame 3 and stays: the last frame is held while the character is in prison. */
+    const IMPACT = 3 / 12;
+    const BAR_COUNT = 7;
+    const bars = document.getElementById("bars");
+    for (let index = 0; index < BAR_COUNT; index += 1) {
+      const x = 74 + index * (364 / (BAR_COUNT - 1));
+      bars.innerHTML += `<rect x="${x - 9}" y="170" width="18" height="424" fill="#5a606e" stroke="#fff" stroke-width="5"/>
+        <rect x="${x - 9}" y="170" width="18" height="424" fill="none" stroke="#111" stroke-width="2"/>
+        <rect x="${x - 6}" y="170" width="5" height="424" fill="#a9b0bd"/>`;
+    }
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#cage", { y: -660 }, { y: 0, duration: IMPACT, ease: "power3.in" }, 0);
+    tl.fromTo("#cage", { scaleY: 1, transformOrigin: "50% 96%" }, { scaleY: 0.93, duration: 0.05 }, IMPACT);
+    tl.to("#cage", { scaleY: 1.03, duration: 0.09 }, IMPACT + 0.08);
+    tl.to("#cage", { scaleY: 1, duration: 0.09 }, IMPACT + 0.17);
+    tl.fromTo("#lock", { y: -14, rotation: -10, transformOrigin: "50% 0%" }, { y: 0, rotation: 8, duration: 0.17 }, IMPACT + 0.17);
+    tl.to("#lock", { rotation: -5, duration: 0.17 }, IMPACT + 0.34);
+    tl.to("#lock", { rotation: 0, duration: 0.17 }, IMPACT + 0.51);
+    tl.fromTo("#clang", { opacity: 0, scale: 0.3, rotation: 6, transformOrigin: "50% 50%" },
+      { opacity: 1, scale: 1, duration: 0.09, ease: "back.out(3)" }, IMPACT);
+    tl.to("#clang", { opacity: 0, duration: 0.17 }, 1.3);
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

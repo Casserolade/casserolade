@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tranche verticale</title>
+  <link rel="stylesheet" href="/tools/graphisme/demo/style.css" />
+  <script type="importmap">{ "imports": { "pixi": "/tools/graphisme/demo/vendor/pixi.min.mjs" } }</script>
+  <script type="module" src="/tools/graphisme/demo/main.js"></script>
+</head>
+<body>
+  <main>
+    <h1>Tranche verticale : rig en temps réel, effets Hyperframes</h1>
+    <p id="status" role="status">Chargement…</p>
+    <div id="stage"></div>
+    <section id="controls" aria-label="Commandes de la démo">
+      <p class="scene"><button data-action="scene">▶ Lancer la scène complète (avec le son)</button></p>
+      <fieldset>
+        <legend>Macron</legend>
+        <button data-action="talk" data-card="0">Parle</button>
+        <button data-action="attack" data-card="0">Attaque</button>
+        <button data-action="hit" data-card="0">Touché</button>
+        <button data-action="crush" data-card="0">Masse</button>
+        <button data-action="getup" data-card="0">Relever</button>
+        <button data-action="golden" data-card="0">Doré</button>
+      </fieldset>
+      <fieldset>
+        <legend>Sarkozy</legend>
+        <button data-action="talk" data-card="1">Parle</button>
+        <button data-action="attack" data-card="1">Attaque</button>
+        <button data-action="hit" data-card="1">Touché</button>
+        <button data-action="crush" data-card="1">Masse</button>
+        <button data-action="getup" data-card="1">Relever</button>
+        <button data-action="golden" data-card="1">Doré</button>
+      </fieldset>
+      <fieldset>
+        <legend>Le Pen</legend>
+        <button data-action="talk" data-card="2">Parle</button>
+        <button data-action="attack" data-card="2">Attaque</button>
+        <button data-action="hit" data-card="2">Touché</button>
+        <button data-action="crush" data-card="2">Masse</button>
+        <button data-action="getup" data-card="2">Relever</button>
+        <button data-action="golden" data-card="2">Doré</button>
+      </fieldset>
+      <fieldset>
+        <legend>Autres effets, sur Sarkozy</legend>
+        <button data-action="immunity" data-card="1">Immunité</button>
+        <button data-action="prison" data-card="1">Prison (ouvrir, fermer)</button>
+        <button data-action="polemic" data-card="1">Polémique</button>
+      </fieldset>
+      <fieldset>
+        <legend>Yeux au repos</legend>
+        <button data-eyes="normal" aria-pressed="true">Vrais yeux</button>
+        <button data-eyes="exorbites" aria-pressed="false">Exorbités</button>
+        <button data-eyes="croix" aria-pressed="false">En croix</button>
+        <button data-eyes="larmes" aria-pressed="false">Larmes</button>
+      </fieldset>
+    </section>
+  </main>
+</body>
+</html>

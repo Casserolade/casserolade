@@ -1,0 +1,1951 @@
+[
+  {
+    "id": "doucet",
+    "nom": "Grégory Doucet",
+    "phrases": [
+      {
+        "texte": "Il a peut-être besoin de vacances, qu'il en prenne et qu'il revienne en septembre bien reposé.",
+        "contexte": "Réponse à Gérald Darmanin, qui dénonçait son « militantisme naïf » sur la sécurité à Lyon",
+        "date": "2022-08-05",
+        "source": "https://www.lyonmag.com/article/125050/gregory-doucet-sur-gerald-darmanin-qu-il-prenne-des-vacances-et-revienne-en-septembre-bien-repose/100",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Entretien au Journal du Dimanche, cité par LyonMag. Une seule source lue.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Le Tour de France continue à véhiculer une image machiste du sport.",
+        "contexte": "Entretien au Progrès, à trois jours du passage du Tour à Lyon",
+        "date": "2020-09-09",
+        "source": "https://www.linfodurable.fr/politique/tour-de-france-machiste-et-polluant-selon-le-maire-de-lyon-19948",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP citant Le Progrès, confirmée par Lyon Capitale et Europe 1. Phrase complète : « Plusieurs points me dérangent. D'abord, le Tour de France continue à véhiculer une image machiste du sport ». « Machiste et polluant » est le résumé de la presse, pas ses mots exacts.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Combien de véhicules à moteur thermique circulent pour faire courir ces coureurs à vélo ?",
+        "contexte": "Même entretien au Progrès sur le Tour de France",
+        "date": "2020-09-09",
+        "source": "https://www.linfodurable.fr/politique/tour-de-france-machiste-et-polluant-selon-le-maire-de-lyon-19948",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP citant Le Progrès.",
+        "moments": [
+          "pose",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Le Tour coûte à la Ville un peu plus de 600 000 euros. L'ardoise n'est pas anodine.",
+        "contexte": "Même entretien au Progrès, pour justifier de ne plus accueillir le Tour",
+        "date": "2020-09-09",
+        "source": "https://www.linfodurable.fr/politique/tour-de-france-machiste-et-polluant-selon-le-maire-de-lyon-19948",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP citant Le Progrès.",
+        "moments": [
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "lucas",
+    "nom": "Benjamin Lucas-Lundy",
+    "phrases": [
+      {
+        "texte": "Quel discours ringard : Il a 90 ans !",
+        "contexte": "Lancé depuis les bancs pendant la déclaration de politique générale de Gabriel Attal, 34 ans, plus jeune Premier ministre de la Ve République",
+        "date": "2024-01-30",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/deuxieme-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Compte rendu officiel de l'Assemblée nationale (interruption de séance).",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Sanctionnez-nous tant que vous voulez !",
+        "contexte": "Dans l'hémicycle, vers 23 h, pendant l'examen d'un texte UDR sur les « mariages simulés ou arrangés ». Il écope d'un rappel à l'ordre le 1er juillet",
+        "date": "2026-06-25",
+        "source": "https://lcp.fr/actualites/xenophobes-racistes-deux-deputes-ecopent-d-un-rappel-a-l-ordre-apres-des-propos-visant-d",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "LCP, chaîne de l'Assemblée. Phrase précédente : « Alors, oui, il y a de la xénophobie. »",
+        "moments": [
+          "casserole",
+          "prison"
+        ]
+      },
+      {
+        "texte": "Humaniste en carton-pâte, vous avez offert une victoire idéologique à Le Pen !",
+        "contexte": "Interruption pendant le discours de Sylvain Maillard, président du groupe Renaissance, au sujet de la loi immigration",
+        "date": "2024-01-30",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/deuxieme-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Compte rendu officiel. Il lance aussi à Attal : « Ça se passe comment à Stanislas ? » et à Maillard : « Encore un fonds Marianne ? »",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Non, je ne me calme pas ! C'est insultant !",
+        "contexte": "Débat sur BFMTV avec le député Renaissance Paul Midy, qui range les écologistes à « l'extrême-gauche »",
+        "date": "2022-08-03",
+        "source": "https://www.ozap.com/actu/-non-je-ne-me-calme-pas-passe-d-armes-entre-deux-deputes-sur-bfmtv/619780",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias, qui renvoie à la vidéo de la séquence. Une seule source lue.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Vous vous rendez compte du mal que vous faites à la République ?! C'est inadmissible et pathétique",
+        "contexte": "Même débat sur BFMTV face à Paul Midy",
+        "date": "2022-08-03",
+        "source": "https://www.ozap.com/actu/-non-je-ne-me-calme-pas-passe-d-armes-entre-deux-deputes-sur-bfmtv/619780",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias. Une seule source lue.",
+        "moments": [
+          "mort"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "batho",
+    "nom": "Delphine Batho",
+    "phrases": [
+      {
+        "texte": "Je ne suis pas sévère, j'essaie d'être lucide. J'ai été limogée par SMS, sur Twitter, en direct. C'est très moderne.",
+        "contexte": "Sur Sud Radio, un an après son renvoi du ministère de l'Écologie",
+        "date": "2014-10-17",
+        "source": "https://www.lyoncapitale.fr/politique/delphine-batho-je-ne-suis-pas-irreverencieuse",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Lyon Capitale reprenant l'entretien de Sud Radio. Une seule source lue.",
+        "moments": [
+          "mort",
+          "prison"
+        ]
+      },
+      {
+        "texte": "C'est un mauvais budget.",
+        "contexte": "Ministre de l'Écologie, sur RTL, à propos de son propre budget. Elle est limogée le soir même",
+        "date": "2013-07-02",
+        "source": "https://acteurspublics.fr/articles/francois-hollande-limoge-delphine-batho/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Repris à l'identique par Acteurs publics, Slate, Reporterre et Maire Info.",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Je suis une femme de gauche qui a conservé intacts ses rêves et ses espérances.",
+        "contexte": "Même entretien sur Sud Radio",
+        "date": "2014-10-17",
+        "source": "https://www.lyoncapitale.fr/politique/delphine-batho-je-ne-suis-pas-irreverencieuse",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Lyon Capitale reprenant Sud Radio.",
+        "moments": [
+          "pose",
+          "heros",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "C'est un peu important en fait.",
+        "contexte": "Débat de la primaire écologiste sur LCI, en réponse à Sandrine Rousseau : « La décroissance, ce n'est pas le sujet »",
+        "date": "2021-09-08",
+        "source": "https://www.slate.fr/story/215499/candidats-primaire-debat-lci-ecologie-presidentielle-decroissance-securite",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Échange rapporté par Slate, que je n'ai pas pu lire en entier : l'attribution à Batho vient du résumé du moteur de recherche. À caler sur la vidéo du débat.",
+        "moments": [
+          "celebration"
+        ]
+      }
+    ],
+    "meilleure": 2
+  },
+  {
+    "id": "hurmic",
+    "nom": "Pierre Hurmic",
+    "phrases": [
+      {
+        "texte": "Nous ne mettrons pas des arbres morts sur les places de la ville, notamment sur la place Pey-Berland.",
+        "contexte": "Conférence de rentrée du maire de Bordeaux : fin du grand sapin de Noël devant la mairie",
+        "date": "2020-09-10",
+        "source": "https://www.linfodurable.fr/politique/le-maire-ecolo-de-bordeaux-veut-en-finir-avec-larbre-mort-de-noel-19978",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP, reprise par Europe 1 et d'autres. Il ajoute : « C'est pas du tout notre conception de la végétalisation. » En 2021, il a reconnu que ce commentaire était de trop.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "C'est pas du tout notre conception de la végétalisation.",
+        "contexte": "Suite immédiate de la phrase sur le sapin de Noël",
+        "date": "2020-09-10",
+        "source": "https://www.linfodurable.fr/politique/le-maire-ecolo-de-bordeaux-veut-en-finir-avec-larbre-mort-de-noel-19978",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP.",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "J'ai des collègues qui sont des shérifs, qui rêvent d'être le premier flic sur leur commune […] moi je ne suis pas un maire shérif.",
+        "contexte": "Matinale de Public Sénat, sur la police municipale",
+        "date": "2020-12-11",
+        "source": "https://www.publicsenat.fr/actualites/politique/pierre-hurmic-je-ne-suis-pas-un-maire-sherif-186119",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Public Sénat, média qui a mené l'entretien. Il annoncera plus tard une brigade de police municipale armée.",
+        "moments": [
+          "pose",
+          "heros"
+        ]
+      },
+      {
+        "texte": "J'étais peut-être un maire manifestant, mais j'étais aussi le maire des commerçants, en même temps.",
+        "contexte": "Défense après sa présence à une manifestation contre la loi sécurité globale, marquée par de la casse à Bordeaux",
+        "date": "2020-12-11",
+        "source": "https://www.publicsenat.fr/actualites/politique/pierre-hurmic-je-ne-suis-pas-un-maire-sherif-186119",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Public Sénat, même entretien.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Le pouvoir des conservateurs et des réactionnaires est hallucinant.",
+        "contexte": "Sur Europe 1, en revenant sur la polémique de « l'arbre mort » de Noël",
+        "date": "2020-11",
+        "source": "https://www.europe1.fr/node/185130",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Titre entre guillemets d'Europe 1 ; le corps de l'article n'a pas pu être lu. Date approximative (annonces Covid du Premier ministre, fin 2020).",
+        "moments": [
+          "mort",
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "mamere",
+    "nom": "Noël Mamère",
+    "phrases": [
+      {
+        "texte": "Nous irons devant la Cour d'appel, puis la Cour de cassation, puis devant la Cour européenne des droits de l'homme.",
+        "contexte": "Sur une éventuelle annulation du mariage homosexuel qu'il a célébré à Bègles malgré l'interdiction du procureur",
+        "date": "2004-07",
+        "source": "https://maire-info.com/le-tribunal-de-grande-instance-de-bordeaux-se-prononce-sur-la-validite-du-mariage-homosexuel-celebre-%C3%A0-begles-article2-4657",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Maire Info, édition du 27 juillet 2004. Une seule source lue.",
+        "moments": [
+          "casserole",
+          "prison",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Pour moi, ce mariage est comme les autres et en tant qu'officier de l'état civil j'estime qu'il est légal.",
+        "contexte": "Avant le mariage de Bègles, face au procureur de Bordeaux. Il sera suspendu un mois de ses fonctions de maire",
+        "date": "2004-05",
+        "source": "https://maire-info.com/mariage-homosexuel-de-begles-le-procureur-de-la-republique-de-bordeaux-signifie-au-maire-son-opposition-%C3%A0-cette-union-article2-4406",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Maire Info, mai 2004. Une seule source lue.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Notre parti ne produit plus rien : il est prisonnier de ses calculs et de ses clans.",
+        "contexte": "Il quitte EELV, dans un entretien au Monde",
+        "date": "2013-09-25",
+        "source": "https://www.lalibre.be/international/2013/09/25/noel-mamere-quitte-europe-ecologie-les-verts-7M25IBFHPVHB5DG7W65VEVWJ74/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche reprise par La Libre ; formule confirmée par Politis et Slate.",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "Nous sommes devenus un syndicat d'élus.",
+        "contexte": "Même entretien au Monde, en claquant la porte d'EELV",
+        "date": "2013-09-25",
+        "source": "https://www.lalibre.be/international/2013/09/25/noel-mamere-quitte-europe-ecologie-les-verts-7M25IBFHPVHB5DG7W65VEVWJ74/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "La Libre ; formule reprise par Politis.",
+        "moments": [
+          "mort",
+          "heros"
+        ]
+      },
+      {
+        "texte": "Manuel Valls, ce n'est pas la gauche.",
+        "contexte": "Sur Sud Radio et Public Sénat, en pleine loi Travail",
+        "date": "2016-05-23",
+        "source": "https://www.sudradio.fr/politique/noel-mamere-manuel-valls-ce-nest-pas-la-gauche",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Site de Sud Radio, média qui a mené l'entretien.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Pas de gaffe célèbre trouvée. L'archive INA du 2 mars 2002 (« on ne va pas taper sur les sauvageons », contre Chevènement) n'a pas de transcription française : https://mediaclip.ina.fr/en/i20246804-we-don-t-want-to-hit-the-wildlings.html"
+  },
+  {
+    "id": "piolle",
+    "nom": "Éric Piolle",
+    "phrases": [
+      {
+        "texte": "On connaissait le Puy du Fou, maintenant on a le fou du Puy !",
+        "contexte": "Devant des journalistes, contre Laurent Wauquiez, qui veut sortir sa région du « zéro artificialisation nette ». Grand prix de l'humour politique 2023",
+        "date": "2023-10-09",
+        "source": "https://france3-regions.franceinfo.fr/auvergne-rhone-alpes/isere/grenoble/prix-de-l-humour-en-politique-eric-piolle-recompense-apres-un-tacle-a-laurent-wauquiez-2885798.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "France 3 Régions et la sélection AFP du prix Press Club, humour et politique (lagazettefrance.fr).",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "À vrai dire, je m'en fous un peu.",
+        "contexte": "À propos des critiques sur la sécurité et la propreté à Grenoble, dans Libération. Une grenade explose dans un bar de la ville la veille de la parution",
+        "date": "2025-02-13",
+        "source": "https://www.sudradio.fr/sud-radio/eric-piolle-cree-la-polemique-avec-des-propos-tenus-avant-lattaque-a-la-grenade-a-grenoble",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Entretien à Libération, repris par Sud Radio et Europe 1 (« Je m'en fous », réaction de François-Xavier Bellamy).",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Il y a des fusillades partout.",
+        "contexte": "Même entretien à Libération, pour dire que les caméras n'empêchent rien",
+        "date": "2025-02-13",
+        "source": "https://www.sudradio.fr/sud-radio/eric-piolle-cree-la-polemique-avec-des-propos-tenus-avant-lattaque-a-la-grenade-a-grenoble",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Sud Radio citant Libération. Une seule source lue.",
+        "moments": [
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "duflot",
+    "nom": "Cécile Duflot",
+    "phrases": [
+      {
+        "texte": "Quand on cherche du confort, on s'achète des pantoufles.",
+        "contexte": "Vœux à la presse de la ministre du Logement, à qui l'on demande s'il est confortable d'être au gouvernement",
+        "date": "2014-01",
+        "source": "https://www.batiweb.com/actualites/vie-des-societes/cecile-duflot-le-logement-ne-peut-pas-etre-abandonne-aux-lois-du-marche-23629",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Batiweb et Lyon Capitale (https://www.lyoncapitale.fr/?p=86733) concordent.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Pas un journaliste, mais un connard.",
+        "contexte": "Tweet vite effacé contre Bruno Testa, journaliste de L'Union, après un déjeuner de presse à Reims",
+        "date": "2012-02-02",
+        "source": "https://www.ozap.com/actu/cecile-duflot-traite-un-journaliste-de-connard-sur-twitter/439144",
+        "type_source": "reseau_social",
+        "fiabilite": "verifie",
+        "note": "Puremédias et Slate (« le connard »). Le texte intégral du tweet n'est pas conservé.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Madame la journaliste de BFMTV, je vais vous dire aussi que vous êtes responsables, pas que les politiques.",
+        "contexte": "Interview agacée sur BFMTV pendant l'été du burkini, alors qu'elle venait parler des journées d'été d'EELV",
+        "date": "2016-08-25",
+        "source": "https://www.ozap.com/actu/cecile-duflot-tres-agacee-par-une-question-d-une-journaliste-de-bfmtv/505791",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias. Une seule source lue.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "C'est la quatrième question que vous me posez sur le sujet alors que je vous ai répondu.",
+        "contexte": "Même interview sur BFMTV",
+        "date": "2016-08-25",
+        "source": "https://www.ozap.com/actu/cecile-duflot-tres-agacee-par-une-question-d-une-journaliste-de-bfmtv/505791",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias. Une seule source lue.",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "cohn_bendit",
+    "nom": "Daniel Cohn-Bendit",
+    "phrases": [
+      {
+        "texte": "La sexualité d'un gosse, c'est absolument fantastique […] Quand une petite fille de 5 ans commence à vous déshabiller, c'est fantastique, c'est un jeu érotico-maniaque...",
+        "contexte": "Sur le plateau d'Apostrophes (Antenne 2, Bernard Pivot), à propos de son passé d'éducateur dans un jardin d'enfants à Francfort",
+        "date": "1982-04-23",
+        "source": "https://fr.wikiquote.org/wiki/Daniel_Cohn-Bendit",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Texte tel que cité par L'Express (« Daniel Cohn-Bendit, le hasch et les enfants », 10 juin 2009, http://www.lexpress.fr/actualite/politique/daniel-cohn-bendit-le-hasch-et-les-enfants_766524.html) et Wikiquote. Texte complet chez L'Express : « La sexualité d'un gosse, c'est absolument fantastique, faut être honnête. J'ai travaillé auparavant avec des gosses qui avaient entre 4 et 6 ans. Quand une petite fille de 5 ans commence à vous déshabiller, c'est fantastique, c'est un jeu érotico-maniaque... » Transcription orale plus longue (plateformejonas.fr) : « Vous savez que la sexualité d'un gosse, c'est absolument fantastique. Faut être honnête, sérieux. Moi j'ai travaillé avec des gosses qui avaient entre 4 et 6 ans. Ben vous savez, quand une petite fille de 5 ans, 5 ans et demi, commence à vous déshabiller, c'est fantastique parce que c'est un jeu érotico-maniaque. » L'émission du 23 avril 1982 figure au catalogue INA (extraits I00008854 et I10229985 avec Paul Guth), mais je n'ai pas trouvé d'extrait INA en ligne contenant ce passage : pas d'audio. Il a ensuite jugé ces propos « inadmissibles ». Aucune poursuite ni condamnation.",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] mon pote, je te dis, jamais tu ne seras président de la République, parce que t'es trop minable.",
+        "contexte": "Clash avec François Bayrou dans « À vous de juger » sur France 2, à trois jours des européennes, après que Bayrou a ressorti Le Grand Bazar",
+        "date": "2009-06-04",
+        "source": "https://www.slate.fr/story/6135/bayrou-accuse-sans-le-dire-cohn-bendit-de-pedophilie",
+        "type_source": "presse",
+        "audio": "https://mediaclip.ina.fr/en/i10187813-clash-between-daniel-cohn-bendit-and-francois-bayrou.html",
+        "fiabilite": "verifie",
+        "note": "Transcription de Slate ; début de phrase : « Ce genre de jeu, devant les citoyens, eh bien mon pote, je te dis… ». Clip INA de l'échange et Jean-Marc Morandini (« ignoble », « minable ») concordent. Variante non sourcée : « t'es trop minable pour être un jour Président ».",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Ce sont des crétins finis, s'ils veulent tous finir avec Poutine, qu'ils se mettent dans son lit.",
+        "contexte": "Sur BFMTV, à propos de Gérard Depardieu et Brigitte Bardot, tentés par la Russie",
+        "date": "2013-01-04",
+        "source": "https://www.ozap.com/actu/daniel-cohn-bendit-depardieu-et-bardot-ce-sont-des-cretins-finis/444843",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias. Une seule source lue.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "J'ai raconté ça par pure provocation, pour épater le bourgeois.",
+        "contexte": "Sa défense pendant la polémique sur Le Grand Bazar (1975), relancée aux européennes de 2009",
+        "date": "2009-06-05",
+        "source": "https://www.nouvelobs.com/politique/europeennes-2009/20090605.OBS9379/les-extraits-du-livre-de-daniel-cohn-bendit-qui-font-polemique.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "L'Obs, cité par Wikiquote. Suite : « sachant ce que je sais aujourd'hui des abus sexuels, j'ai des remords d'avoir écrit tout cela ».",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Oui, vraiment, j'ai dû me retenir pour ne pas aller plus loin... lui mettre une baffe !",
+        "contexte": "Sur LCI, au lendemain de son clash avec Gilbert Collard sur le plateau de TF1 pour les européennes",
+        "date": "2019-05-27",
+        "source": "https://www.ozap.com/actu/daniel-cohn-bendit-j-ai-du-me-retenir-de-ne-pas-mettre-une-baffe-a-gilbert-collard/579167",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias. Une seule source lue.",
+        "moments": [
+          "pose",
+          "mort"
+        ]
+      }
+    ],
+    "meilleure": 1
+  },
+  {
+    "id": "jadot",
+    "nom": "Yannick Jadot",
+    "phrases": [
+      {
+        "texte": "Alors là, c'est les pays baltes, c'est là que c'est très compliqué, on ne va pas se raconter d'histoire.",
+        "contexte": "Candidat à la présidentielle et eurodéputé depuis 2009, il sèche sur les capitales de l'UE devant des élèves dans « Au tableau ! » (C8)",
+        "date": "2022-03-27",
+        "source": "https://www.ozap.com/actu/-au-tableau-yannick-jadot-seche-sur-les-capitales-de-l-union-europeenne/615255",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Puremédias ; Atlantico relate la même séquence. Même émission : « Alors là, vous me faîtes des colles, allez-y aidez-moi ! »",
+        "moments": [
+          "pose",
+          "mort"
+        ]
+      },
+      {
+        "texte": "J'ai un globe chez moi. Je le regarde en permanence.",
+        "contexte": "Sur Europe 1, le lendemain, pour s'expliquer sur les pays baltes",
+        "date": "2022-03-28",
+        "source": "https://www.ozap.com/actu/-au-tableau-yannick-jadot-seche-sur-les-capitales-de-l-union-europeenne/615255",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias citant Europe 1. Il ajoute : « J'adore l'histoire mais j'avoue qu'à l'école, sur la géographie, j'ai toujours eu du mal. »",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Dans le passé, on a été moqués, traités de catastrophistes ou d'utopistes […] d'un seul coup, tout le monde est devenu écolo.",
+        "contexte": "Meeting des européennes à Toulouse. EELV finira troisième avec 13,5 %",
+        "date": "2019-05-15",
+        "source": "https://www.linfodurable.fr/dun-seul-coup-tout-le-monde-est-devenu-ecolo-ironise-jadot-11173",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Sarkozy, Hollande, Macron... Ils ont tous eu leur chance. Et ils ont tous échoué.",
+        "contexte": "Même campagne des européennes",
+        "date": "2019-05-15",
+        "source": "https://www.linfodurable.fr/dun-seul-coup-tout-le-monde-est-devenu-ecolo-ironise-jadot-11173",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP.",
+        "moments": [
+          "pose",
+          "heros"
+        ]
+      },
+      {
+        "texte": "Je suis écologiste, je ne suis pas social-démocrate.",
+        "contexte": "Il refuse une alliance avec la gauche pour les européennes",
+        "date": "2019",
+        "source": "https://www.europe1.fr/politique/yannick-jadot-refuse-une-alliance-avec-la-gauche-pour-les-europeennes-je-suis-ecologiste-je-ne-suis-pas-social-democrate-3846212",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Titre entre guillemets d'Europe 1 ; corps de l'article non lu.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 2
+  },
+  {
+    "id": "rousseau",
+    "nom": "Sandrine Rousseau",
+    "phrases": [
+      {
+        "texte": "Je vis avec un homme déconstruit et je suis super heureuse.",
+        "contexte": "Débat de la primaire écologiste face à Yannick Jadot sur LCI. Prix de la révélation de l'année du Press Club, humour et politique",
+        "date": "2021-09-22",
+        "source": "https://www.ozap.com/actu/-on-ne-va-pas-s-interdire-les-plans-a-trois-marlene-schiappa-remporte-le-prix-de-l-humour-politique-2021/611364",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Forme retenue par le jury du Press Club (Puremédias, Purepeople). Variantes : « Moi, par exemple, je vis avec un homme déconstruit, et j'en suis hyper heureuse » (src/data/casseroles.ts) et « … Et j'en suis très heureuse » (Purepeople). À caler sur la vidéo LCI.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Il faut changer de mentalité pour que manger une entrecôte cuite sur un barbecue ne soit plus un symbole de virilité.",
+        "contexte": "Table ronde des journées d'été d'EELV",
+        "date": "2022-08-27",
+        "source": "https://www.dhnet.be/actu/monde/2022/08/30/le-barbecue-un-symbole-de-virilite-la-sortie-de-sandrine-rousseau-eelv-provoque-la-polemique-QPCZK5YJ4ZCTZEQGDI722VWEVM/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Repris à l'identique par La DH, Le Bonbon et VL Media. Variante : « Il faut aussi changer de mentalité… ne soit pas un symbole de virilité » (Purebreak, Connexion France).",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Je préfère des femmes qui jettent des sorts plutôt que des hommes qui construisent des EPR.",
+        "contexte": "Entretien à Charlie Hebdo pendant la primaire écologiste. Sonia Mabrouk lui demande ensuite sur Europe 1 : « Vous n'allez pas me jeter un sort ? » Réponse : « Eh bien pourquoi pas... »",
+        "date": "2021-08",
+        "source": "https://www.ozap.com/actu/-vous-n-allez-pas-me-jeter-un-sort-echange-glacial-entre-sonia-mabrouk-et-sandrine-rousseau-sur-europe-1/608031",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias ne cite que « des femmes qui jettent des sorts plutôt que des hommes qui construisent des EPR », en discours indirect avec « préférait ». « Je préfère » est la forme couramment citée : à caler sur Charlie Hebdo.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Je vous dis qu'on a un droit à la paresse, à la transition des métiers. On a le droit de faire des pauses dans sa vie.",
+        "contexte": "Sur BFMTV, en réponse à Fabien Roussel sur la « gauche du travail »",
+        "date": "2022-09-15",
+        "source": "https://www.letribunaldunet.fr/clash/droit-paresse-sandrine-rousseau-vole-rescousse-francais-sans-emploi.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Le Tribunal du Net citant BFMTV. Une seule source lue.",
+        "moments": [
+          "mort",
+          "prison"
+        ]
+      },
+      {
+        "texte": "Je voudrais qu'il y ait une possibilité de délit de non-partage des tâches domestiques.",
+        "contexte": "Proposition qui a fait partie des petites phrases de l'année 2022",
+        "date": "2022",
+        "source": "https://www.connexionfrance.com/article/Mag/Language/The-best-quips-from-french-politicians-in-2022",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Connexion France, sans date précise. Une seule source lue.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 1
+  },
+  {
+    "id": "tondelier",
+    "nom": "Marine Tondelier",
+    "phrases": [
+      {
+        "texte": "Je vais vous ajouter à mon compte pénibilité si on n'abroge pas la réforme des retraites.",
+        "contexte": "Soir du second tour des législatives sur France 2, au député RN Jean-Philippe Tanguy, qui lui coupe la parole",
+        "date": "2024-07-07",
+        "source": "https://www.ozap.com/actu/-vous-on-vous-a-assez-entendu-marine-tondelier-les-ecologistes-enchaine-les-tacles-contre-jean-philippe-tanguy-rn-lors-de-la-soiree-legislatives-de-france-2/644794",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=rODc5X0lmjA",
+        "fiabilite": "verifie",
+        "note": "Puremédias (8 juillet 2024, vidéo France 2 en tête d'article) et vidéo du Nouvel Obs sur sa chaîne YouTube, qui cite la même phrase (« Je vais vous ajouter à mon compte pénibilité, si on n'abroge pas la réforme des retraites. »).",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "J'ai pas de souvenir. Je peux pas vous dire, je l'ai pas connu.",
+        "contexte": "Candidate à la présidentielle, sur LCI, quand Darius Rochebin lui montre le portrait de Georges Pompidou et lui demande un mot sur lui",
+        "date": "2026-09-07",
+        "source": "https://www.jeanmarcmorandini.com/article-651440-entre-inculture-et-vide-sideral-le-naufrage-de-marine-tondelier-incapable-d-avoir-un-avis-sur-les-anciens-presidents-de-la-ve-republique-desespere-les-reseaux-sociaux-video.html",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=taGDacrhqGY",
+        "fiabilite": "verifie",
+        "note": "Même citation chez Jean-Marc Morandini et Le Tribunal du Net (letribunaldunet.fr, « J'ai pas de souvenir » en titre). L'audio renvoie à l'entretien intégral sur la chaîne YouTube de LCI. Variante plus longue relevée sur X : « Pffft... J'ai pas de souvenirs. J'ai pas connu, je peux pas vous dire, j'ai pas de truc marquant à dire sur Pompidou euh, en tant que citoyenne, électrice... »",
+        "moments": [
+          "mort",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Bah vous, ça vous a marqué visiblement.",
+        "contexte": "Même séquence sur LCI : Darius Rochebin lui souffle « la croissance, le développement, l'industrie » pour l'aider sur Pompidou",
+        "date": "2026-09-07",
+        "source": "https://www.letribunaldunet.fr/politique/marine-tondelier-silence-presidents-lci.html",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=taGDacrhqGY",
+        "fiabilite": "verifie",
+        "note": "Même formulation chez Le Tribunal du Net et Jean-Marc Morandini. Entretien intégral sur la chaîne YouTube de LCI.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Ce qui m'a marqué, c'est manger des pommes.",
+        "contexte": "Même séquence sur LCI, au portrait de Jacques Chirac, après « Je ne me rappelle pas tellement de sa politique »",
+        "date": "2026-09-07",
+        "source": "https://www.jeanmarcmorandini.com/article-651440-entre-inculture-et-vide-sideral-le-naufrage-de-marine-tondelier-incapable-d-avoir-un-avis-sur-les-anciens-presidents-de-la-ve-republique-desespere-les-reseaux-sociaux-video.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Phrase complète chez Jean-Marc Morandini ; Europe 1 titre sa vidéo YouTube « « Manger des pommes » : Marine Tondelier a-t-elle la culture politique pour présider ? » (youtube.com/watch?v=91WpafEua3A), et Le Tribunal du Net cite « Je ne me rappelle pas tellement de sa politique ». Le slogan « mangez des pommes » vient des Guignols de 1995.",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Le gouvernement a tout fait pour que cette manifestation soit un échec. Raté !",
+        "contexte": "En duplex le soir de la manifestation nationale contre la vie chère",
+        "date": "2026-10-24",
+        "source": "https://www.youtube.com/watch?v=MD7dAxzCQh4",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=MD7dAxzCQh4",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo publiée par sa propre chaîne YouTube (« Les Écologistes et Marine Tondelier »). Le « Raté ! » seul fait un bon cri de victoire.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Vous, on vous a assez entendu ! Si vous voulez parler il fallait venir aux débats.",
+        "contexte": "Même soirée électorale sur France 2, à Jean-Philippe Tanguy qui l'interrompt",
+        "date": "2024-07-07",
+        "source": "https://www.ozap.com/actu/-vous-on-vous-a-assez-entendu-marine-tondelier-les-ecologistes-enchaine-les-tacles-contre-jean-philippe-tanguy-rn-lors-de-la-soiree-legislatives-de-france-2/644794",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias seul (titre de l'article, vidéo France 2 intégrée). Elle enchaîne sur « les débats nationaux et locaux que vous avez séchés parce que vous n'avez rien à raconter ».",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Vous allez nous laisser parler 5 minutes ça va vous faire du bien.",
+        "contexte": "Même soirée électorale sur France 2, face à Jean-Philippe Tanguy",
+        "date": "2024-07-07",
+        "source": "https://www.ozap.com/actu/-vous-on-vous-a-assez-entendu-marine-tondelier-les-ecologistes-enchaine-les-tacles-contre-jean-philippe-tanguy-rn-lors-de-la-soiree-legislatives-de-france-2/644794",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias, dans deux articles (8 juillet 2024 et l'article sur l'entretien à Society). Pas de second média trouvé.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Je souffre en vous écoutant à chaque seconde je confirme.",
+        "contexte": "Même soirée sur France 2, quand Tanguy lance « Il va souffrir encore »",
+        "date": "2024-07-07",
+        "source": "https://www.ozap.com/actu/-vous-on-vous-a-assez-entendu-marine-tondelier-les-ecologistes-enchaine-les-tacles-contre-jean-philippe-tanguy-rn-lors-de-la-soiree-legislatives-de-france-2/644794",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias seul.",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "Ils ont affiché tous les portraits, donc j'ai été un peu déstabilisée.",
+        "contexte": "Sur France Inter, pour expliquer pourquoi elle a séché sur Pompidou et Giscard dans le quiz des anciens présidents sur LCI le 7 septembre",
+        "date": "2026-09-16",
+        "source": "https://lcp.fr/actualites/j-ai-ete-un-peu-destabilisee-marine-tondelier-revient-sur-sa-sequence-compliquee-lors-d",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "LCP citant France Inter. Elle ajoute : « Et puis en un mot, que voulez vous que je dise ? » La chaîne YouTube de France Inter publie l'extrait (youtube.com/watch?v=6D2s9jf7ak8) sous une autre phrase de la même réponse ; vidéo non écoutée.",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Cyril Hanouna, dans cet empire Bolloré, il joue le rôle du bouffon. Il amuse les gens en racontant n'importe quoi.",
+        "contexte": "« Dimanche en politique » sur France 3",
+        "date": "2025-03-23",
+        "source": "https://www.ozap.com/actu/il-amuse-les-gens-en-racontant-n-importe-quoi-marine-tondelier-estime-que-cyril-hanouna-joue-le-role-du-bouffon-dans-l-empire-bollore/649226",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias seul.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "thevenot",
+    "nom": "Prisca Thevenot",
+    "phrases": [
+      {
+        "texte": "Ma cohérence est parfaite.",
+        "contexte": "Députée Renaissance, invitée de France Inter, pressée d'expliquer son absence à un rassemblement à Trappes et le « souci de cohérence » entre ses mots et ses actes",
+        "date": "2026-11-01",
+        "source": "https://www.youtube.com/watch?v=ilGnonI43qw",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=ilGnonI43qw",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de France Inter. Ne pas reprendre le reste de l'échange, où elle parle du racisme dont elle est elle-même victime.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] passage à l'acte évité le week-end dernier.",
+        "contexte": "Porte-parole du gouvernement, au compte rendu du Conseil des ministres : elle annonce un attentat déjoué pendant le week-end de Pâques. Moins d'une heure plus tard, son entourage assure qu'« aucun attentat n'avait été déjoué »",
+        "date": "2024-04-03",
+        "source": "https://www.youtube.com/watch?v=BaRZjj6Zd_I",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=BaRZjj6Zd_I",
+        "fiabilite": "verifie",
+        "note": "Fragment cité par la vidéo du HuffPost sur YouTube ; Le Parisien (youtube.com/watch?v=F5p7i1CKqaA) cite « tentative de passage à l'acte » et parle de « bourde ».",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      },
+      {
+        "texte": "La France Insoumise a un discours anti-France en permanence sur tout.",
+        "contexte": "Porte-parole du gouvernement démissionnaire, invitée de Sud Radio au lendemain de la clôture des Jeux olympiques. Selon elle, LFI a « la médaille d'or de l'indécence et de l'anti-France »",
+        "date": "2024-08-12",
+        "source": "https://www.sudradio.fr/linvite-politique/la-france-insoumise-a-un-discours-anti-france-en-permanence-sur-tout-deplore-prisca-thevenot",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la page de son interview sur le site de Sud Radio (relue).",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Nous devons continuer à garder cette flamme olympique, celle qui a vibré au sein de nos foyers.",
+        "contexte": "Même interview sur Sud Radio, sur l'héritage des Jeux de Paris ; pour la vasque, « si on peut la garder aussi d'une façon ou d'une autre c'est bien »",
+        "date": "2024-08-12",
+        "source": "https://www.sudradio.fr/linvite-politique/la-france-insoumise-a-un-discours-anti-france-en-permanence-sur-tout-deplore-prisca-thevenot",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Propos de son interview, cités sur la page de Sud Radio (relue).",
+        "moments": [
+          "celebration",
+          "heros"
+        ]
+      },
+      {
+        "texte": "Je ne sais pas si elle a menti.",
+        "contexte": "Porte-parole du gouvernement sur France Inter, censée défendre Amélie Oudéa-Castéra, accusée d'avoir menti sur la scolarisation de ses enfants dans le privé",
+        "date": "2024-01-15",
+        "source": "https://atlantico.fr/article/pepite/la-porte-parole-du-gouvernement-prisca-thevenot-defend-la-ministre-de-l-education-nationale-amelie-oudea-castera-face-a-la-polemique-je-ne-sais-pas-si-elle-a-menti-attal-macron-prive-public-enseignants-lutte-contre-l-absenteisme",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Citation en titre d'Atlantico (relu), seule source ; l'émission de France Inter du 15 janvier 2024 n'a pas été retrouvée.",
+        "moments": [
+          "mort",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Regardez l'affaire Inès Reg et Natasha St-Pier. Ça a créé un même fantasme identitaire dans lequel chacun pouvait se représenter.",
+        "contexte": "Porte-parole du gouvernement, interrogée par Paris Match sur la série « La Fièvre », elle compare la France au bord de la guerre civile au clash de « Danse avec les stars »",
+        "date": "2024-04-25",
+        "source": "https://www.ozap.com/actu/-l-affaire-ines-reg-et-natasha-st-pier-a-cree-un-fantasme-identitaire-prisca-thevenot-porte-parole-du-gouvernement-revient-sur-le-clash-dans-danse-avec-les-stars/643623",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias citant Paris Match (25 avril 2024) ; article de Paris Match non lu.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Écartés : tout ce qui touche au racisme dont elle est victime (dont la rumeur d'un surnom raciste attribué à Emmanuel Macron, octobre 2026) et à son agression pendant les législatives de 2024."
+  },
+  {
+    "id": "ndiaye",
+    "nom": "Sibeth Ndiaye",
+    "phrases": [
+      {
+        "texte": "Demain matin j'utilise ma voiture de fonction comme tous les jours. Je serai de tout coeur avec tous les Franciliens qui galèreront dans les couloirs du métro.",
+        "contexte": "Porte-parole du gouvernement, la veille de la grande grève RATP",
+        "date": "2019-09-12",
+        "source": "https://www.24matins.fr/prix-de-lhumour-politique-les-premieres-selections-de-petites-phrases-1131142",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Sur BFMTV ; retenue dans la sélection du prix Press Club, humour et politique 2020. Une seule source lue.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Nous avons conscience que nos concitoyens ne mangent pas du homard tous les jours. Bien souvent c'est plutôt des kebabs.",
+        "contexte": "Sur CNews, interrogée sur les dîners aux homards de François de Rugy",
+        "date": "2019-07-16",
+        "source": "https://www.francetvinfo.fr/politique/ump/nadine-morano/nadine-morano-accuse-sibeth-ndiaye-d-avoir-des-lacunes-sur-la-culture-francaise-des-elus-et-ministres-lrem-jugent-son-tweet-raciste_3543255.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Franceinfo avec AFP, et Wikipédia. Nadine Morano lui a répondu par un tweet raciste : la moquerie vise ici la phrase sur les kebabs, pas ses origines.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "J'assume parfaitement de mentir pour protéger le président.",
+        "contexte": "Conseillère presse de l'Élysée, propos rapportés par L'Express",
+        "date": "2017-07",
+        "source": "https://www.lesinrocks.com/actu/mensonges-pressions-les-etranges-methodes-de-sibeth-ndiaye-pour-defendre-macron-368159-12-07-2017/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Déjà dans src/data/casseroles.ts. Elle a parlé d'une formule « maladroite » qui concernait, selon elle, la vie privée du président.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "C'est pas du travail de journaliste, c'est du travail de sagouin !",
+        "contexte": "À un journaliste, filmée dans le documentaire de TF1 « Emmanuel Macron, les coulisses d'une victoire »",
+        "date": "2017-05-08",
+        "source": "https://www.lesinrocks.com/actu/mensonges-pressions-les-etranges-methodes-de-sibeth-ndiaye-pour-defendre-macron-368159-12-07-2017/",
+        "type_source": "video",
+        "fiabilite": "verifie",
+        "note": "Scène du documentaire de Yann L'Hénoret, citée par Les Inrocks et Wikipédia.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Si vous n'êtes pas contente, je vous sors du pool.",
+        "contexte": "Aux journalistes qui suivent Emmanuel Macron au Salon de l'agriculture. Elle leur lance aussi : « Vous devez obéir »",
+        "date": "2019-02-23",
+        "source": "https://www.lemonde.fr/politique/article/2019/02/23/bravo-ne-lachez-rien-au-salon-de-l-agriculture-macron-s-offre-un-bain-de-foule-sans-chahut-ni-insultes_5427438_823448.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Monde, dont les journalistes étaient sur place ; repris par Wikipédia.",
+        "moments": [
+          "celebration"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "bregeon",
+    "nom": "Maud Bregeon",
+    "phrases": [
+      {
+        "texte": "À eux de décider s'ils veulent d'une France sans budget ni gouvernement.",
+        "contexte": "Porte-parole du gouvernement Barnier, aux députés qui menacent de censurer. Ils censurent le 4 décembre",
+        "date": "2024-11-23",
+        "source": "https://www.leparisien.fr/politique/sans-budget-on-prend-le-risque-dun-scenario-a-la-grecque-lavertissement-de-maud-bregeon-porte-parole-du-gouvernement-23-11-2024-XD73VYMSXFE6FADQY7JFCLWCTY.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Entretien au Parisien.",
+        "moments": [
+          "celebration",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Sans budget, on prend le risque d'un scénario à la grecque.",
+        "contexte": "Même entretien au Parisien, dix jours avant la chute du gouvernement Barnier",
+        "date": "2024-11-23",
+        "source": "https://www.leparisien.fr/politique/sans-budget-on-prend-le-risque-dun-scenario-a-la-grecque-lavertissement-de-maud-bregeon-porte-parole-du-gouvernement-23-11-2024-XD73VYMSXFE6FADQY7JFCLWCTY.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Titre et entretien du Parisien.",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "C'est à la fois vertigineux et très enthousiasmant.",
+        "contexte": "Sa réaction à sa nomination comme porte-parole du gouvernement Barnier, qui tiendra trois mois",
+        "date": "2024-09-22",
+        "source": "https://www.leparisien.fr/politique/gouvernement-barnier-maud-bregeon-succede-a-prisca-thevenot-au-porte-parolat-22-09-2024-GXBBKMDCXRCWJPZGEUNYCZ727Q.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Parisien. Suite : « Mais c'est aussi le job de porte-parole le plus dur de ces sept dernières années ».",
+        "moments": [
+          "pose",
+          "heros"
+        ]
+      },
+      {
+        "texte": "Emmanuel Macron a été élu pour réformer, pas pour se conformer ou se résigner.",
+        "contexte": "Porte-parole de LREM",
+        "date": "2021-07-04",
+        "source": "https://www.lamontagne.fr/paris-75000/actualites/maud-bregeon-porte-parole-lrem-emmanuel-macron-a-ete-elu-pour-reformer-pas-pour-se-conformer-ou-se-resigner_13978088/",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Titre entre guillemets de La Montagne ; corps de l'article non lu.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "[La France] ne peut que se satisfaire de la mort de Khamenei […] ce n'est pas encadré par la loi.",
+        "contexte": "Porte-parole du gouvernement au Grand Jury RTL, au lendemain des frappes américaines et israéliennes sur l'Iran",
+        "date": "2026-03-01",
+        "source": "https://www.rtl.fr/actu/politique/frappes-en-iran-sur-rtl-maud-bregeon-estime-que-la-france-ne-peut-que-se-satisfaire-de-la-mort-de-khamenei-meme-si-ce-n-est-pas-encadre-par-la-loi-7900606929",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "RTL ne cite que deux fragments : « ne peut que se satisfaire de la mort de Khamenei » et, après « même si », « ce n'est pas encadré par la loi ». Elle parle aussi d'un « dictateur sanguinaire ». À caler sur la vidéo du Grand Jury.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "maillard",
+    "nom": "Sylvain Maillard",
+    "phrases": [
+      {
+        "texte": "Je suis dans la vie réelle, tout simplement.",
+        "contexte": "Élu dès le premier tour des législatives dans la 1re circonscription de Paris, premier député élu de la capitale",
+        "date": "2017-06-12",
+        "source": "https://www.leparisien.fr/elections/legislatives/sylvain-maillard-elu-au-premier-tour-dans-la-1re-circonscription-de-paris-je-suis-dans-la-vie-reelle-tout-simplement-12-06-2017-7045218.php",
+        "type_source": "video",
+        "audio": "https://www.leparisien.fr/elections/legislatives/sylvain-maillard-elu-au-premier-tour-dans-la-1re-circonscription-de-paris-je-suis-dans-la-vie-reelle-tout-simplement-12-06-2017-7045218.php",
+        "fiabilite": "verifie",
+        "note": "Vidéo et texte du Parisien. Le titre dit « Je suis dans la vie réelle, simplement » ; le corps de l'article : « tout simplement ». Même entretien : « Il faut arrêter de voter des lois pour voter des lois. »",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "On peut parfois à un micro ne pas être suffisamment précis.",
+        "contexte": "Sur RFI, pour défendre le chiffre de « 50 » sans-abri dormant dehors en Île-de-France avancé par Julien Denormandie",
+        "date": "2018-02-05",
+        "source": "https://www.marianne.net/politique/video-pour-depute-lrem-syvlain-maillard-immense-majorite-sdf-dorment-dans-la-rue-par-choix",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Marianne, qui retranscrit la matinale de RFI. Une seule source lue.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "L'immense majorité, c'est leur choix, oui.",
+        "contexte": "Même matinale de RFI : le journaliste lui demande si les autres sans-abri dorment dehors par choix",
+        "date": "2018-02-05",
+        "source": "https://www.marianne.net/politique/video-pour-depute-lrem-syvlain-maillard-immense-majorite-sdf-dorment-dans-la-rue-par-choix",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Marianne retranscrit RFI. Plus tard, sur RMC, il parle de propos « maladroits » mais affirme : « c'est une phrase que je n'ai jamais prononcée ». À caler sur l'enregistrement de RFI.",
+        "moments": [
+          "pose",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Je redis que mes propos étaient maladroits mais j'aurais aimé qu'on les prenne dans leur intégralité.",
+        "contexte": "Sur RMC, face à Christian Page, sans-abri, dans « Les Grandes Gueules »",
+        "date": "2018-02",
+        "source": "https://rmc.bfmtv.com/emission/christian-page-sdf-au-depute-sylvain-maillard-il-faut-que-vous-preniez-conscience-que-des-gens-meurent-dans-la-rue-1374336.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Site de RMC, qui diffusait l'émission.",
+        "moments": [
+          "casserole",
+          "mort"
+        ]
+      },
+      {
+        "texte": "L'essentiel, c'est la dynamique.",
+        "contexte": "Président de LREM Paris, sur les sondages des municipales. La liste d'Agnès Buzyn fera environ 13 % au second tour",
+        "date": "2020-03-05",
+        "source": "https://www.lefigaro.fr/politique/sylvain-maillard-l-essentiel-c-est-la-dynamique-20200305",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Entretien au Figaro. Même entretien : « Attention aux sondages ! »",
+        "moments": [
+          "celebration",
+          "mort"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "castaner",
+    "nom": "Christophe Castaner",
+    "phrases": [
+      {
+        "texte": "Depuis que je suis ministre, mes nuits sont moins agitées.",
+        "contexte": "Ministre de l'Intérieur, dans Gala, quelques mois après des photos de lui en discothèque un samedi soir de mobilisation des Gilets jaunes",
+        "date": "2019-09-11",
+        "source": "https://www.24matins.fr/prix-de-lhumour-politique-les-premieres-selections-de-petites-phrases-1131142",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Sélection du prix Press Club, humour et politique 2020, citant Gala. Une seule source lue.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "On a attaqué un hôpital.",
+        "contexte": "Tweet sur la Pitié-Salpêtrière le 1er mai. Les vidéos montrent des manifestants qui fuient une charge ; il recule deux jours plus tard",
+        "date": "2019-05-01",
+        "source": "https://www.lemonde.fr/politique/article/2019/05/03/affaire-de-la-pitie-salpetriere-castaner-sous-le-feu-des-critiques_5457698_823448.html",
+        "type_source": "reseau_social",
+        "fiabilite": "verifie",
+        "note": "Déjà dans src/data/casseroles.ts. Le Monde : il « reconnaît qu'il n'aurait pas dû employer le terme d'attaque ».",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "C'était mon grand frère, mon protecteur. Il m'appelait l'étudiant.",
+        "contexte": "À propos de Christian Oraison, caïd des Alpes-de-Haute-Provence lié au gang de braqueurs de la Dream Team, qu'il fréquentait jeune",
+        "date": "2018-06-02",
+        "source": "https://www.lejdd.fr/politique/les-erreurs-de-jeunesse-de-christophe-castaner-3670172",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Le JDD, « Les erreurs de jeunesse de Christophe Castaner », cité par Wikipédia. Article non lu.",
+        "moments": [
+          "prison"
+        ]
+      },
+      {
+        "texte": "Tous les politiques ont de l'ego. Ou alors ils mentent. Il y a peu, je téléchargeais encore La Provence à 5 heures du matin pour voir s'il y avait ma photo […]",
+        "contexte": "Portrait « Christophe Castaner, l'enjoliveur » dans Libération",
+        "date": "2017-09-18",
+        "source": "http://www.liberation.fr/france/2017/09/18/christophe-castaner-l-enjoliveur_1597225",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Cité par Wikipédia ; Libération non lu. Fin de phrase : « dans l'édition du jour ».",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Nous sommes en train de créer une TVA sur des produits jugés trop populaires : il y a un effet moralisateur dans tout cela qui m'exaspère.",
+        "contexte": "Conseiller de Shein, contre la loi qui taxe la mode ultra-éphémère. Il dit aussi que Shein « démocratise la mode pour tous »",
+        "date": "2025-01",
+        "source": "https://fr.wikipedia.org/wiki/Christophe_Castaner",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Propos cités par Wikipédia d'après la presse (HuffPost) ; source primaire non lue.",
+        "moments": [
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "oudea",
+    "nom": "Amélie Oudéa-Castéra",
+    "phrases": [
+      {
+        "texte": "Si je rapporte ma rémunération actuelle au volume d'heures que chaque semaine je m'enfourne, en bossant jour, nuit, week-ends, je ne suis pas bien payée.",
+        "contexte": "Lors d'une audition devant les députés, à propos de son salaire d'environ 500 000 euros par an comme directrice générale de la Fédération française de tennis",
+        "date": "2023",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/premiere-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Citée au compte rendu officiel de l'Assemblée (30 janvier 2024) par une députée, avec « Le sujet, c'est la passion, c'est l'investissement » en tête. Forme complète d'après Libération et Wikipédia. Date exacte de l'audition à préciser.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Des paquets d'heures qui n'étaient pas sérieusement remplacées.",
+        "contexte": "Pour justifier d'avoir mis ses enfants dans le privé, au lendemain de sa nomination à l'Éducation nationale",
+        "date": "2024-01-12",
+        "source": "https://www.liberation.fr/societe/education/des-paquets-dheures-qui-netaient-pas-serieusement-remplacees-la-plainte-pour-diffamation-contre-amelie-oudea-castera-classee-sans-suite-20240215_KGYGF6LNTRCT5OVYXHMJZOQMIA/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Déjà dans src/data/casseroles.ts ; titre entre guillemets de Libération (15 février 2024 : la plainte en diffamation de l'enseignante est classée sans suite). Une ancienne institutrice de son fils dit n'avoir jamais été absente.",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Ce n'est pas moi qui compte, c'est l'école.",
+        "contexte": "En pleine polémique Stanislas, citée par une députée devant elle à l'Assemblée",
+        "date": "2024-01",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/premiere-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "a_recouper",
+        "note": "Reprise au compte rendu officiel par la députée qui l'interroge ; source d'origine non retrouvée. Elle quitte l'Éducation nationale le 8 février.",
+        "moments": [
+          "heros",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Qu'on ait une culture du numéro 1.",
+        "contexte": "Directrice générale de la Fédération française de tennis, dans L'Équipe",
+        "date": "2018-08-02",
+        "source": "https://www.lequipe.fr/Tous-sports/Article/Amelie-castera-qu-on-ait-une-culture-du-numero-1/927413",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Titre entre guillemets de L'Équipe ; corps de l'article non lu.",
+        "moments": [
+          "celebration"
+        ]
+      }
+    ],
+    "meilleure": 3
+  },
+  {
+    "id": "rugy",
+    "nom": "François de Rugy",
+    "phrases": [
+      {
+        "texte": "C'est n'importe quoi ! Qu'ils me le montrent, ce sèche-cheveux !",
+        "contexte": "Sur RMC-BFMTV, en pleine affaire des homards, contre l'accusation d'un sèche-cheveux plaqué or payé sur fonds publics",
+        "date": "2019-07-12",
+        "source": "https://www.lefigaro.fr/politique/le-scan/diners-travaux-logement-la-contre-attaque-de-francois-de-rugy-20190712",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Figaro retranscrit l'entretien télévisé ; vidéo diffusée par BFMTV.",
+        "moments": [
+          "celebration",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Je n'ai pas de raison de démissionner.",
+        "contexte": "Même entretien sur RMC-BFMTV. Il démissionne quatre jours plus tard, le 16 juillet",
+        "date": "2019-07-12",
+        "source": "https://www.lefigaro.fr/politique/le-scan/diners-travaux-logement-la-contre-attaque-de-francois-de-rugy-20190712",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Suite : « Mais je ne le ferai pas car je suis très en colère ».",
+        "moments": [
+          "mort",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "J'en ai plus que marre de voir qu'on essaye de me tailler un portrait de Monsieur DE Rugy, et de sa femme, qui vivent la vie de château.",
+        "contexte": "Même entretien, contre Mediapart",
+        "date": "2019-07-12",
+        "source": "https://www.lefigaro.fr/politique/le-scan/diners-travaux-logement-la-contre-attaque-de-francois-de-rugy-20190712",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Figaro.",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Je suis victime d'une tricherie du propriétaire et de l'agence immobilière.",
+        "contexte": "Sur le logement social qu'il louait près de Nantes",
+        "date": "2019-07-12",
+        "source": "https://www.bfmtv.com/mediaplayer/video/logement-social-francois-de-rugy-se-dit-victime-d-une-tricherie-du-proprietaire-et-de-l-agence-immobiliere-1174806.html",
+        "type_source": "video",
+        "audio": "https://www.bfmtv.com/mediaplayer/video/logement-social-francois-de-rugy-se-dit-victime-d-une-tricherie-du-proprietaire-et-de-l-agence-immobiliere-1174806.html",
+        "fiabilite": "verifie",
+        "note": "Vidéo BFMTV et Le Figaro concordent.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "C'est le fantasme du coupage de têtes !",
+        "contexte": "Même entretien, sur Mediapart qui mènerait « une campagne permanente contre ceux qui gouvernent »",
+        "date": "2019-07-12",
+        "source": "https://www.lefigaro.fr/politique/le-scan/diners-travaux-logement-la-contre-attaque-de-francois-de-rugy-20190712",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Figaro.",
+        "moments": [
+          "mort",
+          "prison"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Pas trouvé de phrase vérifiée de sa main sur les homards eux-mêmes."
+  },
+  {
+    "id": "schiappa",
+    "nom": "Marlène Schiappa",
+    "phrases": [
+      {
+        "texte": "À ma connaissance, je ne suis accusée de rien.",
+        "contexte": "Audition devant la commission d'enquête du Sénat sur le Fonds Marianne",
+        "date": "2023-06-14",
+        "source": "https://www.publicsenat.fr/actualites/politique/462674",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole",
+          "prison"
+        ],
+        "note": "Public Sénat, la chaîne qui retransmettait l'audition. Remplace « Ma probité est intacte », sans source, dans casseroles.ts."
+      },
+      {
+        "texte": "Je ne me dérobe pas, j'entends endosser ma responsabilité, toute ma responsabilité mais aussi rien que ma responsabilité.",
+        "contexte": "Même audition, sur le Fonds Marianne",
+        "date": "2023-06-14",
+        "source": "https://www.publicsenat.fr/actualites/politique/462674",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole",
+          "mort"
+        ],
+        "note": "Public Sénat."
+      },
+      {
+        "texte": "Tu n'es qu'un sac à main de seconde main.",
+        "contexte": "SMS à sa collègue ministre Isabelle Rome, qui avait critiqué sa une de Playboy",
+        "date": "2023-04-19",
+        "source": "https://www.ladepeche.fr/2023/04/19/tu-nes-quun-sac-a-main-de-seconde-main-le-sms-cinglant-de-marlene-schiappa-a-isabelle-rome-apres-sa-critique-sur-playboy-11144325.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "La Dépêche et Wikipédia. SMS complet : « Ne pas avoir de notoriété, ce n'est pas grave en politique. Ne pas avoir d'action concrète, déjà plus. Ne pas avoir de tripes, encore plus. Tu n'es qu'un sac à main de seconde main. Trouve le courage de me rappeler plutôt que de parler dans mon dos ».",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "On ne va pas interdire les plans à trois, l'infidélité, le polyamour, les trouples […]",
+        "contexte": "Sur Radio J, ministre de la Citoyenneté, pour rassurer sur son projet de loi contre la polygamie. Grand prix de l'humour politique 2021",
+        "date": "2020-12-13",
+        "source": "https://www.ozap.com/actu/-on-ne-va-pas-s-interdire-les-plans-a-trois-marlene-schiappa-remporte-le-prix-de-l-humour-politique-2021/611364",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Puremédias (AFP) et Connexion France. Variante en titre : « On ne va pas s'interdire les plans à trois ». La phrase continue au-delà de l'extrait.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Rentrer dans le moule, c'est l'ambition d'une tarte.",
+        "contexte": "Ex-ministre, candidate de l'émission « Les Traîtres » sur M6",
+        "date": "2025-09-02",
+        "source": "https://www.leparisien.fr/culture-loisirs/tv/marlene-schiappa-dans-les-traitres-sur-m-6-rentrer-dans-le-moule-cest-lambition-dune-tarte-02-09-2025-DOF4VFTT7NHSXBO5L5AP6CRWZ4.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Entretien au Parisien.",
+        "moments": [
+          "pose",
+          "heros"
+        ]
+      },
+      {
+        "texte": "C'est tout naturellement que je rejoins Rachida Dati.",
+        "contexte": "Son ralliement à Rachida Dati entre les deux tours des municipales à Paris",
+        "date": "2026-03-17",
+        "source": "https://www.leparisien.fr/elections/municipales/municipales-2026-cest-tout-naturellement-que-je-rejoins-rachida-dati-marlene-schiappa-officialise-son-ralliement-17-03-2026-4VF2YTN7R5AVPH3QXHQGRZRYVM.php",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Titre entre guillemets du Parisien ; corps non lu.",
+        "moments": [
+          "heros",
+          "mort"
+        ]
+      }
+    ],
+    "meilleure": 2,
+    "note": "« Ma probité est intacte » (src/data/casseroles.ts) n'est pas reprise : source non retrouvée."
+  },
+  {
+    "id": "berge",
+    "nom": "Aurore Bergé",
+    "phrases": [
+      {
+        "texte": "C'est surtout une copine :) Elle sera très aidante avec moi.",
+        "contexte": "Message sur la déléguée générale de la fédération des crèches privées, révélé par franceinfo. En septembre, elle avait démenti « toute proximité ou forme de copinage »",
+        "date": "2024-10-03",
+        "source": "https://www.franceinfo.fr/societe/info-franceinfo-dysfonctionnements-dans-les-creches-privees-des-documents-demontrent-l-entente-entre-aurore-berge-et-la-federation-francaise-des-entreprises-de-creches_6815789.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Document publié par franceinfo, repris par Wikipédia. Le démenti est rapporté au conditionnel par La Dépêche (13 septembre 2024). Elle conteste toute entente.",
+        "moments": [
+          "casserole",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Ça n'a jamais été un objectif de vie de devenir ministre pour ajouter une ligne à une biographie sur Wikipédia.",
+        "contexte": "À Ouest-France, en prenant le ministère des Solidarités",
+        "date": "2023-07-24",
+        "source": "https://www.bfmtv.com/politique/gouvernement/aurore-berge-assure-ne-pas-etre-devenue-ministre-pour-ajouter-une-ligne-sur-wikipedia_AN-202307250509.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "BFMTV citant Ouest-France. Suite : « Je n'ai jamais envisagé la vie politique ainsi ».",
+        "moments": [
+          "pose",
+          "heros"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Seulement deux phrases vérifiables trouvées avant l'épuisement du quota de recherches."
+  },
+  {
+    "id": "dupond_moretti",
+    "nom": "Éric Dupond-Moretti",
+    "phrases": [
+      {
+        "texte": "Si vous l'avez pris pour vous, je regrette ce geste. Mais lorsque je fais ce double geste, je l'ai dit, c'est un bras d'honneur à la présomption d'innocence.",
+        "contexte": "Garde des Sceaux, à l'Assemblée, après ses deux bras d'honneur à Olivier Marleix qui venait d'évoquer sa mise en examen",
+        "date": "2023-03-07",
+        "source": "https://www.francetvinfo.fr/politique/eric-dupond-moretti/video-politique-accuse-d-avoir-fait-des-bras-d-honneur-au-president-de-groupe-les-republicains-eric-dupond-moretti-presente-ses-excuses_5698082.html",
+        "type_source": "video",
+        "audio": "https://www.francetvinfo.fr/politique/eric-dupond-moretti/video-politique-accuse-d-avoir-fait-des-bras-d-honneur-au-president-de-groupe-les-republicains-eric-dupond-moretti-presente-ses-excuses_5698082.html",
+        "fiabilite": "verifie",
+        "note": "Franceinfo, avec la vidéo de l'Assemblée. Il avait d'abord concédé que « ce geste n'était pas un geste adéquat ». 155 caractères.",
+        "moments": [
+          "casserole",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "On est chez les dingues.",
+        "contexte": "En découvrant que le Parquet national financier avait épluché ses relevés téléphoniques d'avocat. Il dénonce « une clique de juges qui s'autorise tout »",
+        "date": "2020-06",
+        "source": "https://www.francetvinfo.fr/politique/affaire/sarkozy-sur-ecoute/avocats-surveilles-dans-l-affaire-des-ecoutes-on-est-chez-les-dingues-eric-dupont-moretti-denonce-une-clique-de-juges-qui-s-autorise-tout_4022799.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Titre de franceinfo, repris par Wikipédia.",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Je suis mort de trouille.",
+        "contexte": "Avant de monter sur scène dans son spectacle « Éric Dupond-Moretti à la barre »",
+        "date": "2018-09-23",
+        "source": "https://www.leparisien.fr/culture-loisirs/eric-dupond-moretti-au-theatre-en-janvier-je-suis-mort-de-trouille-23-09-2018-7899954.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Titre du Parisien, qui l'a interviewé ; repris par Wikipédia.",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "L'anonymat libère un tas de lâches qui peuvent dire toutes les conneries du monde.",
+        "contexte": "Sur BFMTV, pendant l'affaire Griveaux : il veut interdire les messages non signés sur les réseaux sociaux",
+        "date": "2020-02-20",
+        "source": "https://www.bfmtv.com/societe/pour-eric-dupond-moretti-les-reseaux-sociaux-sont-devenus-une-poubelle-a-ciel-ouvert_VN-202002200095.html",
+        "type_source": "video",
+        "fiabilite": "a_recouper",
+        "note": "Cité par Wikipédia d'après BFMTV. Phrase précédente : « Il faut interdire toute communication sur les réseaux sociaux qui ne serait pas signée. »",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "Oui, je suis un homme libre. J'admets ma fierté d'être avocat, d'avoir refusé la Légion d'honneur et la franc-maçonnerie.",
+        "contexte": "Avocat, sur son refus de la Légion d'honneur en 2013",
+        "date": "2018",
+        "source": "https://fr.wikipedia.org/wiki/%C3%89ric_Dupond-Moretti",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Cité par Wikipédia d'après Le Parisien ; source primaire non lue.",
+        "moments": [
+          "heros",
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Relaxé par la Cour de justice de la République en 2023."
+  },
+  {
+    "id": "lemaire",
+    "nom": "Bruno Le Maire",
+    "phrases": [
+      {
+        "texte": "Nous allons provoquer l'effondrement de l'économie russe.",
+        "contexte": "Ministre de l'Économie, sur franceinfo, une semaine après l'invasion de l'Ukraine. Il juge le terme « inapproprié » dès le lendemain",
+        "date": "2022-03-01",
+        "source": "franceinfo, 1er mars 2022 (repris de src/data/casseroles.ts)",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Déjà dans src/data/casseroles.ts, réputé vérifié. URL de la source non retrouvée (quota de recherches épuisé).",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Mon intelligence est un obstacle.",
+        "contexte": "Candidat à la primaire de la droite. Grand prix de l'humour politique 2016",
+        "date": "2016",
+        "source": "https://www.lefigaro.fr/politique/le-scan/insolites/2016/06/07/25007-20160607ARTFIG00211-mon-intelligence-est-un-obstacle-le-maire-prix-de-l-humour-politique.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Figaro et Public Sénat concordent sur la formule. Contexte précis de la phrase à caler.",
+        "moments": [
+          "pose",
+          "heros"
+        ]
+      },
+      {
+        "texte": "Emmanuel Macron, c'est toujours une idéologie qui a planté la France.",
+        "contexte": "Sur franceinfo, pendant la campagne de François Fillon. Il devient ministre d'Emmanuel Macron quatre mois plus tard",
+        "date": "2017-01-12",
+        "source": "https://www.francetvinfo.fr/replay-radio/8h30-aphatie/pour-bruno-le-maire-emmanuel-macron-cest-toujours-une-ideologie-qui-a-plante-la-france_2004031.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Titre de franceinfo, média qui l'interviewait ; repris par Wikipédia.",
+        "moments": [
+          "heros",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Ils fonctionnent avec de la flatterie. Ils sont d'une grande amabilité. Ils vous proposent des cadeaux. Regardez les poignets de bon nombre de ministres !",
+        "contexte": "Sur les dirigeants des monarchies du Golfe. Il dit avoir rendu une montre offerte par l'émir du Qatar en 2009",
+        "date": "2016-10",
+        "source": "https://fr.wikipedia.org/wiki/Bruno_Le_Maire",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Propos rapportés dans le livre « Nos très chers émirs » (Christian Chesnot et Georges Malbrunot, 2016), cités par Wikipédia. Le lien vers Challenges cité par Wikipédia est mort.",
+        "moments": [
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "darmanin",
+    "nom": "Gérald Darmanin",
+    "phrases": [
+      {
+        "texte": "[…] en vient quasiment à être dans la mollesse je trouve... Il vous faut prendre des vitamines, je ne vous trouve pas assez dure là.",
+        "contexte": "Débat face à Marine Le Pen sur France 2, en pleine loi séparatisme",
+        "date": "2021-02-11",
+        "source": "https://www.bfmtv.com/politique/marine-le-pen-molle-les-propos-de-gerald-darmanin-sement-l-embarras-au-sein-de-la-rem_AN-202102150325.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "BFMTV et Wikiquote. Début de la phrase : « Madame Le Pen, dans sa stratégie de dédiabolisation, … ».",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Quand j'entends le mot « violences policières », moi, personnellement, je m'étouffe.",
+        "contexte": "Ministre de l'Intérieur, devant la commission des lois de l'Assemblée",
+        "date": "2020-07-28",
+        "source": "https://www.ladepeche.fr/2020/07/29/quand-jentends-le-mot-violences-policieres-je-metouffe-la-phrase-polemique-de-gerald-darmanin-8998888.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "La Dépêche avec AFP. Variante dans le même article : « Quand j'entends le mot violences policières personnellement je m'étouffe ».",
+        "moments": [
+          "pose",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Si je suis Maire de Tourcoing, je ne célébrerai pas personnellement de mariages entre 2 hommes et 2 femmes.",
+        "contexte": "Tweet de 2013 contre le mariage pour tous, alors candidat à la mairie de Tourcoing, ressorti à son entrée au gouvernement",
+        "date": "2013-06-02",
+        "source": "https://www.francetvinfo.fr/politique/gouvernement-d-edouard-philippe/gouvernement-gerald-darmanin-rattrape-par-ses-anciens-tweets-contre-le-mariage-entre-homosexuels_2196196.html",
+        "type_source": "reseau_social",
+        "fiabilite": "verifie",
+        "note": "Texte du tweet selon Wikiquote (d'après Le Figaro). Franceinfo cite une forme courte : « Je ne célébrerai pas de mariages entre 2 hommes et 2 femmes ». Il s'en est excusé à son entrée au gouvernement.",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "30 000 à 40 000 supporters anglais, soit sans billet, soit avec des billets falsifiés.",
+        "contexte": "Après le chaos de la finale de la Ligue des champions au Stade de France. L'UEFA comptera environ 2 600 faux billets au scanner",
+        "date": "2022-05",
+        "source": "src/data/casseroles.ts (carte « 30 000 à 40 000 faux billets »)",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Déjà dans src/data/casseroles.ts, réputé vérifié. URL non retrouvée (quota de recherches épuisé).",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "M. Macron n'aura pas de majorité, ou alors de circonstances, et cela durera ce que durent les amours de vacances.",
+        "contexte": "Porte-parole de Nicolas Sarkozy puis soutien de Fillon, il qualifie Macron de « bobopopuliste ». Il devient son ministre en mai 2017",
+        "date": "2017-01-26",
+        "source": "http://www.lefigaro.fr/elections/presidentielles/2017/01/26/35003-20170126ARTFIG00107-darmanin-presente-macron-comme-un-candidat-bobopopuliste.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Figaro, cité par Wikiquote. Début : « C'est la fin de la Ve République telle qu'on la connaît ».",
+        "moments": [
+          "heros",
+          "mort"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "philippe",
+    "nom": "Édouard Philippe",
+    "phrases": [
+      {
+        "texte": "Non, seulement les emmerdes.",
+        "contexte": "Premier ministre, à un journaliste qui lui demande si « tout remonte à Matignon ». Grand prix de l'humour politique 2018-2019",
+        "date": "2018-07",
+        "source": "https://www.ozap.com/actu/edouard-philippe-remporte-le-prix-de-l-humour-politique-grace-a-ses-emmerdes/577205",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Puremédias d'après l'AFP ; « été 2018 », date exacte non précisée.",
+        "moments": [
+          "casserole",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Il faut une certaine audace pour que quelqu'un qui a été battu à une élection où il était candidat puisse penser qu'il sera élu à une élection où il n'est pas candidat !",
+        "contexte": "Sur Jean-Luc Mélenchon, qui demandait aux Français de l'« élire Premier ministre » aux législatives",
+        "date": "2022",
+        "source": "https://www.connexionfrance.com/article/Mag/Language/The-best-quips-from-french-politicians-in-2022",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Connexion France, sans date précise (printemps 2022). 165 caractères, un peu au-dessus de la limite : la blague ne se coupe pas.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Je ne suis pas certain de comprendre la question. Vous voulez connaître mon taux horaire au jour de l'élection ? Ma rémunération mensuelle moyenne ? Annuelle ?",
+        "contexte": "Sa réponse écrite à la Haute autorité pour la transparence, qui lui demandait ses honoraires d'avocat dans sa déclaration de député. Il fait partie des 23 élus épinglés",
+        "date": "2017-05-15",
+        "source": "https://www.rtl.fr/actu/politique/edouard-philippe-ses-nebuleuses-declarations-de-patrimoine-et-interets-7788544879",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "RTL d'après Mediapart, déclaration publique reproduite. Date = parution de l'article, à sa nomination à Matignon. 159 caractères.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Le découragement ne fait pas partie de la gamme d'émotions que je m'autorise.",
+        "contexte": "Conférence de presse sur le Covid-19, à un journaliste de l'AFP qui lui demande s'il est découragé",
+        "date": "2020-03-28",
+        "source": "https://fr.wikiquote.org/wiki/%C3%89douard_Philippe",
+        "type_source": "video",
+        "fiabilite": "a_recouper",
+        "note": "Wikiquote, d'après BFMTV, écrit « ne fais pas parti de la gamme d'émotion » : orthographe corrigée ici. À caler sur la vidéo.",
+        "moments": [
+          "mort",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Je serai candidat à la prochaine élection présidentielle.",
+        "contexte": "Entretien au Point, deux mois après la dissolution",
+        "date": "2024-09-03",
+        "source": "https://www.lepoint.fr/politique/exclusif-edouard-philippe-je-serai-candidat-a-la-prochaine-election-presidentielle-03-09-2024-2569359_20.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Le Point, média de l'entretien.",
+        "moments": [
+          "heros",
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 1,
+    "note": "Écartée : « Si vous pensez qu'il faut être un playboy en France pour être élu, j'ai quand même quelques contre-exemples » (prix de l'humour 2023), qui répond à une question sur son alopécie, donc sur sa santé."
+  },
+  {
+    "id": "lecornu",
+    "nom": "Sébastien Lecornu",
+    "phrases": [
+      {
+        "texte": "Ce soir, je considère que ma mission est terminée.",
+        "contexte": "Premier ministre démissionnaire, au 20 Heures de France 2. Il est reconduit à Matignon deux jours plus tard",
+        "date": "2025-10-08",
+        "source": "https://www.franceinfo.fr/politique/gouvernement-de-sebastien-lecornu/ma-mission-est-terminee-j-ai-tout-essaye-ce-qu-il-faut-retenir-de-l-interview-de-sebastien-lecornu-apres-les-ultimes-negociations-pour-sortir-de-la-crise_7540252.html",
+        "type_source": "video",
+        "audio": "https://www.franceinfo.fr/politique/gouvernement-de-sebastien-lecornu/ma-mission-est-terminee-j-ai-tout-essaye-ce-qu-il-faut-retenir-de-l-interview-de-sebastien-lecornu-apres-les-ultimes-negociations-pour-sortir-de-la-crise_7540252.html",
+        "fiabilite": "verifie",
+        "note": "Franceinfo (groupe France Télévisions). Même interview : « j'ai tout essayé ».",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "Je ne cours pas après le job.",
+        "contexte": "Même interview sur France 2, deux jours avant d'être renommé Premier ministre",
+        "date": "2025-10-08",
+        "source": "https://www.franceinfo.fr/politique/gouvernement-de-sebastien-lecornu/ma-mission-est-terminee-j-ai-tout-essaye-ce-qu-il-faut-retenir-de-l-interview-de-sebastien-lecornu-apres-les-ultimes-negociations-pour-sortir-de-la-crise_7540252.html",
+        "type_source": "video",
+        "fiabilite": "verifie",
+        "note": "Franceinfo.",
+        "moments": [
+          "celebration",
+          "heros"
+        ]
+      },
+      {
+        "texte": "Il n'y a qu'un patron à la mairie de Vernon, c'est moi.",
+        "contexte": "Maire de Vernon, en pleine fronde de sa majorité municipale",
+        "date": "2015-04-09",
+        "source": "https://actu.fr/normandie/vernon_27681/il-ny-a-quun-patron-a-la-mairie-de-vernon-cest-moi_10683900.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Titre entre guillemets d'actu.fr, cité par Wikipédia ; corps non lu.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "J'ai décidé de retirer la suppression de deux jours fériés.",
+        "contexte": "Tout juste nommé à Matignon, il enterre la mesure phare de François Bayrou",
+        "date": "2025-09-13",
+        "source": "https://www.sudouest.fr/politique/sebastien-lecornu/exclusif-sebastien-lecornu-a-sud-ouest-j-ai-decide-de-retirer-la-suppression-de-deux-jours-feries-25907440.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Entretien à Sud Ouest.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "La primaire, c'est le rendez-vous de la modernité.",
+        "contexte": "Soutien de Bruno Le Maire, sur la primaire de la droite",
+        "date": "2015-10-20",
+        "source": "https://video.lefigaro.fr/figaro/video/sebastien-lecornu-la-primaire-c-est-le-rendez-vous-de-la-modernite/4567606337001/",
+        "type_source": "video",
+        "audio": "https://video.lefigaro.fr/figaro/video/sebastien-lecornu-la-primaire-c-est-le-rendez-vous-de-la-modernite/4567606337001/",
+        "fiabilite": "a_recouper",
+        "note": "Titre de la vidéo du Figaro, citée par Wikipédia ; vidéo non regardée.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 1
+  },
+  {
+    "id": "bayrou",
+    "nom": "François Bayrou",
+    "phrases": [
+      {
+        "texte": "Combien y a-t-il d'étoiles dans le système solaire ? Il y en a, si je ne me trompe pas, entre 200 et 400 milliards.",
+        "contexte": "Premier ministre, devant des chercheurs au Muséum national d'histoire naturelle. Le système solaire compte une étoile",
+        "date": "2025-03-07",
+        "source": "https://www.ladepeche.fr/2025/03/14/video-des-milliards-de-soleils-dans-le-systeme-solaire-lenorme-erreur-de-francois-bayrou-qui-provoque-lhilarite-des-internautes-12570682.php",
+        "type_source": "video",
+        "audio": "https://www.ladepeche.fr/2025/03/14/video-des-milliards-de-soleils-dans-le-systeme-solaire-lenorme-erreur-de-francois-bayrou-qui-provoque-lhilarite-des-internautes-12570682.php",
+        "fiabilite": "verifie",
+        "note": "La Dépêche (vidéo) et Wikiquote. Il insiste : « Il y a entre 200 et 400 fois 1000 millions de soleils dans le système solaire. » Juste avant : « Je suis dans une obsession de ce que représente le système solaire ».",
+        "moments": [
+          "pose",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Tu ne me fais pas les poches.",
+        "contexte": "Candidat à la présidentielle, à Strasbourg, juste avant de gifler un enfant de 11 ans qu'il accuse de tenter de le voler",
+        "date": "2002-04-09",
+        "source": "https://www.bfmtv.com/alsace/info-bfm-alsace-ce-qu-est-devenu-l-enfant-gifle-par-francois-bayrou-a-strasbourg-en-2002_AV-202412170776.html",
+        "type_source": "video",
+        "audio": "https://www.bfmtv.com/alsace/info-bfm-alsace-ce-qu-est-devenu-l-enfant-gifle-par-francois-bayrou-a-strasbourg-en-2002_AV-202412170776.html",
+        "fiabilite": "verifie",
+        "note": "BFM Alsace (vidéo), et Wikipédia. Images diffusées dans tous les journaux télévisés. L'enfant reste hors champ dans le jeu.",
+        "moments": [
+          "celebration",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Un geste de père de famille […] sans gravité.",
+        "contexte": "Quelques jours après la gifle de Strasbourg",
+        "date": "2002-04",
+        "source": "https://fr.wikipedia.org/wiki/Fran%C3%A7ois_Bayrou",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Fragment cité par Wikipédia ; source primaire non lue.",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Je ne prends de voix à personne car les voix n'appartiennent à personne.",
+        "contexte": "Candidat à la présidentielle, à un étudiant de Sciences Po Lyon qui lui demande s'il prend plus de voix à droite ou à gauche",
+        "date": "2007-03-07",
+        "source": "https://fr.wikiquote.org/wiki/Fran%C3%A7ois_Bayrou",
+        "type_source": "video",
+        "fiabilite": "a_recouper",
+        "note": "Wikiquote, d'après le 20 heures de France 2.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "J'ai un message pour ces grandes puissances médiatiques : vous n'êtes pas les patrons de la France.",
+        "contexte": "Candidat à la présidentielle, contre les médias qui voudraient un duel Sarkozy-Royal",
+        "date": "2007-01-09",
+        "source": "https://fr.wikiquote.org/wiki/Fran%C3%A7ois_Bayrou",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Wikiquote, d'après Le Bien Public du 10 janvier 2007.",
+        "moments": [
+          "heros",
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 1,
+    "note": "Écarté volontairement : ses déclarations sur l'affaire Bétharram (violences sexuelles sur des enfants). Statut judiciaire : affaire des assistants du MoDem, relaxé en première instance, arrêt d'appel attendu le 17 décembre 2026."
+  },
+  {
+    "id": "attal",
+    "nom": "Gabriel Attal",
+    "phrases": [
+      {
+        "texte": "Tu casses, tu répares ; tu salis, tu nettoies ; tu défies l'autorité, on t'apprend à la respecter !",
+        "contexte": "Déclaration de politique générale à l'Assemblée. Les députés de la majorité se lèvent pour applaudir",
+        "date": "2024-01-30",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/deuxieme-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Compte rendu officiel de l'Assemblée nationale.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Alors oui, j'assume de le dire : il faut désmicardiser la France.",
+        "contexte": "Même déclaration de politique générale",
+        "date": "2024-01-30",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/deuxieme-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Compte rendu officiel. Plus loin : « Déverrouiller, désmicardiser, débureaucratiser ».",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "France rime avec puissance.",
+        "contexte": "Même déclaration de politique générale",
+        "date": "2024-01-30",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/deuxieme-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Compte rendu officiel.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Je suis né en 1989, l'année du bicentenaire de la Révolution.",
+        "contexte": "Même déclaration : le plus jeune Premier ministre de la Ve République. Le compte rendu note des « applaudissements ironiques » à gauche",
+        "date": "2024-01-30",
+        "source": "https://www.assemblee-nationale.fr/dyn/16/comptes-rendus/seance/session-ordinaire-de-2023-2024/deuxieme-seance-du-mardi-30-janvier-2024",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "note": "Compte rendu officiel. Benjamin Lucas lui lance plus tard : « Quel discours ringard : Il a 90 ans ! »",
+        "moments": [
+          "heros",
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Pas trouvé de phrase vérifiée pour le moment « mort » (sa démission de juillet 2024, par exemple)."
+  },
+  {
+    "id": "macron",
+    "nom": "Emmanuel Macron",
+    "phrases": [
+      {
+        "texte": "Hôtels, cafés, restaurants, je traverse la rue, je vous en trouve !",
+        "contexte": "À un jeune chômeur horticulteur, dans les jardins de l'Élysée, pendant les Journées du patrimoine",
+        "date": "2018-09-15",
+        "source": "https://www.parismatch.be/actualites/politique/2018/09/17/du-travail-je-traverse-la-rue-je-vous-en-trouve-la-phrase-de-macron-cree-la-polemique-MINT4FY7ZNGUJOJQW5JIHQF3TM/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "casserole"
+        ],
+        "note": "Paris Match et Le Monde concordent. Corrige la forme « … et je vous en trouve un » de casseroles.ts."
+      },
+      {
+        "texte": "Ce que vous proposez, comme d'habitude, c'est de la poudre de perlimpinpin.",
+        "contexte": "Débat du second tour face à Marine Le Pen, sur sa proposition d'expulser tous les fichés S",
+        "date": "2017-05-03",
+        "source": "https://fr.wikiquote.org/wiki/Emmanuel_Macron",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=iOAbBdlWgz0&t=1h8m38s",
+        "fiabilite": "verifie",
+        "note": "Débat diffusé en direct par toutes les grandes chaînes ; Wikiquote renvoie à la vidéo au temps exact (1 h 08 min 38 s). Chaîne YouTube non vérifiée.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "S'ils veulent un responsable, il est devant vous, qu'ils viennent le chercher.",
+        "contexte": "Devant ses ministres et ses députés à la Maison de l'Amérique latine, en pleine affaire Benalla",
+        "date": "2018-07-24",
+        "source": "https://www.20minutes.fr/politique/2312643-20180724-affaire-benalla-seul-responsable-viennent-chercher-lance-emmanuel-macron-troupes",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "20 Minutes. Juste avant : « S'ils cherchent un responsable, le seul responsable, c'est moi et moi seul. » La forme courte devenue mème, « qu'ils viennent me chercher », est celle du titre de 20 Minutes ; le corps de l'article cite « qu'ils viennent le chercher ».",
+        "moments": [
+          "casserole",
+          "prison",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "[…] si vous écoutez les mecs de la sécurité, vous finissez comme Hollande. Peut-être que vous êtes en sécurité mais vous êtes mort.",
+        "contexte": "Candidat, filmé pendant la campagne dans le documentaire de TF1 « Emmanuel Macron, les coulisses d'une victoire »",
+        "date": "2017-05-08",
+        "source": "https://fr.wikiquote.org/wiki/Emmanuel_Macron",
+        "type_source": "video",
+        "fiabilite": "a_recouper",
+        "note": "Wikiquote, d'après le documentaire de Yann L'Hénoret diffusé sur TF1. Début : « Il ne faut jamais écouter les mecs de la sécurité. […] Parce que… ».",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "Vous n'allez pas me faire peur avec votre tee-shirt. La meilleure façon de se payer un costard, c'est de travailler !",
+        "contexte": "Ministre de l'Économie, à un militant contre la loi Travail à Lunel (Hérault)",
+        "date": "2016-05-27",
+        "source": "https://www.radiofrance.fr/franceculture/podcasts/journal-de-18h/emmanuel-macron-que-revele-sa-phrase-la-meilleure-facon-de-se-payer-un-costard-c-est-de-travailler-9163188",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "France Culture et Wikiquote ; scène filmée.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Une gare, c'est un lieu où on croise les gens qui réussissent et les gens qui ne sont rien […]",
+        "contexte": "Inauguration du campus de start-up Station F, à la Halle Freyssinet",
+        "date": "2017-06-29",
+        "source": "https://www.20minutes.fr/high-tech/2097855-20170703-video-emmanuel-macron-croisez-gens-reussissent-autres-rien-phrase-fait-polemique",
+        "type_source": "video",
+        "audio": "https://www.20minutes.fr/high-tech/2097855-20170703-video-emmanuel-macron-croisez-gens-reussissent-autres-rien-phrase-fait-polemique",
+        "fiabilite": "verifie",
+        "note": "20 Minutes (vidéo) et Wikiquote. Suite : « parce que c'est un lieu où on passe, un lieu que l'on partage ».",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 1,
+    "note": "Déjà dans src/data/casseroles.ts : « Je traverse la rue et je vous en trouve un » et « On met un pognon de dingue… ». Le Monde (17 septembre 2018) titre « Je traverse la rue, je vous en trouve » : la forme de casseroles.ts est à revérifier sur la vidéo. Autres pistes sourcées : « Qui aurait pu prédire la vague d'inflation ainsi déclenchée ? Ou la crise climatique… » (vœux du 31 décembre 2022, franceinfo) ; « Le kwassa-kwassa pêche peu, il amène du Comorien ! » (1er juin 2017, BFMTV) ; « Les deux grands partis, c'est l'amicale des boulistes. Mais sans l'amitié et sans les boules » (Le Parisien, 24 septembre 2016, sélection Press Club)."
+  }
+]

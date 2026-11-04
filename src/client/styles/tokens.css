@@ -1,0 +1,59 @@
+:root {
+  /* One pixel of the 1920×1080 table, on this screen: the table keeps its shape on every screen. */
+  --s: min(calc(100vw / 1920), calc(100dvh / 1080));
+  --color-background: #16181d;
+  --color-surface: #23262e;
+  --color-surface-raised: #2f333d;
+  --color-border: #4a4f5c;
+  --color-text: #f2f3f5;
+  --color-text-muted: #b4b8c2;
+  --color-accent: #ffc53d;
+  --color-accent-text: #1c1500;
+  --color-danger: #ff6b6b;
+  --color-success: #5fd38d;
+  --color-attack: #ffb347;
+  --color-health: #ff7a85;
+  --color-gold: #ffd700;
+
+  --camp-insoumis: #c8323c;
+  --camp-socialistes: #e0528a;
+  --camp-ecologistes: #3c9d4e;
+  --camp-macronie: #d9972b;
+  --camp-republicains: #2f6fd0;
+  --camp-rn: #24408e;
+  --camp-reconquete: #6b3fa0;
+  --camp-civile: #6b7280;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+
+  --radius: 8px;
+  --font-size-small: 0.85rem;
+  --font-size-normal: 1rem;
+  --font-size-large: 1.3rem;
+  --font-size-title: 1.9rem;
+  /* The table: side rails, and seven reduced cards between them, two rows high. */
+  --rail-width: clamp(120px, 12vw, 280px);
+  --ticker-height: 1.8rem;
+  --token-gap: var(--space-2);
+  --card-width: clamp(64px, min(calc((100vw - var(--rail-width) * 2 - var(--token-gap) * 6 - 32px) / 7), calc((64dvh - 6.6rem) / 2 * 0.7)), 250px);
+  --card-min-height: calc(var(--card-width) * 732 / 512);
+  --full-card-width: clamp(220px, 36dvh, 360px);
+  --font-card: 'Alegreya Sans', system-ui, sans-serif;
+  --font-card-title: 'Alegreya Sans SC', 'Alegreya Sans', system-ui, sans-serif;
+  --font-number: 'Bangers', Impact, sans-serif;
+  --color-metal: #b9bfca;
+  --color-metal-dark: #3f4654;
+  --color-boosted: #7dff9e;
+  --color-ink: #14110c;
+  --color-ink-soft: #6b5a38;
+  --color-paper: #f3ecd8;
+}
+
+/* A phone held upright: three cards a line, and the page scrolls. */
+@media (max-aspect-ratio: 1 / 1) {
+  :root { --card-width: calc((100vw - 40px) / 3); }
+}

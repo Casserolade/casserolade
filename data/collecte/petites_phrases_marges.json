@@ -1,0 +1,2179 @@
+[
+  {
+    "id": "zemmour",
+    "nom": "Éric Zemmour",
+    "phrases": [
+      {
+        "texte": "Ça rigole plus, là ? Poussez-vous ! Reculez !",
+        "contexte": "Au salon Milipol, il pointe un fusil de précision factice sur les journalistes",
+        "date": "2021-10-20",
+        "source": "https://www.youtube.com/watch?v=yROAB65N9aw",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=b-0xYhYxAsA",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration",
+          "pose"
+        ],
+        "note": "Déjà dans casseroles.ts (milipol). Vidéo HuffPost ; sous-titres de l'extrait audio : « ça rigole plus »."
+      },
+      {
+        "texte": "Et bien profond.",
+        "contexte": "À Marseille, il répond par un doigt d'honneur à une passante qui lui en a fait un",
+        "date": "2021-11-27",
+        "source": "https://www.youtube.com/watch?v=ANZEFO_wGEk",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=n5bLor_blw0",
+        "fiabilite": "verifie",
+        "moments": [
+          "mort",
+          "celebration"
+        ],
+        "note": "Déjà dans casseroles.ts (bien_profond). Il a ensuite reconnu un geste « fort inélégant »."
+      },
+      {
+        "texte": "Votre mère a eu tort.",
+        "contexte": "Enregistrement des Terriens du dimanche (C8), à la chroniqueuse Hapsatou Sy, sur son prénom ; il lui propose ensuite « Corinne »",
+        "date": "2018-09",
+        "source": "https://www.revue-tranel.ch/article/download/3459/3154/5167",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Transcription universitaire de l'échange intégral (revue Tranel), Europe 1, Sud Radio. Le passage avait été coupé au montage par C8 ; Hapsatou Sy a diffusé les images. Condamné en janvier 2023 à une amende pour injure raciste. La suite immédiate, « Corinne ! », peut servir de second temps."
+      },
+      {
+        "texte": "Ils n'ont rien à faire ici, ils sont voleurs, ils sont assassins, ils sont violeurs, c'est tout ce qu'ils sont.",
+        "contexte": "Face à l'info (CNews), sur les mineurs étrangers isolés",
+        "date": "2020-09-29",
+        "source": "https://www.brut.media/fr/articles/mineurs-isoles-eric-zemmour-definitivement-condamne-pour-complicite-de-provocation-a-la-haine",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Suite : « il faut les renvoyer et il ne faut même pas qu'ils viennent ». Condamnation à 10 000 euros d'amende confirmée en appel (septembre 2024), devenue définitive après rejet du pourvoi par la Cour de cassation (septembre 2026, article Brut du 14/09/2026)."
+      },
+      {
+        "texte": "Quand on décrit la réalité, on est criminalisé.",
+        "contexte": "À son procès au tribunal correctionnel de Paris pour ses propos de 2010 sur les « trafiquants noirs et arabes »",
+        "date": "2011-01-11",
+        "source": "https://www.ozap.com/actu/eric-zemmour-jugement-propos-raciste-proces/390214",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "casserole",
+          "prison"
+        ],
+        "note": "Rapporté par Ozap et repris par jeanmarcmorandini.com ; formulation mot pour mot à confirmer sur une dépêche AFP. Condamné en février 2011 pour provocation à la discrimination raciale."
+      },
+      {
+        "texte": "Je ne me tromperai pas d'adversaire.",
+        "contexte": "Soir du premier tour à la Mutualité, éliminé avec environ 7 %, il appelle à voter Marine Le Pen",
+        "date": "2022-04-10",
+        "source": "https://www.europe1.fr/node/85858",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "heros",
+          "mort"
+        ],
+        "note": "Europe 1, Brut et La Libre concordent. Suite : « C'est la raison pour laquelle j'appelle mes électeurs à voter pour Marine Le Pen » (Brut : « voter Marine Le Pen »)."
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "mitterrand",
+    "nom": "François Mitterrand",
+    "phrases": [
+      {
+        "texte": "Mais vous avez tout à fait raison, monsieur le Premier ministre.",
+        "contexte": "Débat d'entre-deux-tours, après que Chirac a demandé à l'appeler « monsieur Mitterrand » puisqu'ils sont « deux candidats à égalité »",
+        "date": "1988-04-28",
+        "source": "https://www.elysee.fr/francois-mitterrand/1988/04/28/face-a-face-televise-entre-mm-francois-mitterrand-et-jacques-chirac-lors-de-la-campagne-electorale-pour-le-second-tour-de-lelection-presidentielle-paris-jeudi-28-avril-1988",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration",
+          "pose"
+        ],
+        "note": "Transcription officielle de l'Élysée. Réplique culte, idéale pour la Célébration."
+      },
+      {
+        "texte": "Dans les yeux, je la conteste.",
+        "contexte": "Même débat : Chirac lui demande s'il peut contester sa version de l'affaire Gordji « en me regardant dans les yeux »",
+        "date": "1988-04-28",
+        "source": "https://www.elysee.fr/francois-mitterrand/1988/04/28/face-a-face-televise-entre-mm-francois-mitterrand-et-jacques-chirac-lors-de-la-campagne-electorale-pour-le-second-tour-de-lelection-presidentielle-paris-jeudi-28-avril-1988",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Transcription officielle de l'Élysée."
+      },
+      {
+        "texte": "[…] dans l'intervalle vous soyez devenu, vous, l'homme du passif […]",
+        "contexte": "Débat d'entre-deux-tours face à Giscard, qui l'avait traité d'« homme du passé » en 1974",
+        "date": "1981-05-05",
+        "source": "https://www.elysee.fr/valery-giscard-d-estaing/1981/05/05/face-a-face-televise-entre-mm-valery-giscard-destaing-et-francois-mitterrand-lors-de-la-campagne-officielle-pour-le-second-tour-de-lelection-presidentielle-paris-mardi-5-mai-1981",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Transcription de l'Élysée : « …que dans l'intervalle vous soyez devenu, vous, l'homme du passif, cela gêne un peu votre démonstration d'aujourd'hui ! ». Slate et Ozap donnent des variantes de ponctuation."
+      },
+      {
+        "texte": "Je ne suis pas votre élève.",
+        "contexte": "Même débat, quand Giscard l'interroge sur le cours du mark comme un examinateur",
+        "date": "1981-05-05",
+        "source": "https://www.elysee.fr/valery-giscard-d-estaing/1981/05/05/face-a-face-televise-entre-mm-valery-giscard-destaing-et-francois-mitterrand-lors-de-la-campagne-officielle-pour-le-second-tour-de-lelection-presidentielle-paris-mardi-5-mai-1981",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "casserole"
+        ],
+        "note": "Transcription officielle de l'Élysée."
+      },
+      {
+        "texte": "Je crois aux forces de l'esprit et je ne vous quitterai pas.",
+        "contexte": "Derniers vœux télévisés aux Français, alors qu'il se sait condamné par la maladie",
+        "date": "1994-12-31",
+        "source": "https://www.elysee.fr/francois-mitterrand/1994/12/31/allocution-de-m-francois-mitterrand-president-de-la-republique-sur-le-role-du-gign-dans-lissue-de-la-prise-dotages-de-lavion-alger-paris-la-lutte-contre-lexclusion-et-la-construction-europeenne-paris-le-31-decembre-1994",
+        "type_source": "officiel",
+        "fiabilite": "verifie",
+        "moments": [
+          "mort",
+          "heros"
+        ],
+        "note": "Formulation exacte vérifiée sur la transcription de l'Élysée. La phrase précédente commence par « Là où je serai, je l'écouterai le cœur plein de reconnaissance pour le peuple français ». Hérodote ajoute « Mes chers compatriotes » devant, ce qui n'est pas dans la même phrase de la transcription."
+      },
+      {
+        "texte": "Dans ces pays-là, un génocide, ce n'est pas trop important.",
+        "contexte": "Propos privé de l'été 1994 sur le Rwanda, rapporté par Patrick de Saint-Exupéry",
+        "date": "1998-01-12",
+        "source": "https://francegenocidetutsi.org/MitterrandDansPaysLaGenocidePasTropImportantLibe10052021.pdf",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Propos rapporté, pas enregistré : Le Figaro, 12 janvier 1998, « France-Rwanda : un génocide sans importance » ; vérifié comme attribution par CheckNews (Libération, 10 mai 2021). Variantes : « c'est pas », « ça n'est pas », « un génocide n'est pas trop important ». La date est celle de la publication."
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "chirac",
+    "nom": "Jacques Chirac",
+    "phrases": [
+      {
+        "texte": "Qu'est-ce qu'elle veut de plus, cette mégère ? Mes couilles sur un plateau ?",
+        "contexte": "Sommet européen de Bruxelles, Premier ministre, sur Margaret Thatcher, micro qu'il croyait coupé",
+        "date": "1988-02",
+        "source": "https://www.publicsenat.fr/actualites/politique/les-phrases-cultes-de-jacques-chirac-145879",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Public Sénat (AFP), Paris Match, Demotivateur concordent sur « mes couilles sur un plateau ». Variante très répandue : « cette ménagère » ; Chirac aurait confirmé plus tard avoir dit « mégère ». Pas d'enregistrement public connu."
+      },
+      {
+        "texte": "Ce n'est pas qu'elles se dégonflent, c'est qu'elles font pschitt, si vous me permettez cette expression.",
+        "contexte": "Interview du 14 Juillet à l'Élysée, sur les voyages payés en liquide quand il était maire de Paris",
+        "date": "2001-07-14",
+        "source": "https://www.publicsenat.fr/actualites/politique/les-phrases-cultes-de-jacques-chirac-145879",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole",
+          "celebration"
+        ],
+        "note": "Public Sénat (AFP) et Paris Match concordent. Il parle des sommes évoquées par la presse. Version courte possible : « Elles font pschitt »."
+      },
+      {
+        "texte": "Aujourd'hui, on rapporte une histoire abracadabrantesque.",
+        "contexte": "Interview par Élise Lucet sur France 3, sur la cassette posthume de Jean-Claude Méry",
+        "date": "2000-09-21",
+        "source": "https://mediaclip.ina.fr/en/i09036599-jacques-chirac-an-abracadabrantesque-story.html",
+        "type_source": "ina",
+        "audio": "https://mediaclip.ina.fr/en/i09036599-jacques-chirac-an-abracadabrantesque-story.html",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Extrait INA et Public Sénat. Il qualifie aussi le témoignage de « mensonge, calomnie, manipulation »."
+      },
+      {
+        "texte": "Je décide et il exécute.",
+        "contexte": "Interview du 14 Juillet, pour recadrer Nicolas Sarkozy, alors ministre des Finances",
+        "date": "2004-07-14",
+        "source": "https://www.publicsenat.fr/actualites/politique/les-phrases-cultes-de-jacques-chirac-145879",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration",
+          "pose",
+          "heros"
+        ],
+        "note": "Public Sénat, Universalis, Acteurs publics. Variante de ponctuation : « Je décide, il exécute »."
+      },
+      {
+        "texte": "Si vous ajoutez à cela le bruit et l'odeur, eh bien le travailleur français sur le palier devient fou.",
+        "contexte": "Dîner-débat du RPR à Orléans, sur l'immigration",
+        "date": "1991-06-19",
+        "source": "https://www.herodote.net/Chirac-citations-id-360.php",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Hérodote (d'après Le Monde du 21 juin 1991), Public Sénat, Europe 1. Variantes : sans « eh bien », sans « sur le palier ». La moquerie vise l'auteur."
+      },
+      {
+        "texte": "What do you want? Me to go back to my plane and go back to France?",
+        "contexte": "Dans la vieille ville de Jérusalem, excédé par les policiers israéliens qui le serrent de trop près",
+        "date": "1996-10-22",
+        "source": "https://www.publicsenat.fr/actualites/politique/les-phrases-cultes-de-jacques-chirac-145879",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "mort"
+        ],
+        "note": "Scène filmée par toutes les télévisions. Variantes de transcription selon les médias (« Do you want me to go back to my plane? »)."
+      }
+    ],
+    "meilleure": 3
+  },
+  {
+    "id": "poutou",
+    "nom": "Philippe Poutou",
+    "phrases": [
+      {
+        "texte": "Nous, quand on est convoqué par la police, nous ouvriers, nous n'avons pas d'immunité ouvrière, désolé, on y va !",
+        "contexte": "Débat à onze candidats (BFMTV-CNews), visant Marine Le Pen qui refuse ses convocations",
+        "date": "2017-04-04",
+        "source": "https://www.parismatch.be/actualites/politique/2017/04/05/clashs-critiques-menaces-quand-philippe-poutou-rentre-dans-les-plumes-de-ses-adversaires-IHZEU42GCFA6PDBIFWWANMLARU/",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=2NdrnH64-a8",
+        "fiabilite": "verifie",
+        "moments": [
+          "prison",
+          "casserole",
+          "celebration"
+        ],
+        "note": "Paris Match ; Public Sénat donne « quand on est convoqués par la police, nous n'avons pas d'immunité ouvrière, on y va ! ». Déjà dans casseroles.ts (immunite_ouvriere), formulation à caler sur la vidéo (extrait CNews indiqué)."
+      },
+      {
+        "texte": "François Fillon, que des histoires, plus on fouille plus on sent la corruption, la triche.",
+        "contexte": "Même débat, face à François Fillon",
+        "date": "2017-04-04",
+        "source": "https://www.publicsenat.fr/actualites/politique/poutou-creve-l-ecran-et-acquiert-une-legitimite-singuliere-58338",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=x3uvbNCRh1g",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Public Sénat et Paris Match concordent. Fillon répond : « Oooh, oooh, oooh, je vais vous foutre un procès »."
+      },
+      {
+        "texte": "Pour quelqu'un d'anti-européen, ça ne la gêne pas de piquer dans les caisses de l'Europe.",
+        "contexte": "Même débat, à Marine Le Pen",
+        "date": "2017-04-04",
+        "source": "https://www.publicsenat.fr/actualites/politique/poutou-creve-l-ecran-et-acquiert-une-legitimite-singuliere-58338",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Public Sénat et Paris Match concordent."
+      },
+      {
+        "texte": "Il parle de la dette mais ça l'empêche pas de se servir dans les caisses.",
+        "contexte": "Même débat, à propos de Fillon, environ une heure après le premier accrochage",
+        "date": "2017-04-04",
+        "source": "https://www.parismatch.be/actualites/politique/2017/04/05/clashs-critiques-menaces-quand-philippe-poutou-rentre-dans-les-plumes-de-ses-adversaires-IHZEU42GCFA6PDBIFWWANMLARU/",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Paris Match seul ; Public Sénat résume « se servir dans la caisse »."
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "roussel",
+    "nom": "Fabien Roussel",
+    "phrases": [
+      {
+        "texte": "Franchement, vous n'allez pas me parler du sexe des escalopes quand même !",
+        "contexte": "Sur Europe 1, en réponse à Sandrine Rousseau pour qui le barbecue est « un symbole de virilité »",
+        "date": "2022-08-30",
+        "source": "https://www.linfodurable.fr/barbecue-symbole-de-virilite-bayou-daccord-roussel-refuse-quon-parle-du-sexe-des-escalopes-33793",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=TzAs-HrplJc",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Dépêche AFP (L'Info durable) et vidéo Europe 1 (sous-titres : « parler du sexe des escalopes »)."
+      },
+      {
+        "texte": "On mange de la viande en fonction de ce que l'on a dans le porte-monnaie, pas en fonction de ce qu'on a dans sa culotte ou dans son slip.",
+        "contexte": "Même interview sur Europe 1",
+        "date": "2022-08-30",
+        "source": "https://www.linfodurable.fr/barbecue-symbole-de-virilite-bayou-daccord-roussel-refuse-quon-parle-du-sexe-des-escalopes-33793",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=TzAs-HrplJc",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Dépêche AFP. Phrase longue (environ 130 caractères)."
+      },
+      {
+        "texte": "Un bon vin, un bon fromage, une bonne viande, pour moi c'est la bonne gastronomie française.",
+        "contexte": "Dimanche en politique (France 3), pendant la campagne présidentielle",
+        "date": "2022-01-09",
+        "source": "https://www.sudradio.fr/societe/roussel-pour-les-deconstructeurs-la-france-cest-ringard-nauseabond",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Sud Radio ; reprise partout, ordre des mots variable (« un bon vin, une bonne viande, un bon fromage »). Suite : « il faut avoir des moyens »."
+      },
+      {
+        "texte": "La gauche doit défendre le travail et le salaire, et ne pas être la gauche des allocations, minima sociaux et revenus de substitution.",
+        "contexte": "À la Fête de l'Humanité, devant des journalistes",
+        "date": "2022-09-09",
+        "source": "https://www.politis.fr/articles/2022/09/roussel-seul-contre-son-camp-44808/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Politis et Sud Radio ; Public Sénat donne une version courte : « La gauche doit défendre le travail et ne pas être la gauche des allocations et minima sociaux »."
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "lassalle",
+    "nom": "Jean Lassalle",
+    "phrases": [
+      {
+        "texte": "Je ne vois pas qui, à part Jean Lassalle, de Macron ou de Fillon l'emporterait.",
+        "contexte": "Interview sur Radio Classique, à trois semaines du premier tour",
+        "date": "2017-03-31",
+        "source": "https://www.publicsenat.fr/actualites/politique/a-la-place-du-peuple-lassalle-n-irait-pas-massivement-voter-a-la-presidentielle",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration",
+          "heros"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé. Il parle de lui à la troisième personne."
+      },
+      {
+        "texte": "Je ne sais pas si je serai encore candidat ce soir.",
+        "contexte": "Grand oral devant des élus locaux, à moins d'un mois du premier tour ; il ira finalement jusqu'au bout (3,13 %)",
+        "date": "2022-03-15",
+        "source": "https://www.publicsenat.fr/actualites/politique/jean-lassalle-envisage-fortement-de-se-retirer-de-la-course-a-la-presidentielle",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "mort",
+          "heros"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé. Même matinée : « Oui j'envisage fortement de me retirer à l'heure qu'il est » et « Cette élection n'a plus aucun sens »."
+      },
+      {
+        "texte": "Si je peux me permettre le conseil du vieux, n'abdiquez pas.",
+        "contexte": "Même discours, quelques phrases après avoir dit qu'il envisageait d'abandonner",
+        "date": "2022-03-15",
+        "source": "https://www.publicsenat.fr/actualites/politique/jean-lassalle-envisage-fortement-de-se-retirer-de-la-course-a-la-presidentielle",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration",
+          "pose"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé. Même discours : « Nous n'avons été que des lâches au cours de ces 30 dernières années. »"
+      },
+      {
+        "texte": "A la place du peuple, je ne me rendrai pas massivement à cette élection.",
+        "contexte": "Même interview, candidat lui-même, sur une campagne « totalement dégradante et profondément détestable »",
+        "date": "2017-03-31",
+        "source": "https://www.publicsenat.fr/actualites/politique/a-la-place-du-peuple-lassalle-n-irait-pas-massivement-voter-a-la-presidentielle",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "mort",
+          "heros"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé."
+      },
+      {
+        "texte": "Une bulle économique irréfutable qui va faire pschitt.",
+        "contexte": "Même interview, à propos d'Emmanuel Macron",
+        "date": "2017-03-31",
+        "source": "https://www.publicsenat.fr/actualites/politique/a-la-place-du-peuple-lassalle-n-irait-pas-massivement-voter-a-la-presidentielle",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé. Extrait de phrase ; la prophétie s'est retournée contre lui."
+      },
+      {
+        "texte": "Oui, je serai candidat à la présidentielle de 2022, si je suis en bonne santé !",
+        "contexte": "Interview sur Sud Radio",
+        "date": "2019-11-28",
+        "source": "https://www.sudradio.fr/politique/jean-lassalle-candidat-a-la-presidentielle-de-2022-si-je-suis-en-bonne-sante",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "heros",
+          "pose"
+        ],
+        "note": "Page de Sud Radio sur sa propre interview. Même interview : « Je suis Gilet Jaune dans l'esprit, parce que je suis député. »"
+      }
+    ],
+    "meilleure": 0,
+    "note": "Peu de petites phrases de Lassalle sont citées mot pour mot dans la presse : sa célébrité tient surtout à ses gestes (chant à l'Assemblée en 2003, gilet jaune dans l'hémicycle le 21 novembre 2018, marche à travers la France). Le 15 mars 2022, il déclare aussi sur Sud Radio : « La démocratie en France n'est plus qu'une légende » (message du compte de Sud Radio, https://x.com/SudRadio/status/1503635529253933056)."
+  },
+  {
+    "id": "hanouna",
+    "nom": "Cyril Hanouna",
+    "phrases": [
+      {
+        "texte": "Toi, t'es une merde.",
+        "contexte": "TPMP (C8), au député LFI Louis Boyard, ex-chroniqueur, qui critiquait Vincent Bolloré",
+        "date": "2022-11-10",
+        "source": "https://www.ozap.com/actu/abruti-tocard-cyril-hanouna-condamne-a-4000-euros-pour-avoir-insulte-louis-boyard-sur-le-plateau-de-tpmp/648827",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "elimination",
+          "defaite"
+        ],
+        "note": "Ozap, DH, L'Avenir concordent. Statut : amende record de 3,5 millions d'euros pour C8 (Arcom, maintenue par le Conseil d'État) ; Hanouna condamné pour injures publiques à 4 000 euros le 20 février 2025, peine ramenée à 2 000 euros en appel le 19 mars 2026 (Ozap). Déjà dans citations.json (tes_une_merde)."
+      },
+      {
+        "texte": "Arrête de te la raconter ! Espèce d'abruti. Si t'es député c'est grâce à nous.",
+        "contexte": "Même échange avec Louis Boyard",
+        "date": "2022-11-10",
+        "source": "https://www.ozap.com/actu/-tocard-va-allez-tais-toi-enorme-clash-entre-cyril-hanouna-et-le-depute-louis-boyard-a-propos-de-vincent-bollore/623690",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "victoire",
+          "echelon"
+        ],
+        "note": "Ozap (transcription de la séquence) ; « abruti » repris par toute la presse et par le jugement."
+      },
+      {
+        "texte": "Tocard va, allez tais-toi ! Bouffon va !",
+        "contexte": "Même échange, après que Boyard l'a accusé de « faire monter le racisme en France »",
+        "date": "2022-11-10",
+        "source": "https://www.ozap.com/actu/-tocard-va-allez-tais-toi-enorme-clash-entre-cyril-hanouna-et-le-depute-louis-boyard-a-propos-de-vincent-bollore/623690",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite",
+          "elimination"
+        ],
+        "note": "Ozap, DH (« tocard », « bouffon »)."
+      },
+      {
+        "texte": "Allez, barre-toi ! C'est un naze…",
+        "contexte": "Même échange, quand Boyard quitte le plateau sous les huées",
+        "date": "2022-11-10",
+        "source": "https://www.ozap.com/actu/-tocard-va-allez-tais-toi-enorme-clash-entre-cyril-hanouna-et-le-depute-louis-boyard-a-propos-de-vincent-bollore/623690",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "elimination"
+        ],
+        "note": "Ozap seul pour cette réplique."
+      },
+      {
+        "texte": "Tu sais que tu es dans le groupe Bolloré ici ? Qu'est-ce que tu viens foutre ici alors ?",
+        "contexte": "Même échange, quand Boyard évoque les activités de Bolloré en Afrique",
+        "date": "2022-11-10",
+        "source": "https://www.ozap.com/actu/-tocard-va-allez-tais-toi-enorme-clash-entre-cyril-hanouna-et-le-depute-louis-boyard-a-propos-de-vincent-bollore/623690",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "achat",
+          "attente"
+        ],
+        "note": "Ozap ; Breizh-info donne « Tu sais que t'es dans le groupe Bolloré, ici ? » ; Ozap (arrêt d'appel) : « Excuse-moi mon chéri, tu viens me parler de Bolloré, tu sais que tu es dans le groupe Bolloré ici ? »."
+      },
+      {
+        "texte": "Sur la séquence, je m'excuse pas du tout.",
+        "contexte": "Retour à l'antenne de TPMP quatre jours après l'affaire Boyard",
+        "date": "2022-11-14",
+        "source": "https://www.dhnet.be/medias/television/2022/11/14/apres-ses-insultes-envers-louis-boyard-cyril-hanouna-revient-a-lantenne-et-riposte-je-mexcuse-pas-du-tout-CMXVUTVBWRDQVOMSEHHTVAV3AM/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite"
+        ],
+        "note": "DH (Belga/AFP). Il ajoute aussitôt : « je regrette les propos injurieux »."
+      },
+      {
+        "texte": "Ils ont voulu m'emmerder. Ça va partir en cacahuète !",
+        "contexte": "TPMP, contre Quotidien qui l'accuse d'avoir coupé une séquence du documentaire de Marie Portolano",
+        "date": "2021-03-26",
+        "source": "https://www.ozap.com/actu/cyril-hanouna-s-en-prend-a-quotidien-ils-ont-voulu-m-emmerder-ca-va-partir-en-cacahuete/603072",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "actualiser",
+          "attente"
+        ],
+        "note": "Ozap (transcription de l'émission), seule source trouvée. Variante dans le même passage : « Là, ils ont voulu m'emmerder. Oui ça va partir en cacahuète ! »."
+      },
+      {
+        "texte": "S'il faut, je ferai des patrouilles dans Paris. J'espère les croiser.",
+        "contexte": "Même émission, à propos de l'équipe de Quotidien",
+        "date": "2021-03-26",
+        "source": "https://www.ozap.com/actu/cyril-hanouna-s-en-prend-a-quotidien-ils-ont-voulu-m-emmerder-ca-va-partir-en-cacahuete/603072",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "attente"
+        ],
+        "note": "Ozap seul."
+      },
+      {
+        "texte": "Qu'il recommence à faire Les Tuche, qu'il nous fasse pas chier, quel abruti celui-ci.",
+        "contexte": "TPMP, contre l'acteur Jean-Paul Rouve qui avait jugé « pas très grave » de baisser le chauffage d'un degré",
+        "date": "2022-09-19",
+        "source": "https://www.purebreak.com/news/-il-est-c-n-comme-une-b-te-quel-abruti-cyril-hanouna-atomise-jean-paul-rouve-dans-tpmp/235728",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "elimination",
+          "defaite"
+        ],
+        "note": "Purebreak ; Le Tribunal du Net et Pure People rapportent le même clash. Même séquence : « Il est con comme une bête » (Purebreak l'écrit « c*n comme une b*te »). Date : lundi 19 septembre 2022 selon Purebreak, d'autres sources disent le 20."
+      },
+      {
+        "texte": "Moi, il se trouve, je le dis, je suis un spécialiste des audiences.",
+        "contexte": "TPMP, contre Quotidien, après l'audition de Yann Barthès par la commission d'enquête de l'Assemblée sur la TNT",
+        "date": "2024-03-27",
+        "source": "https://www.ozap.com/actu/-tout-est-malhonnete-cyril-hanouna-clashe-quotidien-dans-tpmp/643150",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "echelon",
+          "triple",
+          "victoire"
+        ],
+        "note": "Ozap seul. Même tirade : « Moi, ce qui me gêne c'est la malhonnêteté de ces gens. Tout est malhonnête. C'est l'arrogance. »"
+      },
+      {
+        "texte": "On a été premier talk grâce à vous, tous les soirs, on a fait le max.",
+        "contexte": "En annonçant la fin définitive de TPMP, trois semaines après la fermeture de C8",
+        "date": "2025-03-21",
+        "source": "https://www.parismatch.be/culture/medias/2025/03/22/on-va-faire-une-grosse-fete-quelques-semaines-apres-la-fermeture-de-c8-cyril-hanouna-annonce-la-fin-definitive-de-touche-pas-a-mon-poste-3JHIHWEA3ZBQRDJ5CT54UBHFLQ/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "victoire"
+        ],
+        "note": "Paris Match Belgique (AFP) ; 75secondes confirme l'annonce. Même discours : « Je sais que j'ai fait le maximum pour rester le plus longtemps avec vous. Et ça a été un carton énorme »."
+      },
+      {
+        "texte": "Mercredi, les chéris, ce sera la dernière de Touche pas à mon poste.",
+        "contexte": "Même annonce, après la fermeture de C8 le 28 février 2025",
+        "date": "2025-03-21",
+        "source": "https://www.parismatch.be/culture/medias/2025/03/22/on-va-faire-une-grosse-fete-quelques-semaines-apres-la-fermeture-de-c8-cyril-hanouna-annonce-la-fin-definitive-de-touche-pas-a-mon-poste-3JHIHWEA3ZBQRDJ5CT54UBHFLQ/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "elimination",
+          "defaite"
+        ],
+        "note": "Paris Match Belgique (AFP). Suite : « On va faire une grosse fête »."
+      }
+    ],
+    "meilleure": 1
+  },
+  {
+    "id": "praud",
+    "nom": "Pascal Praud",
+    "phrases": [
+      {
+        "texte": "Il y a beaucoup d'immigration en ce moment. Est-ce que c'est les personnes qui n'ont pas les mêmes conditions d'hygiène […] ?",
+        "contexte": "L'Heure des pros (CNews), à un spécialiste des punaises de lit",
+        "date": "2023-09-29",
+        "source": "https://www.ozap.com/actu/l-arcom-met-en-garde-cnews-apres-le-lien-etabli-par-pascal-praud-entre-immigration-et-punaises-de-lit/642867",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=jtrdBEimX1A",
+        "fiabilite": "verifie",
+        "moments": [
+          "attente",
+          "actualiser"
+        ],
+        "note": "Ozap (deux articles) ; Arcom a mis CNews en garde le 11 mars 2024 (« la formulation même de cette question était susceptible d'encourager des comportements discriminatoires »). Texte complet de la deuxième phrase : « Est-ce que c'est les personnes qui n'ont pas les mêmes conditions d'hygiène que ceux qui sont sur le sol de France », puis : « parce qu'ils sont dans la rue, parce que peut-être n'ont-ils pas accès à tous les services comme les autres ? ». L'extrait audio indiqué vient d'une chaîne non officielle. Voir aussi citations.json (punaises_de_lit)."
+      },
+      {
+        "texte": "Il y a une maladresse de ma part sur le mot immigration, je voulais dire les migrants.",
+        "contexte": "Retour sur la polémique des punaises de lit, où il dénonce aussi « une chasse à l'homme »",
+        "date": "2023-10-02",
+        "source": "https://www.ozap.com/actu/-j-aimerais-que-l-arcom-me-defende-pascal-praud-denonce-une-chasse-a-l-homme-apres-la-polemique-sur-les-punaises-de-lit/637798",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite"
+        ],
+        "note": "Ozap, Europe 1 et Le Courrier de l'Atlas. L'excuse aggrave la phrase."
+      },
+      {
+        "texte": "Beaucoup de femmes n'ont pas eu la chance d'être regardées par les hommes et nourrissent parfois un sentiment de revanche.",
+        "contexte": "L'Heure des pros (CNews), pendant un débat ; propos sanctionnés par l'Arcom",
+        "date": "2025-04-03",
+        "source": "https://www.ozap.com/actu/larcom-met-en-garde-cnews-pour-prejuges-sexistes-apres-un-debat-anime-par-pascal-praud/652768",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "attente"
+        ],
+        "note": "Avertissement de l'Arcom pour préjugés sexistes, décidé le 8 octobre 2025 et rendu public le 4 décembre 2025. La moquerie vise l'auteur."
+      },
+      {
+        "texte": "Ne donnez pas de leçons, surtout pas à moi !",
+        "contexte": "L'Heure des pros, face à Christophe Deloire (Reporters sans frontières), au lendemain de la décision du Conseil d'État sur le pluralisme de CNews",
+        "date": "2024-02-14",
+        "source": "https://www.purebreak.com/news/-ne-donnez-pas-de-lecons-pascal-praud-explose-sur-cnews-face-au-patron-de-reporters-sans-frontieres-apres-s-en-etre-pris-a-bfmtv/248437",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "victoire",
+          "defaite"
+        ],
+        "note": "Purebreak. Juste avant : « Donc ne parlez pas de pluralisme et ne parlez pas de démocratie ! »."
+      },
+      {
+        "texte": "Vous votez à droite ou à gauche ? Il va falloir le dire !",
+        "contexte": "Sur Europe 1, il se moque de la décision du Conseil d'État demandant à l'Arcom de contrôler le pluralisme de CNews",
+        "date": "2024-02-14",
+        "source": "https://www.europe1.fr/emissions/le-6-9/controle-de-cnews-vous-votez-a-droite-ou-a-gauche-il-va-falloir-le-dire-samuse-pascal-praud-4230586",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "achat",
+          "attente"
+        ],
+        "note": "Titre de la page d'Europe 1 sur son propre extrait (page non consultable dans cette session) ; un titre peut resserrer la phrase. Date de diffusion à confirmer (après la décision du Conseil d'État du 13 février 2024)."
+      },
+      {
+        "texte": "Nous sommes créateurs d'emplois à l'Arcom.",
+        "contexte": "Ouverture de L'Heure des pros, « avec l'Arcom qui nous regarde et plus encore, nous écoute et prend des notes »",
+        "date": "2024-07-03",
+        "source": "https://www.ozap.com/actu/-nous-sommes-createurs-d-emplois-a-l-arcom-pascal-praud-tacle-avec-humour-le-gendarme-du-l-audiovisuel-dans-l-heure-des-pros/644752",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "achat",
+          "echelon"
+        ],
+        "note": "Ozap seul."
+      },
+      {
+        "texte": "Mais Caroline Mécary, c'est insupportable votre attitude ! […] Il ne faut plus venir.",
+        "contexte": "L'Heure des pros, contre sa chroniqueuse avocate pendant un débat sur le procès Mélenchon ; il finit au mégaphone",
+        "date": "2019-09-20",
+        "source": "https://www.dhnet.be/medias/television/2019/09/20/pascal-praud-pete-un-plomb-en-pleine-emission-sur-une-chroniqueuse-il-ne-faut-plus-venir-video-JT2RUIO7XRDFNO3XWBWCHRRTS4/",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "elimination"
+        ],
+        "note": "DH, qui intègre la vidéo. Entre les deux : « On ne peut pas s'écouter, dès que vous êtes là, on ne peut pas faire un débat serein. »"
+      },
+      {
+        "texte": "Je m'amuse, je caricature celui qui le matin dit « ah ben dis donc, le réchauffement climatique… Il fait -3 °C ! »",
+        "contexte": "Sur le plateau de TPMP, pour se défendre après avoir ironisé sur le réchauffement face à Claire Nouvian le 6 mai",
+        "date": "2019-05-08",
+        "source": "https://www.ozap.com/actu/-l-heure-des-pros-pascal-praud-denonce-un-proces-en-sorcellerie-apres-la-polemique-claire-nouvian/578351",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "attente",
+          "actualiser"
+        ],
+        "note": "Ozap seul. Même intervention : « Qui peut considérer que je suis climatosceptique en disant cela ? »."
+      },
+      {
+        "texte": "À Libération, le mal est congénital, le refus de voir le monde tel qu'il est.",
+        "contexte": "Éditorial d'ouverture de L'Heure des pros, en réponse à une double page de Libération sur lui",
+        "date": "2025-11-21",
+        "source": "https://www.ozap.com/actu/a-liberation-le-mal-est-congenital-pascal-praud-repond-a-la-une-du-journal-laccusant-de-vouloir-droitiser-le-debat-public/652568",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "victoire"
+        ],
+        "note": "Ozap seul. Même édito : « C'est dans les gènes de Libération de se tromper. »"
+      },
+      {
+        "texte": "Être parodié, c'est la rançon du succès.",
+        "contexte": "Au Parisien, sur la parodie de L'Heure des pros par Malik Bentalha",
+        "date": "2023-11-27",
+        "source": "https://www.dhnet.be/medias/television/2023/11/27/on-me-fait-passer-pour-un-reac-alors-que-je-suis-plutot-anar-pascal-praud-de-cnews-reagit-sur-la-parodie-realisee-par-malik-bentalha-video-3RRDSAH5QRABXE4MPRHGG5AZJ4/",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "victoire",
+          "triple"
+        ],
+        "note": "Propos donnés au Parisien, repris par DH. Même entretien : « On me fait passer pour un réac alors que je suis plutôt anar. »"
+      },
+      {
+        "texte": "Ils veulent nous fermer, c'est clair !",
+        "contexte": "Sur CNews, après une nouvelle mise en demeure de l'Arcom ; il ajoute « Emmanuel Macron veut fermer CNews, voilà »",
+        "date": "2026-06-26",
+        "source": "https://www.jeanmarcmorandini.com/article-645064-le-gros-coup-de-gueule-de-pascal-praud-apres-la-derniere-decision-de-l-arcom-emmanuel-macron-veut-fermer-cnews-ils-veulent-nous-fermer-c-est-clair-video.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "defaite",
+          "elimination"
+        ],
+        "note": "jeanmarcmorandini.com seul ; date déduite de la page (26/06, commentaires de 2026), à confirmer."
+      }
+    ],
+    "meilleure": 9
+  },
+  {
+    "id": "dupont_aignan",
+    "nom": "Nicolas Dupont-Aignan",
+    "phrases": [
+      {
+        "texte": "Je souhaite que par mon geste votre chaîne renoue un jour avec la démocratie.",
+        "contexte": "Il se lève et quitte en direct le 20 heures de TF1 (Audrey Crespo-Mara) pour protester contre son exclusion du débat à cinq",
+        "date": "2017-03-18",
+        "source": "https://www.ozap.com/actu/nicolas-dupont-aignan-quitte-brusquement-le-20-heures-de-tf1/522029",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "mort"
+        ],
+        "note": "Ozap ; Paris Match ne reprend qu'une paraphrase (« la France vit dans une fausse démocratie »). La scène est filmée (JT de TF1) : formulation à caler sur la vidéo. Parfait pour une sortie de serviteur."
+      },
+      {
+        "texte": "Je suis fier d'être un petit qui porte une grande idée de la France !",
+        "contexte": "Lancement de sa campagne présidentielle à Paris, alors qu'il plafonne entre 1 et 3 % dans les sondages",
+        "date": "2022-03-12",
+        "source": "https://www.publicsenat.fr/actualites/politique/mis-a-l-ecart-par-tf1-dupont-aignan-trouve-inacceptable-que-les-medias-choisissent",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration",
+          "heros",
+          "pose"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé. Même jour : « Il est inacceptable que des médias choisissent après le Conseil constitutionnel »."
+      },
+      {
+        "texte": "On va mettre autour du cou des Français une laisse.",
+        "contexte": "Sur Sud Radio, contre l'extension du passe sanitaire",
+        "date": "2021-07-19",
+        "source": "https://www.sudradio.fr/politique/nicolas-dupont-aignan-pass-sanitaire-25-millions-de-francais-auront-moins-de-droits-quun-fiche-s-terroriste/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Page de Sud Radio sur sa propre interview (Philippe David). Ponctuation d'origine : « on va mettre autour du cou des Français, une laisse »."
+      },
+      {
+        "texte": "[…] auront moins de droits qu'un fiché S terroriste.",
+        "contexte": "Même interview, sur les Français non vaccinés soumis au passe sanitaire",
+        "date": "2021-07-19",
+        "source": "https://www.sudradio.fr/politique/nicolas-dupont-aignan-pass-sanitaire-25-millions-de-francais-auront-moins-de-droits-quun-fiche-s-terroriste/",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Sud Radio titre : « 25 millions de Français auront moins de droits qu'un fiché S terroriste » ; le corps de l'article ne cite que la fin de la phrase."
+      },
+      {
+        "texte": "Mon parti sera allié à Marine Le Pen.",
+        "contexte": "20 heures de France 2, le soir où il annonce un « accord de gouvernement » avec Marine Le Pen, qui promet de le nommer Premier ministre",
+        "date": "2017-04-28",
+        "source": "https://www.europe1.fr/politique/apres-son-ralliement-a-le-pen-dupont-aignan-lache-par-deux-de-ses-lieutenants-3314594",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "heros"
+        ],
+        "note": "Europe 1. Même soir : « les Français conserveront le choix entre deux patriotismes ». Premier ministre pendant neuf jours, en théorie."
+      },
+      {
+        "texte": "Ils ont tous trahi le pays !",
+        "contexte": "En campagne présidentielle, à propos des partis de gouvernement",
+        "date": "2017-03-11",
+        "source": "https://fr.wikiquote.org/wiki/Nicolas_Dupont-Aignan",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Wikiquote, qui cite Henri Vernet, Le Parisien, 11 mars 2017 ; article non consulté."
+      }
+    ],
+    "meilleure": 1
+  },
+  {
+    "id": "knafo",
+    "nom": "Sarah Knafo",
+    "phrases": [
+      {
+        "texte": "Vous êtes le fils de, vous êtes le neveu de, etc. Donc, ça m'étonne beaucoup venant de vous !",
+        "contexte": "C'est pas tous les jours dimanche (BFMTV), quand Benjamin Duhamel lui demande si chez Reconquête « la politique se fait en couple »",
+        "date": "2024-04-28",
+        "source": "https://www.ozap.com/actu/-vous-etes-le-fils-de-vous-etes-le-neveu-de-vif-accrochage-entre-sarah-knafo-reconquete-et-benjamin-duhamel-sur-bfmtv/643685",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration",
+          "casserole"
+        ],
+        "note": "Ozap (transcription de l'échange diffusé). Juste avant : « La question m'étonne beaucoup venant de vous, Benjamin. Je sais que vous aussi, vous subissez beaucoup ces accusations. »"
+      },
+      {
+        "texte": "On est vraiment sur BFM, c'est vous qui créez la polémique et c'est vous qui la relancez.",
+        "contexte": "Même émission, face à Benjamin Duhamel",
+        "date": "2024-04-28",
+        "source": "https://www.ozap.com/actu/-vous-etes-le-fils-de-vous-etes-le-neveu-de-vif-accrochage-entre-sarah-knafo-reconquete-et-benjamin-duhamel-sur-bfmtv/643685",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "casserole"
+        ],
+        "note": "Ozap."
+      },
+      {
+        "texte": "Je pense que personne n'attend plus rien de vous et vous trouvez quand même le moyen de décevoir.",
+        "contexte": "Après une interview très tendue sur franceinfo (Simon Le Baron, Audrey Tison), où on lui reprochait un tweet « laconique » après l'attentat de Trappes",
+        "date": "2026-10-28",
+        "source": "https://www.ozap.com/actu/les-deux-journalistes-ont-fait-face-a-une-invitee-venue-denigrer-laudiovisuel-public-la-sdj-de-radio-france-charge-sarah-knafo-apres-son-interview-polemique-sur-franceinfo/657708",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Ozap ne précise pas si la phrase a été dite à l'antenne ou publiée sur les réseaux. La SDJ de Radio France a dénoncé l'interview."
+      },
+      {
+        "texte": "Cette interview commence mal pour le service public.",
+        "contexte": "Même interview sur franceinfo",
+        "date": "2026-10-28",
+        "source": "https://www.ozap.com/actu/les-deux-journalistes-ont-fait-face-a-une-invitee-venue-denigrer-laudiovisuel-public-la-sdj-de-radio-france-charge-sarah-knafo-apres-son-interview-polemique-sur-franceinfo/657708",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Ozap seul."
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "villiers",
+    "nom": "Philippe de Villiers",
+    "phrases": [
+      {
+        "texte": "Je suis fier d'avoir vu mon fils rembarrer tous ces chacals.",
+        "contexte": "Face à Philippe de Villiers (CNews), en réponse au Complément d'enquête de France 2 sur le Puy du Fou",
+        "date": "2023-09-15",
+        "source": "https://www.ozap.com/actu/-je-suis-fier-d-avoir-vu-mon-fils-rembarrer-tous-ces-chacals-philippe-de-villiers-repond-a-complement-d-enquete-sur-cnews/637120",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Ozap (transcription de l'émission, titre et corps concordent)."
+      },
+      {
+        "texte": "J'ai renoncé à tous mes droits. Je n'ai jamais touché un centime.",
+        "contexte": "Même émission, sur l'argent du Puy du Fou",
+        "date": "2023-09-15",
+        "source": "https://www.ozap.com/actu/-je-suis-fier-d-avoir-vu-mon-fils-rembarrer-tous-ces-chacals-philippe-de-villiers-repond-a-complement-d-enquete-sur-cnews/637120",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Ozap. Même émission : « C'est un mensonge. Il n'y a pas de société au-dessus de l'association » et « Je suis fier de ce que j'ai fait ». Il a annoncé une plainte contre France 2."
+      },
+      {
+        "texte": "Le roi est nu, il ne reste que le casque et le scooter.",
+        "contexte": "Dans son livre « Le moment est venu de dire ce que j'ai vu », sur François Hollande",
+        "date": "2015",
+        "source": "https://fr.wikiquote.org/wiki/Philippe_de_Villiers",
+        "type_source": "livre",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Le moment est venu de dire ce que j'ai vu, Albin Michel, 2015, p. 129 (référence Wikiquote)."
+      },
+      {
+        "texte": "L'atmosphère, c'est une atmosphère de pré-guerre civile.",
+        "contexte": "Sur Sud Radio, après des violences à Dijon",
+        "date": "2020-06-16",
+        "source": "https://www.sudradio.fr/societe/philippe-de-villiers-a-dijon-il-y-a-une-atmosphere-de-pre-guerre-civile",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Page de Sud Radio sur sa propre interview (Patrick Roger)."
+      },
+      {
+        "texte": "Moi, j'ai quitté la scène.",
+        "contexte": "Même interview sur Sud Radio ; trois ans plus tard il a sa propre émission sur CNews et laisse planer une candidature pour 2027",
+        "date": "2020-06-16",
+        "source": "https://www.sudradio.fr/societe/philippe-de-villiers-a-dijon-il-y-a-une-atmosphere-de-pre-guerre-civile",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "mort",
+          "heros"
+        ],
+        "note": "Sud Radio. La contradiction fait le sel."
+      },
+      {
+        "texte": "En 1914, c'est tout le monde dans la tranchée. Aujourd'hui, c'est tout le monde au supermarché.",
+        "contexte": "Dans son livre « Les cloches sonneront-elles encore demain ? »",
+        "date": "2016",
+        "source": "https://fr.wikiquote.org/wiki/Philippe_de_Villiers",
+        "type_source": "livre",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Les cloches sonneront-elles encore demain ?, Albin Michel, 2016, chap. XXV, p. 260-261 (référence Wikiquote)."
+      }
+    ],
+    "meilleure": 0,
+    "note": "Le « plombier polonais » de 2005 et ses phrases sur les minarets n'ont pas pu être vérifiés mot pour mot dans cette session (quota de recherches atteint)."
+  },
+  {
+    "id": "philippot",
+    "nom": "Florian Philippot",
+    "phrases": [
+      {
+        "texte": "Non, non. Nous étions 300.",
+        "contexte": "Sur CNews, quand Maud Bregeon (LREM) estime à environ 80 le nombre de participants à sa manifestation",
+        "date": "2020-12-20",
+        "source": "https://www.ozap.com/actu/compare-a-un-chien-sur-une-affiche-florian-philippot-s-echarpe-avec-maud-bregeon-lrem-sur-cnews/600041",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration",
+          "pose"
+        ],
+        "note": "Ozap seul (transcription de la matinale de Thomas Lequertier)."
+      },
+      {
+        "texte": "On a non plus un ministre de l'Intérieur mais un menteur de l'Intérieur.",
+        "contexte": "Après la fausse « attaque » de la Pitié-Salpêtrière évoquée par Christophe Castaner le 1er mai ; invité d'Europe 1 (Audrey Crespo-Mara)",
+        "date": "2019-05-03",
+        "source": "https://www.europe1.fr/politique/intrusion-a-la-pitie-salpetriere-florian-philippot-qualifie-christophe-castaner-de-menteur-de-linterieur-3896394",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Page d'Europe 1 sur sa propre interview (source primaire)."
+      },
+      {
+        "texte": "Il a menti, il a perdu.",
+        "contexte": "Même intervention, à propos de Christophe Castaner ; invité d'Europe 1 (Audrey Crespo-Mara)",
+        "date": "2019-05-03",
+        "source": "https://www.europe1.fr/politique/intrusion-a-la-pitie-salpetriere-florian-philippot-qualifie-christophe-castaner-de-menteur-de-linterieur-3896394",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Page d'Europe 1 sur sa propre interview (source primaire). Même intervention : « Dans n'importe quelle démocratie, Christophe Castaner aurait déjà été démissionné. »"
+      },
+      {
+        "texte": "Mais je le pense. On a encore le droit de le dire ça ?",
+        "contexte": "Sur CNews, quand Maud Bregeon lui reproche de dire que le gouvernement tue plus que le virus",
+        "date": "2020-12-20",
+        "source": "https://www.ozap.com/actu/compare-a-un-chien-sur-une-affiche-florian-philippot-s-echarpe-avec-maud-bregeon-lrem-sur-cnews/600041",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Ozap seul."
+      },
+      {
+        "texte": "Moi, j'ai eu le mérite d'y aller. Et vous ? Vous avez fait quoi ?",
+        "contexte": "Même échange, quand on lui rappelle son score aux européennes",
+        "date": "2020-12-20",
+        "source": "https://www.ozap.com/actu/compare-a-un-chien-sur-une-affiche-florian-philippot-s-echarpe-avec-maud-bregeon-lrem-sur-cnews/600041",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "mort",
+          "heros"
+        ],
+        "note": "Ozap seul. Juste avant : « Ne les méprisez pas… »."
+      }
+    ],
+    "meilleure": 2,
+    "note": "Ses sorties antivax de 2021-2022 n'ont pas pu être vérifiées mot pour mot dans cette session (quota de recherches atteint)."
+  },
+  {
+    "id": "asselineau",
+    "nom": "François Asselineau",
+    "phrases": [
+      {
+        "texte": "Arrêtez de poser ce genre de questions pointues !",
+        "contexte": "Interview par Olivier Galzi sur CNews : il ne sait pas dire combien coûterait le second porte-avions qu'il propose",
+        "date": "2017-04-20",
+        "source": "https://fr.wikipedia.org/wiki/François_Asselineau",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "casserole",
+          "pose"
+        ],
+        "note": "Rapporté par Wikipédia d'après Le Parisien (« VIDEO. Présidentielle : Asselineau ne connaît pas le prix d'un porte-avion et s'énerve », 20 avril 2017, https://www.leparisien.fr/elections/presidentielle/video-presidentielle-asselineau-ne-connait-pas-le-prix-d-un-porte-avion-et-s-enerve-20-04-2017-6871158.php) et Le Figaro (« Incapable de donner le coût d'un porte-avions, Asselineau perd ses nerfs », même date) ; pages non consultables dans cette session, formulation à caler sur la vidéo. Juste avant : « Est-ce que vous avez demandé comment MM. Macron et Fillon sont en train de préparer, eux, le programme des Français ? »"
+      },
+      {
+        "texte": "Je peux vous assurer que je vais faire un score qui va beaucoup surprendre l'ensemble de la classe politique française.",
+        "contexte": "En annonçant sa candidature validée à la présidentielle ; il fera 0,92 %",
+        "date": "2017-03-10",
+        "source": "https://www.publicsenat.fr/actualites/politique/francois-asselineau-le-candidat-du-frexit-n-est-pas-un-fanfaron-56916",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "heros",
+          "celebration"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé. La prophétie se retourne contre lui."
+      },
+      {
+        "texte": "Je ne suis pas un fanfaron.",
+        "contexte": "Même conférence de presse",
+        "date": "2017-03-10",
+        "source": "https://www.publicsenat.fr/actualites/politique/francois-asselineau-le-candidat-du-frexit-n-est-pas-un-fanfaron-56916",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Public Sénat (AFP) seul trouvé."
+      },
+      {
+        "texte": "Moi, quand je suis en France j'ai envie d'être en France, quand je suis en Espagne, j'ai envie d'être en Espagne.",
+        "contexte": "Sur TV5 Monde, pour justifier sa volonté de réduire l'immigration",
+        "date": "2017-04-07",
+        "source": "https://fr.wikipedia.org/wiki/François_Asselineau",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose",
+          "mort"
+        ],
+        "note": "Rapporté par Wikipédia d'après Pascal Hérard, « Portrait : François Asselineau, le candidat nostalgique », TV5 Monde, 7 avril 2017 ; page non consultable dans cette session."
+      },
+      {
+        "texte": "Mai 68 a probablement été la première « révolution de couleur ».",
+        "contexte": "Sa thèse selon laquelle la CIA et des fondations américaines auraient financé Mai 68",
+        "date": "",
+        "source": "https://fr.wikipedia.org/wiki/François_Asselineau",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Rapporté par Wikipédia (note 17), référence d'origine non consultée."
+      }
+    ],
+    "meilleure": 1
+  },
+  {
+    "id": "rigault",
+    "nom": "Stanislas Rigault",
+    "phrases": [
+      {
+        "texte": "2022, c'est fini pour vous l'Assemblée.",
+        "contexte": "Face à Baba (C8), au député LFI Alexis Corbière qui venait de le traiter de « petit apparatchik »",
+        "date": "2022",
+        "source": "https://www.streetpress.com/1716304256-stanislas-rigault-plateaux-tv-medias-soldat-eric-zemmour-reconquete-extreme-droite-overton-grand-remplacement-chaines-info",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Rapporté par StreetPress (22 mai 2024) ; date exacte de l'émission non trouvée (campagne présidentielle 2022). Raté : Corbière a été réélu député en 2022 et en 2024."
+      },
+      {
+        "texte": "J'espère que je ne suis pas juste le jeune de Zemmour qu'on envoie pour se faire tabasser.",
+        "contexte": "Entretien avec StreetPress, sur son rôle de bon client des plateaux télé",
+        "date": "2024-05-22",
+        "source": "https://www.streetpress.com/1716304256-stanislas-rigault-plateaux-tv-medias-soldat-eric-zemmour-reconquete-extreme-droite-overton-grand-remplacement-chaines-info",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "mort"
+        ],
+        "note": "Propos tenus au journaliste de StreetPress (source primaire). Date de publication."
+      },
+      {
+        "texte": "Faut pas faire la vierge effarouchée.",
+        "contexte": "Même entretien, sur les insultes reçues devant un meeting de Reconquête à Metz en mars 2022",
+        "date": "2024-05-22",
+        "source": "https://www.streetpress.com/1716304256-stanislas-rigault-plateaux-tv-medias-soldat-eric-zemmour-reconquete-extreme-droite-overton-grand-remplacement-chaines-info",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "casserole"
+        ],
+        "note": "StreetPress (entretien)."
+      },
+      {
+        "texte": "Je suis disponible et je n'ai pas peur du débat.",
+        "contexte": "Même entretien, sur sa présence permanente sur les chaînes d'info",
+        "date": "2024-05-22",
+        "source": "https://www.streetpress.com/1716304256-stanislas-rigault-plateaux-tv-medias-soldat-eric-zemmour-reconquete-extreme-droite-overton-grand-remplacement-chaines-info",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "StreetPress (entretien)."
+      },
+      {
+        "texte": "Je vous prends le pari que les suspects auront des noms à connotation maghrébine, africaine, issus de l'immigration.",
+        "contexte": "À une journaliste de BFMTV, après la mort de Thomas Perotto à Crépol (Drôme)",
+        "date": "2023-11",
+        "source": "https://fr.wikipedia.org/wiki/Stanislas_Rigault",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Rapporté par Wikipédia d'après France 3 Auvergne-Rhône-Alpes (22 novembre 2023), page non consultable dans cette session. La moquerie vise l'auteur."
+      }
+    ],
+    "meilleure": 0,
+    "note": "A quitté Reconquête et la présidence de Génération Z le 18 mars 2025 (Wikipédia)."
+  },
+  {
+    "id": "bay",
+    "nom": "Nicolas Bay",
+    "phrases": [
+      {
+        "texte": "Mettre hors d'état de nuire les casseurs, la racaille.",
+        "contexte": "Député européen RN, invité du Grand Rendez-vous sur CNews, au 23e samedi des Gilets jaunes",
+        "date": "2019-04-21",
+        "source": "https://www.youtube.com/watch?v=QLCDra7noN0",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=QLCDra7noN0",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de CNews (« mettre hors d'état de nuire les casseurs, la racaille »).",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] ces revues de presse étaient dans le formol depuis 2014, je n'aurais pas écrit « Fait par Timothée Houssin » sur chaque page.",
+        "contexte": "À la barre du procès des assistants du FN en première instance : censées prouver le travail de son assistant en 2014, ses revues de presse ont été mises en page en 2018. La présidente : « Vous avez fabriqué la réalité que vous décrivez ! »",
+        "date": "2024-10-23",
+        "source": "https://france3-regions.franceinfo.fr/normandie/seine-maritime/proces-des-assistants-parlementaires-du-fn-revivez-l-audition-de-timothee-houssin-et-nicolas-bay-3049993.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Compte rendu d'audience de France 3 Normandie (relu), seule source. Phrase entière : « Si j'avais voulu faire croire que ces revues de presse étaient dans le formol depuis 2014, je n'aurais pas écrit \"Fait par Timothée Houssin\" sur chaque page. » Même audience : « J'ai pris la liberté de faire une page de garde en 2018. »",
+        "moments": [
+          "casserole",
+          "prison"
+        ]
+      },
+      {
+        "texte": "C'est totalement mensonger […] nos candidats disent la vérité.",
+        "contexte": "Secrétaire général du FN, sur franceinfo, en réponse à l'enquête de BuzzFeed sur les propos racistes, antisémites et homophobes de candidats FN aux législatives sur les réseaux sociaux",
+        "date": "2017-06-06",
+        "source": "https://www.youtube.com/watch?v=DkWeDWXan0Q",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=DkWeDWXan0Q",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de franceinfo, avec la coupe « (...) » d'origine.",
+        "moments": [
+          "pose",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "A l'époque, je ne me suis pas du tout rendu compte. C'est un tort.",
+        "contexte": "Même audience : il admet que son assistant payé par le Parlement européen, Timothée Houssin, travaillait pour le parti. La présidente : « C'est une réponse de Normand ! »",
+        "date": "2026-01-19",
+        "source": "https://www.ici.fr/normandie/seine-maritime-76/timothee-houssin-m-a-aide-dans-mes-activites-politiques-nationales-reconnait-l-ex-eurodepute-normand-rn-nicolas-bay-7821300",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "note": "Dépêche AFP reprise mot pour mot par ICI Normandie et La Gazette France (relues). Même audience : « Je reconnais qu'avec mes activités politiques nationales qui m'accaparaient, Timothée Houssin m'a aidé dans ces tâches-là. »",
+        "moments": [
+          "mort",
+          "prison"
+        ]
+      },
+      {
+        "texte": "J'ai le sentiment d'avoir pu m'expliquer, d'avoir démontré de manière claire, didactique et illustrée la réalité du travail parlementaire effectué par Timothée Houssin.",
+        "contexte": "Au micro de France 3 Normandie, à la sortie de son audition. Il est condamné le 31 mars 2025, puis en appel le 7 juillet 2026",
+        "date": "2024-10-23",
+        "source": "https://france3-regions.franceinfo.fr/normandie/seine-maritime/proces-des-assistants-parlementaires-du-fn-revivez-l-audition-de-timothee-houssin-et-nicolas-bay-3049993.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Propos recueillis par France 3 Normandie (relu), seule source. Le même jour, il se dit « déterminé, combatif, serein » et lance : « Je suis un député européen qui travaille. Tous mes collaborateurs aussi ».",
+        "moments": [
+          "celebration",
+          "mort"
+        ]
+      },
+      {
+        "texte": "Marine Le Pen n'est pas connue pour manquer d'autorité...",
+        "contexte": "Au procès en appel des assistants du FN, pour soutenir que Marine Le Pen ne lui a jamais donné de consigne sur ses assistants, puisqu'elle l'a nommé secrétaire général quatre mois plus tard",
+        "date": "2026-01-19",
+        "source": "https://www.lagazettefrance.fr/article/au-proces-en-appel-du-rn-les-reponses-de-normand-de-l-eurodepute-nicolas-bay",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Dépêche AFP reprise par La Gazette France (relue), seule source lue ; Europe 1 confirme sur YouTube qu'il « reconnaît une partie des faits » ce jour-là. Il est condamné en appel le 7 juillet 2026 (pourvoi annoncé).",
+        "moments": [
+          "pose",
+          "prison"
+        ]
+      },
+      {
+        "texte": "De la racaille d'extrême-gauche.",
+        "contexte": "Sur Public Sénat, après l'agression d'un député FN",
+        "date": "2017-10-09",
+        "source": "https://www.youtube.com/watch?v=7MsRKqYKcLg",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=7MsRKqYKcLg",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de Public Sénat. Fragment.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] hordes de racailles d'origine étrangère qui pillent et expriment ainsi leur haine pour la France.",
+        "contexte": "En séance au Parlement européen, à propos des manifestants du 17 octobre 2026 ; rappel à l'ordre immédiat de la vice-présidente Katarina Barley, signalement à Roberta Metsola",
+        "date": "2026-10-19",
+        "source": "https://www.europarl.europa.eu/plenary/fr/vod.html?mode=chapter&vodLanguage=FR&internalEPId=2017099727960&providerMeetingId=20261019-0900-PLENARY",
+        "type_source": "officiel",
+        "fiabilite": "a_recouper",
+        "note": "Rapporté par Wikipédia, qui renvoie à la vidéo officielle de la séance (horodatage 19:44:22) ; vidéo et compte rendu in extenso inaccessibles d'ici. La moquerie vise l'auteur.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "La question monétaire est une question qui n'est pas prioritaire.",
+        "contexte": "Numéro 2 du FN, après la présidentielle où la sortie de l'euro avait plombé Marine Le Pen",
+        "date": "2017-05",
+        "source": "https://fr.wikipedia.org/wiki/Nicolas_Bay",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Wikipédia renvoie à France Soir (11 mai 2017, lien mort) et au HuffPost (8 mai 2017, phrase introuvable dans l'article). L'ancienne fiche indiquait Libération du 7 août 2017.",
+        "moments": [
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Statut (Wikipédia, à jour) : affaire des assistants parlementaires du FN, condamné en première instance le 31 mars 2025 (12 mois dont 10 ferme, 3 ans d'inéligibilité avec exécution provisoire), puis en appel le 7 juillet 2026 à 1 an avec sursis, 2 ans d'inéligibilité avec sursis et 5 000 euros d'amende ; pourvoi en cassation annoncé. Relaxé le 2 mai 2024 dans la plainte en diffamation de Médine. Membre d'Identité-Libertés depuis octobre 2024. Aucune vraie phrase de victoire trouvée : la Célébration retenue détourne « hors d'état de nuire »."
+  },
+  {
+    "id": "peltier",
+    "nom": "Guillaume Peltier",
+    "phrases": [
+      {
+        "texte": "Vive la France et vive la Sologne. Et longue vie aux saisons.",
+        "contexte": "Après un débat du Parlement européen sur la chaleur de l'été, où il a pris la parole pour dire « d'arrêter de nous prendre pour des imbéciles »",
+        "date": "2025-09-11",
+        "source": "https://www.youtube.com/watch?v=2nkgDGF18Bw",
+        "type_source": "reseau_social",
+        "audio": "https://www.youtube.com/watch?v=2nkgDGF18Bw",
+        "fiabilite": "verifie",
+        "note": "Texte qu'il a écrit lui-même pour présenter la vidéo de son intervention sur sa chaîne YouTube (« Quand les petits politiciens nous prennent pour des imbéciles... », mise en ligne le 21 janvier 2026). Écrit, pas prononcé : la vidéo ne contient pas forcément ces mots.",
+        "moments": [
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Tu vis, on te taxe ; tu meurs, on te taxe.",
+        "contexte": "Député européen, dans un discours au Parlement européen contre « le social »",
+        "date": "2025-10-09",
+        "source": "https://www.youtube.com/watch?v=m5wuA3pOxyk",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=m5wuA3pOxyk",
+        "fiabilite": "verifie",
+        "note": "Citation dans la description de la vidéo publiée par sa propre chaîne YouTube (« Le « social », on n'en peut plus ! », mise en ligne le 21 janvier 2026).",
+        "moments": [
+          "mort"
+        ]
+      },
+      {
+        "texte": "Nous ne voulons plus du social qui nous ruine, nous voulons le travail qui rémunère !",
+        "contexte": "Même discours au Parlement européen, qui commence par : « Le social, aujourd'hui, cela veut dire : si tu travailles dur, tu paieras pour tous ceux qui ne travaillent pas »",
+        "date": "2025-10-09",
+        "source": "https://www.youtube.com/watch?v=m5wuA3pOxyk",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=m5wuA3pOxyk",
+        "fiabilite": "verifie",
+        "note": "Citation dans la description de la vidéo publiée par sa propre chaîne YouTube.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] avec beaucoup de gravité et d'enthousiasme.",
+        "contexte": "Numéro 2 des Républicains démis un mois plus tôt, il annonce au Grand Rendez-Vous (Europe 1, CNews) qu'il rallie Éric Zemmour. Le lendemain sur BFMTV, il se dit « fidèle à ses convictions ». Parcours : FN, MNR, MPF, UMP, LR, Reconquête, Identité-Libertés",
+        "date": "2022-01-09",
+        "source": "https://www.youtube.com/watch?v=Sdp_RIIUMSk",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=4S4srBJNK-o",
+        "fiabilite": "verifie",
+        "note": "Fragment cité dans la description de la vidéo du Point sur YouTube ; l'émission intégrale est sur sa propre chaîne (youtube.com/watch?v=4S4srBJNK-o). En juin 2024, il quitte Reconquête avec Marion Maréchal ; Zemmour parle de trahison.",
+        "moments": [
+          "heros",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Vous préférez Dubaï à l'Aubrac, et votre horizon se nomme RSA pour les uns, GPA pour les autres.",
+        "contexte": "Au Parlement européen, lors d'un débat sur la culture, à la gauche. Il commence par : « Vous avez tout détruit, jusqu'à la culture de nos pères » et finit par « Enfants de la gauche, rebellez-vous »",
+        "date": "2026-06",
+        "source": "https://www.youtube.com/watch?v=irqGqskk4dI",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=irqGqskk4dI",
+        "fiabilite": "verifie",
+        "note": "Texte du discours dans la description de la vidéo de sa propre chaîne YouTube (mise en ligne le 19 juin 2026) ; date exacte de la séance non relevée. Même discours : « esclaves de journalistes analphabètes ».",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "J'ai un adversaire, c'est la gauche.",
+        "contexte": "Fondateur de la Droite forte à l'UMP, aux Grandes Gueules, en refusant de répondre aux attaques de son propre parti",
+        "date": "2013-05-30",
+        "source": "https://www.youtube.com/watch?v=POiHjPjVq9w",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=POiHjPjVq9w",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de RMC.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "La vie politique commande un engagement de tous les instants.",
+        "contexte": "Sa réponse à une enquête du Monde sur ses collaborateurs épuisés (« son management, c'est de la pressurisation »)",
+        "date": "2021-06-01",
+        "source": "https://www.lemonde.fr/societe/article/2021/06/01/son-management-c-est-de-la-pressurisation-le-depute-guillaume-peltier-epuise-ses-collaborateurs_6082345_3224.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Citation reprise par Wikipédia d'après Le Monde, article inaccessible d'ici. Il y parle aussi des « remous de l'aigreur et de la jalousie ».",
+        "moments": [
+          "casserole"
+        ]
+      },
+      {
+        "texte": "Pas une stratégie droitière, mais une stratégie populaire.",
+        "contexte": "Pour défendre la ligne de la campagne de Nicolas Sarkozy",
+        "date": "2012-02-11",
+        "source": "https://fr.wikipedia.org/wiki/Guillaume_Peltier",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Rapporté par Wikipédia d'après La Nouvelle République du Centre-Ouest (11 février 2012). Extrait de phrase.",
+        "moments": [
+          "pose"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Écarté : « J'ai décidé de soutenir Éric Zemmour » (titre du Figaro, formulation non confirmée), remplacé par le fragment du Point. Parcours : FN (années 1990), MNR, MPF, UMP puis LR (vice-président, démis le 7 décembre 2021), Reconquête (2022), Identité-Libertés (2024)."
+  },
+  {
+    "id": "kazib",
+    "nom": "Anasse Kazib",
+    "phrases": [
+      {
+        "texte": "C'est inadmissible ce que tu racontes Olivier !",
+        "contexte": "Cheminot gréviste, invité des Grandes Gueules sur RMC au huitième jour de la grève contre la réforme des retraites, à Olivier Truchot qui l'accuse d'exagérer les conditions de travail à la SNCF",
+        "date": "2019-12-13",
+        "source": "https://www.youtube.com/watch?v=gke3Gos4S8Q",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=gke3Gos4S8Q",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de RMC (« Débat houleux - Anasse Kazib et Olivier Truchot »).",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Une candidature ouvrière, communiste et révolutionnaire à la présidentielle.",
+        "contexte": "Dans son clip de campagne, en annonçant sa candidature pour 2027 sous l'étiquette Révolution permanente",
+        "date": "2026-06-01",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/presidentielle-2027-le-cheminot-anasse-kazib-annonce-sa-candidature_8040020.html",
+        "type_source": "video",
+        "fiabilite": "verifie",
+        "moments": [
+          "heros",
+          "pose"
+        ],
+        "note": "franceinfo (AFP) cite le clip ; Wikipédia concorde. Il y oppose la « nouvelle classe ouvrière » à la « nouvelle France » de LFI."
+      },
+      {
+        "texte": "Soutien au peuple palestinien qui est debout face à cet État sanguinaire qu'est Israël.",
+        "contexte": "Message sur les réseaux sociaux, accompagné d'images des combattants du Hamas franchissant la frontière, le jour de l'attaque du 7 octobre",
+        "date": "2023-10",
+        "source": "https://www.lefigaro.fr/international/le-parti-des-indigenes-adresse-au-hamas-sa-fraternite-militante-le-npa-appelle-a-l-intifada-20231009",
+        "type_source": "reseau_social",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Rapporté par Le Figaro (9 octobre 2023), cité par Wikipédia ; article non consultable dans cette session. Statut : poursuivi pour apologie du terrorisme après une plainte de janvier 2024 ; l'audience prévue fin juin 2026 (le 25 selon franceinfo, le 26 selon Wikipédia) a été renvoyée pour examiner une question de constitutionnalité. Pas jugé : ne pas présenter comme condamné."
+      },
+      {
+        "texte": "[…] criminaliser toute solidarité avec le peuple palestinien.",
+        "contexte": "Sa défense face à l'enquête pour apologie du terrorisme : selon lui, c'est ce que veut l'État",
+        "date": "2024-04-27",
+        "source": "https://www.lemonde.fr/societe/article/2024/04/27/les-quinze-jours-qui-ont-precipite-l-opinion-francaise-dans-l-engrenage-du-conflit-au-proche-orient_6230219_3224.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Rapporté par Le Monde (27 avril 2024), cité par Wikipédia ; extrait de phrase. En juin 2026, il dénonce aussi la « criminalisation des militants politiques et syndicalistes » (franceinfo)."
+      }
+    ],
+    "meilleure": 0,
+    "note": "Peu de petites phrases drôles trouvées mot pour mot. Ses passages aux Grandes Gueules (2018-2020) sont la meilleure piste ; écarté faute d'attribution claire : « Je n'ai aucune leçon de morale à recevoir de ta part ! » (RMC, 18 novembre 2019, échange avec Gilles-William Goldnadel, sans qu'on sache qui le dit)."
+  },
+  {
+    "id": "cheminade",
+    "nom": "Jacques Cheminade",
+    "phrases": [
+      {
+        "texte": "Un monde sans la City ni Wall Street.",
+        "contexte": "Son slogan de la présidentielle de 2012, quand il dépose 538 parrainages au Conseil constitutionnel",
+        "date": "2012-03-08",
+        "source": "https://www.youtube.com/watch?v=dUKHwz5phl8",
+        "type_source": "video",
+        "fiabilite": "verifie",
+        "note": "Slogan cité dans la description de la vidéo de sa chaîne de campagne (« Cheminade 2012 ») ; Wikipédia et la chaîne « Ça Zap Tweet ! » concordent. En 2017 : « Libérons-nous de l'occupation financière ».",
+        "moments": [
+          "celebration",
+          "heros"
+        ]
+      },
+      {
+        "texte": "On a tué Ben Laden et Khadafi pour qu'ils ne parlent pas.",
+        "contexte": "Candidat à la présidentielle, invité de « 5 minutes avec » sur France Inter",
+        "date": "2012-03-09",
+        "source": "https://www.youtube.com/watch?v=-lDcwXzPrwA",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=-lDcwXzPrwA",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de la vidéo de la chaîne YouTube de France Inter (orthographe « Khadafi » du titre).",
+        "moments": [
+          "pose",
+          "casserole"
+        ]
+      },
+      {
+        "texte": "[…] l'oligarchie des incapables.",
+        "contexte": "Sur France Inter, le jour où il dépose ses parrainages, en dénonçant l'invalidation « inique » de ses comptes de campagne de 1995",
+        "date": "2012-03-08",
+        "source": "https://www.youtube.com/watch?v=H8-Si6Egcoo",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=H8-Si6Egcoo",
+        "fiabilite": "verifie",
+        "note": "Fragment cité en titre de l'extrait AFP sur YouTube.",
+        "moments": [
+          "pose",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "J'aurais été celui qui l'a dit et à ce moment là je pense qu'on me regardera d'une autre manière, avec une autorité certaine.",
+        "contexte": "Au journal de TF1, pendant sa campagne de 1995, en prophétisant un krach financier international (il fait 0,28 %)",
+        "date": "1995-04",
+        "source": "https://fr.wikiquote.org/wiki/Jacques_Cheminade",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Wikiquote, d'après un article de francetvinfo du 20 mars 2012 inaccessible d'ici. Début : « Je pense que les autres riront moins quand il verront […] ».",
+        "moments": [
+          "celebration",
+          "heros"
+        ]
+      },
+      {
+        "texte": "[…] j'irais vous donner une paire de claques.",
+        "contexte": "Face à la Une (TF1), quand Gérard Carreyrou lui demande s'il est « antisémite comme M. LaRouche »",
+        "date": "1995-04-17",
+        "source": "https://www.dailymotion.com/video/xaawua",
+        "type_source": "video",
+        "audio": "https://www.dailymotion.com/video/xaawua",
+        "fiabilite": "a_recouper",
+        "note": "Phrase complète selon Wikipédia (d'après Libération du 19 avril 1995, scan en lien mort) : « Si vous ne me posiez pas la question dans cette enceinte, je crois qu'au nom de mes idées et des gens de ma famille qui ont lutté contre le nazisme, j'irais vous donner une paire de claques ». La vidéo Dailymotion (24 min, publiée par son parti Solidarité & Progrès) réunit ses passages télé de 1995 ; non écoutée.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Un camp de concentration mental sans larmes.",
+        "contexte": "Sa définition de Myspace et Facebook",
+        "date": "2016-04-04",
+        "source": "https://www.liberation.fr/france/2016/04/04/qui-est-jacques-cheminade-lunaire-candidat-a-la-presidentielle_1443884",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Rapporté par Wikipédia d'après Libération (« Qui est Jacques Cheminade, lunaire candidat à la présidentielle ? », 4 avril 2016), site inaccessible d'ici. La date est celle de l'article, pas celle de la phrase.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] réduire le temps des voyages de l'avenir entre la Terre et Mars à dix-quinze jours.",
+        "contexte": "Son programme spatial : la Lune comme base industrielle, puis Mars, grâce à un « corridor thermonucléaire entre la Terre et Mars, via la Lune »",
+        "date": "2012",
+        "source": "https://fr.wikipedia.org/wiki/Jacques_Cheminade",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Rapporté par Wikipédia, qui renvoie à une chronique d'Europe 1 (« On ne demande pas la lune », 21 mars 2012) ; programme d'origine non consulté.",
+        "moments": [
+          "mort",
+          "heros"
+        ]
+      },
+      {
+        "texte": "J'ai su que cette rencontre allait changer ma vie.",
+        "contexte": "Sur sa rencontre avec Lyndon LaRouche à New York au printemps 1974",
+        "date": "2017-04-17",
+        "source": "https://fr.wikipedia.org/wiki/Jacques_Cheminade",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Rapporté par Wikipédia d'après Ouest-France (17 avril 2017), site inaccessible d'ici ; extrait d'un passage plus long.",
+        "moments": [
+          "heros"
+        ]
+      }
+    ],
+    "meilleure": 0
+  },
+  {
+    "id": "durif",
+    "nom": "Sylvain Durif",
+    "phrases": [
+      {
+        "texte": "Si j'en ai envie, je peux aller dans la cuisine de quelqu'un qui m'invite à Montréal – je l'ai déjà fait.",
+        "contexte": "Interview à Vice, sur sa capacité à « aller n'importe où dans le cosmos »",
+        "date": "2017",
+        "source": "https://www.conspiracywatch.info/notice/sylvain-durif",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration",
+          "pose"
+        ],
+        "note": "Cité par Conspiracy Watch d'après Vice ; date de l'interview non précisée (Wikipédia situe l'article de Vice en 2017)."
+      },
+      {
+        "texte": "J'incarne l'énergie du Christ cosmique.",
+        "contexte": "Filmé par Le Parisien à Bugarach, à la veille de la « fin du monde » du 21 décembre 2012",
+        "date": "2012-12-19",
+        "source": "https://www.leparisien.fr/video/un-visiteur-a-bugarach-j-incarne-l-energie-du-christ-cosmique-19-12-2012-2420905.php",
+        "type_source": "video",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "heros"
+        ],
+        "note": "Vidéo du Parisien (« Un visiteur à Bugarach : J'incarne l'énergie du Christ cosmique ») et Conspiracy Watch concordent."
+      },
+      {
+        "texte": "Car comme Jésus, je possède des pouvoirs de guérison.",
+        "contexte": "En présentant son projet de « cité de lumière » de ressourcement",
+        "date": "2016-02",
+        "source": "https://www.conspiracywatch.info/notice/sylvain-durif",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose"
+        ],
+        "note": "Conspiracy Watch, sans référence précise ; Wikipédia cite Midi libre (26 février 2016) pour le même projet."
+      },
+      {
+        "texte": "Je précise que je ne suis pas le leader d'un culte sectaire.",
+        "contexte": "Même période, sur son projet de « cité de lumière »",
+        "date": "2016-02",
+        "source": "https://www.conspiracywatch.info/notice/sylvain-durif",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "casserole"
+        ],
+        "note": "Conspiracy Watch, sans référence précise."
+      },
+      {
+        "texte": "Les autorités de la planète se méfient de moi et m'empêchent de créer ces cités de lumière.",
+        "contexte": "Même période, refoulé d'Israël en 2013 et 2015",
+        "date": "2016-02",
+        "source": "https://www.conspiracywatch.info/notice/sylvain-durif",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "mort",
+          "prison"
+        ],
+        "note": "Conspiracy Watch, sans référence précise."
+      },
+      {
+        "texte": "Le Grand Monarque, le Christ cosmique, le Messie, le Roi, le pape Pierre.",
+        "contexte": "La liste de ses titres, réaffirmés en annonçant sa candidature à la présidentielle de 2027",
+        "date": "2026-08-26",
+        "source": "https://fr.wikipedia.org/wiki/Sylvain_Durif",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "heros"
+        ],
+        "note": "Rapporté par Wikipédia d'après 20 Minutes (26 août 2026). Conspiracy Watch liste aussi « l'Homme vert », « Oriana », « le dernier roi de France », « le dernier pape Pierre »."
+      }
+    ],
+    "meilleure": 0,
+    "note": "Attention : la phrase devenue mème « C'est tout simplement une hallucination… collective ! » est dite par sa mère, pas par lui (Conspiracy Watch). Elle est donc exclue. Candidat déclaré à la présidentielle de 2027 (Facebook, 23 août 2026)."
+  },
+  {
+    "id": "lalanne",
+    "nom": "Francis Lalanne",
+    "phrases": [
+      {
+        "texte": "Citoyennes et Citoyens de la France ! La Patrie est en danger",
+        "contexte": "Ouverture de sa tribune sur FranceSoir appelant l'armée à destituer le président, qui lui vaut une enquête du parquet de Paris",
+        "date": "2021-01",
+        "source": "https://www.dhnet.be/medias/divers/francis-lalanne-appelle-l-armee-a-renverser-macron-et-son-gouvernement-600d57bfd8ad5844d1ac4ccb",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration",
+          "pose",
+          "heros"
+        ],
+        "note": "Texte de la tribune reproduit entre guillemets par DH (24 janvier 2021)."
+      },
+      {
+        "texte": "Le chef de l'État et son gouvernement s'essuient les pieds sur le Droit Républicain comme sur un paillasson.",
+        "contexte": "Même tribune sur FranceSoir",
+        "date": "2021-01",
+        "source": "https://www.dhnet.be/medias/divers/francis-lalanne-appelle-l-armee-a-renverser-macron-et-son-gouvernement-600d57bfd8ad5844d1ac4ccb",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "casserole"
+        ],
+        "note": "DH (24 janvier 2021)."
+      },
+      {
+        "texte": "Il doit donc être destitué",
+        "contexte": "Même tribune, à propos d'Emmanuel Macron",
+        "date": "2021-01",
+        "source": "https://www.dhnet.be/medias/divers/francis-lalanne-appelle-l-armee-a-renverser-macron-et-son-gouvernement-600d57bfd8ad5844d1ac4ccb",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "mort"
+        ],
+        "note": "DH (24 janvier 2021)."
+      },
+      {
+        "texte": "[…] mettre fin à l'exercice du mandat de l'actuel président de la République.",
+        "contexte": "Tribune dans FranceSoir appelant les parlementaires, et à défaut les militaires, à démettre Emmanuel Macron",
+        "date": "2021-01",
+        "source": "https://fr.wikipedia.org/wiki/Francis_Lalanne",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose",
+          "heros"
+        ],
+        "note": "Rapporté par Wikipédia d'après la presse ; tribune d'origine non consultée. Enquête pour provocation à la commission d'atteintes aux intérêts fondamentaux de la Nation ouverte en février 2021, classée sans suite par le parquet de Paris."
+      },
+      {
+        "texte": "[…] commettre un délit […]",
+        "contexte": "En concert à Nice, il invite les 350 spectateurs à s'embrasser devant la police malgré les règles sanitaires",
+        "date": "2021-03-28",
+        "source": "https://fr.wikipedia.org/wiki/Francis_Lalanne",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Fragment rapporté par Wikipédia ; phrase complète non trouvée."
+      }
+    ],
+    "meilleure": 0,
+    "note": "Peu de phrases citées mot pour mot. Ses autres condamnations relèvent en partie de sa vie privée et de son ex-compagne (exclues par la ligne éditoriale). Déclaré inéligible 18 mois en avril 2025 pour absence de compte de campagne (Wikipédia)."
+  },
+  {
+    "id": "arthaud",
+    "nom": "Nathalie Arthaud",
+    "phrases": [
+      {
+        "texte": "Pour LO, les moments électoraux ne sont pas essentiels.",
+        "contexte": "En pleine campagne présidentielle, dont elle est candidate",
+        "date": "2012-04-13",
+        "source": "https://www.lemonde.fr/election-presidentielle-2012/article/2012/04/13/arthaud-pour-lo-les-moments-electoraux-ne-sont-pas-essentiels_1685009_1471069.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "mort",
+          "heros"
+        ],
+        "note": "Titre du Monde (13 avril 2012), cité par Wikipédia ; article non consultable dans cette session, la formule peut être une reprise du journal."
+      },
+      {
+        "texte": "Un choix pipé entre un ennemi ouvert des travailleurs et un faux ami.",
+        "contexte": "Sur le second tour Sarkozy-Hollande, où elle vote blanc",
+        "date": "2012-04-23",
+        "source": "https://www.lefigaro.fr/flash-actu/2012/04/23/97001-20120423FILWWW00573-arthaud-lo-n-appellera-pas-a-voter-ps.php",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Rapporté par Wikipédia d'après Le Figaro (23 avril 2012, AFP) et Le Monde (3 mai 2012) ; articles non consultables dans cette session."
+      },
+      {
+        "texte": "Cela ne peut que déclencher des révoltes et des coups de colère.",
+        "contexte": "Interview politique de 8 h 20 sur Europe 1, sur le pouvoir d'achat, à deux jours du premier tour",
+        "date": "2022-04-08",
+        "source": "https://www.europe1.fr/politique/on-ne-doit-pas-accepter-de-sappauvrir-nathalie-arthaud-alerte-sur-le-pouvoir-dachat-des-francais-4104435",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration"
+        ],
+        "note": "Page d'Europe 1 sur sa propre interview. Le titre d'Europe 1 (« Ça va déclencher des révoltes ») paraphrase la phrase réelle."
+      },
+      {
+        "texte": "Quand on est salarié, on ne doit pas accepter de s'appauvrir.",
+        "contexte": "Même interview sur Europe 1",
+        "date": "2022-04-08",
+        "source": "https://www.europe1.fr/politique/on-ne-doit-pas-accepter-de-sappauvrir-nathalie-arthaud-alerte-sur-le-pouvoir-dachat-des-francais-4104435",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Page d'Europe 1 sur sa propre interview."
+      }
+    ],
+    "meilleure": 1,
+    "note": "Aucune réplique de débat (2012, 2017, 2022) trouvée mot pour mot dans les sources consultées."
+  },
+  {
+    "id": "branco",
+    "nom": "Juan Branco",
+    "phrases": [
+      {
+        "texte": "Ils ne sont pas corrompus, ils sont la corruption.",
+        "contexte": "Sa formule sur la macronie, lancée dans L'Express à la sortie de « Crépuscule », et qu'il recycle depuis sur sa chaîne",
+        "date": "2019-02-11",
+        "source": "https://www.youtube.com/watch?v=SyhNFUisoD4",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=SyhNFUisoD4",
+        "fiabilite": "verifie",
+        "note": "Titre d'une vidéo de sa propre chaîne YouTube (22 décembre 2024) ; Wikipédia la cite aussi d'après L'Express (11 février 2019), article non retrouvé.",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "Votre émission est pornographique !",
+        "contexte": "À Cyril Hanouna, sur le plateau de Touche pas à mon poste",
+        "date": "2020",
+        "source": "https://www.youtube.com/watch?v=TyfI3TAHqx8",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=TyfI3TAHqx8",
+        "fiabilite": "verifie",
+        "note": "Citation en titre de l'extrait publié par la chaîne YouTube de TPMP (mis en ligne le 9 août 2020 ; date de diffusion non relevée).",
+        "moments": [
+          "celebration",
+          "pose"
+        ]
+      },
+      {
+        "texte": "2027, c'est demain !",
+        "contexte": "Candidat à la présidentielle avec son mouvement Les Ruches : « On construit, avec la force de nos mains, un mouvement […] à la recherche d'une rupture et d'une révolution politique »",
+        "date": "2026-05-21",
+        "source": "https://www.youtube.com/watch?v=nbXABuYJinM",
+        "type_source": "video",
+        "audio": "https://www.youtube.com/watch?v=nbXABuYJinM",
+        "fiabilite": "verifie",
+        "note": "Titre d'une vidéo de sa propre chaîne YouTube.",
+        "moments": [
+          "heros",
+          "celebration"
+        ]
+      },
+      {
+        "texte": "Comment fabriquer une guillotine",
+        "contexte": "Titre de son livre, dont il publie la lecture intégrale en pleine campagne présidentielle, avec un chapitre « Guillotine »",
+        "date": "2026-08-20",
+        "source": "https://www.youtube.com/watch?v=_v3L5fxIKic",
+        "type_source": "livre",
+        "fiabilite": "verifie",
+        "note": "Titre donné par sa propre chaîne YouTube (« [Livre Audio] Comment Fabriquer une Guillotine - Lecture intégrale du livre de Juan Branco »). Son site de campagne renvoie aussi à « aurores.org/guillotine ».",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] une nouvelle variante du fascisme.",
+        "contexte": "Sa définition de la macronie dans le pamphlet « Crépuscule »",
+        "date": "2019-03",
+        "source": "https://fr.wikipedia.org/wiki/Juan_Branco",
+        "type_source": "livre",
+        "fiabilite": "a_recouper",
+        "note": "Crépuscule, Au diable vauvert, mars 2019 (d'abord publié sur son blog) ; formule rapportée par Wikipédia, page du livre non vérifiée.",
+        "moments": [
+          "pose"
+        ]
+      },
+      {
+        "texte": "[…] des rapports de népotisme avérés.",
+        "contexte": "Sa défense après son tweet sur Gabriel Attal et Stéphane Séjourné, accusé d'homophobie",
+        "date": "2018-10",
+        "source": "https://fr.wikipedia.org/wiki/Juan_Branco",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Rapporté par Wikipédia. Fragment. La moquerie vise Branco, pas les personnes visées par son tweet.",
+        "moments": [
+          "casserole"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Statut d'avocat : suspendu trois ans dont neuf mois ferme par l'Ordre de Paris en octobre 2024 (secret de l'instruction), décision confirmée en appel en octobre 2025. Il fait aussi l'objet d'une procédure pour violences sexuelles non jugée (réquisitions du 6 août 2026) : exclue par la ligne éditoriale, à ne pas évoquer. Son rôle dans l'affaire de la vidéo de Benjamin Griveaux (2020) est aussi exclu (vidéo intime)."
+  },
+  {
+    "id": "barthes",
+    "nom": "Yann Barthès",
+    "phrases": [
+      {
+        "texte": "Tout le monde a chaud. C'est rare d'ailleurs de vivre un événement universel.",
+        "contexte": "Ouverture de Quotidien (TMC) en pleine canicule ; on lui reprochera un mépris de classe et une pétition « Coupons la clim à Yann Barthès » dépasse 30 000 signatures",
+        "date": "2026-06-23",
+        "source": "https://fr.wikipedia.org/wiki/Yann_Barthès",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "attente",
+          "actualiser"
+        ],
+        "note": "franceinfo (émission du mardi 23 juin 2026 sur TMC) confirme « tout le monde a chaud » ; la suite (« C'est rare d'ailleurs de vivre un événement universel ») vient de Wikipédia, qui cite HuffPost, franceinfo et BFMTV du 26 juin 2026."
+      },
+      {
+        "texte": "Si vous croisez Bernard Arnault, il aura chaud.",
+        "contexte": "Même émission, même canicule",
+        "date": "2026-06-23",
+        "source": "https://fr.wikipedia.org/wiki/Yann_Barthès",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "achat",
+          "attente"
+        ],
+        "note": "Rapporté par Wikipédia et titré par BFMTV (« Si vous croisez Bernard Arnault, il aura chaud » : pourquoi Yann Barthès fait polémique), page BFMTV non consultable dans cette session. Il se reprend aussitôt : « Enfin non ! Il y a cette catégorie de personnes qui est plus concernée que toutes les autres »."
+      },
+      {
+        "texte": "Tout le monde s'en fout.",
+        "contexte": "Même émission, à propos des gens « qui vivent sous les toits »",
+        "date": "2026-06-23",
+        "source": "https://www.franceinfo.fr/culture/tv/une-honte-l-emission-quotidien-et-son-animateur-yann-barthes-sous-le-feu-des-critiques-apres-s-etre-moques-des-personnes-vivant-sous-les-toits-en-pleine-canicule_8080871.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite",
+          "elimination"
+        ],
+        "note": "franceinfo et Wikipédia (d'après HuffPost et BFMTV) concordent. Il visait les témoignages de locataires « qui vivent sous les toits »."
+      },
+      {
+        "texte": "Nous avons encore chaud. Tous. Tous chaud.",
+        "contexte": "Quotidien, deux jours plus tard, en réponse à la polémique : il persiste",
+        "date": "2026-06-25",
+        "source": "https://www.franceinfo.fr/culture/tv/une-honte-l-emission-quotidien-et-son-animateur-yann-barthes-sous-le-feu-des-critiques-apres-s-etre-moques-des-personnes-vivant-sous-les-toits-en-pleine-canicule_8080871.html",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "victoire",
+          "actualiser"
+        ],
+        "note": "franceinfo (« jeudi dans l'émission ») ; HuffPost titre « Yann Barthès persiste et signe », article non consultable."
+      },
+      {
+        "texte": "Je préfère être bien-pensant que le contraire.",
+        "contexte": "Interview à TV Magazine (Le Figaro), en réponse aux critiques de Valeurs actuelles",
+        "date": "2019-08-29",
+        "source": "https://fr.wikipedia.org/wiki/Yann_Barthès",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "victoire"
+        ],
+        "note": "Titre de l'interview cité par Wikipédia, article non consulté. Pas une phrase dite à l'antenne."
+      }
+    ],
+    "meilleure": 0,
+    "note": "Barthès dit peu de choses choquantes en son nom : la plupart de ses polémiques portent sur des séquences de l'émission, pas sur ses phrases."
+  },
+  {
+    "id": "duhamel",
+    "nom": "Benjamin Duhamel",
+    "phrases": [
+      {
+        "texte": "On connaissait au Rassemblement national la politique de père en fille. À Reconquête, la politique se fait en couple ?",
+        "contexte": "C'est pas tous les jours dimanche (BFMTV), à Sarah Knafo, tête de liste aux européennes et compagne d'Éric Zemmour",
+        "date": "2024-04-28",
+        "source": "https://www.ozap.com/actu/-vous-etes-le-fils-de-vous-etes-le-neveu-de-vif-accrochage-entre-sarah-knafo-reconquete-et-benjamin-duhamel-sur-bfmtv/643685",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "achat",
+          "attente"
+        ],
+        "note": "Ozap (transcription). Juste avant : « Vous êtes la compagne d'Eric Zemmour. Ce n'est pas un secret. »"
+      },
+      {
+        "texte": "Excusez-moi, vous mettez en cause ma probité !",
+        "contexte": "Même échange, quand Knafo lui renvoie qu'il est « le fils de » et « le neveu de »",
+        "date": "2024-04-28",
+        "source": "https://www.ozap.com/actu/-vous-etes-le-fils-de-vous-etes-le-neveu-de-vif-accrochage-entre-sarah-knafo-reconquete-et-benjamin-duhamel-sur-bfmtv/643685",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite"
+        ],
+        "note": "Ozap."
+      },
+      {
+        "texte": "[…] jusqu'à preuve du contraire, ce n'est pas, ni ma mère, mon père ou mon oncle, qui m'a permis de faire le métier que je fais.",
+        "contexte": "Même échange ; il est le fils de Patrice Duhamel et de Nathalie Saint-Cricq, et le neveu d'Alain Duhamel",
+        "date": "2024-04-28",
+        "source": "https://www.ozap.com/actu/-vous-etes-le-fils-de-vous-etes-le-neveu-de-vif-accrochage-entre-sarah-knafo-reconquete-et-benjamin-duhamel-sur-bfmtv/643685",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite",
+          "echelon"
+        ],
+        "note": "Ozap. Phrase complète : « Je ne me présente pas à des élections et, jusqu'à preuve du contraire, ce n'est pas, ni ma mère, mon père ou mon oncle, qui m'a permis de faire le métier que je fais. »"
+      },
+      {
+        "texte": "La question est sans aucune polémique, Sarah Knafo.",
+        "contexte": "Même échange, en pleine polémique",
+        "date": "2024-04-28",
+        "source": "https://www.ozap.com/actu/-vous-etes-le-fils-de-vous-etes-le-neveu-de-vif-accrochage-entre-sarah-knafo-reconquete-et-benjamin-duhamel-sur-bfmtv/643685",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "attente",
+          "actualiser"
+        ],
+        "note": "Ozap."
+      }
+    ],
+    "meilleure": 2,
+    "note": "Depuis le 25 août 2025 à la Grande Matinale de France Inter (Wikipédia). Ses accrochages avec d'autres politiques n'ont pas pu être vérifiés dans cette session."
+  },
+  {
+    "id": "ppda",
+    "nom": "Patrick Poivre d'Arvor",
+    "phrases": [
+      {
+        "texte": "Un peu excité, comme un petit garçon dans la cour des grands.",
+        "contexte": "Interview de Nicolas Sarkozy sur TF1, à son retour de son premier G8 ; la question aurait précipité son éviction du 20 heures",
+        "date": "2007-06-20",
+        "source": "https://fr.wikipedia.org/wiki/Patrick_Poivre_d'Arvor",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "echelon",
+          "attente"
+        ],
+        "note": "Forme donnée par Wikipédia (d'après Santamaria et Duhamel, « L'Élysée. Histoire, secrets, mystères », Plon, 2012, p. 107), qui date l'entretien du 20 juin 2007. Variantes dans la presse : « comme un petit garçon qui rentre dans la cour des grands », « petit garçon en train de rentrer dans la cour des grands » (Paperblog, 2008). Archive INA ou TF1 non retrouvée : à recouper."
+      },
+      {
+        "texte": "Une des équipes de TF1 l'a interrogé hier à Cuba.",
+        "contexte": "Lancement de la fausse « interview exclusive » de Fidel Castro au 20 heures, montée à partir d'une conférence de presse",
+        "date": "1991-12-16",
+        "source": "https://www.youtube.com/watch?v=fZBQm6VBwN0",
+        "type_source": "ina",
+        "audio": "https://www.youtube.com/watch?v=fZBQm6VBwN0",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "achat",
+          "actualiser"
+        ],
+        "note": "Phrase d'ouverture du 20 heures selon Wikipédia (qui cite la diffusion TF1) ; la séquence est décryptée dans deux archives INA Arditube (Double Jeu, Antenne 2, 25 janvier et 6 juillet 1992 : youtube.com/watch?v=fZBQm6VBwN0 et youtube.com/watch?v=vee46JUknxU). Formulation à caler sur la vidéo. Voir aussi citations.json, castro_ppda."
+      },
+      {
+        "texte": "Mais je n'allais pas lui réinventer une vie !",
+        "contexte": "Accusé par L'Express d'avoir recopié près de 100 pages d'une biographie américaine de Peter Griffin dans son livre sur Hemingway",
+        "date": "2011-01-04",
+        "source": "https://www.nouvelobs.com/rue89/rue89-rue89-culture/20110104.RUE0186/ppda-accuse-de-plagiat-pour-sa-biographie-d-hemingway.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "defaite"
+        ],
+        "note": "Réponse écrite citée par Rue89 (nouvelobs.com, 4 janvier 2011, relu) d'après L'Express ; Wikipédia concorde. Début : « J'ai passé un an et demi à écrire ce livre et trouve très désobligeant ce soupçon de plagiat. Je me suis naturellement documenté auprès des nombreuses biographies existantes, au nombre desquelles celle de Griffin me semble la meilleure sur le jeune Hemingway. »"
+      },
+      {
+        "texte": "Ce qu'on ne peut éviter, il faut l'embrasser.",
+        "contexte": "Dernier mot de son dernier 20 heures de TF1, en citant Shakespeare, après son éviction",
+        "date": "2008-07-10",
+        "source": "https://fr.wikipedia.org/wiki/Patrick_Poivre_d'Arvor",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "elimination",
+          "defaite"
+        ],
+        "note": "Citation de Shakespeare dite à l'antenne, rapportée par Wikipédia. Le dernier journal circule en entier sur YouTube (youtube.com/watch?v=3FM3zKOwlBA), mais sur une chaîne non officielle et non écouté : à caler sur l'archive INA."
+      },
+      {
+        "texte": "Cette pseudo affaire est un enchaînement de rumeurs.",
+        "contexte": "Dans son livre « Confessions », sur la fausse interview de Castro",
+        "date": "",
+        "source": "https://fr.wikipedia.org/wiki/Patrick_Poivre_d'Arvor",
+        "type_source": "livre",
+        "fiabilite": "a_recouper",
+        "moments": [
+          "defaite",
+          "attente"
+        ],
+        "note": "Rapporté par Wikipédia ; page du livre non vérifiée."
+      }
+    ],
+    "meilleure": 2,
+    "note": "Une seule phrase vérifiée (Hemingway), d'où « meilleure » sur elle. Aucune phrase retenue ne touche aux plaintes pour violences sexuelles déposées contre lui depuis 2021 (mis en examen en 2023, il conteste) : sujet exclu par la ligne éditoriale."
+  },
+  {
+    "id": "bouleau",
+    "nom": "Gilles Bouleau",
+    "phrases": [
+      {
+        "texte": "Nous sommes entre gens polis, je ne vous donnerai pas le nom du film.",
+        "contexte": "En fin de soirée électorale des régionales sur TF1, au moment d'annoncer la rediffusion du « Dîner de cons » : « Votre soirée continue avec un film de Francis Weber, avec Jacques Villeret et Thierry Lhermitte. »",
+        "date": "2015-12-13",
+        "source": "https://www.ozap.com/actu/soiree-electorale-gilles-bouleau-refuse-d-annoncer-le-diner-de-cons-sur-tf1/485227",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias (14 décembre 2015, relu), qui intègre la séquence vidéo ; aucune seconde source trouvée.",
+        "moments": [
+          "elimination",
+          "attente"
+        ]
+      },
+      {
+        "texte": "C'est quand même votre échec, c'est vous qui êtes le capitaine depuis huit ans.",
+        "contexte": "À Emmanuel Macron, au début de l'émission spéciale « Les défis de la France » sur TF1, après un sondage où 69 % des Français jugent que le pays change en mal",
+        "date": "2025-05-13",
+        "source": "https://www.letribunaldunet.fr/politique/votre-echec-gilles-bouleau-dezingue-emmanuel-macron.html",
+        "type_source": "presse",
+        "audio": "https://www.youtube.com/watch?v=db5XImMwNDw",
+        "fiabilite": "a_recouper",
+        "note": "Le Tribunal du Net (relu) ; une chaîne YouTube non officielle titre « C'est VOTRE échec ! ». L'audio renvoie à l'émission intégrale sur la chaîne YouTube de TF1 Info, non écoutée : moment exact à repérer en début d'émission.",
+        "moments": [
+          "triple",
+          "victoire"
+        ]
+      },
+      {
+        "texte": "Le JT de France 2 est sensiblement plus long. Leurs choix sont moins drastiques. Et nous sommes meilleurs.",
+        "contexte": "Neuf mois après sa prise du 20 heures de TF1, dans une interview de trois pages à Paris Match, sur le JT de David Pujadas",
+        "date": "2013-03",
+        "source": "https://www.ozap.com/actu/gilles-bouleau-nous-sommes-meilleurs-que-france-2/446293",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias (27 mars 2013) citant Paris Match ; Paris Match non lu.",
+        "moments": [
+          "victoire"
+        ]
+      },
+      {
+        "texte": "Je suis un enfant de TF1. Mon code génétique, c'est celui de TF1.",
+        "contexte": "Sur RTL, au lendemain de sa nomination au 20 heures de TF1, préféré à Laurent Delahousse pour succéder à Laurence Ferrari",
+        "date": "2012-06",
+        "source": "https://www.ozap.com/actu/gilles-bouleau-mon-code-genetique-c-est-celui-de-tf1/441443",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias (15 juin 2012) citant RTL ; émission de RTL non retrouvée.",
+        "moments": [
+          "echelon",
+          "achat"
+        ]
+      },
+      {
+        "texte": "Ce sont des footballeurs professionnels que nous retrouverons... eh bien demain, parce que le temps court. C'est donc la fin de ce journal.",
+        "contexte": "Coupé en plein lancement de reportage par le générique de fin du 20 heures, le soir de l'abandon de Notre-Dame-des-Landes",
+        "date": "2018-01-17",
+        "source": "https://www.ozap.com/actu/tf1-gilles-bouleau-coupe-en-plein-jt-par-le-generique-de-fin/548187",
+        "type_source": "presse",
+        "fiabilite": "a_recouper",
+        "note": "Puremédias (18 janvier 2018, relu), avec la séquence vidéo ; aucune seconde source trouvée.",
+        "moments": [
+          "defaite",
+          "elimination"
+        ]
+      }
+    ],
+    "meilleure": 0,
+    "note": "Rien de vérifié par deux sources : toutes les phrases viennent de Puremédias ou du Tribunal du Net, souvent avec la vidéo d'origine, mais sans archive officielle retrouvée. « meilleure » pointe donc une phrase à recouper. Écarté : « Je ne savais pas » (réaction à l'affaire PPDA), sujet exclu par la ligne éditoriale."
+  }
+]

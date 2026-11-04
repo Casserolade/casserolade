@@ -1,0 +1,1282 @@
+{
+ "photos": [
+  {
+   "id": "aliot",
+   "nom": "Louis Aliot",
+   "auteur": "Pablo Tupin-Noriega",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_2015_02_(cropped)_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "aphatie",
+   "nom": "Jean-Michel Aphatie",
+   "auteur": "VL.",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Michel.Aphatie.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "arthaud",
+   "nom": "Nathalie Arthaud",
+   "auteur": "Kokluts",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nathalie_Arthaud_(LO)_19-05-2024.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "asselineau",
+   "nom": "François Asselineau",
+   "auteur": "Union Populaire Républicaine",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_ASSELINEAU.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "attal",
+   "nom": "Gabriel Attal",
+   "auteur": "Ismail Aissoub",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_2025_(close_crop).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "aubry",
+   "nom": "Manon Aubry",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1720623827463_20190528_AUBRY_Manon_FR_9.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "balkany",
+   "nom": "Patrick Balkany",
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Patrick_Balkany_2010.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "barbier",
+   "nom": "Christophe Barbier",
+   "auteur": "ActuaLitté",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Christophe_Barbier_-_Prix_Bristol_des_Lumi%C3%A8res_2015_(23513117410).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "bardella",
+   "nom": "Jordan Bardella",
+   "auteur": "Daina Le Lardic",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1721231397060_20240717_EP-170912A_DLL_199.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "barthes",
+   "nom": "Yann Barthès",
+   "auteur": "Anipamal",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Yann_Barth%C3%A8s.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "batho",
+   "nom": "Delphine Batho",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210820_batho.d_6605.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "bay",
+   "nom": "Nicolas Bay",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1718699899690_20240617_BAY_Nicolas_FR_011.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "bayrou",
+   "nom": "François Bayrou",
+   "auteur": "Service photographique de Matignon",
+   "licence": "Licence Ouverte",
+   "source": "https://commons.wikimedia.org/wiki/File:Bayrou_Matignon_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "berge",
+   "nom": "Aurore Bergé",
+   "auteur": "HUGUES DE BEAUCHESNE",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:AURORE_BERG%C3%89_04_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "bertrand",
+   "nom": "Xavier Bertrand",
+   "auteur": "Claudio Centonze / European Union, 2025 / EC - Audiovisual Service",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Xavier_Bertrand_-_2025_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "bompard",
+   "nom": "Manuel Bompard",
+   "auteur": "European Parliament",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:Bompard_MEP_2019.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "bouamrane",
+   "nom": "Karim Bouamrane",
+   "auteur": "Oumma",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Karim_Bouamrane_en_2026_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "bouleau",
+   "nom": "Gilles Bouleau",
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gilles_Bouleau_Cannes_2016.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "boyard",
+   "nom": "Louis Boyard",
+   "auteur": "Babar BZH",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Boyard_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "branco",
+   "nom": "Juan Branco",
+   "auteur": "UPOP Marseille",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Juan_Branco_Pick.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "braun_pivet",
+   "nom": "Yaël Braun-Pivet",
+   "auteur": "G.Garitan",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Ya%C3%ABl_Braun-Pivet_4colonnes_19182.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "bregeon",
+   "nom": "Maud Bregeon",
+   "auteur": "Ministère de l'Europe et des Affaires étrangères",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Maud_Bregeon_(2023).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "cahuzac",
+   "nom": "Jérôme Cahuzac",
+   "auteur": "Cyclotron",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:PR-2012-05-15_IMG_1493_(crop).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "castaner",
+   "nom": "Christophe Castaner",
+   "auteur": "Arthur Empereur",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Christophe_Castaner_en_2019_(cropped_2).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "cazeneuve",
+   "nom": "Bernard Cazeneuve",
+   "auteur": "State Chancellery of Latvia",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Ministru_prezidents_Valdis_Dombrovskis_tiekas_ar_Francijas_Eiropas_lietu_ministru_Bern%C4%81ru_Kazen%C4%93vu_(Bernard_Cazeneuve)_(7985359635)_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "cheminade",
+   "nom": "Jacques Cheminade",
+   "auteur": "Fabienkhan",
+   "licence": "CC BY-SA 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Jacques_cheminade_22102209_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "chenu",
+   "nom": "Sébastien Chenu",
+   "auteur": "Jérémy-Günther-Heinz Jähnick",
+   "licence": "GFDL 1.2",
+   "source": "https://commons.wikimedia.org/wiki/File:Denain_-_S%C3%A9bastien_Chenu_lors_du_conseil_municipal_du_27_juin_2016_(cropped).JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "chikirou",
+   "nom": "Sophia Chikirou",
+   "auteur": "Wyslijp16",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Manifestation_du_22_novembre_2025_%C3%A0_Paris_contre_les_violences_sexistes,_sexuelles_et_de_genre_%E2%80%94_080.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "chirac",
+   "nom": "Jacques Chirac",
+   "auteur": "Christian Lambiotte",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jacques_Chirac_(1997)_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "ciotti",
+   "nom": "Éric Ciotti",
+   "auteur": "Frantogian",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Ciotti_(2).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "cohn_bendit",
+   "nom": "Daniel Cohn-Bendit",
+   "auteur": "Molgreen",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20250426_xl_1415-1505_taz_lab_2025_thema_weiter_machen_%E2%80%93_jenseits_der_empoerung_-_das_vierfuenftel-jahrhundertgespraech_(6).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "cope",
+   "nom": "Jean-François Copé",
+   "auteur": "Astrakan25",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Cop%C3%A9,_D%C3%A9put%C3%A9-maire_de_Meaux_2015_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "coquerel",
+   "nom": "Éric Coquerel",
+   "auteur": "Jérémie Silvestro (œuvre dérivée : Keymap9)",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Eric_Coquerel_en_2017.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "darmanin",
+   "nom": "Gérald Darmanin",
+   "auteur": "UK Home Office",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:G%C3%A9rald_Darmanin_in_2022.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "dati",
+   "nom": "Rachida Dati",
+   "auteur": "Thesupermat",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Festival_automobile_international_2016_-_Photocall_-_043_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "de_gaulle",
+   "nom": "Charles de Gaulle",
+   "auteur": "Bundesarchiv, B 145 Bild-F015892-0010 / Ludwig Wegmann",
+   "licence": "CC BY-SA 3.0 de",
+   "source": "https://commons.wikimedia.org/wiki/File:Charles_de_Gaulle-1963_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "delogu",
+   "nom": "Sébastien Delogu",
+   "auteur": "SachaLintignat",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu_Manifestation.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "doucet",
+   "nom": "Grégory Doucet",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210821_doucet.gregory_6654.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "duflot",
+   "nom": "Cécile Duflot",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:C%C3%A9cile_Duflot,_2010_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "dupond_moretti",
+   "nom": "Éric Dupond-Moretti",
+   "auteur": "Linelola54",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Eric_Dupond-Moretti.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "dupont_aignan",
+   "nom": "Nicolas Dupont-Aignan",
+   "auteur": "Debout la France",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan,_homme_politique_fran%C3%A7ais.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "durif",
+   "nom": "Sylvain Durif",
+   "auteur": "chatzefratz",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sylvain_Durif,_sur_une_aire_d%27autoroute,_en_2013.png",
+   "partage_identique": false
+  },
+  {
+   "id": "faure",
+   "nom": "Olivier Faure",
+   "auteur": "Olivier Faure",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_d%27Olivier_Faure.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "ferrari",
+   "nom": "Laurence Ferrari",
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Laurence_Ferrari_Cannes_2017.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "fillon",
+   "nom": "François Fillon",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Fillon_2010.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "fogiel",
+   "nom": "Marc-Olivier Fogiel",
+   "auteur": "ManoSolo13241324",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marc-Olivier_Fogiel_2025.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "fournas",
+   "nom": "Grégoire de Fournas",
+   "auteur": "The5thorseman",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gr%C3%A9goire_de_Fournas.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "giscard",
+   "nom": "Valéry Giscard d'Estaing",
+   "auteur": "Christian Lambiotte",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9ry_Giscard_d%27Estaing_(1975)_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "glucksmann",
+   "nom": "Raphaël Glucksmann",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1720448398743_20240708_GLUCKSMANN_Raphael_FR_006.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "gueant",
+   "nom": "Claude Guéant",
+   "auteur": "Claude_Guéant_-_1.jpg : Γιώργος Α. Παπανδρέου Πρωθυπουργός της Ελλάδας from Greece\nderivative work: Citron (talk)",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Claude_Gu%C3%A9ant_(derivate_work).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "guedj",
+   "nom": "Jérôme Guedj",
+   "auteur": "Audrey AK",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:J%C3%A9r%C3%B4me_Guedj_2010.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "guette",
+   "nom": "Clémence Guetté",
+   "auteur": "Claire Jacquin",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Cl%C3%A9mence_Guett%C3%A9,_vice_pr%C3%A9sidente_de_l%27Assembl%C3%A9e_nationale_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "hanouna",
+   "nom": "Cyril Hanouna",
+   "auteur": "",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Cyril_Hanouna_lors_d%27un_enregistrement_d%27une_%C3%A9mission_de_radio_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "hidalgo",
+   "nom": "Anne Hidalgo",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:(Anne_Hidalgo)_2020._Jacques_Paquier._P%C3%A9cresse_-_Ollier_-_Hidalgo_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "hollande",
+   "nom": "François Hollande",
+   "auteur": "Web Summit",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Hollande_-_2017_(27869823159)_(cropped_2).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "hortefeux",
+   "nom": "Brice Hortefeux",
+   "auteur": "Andy Mabbett",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Brice_Hortefeux_01_(cropped).JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "houssin",
+   "nom": "Timothée Houssin",
+   "auteur": "TrisHR",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20240708-P1020457_Timoth%C3%A9e_Houssin_Wikipedia.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "hurmic",
+   "nom": "Pierre Hurmic",
+   "auteur": "Lelefa",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_Pierre_Hurmic_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "jadot",
+   "nom": "Yannick Jadot",
+   "auteur": "greensefa",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Yannick_Jadot,_2014_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "jmlp",
+   "nom": "Jean-Marie Le Pen",
+   "auteur": "European Parliament Multimedia Centre",
+   "licence": "Attribution",
+   "source": "https://commons.wikimedia.org/wiki/File:Le_Pen_Jean-Marie_1999.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "kazib",
+   "nom": "Anasse Kazib",
+   "auteur": "PabloMorao27",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib,_d%C3%A9cembre_2021.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "knafo",
+   "nom": "Sarah Knafo",
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sarah_Knafo_le_9_mars_2026_(crop).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "lafont",
+   "nom": "Samuel Lafont",
+   "auteur": "Anh De France",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Samuel_Lafont,_avril_2022.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "lalanne",
+   "nom": "Francis Lalanne",
+   "auteur": "Olivier Roller, In Libro Veritas",
+   "licence": "FAL",
+   "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne.png",
+   "partage_identique": true
+  },
+  {
+   "id": "lapix",
+   "nom": "Anne-Sophie Lapix",
+   "auteur": "Joan Hernandez Mir",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anne-Sophie_Lapix_Cannes_2018.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "larcher",
+   "nom": "Gérard Larcher",
+   "auteur": "Senate",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_G._Larcher_2014_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "lassalle",
+   "nom": "Jean Lassalle",
+   "auteur": "Antoine Lamielle",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Lassalle_03_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "lavalette",
+   "nom": "Laure Lavalette",
+   "auteur": "Alain V",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Laure_Lavalette.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "leaument",
+   "nom": "Antoine Léaument",
+   "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "lecornu",
+   "nom": "Sébastien Lecornu",
+   "auteur": "U.S. Secretary of Defense",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Lecornu_2024_(2x3_crop).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "lemaire",
+   "nom": "Bruno Le Maire",
+   "auteur": "Belgian Presidency of the Council of the EU 2024 from Belgium",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EU2024BE_240223_Informal_meeting_of_economic_and_financial_affairs_ministers_Gent_JNZT_0037_(53546760021).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "lepen",
+   "nom": "Marine Le Pen",
+   "auteur": "VOX España",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B0%D1%80%D0%B8%D0%BD_%D0%9B%D0%B5_%D0%9F%D0%B5%D0%BD_(28-01-2022).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "lepers",
+   "nom": "Julien Lepers",
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "lescure",
+   "nom": "Pierre Lescure",
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pierre_Lescure_2012.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "lisnard",
+   "nom": "David Lisnard",
+   "auteur": "Grégor Sauvagère",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:David_Lisnard_en_2026.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "lucas",
+   "nom": "Benjamin Lucas-Lundy",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210819_lucas.benjamin_5936.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "macron",
+   "nom": "Emmanuel Macron",
+   "auteur": "Nebojša Tejić",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Emmanuel_Macron_2025_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "maillard",
+   "nom": "Sylvain Maillard",
+   "auteur": "Lionel Barbe",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sylvain-Maillard.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "mamere",
+   "nom": "Noël Mamère",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Noel.Mamere2006.JPG",
+   "partage_identique": false
+  },
+  {
+   "id": "marechal",
+   "nom": "Marion Maréchal",
+   "auteur": "Gauthier Bouchet",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:MMLePen-010912.JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "mariani",
+   "nom": "Thierry Mariani",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1718282772753_20240611_20240611_MARIANI_Thierry_FR_004.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "mc_lepen",
+   "nom": "Marie-Caroline Le Pen",
+   "auteur": "ValentinDLH59",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marie-Caroline_le_Pen.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "melenchon",
+   "nom": "Jean-Luc Mélenchon",
+   "auteur": "jlm2017.fr",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:M%C3%A9lenchon_2027_-_55262255527_(cropped_3-4).png",
+   "partage_identique": false
+  },
+  {
+   "id": "messiha",
+   "nom": "Jean Messiha",
+   "auteur": "Anh De France",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Messiha,_mars_2022_(52104100348).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "mitterrand",
+   "nom": "François Mitterrand",
+   "auteur": "Comet Photo AG (Zürich)",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:President_Fran%C3%A7ois_Mitterrand_in_1983.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "morano",
+   "nom": "Nadine Morano",
+   "auteur": "European Parliament",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:Nadine_Morano_MEP_2019.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "ndiaye",
+   "nom": "Sibeth Ndiaye",
+   "auteur": "Hegor",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:MH-Sibeth_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "odoul",
+   "nom": "Julien Odoul",
+   "auteur": "Toufik-de-Planoise",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Odoul_-_Besan%C3%A7on_25-04-2019_-_Toufik-de-Planoise.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "oudea",
+   "nom": "Amélie Oudéa-Castéra",
+   "auteur": "Web Summit",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Am%C3%A9lie_Oud%C3%A9a-Cast%C3%A9ra_2017_(crop)_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "panot",
+   "nom": "Mathilde Panot",
+   "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marche_des_fiert%C3%A9s_de_Paris_2017-21.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "pecresse",
+   "nom": "Valérie Pécresse",
+   "auteur": "Gail Leenstra",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9rie_P%C3%A9cresse_at_a_2024_Paralympic_Games_media_conference_in_2024_3_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "peltier",
+   "nom": "Guillaume Peltier",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1718699868533_20240617_PELTIER_Guillaume_FR_004.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "philippe",
+   "nom": "Édouard Philippe",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89douard_Philippe_2019_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "philippot",
+   "nom": "Florian Philippot",
+   "auteur": "Films et documetnaires",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Florian_Philippot.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "piolle",
+   "nom": "Éric Piolle",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210819_piolle.eric5891_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "poisson",
+   "nom": "Jean-Frédéric Poisson",
+   "auteur": "© Peter Potrowl",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fr%C3%A9d%C3%A9ric_Poisson_-_Manifestation_%C2%AB_Marchons_Enfants_%C2%BB_contre_la_PMA_et_la_GPA_-_12_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "portes",
+   "nom": "Thomas Portes",
+   "auteur": "Pioupiou838383",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thomas_Portes.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "poutou",
+   "nom": "Philippe Poutou",
+   "auteur": "Patrice CALATAYU from Bordeaux, France",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Philippe_Poutou_2020_(cropped).png",
+   "partage_identique": true
+  },
+  {
+   "id": "ppda",
+   "nom": "Patrick Poivre d'Arvor",
+   "auteur": "Babsy",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:PPDA_-_Brive_2011.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "praud",
+   "nom": "Pascal Praud",
+   "auteur": "ManoSolo13241324",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pascal_Praud_2025.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "pujadas",
+   "nom": "David Pujadas",
+   "auteur": "Coccico2345",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:David_Pujadas_USA.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "retailleau",
+   "nom": "Bruno Retailleau",
+   "auteur": "Anthonymontardyfr",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Bruno_Retailleau_-_Ministre_de_l%27Int%C3%A9rieur_fran%C3%A7ais.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "rigault",
+   "nom": "Stanislas Rigault",
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Stanislas_Rigault_12_novembre_2023.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "rousseau",
+   "nom": "Sandrine Rousseau",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210819_rousseau.s_5754.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "roussel",
+   "nom": "Fabien Roussel",
+   "auteur": "NakaraZn Zouhaïr NAKARA",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fabien_Roussel_2022_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "royal",
+   "nom": "Ségolène Royal",
+   "auteur": "English : This photo has been taken by Matthieu Riegler  (User:Kyro) and released under the licenses stated below. You are free to use it for any purpose as lon",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal_-_Janvier_2012.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "ruffin",
+   "nom": "François Ruffin",
+   "auteur": "Thinkerview",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Ruffin_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "rugy",
+   "nom": "François de Rugy",
+   "auteur": "bruno perroud",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_de_Rugy.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "salame",
+   "nom": "Léa Salamé",
+   "auteur": "Soso171120",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:L%C3%A9aSalam%C3%A9.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "sarkozy",
+   "nom": "Nicolas Sarkozy",
+   "auteur": "Αντώνης Σαμαράς Πρωθυπουργός της Ελλάδας from Greece",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Sarkozy_(September_1,_2011)_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "schiappa",
+   "nom": "Marlène Schiappa",
+   "auteur": "Nantilus",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marl%C3%A8ne_Schiappa_2.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "tache",
+   "nom": "Aurélien Taché",
+   "auteur": "TrisHR",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "tanguy",
+   "nom": "Jean-Philippe Tanguy",
+   "auteur": "Debout la France",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Philippe_Tanguy.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "thevenot",
+   "nom": "Prisca Thevenot",
+   "auteur": "Maxime BOUDET",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Prisca_Thevenot_2023.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "thevenoud",
+   "nom": "Thomas Thévenoud",
+   "auteur": "Tthevenoud",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thomas_Thevenoud_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "tiberi",
+   "nom": "Jean Tiberi",
+   "auteur": "Marie-Lan Nguyen (User:Jastrow)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Tiberi_2007_06_06_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "tondelier",
+   "nom": "Marine Tondelier",
+   "auteur": "Selbymay",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Huma2023MarineTondelier_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "trouve",
+   "nom": "Aurélie Trouvé",
+   "auteur": "Toufik-de-Planoise",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Aur%C3%A9lie_Trouv%C3%A9_Besan%C3%A7on_14-01-2022_Toufik-de-Planoise.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "vallaud",
+   "nom": "Boris Vallaud",
+   "auteur": "Bloody-libu",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Boris_Vallaud_en_2023.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "valls",
+   "nom": "Manuel Valls",
+   "auteur": "Kommunikation BMW Stiftung Photographer: Lorenz Böck",
+   "licence": "CC BY-SA 3.0 de",
+   "source": "https://commons.wikimedia.org/wiki/File:Valls_Schaefer_Munich_Economic_Summit_2015_(cropped).JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "villiers",
+   "nom": "Philippe de Villiers",
+   "auteur": "European Parliament Multimedia Centre",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:DE_VILLIERS_Philippe_MEP.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "wauquiez",
+   "nom": "Laurent Wauquiez",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:AAA_2129_(45718113412)_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "yann_bompard",
+   "nom": "Yann Bompard",
+   "auteur": null,
+   "licence": "fournie",
+   "source": null,
+   "partage_identique": false
+  },
+  {
+   "id": "zemmour",
+   "nom": "Éric Zemmour",
+   "auteur": "Anh De France",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_d%27%C3%89ric_Zemmour,_avril_2022.jpg",
+   "partage_identique": false
+  }
+ ],
+ "polices": [
+  {
+   "nom": "Bangers",
+   "licence": "SIL OFL 1.1"
+  },
+  {
+   "nom": "Alegreya Sans et Alegreya Sans SC",
+   "licence": "SIL OFL 1.1"
+  },
+  {
+   "nom": "Dela Gothic One",
+   "licence": "SIL OFL 1.1"
+  }
+ ],
+ "sons": [
+  {
+   "id": "cest_notre_projet",
+   "nom": "Emmanuel Macron, « Parce que c'est notre projet ! »",
+   "auteur": "Le Point, « Extrait du discours d'Emmanuel Macron à la Porte de Versailles »",
+   "source": "https://www.youtube.com/watch?v=a1r8Ad6nFSA",
+   "date": "2016-12-10",
+   "note": "Extrait de 3 secondes, volume relevé (+8 dB, limiteur). Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "cest_notre_projet_complet",
+   "nom": "Emmanuel Macron, « Ce que je veux, c'est que vous, partout, vous alliez le faire gagner, parce que c'est notre projet ! Vive la République ! Vive la France ! »",
+   "auteur": "Le Point, « Extrait du discours d'Emmanuel Macron à la Porte de Versailles »",
+   "source": "https://www.youtube.com/watch?v=a1r8Ad6nFSA",
+   "date": "2016-12-10",
+   "note": "Cri d'accueil, 14,6 s : de 8,6 à 23,2 s du passage téléchargé par tools/collecte/cri_accueil.sh (sections 18,9 à 37,9 s), calé sur la phrase avec WhisperX, volume relevé (+8 dB, limiteur). Transcrit par WhisperX, pas encore écouté par l'utilisateur."
+  },
+  {
+   "id": "accent_toulouse",
+   "nom": "Mélenchon, « qu'est-ce que ça veut dire »",
+   "auteur": "LeHuffPost, « Jean-Luc Mélenchon se moque de l’accent d’une journaliste »",
+   "source": "https://www.youtube.com/watch?v=fpoaodwmkJc",
+   "note": "Extrait de 8.2 à 11.7 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "amie_tchadienne",
+   "nom": "Morano, « plus noire qu'une arabe »",
+   "auteur": "SOS Racisme, « Nadine Morano: \"I'm not racist, my best friend is even darker than an Arab!\" »",
+   "source": "https://www.youtube.com/watch?v=6_3r1cIXJsE",
+   "note": "Extrait de 14.8 à 16.8 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "arbre_mort",
+   "nom": "Hurmic, « arbre mort »",
+   "auteur": "Le Point, « À Bordeaux, exit le sapin de Noël, « un arbre mort » pour le maire Pierre Hurmic »",
+   "source": "https://www.youtube.com/watch?v=K0ZhGJqZ8IU",
+   "note": "Extrait de 0.0 à 0.7 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "attaque_hopital",
+   "nom": "Castaner, « attaqué un hôpital »",
+   "auteur": "FRANCE 24, « May 1st at the Pitié-Salpêtrière: the scenario of an \"attack\" shattered »",
+   "source": "https://www.youtube.com/watch?v=3Ye0Qdm3e1E",
+   "note": "Extrait de 43.0 à 44.8 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "blancos",
+   "nom": "Valls, « blancos »",
+   "auteur": "documentaire hd 7, « Manuel Valls \"El Blancos\" is Prime Minister »",
+   "source": "https://www.youtube.com/watch?v=N3_g3e4z1GQ",
+   "note": "Extrait de 36.1 à 38.0 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "bravitude",
+   "nom": "Royal, « bravitude »",
+   "auteur": "INA Politique, « 2007 : La bravitude de Ségolène Royal | Archive INA »",
+   "source": "https://www.youtube.com/watch?v=rgNoO9tqgBk",
+   "note": "Extrait de 32.5 à 33.7 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "conditions_lecornu",
+   "nom": "Lecornu, « conditions n'étaient »",
+   "auteur": "Le Figaro, « Sébastien Lecornu démissionne de son poste de premier ministre »",
+   "source": "https://www.youtube.com/watch?v=i7A5N1zcUAs",
+   "note": "Extrait de 3472.6 à 3474.6 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "courbe_chomage",
+   "nom": "Hollande, « inverser la courbe »",
+   "auteur": "AFP, « Hollande maintient \"sa volonté\" d'inverser la courbe du chômage »",
+   "source": "https://www.youtube.com/watch?v=cTbVuin5bVM",
+   "note": "Extrait de 12.6 à 13.6 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "debat_2017_dossiers",
+   "nom": "Le Pen, « alstom »",
+   "auteur": "Public Sénat, « ▶Marine Le Pen accuses Emmanuel Macron of having favored the acquisition of SFR by Patrick Drahi »",
+   "source": "https://www.youtube.com/watch?v=ypQID7zfeRQ",
+   "note": "Extrait de 93.6 à 94.4 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "farine_francaise",
+   "nom": "Fillon, « la farine était française »",
+   "auteur": "V.A.D.# • VOUS AVEZ DIT DÉMOCRATIE ? •, « ENFARINAGE FILLON  • WWW.farine.PRO »",
+   "source": "https://www.youtube.com/watch?v=PXZ8ZKL_ngs",
+   "note": "Extrait de 74.8 à 76.1 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "faux_billets",
+   "nom": "Darmanin, « faux billets »",
+   "auteur": "AFP, « Stade de France: Darmanin dénonce une \"fraude massive, industrielle de faux billets\" | AFP Extrait »",
+   "source": "https://www.youtube.com/watch?v=YFek0NPWo7E",
+   "note": "Extrait de 5.2 à 6.2 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "gaulois_refractaires",
+   "nom": "Macron, « gaulois réfractaires »",
+   "auteur": "LeHuffPost, « Macron ironise sur le \"Gaulois réfractaire au changement\" »",
+   "source": "https://www.youtube.com/watch?v=6UHrvADhJVk",
+   "note": "Extrait de 16.9 à 19.9 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "hologrammes",
+   "nom": "Mélenchon, « le temps des hologrammes »",
+   "auteur": "CNEWS, « Mélenchon se dédouble, en hologramme »",
+   "source": "https://www.youtube.com/watch?v=HzB7rT5_Ur4",
+   "note": "Extrait de None à None s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "immunite_ouvriere",
+   "nom": "Poutou, « immunité ouvrière »",
+   "auteur": "Là-bas si j'y suis, « The “Great Debate” of the “little ones” »",
+   "source": "https://www.youtube.com/watch?v=VBQ3ybTCHgQ",
+   "note": "Extrait de 326.2 à 326.6 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "minable",
+   "nom": "Cohn-Bendit, « minable »",
+   "auteur": "INA Politique, « Clash entre François Bayrou et Daniel Cohn Bendit sur le plateau de \"A vous de juger\" - Archive INA »",
+   "source": "https://www.youtube.com/watch?v=qFrg5Rj1BSk",
+   "note": "Extrait de 84.4 à 84.7 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "moi_president",
+   "nom": "Hollande, « moi président »",
+   "auteur": "Public Sénat, « What remains of Hollande's \"I, President of the Republic\"? »",
+   "source": "https://www.youtube.com/watch?v=2CvTMcpy83Y",
+   "note": "Extrait de 0.8 à 1.8 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "paquets_heures",
+   "nom": "Oudéa-Castéra, « paquets d'heures »",
+   "auteur": "TF1 INFO, « Amélie Oudéa-Castera : première polémique pour la ministre »",
+   "source": "https://www.youtube.com/watch?v=6lUm0jlPiGQ",
+   "note": "Extrait de 36.5 à 37.5 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "personne_sacree",
+   "nom": "Mélenchon, « ma personne est sacrée »",
+   "auteur": "Top Memes France, « Jean-Luc Mélenchon - \"Don't touch me, I am inviolable\" »",
+   "source": "https://www.youtube.com/watch?v=upWu3-4DA9g",
+   "note": "Extrait de 4.1 à 6.1 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "pisse_dessus",
+   "nom": "Glucksmann, « on leur pisse dessus »",
+   "auteur": "À gauche, « « On leur pisse dessus » Glucksmann se lâche sur Mélenchon et Le Pen en réunion privée @LeMédia-TV  »",
+   "source": "https://www.youtube.com/watch?v=LwG31EnXXek",
+   "note": "Extrait de 30.5 à 31.4 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "pognon_de_dingue",
+   "nom": "Macron, « pognon de dingue »",
+   "auteur": "LeHuffPost, « Macron Stages His Social Philosophy: \"We Spend Crazy Amounts of Money and the Poor Remain Poor\" »",
+   "source": "https://www.youtube.com/watch?v=79a-1d_g3S0",
+   "note": "Extrait de 38.3 à 38.9 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "probite_intacte",
+   "nom": "Schiappa, « probité »",
+   "auteur": "Public Sénat, « Marianne Fund: Marlène Schiappa \"supports the opening of any possible commission of inquiry\" »",
+   "source": "https://www.youtube.com/watch?v=cEXzov-Z4aE",
+   "note": "Extrait de 157.2 à 157.4 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "quand_il_y_en_a_un",
+   "nom": "Hortefeux, « quand il y en a un »",
+   "auteur": "INA Politique, « Propos racistes de Brice Hortefeux »",
+   "source": "https://www.youtube.com/watch?v=Rug1ULJFvqY",
+   "note": "Extrait de 75.2 à 76.6 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "racaille",
+   "nom": "Sarkozy, « cette bande de racailles »",
+   "auteur": "sterd007, « Sarkozy racailles 26 octobre 2005 Argenteuil »",
+   "source": "https://www.youtube.com/watch?v=Bs2TiewZWXI",
+   "note": "Extrait de 3.4 à 4.4 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "republique_cest_moi",
+   "nom": "Mélenchon, « la république c'est moi »",
+   "auteur": "euronews (en français), « Mélenchon and the \"political police\": images of the brawl »",
+   "source": "https://www.youtube.com/watch?v=ObgDNk2GXEk",
+   "note": "Extrait de 17.6 à 20.1 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "se_canto",
+   "nom": "Lassalle, « se canto »",
+   "auteur": "INA Politique, « 2003 : Jean Lassalle, député chanteur du Béarn | Archive INA »",
+   "source": "https://www.youtube.com/watch?v=WPKTeMZmi18",
+   "note": "Extrait de None à None s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "siege_ciotti",
+   "nom": "Ciotti, « je suis le président »",
+   "auteur": "Trouble Fait, « LÉGISLATIVES : Les coulisses d’une fin peu glorieuse pour LR et Reconquête. »",
+   "source": "https://www.youtube.com/watch?v=f5mYoETB508",
+   "note": "Extrait de 1821.6 à 1822.2 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  },
+  {
+   "id": "traverse_la_rue",
+   "nom": "Macron, « je traverse la rue »",
+   "auteur": "euronews (en français), « \"I'll just cross the street and find you one\": Macron turns into a job center advisor »",
+   "source": "https://www.youtube.com/watch?v=FHMy6DhOXrI",
+   "note": "Extrait de 41.2 à 43.6 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
+  }
+ ],
+ "logos": [
+  {
+   "id": "bfmtv",
+   "fichier": "File:Logo BFMTV 2019.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Logo_BFMTV_2019.svg",
+   "licence": "Public domain",
+   "auteur": "RMC BFM"
+  },
+  {
+   "id": "c_a_vous",
+   "fichier": "File:Logo C à vous.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Logo_C_%C3%A0_vous.svg",
+   "licence": "CC BY-SA 4.0",
+   "auteur": "Lenny Ellipse"
+  },
+  {
+   "id": "cnews",
+   "fichier": "File:Logo CNews 2016.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Logo_CNews_2016.svg",
+   "licence": "non précisée",
+   "auteur": "Canal+"
+  },
+  {
+   "id": "france2",
+   "fichier": "File:France 2 - logo 2018.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:France_2_-_logo_2018.svg",
+   "licence": "Public domain",
+   "auteur": "France Télévisions"
+  },
+  {
+   "id": "france3_centre",
+   "fichier": "File:France 3 Centre-Val de Loire - Logo 2018.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:France_3_Centre-Val_de_Loire_-_Logo_2018.svg",
+   "licence": "Public domain",
+   "auteur": "France Télévisions"
+  },
+  {
+   "id": "quotidien",
+   "fichier": "File:Quotidien Logo.png",
+   "source": "https://commons.wikimedia.org/wiki/File:Quotidien_Logo.png",
+   "licence": "Public domain",
+   "auteur": "TMC (Télé Monté-Carlo)"
+  },
+  {
+   "id": "tf1",
+   "fichier": "File:Logo TF1 2013.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:Logo_TF1_2013.svg",
+   "licence": "Public domain",
+   "auteur": "Patrick Delobelle (Naked Compagnie) for TF1"
+  },
+  {
+   "id": "tf1_20h",
+   "fichier": "File:Logo LE20H TF1.png",
+   "source": "https://commons.wikimedia.org/wiki/File:Logo_LE20H_TF1.png",
+   "licence": "CC BY-SA 4.0",
+   "auteur": "MyTF1 - Olivier Gérard Salas (concepteur artistique pour la Direction artistique de l'info du groupe TF1)"
+  },
+  {
+   "id": "w9",
+   "fichier": "File:W9 2018.svg",
+   "source": "https://commons.wikimedia.org/wiki/File:W9_2018.svg",
+   "licence": "Public domain",
+   "auteur": "Gédéon/Groupe M6"
+  }
+ ]
+}

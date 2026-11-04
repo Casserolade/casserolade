@@ -1,0 +1,2 @@
+/* The bestiary scrolls, unlike the game's table: a page background of its own. */
+body { min-height: 100dvh; background: radial-gradient(ellipse at 50% 0%, var(--color-surface-raised), var(--color-background) 60%) fixed; }

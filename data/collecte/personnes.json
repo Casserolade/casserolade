@@ -1,0 +1,632 @@
+[
+ {
+  "id": "boyard",
+  "name": "Louis Boyard",
+  "group": "insoumis"
+ },
+ {
+  "id": "leaument",
+  "name": "Antoine Léaument",
+  "group": "insoumis"
+ },
+ {
+  "id": "portes",
+  "name": "Thomas Portes",
+  "group": "insoumis"
+ },
+ {
+  "id": "trouve",
+  "name": "Aurélie Trouvé",
+  "group": "insoumis"
+ },
+ {
+  "id": "chikirou",
+  "name": "Sophia Chikirou",
+  "group": "insoumis"
+ },
+ {
+  "id": "bompard",
+  "name": "Manuel Bompard",
+  "group": "insoumis"
+ },
+ {
+  "id": "panot",
+  "name": "Mathilde Panot",
+  "group": "insoumis"
+ },
+ {
+  "id": "ruffin",
+  "name": "François Ruffin",
+  "group": "insoumis"
+ },
+ {
+  "id": "melenchon",
+  "name": "Jean-Luc Mélenchon",
+  "group": "insoumis"
+ },
+ {
+  "id": "thevenoud",
+  "name": "Thomas Thévenoud",
+  "group": "socialistes"
+ },
+ {
+  "id": "bouamrane",
+  "name": "Karim Bouamrane",
+  "group": "socialistes"
+ },
+ {
+  "id": "guedj",
+  "name": "Jérôme Guedj",
+  "group": "socialistes"
+ },
+ {
+  "id": "vallaud",
+  "name": "Boris Vallaud",
+  "group": "socialistes"
+ },
+ {
+  "id": "cahuzac",
+  "name": "Jérôme Cahuzac",
+  "group": "socialistes"
+ },
+ {
+  "id": "hidalgo",
+  "name": "Anne Hidalgo",
+  "group": "socialistes"
+ },
+ {
+  "id": "valls",
+  "name": "Manuel Valls",
+  "group": "socialistes"
+ },
+ {
+  "id": "faure",
+  "name": "Olivier Faure",
+  "group": "socialistes"
+ },
+ {
+  "id": "cazeneuve",
+  "name": "Bernard Cazeneuve",
+  "group": "socialistes"
+ },
+ {
+  "id": "royal",
+  "name": "Ségolène Royal",
+  "group": "socialistes"
+ },
+ {
+  "id": "glucksmann",
+  "name": "Raphaël Glucksmann",
+  "group": "socialistes"
+ },
+ {
+  "id": "hollande",
+  "name": "François Hollande",
+  "group": "socialistes"
+ },
+ {
+  "id": "doucet",
+  "name": "Grégory Doucet",
+  "group": "ecologistes"
+ },
+ {
+  "id": "lucas",
+  "name": "Benjamin Lucas-Lundy",
+  "group": "ecologistes"
+ },
+ {
+  "id": "batho",
+  "name": "Delphine Batho",
+  "group": "ecologistes"
+ },
+ {
+  "id": "hurmic",
+  "name": "Pierre Hurmic",
+  "group": "ecologistes"
+ },
+ {
+  "id": "mamere",
+  "name": "Noël Mamère",
+  "group": "ecologistes"
+ },
+ {
+  "id": "piolle",
+  "name": "Éric Piolle",
+  "group": "ecologistes"
+ },
+ {
+  "id": "duflot",
+  "name": "Cécile Duflot",
+  "group": "ecologistes"
+ },
+ {
+  "id": "cohn_bendit",
+  "name": "Daniel Cohn-Bendit",
+  "group": "ecologistes"
+ },
+ {
+  "id": "jadot",
+  "name": "Yannick Jadot",
+  "group": "ecologistes"
+ },
+ {
+  "id": "rousseau",
+  "name": "Sandrine Rousseau",
+  "group": "ecologistes"
+ },
+ {
+  "id": "tondelier",
+  "name": "Marine Tondelier",
+  "group": "ecologistes"
+ },
+ {
+  "id": "thevenot",
+  "name": "Prisca Thevenot",
+  "group": "macronie"
+ },
+ {
+  "id": "ndiaye",
+  "name": "Sibeth Ndiaye",
+  "group": "macronie"
+ },
+ {
+  "id": "bregeon",
+  "name": "Maud Bregeon",
+  "group": "macronie"
+ },
+ {
+  "id": "maillard",
+  "name": "Sylvain Maillard",
+  "group": "macronie"
+ },
+ {
+  "id": "castaner",
+  "name": "Christophe Castaner",
+  "group": "macronie"
+ },
+ {
+  "id": "oudea",
+  "name": "Amélie Oudéa-Castéra",
+  "group": "macronie"
+ },
+ {
+  "id": "rugy",
+  "name": "François de Rugy",
+  "group": "macronie"
+ },
+ {
+  "id": "schiappa",
+  "name": "Marlène Schiappa",
+  "group": "macronie"
+ },
+ {
+  "id": "berge",
+  "name": "Aurore Bergé",
+  "group": "macronie"
+ },
+ {
+  "id": "dupond_moretti",
+  "name": "Éric Dupond-Moretti",
+  "group": "macronie"
+ },
+ {
+  "id": "lemaire",
+  "name": "Bruno Le Maire",
+  "group": "macronie"
+ },
+ {
+  "id": "darmanin",
+  "name": "Gérald Darmanin",
+  "group": "macronie"
+ },
+ {
+  "id": "philippe",
+  "name": "Édouard Philippe",
+  "group": "macronie"
+ },
+ {
+  "id": "lecornu",
+  "name": "Sébastien Lecornu",
+  "group": "macronie"
+ },
+ {
+  "id": "bayrou",
+  "name": "François Bayrou",
+  "group": "macronie"
+ },
+ {
+  "id": "attal",
+  "name": "Gabriel Attal",
+  "group": "macronie"
+ },
+ {
+  "id": "macron",
+  "name": "Emmanuel Macron",
+  "group": "macronie"
+ },
+ {
+  "id": "gueant",
+  "name": "Claude Guéant",
+  "group": "republicains"
+ },
+ {
+  "id": "tiberi",
+  "name": "Jean Tiberi",
+  "group": "republicains"
+ },
+ {
+  "id": "balkany",
+  "name": "Patrick Balkany",
+  "group": "republicains"
+ },
+ {
+  "id": "hortefeux",
+  "name": "Brice Hortefeux",
+  "group": "republicains"
+ },
+ {
+  "id": "cope",
+  "name": "Jean-François Copé",
+  "group": "republicains"
+ },
+ {
+  "id": "morano",
+  "name": "Nadine Morano",
+  "group": "republicains"
+ },
+ {
+  "id": "lisnard",
+  "name": "David Lisnard",
+  "group": "republicains"
+ },
+ {
+  "id": "wauquiez",
+  "name": "Laurent Wauquiez",
+  "group": "republicains"
+ },
+ {
+  "id": "bertrand",
+  "name": "Xavier Bertrand",
+  "group": "republicains"
+ },
+ {
+  "id": "ciotti",
+  "name": "Éric Ciotti",
+  "group": "republicains"
+ },
+ {
+  "id": "retailleau",
+  "name": "Bruno Retailleau",
+  "group": "republicains"
+ },
+ {
+  "id": "pecresse",
+  "name": "Valérie Pécresse",
+  "group": "republicains"
+ },
+ {
+  "id": "fillon",
+  "name": "François Fillon",
+  "group": "republicains"
+ },
+ {
+  "id": "dati",
+  "name": "Rachida Dati",
+  "group": "republicains"
+ },
+ {
+  "id": "sarkozy",
+  "name": "Nicolas Sarkozy",
+  "group": "republicains"
+ },
+ {
+  "id": "odoul",
+  "name": "Julien Odoul",
+  "group": "rn"
+ },
+ {
+  "id": "houssin",
+  "name": "Timothée Houssin",
+  "group": "rn"
+ },
+ {
+  "id": "chenu",
+  "name": "Sébastien Chenu",
+  "group": "rn"
+ },
+ {
+  "id": "lavalette",
+  "name": "Laure Lavalette",
+  "group": "rn"
+ },
+ {
+  "id": "tanguy",
+  "name": "Jean-Philippe Tanguy",
+  "group": "rn"
+ },
+ {
+  "id": "aliot",
+  "name": "Louis Aliot",
+  "group": "rn"
+ },
+ {
+  "id": "marechal",
+  "name": "Marion Maréchal",
+  "group": "rn"
+ },
+ {
+  "id": "bardella",
+  "name": "Jordan Bardella",
+  "group": "rn"
+ },
+ {
+  "id": "jmlp",
+  "name": "Jean-Marie Le Pen",
+  "group": "rn"
+ },
+ {
+  "id": "lepen",
+  "name": "Marine Le Pen",
+  "group": "rn"
+ },
+ {
+  "id": "rigault",
+  "name": "Stanislas Rigault",
+  "group": "reconquete"
+ },
+ {
+  "id": "bay",
+  "name": "Nicolas Bay",
+  "group": "reconquete"
+ },
+ {
+  "id": "peltier",
+  "name": "Guillaume Peltier",
+  "group": "reconquete"
+ },
+ {
+  "id": "dupont_aignan",
+  "name": "Nicolas Dupont-Aignan",
+  "group": "reconquete"
+ },
+ {
+  "id": "asselineau",
+  "name": "François Asselineau",
+  "group": "reconquete"
+ },
+ {
+  "id": "philippot",
+  "name": "Florian Philippot",
+  "group": "reconquete"
+ },
+ {
+  "id": "knafo",
+  "name": "Sarah Knafo",
+  "group": "reconquete"
+ },
+ {
+  "id": "villiers",
+  "name": "Philippe de Villiers",
+  "group": "reconquete"
+ },
+ {
+  "id": "zemmour",
+  "name": "Éric Zemmour",
+  "group": "reconquete"
+ },
+ {
+  "id": "kazib",
+  "name": "Anasse Kazib",
+  "group": "civile"
+ },
+ {
+  "id": "cheminade",
+  "name": "Jacques Cheminade",
+  "group": "civile"
+ },
+ {
+  "id": "durif",
+  "name": "Sylvain Durif",
+  "group": "civile"
+ },
+ {
+  "id": "lalanne",
+  "name": "Francis Lalanne",
+  "group": "civile"
+ },
+ {
+  "id": "arthaud",
+  "name": "Nathalie Arthaud",
+  "group": "civile"
+ },
+ {
+  "id": "branco",
+  "name": "Juan Branco",
+  "group": "civile"
+ },
+ {
+  "id": "roussel",
+  "name": "Fabien Roussel",
+  "group": "civile"
+ },
+ {
+  "id": "poutou",
+  "name": "Philippe Poutou",
+  "group": "civile"
+ },
+ {
+  "id": "lassalle",
+  "name": "Jean Lassalle",
+  "group": "civile"
+ },
+ {
+  "id": "chirac",
+  "name": "Jacques Chirac",
+  "group": "civile"
+ },
+ {
+  "id": "mitterrand",
+  "name": "François Mitterrand",
+  "group": "civile"
+ },
+ {
+  "id": "hanouna",
+  "name": "Cyril Hanouna",
+  "group": "animateur"
+ },
+ {
+  "id": "praud",
+  "name": "Pascal Praud",
+  "group": "animateur"
+ },
+ {
+  "id": "ppda",
+  "name": "Patrick Poivre d'Arvor",
+  "group": "animateur"
+ },
+ {
+  "id": "bouleau",
+  "name": "Gilles Bouleau",
+  "group": "animateur"
+ },
+ {
+  "id": "barthes",
+  "name": "Yann Barthès",
+  "group": "animateur"
+ },
+ {
+  "id": "lemoine",
+  "name": "Anne-Élisabeth Lemoine",
+  "group": "animateur"
+ },
+ {
+  "id": "duhamel",
+  "name": "Benjamin Duhamel",
+  "group": "animateur"
+ },
+ {
+  "id": "salame",
+  "name": "Léa Salamé",
+  "group": "animateur"
+ },
+ {
+  "id": "ferrari",
+  "name": "Laurence Ferrari",
+  "group": "animateur"
+ },
+ {
+  "id": "malherbe",
+  "name": "Apolline de Malherbe",
+  "group": "animateur"
+ },
+ {
+  "id": "aphatie",
+  "name": "Jean-Michel Aphatie",
+  "group": "animateur"
+ },
+ {
+  "id": "pujadas",
+  "name": "David Pujadas",
+  "group": "animateur"
+ },
+ {
+  "id": "delogu",
+  "name": "Sébastien Delogu",
+  "group": "insoumis"
+ },
+ {
+  "id": "guette",
+  "name": "Clémence Guetté",
+  "group": "insoumis"
+ },
+ {
+  "id": "tache",
+  "name": "Aurélien Taché",
+  "group": "insoumis"
+ },
+ {
+  "id": "coquerel",
+  "name": "Éric Coquerel",
+  "group": "insoumis"
+ },
+ {
+  "id": "aubry",
+  "name": "Manon Aubry",
+  "group": "insoumis"
+ },
+ {
+  "id": "lafont",
+  "name": "Samuel Lafont",
+  "group": "reconquete"
+ },
+ {
+  "id": "yann_bompard",
+  "name": "Yann Bompard",
+  "group": "reconquete"
+ },
+ {
+  "id": "poisson",
+  "name": "Jean-Frédéric Poisson",
+  "group": "reconquete"
+ },
+ {
+  "id": "messiha",
+  "name": "Jean Messiha",
+  "group": "reconquete"
+ },
+ {
+  "id": "fournas",
+  "name": "Grégoire de Fournas",
+  "group": "rn"
+ },
+ {
+  "id": "mc_lepen",
+  "name": "Marie-Caroline Le Pen",
+  "group": "rn"
+ },
+ {
+  "id": "mariani",
+  "name": "Thierry Mariani",
+  "group": "rn"
+ },
+ {
+  "id": "de_gaulle",
+  "name": "Charles de Gaulle",
+  "group": "civile"
+ },
+ {
+  "id": "lepers",
+  "name": "Julien Lepers",
+  "group": "animateur"
+ },
+ {
+  "id": "braun_pivet",
+  "name": "Yaël Braun-Pivet",
+  "group": "animateur"
+ },
+ {
+  "id": "larcher",
+  "name": "Gérard Larcher",
+  "group": "animateur"
+ },
+ {
+  "id": "fogiel",
+  "name": "Marc-Olivier Fogiel",
+  "group": "animateur"
+ },
+ {
+  "id": "lescure",
+  "name": "Pierre Lescure",
+  "group": "animateur"
+ },
+ {
+  "id": "barbier",
+  "name": "Christophe Barbier",
+  "group": "animateur"
+ },
+ {
+  "id": "lapix",
+  "name": "Anne-Sophie Lapix",
+  "group": "animateur"
+ }
+]

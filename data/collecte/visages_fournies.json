@@ -1,0 +1,44 @@
+{
+"bardella": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.196,
+"bouche": 0.135,
+"largeur": 0.509,
+"coins": 0.032,
+"yeux": 0.165,
+"sourcils": 0.14,
+"profil": 0.649,
+"taille": [
+560,
+864
+],
+"fichier": "assets/photos/fournies/bardella/monaco_rire_buste.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.499,
+"bouche": 0.116,
+"largeur": 0.521,
+"coins": 0.038,
+"yeux": 0.19,
+"sourcils": 0.146,
+"profil": 0.814,
+"taille": [
+309,
+363
+],
+"fichier": "assets/photos/fournies/bardella/monaco_rire_visage.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+}
+]
+}

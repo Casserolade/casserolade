@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=384, height=320" />
+  <title>Oiseaux</title>
+  <script src="gsap.min.js"></script>
+  <style>
+    html, body { margin: 0; background: transparent; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+    .layer { position: absolute; left: 0; top: 0; width: 384px; height: 320px; }
+    .bird { position: absolute; left: 0; top: 0; width: 72px; height: 56px; }
+    .wing-up, .wing-down { position: absolute; left: 0; top: 0; }
+    #dropping, #splat { position: absolute; }
+    #dropping { left: 0; top: 0; width: 22px; height: 30px; }
+    #splat { left: 136px; top: 246px; width: 112px; height: 62px; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-width="384" data-height="320" data-duration="1">
+    <div class="clip layer" id="flock" data-start="0" data-duration="1" data-track-index="0">
+      <svg id="splat" viewBox="0 0 112 62">
+        <polygon points="8,44 28,30 22,12 46,26 58,4 68,26 94,14 86,34 106,46 72,48 62,60 48,50" fill="#fff" stroke="#111" stroke-width="4"/>
+        <polygon points="46,36 58,22 70,36 60,44" fill="#c9b98a"/>
+      </svg>
+      <svg id="dropping" viewBox="0 0 22 30">
+        <polygon points="11,1 20,16 16,27 6,27 2,16" fill="#fff" stroke="#111" stroke-width="3"/></svg>
+      <div class="bird" id="bird-0"></div>
+      <div class="bird" id="bird-1"></div>
+      <div class="bird" id="bird-2"></div>
+    </div>
+  </div>
+  <script>
+    /* Twelve hand-set poses, one per frame at 12 fps, so the loop is exact and choppy on purpose. */
+    const FRAMES = 12;
+    const FRAME_TIME = 1 / FRAMES;
+    const ORBIT = { x: 192, y: 118, radiusX: 150, radiusY: 56 };
+    const BIRD_COLORS = ["#ffd21f", "#ff7ab8", "#6fd6ff"];
+    const DROP_FRAME = 3;
+    const LAND_FRAME = 7;
+
+    function birdSvg(color) {
+      const body = `<polygon points="14,26 34,16 56,24 50,44 22,44" fill="${color}" stroke="#111" stroke-width="4"/>
+        <polygon points="54,26 70,30 54,36" fill="#ff8a1f" stroke="#111" stroke-width="3"/>
+        <circle cx="44" cy="26" r="4.5" fill="#111"/>
+        <polygon points="14,30 2,24 6,40" fill="${color}" stroke="#111" stroke-width="3"/>`;
+      const wingUp = `<polygon class="wing-up" points="26,26 18,4 42,22" fill="#fff" stroke="#111" stroke-width="3"/>`;
+      const wingDown = `<polygon class="wing-down" points="26,28 20,52 42,32" fill="#fff" stroke="#111" stroke-width="3"/>`;
+      return `<svg width="72" height="56" viewBox="0 0 72 56">${body}${wingUp}${wingDown}</svg>`;
+    }
+
+    function orbitPose(birdIndex, frame) {
+      const angle = ((frame / FRAMES) + birdIndex / 3) * Math.PI * 2;
+      return {
+        x: ORBIT.x + Math.cos(angle) * ORBIT.radiusX - 36,
+        y: ORBIT.y + Math.sin(angle) * ORBIT.radiusY - 28,
+        facesRight: Math.sin(angle) > 0 ? -1 : 1,
+      };
+    }
+
+    const tl = gsap.timeline({ paused: true });
+    BIRD_COLORS.forEach((color, birdIndex) => {
+      const element = document.getElementById(`bird-${birdIndex}`);
+      element.innerHTML = birdSvg(color);
+      for (let frame = 0; frame < FRAMES; frame += 1) {
+        const pose = orbitPose(birdIndex, frame);
+        const time = frame * FRAME_TIME;
+        tl.set(element, { x: pose.x, y: pose.y, scaleX: pose.facesRight }, time);
+        tl.set(element.querySelector(".wing-up"), { opacity: frame % 2 === 0 ? 1 : 0 }, time);
+        tl.set(element.querySelector(".wing-down"), { opacity: frame % 2 === 0 ? 0 : 1 }, time);
+      }
+    });
+
+    const dropStart = orbitPose(0, DROP_FRAME);
+    tl.set("#dropping", { opacity: 0, x: dropStart.x + 26, y: dropStart.y + 44 }, 0);
+    tl.set("#dropping", { opacity: 1 }, DROP_FRAME * FRAME_TIME);
+    tl.to("#dropping", { x: 182, y: 256, duration: (LAND_FRAME - DROP_FRAME) * FRAME_TIME, ease: "power1.in" },
+      DROP_FRAME * FRAME_TIME);
+    tl.set("#dropping", { opacity: 0 }, LAND_FRAME * FRAME_TIME);
+    tl.set("#splat", { opacity: 0, scale: 0.5, transformOrigin: "50% 80%" }, 0);
+    tl.set("#splat", { opacity: 1, scale: 1 }, LAND_FRAME * FRAME_TIME);
+
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>
