@@ -1,0 +1,32 @@
+@font-face { font-family: "Bangers"; src: url("/assets/game/fontes/bangers-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Alegreya Sans SC"; font-weight: 800; src: url("/assets/game/fontes/alegreya-sans-sc-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Alegreya Sans"; font-weight: 500; src: url("/assets/game/fontes/alegreya-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Alegreya Sans"; font-weight: 700; src: url("/assets/game/fontes/alegreya-sans-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  --page: #0a0f24;
+  --ink: #f3efe3;
+  --muted: #a9b2cc;
+  --accent: #f2c230;
+  --panel: #161d3a;
+  --line: #36406b;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: "Alegreya Sans", system-ui, sans-serif; font-weight: 500; }
+main { max-width: 1280px; margin: 0 auto; padding: 16px; }
+h1 { margin: 0 0 8px; font: 400 28px/1.1 "Bangers", sans-serif; letter-spacing: 1px; color: var(--accent); }
+#status { margin: 0; min-height: 1.2em; color: var(--muted); }
+#stage canvas { display: block; width: 100% !important; height: auto !important; border-radius: 6px; }
+
+#controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+.scene { flex: 1 0 100%; margin: 0; }
+.scene button { width: 100%; padding: 14px; font-size: 20px; font-weight: 700; background: var(--accent); color: #1b1505; border-color: var(--accent); }
+fieldset { flex: 1 1 280px; margin: 0; padding: 8px 10px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+legend { padding: 0 6px; color: var(--muted); }
+button { margin: 3px 2px; padding: 8px 12px; font: inherit; color: var(--ink); background: #252f58; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; }
+button:hover { background: #33407a; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.scene button:hover { background: #ffd65a; }
+button[aria-pressed="true"] { background: var(--ink); color: #111; font-weight: 700; }
+button[aria-pressed="true"]::before { content: "✓ "; }

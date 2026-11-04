@@ -1,0 +1,17 @@
+node_modules/
+__pycache__/
+dist/
+
+# Raw material, about 1 GB: the game never loads it.
+assets/photos/
+assets/audio/raw/
+assets/coups/
+
+# Downloaded models.
+tools/graphisme/modeles/
+
+# MMR of anonymous players, written by the game server.
+data/serveur/
+
+# Rendus de travail, gardés en local.
+assets/maquette/

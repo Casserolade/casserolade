@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=512, height=640" />
+  <title>Retour en politique</title>
+  <script src="gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Bangers"; src: url("fontes/bangers.woff2") format("woff2"); }
+    html, body { margin: 0; background: transparent; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+    .layer { position: absolute; left: 0; top: 0; width: 512px; height: 640px; }
+    .word { position: absolute; left: 0; width: 512px; text-align: center; font-family: "Bangers"; font-weight: 400;
+      letter-spacing: 3px; color: #ffe01a; -webkit-text-stroke: 5px #111; paint-order: stroke fill; white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-width="512" data-height="640" data-duration="1.5">
+    <div class="clip layer" data-start="0" data-duration="1.5" data-track-index="0">
+      <svg class="layer" id="puff-left" viewBox="0 0 512 640"><polygon points="70,590 82,552 118,558 136,528 172,542 200,568 194,604 148,612 94,612" fill="#efe9d8" stroke="#111" stroke-width="5"/></svg>
+      <svg class="layer" id="puff-right" viewBox="0 0 512 640"><polygon points="442,590 430,552 394,558 376,528 340,542 312,568 318,604 364,612 418,612" fill="#efe9d8" stroke="#111" stroke-width="5"/></svg>
+      <div class="word" id="back-line-1" style="top:18px;font-size:56px;color:#fff">TIENS, ME</div>
+      <div class="word" id="back-line-2" style="top:96px;font-size:88px">REVOILÀ !</div>
+    </div>
+  </div>
+  <script>
+    /* 12 fps. Text and dust only: the rig does the limping, and wears the plaster. */
+    const tl = gsap.timeline({ paused: true });
+    [["#puff-left", -46], ["#puff-right", 46]].forEach(([puff, travel]) => {
+      tl.fromTo(puff, { opacity: 0, x: -travel, scale: 0.5, transformOrigin: "50% 92%" },
+        { opacity: 1, x: 0, scale: 1, duration: 0.17, ease: "power2.out" }, 0);
+      tl.to(puff, { x: travel * 0.5, y: -18, scale: 1.2, duration: 0.5, ease: "none" }, 0.17);
+      tl.to(puff, { opacity: 0, duration: 0.09 }, 0.67);
+    });
+    tl.fromTo("#back-line-1", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.09 }, 0.17);
+    tl.fromTo("#back-line-2", { opacity: 0, scale: 0.3, rotation: -5, transformOrigin: "50% 50%" },
+      { opacity: 1, scale: 1, duration: 0.09, ease: "back.out(3)" }, 0.33);
+    tl.to("#back-line-1", { opacity: 0, duration: 0.09 }, 1.33);
+    tl.to("#back-line-2", { opacity: 0, duration: 0.09 }, 1.33);
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

@@ -1,0 +1,8278 @@
+{
+"aliot": [
+{
+"visages": 6,
+"exploitable": true,
+"ratio": 0.195,
+"bouche": 0.029,
+"largeur": 0.388,
+"coins": 0.03,
+"yeux": 0.303,
+"sourcils": 0.131,
+"profil": 0.355,
+"taille": [
+720,
+480
+],
+"fichier": "assets/photos/galerie/aliot/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.274,
+"bouche": 0.094,
+"largeur": 0.373,
+"coins": -0.016,
+"yeux": 0.303,
+"sourcils": 0.128,
+"profil": 0.71,
+"taille": [
+927,
+618
+],
+"fichier": "assets/photos/galerie/aliot/02.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.32,
+"bouche": 0.002,
+"largeur": 0.358,
+"coins": -0.013,
+"yeux": 0.247,
+"sourcils": 0.116,
+"profil": 0.46,
+"taille": [
+691,
+926
+],
+"fichier": "assets/photos/galerie/aliot/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/aliot/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/aliot/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.46,
+"bouche": 0.001,
+"largeur": 0.34,
+"coins": 0.003,
+"yeux": 0.345,
+"sourcils": 0.131,
+"profil": 0.358,
+"taille": [
+818,
+1000
+],
+"fichier": "assets/photos/galerie/aliot/06.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.326,
+"bouche": 0.003,
+"largeur": 0.347,
+"coins": 0.004,
+"yeux": 0.373,
+"sourcils": 0.132,
+"profil": 0.371,
+"taille": [
+845,
+1000
+],
+"fichier": "assets/photos/galerie/aliot/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.211,
+"bouche": 0.002,
+"largeur": 0.34,
+"coins": 0.005,
+"yeux": 0.4,
+"sourcils": 0.137,
+"profil": 0.381,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/aliot/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"aphatie": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.156,
+"bouche": 0.026,
+"largeur": 0.384,
+"coins": 0.015,
+"yeux": 0.334,
+"sourcils": 0.128,
+"profil": 0.675,
+"taille": [
+567,
+757
+],
+"fichier": "assets/photos/galerie/aphatie/01.jpg",
+"tags": [],
+"garde": true
+}
+],
+"arthaud": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.398,
+"bouche": 0.074,
+"largeur": 0.434,
+"coins": 0.041,
+"yeux": 0.31,
+"sourcils": 0.105,
+"profil": 0.375,
+"taille": [
+645,
+866
+],
+"fichier": "assets/photos/galerie/arthaud/01.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 5,
+"exploitable": true,
+"ratio": 0.185,
+"bouche": 0.049,
+"largeur": 0.38,
+"coins": 0.004,
+"yeux": 0.335,
+"sourcils": 0.118,
+"profil": 0.929,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/arthaud/02.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.154,
+"bouche": 0.006,
+"largeur": 0.347,
+"coins": -0.013,
+"yeux": 0.264,
+"sourcils": 0.121,
+"profil": 0.131,
+"taille": [
+870,
+1000
+],
+"fichier": "assets/photos/galerie/arthaud/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/arthaud/04.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/arthaud/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.446,
+"bouche": 0.004,
+"largeur": 0.428,
+"coins": 0.008,
+"yeux": 0.213,
+"sourcils": 0.135,
+"profil": 0.111,
+"taille": [
+595,
+900
+],
+"fichier": "assets/photos/galerie/arthaud/06.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.443,
+"bouche": 0.003,
+"largeur": 0.445,
+"coins": 0.011,
+"yeux": 0.226,
+"sourcils": 0.133,
+"profil": 0.085,
+"taille": [
+675,
+900
+],
+"fichier": "assets/photos/galerie/arthaud/07.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.444,
+"bouche": 0.004,
+"largeur": 0.455,
+"coins": 0.013,
+"yeux": 0.245,
+"sourcils": 0.133,
+"profil": 0.078,
+"taille": [
+754,
+900
+],
+"fichier": "assets/photos/galerie/arthaud/08.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+}
+],
+"asselineau": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.162,
+"bouche": 0.06,
+"largeur": 0.406,
+"coins": 0.002,
+"yeux": 0.247,
+"sourcils": 0.126,
+"profil": 0.162,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/asselineau/01.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.425,
+"bouche": 0.002,
+"largeur": 0.391,
+"coins": 0.0,
+"yeux": 0.264,
+"sourcils": 0.108,
+"profil": 0.198,
+"taille": [
+777,
+1000
+],
+"fichier": "assets/photos/galerie/asselineau/02.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.188,
+"bouche": 0.005,
+"largeur": 0.365,
+"coins": -0.027,
+"yeux": 0.241,
+"sourcils": 0.132,
+"profil": 0.185,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/asselineau/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.261,
+"bouche": 0.005,
+"largeur": 0.415,
+"coins": -0.007,
+"yeux": 0.255,
+"sourcils": 0.115,
+"profil": 0.191,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/asselineau/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"attal": [
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/attal/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/attal/02.jpg",
+"garde": false
+},
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/attal/03.jpg",
+"garde": false
+},
+{
+"visages": 6,
+"exploitable": false,
+"fichier": "assets/photos/galerie/attal/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/attal/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/attal/06.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.206,
+"bouche": 0.01,
+"largeur": 0.324,
+"coins": -0.015,
+"yeux": 0.461,
+"sourcils": 0.117,
+"profil": 0.933,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/attal/07.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.184,
+"bouche": 0.074,
+"largeur": 0.473,
+"coins": 0.019,
+"yeux": 0.248,
+"sourcils": 0.122,
+"profil": 0.318,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/attal/08.jpg",
+"garde": false
+}
+],
+"balkany": [
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.292,
+"bouche": 0.01,
+"largeur": 0.4,
+"coins": 0.017,
+"yeux": 0.356,
+"sourcils": 0.141,
+"profil": 0.22,
+"taille": [
+960,
+641
+],
+"fichier": "assets/photos/galerie/balkany/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.217,
+"bouche": 0.053,
+"largeur": 0.459,
+"coins": 0.006,
+"yeux": 0.271,
+"sourcils": 0.123,
+"profil": 0.305,
+"taille": [
+811,
+1000
+],
+"fichier": "assets/photos/galerie/balkany/02.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+}
+],
+"bardella": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.277,
+"bouche": 0.016,
+"largeur": 0.352,
+"coins": -0.003,
+"yeux": 0.341,
+"sourcils": 0.114,
+"profil": 0.063,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/bardella/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bardella/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bardella/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.499,
+"bouche": 0.038,
+"largeur": 0.373,
+"coins": -0.01,
+"yeux": 0.359,
+"sourcils": 0.143,
+"profil": 0.228,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/bardella/04.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.262,
+"bouche": 0.051,
+"largeur": 0.37,
+"coins": -0.01,
+"yeux": 0.334,
+"sourcils": 0.129,
+"profil": 0.23,
+"taille": [
+960,
+983
+],
+"fichier": "assets/photos/galerie/bardella/05.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.327,
+"bouche": 0.058,
+"largeur": 0.489,
+"coins": 0.056,
+"yeux": 0.283,
+"sourcils": 0.124,
+"profil": 0.105,
+"taille": [
+737,
+1000
+],
+"fichier": "assets/photos/galerie/bardella/06.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.325,
+"bouche": 0.059,
+"largeur": 0.492,
+"coins": 0.057,
+"yeux": 0.29,
+"sourcils": 0.123,
+"profil": 0.107,
+"taille": [
+737,
+1000
+],
+"fichier": "assets/photos/galerie/bardella/07.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.239,
+"bouche": 0.06,
+"largeur": 0.49,
+"coins": 0.056,
+"yeux": 0.285,
+"sourcils": 0.125,
+"profil": 0.109,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/bardella/08.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"batho": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.316,
+"bouche": 0.025,
+"largeur": 0.345,
+"coins": 0.009,
+"yeux": 0.412,
+"sourcils": 0.121,
+"profil": 0.959,
+"taille": [
+752,
+1000
+],
+"fichier": "assets/photos/galerie/batho/01.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.245,
+"bouche": 0.032,
+"largeur": 0.355,
+"coins": 0.004,
+"yeux": 0.349,
+"sourcils": 0.123,
+"profil": 0.974,
+"taille": [
+752,
+1000
+],
+"fichier": "assets/photos/galerie/batho/02.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.445,
+"bouche": 0.022,
+"largeur": 0.297,
+"coins": -0.022,
+"yeux": 0.385,
+"sourcils": 0.121,
+"profil": 0.374,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/batho/03.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.311,
+"bouche": 0.011,
+"largeur": 0.347,
+"coins": -0.026,
+"yeux": 0.453,
+"sourcils": 0.132,
+"profil": 0.976,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/batho/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.304,
+"bouche": 0.018,
+"largeur": 0.304,
+"coins": -0.021,
+"yeux": 0.427,
+"sourcils": 0.115,
+"profil": 0.877,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/batho/05.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/batho/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.387,
+"bouche": 0.015,
+"largeur": 0.324,
+"coins": -0.019,
+"yeux": 0.73,
+"sourcils": 0.115,
+"profil": 0.967,
+"taille": [
+658,
+877
+],
+"fichier": "assets/photos/galerie/batho/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.354,
+"bouche": 0.021,
+"largeur": 0.297,
+"coins": -0.023,
+"yeux": 0.607,
+"sourcils": 0.124,
+"profil": 0.913,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/batho/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"bay": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.475,
+"bouche": 0.052,
+"largeur": 0.481,
+"coins": 0.049,
+"yeux": 0.312,
+"sourcils": 0.1,
+"profil": 0.086,
+"taille": [
+778,
+1000
+],
+"fichier": "assets/photos/galerie/bay/01.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.213,
+"bouche": 0.028,
+"largeur": 0.381,
+"coins": -0.0,
+"yeux": 0.309,
+"sourcils": 0.11,
+"profil": 0.271,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bay/02.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.378,
+"bouche": 0.067,
+"largeur": 0.35,
+"coins": 0.022,
+"yeux": 0.524,
+"sourcils": 0.132,
+"profil": 0.97,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bay/03.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.216,
+"bouche": 0.095,
+"largeur": 0.393,
+"coins": 0.018,
+"yeux": 0.311,
+"sourcils": 0.105,
+"profil": 0.964,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bay/04.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.447,
+"bouche": 0.028,
+"largeur": 0.345,
+"coins": 0.003,
+"yeux": 0.382,
+"sourcils": 0.119,
+"profil": 0.749,
+"taille": [
+753,
+1000
+],
+"fichier": "assets/photos/galerie/bay/05.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bay/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.221,
+"bouche": 0.027,
+"largeur": 0.317,
+"coins": -0.013,
+"yeux": 0.379,
+"sourcils": 0.132,
+"profil": 0.468,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bay/07.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.319,
+"bouche": 0.054,
+"largeur": 0.492,
+"coins": 0.049,
+"yeux": 0.276,
+"sourcils": 0.095,
+"profil": 0.084,
+"taille": [
+779,
+1000
+],
+"fichier": "assets/photos/galerie/bay/08.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"bayrou": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bayrou/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bayrou/02.jpg",
+"garde": false
+}
+],
+"berge": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/berge/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.244,
+"bouche": 0.02,
+"largeur": 0.365,
+"coins": -0.013,
+"yeux": 0.468,
+"sourcils": 0.12,
+"profil": 0.944,
+"taille": [
+571,
+797
+],
+"fichier": "assets/photos/galerie/berge/02.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.192,
+"bouche": 0.025,
+"largeur": 0.367,
+"coins": -0.021,
+"yeux": 0.294,
+"sourcils": 0.147,
+"profil": 0.931,
+"taille": [
+960,
+599
+],
+"fichier": "assets/photos/galerie/berge/03.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/berge/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.251,
+"bouche": 0.041,
+"largeur": 0.32,
+"coins": -0.012,
+"yeux": 0.322,
+"sourcils": 0.129,
+"profil": 0.406,
+"taille": [
+590,
+856
+],
+"fichier": "assets/photos/galerie/berge/05.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.204,
+"bouche": 0.044,
+"largeur": 0.364,
+"coins": -0.012,
+"yeux": 0.341,
+"sourcils": 0.131,
+"profil": 0.457,
+"taille": [
+960,
+593
+],
+"fichier": "assets/photos/galerie/berge/06.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/berge/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/berge/08.jpg",
+"garde": false
+}
+],
+"bertrand": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bertrand/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bertrand/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bertrand/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.232,
+"bouche": 0.006,
+"largeur": 0.445,
+"coins": 0.031,
+"yeux": 0.279,
+"sourcils": 0.137,
+"profil": 0.514,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bertrand/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bertrand/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bertrand/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.168,
+"bouche": 0.01,
+"largeur": 0.362,
+"coins": 0.017,
+"yeux": 0.297,
+"sourcils": 0.119,
+"profil": 0.575,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/bertrand/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bertrand/08.jpg",
+"garde": false
+}
+],
+"bompard": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.452,
+"bouche": 0.037,
+"largeur": 0.346,
+"coins": -0.014,
+"yeux": 0.336,
+"sourcils": 0.131,
+"profil": 0.471,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/bompard/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.238,
+"bouche": 0.011,
+"largeur": 0.292,
+"coins": 0.01,
+"yeux": 0.285,
+"sourcils": 0.125,
+"profil": 0.013,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bompard/02.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.231,
+"bouche": 0.039,
+"largeur": 0.389,
+"coins": 0.006,
+"yeux": 0.243,
+"sourcils": 0.113,
+"profil": 0.322,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bompard/03.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bompard/04.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bompard/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bompard/06.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bompard/07.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.211,
+"bouche": 0.007,
+"largeur": 0.34,
+"coins": -0.012,
+"yeux": 0.344,
+"sourcils": 0.1,
+"profil": 0.78,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/bompard/08.jpg",
+"garde": false
+}
+],
+"bouamrane": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.358,
+"bouche": 0.011,
+"largeur": 0.424,
+"coins": 0.019,
+"yeux": 0.353,
+"sourcils": 0.131,
+"profil": 0.765,
+"taille": [
+684,
+922
+],
+"fichier": "assets/photos/galerie/bouamrane/01.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.308,
+"bouche": 0.009,
+"largeur": 0.425,
+"coins": 0.017,
+"yeux": 0.353,
+"sourcils": 0.135,
+"profil": 0.774,
+"taille": [
+960,
+882
+],
+"fichier": "assets/photos/galerie/bouamrane/02.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+}
+],
+"bouleau": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.282,
+"bouche": 0.008,
+"largeur": 0.475,
+"coins": 0.034,
+"yeux": 0.263,
+"sourcils": 0.128,
+"profil": 0.061,
+"taille": [
+565,
+800
+],
+"fichier": "assets/photos/galerie/bouleau/01.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bouleau/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bouleau/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/bouleau/04.jpg",
+"garde": false
+}
+],
+"boyard": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.367,
+"bouche": 0.002,
+"largeur": 0.385,
+"coins": 0.002,
+"yeux": 0.316,
+"sourcils": 0.116,
+"profil": 0.035,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/boyard/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.199,
+"bouche": 0.055,
+"largeur": 0.434,
+"coins": 0.017,
+"yeux": 0.268,
+"sourcils": 0.146,
+"profil": 0.307,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/boyard/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.298,
+"bouche": 0.016,
+"largeur": 0.365,
+"coins": -0.001,
+"yeux": 0.28,
+"sourcils": 0.113,
+"profil": 0.111,
+"taille": [
+562,
+1000
+],
+"fichier": "assets/photos/galerie/boyard/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.214,
+"bouche": 0.088,
+"largeur": 0.417,
+"coins": 0.008,
+"yeux": 0.375,
+"sourcils": 0.106,
+"profil": 0.955,
+"taille": [
+562,
+1000
+],
+"fichier": "assets/photos/galerie/boyard/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.185,
+"bouche": 0.011,
+"largeur": 0.388,
+"coins": -0.045,
+"yeux": 0.285,
+"sourcils": 0.141,
+"profil": 0.567,
+"taille": [
+562,
+1000
+],
+"fichier": "assets/photos/galerie/boyard/05.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/boyard/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/boyard/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/boyard/08.jpg",
+"garde": false
+}
+],
+"branco": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.225,
+"bouche": 0.07,
+"largeur": 0.393,
+"coins": -0.0,
+"yeux": 0.362,
+"sourcils": 0.108,
+"profil": 0.921,
+"taille": [
+659,
+1000
+],
+"fichier": "assets/photos/galerie/branco/01.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.254,
+"bouche": 0.009,
+"largeur": 0.356,
+"coins": -0.003,
+"yeux": 0.581,
+"sourcils": 0.111,
+"profil": 0.986,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/branco/02.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.237,
+"bouche": 0.006,
+"largeur": 0.355,
+"coins": -0.01,
+"yeux": 0.493,
+"sourcils": 0.118,
+"profil": 0.992,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/branco/03.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.486,
+"bouche": 0.018,
+"largeur": 0.361,
+"coins": -0.005,
+"yeux": 0.333,
+"sourcils": 0.12,
+"profil": 0.636,
+"taille": [
+857,
+1000
+],
+"fichier": "assets/photos/galerie/branco/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.245,
+"bouche": 0.04,
+"largeur": 0.403,
+"coins": 0.005,
+"yeux": 0.333,
+"sourcils": 0.103,
+"profil": 0.182,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/branco/05.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.209,
+"bouche": 0.02,
+"largeur": 0.395,
+"coins": 0.014,
+"yeux": 0.293,
+"sourcils": 0.119,
+"profil": 0.513,
+"taille": [
+960,
+723
+],
+"fichier": "assets/photos/galerie/branco/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.195,
+"bouche": 0.02,
+"largeur": 0.389,
+"coins": 0.01,
+"yeux": 0.298,
+"sourcils": 0.144,
+"profil": 0.798,
+"taille": [
+960,
+663
+],
+"fichier": "assets/photos/galerie/branco/07.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.286,
+"bouche": 0.015,
+"largeur": 0.389,
+"coins": 0.051,
+"yeux": 0.332,
+"sourcils": 0.102,
+"profil": 0.137,
+"taille": [
+951,
+1000
+],
+"fichier": "assets/photos/galerie/branco/08.jpg",
+"tags": [],
+"garde": true
+}
+],
+"cahuzac": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.128,
+"bouche": 0.023,
+"largeur": 0.403,
+"coins": 0.008,
+"yeux": 0.332,
+"sourcils": 0.095,
+"profil": 0.692,
+"taille": [
+433,
+1000
+],
+"fichier": "assets/photos/galerie/cahuzac/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cahuzac/02.jpg",
+"garde": false
+}
+],
+"castaner": [
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/castaner/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/castaner/02.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/castaner/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/castaner/04.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/castaner/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.32,
+"bouche": 0.002,
+"largeur": 0.417,
+"coins": 0.018,
+"yeux": 0.279,
+"sourcils": 0.103,
+"profil": 0.156,
+"taille": [
+720,
+684
+],
+"fichier": "assets/photos/galerie/castaner/06.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.543,
+"bouche": 0.047,
+"largeur": 0.448,
+"coins": 0.04,
+"yeux": 0.343,
+"sourcils": 0.094,
+"profil": 0.56,
+"taille": [
+598,
+1000
+],
+"fichier": "assets/photos/galerie/castaner/07.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.454,
+"bouche": 0.004,
+"largeur": 0.379,
+"coins": 0.002,
+"yeux": 0.262,
+"sourcils": 0.102,
+"profil": 0.131,
+"taille": [
+751,
+1000
+],
+"fichier": "assets/photos/galerie/castaner/08.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"cazeneuve": [
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cazeneuve/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cazeneuve/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.2,
+"bouche": 0.011,
+"largeur": 0.352,
+"coins": 0.001,
+"yeux": 0.318,
+"sourcils": 0.112,
+"profil": 0.067,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/cazeneuve/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cazeneuve/04.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.263,
+"bouche": 0.003,
+"largeur": 0.374,
+"coins": 0.003,
+"yeux": 0.217,
+"sourcils": 0.128,
+"profil": 0.123,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/cazeneuve/05.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.143,
+"bouche": 0.009,
+"largeur": 0.389,
+"coins": -0.02,
+"yeux": 0.397,
+"sourcils": 0.096,
+"profil": 0.755,
+"taille": [
+902,
+1000
+],
+"fichier": "assets/photos/galerie/cazeneuve/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.184,
+"bouche": 0.016,
+"largeur": 0.365,
+"coins": 0.006,
+"yeux": 0.323,
+"sourcils": 0.153,
+"profil": 0.539,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/cazeneuve/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.151,
+"bouche": 0.078,
+"largeur": 0.473,
+"coins": 0.05,
+"yeux": 0.332,
+"sourcils": 0.108,
+"profil": 0.25,
+"taille": [
+886,
+1000
+],
+"fichier": "assets/photos/galerie/cazeneuve/08.jpg",
+"garde": false
+}
+],
+"cheminade": [
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cheminade/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.354,
+"bouche": 0.039,
+"largeur": 0.412,
+"coins": 0.024,
+"yeux": 0.289,
+"sourcils": 0.106,
+"profil": 0.606,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/cheminade/02.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.352,
+"bouche": 0.038,
+"largeur": 0.411,
+"coins": 0.034,
+"yeux": 0.309,
+"sourcils": 0.103,
+"profil": 0.376,
+"taille": [
+960,
+652
+],
+"fichier": "assets/photos/galerie/cheminade/03.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.426,
+"bouche": 0.011,
+"largeur": 0.354,
+"coins": 0.01,
+"yeux": 0.298,
+"sourcils": 0.127,
+"profil": 0.264,
+"taille": [
+735,
+1000
+],
+"fichier": "assets/photos/galerie/cheminade/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.254,
+"bouche": 0.013,
+"largeur": 0.362,
+"coins": 0.01,
+"yeux": 0.326,
+"sourcils": 0.132,
+"profil": 0.293,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/cheminade/05.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"chenu": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.367,
+"bouche": 0.024,
+"largeur": 0.373,
+"coins": -0.003,
+"yeux": 0.339,
+"sourcils": 0.143,
+"profil": 0.282,
+"taille": [
+960,
+691
+],
+"fichier": "assets/photos/galerie/chenu/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chenu/02.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chenu/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.344,
+"bouche": 0.025,
+"largeur": 0.443,
+"coins": 0.019,
+"yeux": 0.266,
+"sourcils": 0.112,
+"profil": 0.076,
+"taille": [
+687,
+1000
+],
+"fichier": "assets/photos/galerie/chenu/04.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.287,
+"bouche": 0.073,
+"largeur": 0.416,
+"coins": 0.017,
+"yeux": 0.351,
+"sourcils": 0.148,
+"profil": 0.937,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/chenu/05.jpg",
+"tags": [
+"sourire",
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.278,
+"bouche": 0.082,
+"largeur": 0.436,
+"coins": 0.023,
+"yeux": 0.312,
+"sourcils": 0.141,
+"profil": 0.894,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/chenu/06.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.338,
+"bouche": 0.04,
+"largeur": 0.435,
+"coins": 0.033,
+"yeux": 0.324,
+"sourcils": 0.105,
+"profil": 0.388,
+"taille": [
+765,
+1000
+],
+"fichier": "assets/photos/galerie/chenu/07.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.14,
+"bouche": 0.025,
+"largeur": 0.434,
+"coins": 0.03,
+"yeux": 0.318,
+"sourcils": 0.111,
+"profil": 0.353,
+"taille": [
+627,
+1000
+],
+"fichier": "assets/photos/galerie/chenu/08.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+}
+],
+"chikirou": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.32,
+"bouche": 0.013,
+"largeur": 0.31,
+"coins": -0.001,
+"yeux": 0.55,
+"sourcils": 0.125,
+"profil": 0.915,
+"taille": [
+714,
+1000
+],
+"fichier": "assets/photos/galerie/chikirou/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.182,
+"bouche": 0.005,
+"largeur": 0.368,
+"coins": 0.031,
+"yeux": 0.394,
+"sourcils": 0.09,
+"profil": 0.06,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/chikirou/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.209,
+"bouche": 0.023,
+"largeur": 0.431,
+"coins": 0.031,
+"yeux": 0.357,
+"sourcils": 0.14,
+"profil": 0.274,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/chikirou/03.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.287,
+"bouche": 0.072,
+"largeur": 0.479,
+"coins": 0.031,
+"yeux": 0.217,
+"sourcils": 0.137,
+"profil": 0.015,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/chikirou/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.263,
+"bouche": 0.071,
+"largeur": 0.491,
+"coins": 0.058,
+"yeux": 0.332,
+"sourcils": 0.126,
+"profil": 0.392,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/chikirou/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chikirou/06.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chikirou/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chikirou/08.jpg",
+"garde": false
+}
+],
+"chirac": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chirac/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chirac/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chirac/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chirac/04.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chirac/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.166,
+"bouche": 0.012,
+"largeur": 0.393,
+"coins": 0.043,
+"yeux": 0.293,
+"sourcils": 0.126,
+"profil": 0.308,
+"taille": [
+960,
+723
+],
+"fichier": "assets/photos/galerie/chirac/06.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/chirac/07.jpg",
+"garde": false
+}
+],
+"ciotti": [
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ciotti/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ciotti/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.224,
+"bouche": 0.039,
+"largeur": 0.325,
+"coins": 0.002,
+"yeux": 0.371,
+"sourcils": 0.121,
+"profil": 0.749,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/ciotti/03.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.259,
+"bouche": 0.044,
+"largeur": 0.356,
+"coins": -0.002,
+"yeux": 0.268,
+"sourcils": 0.144,
+"profil": 0.941,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/ciotti/04.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ciotti/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ciotti/06.jpg",
+"garde": false
+},
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ciotti/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ciotti/08.jpg",
+"garde": false
+}
+],
+"cohn_bendit": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.159,
+"bouche": 0.021,
+"largeur": 0.323,
+"coins": -0.005,
+"yeux": 0.315,
+"sourcils": 0.111,
+"profil": 0.129,
+"taille": [
+765,
+512
+],
+"fichier": "assets/photos/galerie/cohn_bendit/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cohn_bendit/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cohn_bendit/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.163,
+"bouche": 0.075,
+"largeur": 0.418,
+"coins": 0.012,
+"yeux": 0.278,
+"sourcils": 0.141,
+"profil": 0.965,
+"taille": [
+753,
+1000
+],
+"fichier": "assets/photos/galerie/cohn_bendit/04.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cohn_bendit/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cohn_bendit/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.339,
+"bouche": 0.006,
+"largeur": 0.342,
+"coins": -0.03,
+"yeux": 0.342,
+"sourcils": 0.122,
+"profil": 0.111,
+"taille": [
+666,
+1000
+],
+"fichier": "assets/photos/galerie/cohn_bendit/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cohn_bendit/08.jpg",
+"garde": false
+}
+],
+"cope": [
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cope/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.428,
+"bouche": 0.016,
+"largeur": 0.391,
+"coins": 0.01,
+"yeux": 0.287,
+"sourcils": 0.121,
+"profil": 0.793,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/cope/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.355,
+"bouche": 0.09,
+"largeur": 0.511,
+"coins": 0.047,
+"yeux": 0.378,
+"sourcils": 0.113,
+"profil": 0.673,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/cope/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cope/04.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cope/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cope/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/cope/07.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.179,
+"bouche": 0.095,
+"largeur": 0.381,
+"coins": 0.0,
+"yeux": 0.239,
+"sourcils": 0.152,
+"profil": 0.46,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/cope/08.jpg",
+"garde": false
+}
+],
+"darmanin": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/darmanin/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/darmanin/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.409,
+"bouche": 0.015,
+"largeur": 0.285,
+"coins": 0.003,
+"yeux": 0.766,
+"sourcils": 0.124,
+"profil": 0.936,
+"taille": [
+960,
+661
+],
+"fichier": "assets/photos/galerie/darmanin/03.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.272,
+"bouche": 0.054,
+"largeur": 0.359,
+"coins": 0.045,
+"yeux": 0.289,
+"sourcils": 0.147,
+"profil": 0.954,
+"taille": [
+960,
+621
+],
+"fichier": "assets/photos/galerie/darmanin/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/darmanin/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.206,
+"bouche": 0.002,
+"largeur": 0.391,
+"coins": -0.003,
+"yeux": 0.27,
+"sourcils": 0.126,
+"profil": 0.301,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/darmanin/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/darmanin/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.307,
+"bouche": 0.01,
+"largeur": 0.401,
+"coins": 0.011,
+"yeux": 0.428,
+"sourcils": 0.126,
+"profil": 0.983,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/darmanin/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"dati": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.403,
+"bouche": 0.007,
+"largeur": 0.363,
+"coins": 0.014,
+"yeux": 0.335,
+"sourcils": 0.104,
+"profil": 0.448,
+"taille": [
+708,
+1000
+],
+"fichier": "assets/photos/galerie/dati/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.3,
+"bouche": 0.016,
+"largeur": 0.372,
+"coins": 0.013,
+"yeux": 0.424,
+"sourcils": 0.106,
+"profil": 0.772,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/dati/02.jpg",
+"garde": false
+},
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dati/03.jpg",
+"garde": false
+},
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dati/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dati/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.204,
+"bouche": 0.05,
+"largeur": 0.439,
+"coins": 0.05,
+"yeux": 0.324,
+"sourcils": 0.117,
+"profil": 0.254,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/dati/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.184,
+"bouche": 0.01,
+"largeur": 0.378,
+"coins": 0.03,
+"yeux": 0.333,
+"sourcils": 0.114,
+"profil": 0.679,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/dati/07.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.201,
+"bouche": 0.014,
+"largeur": 0.36,
+"coins": 0.031,
+"yeux": 0.315,
+"sourcils": 0.13,
+"profil": 0.741,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/dati/08.jpg",
+"garde": false
+}
+],
+"doucet": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.481,
+"bouche": 0.017,
+"largeur": 0.358,
+"coins": 0.013,
+"yeux": 0.34,
+"sourcils": 0.13,
+"profil": 0.699,
+"taille": [
+749,
+1000
+],
+"fichier": "assets/photos/galerie/doucet/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.468,
+"bouche": 0.013,
+"largeur": 0.323,
+"coins": 0.004,
+"yeux": 0.385,
+"sourcils": 0.134,
+"profil": 0.402,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/doucet/02.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.543,
+"bouche": 0.015,
+"largeur": 0.36,
+"coins": 0.018,
+"yeux": 0.366,
+"sourcils": 0.148,
+"profil": 0.575,
+"taille": [
+960,
+641
+],
+"fichier": "assets/photos/galerie/doucet/03.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/doucet/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/doucet/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/doucet/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.205,
+"bouche": 0.066,
+"largeur": 0.322,
+"coins": 0.013,
+"yeux": 0.279,
+"sourcils": 0.106,
+"profil": 0.198,
+"taille": [
+871,
+1000
+],
+"fichier": "assets/photos/galerie/doucet/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.411,
+"bouche": 0.005,
+"largeur": 0.344,
+"coins": 0.005,
+"yeux": 0.312,
+"sourcils": 0.109,
+"profil": 0.83,
+"taille": [
+765,
+765
+],
+"fichier": "assets/photos/galerie/doucet/08.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"duflot": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.346,
+"bouche": 0.001,
+"largeur": 0.385,
+"coins": 0.02,
+"yeux": 0.426,
+"sourcils": 0.127,
+"profil": 0.929,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/duflot/01.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.206,
+"bouche": 0.002,
+"largeur": 0.4,
+"coins": 0.03,
+"yeux": 0.321,
+"sourcils": 0.127,
+"profil": 0.326,
+"taille": [
+665,
+1000
+],
+"fichier": "assets/photos/galerie/duflot/02.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.271,
+"bouche": 0.036,
+"largeur": 0.423,
+"coins": 0.033,
+"yeux": 0.406,
+"sourcils": 0.116,
+"profil": 0.771,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/duflot/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.44,
+"bouche": 0.001,
+"largeur": 0.411,
+"coins": 0.005,
+"yeux": 0.353,
+"sourcils": 0.123,
+"profil": 0.195,
+"taille": [
+707,
+1000
+],
+"fichier": "assets/photos/galerie/duflot/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.307,
+"bouche": 0.023,
+"largeur": 0.431,
+"coins": 0.036,
+"yeux": 0.39,
+"sourcils": 0.114,
+"profil": 0.824,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/duflot/05.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.272,
+"bouche": 0.03,
+"largeur": 0.38,
+"coins": 0.03,
+"yeux": 0.399,
+"sourcils": 0.126,
+"profil": 0.88,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/duflot/06.jpg",
+"garde": false
+},
+{
+"visages": 6,
+"exploitable": true,
+"ratio": 0.24,
+"bouche": 0.03,
+"largeur": 0.383,
+"coins": -0.017,
+"yeux": 0.329,
+"sourcils": 0.125,
+"profil": 0.917,
+"taille": [
+960,
+638
+],
+"fichier": "assets/photos/galerie/duflot/07.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/duflot/08.jpg",
+"garde": false
+}
+],
+"dupond_moretti": [
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.167,
+"bouche": 0.005,
+"largeur": 0.387,
+"coins": -0.001,
+"yeux": 0.261,
+"sourcils": 0.167,
+"profil": 0.473,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/dupond_moretti/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupond_moretti/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupond_moretti/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupond_moretti/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupond_moretti/05.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupond_moretti/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.34,
+"bouche": 0.007,
+"largeur": 0.352,
+"coins": -0.003,
+"yeux": 0.34,
+"sourcils": 0.11,
+"profil": 0.616,
+"taille": [
+850,
+740
+],
+"fichier": "assets/photos/galerie/dupond_moretti/07.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.366,
+"bouche": 0.002,
+"largeur": 0.365,
+"coins": -0.007,
+"yeux": 0.376,
+"sourcils": 0.137,
+"profil": 0.381,
+"taille": [
+786,
+1000
+],
+"fichier": "assets/photos/galerie/dupond_moretti/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"dupont_aignan": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupont_aignan/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupont_aignan/02.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": true,
+"ratio": 0.211,
+"bouche": 0.034,
+"largeur": 0.339,
+"coins": -0.019,
+"yeux": 0.322,
+"sourcils": 0.125,
+"profil": 0.962,
+"taille": [
+960,
+540
+],
+"fichier": "assets/photos/galerie/dupont_aignan/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupont_aignan/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupont_aignan/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupont_aignan/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/dupont_aignan/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.184,
+"bouche": 0.083,
+"largeur": 0.345,
+"coins": 0.019,
+"yeux": 0.167,
+"sourcils": 0.164,
+"profil": 0.929,
+"taille": [
+960,
+540
+],
+"fichier": "assets/photos/galerie/dupont_aignan/08.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+}
+],
+"faure": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.422,
+"bouche": 0.005,
+"largeur": 0.4,
+"coins": 0.018,
+"yeux": 0.381,
+"sourcils": 0.097,
+"profil": 0.298,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/faure/07.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/faure/08.jpg",
+"garde": false
+}
+],
+"ferrari": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.316,
+"bouche": 0.077,
+"largeur": 0.472,
+"coins": 0.052,
+"yeux": 0.318,
+"sourcils": 0.109,
+"profil": 0.042,
+"taille": [
+565,
+800
+],
+"fichier": "assets/photos/galerie/ferrari/01.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"fillon": [
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.144,
+"bouche": 0.005,
+"largeur": 0.403,
+"coins": 0.022,
+"yeux": 0.272,
+"sourcils": 0.098,
+"profil": 0.223,
+"taille": [
+620,
+842
+],
+"fichier": "assets/photos/galerie/fillon/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.13,
+"bouche": 0.007,
+"largeur": 0.405,
+"coins": 0.02,
+"yeux": 0.288,
+"sourcils": 0.104,
+"profil": 0.193,
+"taille": [
+661,
+990
+],
+"fichier": "assets/photos/galerie/fillon/02.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.25,
+"bouche": 0.026,
+"largeur": 0.338,
+"coins": -0.011,
+"yeux": 0.182,
+"sourcils": 0.163,
+"profil": 0.655,
+"taille": [
+960,
+604
+],
+"fichier": "assets/photos/galerie/fillon/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/fillon/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/fillon/05.jpg",
+"garde": false
+}
+],
+"glucksmann": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.458,
+"bouche": 0.004,
+"largeur": 0.413,
+"coins": 0.018,
+"yeux": 0.332,
+"sourcils": 0.097,
+"profil": 0.081,
+"taille": [
+778,
+1000
+],
+"fichier": "assets/photos/galerie/glucksmann/01.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.33,
+"bouche": 0.052,
+"largeur": 0.439,
+"coins": 0.04,
+"yeux": 0.337,
+"sourcils": 0.092,
+"profil": 0.256,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/glucksmann/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.148,
+"bouche": 0.081,
+"largeur": 0.399,
+"coins": 0.014,
+"yeux": 0.331,
+"sourcils": 0.136,
+"profil": 0.587,
+"taille": [
+960,
+888
+],
+"fichier": "assets/photos/galerie/glucksmann/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.366,
+"bouche": 0.023,
+"largeur": 0.371,
+"coins": -0.0,
+"yeux": 0.31,
+"sourcils": 0.093,
+"profil": 0.105,
+"taille": [
+770,
+1000
+],
+"fichier": "assets/photos/galerie/glucksmann/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.468,
+"bouche": 0.005,
+"largeur": 0.372,
+"coins": 0.013,
+"yeux": 0.34,
+"sourcils": 0.102,
+"profil": 0.545,
+"taille": [
+714,
+1000
+],
+"fichier": "assets/photos/galerie/glucksmann/05.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.445,
+"bouche": 0.005,
+"largeur": 0.363,
+"coins": 0.014,
+"yeux": 0.369,
+"sourcils": 0.102,
+"profil": 0.518,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/glucksmann/06.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.361,
+"bouche": 0.016,
+"largeur": 0.337,
+"coins": 0.001,
+"yeux": 0.44,
+"sourcils": 0.111,
+"profil": 0.826,
+"taille": [
+960,
+721
+],
+"fichier": "assets/photos/galerie/glucksmann/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.585,
+"bouche": 0.003,
+"largeur": 0.379,
+"coins": 0.01,
+"yeux": 0.419,
+"sourcils": 0.104,
+"profil": 0.596,
+"taille": [
+715,
+1000
+],
+"fichier": "assets/photos/galerie/glucksmann/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"gueant": [
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/gueant/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/gueant/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/gueant/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.35,
+"bouche": 0.023,
+"largeur": 0.353,
+"coins": -0.0,
+"yeux": 0.327,
+"sourcils": 0.118,
+"profil": 0.848,
+"taille": [
+711,
+1000
+],
+"fichier": "assets/photos/galerie/gueant/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.182,
+"bouche": 0.061,
+"largeur": 0.367,
+"coins": -0.002,
+"yeux": 0.297,
+"sourcils": 0.132,
+"profil": 0.794,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/gueant/05.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/gueant/06.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/gueant/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.22,
+"bouche": 0.069,
+"largeur": 0.374,
+"coins": -0.002,
+"yeux": 0.293,
+"sourcils": 0.143,
+"profil": 0.714,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/gueant/08.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+}
+],
+"guedj": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/guedj/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/guedj/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.415,
+"bouche": 0.004,
+"largeur": 0.371,
+"coins": 0.011,
+"yeux": 0.338,
+"sourcils": 0.1,
+"profil": 0.561,
+"taille": [
+689,
+1000
+],
+"fichier": "assets/photos/galerie/guedj/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.361,
+"bouche": 0.003,
+"largeur": 0.37,
+"coins": 0.011,
+"yeux": 0.328,
+"sourcils": 0.101,
+"profil": 0.551,
+"taille": [
+837,
+1000
+],
+"fichier": "assets/photos/galerie/guedj/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/guedj/05.jpg",
+"garde": false
+}
+],
+"hanouna": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.366,
+"bouche": 0.002,
+"largeur": 0.345,
+"coins": 0.023,
+"yeux": 0.428,
+"sourcils": 0.12,
+"profil": 0.542,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/hanouna/01.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.272,
+"bouche": 0.019,
+"largeur": 0.347,
+"coins": 0.02,
+"yeux": 0.334,
+"sourcils": 0.153,
+"profil": 0.133,
+"taille": [
+707,
+1000
+],
+"fichier": "assets/photos/galerie/hanouna/02.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.192,
+"bouche": 0.018,
+"largeur": 0.343,
+"coins": 0.019,
+"yeux": 0.286,
+"sourcils": 0.148,
+"profil": 0.16,
+"taille": [
+960,
+743
+],
+"fichier": "assets/photos/galerie/hanouna/03.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hanouna/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hanouna/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.334,
+"bouche": 0.011,
+"largeur": 0.365,
+"coins": 0.016,
+"yeux": 0.318,
+"sourcils": 0.13,
+"profil": 0.427,
+"taille": [
+633,
+855
+],
+"fichier": "assets/photos/galerie/hanouna/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.188,
+"bouche": 0.018,
+"largeur": 0.369,
+"coins": 0.013,
+"yeux": 0.339,
+"sourcils": 0.118,
+"profil": 0.44,
+"taille": [
+960,
+604
+],
+"fichier": "assets/photos/galerie/hanouna/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.152,
+"bouche": 0.046,
+"largeur": 0.445,
+"coins": 0.007,
+"yeux": 0.248,
+"sourcils": 0.134,
+"profil": 0.214,
+"taille": [
+643,
+1000
+],
+"fichier": "assets/photos/galerie/hanouna/08.jpg",
+"tags": [],
+"garde": true
+}
+],
+"hidalgo": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hidalgo/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hidalgo/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hidalgo/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hidalgo/04.jpg",
+"garde": false
+}
+],
+"hollande": [
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hollande/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hollande/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hollande/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.457,
+"bouche": 0.009,
+"largeur": 0.347,
+"coins": 0.001,
+"yeux": 0.369,
+"sourcils": 0.121,
+"profil": 0.223,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/hollande/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hollande/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hollande/06.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hollande/07.jpg",
+"garde": false
+}
+],
+"hortefeux": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.385,
+"bouche": 0.015,
+"largeur": 0.392,
+"coins": 0.015,
+"yeux": 0.292,
+"sourcils": 0.13,
+"profil": 0.071,
+"taille": [
+661,
+1000
+],
+"fichier": "assets/photos/galerie/hortefeux/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.205,
+"bouche": 0.011,
+"largeur": 0.414,
+"coins": 0.02,
+"yeux": 0.277,
+"sourcils": 0.129,
+"profil": 0.078,
+"taille": [
+663,
+1000
+],
+"fichier": "assets/photos/galerie/hortefeux/02.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.184,
+"bouche": 0.018,
+"largeur": 0.409,
+"coins": 0.02,
+"yeux": 0.303,
+"sourcils": 0.141,
+"profil": 0.172,
+"taille": [
+663,
+1000
+],
+"fichier": "assets/photos/galerie/hortefeux/03.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.281,
+"bouche": 0.001,
+"largeur": 0.377,
+"coins": 0.0,
+"yeux": 0.357,
+"sourcils": 0.137,
+"profil": 0.396,
+"taille": [
+960,
+636
+],
+"fichier": "assets/photos/galerie/hortefeux/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.343,
+"bouche": 0.045,
+"largeur": 0.327,
+"coins": -0.008,
+"yeux": 0.412,
+"sourcils": 0.127,
+"profil": 1.0,
+"taille": [
+960,
+914
+],
+"fichier": "assets/photos/galerie/hortefeux/05.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hortefeux/06.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.283,
+"bouche": 0.001,
+"largeur": 0.356,
+"coins": -0.01,
+"yeux": 0.395,
+"sourcils": 0.122,
+"profil": 0.771,
+"taille": [
+960,
+538
+],
+"fichier": "assets/photos/galerie/hortefeux/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.455,
+"bouche": 0.018,
+"largeur": 0.373,
+"coins": 0.006,
+"yeux": 0.314,
+"sourcils": 0.123,
+"profil": 0.171,
+"taille": [
+751,
+1000
+],
+"fichier": "assets/photos/galerie/hortefeux/08.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"houssin": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.148,
+"bouche": 0.005,
+"largeur": 0.423,
+"coins": 0.006,
+"yeux": 0.236,
+"sourcils": 0.117,
+"profil": 0.092,
+"taille": [
+643,
+1000
+],
+"fichier": "assets/photos/galerie/houssin/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"hurmic": [
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/hurmic/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.41,
+"bouche": 0.07,
+"largeur": 0.505,
+"coins": 0.04,
+"yeux": 0.3,
+"sourcils": 0.098,
+"profil": 0.046,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/hurmic/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.162,
+"bouche": 0.069,
+"largeur": 0.506,
+"coins": 0.045,
+"yeux": 0.274,
+"sourcils": 0.103,
+"profil": 0.061,
+"taille": [
+698,
+1000
+],
+"fichier": "assets/photos/galerie/hurmic/03.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"jadot": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.154,
+"bouche": 0.026,
+"largeur": 0.373,
+"coins": 0.014,
+"yeux": 0.339,
+"sourcils": 0.117,
+"profil": 0.758,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/jadot/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.279,
+"bouche": 0.034,
+"largeur": 0.379,
+"coins": 0.0,
+"yeux": 0.298,
+"sourcils": 0.11,
+"profil": 0.107,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/jadot/02.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.244,
+"bouche": 0.059,
+"largeur": 0.381,
+"coins": 0.018,
+"yeux": 0.448,
+"sourcils": 0.144,
+"profil": 0.914,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/jadot/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.208,
+"bouche": 0.026,
+"largeur": 0.456,
+"coins": 0.015,
+"yeux": 0.334,
+"sourcils": 0.113,
+"profil": 0.59,
+"taille": [
+766,
+1000
+],
+"fichier": "assets/photos/galerie/jadot/04.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.354,
+"bouche": 0.067,
+"largeur": 0.425,
+"coins": 0.037,
+"yeux": 0.357,
+"sourcils": 0.12,
+"profil": 0.614,
+"taille": [
+960,
+641
+],
+"fichier": "assets/photos/galerie/jadot/05.jpg",
+"tags": [
+"sourire",
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.474,
+"bouche": 0.007,
+"largeur": 0.382,
+"coins": 0.016,
+"yeux": 0.355,
+"sourcils": 0.125,
+"profil": 0.575,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/jadot/06.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jadot/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.349,
+"bouche": 0.022,
+"largeur": 0.408,
+"coins": 0.02,
+"yeux": 0.336,
+"sourcils": 0.116,
+"profil": 0.487,
+"taille": [
+960,
+642
+],
+"fichier": "assets/photos/galerie/jadot/08.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+}
+],
+"jmlp": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.211,
+"bouche": 0.064,
+"largeur": 0.318,
+"coins": 0.016,
+"yeux": 0.231,
+"sourcils": 0.129,
+"profil": 0.707,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/jmlp/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/06.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/07.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/jmlp/08.jpg",
+"garde": false
+}
+],
+"kazib": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/kazib/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.19,
+"bouche": 0.014,
+"largeur": 0.391,
+"coins": -0.002,
+"yeux": 0.222,
+"sourcils": 0.13,
+"profil": 0.231,
+"taille": [
+691,
+864
+],
+"fichier": "assets/photos/galerie/kazib/02.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"knafo": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.402,
+"bouche": 0.085,
+"largeur": 0.496,
+"coins": 0.054,
+"yeux": 0.341,
+"sourcils": 0.11,
+"profil": 0.289,
+"taille": [
+778,
+1000
+],
+"fichier": "assets/photos/galerie/knafo/01.jpg",
+"tags": [
+"sourire",
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/knafo/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.342,
+"bouche": 0.004,
+"largeur": 0.411,
+"coins": 0.025,
+"yeux": 0.428,
+"sourcils": 0.105,
+"profil": 0.36,
+"taille": [
+591,
+605
+],
+"fichier": "assets/photos/galerie/knafo/03.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.175,
+"bouche": 0.003,
+"largeur": 0.417,
+"coins": 0.026,
+"yeux": 0.363,
+"sourcils": 0.124,
+"profil": 0.347,
+"taille": [
+733,
+1000
+],
+"fichier": "assets/photos/galerie/knafo/04.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.237,
+"bouche": 0.099,
+"largeur": 0.446,
+"coins": 0.059,
+"yeux": 0.358,
+"sourcils": 0.128,
+"profil": 0.805,
+"taille": [
+754,
+1000
+],
+"fichier": "assets/photos/galerie/knafo/05.jpg",
+"tags": [
+"rire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.291,
+"bouche": 0.049,
+"largeur": 0.411,
+"coins": 0.003,
+"yeux": 0.302,
+"sourcils": 0.147,
+"profil": 0.148,
+"taille": [
+943,
+1000
+],
+"fichier": "assets/photos/galerie/knafo/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.389,
+"bouche": 0.076,
+"largeur": 0.399,
+"coins": 0.017,
+"yeux": 0.373,
+"sourcils": 0.126,
+"profil": 0.29,
+"taille": [
+681,
+1000
+],
+"fichier": "assets/photos/galerie/knafo/07.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+}
+],
+"lalanne": [
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lalanne/01.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lalanne/02.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lalanne/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.222,
+"bouche": 0.077,
+"largeur": 0.409,
+"coins": 0.003,
+"yeux": 0.21,
+"sourcils": 0.13,
+"profil": 0.894,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lalanne/04.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lalanne/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.285,
+"bouche": 0.081,
+"largeur": 0.429,
+"coins": 0.014,
+"yeux": 0.142,
+"sourcils": 0.133,
+"profil": 0.934,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lalanne/06.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.283,
+"bouche": 0.029,
+"largeur": 0.43,
+"coins": 0.006,
+"yeux": 0.246,
+"sourcils": 0.121,
+"profil": 0.885,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lalanne/07.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.22,
+"bouche": 0.049,
+"largeur": 0.378,
+"coins": 0.021,
+"yeux": 0.259,
+"sourcils": 0.139,
+"profil": 0.741,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lalanne/08.jpg",
+"tags": [],
+"garde": true
+}
+],
+"lassalle": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lassalle/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.139,
+"bouche": 0.028,
+"largeur": 0.391,
+"coins": -0.004,
+"yeux": 0.241,
+"sourcils": 0.104,
+"profil": 0.818,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/lassalle/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lassalle/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.114,
+"bouche": 0.042,
+"largeur": 0.405,
+"coins": 0.017,
+"yeux": 0.333,
+"sourcils": 0.104,
+"profil": 0.255,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/lassalle/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lassalle/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lassalle/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lassalle/07.jpg",
+"garde": false
+},
+{
+"visages": 6,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lassalle/08.jpg",
+"garde": false
+}
+],
+"lavalette": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.423,
+"bouche": 0.005,
+"largeur": 0.376,
+"coins": -0.002,
+"yeux": 0.387,
+"sourcils": 0.104,
+"profil": 0.643,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/lavalette/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.352,
+"bouche": 0.089,
+"largeur": 0.415,
+"coins": 0.034,
+"yeux": 0.363,
+"sourcils": 0.124,
+"profil": 0.788,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lavalette/02.jpg",
+"tags": [
+"sourire",
+"parle",
+"surpris"
+],
+"garde": true
+}
+],
+"leaument": [
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/leaument/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.471,
+"bouche": 0.016,
+"largeur": 0.339,
+"coins": -0.009,
+"yeux": 0.378,
+"sourcils": 0.127,
+"profil": 0.423,
+"taille": [
+950,
+1000
+],
+"fichier": "assets/photos/galerie/leaument/02.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.298,
+"bouche": 0.05,
+"largeur": 0.369,
+"coins": 0.022,
+"yeux": 0.341,
+"sourcils": 0.117,
+"profil": 0.278,
+"taille": [
+757,
+653
+],
+"fichier": "assets/photos/galerie/leaument/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.199,
+"bouche": 0.005,
+"largeur": 0.409,
+"coins": 0.019,
+"yeux": 0.313,
+"sourcils": 0.105,
+"profil": 0.016,
+"taille": [
+954,
+936
+],
+"fichier": "assets/photos/galerie/leaument/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/leaument/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.61,
+"bouche": 0.005,
+"largeur": 0.433,
+"coins": 0.03,
+"yeux": 0.33,
+"sourcils": 0.114,
+"profil": 0.025,
+"taille": [
+960,
+634
+],
+"fichier": "assets/photos/galerie/leaument/06.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/leaument/07.jpg",
+"garde": false
+}
+],
+"lecornu": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lecornu/01.jpg",
+"garde": false
+}
+],
+"lemaire": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.261,
+"bouche": 0.059,
+"largeur": 0.387,
+"coins": 0.041,
+"yeux": 0.432,
+"sourcils": 0.122,
+"profil": 0.999,
+"taille": [
+816,
+1000
+],
+"fichier": "assets/photos/galerie/lemaire/01.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lemaire/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lemaire/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.506,
+"bouche": 0.014,
+"largeur": 0.363,
+"coins": 0.004,
+"yeux": 0.367,
+"sourcils": 0.128,
+"profil": 0.518,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lemaire/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.471,
+"bouche": 0.012,
+"largeur": 0.381,
+"coins": -0.001,
+"yeux": 0.345,
+"sourcils": 0.118,
+"profil": 0.671,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lemaire/05.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.488,
+"bouche": 0.014,
+"largeur": 0.39,
+"coins": 0.011,
+"yeux": 0.331,
+"sourcils": 0.109,
+"profil": 0.463,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lemaire/06.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.193,
+"bouche": 0.009,
+"largeur": 0.362,
+"coins": 0.008,
+"yeux": 0.416,
+"sourcils": 0.131,
+"profil": 0.791,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/lemaire/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.575,
+"bouche": 0.007,
+"largeur": 0.393,
+"coins": 0.003,
+"yeux": 0.357,
+"sourcils": 0.132,
+"profil": 0.501,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/lemaire/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"lepen": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/06.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/07.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lepen/08.jpg",
+"garde": false
+}
+],
+"lisnard": [
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lisnard/01.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lisnard/02.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.149,
+"bouche": 0.004,
+"largeur": 0.397,
+"coins": 0.026,
+"yeux": 0.199,
+"sourcils": 0.097,
+"profil": 0.208,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/lisnard/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.41,
+"bouche": 0.03,
+"largeur": 0.498,
+"coins": 0.037,
+"yeux": 0.282,
+"sourcils": 0.089,
+"profil": 0.351,
+"taille": [
+694,
+1000
+],
+"fichier": "assets/photos/galerie/lisnard/04.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lisnard/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.417,
+"bouche": 0.005,
+"largeur": 0.482,
+"coins": 0.041,
+"yeux": 0.25,
+"sourcils": 0.088,
+"profil": 0.09,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/lisnard/06.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lisnard/07.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/lisnard/08.jpg",
+"garde": false
+}
+],
+"lucas": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.368,
+"bouche": 0.072,
+"largeur": 0.314,
+"coins": -0.006,
+"yeux": 0.409,
+"sourcils": 0.121,
+"profil": 0.084,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/lucas/01.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.362,
+"bouche": 0.064,
+"largeur": 0.299,
+"coins": -0.008,
+"yeux": 0.392,
+"sourcils": 0.112,
+"profil": 0.064,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/lucas/02.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.143,
+"bouche": 0.018,
+"largeur": 0.342,
+"coins": 0.011,
+"yeux": 0.285,
+"sourcils": 0.137,
+"profil": 0.827,
+"taille": [
+753,
+1000
+],
+"fichier": "assets/photos/galerie/lucas/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"macron": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/macron/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/macron/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/macron/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/macron/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/macron/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/macron/06.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.233,
+"bouche": 0.092,
+"largeur": 0.424,
+"coins": 0.024,
+"yeux": 0.271,
+"sourcils": 0.105,
+"profil": 0.213,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/macron/07.jpg",
+"garde": false
+}
+],
+"maillard": [
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.298,
+"bouche": 0.053,
+"largeur": 0.487,
+"coins": 0.041,
+"yeux": 0.269,
+"sourcils": 0.105,
+"profil": 0.171,
+"taille": [
+752,
+1000
+],
+"fichier": "assets/photos/galerie/maillard/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.364,
+"bouche": 0.009,
+"largeur": 0.423,
+"coins": 0.033,
+"yeux": 0.281,
+"sourcils": 0.1,
+"profil": 0.096,
+"taille": [
+738,
+1000
+],
+"fichier": "assets/photos/galerie/maillard/02.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.404,
+"bouche": 0.029,
+"largeur": 0.419,
+"coins": 0.031,
+"yeux": 0.379,
+"sourcils": 0.106,
+"profil": 0.012,
+"taille": [
+749,
+1000
+],
+"fichier": "assets/photos/galerie/maillard/03.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.409,
+"bouche": 0.028,
+"largeur": 0.409,
+"coins": 0.029,
+"yeux": 0.366,
+"sourcils": 0.107,
+"profil": 0.008,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/maillard/04.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+}
+],
+"mamere": [
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.247,
+"bouche": 0.061,
+"largeur": 0.401,
+"coins": 0.008,
+"yeux": 0.413,
+"sourcils": 0.11,
+"profil": 1.0,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/mamere/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.265,
+"bouche": 0.068,
+"largeur": 0.439,
+"coins": 0.04,
+"yeux": 0.319,
+"sourcils": 0.115,
+"profil": 0.638,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/mamere/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.247,
+"bouche": 0.039,
+"largeur": 0.459,
+"coins": 0.063,
+"yeux": 0.339,
+"sourcils": 0.111,
+"profil": 0.138,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/mamere/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.452,
+"bouche": 0.031,
+"largeur": 0.329,
+"coins": -0.018,
+"yeux": 0.253,
+"sourcils": 0.125,
+"profil": 0.267,
+"taille": [
+733,
+1000
+],
+"fichier": "assets/photos/galerie/mamere/04.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.502,
+"bouche": 0.034,
+"largeur": 0.321,
+"coins": -0.02,
+"yeux": 0.25,
+"sourcils": 0.12,
+"profil": 0.248,
+"taille": [
+742,
+1000
+],
+"fichier": "assets/photos/galerie/mamere/05.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.215,
+"bouche": 0.044,
+"largeur": 0.33,
+"coins": -0.017,
+"yeux": 0.186,
+"sourcils": 0.127,
+"profil": 0.231,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/mamere/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.382,
+"bouche": 0.009,
+"largeur": 0.359,
+"coins": 0.012,
+"yeux": 0.346,
+"sourcils": 0.125,
+"profil": 0.413,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/mamere/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.34,
+"bouche": 0.018,
+"largeur": 0.363,
+"coins": 0.015,
+"yeux": 0.356,
+"sourcils": 0.131,
+"profil": 0.068,
+"taille": [
+960,
+603
+],
+"fichier": "assets/photos/galerie/mamere/08.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+}
+],
+"marechal": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.216,
+"bouche": 0.012,
+"largeur": 0.397,
+"coins": 0.033,
+"yeux": 0.39,
+"sourcils": 0.122,
+"profil": 0.072,
+"taille": [
+960,
+686
+],
+"fichier": "assets/photos/galerie/marechal/01.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/marechal/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.182,
+"bouche": 0.092,
+"largeur": 0.464,
+"coins": 0.028,
+"yeux": 0.346,
+"sourcils": 0.108,
+"profil": 0.372,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/marechal/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.326,
+"bouche": 0.035,
+"largeur": 0.389,
+"coins": 0.023,
+"yeux": 0.379,
+"sourcils": 0.118,
+"profil": 0.071,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/marechal/04.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/marechal/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.192,
+"bouche": 0.08,
+"largeur": 0.509,
+"coins": 0.047,
+"yeux": 0.297,
+"sourcils": 0.136,
+"profil": 0.892,
+"taille": [
+753,
+1000
+],
+"fichier": "assets/photos/galerie/marechal/06.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.183,
+"bouche": 0.05,
+"largeur": 0.314,
+"coins": 0.041,
+"yeux": 0.351,
+"sourcils": 0.158,
+"profil": 0.851,
+"taille": [
+960,
+650
+],
+"fichier": "assets/photos/galerie/marechal/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/marechal/08.jpg",
+"garde": false
+}
+],
+"melenchon": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/melenchon/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.343,
+"bouche": 0.017,
+"largeur": 0.435,
+"coins": -0.016,
+"yeux": 0.145,
+"sourcils": 0.151,
+"profil": 0.614,
+"taille": [
+818,
+1000
+],
+"fichier": "assets/photos/galerie/melenchon/02.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/melenchon/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/melenchon/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/melenchon/05.jpg",
+"garde": false
+}
+],
+"mitterrand": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/mitterrand/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/mitterrand/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/mitterrand/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/mitterrand/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/mitterrand/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/mitterrand/06.jpg",
+"garde": false
+}
+],
+"morano": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.44,
+"bouche": 0.002,
+"largeur": 0.341,
+"coins": -0.005,
+"yeux": 0.381,
+"sourcils": 0.105,
+"profil": 0.233,
+"taille": [
+960,
+912
+],
+"fichier": "assets/photos/galerie/morano/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.167,
+"bouche": 0.012,
+"largeur": 0.315,
+"coins": -0.013,
+"yeux": 0.436,
+"sourcils": 0.145,
+"profil": 0.952,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/morano/02.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.454,
+"bouche": 0.003,
+"largeur": 0.298,
+"coins": -0.014,
+"yeux": 0.396,
+"sourcils": 0.108,
+"profil": 0.268,
+"taille": [
+960,
+746
+],
+"fichier": "assets/photos/galerie/morano/03.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.505,
+"bouche": 0.003,
+"largeur": 0.392,
+"coins": 0.008,
+"yeux": 0.328,
+"sourcils": 0.119,
+"profil": 0.142,
+"taille": [
+684,
+1000
+],
+"fichier": "assets/photos/galerie/morano/04.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.443,
+"bouche": 0.006,
+"largeur": 0.419,
+"coins": 0.017,
+"yeux": 0.265,
+"sourcils": 0.134,
+"profil": 0.206,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/morano/05.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.378,
+"bouche": 0.052,
+"largeur": 0.419,
+"coins": 0.027,
+"yeux": 0.37,
+"sourcils": 0.112,
+"profil": 0.772,
+"taille": [
+761,
+1000
+],
+"fichier": "assets/photos/galerie/morano/06.jpg",
+"tags": [
+"sourire",
+"parle",
+"surpris"
+],
+"garde": true
+}
+],
+"ndiaye": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.21,
+"bouche": 0.005,
+"largeur": 0.458,
+"coins": -0.014,
+"yeux": 0.222,
+"sourcils": 0.165,
+"profil": 0.083,
+"taille": [
+597,
+1000
+],
+"fichier": "assets/photos/galerie/ndiaye/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.146,
+"bouche": 0.004,
+"largeur": 0.404,
+"coins": -0.001,
+"yeux": 0.309,
+"sourcils": 0.09,
+"profil": 0.503,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/ndiaye/02.jpg",
+"garde": false
+}
+],
+"odoul": [
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.148,
+"bouche": 0.003,
+"largeur": 0.372,
+"coins": -0.005,
+"yeux": 0.627,
+"sourcils": 0.108,
+"profil": 0.896,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/odoul/01.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/odoul/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/odoul/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.348,
+"bouche": 0.055,
+"largeur": 0.455,
+"coins": 0.035,
+"yeux": 0.319,
+"sourcils": 0.102,
+"profil": 0.217,
+"taille": [
+569,
+863
+],
+"fichier": "assets/photos/galerie/odoul/04.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.145,
+"bouche": 0.008,
+"largeur": 0.426,
+"coins": 0.019,
+"yeux": 0.332,
+"sourcils": 0.118,
+"profil": 0.078,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/odoul/05.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.16,
+"bouche": 0.001,
+"largeur": 0.393,
+"coins": 0.007,
+"yeux": 0.35,
+"sourcils": 0.128,
+"profil": 0.902,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/odoul/06.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"exploitable": false,
+"erreur": "cannot identify image file 'assets/photos/galerie/odoul/07.j",
+"fichier": "assets/photos/galerie/odoul/07.jpg",
+"garde": false
+}
+],
+"oudea": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/oudea/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/oudea/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/oudea/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.457,
+"bouche": 0.015,
+"largeur": 0.395,
+"coins": 0.008,
+"yeux": 0.385,
+"sourcils": 0.133,
+"profil": 0.297,
+"taille": [
+803,
+1000
+],
+"fichier": "assets/photos/galerie/oudea/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.235,
+"bouche": 0.015,
+"largeur": 0.396,
+"coins": 0.007,
+"yeux": 0.307,
+"sourcils": 0.129,
+"profil": 0.306,
+"taille": [
+650,
+1000
+],
+"fichier": "assets/photos/galerie/oudea/05.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.357,
+"bouche": 0.002,
+"largeur": 0.398,
+"coins": 0.041,
+"yeux": 0.311,
+"sourcils": 0.13,
+"profil": 0.313,
+"taille": [
+714,
+1000
+],
+"fichier": "assets/photos/galerie/oudea/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.353,
+"bouche": 0.004,
+"largeur": 0.385,
+"coins": -0.001,
+"yeux": 0.342,
+"sourcils": 0.127,
+"profil": 0.381,
+"taille": [
+714,
+1000
+],
+"fichier": "assets/photos/galerie/oudea/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.36,
+"bouche": 0.002,
+"largeur": 0.373,
+"coins": -0.003,
+"yeux": 0.36,
+"sourcils": 0.128,
+"profil": 0.418,
+"taille": [
+714,
+1000
+],
+"fichier": "assets/photos/galerie/oudea/08.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"panot": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.167,
+"bouche": 0.003,
+"largeur": 0.369,
+"coins": -0.0,
+"yeux": 0.392,
+"sourcils": 0.132,
+"profil": 0.94,
+"taille": [
+748,
+1000
+],
+"fichier": "assets/photos/galerie/panot/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/panot/02.jpg",
+"garde": false
+},
+{
+"visages": 6,
+"exploitable": false,
+"fichier": "assets/photos/galerie/panot/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/panot/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.548,
+"bouche": 0.054,
+"largeur": 0.461,
+"coins": 0.048,
+"yeux": 0.325,
+"sourcils": 0.105,
+"profil": 0.267,
+"taille": [
+960,
+638
+],
+"fichier": "assets/photos/galerie/panot/05.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.325,
+"bouche": 0.026,
+"largeur": 0.443,
+"coins": 0.045,
+"yeux": 0.384,
+"sourcils": 0.1,
+"profil": 0.51,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/panot/06.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.436,
+"bouche": 0.04,
+"largeur": 0.351,
+"coins": -0.006,
+"yeux": 0.482,
+"sourcils": 0.119,
+"profil": 0.988,
+"taille": [
+814,
+814
+],
+"fichier": "assets/photos/galerie/panot/07.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.217,
+"bouche": 0.009,
+"largeur": 0.416,
+"coins": 0.025,
+"yeux": 0.346,
+"sourcils": 0.108,
+"profil": 0.283,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/panot/08.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+}
+],
+"pecresse": [
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/pecresse/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/pecresse/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/pecresse/03.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": true,
+"ratio": 0.325,
+"bouche": 0.008,
+"largeur": 0.291,
+"coins": 0.005,
+"yeux": 0.393,
+"sourcils": 0.131,
+"profil": 0.516,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/pecresse/04.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.204,
+"bouche": 0.011,
+"largeur": 0.483,
+"coins": -0.008,
+"yeux": 0.335,
+"sourcils": 0.119,
+"profil": 0.539,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/pecresse/05.jpg",
+"garde": false
+}
+],
+"peltier": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.458,
+"bouche": 0.006,
+"largeur": 0.377,
+"coins": 0.006,
+"yeux": 0.336,
+"sourcils": 0.092,
+"profil": 0.184,
+"taille": [
+778,
+1000
+],
+"fichier": "assets/photos/galerie/peltier/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.195,
+"bouche": 0.185,
+"largeur": 0.463,
+"coins": 0.037,
+"yeux": 0.315,
+"sourcils": 0.117,
+"profil": 0.468,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/peltier/02.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.201,
+"bouche": 0.004,
+"largeur": 0.357,
+"coins": -0.003,
+"yeux": 0.336,
+"sourcils": 0.11,
+"profil": 0.027,
+"taille": [
+960,
+764
+],
+"fichier": "assets/photos/galerie/peltier/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.406,
+"bouche": 0.078,
+"largeur": 0.493,
+"coins": 0.043,
+"yeux": 0.329,
+"sourcils": 0.1,
+"profil": 0.764,
+"taille": [
+960,
+855
+],
+"fichier": "assets/photos/galerie/peltier/04.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.522,
+"bouche": 0.06,
+"largeur": 0.48,
+"coins": 0.036,
+"yeux": 0.281,
+"sourcils": 0.099,
+"profil": 0.162,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/peltier/05.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.244,
+"bouche": 0.06,
+"largeur": 0.442,
+"coins": 0.056,
+"yeux": 0.353,
+"sourcils": 0.087,
+"profil": 0.077,
+"taille": [
+903,
+1000
+],
+"fichier": "assets/photos/galerie/peltier/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.184,
+"bouche": 0.085,
+"largeur": 0.359,
+"coins": 0.008,
+"yeux": 0.33,
+"sourcils": 0.098,
+"profil": 0.381,
+"taille": [
+774,
+708
+],
+"fichier": "assets/photos/galerie/peltier/07.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.29,
+"bouche": 0.055,
+"largeur": 0.471,
+"coins": 0.038,
+"yeux": 0.296,
+"sourcils": 0.103,
+"profil": 0.178,
+"taille": [
+761,
+1000
+],
+"fichier": "assets/photos/galerie/peltier/08.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"philippe": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippe/01.jpg",
+"garde": false
+}
+],
+"philippot": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippot/01.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": true,
+"ratio": 0.211,
+"bouche": 0.034,
+"largeur": 0.339,
+"coins": -0.019,
+"yeux": 0.322,
+"sourcils": 0.125,
+"profil": 0.962,
+"taille": [
+960,
+540
+],
+"fichier": "assets/photos/galerie/philippot/02.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippot/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippot/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippot/05.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.236,
+"bouche": 0.047,
+"largeur": 0.389,
+"coins": 0.013,
+"yeux": 0.364,
+"sourcils": 0.11,
+"profil": 0.527,
+"taille": [
+960,
+540
+],
+"fichier": "assets/photos/galerie/philippot/06.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippot/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/philippot/08.jpg",
+"garde": false
+}
+],
+"piolle": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.34,
+"bouche": 0.044,
+"largeur": 0.407,
+"coins": 0.017,
+"yeux": 0.24,
+"sourcils": 0.12,
+"profil": 0.975,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/piolle/01.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.383,
+"bouche": 0.074,
+"largeur": 0.466,
+"coins": 0.04,
+"yeux": 0.306,
+"sourcils": 0.11,
+"profil": 0.839,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/piolle/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.32,
+"bouche": 0.051,
+"largeur": 0.34,
+"coins": -0.002,
+"yeux": 0.485,
+"sourcils": 0.125,
+"profil": 0.956,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/piolle/03.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.144,
+"bouche": 0.037,
+"largeur": 0.334,
+"coins": -0.002,
+"yeux": 0.347,
+"sourcils": 0.1,
+"profil": 0.993,
+"taille": [
+749,
+1000
+],
+"fichier": "assets/photos/galerie/piolle/04.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.359,
+"bouche": 0.054,
+"largeur": 0.321,
+"coins": 0.004,
+"yeux": 0.5,
+"sourcils": 0.127,
+"profil": 0.976,
+"taille": [
+960,
+642
+],
+"fichier": "assets/photos/galerie/piolle/05.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.266,
+"bouche": 0.005,
+"largeur": 0.361,
+"coins": 0.007,
+"yeux": 0.343,
+"sourcils": 0.129,
+"profil": 0.955,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/piolle/06.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.373,
+"bouche": 0.005,
+"largeur": 0.375,
+"coins": -0.02,
+"yeux": 0.248,
+"sourcils": 0.129,
+"profil": 0.148,
+"taille": [
+716,
+1000
+],
+"fichier": "assets/photos/galerie/piolle/07.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.316,
+"bouche": 0.06,
+"largeur": 0.513,
+"coins": 0.036,
+"yeux": 0.213,
+"sourcils": 0.118,
+"profil": 0.093,
+"taille": [
+747,
+1000
+],
+"fichier": "assets/photos/galerie/piolle/08.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"portes": [
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/portes/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.176,
+"bouche": 0.036,
+"largeur": 0.361,
+"coins": 0.023,
+"yeux": 0.426,
+"sourcils": 0.113,
+"profil": 0.9,
+"taille": [
+674,
+1000
+],
+"fichier": "assets/photos/galerie/portes/02.jpg",
+"garde": false
+}
+],
+"ppda": [
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.24,
+"bouche": 0.101,
+"largeur": 0.496,
+"coins": 0.056,
+"yeux": 0.311,
+"sourcils": 0.097,
+"profil": 0.524,
+"taille": [
+960,
+630
+],
+"fichier": "assets/photos/galerie/ppda/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ppda/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ppda/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ppda/04.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ppda/05.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ppda/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.282,
+"bouche": 0.02,
+"largeur": 0.452,
+"coins": 0.045,
+"yeux": 0.33,
+"sourcils": 0.13,
+"profil": 0.19,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/ppda/07.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.454,
+"bouche": 0.02,
+"largeur": 0.318,
+"coins": 0.015,
+"yeux": 0.405,
+"sourcils": 0.098,
+"profil": 0.233,
+"taille": [
+508,
+720
+],
+"fichier": "assets/photos/galerie/ppda/08.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+}
+],
+"praud": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.23,
+"bouche": 0.027,
+"largeur": 0.38,
+"coins": 0.005,
+"yeux": 0.326,
+"sourcils": 0.148,
+"profil": 0.979,
+"taille": [
+757,
+1000
+],
+"fichier": "assets/photos/galerie/praud/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/praud/02.jpg",
+"garde": false
+}
+],
+"pujadas": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.193,
+"bouche": 0.001,
+"largeur": 0.318,
+"coins": -0.011,
+"yeux": 0.388,
+"sourcils": 0.104,
+"profil": 0.997,
+"taille": [
+745,
+876
+],
+"fichier": "assets/photos/galerie/pujadas/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.341,
+"bouche": 0.064,
+"largeur": 0.466,
+"coins": 0.057,
+"yeux": 0.259,
+"sourcils": 0.099,
+"profil": 0.112,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/pujadas/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+}
+],
+"retailleau": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/retailleau/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/retailleau/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/retailleau/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/retailleau/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/retailleau/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.499,
+"bouche": 0.032,
+"largeur": 0.356,
+"coins": -0.001,
+"yeux": 0.386,
+"sourcils": 0.141,
+"profil": 0.224,
+"taille": [
+500,
+715
+],
+"fichier": "assets/photos/galerie/retailleau/06.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.427,
+"bouche": 0.048,
+"largeur": 0.384,
+"coins": -0.001,
+"yeux": 0.296,
+"sourcils": 0.123,
+"profil": 0.129,
+"taille": [
+666,
+1000
+],
+"fichier": "assets/photos/galerie/retailleau/07.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.434,
+"bouche": 0.041,
+"largeur": 0.381,
+"coins": -0.001,
+"yeux": 0.311,
+"sourcils": 0.123,
+"profil": 0.086,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/retailleau/08.jpg",
+"tags": [],
+"garde": true
+}
+],
+"rigault": [
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.2,
+"bouche": 0.045,
+"largeur": 0.351,
+"coins": -0.008,
+"yeux": 0.556,
+"sourcils": 0.14,
+"profil": 0.906,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/rigault/01.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.219,
+"bouche": 0.063,
+"largeur": 0.38,
+"coins": 0.032,
+"yeux": 0.512,
+"sourcils": 0.138,
+"profil": 0.898,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/rigault/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/rigault/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.341,
+"bouche": 0.021,
+"largeur": 0.343,
+"coins": -0.014,
+"yeux": 0.361,
+"sourcils": 0.106,
+"profil": 0.941,
+"taille": [
+656,
+1000
+],
+"fichier": "assets/photos/galerie/rigault/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"rousseau": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.335,
+"bouche": 0.117,
+"largeur": 0.525,
+"coins": 0.06,
+"yeux": 0.281,
+"sourcils": 0.119,
+"profil": 0.678,
+"taille": [
+919,
+1000
+],
+"fichier": "assets/photos/galerie/rousseau/01.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.228,
+"bouche": 0.012,
+"largeur": 0.456,
+"coins": 0.021,
+"yeux": 0.33,
+"sourcils": 0.097,
+"profil": 0.679,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/rousseau/02.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.358,
+"bouche": 0.129,
+"largeur": 0.507,
+"coins": 0.042,
+"yeux": 0.307,
+"sourcils": 0.109,
+"profil": 0.67,
+"taille": [
+748,
+1000
+],
+"fichier": "assets/photos/galerie/rousseau/03.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.311,
+"bouche": 0.135,
+"largeur": 0.532,
+"coins": 0.074,
+"yeux": 0.354,
+"sourcils": 0.091,
+"profil": 0.048,
+"taille": [
+752,
+1000
+],
+"fichier": "assets/photos/galerie/rousseau/04.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.314,
+"bouche": 0.095,
+"largeur": 0.548,
+"coins": 0.062,
+"yeux": 0.299,
+"sourcils": 0.1,
+"profil": 0.197,
+"taille": [
+749,
+1000
+],
+"fichier": "assets/photos/galerie/rousseau/05.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.289,
+"bouche": 0.038,
+"largeur": 0.355,
+"coins": -0.012,
+"yeux": 0.312,
+"sourcils": 0.115,
+"profil": 0.969,
+"taille": [
+960,
+635
+],
+"fichier": "assets/photos/galerie/rousseau/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.451,
+"bouche": 0.008,
+"largeur": 0.395,
+"coins": -0.018,
+"yeux": 0.381,
+"sourcils": 0.121,
+"profil": 0.978,
+"taille": [
+960,
+641
+],
+"fichier": "assets/photos/galerie/rousseau/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.418,
+"bouche": 0.127,
+"largeur": 0.515,
+"coins": 0.019,
+"yeux": 0.28,
+"sourcils": 0.131,
+"profil": 0.651,
+"taille": [
+777,
+1000
+],
+"fichier": "assets/photos/galerie/rousseau/08.jpg",
+"tags": [
+"rire"
+],
+"garde": true
+}
+],
+"roussel": [
+{
+"visages": 7,
+"exploitable": false,
+"fichier": "assets/photos/galerie/roussel/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/roussel/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/roussel/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/roussel/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/roussel/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.213,
+"bouche": 0.099,
+"largeur": 0.425,
+"coins": -0.003,
+"yeux": 0.259,
+"sourcils": 0.109,
+"profil": 0.639,
+"taille": [
+960,
+837
+],
+"fichier": "assets/photos/galerie/roussel/06.jpg",
+"tags": [
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.374,
+"bouche": 0.002,
+"largeur": 0.427,
+"coins": 0.028,
+"yeux": 0.277,
+"sourcils": 0.117,
+"profil": 0.045,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/roussel/07.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.202,
+"bouche": 0.011,
+"largeur": 0.441,
+"coins": 0.026,
+"yeux": 0.291,
+"sourcils": 0.132,
+"profil": 0.113,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/roussel/08.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+}
+],
+"ruffin": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.245,
+"bouche": 0.005,
+"largeur": 0.347,
+"coins": 0.011,
+"yeux": 0.343,
+"sourcils": 0.096,
+"profil": 0.666,
+"taille": [
+960,
+671
+],
+"fichier": "assets/photos/galerie/ruffin/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ruffin/02.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/ruffin/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.402,
+"bouche": 0.006,
+"largeur": 0.41,
+"coins": 0.018,
+"yeux": 0.354,
+"sourcils": 0.096,
+"profil": 0.581,
+"taille": [
+646,
+833
+],
+"fichier": "assets/photos/galerie/ruffin/04.jpg",
+"tags": [
+"sourire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.349,
+"bouche": 0.052,
+"largeur": 0.47,
+"coins": 0.045,
+"yeux": 0.375,
+"sourcils": 0.09,
+"profil": 0.639,
+"taille": [
+640,
+640
+],
+"fichier": "assets/photos/galerie/ruffin/05.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.432,
+"bouche": 0.009,
+"largeur": 0.381,
+"coins": 0.017,
+"yeux": 0.318,
+"sourcils": 0.098,
+"profil": 0.596,
+"taille": [
+810,
+1000
+],
+"fichier": "assets/photos/galerie/ruffin/06.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.481,
+"bouche": 0.009,
+"largeur": 0.389,
+"coins": 0.005,
+"yeux": 0.356,
+"sourcils": 0.106,
+"profil": 0.758,
+"taille": [
+724,
+1000
+],
+"fichier": "assets/photos/galerie/ruffin/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.436,
+"bouche": 0.01,
+"largeur": 0.398,
+"coins": 0.008,
+"yeux": 0.299,
+"sourcils": 0.111,
+"profil": 0.761,
+"taille": [
+960,
+735
+],
+"fichier": "assets/photos/galerie/ruffin/08.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+}
+],
+"rugy": [
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/rugy/01.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.247,
+"bouche": 0.061,
+"largeur": 0.401,
+"coins": 0.008,
+"yeux": 0.413,
+"sourcils": 0.11,
+"profil": 1.0,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/rugy/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/rugy/03.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": true,
+"ratio": 0.237,
+"bouche": 0.009,
+"largeur": 0.367,
+"coins": -0.006,
+"yeux": 0.32,
+"sourcils": 0.122,
+"profil": 0.638,
+"taille": [
+960,
+641
+],
+"fichier": "assets/photos/galerie/rugy/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.288,
+"bouche": 0.007,
+"largeur": 0.365,
+"coins": -0.006,
+"yeux": 0.413,
+"sourcils": 0.116,
+"profil": 0.942,
+"taille": [
+960,
+667
+],
+"fichier": "assets/photos/galerie/rugy/05.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": true,
+"ratio": 0.207,
+"bouche": 0.025,
+"largeur": 0.323,
+"coins": 0.008,
+"yeux": 0.34,
+"sourcils": 0.133,
+"profil": 0.819,
+"taille": [
+960,
+686
+],
+"fichier": "assets/photos/galerie/rugy/06.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.192,
+"bouche": 0.094,
+"largeur": 0.493,
+"coins": 0.044,
+"yeux": 0.408,
+"sourcils": 0.096,
+"profil": 0.094,
+"taille": [
+960,
+686
+],
+"fichier": "assets/photos/galerie/rugy/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.227,
+"bouche": 0.013,
+"largeur": 0.309,
+"coins": -0.005,
+"yeux": 0.378,
+"sourcils": 0.123,
+"profil": 0.86,
+"taille": [
+960,
+638
+],
+"fichier": "assets/photos/galerie/rugy/08.jpg",
+"garde": false
+}
+],
+"salame": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.27,
+"bouche": 0.007,
+"largeur": 0.407,
+"coins": 0.008,
+"yeux": 0.359,
+"sourcils": 0.143,
+"profil": 0.122,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/salame/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"sarkozy": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/sarkozy/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/sarkozy/02.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/sarkozy/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.264,
+"bouche": 0.1,
+"largeur": 0.475,
+"coins": 0.064,
+"yeux": 0.372,
+"sourcils": 0.106,
+"profil": 0.538,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/sarkozy/04.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.346,
+"bouche": 0.002,
+"largeur": 0.396,
+"coins": 0.015,
+"yeux": 0.336,
+"sourcils": 0.111,
+"profil": 0.059,
+"taille": [
+654,
+916
+],
+"fichier": "assets/photos/galerie/sarkozy/05.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.32,
+"bouche": 0.001,
+"largeur": 0.397,
+"coins": 0.015,
+"yeux": 0.332,
+"sourcils": 0.116,
+"profil": 0.054,
+"taille": [
+696,
+986
+],
+"fichier": "assets/photos/galerie/sarkozy/06.jpg",
+"tags": [],
+"garde": true
+}
+],
+"schiappa": [
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.164,
+"bouche": 0.005,
+"largeur": 0.387,
+"coins": 0.01,
+"yeux": 0.3,
+"sourcils": 0.133,
+"profil": 0.491,
+"taille": [
+853,
+853
+],
+"fichier": "assets/photos/galerie/schiappa/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.355,
+"bouche": 0.071,
+"largeur": 0.512,
+"coins": 0.047,
+"yeux": 0.305,
+"sourcils": 0.111,
+"profil": 0.143,
+"taille": [
+709,
+1000
+],
+"fichier": "assets/photos/galerie/schiappa/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/schiappa/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.284,
+"bouche": 0.021,
+"largeur": 0.352,
+"coins": 0.025,
+"yeux": 0.419,
+"sourcils": 0.121,
+"profil": 0.815,
+"taille": [
+736,
+1000
+],
+"fichier": "assets/photos/galerie/schiappa/04.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.171,
+"bouche": 0.048,
+"largeur": 0.354,
+"coins": 0.027,
+"yeux": 0.34,
+"sourcils": 0.125,
+"profil": 0.921,
+"taille": [
+960,
+642
+],
+"fichier": "assets/photos/galerie/schiappa/05.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.188,
+"bouche": 0.077,
+"largeur": 0.513,
+"coins": 0.051,
+"yeux": 0.279,
+"sourcils": 0.119,
+"profil": 0.107,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/schiappa/06.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.173,
+"bouche": 0.077,
+"largeur": 0.505,
+"coins": 0.05,
+"yeux": 0.291,
+"sourcils": 0.119,
+"profil": 0.116,
+"taille": [
+868,
+1000
+],
+"fichier": "assets/photos/galerie/schiappa/07.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/schiappa/08.jpg",
+"garde": false
+}
+],
+"tanguy": [
+{
+"visages": 6,
+"exploitable": false,
+"fichier": "assets/photos/galerie/tanguy/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.19,
+"bouche": 0.002,
+"largeur": 0.331,
+"coins": 0.001,
+"yeux": 0.308,
+"sourcils": 0.115,
+"profil": 0.71,
+"taille": [
+702,
+802
+],
+"fichier": "assets/photos/galerie/tanguy/02.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.461,
+"bouche": 0.003,
+"largeur": 0.397,
+"coins": 0.025,
+"yeux": 0.321,
+"sourcils": 0.119,
+"profil": 0.214,
+"taille": [
+723,
+1000
+],
+"fichier": "assets/photos/galerie/tanguy/03.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.166,
+"bouche": 0.008,
+"largeur": 0.304,
+"coins": 0.001,
+"yeux": 0.416,
+"sourcils": 0.129,
+"profil": 0.987,
+"taille": [
+750,
+1000
+],
+"fichier": "assets/photos/galerie/tanguy/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/tanguy/05.jpg",
+"garde": false
+}
+],
+"thevenot": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.131,
+"bouche": 0.021,
+"largeur": 0.306,
+"coins": 0.006,
+"yeux": 0.408,
+"sourcils": 0.119,
+"profil": 0.895,
+"taille": [
+666,
+1000
+],
+"fichier": "assets/photos/galerie/thevenot/01.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"tiberi": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.494,
+"bouche": 0.006,
+"largeur": 0.399,
+"coins": -0.021,
+"yeux": 0.29,
+"sourcils": 0.124,
+"profil": 0.163,
+"taille": [
+773,
+1000
+],
+"fichier": "assets/photos/galerie/tiberi/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.319,
+"bouche": 0.006,
+"largeur": 0.411,
+"coins": -0.023,
+"yeux": 0.249,
+"sourcils": 0.127,
+"profil": 0.156,
+"taille": [
+660,
+1000
+],
+"fichier": "assets/photos/galerie/tiberi/02.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.416,
+"bouche": 0.01,
+"largeur": 0.394,
+"coins": 0.004,
+"yeux": 0.345,
+"sourcils": 0.1,
+"profil": 0.555,
+"taille": [
+684,
+882
+],
+"fichier": "assets/photos/galerie/tiberi/03.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/tiberi/04.jpg",
+"garde": false
+}
+],
+"tondelier": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.4,
+"bouche": 0.002,
+"largeur": 0.423,
+"coins": 0.0,
+"yeux": 0.27,
+"sourcils": 0.127,
+"profil": 0.417,
+"taille": [
+960,
+641
+],
+"fichier": "assets/photos/galerie/tondelier/01.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.216,
+"bouche": 0.024,
+"largeur": 0.417,
+"coins": 0.023,
+"yeux": 0.236,
+"sourcils": 0.125,
+"profil": 0.602,
+"taille": [
+749,
+1000
+],
+"fichier": "assets/photos/galerie/tondelier/02.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.423,
+"bouche": 0.004,
+"largeur": 0.418,
+"coins": 0.004,
+"yeux": 0.3,
+"sourcils": 0.121,
+"profil": 0.366,
+"taille": [
+960,
+960
+],
+"fichier": "assets/photos/galerie/tondelier/03.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.372,
+"bouche": 0.108,
+"largeur": 0.505,
+"coins": 0.027,
+"yeux": 0.416,
+"sourcils": 0.102,
+"profil": 0.993,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/tondelier/04.jpg",
+"tags": [
+"rire",
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 6,
+"exploitable": false,
+"fichier": "assets/photos/galerie/tondelier/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.35,
+"bouche": 0.017,
+"largeur": 0.355,
+"coins": -0.005,
+"yeux": 0.313,
+"sourcils": 0.125,
+"profil": 0.234,
+"taille": [
+730,
+973
+],
+"fichier": "assets/photos/galerie/tondelier/06.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.213,
+"bouche": 0.023,
+"largeur": 0.357,
+"coins": -0.006,
+"yeux": 0.346,
+"sourcils": 0.121,
+"profil": 0.276,
+"taille": [
+960,
+768
+],
+"fichier": "assets/photos/galerie/tondelier/07.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.193,
+"bouche": 0.074,
+"largeur": 0.332,
+"coins": 0.015,
+"yeux": 0.375,
+"sourcils": 0.154,
+"profil": 0.956,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/tondelier/08.jpg",
+"tags": [
+"parle",
+"surpris"
+],
+"garde": true
+}
+],
+"trouve": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/trouve/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.499,
+"bouche": 0.058,
+"largeur": 0.546,
+"coins": 0.07,
+"yeux": 0.275,
+"sourcils": 0.131,
+"profil": 0.104,
+"taille": [
+960,
+725
+],
+"fichier": "assets/photos/galerie/trouve/02.jpg",
+"tags": [
+"sourire",
+"parle"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.375,
+"bouche": 0.046,
+"largeur": 0.382,
+"coins": 0.014,
+"yeux": 0.413,
+"sourcils": 0.132,
+"profil": 0.999,
+"taille": [
+853,
+853
+],
+"fichier": "assets/photos/galerie/trouve/03.jpg",
+"tags": [
+"surpris"
+],
+"garde": true
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/trouve/04.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/trouve/05.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/trouve/06.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/trouve/07.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": true,
+"ratio": 0.159,
+"bouche": 0.111,
+"largeur": 0.447,
+"coins": 0.025,
+"yeux": 0.168,
+"sourcils": 0.131,
+"profil": 0.136,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/trouve/08.jpg",
+"garde": false
+}
+],
+"vallaud": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/vallaud/01.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.293,
+"bouche": 0.006,
+"largeur": 0.352,
+"coins": -0.015,
+"yeux": 0.418,
+"sourcils": 0.106,
+"profil": 0.866,
+"taille": [
+667,
+1000
+],
+"fichier": "assets/photos/galerie/vallaud/02.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/vallaud/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.162,
+"bouche": 0.015,
+"largeur": 0.324,
+"coins": -0.014,
+"yeux": 0.353,
+"sourcils": 0.125,
+"profil": 0.594,
+"taille": [
+722,
+1000
+],
+"fichier": "assets/photos/galerie/vallaud/04.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.152,
+"bouche": 0.011,
+"largeur": 0.341,
+"coins": -0.016,
+"yeux": 0.411,
+"sourcils": 0.099,
+"profil": 0.842,
+"taille": [
+665,
+1000
+],
+"fichier": "assets/photos/galerie/vallaud/05.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+}
+],
+"valls": [
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/valls/01.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/valls/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.183,
+"bouche": 0.009,
+"largeur": 0.352,
+"coins": 0.009,
+"yeux": 0.314,
+"sourcils": 0.152,
+"profil": 0.147,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/valls/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/valls/04.jpg",
+"garde": false
+}
+],
+"villiers": [
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/01.jpg",
+"garde": false
+},
+{
+"visages": 5,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/02.jpg",
+"garde": false
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/03.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/04.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/06.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.432,
+"bouche": 0.043,
+"largeur": 0.461,
+"coins": 0.045,
+"yeux": 0.315,
+"sourcils": 0.111,
+"profil": 0.038,
+"taille": [
+684,
+1000
+],
+"fichier": "assets/photos/galerie/villiers/07.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 4,
+"exploitable": false,
+"fichier": "assets/photos/galerie/villiers/08.jpg",
+"garde": false
+}
+],
+"wauquiez": [
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.246,
+"bouche": 0.038,
+"largeur": 0.439,
+"coins": 0.012,
+"yeux": 0.322,
+"sourcils": 0.109,
+"profil": 0.967,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/wauquiez/01.jpg",
+"tags": [],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.37,
+"bouche": 0.016,
+"largeur": 0.363,
+"coins": -0.006,
+"yeux": 0.334,
+"sourcils": 0.106,
+"profil": 0.207,
+"taille": [
+666,
+947
+],
+"fichier": "assets/photos/galerie/wauquiez/02.jpg",
+"tags": [
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/wauquiez/03.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.215,
+"bouche": 0.008,
+"largeur": 0.355,
+"coins": -0.0,
+"yeux": 0.346,
+"sourcils": 0.104,
+"profil": 0.664,
+"taille": [
+960,
+639
+],
+"fichier": "assets/photos/galerie/wauquiez/04.jpg",
+"garde": false
+},
+{
+"visages": 3,
+"exploitable": false,
+"fichier": "assets/photos/galerie/wauquiez/05.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.267,
+"bouche": 0.003,
+"largeur": 0.351,
+"coins": 0.005,
+"yeux": 0.389,
+"sourcils": 0.115,
+"profil": 0.986,
+"taille": [
+960,
+640
+],
+"fichier": "assets/photos/galerie/wauquiez/06.jpg",
+"tags": [
+"surpris",
+"neutre"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/wauquiez/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/wauquiez/08.jpg",
+"garde": false
+}
+],
+"zemmour": [
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/zemmour/01.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.2,
+"bouche": 0.045,
+"largeur": 0.351,
+"coins": -0.008,
+"yeux": 0.556,
+"sourcils": 0.14,
+"profil": 0.906,
+"taille": [
+960,
+720
+],
+"fichier": "assets/photos/galerie/zemmour/02.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/zemmour/03.jpg",
+"garde": false
+},
+{
+"visages": 1,
+"exploitable": true,
+"ratio": 0.342,
+"bouche": 0.009,
+"largeur": 0.417,
+"coins": 0.03,
+"yeux": 0.302,
+"sourcils": 0.106,
+"profil": 0.178,
+"taille": [
+714,
+1000
+],
+"fichier": "assets/photos/galerie/zemmour/04.jpg",
+"tags": [
+"sourire"
+],
+"garde": true
+},
+{
+"visages": 1,
+"exploitable": false,
+"fichier": "assets/photos/galerie/zemmour/05.jpg",
+"garde": false
+},
+{
+"visages": 0,
+"exploitable": false,
+"fichier": "assets/photos/galerie/zemmour/06.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": false,
+"fichier": "assets/photos/galerie/zemmour/07.jpg",
+"garde": false
+},
+{
+"visages": 2,
+"exploitable": true,
+"ratio": 0.207,
+"bouche": 0.01,
+"largeur": 0.407,
+"coins": 0.041,
+"yeux": 0.289,
+"sourcils": 0.144,
+"profil": 0.154,
+"taille": [
+923,
+1000
+],
+"fichier": "assets/photos/galerie/zemmour/08.jpg",
+"garde": false
+}
+]
+}

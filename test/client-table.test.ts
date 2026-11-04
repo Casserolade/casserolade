@@ -1,0 +1,130 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { speechForEvent } from '../src/client/tools/afterCombatSpeech.ts';
+import { CHANTS } from '../src/data/chants.ts';
+import { fanLayout } from '../src/client/tools/fanLayout.ts';
+import { glossaryFor } from '../src/client/tools/glossaryFor.ts';
+import { handCards } from '../src/client/tools/handCards.ts';
+import { medallionMarks } from '../src/client/tools/medallionMarks.ts';
+import { allyTargets, annonceNeedsTarget, spellNeedsTarget, spellTargets } from '../src/client/tools/playTargets.ts';
+import { boldTerms, parseRichText } from '../src/client/tools/richText.ts';
+import { casseroleCardLines, spellCardLines } from '../src/client/tools/spellCardLines.ts';
+import { cardRuleLines } from '../src/client/tools/describeEffect.ts';
+import { CARD_BY_ID, CARDS } from '../src/data/cards.ts';
+import { CASSEROLE_BY_ID, CASSEROLES } from '../src/data/casseroles.ts';
+import { PHRASES } from '../src/data/phrases.ts';
+import { SPELL_BY_ID, SPELLS } from '../src/data/sorts.ts';
+import { makeMinion } from '../src/engine/minion.ts';
+import type { Minion } from '../src/engine/types.ts';
+
+const FAN = { step: 120, maxSpan: 900, anglePerCard: 6, maxAngle: 18, dip: 6, hoverScale: 2, hoverLift: 80, hoverSpread: 60 };
+
+function minion(cardId: string, uid: number, extra: Partial<Minion> = {}): Minion {
+  return { ...makeMinion(CARD_BY_ID[cardId], uid), ...extra };
+}
+
+test('parseRichText splits card text into plain and bold runs', () => {
+  assert.deepEqual(parseRichText('**Annonce** : donne **Immunité** à un allié.'), [
+    { text: 'Annonce', bold: true },
+    { text: ' : donne ', bold: false },
+    { text: 'Immunité', bold: true },
+    { text: ' à un allié.', bold: false },
+  ]);
+  assert.deepEqual(parseRichText('Rien en gras.'), [{ text: 'Rien en gras.', bold: false }]);
+  assert.deepEqual(boldTerms(['**Tract**, **Tract** et **Vente**']), ['Tract', 'Vente']);
+});
+
+test('glossaryFor explains every bold word of every card, spell and casserole', () => {
+  const texts = [
+    ...CARDS.map((card) => cardRuleLines(card)),
+    ...SPELLS.map((spell) => spellCardLines(spell, { tier: 3, tract: { atk: 1, hp: 1 } })),
+    ...CASSEROLES.map((casserole) => casseroleCardLines(casserole, 2)),
+  ];
+  for (const lines of texts) {
+    const explained = glossaryFor(lines).length;
+    assert.equal(explained, new Set(boldTerms(lines).map((term) => term.replace(/\s*\(.*\)$/, '').toLowerCase().replace(/s$/, ''))).size, lines.join(' / '));
+  }
+});
+
+test('glossaryFor folds plurals and numbers back to one entry', () => {
+  const entries = glossaryFor(['**Fin de tour** : joue un **Tract**.', 'Vos **Tracts** donnent +1/+1. **Immunité**.']);
+  assert.deepEqual(entries.map((entry) => entry.term), ['Fin de tour', 'Tract', 'Immunité']);
+  assert.ok(entries.every((entry) => entry.rule.length > 10));
+});
+
+test('fanLayout tilts the ends, keeps the hand narrow, and lifts the hovered card', () => {
+  const rest = fanLayout(5, null, FAN);
+  assert.equal(rest[2].x, 0);
+  assert.ok(rest[0].angle < 0 && rest[4].angle > 0);
+  assert.ok(rest[0].y > rest[2].y, 'the ends dip');
+  const crowded = fanLayout(10, null, FAN);
+  assert.ok(crowded[9].x - crowded[0].x <= FAN.maxSpan + 1e-9);
+  const hovered = fanLayout(5, 1, FAN);
+  assert.equal(hovered[1].angle, 0);
+  assert.equal(hovered[1].scale, 2);
+  assert.ok(hovered[1].y < 0);
+  assert.ok(hovered[1].z > hovered[4].z);
+  assert.ok(hovered[2].x > rest[2].x && hovered[0].x < rest[0].x, 'the neighbours step aside');
+  assert.deepEqual(fanLayout(1, null, FAN)[0], { x: 0, y: 0, angle: 0, scale: 1, z: 0 });
+});
+
+test('handCards mixes minions, spells and casseroles in the order they came', () => {
+  const cards = handCards([minion('boyard', 5)], [{ uid: 7, casseroleId: CASSEROLES[0].id }, { uid: 3, spellId: 'tract', count: 2 }, { uid: 9, spellId: 'nope' }]);
+  assert.deepEqual(cards.map((card) => [card.kind, card.uid]), [['spell', 3], ['minion', 5], ['casserole', 7]]);
+});
+
+test('targets follow the rules the engine checks', () => {
+  const board = [minion('boyard', 1), minion('thevenoud', 2, { golden: true }), { ...minion('boyard', 3), token: true }, minion('melenchon', 4)];
+  assert.ok(annonceNeedsTarget(CARD_BY_ID.valls.effects ?? []));
+  assert.ok(!annonceNeedsTarget(CARD_BY_ID.boyard.effects ?? []));
+  assert.deepEqual(allyTargets(board, 1), [2, 3, 4]);
+  assert.deepEqual(allyTargets(board, undefined, CARD_BY_ID.philippe.effects), [1], 'only plain minions of tier 3 or less turn golden');
+  assert.ok(spellNeedsTarget({ uid: 1, spellId: 'tract' }));
+  assert.ok(!spellNeedsTarget({ uid: 1, spellId: 'note_de_frais' }));
+  assert.ok(spellNeedsTarget({ uid: 1, casseroleId: CASSEROLES[0].id }));
+  assert.deepEqual(spellTargets({ uid: 1, spellId: 'tract' }, board), [1, 2, 3, 4]);
+  assert.deepEqual(spellTargets({ uid: 1, spellId: 'remaniement' }, board), [1]);
+  assert.deepEqual(spellTargets({ uid: 1, casseroleId: CASSEROLES[0].id }, board), [1, 2, 4]);
+  assert.deepEqual(spellTargets({ uid: 1, spellId: 'note_de_frais' }, board), []);
+});
+
+test('medallionMarks shows what the card hides', () => {
+  assert.deepEqual(medallionMarks(CARD_BY_ID.bouamrane.effects ?? []), { heritage: true, triggered: false, revanche: null, celebration: false, reponse: false });
+  const vallaud = medallionMarks(CARD_BY_ID.vallaud.effects ?? []);
+  assert.equal(vallaud.revanche, 3);
+  assert.ok(medallionMarks(CARD_BY_ID.boyard.effects ?? []).celebration);
+  assert.ok(medallionMarks(CARD_BY_ID.portes.effects ?? []).triggered);
+  assert.ok(medallionMarks(CARD_BY_ID.ruffin.effects ?? []).reponse);
+  assert.ok(!medallionMarks(CARD_BY_ID.chikirou.effects ?? []).triggered, 'an Annonce is spent once played');
+});
+
+test('spell and casserole cards say what they do', () => {
+  assert.deepEqual(spellCardLines(SPELL_BY_ID.tract, { tract: { atk: 2, hp: 1 } }), ['Donne +2/+1 à un politique.']);
+  assert.match(spellCardLines(SPELL_BY_ID.investiture, { tier: 4 })[0], /échelon 4/);
+  assert.match(spellCardLines(SPELL_BY_ID.matinale)[0], /2 prochaines actualisations sont gratuites/i);
+  const casserole = CASSEROLE_BY_ID.ecoutes;
+  assert.match(casseroleCardLines(casserole, 2).at(-1) ?? '', /×2 sur Nicolas Sarkozy/);
+});
+
+test('after a combat, the celebrant says a real quote, another of its own, or its camp\'s chant', () => {
+  const speaker = Object.keys(PHRASES).find((id) => PHRASES[id]?.celebration?.length);
+  assert.ok(speaker);
+  const said = speechForEvent({ e: 'celebration', side: 0, uid: 4, cardId: speaker });
+  assert.equal(said?.kind, 'celebration');
+  assert.equal(said?.line, PHRASES[speaker].celebration?.[0]);
+  assert.equal(said?.chant, false);
+  // Doucet has no celebration line, but real quotes of his own: he says one of them.
+  const doucet = speechForEvent({ e: 'celebration', side: 0, uid: 5, cardId: 'doucet' });
+  assert.equal(doucet?.line, PHRASES.doucet.pose?.[0]);
+  assert.equal(doucet?.chant, false);
+  // Without any real quote, the camp's real slogan, as a chant: nobody talks without a word.
+  const silent = CARDS.find((c) => !c.token && !PHRASES[c.id]);
+  assert.ok(silent, 'un politique sans aucune petite phrase');
+  const chanted = speechForEvent({ e: 'celebration', side: 0, uid: 6, cardId: silent.id });
+  assert.equal(chanted?.line, CHANTS[silent.camp]);
+  assert.equal(chanted?.chant, true);
+  for (const card of CARDS) assert.ok(speechForEvent({ e: 'celebration', side: 0, uid: 1, cardId: card.id })?.line, `${card.id} célèbre sans un mot`);
+  assert.equal(speechForEvent({ e: 'celebration', side: 1, uid: 4, cardId: 'personne' })?.line, null);
+  assert.equal(speechForEvent({ e: 'reponse', side: 1, uid: 2, cardId: 'personne' })?.kind, 'reponse');
+  assert.equal(speechForEvent({ e: 'attaque', from: 1, to: 2 }), null);
+});

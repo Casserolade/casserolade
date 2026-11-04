@@ -1,0 +1,16 @@
+{
+ "atlas": "effets/dore.webp",
+ "cols": 4,
+ "rows": 3,
+ "images": 12,
+ "cell": [
+  256,
+  366
+ ],
+ "fps": 12,
+ "ancre": [
+  0.0,
+  0.0
+ ],
+ "boucle": true
+}

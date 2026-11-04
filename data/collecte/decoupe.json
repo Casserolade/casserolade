@@ -1,0 +1,622 @@
+{
+ "aliot": {
+  "basse_definition": false,
+  "hauteur_visage_source": 551,
+  "visages": 1
+ },
+ "aphatie": {
+  "basse_definition": false,
+  "hauteur_visage_source": 210,
+  "visages": 1
+ },
+ "arthaud": {
+  "basse_definition": false,
+  "hauteur_visage_source": 401,
+  "visages": 1
+ },
+ "asselineau": {
+  "basse_definition": false,
+  "hauteur_visage_source": 521,
+  "visages": 1
+ },
+ "attal": {
+  "basse_definition": false,
+  "hauteur_visage_source": 566,
+  "visages": 1
+ },
+ "aubry": {
+  "basse_definition": false,
+  "hauteur_visage_source": 607,
+  "visages": 1
+ },
+ "balkany": {
+  "basse_definition": false,
+  "hauteur_visage_source": 257,
+  "visages": 1
+ },
+ "barbier": {
+  "basse_definition": false,
+  "hauteur_visage_source": 437,
+  "visages": 1
+ },
+ "bardella": {
+  "basse_definition": false,
+  "hauteur_visage_source": 396,
+  "visages": 1
+ },
+ "barthes": {
+  "basse_definition": true,
+  "hauteur_visage_source": 127,
+  "visages": 1
+ },
+ "batho": {
+  "basse_definition": false,
+  "hauteur_visage_source": 280,
+  "visages": 1
+ },
+ "bay": {
+  "basse_definition": false,
+  "hauteur_visage_source": 607,
+  "visages": 1
+ },
+ "bayrou": {
+  "basse_definition": false,
+  "hauteur_visage_source": 327,
+  "visages": 1
+ },
+ "berge": {
+  "basse_definition": false,
+  "hauteur_visage_source": 218,
+  "visages": 1
+ },
+ "bertrand": {
+  "basse_definition": false,
+  "hauteur_visage_source": 395,
+  "visages": 1
+ },
+ "bompard": {
+  "basse_definition": false,
+  "hauteur_visage_source": 724,
+  "visages": 1
+ },
+ "bouamrane": {
+  "basse_definition": false,
+  "hauteur_visage_source": 336,
+  "visages": 1
+ },
+ "bouleau": {
+  "basse_definition": false,
+  "hauteur_visage_source": 232,
+  "visages": 1
+ },
+ "boyard": {
+  "basse_definition": false,
+  "hauteur_visage_source": 528,
+  "visages": 1
+ },
+ "branco": {
+  "basse_definition": false,
+  "hauteur_visage_source": 287,
+  "visages": 1
+ },
+ "braun_pivet": {
+  "basse_definition": false,
+  "hauteur_visage_source": 415,
+  "visages": 1
+ },
+ "bregeon": {
+  "basse_definition": true,
+  "hauteur_visage_source": 120,
+  "visages": 1
+ },
+ "cahuzac": {
+  "basse_definition": false,
+  "hauteur_visage_source": 288,
+  "visages": 1
+ },
+ "castaner": {
+  "basse_definition": false,
+  "hauteur_visage_source": 577,
+  "visages": 1
+ },
+ "cazeneuve": {
+  "basse_definition": false,
+  "hauteur_visage_source": 505,
+  "visages": 1
+ },
+ "cheminade": {
+  "basse_definition": false,
+  "hauteur_visage_source": 558,
+  "visages": 1
+ },
+ "chenu": {
+  "basse_definition": false,
+  "hauteur_visage_source": 294,
+  "visages": 1
+ },
+ "chikirou": {
+  "basse_definition": false,
+  "hauteur_visage_source": 300,
+  "visages": 1
+ },
+ "chirac": {
+  "basse_definition": false,
+  "hauteur_visage_source": 677,
+  "visages": 1
+ },
+ "ciotti": {
+  "basse_definition": false,
+  "hauteur_visage_source": 669,
+  "visages": 1
+ },
+ "cohn_bendit": {
+  "basse_definition": false,
+  "hauteur_visage_source": 460,
+  "visages": 1
+ },
+ "cope": {
+  "basse_definition": false,
+  "hauteur_visage_source": 447,
+  "visages": 1
+ },
+ "coquerel": {
+  "basse_definition": false,
+  "hauteur_visage_source": 433,
+  "visages": 2
+ },
+ "darmanin": {
+  "basse_definition": false,
+  "hauteur_visage_source": 200,
+  "visages": 1
+ },
+ "dati": {
+  "basse_definition": false,
+  "hauteur_visage_source": 547,
+  "visages": 1
+ },
+ "de_gaulle": {
+  "basse_definition": false,
+  "hauteur_visage_source": 373,
+  "visages": 1
+ },
+ "delogu": {
+  "basse_definition": false,
+  "hauteur_visage_source": 676,
+  "visages": 1
+ },
+ "doucet": {
+  "basse_definition": false,
+  "hauteur_visage_source": 302,
+  "visages": 1
+ },
+ "duflot": {
+  "basse_definition": false,
+  "hauteur_visage_source": 589,
+  "visages": 1
+ },
+ "dupond_moretti": {
+  "basse_definition": false,
+  "hauteur_visage_source": 460,
+  "visages": 1
+ },
+ "dupont_aignan": {
+  "basse_definition": false,
+  "hauteur_visage_source": 366,
+  "visages": 1
+ },
+ "durif": {
+  "basse_definition": false,
+  "hauteur_visage_source": 195,
+  "visages": 1
+ },
+ "faure": {
+  "basse_definition": false,
+  "hauteur_visage_source": 417,
+  "visages": 1
+ },
+ "ferrari": {
+  "basse_definition": false,
+  "hauteur_visage_source": 260,
+  "visages": 1
+ },
+ "fillon": {
+  "basse_definition": false,
+  "hauteur_visage_source": 574,
+  "visages": 1
+ },
+ "fogiel": {
+  "basse_definition": false,
+  "hauteur_visage_source": 354,
+  "visages": 1
+ },
+ "fournas": {
+  "basse_definition": false,
+  "hauteur_visage_source": 293,
+  "visages": 1
+ },
+ "giscard": {
+  "basse_definition": false,
+  "hauteur_visage_source": 1255,
+  "visages": 1
+ },
+ "glucksmann": {
+  "basse_definition": false,
+  "hauteur_visage_source": 573,
+  "visages": 1
+ },
+ "gueant": {
+  "basse_definition": false,
+  "hauteur_visage_source": 396,
+  "visages": 1
+ },
+ "guedj": {
+  "basse_definition": false,
+  "hauteur_visage_source": 421,
+  "visages": 1
+ },
+ "guette": {
+  "basse_definition": false,
+  "hauteur_visage_source": 384,
+  "visages": 1
+ },
+ "hanouna": {
+  "basse_definition": false,
+  "hauteur_visage_source": 368,
+  "visages": 1
+ },
+ "hidalgo": {
+  "basse_definition": false,
+  "hauteur_visage_source": 363,
+  "visages": 1
+ },
+ "hollande": {
+  "basse_definition": false,
+  "hauteur_visage_source": 496,
+  "visages": 1
+ },
+ "hortefeux": {
+  "basse_definition": false,
+  "hauteur_visage_source": 558,
+  "visages": 1
+ },
+ "houssin": {
+  "basse_definition": false,
+  "hauteur_visage_source": 221,
+  "visages": 1
+ },
+ "hurmic": {
+  "basse_definition": false,
+  "hauteur_visage_source": 535,
+  "visages": 1
+ },
+ "jadot": {
+  "basse_definition": false,
+  "hauteur_visage_source": 252,
+  "visages": 1
+ },
+ "jmlp": {
+  "basse_definition": false,
+  "hauteur_visage_source": 602,
+  "visages": 1
+ },
+ "kazib": {
+  "basse_definition": false,
+  "hauteur_visage_source": 166,
+  "visages": 1
+ },
+ "knafo": {
+  "basse_definition": false,
+  "hauteur_visage_source": 297,
+  "visages": 1
+ },
+ "lafont": {
+  "basse_definition": false,
+  "hauteur_visage_source": 537,
+  "visages": 1
+ },
+ "lalanne": {
+  "basse_definition": false,
+  "hauteur_visage_source": 157,
+  "visages": 1
+ },
+ "lapix": {
+  "basse_definition": false,
+  "hauteur_visage_source": 403,
+  "visages": 1
+ },
+ "larcher": {
+  "basse_definition": false,
+  "hauteur_visage_source": 407,
+  "visages": 1
+ },
+ "lassalle": {
+  "basse_definition": false,
+  "hauteur_visage_source": 486,
+  "visages": 1
+ },
+ "lavalette": {
+  "basse_definition": false,
+  "hauteur_visage_source": 538,
+  "visages": 1
+ },
+ "leaument": {
+  "basse_definition": false,
+  "hauteur_visage_source": 399,
+  "visages": 1
+ },
+ "lecornu": {
+  "basse_definition": false,
+  "hauteur_visage_source": 603,
+  "visages": 1
+ },
+ "lemaire": {
+  "basse_definition": false,
+  "hauteur_visage_source": 310,
+  "visages": 1
+ },
+ "lepen": {
+  "basse_definition": false,
+  "hauteur_visage_source": 390,
+  "visages": 1
+ },
+ "lepers": {
+  "basse_definition": false,
+  "hauteur_visage_source": 526,
+  "visages": 1
+ },
+ "lescure": {
+  "basse_definition": false,
+  "hauteur_visage_source": 482,
+  "visages": 1
+ },
+ "lisnard": {
+  "basse_definition": false,
+  "hauteur_visage_source": 549,
+  "visages": 1
+ },
+ "lucas": {
+  "basse_definition": false,
+  "hauteur_visage_source": 346,
+  "visages": 1
+ },
+ "macron": {
+  "basse_definition": false,
+  "hauteur_visage_source": 465,
+  "visages": 1
+ },
+ "maillard": {
+  "basse_definition": false,
+  "hauteur_visage_source": 265,
+  "visages": 1
+ },
+ "mamere": {
+  "basse_definition": false,
+  "hauteur_visage_source": 350,
+  "visages": 1
+ },
+ "marechal": {
+  "basse_definition": false,
+  "hauteur_visage_source": 211,
+  "visages": 1
+ },
+ "mariani": {
+  "basse_definition": false,
+  "hauteur_visage_source": 598,
+  "visages": 1
+ },
+ "mc_lepen": {
+  "basse_definition": false,
+  "hauteur_visage_source": 589,
+  "visages": 1
+ },
+ "melenchon": {
+  "basse_definition": false,
+  "hauteur_visage_source": 398,
+  "visages": 1
+ },
+ "messiha": {
+  "basse_definition": false,
+  "hauteur_visage_source": 492,
+  "visages": 1
+ },
+ "mitterrand": {
+  "basse_definition": false,
+  "hauteur_visage_source": 687,
+  "visages": 1
+ },
+ "morano": {
+  "basse_definition": false,
+  "hauteur_visage_source": 712,
+  "visages": 1
+ },
+ "ndiaye": {
+  "basse_definition": false,
+  "hauteur_visage_source": 349,
+  "visages": 1
+ },
+ "odoul": {
+  "basse_definition": false,
+  "hauteur_visage_source": 305,
+  "visages": 1
+ },
+ "oudea": {
+  "basse_definition": false,
+  "hauteur_visage_source": 539,
+  "visages": 1
+ },
+ "panot": {
+  "basse_definition": false,
+  "hauteur_visage_source": 358,
+  "visages": 1
+ },
+ "pecresse": {
+  "basse_definition": false,
+  "hauteur_visage_source": 404,
+  "visages": 1
+ },
+ "peltier": {
+  "basse_definition": false,
+  "hauteur_visage_source": 568,
+  "visages": 1
+ },
+ "philippe": {
+  "basse_definition": false,
+  "hauteur_visage_source": 525,
+  "visages": 1
+ },
+ "philippot": {
+  "basse_definition": false,
+  "hauteur_visage_source": 413,
+  "visages": 1
+ },
+ "piolle": {
+  "basse_definition": false,
+  "hauteur_visage_source": 497,
+  "visages": 1
+ },
+ "poisson": {
+  "basse_definition": false,
+  "hauteur_visage_source": 533,
+  "visages": 1
+ },
+ "portes": {
+  "basse_definition": false,
+  "hauteur_visage_source": 251,
+  "visages": 1
+ },
+ "poutou": {
+  "basse_definition": true,
+  "hauteur_visage_source": 134,
+  "visages": 1
+ },
+ "ppda": {
+  "basse_definition": false,
+  "hauteur_visage_source": 409,
+  "visages": 1
+ },
+ "praud": {
+  "basse_definition": false,
+  "hauteur_visage_source": 293,
+  "visages": 1
+ },
+ "pujadas": {
+  "basse_definition": false,
+  "hauteur_visage_source": 330,
+  "visages": 1
+ },
+ "retailleau": {
+  "basse_definition": false,
+  "hauteur_visage_source": 281,
+  "visages": 1
+ },
+ "rigault": {
+  "basse_definition": false,
+  "hauteur_visage_source": 428,
+  "visages": 1
+ },
+ "rousseau": {
+  "basse_definition": false,
+  "hauteur_visage_source": 406,
+  "visages": 1
+ },
+ "roussel": {
+  "basse_definition": false,
+  "hauteur_visage_source": 456,
+  "visages": 1
+ },
+ "royal": {
+  "basse_definition": false,
+  "hauteur_visage_source": 576,
+  "visages": 1
+ },
+ "ruffin": {
+  "basse_definition": false,
+  "hauteur_visage_source": 334,
+  "visages": 1
+ },
+ "rugy": {
+  "basse_definition": false,
+  "hauteur_visage_source": 362,
+  "visages": 1
+ },
+ "salame": {
+  "basse_definition": false,
+  "hauteur_visage_source": 263,
+  "visages": 1
+ },
+ "sarkozy": {
+  "basse_definition": false,
+  "hauteur_visage_source": 325,
+  "visages": 1
+ },
+ "schiappa": {
+  "basse_definition": false,
+  "hauteur_visage_source": 439,
+  "visages": 1
+ },
+ "tache": {
+  "basse_definition": false,
+  "hauteur_visage_source": 402,
+  "visages": 1
+ },
+ "tanguy": {
+  "basse_definition": false,
+  "hauteur_visage_source": 628,
+  "visages": 1
+ },
+ "thevenot": {
+  "basse_definition": true,
+  "hauteur_visage_source": 137,
+  "visages": 1
+ },
+ "thevenoud": {
+  "basse_definition": false,
+  "hauteur_visage_source": 530,
+  "visages": 1
+ },
+ "tiberi": {
+  "basse_definition": false,
+  "hauteur_visage_source": 578,
+  "visages": 1
+ },
+ "tondelier": {
+  "basse_definition": false,
+  "hauteur_visage_source": 339,
+  "visages": 1
+ },
+ "trouve": {
+  "basse_definition": false,
+  "hauteur_visage_source": 371,
+  "visages": 1
+ },
+ "vallaud": {
+  "basse_definition": false,
+  "hauteur_visage_source": 188,
+  "visages": 1
+ },
+ "valls": {
+  "basse_definition": false,
+  "hauteur_visage_source": 538,
+  "visages": 1
+ },
+ "villiers": {
+  "basse_definition": false,
+  "hauteur_visage_source": 610,
+  "visages": 1
+ },
+ "wauquiez": {
+  "basse_definition": false,
+  "hauteur_visage_source": 347,
+  "visages": 1
+ },
+ "yann_bompard": {
+  "basse_definition": false,
+  "hauteur_visage_source": 176,
+  "visages": 2
+ },
+ "zemmour": {
+  "basse_definition": false,
+  "hauteur_visage_source": 455,
+  "visages": 1
+ }
+}

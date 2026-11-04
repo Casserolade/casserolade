@@ -1,0 +1,40 @@
+{
+  "name": "casserolade",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Un pastiche de la politique française, déguisé en autobattler.",
+  "license": "MIT",
+  "homepage": "https://casserolade.fr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/casserolade/casserolade.git"
+  },
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "typecheck": "vue-tsc --noEmit",
+    "sim": "node src/sim/run.ts",
+    "dev": "vite",
+    "build": "vite build",
+    "server": "node src/server/main.ts"
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/ws": "^8.18.2",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.5",
+    "vue-tsc": "^3.3.14"
+  },
+  "dependencies": {
+    "pixi.js": "^8.22.0",
+    "vue": "^3.5.44",
+    "ws": "^8.22.1"
+  },
+  "imports": {
+    "#src/*": "./src/*"
+  }
+}

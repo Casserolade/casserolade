@@ -1,0 +1,16 @@
+{
+ "atlas": "effets/immunite.webp",
+ "cols": 6,
+ "rows": 3,
+ "images": 18,
+ "cell": [
+  384,
+  480
+ ],
+ "fps": 12,
+ "ancre": [
+  0.5,
+  1.0
+ ],
+ "impact": 2
+}

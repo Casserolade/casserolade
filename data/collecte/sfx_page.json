@@ -1,0 +1,632 @@
+[
+ {
+  "id": "republique_cest_moi",
+  "qui": "Mélenchon",
+  "phrase": "la république c'est moi",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/republique_cest_moi/ObgDNk2GXEk.mp3",
+    "video": "ObgDNk2GXEk",
+    "url": "https://www.youtube.com/watch?v=ObgDNk2GXEk&t=17s",
+    "chaine": "euronews (en français)",
+    "titre": "Mélenchon and the \"political police\": images of the brawl",
+    "chaine_connue": true,
+    "texte": "[1.9 s] La République, c'est moi !",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "personne_sacree",
+  "qui": "Mélenchon",
+  "phrase": "ma personne est sacrée",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/personne_sacree/upWu3-4DA9g.mp3",
+    "video": "upWu3-4DA9g",
+    "url": "https://www.youtube.com/watch?v=upWu3-4DA9g&t=4s",
+    "chaine": "Top Memes France",
+    "titre": "Jean-Luc Mélenchon - \"Don't touch me, I am inviolable\"",
+    "chaine_connue": false,
+    "texte": "[2.3 s] Ma personne est sacrée, je suis parlementaire.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "accent_toulouse",
+  "qui": "Mélenchon",
+  "phrase": "qu'est-ce que ça veut dire",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/accent_toulouse/fpoaodwmkJc.mp3",
+    "video": "fpoaodwmkJc",
+    "url": "https://www.youtube.com/watch?v=fpoaodwmkJc&t=8s",
+    "chaine": "LeHuffPost",
+    "titre": "Jean-Luc Mélenchon se moque de l’accent d’une journaliste",
+    "chaine_connue": true,
+    "texte": "[3.2 s] Et alors, qu'est-ce que ça veut dire ?",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/accent_toulouse/xgXxhLAvCzc.mp3",
+    "video": "xgXxhLAvCzc",
+    "url": "https://www.youtube.com/watch?v=xgXxhLAvCzc&t=20s",
+    "chaine": "INA Politique",
+    "titre": "2018 : Jean-Luc Mélenchon, méprisant avec l'accent du sud ? | Archive INA",
+    "chaine_connue": true,
+    "texte": "[16.7 s] [non ajusté] des rapages en ce moment. Écoutez l'échange.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "hologrammes",
+  "qui": "Mélenchon",
+  "phrase": "le temps des hologrammes",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/hologrammes/HzB7rT5_Ur4.mp3",
+    "video": "HzB7rT5_Ur4",
+    "url": "https://www.youtube.com/watch?v=HzB7rT5_Ur4",
+    "chaine": "CNEWS",
+    "titre": "Mélenchon se dédouble, en hologramme",
+    "chaine_connue": true,
+    "texte": "[79.0 s] [non ajusté] Cet homme à gauche est réel. A côté, celui qui récupère le livre est un hologramme de celui qui se trouve dans cette autre salle. Jean-Luc Mélenchon va lui aussi se dédoubler ce dimanche, le temps d'un meeting. Physiquement présent à Lyon, son image en 3D sera retransmise sur la scène parisienne ave",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "racaille",
+  "qui": "Sarkozy",
+  "phrase": "cette bande de racailles",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/racaille/Bs2TiewZWXI.mp3",
+    "video": "Bs2TiewZWXI",
+    "url": "https://www.youtube.com/watch?v=Bs2TiewZWXI&t=3s",
+    "chaine": "sterd007",
+    "titre": "Sarkozy racailles 26 octobre 2005 Argenteuil",
+    "chaine_connue": false,
+    "texte": "[1.6 s] Vous avez assez de cette bande de racailles ?",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "amie_tchadienne",
+  "qui": "Morano",
+  "phrase": "plus noire qu'une arabe",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/amie_tchadienne/6_3r1cIXJsE.mp3",
+    "video": "6_3r1cIXJsE",
+    "url": "https://www.youtube.com/watch?v=6_3r1cIXJsE&t=14s",
+    "chaine": "SOS Racisme",
+    "titre": "Nadine Morano: \"I'm not racist, my best friend is even darker than an Arab!\"",
+    "chaine_connue": false,
+    "texte": "[2.0 s] alors que j'ai des amis qui sont justement arabes, et dont ma meilleure amie qui est tchadienne, donc plus noire qu'une arabe, je trouve ça choquant.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "pisse_dessus",
+  "qui": "Glucksmann",
+  "phrase": "on leur pisse dessus",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/pisse_dessus/LwG31EnXXek.mp3",
+    "video": "LwG31EnXXek",
+    "url": "https://www.youtube.com/watch?v=LwG31EnXXek&t=30s",
+    "chaine": "À gauche",
+    "titre": "« On leur pisse dessus » Glucksmann se lâche sur Mélenchon et Le Pen en réunion privée @LeMédia-TV ",
+    "chaine_connue": false,
+    "texte": "[3.5 s] Donc, en fait, ils vont agir en 6 minutes, mais on leur pisse dessus.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "probite_intacte",
+  "qui": "Schiappa",
+  "phrase": "probité",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/probite_intacte/cEXzov-Z4aE.mp3",
+    "video": "cEXzov-Z4aE",
+    "url": "https://www.youtube.com/watch?v=cEXzov-Z4aE&t=157s",
+    "chaine": "Public Sénat",
+    "titre": "Marianne Fund: Marlène Schiappa \"supports the opening of any possible commission of inquiry\"",
+    "chaine_connue": true,
+    "texte": "[0.4 s] membres de mon cabinet les anciens membres ont tous d'ailleurs sont tous des gens qui ont une probité et un sérieux exemplaire je veux le dire parce que c'est pas vous dis je me victime",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "siege_ciotti",
+  "qui": "Ciotti",
+  "phrase": "je suis le président",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/siege_ciotti/f5mYoETB508.mp3",
+    "video": "f5mYoETB508",
+    "url": "https://www.youtube.com/watch?v=f5mYoETB508&t=1821s",
+    "chaine": "Trouble Fait",
+    "titre": "LÉGISLATIVES : Les coulisses d’une fin peu glorieuse pour LR et Reconquête.",
+    "chaine_connue": false,
+    "texte": "[0.9 s] le rn et il s'est dit bon les copains suivront ils n'ont pas trop le choix je suis président je fais ce que je veux ça s'est pas bien passé alors non seulement il a fait sa décision",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "ca_rigole_plus",
+  "qui": "Zemmour",
+  "phrase": "ça rigole plus",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/ca_rigole_plus/yROAB65N9aw.mp3",
+    "video": "yROAB65N9aw",
+    "url": "https://www.youtube.com/watch?v=yROAB65N9aw",
+    "chaine": "LeHuffPost",
+    "titre": "Éric Zemmour pointe un fusil de sniper sur des journalistes au Milipol",
+    "chaine_connue": true,
+    "texte": "[0.9 s] Ça rigole plus, là.",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/ca_rigole_plus/b-0xYhYxAsA.mp3",
+    "video": "b-0xYhYxAsA",
+    "url": "https://www.youtube.com/watch?v=b-0xYhYxAsA",
+    "chaine": "moderne star",
+    "titre": "\"Ça rigole plus là, reculez !\" : l'incroyable et dérangeante séquence d'Éric Zemmour, armé, face aux",
+    "chaine_connue": false,
+    "texte": "[0.9 s] Alors qu'il posait avec un sniper utilisé par le RAID, l'ancien chroniqueur de CNUS est tourné vers les journalistes avec l'appareil en main avant de lancer en le pointant sur eux, ça rigole plus là, reculé.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "bien_profond",
+  "qui": "Zemmour",
+  "phrase": "bien profond",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/bien_profond/ANZEFO_wGEk.mp3",
+    "video": "ANZEFO_wGEk",
+    "url": "https://www.youtube.com/watch?v=ANZEFO_wGEk",
+    "chaine": "BFMTV",
+    "titre": "Éric Zemmour échange un doigt d'honneur avec une passante à Marseille",
+    "chaine_connue": true,
+    "texte": "[0.6 s] Et bien profond, à ses côtés, il y a Sarah Knafo, qui est sa première conseillère politique, qui éclate de rire, rapporte nos confrères de l'AFP, depuis la voiture.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "traverse_la_rue",
+  "qui": "Macron",
+  "phrase": "je traverse la rue",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/traverse_la_rue/FHMy6DhOXrI.mp3",
+    "video": "FHMy6DhOXrI",
+    "url": "https://www.youtube.com/watch?v=FHMy6DhOXrI&t=41s",
+    "chaine": "euronews (en français)",
+    "titre": "\"I'll just cross the street and find you one\": Macron turns into a job center advisor",
+    "chaine_connue": true,
+    "texte": "[0.7 s] métier c'est aussi honnêtement l'hôtel café restaurant je veux que je traverse la rue je vous en trouve il veut simplement des gens qui sont prêts à travailler avec les contraintes du métier",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/traverse_la_rue/0lV1QIInhIE.mp3",
+    "video": "0lV1QIInhIE",
+    "url": "https://www.youtube.com/watch?v=0lV1QIInhIE&t=12s",
+    "chaine": "BFMTV",
+    "titre": "Macron lui avait conseillé de \"traverser la rue\" pour trouver un emploi: qu'est devenu Jonathan?",
+    "chaine_connue": true,
+    "texte": "[11.2 s] [non ajusté] A l'Elysée, son échange avec Emmanuel Macron avait créé la polémique. Le jeune chômeur avait alors",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "pognon_de_dingue",
+  "qui": "Macron",
+  "phrase": "pognon de dingue",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/pognon_de_dingue/79a-1d_g3S0.mp3",
+    "video": "79a-1d_g3S0",
+    "url": "https://www.youtube.com/watch?v=79a-1d_g3S0&t=38s",
+    "chaine": "LeHuffPost",
+    "titre": "Macron Stages His Social Philosophy: \"We Spend Crazy Amounts of Money and the Poor Remain Poor\"",
+    "chaine_connue": true,
+    "texte": "[2.2 s] On met un pognon de dingue dans des minima sociaux.",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/pognon_de_dingue/s_eq4PJq7KI.mp3",
+    "video": "s_eq4PJq7KI",
+    "url": "https://www.youtube.com/watch?v=s_eq4PJq7KI&t=390s",
+    "chaine": "Le Média",
+    "titre": "\"UN POGNON DE DINGUE\" : LE RAPPORT QUI ÉPINGLE MACRON ET SES DÎNERS LUXUEUX",
+    "chaine_connue": true,
+    "texte": "[2.2 s] On met un pognon de dingue dans des minima sociaux.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "gaulois_refractaires",
+  "qui": "Macron",
+  "phrase": "gaulois réfractaires",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/gaulois_refractaires/6UHrvADhJVk.mp3",
+    "video": "6UHrvADhJVk",
+    "url": "https://www.youtube.com/watch?v=6UHrvADhJVk&t=16s",
+    "chaine": "LeHuffPost",
+    "titre": "Macron ironise sur le \"Gaulois réfractaire au changement\"",
+    "chaine_connue": true,
+    "texte": "[8.0 s] [non ajusté] dernières décennies n'est pas exactement le gaulois réfractaire au changement, mais",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "cest_notre_projet",
+  "qui": "Macron",
+  "phrase": "c'est notre projet",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/cest_notre_projet/a1r8Ad6nFSA.mp3",
+    "video": "a1r8Ad6nFSA",
+    "url": "https://www.youtube.com/watch?v=a1r8Ad6nFSA&t=26s",
+    "chaine": "Le Point",
+    "titre": "Extrait du discours d’Emmanuel Macron à la Porte de Versailles",
+    "chaine_connue": false,
+    "texte": "[2.6 s] C'est que vous, partout, vous alliez le faire gagner parce que c'est notre projet.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "arbre_mort",
+  "qui": "Hurmic",
+  "phrase": "arbre mort",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/arbre_mort/K0ZhGJqZ8IU.mp3",
+    "video": "K0ZhGJqZ8IU",
+    "url": "https://www.youtube.com/watch?v=K0ZhGJqZ8IU&t=0s",
+    "chaine": "Le Point",
+    "titre": "À Bordeaux, exit le sapin de Noël, « un arbre mort » pour le maire Pierre Hurmic",
+    "chaine_connue": false,
+    "texte": "[1.8 s] Sur l'arbre mort de Noël de la place Péberlon,",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "bravitude",
+  "qui": "Royal",
+  "phrase": "bravitude",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/bravitude/rgNoO9tqgBk.mp3",
+    "video": "rgNoO9tqgBk",
+    "url": "https://www.youtube.com/watch?v=rgNoO9tqgBk&t=32s",
+    "chaine": "INA Politique",
+    "titre": "2007 : La bravitude de Ségolène Royal | Archive INA",
+    "chaine_connue": true,
+    "texte": "[6.7 s] [non ajusté] Dans cette marche...",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/bravitude/_GkjhWavV-U.mp3",
+    "video": "_GkjhWavV-U",
+    "url": "https://www.youtube.com/watch?v=_GkjhWavV-U&t=11s",
+    "chaine": "KalashUMP",
+    "titre": "Brave Royal !",
+    "chaine_connue": false,
+    "texte": "[3.8 s] Et qui vient sur la grande muraille conquiert la bravitude.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "blancos",
+  "qui": "Valls",
+  "phrase": "blancos",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/blancos/N3_g3e4z1GQ.mp3",
+    "video": "N3_g3e4z1GQ",
+    "url": "https://www.youtube.com/watch?v=N3_g3e4z1GQ&t=36s",
+    "chaine": "documentaire hd 7",
+    "titre": "Manuel Valls \"El Blancos\" is Prime Minister",
+    "chaine_connue": false,
+    "texte": "[8.9 s] [non ajusté] Je ne pouvais pas espérer, même dans mes rêves les plus fous, pareille promotion. El Blanco, premier ministre de la France, celui qui m'a permis de passer en quelque",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "moi_president",
+  "qui": "Hollande",
+  "phrase": "moi président",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/moi_president/2CvTMcpy83Y.mp3",
+    "video": "2CvTMcpy83Y",
+    "url": "https://www.youtube.com/watch?v=2CvTMcpy83Y&t=0s",
+    "chaine": "Public Sénat",
+    "titre": "What remains of Hollande's \"I, President of the Republic\"?",
+    "chaine_connue": true,
+    "texte": "[3.4 s] Moi, président de la République, je ne serai pas le chef de la majorité.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "courbe_chomage",
+  "qui": "Hollande",
+  "phrase": "inverser la courbe",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/courbe_chomage/cTbVuin5bVM.mp3",
+    "video": "cTbVuin5bVM",
+    "url": "https://www.youtube.com/watch?v=cTbVuin5bVM&t=12s",
+    "chaine": "AFP",
+    "titre": "Hollande maintient \"sa volonté\" d'inverser la courbe du chômage",
+    "chaine_connue": false,
+    "texte": "[3.7 s] Nous sommes convaincus que nous allons inverser la courbe du chômage.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "paquets_heures",
+  "qui": "Oudéa-Castéra",
+  "phrase": "paquets d'heures",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/paquets_heures/6lUm0jlPiGQ.mp3",
+    "video": "6lUm0jlPiGQ",
+    "url": "https://www.youtube.com/watch?v=6lUm0jlPiGQ&t=36s",
+    "chaine": "TF1 INFO",
+    "titre": "Amélie Oudéa-Castera : première polémique pour la ministre",
+    "chaine_connue": true,
+    "texte": "[0.8 s] de mes parents, mon mari et moi, qui avons vu des paquets d'heures qui n'étaient pas sérieusement remplacés.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "attaque_hopital",
+  "qui": "Castaner",
+  "phrase": "attaqué un hôpital",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/attaque_hopital/3Ye0Qdm3e1E.mp3",
+    "video": "3Ye0Qdm3e1E",
+    "url": "https://www.youtube.com/watch?v=3Ye0Qdm3e1E&t=42s",
+    "chaine": "FRANCE 24",
+    "titre": "May 1st at the Pitié-Salpêtrière: the scenario of an \"attack\" shattered",
+    "chaine_connue": true,
+    "texte": "[3.2 s] Des gens ont attaqué un hôpital.",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/attaque_hopital/6uIVPncGdhw.mp3",
+    "video": "6uIVPncGdhw",
+    "url": "https://www.youtube.com/watch?v=6uIVPncGdhw&t=10s",
+    "chaine": "CNEWS",
+    "titre": "La Pitié-Salpêtrière : Castaner vivement critiqué",
+    "chaine_connue": true,
+    "texte": "[2.0 s] pétrière en marge de la fête du travail des gens ont attaqué un hôpital des infirmières ont dû préserver le service",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "faux_billets",
+  "qui": "Darmanin",
+  "phrase": "faux billets",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/faux_billets/YFek0NPWo7E.mp3",
+    "video": "YFek0NPWo7E",
+    "url": "https://www.youtube.com/watch?v=YFek0NPWo7E&t=5s",
+    "chaine": "AFP",
+    "titre": "Stade de France: Darmanin dénonce une \"fraude massive, industrielle de faux billets\" | AFP Extrait",
+    "chaine_connue": false,
+    "texte": "[1.0 s] Ce qui a été constaté, c'est une fraude massive, industrielle et organisée de faux billets, puisque les préfiltrages évoqués",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "conditions_lecornu",
+  "qui": "Lecornu",
+  "phrase": "conditions n'étaient",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/conditions_lecornu/i7A5N1zcUAs.mp3",
+    "video": "i7A5N1zcUAs",
+    "url": "https://www.youtube.com/watch?v=i7A5N1zcUAs&t=3472s",
+    "chaine": "Le Figaro",
+    "titre": "Sébastien Lecornu démissionne de son poste de premier ministre",
+    "chaine_connue": true,
+    "texte": "[1.4 s] Ce lundi matin, les conditions n'étaient plus remplies pour que je puisse exercer ces fonctions.",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/conditions_lecornu/TIyGtw1STJY.mp3",
+    "video": "TIyGtw1STJY",
+    "url": "https://www.youtube.com/watch?v=TIyGtw1STJY&t=182s",
+    "chaine": "LCI",
+    "titre": "\"Les conditions ne sont pas remplies\" : le Premier ministre Sébastien Lecornu a démissionné｜LCI",
+    "chaine_connue": true,
+    "texte": "[1.4 s] En ce lundi matin, les conditions n'étaient plus remplies pour que je puisse exercer ces fonctions de",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "quand_il_y_en_a_un",
+  "qui": "Hortefeux",
+  "phrase": "quand il y en a un",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/quand_il_y_en_a_un/Rug1ULJFvqY.mp3",
+    "video": "Rug1ULJFvqY",
+    "url": "https://www.youtube.com/watch?v=Rug1ULJFvqY&t=75s",
+    "chaine": "INA Politique",
+    "titre": "Propos racistes de Brice Hortefeux",
+    "chaine_connue": true,
+    "texte": "[0.4 s] J'ai simplement dit, en parlant des Auvergnats, quand il y en a un, il n'y a pas de problème, mais quand il y en a beaucoup, ça peut poser des problèmes, parce que je venais",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "farine_francaise",
+  "qui": "Fillon",
+  "phrase": "la farine était française",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/farine_francaise/PXZ8ZKL_ngs.mp3",
+    "video": "PXZ8ZKL_ngs",
+    "url": "https://www.youtube.com/watch?v=PXZ8ZKL_ngs&t=74s",
+    "chaine": "V.A.D.# • VOUS AVEZ DIT DÉMOCRATIE ? •",
+    "titre": "ENFARINAGE FILLON  • WWW.farine.PRO",
+    "chaine_connue": false,
+    "texte": "[2.3 s] J'espère au moins que la farine était française.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "debat_2017_dossiers",
+  "qui": "Le Pen",
+  "phrase": "alstom",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/debat_2017_dossiers/ypQID7zfeRQ.mp3",
+    "video": "ypQID7zfeRQ",
+    "url": "https://www.youtube.com/watch?v=ypQID7zfeRQ&t=93s",
+    "chaine": "Public Sénat",
+    "titre": "▶Marine Le Pen accuses Emmanuel Macron of having favored the acquisition of SFR by Patrick Drahi",
+    "chaine_connue": true,
+    "texte": "[2.8 s] Pour Alstom, vous avez dit à M. Dupont-Aignan, c'est pas moi.",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "immunite_ouvriere",
+  "qui": "Poutou",
+  "phrase": "immunité ouvrière",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/immunite_ouvriere/VBQ3ybTCHgQ.mp3",
+    "video": "VBQ3ybTCHgQ",
+    "url": "https://www.youtube.com/watch?v=VBQ3ybTCHgQ&t=326s",
+    "chaine": "Là-bas si j'y suis",
+    "titre": "The “Great Debate” of the “little ones”",
+    "chaine_connue": false,
+    "texte": "[0.9 s] quand nous on est convoqué par la police nous vous voyez par exemple on n'a pas d'immunité ouvrière désolé on y va voilà vous avez une chance le système",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/immunite_ouvriere/vMzJHCbpDqs.mp3",
+    "video": "vMzJHCbpDqs",
+    "url": "https://www.youtube.com/watch?v=vMzJHCbpDqs&t=110s",
+    "chaine": "MsArthur75",
+    "titre": "Philippe Poutou tacle et démonte Marine Le Pen sur son immunité de députée",
+    "chaine_connue": false,
+    "texte": "[0.8 s] illustre ouais quand nous on est convoqué par la police nous ouvriers par exemple on n'a pas d'immunité ouvrière désolé on y va voilà vous avez une chance le système",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "se_canto",
+  "qui": "Lassalle",
+  "phrase": "se canto",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/se_canto/WPKTeMZmi18.mp3",
+    "video": "WPKTeMZmi18",
+    "url": "https://www.youtube.com/watch?v=WPKTeMZmi18",
+    "chaine": "INA Politique",
+    "titre": "2003 : Jean Lassalle, député chanteur du Béarn | Archive INA",
+    "chaine_connue": true,
+    "texte": "[97.1 s] [non ajusté] En plein pays béarnais, rien d'exceptionnel à ce que des bergers chantent cet hymne à la gloire de la montagne. Mais quand ce chant retentit dans l'hémicycle, entonné à plein poumon par un élu de la République, la scène devient incongrue. Monsieur, s'il vous plaît, s'il vous plaît, vous pouvez vous ",
+    "entier": false
+   }
+  ]
+ },
+ {
+  "id": "minable",
+  "qui": "Cohn-Bendit",
+  "phrase": "minable",
+  "candidats": [],
+  "extraits": [
+   {
+    "fichier": "assets/audio/sfx/minable/qFrg5Rj1BSk.mp3",
+    "video": "qFrg5Rj1BSk",
+    "url": "https://www.youtube.com/watch?v=qFrg5Rj1BSk&t=84s",
+    "chaine": "INA Politique",
+    "titre": "Clash entre François Bayrou et Daniel Cohn Bendit sur le plateau de \"A vous de juger\" - Archive INA",
+    "chaine_connue": true,
+    "texte": "[4.7 s] jamais tu seras président de la République, parce que t'es trop minable.",
+    "entier": false
+   },
+   {
+    "fichier": "assets/audio/sfx/minable/m2Svw3E4W-M.mp3",
+    "video": "m2Svw3E4W-M",
+    "url": "https://www.youtube.com/watch?v=m2Svw3E4W-M&t=84s",
+    "chaine": "INA Société",
+    "titre": "Lively exchange between François Bayrou and Daniel Cohn Bendit on the set of \"It's up to you to j...",
+    "chaine_connue": true,
+    "texte": "[0.4 s] dit jamais tu seras président de la république très bien parce qu'elle est trop minable très bien trop mineur la réponse du leader du modem et cinq",
+    "entier": false
+   }
+  ]
+ }
+]

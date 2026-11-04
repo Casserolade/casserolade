@@ -1,0 +1,6576 @@
+{
+ "version": 1,
+ "camps": {
+  "insoumis": {
+   "nom": "Insoumis",
+   "couleur": "#c8102e"
+  },
+  "socialistes": {
+   "nom": "Socialistes",
+   "couleur": "#e0457b"
+  },
+  "ecologistes": {
+   "nom": "Écologistes",
+   "couleur": "#5da832"
+  },
+  "macronie": {
+   "nom": "Macronie",
+   "couleur": "#e8b417"
+  },
+  "republicains": {
+   "nom": "Républicains",
+   "couleur": "#2c74c9"
+  },
+  "rn": {
+   "nom": "RN",
+   "couleur": "#17295e"
+  },
+  "reconquete": {
+   "nom": "Reconquête",
+   "couleur": "#6b4bb8"
+  },
+  "societe_civile": {
+   "nom": "Société civile",
+   "couleur": "#8c8574"
+  }
+ },
+ "personnages": {
+  "aliot": {
+   "atlas": "personnages/aliot.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 271,
+     "h": 416
+    },
+    "machoire": {
+     "x": 275,
+     "y": 0,
+     "w": 192,
+     "h": 89,
+     "pose": [
+      60.0,
+      293.0
+     ],
+     "pivot": [
+      121.9,
+      9.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     132.1,
+     201.6,
+     42.9
+    ],
+    "oeil_d": [
+     218.4,
+     201.6,
+     38.5
+    ],
+    "bouche": [
+     181.9,
+     302.4
+    ],
+    "menton": [
+     180.0,
+     367.9
+    ]
+   },
+   "credits": {
+    "auteur": "Pablo Tupin-Noriega",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_2015_02_(cropped)_(cropped).jpg"
+   }
+  },
+  "aphatie": {
+   "atlas": "personnages/aphatie.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 273,
+     "h": 332
+    },
+    "machoire": {
+     "x": 277,
+     "y": 0,
+     "w": 168,
+     "h": 81,
+     "pose": [
+      62.0,
+      251.0
+     ],
+     "pivot": [
+      89.0,
+      10.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     119.8,
+     158.8,
+     38.5
+    ],
+    "oeil_d": [
+     204.5,
+     158.8,
+     36.3
+    ],
+    "bouche": [
+     151.0,
+     261.2
+    ],
+    "menton": [
+     149.8,
+     323.8
+    ]
+   },
+   "credits": {
+    "auteur": "VL.",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean-Michel.Aphatie.jpg"
+   }
+  },
+  "arthaud": {
+   "atlas": "personnages/arthaud.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 271,
+     "h": 357
+    },
+    "machoire": {
+     "x": 275,
+     "y": 0,
+     "w": 200,
+     "h": 91,
+     "pose": [
+      24.0,
+      266.0
+     ],
+     "pivot": [
+      98.3,
+      9.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     76.8,
+     183.0,
+     38.0
+    ],
+    "oeil_d": [
+     174.7,
+     183.0,
+     38.4
+    ],
+    "bouche": [
+     122.3,
+     275.6
+    ],
+    "menton": [
+     117.6,
+     346.9
+    ]
+   },
+   "credits": {
+    "auteur": "Kokluts",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nathalie_Arthaud_(LO)_19-05-2024.jpg"
+   }
+  },
+  "asselineau": {
+   "atlas": "personnages/asselineau.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 280,
+     "h": 341
+    },
+    "machoire": {
+     "x": 284,
+     "y": 0,
+     "w": 219,
+     "h": 88,
+     "pose": [
+      18.0,
+      253.0
+     ],
+     "pivot": [
+      90.9,
+      8.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     65.3,
+     163.7,
+     39.1
+    ],
+    "oeil_d": [
+     167.2,
+     163.7,
+     42.5
+    ],
+    "bouche": [
+     108.9,
+     261.9
+    ],
+    "menton": [
+     107.3,
+     329.0
+    ]
+   },
+   "credits": {
+    "auteur": "Union Populaire Républicaine",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_ASSELINEAU.jpg"
+   }
+  },
+  "attal": {
+   "atlas": "personnages/attal.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 285,
+     "h": 379
+    },
+    "machoire": {
+     "x": 289,
+     "y": 0,
+     "w": 177,
+     "h": 89,
+     "pose": [
+      62.0,
+      290.0
+     ],
+     "pivot": [
+      97.4,
+      12.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     110.2,
+     201.7,
+     41.8
+    ],
+    "oeil_d": [
+     197.7,
+     201.7,
+     39.6
+    ],
+    "bouche": [
+     159.4,
+     302.1
+    ],
+    "menton": [
+     161.4,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Ismail Aissoub",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_2025_(close_crop).jpg"
+   }
+  },
+  "aubry": {
+   "atlas": "personnages/aubry.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 379,
+     "h": 444
+    },
+    "machoire": {
+     "x": 383,
+     "y": 0,
+     "w": 195,
+     "h": 104,
+     "pose": [
+      97.0,
+      263.0
+     ],
+     "pivot": [
+      92.2,
+      10.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     144.6,
+     184.8,
+     38.0
+    ],
+    "oeil_d": [
+     237.7,
+     184.8,
+     39.3
+    ],
+    "bouche": [
+     189.2,
+     273.7
+    ],
+    "menton": [
+     190.0,
+     354.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Union 2024 - Source : EP",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:1720623827463_20190528_AUBRY_Manon_FR_9.jpg"
+   }
+  },
+  "balkany": {
+   "atlas": "personnages/balkany.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 252,
+     "h": 331
+    },
+    "machoire": {
+     "x": 256,
+     "y": 0,
+     "w": 209,
+     "h": 102,
+     "pose": [
+      37.0,
+      227.0
+     ],
+     "pivot": [
+      119.9,
+      10.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     105.3,
+     140.6,
+     36.0
+    ],
+    "oeil_d": [
+     195.5,
+     140.6,
+     32.2
+    ],
+    "bouche": [
+     156.9,
+     237.2
+    ],
+    "menton": [
+     163.1,
+     315.8
+    ]
+   },
+   "credits": {
+    "auteur": "Nicolas Richoffer",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Patrick_Balkany_2010.jpg"
+   }
+  },
+  "barbier": {
+   "atlas": "personnages/barbier.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 379
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 170,
+     "h": 99,
+     "pose": [
+      65.0,
+      280.0
+     ],
+     "pivot": [
+      105.8,
+      16.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     142.0,
+     201.4,
+     39.9
+    ],
+    "oeil_d": [
+     226.6,
+     201.4,
+     35.0
+    ],
+    "bouche": [
+     170.8,
+     296.0
+    ],
+    "menton": [
+     164.8,
+     367.3
+    ]
+   },
+   "credits": {
+    "auteur": "ActuaLitté",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Christophe_Barbier_-_Prix_Bristol_des_Lumi%C3%A8res_2015_(23513117410).jpg"
+   }
+  },
+  "bardella": {
+   "atlas": "personnages/bardella.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 255,
+     "h": 351
+    },
+    "machoire": {
+     "x": 259,
+     "y": 0,
+     "w": 181,
+     "h": 85,
+     "pose": [
+      35.0,
+      264.0
+     ],
+     "pivot": [
+      83.3,
+      9.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     77.4,
+     171.6,
+     38.4
+    ],
+    "oeil_d": [
+     169.7,
+     171.6,
+     40.2
+    ],
+    "bouche": [
+     118.3,
+     273.6
+    ],
+    "menton": [
+     117.9,
+     336.0
+    ]
+   },
+   "credits": {
+    "auteur": "Daina Le Lardic",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:1721231397060_20240717_EP-170912A_DLL_199.jpg"
+   }
+  },
+  "barthes": {
+   "atlas": "personnages/barthes.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 270,
+     "h": 375
+    },
+    "machoire": {
+     "x": 274,
+     "y": 0,
+     "w": 186,
+     "h": 105,
+     "pose": [
+      51.0,
+      270.0
+     ],
+     "pivot": [
+      106.8,
+      13.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     112.0,
+     199.8,
+     36.6
+    ],
+    "oeil_d": [
+     195.3,
+     199.8,
+     32.7
+    ],
+    "bouche": [
+     157.8,
+     283.5
+    ],
+    "menton": [
+     162.8,
+     363.0
+    ]
+   },
+   "credits": {
+    "auteur": "Anipamal",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Yann_Barth%C3%A8s.jpg"
+   }
+  },
+  "batho": {
+   "atlas": "personnages/batho.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 301,
+     "h": 353
+    },
+    "machoire": {
+     "x": 305,
+     "y": 0,
+     "w": 196,
+     "h": 89,
+     "pose": [
+      68.0,
+      260.0
+     ],
+     "pivot": [
+      122.8,
+      11.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     137.8,
+     167.1,
+     41.4
+    ],
+    "oeil_d": [
+     232.4,
+     167.1,
+     37.6
+    ],
+    "bouche": [
+     190.8,
+     271.0
+    ],
+    "menton": [
+     192.5,
+     335.9
+    ]
+   },
+   "credits": {
+    "auteur": "Greenbox",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20210820_batho.d_6605.jpg"
+   }
+  },
+  "bay": {
+   "atlas": "personnages/bay.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 257,
+     "h": 355
+    },
+    "machoire": {
+     "x": 261,
+     "y": 0,
+     "w": 184,
+     "h": 105,
+     "pose": [
+      30.0,
+      249.0
+     ],
+     "pivot": [
+      88.0,
+      12.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     75.5,
+     174.5,
+     34.1
+    ],
+    "oeil_d": [
+     157.4,
+     174.5,
+     35.1
+    ],
+    "bouche": [
+     118.0,
+     261.1
+    ],
+    "menton": [
+     117.6,
+     341.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Union 2024 - Source : EP",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:1718699899690_20240617_BAY_Nicolas_FR_011.jpg"
+   }
+  },
+  "bayrou": {
+   "atlas": "personnages/bayrou.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 272,
+     "h": 342
+    },
+    "machoire": {
+     "x": 276,
+     "y": 0,
+     "w": 187,
+     "h": 83,
+     "pose": [
+      50.0,
+      259.0
+     ],
+     "pivot": [
+      104.1,
+      10.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     106.5,
+     166.1,
+     33.3
+    ],
+    "oeil_d": [
+     194.4,
+     166.1,
+     30.4
+    ],
+    "bouche": [
+     154.1,
+     269.0
+    ],
+    "menton": [
+     154.4,
+     332.0
+    ]
+   },
+   "credits": {
+    "auteur": "Service photographique de Matignon",
+    "licence": "Licence Ouverte",
+    "source": "https://commons.wikimedia.org/wiki/File:Bayrou_Matignon_(cropped).jpg"
+   }
+  },
+  "berge": {
+   "atlas": "personnages/berge.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 289,
+     "h": 379
+    },
+    "machoire": {
+     "x": 293,
+     "y": 0,
+     "w": 191,
+     "h": 98,
+     "pose": [
+      36.0,
+      251.0
+     ],
+     "pivot": [
+      56.2,
+      10.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     53.9,
+     165.3,
+     35.0
+    ],
+    "oeil_d": [
+     150.8,
+     165.3,
+     42.2
+    ],
+    "bouche": [
+     92.2,
+     261.6
+    ],
+    "menton": [
+     94.7,
+     335.0
+    ]
+   },
+   "credits": {
+    "auteur": "HUGUES DE BEAUCHESNE",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:AURORE_BERG%C3%89_04_(cropped).jpg"
+   }
+  },
+  "bertrand": {
+   "atlas": "personnages/bertrand.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 274,
+     "h": 357
+    },
+    "machoire": {
+     "x": 278,
+     "y": 0,
+     "w": 205,
+     "h": 96,
+     "pose": [
+      43.0,
+      261.0
+     ],
+     "pivot": [
+      114.0,
+      10.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     111.0,
+     178.9,
+     40.0
+    ],
+    "oeil_d": [
+     196.4,
+     178.9,
+     36.6
+    ],
+    "bouche": [
+     157.0,
+     271.3
+    ],
+    "menton": [
+     158.6,
+     344.0
+    ]
+   },
+   "credits": {
+    "auteur": "Claudio Centonze / European Union, 2025 / EC - Audiovisual Service",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Xavier_Bertrand_-_2025_(cropped).jpg"
+   }
+  },
+  "bompard": {
+   "atlas": "personnages/bompard.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 271,
+     "h": 367
+    },
+    "machoire": {
+     "x": 275,
+     "y": 0,
+     "w": 199,
+     "h": 92,
+     "pose": [
+      35.0,
+      255.0
+     ],
+     "pivot": [
+      94.9,
+      9.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     85.5,
+     170.1,
+     36.0
+    ],
+    "oeil_d": [
+     172.1,
+     170.1,
+     37.6
+    ],
+    "bouche": [
+     129.9,
+     264.6
+    ],
+    "menton": [
+     131.2,
+     334.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Parliament",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:Bompard_MEP_2019.jpg"
+   }
+  },
+  "bouamrane": {
+   "atlas": "personnages/bouamrane.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 240,
+     "h": 328
+    },
+    "machoire": {
+     "x": 244,
+     "y": 0,
+     "w": 172,
+     "h": 97,
+     "pose": [
+      14.0,
+      231.0
+     ],
+     "pivot": [
+      39.2,
+      11.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     30.3,
+     144.2,
+     23.5
+    ],
+    "oeil_d": [
+     105.8,
+     144.2,
+     38.5
+    ],
+    "bouche": [
+     53.2,
+     242.6
+    ],
+    "menton": [
+     48.8,
+     315.9
+    ]
+   },
+   "credits": {
+    "auteur": "Oumma",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Karim_Bouamrane_en_2026_(cropped).jpg"
+   }
+  },
+  "bouleau": {
+   "atlas": "personnages/bouleau.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 287,
+     "h": 365
+    },
+    "machoire": {
+     "x": 291,
+     "y": 0,
+     "w": 206,
+     "h": 101,
+     "pose": [
+      43.0,
+      254.0
+     ],
+     "pivot": [
+      108.6,
+      12.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     104.4,
+     179.4,
+     40.9
+    ],
+    "oeil_d": [
+     197.1,
+     179.4,
+     38.2
+    ],
+    "bouche": [
+     151.6,
+     266.7
+    ],
+    "menton": [
+     153.2,
+     342.0
+    ]
+   },
+   "credits": {
+    "auteur": "Georges Biard",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gilles_Bouleau_Cannes_2016.jpg"
+   }
+  },
+  "boyard": {
+   "atlas": "personnages/boyard.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 267,
+     "h": 388
+    },
+    "machoire": {
+     "x": 271,
+     "y": 0,
+     "w": 193,
+     "h": 95,
+     "pose": [
+      42.0,
+      285.0
+     ],
+     "pivot": [
+      94.1,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     87.3,
+     196.0,
+     42.5
+    ],
+    "oeil_d": [
+     180.2,
+     196.0,
+     42.8
+    ],
+    "bouche": [
+     136.1,
+     294.9
+    ],
+    "menton": [
+     136.5,
+     367.0
+    ]
+   },
+   "credits": {
+    "auteur": "Babar BZH",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Louis_Boyard_(cropped).jpg"
+   }
+  },
+  "branco": {
+   "atlas": "personnages/branco.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 384,
+     "h": 379
+    },
+    "machoire": {
+     "x": 388,
+     "y": 0,
+     "w": 182,
+     "h": 95,
+     "pose": [
+      138.0,
+      284.0
+     ],
+     "pivot": [
+      73.2,
+      17.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     165.7,
+     197.0,
+     39.4
+    ],
+    "oeil_d": [
+     259.5,
+     197.0,
+     41.0
+    ],
+    "bouche": [
+     211.2,
+     301.3
+    ],
+    "menton": [
+     212.7,
+     367.9
+    ]
+   },
+   "credits": {
+    "auteur": "UPOP Marseille",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Juan_Branco_Pick.jpg"
+   }
+  },
+  "braun_pivet": {
+   "atlas": "personnages/braun_pivet.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 376,
+     "h": 442
+    },
+    "machoire": {
+     "x": 380,
+     "y": 0,
+     "w": 197,
+     "h": 88,
+     "pose": [
+      70.0,
+      275.0
+     ],
+     "pivot": [
+      121.9,
+      10.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     136.7,
+     186.3,
+     45.6
+    ],
+    "oeil_d": [
+     229.1,
+     186.3,
+     39.9
+    ],
+    "bouche": [
+     191.9,
+     285.4
+    ],
+    "menton": [
+     194.2,
+     351.0
+    ]
+   },
+   "credits": {
+    "auteur": "G.Garitan",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ya%C3%ABl_Braun-Pivet_4colonnes_19182.jpg"
+   }
+  },
+  "bregeon": {
+   "atlas": "personnages/bregeon.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 317,
+     "h": 451
+    },
+    "machoire": {
+     "x": 321,
+     "y": 0,
+     "w": 164,
+     "h": 97,
+     "pose": [
+      64.0,
+      277.0
+     ],
+     "pivot": [
+      127.2,
+      10.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     150.5,
+     194.9,
+     38.5
+    ],
+    "oeil_d": [
+     231.4,
+     194.9,
+     26.5
+    ],
+    "bouche": [
+     191.2,
+     287.4
+    ],
+    "menton": [
+     193.2,
+     359.9
+    ]
+   },
+   "credits": {
+    "auteur": "Ministère de l'Europe et des Affaires étrangères",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Maud_Bregeon_(2023).jpg"
+   }
+  },
+  "cahuzac": {
+   "atlas": "personnages/cahuzac.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 249,
+     "h": 363
+    },
+    "machoire": {
+     "x": 253,
+     "y": 0,
+     "w": 189,
+     "h": 97,
+     "pose": [
+      17.0,
+      263.0
+     ],
+     "pivot": [
+      49.5,
+      9.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     27.6,
+     176.2,
+     29.4
+    ],
+    "oeil_d": [
+     105.5,
+     176.2,
+     36.1
+    ],
+    "bouche": [
+     66.5,
+     272.7
+    ],
+    "menton": [
+     60.2,
+     346.0
+    ]
+   },
+   "credits": {
+    "auteur": "Cyclotron",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:PR-2012-05-15_IMG_1493_(crop).jpg"
+   }
+  },
+  "castaner": {
+   "atlas": "personnages/castaner.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 276,
+     "h": 369
+    },
+    "machoire": {
+     "x": 280,
+     "y": 0,
+     "w": 185,
+     "h": 91,
+     "pose": [
+      51.0,
+      273.0
+     ],
+     "pivot": [
+      101.3,
+      10.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     105.9,
+     181.4,
+     38.4
+    ],
+    "oeil_d": [
+     199.5,
+     181.4,
+     36.9
+    ],
+    "bouche": [
+     152.3,
+     283.5
+    ],
+    "menton": [
+     151.1,
+     351.0
+    ]
+   },
+   "credits": {
+    "auteur": "Arthur Empereur",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Christophe_Castaner_en_2019_(cropped_2).jpg"
+   }
+  },
+  "cazeneuve": {
+   "atlas": "personnages/cazeneuve.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 260,
+     "h": 334
+    },
+    "machoire": {
+     "x": 264,
+     "y": 0,
+     "w": 182,
+     "h": 84,
+     "pose": [
+      42.0,
+      250.0
+     ],
+     "pivot": [
+      87.7,
+      8.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     88.1,
+     157.2,
+     39.5
+    ],
+    "oeil_d": [
+     180.6,
+     157.2,
+     40.9
+    ],
+    "bouche": [
+     129.7,
+     258.7
+    ],
+    "menton": [
+     130.4,
+     325.0
+    ]
+   },
+   "credits": {
+    "auteur": "State Chancellery of Latvia",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Ministru_prezidents_Valdis_Dombrovskis_tiekas_ar_Francijas_Eiropas_lietu_ministru_Bern%C4%81ru_Kazen%C4%93vu_(Bernard_Cazeneuve)_(7985359635)_(cropped).jpg"
+   }
+  },
+  "cheminade": {
+   "atlas": "personnages/cheminade.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 308,
+     "h": 347
+    },
+    "machoire": {
+     "x": 312,
+     "y": 0,
+     "w": 183,
+     "h": 90,
+     "pose": [
+      45.0,
+      257.0
+     ],
+     "pivot": [
+      75.3,
+      9.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     84.9,
+     171.9,
+     33.8
+    ],
+    "oeil_d": [
+     168.9,
+     171.9,
+     38.1
+    ],
+    "bouche": [
+     120.3,
+     266.8
+    ],
+    "menton": [
+     117.7,
+     335.0
+    ]
+   },
+   "credits": {
+    "auteur": "Fabienkhan",
+    "licence": "CC BY-SA 2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:Jacques_cheminade_22102209_(cropped).jpg"
+   }
+  },
+  "chenu": {
+   "atlas": "personnages/chenu.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 271,
+     "h": 337
+    },
+    "machoire": {
+     "x": 275,
+     "y": 0,
+     "w": 197,
+     "h": 91,
+     "pose": [
+      31.0,
+      246.0
+     ],
+     "pivot": [
+      97.3,
+      9.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     82.0,
+     164.6,
+     35.0
+    ],
+    "oeil_d": [
+     174.2,
+     164.6,
+     35.7
+    ],
+    "bouche": [
+     128.3,
+     255.1
+    ],
+    "menton": [
+     129.2,
+     328.0
+    ]
+   },
+   "credits": {
+    "auteur": "Jérémy-Günther-Heinz Jähnick",
+    "licence": "GFDL 1.2",
+    "source": "https://commons.wikimedia.org/wiki/File:Denain_-_S%C3%A9bastien_Chenu_lors_du_conseil_municipal_du_27_juin_2016_(cropped).JPG"
+   }
+  },
+  "chikirou": {
+   "atlas": "personnages/chikirou.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 338,
+     "h": 380
+    },
+    "machoire": {
+     "x": 342,
+     "y": 0,
+     "w": 173,
+     "h": 89,
+     "pose": [
+      89.0,
+      291.0
+     ],
+     "pivot": [
+      98.8,
+      12.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     152.4,
+     205.7,
+     44.8
+    ],
+    "oeil_d": [
+     245.4,
+     205.7,
+     40.1
+    ],
+    "bouche": [
+     187.8,
+     303.0
+    ],
+    "menton": [
+     188.1,
+     367.0
+    ]
+   },
+   "credits": {
+    "auteur": "Wyslijp16",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Manifestation_du_22_novembre_2025_%C3%A0_Paris_contre_les_violences_sexistes,_sexuelles_et_de_genre_%E2%80%94_080.jpg"
+   }
+  },
+  "chirac": {
+   "atlas": "personnages/chirac.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 252,
+     "h": 373
+    },
+    "machoire": {
+     "x": 256,
+     "y": 0,
+     "w": 180,
+     "h": 84,
+     "pose": [
+      31.0,
+      289.0
+     ],
+     "pivot": [
+      70.9,
+      12.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     45.2,
+     195.9,
+     37.4
+    ],
+    "oeil_d": [
+     138.8,
+     195.9,
+     39.2
+    ],
+    "bouche": [
+     101.9,
+     301.1
+    ],
+    "menton": [
+     103.5,
+     360.7
+    ]
+   },
+   "credits": {
+    "auteur": "Christian Lambiotte",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jacques_Chirac_(1997)_(cropped).jpg"
+   }
+  },
+  "ciotti": {
+   "atlas": "personnages/ciotti.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 315
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 197,
+     "h": 106,
+     "pose": [
+      44.0,
+      208.0
+     ],
+     "pivot": [
+      118.9,
+      14.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     116.9,
+     124.6,
+     37.4
+    ],
+    "oeil_d": [
+     200.5,
+     124.6,
+     33.4
+    ],
+    "bouche": [
+     162.9,
+     222.5
+    ],
+    "menton": [
+     166.2,
+     301.0
+    ]
+   },
+   "credits": {
+    "auteur": "Frantogian",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Ciotti_(2).jpg"
+   }
+  },
+  "cohn_bendit": {
+   "atlas": "personnages/cohn_bendit.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 302,
+     "h": 381
+    },
+    "machoire": {
+     "x": 306,
+     "y": 0,
+     "w": 219,
+     "h": 93,
+     "pose": [
+      51.0,
+      287.0
+     ],
+     "pivot": [
+      115.7,
+      11.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     115.5,
+     199.7,
+     38.7
+    ],
+    "oeil_d": [
+     211.0,
+     199.7,
+     37.6
+    ],
+    "bouche": [
+     166.7,
+     298.9
+    ],
+    "menton": [
+     168.3,
+     367.0
+    ]
+   },
+   "credits": {
+    "auteur": "Molgreen",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20250426_xl_1415-1505_taz_lab_2025_thema_weiter_machen_%E2%80%93_jenseits_der_empoerung_-_das_vierfuenftel-jahrhundertgespraech_(6).jpg"
+   }
+  },
+  "cope": {
+   "atlas": "personnages/cope.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 258,
+     "h": 347
+    },
+    "machoire": {
+     "x": 262,
+     "y": 0,
+     "w": 195,
+     "h": 100,
+     "pose": [
+      8.0,
+      246.0
+     ],
+     "pivot": [
+      61.6,
+      11.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     38.4,
+     161.9,
+     31.0
+    ],
+    "oeil_d": [
+     129.2,
+     161.9,
+     40.6
+    ],
+    "bouche": [
+     69.6,
+     257.8
+    ],
+    "menton": [
+     65.1,
+     331.8
+    ]
+   },
+   "credits": {
+    "auteur": "Astrakan25",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Cop%C3%A9,_D%C3%A9put%C3%A9-maire_de_Meaux_2015_(cropped).jpg"
+   }
+  },
+  "coquerel": {
+   "atlas": "personnages/coquerel.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 289,
+     "h": 361
+    },
+    "machoire": {
+     "x": 293,
+     "y": 0,
+     "w": 226,
+     "h": 99,
+     "pose": [
+      35.0,
+      261.0
+     ],
+     "pivot": [
+      125.0,
+      13.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     108.2,
+     177.0,
+     41.9
+    ],
+    "oeil_d": [
+     201.3,
+     177.0,
+     38.1
+    ],
+    "bouche": [
+     160.0,
+     274.8
+    ],
+    "menton": [
+     164.5,
+     347.9
+    ]
+   },
+   "credits": {
+    "auteur": "Jérémie Silvestro (œuvre dérivée : Keymap9)",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Eric_Coquerel_en_2017.jpg"
+   }
+  },
+  "darmanin": {
+   "atlas": "personnages/darmanin.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 288,
+     "h": 376
+    },
+    "machoire": {
+     "x": 292,
+     "y": 0,
+     "w": 198,
+     "h": 94,
+     "pose": [
+      27.0,
+      279.0
+     ],
+     "pivot": [
+      65.0,
+      11.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     54.7,
+     196.7,
+     34.7
+    ],
+    "oeil_d": [
+     141.5,
+     196.7,
+     40.1
+    ],
+    "bouche": [
+     92.0,
+     290.2
+    ],
+    "menton": [
+     90.9,
+     359.0
+    ]
+   },
+   "credits": {
+    "auteur": "UK Home Office",
+    "licence": "CC BY 2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:G%C3%A9rald_Darmanin_in_2022.jpg"
+   }
+  },
+  "dati": {
+   "atlas": "personnages/dati.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 346,
+     "h": 376
+    },
+    "machoire": {
+     "x": 350,
+     "y": 0,
+     "w": 163,
+     "h": 81,
+     "pose": [
+      95.0,
+      295.0
+     ],
+     "pivot": [
+      52.5,
+      11.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     104.1,
+     200.7,
+     37.3
+    ],
+    "oeil_d": [
+     196.2,
+     200.7,
+     43.9
+    ],
+    "bouche": [
+     147.5,
+     306.1
+    ],
+    "menton": [
+     151.1,
+     366.8
+    ]
+   },
+   "credits": {
+    "auteur": "Thesupermat",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Festival_automobile_international_2016_-_Photocall_-_043_(cropped).jpg"
+   }
+  },
+  "de_gaulle": {
+   "atlas": "personnages/de_gaulle.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 271,
+     "h": 350
+    },
+    "machoire": {
+     "x": 275,
+     "y": 0,
+     "w": 186,
+     "h": 94,
+     "pose": [
+      59.0,
+      253.0
+     ],
+     "pivot": [
+      101.0,
+      9.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     111.6,
+     159.1,
+     36.2
+    ],
+    "oeil_d": [
+     200.3,
+     159.1,
+     32.8
+    ],
+    "bouche": [
+     160.0,
+     262.0
+    ],
+    "menton": [
+     162.9,
+     334.0
+    ]
+   },
+   "credits": {
+    "auteur": "Bundesarchiv, B 145 Bild-F015892-0010 / Ludwig Wegmann",
+    "licence": "CC BY-SA 3.0 de",
+    "source": "https://commons.wikimedia.org/wiki/File:Charles_de_Gaulle-1963_(cropped).jpg"
+   }
+  },
+  "delogu": {
+   "atlas": "personnages/delogu.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 293,
+     "h": 351
+    },
+    "machoire": {
+     "x": 297,
+     "y": 0,
+     "w": 235,
+     "h": 106,
+     "pose": [
+      54.0,
+      227.0
+     ],
+     "pivot": [
+      165.3,
+      12.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     152.5,
+     145.1,
+     44.7
+    ],
+    "oeil_d": [
+     245.8,
+     145.1,
+     32.4
+    ],
+    "bouche": [
+     219.3,
+     239.8
+    ],
+    "menton": [
+     238.0,
+     318.6
+    ]
+   },
+   "credits": {
+    "auteur": "SachaLintignat",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu_Manifestation.jpg"
+   }
+  },
+  "doucet": {
+   "atlas": "personnages/doucet.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 274,
+     "h": 427
+    },
+    "machoire": {
+     "x": 278,
+     "y": 0,
+     "w": 172,
+     "h": 87,
+     "pose": [
+      35.0,
+      262.0
+     ],
+     "pivot": [
+      55.9,
+      10.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     49.7,
+     172.7,
+     36.6
+    ],
+    "oeil_d": [
+     140.5,
+     172.7,
+     43.9
+    ],
+    "bouche": [
+     90.9,
+     272.2
+    ],
+    "menton": [
+     93.4,
+     335.9
+    ]
+   },
+   "credits": {
+    "auteur": "Greenbox",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20210821_doucet.gregory_6654.jpg"
+   }
+  },
+  "duflot": {
+   "atlas": "personnages/duflot.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 389,
+     "h": 444
+    },
+    "machoire": {
+     "x": 393,
+     "y": 0,
+     "w": 216,
+     "h": 92,
+     "pose": [
+      96.0,
+      275.0
+     ],
+     "pivot": [
+      90.7,
+      10.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     140.2,
+     186.7,
+     41.3
+    ],
+    "oeil_d": [
+     236.4,
+     186.7,
+     43.5
+    ],
+    "bouche": [
+     186.7,
+     285.1
+    ],
+    "menton": [
+     184.8,
+     354.0
+    ]
+   },
+   "credits": {
+    "auteur": "Marie-Lan Nguyen",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:C%C3%A9cile_Duflot,_2010_(cropped).jpg"
+   }
+  },
+  "dupond_moretti": {
+   "atlas": "personnages/dupond_moretti.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 242,
+     "h": 373
+    },
+    "machoire": {
+     "x": 246,
+     "y": 0,
+     "w": 184,
+     "h": 89,
+     "pose": [
+      42.0,
+      281.0
+     ],
+     "pivot": [
+      111.4,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     113.8,
+     189.3,
+     40.9
+    ],
+    "oeil_d": [
+     199.0,
+     189.3,
+     37.3
+    ],
+    "bouche": [
+     153.4,
+     290.9
+    ],
+    "menton": [
+     154.7,
+     356.0
+    ]
+   },
+   "credits": {
+    "auteur": "Linelola54",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Eric_Dupond-Moretti.jpg"
+   }
+  },
+  "dupont_aignan": {
+   "atlas": "personnages/dupont_aignan.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 275,
+     "h": 378
+    },
+    "machoire": {
+     "x": 279,
+     "y": 0,
+     "w": 190,
+     "h": 103,
+     "pose": [
+      39.0,
+      275.0
+     ],
+     "pivot": [
+      100.7,
+      11.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     91.1,
+     197.4,
+     36.8
+    ],
+    "oeil_d": [
+     184.9,
+     197.4,
+     37.6
+    ],
+    "bouche": [
+     139.7,
+     286.5
+    ],
+    "menton": [
+     140.8,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Debout la France",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan,_homme_politique_fran%C3%A7ais.jpg"
+   }
+  },
+  "durif": {
+   "atlas": "personnages/durif.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 272,
+     "h": 322
+    },
+    "machoire": {
+     "x": 276,
+     "y": 0,
+     "w": 196,
+     "h": 91,
+     "pose": [
+      41.0,
+      231.0
+     ],
+     "pivot": [
+      92.7,
+      13.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     86.6,
+     147.6,
+     40.5
+    ],
+    "oeil_d": [
+     191.4,
+     147.6,
+     41.7
+    ],
+    "bouche": [
+     133.7,
+     244.6
+    ],
+    "menton": [
+     134.1,
+     314.0
+    ]
+   },
+   "credits": {
+    "auteur": "chatzefratz",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sylvain_Durif,_sur_une_aire_d%27autoroute,_en_2013.png"
+   }
+  },
+  "faure": {
+   "atlas": "personnages/faure.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 253,
+     "h": 366
+    },
+    "machoire": {
+     "x": 257,
+     "y": 0,
+     "w": 174,
+     "h": 93,
+     "pose": [
+      42.0,
+      273.0
+     ],
+     "pivot": [
+      87.9,
+      14.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     84.7,
+     187.3,
+     39.8
+    ],
+    "oeil_d": [
+     173.4,
+     187.3,
+     38.5
+    ],
+    "bouche": [
+     129.9,
+     287.5
+    ],
+    "menton": [
+     130.1,
+     354.0
+    ]
+   },
+   "credits": {
+    "auteur": "Olivier Faure",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_d%27Olivier_Faure.jpg"
+   }
+  },
+  "ferrari": {
+   "atlas": "personnages/ferrari.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 287,
+     "h": 379
+    },
+    "machoire": {
+     "x": 291,
+     "y": 0,
+     "w": 186,
+     "h": 104,
+     "pose": [
+      52.0,
+      275.0
+     ],
+     "pivot": [
+      91.6,
+      13.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     100.3,
+     202.7,
+     38.0
+    ],
+    "oeil_d": [
+     190.8,
+     202.7,
+     37.9
+    ],
+    "bouche": [
+     143.6,
+     288.3
+    ],
+    "menton": [
+     139.8,
+     367.9
+    ]
+   },
+   "credits": {
+    "auteur": "Georges Biard",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Laurence_Ferrari_Cannes_2017.jpg"
+   }
+  },
+  "fillon": {
+   "atlas": "personnages/fillon.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 295,
+     "h": 367
+    },
+    "machoire": {
+     "x": 299,
+     "y": 0,
+     "w": 209,
+     "h": 97,
+     "pose": [
+      52.0,
+      269.0
+     ],
+     "pivot": [
+      118.0,
+      11.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     127.9,
+     182.4,
+     37.8
+    ],
+    "oeil_d": [
+     218.2,
+     182.4,
+     37.9
+    ],
+    "bouche": [
+     170.0,
+     280.1
+    ],
+    "menton": [
+     173.0,
+     353.0
+    ]
+   },
+   "credits": {
+    "auteur": "Marie-Lan Nguyen",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Fillon_2010.jpg"
+   }
+  },
+  "fogiel": {
+   "atlas": "personnages/fogiel.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 243,
+     "h": 358
+    },
+    "machoire": {
+     "x": 247,
+     "y": 0,
+     "w": 175,
+     "h": 93,
+     "pose": [
+      51.0,
+      265.0
+     ],
+     "pivot": [
+      144.0,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     151.2,
+     174.7,
+     35.5
+    ],
+    "oeil_d": [
+     210.7,
+     174.7,
+     18.3
+    ],
+    "bouche": [
+     195.0,
+     274.9
+    ],
+    "menton": [
+     189.5,
+     343.0
+    ]
+   },
+   "credits": {
+    "auteur": "ManoSolo13241324",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marc-Olivier_Fogiel_2025.jpg"
+   }
+  },
+  "fournas": {
+   "atlas": "personnages/fournas.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 252,
+     "h": 361
+    },
+    "machoire": {
+     "x": 256,
+     "y": 0,
+     "w": 200,
+     "h": 100,
+     "pose": [
+      18.0,
+      252.0
+     ],
+     "pivot": [
+      90.9,
+      10.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     64.7,
+     170.5,
+     35.5
+    ],
+    "oeil_d": [
+     156.2,
+     170.5,
+     37.4
+    ],
+    "bouche": [
+     108.9,
+     262.5
+    ],
+    "menton": [
+     106.6,
+     339.0
+    ]
+   },
+   "credits": {
+    "auteur": "The5thorseman",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gr%C3%A9goire_de_Fournas.jpg"
+   }
+  },
+  "giscard": {
+   "atlas": "personnages/giscard.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 266,
+     "h": 354
+    },
+    "machoire": {
+     "x": 270,
+     "y": 0,
+     "w": 172,
+     "h": 90,
+     "pose": [
+      52.0,
+      263.0
+     ],
+     "pivot": [
+      92.0,
+      10.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     103.8,
+     163.7,
+     37.2
+    ],
+    "oeil_d": [
+     192.3,
+     163.7,
+     37.8
+    ],
+    "bouche": [
+     144.0,
+     273.8
+    ],
+    "menton": [
+     142.5,
+     340.0
+    ]
+   },
+   "credits": {
+    "auteur": "Christian Lambiotte",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9ry_Giscard_d%27Estaing_(1975)_(cropped).jpg"
+   }
+  },
+  "glucksmann": {
+   "atlas": "personnages/glucksmann.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 266,
+     "h": 356
+    },
+    "machoire": {
+     "x": 270,
+     "y": 0,
+     "w": 172,
+     "h": 93,
+     "pose": [
+      51.0,
+      261.0
+     ],
+     "pivot": [
+      94.1,
+      12.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     98.0,
+     173.0,
+     39.5
+    ],
+    "oeil_d": [
+     187.1,
+     173.0,
+     38.4
+    ],
+    "bouche": [
+     145.1,
+     273.2
+    ],
+    "menton": [
+     143.8,
+     341.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Union 2024 - Source : EP",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:1720448398743_20240708_GLUCKSMANN_Raphael_FR_006.jpg"
+   }
+  },
+  "gueant": {
+   "atlas": "personnages/gueant.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 266,
+     "h": 385
+    },
+    "machoire": {
+     "x": 270,
+     "y": 0,
+     "w": 160,
+     "h": 90,
+     "pose": [
+      46.0,
+      283.0
+     ],
+     "pivot": [
+      29.0,
+      9.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     25.9,
+     186.0,
+     23.1
+    ],
+    "oeil_d": [
+     92.6,
+     186.0,
+     37.7
+    ],
+    "bouche": [
+     75.0,
+     292.8
+    ],
+    "menton": [
+     83.0,
+     358.3
+    ]
+   },
+   "credits": {
+    "auteur": "Claude_Guéant_-_1.jpg : Γιώργος Α. Παπανδρέου Πρωθυπουργός της Ελλάδας from Greece\nderivative work: Citron (talk)",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Claude_Gu%C3%A9ant_(derivate_work).jpg"
+   }
+  },
+  "guedj": {
+   "atlas": "personnages/guedj.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 331,
+     "h": 382
+    },
+    "machoire": {
+     "x": 335,
+     "y": 0,
+     "w": 158,
+     "h": 89,
+     "pose": [
+      77.0,
+      290.0
+     ],
+     "pivot": [
+      113.3,
+      14.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     154.9,
+     195.8,
+     45.9
+    ],
+    "oeil_d": [
+     242.7,
+     195.8,
+     31.6
+    ],
+    "bouche": [
+     190.3,
+     304.1
+    ],
+    "menton": [
+     180.5,
+     365.4
+    ]
+   },
+   "credits": {
+    "auteur": "Audrey AK",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:J%C3%A9r%C3%B4me_Guedj_2010.jpg"
+   }
+  },
+  "guette": {
+   "atlas": "personnages/guette.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 368,
+     "h": 459
+    },
+    "machoire": {
+     "x": 372,
+     "y": 0,
+     "w": 203,
+     "h": 94,
+     "pose": [
+      82.0,
+      287.0
+     ],
+     "pivot": [
+      114.2,
+      9.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     144.1,
+     195.9,
+     40.9
+    ],
+    "oeil_d": [
+     235.1,
+     195.9,
+     39.7
+    ],
+    "bouche": [
+     196.2,
+     296.2
+    ],
+    "menton": [
+     197.6,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Claire Jacquin",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cl%C3%A9mence_Guett%C3%A9,_vice_pr%C3%A9sidente_de_l%27Assembl%C3%A9e_nationale_(cropped).jpg"
+   }
+  },
+  "hanouna": {
+   "atlas": "personnages/hanouna.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 355,
+     "h": 391
+    },
+    "machoire": {
+     "x": 359,
+     "y": 0,
+     "w": 186,
+     "h": 91,
+     "pose": [
+      80.0,
+      290.0
+     ],
+     "pivot": [
+      84.9,
+      11.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     125.3,
+     206.4,
+     37.0
+    ],
+    "oeil_d": [
+     211.7,
+     206.4,
+     39.5
+    ],
+    "bouche": [
+     164.9,
+     301.5
+    ],
+    "menton": [
+     165.7,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Cyril_Hanouna_lors_d%27un_enregistrement_d%27une_%C3%A9mission_de_radio_(cropped).jpg"
+   }
+  },
+  "hidalgo": {
+   "atlas": "personnages/hidalgo.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 391,
+     "h": 453
+    },
+    "machoire": {
+     "x": 395,
+     "y": 0,
+     "w": 202,
+     "h": 106,
+     "pose": [
+      107.0,
+      269.0
+     ],
+     "pivot": [
+      92.3,
+      14.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     148.4,
+     194.7,
+     40.8
+    ],
+    "oeil_d": [
+     250.2,
+     194.7,
+     45.1
+    ],
+    "bouche": [
+     199.3,
+     283.5
+    ],
+    "menton": [
+     199.9,
+     361.9
+    ]
+   },
+   "credits": {
+    "auteur": "Jacques Paquier",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:(Anne_Hidalgo)_2020._Jacques_Paquier._P%C3%A9cresse_-_Ollier_-_Hidalgo_(cropped).jpg"
+   }
+  },
+  "hollande": {
+   "atlas": "personnages/hollande.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 258,
+     "h": 354
+    },
+    "machoire": {
+     "x": 262,
+     "y": 0,
+     "w": 222,
+     "h": 89,
+     "pose": [
+      25.0,
+      262.0
+     ],
+     "pivot": [
+      123.7,
+      9.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     104.3,
+     169.2,
+     39.1
+    ],
+    "oeil_d": [
+     190.9,
+     169.2,
+     35.9
+    ],
+    "bouche": [
+     148.7,
+     271.2
+    ],
+    "menton": [
+     149.9,
+     338.0
+    ]
+   },
+   "credits": {
+    "auteur": "Web Summit",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Hollande_-_2017_(27869823159)_(cropped_2).jpg"
+   }
+  },
+  "hortefeux": {
+   "atlas": "personnages/hortefeux.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 348
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 171,
+     "h": 88,
+     "pose": [
+      44.0,
+      260.0
+     ],
+     "pivot": [
+      80.3,
+      13.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     76.0,
+     175.3,
+     34.5
+    ],
+    "oeil_d": [
+     167.7,
+     175.3,
+     36.4
+    ],
+    "bouche": [
+     124.3,
+     273.9
+    ],
+    "menton": [
+     124.9,
+     339.0
+    ]
+   },
+   "credits": {
+    "auteur": "Andy Mabbett",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brice_Hortefeux_01_(cropped).JPG"
+   }
+  },
+  "houssin": {
+   "atlas": "personnages/houssin.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 270,
+     "h": 375
+    },
+    "machoire": {
+     "x": 274,
+     "y": 0,
+     "w": 200,
+     "h": 95,
+     "pose": [
+      33.0,
+      270.0
+     ],
+     "pivot": [
+      90.3,
+      8.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     78.7,
+     188.3,
+     36.8
+    ],
+    "oeil_d": [
+     172.7,
+     188.3,
+     36.7
+    ],
+    "bouche": [
+     123.3,
+     278.9
+    ],
+    "menton": [
+     122.9,
+     352.0
+    ]
+   },
+   "credits": {
+    "auteur": "TrisHR",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20240708-P1020457_Timoth%C3%A9e_Houssin_Wikipedia.jpg"
+   }
+  },
+  "hurmic": {
+   "atlas": "personnages/hurmic.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 270,
+     "h": 341
+    },
+    "machoire": {
+     "x": 274,
+     "y": 0,
+     "w": 188,
+     "h": 100,
+     "pose": [
+      46.0,
+      241.0
+     ],
+     "pivot": [
+      98.4,
+      12.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     98.6,
+     165.3,
+     33.2
+    ],
+    "oeil_d": [
+     182.3,
+     165.3,
+     31.7
+    ],
+    "bouche": [
+     144.4,
+     253.1
+    ],
+    "menton": [
+     146.4,
+     333.0
+    ]
+   },
+   "credits": {
+    "auteur": "Lelefa",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_Pierre_Hurmic_(cropped).jpg"
+   }
+  },
+  "jadot": {
+   "atlas": "personnages/jadot.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 252,
+     "h": 358
+    },
+    "machoire": {
+     "x": 256,
+     "y": 0,
+     "w": 183,
+     "h": 92,
+     "pose": [
+      33.0,
+      266.0
+     ],
+     "pivot": [
+      94.4,
+      10.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     78.5,
+     181.5,
+     35.4
+    ],
+    "oeil_d": [
+     169.3,
+     181.5,
+     36.1
+    ],
+    "bouche": [
+     127.4,
+     276.2
+    ],
+    "menton": [
+     130.8,
+     348.9
+    ]
+   },
+   "credits": {
+    "auteur": "greensefa",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Yannick_Jadot,_2014_(cropped).jpg"
+   }
+  },
+  "jmlp": {
+   "atlas": "personnages/jmlp.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 256,
+     "h": 357
+    },
+    "machoire": {
+     "x": 260,
+     "y": 0,
+     "w": 203,
+     "h": 98,
+     "pose": [
+      21.0,
+      259.0
+     ],
+     "pivot": [
+      107.1,
+      11.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     78.6,
+     182.0,
+     37.4
+    ],
+    "oeil_d": [
+     174.8,
+     182.0,
+     35.9
+    ],
+    "bouche": [
+     128.1,
+     270.3
+    ],
+    "menton": [
+     128.8,
+     345.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Parliament Multimedia Centre",
+    "licence": "Attribution",
+    "source": "https://commons.wikimedia.org/wiki/File:Le_Pen_Jean-Marie_1999.jpg"
+   }
+  },
+  "kazib": {
+   "atlas": "personnages/kazib.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 298,
+     "h": 362
+    },
+    "machoire": {
+     "x": 302,
+     "y": 0,
+     "w": 239,
+     "h": 96,
+     "pose": [
+      45.0,
+      240.0
+     ],
+     "pivot": [
+      134.4,
+      9.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     126.0,
+     157.0,
+     42.0
+    ],
+    "oeil_d": [
+     217.8,
+     157.0,
+     37.8
+    ],
+    "bouche": [
+     179.4,
+     249.8
+    ],
+    "menton": [
+     184.8,
+     322.9
+    ]
+   },
+   "credits": {
+    "auteur": "PabloMorao27",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib,_d%C3%A9cembre_2021.jpg"
+   }
+  },
+  "knafo": {
+   "atlas": "personnages/knafo.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 370,
+     "h": 441
+    },
+    "machoire": {
+     "x": 374,
+     "y": 0,
+     "w": 179,
+     "h": 89,
+     "pose": [
+      100.0,
+      271.0
+     ],
+     "pivot": [
+      84.0,
+      12.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     144.0,
+     185.5,
+     39.7
+    ],
+    "oeil_d": [
+     235.3,
+     185.5,
+     43.4
+    ],
+    "bouche": [
+     184.0,
+     283.2
+    ],
+    "menton": [
+     182.9,
+     350.0
+    ]
+   },
+   "credits": {
+    "auteur": "Siren-Com",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sarah_Knafo_le_9_mars_2026_(crop).jpg"
+   }
+  },
+  "lafont": {
+   "atlas": "personnages/lafont.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 278,
+     "h": 377
+    },
+    "machoire": {
+     "x": 282,
+     "y": 0,
+     "w": 184,
+     "h": 91,
+     "pose": [
+      37.0,
+      286.0
+     ],
+     "pivot": [
+      86.5,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     77.1,
+     195.4,
+     39.4
+    ],
+    "oeil_d": [
+     175.8,
+     195.4,
+     41.0
+    ],
+    "bouche": [
+     123.5,
+     295.9
+    ],
+    "menton": [
+     123.0,
+     366.0
+    ]
+   },
+   "credits": {
+    "auteur": "Anh De France",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Samuel_Lafont,_avril_2022.jpg"
+   }
+  },
+  "lalanne": {
+   "atlas": "personnages/lalanne.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 391,
+     "h": 426
+    },
+    "machoire": {
+     "x": 395,
+     "y": 0,
+     "w": 196,
+     "h": 87,
+     "pose": [
+      103.0,
+      258.0
+     ],
+     "pivot": [
+      93.3,
+      10.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     150.6,
+     167.3,
+     42.2
+    ],
+    "oeil_d": [
+     246.8,
+     167.3,
+     42.7
+    ],
+    "bouche": [
+     196.3,
+     268.2
+    ],
+    "menton": [
+     197.2,
+     335.0
+    ]
+   },
+   "credits": {
+    "auteur": "Olivier Roller, In Libro Veritas",
+    "licence": "FAL",
+    "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne.png"
+   }
+  },
+  "lapix": {
+   "atlas": "personnages/lapix.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 265,
+     "h": 376
+    },
+    "machoire": {
+     "x": 269,
+     "y": 0,
+     "w": 171,
+     "h": 91,
+     "pose": [
+      58.0,
+      285.0
+     ],
+     "pivot": [
+      132.2,
+      9.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     162.1,
+     198.8,
+     40.4
+    ],
+    "oeil_d": [
+     232.0,
+     198.8,
+     26.7
+    ],
+    "bouche": [
+     190.2,
+     294.6
+    ],
+    "menton": [
+     194.0,
+     365.9
+    ]
+   },
+   "credits": {
+    "auteur": "Joan Hernandez Mir",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Anne-Sophie_Lapix_Cannes_2018.jpg"
+   }
+  },
+  "larcher": {
+   "atlas": "personnages/larcher.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 277,
+     "h": 362
+    },
+    "machoire": {
+     "x": 281,
+     "y": 0,
+     "w": 216,
+     "h": 95,
+     "pose": [
+      51.0,
+      254.0
+     ],
+     "pivot": [
+      126.0,
+      13.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     126.2,
+     176.1,
+     38.2
+    ],
+    "oeil_d": [
+     219.0,
+     176.1,
+     36.6
+    ],
+    "bouche": [
+     177.0,
+     267.2
+    ],
+    "menton": [
+     179.8,
+     336.0
+    ]
+   },
+   "credits": {
+    "auteur": "Senate",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_G._Larcher_2014_(cropped).jpg"
+   }
+  },
+  "lassalle": {
+   "atlas": "personnages/lassalle.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 370
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 198,
+     "h": 102,
+     "pose": [
+      19.0,
+      268.0
+     ],
+     "pivot": [
+      59.1,
+      10.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     34.5,
+     191.0,
+     29.6
+    ],
+    "oeil_d": [
+     117.9,
+     191.0,
+     38.9
+    ],
+    "bouche": [
+     78.1,
+     278.4
+    ],
+    "menton": [
+     65.7,
+     360.0
+    ]
+   },
+   "credits": {
+    "auteur": "Antoine Lamielle",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean_Lassalle_03_(cropped).jpg"
+   }
+  },
+  "lavalette": {
+   "atlas": "personnages/lavalette.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 356
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 172,
+     "h": 93,
+     "pose": [
+      74.0,
+      260.0
+     ],
+     "pivot": [
+      113.6,
+      9.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     133.3,
+     165.2,
+     38.9
+    ],
+    "oeil_d": [
+     215.0,
+     165.2,
+     32.5
+    ],
+    "bouche": [
+     187.6,
+     269.4
+    ],
+    "menton": [
+     190.1,
+     339.0
+    ]
+   },
+   "credits": {
+    "auteur": "Alain V",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Laure_Lavalette.jpg"
+   }
+  },
+  "leaument": {
+   "atlas": "personnages/leaument.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 246,
+     "h": 351
+    },
+    "machoire": {
+     "x": 250,
+     "y": 0,
+     "w": 172,
+     "h": 93,
+     "pose": [
+      39.0,
+      258.0
+     ],
+     "pivot": [
+      89.6,
+      11.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     82.9,
+     173.4,
+     39.2
+    ],
+    "oeil_d": [
+     170.4,
+     173.4,
+     38.1
+    ],
+    "bouche": [
+     128.6,
+     269.3
+    ],
+    "menton": [
+     129.3,
+     340.0
+    ]
+   },
+   "credits": {
+    "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument.jpg"
+   }
+  },
+  "lecornu": {
+   "atlas": "personnages/lecornu.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 254,
+     "h": 364
+    },
+    "machoire": {
+     "x": 258,
+     "y": 0,
+     "w": 181,
+     "h": 86,
+     "pose": [
+      37.0,
+      277.0
+     ],
+     "pivot": [
+      88.4,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     82.4,
+     189.0,
+     38.0
+    ],
+    "oeil_d": [
+     171.4,
+     189.0,
+     38.3
+    ],
+    "bouche": [
+     125.4,
+     286.9
+    ],
+    "menton": [
+     125.2,
+     350.0
+    ]
+   },
+   "credits": {
+    "auteur": "U.S. Secretary of Defense",
+    "licence": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Lecornu_2024_(2x3_crop).jpg"
+   }
+  },
+  "lemaire": {
+   "atlas": "personnages/lemaire.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 266,
+     "h": 359
+    },
+    "machoire": {
+     "x": 270,
+     "y": 0,
+     "w": 182,
+     "h": 90,
+     "pose": [
+      64.0,
+      269.0
+     ],
+     "pivot": [
+      112.4,
+      9.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     135.0,
+     179.6,
+     41.4
+    ],
+    "oeil_d": [
+     223.4,
+     179.6,
+     35.3
+    ],
+    "bouche": [
+     176.4,
+     278.2
+    ],
+    "menton": [
+     181.4,
+     350.0
+    ]
+   },
+   "credits": {
+    "auteur": "Belgian Presidency of the Council of the EU 2024 from Belgium",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:EU2024BE_240223_Informal_meeting_of_economic_and_financial_affairs_ministers_Gent_JNZT_0037_(53546760021).jpg"
+   }
+  },
+  "lepen": {
+   "atlas": "personnages/lepen.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 319,
+     "h": 364
+    },
+    "machoire": {
+     "x": 323,
+     "y": 0,
+     "w": 193,
+     "h": 103,
+     "pose": [
+      74.0,
+      247.0
+     ],
+     "pivot": [
+      107.7,
+      14.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     139.4,
+     170.5,
+     39.0
+    ],
+    "oeil_d": [
+     230.4,
+     170.5,
+     35.8
+    ],
+    "bouche": [
+     181.7,
+     261.3
+    ],
+    "menton": [
+     184.1,
+     337.0
+    ]
+   },
+   "credits": {
+    "auteur": "VOX España",
+    "licence": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%9C%D0%B0%D1%80%D0%B8%D0%BD_%D0%9B%D0%B5_%D0%9F%D0%B5%D0%BD_(28-01-2022).jpg"
+   }
+  },
+  "lepers": {
+   "atlas": "personnages/lepers.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 275,
+     "h": 360
+    },
+    "machoire": {
+     "x": 279,
+     "y": 0,
+     "w": 208,
+     "h": 100,
+     "pose": [
+      36.0,
+      251.0
+     ],
+     "pivot": [
+      102.7,
+      13.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     99.5,
+     165.7,
+     37.3
+    ],
+    "oeil_d": [
+     190.3,
+     165.7,
+     37.9
+    ],
+    "bouche": [
+     138.7,
+     264.3
+    ],
+    "menton": [
+     138.4,
+     338.0
+    ]
+   },
+   "credits": {
+    "auteur": "Rama",
+    "licence": "CC BY-SA 2.0 fr",
+    "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG"
+   }
+  },
+  "lescure": {
+   "atlas": "personnages/lescure.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 278,
+     "h": 370
+    },
+    "machoire": {
+     "x": 282,
+     "y": 0,
+     "w": 183,
+     "h": 100,
+     "pose": [
+      55.0,
+      270.0
+     ],
+     "pivot": [
+      92.6,
+      12.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     111.9,
+     193.6,
+     34.1
+    ],
+    "oeil_d": [
+     199.9,
+     193.6,
+     35.3
+    ],
+    "bouche": [
+     147.6,
+     282.8
+    ],
+    "menton": [
+     147.4,
+     358.0
+    ]
+   },
+   "credits": {
+    "auteur": "Siren-Com",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pierre_Lescure_2012.jpg"
+   }
+  },
+  "lisnard": {
+   "atlas": "personnages/lisnard.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 254,
+     "h": 374
+    },
+    "machoire": {
+     "x": 258,
+     "y": 0,
+     "w": 185,
+     "h": 94,
+     "pose": [
+      34.0,
+      280.0
+     ],
+     "pivot": [
+      98.2,
+      13.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     85.4,
+     196.5,
+     36.8
+    ],
+    "oeil_d": [
+     177.2,
+     196.5,
+     34.9
+    ],
+    "bouche": [
+     132.2,
+     293.5
+    ],
+    "menton": [
+     133.3,
+     365.0
+    ]
+   },
+   "credits": {
+    "auteur": "Grégor Sauvagère",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:David_Lisnard_en_2026.jpg"
+   }
+  },
+  "lucas": {
+   "atlas": "personnages/lucas.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 266,
+     "h": 379
+    },
+    "machoire": {
+     "x": 270,
+     "y": 0,
+     "w": 177,
+     "h": 99,
+     "pose": [
+      49.0,
+      268.0
+     ],
+     "pivot": [
+      90.7,
+      13.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     100.5,
+     180.6,
+     37.0
+    ],
+    "oeil_d": [
+     185.7,
+     180.6,
+     37.3
+    ],
+    "bouche": [
+     139.7,
+     281.1
+    ],
+    "menton": [
+     140.5,
+     354.0
+    ]
+   },
+   "credits": {
+    "auteur": "Greenbox",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20210819_lucas.benjamin_5936.jpg"
+   }
+  },
+  "macron": {
+   "atlas": "personnages/macron.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 280,
+     "h": 370
+    },
+    "machoire": {
+     "x": 284,
+     "y": 0,
+     "w": 204,
+     "h": 94,
+     "pose": [
+      23.0,
+      270.0
+     ],
+     "pivot": [
+      79.2,
+      11.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     63.6,
+     182.8,
+     38.9
+    ],
+    "oeil_d": [
+     152.1,
+     182.8,
+     42.8
+    ],
+    "bouche": [
+     102.2,
+     281.7
+    ],
+    "menton": [
+     97.7,
+     350.0
+    ]
+   },
+   "credits": {
+    "auteur": "Nebojša Tejić",
+    "licence": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Emmanuel_Macron_2025_(cropped).jpg"
+   }
+  },
+  "maillard": {
+   "atlas": "personnages/maillard.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 246,
+     "h": 358
+    },
+    "machoire": {
+     "x": 250,
+     "y": 0,
+     "w": 181,
+     "h": 92,
+     "pose": [
+      34.0,
+      266.0
+     ],
+     "pivot": [
+      87.2,
+      11.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     78.3,
+     183.7,
+     38.7
+    ],
+    "oeil_d": [
+     164.2,
+     183.7,
+     38.2
+    ],
+    "bouche": [
+     121.2,
+     277.8
+    ],
+    "menton": [
+     120.8,
+     349.0
+    ]
+   },
+   "credits": {
+    "auteur": "Lionel Barbe",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Sylvain-Maillard.jpg"
+   }
+  },
+  "mamere": {
+   "atlas": "personnages/mamere.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 281,
+     "h": 362
+    },
+    "machoire": {
+     "x": 285,
+     "y": 0,
+     "w": 176,
+     "h": 83,
+     "pose": [
+      57.0,
+      277.0
+     ],
+     "pivot": [
+      96.7,
+      9.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     109.6,
+     180.3,
+     43.0
+    ],
+    "oeil_d": [
+     198.6,
+     180.3,
+     42.1
+    ],
+    "bouche": [
+     153.7,
+     286.5
+    ],
+    "menton": [
+     154.3,
+     347.0
+    ]
+   },
+   "credits": {
+    "auteur": "Kenji-Baptiste OIKAWA",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Noel.Mamere2006.JPG"
+   }
+  },
+  "marechal": {
+   "atlas": "personnages/marechal.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 313,
+     "h": 367
+    },
+    "machoire": {
+     "x": 317,
+     "y": 0,
+     "w": 165,
+     "h": 86,
+     "pose": [
+      51.0,
+      281.0
+     ],
+     "pivot": [
+      74.7,
+      10.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     94.0,
+     191.9,
+     36.3
+    ],
+    "oeil_d": [
+     176.3,
+     191.9,
+     37.9
+    ],
+    "bouche": [
+     125.7,
+     291.8
+    ],
+    "menton": [
+     125.9,
+     357.0
+    ]
+   },
+   "credits": {
+    "auteur": "Gauthier Bouchet",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:MMLePen-010912.JPG"
+   }
+  },
+  "mariani": {
+   "atlas": "personnages/mariani.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 286,
+     "h": 357
+    },
+    "machoire": {
+     "x": 290,
+     "y": 0,
+     "w": 181,
+     "h": 89,
+     "pose": [
+      51.0,
+      267.0
+     ],
+     "pivot": [
+      81.6,
+      10.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     96.6,
+     177.3,
+     35.0
+    ],
+    "oeil_d": [
+     184.1,
+     177.3,
+     36.6
+    ],
+    "bouche": [
+     132.6,
+     277.7
+    ],
+    "menton": [
+     131.1,
+     343.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Union 2024 - Source : EP",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:1718282772753_20240611_20240611_MARIANI_Thierry_FR_004.jpg"
+   }
+  },
+  "mc_lepen": {
+   "atlas": "personnages/mc_lepen.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 337,
+     "h": 394
+    },
+    "machoire": {
+     "x": 341,
+     "y": 0,
+     "w": 204,
+     "h": 96,
+     "pose": [
+      83.0,
+      280.0
+     ],
+     "pivot": [
+      102.5,
+      9.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     136.6,
+     198.4,
+     38.9
+    ],
+    "oeil_d": [
+     232.9,
+     198.4,
+     38.1
+    ],
+    "bouche": [
+     185.5,
+     289.1
+    ],
+    "menton": [
+     188.2,
+     363.0
+    ]
+   },
+   "credits": {
+    "auteur": "ValentinDLH59",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marie-Caroline_le_Pen.jpg"
+   }
+  },
+  "melenchon": {
+   "atlas": "personnages/melenchon.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 287,
+     "h": 372
+    },
+    "machoire": {
+     "x": 291,
+     "y": 0,
+     "w": 187,
+     "h": 90,
+     "pose": [
+      42.0,
+      280.0
+     ],
+     "pivot": [
+      87.5,
+      9.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     86.2,
+     189.1,
+     35.6
+    ],
+    "oeil_d": [
+     181.8,
+     189.1,
+     37.6
+    ],
+    "bouche": [
+     129.5,
+     289.3
+    ],
+    "menton": [
+     128.2,
+     357.0
+    ]
+   },
+   "credits": {
+    "auteur": "jlm2017.fr",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:M%C3%A9lenchon_2027_-_55262255527_(cropped_3-4).png"
+   }
+  },
+  "messiha": {
+   "atlas": "personnages/messiha.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 267,
+     "h": 341
+    },
+    "machoire": {
+     "x": 271,
+     "y": 0,
+     "w": 200,
+     "h": 99,
+     "pose": [
+      18.0,
+      242.0
+     ],
+     "pivot": [
+      78.4,
+      13.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     48.8,
+     161.6,
+     35.4
+    ],
+    "oeil_d": [
+     140.8,
+     161.6,
+     38.4
+    ],
+    "bouche": [
+     96.4,
+     255.0
+    ],
+    "menton": [
+     93.4,
+     328.0
+    ]
+   },
+   "credits": {
+    "auteur": "Anh De France",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean_Messiha,_mars_2022_(52104100348).jpg"
+   }
+  },
+  "mitterrand": {
+   "atlas": "personnages/mitterrand.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 249,
+     "h": 334
+    },
+    "machoire": {
+     "x": 253,
+     "y": 0,
+     "w": 175,
+     "h": 92,
+     "pose": [
+      56.0,
+      242.0
+     ],
+     "pivot": [
+      106.2,
+      11.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     109.6,
+     151.4,
+     39.8
+    ],
+    "oeil_d": [
+     193.7,
+     151.4,
+     35.0
+    ],
+    "bouche": [
+     162.2,
+     253.6
+    ],
+    "menton": [
+     164.4,
+     320.0
+    ]
+   },
+   "credits": {
+    "auteur": "Comet Photo AG (Zürich)",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:President_Fran%C3%A7ois_Mitterrand_in_1983.jpg"
+   }
+  },
+  "morano": {
+   "atlas": "personnages/morano.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 307,
+     "h": 356
+    },
+    "machoire": {
+     "x": 311,
+     "y": 0,
+     "w": 203,
+     "h": 95,
+     "pose": [
+      45.0,
+      260.0
+     ],
+     "pivot": [
+      93.8,
+      10.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     97.0,
+     177.8,
+     36.6
+    ],
+    "oeil_d": [
+     181.8,
+     177.8,
+     36.8
+    ],
+    "bouche": [
+     138.8,
+     270.7
+    ],
+    "menton": [
+     140.2,
+     342.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Parliament",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:Nadine_Morano_MEP_2019.jpg"
+   }
+  },
+  "ndiaye": {
+   "atlas": "personnages/ndiaye.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 300,
+     "h": 383
+    },
+    "machoire": {
+     "x": 304,
+     "y": 0,
+     "w": 228,
+     "h": 102,
+     "pose": [
+      50.0,
+      244.0
+     ],
+     "pivot": [
+      120.9,
+      11.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     114.0,
+     168.3,
+     45.1
+    ],
+    "oeil_d": [
+     222.3,
+     168.3,
+     44.0
+    ],
+    "bouche": [
+     170.9,
+     255.3
+    ],
+    "menton": [
+     173.3,
+     332.9
+    ]
+   },
+   "credits": {
+    "auteur": "Hegor",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:MH-Sibeth_(cropped).jpg"
+   }
+  },
+  "odoul": {
+   "atlas": "personnages/odoul.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 268,
+     "h": 344
+    },
+    "machoire": {
+     "x": 272,
+     "y": 0,
+     "w": 200,
+     "h": 105,
+     "pose": [
+      44.0,
+      239.0
+     ],
+     "pivot": [
+      122.2,
+      11.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     116.1,
+     162.2,
+     41.3
+    ],
+    "oeil_d": [
+     206.3,
+     162.2,
+     38.0
+    ],
+    "bouche": [
+     166.2,
+     250.2
+    ],
+    "menton": [
+     169.2,
+     331.0
+    ]
+   },
+   "credits": {
+    "auteur": "Toufik-de-Planoise",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Julien_Odoul_-_Besan%C3%A7on_25-04-2019_-_Toufik-de-Planoise.jpg"
+   }
+  },
+  "oudea": {
+   "atlas": "personnages/oudea.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 330,
+     "h": 366
+    },
+    "machoire": {
+     "x": 334,
+     "y": 0,
+     "w": 213,
+     "h": 88,
+     "pose": [
+      50.0,
+      246.0
+     ],
+     "pivot": [
+      87.9,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     97.9,
+     154.8,
+     38.0
+    ],
+    "oeil_d": [
+     187.3,
+     154.8,
+     42.6
+    ],
+    "bouche": [
+     137.9,
+     255.9
+    ],
+    "menton": [
+     133.3,
+     323.0
+    ]
+   },
+   "credits": {
+    "auteur": "Web Summit",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Am%C3%A9lie_Oud%C3%A9a-Cast%C3%A9ra_2017_(crop)_(cropped).jpg"
+   }
+  },
+  "panot": {
+   "atlas": "personnages/panot.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 290,
+     "h": 375
+    },
+    "machoire": {
+     "x": 294,
+     "y": 0,
+     "w": 168,
+     "h": 96,
+     "pose": [
+      72.0,
+      279.0
+     ],
+     "pivot": [
+      96.2,
+      12.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     123.3,
+     199.9,
+     38.9
+    ],
+    "oeil_d": [
+     210.1,
+     199.9,
+     34.8
+    ],
+    "bouche": [
+     168.2,
+     291.6
+    ],
+    "menton": [
+     169.2,
+     367.0
+    ]
+   },
+   "credits": {
+    "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marche_des_fiert%C3%A9s_de_Paris_2017-21.jpg"
+   }
+  },
+  "pecresse": {
+   "atlas": "personnages/pecresse.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 383,
+     "h": 383
+    },
+    "machoire": {
+     "x": 387,
+     "y": 0,
+     "w": 190,
+     "h": 89,
+     "pose": [
+      95.0,
+      271.0
+     ],
+     "pivot": [
+      104.5,
+      9.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     148.6,
+     182.2,
+     43.8
+    ],
+    "oeil_d": [
+     242.7,
+     182.2,
+     40.5
+    ],
+    "bouche": [
+     199.5,
+     280.6
+    ],
+    "menton": [
+     198.9,
+     347.0
+    ]
+   },
+   "credits": {
+    "auteur": "Gail Leenstra",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9rie_P%C3%A9cresse_at_a_2024_Paralympic_Games_media_conference_in_2024_3_(cropped).jpg"
+   }
+  },
+  "peltier": {
+   "atlas": "personnages/peltier.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 253,
+     "h": 371
+    },
+    "machoire": {
+     "x": 257,
+     "y": 0,
+     "w": 172,
+     "h": 92,
+     "pose": [
+      31.0,
+      276.0
+     ],
+     "pivot": [
+      78.2,
+      10.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     67.0,
+     186.3,
+     35.3
+    ],
+    "oeil_d": [
+     154.5,
+     186.3,
+     37.2
+    ],
+    "bouche": [
+     109.2,
+     286.5
+    ],
+    "menton": [
+     109.1,
+     355.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Union 2024 - Source : EP",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:1718699868533_20240617_PELTIER_Guillaume_FR_004.jpg"
+   }
+  },
+  "philippe": {
+   "atlas": "personnages/philippe.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 369
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 199,
+     "h": 97,
+     "pose": [
+      18.0,
+      271.0
+     ],
+     "pivot": [
+      77.9,
+      12.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     53.9,
+     189.7,
+     36.6
+    ],
+    "oeil_d": [
+     147.4,
+     189.7,
+     39.5
+    ],
+    "bouche": [
+     95.9,
+     283.2
+    ],
+    "menton": [
+     94.6,
+     356.0
+    ]
+   },
+   "credits": {
+    "auteur": "Jacques Paquier",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:%C3%89douard_Philippe_2019_(cropped).jpg"
+   }
+  },
+  "philippot": {
+   "atlas": "personnages/philippot.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 236,
+     "h": 352
+    },
+    "machoire": {
+     "x": 240,
+     "y": 0,
+     "w": 182,
+     "h": 88,
+     "pose": [
+      37.0,
+      259.0
+     ],
+     "pivot": [
+      147.8,
+      10.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     130.2,
+     171.6,
+     37.1
+    ],
+    "oeil_d": [
+     201.9,
+     171.6,
+     25.9
+    ],
+    "bouche": [
+     184.8,
+     269.1
+    ],
+    "menton": [
+     191.3,
+     331.6
+    ]
+   },
+   "credits": {
+    "auteur": "Films et documetnaires",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Florian_Philippot.jpg"
+   }
+  },
+  "piolle": {
+   "atlas": "personnages/piolle.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 310,
+     "h": 377
+    },
+    "machoire": {
+     "x": 314,
+     "y": 0,
+     "w": 229,
+     "h": 93,
+     "pose": [
+      51.0,
+      279.0
+     ],
+     "pivot": [
+      128.5,
+      10.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     121.1,
+     193.5,
+     40.6
+    ],
+    "oeil_d": [
+     226.0,
+     193.5,
+     38.2
+    ],
+    "bouche": [
+     179.5,
+     289.8
+    ],
+    "menton": [
+     183.8,
+     357.9
+    ]
+   },
+   "credits": {
+    "auteur": "Greenbox",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20210819_piolle.eric5891_(cropped).jpg"
+   }
+  },
+  "poisson": {
+   "atlas": "personnages/poisson.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 275,
+     "h": 375
+    },
+    "machoire": {
+     "x": 279,
+     "y": 0,
+     "w": 194,
+     "h": 93,
+     "pose": [
+      36.0,
+      282.0
+     ],
+     "pivot": [
+      92.7,
+      10.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     85.5,
+     199.4,
+     37.0
+    ],
+    "oeil_d": [
+     177.0,
+     199.4,
+     38.3
+    ],
+    "bouche": [
+     128.7,
+     292.7
+    ],
+    "menton": [
+     128.3,
+     364.0
+    ]
+   },
+   "credits": {
+    "auteur": "© Peter Potrowl",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean-Fr%C3%A9d%C3%A9ric_Poisson_-_Manifestation_%C2%AB_Marchons_Enfants_%C2%BB_contre_la_PMA_et_la_GPA_-_12_(cropped).jpg"
+   }
+  },
+  "portes": {
+   "atlas": "personnages/portes.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 231,
+     "h": 347
+    },
+    "machoire": {
+     "x": 235,
+     "y": 0,
+     "w": 159,
+     "h": 95,
+     "pose": [
+      23.0,
+      246.0
+     ],
+     "pivot": [
+      29.6,
+      10.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     23.8,
+     154.3,
+     21.0
+    ],
+    "oeil_d": [
+     92.4,
+     154.3,
+     33.8
+    ],
+    "bouche": [
+     52.6,
+     256.3
+    ],
+    "menton": [
+     53.4,
+     327.0
+    ]
+   },
+   "credits": {
+    "auteur": "Pioupiou838383",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Thomas_Portes.jpg"
+   }
+  },
+  "poutou": {
+   "atlas": "personnages/poutou.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 265,
+     "h": 338
+    },
+    "machoire": {
+     "x": 269,
+     "y": 0,
+     "w": 194,
+     "h": 105,
+     "pose": [
+      38.0,
+      229.0
+     ],
+     "pivot": [
+      102.7,
+      15.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     99.8,
+     155.3,
+     38.1
+    ],
+    "oeil_d": [
+     191.3,
+     155.3,
+     36.4
+    ],
+    "bouche": [
+     140.7,
+     244.0
+    ],
+    "menton": [
+     137.7,
+     320.8
+    ]
+   },
+   "credits": {
+    "auteur": "Patrice CALATAYU from Bordeaux, France",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Philippe_Poutou_2020_(cropped).png"
+   }
+  },
+  "ppda": {
+   "atlas": "personnages/ppda.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 291,
+     "h": 383
+    },
+    "machoire": {
+     "x": 295,
+     "y": 0,
+     "w": 185,
+     "h": 97,
+     "pose": [
+      70.0,
+      284.0
+     ],
+     "pivot": [
+      102.5,
+      15.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     129.6,
+     200.1,
+     40.8
+    ],
+    "oeil_d": [
+     221.2,
+     200.1,
+     37.6
+    ],
+    "bouche": [
+     172.5,
+     299.5
+    ],
+    "menton": [
+     171.7,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Babsy",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:PPDA_-_Brive_2011.jpg"
+   }
+  },
+  "praud": {
+   "atlas": "personnages/praud.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 279,
+     "h": 359
+    },
+    "machoire": {
+     "x": 283,
+     "y": 0,
+     "w": 181,
+     "h": 97,
+     "pose": [
+      56.0,
+      249.0
+     ],
+     "pivot": [
+      145.9,
+      10.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     134.7,
+     160.5,
+     39.6
+    ],
+    "oeil_d": [
+     186.3,
+     160.5,
+     18.5
+    ],
+    "bouche": [
+     201.9,
+     259.4
+    ],
+    "menton": [
+     207.1,
+     330.9
+    ]
+   },
+   "credits": {
+    "auteur": "ManoSolo13241324",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Pascal_Praud_2025.jpg"
+   }
+  },
+  "pujadas": {
+   "atlas": "personnages/pujadas.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 286,
+     "h": 374
+    },
+    "machoire": {
+     "x": 290,
+     "y": 0,
+     "w": 180,
+     "h": 100,
+     "pose": [
+      45.0,
+      274.0
+     ],
+     "pivot": [
+      82.5,
+      14.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     82.9,
+     192.1,
+     35.7
+    ],
+    "oeil_d": [
+     170.3,
+     192.1,
+     37.4
+    ],
+    "bouche": [
+     127.5,
+     288.1
+    ],
+    "menton": [
+     127.9,
+     363.9
+    ]
+   },
+   "credits": {
+    "auteur": "Coccico2345",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:David_Pujadas_USA.jpg"
+   }
+  },
+  "retailleau": {
+   "atlas": "personnages/retailleau.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 300,
+     "h": 357
+    },
+    "machoire": {
+     "x": 304,
+     "y": 0,
+     "w": 182,
+     "h": 94,
+     "pose": [
+      68.0,
+      263.0
+     ],
+     "pivot": [
+      96.8,
+      12.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     120.9,
+     174.9,
+     33.9
+    ],
+    "oeil_d": [
+     206.3,
+     174.9,
+     32.4
+    ],
+    "bouche": [
+     164.8,
+     275.9
+    ],
+    "menton": [
+     165.8,
+     349.0
+    ]
+   },
+   "credits": {
+    "auteur": "Anthonymontardyfr",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bruno_Retailleau_-_Ministre_de_l%27Int%C3%A9rieur_fran%C3%A7ais.jpg"
+   }
+  },
+  "rigault": {
+   "atlas": "personnages/rigault.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 374
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 194,
+     "h": 87,
+     "pose": [
+      26.0,
+      277.0
+     ],
+     "pivot": [
+      29.7,
+      9.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     30.2,
+     182.6,
+     24.1
+    ],
+    "oeil_d": [
+     104.1,
+     182.6,
+     39.3
+    ],
+    "bouche": [
+     55.7,
+     286.8
+    ],
+    "menton": [
+     62.7,
+     349.9
+    ]
+   },
+   "credits": {
+    "auteur": "Siren-Com",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Stanislas_Rigault_12_novembre_2023.jpg"
+   }
+  },
+  "rousseau": {
+   "atlas": "personnages/rousseau.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 298,
+     "h": 389
+    },
+    "machoire": {
+     "x": 302,
+     "y": 0,
+     "w": 173,
+     "h": 111,
+     "pose": [
+      56.0,
+      271.0
+     ],
+     "pivot": [
+      87.5,
+      10.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     104.9,
+     195.1,
+     41.0
+    ],
+    "oeil_d": [
+     199.3,
+     195.1,
+     42.3
+    ],
+    "bouche": [
+     143.5,
+     281.1
+    ],
+    "menton": [
+     142.5,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Greenbox",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20210819_rousseau.s_5754.jpg"
+   }
+  },
+  "roussel": {
+   "atlas": "personnages/roussel.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 301,
+     "h": 380
+    },
+    "machoire": {
+     "x": 305,
+     "y": 0,
+     "w": 180,
+     "h": 92,
+     "pose": [
+      70.0,
+      288.0
+     ],
+     "pivot": [
+      87.3,
+      13.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     109.1,
+     203.8,
+     40.4
+    ],
+    "oeil_d": [
+     208.3,
+     203.8,
+     41.5
+    ],
+    "bouche": [
+     157.3,
+     301.8
+    ],
+    "menton": [
+     158.1,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "NakaraZn Zouhaïr NAKARA",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fabien_Roussel_2022_(cropped).jpg"
+   }
+  },
+  "royal": {
+   "atlas": "personnages/royal.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 262,
+     "h": 409
+    },
+    "machoire": {
+     "x": 266,
+     "y": 0,
+     "w": 192,
+     "h": 102,
+     "pose": [
+      26.0,
+      276.0
+     ],
+     "pivot": [
+      62.1,
+      9.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     53.5,
+     197.4,
+     29.5
+    ],
+    "oeil_d": [
+     130.5,
+     197.4,
+     35.9
+    ],
+    "bouche": [
+     88.1,
+     285.8
+    ],
+    "menton": [
+     79.5,
+     365.0
+    ]
+   },
+   "credits": {
+    "auteur": "English : This photo has been taken by Matthieu Riegler  (User:Kyro) and released under the licenses stated below. You are free to use it for any purpose as lon",
+    "licence": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal_-_Janvier_2012.jpg"
+   }
+  },
+  "ruffin": {
+   "atlas": "personnages/ruffin.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 263,
+     "h": 353
+    },
+    "machoire": {
+     "x": 267,
+     "y": 0,
+     "w": 201,
+     "h": 100,
+     "pose": [
+      52.0,
+      253.0
+     ],
+     "pivot": [
+      132.3,
+      10.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     136.3,
+     165.6,
+     38.3
+    ],
+    "oeil_d": [
+     216.0,
+     165.6,
+     31.9
+    ],
+    "bouche": [
+     184.3,
+     263.2
+    ],
+    "menton": [
+     193.1,
+     340.9
+    ]
+   },
+   "credits": {
+    "auteur": "Thinkerview",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Ruffin_(cropped).jpg"
+   }
+  },
+  "rugy": {
+   "atlas": "personnages/rugy.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 280,
+     "h": 379
+    },
+    "machoire": {
+     "x": 284,
+     "y": 0,
+     "w": 201,
+     "h": 92,
+     "pose": [
+      35.0,
+      286.0
+     ],
+     "pivot": [
+      84.2,
+      9.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     74.6,
+     193.5,
+     36.9
+    ],
+    "oeil_d": [
+     165.4,
+     193.5,
+     38.3
+    ],
+    "bouche": [
+     119.2,
+     295.4
+    ],
+    "menton": [
+     118.6,
+     365.0
+    ]
+   },
+   "credits": {
+    "auteur": "bruno perroud",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_de_Rugy.jpg"
+   }
+  },
+  "salame": {
+   "atlas": "personnages/salame.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 307,
+     "h": 371
+    },
+    "machoire": {
+     "x": 311,
+     "y": 0,
+     "w": 194,
+     "h": 90,
+     "pose": [
+      48.0,
+      270.0
+     ],
+     "pivot": [
+      110.0,
+      10.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     110.5,
+     178.7,
+     39.2
+    ],
+    "oeil_d": [
+     196.3,
+     178.7,
+     36.0
+    ],
+    "bouche": [
+     158.0,
+     280.7
+    ],
+    "menton": [
+     160.3,
+     347.0
+    ]
+   },
+   "credits": {
+    "auteur": "Soso171120",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:L%C3%A9aSalam%C3%A9.jpg"
+   }
+  },
+  "sarkozy": {
+   "atlas": "personnages/sarkozy.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 279,
+     "h": 377
+    },
+    "machoire": {
+     "x": 283,
+     "y": 0,
+     "w": 173,
+     "h": 85,
+     "pose": [
+      51.0,
+      292.0
+     ],
+     "pivot": [
+      91.5,
+      10.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     100.1,
+     203.9,
+     36.5
+    ],
+    "oeil_d": [
+     183.6,
+     203.9,
+     34.6
+    ],
+    "bouche": [
+     142.5,
+     302.0
+    ],
+    "menton": [
+     140.0,
+     367.0
+    ]
+   },
+   "credits": {
+    "auteur": "Αντώνης Σαμαράς Πρωθυπουργός της Ελλάδας from Greece",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Sarkozy_(September_1,_2011)_(cropped).jpg"
+   }
+  },
+  "schiappa": {
+   "atlas": "personnages/schiappa.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 367,
+     "h": 451
+    },
+    "machoire": {
+     "x": 371,
+     "y": 0,
+     "w": 185,
+     "h": 103,
+     "pose": [
+      105.0,
+      270.0
+     ],
+     "pivot": [
+      81.7,
+      10.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     144.3,
+     196.3,
+     37.9
+    ],
+    "oeil_d": [
+     233.7,
+     196.3,
+     41.3
+    ],
+    "bouche": [
+     186.7,
+     280.3
+    ],
+    "menton": [
+     184.0,
+     360.0
+    ]
+   },
+   "credits": {
+    "auteur": "Nantilus",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Marl%C3%A8ne_Schiappa_2.jpg"
+   }
+  },
+  "tache": {
+   "atlas": "personnages/tache.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 274,
+     "h": 369
+    },
+    "machoire": {
+     "x": 278,
+     "y": 0,
+     "w": 169,
+     "h": 78,
+     "pose": [
+      37.0,
+      291.0
+     ],
+     "pivot": [
+      51.7,
+      10.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     41.4,
+     192.0,
+     35.5
+    ],
+    "oeil_d": [
+     132.0,
+     192.0,
+     42.7
+    ],
+    "bouche": [
+     88.7,
+     301.0
+    ],
+    "menton": [
+     93.7,
+     357.7
+    ]
+   },
+   "credits": {
+    "auteur": "TrisHR",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg"
+   }
+  },
+  "tanguy": {
+   "atlas": "personnages/tanguy.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 273,
+     "h": 376
+    },
+    "machoire": {
+     "x": 277,
+     "y": 0,
+     "w": 167,
+     "h": 88,
+     "pose": [
+      59.0,
+      288.0
+     ],
+     "pivot": [
+      96.1,
+      13.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     105.3,
+     204.5,
+     41.6
+    ],
+    "oeil_d": [
+     201.6,
+     204.5,
+     37.9
+    ],
+    "bouche": [
+     155.1,
+     301.2
+    ],
+    "menton": [
+     154.7,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Debout la France",
+    "licence": "CC BY-SA 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean-Philippe_Tanguy.jpg"
+   }
+  },
+  "thevenot": {
+   "atlas": "personnages/thevenot.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 272,
+     "h": 443
+    },
+    "machoire": {
+     "x": 276,
+     "y": 0,
+     "w": 193,
+     "h": 89,
+     "pose": [
+      52.0,
+      278.0
+     ],
+     "pivot": [
+      25.8,
+      10.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     64.4,
+     185.0,
+     19.7
+    ],
+    "oeil_d": [
+     129.5,
+     185.0,
+     37.7
+    ],
+    "bouche": [
+     77.8,
+     288.9
+    ],
+    "menton": [
+     84.0,
+     352.0
+    ]
+   },
+   "credits": {
+    "auteur": "Maxime BOUDET",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Prisca_Thevenot_2023.jpg"
+   }
+  },
+  "thevenoud": {
+   "atlas": "personnages/thevenoud.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 279,
+     "h": 369
+    },
+    "machoire": {
+     "x": 283,
+     "y": 0,
+     "w": 208,
+     "h": 110,
+     "pose": [
+      58.0,
+      248.0
+     ],
+     "pivot": [
+      124.4,
+      11.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     133.2,
+     179.1,
+     44.8
+    ],
+    "oeil_d": [
+     224.4,
+     179.1,
+     37.8
+    ],
+    "bouche": [
+     182.4,
+     259.7
+    ],
+    "menton": [
+     191.4,
+     344.9
+    ]
+   },
+   "credits": {
+    "auteur": "Tthevenoud",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Thomas_Thevenoud_(cropped).jpg"
+   }
+  },
+  "tiberi": {
+   "atlas": "personnages/tiberi.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 268,
+     "h": 349
+    },
+    "machoire": {
+     "x": 272,
+     "y": 0,
+     "w": 214,
+     "h": 97,
+     "pose": [
+      41.0,
+      250.0
+     ],
+     "pivot": [
+      119.5,
+      13.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     111.4,
+     158.5,
+     39.3
+    ],
+    "oeil_d": [
+     204.7,
+     158.5,
+     36.6
+    ],
+    "bouche": [
+     160.5,
+     263.0
+    ],
+    "menton": [
+     164.7,
+     333.0
+    ]
+   },
+   "credits": {
+    "auteur": "Marie-Lan Nguyen (User:Jastrow)",
+    "licence": "CC BY 2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:Jean_Tiberi_2007_06_06_(cropped).jpg"
+   }
+  },
+  "tondelier": {
+   "atlas": "personnages/tondelier.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 404,
+     "h": 454
+    },
+    "machoire": {
+     "x": 408,
+     "y": 0,
+     "w": 198,
+     "h": 93,
+     "pose": [
+      117.0,
+      283.0
+     ],
+     "pivot": [
+      86.2,
+      10.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     165.2,
+     194.5,
+     40.4
+    ],
+    "oeil_d": [
+     255.8,
+     194.5,
+     42.3
+    ],
+    "bouche": [
+     203.2,
+     293.5
+    ],
+    "menton": [
+     201.3,
+     363.0
+    ]
+   },
+   "credits": {
+    "auteur": "Selbymay",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Huma2023MarineTondelier_(cropped).jpg"
+   }
+  },
+  "trouve": {
+   "atlas": "personnages/trouve.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 384,
+     "h": 379
+    },
+    "machoire": {
+     "x": 388,
+     "y": 0,
+     "w": 189,
+     "h": 104,
+     "pose": [
+      87.0,
+      275.0
+     ],
+     "pivot": [
+      107.7,
+      14.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     141.9,
+     202.9,
+     44.3
+    ],
+    "oeil_d": [
+     244.2,
+     202.9,
+     41.8
+    ],
+    "bouche": [
+     194.7,
+     289.3
+    ],
+    "menton": [
+     194.4,
+     367.0
+    ]
+   },
+   "credits": {
+    "auteur": "Toufik-de-Planoise",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Aur%C3%A9lie_Trouv%C3%A9_Besan%C3%A7on_14-01-2022_Toufik-de-Planoise.jpg"
+   }
+  },
+  "vallaud": {
+   "atlas": "personnages/vallaud.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 281,
+     "h": 459
+    },
+    "machoire": {
+     "x": 285,
+     "y": 0,
+     "w": 179,
+     "h": 90,
+     "pose": [
+      66.0,
+      292.0
+     ],
+     "pivot": [
+      117.8,
+      11.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     133.3,
+     199.7,
+     37.2
+    ],
+    "oeil_d": [
+     214.6,
+     199.7,
+     32.5
+    ],
+    "bouche": [
+     183.8,
+     303.9
+    ],
+    "menton": [
+     190.0,
+     367.9
+    ]
+   },
+   "credits": {
+    "auteur": "Bloody-libu",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Boris_Vallaud_en_2023.jpg"
+   }
+  },
+  "valls": {
+   "atlas": "personnages/valls.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 279,
+     "h": 367
+    },
+    "machoire": {
+     "x": 283,
+     "y": 0,
+     "w": 201,
+     "h": 101,
+     "pose": [
+      54.0,
+      261.0
+     ],
+     "pivot": [
+      110.9,
+      9.3
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     121.3,
+     180.3,
+     38.9
+    ],
+    "oeil_d": [
+     209.3,
+     180.3,
+     36.4
+    ],
+    "bouche": [
+     164.9,
+     270.3
+    ],
+    "menton": [
+     166.9,
+     349.0
+    ]
+   },
+   "credits": {
+    "auteur": "Kommunikation BMW Stiftung Photographer: Lorenz Böck",
+    "licence": "CC BY-SA 3.0 de",
+    "source": "https://commons.wikimedia.org/wiki/File:Valls_Schaefer_Munich_Economic_Summit_2015_(cropped).JPG"
+   }
+  },
+  "villiers": {
+   "atlas": "personnages/villiers.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 256,
+     "h": 376
+    },
+    "machoire": {
+     "x": 260,
+     "y": 0,
+     "w": 177,
+     "h": 100,
+     "pose": [
+      44.0,
+      271.0
+     ],
+     "pivot": [
+      84.2,
+      10.0
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     85.0,
+     185.8,
+     34.4
+    ],
+    "oeil_d": [
+     172.0,
+     185.8,
+     36.1
+    ],
+    "bouche": [
+     128.2,
+     281.0
+    ],
+    "menton": [
+     127.2,
+     358.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Parliament Multimedia Centre",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:DE_VILLIERS_Philippe_MEP.jpg"
+   }
+  },
+  "wauquiez": {
+   "atlas": "personnages/wauquiez.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 282,
+     "h": 386
+    },
+    "machoire": {
+     "x": 286,
+     "y": 0,
+     "w": 201,
+     "h": 91,
+     "pose": [
+      51.0,
+      290.0
+     ],
+     "pivot": [
+      116.0,
+      9.7
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     113.8,
+     200.3,
+     45.7
+    ],
+    "oeil_d": [
+     209.5,
+     200.3,
+     42.6
+    ],
+    "bouche": [
+     167.0,
+     299.7
+    ],
+    "menton": [
+     168.0,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "European People's Party",
+    "licence": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:AAA_2129_(45718113412)_(cropped).jpg"
+   }
+  },
+  "yann_bompard": {
+   "atlas": "personnages/yann_bompard.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 270,
+     "h": 334
+    },
+    "machoire": {
+     "x": 274,
+     "y": 0,
+     "w": 210,
+     "h": 95,
+     "pose": [
+      9.0,
+      239.0
+     ],
+     "pivot": [
+      67.2,
+      10.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     37.2,
+     154.2,
+     30.4
+    ],
+    "oeil_d": [
+     124.5,
+     154.2,
+     37.3
+    ],
+    "bouche": [
+     76.2,
+     249.8
+    ],
+    "menton": [
+     68.6,
+     321.9
+    ]
+   },
+   "credits": {
+    "auteur": null,
+    "licence": "fournie",
+    "source": null
+   }
+  },
+  "zemmour": {
+   "atlas": "personnages/zemmour.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 292,
+     "h": 363
+    },
+    "machoire": {
+     "x": 296,
+     "y": 0,
+     "w": 181,
+     "h": 91,
+     "pose": [
+      74.0,
+      266.0
+     ],
+     "pivot": [
+      102.6,
+      14.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     127.7,
+     180.9,
+     42.4
+    ],
+    "oeil_d": [
+     222.8,
+     180.9,
+     39.4
+    ],
+    "bouche": [
+     176.6,
+     280.5
+    ],
+    "menton": [
+     177.4,
+     344.0
+    ]
+   },
+   "credits": {
+    "auteur": "Anh De France",
+    "licence": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_d%27%C3%89ric_Zemmour,_avril_2022.jpg"
+   }
+  }
+ },
+ "corps": {
+  "ecologistes": "corps/ecologistes.webp",
+  "insoumis": "corps/insoumis.webp",
+  "macronie": "corps/macronie.webp",
+  "prison": "corps/prison.webp",
+  "reconquete": "corps/reconquete.webp",
+  "republicains": "corps/republicains.webp",
+  "rn": "corps/rn.webp",
+  "socialistes": "corps/socialistes.webp",
+  "societe_civile": "corps/societe_civile.webp"
+ },
+ "yeux": {
+  "croix": "yeux/croix.webp",
+  "exorbites": "yeux/exorbites.webp",
+  "larmes": "yeux/larmes.webp"
+ },
+ "bouches": {},
+ "effets": {
+  "coup_fatal": {
+   "atlas": "effets/coup_fatal.webp",
+   "cols": 6,
+   "rows": 3,
+   "images": 18,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 4,
+   "tient": true
+  },
+  "dore": {
+   "atlas": "effets/dore.webp",
+   "cols": 4,
+   "rows": 3,
+   "images": 12,
+   "cell": [
+    256,
+    366
+   ],
+   "fps": 12,
+   "ancre": [
+    0.0,
+    0.0
+   ],
+   "boucle": true
+  },
+  "immunite": {
+   "atlas": "effets/immunite.webp",
+   "cols": 6,
+   "rows": 3,
+   "images": 18,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 2
+  },
+  "masse_100t": {
+   "atlas": "effets/masse_100t.webp",
+   "cols": 6,
+   "rows": 4,
+   "images": 24,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 3
+  },
+  "mort_casserole": {
+   "atlas": "effets/mort_casserole.webp",
+   "cols": 6,
+   "rows": 4,
+   "images": 24,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 3
+  },
+  "mort_coffre_fort": {
+   "atlas": "effets/mort_coffre_fort.webp",
+   "cols": 6,
+   "rows": 4,
+   "images": 24,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 3
+  },
+  "mort_enclume": {
+   "atlas": "effets/mort_enclume.webp",
+   "cols": 6,
+   "rows": 4,
+   "images": 24,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 3
+  },
+  "mort_piano": {
+   "atlas": "effets/mort_piano.webp",
+   "cols": 6,
+   "rows": 4,
+   "images": 24,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 3
+  },
+  "oiseaux": {
+   "atlas": "effets/oiseaux.webp",
+   "cols": 4,
+   "rows": 3,
+   "images": 12,
+   "cell": [
+    384,
+    320
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "boucle": true
+  },
+  "polemique": {
+   "atlas": "effets/polemique.webp",
+   "cols": 6,
+   "rows": 3,
+   "images": 18,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 5
+  },
+  "prison": {
+   "atlas": "effets/prison.webp",
+   "cols": 6,
+   "rows": 4,
+   "images": 24,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ],
+   "impact": 3,
+   "tient": true
+  },
+  "retour": {
+   "atlas": "effets/retour.webp",
+   "cols": 6,
+   "rows": 3,
+   "images": 18,
+   "cell": [
+    384,
+    480
+   ],
+   "fps": 12,
+   "ancre": [
+    0.5,
+    1.0
+   ]
+  },
+  "etoile": {
+   "image": "effets/etoile.webp"
+  },
+  "pansement": {
+   "image": "effets/pansement.webp"
+  }
+ },
+ "plateaux": {
+  "bfm": {
+   "decor": "plateaux/bfm.webp"
+  },
+  "c_a_vous": {
+   "decor": "plateaux/c_a_vous.webp"
+  },
+  "cnews": {
+   "decor": "plateaux/cnews.webp"
+  },
+  "france2_dimanche": {
+   "decor": "plateaux/france2_dimanche.webp"
+  },
+  "france2_prime": {
+   "decor": "plateaux/france2_prime.webp"
+  },
+  "france3": {
+   "decor": "plateaux/france3.webp"
+  },
+  "grand_oral": {
+   "decor": "plateaux/grand_oral.webp"
+  },
+  "hanouna": {
+   "decor": "plateaux/hanouna.webp"
+  },
+  "lci": {
+   "decor": "plateaux/lci.webp"
+  },
+  "lcp": {
+   "decor": "plateaux/lcp.webp"
+  },
+  "public_senat": {
+   "decor": "plateaux/public_senat.webp"
+  },
+  "quotidien": {
+   "decor": "plateaux/quotidien.webp"
+  },
+  "tf1_20h": {
+   "decor": "plateaux/tf1_20h.webp"
+  },
+  "tf1_second_tour": {
+   "decor": "plateaux/tf1_second_tour.webp"
+  }
+ },
+ "sons": {
+  "citations": {
+   "accent_toulouse": "sons/citations/accent_toulouse.mp3",
+   "amie_tchadienne": "sons/citations/amie_tchadienne.mp3",
+   "arbre_mort": "sons/citations/arbre_mort.mp3",
+   "attaque_hopital": "sons/citations/attaque_hopital.mp3",
+   "blancos": "sons/citations/blancos.mp3",
+   "bravitude": "sons/citations/bravitude.mp3",
+   "cest_notre_projet": "sons/citations/cest_notre_projet.mp3",
+   "cest_notre_projet_complet": "sons/citations/cest_notre_projet_complet.mp3",
+   "conditions_lecornu": "sons/citations/conditions_lecornu.mp3",
+   "courbe_chomage": "sons/citations/courbe_chomage.mp3",
+   "debat_2017_dossiers": "sons/citations/debat_2017_dossiers.mp3",
+   "farine_francaise": "sons/citations/farine_francaise.mp3",
+   "faux_billets": "sons/citations/faux_billets.mp3",
+   "gaulois_refractaires": "sons/citations/gaulois_refractaires.mp3",
+   "hologrammes": "sons/citations/hologrammes.mp3",
+   "immunite_ouvriere": "sons/citations/immunite_ouvriere.mp3",
+   "minable": "sons/citations/minable.mp3",
+   "moi_president": "sons/citations/moi_president.mp3",
+   "paquets_heures": "sons/citations/paquets_heures.mp3",
+   "personne_sacree": "sons/citations/personne_sacree.mp3",
+   "pisse_dessus": "sons/citations/pisse_dessus.mp3",
+   "pognon_de_dingue": "sons/citations/pognon_de_dingue.mp3",
+   "probite_intacte": "sons/citations/probite_intacte.mp3",
+   "quand_il_y_en_a_un": "sons/citations/quand_il_y_en_a_un.mp3",
+   "racaille": "sons/citations/racaille.mp3",
+   "republique_cest_moi": "sons/citations/republique_cest_moi.mp3",
+   "se_canto": "sons/citations/se_canto.mp3",
+   "siege_ciotti": "sons/citations/siege_ciotti.mp3",
+   "traverse_la_rue": "sons/citations/traverse_la_rue.mp3"
+  },
+  "bruitages": {
+   "coup": "sons/bruitages/coup.mp3",
+   "masse": "sons/bruitages/masse.mp3"
+  }
+ },
+ "carte": {
+  "cadres": {
+   "1": "carte/cadre_1.webp",
+   "2": "carte/cadre_2.webp",
+   "3": "carte/cadre_3.webp",
+   "4": "carte/cadre_4.webp",
+   "5": "carte/cadre_5.webp",
+   "6": "carte/cadre_6.webp",
+   "dore": "carte/cadre_dore.webp"
+  },
+  "arche": "carte/arche.webp",
+  "attaque": "carte/attaque.webp",
+  "bandeau": "carte/bandeau.webp",
+  "casserole_affaire": "carte/casserole_affaire.webp",
+  "casserole_ridicule": "carte/casserole_ridicule.webp",
+  "console": "carte/console.webp",
+  "fond_art": "carte/fond_art.webp",
+  "jeton_1": "carte/jeton_1.webp",
+  "jeton_2": "carte/jeton_2.webp",
+  "jeton_3": "carte/jeton_3.webp",
+  "jeton_4": "carte/jeton_4.webp",
+  "jeton_5": "carte/jeton_5.webp",
+  "jeton_6": "carte/jeton_6.webp",
+  "jeton_dore": "carte/jeton_dore.webp",
+  "mot_cle_cumul": "carte/mot_cle_cumul.webp",
+  "mot_cle_immunite": "carte/mot_cle_immunite.webp",
+  "mot_cle_ni_droite_ni_gauche": "carte/mot_cle_ni_droite_ni_gauche.webp",
+  "mot_cle_polemique": "carte/mot_cle_polemique.webp",
+  "mot_cle_porte_parole": "carte/mot_cle_porte_parole.webp",
+  "mot_cle_retour": "carte/mot_cle_retour.webp",
+  "pv": "carte/pv.webp",
+  "fontes": {
+   "alegreya-sans-latin-500-normal": "fontes/alegreya-sans-latin-500-normal.woff2",
+   "alegreya-sans-latin-700-normal": "fontes/alegreya-sans-latin-700-normal.woff2",
+   "alegreya-sans-sc-latin-800-normal": "fontes/alegreya-sans-sc-latin-800-normal.woff2",
+   "bangers-latin-400-normal": "fontes/bangers-latin-400-normal.woff2"
+  }
+ }
+}

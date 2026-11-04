@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=512, height=640" />
+  <title>Immunité</title>
+  <script src="gsap.min.js"></script>
+  <style>
+    @font-face { font-family: "Bangers"; src: url("fontes/bangers.woff2") format("woff2"); }
+    html, body { margin: 0; background: transparent; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+    .layer { position: absolute; left: 0; top: 0; width: 512px; height: 640px; }
+    .word { position: absolute; left: 0; width: 512px; text-align: center; font-family: "Bangers"; font-weight: 400;
+      letter-spacing: 3px; color: #ffe01a; -webkit-text-stroke: 5px #111; paint-order: stroke fill; white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-width="512" data-height="640" data-duration="1.5">
+    <div class="clip layer" data-start="0" data-duration="1.5" data-track-index="0">
+      <svg class="layer" id="ring-1" viewBox="0 0 512 640"><ellipse cx="256" cy="600" rx="210" ry="30" fill="none" stroke="#fff" stroke-width="7"/></svg>
+      <svg class="layer" id="ring-2" viewBox="0 0 512 640"><ellipse cx="256" cy="600" rx="210" ry="30" fill="none" stroke="#bfe9ff" stroke-width="5"/></svg>
+      <svg class="layer" id="bell" viewBox="0 0 512 640">
+        <path d="M86 604 V300 C86 170 170 112 256 112 C342 112 426 170 426 300 V604 Z" fill="#cdeeff" fill-opacity=".2" stroke="#fff" stroke-width="10"/>
+        <path d="M86 604 V300 C86 170 170 112 256 112 C342 112 426 170 426 300 V604 Z" fill="none" stroke="#111" stroke-width="3"/>
+        <rect x="70" y="596" width="372" height="20" rx="8" fill="#fff" stroke="#111" stroke-width="3"/>
+        <circle cx="256" cy="94" r="24" fill="#fff" stroke="#111" stroke-width="3"/>
+        <path d="M128 310 C128 230 170 180 214 166 L190 214 C166 240 158 280 158 340 Z" fill="#fff" fill-opacity=".75"/>
+        <path d="M366 360 L392 360 L392 520 L366 520 Z" fill="#fff" fill-opacity=".4"/>
+      </svg>
+      <div class="word" id="ting" style="top:20px;font-size:84px">TING !</div>
+    </div>
+  </div>
+  <script>
+    /* 12 fps. The bell lands on frame 2: the rig does not react, that is the joke. */
+    const IMPACT = 2 / 12;
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#bell", { y: -660 }, { y: 0, duration: IMPACT, ease: "power2.in" }, 0);
+    tl.fromTo("#bell", { rotation: 0, transformOrigin: "50% 95%" }, { rotation: -1.6, duration: 0.08 }, IMPACT);
+    tl.to("#bell", { rotation: 1.6, duration: 0.17 }, IMPACT + 0.08);
+    tl.to("#bell", { rotation: -0.8, duration: 0.17 }, IMPACT + 0.25);
+    tl.to("#bell", { rotation: 0, duration: 0.09 }, IMPACT + 0.42);
+    [["#ring-1", 0], ["#ring-2", 0.17]].forEach(([ring, delay]) => {
+      tl.fromTo(ring, { opacity: 0, scale: 0.7, transformOrigin: "50% 94%" },
+        { opacity: 1, scale: 0.8, duration: 0.01 }, IMPACT + delay);
+      tl.to(ring, { opacity: 0, scale: 1.25, duration: 0.42, ease: "none" }, IMPACT + delay + 0.01);
+    });
+    tl.fromTo("#ting", { opacity: 0, scale: 0.3, rotation: -8, transformOrigin: "50% 50%" },
+      { opacity: 1, scale: 1, duration: 0.09, ease: "back.out(3)" }, IMPACT);
+    tl.to("#ting", { opacity: 0, duration: 0.09 }, 1.0);
+    tl.to("#bell", { y: -700, duration: 0.33, ease: "power2.in" }, 1.17);
+    window.__timelines["main"] = tl;
+  </script>
+</body>
+</html>

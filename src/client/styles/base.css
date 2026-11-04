@@ -1,0 +1,58 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Every text follows the screen: 20px on a large one. */
+html { font-size: clamp(15px, min(1.05vw, 1.9dvh), 24px); }
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-card);
+  font-size: var(--font-size-normal);
+}
+
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: var(--font-size-title); }
+h2 { font-size: var(--font-size-large); }
+
+button { font: inherit; color: inherit; }
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: stretch;
+}
+
+.muted { color: var(--color-text-muted); }
+.small { font-size: var(--font-size-small); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Forms of the menus: dark fields, the accent when focused. */
+label { display: flex; flex-direction: column; gap: 0.3rem; color: #c9cfdc; font-weight: 700; }
+input, select { font: inherit; font-weight: 500; padding: 0.45rem 0.7rem; border-radius: 10px; border: 2px solid rgb(255 255 255 / 0.22); background: rgb(5 8 20 / 0.75); color: #fff; }
+input:focus-visible, select:focus-visible { outline: none; border-color: var(--color-accent); }
