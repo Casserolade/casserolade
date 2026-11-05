@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="data:," />
     <title>À propos · Casserolade</title>
-    <meta name="description" content="Casserolade n'est pas vraiment un jeu : c'est un pastiche de la politique française, déguisé en autobattler. De vrais politiques, leurs vraies casseroles, sur les pires plateaux télé." />
+    <meta name="description" content="Casserolade n'est pas vraiment un jeu : c'est un pastiche de la politique française, un mashup numérique entre Hearthstone Battlegrounds, South Park et une boîte à sons géante. De vrais politiques, leurs vraies casseroles, sur les pires plateaux télé." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://casserolade.fr/a-propos" />
     <meta property="og:title" content="Casserolade · Casseroles et tambouille politique" />
     <meta property="og:description" content="Un pastiche de la politique française, déguisé en autobattler. Trash, mais rien d'inventé sur le fond." />
     <meta property="og:image" content="https://casserolade.fr/logo/casserolade-fr.webp" />
     <link rel="stylesheet" href="./styles/a-propos.css" />
+    <script type="module" src="./aPropos.ts"></script>
   </head>
   <body>
     <main class="about">
@@ -20,23 +21,40 @@
         <p class="tagline">Casseroles et tambouille politique</p>
       </header>
       <article class="note">
-        <p class="lead">Casserolade n'est pas vraiment un jeu. C'est un pastiche de la politique française, déguisé en jeu.</p>
+        <p class="lead">Casserolade n'est pas vraiment un jeu. C'est un pastiche de la politique française, sous la forme d'un gigantesque mashup numérique.</p>
+        <p>Imaginez un croisement entre :</p>
+        <ul>
+          <li><strong>Hearthstone Battlegrounds</strong> ou <strong>TFT</strong> pour le gameplay : un autobattler stratégique, avec ses synergies, ses sorts et ses compositions ;</li>
+          <li><strong>South Park</strong> pour le ton, l'irrévérence et les avatars en marionnettes découpées ;</li>
+          <li>une <strong>boîte à sons géante</strong> : plus de 650 répliques politiques, dont près de 250 avec la vraie voix, de « Ben voyons ! » à « For sure », en passant par « Si vous ajoutez à cela le bruit et l'odeur… ».</li>
+        </ul>
         <p>La forme est celle des autobattlers : on recrute ses troupes, on fait grandir son plateau, puis les combats se jouent tout seuls. Sauf qu'ici, les troupes sont de vrais politiques, et chaque manche se joue sur un plateau télé, et plutôt les pires : Cyril Hanouna, Pascal Praud sur CNews, PPDA de retour au 20 heures de TF1. La lie de la télé, jusqu'au débat d'entre-deux-tours. Parce que c'est là que se fait la politique aujourd'hui : sous les projecteurs, devant un animateur, entre deux petites phrases.</p>
-        <p>Les casseroles sont leurs vraies affaires et leurs vrais ridicules : la valise libyenne, les homards, les emplois fictifs, les lapsus. Dans le jeu, une casserole ne coule personne : elle rend plus fort. Deux casseroles font un scandale, le scandale dure deux manches, puis le peuple oublie, et il ne reste que l'avantage. Ce n'est pas une règle inventée pour le jeu, c'est une observation.</p>
-        <p>Le ton est trash, façon South Park : des têtes découpées, des marionnettes en carton sur des plateaux bien trop beaux pour elles. Mais sur le fond, rien n'est inventé. Chaque affaire est réelle et datée, chaque citation est mot pour mot. Quand un politique parle, c'est sa vraie voix ; sinon, sa phrase s'affiche.</p>
-        <p>Tous les camps prennent les mêmes coups, et aucun ne gagne d'office. L'équilibrage du gameplay est la seule neutralité qu'on doit à tout le monde.</p>
-        <p>Casserolade est gratuit, sans publicité, sans inscription, sans rien à vendre. Pour toujours.</p>
+        <p>Tout le vocabulaire est détourné de la vie politique. Les points de vie sont des sondages, l'armure le socle électoral. Le taunt devient un Porte-parole, le bouclier divin l'Immunité, la découverte d'un triple une Investiture, un buff un Tract, et les jetons des Assistants fictifs. À l'échelon 6, le plus haut de la boutique, on croise les monuments historiques : de Gaulle, Giscard, Chirac, Mitterrand.</p>
+        <p>Les casseroles sont leurs vraies affaires et leurs vrais ridicules : la valise libyenne, les homards, les emplois fictifs, les lapsus. Dans le jeu, une casserole ne coule personne : elle rend plus fort. Deux casseroles font un scandale (il en faut trois à Sarkozy), le scandale dure deux manches, puis le peuple oublie, et il ne reste que l'avantage. Un Bracelet électronique bien placé, et l'on oublie plus vite encore. Ce n'est pas une règle inventée pour le jeu, c'est une observation.</p>
+        <p>Le ton est trash, mais sur le fond, rien n'est inventé. Chaque affaire est réelle et datée, chaque citation est mot pour mot. Quand un politique parle, c'est sa vraie voix ; sinon, sa phrase s'affiche.</p>
+        <p>Derrière les blagues, c'est un vrai jeu de stratégie, riche et profond : des bots jouent des milliers de parties pour tester les compositions et équilibrer camps, héros et sorts. Tous les camps prennent les mêmes coups, et aucun ne gagne d'office. L'équilibrage du gameplay est la seule neutralité qu'on doit à tout le monde.</p>
+        <p>Un énorme défouloir, donc, mais aussi une critique assez féroce de la déliquescence de notre vie politique et médiatique.</p>
+        <p>Casserolade est gratuit, sans publicité, sans inscription, sans rien à vendre.</p>
       </article>
       <section id="contribuer" class="note contribute">
-        <h2>Le jeu est imparfait : aidez-moi</h2>
-        <p>Casserolade est libre, sous licence MIT, et tout son code est sur GitHub. Il est imparfait, et il le restera sans vous. C'est long de trouver les bons extraits, de découper proprement les audios, de vérifier chaque affaire. Et je n'ai pas forcément votre inspiration.</p>
+        <h2>Mettre la main à la casserole</h2>
+        <p>Casserolade est libre, sous licence MIT, et tout son code est sur GitHub. Le jeu est encore jeune : vos retours, en jouant comme en lisant le code, le font avancer. Trouver les bons extraits, découper proprement les sons, vérifier chaque affaire, ça prend du temps, et les bonnes idées viennent de partout.</p>
         <ul>
           <li>Une erreur dans une affaire, une date, une citation ? Signalez-la : « rien d'inventé » ne tient qu'avec beaucoup d'yeux.</li>
           <li>Une casserole oubliée, une petite phrase mémorable, un politique qui manque ? Proposez-la, avec sa source.</li>
-          <li>Un extrait audio authentique, bien découpé ? C'est le plus dur à trouver.</li>
+          <li>Un extrait audio authentique, bien découpé ? C'est le plus rare.</li>
           <li>Une règle mieux pensée, un bot plus malin, un plateau plus ridicule encore, du code ? Tout est bienvenu.</li>
         </ul>
         <p><a href="https://github.com/casserolade/casserolade">github.com/casserolade/casserolade</a></p>
+      </section>
+      <section id="sources" class="note sources">
+        <h2>Toutes les sources</h2>
+        <p>Rien n'est inventé, et tout se vérifie : chaque phrase du jeu avec sa source, chaque casserole avec son fait et son statut datés, chaque vraie voix avec la vidéo d'où elle vient, chaque photo avec son auteur et sa licence.</p>
+        <button type="button" id="voir-sources" class="show-sources">Afficher toutes les sources</button>
+        <div id="liste-sources" hidden>
+          <input type="search" placeholder="Chercher un nom, un mot, une affaire…" aria-label="Chercher dans les sources" />
+          <div class="categories"></div>
+        </div>
       </section>
       <a class="play" href="/">Jouer</a>
     </main>

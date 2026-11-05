@@ -41,6 +41,8 @@ body {
 
 .contribute { width: 100%; padding: var(--space-5); border-radius: 22px; border: 3px solid var(--color-border); background: var(--color-surface); }
 .contribute h2 { margin: 0 0 0.6em; color: var(--color-accent); font: 400 1.9rem / 1.05 var(--font-number); letter-spacing: 1px; }
+.note ul { margin: 0.4em 0 1em; padding-left: 1.2em; font-size: 1.1rem; line-height: 1.55; }
+.note li + li { margin-top: 0.4em; }
 .contribute ul { margin: 1em 0; padding-left: 1.2em; font-size: 1.1rem; line-height: 1.55; }
 .contribute li + li { margin-top: 0.5em; }
 .contribute a { color: var(--color-accent); font-weight: 700; }
@@ -58,3 +60,13 @@ body {
 }
 .play:hover { transform: scale(1.05); }
 .play:focus-visible { outline: 3px solid var(--color-text); outline-offset: 3px; }
+.sources { width: 100%; }
+.sources h2 { margin: 0 0 0.6em; color: var(--color-accent); font: 400 1.9rem / 1.05 var(--font-number); letter-spacing: 1px; }
+.show-sources { margin-top: 1em; padding: 0.5em 1.2em; border: 3px solid var(--color-border); border-radius: 999px; background: var(--color-surface); color: inherit; font: 700 1.1rem / 1 var(--font-card, inherit); cursor: pointer; }
+.show-sources:hover, .show-sources:focus-visible { border-color: var(--color-accent); }
+#liste-sources input[type="search"] { width: 100%; box-sizing: border-box; margin: 1em 0 0.6em; padding: 0.5em 0.8em; border-radius: 10px; border: 2px solid var(--color-border); background: var(--color-surface); color: inherit; font: inherit; }
+.categories details { margin: 0.4em 0; }
+.categories summary { cursor: pointer; font-weight: 700; font-size: 1.15rem; padding: 0.3em 0; }
+.categories ul { font-size: 0.98rem; line-height: 1.5; }
+.categories li[hidden] { display: none; }
+.categories a { color: var(--color-accent); }
