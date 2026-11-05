@@ -26,11 +26,11 @@ export const TUTORIEL = {
   /** Sondages en plus pour le joueur : on apprend sans risque de perdre. */
   bonusJoueur: 30,
   boutique: {
-    1: ['cheminade', 'durif', 'boyard'],
-    2: ['kazib', 'cheminade', 'durif'],
-    3: ['cheminade', 'durif', 'tiberi', 'boyard'],
-    4: ['cheminade', 'durif', 'tiberi', 'boyard'],
-    5: ['cheminade', 'durif', 'kazib', 'boyard'],
+    1: ['cheminade', 'tiberi', 'leaument'],
+    2: ['kazib', 'cheminade', 'tiberi'],
+    3: ['cheminade', 'delogu', 'tiberi', 'leaument'],
+    4: ['cheminade', 'delogu', 'tiberi', 'leaument'],
+    5: ['cheminade', 'delogu', 'kazib', 'leaument'],
   } as Record<number, string[]>,
   sorts: { 2: ['sondage_flatteur'] } as Record<number, string[]>,
   casseroles: { 3: 'homards', 4: 'homards', 5: 'lapsus', 6: 'lapsus' } as Record<number, string>,

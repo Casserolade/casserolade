@@ -27,7 +27,6 @@ export type Condition =
 
 export type Recompense =
   /** Un héros de plus proposé au choix, en solo et en carrière. */
-  | { type: 'heros_en_plus' }
   /** Un titre, à côté du pseudo. */
   | { type: 'titre'; titre: string };
 
@@ -43,8 +42,8 @@ export const SUCCES: Succes[] = [
   { id: 'bizuth', nom: 'Bizuth', description: 'Aller au bout du tutoriel.', condition: { type: 'tutoriel' }, recompense: { type: 'titre', titre: 'Le Stagiaire' } },
   { id: 'premier_meeting', nom: 'Premier meeting', description: 'Finir une partie.', condition: { type: 'parties', n: 1 } },
   { id: 'second_tour', nom: 'Qualifié pour le second tour', description: 'Finir une partie dans les deux premiers.', condition: { type: 'place', place: 2 } },
-  { id: 'premier_mandat', nom: 'Premier mandat', description: 'Gagner une partie.', condition: { type: 'victoires', n: 1 }, recompense: { type: 'heros_en_plus' } },
-  { id: 'cumul', nom: 'Cumul des mandats', description: 'Gagner dix parties.', condition: { type: 'victoires', n: 10 }, recompense: { type: 'heros_en_plus' } },
+  { id: 'premier_mandat', nom: 'Premier mandat', description: 'Gagner une partie.', condition: { type: 'victoires', n: 1 }, recompense: { type: 'titre', titre: 'L\'Élu' } },
+  { id: 'cumul', nom: 'Cumul des mandats', description: 'Gagner dix parties.', condition: { type: 'victoires', n: 10 }, recompense: { type: 'titre', titre: 'Le Cumulard' } },
   { id: 'vieux_routier', nom: 'Vieux routier', description: 'Finir cinquante parties.', condition: { type: 'parties', n: 50 }, recompense: { type: 'titre', titre: 'Le Baron' } },
   { id: 'casserolade', nom: 'Casserolade', description: 'Poser huit casseroles dans une partie.', condition: { type: 'partie', stat: 'casseroles', n: 8 }, recompense: { type: 'titre', titre: 'Le Batteur de casseroles' } },
   { id: 'affaire_d_etat', nom: 'Affaire d\'État', description: 'Trois scandales dans une partie.', condition: { type: 'partie', stat: 'scandales', n: 3 } },

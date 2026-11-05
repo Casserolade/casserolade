@@ -1,7 +1,7 @@
 /**
  * Ce que chante un camp quand un de ses politiques célèbre sans avoir de petite phrase vérifiée : un vrai
  * slogan de campagne ou un vrai chant de meeting, affiché comme un chant (entre notes de musique), jamais
- * comme une citation du politique. Demande de l'utilisateur, 3 novembre 2026 : « Il faut dire un truc
+ * comme une citation du politique. Demande du 3 novembre 2026 : « Il faut dire un truc
  * générique sur le parti ». Dernière vérification : 3 novembre 2026.
  *
  * - insoumis : « On lâche rien », HK et les Saltimbanks (2011), l'hymne des manifestations depuis.
