@@ -126,7 +126,7 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
       flyToHand(from, current.shopSpellCosts[item.slot] ?? item.spell.cost, { card: { kind: 'spell', spell: item.spell } });
       act({ t: 'buy_spell', slot: item.slot });
     } else if (item.from === 'shop-casserole') {
-      flyToHand(from, current.casseroleCost ?? item.casserole.cost, { card: { kind: 'casserole', casserole: item.casserole, ownerMultiplier: current.params.ownerMultiplier } });
+      flyToHand(from, current.casseroleCost ?? item.casserole.cost, { card: { kind: 'casserole', casserole: item.casserole } });
       act({ t: 'buy_casserole' });
     }
   }

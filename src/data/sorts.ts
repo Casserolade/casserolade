@@ -56,6 +56,12 @@ export const SPELLS: Spell[] = [
   spell('conseil_des_ministres', 'Conseil des ministres', 5, 3, false, [fx('allies', { do: 'declencher', trigger: 'fin_tour' })]),
 ];
 
+// Les effets d'un sort servent à chaque lancer, dans toutes les parties : figés, rien ne peut les modifier en place.
+for (const spell of SPELLS) {
+  for (const effect of spell.effects) Object.freeze(effect);
+  Object.freeze(spell.effects);
+}
+
 export const SPELL_BY_ID: Record<string, Spell> = Object.fromEntries(SPELLS.map((s) => [s.id, s]));
 
 /** Les sorts qui peuvent sortir en boutique ou d'une découverte, jusqu'à cet échelon. */

@@ -1,7 +1,8 @@
-import type { Card, Casserole, Effect, HandSpell, Keyword, Minion, PlayerAction, Rng, Spell, Target, Trigger } from '../engine/types.ts';
+import type { Card, Casserole, CasseroleBonus, Effect, HandSpell, Keyword, Minion, PlayerAction, Rng, Spell, Target, Trigger } from '../engine/types.ts';
 import type { PlayerView } from '../engine/game.ts';
 import { resolveCombat } from '../engine/combat.ts';
 import { makeMinion } from '../engine/minion.ts';
+import { relaunchable } from '../engine/relaunch.ts';
 import { createRng } from '../engine/rng.ts';
 import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
@@ -252,7 +253,8 @@ export function cardPower(card: Card): number {
 function minionPower(m: Minion): number {
   let v = m.atk + m.hp;
   for (const k of m.keywords) v += KEYWORD_VALUE[k];
-  for (const e of m.effects) v += effectValue(e) * (m.golden ? 2 : 1);
+  // La vue dit la puissance de chaque effet : un Ralliement doré double les siens, une casserole jamais.
+  for (const e of m.effects) v += effectValue(e) * (e.power ?? (m.golden ? 2 : 1));
   return v;
 }
 
@@ -293,7 +295,8 @@ function spellWorth(spell: Spell, view: PlayerView, bot: BotState | null): numbe
       case 'declencher':
         return sum + engines(e.trigger === 'annonce' ? 'annonce' : e.trigger === 'heritage' ? 'heritage' : 'fin_tour') * (e.to === 'allies' ? 2 : 1);
       case 'congres':
-        return sum + BUDGET_WORTH + (bot?.commitment ? 3 : 0);
+        // Une actualisation : les « Quand vous actualisez » du plateau jouent aussi.
+        return sum + BUDGET_WORTH + (bot?.commitment ? 3 : 0) + rollEngine(view);
       default:
         return sum + actionValue(e);
     }
@@ -368,18 +371,24 @@ function expectedTier(view: PlayerView, bot: BotState): number {
   return 1;
 }
 
-/** Ce que la casserole apporte tout de suite et pour toujours : son avantage. */
+/** Ce que vaut un avantage de casserole sur ce politique : celui de la carte, ou son bonus de propriétaire. */
+function advantageValue(gain: CasseroleBonus, m: Minion, view: PlayerView): number {
+  let v = (gain.atk ?? 0) + (gain.hp ?? 0);
+  for (const k of gain.keywords ?? []) if (!m.keywords.includes(k)) v += KEYWORD_VALUE[k];
+  v += Math.max(0, gain.budgetPerRound ?? 0) * 2;
+  for (const e of gain.effects ?? []) v += effectValue(e);
+  if (gain.freeRecruit) v += 3 + view.tier * 2;
+  if (gain.aloneBonus && !view.board.some((o) => o !== m && o.camp === m.camp)) v += gain.aloneBonus * 2;
+  if (gain.summon) v += 2;
+  v += gain.instantBudget ?? 0;
+  v += (gain.bonusDamage ?? 0) * 1.5;
+  return v;
+}
+
+/** Ce que la casserole apporte tout de suite et pour toujours : son avantage, et son bonus sur son propriétaire. */
 function casseroleValue(c: Casserole, m: Minion, view: PlayerView): number {
-  const mult = m.cardId === c.owner ? view.params.ownerMultiplier : 1;
-  let v = (c.atk ?? 0) * (c.atk && c.atk > 0 ? mult : 1) + (c.hp ?? 0) * (c.hp && c.hp > 0 ? mult : 1);
-  for (const k of c.keywords ?? []) if (!m.keywords.includes(k)) v += KEYWORD_VALUE[k];
-  v += Math.max(0, c.budgetPerRound ?? 0) * 2 * mult;
-  for (const e of c.effects ?? []) v += effectValue(e);
-  if (c.freeRecruit) v += 3 + view.tier * 2;
+  let v = advantageValue(c, m, view) + (m.cardId === c.owner ? advantageValue(c.ownerBonus, m, view) : 0);
   if (c.swapStats) v += Math.max(0, m.hp - m.atk) * 0.5;
-  if (c.aloneBonus && !view.board.some((o) => o !== m && o.camp === m.camp)) v += c.aloneBonus * 2;
-  v += c.instantBudget ?? 0;
-  v += (c.bonusDamage ?? 0) * 1.5;
   // Les Républicains se nourrissent des affaires.
   v += view.board.filter((o) => o.effects.some((e) => e.when === 'casserole_recue' || (e.do === 'compteur' && e.compteur === 'casseroles'))).length * 2;
   v -= Math.max(0, c.cost - (view.mods.casseroleDiscount ?? 0)) * 0.5;
@@ -388,8 +397,8 @@ function casseroleValue(c: Casserole, m: Minion, view: PlayerView): number {
 
 /** Ce que coûte le défaut d'une casserole pendant un scandale de deux manches. */
 function defectCost(c: Casserole, m: Minion): number {
-  // Le scandale commence une fois le budget de la manche versé : il en coûte une seule.
-  let v = -Math.min(0, c.budgetPerRound ?? 0) * 2;
+  // Le scandale coûte ses deux manches de budget : le peuple oublie une fois le budget de la deuxième versé.
+  let v = -Math.min(0, c.budgetPerRound ?? 0) * 2 * 2;
   v += (c.hpLossOnDeath ?? 0) * 1.5;
   if (c.locked) v += 1;
   if (c.silence) v += m.effects.reduce((sum, e) => sum + effectValue(e), 0);
@@ -401,7 +410,7 @@ function defectCost(c: Casserole, m: Minion): number {
  * ses casseroles pas encore oubliées. Zéro si elle reste seule, ou si elle fait tout oublier.
  */
 function scandalCost(c: Casserole, m: Minion, view: PlayerView): number {
-  if (c.chargesRemoved) return -(m.scandal ? m.casseroles.slice(m.oublie).reduce((s, id) => s + defectCost(CASSEROLE_BY_ID[id], m), 0) : 0);
+  if (c.forgetsAll) return -(m.scandal ? m.casseroles.slice(m.oublie).reduce((s, id) => s + defectCost(CASSEROLE_BY_ID[id], m), 0) : 0);
   if (m.scandal) return defectCost(c, m);
   if (m.charges + (c.charges ?? 1) < view.scandalThreshold) return 0;
   return [...m.casseroles.slice(m.oublie).map((id) => CASSEROLE_BY_ID[id]), c].reduce((s, x) => s + defectCost(x, m), 0);
@@ -541,7 +550,8 @@ function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxT
       return strongest(lacking.length > 0 ? lacking : board, self ?? undefined);
     }
     case 'declencher': {
-      const withTrigger = board.filter((m) => m !== self && m.effects.some((e) => e.when === first.trigger));
+      // Seulement un politique qui a de quoi être relancé : une Annonce qui détruit ne se relance pas.
+      const withTrigger = board.filter((m) => m !== self && relaunchable(m.effects, first.trigger).length > 0);
       return strongest(withTrigger);
     }
     default:
@@ -657,9 +667,9 @@ function worstMinion(view: PlayerView, bot?: BotState): Minion | null {
 function rollEngine(view: PlayerView): number {
   let value = 0;
   for (const m of view.board) {
-    const k = m.golden ? 2 : 1;
     for (const e of m.effects) {
       if (e.when !== 'actualise') continue;
+      const k = e.power ?? (m.golden ? 2 : 1);
       if (e.do !== 'buff') {
         value += 2 * k;
         continue;

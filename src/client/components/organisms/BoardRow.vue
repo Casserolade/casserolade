@@ -154,7 +154,7 @@ function inspect(event: PointerEvent, minion: Minion): void {
           :jolts="tableFx.jolts.value[minion.uid] ?? 0"
         />
         <span v-if="outcomeOf(minion)?.owner || outcomeOf(minion)?.scandal" class="forecast" aria-hidden="true">
-          <b v-if="outcomeOf(minion)?.owner" class="double">×2</b>
+          <b v-if="outcomeOf(minion)?.owner" class="owner-bonus">Bonus</b>
           <b v-if="outcomeOf(minion)?.scandal" class="scandal" :class="outcomeOf(minion)?.scandal">{{ SCANDAL_TAGS[outcomeOf(minion)?.scandal ?? 'starts'] }}</b>
         </span>
         <span v-if="minion.uid === forgotten" class="forecast" aria-hidden="true"><b class="scandal forgets">Oublié !</b></span>
@@ -228,7 +228,7 @@ function inspect(event: PointerEvent, minion: Minion): void {
 /* What the casserole in hand would do here, above the medallion, before it is dropped. */
 .forecast { position: absolute; left: 50%; top: calc(var(--s) * -30); translate: -50% 0; z-index: 3; display: flex; gap: calc(var(--s) * 6); pointer-events: none; white-space: nowrap; animation: forecast-in 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
 .forecast b { padding: calc(var(--s) * 2) calc(var(--s) * 12); border-radius: calc(var(--s) * 14); border: calc(var(--s) * 3) solid var(--color-ink); font: 400 calc(var(--s) * 26) / 1.1 var(--font-number); letter-spacing: calc(var(--s) * 1); box-shadow: calc(var(--s) * 3) calc(var(--s) * 4) 0 rgb(0 0 0 / 0.4); }
-.double { background: #ffd84a; color: var(--color-ink); }
+.owner-bonus { background: #ffd84a; color: var(--color-ink); }
 .scandal { background: #c8102e; color: #fff; rotate: -4deg; }
 .scandal.forgets { background: #f2c230; color: var(--color-ink); }
 .quip { position: absolute; left: 50%; bottom: calc(100% - var(--s) * 20); z-index: 4; width: max-content; max-width: calc(var(--s) * 340); translate: -50% 0; pointer-events: none; animation: forecast-in 0.3s cubic-bezier(0.3, 1.6, 0.5, 1); }

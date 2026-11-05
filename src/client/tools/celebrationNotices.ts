@@ -25,7 +25,7 @@ export function celebrationNotices(log: CombatEvent[]): CelebrationNotice[] {
     if (event.e !== 'effet' || event.when !== 'celebration') return;
     const found = units.get(event.uid);
     if (!found) return;
-    const described = describeEffect(event.effect, found.unit.golden);
+    const described = describeEffect(event.effect, (event.effect.power ?? (found.unit.golden ? 2 : 1)) > 1);
     const body = described.startsWith(HEAD) ? described.slice(HEAD.length) : described;
     const text = body.charAt(0).toUpperCase() + body.slice(1);
     notices.push({ at, uid: event.uid, side: found.side, name: found.unit.name, text, repeats: celebrationRepeats(log, found.side) });

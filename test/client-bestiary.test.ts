@@ -15,7 +15,6 @@ import { EMPTY_BESTIARY_FILTER } from '../src/client/const/emptyBestiaryFilter.t
 import type { GameSources } from '../src/client/services/loadSources.ts';
 import { TOKENS } from '../src/data/cards.ts';
 import { CONTEXTS, HEROES } from '../src/data/heroes.ts';
-import { PARAMS } from '../src/data/params.ts';
 import { SPELLS } from '../src/data/sorts.ts';
 
 test('bestiaryCamps : chaque politique une fois, dans son camp, par échelon puis par nom, avec ses casseroles', () => {
@@ -35,7 +34,7 @@ test('bestiaryCamps : chaque politique une fois, dans son camp, par échelon pui
 
 const catalog = bestiaryCatalog({
   cards: CARDS, tokens: Object.values(TOKENS), casseroles: CASSEROLES, spells: SPELLS, heroes: HEROES, contexts: CONTEXTS,
-  campOrder: [...PARTY_CAMPS, 'civile'], ownerMultiplier: PARAMS.ownerMultiplier,
+  campOrder: [...PARTY_CAMPS, 'civile'],
   cardTerms: [{ term: 'Porte-parole', rule: 'Les ennemis doivent l\'attaquer en priorité.' }, { term: 'Fin de tour', rule: 'À la fin du recrutement.' }],
   gameTerms: [{ term: 'Budget', rule: 'Il ne se garde pas.' }],
 });

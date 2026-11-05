@@ -13,11 +13,14 @@ import type {
   Params,
   Rng,
 } from './types.ts';
-import { makeToken } from './minion.ts';
+import { effectPower, makeToken } from './minion.ts';
+import { relaunchable } from './relaunch.ts';
 import { isCamp as isCampOf } from './camps.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 
 const MAX_ATTACKS = 400;
+/** Des ripostes qui se répondent (deux casseroles à riposte face à face) s'arrêtent là, quoi qu'il arrive. */
+const MAX_RIPOSTES = 200;
 
 interface Unit extends Minion {
   attacked: boolean;
@@ -60,18 +63,23 @@ interface Battle {
   retriggered: Set<number>;
   /** La taille du plateau : les invocations s'arrêtent là, comme au recrutement. */
   boardSize: number;
+  /** Les ripostes déjà jouées : une chaîne de ripostes s'arrête à MAX_RIPOSTES. */
+  ripostes: number;
 }
 
-/** Le seul bonus calculé au début du combat : celui d'un serviteur seul de son camp, apporté par une casserole. */
-export function combatBonuses(minions: Minion[]): number[] {
+/**
+ * Le seul bonus calculé au début du combat : celui d'un serviteur seul de son camp, apporté par une casserole. Un allié
+ * Ni droite ni gauche est de son camp ; avec le Fer à cheval (`extremes`), les extrêmes sont un même camp.
+ */
+export function combatBonuses(minions: Minion[], extremes = false): number[] {
   return minions.map((m) => {
-    const alone = m.aloneBonus > 0 && !minions.some((o) => o !== m && o.camp === m.camp);
+    const alone = m.aloneBonus > 0 && !minions.some((o) => o !== m && isCampOf(o, m.camp, extremes));
     return alone ? m.aloneBonus : 0;
   });
 }
 
-function toSide(index: 0 | 1, s: CombatSide): Side {
-  const bonuses = combatBonuses(s.minions);
+function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
+  const bonuses = combatBonuses(s.minions, extremes);
   const units: Unit[] = s.minions.map((m, i) => {
     const extra = bonuses[i];
     return { ...m, keywords: [...m.keywords], effects: m.effects, atk: m.atk + extra, hp: m.hp + extra, attacked: false, bonus: extra, avenge: 0, peak: m.hp + extra };
@@ -116,6 +124,11 @@ function addStats(b: Battle, side: Side, u: Unit, atk: number, hp: number, perma
   if (perma && u.uid < b.firstSummonUid) side.persist.buffs.push({ uid: u.uid, atk, hp });
 }
 
+/** Ses effets tels que le client les lit : chacun dit sa puissance, l'identité des effets ne voyage pas. */
+function withPower(u: Minion): Effect[] {
+  return u.effects.map((e) => ({ ...e, power: effectPower(u, e) }));
+}
+
 function toCombatUnit(u: Unit): CombatUnit {
   return {
     uid: u.uid,
@@ -130,7 +143,7 @@ function toCombatUnit(u: Unit): CombatUnit {
     token: u.token,
     noAttack: u.noAttack,
     casseroles: [...u.casseroles],
-    effects: u.effects,
+    effects: withPower(u),
     bonus: u.bonus,
     ...(u.scandal ? { scandal: true } : {}),
   };
@@ -159,8 +172,8 @@ function logOpening(b: Battle, first: 0 | 1): void {
 }
 
 function logEffect(b: Battle, u: Unit, eff: Effect): void {
-  const casserole = u.casseroles.find((id) => CASSEROLE_BY_ID[id]?.effects?.includes(eff));
-  b.log.push({ e: 'effet', uid: u.uid, when: eff.when, effect: eff, ...(casserole ? { casserole } : {}) });
+  const casserole = u.casseroles.find((id) => CASSEROLE_BY_ID[id]?.effects?.includes(eff) || CASSEROLE_BY_ID[id]?.ownerBonus.effects?.includes(eff));
+  b.log.push({ e: 'effet', uid: u.uid, when: eff.when, effect: { ...eff, power: effectPower(u, eff) }, ...(casserole ? { casserole } : {}) });
 }
 
 function otherSide(b: Battle, side: Side): Side {
@@ -219,7 +232,8 @@ function allyTargets(b: Battle, side: Side, self: Unit, index: number, eff: Effe
       return next ? [next] : [];
     }
     case 'aleatoire': {
-      const pool = alive.filter((u) => u !== self && (!eff.camp || isCamp(u, eff.camp)));
+      // Un mot-clé au hasard va à un allié qui ne l'a pas encore.
+      const pool = alive.filter((u) => u !== self && (!eff.camp || isCamp(u, eff.camp)) && !(eff.do === 'mot_cle' && has(u, eff.keyword)));
       return pool.length > 0 ? [b.rng.pick(pool)] : [];
     }
     case 'dores':
@@ -247,14 +261,21 @@ function foeTargets(b: Battle, enemy: Side, eff: Effect): Unit[] {
   }
 }
 
-/** Un serviteur doré double les valeurs de ses effets. */
-function power(u: Minion): number {
-  return u.golden ? 2 : 1;
+/**
+ * Donne un mot-clé en combat. Rejoué (doré, Mitterrand, relance), il ne se perd pas sur un allié qui l'a déjà : il passe
+ * à un autre allié vivant au hasard qui ne l'a pas.
+ */
+function giveKeyword(b: Battle, side: Side, self: Unit, u: Unit, keyword: Keyword, replay: boolean): void {
+  if (!has(u, keyword)) return grant(b, u, keyword);
+  if (!replay) return;
+  const lacking = side.units.filter((x) => x.hp > 0 && x !== self && !has(x, keyword));
+  if (lacking.length > 0) grant(b, b.rng.pick(lacking), keyword);
 }
 
-function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect, trigger?: Unit): void {
+/** `replay` : l'effet est rejoué (doré, Mitterrand, relance) ; un mot-clé déjà là passe alors à un autre allié. */
+function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect, trigger?: Unit, replay = false): void {
   const enemy = otherSide(b, side);
-  const k = power(self);
+  const k = effectPower(self, eff);
   if (eff.once === 'combat') {
     const key = `${self.uid}:${self.effects.indexOf(eff)}`;
     if (b.once.has(key)) return;
@@ -302,10 +323,16 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       break;
     }
     case 'degats':
-      for (const u of foeTargets(b, enemy, eff)) dealDamage(b, enemy, u, eff.value * k);
+      // Des dégâts d'effet font riposter, comme ceux d'une attaque : « après avoir subi des dégâts, s'il survit ».
+      for (const u of foeTargets(b, enemy, eff)) {
+        if (dealDamage(b, enemy, u, eff.value * k) && u.hp > 0) fireRiposte(b, enemy, u);
+      }
       break;
     case 'mot_cle':
-      for (const u of allyTargets(b, side, self, index, eff, trigger)) grant(b, u, eff.keyword);
+      // Doré, il le donne deux fois : la deuxième, comme un effet rejoué, va à un autre allié si la cible l'a déjà.
+      for (let i = 0; i < k; i++) {
+        for (const u of allyTargets(b, side, self, index, eff, trigger)) giveKeyword(b, side, self, u, eff.keyword, replay || i > 0);
+      }
       break;
     case 'retirer':
       for (const u of foeTargets(b, enemy, eff)) lose(b, u, eff.keyword);
@@ -335,7 +362,10 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
         if (u === self || b.retriggered.has(u.uid)) continue;
         b.retriggered.add(u.uid);
         const at = side.units.indexOf(u);
-        for (const other of u.effects) if (other.when === eff.trigger) runEffect(b, side, u, at, other);
+        // Doré, il joue deux fois ce qu'il relance ; une relance compte comme un effet rejoué.
+        for (let i = 0; i < k; i++) {
+          for (const other of relaunchable(u.effects, eff.trigger)) runEffect(b, side, u, at, other, undefined, true);
+        }
       }
       break;
     default:
@@ -369,13 +399,13 @@ function summon(b: Battle, side: Side, self: Minion, index: number, tokenId: str
   }
 }
 
-/** Combien de fois les Héritages de ce camp se déclenchent : Mitterrand, vivant, les double. */
-function heritageCount(side: Side): number {
+/** Combien de fois jouent les effets d'un déclencheur de ce camp : un multiplicateur vivant (Mitterrand, Macron) les double, les triple doré. */
+function repeatsOf(units: Unit[], trigger: 'heritage' | 'celebration'): number {
   let count = 1;
-  for (const u of side.units) {
+  for (const u of units) {
     if (u.hp <= 0) continue;
     for (const eff of u.effects) {
-      if (eff.when === 'aura' && eff.do === 'doubler' && eff.trigger === 'heritage') count = Math.max(count, u.golden ? 3 : 2);
+      if (eff.when === 'aura' && eff.do === 'doubler' && eff.trigger === trigger) count = Math.max(count, effectPower(u, eff) > 1 ? 3 : 2);
     }
   }
   return count;
@@ -384,7 +414,8 @@ function heritageCount(side: Side): number {
 function fireAvenge(b: Battle, side: Side, dead: Unit): void {
   for (const u of [...side.units]) {
     if (u === dead || u.hp <= 0) continue;
-    const avenges = u.effects.filter((eff) => eff.when === 'revanche' && (eff.do === 'camp_buff' ? !eff.card || dead.cardId === eff.card : true));
+    // `card` : seule la mort de ces serviteurs compte (Faure et les Suppléants).
+    const avenges = u.effects.filter((eff) => eff.when === 'revanche' && (!eff.card || dead.cardId === eff.card));
     if (avenges.length === 0) continue;
     u.avenge++;
     for (const eff of avenges) {
@@ -407,14 +438,14 @@ function resolveDeaths(b: Battle, order: [Side, Side]): void {
           if (u.hpLossOnDeath > 0) b.log.push({ e: 'penalite', uid: u.uid, side: side.index, value: u.hpLossOnDeath });
         }
         side.penalty += u.hpLossOnDeath;
-        const repeats = heritageCount(side);
+        const repeats = repeatsOf(side.units, 'heritage');
         if (comesBack) {
           if (!has(u, 'retour')) side.deathRetourUsed = true;
           u.keywords = u.keywords.filter((x) => x !== 'retour');
           u.hp = 1;
           if (b.logging) b.log.push({ e: 'retour', uid: u.uid, hp: 1 });
           for (let r = 0; r < repeats; r++) {
-            for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i, eff);
+            for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i, eff, undefined, r > 0);
           }
         } else {
           side.units.splice(i, 1);
@@ -423,7 +454,7 @@ function resolveDeaths(b: Battle, order: [Side, Side]): void {
             transmit(b, side, u, i - 1, false, 1);
           }
           for (let r = 0; r < repeats; r++) {
-            for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i - 1, eff);
+            for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i - 1, eff, undefined, r > 0);
           }
           i--;
         }
@@ -485,6 +516,8 @@ function strike(b: Battle, atkSide: Side, defSide: Side, attacker: Unit, target:
 }
 
 function fireRiposte(b: Battle, side: Side, u: Unit): void {
+  if (b.ripostes >= MAX_RIPOSTES || !u.effects.some((eff) => eff.when === 'riposte')) return;
+  b.ripostes++;
   const index = side.units.indexOf(u);
   for (const eff of u.effects) {
     if (eff.when === 'riposte') runEffect(b, side, u, index, eff);
@@ -529,7 +562,8 @@ function initiative(a: CombatSide, b: CombatSide, rng: Rng): 0 | 1 {
  */
 export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions): CombatResult {
   const first = initiative(a, c, opts.rng);
-  const sides: [Side, Side] = [toSide(0, a), toSide(1, c)];
+  const extremes = opts.ctx?.extremesAllied ?? false;
+  const sides: [Side, Side] = [toSide(0, a, extremes), toSide(1, c, extremes)];
   const uidStart = opts.uidStart ?? 1_000_000;
   const b: Battle = {
     sides,
@@ -542,6 +576,7 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
     once: new Set(),
     retriggered: new Set(),
     boardSize: opts.params.boardSize,
+    ripostes: 0,
   };
   const order: [Side, Side] = first === 0 ? [sides[0], sides[1]] : [sides[1], sides[0]];
   if (b.logging) logOpening(b, first);
@@ -580,6 +615,8 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
   if (b.logging) b.log.push({ e: 'fin', winner, sides: snapshot(sides) });
 
   const celebrant = winner === null ? null : pickCelebrant(sides[winner]);
+  // Macron double les Célébrations s'il a survécu, comme Mitterrand ne double les Héritages que vivant.
+  const celebrationRepeats = winner === null ? 1 : repeatsOf(sides[winner].units, 'celebration');
   const celebrants = winner === null ? [] : sides[winner].units.filter((u) => u.hp > 0 && u.effects.some((eff) => eff.when === 'celebration'));
   const responder = winner === null ? null : pickResponder(winner === 0 ? 1 : 0, winner === 0 ? c : a);
   const loserBoard = winner === null ? [] : (winner === 0 ? c : a).minions;
@@ -605,6 +642,7 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
     celebrants: celebrants.map((u) => ({ side: sides[winner as 0 | 1].index, uid: u.uid })),
     responder: responder ? { side: responder.side, uid: responder.uid } : null,
     responders: responders.map((m) => ({ side: winner === 0 ? 1 : 0, uid: m.uid })),
+    celebrationRepeats,
     log: b.log,
   };
 }

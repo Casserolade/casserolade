@@ -31,7 +31,7 @@ export function narrateCombatEvent(event: CombatEvent, sides: CombatSides): stri
     case 'mot_cle':
       return `${findName(sides, event.uid)} ${event.gain ? 'gagne' : 'perd'} ${KEYWORD_RULES[event.keyword].label}.`;
     case 'effet':
-      return `${findName(sides, event.uid)} : ${describeEffect(event.effect).replaceAll('**', '')}`;
+      return `${findName(sides, event.uid)} : ${describeEffect(event.effect, (event.effect.power ?? 1) > 1).replaceAll('**', '')}`;
     case 'mort':
       return `${findName(sides, event.uid)} est à terre.`;
     case 'retour':

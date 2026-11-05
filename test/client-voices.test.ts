@@ -86,7 +86,7 @@ test('aucun texte affiché ne dit « serviteur » : cartes, dorées comprises, s
   const texts = [
     ...CARDS.flatMap((card) => [...cardRuleLines(card), ...cardRuleLines(card, { isGolden: true })]),
     ...SPELLS.flatMap((spell) => spellCardLines(spell, { tier: 3, tract: { atk: 1, hp: 1 } })),
-    ...CASSEROLES.flatMap((casserole) => casseroleCardLines(casserole, 2)),
+    ...CASSEROLES.flatMap((casserole) => casseroleCardLines(casserole)),
     ...Object.values(KEYWORD_RULES).flatMap(({ label, rule }) => [label, rule]),
     ...Object.entries(TERM_RULES).flat(),
     ...HEROES.flatMap((hero) => [hero.name, hero.power, hero.desc]),

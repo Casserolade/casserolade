@@ -11,7 +11,7 @@ defineProps<{ card: ShownCard }>();
   <span class="shown-card">
     <CardFace v-if="card.kind === 'minion'" v-bind="card.face" />
     <SpellCard v-else-if="card.kind === 'spell'" :spell="card.spell" :count="card.count" :tier="card.tier" :tract="card.tract" />
-    <SpellCard v-else :casserole="card.casserole" :owner-multiplier="card.ownerMultiplier" />
+    <SpellCard v-else :casserole="card.casserole" />
   </span>
 </template>
 

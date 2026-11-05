@@ -43,7 +43,7 @@ function playPlain(game: Game, owner: string): Minion {
 
 /** Une casserole qui fait oublier ne sert que sur un politique en scandale : on lui en donne un. */
 function scandalize(game: Game, target: Minion, c: Casserole): void {
-  if (!c.chargesRemoved) return;
+  if (!c.forgetsAll) return;
   const filler = CASSEROLES.find((x) => x.id === 'homards') as Casserole;
   pose(game, target, filler);
   pose(game, target, filler);

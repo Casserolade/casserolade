@@ -51,7 +51,7 @@ function shown(card: HandCard): ShownCard {
       face: minionFace(minion, { copies: copies >= 2 ? copies : 0, charges: minion.charges, scandalThreshold: props.view.scandalThreshold, scandalLeft: scandalLeft(minion, props.view.round) }),
     };
   }
-  if (card.kind === 'casserole') return { kind: 'casserole', casserole: card.casserole, ownerMultiplier: props.view.params.ownerMultiplier };
+  if (card.kind === 'casserole') return { kind: 'casserole', casserole: card.casserole };
   return { kind: 'spell', spell: card.spell, count: card.held.count, tier: card.held.tier, tract: props.view.tract };
 }
 

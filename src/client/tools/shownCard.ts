@@ -40,12 +40,12 @@ export function scandalLeft(minion: { scandal?: { until: number } }, round: numb
 export type ShownCard =
   | { kind: 'minion'; face: MinionFace }
   | { kind: 'spell'; spell: Spell; count?: number; tier?: number; tract?: { atk: number; hp: number } }
-  | { kind: 'casserole'; casserole: Casserole; ownerMultiplier: number };
+  | { kind: 'casserole'; casserole: Casserole };
 
 /** The rule lines printed on a card, with its keywords between ** : what the glossary explains. */
 export function shownCardLines(card: ShownCard): string[] {
   if (card.kind === 'spell') return spellCardLines(card.spell, { tier: card.tier, tract: card.tract });
-  if (card.kind === 'casserole') return casseroleCardLines(card.casserole, card.ownerMultiplier);
+  if (card.kind === 'casserole') return casseroleCardLines(card.casserole);
   const { keywords, effects, cardId, golden } = card.face;
   return cardRuleLines({ keywords, effects, golden: CARD_BY_ID[cardId]?.golden }, { isGolden: golden });
 }

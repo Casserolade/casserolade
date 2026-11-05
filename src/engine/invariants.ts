@@ -9,6 +9,7 @@
 import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { SPELL_BY_ID } from '../data/sorts.ts';
+import { effectOrigin } from './minion.ts';
 import { boardLimit, handCount } from './recruit.ts';
 import type { Game, Player } from './state.ts';
 import type { Effect, Keyword, Minion } from './types.ts';
@@ -62,6 +63,7 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
   if (m.simple) check(m.copies === 0 && !m.golden, 'copie simple dorée ou comptée dans la réserve');
   if (m.golden) check([1, 3].includes(m.copies) || m.simple, `doré avec ${m.copies} exemplaires`);
   for (const id of m.merged) check(Boolean(CARD_BY_ID[id]), `carte ralliée inconnue ${id}`);
+  for (const id of m.rallied) check(Boolean(CARD_BY_ID[id]), `Ralliement inconnu ${id}`);
   if (!card) return out;
 
   // Les casseroles, le scandale et l'oubli du peuple.
@@ -70,17 +72,22 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
   if (all.length !== m.casseroles.length) return out;
   check(Number.isInteger(m.oublie) && m.oublie >= 0 && m.oublie <= m.casseroles.length, `${m.oublie} oubliées sur ${m.casseroles.length}`);
   const live = all.slice(m.oublie);
-  for (const c of live) check(!c.chargesRemoved, `« ${c.id} » fait tout oublier, mais n'est pas oubliée`);
+  for (const c of live) check(!c.forgetsAll, `« ${c.id} » fait tout oublier, mais n'est pas oubliée`);
   check(m.charges === live.reduce((s, c) => s + (c.charges ?? 1), 0), `${m.charges} charges pour ${live.map((c) => c.id)}`);
-  const mult = (c: { owner: string }) => (m.cardId === c.owner ? game.params.ownerMultiplier : 1);
-  const bonusBudget = all.reduce((s, c) => s + Math.max(0, c.budgetPerRound ?? 0) * mult(c), 0);
+  // Les bonus de propriétaire qu'il porte : chacun vient d'une de ses casseroles, posée sur son propriétaire.
+  const owners = m.ownerCasseroles.map((id) => CASSEROLE_BY_ID[id]).filter(Boolean);
+  check(owners.length === m.ownerCasseroles.length, `bonus de propriétaire inconnu ${m.ownerCasseroles}`);
+  for (const id of new Set(m.ownerCasseroles)) {
+    check(m.ownerCasseroles.filter((x) => x === id).length <= m.casseroles.filter((x) => x === id).length, `bonus de propriétaire de « ${id} » sans la casserole`);
+  }
+  const bonusBudget = all.reduce((s, c) => s + Math.max(0, c.budgetPerRound ?? 0), 0) + owners.reduce((s, c) => s + Math.max(0, c.ownerBonus.budgetPerRound ?? 0), 0);
   const defectBudget = m.scandal ? live.reduce((s, c) => s + Math.min(0, c.budgetPerRound ?? 0), 0) : 0;
   const defectHp = m.scandal ? live.reduce((s, c) => s + (c.hpLossOnDeath ?? 0), 0) : 0;
   check(m.budgetPerRound === bonusBudget + defectBudget, `budget par manche ${m.budgetPerRound}, attendu ${bonusBudget} + ${defectBudget}`);
   check(m.hpLossOnDeath === defectHp, `sondages perdus à la mort ${m.hpLossOnDeath}, attendu ${defectHp}`);
-  const bonusDamage = all.reduce((s, c) => s + Math.max(0, c.bonusDamage ?? 0) * mult(c) + Math.min(0, c.bonusDamage ?? 0), 0);
+  const bonusDamage = all.reduce((s, c) => s + (c.bonusDamage ?? 0), 0) + owners.reduce((s, c) => s + (c.ownerBonus.bonusDamage ?? 0), 0);
   check(m.bonusDamage === bonusDamage, `dégâts bonus ${m.bonusDamage}, attendu ${bonusDamage}`);
-  const alone = all.reduce((s, c) => s + Math.max(0, c.aloneBonus ?? 0) * mult(c) + Math.min(0, c.aloneBonus ?? 0), 0);
+  const alone = all.reduce((s, c) => s + (c.aloneBonus ?? 0), 0) + owners.reduce((s, c) => s + (c.ownerBonus.aloneBonus ?? 0), 0);
   check(m.aloneBonus === alone, `bonus de solitude ${m.aloneBonus}, attendu ${alone}`);
   if (m.bracelet) check(m.locked, 'sous bracelet, mais libre de bouger');
   if (m.scandal) {
@@ -97,26 +104,20 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
     if (live.some((c) => c.silence)) check(Boolean(s.silenced), 'le défaut « perd ses effets » n\'est pas appliqué');
   }
 
-  // Les effets : ceux de la carte, des casseroles et des cartes ralliées, ni perdus ni dupliqués.
-  const fromCasseroles = all.flatMap((c) => c.effects ?? []);
-  const fromCasserolesAtMost = all.flatMap((c) => Array.from({ length: game.params.ownerMultiplier }, () => c.effects ?? []).flat());
-  const base = card.effects ?? [];
-  const mergedEffects = m.merged.flatMap((id) => CARD_BY_ID[id]?.effects ?? []);
+  // Les effets : ceux de la carte, des casseroles, des bonus de propriétaire et des cartes ralliées (une fois par
+  // Ralliement), exactement, ni perdus ni dupliqués. Une copie ralliée compte pour l'effet de carte dont elle vient.
+  const fromCasseroles = [...all.flatMap((c) => c.effects ?? []), ...owners.flatMap((c) => c.ownerBonus.effects ?? [])];
+  const expected = [...(card.effects ?? []), ...fromCasseroles, ...m.rallied.flatMap((id) => CARD_BY_ID[id]?.effects ?? [])];
   if (m.scandal?.silenced) {
     // Décidé le 3 novembre 2026 : un Ralliement posé sur un politique réduit au silence garde ses effets.
-    for (const e of m.effects) check(fromCasseroles.includes(e) || mergedEffects.includes(e), 'réduit au silence, mais garde un effet qui n\'est pas de casserole');
+    for (const e of m.effects) check(fromCasseroles.includes(e) || effectOrigin(e) !== e, 'réduit au silence, mais garde un effet qui n\'est pas de casserole');
   }
-  const pool = [...m.effects, ...(m.scandal?.silenced ?? [])];
-  for (const e of new Set([...base, ...fromCasseroles])) {
-    const want = countIn(base, e) + countIn(fromCasseroles, e);
-    check(countIn(pool, e) >= want, `effet perdu (${e.when} ${e.do}), ${countIn(pool, e)} au lieu de ${want}`);
-  }
-  for (const id of new Set(m.merged)) {
-    for (const e of CARD_BY_ID[id]?.effects ?? []) check(pool.includes(e), `l'effet ${e.when} ${e.do} de ${id}, rallié, est perdu`);
-  }
-  for (const e of new Set(pool)) {
-    const max = countIn(base, e) + countIn(mergedEffects, e) + countIn(fromCasserolesAtMost, e);
-    check(countIn(pool, e) <= max, `effet dupliqué (${e.when} ${e.do}) ${countIn(pool, e)} fois, au plus ${max}`);
+  const actual = [...m.effects, ...(m.scandal?.silenced ?? [])].map(effectOrigin);
+  for (const e of new Set([...expected, ...actual])) {
+    const want = countIn(expected, e);
+    const have = countIn(actual, e);
+    if (have < want) out.push(`${at} : effet perdu (${e.when} ${e.do}), ${have} au lieu de ${want}`);
+    if (have > want) out.push(`${at} : effet en trop (${e.when} ${e.do}), ${have} au lieu de ${want}`);
   }
   return out;
 }

@@ -17,6 +17,7 @@ import { allyTargets, annonceNeedsTarget, spellNeedsTarget, spellTargets } from 
 import { boldTerms, parseRichText } from '../src/client/tools/richText.ts';
 import { casseroleCardLines, spellCardLines } from '../src/client/tools/spellCardLines.ts';
 import { cardRuleLines } from '../src/client/tools/describeEffect.ts';
+import { describeOwnerBonus } from '../src/client/tools/describeOwnerBonus.ts';
 import { CARD_BY_ID, CARDS } from '../src/data/cards.ts';
 import { CASSEROLE_BY_ID, CASSEROLES } from '../src/data/casseroles.ts';
 import { PHRASES } from '../src/data/phrases.ts';
@@ -45,7 +46,7 @@ test('glossaryFor explains every bold word of every card, spell and casserole', 
   const texts = [
     ...CARDS.map((card) => cardRuleLines(card)),
     ...SPELLS.map((spell) => spellCardLines(spell, { tier: 3, tract: { atk: 1, hp: 1 } })),
-    ...CASSEROLES.map((casserole) => casseroleCardLines(casserole, 2)),
+    ...CASSEROLES.map((casserole) => casseroleCardLines(casserole)),
   ];
   for (const lines of texts) {
     const explained = glossaryFor(lines).length;
@@ -110,7 +111,7 @@ test('spell and casserole cards say what they do', () => {
   assert.match(spellCardLines(SPELL_BY_ID.investiture, { tier: 4 })[0], /échelon 4/);
   assert.match(spellCardLines(SPELL_BY_ID.matinale)[0], /2 prochaines actualisations sont gratuites/i);
   const casserole = CASSEROLE_BY_ID.ecoutes;
-  assert.match(casseroleCardLines(casserole, 2).at(-1) ?? '', /×2 sur Nicolas Sarkozy/);
+  assert.equal(casseroleCardLines(casserole).at(-1), 'Sur Nicolas Sarkozy, en plus\u00a0: +3/+3.');
 });
 
 test('after a combat, the celebrant says a real quote, another of its own, or its camp\'s chant', () => {
@@ -201,4 +202,38 @@ test('on a winning streak, the same politician does not say the same line twice:
   const said = speechForEvent(voicedEvent, 0)?.line ?? null;
   const next = speechForEvent(voicedEvent, 0, said)?.line ?? null;
   assert.ok(next && next !== said && voixPourPhrase(twice, next), 'another recorded line when there is one');
+});
+
+test('describeOwnerBonus says what each casserole gives its owner on top, as the engine applies it', () => {
+  for (const casserole of CASSEROLES) assert.match(describeOwnerBonus(casserole) ?? '', /^Sur .+, en plus\u00a0: .+\.$/, casserole.id);
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.ecoutes), 'Sur Nicolas Sarkozy, en plus\u00a0: +3/+3.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.hologramme), 'Sur Jean-Luc Mélenchon, en plus\u00a0: +1/+0 et un deuxième Hologramme.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.accent), 'Sur Jean-Luc Mélenchon, en plus\u00a0: +2/+0 et son effet joue deux fois.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.traverser_la_rue), 'Sur Emmanuel Macron, en plus\u00a0: un deuxième politique gratuit de votre échelon.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.compte_suisse), 'Sur Jérôme Cahuzac, en plus\u00a0: +2 budget par manche.');
+});
+
+test('a card says how many times an effect repeats, and a golden card always says more than a plain one', () => {
+  assert.match(cardRuleLines(CARD_BY_ID.chikirou).join(' '), /au hasard, trois fois\.$/);
+  for (const card of CARDS) {
+    if (card.effects?.length) assert.notDeepEqual(cardRuleLines(card, { isGolden: true }), cardRuleLines(card), card.id);
+  }
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.bertrand, { isGolden: true }), ['**Annonce** : donne **Immunité** à un autre allié, et à un deuxième au hasard.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.morano, { isGolden: true }).at(-1), '**Célébration** : donne **Immunité** à deux autres alliés au hasard.');
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.philippe, { isGolden: true }), ['**Annonce** : rend doré un autre allié d\'échelon 4 ou moins, et un deuxième au hasard.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.hidalgo, { isGolden: true }), ['**Annonce** : détruisez un autre allié et **découvrez** deux fois un politique de son camp.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.jadot, { isGolden: true }), ['**Fin de tour** : déclenche deux fois la **Fin de tour** de ses voisins.']);
+});
+
+test('an effect that tells its power keeps it: a golden Ralliement on a plain host, a casserole on a golden one', () => {
+  const income = CARD_BY_ID.lemaire.effects?.[0];
+  assert.ok(income);
+  assert.deepEqual(cardRuleLines({ effects: [{ ...income, power: 2 }] }), ['Au début de votre tour, gagnez 4 budget.']);
+  assert.deepEqual(cardRuleLines({ effects: [{ ...income, power: 1 }] }, { isGolden: true }), ['Au début de votre tour, gagnez 2 budget.']);
+});
+
+test('a relaunch spell only lands on a minion that has something to relaunch', () => {
+  const board = [makeMinion(CARD_BY_ID.hidalgo, 1), makeMinion(CARD_BY_ID.bertrand, 2), makeMinion(CARD_BY_ID.gueant, 3)];
+  assert.deepEqual(spellTargets({ uid: 9, spellId: 'seconde_deliberation' }, board), [2]);
+  assert.deepEqual(spellTargets({ uid: 9, spellId: 'tribune_libre' }, board), []);
 });

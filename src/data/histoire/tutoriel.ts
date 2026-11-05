@@ -43,7 +43,7 @@ export const TUTORIEL = {
     { fini: 'actualise', texte: 'Rien ne vous plaît ? Actualisez la boutique avec la flèche ronde, en haut à droite : pour 1 de budget, de nouveaux politiques.' },
     { fini: 'gel', texte: 'Un politique vous plaît, mais le budget manque ? Gelez la boutique avec le flocon : à la manche suivante, elle sera encore là, au lieu d\'être renouvelée.' },
     { fini: 'echelon', texte: 'Montez d\'échelon avec la flèche, en haut : la boutique proposera des politiques plus forts. Le prix baisse à chaque manche d\'attente.' },
-    { fini: 'casserole_posee', texte: 'Une casserole ! C\'est un bonus, et il compte double sur son propriétaire. Achetez-la et posez-la sur un politique.' },
+    { fini: 'casserole_posee', texte: 'Une casserole ! C\'est un bonus, et son propriétaire en tire encore plus. Achetez-la et posez-la sur un politique.' },
     { fini: 'scandale', texte: 'Une deuxième casserole sur le même politique : scandale. Pendant deux manches, les défauts de ses casseroles s\'appliquent.' },
     { fini: 'triple', texte: 'Trois exemplaires du même politique fusionnent en une version dorée. Achetez des Cheminade.' },
     { fini: 'decouvrir', texte: 'Posez le doré : il vous donne une Investiture. Lancez-la, et choisissez une carte parmi trois.' },

@@ -33,6 +33,5 @@ export const PARAMS: Params = {
   braceletChance: 0.5,
   scandalThreshold: 2,
   scandalRounds: 2,
-  ownerMultiplier: 2,
   heroChoices: 3,
 };

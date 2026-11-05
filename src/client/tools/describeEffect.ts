@@ -143,8 +143,8 @@ function tokenText(id: string, count: number): string {
 }
 
 /**
- * Ce que joue un politique doré : le moteur applique ses effets avec k = 2 (`power()` dans
- * recruit.ts et combat.ts). Le texte dit ce qui arrive vraiment, nombres doublés compris.
+ * Ce que joue un effet doré : le moteur l'applique avec sa puissance (`effectPower` dans minion.ts), 2 pour un doré.
+ * Le texte dit ce qui arrive vraiment : les nombres doublés ici, les autres effets dans `action`.
  */
 function goldenEffect(e: Effect): Effect {
   switch (e.do) {
@@ -171,6 +171,22 @@ function goldenEffect(e: Effect): Effect {
   }
 }
 
+/** Une cible qui n'est qu'un seul allié : doré, son mot-clé en touche un autre au hasard. */
+const ONE_ALLY: ReadonlySet<Target> = new Set(['soi', 'cible', 'premier_allie', 'dernier_allie', 'allie_suivant', 'joue', 'declencheur']);
+
+/**
+ * Doré, un mot-clé se donne deux fois, et le moteur ne le perd pas sur qui l'a déjà : il passe à un autre allié au
+ * hasard. « au hasard » vise toujours un allié qui ne l'a pas encore.
+ */
+function goldenKeyword(e: Extract<Effect, { do: 'mot_cle' }>, dest: string): string {
+  const word = keyword(e.keyword);
+  if (e.to === 'aleatoire') return `donne ${word} à deux autres ${e.camp ? CAMP_MANY[e.camp] : 'alliés'} au hasard`;
+  if (e.to === 'voisins') return `donne ${word} ${to(dest)}, et à deux autres au hasard`;
+  if (e.to === 'soi') return `gagne ${word}, et le donne à un allié au hasard`;
+  if (ONE_ALLY.has(e.to)) return `donne ${word} ${to(dest)}, et à un deuxième au hasard`;
+  return `donne ${word} ${to(dest)}`;
+}
+
 /** L'action, à l'infinitif ou conjuguée, sans le déclencheur. `golden` : ce que fait un politique doré. */
 function action(raw: Effect, onSpell: boolean, golden = false): string {
   const e = golden ? goldenEffect(raw) : raw;
@@ -195,6 +211,7 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'budget':
       return `gagnez ${e.value} budget${e.plus_tard ? ' à la prochaine manche' : ''}`;
     case 'mot_cle':
+      if (golden) return goldenKeyword(e, dest);
       return self ? `gagne ${keyword(e.keyword)}` : `donne ${keyword(e.keyword)} ${to(dest)}`;
     case 'retirer':
       return `retire ${keyword(e.keyword)} ${to(dest)}`;
@@ -230,13 +247,13 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
       return self ? `${which}, et gagne ${twice}ses stats` : `${which} : ${dest} gagne ${twice}ses stats`;
     }
     case 'dorer':
-      return `rend doré ${dest} d'échelon ${e.maxTier} ou moins`;
+      return `rend doré ${dest} d'échelon ${e.maxTier} ou moins${golden ? ', et un deuxième au hasard' : ''}`;
     case 'detruire':
       return `détruisez ${dest}`;
     case 'sacrifier':
-      return `détruisez ${dest} et **découvrez** un politique de son camp`;
+      return `détruisez ${dest} et **découvrez** ${twice}un politique de son camp`;
     case 'declencher':
-      return `déclenche ${e.trigger === 'fin_tour' ? 'la ' : 'l\''}**${TRIGGER_WORD[e.trigger]}** ${of(dest)}`;
+      return `déclenche ${twice}${e.trigger === 'fin_tour' ? 'la ' : 'l\''}**${TRIGGER_WORD[e.trigger]}** ${of(dest)}`;
     case 'doubler':
       return `vos **${TRIGGER_WORDS[e.trigger]}** se déclenchent ${golden ? 'trois' : 'deux'} fois`;
     case 'compteur':
@@ -337,10 +354,14 @@ export function describeSpell(spell: Spell): string {
   return `${capitalize(spell.effects.map((e) => action(e, true)).join(', et '))}.`;
 }
 
+/** « deux fois », « trois fois » : un effet répété sur la carte. */
+const TIMES: Record<number, string> = { 2: 'deux fois', 3: 'trois fois', 4: 'quatre fois' };
+
 /**
  * Les lignes de règle d'un politique : ses mots-clés, puis ses effets regroupés par déclencheur.
  * `card.golden` est la propriété « Toujours doré » de la carte ; `isGolden`, l'état du politique
- * montré : doré, ses effets jouent deux fois plus fort, et son texte le dit.
+ * montré : doré, les effets de sa carte jouent deux fois plus fort, et son texte le dit. Un effet qui dit
+ * sa puissance (`power`, dans les vues et les combats) la garde : un Ralliement doré, une casserole.
  */
 export function cardRuleLines(card: Pick<Card, 'keywords' | 'effects' | 'golden'>, { isGolden = false }: { isGolden?: boolean } = {}): string[] {
   const lines: string[] = [];
@@ -348,15 +369,24 @@ export function cardRuleLines(card: Pick<Card, 'keywords' | 'effects' | 'golden'
   if (card.golden) keywords.unshift('Toujours doré.');
   if (keywords.length) lines.push(keywords.join(' '));
   const effects = card.effects ?? [];
+  const goldenOf = (e: Effect) => (e.power !== undefined ? e.power > 1 : isGolden);
+  // La ligne d'un effet répété, avant son « deux fois » : Chikirou en a trois.
+  let repeatedLine = '';
+  let repeated = 1;
   for (let i = 0; i < effects.length; i++) {
     const e = effects[i];
     const previous = effects[i - 1];
-    // Deux effets du même déclencheur se lisent en une phrase ; un effet répété se lit « deux fois ».
+    // Deux effets du même déclencheur se lisent en une phrase ; un effet répété se lit « deux fois », « trois fois ».
     if (previous && JSON.stringify(previous) === JSON.stringify(e)) {
-      lines[lines.length - 1] = `${lines[lines.length - 1].slice(0, -1)}, deux fois.`;
-    } else if (previous && previous.when === e.when && prefix(e) !== '') {
+      if (repeated === 1) repeatedLine = lines[lines.length - 1].slice(0, -1);
+      repeated++;
+      lines[lines.length - 1] = `${repeatedLine}, ${TIMES[repeated] ?? `${repeated} fois`}.`;
+      continue;
+    }
+    repeated = 1;
+    if (previous && previous.when === e.when && prefix(e) !== '') {
       const last = lines[lines.length - 1].slice(0, -1);
-      const next = action(e, false, isGolden);
+      const next = action(e, false, goldenOf(e));
       // « donne X à vos politiques » puis « donne Y à vos politiques » : « donne X et Y à vos politiques ».
       const shared = / (à [^,]+)$/.exec(last)?.[1];
       if (shared && next.startsWith('donne ') && next.endsWith(` ${shared}`) && !suffix(e)) {
@@ -365,7 +395,7 @@ export function cardRuleLines(card: Pick<Card, 'keywords' | 'effects' | 'golden'
         lines[lines.length - 1] = `${last}, et ${next}${suffix(e)}.`;
       }
     } else {
-      lines.push(describeEffect(e, isGolden));
+      lines.push(describeEffect(e, goldenOf(e)));
     }
   }
   return lines;

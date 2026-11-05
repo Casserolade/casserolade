@@ -37,7 +37,7 @@ function summary(c: Casserole): string {
   if (c.swapStats) out.push('échange attaque et PV');
   if (c.aloneBonus) out.push(`+${c.aloneBonus}/+${c.aloneBonus} s'il est seul de son camp`);
   if (c.charges === 2) out.push('compte double vers le scandale');
-  if (c.chargesRemoved) out.push('fait tout oublier');
+  if (c.forgetsAll) out.push('fait tout oublier');
   // Le défaut ne s'applique que pendant un scandale.
   const defects: string[] = [];
   if (c.budgetPerRound && c.budgetPerRound < 0) defects.push(`${c.budgetPerRound} budget par manche`);

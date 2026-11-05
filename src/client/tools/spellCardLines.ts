@@ -1,7 +1,7 @@
 import { describeCasserole } from '#src/client/tools/describeCasserole.ts';
+import { describeOwnerBonus } from '#src/client/tools/describeOwnerBonus.ts';
 import { describeSpell } from '#src/client/tools/describeEffect.ts';
 import { signed } from '#src/client/tools/signed.ts';
-import { CARD_BY_ID } from '#src/data/cards.ts';
 import type { Casserole, Spell } from '#src/engine/types.ts';
 
 /**
@@ -14,9 +14,8 @@ export function spellCardLines(spell: Spell, { tier, tract }: { tier?: number; t
   return [describeSpell(spell)];
 }
 
-/** The text of a casserole card: its rules, and who gets it twice as hard. */
-export function casseroleCardLines(casserole: Casserole, ownerMultiplier: number): string[] {
-  const owner = CARD_BY_ID[casserole.owner]?.name;
-  const lines = describeCasserole(casserole);
-  return owner && ownerMultiplier > 1 ? [...lines, `×${ownerMultiplier} sur ${owner}`] : lines;
+/** The text of a casserole card: its rules, then what its historical owner gets on top. */
+export function casseroleCardLines(casserole: Casserole): string[] {
+  const owner = describeOwnerBonus(casserole);
+  return owner ? [...describeCasserole(casserole), owner] : describeCasserole(casserole);
 }

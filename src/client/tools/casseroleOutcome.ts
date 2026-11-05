@@ -1,7 +1,7 @@
 import type { Casserole, Minion } from '#src/engine/types.ts';
 
 export interface CasseroleOutcome {
-  /** Its own affair: everything good counts twice. */
+  /** Its own affair: its owner bonus comes on top. */
   owner: boolean;
   /**
    * `starts`: the casserole sets off a scandal. `adds`: it lands in one, its défaut joins at once.
@@ -12,11 +12,11 @@ export interface CasseroleOutcome {
 
 /**
  * What a casserole would do to this minion, said before it lands, as the engine applies it
- * (applyCasserole in game.ts): twice as good on its owner, and the scandal it may set off.
+ * (applyCasserole in game.ts): its owner bonus on its owner, and the scandal it may set off.
  */
 export function casseroleOutcome(minion: Pick<Minion, 'cardId' | 'charges' | 'scandal'>, casserole: Casserole, threshold: number): CasseroleOutcome {
   const owner = casserole.owner === minion.cardId;
-  if (casserole.chargesRemoved) return { owner, scandal: minion.scandal || minion.charges > 0 ? 'forgets' : null };
+  if (casserole.forgetsAll) return { owner, scandal: minion.scandal || minion.charges > 0 ? 'forgets' : null };
   if (minion.scandal) return { owner, scandal: 'adds' };
   return { owner, scandal: minion.charges + (casserole.charges ?? 1) >= threshold ? 'starts' : null };
 }
