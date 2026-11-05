@@ -31,8 +31,14 @@
 - Sylvain Durif apprend la **Fin de tour** : posé, il joue à la fin du recrutement, sous vos yeux, juste avant le combat.
 - Les casseroles, pas à pas : une première casserole, un bonus ; une deuxième sur le même politique, le scandale, qui le cloue sur place (le cadenas), et l'on déplace les autres autour de lui ; puis l'oubli du peuple, en dernier. Le Bracelet électronique est expliqué au passage.
 
+**Les voix**
+- Sur une partie, on n'entend jamais deux fois la même voix : politiques, animateurs et héros.
+- Après un combat, un seul politique parle à voix haute : celui qui célèbre, sinon celui qui répond. L'autre garde sa bulle.
+- Une Célébration prend d'abord un extrait court, de 6 secondes au plus ; s'il n'en reste plus, un plus long, plutôt que rien.
+- Les Célébrations s'affichent toutes ensemble, au moment où la voix commence, chacune avec la tête de son politique.
+
 **L'accueil**
-- Un sous-titre tiré au hasard à chaque visite : « Pookie sonne le glas », « Une affaire n'arrive jamais seule », « Toute ressemblance est volontaire »…
+- Un sous-titre tiré au hasard à chaque visite : « Pookie sonne le glas », « 49.3 fois plus drôle », « Rien d'inventé, hélas »…
 
 ## 0.2b — 5 novembre 2026
 

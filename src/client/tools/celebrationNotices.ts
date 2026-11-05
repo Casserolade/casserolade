@@ -7,6 +7,8 @@ export interface CelebrationNotice {
   /** Where its effect sits in the combat log: the notice shows once the playback has reached it. */
   at: number;
   uid: number;
+  /** Its card: the notice shows its head. */
+  cardId: string;
   side: 0 | 1;
   name: string;
   /** What it gives, card text without its « Célébration : » head, golden values included. */
@@ -28,7 +30,7 @@ export function celebrationNotices(log: CombatEvent[]): CelebrationNotice[] {
     const described = describeEffect(event.effect, (event.effect.power ?? (found.unit.golden ? 2 : 1)) > 1);
     const body = described.startsWith(HEAD) ? described.slice(HEAD.length) : described;
     const text = body.charAt(0).toUpperCase() + body.slice(1);
-    notices.push({ at, uid: event.uid, side: found.side, name: found.unit.name, text, repeats: celebrationRepeats(log, found.side) });
+    notices.push({ at, uid: event.uid, cardId: found.unit.cardId, side: found.side, name: found.unit.name, text, repeats: celebrationRepeats(log, found.side) });
   });
   return notices;
 }
