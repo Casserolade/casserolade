@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import CasseroleArt from '#src/client/components/atoms/CasseroleArt.vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
-import PaperPuppet from '#src/client/components/atoms/PaperPuppet.vue';
 import RichText from '#src/client/components/atoms/RichText.vue';
 import { DEFAULT_SPELL_ART, SPELL_ART } from '#src/client/const/spellArt.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
@@ -35,8 +35,9 @@ const frameTier = computed(() => props.spell?.tier ?? owner.value?.tier ?? 1);
 const faceStyle = computed(() => ({
   ...cardFaceStyle(gameArt.manifest.value, 'civile', frameTier.value, props.spell?.id === 'investiture'),
   '--camp-color': color.value,
-  '--pan-image': props.casserole ? cssImage(gameArt.manifest.value.carte[`casserole_${props.casserole.kind}`]) : 'none',
 }));
+const panImage = computed(() => (props.casserole ? cssImage(gameArt.manifest.value.carte[`casserole_${props.casserole.kind}`]) : 'none'));
+const illustration = computed(() => (props.casserole ? cssImage(gameArt.manifest.value.casseroles?.[props.casserole.id]) : 'none'));
 const ownerPuppet = computed(() => (owner.value ? puppetStyle(gameArt.manifest.value, owner.value.id, owner.value.camp) : null));
 const name = computed(() => props.casserole?.name ?? props.spell?.name ?? '');
 const lines = computed(() => {
@@ -51,10 +52,7 @@ const rulesSize = computed(() => fittedRulesSize(lines.value));
   <span class="face" :class="{ casserole: Boolean(casserole) }" :style="faceStyle">
     <span class="art">
       <span class="burst" />
-      <template v-if="casserole">
-        <PaperPuppet v-if="ownerPuppet" class="owner" :puppet="ownerPuppet" :name="owner?.name ?? ''" />
-        <span class="pan" />
-      </template>
+      <CasseroleArt v-if="casserole" :illustration="illustration" :pan-image="panImage" :owner-puppet="ownerPuppet" :owner-name="owner?.name ?? ''" />
       <span v-else-if="spell?.id === 'investiture' && tier" class="big-tier"><GameIcon name="crown" /><span>{{ tier }}</span></span>
       <GameIcon v-else class="big-icon" :name="art.icon" />
     </span>
@@ -121,18 +119,6 @@ const rulesSize = computed(() => fittedRulesSize(lines.value));
   paint-order: stroke fill;
 }
 .big-tier .game-icon { font-size: calc(var(--u) * 140); }
-.owner { inset: 0; top: calc(var(--u) * 30); }
-.pan {
-  position: absolute;
-  left: calc(var(--u) * 92);
-  top: calc(var(--u) * -40);
-  width: calc(var(--u) * 270);
-  height: calc(var(--u) * 270);
-  rotate: 196deg;
-  animation: pan-wobble 1.6s ease-in-out infinite;
-  background: var(--pan-image) center / contain no-repeat;
-  filter: drop-shadow(0 calc(var(--u) * 10) calc(var(--u) * 10) rgb(0 0 0 / 0.5));
-}
 .frame { inset: 0; background: var(--frame-image) center / 100% 100% no-repeat; }
 .ribbon {
   left: 0;
@@ -196,6 +182,5 @@ const rulesSize = computed(() => fittedRulesSize(lines.value));
   rotate: 8deg;
 }
 @keyframes burst-turn { to { rotate: 360deg; } }
-@keyframes pan-wobble { 50% { rotate: 186deg; translate: 0 calc(var(--u) * 6); } }
-@media (prefers-reduced-motion: reduce) { .burst, .pan { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .burst { animation: none; } }
 </style>

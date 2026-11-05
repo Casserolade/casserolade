@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
 import { cardInspector } from '#src/client/stores/cardInspector.ts';
+import { tableFx } from '#src/client/stores/tableFx.ts';
 import { useBoardQuips } from '#src/client/stores/useBoardQuips.ts';
 import type { TableGestures } from '#src/client/stores/useTableGestures.ts';
 import { boardResponder } from '#src/client/tools/boardResponder.ts';
@@ -149,6 +150,7 @@ function inspect(event: PointerEvent, minion: Minion): void {
           :oublie="minion.oublie"
           :scandal-left="scandalLeft(minion, round)"
           :answers="responder === minion.uid"
+          :jolts="tableFx.jolts.value[minion.uid] ?? 0"
         />
         <span v-if="outcomeOf(minion)?.owner || outcomeOf(minion)?.scandal" class="forecast" aria-hidden="true">
           <b v-if="outcomeOf(minion)?.owner" class="double">×2</b>
