@@ -1,15 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import ArchPortrait from '#src/client/components/atoms/ArchPortrait.vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import RichText from '#src/client/components/atoms/RichText.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
+import { playVoice } from '#src/client/services/soundEffects.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 import { boldGlossaryTerms, glossaryFor } from '#src/client/tools/glossaryFor.ts';
+import { heroQuotes } from '#src/client/tools/heroQuotes.ts';
+import { nextQuote } from '#src/client/tools/nextQuote.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { splitPolls } from '#src/client/tools/splitPolls.ts';
-import { phraseFor } from '#src/data/phrases.ts';
+import { voixPourPhrase } from '#src/data/trouverVoix.ts';
 import type { Hero } from '#src/engine/types.ts';
 
 /** A hero to choose: the face in its niche, its power, its polls. A real choice: one click. */
@@ -21,17 +24,30 @@ const archImage = computed(() => cssImage(gameArt.manifest.value.carte.arche));
 /** Its power as the cards write theirs: the keywords in bold, and what they mean right under the card. */
 const desc = computed(() => boldGlossaryTerms(props.hero.desc));
 const glossary = computed(() => glossaryFor([desc.value]));
-/** Its best-known line, word for word, said when the pointer rests on it. */
-const MAX_QUOTE = 110;
-const quote = computed(() => {
-  const line = phraseFor(props.hero.id, 'heros');
-  return line && line.length <= MAX_QUOTE ? line : null;
-});
+/** One of its real lines, word for word, shown when the pointer rests on it: another one each time it comes back. */
+const quotes = computed(() => heroQuotes(props.hero.id));
+const quote = ref<string | null>(nextQuote(quotes.value, null, Math.random()));
+function rollQuote(): void {
+  quote.value = nextQuote(quotes.value, quote.value, Math.random());
+}
+
+/**
+ * Chosen: it says its line in its real voice, when it was recorded. If the line shown was not, the bubble
+ * turns to one that was: the voice always says what the bubble shows.
+ */
+function sayIt(): void {
+  if (props.as !== 'button') return;
+  const id = props.hero.id;
+  const voiced = quote.value && voixPourPhrase(id, quote.value) ? quote.value : quotes.value.find((line) => voixPourPhrase(id, line));
+  if (!voiced) return;
+  quote.value = voiced;
+  void playVoice(voixPourPhrase(id, voiced));
+}
 
 </script>
 
 <template>
-  <component :is="as" :type="as === 'button' ? 'button' : undefined" class="hero">
+  <component :is="as" :type="as === 'button' ? 'button' : undefined" class="hero" @pointerenter="rollQuote" @focus="rollQuote" @click="sayIt">
     <span v-if="quote" class="quote" aria-hidden="true"><SpeechBubble tail="down">{{ quote }}</SpeechBubble></span>
     <ArchPortrait class="arch" :puppet="puppet" :name="hero.name" :frame-image="archImage" hide-name />
     <strong class="name">{{ hero.name }}</strong>
