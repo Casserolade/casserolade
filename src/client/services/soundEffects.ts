@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { SYNTH_SOUNDS } from '#src/client/services/synthSounds.ts';
 import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { heardVoices } from '#src/client/stores/heardVoices.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 import { claimSpeech, claimVoice, createMixerState, varySound } from '#src/client/tools/soundMixer.ts';
 
@@ -151,12 +152,13 @@ export function preloadVoice(key: string | null): void {
 
 /**
  * A real voice of the manifest (`sons.citations`), never altered: one at a time, never cutting the one
- * that speaks, under the welcome shout. Resolves to how long it speaks, in milliseconds, once it starts:
- * the bubble that shows its words stays at least that long. 0 when it does not play.
+ * that speaks, under the welcome shout, and never twice in the same game (heardVoices). Resolves to how long it
+ * speaks, in milliseconds, once it starts: the bubble that shows its words stays at least that long. 0 when it does
+ * not play.
  */
 export async function playVoice(key: string | null): Promise<number> {
   const path = key ? gameArt.manifest.value.sons.citations?.[key] : undefined;
-  if (!path || soundSettings.muted.value) return 0;
+  if (!key || !path || soundSettings.muted.value || heardVoices.has(key)) return 0;
   const buffer = await loadSample(`voice-${key}`, path);
   const graph = audio();
   if (!buffer || !graph || soundSettings.muted.value) return 0;
@@ -171,6 +173,7 @@ export async function playVoice(key: string | null): Promise<number> {
     source.connect(level);
     level.connect(graph.master);
     source.start(start);
+    heardVoices.remember(key);
     if (buffer.duration > MAX_VOICE_SECONDS) {
       level.gain.setValueAtTime(VOICE_GAIN, start + seconds - VOICE_FADE_SECONDS);
       level.gain.linearRampToValueAtTime(0, start + seconds);

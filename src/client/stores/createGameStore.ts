@@ -7,6 +7,7 @@ import type { PlayerAction } from '#src/engine/types.ts';
 import { CHAT_LONGUEUR, PARTIE_DISPARUE, PARTIE_PLANTEE } from '#src/protocol/messages.ts';
 import type { Classement, MessageChat, OptionsSalon, ServerMessage, VueFile, VueSalon } from '#src/protocol/messages.ts';
 import type { Transport } from '#src/protocol/transport.ts';
+import { heardVoices } from '#src/client/stores/heardVoices.ts';
 
 const NOTICE_MS = 3500;
 /** The queue said goodbye: a table follows at once, or another tab took the place. */
@@ -28,7 +29,10 @@ export interface MmrChange {
 }
 
 /** Everything the screens know about the game. It alone talks to the transport. */
+
 export function createGameStore(transport: Transport & Partial<ConnectionWatch>) {
+  // A new game: no voice heard yet (a voice is never heard twice in the same game).
+  heardVoices.forget();
   const view = shallowRef<PlayerView | null>(null);
   const combat = shallowRef<CombatView | null>(null);
   /** The end of turn playing on the recruitment table, before its combat opens. */
@@ -161,6 +165,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
   }
 
   function resetGame(): void {
+    heardVoices.forget();
     endOfTurn.value?.destroy();
     endOfTurn.value = null;
     endOfTurnRound = -1;

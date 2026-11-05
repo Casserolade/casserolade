@@ -16,8 +16,10 @@ import { CombatPlayback } from '#src/client/stores/createCombatPlayback.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { ANSWER_MOMENTS, CELEBRATION_MOMENTS } from '#src/client/const/speechMoments.ts';
 import { speechForEvent } from '#src/client/tools/afterCombatSpeech.ts';
-import { hasRecordedLine } from '#src/client/tools/hasRecordedLine.ts';
+import { freshVoice } from '#src/client/tools/freshVoice.ts';
+import { quotesFor } from '#src/client/tools/quotesFor.ts';
 import { voicedSpeaker } from '#src/client/tools/voicedSpeaker.ts';
+import { heardVoices } from '#src/client/stores/heardVoices.ts';
 import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
 import { startedCombats } from '#src/client/stores/startedCombats.ts';
 import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
@@ -52,6 +54,8 @@ const HIGH_SPEAKER = 0.4;
 const DRAIN = { zoomMs: 250, stepMs: 130, hurtMs: 550 };
 /** The giant casserole of the fatal blow, in table pixels, and how long the rival shakes under it. */
 const FATAL_BLOW = { width: 200, shakeMs: 450, afterMs: 600 };
+/** A Célébration is short: a recording of 6 seconds at most first (5 November 2026: Morano's took 8), a longer one when none is left. */
+const SPEECH_VOICE_MAX_SECONDS = 6;
 
 /** `view`: the player's view when the combat began. The next round's view never changes what is shown here. */
 const props = defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null }>();
@@ -83,6 +87,8 @@ let speechEndsAt = 0;
 const speech = shallowRef<(CombatSpeech & { at: { x: number; y: number } | null; below: boolean }) | null>(null);
 /** Drawn once per combat: which of its quotes the celebrant (and the one who answers) says, so that the voice loaded ahead is the one heard. */
 const speechRoll = Math.random();
+/** A single politician is heard after the combat: the one who celebrates, or else the one who answers. */
+let politicianHeard = false;
 /** Already started before this mount (a hot reload on the dev server): it is not played again from the top. */
 const startedBefore = startedCombats.has(props.combat);
 startedCombats.add(props.combat);
@@ -93,9 +99,12 @@ const playback = new CombatPlayback(props.combat.log, {
   handleFinished: scheduleClose,
 });
 const { sides, current, narration, finished, speed, played } = playback;
-/** What each Célébration gives, shown as it plays: all of them at once when the combat is skipped. */
+/** What each Célébration gives, all at once, as the one who celebrates starts to speak (or when the combat is skipped). */
 const allNotices = celebrationNotices(props.combat.log);
-const notices = computed(() => allNotices.filter((notice) => notice.at < played.value));
+const celebrationAt = props.combat.log.findIndex((event) => event.e === 'celebration');
+const notices = computed(() => (celebrationAt >= 0 && played.value > celebrationAt ? allNotices : []));
+/** The head of each politician who celebrates, on its notice. */
+const noticeHeads = computed(() => Object.fromEntries(allNotices.map((notice) => [notice.cardId, puppetStyle(gameArt.manifest.value, notice.cardId, 'civile')])));
 const plainSides = computed(() => (stageReady.value || stageFailed.value || finished.value ? sides.value : openingSides));
 const own = computed(() => plainSides.value[props.combat.side]);
 const enemy = computed(() => plainSides.value[props.combat.side === 0 ? 1 : 0]);
@@ -218,19 +227,31 @@ function scheduleClose(): void {
   resultTimer = window.setTimeout(showResult, RESULT_DELAY_MS);
 }
 
-/** After the combat, the survivor who celebrates speaks over its medallion; the one who answers, over its hero. */
-/** Who takes the floor for this event: one with a recorded line when there is one, so that its voice is heard. */
-function withVoiceFirst(event: CombatEvent): CombatEvent {
-  if (event.e !== 'celebration' && event.e !== 'reponse') return event;
-  const moments = event.e === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS;
-  return voicedSpeaker(event, props.combat.log, (cardId) => hasRecordedLine(cardId, moments));
+/**
+ * The voice that can say this line after the combat: never heard yet in this game, only one per combat, and no
+ * longer than `maxSeconds`.
+ */
+function voiceFor(cardId: string, line: string, maxSeconds = Infinity): string | null {
+  return politicianHeard ? null : freshVoice(cardId, line, heardVoices.has, maxSeconds);
 }
 
-/** What is said for this event: never the line this politician said last time, when it has another one. */
+/**
+ * What is said for this event, with voices of `maxSeconds` at most: who takes the floor (one whose line can be heard,
+ * when there is one), and never the line this politician said last time, when it has another one.
+ */
+function speechWithin(event: CombatEvent, maxSeconds: number): CombatSpeech | null {
+  if (event.e !== 'celebration' && event.e !== 'reponse') return null;
+  const moments = event.e === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS;
+  const canVoice = (cardId: string, line: string) => voiceFor(cardId, line, maxSeconds) !== null;
+  const speaker = voicedSpeaker(event, props.combat.log, (cardId) => quotesFor(cardId, moments).some((line) => canVoice(cardId, line)));
+  return speechForEvent(speaker, speechRoll, lastSpokenLines.lastOf(speaker.cardId), canVoice);
+}
+
+/** After the combat, the survivor who celebrates speaks over its medallion; the one who answers, over its hero. A short voice first; when none is left, a longer one rather than none. */
 function speechFor(event: CombatEvent): CombatSpeech | null {
-  const speaker = withVoiceFirst(event);
-  const cardId = 'cardId' in speaker ? speaker.cardId : '';
-  return speechForEvent(speaker, speechRoll, lastSpokenLines.lastOf(cardId));
+  const short = speechWithin(event, SPEECH_VOICE_MAX_SECONDS);
+  if (!short?.line || voiceFor(short.cardId, short.line, SPEECH_VOICE_MAX_SECONDS)) return short;
+  return speechWithin(event, Infinity);
 }
 
 watch(current, (event) => {
@@ -251,10 +272,12 @@ watch(current, (event) => {
   if (said.line && !said.chant) lastSpokenLines.remember(said.cardId, said.line);
   const readMore = longTextBonusMs(said.line ?? '');
   hideSpeechAfter(seconds * 1000 + 300 + readMore);
-  // A politician is heard after the combat only: when it celebrates, or has the last word with its Droit de réponse.
-  if (!said.line) return;
+  // A politician is heard after the combat only, and only one: the one who celebrates, or else the one who answers.
+  const voice = said.line && !said.chant ? voiceFor(said.cardId, said.line) : null;
+  if (!voice) return;
+  politicianHeard = true;
   // Its real voice, when its words were recorded: the combat waits for it, and the bubble stays as long.
-  void playVoice(voixPourPhrase(said.cardId, said.line)).then((voiceMs) => {
+  void playVoice(voice).then((voiceMs) => {
     if (hasLeft || voiceMs === 0 || speech.value !== shown) return;
     playback.hold(voiceMs);
     hideSpeechAfter(voiceMs + 300 + readMore);
@@ -307,10 +330,13 @@ async function startStage(host: HTMLElement): Promise<void> {
 }
 
 onMounted(async () => {
-  // The voices of the lines said in this combat load with the stage: each starts with its bubble.
+  // The one voice heard after this combat loads with the stage, so that it starts with its bubble.
   for (const event of props.combat.log) {
     const said = speechFor(event);
-    if (said?.line) preloadVoice(voixPourPhrase(said.cardId, said.line));
+    const voice = said?.line && !said.chant ? voiceFor(said.cardId, said.line) : null;
+    if (!voice) continue;
+    preloadVoice(voice);
+    break;
   }
   await startStage(stageHost.value as HTMLElement);
   // The player may have skipped or left while the stage was loading.
@@ -367,7 +393,7 @@ onUnmounted(() => {
     <p v-if="waitingNext" class="waiting-next" role="status">Les autres débats se terminent…</p>
 
     <template #front>
-      <CelebrationNotices :notices="notices" :side="props.combat.side" />
+      <CelebrationNotices :notices="notices" :side="props.combat.side" :heads="noticeHeads" />
       <div v-if="resultShown" class="outcome" :class="{ won, lost: lost || eliminated }" role="status">
         <strong class="result">{{ eliminated ? 'Éliminé !' : won ? 'Victoire !' : lost ? 'Défaite…' : 'Égalité' }}</strong>
         <span class="detail">{{ outcome }}</span>

@@ -23,15 +23,21 @@ export interface CombatSpeech {
  * not say the same thing every time. When some of its quotes were recorded, the draw is among those: these
  * two moments are where the real voices are heard (4 November 2026: too few were). `avoid` is the line it
  * said last time: on a winning streak it says another one, recorded if it has another, else in a bubble
- * (5 November 2026). A politician without any quote chants its camp's real slogan, so that nobody talks for
- * a long time without a word.
+ * (5 November 2026). `canVoice` says which lines can be heard now: in a game, a voice is never heard twice, and
+ * after a combat a single politician is heard. A politician without any quote chants its camp's real slogan, so
+ * that nobody talks for a long time without a word.
  */
-export function speechForEvent(event: CombatEvent, roll = 0, avoid: string | null = null): CombatSpeech | null {
+export function speechForEvent(
+  event: CombatEvent,
+  roll = 0,
+  avoid: string | null = null,
+  canVoice: (cardId: string, line: string) => boolean = (cardId, line) => Boolean(voixPourPhrase(cardId, line)),
+): CombatSpeech | null {
   if (event.e !== 'celebration' && event.e !== 'reponse') return null;
   const kind = event.e === 'celebration' ? 'celebration' : 'reponse';
   const quotes = quotesFor(event.cardId, kind === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS);
   const fresh = quotes.filter((line) => line !== avoid);
-  const voiced = fresh.filter((line) => voixPourPhrase(event.cardId, line));
+  const voiced = fresh.filter((line) => canVoice(event.cardId, line));
   const pool = voiced.length > 0 ? voiced : fresh.length > 0 ? fresh : quotes;
   const quote = pool.length ? pool[Math.min(pool.length - 1, Math.floor(roll * pool.length))] : null;
   const camp = CARD_BY_ID[event.cardId]?.camp;

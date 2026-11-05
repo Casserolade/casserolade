@@ -94,3 +94,32 @@ test('aucun texte affiché ne dit « serviteur » : cartes, dorées comprises, s
   const glossary = glossaryFor(texts).flatMap((entry) => [entry.term, entry.rule]);
   for (const text of [...texts, ...glossary]) assert.doesNotMatch(text, /serviteur/i, text);
 });
+
+test('freshVoice: a recorded line not heard yet in this game, and short enough for a Célébration', async () => {
+  const { freshVoice } = await import('../src/client/tools/freshVoice.ts');
+  const { DUREES_VOIX } = await import('../src/data/dureesVoix.ts');
+  const { VOIX } = await import('../src/data/voix.ts');
+  const morano = VOIX.find((v) => v.fichier === 'morano_morano_amie_tchadienne');
+  assert.ok(morano && DUREES_VOIX[morano.fichier] > 6, 'the line of Morano that took 8 seconds');
+  assert.equal(freshVoice('morano', morano.phrase, () => false), morano.fichier);
+  assert.equal(freshVoice('morano', morano.phrase, () => false, 6), null, 'too long for a Célébration');
+  assert.equal(freshVoice('morano', morano.phrase, (key) => key === morano.fichier), null, 'already heard in this game');
+  assert.equal(freshVoice('morano', 'Une phrase qu\'elle n\'a jamais dite.', () => false), null);
+});
+
+test('every real voice has its duration: a Célébration knows ahead whether it is short', async () => {
+  const { DUREES_VOIX } = await import('../src/data/dureesVoix.ts');
+  const { VOIX } = await import('../src/data/voix.ts');
+  const missing = VOIX.filter((v) => !(DUREES_VOIX[v.fichier] > 0)).map((v) => v.fichier);
+  assert.deepEqual(missing, [], 'node tools/phrases/durees_voix.ts');
+});
+
+test('heardVoices: a voice is never heard twice in the same game, and a new game forgets them', async () => {
+  const { heardVoices } = await import('../src/client/stores/heardVoices.ts');
+  heardVoices.forget();
+  assert.equal(heardVoices.has('pisse_dessus'), false);
+  heardVoices.remember('pisse_dessus');
+  assert.equal(heardVoices.has('pisse_dessus'), true);
+  heardVoices.forget();
+  assert.equal(heardVoices.has('pisse_dessus'), false);
+});

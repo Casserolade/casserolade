@@ -237,3 +237,13 @@ test('a relaunch spell only lands on a minion that has something to relaunch', (
   assert.deepEqual(spellTargets({ uid: 9, spellId: 'seconde_deliberation' }, board), [2]);
   assert.deepEqual(spellTargets({ uid: 9, spellId: 'tribune_libre' }, board), []);
 });
+
+test('speechForEvent draws a line that can be heard now, or a plain bubble when none can', () => {
+  const event = { e: 'celebration' as const, side: 0 as const, uid: 4, cardId: 'morano' };
+  const recorded = quotesFor('morano', ['celebration', 'heros', 'pose', 'casserole', 'mort']).filter((line) => voixPourPhrase('morano', line));
+  assert.ok(recorded.length >= 2);
+  const [kept] = recorded;
+  for (const roll of [0, 0.5, 0.999]) assert.equal(speechForEvent(event, roll, null, (_, line) => line === kept)?.line, kept);
+  const silent = speechForEvent(event, 0, null, () => false);
+  assert.ok(silent?.line, 'still a line, in a bubble');
+});
