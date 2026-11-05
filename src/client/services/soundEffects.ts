@@ -16,7 +16,8 @@ const MASTER_CEILING = 1.4;
  * The greeting, shouted: Macron at the Porte de Versailles, 10 December 2016. Loud in the file, so turned down.
  * The full shout when the manifest has it, else the short cut.
  */
-const WELCOME_SOUNDS = ['cest_notre_projet_complet', 'cest_notre_projet'];
+/** Macron's « parce que c'est notre projet ! », shouted: in sons/accueil, apart from the quotes. */
+const WELCOME_SOUND = 'cest_notre_projet_complet';
 const WELCOME_GAIN = 0.45;
 /**
  * The real voices of the quotes: about -17 dB in their files, against -12 for the shout. At this gain
@@ -200,30 +201,22 @@ export function playSample(name: string, gain: number): void {
   }).catch(() => undefined);
 }
 
-let welcomed = false;
 let welcomeVoice: HTMLAudioElement | null = null;
 
-/**
- * The game's greeting, once per visit, at a sane level. Browsers refuse sound before the first gesture:
- * it then waits for the first click or key press.
- */
-export function playWelcome(): void {
-  const citations = gameArt.manifest.value.sons.citations ?? {};
-  const path = WELCOME_SOUNDS.map((name) => citations[name]).find(Boolean);
-  if (welcomed || soundSettings.muted.value || !path) return;
-  welcomed = true;
-  const voice = new Audio(assetUrl(path));
-  welcomeVoice = voice;
-  voice.volume = Math.min(1, soundSettings.volume.value * WELCOME_GAIN);
-  voice.play().catch(() => {
-    const retry = (): void => {
-      window.removeEventListener('pointerdown', retry);
-      window.removeEventListener('keydown', retry);
-      if (soundSettings.muted.value) return;
-      voice.volume = Math.min(1, soundSettings.volume.value * WELCOME_GAIN);
-      voice.play().catch(() => undefined);
-    };
-    window.addEventListener('pointerdown', retry);
-    window.addEventListener('keydown', retry);
-  });
+/** The shout's player, made once and played again at each click on the logo. */
+function welcomeAudio(): HTMLAudioElement | null {
+  const path = gameArt.manifest.value.sons.accueil?.[WELCOME_SOUND];
+  if (!path) return null;
+  welcomeVoice ??= new Audio(assetUrl(path));
+  welcomeVoice.volume = Math.min(1, soundSettings.volume.value * WELCOME_GAIN);
+  return welcomeVoice;
 }
+
+/** The easter egg of the logo, its only use: the shout, from the start, each time it is clicked. */
+export function shout(): void {
+  const voice = soundSettings.muted.value ? null : welcomeAudio();
+  if (!voice) return;
+  voice.currentTime = 0;
+  voice.play().catch(() => undefined);
+}
+

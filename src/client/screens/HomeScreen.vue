@@ -9,8 +9,12 @@ import RoomForm from '#src/client/components/molecules/RoomForm.vue';
 import SoloForm from '#src/client/components/molecules/SoloForm.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import { savePseudo, savedPseudo } from '#src/client/services/localProfile.ts';
-import { playWelcome } from '#src/client/services/soundEffects.ts';
-import { gameArt } from '#src/client/stores/gameArt.ts';
+import { shout } from '#src/client/services/soundEffects.ts';
+import { pickOne } from '#src/client/tools/pickOne.ts';
+import { VERSION } from '#src/client/const/version.ts';
+import ChasingReporter from '#src/client/components/organisms/ChasingReporter.vue';
+import { ANIMATEURS } from '#src/data/animateurs.ts';
+import { PLATEAUX, SECOND_TOUR } from '#src/data/plateaux.ts';
 
 const MAX_PSEUDO_LENGTH = 24;
 
@@ -44,15 +48,30 @@ const emit = defineEmits<{
 const pseudo = ref(savedPseudo());
 watch(pseudo, (value) => savePseudo(value));
 
-// The manifest may still be loading when the home screen appears.
-watch(gameArt.manifest, playWelcome, { immediate: true });
+/** Behind the home page, one of the game's TV sets at random, a new one at each visit. */
+const plateauId = pickOne([...PLATEAUX, SECOND_TOUR].map((plateau) => plateau.id), Math.random()) ?? SECOND_TOUR.id;
+
+/** The host of that set runs after the mouse; it pulls a face at each game mode clicked. */
+const hostId = ANIMATEURS.find((host) => host.plateau === plateauId)?.id ?? 'bouleau';
+const reactions = ref(0);
+/** The time of its face before the mode opens: short, but long enough to be seen. */
+const REACTION_DELAY_MS = 450;
+function react(then: () => void): void {
+  reactions.value++;
+  window.setTimeout(then, REACTION_DELAY_MS);
+}
+
+// No greeting on arrival: Macron's shout is only the logo's easter egg (5 November 2026).
 </script>
 
 <template>
-  <MenuBackdrop>
+  <MenuBackdrop :plateau-id="plateauId">
     <SoundControl class="sound" />
     <div class="home">
-      <h1 class="logo"><img :src="assetUrl('logo/casserolade-fr.webp')" alt="Casserolade" /></h1>
+      <h1 class="logo">
+        <!-- An easter egg: Macron shouts « c'est notre projet ! » each time the logo is clicked. -->
+        <button type="button" class="logo-button" @click="shout"><img :src="assetUrl('logo/casserolade-fr.webp')" alt="Casserolade" /></button>
+      </h1>
       <p class="tagline">Casseroles et tambouille politique</p>
       <p v-if="error" class="error" role="alert">{{ error }}</p>
       <p v-if="resume" class="resume" role="status">
@@ -67,43 +86,48 @@ watch(gameArt.manifest, playWelcome, { immediate: true });
         <section class="mode main-mode">
           <h2>Jeu solo contre l'ordinateur</h2>
           <p>Une partie tout de suite, contre des politiques pilotés par la machine.</p>
-          <SoloForm @start="(settings) => emit('solo', settings)" />
+          <SoloForm @start="(settings) => react(() => emit('solo', settings))" />
         </section>
         <section class="mode">
           <h2>Partie publique</h2>
           <p>Des inconnus de votre niveau, sans compte. Si la table vote pour, des bots prennent les places vides.</p>
-          <AppButton primary @click="emit('public', pseudo)">Entrer dans la file</AppButton>
+          <AppButton primary @click="react(() => emit('public', pseudo))">Entrer dans la file</AppButton>
         </section>
         <section class="mode" :class="{ invited: inviteCode }">
           <h2>Entre amis</h2>
           <p v-if="inviteCode">On vous attend au salon <strong>{{ inviteCode }}</strong>.</p>
           <p v-else>Un lien à partager, sans compte. Les bots prennent les places vides.</p>
-          <RoomForm :invite-code="inviteCode" @create="emit('create', pseudo)" @join="(code) => emit('join', code, pseudo)" />
+          <RoomForm :invite-code="inviteCode" @create="react(() => emit('create', pseudo))" @join="(code) => react(() => emit('join', code, pseudo))" />
         </section>
         <section class="mode">
           <h2>Jeu solo – Mode carrière</h2>
           <p>Un politique, sept élections, du canton au second tour. Chacune a sa règle spéciale.</p>
-          <AppButton primary @click="emit('story')">Jouer la carrière</AppButton>
+          <AppButton primary @click="react(() => emit('story'))">Jouer la carrière</AppButton>
         </section>
       </div>
       <nav class="extras">
-        <AppButton :primary="newcomer" :class="{ beckon: newcomer }" @click="emit('tutorial')"><GameIcon name="sparkle" /> {{ newcomer ? 'Première fois ? Le tutoriel' : 'Tutoriel' }}</AppButton>
+        <AppButton :primary="newcomer" :class="{ beckon: newcomer }" @click="react(() => emit('tutorial'))"><GameIcon name="sparkle" /> {{ newcomer ? 'Première fois ? Le tutoriel' : 'Tutoriel' }}</AppButton>
         <AppButton @click="emit('achievements')"><GameIcon name="star" /> Succès<span v-if="achievements" class="count">{{ achievements }}</span></AppButton>
         <AppButton href="/bestiaire" target="_blank"><GameIcon name="skull" /> Le bestiaire</AppButton>
       </nav>
       <nav class="links" aria-label="Le projet">
         <a href="/a-propos">À propos</a>
         <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
+        <a class="version" href="https://github.com/casserolade/casserolade/blob/main/CHANGELOG.md" title="Ce qui a changé">v{{ VERSION }}</a>
         <a href="/a-propos#contribuer">Contribuer</a>
       </nav>
     </div>
+    <ChasingReporter :host-id="hostId" :reactions="reactions" />
   </MenuBackdrop>
 </template>
 
 <style scoped>
 .sound { position: fixed; top: 1rem; right: 1rem; z-index: 5; }
 .home { display: flex; flex-direction: column; align-items: center; gap: 1rem; width: min(84rem, 96vw); }
-.logo { margin: 0; line-height: 0; }
+/* Over the running reporter: it hides behind the logo at first, and passes behind it. */
+.logo { position: relative; z-index: 50; margin: 0; line-height: 0; }
+.logo-button { padding: 0; border: 0; background: none; cursor: pointer; line-height: 0; }
+.logo-button:active img { transform: scale(0.96) rotate(-2deg); }
 .logo img { width: auto; height: min(330px, 30dvh); max-width: 88vw; object-fit: contain; filter: drop-shadow(0 18px 30px rgb(0 0 0 / 0.65)); animation: logo-in 0.7s cubic-bezier(0.3, 1.5, 0.5, 1); }
 .tagline { margin-top: -0.9rem; color: #ffe27a; font: 400 1.7rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 5px var(--color-ink); paint-order: stroke fill; }
 .error { padding: 0.4rem 1rem; border-radius: 999px; background: #7a1420; color: #fff; font-weight: 700; }
