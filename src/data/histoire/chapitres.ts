@@ -16,6 +16,14 @@ export type Declencheur =
   | 'plateau_plein'
   | 'annonce'
   | 'premier_sort'
+  /** Un politique Porte-parole est sur le plateau. */
+  | 'porte_parole'
+  /** Un politique qui a l'Immunité est sur le plateau. */
+  | 'immunite'
+  /** Le même plateau dans un autre ordre : un politique a été déplacé. */
+  | 'deplace'
+  /** Une manche est passée avec un politique à Fin de tour sur le plateau : sa Fin de tour a joué. */
+  | 'fin_de_tour'
   | 'actualise'
   | 'gel'
   | 'decouvrir'

@@ -133,6 +133,11 @@ export function texteObjectif(o: Objectif): string {
   }
 }
 
+/** Les mêmes politiques, dans un autre ordre : l'un d'eux a été déplacé. */
+function memesPolitiquesAutrement(avant: number[], apres: number[]): boolean {
+  return apres.length === avant.length && apres.every((uid) => avant.includes(uid)) && apres.some((uid, i) => uid !== avant[i]);
+}
+
 /** Dans la même manche, une boutique qui n'a pas seulement perdu une carte achetée : elle a été actualisée. */
 function boutiqueRenouvelee(avant: string[], apres: string[]): boolean {
   const meme = apres.length === avant.length && apres.every((id, i) => id === avant[i]);
@@ -156,7 +161,7 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
   let sortsJoues = 0;
   let manche = 0;
   let sondages = 0;
-  let avant: { casseroles: number; tier: number; board: number; possedes: number; sorts: number; uids: Set<number>; round: number; shop: string[] } | null = null;
+  let avant: { casseroles: number; tier: number; board: number; possedes: number; sorts: number; uids: Set<number>; ordre: number[]; finDeTour: boolean; round: number; shop: string[] } | null = null;
 
   const dire = (d: Declencheur, sortie: Ligne[], repete = false) => {
     if (dits.has(d) && !repete) return;
@@ -198,7 +203,12 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
         if (possedes.some((m) => m.oublie > 0 && !m.scandal)) dire('oubli', sortie);
         if (view.tier > avant.tier) dire('echelon', sortie);
         if (view.round === avant.round && boutiqueRenouvelee(avant.shop, view.shop)) dire('actualise', sortie);
+        if (view.round === avant.round && memesPolitiquesAutrement(precedent.ordre, view.board.map((m) => m.uid))) dire('deplace', sortie);
+        // Une manche est passée avec un politique à Fin de tour sur le plateau : on a vu sa Fin de tour jouer.
+        if (view.round > avant.round && avant.finDeTour) dire('fin_de_tour', sortie);
       }
+      if (view.board.some((m) => m.keywords.includes('porte_parole'))) dire('porte_parole', sortie);
+      if (view.board.some((m) => m.keywords.includes('immunite'))) dire('immunite', sortie);
       if (view.board.length >= view.boardLimit) dire('plateau_plein', sortie);
       if (view.casseroleOffer) dire('casserole_offerte', sortie);
       if (view.frozen) dire('gel', sortie);
@@ -216,6 +226,8 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
         possedes: possedes.length,
         sorts,
         uids: new Set(view.board.map((m) => m.uid)),
+        ordre: view.board.map((m) => m.uid),
+        finDeTour: view.board.some((m) => m.effects.some((e) => e.when === 'fin_tour')),
         round: view.round,
         shop: [...view.shop],
       };

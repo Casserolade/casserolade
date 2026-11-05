@@ -26,6 +26,14 @@
 **Équilibrage**
 - Bruno Le Maire rapporte 2 budget au début du tour, au lieu de 1 : une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie.
 
+**Le tutoriel**
+- Il montre les mots-clés en jeu : Delogu est **Porte-parole**, Guéant a l'**Immunité**. Les mots-clés sont en gras dans la consigne.
+- Sylvain Durif apprend la **Fin de tour** : posé, il joue à la fin du recrutement, sous vos yeux, juste avant le combat.
+- Les casseroles, pas à pas : une première casserole, un bonus ; une deuxième sur le même politique, le scandale, qui le cloue sur place (le cadenas), et l'on déplace les autres autour de lui ; puis l'oubli du peuple, en dernier. Le Bracelet électronique est expliqué au passage.
+
+**L'accueil**
+- Un sous-titre tiré au hasard à chaque visite : « Pookie sonne le glas », « Une affaire n'arrive jamais seule », « Toute ressemblance est volontaire »…
+
 ## 0.2b — 5 novembre 2026
 
 **Le roster, rééquilibré carte par carte**
