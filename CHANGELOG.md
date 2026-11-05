@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2b — 5 novembre 2026
+
+**Le roster, rééquilibré carte par carte**
+- Comme dans Battlegrounds : deux politiques par camp à l'échelon 1, trois ou quatre au 2, et deux échelons 5 par camp. 22 politiques changent d'échelon, dont Ruffin, Royal, Rousseau, Philippe, Pécresse, Bardella et Villiers, qui montent à l'échelon 5.
+- Chaque carte a été mesurée en partie, seule et dans son camp : un échelon plus haut vaut plus que le précédent, ou c'est une clé de synergie. Les légendes de l'échelon 6 ont enfin la force de leur rang.
+- Knafo ne fait plus grandir Reconquête qu'une fois par manche ; Zemmour reprend la main à l'actualisation. Coquerel, Glucksmann, Faure et d'autres cartes inutiles servent à quelque chose.
+- Les camps sont plus serrés qu'avant, et les sondages des héros recalculés.
+
+**Célébration et Droit de réponse**
+- Treize gags de plateau deviennent des Vedettes, avec une petite Célébration et souvent leur vraie voix : Delogu, Thévenoud, Cahuzac, Doucet, Rugy, Odoul, Dupont-Aignan, Asselineau, Cheminade, Durif, Arthaud, Poutou, Lassalle. Chaque camp a sa Célébration dès les premiers échelons.
+- Après une défaite, chaque Droit de réponse joue, plus seulement le plus à gauche ; chaque camp en a un, bas dans les échelons.
+- Macron, « la Fête de la musique », double les Célébrations.
+- Une Célébration rapporte désormais dans plus d'une victoire sur deux, un Droit de réponse dans une défaite sur deux.
+
+**Le jeu**
+- Trois héros au choix, toujours. Les succès qui en ajoutaient un donnent un titre.
+- Le Bracelet électronique oublie le scandale, puis le politique est sous bracelet jusqu'à la manche suivante : il ne bouge plus et ne se renvoie pas. Avant, il restait cloué toute la partie sans que rien ne le dise.
+- La réserve suit Battlegrounds : chaque politique d'un même échelon a le même nombre d'exemplaires, partagés par les huit joueurs. Plus de Ndiaye à foison.
+- « Découvrez un politique de votre échelon » donne bien cet échelon, jamais en dessous. Même chose pour la casserole « Je traverse la rue ».
+- Les contextes, la règle du jour, s'activent ou se désactivent en solo et dans les salons, au hasard par défaut, et s'affichent pendant la partie. Neuf nouveaux, plus drôles : Quoi qu'il en coûte, Mercato, Tripartition, Prescription, Ascenseur social, Chaîne d'info en continu, Primaire ouverte, Premier de cordée, Ruissellement. Le Budget d'austérité s'en va, et la Dissolution rend un politique.
+- Un doré se reconnaît au premier coup d'œil : cadre d'or perlé, couronne et étincelles. L'Immunité est une vraie bulle, la Polémique dégouline davantage.
+- Le combat montre enfin les mêmes médaillons que le recrutement : anneau métal, rayons, bulle d'Immunité, lueur et gouttes de la Polémique, écharpes du Cumul qui tournent, pupitre du Porte-parole avec son micro, et les marques (Héritage, Célébration, Revanche…).
+- Pendant une découverte, l'aide d'une carte s'affiche à côté d'elle, et ne sort plus de l'écran.
+- Plus de pose ratée sans un mot : une carte lâchée sur un politique cloué se pose à la place libre la plus proche, et la ligne de dépôt dit quand le plateau est plein.
+
+**Le bestiaire**
+- Les casseroles, les sorts, les jetons et les contextes rejoignent les héros et les politiques.
+- Tous les mots-clés expliqués, avec les politiques qui les portent.
+- Des filtres : recherche, type, camp et échelon, gardés dans le lien.
+- Chaque fiche donne ses sources : photos, vraies voix, petites phrases et faits.
+
 ## 0.1b — 5 novembre 2026
 
 **La boîte à sons**
