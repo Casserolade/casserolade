@@ -72,12 +72,6 @@ export function apresResultat(avant: Progres, r: Resultat): { progres: Progres; 
   return { progres, nouveaux };
 }
 
-/** Héros proposés au choix en solo et en carrière : la règle, plus un par succès qui le donne. */
-export function herosAuChoix(p: Progres): number {
-  const bonus = SUCCES.filter((s) => s.recompense?.type === 'heros_en_plus' && p.obtenus.includes(s.id)).length;
-  return PARAMS.heroChoices + bonus;
-}
-
 /** Les titres gagnés, du plus ancien au plus récent : le joueur choisit celui qu'il affiche. */
 export function titres(p: Progres): string[] {
   return p.obtenus.flatMap((id) => {

@@ -1,5 +1,5 @@
 /**
- * Les animateurs qui tiennent la boutique : un vrai animateur par plateau (décision de l'utilisateur,
+ * Les animateurs qui tiennent la boutique : un vrai animateur par plateau (décision du
  * 3 novembre 2026). Ceux qui n'ont pas de plateau ne parlent que dans le mode histoire.
  * Les « répliques » sont des inventions de parodie, jamais présentées comme des citations.
  * Les « faits » sont vérifiés et datés. Dernière vérification : 3 novembre 2026.

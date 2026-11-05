@@ -1,6 +1,6 @@
 /**
  * Ce que disent les bots. Tout ici est inventé, c'est de la parodie. L'écran ne porte aucune mention :
- * c'est la décision de l'utilisateur. Les vraies citations sont dans casseroles.ts, avec leur source.
+ * c'est une décision du jeu. Les vraies citations sont dans casseroles.ts, avec leur source.
  * Chaque réplique s'appuie sur un fait de casseroles.ts ou sur un trait public, sans accusation nouvelle
  * et en respectant les statuts judiciaires. Dernière relecture : 2 novembre 2026.
  */
