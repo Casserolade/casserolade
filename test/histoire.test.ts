@@ -6,7 +6,9 @@ import { GISCARD } from '../src/data/histoire/boss.ts';
 import { HEROES, HERO_BY_ID } from '../src/data/heroes.ts';
 import { PLATEAUX, SECOND_TOUR } from '../src/data/plateaux.ts';
 import { REPLIQUES } from '../src/data/repliques.ts';
+import { CARD_BY_ID } from '../src/data/cards.ts';
 import { applyAction, createGame, viewFor } from '../src/engine/game.ts';
+import { makeMinion } from '../src/engine/minion.ts';
 import type { PlayerView } from '../src/engine/game.ts';
 import { actionAutorisee, apresChapitre, chapitreCourant, composerTable, creerSuivi, nouvelleCampagne, plateauDuChapitre, remplir, tirerBoss } from '../src/histoire/campagne.ts';
 import { playGame } from '../src/sim/simulate.ts';
@@ -176,7 +178,7 @@ test('les objectifs se mesurent sur ce que le joueur a vraiment fait', () => {
   const base = viewFor(game, 0);
   const suivi = creerSuivi(chapitre);
   suivi.observer({ ...base, round: 2 });
-  const enScandale = { ...(base.shop[0] as never as PlayerView['board'][number]), uid: 501, casseroles: ['homards', 'lapsus'], oublie: 0, scandal: { until: 5, budget: -2, hpLoss: 0, locked: false, silenced: null } };
+  const enScandale = { ...makeMinion(CARD_BY_ID[base.shop[0]], 501), casseroles: ['homards', 'lapsus'], oublie: 0, scandal: { until: 5, budget: -2, hpLoss: 0, locked: false, silenced: null } };
   suivi.observer({ ...base, round: 3, board: [enScandale] });
   const b = suivi.conclure({ ...base, round: 3 }, 1);
   assert.equal(b.reussi, true);

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
+import RichText from '#src/client/components/atoms/RichText.vue';
 import { TUTORIAL_TARGETS } from '#src/client/const/tutorialTargets.ts';
 import type { Etape } from '#src/data/histoire/tutoriel.ts';
 
@@ -62,7 +63,7 @@ const ringStyle = computed(() => (rect.value ? {
       <Transition name="say" mode="out-in">
         <div v-if="step" :key="step.fini" class="bubble" :class="{ last: learned }" :style="bubbleTop">
           <span class="kicker">{{ learned ? 'Bravo' : 'Tutoriel' }}</span>
-          <p>{{ step.texte }}</p>
+          <p><RichText :text="step.texte" /></p>
           <AppButton v-if="learned" class="career" primary @click="$emit('career')">Passer à la carrière</AppButton>
         </div>
       </Transition>

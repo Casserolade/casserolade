@@ -45,6 +45,22 @@ function suivreLaConsigne(game: Game, fini: string): void {
       if (slot >= 0) act({ t: 'buy', slot });
       break;
     }
+    case 'porte_parole':
+    case 'immunite':
+    case 'fin_de_tour': {
+      // Delogu, Guéant et Durif : achetés et posés d'un geste ; la Fin de tour se voit à la manche suivante.
+      const wanted: Record<string, string> = { porte_parole: 'delogu', immunite: 'gueant', fin_de_tour: 'durif' };
+      if (p.board.some((m) => m.cardId === wanted[fini])) break;
+      const slot = p.shop.indexOf(wanted[fini]);
+      if (slot >= 0) act({ t: 'buy', slot });
+      break;
+    }
+    case 'deplace': {
+      // Le politique cloué garde sa place : un autre passe devant.
+      const libres = p.board.filter((m) => !m.locked);
+      if (libres.length >= 2) act({ t: 'move', uid: libres[libres.length - 1].uid, to: p.board.indexOf(libres[0]) });
+      break;
+    }
     case 'premier_sort': {
       const tract = p.spells.find((s) => s.spellId === 'tract');
       if (tract && p.board[0]) act({ t: 'cast', uid: tract.uid, target: p.board[0].uid });
@@ -119,6 +135,13 @@ test('un joueur qui suit les consignes arrive au bout du tutoriel', () => {
   assert.ok(r.termine, `consignes vues : ${r.vues.join(', ')}`);
   assert.ok(r.vivant, 'le joueur ne perd pas le tutoriel');
   assert.ok(r.manche <= 10, `tout est vu en ${r.manche} manches`);
+});
+
+test('le tutoriel montre les mots-clés, la Fin de tour, le scandale qui cloue et le déplacement autour de lui', () => {
+  const r = jouerLeTutoriel(4);
+  for (const etape of ['porte_parole', 'immunite', 'scandale', 'deplace', 'fin_de_tour', 'oubli']) {
+    assert.ok(r.vues.includes(etape), `${etape} absente : ${r.vues.join(', ')}`);
+  }
 });
 
 test('le tutoriel apprend à actualiser et à geler, et la boutique gelée passe la manche', () => {
