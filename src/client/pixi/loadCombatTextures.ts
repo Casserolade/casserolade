@@ -1,11 +1,16 @@
 import { Assets, Rectangle, Texture } from 'pixi.js';
-import type { GameManifest } from '#src/client/const/gameManifest.ts';
+import type { CharacterArt, GameManifest } from '#src/client/const/gameManifest.ts';
 import { sliceSheet } from '#src/client/pixi/sheetEffect.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 
-export interface CharacterTextures {
+export interface FaceTextures {
   head: Texture;
   jaw: Texture;
+}
+
+export interface CharacterTextures extends FaceTextures {
+  /** Its other faces, by name: `rire`, `aie`. A face whose image is missing is left out. */
+  faces: Record<string, FaceTextures>;
 }
 
 export interface CombatTextures {
@@ -44,12 +49,22 @@ function cutPiece(sheet: Texture, { x, y, w, h }: { x: number; y: number; w: num
   return new Texture({ source: sheet.source, frame: new Rectangle(x, y, w, h) });
 }
 
+async function loadFace(art: Omit<CharacterArt, 'visages'>): Promise<FaceTextures | null> {
+  const sheet = await loadTexture(art.atlas);
+  return sheet && { head: cutPiece(sheet, art.pieces.tete), jaw: cutPiece(sheet, art.pieces.machoire) };
+}
+
+async function loadFaces(art: CharacterArt): Promise<Record<string, FaceTextures>> {
+  const entries = await Promise.all(Object.entries(art.visages ?? {}).map(async ([name, face]) => [name, await loadFace(face)] as const));
+  return Object.fromEntries(entries.filter((entry): entry is [string, FaceTextures] => entry[1] !== null));
+}
+
 async function loadCharacters(manifest: GameManifest, ids: string[]): Promise<Record<string, CharacterTextures>> {
   const known = [...new Set(ids)].filter((id) => manifest.personnages[id]);
   const entries = await Promise.all(known.map(async (id) => {
     const art = manifest.personnages[id];
-    const sheet = await loadTexture(art.atlas);
-    return [id, sheet && { head: cutPiece(sheet, art.pieces.tete), jaw: cutPiece(sheet, art.pieces.machoire) }] as const;
+    const [face, faces] = await Promise.all([loadFace(art), loadFaces(art)]);
+    return [id, face && { ...face, faces }] as const;
   }));
   return Object.fromEntries(entries.filter((entry): entry is [string, CharacterTextures] => entry[1] !== null));
 }

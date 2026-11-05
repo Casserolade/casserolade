@@ -18,6 +18,8 @@ export interface CharacterArt {
     bouche: [number, number];
     menton: [number, number];
   };
+  /** Its other faces, cut the same way: `rire` when it celebrates, `aie` when hit (tools/graphisme/visages.py). */
+  visages?: Record<string, Omit<CharacterArt, 'visages'>>;
 }
 
 export interface EffectArt {
@@ -41,7 +43,9 @@ export interface GameManifest {
   yeux: Record<string, string>;
   effets: Record<string, EffectArt>;
   plateaux: Record<string, { decor: string; jingle?: string }>;
-  sons: { citations?: Record<string, string>; bruitages?: Record<string, string> };
+  sons: { citations?: Record<string, string>; bruitages?: Record<string, string>; accueil?: Record<string, string> };
+  /** A real photo cut out with scissors for a casserole card, by casserole id (tools/graphisme/illustration_casserole.py). */
+  casseroles?: Record<string, string>;
   carte: {
     cadres?: Record<string, string>;
     attaque?: string;

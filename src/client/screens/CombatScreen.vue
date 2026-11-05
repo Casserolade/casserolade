@@ -13,7 +13,12 @@ import { pickCriticalKills } from '#src/client/tools/pickCriticalKills.ts';
 import { playSound, playVoice, preloadVoice } from '#src/client/services/soundEffects.ts';
 import { CombatPlayback } from '#src/client/stores/createCombatPlayback.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { ANSWER_MOMENTS, CELEBRATION_MOMENTS } from '#src/client/const/speechMoments.ts';
 import { speechForEvent } from '#src/client/tools/afterCombatSpeech.ts';
+import { hasRecordedLine } from '#src/client/tools/hasRecordedLine.ts';
+import { voicedSpeaker } from '#src/client/tools/voicedSpeaker.ts';
+import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
+import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
 import { afterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { CombatSpeech } from '#src/client/tools/afterCombatSpeech.ts';
@@ -31,12 +36,15 @@ import { combatEventDuration } from '#src/protocol/combatDuration.ts';
 import { voixPourPhrase } from '#src/data/trouverVoix.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 import type { CombatSides } from '#src/engine/replay.ts';
+import type { CombatEvent } from '#src/engine/types.ts';
 
 const SPEEDS = [1, 2, 4];
 /** The last blows settle (the gag, the numbers that rise) before the result is written over them. */
 const RESULT_DELAY_MS = 700;
 /** Seen, the combat stays until the next round comes: past this, the screen says what it waits for. */
 const WAIT_HINT_MS = 1500;
+/** A speaker whose top is in the upper part of the screen, as a share of its height, speaks below itself. */
+const HIGH_SPEAKER = 0.4;
 /** The polls a loss takes drain one by one under a zoom: the zoom first, then each step, then the blow. */
 const DRAIN = { zoomMs: 250, stepMs: 130, hurtMs: 550 };
 /** The giant casserole of the fatal blow, in table pixels, and how long the rival shakes under it. */
@@ -69,7 +77,9 @@ const speaker = ref<AfterCombatSpeaker>(null);
 let minionSpoke = false;
 /** When the bubble of the medallion that speaks goes away, on the page's clock: the result waits for it. */
 let speechEndsAt = 0;
-const speech = shallowRef<(CombatSpeech & { at: { x: number; y: number } | null }) | null>(null);
+const speech = shallowRef<(CombatSpeech & { at: { x: number; y: number } | null; below: boolean }) | null>(null);
+/** Drawn once per combat: which of its quotes the celebrant (and the one who answers) says, so that the voice loaded ahead is the one heard. */
+const speechRoll = Math.random();
 
 const playback = new CombatPlayback(props.combat.log, {
   handleEvent: (event, sides) => stage?.handleEvent(event, sides),
@@ -200,9 +210,23 @@ function scheduleClose(): void {
 }
 
 /** After the combat, the survivor who celebrates speaks over its medallion; the one who answers, over its hero. */
+/** Who takes the floor for this event: one with a recorded line when there is one, so that its voice is heard. */
+function withVoiceFirst(event: CombatEvent): CombatEvent {
+  if (event.e !== 'celebration' && event.e !== 'reponse') return event;
+  const moments = event.e === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS;
+  return voicedSpeaker(event, props.combat.log, (cardId) => hasRecordedLine(cardId, moments));
+}
+
+/** What is said for this event: never the line this politician said last time, when it has another one. */
+function speechFor(event: CombatEvent): CombatSpeech | null {
+  const speaker = withVoiceFirst(event);
+  const cardId = 'cardId' in speaker ? speaker.cardId : '';
+  return speechForEvent(speaker, speechRoll, lastSpokenLines.lastOf(cardId));
+}
+
 watch(current, (event) => {
   if (!event) return;
-  const said = speechForEvent(event);
+  const said = speechFor(event);
   if (!said) return;
   const seconds = combatEventDuration(event) / 1000 / speed.value;
   const at = stage?.unitPosition(said.uid) ?? null;
@@ -210,17 +234,21 @@ watch(current, (event) => {
     stage?.celebrate(said.uid, seconds);
     playSound('celebrate');
   }
-  const shown = { ...said, at: at ? { x: at.x, y: at.top } : null };
+  // A medallion high on the screen speaks below itself: above, a long line would run off the top.
+  const below = at ? at.top < window.innerHeight * HIGH_SPEAKER : said.side !== props.combat.side;
+  const shown = { ...said, below, at: at ? { x: at.x, y: below ? at.y : at.top } : null };
   speech.value = shown;
   if (said.line) minionSpoke = true;
-  hideSpeechAfter(seconds * 1000 + 300);
-  // A politician is heard only when it celebrates a victory: the Droit de réponse stays a bubble.
-  if (!said.line || said.kind !== 'celebration') return;
+  if (said.line && !said.chant) lastSpokenLines.remember(said.cardId, said.line);
+  const readMore = longTextBonusMs(said.line ?? '');
+  hideSpeechAfter(seconds * 1000 + 300 + readMore);
+  // A politician is heard after the combat only: when it celebrates, or has the last word with its Droit de réponse.
+  if (!said.line) return;
   // Its real voice, when its words were recorded: the combat waits for it, and the bubble stays as long.
   void playVoice(voixPourPhrase(said.cardId, said.line)).then((voiceMs) => {
     if (hasLeft || voiceMs === 0 || speech.value !== shown) return;
     playback.hold(voiceMs);
-    hideSpeechAfter(voiceMs + 300);
+    hideSpeechAfter(voiceMs + 300 + readMore);
     if (said.kind === 'celebration') stage?.celebrate(said.uid, voiceMs / 1000);
   });
 });
@@ -272,8 +300,8 @@ async function startStage(host: HTMLElement): Promise<void> {
 onMounted(async () => {
   // The voices of the lines said in this combat load with the stage: each starts with its bubble.
   for (const event of props.combat.log) {
-    const said = speechForEvent(event);
-    if (said?.line && said.kind === 'celebration') preloadVoice(voixPourPhrase(said.cardId, said.line));
+    const said = speechFor(event);
+    if (said?.line) preloadVoice(voixPourPhrase(said.cardId, said.line));
   }
   await startStage(stageHost.value as HTMLElement);
   // The player may have skipped or left while the stage was loading.
@@ -297,7 +325,7 @@ onUnmounted(() => {
 <template>
   <GameTable :plateau-id="plateauId">
     <div class="opponent" :class="{ shaken: rivalShaken }">
-      <HeroCorner :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" :show-power="false" />
+      <HeroCorner :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line">
         <SpeechBubble tail="left">{{ rivalLine }}</SpeechBubble>
@@ -308,7 +336,7 @@ onUnmounted(() => {
       <SpeechBubble v-if="hostTalking" class="host-line" tail="left">{{ hostLine }}</SpeechBubble>
     </div>
     <div v-if="view" class="hero-spot" :class="{ draining, hurt }">
-      <HeroCorner :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" :show-power="false" />
+      <HeroCorner :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
     </div>
 
     <div v-if="!stageReady" class="plain" :class="{ loading: !stageFailed }">
@@ -337,12 +365,12 @@ onUnmounted(() => {
 
     <template #overlay>
       <div ref="stageHost" class="stage-host" aria-hidden="true" />
-      <div v-if="speech" :key="`${speech.kind}-${speech.uid}`" class="speech" :class="speech.kind" :style="speechStyle" role="status">
+      <div v-if="speech" :key="`${speech.kind}-${speech.uid}`" class="speech" :class="[speech.kind, { below: speech.below }]" :style="speechStyle" role="status">
         <ConfettiBurst v-if="speech.kind === 'celebration'" class="confetti" />
         <span v-if="speech.kind === 'celebration'" class="speed-lines" aria-hidden="true" />
         <span class="speech-bubble">
           <HeadPortrait v-if="!speech.at" class="speaker" :puppet="speakerPuppet" />
-          <SpeechBubble v-if="speechText" tail="down" :shout="speech.kind === 'celebration'">{{ speechText }}</SpeechBubble>
+          <SpeechBubble v-if="speechText" :tail="speech.below ? 'up' : 'down'" :shout="speech.kind === 'celebration'">{{ speechText }}</SpeechBubble>
         </span>
       </div>
     </template>
@@ -350,12 +378,15 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.opponent { --u: var(--s); position: absolute; left: 50%; top: calc(var(--s) * 4); translate: -50% 0; }
+/* Above the combat stage, like the player's own hero: its power shows on hover, over the stage. */
+.opponent { --u: var(--s); position: absolute; z-index: 25; left: 50%; top: calc(var(--s) * 4); translate: -50% 0; }
 /* The casserole lands on the rival's head: its rim sits low on the forehead, the pan tilted like a hat. */
 .fatal-blow { left: 50%; top: calc(var(--s) * -170); translate: -50% 0; z-index: 3; }
 .opponent.shaken :deep(.hero-corner) { animation: rival-shake 0.45s linear; }
 @keyframes rival-shake { 0%, 100% { translate: 0 0; } 20% { translate: calc(var(--s) * -8) calc(var(--s) * 6); } 45% { translate: calc(var(--s) * 7) calc(var(--s) * 2); } 70% { translate: calc(var(--s) * -4) 0; } }
 .opponent :deep(.arch) { --arch-width: calc(var(--s) * 124); }
+/* The rival sits at the top of the screen: its power opens downward, never above the edge. */
+.opponent :deep(.power) { bottom: auto; top: calc(var(--s) * 8); }
 /* The host at its lectern, on the left of the table, between the corner and our hero. */
 .booth { position: absolute; left: calc(var(--s) * 14); top: calc(var(--s) * 236); }
 .host { --lectern-width: calc(var(--s) * 280); }
@@ -414,6 +445,8 @@ onUnmounted(() => {
 .rival-line { position: absolute; left: calc(100% + var(--s) * 28); top: calc(var(--s) * 18); z-index: 20; width: max-content; max-width: calc(var(--s) * 480); }
 .speech { position: fixed; z-index: 30; width: 0; height: 0; pointer-events: none; }
 .speech-bubble { position: absolute; left: 0; bottom: calc(var(--s) * 70); translate: -30% 0; display: flex; align-items: flex-end; gap: calc(var(--s) * 8); width: max-content; max-width: calc(var(--s) * 560); }
+/* Below a medallion high on the screen: under its stats, the tail up toward it. */
+.below .speech-bubble { bottom: auto; top: calc(var(--s) * 100); align-items: flex-start; }
 .celebration .speech-bubble :deep(.bubble) { font-size: calc(var(--s) * 32); padding: calc(var(--s) * 14) calc(var(--s) * 26); }
 .speaker { --portrait-size: calc(var(--s) * 90); border: calc(var(--s) * 4) solid #fff; }
 .confetti { left: 0; top: calc(var(--s) * 60); }

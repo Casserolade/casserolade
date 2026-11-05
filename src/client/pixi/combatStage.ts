@@ -351,5 +351,5 @@ export class CombatStage {
 }
 
 async function loadFonts(): Promise<void> {
-  await Promise.all(['800 40px "Alegreya Sans SC"', '700 28px "Alegreya Sans"', '72px Bangers'].map((font) => document.fonts.load(font)));
+  await Promise.all(['800 40px "Alegreya Sans SC"', '700 28px "Alegreya Sans"', '72px Bangers'].map((font) => document.fonts.load(font, 'Bangers 0123456789')));
 }
