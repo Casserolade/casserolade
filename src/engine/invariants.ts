@@ -82,6 +82,7 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
   check(m.bonusDamage === bonusDamage, `dégâts bonus ${m.bonusDamage}, attendu ${bonusDamage}`);
   const alone = all.reduce((s, c) => s + Math.max(0, c.aloneBonus ?? 0) * mult(c) + Math.min(0, c.aloneBonus ?? 0), 0);
   check(m.aloneBonus === alone, `bonus de solitude ${m.aloneBonus}, attendu ${alone}`);
+  if (m.bracelet) check(m.locked, 'sous bracelet, mais libre de bouger');
   if (m.scandal) {
     const s = m.scandal;
     check(s.budget === defectBudget, `scandale : budget ${s.budget}, attendu ${defectBudget}`);

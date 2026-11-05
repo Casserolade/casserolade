@@ -15,7 +15,6 @@ export const PARAMS: Params = {
   tierCost: { 2: 4, 3: 6, 4: 8, 5: 9, 6: 10 },
   shopSize: { 1: 3, 2: 4, 3: 4, 4: 5, 5: 5, 6: 6 },
   copies: { 1: 15, 2: 13, 3: 11, 4: 9, 5: 7, 6: 7 },
-  poolBalance: 1,
   spellSlots: 1,
   spellDiscount: 0,
   damagePerSurvivor: 2,
@@ -35,5 +34,5 @@ export const PARAMS: Params = {
   scandalThreshold: 2,
   scandalRounds: 2,
   ownerMultiplier: 2,
-  heroChoices: 2,
+  heroChoices: 3,
 };

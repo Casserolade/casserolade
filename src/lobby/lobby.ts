@@ -1,5 +1,5 @@
 import type { BotLevel } from '../bots/bots.ts';
-import { CONTEXTS } from '../data/heroes.ts';
+import { CONTEXTS, RANDOM_CONTEXT } from '../data/heroes.ts';
 import { CHAT_LONGUEUR, PARTIE_DISPARUE } from '../protocol/messages.ts';
 import { recruitTimeMs } from '../protocol/recruitTime.ts';
 import type { Classement, ClientMessage, MessageChat, OptionsSalon, ServerMessage, VueSalon } from '../protocol/messages.ts';
@@ -502,7 +502,7 @@ export class Lobby {
   }
 
   private optionsValides(options: OptionsSalon): OptionsSalon {
-    const contexte = CONTEXTS.some((c) => c.id === options.contexte) ? options.contexte : undefined;
+    const contexte = options.contexte === RANDOM_CONTEXT || CONTEXTS.some((c) => c.id === options.contexte) ? options.contexte : undefined;
     return {
       // Le nombre de bots se déduit des présents au lancement.
       bots: 0,
