@@ -132,6 +132,7 @@ function toCombatUnit(u: Unit): CombatUnit {
     casseroles: [...u.casseroles],
     effects: u.effects,
     bonus: u.bonus,
+    ...(u.scandal ? { scandal: true } : {}),
   };
 }
 

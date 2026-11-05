@@ -504,6 +504,8 @@ export interface CombatUnit {
   effects: Effect[];
   /** Bonus de solitude déjà compris dans atk et hp. */
   bonus: number;
+  /** En scandale : sa marionnette garde sa tête de choc tout le combat. */
+  scandal?: boolean;
 }
 
 /**
