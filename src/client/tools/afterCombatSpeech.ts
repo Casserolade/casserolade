@@ -1,13 +1,10 @@
 import { CARD_BY_ID } from '#src/data/cards.ts';
 import { CHANTS } from '#src/data/chants.ts';
-import { phraseFor } from '#src/data/phrases.ts';
-import type { Moment } from '#src/data/phrases.ts';
 import type { CombatEvent } from '#src/engine/types.ts';
+import { ANSWER_MOMENTS, CELEBRATION_MOMENTS } from '#src/client/const/speechMoments.ts';
+import { quotesFor } from '#src/client/tools/quotesFor.ts';
+import { voixPourPhrase } from '#src/data/trouverVoix.ts';
 
-/** Where the celebrant's words are looked for, in this order: its celebration first, then any of its real quotes. */
-const CELEBRATION_MOMENTS: Moment[] = ['celebration', 'heros', 'pose', 'casserole', 'mort'];
-/** The one who answers for the loser: its last word first, then any of its real quotes. */
-const ANSWER_MOMENTS: Moment[] = ['mort', 'defaite', 'casserole', 'pose'];
 
 export interface CombatSpeech {
   kind: 'celebration' | 'reponse';
@@ -22,14 +19,21 @@ export interface CombatSpeech {
 
 /**
  * What is said once the combat is over: the survivor who celebrates the victory, and the one who answers
- * for the loser. Its own verified quotes first; a politician without any chants its camp's real slogan,
- * so that nobody talks for a long time without a word.
+ * for the loser. One of its own verified quotes, drawn by `roll` in [0, 1) so that the same politician does
+ * not say the same thing every time. When some of its quotes were recorded, the draw is among those: these
+ * two moments are where the real voices are heard (4 November 2026: too few were). `avoid` is the line it
+ * said last time: on a winning streak it says another one, recorded if it has another, else in a bubble
+ * (5 November 2026). A politician without any quote chants its camp's real slogan, so that nobody talks for
+ * a long time without a word.
  */
-export function speechForEvent(event: CombatEvent): CombatSpeech | null {
+export function speechForEvent(event: CombatEvent, roll = 0, avoid: string | null = null): CombatSpeech | null {
   if (event.e !== 'celebration' && event.e !== 'reponse') return null;
   const kind = event.e === 'celebration' ? 'celebration' : 'reponse';
-  const moments = kind === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS;
-  const quote = moments.map((moment) => phraseFor(event.cardId, moment)).find((line) => line !== null) ?? null;
+  const quotes = quotesFor(event.cardId, kind === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS);
+  const fresh = quotes.filter((line) => line !== avoid);
+  const voiced = fresh.filter((line) => voixPourPhrase(event.cardId, line));
+  const pool = voiced.length > 0 ? voiced : fresh.length > 0 ? fresh : quotes;
+  const quote = pool.length ? pool[Math.min(pool.length - 1, Math.floor(roll * pool.length))] : null;
   const camp = CARD_BY_ID[event.cardId]?.camp;
   const chant = quote === null && camp ? CHANTS[camp] : null;
   return { kind, side: event.side, uid: event.uid, cardId: event.cardId, line: quote ?? chant, chant: chant !== null };

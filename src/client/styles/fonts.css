@@ -2,3 +2,6 @@
 @font-face { font-family: 'Alegreya Sans'; font-weight: 700; font-display: swap; src: url('/fontes/alegreya-sans-latin-700-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Alegreya Sans SC'; font-weight: 800; font-display: swap; src: url('/fontes/alegreya-sans-sc-latin-800-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Bangers'; font-weight: 400; font-display: swap; src: url('/fontes/bangers-latin-400-normal.woff2') format('woff2'); }
+/* The digits of Bangers come from Luckiest Guy: in Bangers, a 7 reads as a 1 (5 November 2026). Declared after it,
+   for the digits only, under the same name: every number of the game takes them, cards and combat alike. */
+@font-face { font-family: 'Bangers'; font-weight: 400; font-display: swap; src: url('/fontes/luckiest-guy-latin-400-normal.woff2') format('woff2'); unicode-range: U+0030-0039; }

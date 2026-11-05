@@ -8,6 +8,8 @@ import { NUMBER_STYLE } from '#src/client/pixi/createCardDecor.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import { SheetEffect } from '#src/client/pixi/sheetEffect.ts';
 import { campArtKey } from '#src/client/tools/campArtKey.ts';
+import { otherFaces } from '#src/client/tools/otherFaces.ts';
+import { healthTone } from '#src/client/tools/healthTone.ts';
 import { statTones } from '#src/client/tools/statTone.ts';
 import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
 import type { CombatUnit, Keyword } from '#src/engine/types.ts';
@@ -31,6 +33,10 @@ const PAN = { size: 34, gap: 2, top: 8, string: 12 };
 const CELEBRATION_LIFT = 34;
 /** Going out in light, in combat seconds. */
 const DISSOLVE_SECONDS = 0.75;
+/** A hit shows its wincing face this long, in combat seconds, when it has one. */
+const HIT_FACE_SECONDS = 0.7;
+/** A hit spins it round one time in two: the cut-out does not always land the same way. */
+const TURN_ON_HIT_CHANCE = 0.5;
 /** The Retour badge: where it sits on the frame, its disc and its arrow, in medallion units. */
 const COMEBACK = { x: 6, y: 18, radius: 18, arrow: 24 };
 
@@ -105,6 +111,8 @@ export class CombatCard {
   readonly uid: number;
   atk: number;
   hp: number;
+  /** The most health it had in this combat: below it, it is wounded, and its number turns red. */
+  private maxHp = 0;
   private readonly cardId: string;
   private readonly golden: boolean;
   private readonly rig: CharacterRig;
@@ -151,12 +159,14 @@ export class CombatCard {
       name: unit.name,
       head: character?.head ?? null,
       jaw: character?.jaw ?? null,
+      faces: character ? otherFaces(manifest.personnages[unit.cardId], character.faces) : {},
       body: textures.bodies[campKey] ?? null,
       eyes: textures.eyes,
       star: textures.star,
       plaster: textures.plaster,
     });
     this.rig.setHome(CARD_LAYOUT.feetX, CARD_LAYOUT.feetY);
+    if (unit.scandal) this.rig.restOn('choc');
 
     const ring = new Graphics()
       .ellipse(CX, CY + 5, W / 2, H / 2).fill({ color: '#000000', alpha: 0.45 })
@@ -219,11 +229,12 @@ export class CombatCard {
   show(unit: CombatUnit): void {
     this.atk = unit.atk;
     this.hp = unit.hp;
+    this.maxHp = Math.max(this.maxHp, unit.hp);
     this.attackText.text = String(unit.atk);
     this.healthText.text = String(Math.max(0, unit.hp));
     const tones = statTones(this.cardId, this.golden, unit.atk, unit.hp);
     this.attackText.style.fill = TONE_COLORS[tones.atk];
-    this.healthText.style.fill = TONE_COLORS[tones.hp];
+    this.healthText.style.fill = TONE_COLORS[healthTone(tones.hp, unit.hp, this.maxHp)];
     if (unit.keywords.join() !== this.keywords.join()) {
       this.keywords = [...unit.keywords];
       drawBackdrop(this.backdrop, this.keywords);
@@ -259,8 +270,12 @@ export class CombatCard {
     this.rig.talk(0.4);
   }
 
+  /** Hit: its face winces, and one time in two it spins round like a slapped cut-out, then it is itself again. */
   takeHit(): void {
-    this.rig.flashEyes('croix', 1);
+    this.rig.showFace('aie', HIT_FACE_SECONDS);
+    if (Math.random() < TURN_ON_HIT_CHANCE) this.rig.turnAround(HIT_FACE_SECONDS);
+    // Drawn crossed eyes only for a cut-out without a wincing face of its own: over a real face, they spoil it.
+    if (!this.rig.hasFace('aie')) this.rig.flashEyes('croix', 1);
     this.rig.showStars(1.2);
     this.rig.play('hit');
     this.pose = 0.25;
@@ -272,6 +287,8 @@ export class CombatCard {
 
   /** The one who celebrates: it rises into a spotlight, grows, talks, and stays up for the length of its line. */
   celebrate(seconds: number): void {
+    this.rig.showFace('rire', seconds);
+    this.rig.turnAround(seconds);
     this.rig.talk(seconds);
     this.pose = -seconds;
     if (!this.spotlight) {
