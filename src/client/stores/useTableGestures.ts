@@ -182,6 +182,7 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
     if (from && to) tableFx.add({ kind: 'spell', from, to, card });
     else if (from) tableFx.add({ kind: 'burst', at: from, color: '#ffd84a' });
     playSound('spell');
+    if (target !== undefined) tableFx.jolt(target);
     send(target === undefined ? { t: 'cast', uid: held.uid } : { t: 'cast', uid: held.uid, target });
   }
 
@@ -333,15 +334,16 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
         else if (aim.zone === 'board') play(item.minion, aim.index);
         return;
       case 'hand-spell': {
-        // Only the board casts: back in the hand, over the shop or in the void, the card goes back.
-        if (aim.zone !== 'board') return;
+        // Anywhere on the table casts, the shop side included: the whole panel reads as the play area
+        // (5 November 2026, spells dropped over the shop came back). Only the hand band gives the card back.
+        if (aim.zone === null || aim.zone === 'hand') return;
         if (!spellNeedsTarget(item.held)) {
           cast(item.held, item.card, undefined, point);
           return;
         }
         const valid = spellTargets(item.held, board());
         if (aim.uid !== null && valid.includes(aim.uid)) cast(item.held, item.card, aim.uid, point);
-        else if (aim.zone === 'board') aimSpell(item.held, item.card, point);
+        else aimSpell(item.held, item.card, point);
         return;
       }
       case 'board':

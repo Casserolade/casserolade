@@ -4,6 +4,7 @@ import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import PaperPuppet from '#src/client/components/atoms/PaperPuppet.vue';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { usePuppetFaces } from '#src/client/stores/usePuppetFaces.ts';
 import { rememberOblivion } from '#src/client/stores/seenOblivion.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 import { cardFaceStyle } from '#src/client/tools/cardFaceStyle.ts';
@@ -18,6 +19,10 @@ const POP_MS = 450;
 const CLANG_DELAY_MS = 360;
 /** The table of a new round needs a moment to appear before anything happens on it. */
 const ROUND_START_MS = 700;
+/** A casserole or a scandal: its shocked face, turned round, then its own face again. */
+const SHOCK_MS = 900;
+/** A spell cast on it: the same jolt, a little longer, to be seen. */
+const SPELL_SHOCK_MS = SHOCK_MS + 700;
 
 /**
  * A minion on the table: an oval portrait, attack bottom left, health bottom right, nothing to read.
@@ -50,7 +55,9 @@ const props = withDefaults(defineProps<{
   boardUid?: number;
   /** False when another one would answer a defeat in its place: its bubble goes dim. */
   answers?: boolean;
-}>(), { keywords: () => [], effects: () => [], casseroles: () => [], charges: 0, scandalThreshold: 0, oublie: 0, scandalLeft: 0, answers: true });
+  /** How many spells it has received: at each new one, its face jolts. */
+  jolts?: number;
+}>(), { keywords: () => [], effects: () => [], casseroles: () => [], charges: 0, scandalThreshold: 0, oublie: 0, scandalLeft: 0, answers: true, jolts: 0 });
 
 const has = (keyword: Keyword) => props.keywords.includes(keyword);
 const style = computed(() => {
@@ -58,9 +65,12 @@ const style = computed(() => {
   const face = cardFaceStyle(manifest, props.camp, 1, Boolean(props.golden));
   return { '--camp-color': face['--camp-color'], '--attack-image': face['--attack-image'], '--health-image': face['--health-image'] };
 });
+const faces = usePuppetFaces();
+const inScandal = computed(() => props.scandalLeft > 0);
 const puppet = computed(() => {
   const manifest = gameArt.manifest.value;
-  return puppetStyle(manifest, props.cardId, props.camp);
+  // In a scandal, it keeps its shocked face until the people forget.
+  return puppetStyle(manifest, props.cardId, props.camp, faces.face.value ?? (inScandal.value ? 'choc' : null));
 });
 const tones = computed(() => statTones(props.cardId, Boolean(props.golden), props.atk, props.hp));
 const marks = computed(() => medallionMarks(props.effects));
@@ -78,7 +88,6 @@ const pans = computed(() =>
       })),
 );
 const porteParoleIcon = computed(() => gameArt.manifest.value.carte.mot_cle_porte_parole);
-const inScandal = computed(() => props.scandalLeft > 0);
 
 /** A number that changes pops, so that a gain is seen. */
 const popAtk = ref(false);
@@ -98,6 +107,7 @@ const clang = ref(0);
 watch(() => props.casseroles.length, (count, before) => {
   if (props.bare || count <= before) return;
   clang.value++;
+  faces.show('choc', SHOCK_MS);
   window.setTimeout(() => playSound('clang'), CLANG_DELAY_MS);
 });
 
@@ -106,7 +116,13 @@ const puff = ref(0);
 watch(inScandal, (now, before) => {
   if (props.bare || !now || before) return;
   puff.value++;
+  faces.show('choc', SHOCK_MS);
   playSound('scandal');
+});
+
+/** A spell lands on it: the same jolt. */
+watch(() => props.jolts, (count, before) => {
+  if (!props.bare && count > before) faces.show('choc', SPELL_SHOCK_MS);
 });
 
 /** The people forget: the pans flip into gold medals, with a sparkle. Only the ones just forgotten. */
@@ -156,7 +172,7 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
     <span v-if="showTier && tier" class="tier" role="img" :aria-label="`Échelon ${tier}`" :style="{ '--cols': tierColumns }"><GameIcon v-for="n in tier" :key="n" name="star" /></span>
     <span class="oval">
       <span class="rays" />
-      <span class="figure"><PaperPuppet :puppet="puppet" :name="name" /></span>
+      <span class="figure" :class="{ turned: faces.turned.value }"><PaperPuppet :puppet="puppet" :name="name" /></span>
       <span v-if="golden" class="sheen" />
     </span>
     <span v-if="has('polemique')" class="slime" aria-hidden="true"><i /><i /><i /></span>
@@ -234,6 +250,8 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   width: calc(var(--u) * 512);
   height: calc(var(--u) * 732);
 }
+/* Turned round at once, like a slapped cut-out: no transition, the jerk is the joke. */
+.figure.turned { scale: -1 1; }
 .sheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 42%, rgb(255 240 180 / 0.32) 50%, transparent 58%); background-size: 300% 100%; animation: sheen 3.6s ease-in-out infinite; mix-blend-mode: screen; }
 
 /* Immunité: a golden soap bubble around it. */

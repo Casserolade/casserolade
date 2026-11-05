@@ -7,6 +7,7 @@ import { playSound, playVoice } from '#src/client/services/soundEffects.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 import { hostQuote } from '#src/client/tools/hostQuote.ts';
+import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { voixPourPhrase } from '#src/data/trouverVoix.ts';
 import type { PlayerView } from '#src/engine/game.ts';
@@ -32,18 +33,27 @@ const rollLabel = computed(() => {
 const shownLine = ref<string | null>(null);
 const talking = ref(0);
 let timer = 0;
+/** The round when the host was last heard: one real voice per recruitment, the other lines stay bubbles. */
+let heardRound = -1;
 
-/** A line in a bubble, gone by itself; in the host's real voice when its words were recorded, as long as the voice. */
+/**
+ * A line in a bubble, gone by itself; in the host's real voice when its words were recorded, as long as the voice.
+ * The voice is rationed to one per round: the soundbox is funny when it is rare, not as a rain of sounds.
+ */
 function say(line: string): void {
   shownLine.value = line;
   talking.value++;
   window.clearTimeout(timer);
-  timer = window.setTimeout(() => (shownLine.value = null), LINE_MS);
+  const lineMs = LINE_MS + longTextBonusMs(line);
+  timer = window.setTimeout(() => (shownLine.value = null), lineMs);
   const shownAt = performance.now();
-  void playVoice(voixPourPhrase(props.view.animateur.id, line)).then((voiceMs) => {
+  const round = props.view.round;
+  const voice = heardRound === round ? null : voixPourPhrase(props.view.animateur.id, line);
+  void playVoice(voice).then((voiceMs) => {
+    if (voiceMs > 0) heardRound = round;
     if (voiceMs === 0 || shownLine.value !== line) return;
     window.clearTimeout(timer);
-    timer = window.setTimeout(() => (shownLine.value = null), Math.max(LINE_MS - (performance.now() - shownAt), voiceMs + 300));
+    timer = window.setTimeout(() => (shownLine.value = null), Math.max(lineMs - (performance.now() - shownAt), voiceMs + 300 + longTextBonusMs(line)));
   });
 }
 

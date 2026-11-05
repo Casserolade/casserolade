@@ -8,8 +8,9 @@ import type { Camp } from '#src/engine/types.ts';
 /**
  * The paper puppet of a card as CSS variables, in card units (see PaperPuppet.vue).
  * Same geometry as the PixiJS rig: the chin rests on the neck of the body, the feet on the card's floor.
+ * `face` names another face of the character (`choc`…); without it, or when it has none, its own face.
  */
-export function puppetStyle(manifest: GameManifest, characterId: string, camp: Camp): Record<string, string> {
+export function puppetStyle(manifest: GameManifest, characterId: string, camp: Camp, face: string | null = null): Record<string, string> {
   const { headScale, bodyScale, bodyWidth, bodyHeight, neckOverlap } = RIG_LAYOUT;
   const neckY = CARD_LAYOUT.feetY - bodyHeight * bodyScale + neckOverlap;
   const style: Record<string, string> = {
@@ -21,7 +22,7 @@ export function puppetStyle(manifest: GameManifest, characterId: string, camp: C
     '--neck-x': String(CARD_LAYOUT.feetX),
     '--neck-y': String(neckY),
   };
-  const art = manifest.personnages[characterId];
+  const art = (face && manifest.personnages[characterId]?.visages?.[face]) || manifest.personnages[characterId];
   if (!art) return style;
   const { tete: head, machoire: jaw } = art.pieces;
   const [chinX, chinY] = art.ancres.menton;

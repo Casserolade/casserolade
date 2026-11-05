@@ -75,6 +75,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
   let combatTimer: ReturnType<typeof setTimeout> | undefined;
   /** Said by the host once the server has accepted the action, not before. */
   let pendingHostLine: string | null = null;
+  /** How many lines the host has said at the desk: each gesture brings the next of its real quotes. */
+  let hostTurn = 0;
   /** The player watched this combat to the end: it gives way as soon as the next round is there. */
   let combatSeen = false;
   /** The round of the last combat watched: a reconnection sends it again, it is not played twice. */
@@ -275,13 +277,13 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
     }
   }
 
-  /** The host reacts to the gestures that matter, once the server has accepted them. */
+  /** The host reacts to the gestures that matter, once the server has accepted them: its real words first, its stock line otherwise. */
   function updateHostLine(action: PlayerAction): void {
     const host = view.value?.animateur;
     if (!host) return;
-    if (action.t === 'buy') pendingHostLine = host.repliques.achat;
-    else if (action.t === 'roll') pendingHostLine = host.repliques.actualiser;
-    else if (action.t === 'upgrade') pendingHostLine = hostQuote(host.id, 'echelon');
+    if (action.t === 'buy') pendingHostLine = hostQuote(host.id, 'achat', hostTurn++) ?? host.repliques.achat;
+    else if (action.t === 'roll') pendingHostLine = hostQuote(host.id, 'actualiser', hostTurn++) ?? host.repliques.actualiser;
+    else if (action.t === 'upgrade') pendingHostLine = hostQuote(host.id, 'echelon', hostTurn++);
   }
 
   function act(action: PlayerAction): void {

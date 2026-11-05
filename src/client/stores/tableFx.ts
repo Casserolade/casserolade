@@ -21,6 +21,8 @@ const LIFETIME_MS = 1100;
 /** The effects of each gesture: they start from where the gesture happened and go away by themselves. */
 function createTableFx() {
   const effects = shallowRef<TableEffect[]>([]);
+  /** How many spells each politician of the board has received, by uid: its medallion jolts at each one. */
+  const jolts = shallowRef<Record<number, number>>({});
   let nextId = 1;
 
   function add(effect: NewEffect): void {
@@ -29,7 +31,11 @@ function createTableFx() {
     window.setTimeout(() => (effects.value = effects.value.filter((other) => other.id !== id)), LIFETIME_MS);
   }
 
-  return { effects, add };
+  function jolt(uid: number): void {
+    jolts.value = { ...jolts.value, [uid]: (jolts.value[uid] ?? 0) + 1 };
+  }
+
+  return { effects, jolts, add, jolt };
 }
 
 export const tableFx = createTableFx();
