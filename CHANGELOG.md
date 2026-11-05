@@ -1,5 +1,31 @@
 # Changelog
 
+## Prochaine version
+
+**Doubler rapporte toujours**
+- Le « ×2 sur son propriétaire » des casseroles devient un bonus de propriétaire écrit sur chaque carte : « Sur Nicolas Sarkozy, en plus : +3/+3 ». Quatorze casseroles ne rapportaient presque rien de plus à leur propriétaire, parce qu'un mot-clé, un échange ou un oubli ne double pas. Sur son propriétaire, une casserole donne désormais ses nombres encore une fois, et au moins +1/+1 ; Mélenchon a un deuxième Hologramme, Fillon un deuxième Assistant fictif.
+- La boutique ne propose plus que les casseroles des politiques de la partie, et jamais une casserole que vous avez déjà : une affaire n'arrive qu'une fois. Sept comptes en Suisse sur Cahuzac rapportaient 28 de budget par manche.
+- Un doré fait toujours plus que la carte normale, comme le dit son texte. Un mot-clé va à un allié de plus (Valls, Bertrand, Peltier, Morano, Copé, Lisnard, Pécresse, Dati). Philippe dore deux alliés, Hidalgo découvre deux fois, Jadot, Glucksmann et Chirac relancent deux fois. Douze dorés n'avaient aucun effet de plus.
+- Un Ralliement doré garde ses effets doublés sur un hôte qui ne l'est pas, et un Ralliement normal ne double plus sur un hôte doré. Une casserole donne la même chose à un doré qu'aux autres.
+- Rejoué par Lassalle, Chirac, Mitterrand ou Macron, un mot-clé que l'allié a déjà passe à un autre allié, au lieu de se perdre. Un mot-clé donné « au hasard » va toujours à un allié qui ne l'a pas : les deux Retours de Royal ne tombent plus sur le même.
+
+**Corrections**
+- Chirac posé à côté d'Hidalgo se détruisait lui-même en relançant son Annonce. Une Annonce qui détruit ne se relance plus, et une Annonce ciblée relancée vise un autre allié au hasard, jamais celui qui la relance. Seconde délibération et Tribune libre refusent un politique qui n'a rien à relancer.
+- Un triple ou un Ralliement ne prolonge plus un scandale en cours.
+- Bayrou compte un Ralliement doré pour un, et non pour trois.
+- L'Investiture ne se perd plus quand l'Annonce du doré remplit la main.
+- Congrès est une vraie actualisation : « Quand vous actualisez » joue, et la casserole change.
+- « Après avoir subi des dégâts » réagit aussi aux dégâts d'un 49.3 ou d'une casserole.
+- L'allié suivant est le premier quand il n'y a personne à droite, au recrutement comme en combat : la Célébration de Royal, tout à droite, n'est plus perdue.
+- Un scandale coûte bien ses deux manches de budget, et un politique en main paie son budget par manche.
+- Macron ne double plus les Célébrations s'il est mort au combat, comme Mitterrand les Héritages.
+- Primaire ou Hidalgo sur un politique de la Société civile font découvrir la Société civile.
+- Le bonus de solitude des casseroles tient compte d'un allié Ni droite ni gauche, et du Fer à cheval.
+- Le texte de Chikirou dit « trois fois ».
+
+**Équilibrage**
+- Bruno Le Maire rapporte 2 budget au début du tour, au lieu de 1 : une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie.
+
 ## 0.2b — 5 novembre 2026
 
 **Le roster, rééquilibré carte par carte**
