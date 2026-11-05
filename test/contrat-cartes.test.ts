@@ -21,6 +21,8 @@ const COMBAT_TRIGGERS: Trigger[] = ['debut_combat', 'heritage', 'riposte', 'meet
 const VARIANTS = 3;
 /** Les alliés de tous les mondes : un Fin de tour, une Immunité. */
 const FIXED_ALLIES = ['durif', 'gueant'];
+/** The cards `fire` plays to set off a trigger: as allies, their third copy would make a triple instead. */
+const TRIGGER_CARDS = ['houssin', 'castaner'];
 /** Des textes qui ne jouent que dans une situation que ce banc ne construit pas : chacun sa raison. */
 const SITUATIONAL: Record<string, string> = {};
 
@@ -39,7 +41,7 @@ function world(card: Card, when: Trigger, keepTrigger: boolean, variant: number)
   p.budget = 40;
   p.tier = Math.max(card.tier, 3);
   // Ni Ralliement ni allié fixe : un troisième exemplaire, en jeu, ferait un triple et changerait le monde.
-  const sameCamp = CARDS.filter((c) => c.camp === card.camp && c.id !== card.id && c.tier <= 3 && !c.token && !c.keywords?.includes('ralliement') && !FIXED_ALLIES.includes(c.id))
+  const sameCamp = CARDS.filter((c) => c.camp === card.camp && c.id !== card.id && c.tier <= 3 && !c.token && !c.keywords?.includes('ralliement') && !FIXED_ALLIES.includes(c.id) && !TRIGGER_CARDS.includes(c.id))
     .sort((a, b) => (a.effects?.length ?? 0) - (b.effects?.length ?? 0))[0]?.id ?? 'thevenoud';
   const allies: Minion[] = [];
   for (const id of [sameCamp, ...FIXED_ALLIES]) {

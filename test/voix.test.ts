@@ -27,7 +27,7 @@ test('chaque vraie voix a son fichier, sa personne, et sa casserole du même pro
 });
 
 test('une voix ne se joue que si elle dit ce qu\'on lit', () => {
-  // Les voix gardées changent à chaque écoute de l'utilisateur : le test prend celles qui sont là.
+  // Les voix gardées changent à chaque séance d'écoute : le test prend celles qui sont là.
   const surCasserole = VOIX.find((v) => v.casserole);
   if (surCasserole) assert.equal(voixPourCasserole(surCasserole.casserole as string), surCasserole.fichier);
   assert.equal(voixPourCasserole('courbe'), null, 'la casserole cite le Bourget, aucun extrait ne dit cela');

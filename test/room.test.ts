@@ -6,6 +6,7 @@ import type { Classement, ServerMessage } from '../src/protocol/messages.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
 import { PARTIE_PLANTEE } from '../src/protocol/messages.ts';
 import { replayRoom } from '../src/server/replayRoom.ts';
+import { PARAMS } from '../src/data/params.ts';
 import { GameRoom } from '../src/server/room.ts';
 import type { Clock, RoomIncident, RoomSeat } from '../src/server/room.ts';
 
@@ -69,7 +70,7 @@ test('a room waits for the human hero choice, then starts recruitment with a tim
   const { room, inbox, lastView } = createRoom();
   room.start();
   assert.equal(lastView(0).phase, 'choix_heros');
-  assert.equal(lastView(0).heroOffers?.length, 2);
+  assert.equal(lastView(0).heroOffers?.length, PARAMS.heroChoices);
   room.handleMessage(0, { type: 'action', seq: 1, action: { t: 'hero', i: 1 } });
   assert.equal(lastView(0).phase, 'recrutement');
   const last = inbox.get(0)?.at(-1);

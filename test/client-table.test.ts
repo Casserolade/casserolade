@@ -98,10 +98,10 @@ test('targets follow the rules the engine checks', () => {
 test('medallionMarks shows what the card hides', () => {
   assert.deepEqual(medallionMarks(CARD_BY_ID.bouamrane.effects ?? []), { heritage: true, triggered: false, revanche: null, celebration: false, reponse: false });
   const vallaud = medallionMarks(CARD_BY_ID.vallaud.effects ?? []);
-  assert.equal(vallaud.revanche, 3);
+  assert.equal(vallaud.revanche, 4);
   assert.ok(medallionMarks(CARD_BY_ID.boyard.effects ?? []).celebration);
   assert.ok(medallionMarks(CARD_BY_ID.portes.effects ?? []).triggered);
-  assert.ok(medallionMarks(CARD_BY_ID.ruffin.effects ?? []).reponse);
+  assert.ok(medallionMarks(CARD_BY_ID.ndiaye.effects ?? []).reponse);
   assert.ok(!medallionMarks(CARD_BY_ID.chikirou.effects ?? []).triggered, 'an Annonce is spent once played');
 });
 

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createGame, finishRound, startCombats } from '../src/engine/game.ts';
 
 /**
- * Les rencontres de chaque manche. Retour de l'utilisateur (3 novembre 2026) : « je n'ai jamais croisé
+ * Les rencontres de chaque manche. Retour de partie (3 novembre 2026) : « je n'ai jamais croisé
  * mon collègue alors que j'ai croisé 3 fois Bardella ». L'appariement tiré au hasard n'évitait que le
  * dernier adversaire : 22 % des paires ne se croisaient jamais.
  */

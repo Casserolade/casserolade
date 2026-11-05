@@ -602,3 +602,29 @@ test('chaseMood: it sweats after a long run, flops down when it stops, and sits 
   assert.equal(short.sitting, false, 'a short dash: it stays up');
   assert.equal(chaseMood(short, false, 5).sitting, true, 'bored: it sits');
 });
+
+test('mixColor mixes like CSS color-mix in srgb', async () => {
+  const { mixColor } = await import('../src/client/tools/mixColor.ts');
+  assert.equal(mixColor('#ffffff', '#000000', 0.5), '#808080');
+  assert.equal(mixColor('#2f6fd0', '#ffffff', 1), '#2f6fd0');
+  assert.equal(mixColor('#2f6fd0', '#000000', 0), '#000000');
+});
+
+test('nearestInsertion: a card dropped on a nailed politician lands at the nearest free place', async () => {
+  const { nearestInsertion } = await import('../src/client/tools/nearestInsertion.ts');
+  const { insertAroundLocked } = await import('../src/engine/reorderAroundLocked.ts');
+  const board = [{ locked: false }, { locked: true }, { locked: false }];
+  const locked = (m: { locked: boolean }) => m.locked;
+  assert.equal(nearestInsertion(board, 0, locked), 0);
+  assert.equal(nearestInsertion(board, 1, locked), 2, 'past the nailed one');
+  assert.equal(nearestInsertion(board, 3, locked), 3, 'the end is always free');
+  for (let index = 0; index <= board.length; index++) {
+    assert.ok(insertAroundLocked(board, { locked: false }, nearestInsertion(board, index, locked), locked), `index ${index} accepted by the engine`);
+  }
+});
+
+test('dropGuideLabel says when the board is full, and how many places it has', async () => {
+  const { dropGuideLabel } = await import('../src/client/tools/dropGuideLabel.ts');
+  assert.equal(dropGuideLabel({ mode: 'play', armed: true, amount: 0, blocked: 'board', places: 6 }), 'Plateau plein : 6 places');
+  assert.equal(dropGuideLabel({ mode: 'sell', armed: true, amount: 1, blocked: 'bracelet' }), 'Sous bracelet');
+});

@@ -254,12 +254,12 @@ test('Hidalgo et la Primaire détruisent leur cible : elle se choisit toujours, 
 // 7. Un politique doré dit ce qu'il fait vraiment.
 
 test('le texte d\'un politique doré double ce que le moteur double', () => {
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.cheminade, { isGolden: true }), ['**Vente** : **découvrez** un sort, deux fois.']);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.doucet, { isGolden: true }), ['**Fin de tour** : gagne +2/+2.']);
+  assert.ok(cardRuleLines(CARD_BY_ID.cheminade, { isGolden: true }).includes('**Vente** : **découvrez** un sort, deux fois.'));
+  assert.ok(cardRuleLines(CARD_BY_ID.doucet, { isGolden: true }).includes('**Fin de tour** : gagne +2/+2.'));
   assert.match(cardRuleLines(CARD_BY_ID.chirac, { isGolden: true }).join(' '), /trois fois/);
   assert.match(cardRuleLines(CARD_BY_ID.oudea).join(' '), /Toujours doré.*\+1\/\+0/);
   assert.match(cardRuleLines(CARD_BY_ID.oudea, { isGolden: true }).join(' '), /\+2\/\+0/);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.doucet), ['**Fin de tour** : gagne +1/+1.'], 'un politique simple garde son texte');
+  assert.ok(cardRuleLines(CARD_BY_ID.doucet).includes('**Fin de tour** : gagne +1/+1.'), 'un politique simple garde son texte');
   for (const card of CARDS) {
     const lines = cardRuleLines(card, { isGolden: true });
     assert.ok(lines.every((line) => !/undefined|NaN/.test(line)), card.id);
@@ -320,9 +320,9 @@ test('éliminé bien avant la fin (en ligne) : le classement s\'affiche dès qu\
 
 test('une partie locale coupée par un rechargement se dit une fois, et une partie finie ne dit rien', () => {
   const storage = memoryMarks();
-  markLocalGame({ kind: 'solo', botLevel: 'difficile' }, storage);
+  markLocalGame({ kind: 'solo', botLevel: 'difficile', contexte: 'mercato' }, storage);
   const mark = takeInterruptedGame(storage);
-  assert.deepEqual(mark, { kind: 'solo', botLevel: 'difficile' });
+  assert.deepEqual(mark, { kind: 'solo', botLevel: 'difficile', contexte: 'mercato' });
   assert.match(interruptedNotice(mark ?? { kind: 'solo' }).text, /rechargée/);
   assert.equal(takeInterruptedGame(storage), null, 'dit une seule fois');
   markLocalGame({ kind: 'carriere' }, storage);

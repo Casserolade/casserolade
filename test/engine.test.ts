@@ -2,15 +2,17 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { combatBonuses, resolveCombat } from '../src/engine/combat.ts';
 import { isCamp } from '../src/engine/camps.ts';
-import { addSpellToHand, offerCasserole, refillShop } from '../src/engine/recruit.ts';
-import { applyAction, createGame, resolveRound, startCombats, viewFor } from '../src/engine/game.ts';
+import { addMinionToHand, addSpellToHand, endOfTurn, offerCasserole, refillShop } from '../src/engine/recruit.ts';
+import { applyAction, createGame, resolveRound, startCombats, startRound, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { makeMinion } from '../src/engine/minion.ts';
+import { invariantViolations } from '../src/engine/invariants.ts';
+import { createBot, decide } from '../src/bots/bots.ts';
 import { createRng } from '../src/engine/rng.ts';
 import type { Card, Effect, Keyword, Minion } from '../src/engine/types.ts';
 import { CARDS, CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
 import { CASSEROLES } from '../src/data/casseroles.ts';
-import { HEROES } from '../src/data/heroes.ts';
+import { HEROES, RANDOM_CONTEXT } from '../src/data/heroes.ts';
 import { PARAMS } from '../src/data/params.ts';
 import { SPELLS } from '../src/data/sorts.ts';
 import { PLATEAUX, SECOND_TOUR, plateauFor } from '../src/data/plateaux.ts';
@@ -140,14 +142,16 @@ test('chaque Vedette survivante applique sa Célébration, une seule prononce sa
     const m = addMinionToHand(game, p, id);
     assert.ok(m && applyAction(game, 0, { t: 'play', uid: m.uid }).ok);
   }
-  const tracts = p.spells.filter((s) => s.spellId === 'tract').length;
+  // Tracts pile up in one card with a count (rule R5).
+  const countTracts = () => p.spells.filter((s) => s.spellId === 'tract').reduce((sum, s) => sum + (s.count ?? 1), 0);
+  const tracts = countTracts();
   startCombats(game);
   const record = game.roundCombats[0];
   assert.equal(record.result.winner, 0);
   assert.equal(record.result.celebrants.length, 2, 'Boyard et Villiers célèbrent tous les deux');
   assert.equal(record.result.log.filter((e) => e.e === 'celebration').length, 1, 'une seule petite phrase');
   assert.equal(p.freeRolls, 2, 'les actualisations de Villiers, même derrière Boyard');
-  assert.ok(p.spells.filter((s) => s.spellId === 'tract').length > tracts, 'le Tract de Boyard');
+  assert.ok(countTracts() > tracts, 'les Tracts de Boyard');
 });
 
 test('le Droit de réponse : le perdant le plus à gauche qui en a un répond', () => {
@@ -228,7 +232,7 @@ test('une casserole s\'achète, va en main, et vaut double sur son propriétaire
   poseCasserole(game, 'ecoutes', sarko);
   poseCasserole(game, 'ecoutes', kazib);
   const perCasserole = (CARD_BY_ID.sarkozy.effects ?? []).find((e) => e.when === 'casserole_recue') as Effect & { atk: number };
-  assert.equal(sarko.atk, CARD_BY_ID.sarkozy.atk + 6 + 2 * perCasserole.atk, 'double, plus Sarkozy qui grandit à chaque casserole posée');
+  assert.equal(sarko.atk, CARD_BY_ID.sarkozy.atk + 6 + perCasserole.atk, 'double, plus Sarkozy qui grandit à la première casserole de la manche');
   // « Ne bouge plus » est un défaut : il dort tant qu'il n'y a pas de scandale.
   assert.equal(sarko.locked, false);
   poseCasserole(game, 'homards', sarko);
@@ -428,7 +432,28 @@ test('Je traverse la rue trouve un politique gratuit de l\'échelon du joueur', 
   poseCasserole(game, 'traverser_la_rue', p.board[0]);
   const found = p.hand[0];
   assert.ok(found);
-  assert.ok(CARD_BY_ID[found.cardId].tier <= p.tier);
+  assert.equal(CARD_BY_ID[found.cardId].tier, p.tier);
+});
+
+/** Casts a discover spell at this tier and gives the tiers it offers. */
+function discoveredTiers(spellId: string, tier: number): number[] {
+  const { game, p } = setup();
+  p.tier = tier;
+  p.spells.push({ uid: 9001, spellId });
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: 9001 }).ok, true);
+  assert.ok(p.discover && p.discover.options.length > 0);
+  return p.discover.options.map((id) => CARD_BY_ID[id].tier);
+}
+
+test('« un politique de votre échelon » : la découverte ne propose jamais un échelon plus bas', () => {
+  for (const tier of [2, 3, 4, 5, 6]) {
+    assert.deepEqual(discoveredTiers('motion_de_synthese', tier), [tier, tier, tier], `Motion de synthèse à l'échelon ${tier}`);
+    for (const tiers of [discoveredTiers('programme', tier), discoveredTiers('testament_politique', tier), discoveredTiers('ouverture', tier)]) {
+      // Fewer choices rather than a lower tier; a tier with no such card at all falls back to the closest one below.
+      assert.equal(new Set(tiers).size, 1, `un seul échelon proposé à l'échelon ${tier}`);
+      assert.ok(tiers[0] <= tier);
+    }
+  }
 });
 
 test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () => {
@@ -439,7 +464,8 @@ test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () =
   const [atk, hp] = [host.atk, host.hp];
   assert.equal(applyAction(game, 0, { t: 'play', uid: p.hand[0].uid, onto: host.uid }).ok, true);
   assert.equal(p.board.length, 1);
-  assert.deepEqual([host.atk, host.hp], [atk + 3, hp + 3]);
+  const rallied = CARD_BY_ID.dupond_moretti;
+  assert.deepEqual([host.atk, host.hp], [atk + rallied.atk, hp + rallied.hp]);
   assert.equal(host.keywords.includes('immunite'), true);
   assert.equal(host.merged.includes('dupond_moretti'), true);
   buy('arthaud', true);
@@ -483,8 +509,9 @@ test('le débauchage prend les stats du serviteur de la boutique, gains compris'
   p.shop = ['chirac'];
   applyAction(game, 0, { t: 'play', uid: p.hand[0].uid });
   const houssin = p.board.find((m) => m.cardId === 'houssin') as Minion;
-  // Houssin a lui-même +1/+1 de la boutique, et prend Chirac (3/6) avec son +1/+1.
-  assert.deepEqual([houssin.atk, houssin.hp], [2 + 4, 2 + 7]);
+  // Houssin a lui-même +1/+1 de la boutique, et prend Chirac avec son +1/+1.
+  const [h, c] = [CARD_BY_ID.houssin, CARD_BY_ID.chirac];
+  assert.deepEqual([houssin.atk, houssin.hp], [h.atk + 1 + c.atk + 1, h.hp + 1 + c.hp + 1]);
   assert.equal(p.shop.length, 0);
   assert.equal(p.counters.debauchages, 1);
 });
@@ -528,16 +555,16 @@ test('Hollande : son Héritage rend le camp plus fort pour de bon, même en comb
   const before = thevenoud.atk;
   for (const q of game.players.slice(1)) q.board = [makeMinion(CARD_BY_ID.chirac, 50000 + q.seat), { ...makeMinion(CARD_BY_ID.mitterrand, 60000 + q.seat), atk: 30, hp: 30 }];
   startCombats(game);
-  assert.ok(thevenoud.atk >= before + 2, 'Hollande meurt deux fois (Retour)');
+  assert.ok(thevenoud.atk >= before + 1, 'l\'Héritage de Hollande, pour de bon');
 });
 
-test('Durif, à chaque fin de tour, donne +1/+1 à un autre allié', () => {
+test('Durif, à chaque fin de tour, donne deux fois +1/+1 à un autre allié', () => {
   const { game, p, buy } = setup();
   buy('durif');
   buy('cheminade');
   const target = p.board[1];
-  resolveRound(game);
-  assert.equal(target.atk, CARD_BY_ID.cheminade.atk + 1);
+  endOfTurn(game, p);
+  assert.equal(target.atk, CARD_BY_ID.cheminade.atk + 2, 'le seul autre allié reçoit les deux');
 });
 
 test('la Dépense : Rugy grandit chaque fois que vous avez dépensé 5', () => {
@@ -644,24 +671,220 @@ test('la Fin de tour est notée effet par effet, et part avec la vue du combat (
   const game = createGame({ seed: 9, seats: 2, heroes: ['tondelier', 'philippe'], activeCamps: ['ecologistes', 'macronie', 'insoumis', 'rn', 'socialistes'], combatLog: true });
   const p = game.players[0];
   p.budget = 20;
-  const placed = ['doucet', 'macron'].map((id) => {
+  const placed = ['doucet', 'bayrou'].map((id) => {
     const m = addMinionToHand(game, p, id);
     assert.ok(m && applyAction(game, 0, { t: 'play', uid: m.uid }).ok);
     return m;
   });
-  const [doucet, macron] = placed;
+  const [doucet, bayrou] = placed;
   const before = { atk: p.board[0].atk, hp: p.board[0].hp };
   startCombats(game);
   const steps = p.endOfTurnSteps;
   const grow = steps.find((s) => s.source === doucet.uid);
   assert.ok(grow, 'Doucet joue sa Fin de tour');
   assert.deepEqual(grow.changes.map((c) => c.uid), [doucet.uid]);
-  const idle = steps.find((s) => s.source === macron.uid);
-  assert.ok(idle && idle.changes.length === 0 && idle.notes.length === 0, 'Macron sans doré : rien à faire, et ça se voit');
+  const idle = steps.find((s) => s.source === bayrou.uid);
+  assert.ok(idle && idle.changes.length === 0 && idle.notes.length === 0, 'Bayrou sans Ralliement : rien à faire, et ça se voit');
   const hero = steps.find((s) => s.source === null);
   assert.ok(hero, 'le pouvoir de Tondelier est une étape');
   assert.deepEqual(hero.changes[0], { uid: p.board[0].uid, atk: before.atk + 2, hp: before.hp + 2, keywords: p.board[0].keywords }, 'Doucet +1/+1, puis Tondelier +1/+1 sur le premier');
   const view = combatViewFor(game, 0);
   assert.equal(view?.endOfTurn.length, steps.length);
   assert.ok(!view?.log.some((e) => e.e === 'effet' && e.when === 'fin_tour'), 'le combat ne rejoue plus la Fin de tour');
+});
+
+// Les contextes.
+
+function withContext(contextId: string, seed = 13) {
+  const game = createGame({ seed, heroes: Array(8).fill('attal'), contextId });
+  return { game, p: game.players[0] };
+}
+
+test('contexte « hasard » : une règle tirée avec la graine, jamais la vie politique ordinaire', () => {
+  const drawn = new Set<string>();
+  for (let seed = 1; seed <= 60; seed++) {
+    const id = withContext(RANDOM_CONTEXT, seed).game.ctx.id;
+    assert.notEqual(id, 'normal');
+    assert.equal(withContext(RANDOM_CONTEXT, seed).game.ctx.id, id, 'même graine, même contexte');
+    drawn.add(id);
+  }
+  assert.ok(drawn.size >= 8, `${drawn.size} contextes tirés`);
+  assert.equal(withContext('inconnu').game.ctx.id, 'normal');
+});
+
+test('Primaire ouverte : chacun découvre un politique de l\'échelon 2 à la première manche', () => {
+  const { game } = withContext('primaire_ouverte');
+  for (const p of game.players) {
+    assert.ok(p.discover && p.discover.options.length > 0);
+    assert.ok(p.discover.options.every((id) => CARD_BY_ID[id].tier === 2));
+  }
+});
+
+test('Ruissellement : le dernier en sondages, ex æquo compris, reçoit 2 de budget en plus', () => {
+  const { game } = withContext('ruissellement');
+  assert.equal(game.players[0].budget, PARAMS.startBudget + 2, 'manche 1 : tout le monde est à égalité');
+  game.players.forEach((p, i) => (p.hp = i === 0 ? 10 : 20));
+  startRound(game);
+  const base = PARAMS.startBudget + PARAMS.budgetPerRound;
+  assert.equal(game.players[0].budget, base + 2);
+  assert.equal(game.players[1].budget, base);
+});
+
+test('Premier de cordée : à la fin du recrutement, le plus à gauche gagne +1/+1, et l\'étape se joue', () => {
+  const { game, p } = withContext('premier_de_cordee');
+  p.budget = 100;
+  for (const id of ['gueant', 'thevenoud']) {
+    p.shop = [id];
+    assert.equal(applyAction(game, 0, { t: 'buy', slot: 0 }).ok, true);
+  }
+  const [first, second] = p.board;
+  const before = [first.atk, first.hp, second.atk, second.hp];
+  p.endOfTurnSteps = [];
+  endOfTurn(game, p);
+  assert.deepEqual([first.atk, first.hp, second.atk, second.hp], [before[0] + 1, before[1] + 1, before[2], before[3]]);
+  assert.equal(p.endOfTurnSteps.at(-1)?.source, first.uid);
+});
+
+test('Dissolution : à la manche 8, le dernier politique part, puis chacun découvre un politique de son échelon', () => {
+  const { game, p } = withContext('dissolution');
+  p.budget = 100;
+  for (const id of ['gueant', 'thevenoud']) {
+    p.shop = [id];
+    assert.equal(applyAction(game, 0, { t: 'buy', slot: 0 }).ok, true);
+  }
+  p.tier = 3;
+  game.round = 7;
+  startRound(game);
+  assert.deepEqual(p.board.map((m) => m.cardId), ['gueant']);
+  assert.ok(p.discover && p.discover.options.every((id) => CARD_BY_ID[id].tier === 3));
+});
+
+// Le Bracelet électronique.
+
+/** The rules of the politicians themselves: these tests fill the shop by hand, so the pool counts are left aside. */
+function minionViolations(game: Game): string[] {
+  return invariantViolations(game).filter((v) => !v.startsWith('exemplaires de'));
+}
+
+/** A politician in scandal under « Les écoutes » (ne bouge plus) and the homards, on the board of player 0. */
+function inScandal(game: Game, cardId: string): Minion {
+  const p = game.players[0];
+  p.shop = [cardId];
+  assert.equal(applyAction(game, 0, { t: 'buy', slot: 0 }).ok, true);
+  const m = p.board.at(-1) as Minion;
+  poseCasserole(game, 'ecoutes', m);
+  poseCasserole(game, 'homards', m);
+  assert.ok(m.scandal && m.locked);
+  return m;
+}
+
+function castBracelet(game: Game): void {
+  game.players[0].spells.push({ uid: 99001, spellId: 'bracelet_electronique' });
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: 99001 }).ok, true);
+}
+
+test('Bracelet : le scandale s\'oublie, puis ni déplacé ni renvoyé jusqu\'à la manche suivante', () => {
+  const { game, p, buy } = setup();
+  buy('cheminade');
+  const m = inScandal(game, 'kazib');
+  castBracelet(game);
+  assert.equal(m.scandal, undefined);
+  assert.ok(m.locked && m.bracelet);
+  assert.equal(applyAction(game, 0, { t: 'move', uid: m.uid, to: 0 }).ok, false);
+  assert.equal(applyAction(game, 0, { t: 'sell', uid: m.uid }).ok, false);
+  assert.ok(p.board.includes(m));
+  startRound(game);
+  assert.ok(!m.locked && !m.bracelet, 'le bracelet tombe à la manche suivante');
+  assert.equal(applyAction(game, 0, { t: 'move', uid: m.uid, to: 0 }).ok, true);
+  assert.equal(applyAction(game, 0, { t: 'sell', uid: m.uid }).ok, true);
+});
+
+test('Bracelet : un nouveau scandale qui cloue, pris sous bracelet, le cloue encore après le bracelet', () => {
+  const { game } = setup();
+  const m = inScandal(game, 'kazib');
+  castBracelet(game);
+  poseCasserole(game, 'mandat_depot', m);
+  poseCasserole(game, 'ecoutes', m);
+  assert.ok(m.scandal, 'nouveau scandale');
+  startRound(game);
+  assert.ok(!m.bracelet);
+  assert.equal(m.locked, Boolean(m.scandal?.locked), 'cloué tant que le nouveau scandale dure');
+  assert.deepEqual(minionViolations(game), []);
+});
+
+test('Bracelet : le doré d\'un triple part en main libre, sans bracelet', () => {
+  const { game, p } = setup();
+  const m = inScandal(game, 'kazib');
+  castBracelet(game);
+  for (let i = 0; i < 2; i++) {
+    p.shop = ['kazib'];
+    assert.equal(applyAction(game, 0, { t: 'buy', slot: 0, main: true }).ok, true);
+  }
+  const golden = p.hand.find((x) => x.golden && x.cardId === 'kazib') as Minion;
+  assert.ok(golden && !p.board.includes(m));
+  assert.equal(golden.bracelet, undefined);
+  assert.equal(golden.locked, Boolean(golden.scandal?.locked));
+  assert.deepEqual(minionViolations(game), []);
+});
+
+test('Bracelet : un bot ne tente jamais de renvoyer un politique sous bracelet', () => {
+  const game = createGame({ seed: 21, heroes: Array(8).fill('attal') });
+  const p = game.players[0];
+  p.budget = 100;
+  const m = inScandal(game, 'kazib');
+  castBracelet(game);
+  p.budget = 9;
+  const bot = createBot('difficile', 3);
+  for (let n = 0; n < 40; n++) {
+    const action = decide(viewFor(game, 0), bot);
+    if (!action) break;
+    assert.ok(!(action.t === 'sell' && action.uid === m.uid), 'renvoi d\'un politique sous bracelet');
+    if (!applyAction(game, 0, action).ok) break;
+  }
+});
+
+// Célébration et Droit de réponse.
+
+/** Two seats: player 0 lays these cards, player 1 these, then the combat is played. */
+function duel(mine: string[], theirs: string[], seed = 4) {
+  const game = createGame({ seed, seats: 2, heroes: ['philippe', 'philippe'], activeCamps: ['reconquete', 'insoumis', 'rn', 'socialistes', 'macronie'], combatLog: true });
+  for (const [seat, ids] of [[0, mine], [1, theirs]] as const) {
+    const p = game.players[seat];
+    p.budget = 50;
+    for (const id of ids) {
+      const m = addMinionToHand(game, p, id);
+      assert.ok(m && applyAction(game, seat, { t: 'play', uid: m.uid }).ok, `${id} posé`);
+    }
+  }
+  return game;
+}
+
+test('Droit de réponse : après une défaite, chacun joue le sien, et le plus à gauche prend la parole', () => {
+  const game = duel(['ndiaye', 'poutou'], ['de_gaulle', 'giscard', 'chirac']);
+  const p = game.players[0];
+  const before = p.nextBudgetBonus;
+  startCombats(game);
+  const record = game.roundCombats[0];
+  assert.equal(record.result.winner, 1);
+  assert.equal(record.result.responders.length, 2, 'Ndiaye et Poutou');
+  assert.equal(record.result.responder?.uid, p.board[0].uid, 'le plus à gauche parle');
+  assert.equal(p.nextBudgetBonus, before + 2, '+1 de Ndiaye, +1 de Poutou');
+});
+
+test('Macron double les Célébrations : la Fête de la musique', () => {
+  const tractsAfter = (mine: string[]) => {
+    const game = duel(mine, []);
+    const p = game.players[0];
+    const count = () => p.spells.filter((s) => s.spellId === 'tract').reduce((sum, s) => sum + (s.count ?? 1), 0);
+    const before = count();
+    startCombats(game);
+    assert.equal(game.roundCombats[0].result.winner, 0);
+    return count() - before;
+  };
+  assert.equal(tractsAfter(['boyard', 'macron']), 2 * tractsAfter(['boyard', 'leaument']));
+});
+
+test('un héros au bonus de sondages négatif ne commence jamais la partie éliminé', () => {
+  const game = createGame({ seed: 3, heroes: Array(8).fill('bouamrane'), params: { startHp: 4 } });
+  assert.ok(game.players.every((p) => p.hp >= 1 && p.alive));
 });
