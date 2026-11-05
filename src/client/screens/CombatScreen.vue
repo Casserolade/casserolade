@@ -19,10 +19,11 @@ import { speechForEvent } from '#src/client/tools/afterCombatSpeech.ts';
 import { hasRecordedLine } from '#src/client/tools/hasRecordedLine.ts';
 import { voicedSpeaker } from '#src/client/tools/voicedSpeaker.ts';
 import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
+import { startedCombats } from '#src/client/stores/startedCombats.ts';
 import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
 import { afterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
-import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import { celebrationNotices } from '#src/client/tools/celebrationNotices.ts';
+import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { CombatSpeech } from '#src/client/tools/afterCombatSpeech.ts';
 import { combatCharacterIds } from '#src/client/tools/combatCharacterIds.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
@@ -82,6 +83,9 @@ let speechEndsAt = 0;
 const speech = shallowRef<(CombatSpeech & { at: { x: number; y: number } | null; below: boolean }) | null>(null);
 /** Drawn once per combat: which of its quotes the celebrant (and the one who answers) says, so that the voice loaded ahead is the one heard. */
 const speechRoll = Math.random();
+/** Already started before this mount (a hot reload on the dev server): it is not played again from the top. */
+const startedBefore = startedCombats.has(props.combat);
+startedCombats.add(props.combat);
 
 const playback = new CombatPlayback(props.combat.log, {
   handleEvent: (event, sides) => stage?.handleEvent(event, sides),
@@ -311,7 +315,8 @@ onMounted(async () => {
   await startStage(stageHost.value as HTMLElement);
   // The player may have skipped or left while the stage was loading.
   if (hasLeft) return;
-  if (finished.value) stage?.jumpTo(sides.value);
+  if (startedBefore) playback.skip();
+  else if (finished.value) stage?.jumpTo(sides.value);
   else playback.start();
 });
 onUnmounted(() => {
@@ -362,12 +367,12 @@ onUnmounted(() => {
     <p v-if="waitingNext" class="waiting-next" role="status">Les autres débats se terminent…</p>
 
     <template #front>
+      <CelebrationNotices :notices="notices" :side="props.combat.side" />
       <div v-if="resultShown" class="outcome" :class="{ won, lost: lost || eliminated }" role="status">
         <strong class="result">{{ eliminated ? 'Éliminé !' : won ? 'Victoire !' : lost ? 'Défaite…' : 'Égalité' }}</strong>
         <span class="detail">{{ outcome }}</span>
       </div>
     </template>
-      <CelebrationNotices :notices="notices" :side="props.combat.side" />
 
     <template #overlay>
       <div ref="stageHost" class="stage-host" aria-hidden="true" />
