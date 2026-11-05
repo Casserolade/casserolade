@@ -1,5 +1,5 @@
 // Demo only: in the game, card text is generated from src/data/cards.ts (session B).
-// Each quote is what the clip actually says. The clips still have to be listened to by the user.
+// Each quote is what the clip actually says. The clips still have to be listened to.
 export const DEMO_CARDS = [
   {
     id: 'macron',

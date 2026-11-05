@@ -1,7 +1,7 @@
 """Écrit assets/game/credits.json : l'auteur et la licence de chaque photo utilisée, des logos des chaînes, plus les polices.
 
 Usage : python3 tools/graphisme/credits.py
-`partage_identique` signale les licences qui, en principe, s'étendent aux images dérivées : à trancher par l'utilisateur.
+`partage_identique` signale les licences qui, en principe, s'étendent aux images dérivées : à trancher.
 """
 import json
 import os

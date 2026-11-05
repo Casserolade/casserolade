@@ -3,12 +3,12 @@
 Lancer avec uv :
   uv run --no-project --python 3.11 --with bpy --with pillow python tools/graphisme/studios_3d.py [--samples 96] [--out dossier] [ids…]
 
-Retour de l'utilisateur (3 novembre 2026) : « les plateaux de télé se ressemblent trop ». Les quatorze sortaient
+Retour de partie (3 novembre 2026) : « les plateaux de télé se ressemblent trop ». Les quatorze sortaient
 du même squelette (trois écrans rayés, deux gradins, une scène ronde, deux bureaux). Ici, chaque émission a sa
 signature, inspirée des vrais plateaux : les formes qui flottent de TPMP, les triangles de Face à face, le mur
 de plantes de C à vous, l'hémicycle de LCP, les rideaux du Sénat, la carte de LCI, les chronos du débat.
 La table du jeu couvre le centre de l'image : les signatures sont sur les bords et dans les coins.
-Les vraies chaînes, sous leur vrai nom (consigne de l'utilisateur, 3 novembre 2026). Mêmes ids que src/data/plateaux.ts.
+Les vraies chaînes, sous leur vrai nom (consigne du 3 novembre 2026). Mêmes ids que src/data/plateaux.ts.
 """
 import argparse
 import math
@@ -507,7 +507,7 @@ RIG_COLORS = {
     "c_a_vous": "#ffe2b0", "quotidien": "#ffd23f", "france2_dimanche": "#cfe0ff", "grand_oral": "#fff2d0", "france2_prime": "#ffffff",
     "tf1_20h": "#e6eeff", "tf1_second_tour": "#ffffff",
 }
-# CNews, le modèle validé par l'utilisateur (test de style du 3 novembre 2026), a son propre gréement.
+# CNews, le modèle validé (test de style du 3 novembre 2026), a son propre gréement.
 OWN_RIG = {"cnews"}
 
 

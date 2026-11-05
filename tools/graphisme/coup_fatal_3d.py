@@ -3,7 +3,7 @@
   uv run --no-project --python 3.11 --with bpy --with pillow python tools/graphisme/coup_fatal_3d.py [--samples 64]
   puis : uv run --with pillow python tools/graphisme/planche.py <dossier> coup_fatal 12 1 6 impact=4 ancre=0.5,1 tient=1
 
-Décision de l'utilisateur (3 novembre 2026) : plus rien ne tombe sur un politique ; le seul gros gag, en 3D,
+Décision du 3 novembre 2026 : plus rien ne tombe sur un politique ; le seul gros gag, en 3D,
 est le coup porté à l'adversaire quand la victoire le tue. La casserole est le thème du jeu : elle tombe à
 l'envers, le coiffe, s'écrase, rebondit, vacille, et reste de travers sur sa tête.
 Images de 384×480 sur fond transparent, caméra orthographique de face : le bord de la casserole au repos

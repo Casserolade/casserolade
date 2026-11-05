@@ -2,7 +2,7 @@
 # Le cri d'accueil en entier : « ce que je veux, c'est que vous, partout, vous alliez le faire gagner,
 # parce que c'est notre projet ! Vive la République, vive la France ! » (Porte de Versailles,
 # 10 décembre 2016). De 18,9 s à 37,9 s de l'extrait du Point, d'après ses sous-titres.
-# YouTube refuse le téléchargement depuis un conteneur : à lancer sur la machine de l'utilisateur,
+# YouTube refuse le téléchargement depuis un conteneur : à lancer sur une machine personnelle,
 # depuis la racine du dépôt. Le jeu prend ce fichier dès qu'il est dans le manifeste.
 set -e
 mkdir -p assets/audio/sfx/cest_notre_projet

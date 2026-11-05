@@ -5264,7 +5264,7 @@
    "auteur": "Le Point, « Extrait du discours d'Emmanuel Macron à la Porte de Versailles »",
    "source": "https://www.youtube.com/watch?v=a1r8Ad6nFSA",
    "date": "2016-12-10",
-   "note": "Cri d'accueil (assets/game/sons/accueil/), 14,6 s : de 8,6 à 23,2 s du passage téléchargé par tools/collecte/cri_accueil.sh (sections 18,9 à 37,9 s), calé sur la phrase avec WhisperX, volume relevé (+8 dB, limiteur). Transcrit par WhisperX, pas encore écouté par l'utilisateur."
+   "note": "Cri d'accueil (assets/game/sons/accueil/), 14,6 s : de 8,6 à 23,2 s du passage téléchargé par tools/collecte/cri_accueil.sh (sections 18,9 à 37,9 s), calé sur la phrase avec WhisperX, volume relevé (+8 dB, limiteur). Transcrit par WhisperX."
   }
  ],
  "logos": [
@@ -5335,7 +5335,7 @@
  "illustrations": [
   {
    "id": "des_deux_siciles",
-   "source": "Photo fournie par l'utilisateur : Grand Prix de Monaco, 7 juin 2026",
+   "source": "Photo du Grand Prix de Monaco, 7 juin 2026",
    "auteur": null,
    "licence": null
   }
