@@ -1,4 +1,4 @@
-import { ref, shallowRef } from 'vue';
+import { computed, ref, shallowRef } from 'vue';
 import { applyCombatEvent } from '#src/engine/replay.ts';
 import type { CombatSides } from '#src/engine/replay.ts';
 import type { CombatEvent } from '#src/engine/types.ts';
@@ -22,6 +22,8 @@ export class CombatPlayback {
   /** Comes after the last event has played its whole duration: the final state stays readable. */
   readonly finished = ref(false);
   private readonly index = ref(0);
+  /** How many events have played so far: all of them once skipped. */
+  readonly played = computed(() => this.index.value);
   private readonly log: CombatEvent[];
   private readonly listener: CombatPlaybackListener | null;
   private timer = 0;

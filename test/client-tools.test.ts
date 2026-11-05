@@ -647,3 +647,49 @@ test('suitcaseFlight goes from the middle of the hand to the middle of the link,
   assert.ok(far.lift > near.lift && near.lift >= 70);
   assert.ok(far.seconds > near.seconds && far.seconds <= 0.95 && near.seconds >= 0.45);
 });
+
+/** A combat that side 0 wins, with Durif and Cahuzac to celebrate it, Macron golden or not behind them. */
+async function celebratedCombat(macron: 'none' | 'plain' | 'golden') {
+  const { resolveCombat } = await import('../src/engine/combat.ts');
+  const { makeMinion } = await import('../src/engine/minion.ts');
+  const { createRng } = await import('../src/engine/rng.ts');
+  const { CARD_BY_ID } = await import('../src/data/cards.ts');
+  const { PARAMS } = await import('../src/data/params.ts');
+  let uid = 1;
+  const minion = (cardId: string, golden = false) => ({ ...makeMinion(CARD_BY_ID[cardId], uid++), golden, atk: 30, hp: 30 });
+  const mine = [minion('durif', true), minion('cahuzac')];
+  if (macron !== 'none') mine.push(minion('macron', macron === 'golden'));
+  const theirs = [{ ...makeMinion(CARD_BY_ID.ndiaye, uid++), atk: 1, hp: 1 }];
+  return resolveCombat({ minions: mine, mods: {}, hp: 10 }, { minions: theirs, mods: {}, hp: 10 }, { params: PARAMS, ctx: null, rng: createRng(3), log: true });
+}
+
+test('celebrationNotices gives each Célébration its bonus, golden values included, after the end of the combat', async () => {
+  const { celebrationNotices } = await import('../src/client/tools/celebrationNotices.ts');
+  const result = await celebratedCombat('none');
+  assert.equal(result.winner, 0);
+  const notices = celebrationNotices(result.log);
+  assert.deepEqual(notices.map((n) => [n.name, n.text, n.side, n.repeats]), [
+    ['Sylvain Durif', 'Donne +4/+4 à un autre allié au hasard.', 0, 1],
+    ['Jérôme Cahuzac', 'Gagnez 1 budget à la prochaine manche.', 0, 1],
+  ]);
+  const end = result.log.findIndex((e) => e.e === 'fin');
+  assert.ok(notices.every((n) => n.at > end && result.log[n.at].e === 'effet'));
+});
+
+test('celebrationRepeats: Macron doubles the Célébrations of its side, triples them golden', async () => {
+  const { celebrationRepeats } = await import('../src/client/tools/celebrationRepeats.ts');
+  assert.equal(celebrationRepeats((await celebratedCombat('none')).log, 0), 1);
+  assert.equal(celebrationRepeats((await celebratedCombat('plain')).log, 0), 2);
+  assert.equal(celebrationRepeats((await celebratedCombat('golden')).log, 0), 3);
+  assert.equal(celebrationRepeats((await celebratedCombat('golden')).log, 1), 1);
+});
+
+test('combatUnits finds the opening units and the summoned ones, with their side', async () => {
+  const { combatUnits } = await import('../src/client/tools/combatUnits.ts');
+  const unit = (uid: number, name: string) => ({ uid, name }) as never;
+  const units = combatUnits([
+    { e: 'debut', sides: [[unit(1, 'A')], [unit(2, 'B')]] } as never,
+    { e: 'invocation', side: 1, index: 0, unit: unit(9, 'Jeton') } as never,
+  ]);
+  assert.deepEqual([...units].map(([uid, found]) => [uid, found.side]), [[1, 0], [2, 1], [9, 1]]);
+});
