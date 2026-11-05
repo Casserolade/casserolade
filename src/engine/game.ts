@@ -1,8 +1,9 @@
-import type { Camp, Casserole, CombatEvent, Context, Counter, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
+import type { Camp, Casserole, CasseroleBonus, CombatEvent, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
 import type { CombatRecord, Game, GamePhase, Player, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
-import { makeMinion, makeToken, tripleCopies } from './minion.ts';
+import { effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
+import { relaunchable } from './relaunch.ts';
 import { insertAroundLocked, reorderAroundLocked } from './reorderAroundLocked.ts';
 import {
   addMinionToHand,
@@ -35,6 +36,7 @@ import {
   releaseBracelet,
   rally,
   refillShop,
+  refreshShop,
   releaseMinion,
   returnToPool,
   settleDiscovers,
@@ -268,15 +270,16 @@ export function startRound(game: Game): void {
   const { params, round } = game;
   for (const p of game.players) {
     if (!p.alive) continue;
-    forgetScandals(game, p);
-    for (const m of p.board) releaseBracelet(m);
     const dissolved = game.ctx.dissolutionRound === round;
     if (dissolved && p.board.length > 0) releaseMinion(game, p.board.pop() as Minion);
-    const perRound = p.board.reduce((sum, m) => sum + m.budgetPerRound, 0);
+    // Le budget avant l'oubli du peuple : un scandale coûte ses deux manches de budget. Un politique en main paie aussi.
+    const perRound = [...p.board, ...p.hand].reduce((sum, m) => sum + m.budgetPerRound, 0);
     const base = Math.min(maxBudget(game, p), params.startBudget + (round - 1) * params.budgetPerRound);
     const trickle = game.ctx.lastPlaceBudget && isLastInPolls(game, p) ? game.ctx.lastPlaceBudget : 0;
     p.budget = Math.max(0, base + (p.hero.mods.budgetPerRound ?? 0) + perRound + p.nextBudgetBonus + trickle);
     p.nextBudgetBonus = 0;
+    forgetScandals(game, p);
+    for (const m of p.board) releaseBracelet(m);
     if (round > 1 && p.tier < params.tierMax) p.upgradeCost = Math.max(0, p.upgradeCost - 1);
     p.buysThisRound = 0;
     p.rollsThisRound = 0;
@@ -297,7 +300,7 @@ function isLastInPolls(game: Game, p: Player): boolean {
   return p.hp <= Math.min(...game.players.filter((x) => x.alive).map((x) => x.hp));
 }
 
-/** L'oubli du peuple, avant le budget de la manche : les défauts ne coûtent plus rien. */
+/** L'oubli du peuple, une fois le budget de la manche versé : le scandale a coûté ses deux manches, ses défauts s'en vont. */
 function forgetScandals(game: Game, p: Player): void {
   for (const m of [...p.board, ...p.hand]) {
     if (!m.scandal || m.scandal.until > game.round) continue;
@@ -330,19 +333,23 @@ function playFromHand(game: Game, p: Player, m: Minion, to: number, targetUid?: 
     if (!next) return fail('Place invalide.');
     p.hand = p.hand.filter((x) => x !== m);
     p.board = next;
-  } else {
+  }
+  // Rallié, ses effets passent sur l'hôte avec leur puissance : son Annonce joue ces copies-là.
+  let effects: Effect[] = m.effects;
+  if (host !== m) {
     p.hand = p.hand.filter((x) => x !== m);
-    rally(game, p, host, m);
+    effects = rally(game, p, host, m);
     fireBoard(game, p, 'rallie', { played: host });
   }
   // Sans cible donnée, l'Annonce vise le premier autre allié : le minuteur ne bloque jamais la partie.
-  if (!target && needsTarget(m.effects)) target = p.board.find((x) => x !== host) ?? null;
+  if (!target && needsTarget(effects)) target = p.board.find((x) => x !== host) ?? null;
   if (m.golden) incrementCounter(p, 'dores_joues');
-  announce(game, p, host, m.effects, m, target);
+  // L'Investiture avant l'Annonce : le doré vient de quitter la main, elle y trouve toujours sa place.
   if (m.golden && m.copies === 3 && !m.investi) {
     m.investi = true;
     addSpellToHand(game, p, 'investiture', Math.min(p.tier + 1, game.params.tierMax));
   }
+  announce(game, p, host, effects, m, target);
   return OK;
 }
 
@@ -369,6 +376,10 @@ function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): A
     if (spell.maxTargetTier !== undefined && (target.golden || target.token || target.simple || target.tier > spell.maxTargetTier)) {
       return fail(`Il faut un politique non doré d'échelon ${spell.maxTargetTier} ou moins.`);
     }
+    // Une relance sur un politique qui n'a rien à relancer serait perdue (une Annonce qui détruit ne se relance pas).
+    for (const eff of spell.effects) {
+      if (eff.do === 'declencher' && relaunchable(target.effects, eff.trigger).length === 0) return fail('Ce politique n\'a rien à relancer.');
+    }
   }
   if (held.count && held.count > 1) held.count--;
   else p.spells = p.spells.filter((x) => x !== held);
@@ -387,32 +398,22 @@ function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): A
 }
 
 /**
- * Une casserole : son avantage tout de suite et pour toujours, le double sur son propriétaire
- * (stats, budget, dégâts bonus, et ses effets qui jouent deux fois).
- * Son défaut dort. Au seuil, scandale : les défauts de ses casseroles pas encore oubliées
- * s'appliquent, jusqu'à l'oubli du peuple.
+ * Une casserole : son avantage tout de suite et pour toujours. Posée sur son propriétaire historique, elle donne en
+ * plus son bonus de propriétaire, écrit sur la carte (`ownerBonus`). Son défaut dort. Au seuil, scandale : les défauts
+ * de ses casseroles pas encore oubliées s'appliquent, jusqu'à l'oubli du peuple.
  */
 function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
-  const mult = m.cardId === c.owner ? game.params.ownerMultiplier : 1;
-  const scale = (v: number | undefined) => (v && v > 0 ? v * mult : (v ?? 0));
-  m.atk = Math.max(0, m.atk + scale(c.atk));
-  m.hp = Math.max(1, m.hp + scale(c.hp));
-  for (const k of c.keywords ?? []) if (!m.keywords.includes(k)) m.keywords.push(k);
+  const owned = m.cardId === c.owner;
   m.casseroles.push(c.id);
-  // Sur son propriétaire, ses effets jouent deux fois : le ×2 compte aussi pour une casserole sans stats.
-  for (let i = 0; i < (c.effects ? mult : 0); i++) m.effects = [...m.effects, ...(c.effects ?? [])];
-  // Le budget par manche : le gain tout de suite, la perte seulement pendant un scandale.
-  m.budgetPerRound += scale(Math.max(0, c.budgetPerRound ?? 0));
-  m.bonusDamage += scale(c.bonusDamage);
-  m.aloneBonus += scale(c.aloneBonus);
+  if (owned) m.ownerCasseroles.push(c.id);
+  gainAdvantage(p, m, c);
+  if (owned) gainAdvantage(p, m, c.ownerBonus);
   if (c.swapStats) [m.atk, m.hp] = [Math.max(0, m.hp), Math.max(1, m.atk)];
-  if (c.instantBudget) p.budget += scale(c.instantBudget);
   // « Quel compte Facebook ? » : ni vu ni connu, tout est oublié.
-  if (c.chargesRemoved) {
+  if (c.forgetsAll) {
     if (m.scandal) p.stats.forgotten++;
     forgetScandal(m);
-  }
-  else {
+  } else {
     m.charges += c.charges ?? 1;
     // Reçue en plein scandale, son défaut s'y ajoute tout de suite.
     if (m.scandal) addDefect(m, c);
@@ -421,16 +422,35 @@ function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
       p.stats.scandals++;
     }
   }
-  if (c.summon && p.board.length < boardLimit(game, p)) {
-    p.board.splice(p.board.indexOf(m) + 1, 0, welcome(game, p, makeToken(c.summon, m.camp, game.nextUid++)));
-  }
-  for (let i = 0; i < (c.freeRecruit ? mult : 0); i++) {
-    const cardId = drawFromTier(game, p.tier);
-    if (cardId) addMinionToHand(game, p, cardId);
-  }
+  summonAndRecruit(game, p, m, c);
+  if (owned) summonAndRecruit(game, p, m, c.ownerBonus);
   p.stats.casseroles++;
   incrementCounter(p, 'casseroles');
   fireBoard(game, p, 'casserole_recue', { played: m });
+}
+
+/** Ce qu'un avantage donne tout de suite : stats, mots-clés, effets, budget par manche, dégâts au héros, solitude, budget. */
+function gainAdvantage(p: Player, m: Minion, gain: CasseroleBonus): void {
+  m.atk = Math.max(0, m.atk + (gain.atk ?? 0));
+  m.hp = Math.max(1, m.hp + (gain.hp ?? 0));
+  for (const k of gain.keywords ?? []) if (!m.keywords.includes(k)) m.keywords.push(k);
+  if (gain.effects) m.effects = [...m.effects, ...gain.effects];
+  // Le budget par manche : le gain tout de suite, la perte seulement pendant un scandale.
+  m.budgetPerRound += Math.max(0, gain.budgetPerRound ?? 0);
+  m.bonusDamage += gain.bonusDamage ?? 0;
+  m.aloneBonus += gain.aloneBonus ?? 0;
+  p.budget += gain.instantBudget ?? 0;
+}
+
+/** Ce qu'un avantage fait arriver sur la table : un jeton à côté de lui, un politique gratuit de votre échelon. */
+function summonAndRecruit(game: Game, p: Player, m: Minion, gain: CasseroleBonus): void {
+  if (gain.summon && p.board.length < boardLimit(game, p)) {
+    p.board.splice(p.board.indexOf(m) + 1, 0, welcome(game, p, makeToken(gain.summon, m.camp, game.nextUid++)));
+  }
+  if (gain.freeRecruit) {
+    const cardId = drawFromTier(game, p.tier);
+    if (cardId) addMinionToHand(game, p, cardId);
+  }
 }
 
 export function casseroleCost(p: Player, c: Casserole): number {
@@ -539,10 +559,7 @@ export function applyAction(game: Game, seat: number, a: PlayerAction): ActionRe
       if (p.freeRolls > 0) p.freeRolls--;
       else p.rollsThisRound++;
       spend(game, p, cost);
-      p.frozen = false;
-      refillShop(game, p);
-      if (game.params.casseroleOnRoll) offerCasserole(game, p);
-      fireBoard(game, p, 'actualise', {});
+      refreshShop(game, p);
       return OK;
     }
     case 'freeze':
@@ -651,16 +668,19 @@ export interface CombatView {
  * moteur ne modifie jamais et dont il compare l'identité (casseroles d'un effet, silence).
  */
 function copyMinion(m: Minion): Minion {
-  const copy: Minion = { ...m, keywords: [...m.keywords], effects: [...m.effects], casseroles: [...m.casseroles], merged: [...m.merged] };
+  const copy: Minion = { ...m, keywords: [...m.keywords], effects: [...m.effects], casseroles: [...m.casseroles], merged: [...m.merged], rallied: [...m.rallied], ownerCasseroles: [...m.ownerCasseroles] };
   if (m.scandal) copy.scandal = { ...m.scandal, silenced: m.scandal.silenced ? [...m.scandal.silenced] : null };
   return copy;
 }
 
-/** Ce que la vue montre d'un serviteur : une copie complète, effets compris. */
+/**
+ * Ce que la vue montre d'un serviteur : une copie complète, effets compris. Chaque effet y dit sa puissance (`power`) :
+ * la copie n'a plus l'identité des effets de la carte, qui dit lesquels un doré joue doublés.
+ */
 function viewMinion(m: Minion): Minion {
   const copy = copyMinion(m);
-  copy.effects = copy.effects.map((e) => ({ ...e }));
-  if (copy.scandal?.silenced) copy.scandal.silenced = copy.scandal.silenced.map((e) => ({ ...e }));
+  copy.effects = m.effects.map((e) => ({ ...e, power: effectPower(m, e) }));
+  if (m.scandal?.silenced && copy.scandal) copy.scandal.silenced = m.scandal.silenced.map((e) => ({ ...e, power: effectPower(m, e) }));
   return copy;
 }
 
@@ -888,7 +908,7 @@ export function finishRound(game: Game): void {
 function afterCombat(game: Game, p: Player, side: 0 | 1, record: CombatRecord): void {
   const { result } = record;
   applyPersist(game, p, result.persist[side]);
-  for (const celebrant of result.celebrants) if (celebrant.side === side) afterCombatSpeech(game, p, celebrant.uid, 'celebration');
+  for (const celebrant of result.celebrants) if (celebrant.side === side) afterCombatSpeech(game, p, celebrant.uid, 'celebration', result.celebrationRepeats);
   // Chaque Droit de réponse joue, comme chaque Célébration : un seul prend la parole (`responder`).
   for (const answer of result.responders) if (answer.side === side) afterCombatSpeech(game, p, answer.uid, 'droit_de_reponse');
   const lost = result.winner !== null && result.winner !== side;

@@ -62,7 +62,7 @@ const carriers = (term: string) => bestiaryFilterQuery({ kind: 'politique', camp
 
     <BestiarySection v-if="casseroles.length" id="casseroles" title="Les casseroles" :count="countLabel(casseroles.length, 'casserole', 'casseroles')" wide>
       <li v-for="item in casseroles" :key="item.key">
-        <CasseroleSheet :casserole="item.data" :owner-name="CARD_BY_ID[item.data.owner]?.name ?? item.data.owner" :owner-multiplier="PARAMS.ownerMultiplier" :sources="forCasserole(item.key)" />
+        <CasseroleSheet :casserole="item.data" :owner-name="CARD_BY_ID[item.data.owner]?.name ?? item.data.owner" :sources="forCasserole(item.key)" />
       </li>
     </BestiarySection>
 

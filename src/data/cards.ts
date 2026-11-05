@@ -133,7 +133,8 @@ export const CARDS: Card[] = [
   card('castaner', 'Christophe Castaner', 'macronie', 3, 2, 3, { kw: ['ralliement', 'cumul'] }),
   card('berge', 'Aurore Bergé', 'macronie', 3, 3, 3, { kw: ['ralliement'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   card('dupond_moretti', 'Éric Dupond-Moretti', 'macronie', 3, 1, 2, { kw: ['ralliement', 'immunite'] }),
-  card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 1 })] }),
+  // 5 novembre 2026 : 2 de budget au lieu de 1. Une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie (5,11 en mono-camp).
+  card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 2 })] }),
   card('darmanin', 'Gérald Darmanin', 'macronie', 4, 8, 9, { kw: ['ralliement', 'porte_parole'] }),
   card('philippe', 'Édouard Philippe', 'macronie', 5, 8, 9, { fx: [fx('annonce', 'cible', { do: 'dorer', maxTier: 4 })] }),
   card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
@@ -244,6 +245,13 @@ export const CARDS: Card[] = [
   card('chirac', 'Jacques Chirac', 'civile', 6, 10, 10, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
   card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(3, 3))] }),
 ];
+
+// Une carte partage ses effets, par identité, avec chacun de ses serviteurs, dans toutes les parties : figés, rien
+// ne peut les modifier en place.
+for (const card of [...CARDS, ...Object.values(TOKENS)]) {
+  for (const effect of card.effects ?? []) Object.freeze(effect);
+  Object.freeze(card.effects);
+}
 
 export const CARD_BY_ID: Record<string, Card> = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 

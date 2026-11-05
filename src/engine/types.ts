@@ -55,7 +55,6 @@ export type Trigger =
   | 'rallie'
   /** Quand un de vos serviteurs reçoit une casserole. */
   | 'casserole_recue'
-  /** Activé par le joueur, une fois par manche, contre `cout` budget. */
   /** Chaque fois que vous avez dépensé `n` budget. */
   | 'depense'
   // Après le combat
@@ -98,7 +97,7 @@ export type Target =
   | 'allie_suivant'
   /** Vos serviteurs dorés. */
   | 'dores'
-  /** Un allié choisi par le joueur : Annonce, sort, Permanence. */
+  /** Un allié choisi par le joueur : Annonce, sort. Relancée, l'Annonce vise un autre allié au hasard. */
   | 'cible'
   /** Un autre allié au hasard (du camp `camp`, si précisé). */
   | 'aleatoire'
@@ -142,7 +141,7 @@ export type Action =
   | { do: 'exiler' }
   /** Le peuple oublie tout de suite le scandale le plus long. Il ne bouge plus. */
   | { do: 'oublier' }
-  /** `tout` : donne ses stats ; sinon son attaque. */
+  /** À l'allié suivant (le premier s'il est le dernier). `tout` : donne ses stats ; sinon son attaque. */
   | { do: 'transmettre'; tout?: boolean }
   /** Ajoute une carte à la main : un serviteur, un sort, `sort_aleatoire`, ou `copie` de lui-même (prise dans la réserve, règle R3). */
   | { do: 'carte'; card: string; count: number }
@@ -158,13 +157,13 @@ export type Action =
   | { do: 'jouer_tract' }
   /** Retire un serviteur de la boutique et donne ses stats aux cibles. */
   | { do: 'debaucher'; pick: ShopPick }
-  /** Rend la cible dorée, sans Investiture. */
+  /** Rend la cible dorée, sans Investiture. Rejouée, elle dore un autre allié qui peut l'être. */
   | { do: 'dorer'; maxTier: number }
   /** Détruit la cible alliée. Son Héritage se déclenche. */
   | { do: 'detruire' }
-  /** Détruit la cible alliée, puis découvre un serviteur de son camp. */
+  /** Détruit la cible alliée, puis découvre un serviteur de son camp. Rejouée, elle ne détruit plus : elle redécouvre. */
   | { do: 'sacrifier'; echelon?: number }
-  /** Déclenche les effets `trigger` des cibles, une fois par manche au plus pour chacune. */
+  /** Déclenche les effets `trigger` des cibles, une fois par manche au plus pour chacune (règle R4). Doré, il les joue deux fois. */
   | { do: 'declencher'; trigger: 'annonce' | 'heritage' | 'fin_tour' }
   /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). */
   | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration' }
@@ -180,7 +179,7 @@ export type Action =
   | { do: 'budget_max'; value: number }
   /** Si vous perdez le prochain combat, gagnez `value` budget. */
   | { do: 'pari_defaite'; value: number }
-  /** Actualise la boutique avec des serviteurs du camp de la cible. */
+  /** Une actualisation, avec des serviteurs du camp de la cible : « Quand vous actualisez » joue aussi. */
   | { do: 'congres' }
   /** Donne aux cibles les stats de la victime (déclencheur `tue`) : `pv` seulement, ou `tout`. */
   | { do: 'butin'; part: 'pv' | 'tout' };
@@ -198,6 +197,12 @@ export type Effect = {
   perma?: boolean;
   /** Une seule fois par combat, ou par manche. */
   once?: 'combat' | 'manche';
+  /**
+   * Sa puissance, quand elle ne vient pas du politique qui le porte : 2, il joue doublé. Le moteur la pose sur les
+   * effets d'un Ralliement, qui gardent celle de leur carte, et dans les vues, sur chaque effet. Sans elle, un effet
+   * de la carte d'un doré joue doublé, et celui d'une casserole, jamais.
+   */
+  power?: number;
 } & Action;
 
 export interface Card {
@@ -276,8 +281,10 @@ export interface Casserole {
   freeRecruit?: boolean;
   /** +X/+X en combat si le serviteur est le seul de son camp sur le plateau. */
   aloneBonus?: number;
-  /** Retire ce nombre de charges du serviteur : le peuple oublie son scandale. */
-  chargesRemoved?: number;
+  /** Le peuple oublie tout, tout de suite : son scandale et ses casseroles, qui deviennent des médailles. */
+  forgetsAll?: boolean;
+  /** Ce que son propriétaire historique gagne en plus, quand elle est posée sur lui. */
+  ownerBonus: CasseroleBonus;
   /** Une affaire judiciaire ou un ridicule public. Les règles sont les mêmes. */
   kind: 'affaire' | 'ridicule';
   /** À la une : une affaire que tout le monde connaît. Elle sort plus souvent en boutique (params.uneWeight). */
@@ -293,6 +300,9 @@ export interface Casserole {
   /** Vrai si le statut a été recoupé dans une source pendant la recherche. */
   verifie: boolean;
 }
+
+/** Le bonus de propriétaire d'une casserole : les mêmes avantages qu'elle, en plus, sur son propriétaire historique. */
+export type CasseroleBonus = Partial<Pick<Casserole, 'atk' | 'hp' | 'keywords' | 'budgetPerRound' | 'instantBudget' | 'bonusDamage' | 'aloneBonus' | 'effects' | 'summon' | 'freeRecruit'>>;
 
 /**
  * Un scandale : les défauts de ses casseroles s'appliquent, jusqu'à l'oubli du peuple. On garde ce
@@ -330,8 +340,12 @@ export interface Minion {
   casseroles: string[];
   /** Les `oublie` premières sont oubliées : leurs défauts ne reviendront jamais. */
   oublie: number;
-  /** Les cartes ralliées sur lui : leurs exemplaires retournent à la réserve avec lui. */
+  /** Les exemplaires ralliés sur lui (trois pour un doré) : ils retournent à la réserve avec lui. */
   merged: string[];
+  /** Les cartes ralliées sur lui, une par Ralliement : Bayrou les compte, et leurs effets gardent leur puissance. */
+  rallied: string[];
+  /** Celles de ses casseroles posées sur leur propriétaire : il porte aussi leur bonus de propriétaire. */
+  ownerCasseroles: string[];
   /** Le poids de ses casseroles pas encore oubliées. Au seuil, scandale. */
   charges: number;
   /** En scandale jusqu'au début de cette manche : les défauts de ses casseroles s'appliquent. */
@@ -345,7 +359,7 @@ export interface Minion {
   hpLossOnDeath: number;
   budgetPerRound: number;
   aloneBonus: number;
-  /** Ce doré a déjà donné son Investiture : le reposer, au retour de prison, n'en redonne pas. */
+  /** Ce doré a déjà donné son Investiture : il n'en redonne pas. */
   investi?: boolean;
 }
 
@@ -420,7 +434,6 @@ export interface Params {
   scandalThreshold: number;
   /** Manches que dure un scandale, avant l'oubli du peuple. */
   scandalRounds: number;
-  ownerMultiplier: number;
   heroChoices: number;
 }
 
@@ -456,7 +469,7 @@ export type PlayerAction =
   | { t: 'play'; uid: number; to?: number; target?: number; onto?: number }
   /** Lance un sort ou pose une casserole de la main, sur l'allié `target` s'il en demande un. */
   | { t: 'cast'; uid: number; target?: number }
-  /** Active la Permanence d'un serviteur du plateau. */
+  /** Renvoie un serviteur du plateau ou de la main. */
   | { t: 'sell'; uid: number }
   | { t: 'roll' }
   | { t: 'freeze' }
@@ -580,5 +593,7 @@ export interface CombatResult {
   responder: { side: 0 | 1; uid: number } | null;
   /** Tous ceux du perdant qui ont un Droit de réponse : chacun l'applique, comme les Célébrations (5 novembre 2026). */
   responders: { side: 0 | 1; uid: number }[];
+  /** Combien de fois jouent les Célébrations du vainqueur : Macron, s'il a survécu, les double (les triple, doré). */
+  celebrationRepeats: number;
   log: CombatEvent[];
 }

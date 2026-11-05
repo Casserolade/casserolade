@@ -52,7 +52,7 @@ const casserole = computed(() => {
   const found = id ? CASSEROLE_BY_ID[id] : null;
   if (!found) return null;
   const cost = props.view.casseroleCost ?? found.cost;
-  return { casserole: found, cost, affordable: props.view.budget >= cost, card: { kind: 'casserole', casserole: found, ownerMultiplier: props.view.params.ownerMultiplier } as ShownCard };
+  return { casserole: found, cost, affordable: props.view.budget >= cost, card: { kind: 'casserole', casserole: found } as ShownCard };
 });
 /** A full counter (tier 6: six politicians, a spell, a casserole) shrinks its items to stay on one line. */
 const fit = computed(() => shopFit(minions.value.length, spells.value.length + (casserole.value ? 1 : 0)));

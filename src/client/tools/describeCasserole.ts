@@ -21,7 +21,7 @@ export function describeCasserole(casserole: Casserole): string[] {
   if (casserole.swapStats) lines.push('Échange son attaque et ses PV');
   if (casserole.freeRecruit) lines.push('Ajoute gratuitement un politique de votre échelon');
   if (casserole.aloneBonus) lines.push(`+${casserole.aloneBonus}/+${casserole.aloneBonus} en combat s'il est seul de son camp`);
-  if (casserole.chargesRemoved) lines.push('Le peuple oublie tout, tout de suite');
+  if (casserole.forgetsAll) lines.push('Le peuple oublie tout, tout de suite');
   if ((casserole.charges ?? 1) > 1) lines.push('Compte double : fait **Scandale** à elle seule');
   const defects: string[] = [];
   if ((casserole.budgetPerRound ?? 0) < 0) defects.push(`${casserole.budgetPerRound} budget par manche`);

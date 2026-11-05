@@ -5,12 +5,12 @@ import type { EntrySources } from '#src/client/tools/personSources.ts';
 import type { Casserole } from '#src/engine/types.ts';
 
 /** A casserole in the bestiary: its card, whose it is, its joke and quote, and the real fact it laughs at. */
-defineProps<{ casserole: Casserole; ownerName: string; ownerMultiplier: number; sources: EntrySources | null }>();
+defineProps<{ casserole: Casserole; ownerName: string; sources: EntrySources | null }>();
 </script>
 
 <template>
   <article class="sheet">
-    <ShownCardFace :card="{ kind: 'casserole', casserole, ownerMultiplier }" />
+    <ShownCardFace :card="{ kind: 'casserole', casserole }" />
     <p class="owner"><strong>{{ ownerName }}</strong> · {{ casserole.kind === 'affaire' ? 'Affaire' : 'Ridicule' }}<template v-if="casserole.une">, à la une</template></p>
     <p class="joke">{{ casserole.blague }}</p>
     <p v-if="casserole.citation" class="quote">« {{ casserole.citation }} »</p>

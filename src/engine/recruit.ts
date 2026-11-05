@@ -1,7 +1,8 @@
-import type { Camp, Casserole, CombatPersist, Counter, Effect, EndOfTurnNote, EndOfTurnStep, Minion, Trigger } from './types.ts';
+import type { Camp, Casserole, CombatPersist, Counter, Effect, EndOfTurnNote, EndOfTurnStep, Keyword, Minion, Trigger } from './types.ts';
 import type { Game, Offer, Player, StatGain } from './state.ts';
 import { isCamp as isCampOf } from './camps.ts';
-import { makeMinion, makeSimpleCopy, makeToken, poolCopies, tripleCopies } from './minion.ts';
+import { effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
+import { relaunchable } from './relaunch.ts';
 import { CARDS, CARD_BY_ID } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { SPELL_BY_ID, shopSpells } from '../data/sorts.ts';
@@ -15,6 +16,11 @@ import { SPELL_BY_ID, shopSpells } from '../data/sorts.ts';
 export interface EffectContext {
   target?: Minion | null;
   played?: Minion | null;
+  /**
+   * L'effet est rejoué : par un doré, un multiplicateur (Lassalle, Chirac, Mitterrand, Macron) ou une relance.
+   * Rejoué, un mot-clé ou une dorure que la cible a déjà passe à un autre allié, et un sacrifice ne détruit plus.
+   */
+  replay?: boolean;
 }
 
 export function isCamp(game: Game, m: Pick<Minion, 'camp' | 'keywords'>, camp: Camp): boolean {
@@ -148,7 +154,7 @@ function counterGain(p: Player, m: Minion): { atk: number; hp: number } {
   let hp = 0;
   for (const eff of m.effects) {
     if (eff.when !== 'aura' || eff.do !== 'compteur') continue;
-    const k = m.golden ? 2 : 1;
+    const k = effectPower(m, eff);
     atk += eff.atk * p.counters[eff.compteur] * k;
     hp += eff.hp * p.counters[eff.compteur] * k;
   }
@@ -161,7 +167,7 @@ export function incrementCounter(p: Player, counter: Counter, by = 1): void {
   for (const m of [...p.board, ...p.hand]) {
     for (const eff of m.effects) {
       if (eff.when !== 'aura' || eff.do !== 'compteur' || eff.compteur !== counter) continue;
-      const k = m.golden ? 2 : 1;
+      const k = effectPower(m, eff);
       addStats(m, eff.atk * by * k, eff.hp * by * k);
     }
   }
@@ -265,9 +271,9 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   if (copies.length < 3) return;
   const card = CARD_BY_ID[cardId];
   const parts = copies.slice(0, 3);
-  // Les défauts d'un scandale en cours ne passent pas tels quels : le doré refait scandale s'il le faut.
+  // Les défauts d'un scandale en cours ne passent pas tels quels : le doré les reprend tous, jusqu'à la même date.
   // Un exemplaire réduit au silence rend d'abord ses effets, Ralliements compris.
-  const ongoing = parts.map(liftScandal).some(Boolean);
+  const ongoing = parts.map(liftScandal).filter((until): until is number => until !== null);
   const golden = parts[0];
   const buffAtk = parts.reduce((s, m) => s + (m.atk - card.atk), 0);
   const buffHp = parts.reduce((s, m) => s + (m.hp - card.hp), 0);
@@ -279,6 +285,8 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   const base = card.effects ?? [];
   golden.effects = [...base, ...parts.flatMap((m) => withoutBase(m.effects, base))];
   golden.merged = parts.flatMap((m) => m.merged);
+  golden.rallied = parts.flatMap((m) => m.rallied);
+  golden.ownerCasseroles = parts.flatMap((m) => m.ownerCasseroles);
   // Les casseroles oubliées d'abord, puis celles qui ne le sont pas encore.
   golden.casseroles = [...parts.flatMap((m) => m.casseroles.slice(0, m.oublie)), ...parts.flatMap((m) => m.casseroles.slice(m.oublie))];
   golden.oublie = parts.reduce((s, m) => s + m.oublie, 0);
@@ -290,10 +298,11 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   // Le doré part en main, libre : un bracelet ne le suit pas, et un scandale le recloue ci-dessous s'il le faut.
   golden.locked = false;
   delete golden.bracelet;
-  if (golden.charges >= scandalThreshold(game, p)) {
+  // Un scandale en cours continue sur le doré, sans repartir pour deux manches ; sinon, il peut en éclater un nouveau.
+  if (ongoing.length > 0) startScandal(game, golden, Math.max(...ongoing));
+  else if (golden.charges >= scandalThreshold(game, p)) {
     startScandal(game, golden);
-    // Un scandale en cours continue sur le doré ; sinon, c'en est un nouveau.
-    if (!ongoing) p.stats.scandals++;
+    p.stats.scandals++;
   }
   p.board = p.board.filter((m) => !parts.includes(m));
   p.hand = p.hand.filter((m) => !parts.includes(m));
@@ -317,7 +326,7 @@ function queueOffer(p: Player, offer: Offer): void {
  */
 export function offerMinions(game: Game, p: Player, tier: number, camp?: Camp, trigger?: Trigger, source?: string): void {
   const target = Math.max(1, Math.min(tier, game.params.tierMax));
-  const campOk = (id: string) => !camp || camp === 'civile' || !game.camps.includes(camp) || isCamp(game, makeMinion(CARD_BY_ID[id], -1), camp);
+  const campOk = (id: string) => !camp || (camp !== 'civile' && !game.camps.includes(camp)) || isCamp(game, makeMinion(CARD_BY_ID[id], -1), camp);
   const triggerOk = (id: string) => !trigger || (CARD_BY_ID[id].effects ?? []).some((e) => e.when === trigger);
   const available = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source && campOk(id) && triggerOk(id)).map(([id]) => id);
   const options = game.rng.shuffle(closestTier(available, target)).slice(0, 3);
@@ -368,17 +377,12 @@ export function dropDiscovers(game: Game, p: Player): void {
 
 // Les effets.
 
-/** Un serviteur doré double les valeurs de ses effets. */
-function power(m: Minion | null): number {
-  return m?.golden ? 2 : 1;
-}
-
 /** Combien de fois un déclencheur joue : Chirac, Lassalle et Mitterrand doublent, triplent s'ils sont dorés. */
 export function repeatCount(p: Player, trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration'): number {
   let count = 1;
   for (const m of p.board) {
     for (const eff of m.effects) {
-      if (eff.when === 'aura' && eff.do === 'doubler' && eff.trigger === trigger) count = Math.max(count, m.golden ? 3 : 2);
+      if (eff.when === 'aura' && eff.do === 'doubler' && eff.trigger === trigger) count = Math.max(count, effectPower(m, eff) > 1 ? 3 : 2);
     }
   }
   return count;
@@ -388,14 +392,16 @@ export function repeatCount(p: Player, trigger: 'annonce' | 'heritage' | 'fin_to
 export function scandalThreshold(game: Game, p: Player): number {
   let extra = 0;
   for (const m of p.board) {
-    for (const eff of m.effects) if (eff.when === 'aura' && eff.do === 'scandale_plus') extra = Math.max(extra, eff.value * power(m));
+    for (const eff of m.effects) if (eff.when === 'aura' && eff.do === 'scandale_plus') extra = Math.max(extra, eff.value * effectPower(m, eff));
   }
   return game.params.scandalThreshold + (p.hero.mods.scandalThresholdDelta ?? 0) + extra;
 }
 
-/** Les effets que ses casseroles lui ont donnés : un silence ne les touche pas. */
+/** Les effets que ses casseroles lui ont donnés, bonus de propriétaire compris : un silence ne les touche pas. */
 function casseroleEffects(m: Minion): Set<Effect> {
-  return new Set(m.casseroles.flatMap((id) => CASSEROLE_BY_ID[id]?.effects ?? []));
+  const fromCasseroles = m.casseroles.flatMap((id) => CASSEROLE_BY_ID[id]?.effects ?? []);
+  const fromOwners = m.ownerCasseroles.flatMap((id) => CASSEROLE_BY_ID[id]?.ownerBonus.effects ?? []);
+  return new Set([...fromCasseroles, ...fromOwners]);
 }
 
 /**
@@ -421,26 +427,29 @@ export function addDefect(m: Minion, c: Casserole): void {
   }
 }
 
-/** Le scandale éclate : les défauts de ses casseroles pas encore oubliées s'appliquent. */
-export function startScandal(game: Game, m: Minion): void {
-  m.scandal = { until: game.round + game.params.scandalRounds, budget: 0, hpLoss: 0, locked: false, silenced: null };
+/**
+ * Le scandale éclate : les défauts de ses casseroles pas encore oubliées s'appliquent, pour deux manches. `until` :
+ * un scandale en cours qui continue (triple, Ralliement) garde sa date.
+ */
+export function startScandal(game: Game, m: Minion, until = game.round + game.params.scandalRounds): void {
+  m.scandal = { until, budget: 0, hpLoss: 0, locked: false, silenced: null };
   for (const id of m.casseroles.slice(m.oublie)) addDefect(m, CASSEROLE_BY_ID[id]);
 }
 
 /**
  * Lève les défauts d'un scandale sans rien oublier : une fusion les recompte ensuite.
- * Vrai s'il y avait un scandale.
+ * La manche où il devait finir, s'il y en avait un.
  */
-function liftScandal(m: Minion): boolean {
+function liftScandal(m: Minion): number | null {
   const scandal = m.scandal;
-  if (!scandal) return false;
+  if (!scandal) return null;
   m.budgetPerRound -= scandal.budget;
   m.hpLossOnDeath -= scandal.hpLoss;
   // Sous bracelet, il reste cloué : le bracelet tombe à la manche suivante (releaseBracelet).
   if (scandal.locked) m.locked = Boolean(m.bracelet);
   if (scandal.silenced) m.effects = [...scandal.silenced, ...m.effects];
   delete m.scandal;
-  return true;
+  return scandal.until;
 }
 
 /** La manche suivante, le bracelet tombe : il bouge et se renvoie de nouveau, sauf si un scandale le cloue encore. */
@@ -458,33 +467,42 @@ export function forgetScandal(m: Minion): void {
 }
 
 /**
- * Le Ralliement : le serviteur rejoint son hôte, qui prend ses stats, ses mots-clés et ses effets.
- * Un doré issu d'un triple peut porter des casseroles : l'hôte les prend aussi, avec leurs avantages.
- * Rien ne se perd, et on n'efface pas un scandale en ralliant. L'hôte les reçoit comme des
- * casseroles posées, sans rejouer leurs avantages, déjà dans les stats du rallié.
+ * Le Ralliement : le serviteur rejoint son hôte, qui prend ses stats, ses mots-clés et ses effets. Ses effets gardent
+ * leur puissance : un Ralliement doré joue les siens doublés, même sur un hôte qui ne l'est pas, et l'inverse.
+ * Un doré issu d'un triple peut porter des casseroles : l'hôte les prend aussi, avec leurs avantages et leurs bonus de
+ * propriétaire. Rien ne se perd, et on n'efface pas un scandale en ralliant : il continue, jusqu'à sa date. L'hôte les
+ * reçoit comme des casseroles posées, sans rejouer leurs avantages, déjà dans les stats du rallié. Rend les effets
+ * passés sur l'hôte : son Annonce les joue.
  */
-export function rally(game: Game, p: Player, host: Minion, m: Minion): void {
+export function rally(game: Game, p: Player, host: Minion, m: Minion): Effect[] {
   const ongoing = liftScandal(m);
   host.atk += m.atk;
   host.hp += m.hp;
   for (const k of m.keywords) if (k !== 'ralliement' && !host.keywords.includes(k)) host.keywords.push(k);
-  host.effects = [...host.effects, ...m.effects];
-  host.merged = [...host.merged, ...(m.copies > 0 ? Array.from({ length: m.copies }, () => m.cardId) : [m.cardId]), ...m.merged];
-  if (m.casseroles.length === 0) return;
+  const carried = m.effects.map((e) => rallyEffect(m, e));
+  host.effects = [...host.effects, ...carried];
+  host.merged = [...host.merged, ...Array.from({ length: m.copies }, () => m.cardId), ...m.merged];
+  host.rallied = [...host.rallied, m.cardId, ...m.rallied];
+  if (m.casseroles.length === 0) return carried;
   const live = m.casseroles.slice(m.oublie);
   host.casseroles = [...host.casseroles.slice(0, host.oublie), ...m.casseroles.slice(0, m.oublie), ...host.casseroles.slice(host.oublie), ...live];
   host.oublie += m.oublie;
   host.charges += m.charges;
+  host.ownerCasseroles = [...host.ownerCasseroles, ...m.ownerCasseroles];
   host.budgetPerRound += m.budgetPerRound;
   host.bonusDamage += m.bonusDamage;
   host.hpLossOnDeath += m.hpLossOnDeath;
   host.aloneBonus += m.aloneBonus;
   if (host.scandal) {
     for (const id of live) addDefect(host, CASSEROLE_BY_ID[id]);
+    if (ongoing !== null) host.scandal.until = Math.max(host.scandal.until, ongoing);
+  } else if (ongoing !== null) {
+    startScandal(game, host, ongoing);
   } else if (live.length > 0 && host.charges >= scandalThreshold(game, p)) {
     startScandal(game, host);
-    if (!ongoing) p.stats.scandals++;
+    p.stats.scandals++;
   }
+  return carried;
 }
 
 /** Ses effets, moins une fois chaque effet de la carte : ceux de ses Ralliements restent, même d'une même carte. */
@@ -525,7 +543,7 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
     case 'dernier_allie':
       return board.slice(-1);
     case 'allie_suivant': {
-      const next = at >= 0 ? board[at + 1] : board[pos];
+      const next = nextAlly(board, self, index);
       return next ? [next] : [];
     }
     case 'dores':
@@ -533,7 +551,8 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
     case 'cible':
       return ctx.target && board.includes(ctx.target) ? [ctx.target] : [];
     case 'aleatoire': {
-      const pool = others(p, self).filter((m) => !eff.camp || isCamp(game, m, eff.camp));
+      // Un mot-clé au hasard va à un allié qui ne l'a pas encore : Royal ne donne pas deux fois son Retour au même.
+      const pool = others(p, self).filter((m) => (!eff.camp || isCamp(game, m, eff.camp)) && !(eff.do === 'mot_cle' && m.keywords.includes(eff.keyword)));
       return pool.length > 0 ? [game.rng.pick(pool)] : [];
     }
     case 'joue':
@@ -555,17 +574,26 @@ function addStats(m: Minion, atk: number, hp: number): void {
 }
 
 /**
- * Une casserole en boutique. Les affaires suivent leurs propriétaires : souvent, c'est celle
- * d'un politique que le joueur a déjà, pour que le double sur le propriétaire arrive vraiment.
+ * Une casserole en boutique. Les affaires suivent leurs propriétaires : souvent, c'est celle d'un politique que le
+ * joueur a déjà, pour que son bonus de propriétaire arrive vraiment. Jamais celle d'un politique absent de la partie :
+ * son bonus de propriétaire ne servirait jamais. Jamais une casserole que le joueur a déjà.
  */
 export function offerCasserole(game: Game, p: Player): void {
   if (game.round < game.params.casseroleFromRound) {
     p.casseroleOffer = null;
     return;
   }
+  // Une affaire n'arrive qu'une fois : pas une casserole que le joueur a déjà, en main ou sur un de ses politiques.
+  // Sans ça, Cahuzac revoyait son compte en Suisse une fois sur deux : sept comptes, 28 de budget par manche.
+  const had = new Set([...p.spells.map((s) => s.casseroleId), ...[...p.board, ...p.hand].flatMap((m) => m.casseroles)]);
+  const present = CASSEROLES.filter((c) => game.poolTotal.has(c.owner) && !had.has(c.id));
+  if (present.length === 0) {
+    p.casseroleOffer = null;
+    return;
+  }
   const owned = new Set([...p.board, ...p.hand].map((m) => m.cardId));
-  const theirs = CASSEROLES.filter((c) => owned.has(c.owner));
-  const pool = theirs.length > 0 && game.rng.next() < game.params.casseroleOwnerChance ? theirs : CASSEROLES;
+  const theirs = present.filter((c) => owned.has(c.owner));
+  const pool = theirs.length > 0 && game.rng.next() < game.params.casseroleOwnerChance ? theirs : present;
   // Les affaires à la une pèsent plus : sur 64 casseroles, les plus connues doivent sortir.
   const weight = (c: Casserole) => (c.une ? game.params.uneWeight : 1);
   let r = game.rng.next() * pool.reduce((s, c) => s + weight(c), 0);
@@ -628,7 +656,7 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     if (p.onceThisRound.has(key)) return;
     p.onceThisRound.add(key);
   }
-  const k = power(self);
+  const k = self ? effectPower(self, eff) : 1;
   const targets = () => targetsOf(game, p, self, eff, ctx, index);
   switch (eff.do) {
     case 'buff':
@@ -645,7 +673,8 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       break;
     }
     case 'buff_par_ralliement':
-      for (const t of targets()) addStats(t, eff.atk * t.merged.length * k, eff.hp * t.merged.length * k);
+      // Un Ralliement compte pour un, même doré : ce sont les Ralliements reçus, pas les exemplaires.
+      for (const t of targets()) addStats(t, eff.atk * t.rallied.length * k, eff.hp * t.rallied.length * k);
       break;
     case 'jouer_tract':
       for (const t of targets()) playTract(game, p, t, k);
@@ -662,7 +691,8 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       break;
     }
     case 'mot_cle':
-      for (const t of targets()) if (!t.keywords.includes(eff.keyword)) t.keywords.push(eff.keyword);
+      // Doré, il le donne deux fois : la deuxième, comme un effet rejoué, va à un autre allié si la cible l'a déjà.
+      for (let i = 0; i < k; i++) for (const t of targets()) giveKeyword(game, p, self, t, eff.keyword, ctx.replay || i > 0);
       break;
     case 'basculer':
       for (const t of targets()) t.keywords = t.keywords.includes(eff.keyword) ? t.keywords.filter((k) => k !== eff.keyword) : [...t.keywords, eff.keyword];
@@ -698,36 +728,34 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       break;
     }
     case 'dorer':
-      for (const t of targets()) makeGolden(p, t, eff.maxTier);
+      // Doré, il dore deux fois : la deuxième va à un autre allié, celui-ci l'étant déjà.
+      for (let i = 0; i < k; i++) for (const t of targets()) gild(game, p, self, t, eff.maxTier, ctx.replay || i > 0);
       break;
     case 'detruire':
       for (const t of targets()) destroy(game, p, t);
       break;
-    case 'sacrifier':
-      for (const t of targets()) {
-        const camp = t.camp;
-        destroy(game, p, t);
-        offerMinions(game, p, p.tier + (eff.echelon ?? 0), camp === 'civile' ? undefined : camp);
-      }
+    case 'sacrifier': {
+      // Rejoué (Chirac, le pouvoir de Macron), le sacrifice ne détruit pas une deuxième fois : la victime est déjà
+      // partie, il redécouvre. Doré, il découvre deux fois.
+      const victim = targets()[0] ?? null;
+      const gone = !victim && ctx.target && !p.board.includes(ctx.target) ? ctx.target : null;
+      const camp = (victim ?? gone)?.camp;
+      if (!camp) break;
+      if (victim) destroy(game, p, victim);
+      for (let i = 0; i < k; i++) offerMinions(game, p, p.tier + (eff.echelon ?? 0), camp);
       break;
+    }
     case 'declencher':
       for (const t of targets()) {
         // Règle R4 : un relanceur ne relance pas deux fois le même serviteur dans la manche.
         if (t === self || p.retriggered.has(t.uid)) continue;
         p.retriggered.add(t.uid);
-        // Une Annonce relancée qui demande une cible vise le premier autre allié.
-        const relaunchTarget = p.board.find((x) => x !== t) ?? null;
-        for (const other of t.effects) if (other.when === eff.trigger) applyEffect(game, p, t, other, { target: relaunchTarget });
+        // Doré, il joue deux fois ce qu'il relance.
+        for (let i = 0; i < k; i++) relaunch(game, p, self, t, eff.trigger);
       }
       break;
     case 'actualiser':
-      // Comme le bouton Actualiser : la boutique se dégèle, la casserole change aussi.
-      for (let i = 0; i < (eff.count ?? 1); i++) {
-        p.frozen = false;
-        refillShop(game, p);
-        if (game.params.casseroleOnRoll) offerCasserole(game, p);
-        fireBoard(game, p, 'actualise', {});
-      }
+      for (let i = 0; i < (eff.count ?? 1); i++) refreshShop(game, p);
       break;
     case 'actualisations_gratuites':
       p.freeRolls += eff.value * k;
@@ -749,13 +777,13 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       p.lossBet += eff.value * k;
       break;
     case 'congres': {
+      // Une actualisation comme les autres, avec les politiques du camp de la cible.
       const t = targets()[0];
-      if (t) refillShop(game, p, t.camp === 'civile' ? undefined : t.camp);
+      if (t) refreshShop(game, p, t.camp);
       break;
     }
     case 'transmettre': {
-      const at = self && p.board.includes(self) ? p.board.indexOf(self) + 1 : Math.max(0, index);
-      const next = p.board[at] ?? null;
+      const next = nextAlly(p.board, self, index);
       if (!next || !self) break;
       // Comme en combat : un doré transmet le double, de son attaque ou de toutes ses stats.
       addStats(next, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.hp) * k : 0);
@@ -767,14 +795,72 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
   }
 }
 
+/** L'allié suivant : celui à sa droite, ou le premier s'il est le dernier, comme en combat. Mort, il part de sa place d'avant (`index`). */
+function nextAlly(board: Minion[], self: Minion | null, index: number): Minion | null {
+  const at = self ? board.indexOf(self) : -1;
+  const from = at >= 0 ? at + 1 : Math.max(0, index);
+  return board.slice(from).find((m) => m !== self) ?? board.find((m) => m !== self) ?? null;
+}
+
+/**
+ * Donne un mot-clé. Rejoué (doré, multiplicateur, relance), il ne se perd pas sur un allié qui l'a déjà : il passe à
+ * un autre allié au hasard qui ne l'a pas.
+ */
+function giveKeyword(game: Game, p: Player, self: Minion | null, t: Minion, keyword: Keyword, replay: boolean): void {
+  if (!t.keywords.includes(keyword)) {
+    t.keywords.push(keyword);
+    return;
+  }
+  if (!replay) return;
+  const lacking = p.board.filter((m) => m !== self && !m.keywords.includes(keyword));
+  if (lacking.length > 0) game.rng.pick(lacking).keywords.push(keyword);
+}
+
+/** Peut-il être rendu doré par un effet ? Ni déjà doré, ni jeton, ni copie simple, et d'un échelon assez bas. */
+function canGild(m: Minion, maxTier: number): boolean {
+  return !m.golden && !m.token && !m.simple && m.tier <= maxTier && Boolean(CARD_BY_ID[m.cardId]);
+}
+
+/** Rend doré. Rejouée sur un allié qui ne peut pas l'être, la dorure passe à un autre allié au hasard qui le peut. */
+function gild(game: Game, p: Player, self: Minion | null, t: Minion, maxTier: number, replay: boolean): void {
+  if (canGild(t, maxTier)) return makeGolden(p, t);
+  if (!replay) return;
+  const others = p.board.filter((m) => m !== self && canGild(m, maxTier));
+  if (others.length > 0) makeGolden(p, game.rng.pick(others));
+}
+
 /** Rendre doré par un effet : stats de base doublées, effets doublés, mais pas d'Investiture (règle R3). */
-function makeGolden(p: Player, m: Minion, maxTier: number): void {
-  if (m.golden || m.token || m.simple || m.tier > maxTier) return;
+function makeGolden(p: Player, m: Minion): void {
   const card = CARD_BY_ID[m.cardId];
-  if (!card) return;
   m.golden = true;
   addStats(m, card.atk, card.hp);
   incrementCounter(p, 'dores_joues');
+}
+
+/**
+ * Relance les effets d'un déclencheur, comme rejoués. Une Annonce ciblée vise un autre allié au hasard, ni le relancé
+ * ni le relanceur ; une Annonce qui détruit (Hidalgo) demande un choix, et ne se relance pas.
+ */
+function relaunch(game: Game, p: Player, source: Minion | null, t: Minion, trigger: Trigger): void {
+  for (const other of relaunchable(t.effects, trigger)) {
+    if (other.to !== 'cible') {
+      applyEffect(game, p, t, other, { replay: true });
+      continue;
+    }
+    const allies = p.board.filter((m) => m !== t && m !== source);
+    if (allies.length > 0) applyEffect(game, p, t, other, { target: game.rng.pick(allies), replay: true });
+  }
+}
+
+/**
+ * Actualiser : la boutique se dégèle et se renouvelle, avec les politiques d'un camp si `camp` le dit (Congrès), la
+ * casserole change aussi, puis « Quand vous actualisez » joue.
+ */
+export function refreshShop(game: Game, p: Player, camp?: Camp): void {
+  p.frozen = false;
+  refillShop(game, p, camp);
+  if (game.params.casseroleOnRoll) offerCasserole(game, p);
+  fireBoard(game, p, 'actualise', {});
 }
 
 /** Détruit un allié au recrutement : il rend ses exemplaires, et son Héritage se déclenche. */
@@ -785,7 +871,7 @@ export function destroy(game: Game, p: Player, m: Minion): void {
   releaseMinion(game, m);
   const repeats = repeatCount(p, 'heritage');
   for (let r = 0; r < repeats; r++) {
-    for (const eff of m.effects) if (eff.when === 'heritage') applyEffect(game, p, m, eff, {}, index);
+    for (const eff of m.effects) if (eff.when === 'heritage') applyEffect(game, p, m, eff, { replay: r > 0 }, index);
   }
 }
 
@@ -811,7 +897,7 @@ export function endOfTurn(game: Game, p: Player): void {
       for (const eff of m.effects) {
         if (eff.when !== 'fin_tour') continue;
         const before = tableState(p);
-        applyEffect(game, p, m, eff, {});
+        applyEffect(game, p, m, eff, { replay: r > 0 });
         p.endOfTurnSteps.push(stepBetween(m.uid, before, tableState(p)));
       }
     }
@@ -898,7 +984,7 @@ export function announce(game: Game, p: Player, self: Minion, effects: Effect[],
   const annonces = effects.filter((e) => e.when === 'annonce');
   if (annonces.length > 0) p.annoncesThisRound++;
   for (let r = 0; r < repeats && annonces.length > 0; r++) {
-    for (const eff of annonces) applyEffect(game, p, self, eff, { target });
+    for (const eff of annonces) applyEffect(game, p, self, eff, { target, replay: r > 0 });
   }
   if (isCamp(game, played, 'ecologistes')) incrementCounter(p, 'ecologistes_joues');
   fireBoard(game, p, 'joue', { played: self }, (owner, eff) => owner !== self && (!eff.camp || isCamp(game, played, eff.camp)));
@@ -925,14 +1011,15 @@ export function applyPersist(game: Game, p: Player, persist: CombatPersist): voi
   }
 }
 
-/** La Célébration ou le Droit de réponse d'un serviteur du plateau, après le combat. */
-export function afterCombatSpeech(game: Game, p: Player, uid: number, trigger: 'celebration' | 'droit_de_reponse'): void {
+/**
+ * La Célébration ou le Droit de réponse d'un serviteur du plateau, après le combat. `repeats` : Macron, s'il a survécu,
+ * double les Célébrations, comme Lassalle les Fins de tour (le combat le compte, `celebrationRepeats`).
+ */
+export function afterCombatSpeech(game: Game, p: Player, uid: number, trigger: 'celebration' | 'droit_de_reponse', repeats = 1): void {
   const m = p.board.find((x) => x.uid === uid);
   if (!m) return;
-  // Macron double les Célébrations, comme Lassalle les Fins de tour.
-  const repeats = trigger === 'celebration' ? repeatCount(p, 'celebration') : 1;
   for (let r = 0; r < repeats; r++) {
-    for (const eff of m.effects) if (eff.when === trigger && p.board.includes(m)) applyEffect(game, p, m, eff);
+    for (const eff of m.effects) if (eff.when === trigger && p.board.includes(m)) applyEffect(game, p, m, eff, { replay: r > 0 });
   }
 }
 

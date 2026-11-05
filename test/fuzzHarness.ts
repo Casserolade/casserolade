@@ -129,7 +129,7 @@ function checkCasserolesKept(p: Player, before: Before, a: PlayerAction, where: 
     const c = CASSEROLE_BY_ID[posed];
     if (t) {
       t.casseroles = [...t.casseroles, posed];
-      if (c.chargesRemoved) {
+      if (c.forgetsAll) {
         t.oublie = t.casseroles.length;
         t.charges = 0;
       } else t.charges += c.charges ?? 1;

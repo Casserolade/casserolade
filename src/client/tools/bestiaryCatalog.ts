@@ -40,7 +40,6 @@ export interface BestiaryData {
   heroes: readonly Hero[];
   contexts: readonly Context[];
   campOrder: readonly Camp[];
-  ownerMultiplier: number;
   /** The words in bold on the cards, with their rule: the same ones the game explains on hover. */
   cardTerms: readonly { term: string; rule: string }[];
   /** The words of the game itself: budget, tier, golden… */
@@ -77,7 +76,7 @@ export function bestiaryCatalog(data: BestiaryData): BestiaryCatalog {
     camps,
     casseroles: data.casseroles.map((c) => ({
       key: c.id, kind: 'casserole', camp: campOf(c.owner), tier: null, data: c,
-      text: `${c.name} ${cardOf(c.owner)?.name ?? ''} ${rules({ kind: 'casserole', casserole: c, ownerMultiplier: data.ownerMultiplier })} ${c.blague} ${c.citation ?? ''} ${c.fait}`,
+      text: `${c.name} ${cardOf(c.owner)?.name ?? ''} ${rules({ kind: 'casserole', casserole: c })} ${c.blague} ${c.citation ?? ''} ${c.fait}`,
     })),
     spells: data.spells.filter((s) => !s.token).map((s) => ({ key: s.id, kind: 'sort', camp: null, tier: s.tier, text: `${s.name} ${rules(spell(s))}`, data: s })),
     tokens: [

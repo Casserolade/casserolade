@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { applyAction, createGame, resolveRound, startCombats, viewFor } from '../src/engine/game.ts';
 import type { Minion } from '../src/engine/types.ts';
 import { CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
-import { makeMinion } from '../src/engine/minion.ts';
+import { effectOrigin, makeMinion } from '../src/engine/minion.ts';
 import { resolveCombat } from '../src/engine/combat.ts';
 import { createRng } from '../src/engine/rng.ts';
 import { createBot, decide } from '../src/bots/bots.ts';
@@ -134,7 +134,7 @@ test('un triple d\'un serviteur réduit au silence lui rend, à l\'oubli, les ef
   buy('berge', true);
   assert.equal(applyAction(game, 0, { t: 'play', uid: p.hand[0].uid, onto: host.uid }).ok, true);
   const heritage = CARD_BY_ID.berge.effects?.[0];
-  assert.ok(heritage && host.effects.includes(heritage));
+  assert.ok(heritage && host.effects.map(effectOrigin).includes(heritage), 'l\'Héritage de Bergé passe sur l\'hôte, en copie ralliée');
   pose('blancos', host);
   pose('homards', host);
   assert.deepEqual(host.effects, [], 'réduit au silence');
@@ -145,7 +145,7 @@ test('un triple d\'un serviteur réduit au silence lui rend, à l\'oubli, les ef
   resolveRound(game);
   resolveRound(game);
   assert.equal(golden.scandal, undefined);
-  assert.ok(golden.effects.includes(heritage), 'l\'Héritage de Bergé revient avec l\'oubli');
+  assert.ok(golden.effects.map(effectOrigin).includes(heritage), 'l\'Héritage de Bergé revient avec l\'oubli');
   for (const e of CARD_BY_ID.cheminade.effects ?? []) assert.equal(golden.effects.filter((x) => x === e).length, 1);
 });
 
@@ -155,11 +155,11 @@ test('un triple garde chaque Ralliement, même celui d\'une carte sur elle-même
   buy('berge', true);
   assert.equal(applyAction(game, 0, { t: 'play', uid: p.hand[0].uid, onto: p.board[0].uid }).ok, true);
   const heritage = CARD_BY_ID.berge.effects?.[0];
-  assert.equal(p.board[0].effects.filter((e) => e === heritage).length, 2);
+  assert.equal(p.board[0].effects.filter((e) => effectOrigin(e) === heritage).length, 2);
   buy('berge', true);
   buy('berge', true);
   const golden = p.hand.find((m) => m.golden) as Minion;
-  assert.equal(golden.effects.filter((e) => e === heritage).length, 2, 'son Héritage, et celui de la Bergé ralliée');
+  assert.equal(golden.effects.filter((e) => effectOrigin(e) === heritage).length, 2, 'son Héritage, et celui de la Bergé ralliée');
 });
 
 test('le tutoriel suit son script quelle que soit la graine : ses camps sont toujours en jeu', () => {

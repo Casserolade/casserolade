@@ -5,7 +5,7 @@ import { isCamp } from '../src/engine/camps.ts';
 import { addMinionToHand, addSpellToHand, endOfTurn, offerCasserole, refillShop } from '../src/engine/recruit.ts';
 import { applyAction, createGame, resolveRound, startCombats, startRound, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
-import { makeMinion } from '../src/engine/minion.ts';
+import { effectOrigin, makeMinion } from '../src/engine/minion.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
 import { createBot, decide } from '../src/bots/bots.ts';
 import { createRng } from '../src/engine/rng.ts';
@@ -307,11 +307,11 @@ test('un Ralliement posé sur un politique en scandale, réduit au silence, gard
   buy('tache', true);
   assert.equal(applyAction(game, 0, { t: 'play', uid: p.hand[0].uid, onto: m.uid }).ok, true);
   const rallies = CARD_BY_ID.tache.effects ?? [];
-  assert.ok(rallies.every((e) => m.effects.includes(e)), 'le Tract de fin de tour de Taché joue pendant le scandale');
+  assert.ok(rallies.every((e) => m.effects.map(effectOrigin).includes(e)), 'le Tract de fin de tour de Taché joue pendant le scandale');
   manche(game);
   manche(game);
   assert.equal(m.scandal, undefined);
-  assert.ok([...siens, ...rallies].every((e) => m.effects.includes(e)), 'après l\'oubli : ses effets et ceux du rallié');
+  assert.ok([...siens, ...rallies].every((e) => m.effects.map(effectOrigin).includes(e)), 'après l\'oubli : ses effets et ceux du rallié');
 });
 
 test('le Bracelet électronique fait oublier un scandale tout de suite, mais il ne bouge plus', () => {

@@ -103,7 +103,7 @@ watch(tripleCount, (count, before) => {
 
     <template #overlay>
       <TargetArrow :gestures="gestures" />
-      <CarriedItem :gestures="gestures" :owner-multiplier="view.params.ownerMultiplier" :scandal-threshold="view.scandalThreshold" :round="view.round" />
+      <CarriedItem :gestures="gestures" :scandal-threshold="view.scandalThreshold" :round="view.round" />
       <FxLayer />
       <CardInspector />
       <DiscoverOverlay v-if="view.discover" :key="view.discover.join()" :choices="view.discover" :kind="view.discoverKind" @choose="(i) => store.act({ t: 'discover', i })" />

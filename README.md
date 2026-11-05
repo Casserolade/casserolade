@@ -53,7 +53,7 @@ Gratuit, sans publicité, sans inscription, sans rien à vendre.
 - **Trois exemplaires du même politique** en font un doré, qui donne une **Investiture** : la découverte d'un politique de l'échelon au-dessus.
 - **Les camps se parlent par le texte des cartes** : Annonces, Fins de tour, Héritages, Ralliements, Tracts, Revanches… Les moteurs se croisent, et les plateaux grandissent au recrutement.
 - **Le combat est automatique**, de gauche à droite, avec des cibles tirées au hasard, sauf le **Porte-parole**, qu'on doit attaquer d'abord.
-- **Les casseroles** donnent un avantage tout de suite, et le double sur leur propriétaire. Leur défaut dort jusqu'au scandale.
+- **Les casseroles** donnent un avantage tout de suite, et un bonus de plus sur leur propriétaire. Leur défaut dort jusqu'au scandale.
 - **Après une victoire, la Célébration** : un survivant prononce sa petite phrase, une Vedette d'abord, et chaque survivant qui a une Célébration en tire un gain. **Après une défaite, le Droit de réponse** : chaque politique qui en a un joue le sien, et le plus à gauche répond.
 
 Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/bestiaire?type=mot_cle), et au survol de chaque carte en jeu.

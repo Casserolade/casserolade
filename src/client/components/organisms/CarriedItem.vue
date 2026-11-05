@@ -12,7 +12,7 @@ import type { ShownCard } from '#src/client/tools/shownCard.ts';
  * What the player carries, under the pointer: the medallion of a politician, or the card of a spell.
  * Lifted off the table with its shadow below, it tilts with the movement, and glows with what a drop here would do.
  */
-const props = defineProps<{ gestures: TableGestures; ownerMultiplier: number; scandalThreshold: number; round: number }>();
+const props = defineProps<{ gestures: TableGestures; scandalThreshold: number; round: number }>();
 
 const drag = computed(() => props.gestures.dragging.value);
 const minion = computed(() => {
@@ -23,7 +23,7 @@ const card = computed<ShownCard | null>(() => {
   const item = drag.value?.item;
   if (item?.from === 'hand-spell') return item.card;
   if (item?.from === 'shop-spell') return { kind: 'spell', spell: item.spell };
-  if (item?.from === 'shop-casserole') return { kind: 'casserole', casserole: item.casserole, ownerMultiplier: props.ownerMultiplier };
+  if (item?.from === 'shop-casserole') return { kind: 'casserole', casserole: item.casserole };
   return null;
 });
 const place = computed(() => {

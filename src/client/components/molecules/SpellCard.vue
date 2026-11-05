@@ -25,8 +25,7 @@ const props = withDefaults(defineProps<{
   /** The tier an Investiture was fixed at. */
   tier?: number;
   tract?: { atk: number; hp: number };
-  ownerMultiplier?: number;
-}>(), { spell: null, casserole: null, count: 1, tier: undefined, tract: undefined, ownerMultiplier: 2 });
+}>(), { spell: null, casserole: null, count: 1, tier: undefined, tract: undefined });
 
 const art = computed(() => (props.spell ? (SPELL_ART[props.spell.id] ?? DEFAULT_SPELL_ART) : DEFAULT_SPELL_ART));
 const color = computed(() => (props.casserole ? CASSEROLE_COLORS[props.casserole.kind] : art.value.color));
@@ -41,7 +40,7 @@ const illustration = computed(() => (props.casserole ? cssImage(gameArt.manifest
 const ownerPuppet = computed(() => (owner.value ? puppetStyle(gameArt.manifest.value, owner.value.id, owner.value.camp) : null));
 const name = computed(() => props.casserole?.name ?? props.spell?.name ?? '');
 const lines = computed(() => {
-  if (props.casserole) return casseroleCardLines(props.casserole, props.ownerMultiplier);
+  if (props.casserole) return casseroleCardLines(props.casserole);
   return props.spell ? spellCardLines(props.spell, { tier: props.tier, tract: props.tract }) : [];
 });
 const nameSize = computed(() => fittedNameSize(name.value));

@@ -13,7 +13,6 @@ import { parseBestiaryFilter } from '#src/client/tools/parseBestiaryFilter.ts';
 import { CARDS, PARTY_CAMPS, TOKENS } from '#src/data/cards.ts';
 import { CASSEROLES } from '#src/data/casseroles.ts';
 import { CONTEXTS, HEROES } from '#src/data/heroes.ts';
-import { PARAMS } from '#src/data/params.ts';
 import { SPELLS } from '#src/data/sorts.ts';
 
 /**
@@ -23,7 +22,7 @@ import { SPELLS } from '#src/data/sorts.ts';
 export function useBestiary() {
   const catalog = bestiaryCatalog({
     cards: CARDS, tokens: Object.values(TOKENS), casseroles: CASSEROLES, spells: SPELLS, heroes: HEROES, contexts: CONTEXTS,
-    campOrder: [...PARTY_CAMPS, 'civile'], ownerMultiplier: PARAMS.ownerMultiplier,
+    campOrder: [...PARTY_CAMPS, 'civile'],
     cardTerms: [
       ...Object.values(KEYWORD_RULES).map(({ label, rule }) => ({ term: label, rule })),
       ...Object.entries(TERM_RULES).map(([term, rule]) => ({ term: term.charAt(0).toUpperCase() + term.slice(1), rule })),
