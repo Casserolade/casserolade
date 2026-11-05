@@ -115,6 +115,10 @@ test('seul l\'hôte règle et lance, et le niveau de mesure n\'est pas proposé 
   t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, niveauBots: 'difficile', contexte: 'inconnu' } });
   assert.equal(t.salon('b').options.niveauBots, 'difficile');
   assert.equal(t.salon('b').options.contexte, undefined);
+  t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, contexte: 'hasard' } });
+  assert.equal(t.salon('b').options.contexte, 'hasard', 'un contexte tiré au lancement');
+  t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, contexte: 'mercato' } });
+  assert.equal(t.salon('b').options.contexte, 'mercato');
   t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, niveauBots: 'debutant' } });
   assert.equal(t.salon('b').options.niveauBots, 'moyen');
 });

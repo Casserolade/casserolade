@@ -61,15 +61,14 @@ function memoryStorage(): ProfileStorage & { data: Map<string, string> } {
 
 const STATS: PlayerView['stats'] = { casseroles: 0, scandals: 0, forgotten: 0, triples: 0, spells: 0 };
 
-test('succès : une victoire solo débloque, se garde, et donne un héros de plus au choix', () => {
+test('succès : une victoire solo débloque, se garde, et donne un titre', () => {
   const storage = memoryStorage();
   const board = createAchievements(storage);
-  assert.equal(board.heroChoices.value, PARAMS.heroChoices);
   board.startGame();
   const unlocked = board.recordGame([{ seat: 0, pseudo: 'Vous', heroId: 'hollande', place: 1 }], { stats: STATS } as PlayerView);
   assert.ok(unlocked.some((s) => s.id === 'premier_mandat'));
   assert.deepEqual(board.fresh.value.map((s) => s.id), unlocked.map((s) => s.id), 'l\'écran de fin les montre');
-  assert.equal(board.heroChoices.value, PARAMS.heroChoices + 1);
+  assert.ok(board.earnedTitles.value.includes('L\'Élu'));
   assert.equal(readProgress(storage).victoires, 1, 'gardé dans le navigateur');
   board.startGame();
   assert.deepEqual(board.fresh.value, [], 'la partie suivante repart de zéro');

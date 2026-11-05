@@ -5,7 +5,7 @@ import { PARAMS } from '../src/data/params.ts';
 import { HEROES } from '../src/data/heroes.ts';
 import { CHAPITRES, OUTRE_TOMBE } from '../src/data/histoire/chapitres.ts';
 import { createGame, viewFor } from '../src/engine/game.ts';
-import { apresResultat, herosAuChoix, progresValide, progresVierge, titres } from '../src/histoire/succes.ts';
+import { apresResultat, progresValide, progresVierge, titres } from '../src/histoire/succes.ts';
 
 const STATS = { casseroles: 0, scandals: 0, forgotten: 0, triples: 0, spells: 0 };
 
@@ -15,14 +15,13 @@ test('chaque succès a un identifiant unique, et ses chapitres existent', () => 
   for (const s of SUCCES) if (s.condition.type === 'chapitre') assert.ok(chapitres.has(s.condition.id), s.id);
 });
 
-test('une première victoire donne un héros de plus au choix, et un titre se gagne une fois', () => {
+test('une première victoire donne son titre, et un succès se gagne une fois', () => {
   let p = progresVierge();
-  assert.equal(herosAuChoix(p), PARAMS.heroChoices);
   const gagne = apresResultat(p, { place: 1, stats: { ...STATS, casseroles: 9 } });
   p = gagne.progres;
   assert.ok(gagne.nouveaux.some((s) => s.id === 'premier_mandat'));
   assert.ok(gagne.nouveaux.some((s) => s.id === 'casserolade'));
-  assert.equal(herosAuChoix(p), PARAMS.heroChoices + 1);
+  assert.ok(titres(p).includes('L\'Élu'));
   assert.ok(titres(p).includes('Le Batteur de casseroles'));
   const encore = apresResultat(p, { place: 1, stats: { ...STATS, casseroles: 9 } });
   assert.equal(encore.nouveaux.filter((s) => s.id === 'casserolade').length, 0, 'un succès ne se gagne qu\'une fois');

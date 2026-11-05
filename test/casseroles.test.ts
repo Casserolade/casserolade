@@ -8,7 +8,7 @@ import { CASSEROLES } from '../src/data/casseroles.ts';
 import type { Casserole, Minion } from '../src/engine/types.ts';
 
 /**
- * Les casseroles, une par une. Retours de l'utilisateur (3 novembre 2026) : « L'immunité ouvrière »
+ * Les casseroles, une par une. Retour de partie (3 novembre 2026) : « L'immunité ouvrière »
  * ne valait rien, même ×2 sur Poutou, et la casserole de Zemmour ne lui donnait rien : il avait déjà
  * sa Polémique. Chaque casserole doit faire quelque chose, et plus encore sur son propriétaire.
  */

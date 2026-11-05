@@ -92,7 +92,7 @@ test('the view carries the phase, and a host for every plateau', () => {
   const view = viewFor(game, 0);
   assert.equal(view.phase, 'recrutement');
   assert.equal(view.animateur.plateau, 'france3');
-  // A real host on every plateau (the user's rule, 3 November 2026): the info ticker is only a fallback.
+  // A real host on every plateau (rule of 3 November 2026): the info ticker is only a fallback.
   for (const plateau of [...PLATEAUX, SECOND_TOUR]) assert.ok(animateurFor(plateau.id).reel, `${plateau.id} n'a pas de vrai animateur`);
   for (const a of ANIMATEURS) if (a.plateau) assert.equal(animateurFor(a.plateau).id, a.id, `${a.id} n'est pas le seul sur ${a.plateau}`);
 });
