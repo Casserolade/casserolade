@@ -156,7 +156,7 @@ function drainPolls(): number {
 }
 
 /**
- * The one big gag of the game (the user's rule, 3 November 2026): once the rival's polls are gone, a giant
+ * The one big gag of the game (rule of 3 November 2026): once the rival's polls are gone, a giant
  * casserole, rendered in 3D, falls on its head; « clang » and a shake at the impact. Returns when it is over.
  */
 function dropFatalBlow(startMs: number): number {

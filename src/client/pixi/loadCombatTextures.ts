@@ -27,6 +27,8 @@ export interface CombatTextures {
   characters: Record<string, CharacterTextures>;
   /** The casseroles hanging under a medallion, by kind: affaire, ridicule. */
   pans: Record<string, Texture>;
+  /** The microphone on the Porte-parole's lectern. */
+  mic: Texture | null;
 }
 
 /** One texture, or nothing: a missing asset must never stop a combat (contract 1). */
@@ -93,7 +95,7 @@ export async function loadCombatTextures(manifest: GameManifest, characterIds: s
     const path = manifest.carte[`casserole_${kind}`];
     return path ? [[kind, path]] : [];
   }));
-  const [frames, art, ribbon, attack, health, bodies, eyes, star, plaster, effects, characters, pans] = await Promise.all([
+  const [frames, art, ribbon, attack, health, bodies, eyes, star, plaster, effects, characters, pans, mic] = await Promise.all([
     loadTextureMap(cadres),
     loadTexture(artBackground),
     loadTexture(bandeau),
@@ -106,6 +108,7 @@ export async function loadCombatTextures(manifest: GameManifest, characterIds: s
     loadEffects(manifest),
     loadCharacters(manifest, characterIds),
     loadTextureMap(panPaths),
+    loadTexture(manifest.carte.mot_cle_porte_parole),
   ]);
-  return { frames, art, ribbon, attack, health, bodies, eyes, star, plaster, effects, characters, pans };
+  return { frames, art, ribbon, attack, health, bodies, eyes, star, plaster, effects, characters, pans, mic };
 }
