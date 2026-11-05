@@ -15,6 +15,7 @@ export interface MinionFace {
   casseroles?: string[];
   golden?: boolean;
   locked?: boolean;
+  bracelet?: boolean;
   copies?: number;
   charges?: number;
   scandalThreshold?: number;
@@ -26,8 +27,8 @@ export interface MinionFace {
 
 /** Only what a card face displays, from a minion of the board, the hand or the shop. */
 export function minionFace(minion: MinionFace, extra: Partial<MinionFace> = {}): MinionFace {
-  const { cardId, name, camp, tier, atk, hp, keywords, effects, casseroles, golden, locked, oublie } = minion;
-  return { cardId, name, camp, tier, atk, hp, keywords, effects, casseroles, golden, locked, oublie, ...extra };
+  const { cardId, name, camp, tier, atk, hp, keywords, effects, casseroles, golden, locked, bracelet, oublie } = minion;
+  return { cardId, name, camp, tier, atk, hp, keywords, effects, casseroles, golden, locked, bracelet, oublie, ...extra };
 }
 
 /** Rounds of scandal left for this minion at this round: 0 without a scandal. */

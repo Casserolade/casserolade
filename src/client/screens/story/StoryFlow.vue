@@ -48,7 +48,7 @@ function play(): void {
   if (!campaign.value || !chapter.value) return;
   stopRun();
   achievements.startGame();
-  run.value = new StoryRun(chapter.value, campaign.value.heroId, campaign.value.bossId, achievements.heroChoices.value);
+  run.value = new StoryRun(chapter.value, campaign.value.heroId, campaign.value.bossId);
   store.value = createGameStore(run.value);
   markLocalGame({ kind: 'carriere' });
 }

@@ -51,7 +51,7 @@ const COUNTER_TEXT: Record<Counter, string> = {
 };
 
 const TRIGGER_WORD: Partial<Record<Trigger, string>> = { annonce: 'Annonce', heritage: 'Héritage', fin_tour: 'Fin de tour' };
-const TRIGGER_WORDS: Partial<Record<Trigger, string>> = { annonce: 'Annonces', heritage: 'Héritages', fin_tour: 'Fins de tour' };
+const TRIGGER_WORDS: Partial<Record<Trigger, string>> = { annonce: 'Annonces', heritage: 'Héritages', fin_tour: 'Fins de tour', celebration: 'Célébrations' };
 
 function keyword(k: Keyword): string {
   return `**${KEYWORD_RULES[k].label}**`;
@@ -250,7 +250,7 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'budget_max':
       return `votre budget maximum augmente de ${e.value}`;
     case 'oublier':
-      return 'le peuple oublie tout de suite le scandale le plus long de vos politiques. Il ne bouge plus';
+      return 'le peuple oublie tout de suite le scandale le plus long de vos politiques. Sous bracelet, il ne bouge plus et ne se renvoie pas avant la prochaine manche';
     case 'pari_defaite':
       return `si vous perdez le prochain combat, gagnez ${e.value} budget`;
     case 'congres':

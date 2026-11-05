@@ -10,7 +10,7 @@ import { SUCCES } from '#src/data/succes.ts';
 /** The achievements board: all of them, won or not, what they give, and the title to show. */
 defineEmits<{ leave: [] }>();
 
-const { progress, earnedTitles, title, heroChoices } = achievements;
+const { progress, earnedTitles, title } = achievements;
 const board = computed(() => SUCCES.map((item) => ({ ...item, won: progress.value.obtenus.includes(item.id) })));
 const wonCount = computed(() => board.value.filter((item) => item.won).length);
 </script>
@@ -22,7 +22,6 @@ const wonCount = computed(() => board.value.filter((item) => item.won).length);
       <li><strong>{{ wonCount }}</strong> sur {{ SUCCES.length }}</li>
       <li><strong>{{ progress.parties }}</strong> {{ progress.parties > 1 ? 'parties' : 'partie' }}</li>
       <li><strong>{{ progress.victoires }}</strong> {{ progress.victoires > 1 ? 'victoires' : 'victoire' }}</li>
-      <li><strong>{{ heroChoices }}</strong> héros au choix</li>
     </ul>
 
     <section class="panel titles" aria-labelledby="titles-heading">

@@ -34,7 +34,7 @@ withDefaults(defineProps<{
   newcomer: false,
 });
 const emit = defineEmits<{
-  solo: [settings: { botLevel: BotLevel }];
+  solo: [settings: { botLevel: BotLevel; contexte: string }];
   create: [pseudo: string];
   join: [code: string, pseudo: string];
   public: [pseudo: string];

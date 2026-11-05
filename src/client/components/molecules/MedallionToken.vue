@@ -43,6 +43,8 @@ const props = withDefaults(defineProps<{
   casseroles?: string[];
   golden?: boolean;
   locked?: boolean;
+  /** Under the Bracelet électronique: neither moved nor sold until the next round. */
+  bracelet?: boolean;
   charges?: number;
   scandalThreshold?: number;
   /** The first `oublie` casseroles are forgotten: they hang as medals. */
@@ -176,7 +178,12 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
       <span v-if="golden" class="sheen" />
     </span>
     <span v-if="has('polemique')" class="slime" aria-hidden="true"><i /><i /><i /></span>
-    <span v-if="has('immunite')" class="bubble" aria-hidden="true" />
+    <template v-if="golden">
+      <span class="beads" aria-hidden="true" />
+      <span class="twinkles" aria-hidden="true"><GameIcon v-for="n in 3" :key="n" name="sparkle" :style="{ '--k': n }" /></span>
+      <span class="crown" aria-hidden="true"><GameIcon name="crown" /></span>
+    </template>
+    <span v-if="has('immunite')" class="bubble" aria-hidden="true"><span class="glint" /></span>
     <template v-if="has('cumul')"><span class="sash one" aria-hidden="true" /><span class="sash two" aria-hidden="true" /></template>
     <span v-if="has('retour')" class="comeback" aria-hidden="true"><GameIcon name="comeback" /></span>
     <span v-if="has('vedette')" class="star" aria-hidden="true"><GameIcon name="star" /></span>
@@ -186,7 +193,7 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
       <span v-if="marks.revanche !== null" class="mark revanche"><GameIcon name="sword" />{{ marks.revanche }}</span>
       <GameIcon v-if="marks.celebration" class="mark confetti" name="confetti" />
       <GameIcon v-if="marks.reponse" class="mark answer" :class="{ idle: !answers }" name="speech" />
-      <GameIcon v-if="locked" class="mark lock" name="lock" />
+      <GameIcon v-if="locked" class="mark lock" :name="bracelet ? 'bracelet' : 'lock'" />
     </span>
     <span class="stat atk" :class="[`tone-${tones.atk}`, { pop: popAtk }]"><span class="sr-only">Attaque </span>{{ atk }}</span>
     <span class="stat hp" :class="[`tone-${tones.hp}`, { pop: popHp }]"><span class="sr-only">PV </span>{{ Math.max(0, hp) }}</span>
@@ -230,7 +237,37 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   background: linear-gradient(160deg, #f4f6fa, #9aa3b4 30%, #4a5264 52%, #c3c9d4 74%, #6b7385);
   box-shadow: 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6), inset 0 0 0 calc(var(--mu) * 1.5) rgb(0 0 0 / 0.55);
 }
-.golden .ring { background: linear-gradient(160deg, #fff6c4, #f2c230 28%, #9a6a08 52%, #ffe27a 72%, #b07c10); box-shadow: 0 0 calc(var(--mu) * 18) rgb(255 200 40 / 0.65), 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6); }
+/* Doré, as plain as in Battlegrounds: a thick gold frame strung with beads, a crown, sparkles, and a warm glow. */
+.golden .ring {
+  inset: calc(var(--mu) * -5);
+  background: linear-gradient(160deg, #fff6c4, #f2c230 22%, #9a6a08 46%, #ffe27a 66%, #c08a14 84%, #fff0a0);
+  box-shadow: 0 0 calc(var(--mu) * 22) calc(var(--mu) * 4) rgb(255 200 40 / 0.75), inset 0 0 0 calc(var(--mu) * 2) #6a4400, 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6);
+  animation: gold-glow 2.6s ease-in-out infinite;
+}
+.golden .oval { inset: calc(var(--mu) * 9); box-shadow: inset 0 0 0 calc(var(--mu) * 3) #6a4400, inset 0 calc(var(--mu) * -12) calc(var(--mu) * 18) rgb(0 0 0 / 0.45); }
+.beads {
+  inset: calc(var(--mu) * -1);
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, #fffbe0 0 2.5deg, transparent 2.5deg 12deg);
+  mask: radial-gradient(farthest-side, transparent calc(100% - var(--mu) * 5), #000 calc(100% - var(--mu) * 4.5), #000 calc(100% - var(--mu) * 2), transparent calc(100% - var(--mu) * 1.5));
+  opacity: 0.9;
+  pointer-events: none;
+}
+.crown {
+  right: calc(var(--mu) * -10);
+  top: calc(var(--mu) * -6);
+  z-index: 2;
+  rotate: 22deg;
+  color: #ffd84a;
+  font-size: calc(var(--mu) * 40);
+  filter: drop-shadow(0 0 calc(var(--mu) * 6) rgb(255 210 60 / 0.9));
+  --icon-edge: #5a3a00;
+}
+.twinkles { inset: calc(var(--mu) * -16); pointer-events: none; }
+.twinkles > * { position: absolute; color: #fff6c4; font-size: calc(var(--mu) * 18); animation: twinkle 1.8s ease-in-out infinite; animation-delay: calc(var(--k) * -0.6s); filter: drop-shadow(0 0 calc(var(--mu) * 4) #ffd84a); }
+.twinkles > :nth-child(1) { left: 2%; top: 30%; }
+.twinkles > :nth-child(2) { right: 4%; top: 62%; }
+.twinkles > :nth-child(3) { left: 14%; bottom: 6%; }
 .is-both .ring { background: linear-gradient(90deg, #e2424f 0 50%, #2e64d8 50% 100%); }
 .oval {
   inset: calc(var(--mu) * 7);
@@ -254,17 +291,19 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
 .figure.turned { scale: -1 1; }
 .sheen { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 42%, rgb(255 240 180 / 0.32) 50%, transparent 58%); background-size: 300% 100%; animation: sheen 3.6s ease-in-out infinite; mix-blend-mode: screen; }
 
-/* Immunité: a golden soap bubble around it. */
+/* Immunité, the divine shield of Battlegrounds: a bright bubble over the whole medallion, its rim and its gleam. */
 .bubble {
-  inset: calc(var(--mu) * -11);
+  inset: calc(var(--mu) * -15);
   border-radius: 50%;
+  border: calc(var(--mu) * 4) solid rgb(255 250 210 / 0.95);
   background:
-    radial-gradient(ellipse 30% 18% at 32% 18%, rgb(255 255 255 / 0.85), transparent 70%),
-    radial-gradient(ellipse at 50% 50%, transparent 58%, rgb(255 214 80 / 0.28) 74%, rgb(255 236 150 / 0.75) 90%, rgb(255 214 80 / 0) 100%);
-  box-shadow: 0 0 calc(var(--mu) * 14) rgb(255 210 60 / 0.6), inset 0 0 calc(var(--mu) * 10) rgb(255 230 140 / 0.5);
+    radial-gradient(ellipse 34% 20% at 32% 17%, rgb(255 255 255 / 0.95), transparent 70%),
+    radial-gradient(ellipse at 50% 50%, rgb(255 248 200 / 0.16) 40%, rgb(255 226 110 / 0.42) 78%, rgb(255 214 80 / 0.7) 100%);
+  box-shadow: 0 0 calc(var(--mu) * 16) calc(var(--mu) * 3) rgb(255 220 90 / 0.85), inset 0 0 calc(var(--mu) * 16) rgb(255 240 170 / 0.8);
   animation: bubble-breathe 2.4s ease-in-out infinite;
   pointer-events: none;
 }
+.bubble .glint { position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(115deg, transparent 40%, rgb(255 255 255 / 0.55) 48%, transparent 56%); background-size: 300% 100%; animation: sheen 2.8s ease-in-out infinite; }
 /* Porte-parole: a lectern shaped like a shield, behind it, with its microphone. */
 .lectern {
   left: calc(var(--mu) * -20);
@@ -304,13 +343,13 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   --icon-edge: #0c2a55;
 }
 /* Polémique: green slime dripping from the frame. */
-.is-toxic .ring { box-shadow: 0 0 calc(var(--mu) * 16) calc(var(--mu) * 3) rgb(120 255 60 / 0.55), 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6); }
+.is-toxic .ring { box-shadow: 0 0 calc(var(--mu) * 22) calc(var(--mu) * 6) rgb(120 255 60 / 0.8), 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6); }
 .slime { left: calc(var(--mu) * 30); right: calc(var(--mu) * 30); bottom: calc(var(--mu) * 8); height: calc(var(--mu) * 40); pointer-events: none; }
 .slime i {
   position: absolute;
   top: 0;
-  width: calc(var(--mu) * 13);
-  height: calc(var(--mu) * 26);
+  width: calc(var(--mu) * 17);
+  height: calc(var(--mu) * 34);
   border-radius: 40% 40% 50% 50% / 30% 30% 70% 70%;
   background: radial-gradient(circle at 35% 30%, #d6ff8a, #57d11c 45%, #2a8a10);
   box-shadow: 0 0 calc(var(--mu) * 6) rgb(120 255 60 / 0.8);
@@ -318,7 +357,7 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   animation: drip 1.9s ease-in infinite;
 }
 .slime i:nth-child(1) { left: 8%; animation-delay: -0.4s; }
-.slime i:nth-child(2) { left: 45%; height: calc(var(--mu) * 34); animation-delay: -1.1s; }
+.slime i:nth-child(2) { left: 45%; height: calc(var(--mu) * 44); animation-delay: -1.1s; }
 .slime i:nth-child(3) { left: 78%; animation-delay: -1.6s; }
 /* Cumul des mandats: two tricolor sashes whirling around it, like a gust of wind. */
 .sash {
@@ -535,7 +574,9 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
 @keyframes pan-rattle { 0%, 100% { rotate: -9deg; } 50% { rotate: 9deg; } }
 @keyframes smoke { 0% { translate: -50% 0; scale: 0.4; opacity: 0.8; } 100% { translate: -50% calc(var(--mu) * -26); scale: 1.4; opacity: 0; } }
 @keyframes sheen { 0% { background-position: 120% 0; } 60%, 100% { background-position: -120% 0; } }
-@keyframes bubble-breathe { 50% { transform: scale(1.03); opacity: 0.85; } }
+@keyframes bubble-breathe { 50% { transform: scale(1.03); opacity: 0.9; } }
+@keyframes gold-glow { 50% { box-shadow: 0 0 calc(var(--mu) * 30) calc(var(--mu) * 7) rgb(255 210 60 / 0.95), inset 0 0 0 calc(var(--mu) * 2) #6a4400, 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6); } }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); } 50% { opacity: 1; transform: scale(1.1) rotate(45deg); } }
 @keyframes halo-pulse { 50% { transform: scale(1.04); opacity: 0.75; } }
 @keyframes whirl { to { rotate: 360deg; } }
 @keyframes drip { 0% { transform: scaleY(0.4); opacity: 0; } 20% { opacity: 1; } 70% { transform: scaleY(1.25) translateY(calc(var(--mu) * 6)); opacity: 1; } 100% { transform: scaleY(0.6) translateY(calc(var(--mu) * 24)); opacity: 0; } }

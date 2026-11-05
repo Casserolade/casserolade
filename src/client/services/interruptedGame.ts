@@ -9,8 +9,9 @@ export type LocalGameKind = (typeof KINDS)[number];
 
 export interface LocalGameMark {
   kind: LocalGameKind;
-  /** A solo game starts again with the same bots. */
+  /** A solo game starts again with the same bots, and the same context choice. */
   botLevel?: BotLevel;
+  contexte?: string;
 }
 
 export interface MarkStorage {
@@ -59,7 +60,11 @@ export function takeInterruptedGame(storage: MarkStorage | null = tabStorage()):
   try {
     const mark = JSON.parse(raw) as Partial<LocalGameMark>;
     if (!mark || !KINDS.includes(mark.kind as LocalGameKind)) return null;
-    return { kind: mark.kind as LocalGameKind, ...(LEVELS.includes(mark.botLevel as BotLevel) ? { botLevel: mark.botLevel } : {}) };
+    return {
+      kind: mark.kind as LocalGameKind,
+      ...(LEVELS.includes(mark.botLevel as BotLevel) ? { botLevel: mark.botLevel } : {}),
+      ...(typeof mark.contexte === 'string' ? { contexte: mark.contexte } : {}),
+    };
   } catch {
     return null;
   }

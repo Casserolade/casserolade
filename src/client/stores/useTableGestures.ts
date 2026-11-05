@@ -6,6 +6,7 @@ import { centerOf, tableFx } from '#src/client/stores/tableFx.ts';
 import type { Point } from '#src/client/stores/tableFx.ts';
 import { DROP_ZONES } from '#src/client/const/dropZones.ts';
 import { insertionIndex } from '#src/client/tools/insertionIndex.ts';
+import { nearestInsertion } from '#src/client/tools/nearestInsertion.ts';
 import { nearestSlotIndex } from '#src/client/tools/nearestSlotIndex.ts';
 import type { SlotBox } from '#src/client/tools/nearestSlotIndex.ts';
 import { zoneForTableY } from '#src/client/tools/zoneForTableY.ts';
@@ -270,7 +271,8 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
       const index = item.minion.locked || boxes.length === 0 ? item.index : nearestSlotIndex(boxes, available, point);
       return { zone, index, uid: under?.uid ?? null };
     }
-    return { zone, index: insertionIndex(boxes, point), uid: under?.uid ?? null };
+    const index = item.from === 'hand' ? nearestInsertion(board(), insertionIndex(boxes, point), (m) => m.locked) : insertionIndex(boxes, point);
+    return { zone, index, uid: under?.uid ?? null };
   }
 
   function beginDrag(item: GestureItem, point: Point): void {
@@ -347,7 +349,8 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
         return;
       }
       case 'board':
-        if (aim.zone === 'shop') sell(item.minion, point);
+        // Under a bracelet it cannot be sent back before the next round: dropped on the shop, it just returns.
+        if (aim.zone === 'shop' && !item.minion.bracelet) sell(item.minion, point);
         else if (aim.zone === 'board' && aim.index !== item.index) {
           playSound('play', 0.6);
           act({ t: 'move', uid: item.minion.uid, to: aim.index });

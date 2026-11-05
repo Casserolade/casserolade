@@ -36,7 +36,13 @@ onMounted(() => playSound('discover'));
   <div class="discover" role="dialog" aria-modal="true" aria-label="Découvrez : choisissez une carte">
     <p class="title" aria-hidden="true">Découvrez !</p>
     <ol class="choices">
-      <li v-for="(card, index) in cards" :key="`${choices[index]}-${index}`" class="choice" :class="{ chosen: chosen === index, gone: chosen !== null && chosen !== index }" :style="{ '--i': index }">
+      <li
+        v-for="(card, index) in cards"
+        :key="`${choices[index]}-${index}`"
+        class="choice"
+        :class="{ chosen: chosen === index, gone: chosen !== null && chosen !== index }"
+        :style="{ '--i': index, '--fan': index - (cards.length - 1) / 2 }"
+      >
         <button v-if="card" type="button" class="pick" @click="choose(index)" @pointerenter="hovered = index" @pointerleave="hovered = null">
           <ShownCardFace :card="card" />
         </button>
@@ -69,10 +75,15 @@ onMounted(() => playSound('discover'));
   animation: title-in 0.4s cubic-bezier(0.3, 1.6, 0.5, 1);
 }
 .choices { list-style: none; margin: 0; padding: 0; display: flex; align-items: flex-start; gap: calc(var(--s) * 50); }
-.choice { position: relative; width: calc(var(--s) * 420); animation: card-in 0.5s cubic-bezier(0.3, 1.4, 0.5, 1) backwards; animation-delay: calc(var(--i) * 0.09s); rotate: calc((var(--i) - 1) * 4deg); translate: 0 calc(var(--s) * (var(--i) - 1) * (var(--i) - 1) * 24); }
+/* The fan: `--fan` is the card's place from the middle, so that one or two choices stand centred too. */
+.choice { position: relative; width: calc(var(--s) * 420); animation: card-in 0.5s cubic-bezier(0.3, 1.4, 0.5, 1) backwards; animation-delay: calc(var(--i) * 0.09s); rotate: calc(var(--fan) * 4deg); translate: 0 calc(var(--s) * var(--fan) * var(--fan) * 24); }
+.choice:has(.pick:hover) { z-index: 1; }
 .pick { display: block; width: 100%; padding: 0; background: none; border: none; cursor: pointer; transition: transform 0.14s ease-out, filter 0.14s; filter: drop-shadow(0 calc(var(--s) * 20) calc(var(--s) * 30) rgb(0 0 0 / 0.7)); }
 .pick:hover, .pick:focus-visible { transform: translateY(calc(var(--s) * -24)) scale(1.05); filter: drop-shadow(0 0 calc(var(--s) * 30) rgb(255 220 90 / 0.9)); }
-.glossary { position: absolute; left: 0; right: 0; top: calc(100% + var(--s) * 10); }
+/* Beside the card, never under it: under it, a long text ran off the screen. Upright, its foot on the card's foot,
+   it grows upward; the last card has it on its left. */
+.glossary { position: absolute; z-index: 1; bottom: calc(var(--s) * 30); left: calc(100% + var(--s) * 12); width: calc(var(--s) * 360); rotate: calc(var(--fan) * -4deg); pointer-events: none; }
+.choice:last-child:not(:first-child) .glossary { left: auto; right: calc(100% + var(--s) * 12); }
 .chosen .pick { animation: picked 0.4s ease-in forwards; }
 .gone { opacity: 0; transition: opacity 0.25s; }
 @keyframes darken { from { opacity: 0; } }

@@ -12,6 +12,7 @@ const BASE_FORMS: Record<string, string> = {
   annonces: 'Annonce',
   héritages: 'Héritage',
   'fins de tour': 'Fin de tour',
+  célébrations: 'Célébration',
 };
 
 const RULES_BY_TERM = new Map<string, GlossaryEntry>([

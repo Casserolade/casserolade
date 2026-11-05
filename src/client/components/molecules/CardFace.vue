@@ -34,6 +34,7 @@ const props = withDefaults(
     casseroles?: string[];
     golden?: boolean;
     locked?: boolean;
+    bracelet?: boolean;
     /** Copies owned, toward a triple. */
     copies?: number;
     charges?: number;
@@ -88,7 +89,7 @@ const tones = computed(() => statTones(props.cardId, Boolean(props.golden), prop
     </span>
     <span class="medal attack" :class="`tone-${tones.atk}`"><span class="sr-only">Attaque </span>{{ atk }}</span>
     <span class="medal health" :class="`tone-${tones.hp}`"><span class="sr-only">PV </span>{{ Math.max(0, hp) }}</span>
-    <CardChips :tier="tier" :camp-label="CAMP_LABELS[camp]" :locked="locked" :copies="copies" :charges="charges" :scandal-threshold="scandalThreshold" :scandal-left="scandalLeft" />
+    <CardChips :tier="tier" :camp-label="CAMP_LABELS[camp]" :locked="locked" :bracelet="bracelet" :copies="copies" :charges="charges" :scandal-threshold="scandalThreshold" :scandal-left="scandalLeft" />
     <span v-if="golden" class="sr-only">Doré</span>
     <SheetSprite v-if="shine" class="shine" :sprite="shine" />
   </span>

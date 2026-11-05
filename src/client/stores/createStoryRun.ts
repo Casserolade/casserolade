@@ -36,8 +36,7 @@ export class StoryRun implements Transport {
   private lineTimer = 0;
   private listener: (message: ServerMessage) => void = () => {};
 
-  /** `heroChoices`: heroes offered when the chapter lets the player choose, achievements included. */
-  constructor(chapter: Chapitre, heroId: string, campaignBossId: string, heroChoices?: number) {
+  constructor(chapter: Chapitre, heroId: string, campaignBossId: string) {
     this.chapter = chapter;
     this.tracker = creerSuivi(chapter);
     const seed = generateSeed();
@@ -48,7 +47,7 @@ export class StoryRun implements Transport {
       botLevel: 'facile',
       seed,
       seats: table.sieges.map((seat, index) => ({ pseudo: index === HUMAN_SEAT ? 'Vous' : `Bot ${index}`, level: seat.level })),
-      game: heroChoices ? { ...table.game, heroChoices: { [HUMAN_SEAT]: heroChoices } } : table.game,
+      game: table.game,
     });
     this.inner.onMessage((message) => this.receive(message));
   }
