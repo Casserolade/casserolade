@@ -5,9 +5,14 @@ le volume est normalisé, le fichier va dans assets/game/sons/citations/, le man
 crédits sont mis à jour, et src/data/voix.ts est régénéré. Une voix ne se joue que là où elle dit
 exactement ce qu'on lit : sur sa casserole quand celle-ci raconte la même chose, ou dans une bulle
 qui contient sa phrase. Jamais de voix synthétisée : sans extrait, la citation reste en texte.
+Les saillies validées dans data/collecte/ecoute_saillies.json s'y ajoutent (voix_saillies.py), et
+remplacent l'ancienne découpe de la même phrase.
 Usage : python3 -I tools/collecte/voix_jeu.py   (depuis la racine du dépôt)
 """
-import json, os, subprocess
+import json, os, subprocess, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from voix_saillies import jetons, voix_des_saillies  # noqa: E402
 
 RACINE = os.getcwd()
 ECOUTE = "data/collecte/ecoute.json"
@@ -47,6 +52,15 @@ def charger(chemin):
     with open(chemin, encoding="utf-8") as f:
         return json.load(f)
 
+def charger_si(chemin):
+    return charger(chemin) if os.path.exists(chemin) else {}
+
+def remplacee(ancienne, nouvelles):
+    """Une ancienne découpe cède la place à une saillie validée qui dit la même chose, ou porte la même casserole."""
+    mots = " ".join(jetons(ancienne["phrase"]))
+    return any(n["personne"] == ancienne["personne"] and (f" {mots} " in f" {' '.join(jetons(n['phrase']))} " or
+               (ancienne.get("casserole") and n.get("casserole") == ancienne["casserole"])) for n in nouvelles)
+
 def main():
     ecoute = charger(ECOUTE)
     citations = {c["id"]: c for c in charger(CITATIONS)}
@@ -81,6 +95,18 @@ def main():
                 "note": f"Extrait de {c.get('debut')} à {c.get('fin')} s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json).",
             })
         voix.append({"id": cid, "personne": PERSONNE[cid], "phrase": citations[cid]["phrase"], **({"casserole": CASSEROLE[cid]} if cid in CASSEROLE else {})})
+    nouvelles = voix_des_saillies(manifeste, credits)
+    # Une voix retirée à l'écoute ne joue plus, même sans remplaçante : mieux vaut une bulle muette qu'un son faux.
+    retirees = {cle[4:] for cle, v in charger_si("data/collecte/ecoute_saillies.json").items() if cle.startswith("jeu/") and v.get("verdict") == "retirer"}
+    voix = [v for v in voix if v["id"] not in retirees and not remplacee(v, nouvelles)] + [v for v in nouvelles if v["id"] not in retirees]
+    # Un son qui ne joue plus ne pèse plus dans le jeu : fichier, manifeste et crédits.
+    jouees = {v["id"] for v in voix}
+    for fichier in os.listdir(DEST):
+        nom = fichier.removesuffix(".mp3")
+        if fichier.endswith(".mp3") and nom not in jouees:
+            os.remove(f"{DEST}/{fichier}")
+            manifeste.get("sons", {}).get("citations", {}).pop(nom, None)
+            credits["sons"] = [son for son in credits.get("sons", []) if son["id"] != nom]
     with open(MANIFESTE, "w", encoding="utf-8") as f:
         json.dump(manifeste, f, ensure_ascii=False, indent=1)
     with open(CREDITS, "w", encoding="utf-8") as f:
