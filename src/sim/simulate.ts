@@ -4,6 +4,7 @@ import type { Hero, Params } from '../engine/types.ts';
 import { createBot, decide } from '../bots/bots.ts';
 import type { BotLevel, BotState, BotStyle } from '../bots/bots.ts';
 import { resolveCombat } from '../engine/combat.ts';
+import { addMinionToHand, take } from '../engine/recruit.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { HEROES } from '../data/heroes.ts';
 
@@ -28,6 +29,8 @@ export interface SeatResult {
   rank6: number | null;
   /** Nombre d'actions par type : vérifie que le bot fait bien ce qu'on croit. */
   actions: Record<string, number>;
+  /** La carte offerte (`RunOptions.gift`) a-t-elle été posée dans sa manche ou la suivante ? Vérifie que le bot la joue. */
+  giftPlayed?: boolean;
 }
 
 export interface GameResult {
@@ -57,6 +60,10 @@ export interface RunOptions {
   heroes?: (string | undefined)[];
   styles?: (BotStyle | undefined)[];
   activeCamps?: GameOptions['activeCamps'];
+  /** Mesure d'une carte (bilan_cartes.ts) : elle arrive gratuitement dans la main de ce siège, au début de cette manche. */
+  gift?: { seat: number; round: number; cardId: string };
+  /** Le camp que vise chaque bot dès le départ, au lieu d'un tirage. */
+  commitments?: (string | undefined)[];
 }
 
 function dominant(game: Game, seat: number): { camp: string | null; count: number } {
@@ -111,6 +118,9 @@ export function playGame(opts: RunOptions): GameResult {
   };
   const game = createGame(gameOpts);
   const bots: BotState[] = opts.levels.map((lvl, i) => createBot(lvl, opts.seed * 31 + i + 1, opts.styles?.[i]));
+  opts.commitments?.forEach((camp, i) => {
+    if (camp) bots[i].commitment = camp;
+  });
 
   let combats = 0;
   let draws = 0;
@@ -124,8 +134,14 @@ export function playGame(opts: RunOptions): GameResult {
   const finalBoards = new Map<number, { camp: string | null; count: number; size: number; tier: number }>();
   const casseroleCounts: Record<string, number> = {};
   const actionCounts: Record<string, number>[] = bots.map(() => ({}));
+  let giftPlayed = false;
 
   while (game.phase === 'recrutement' && game.round < MAX_ROUNDS) {
+    const gift = opts.gift;
+    if (gift && game.round === gift.round && game.players[gift.seat].alive) {
+      take(game, gift.cardId);
+      addMinionToHand(game, game.players[gift.seat], gift.cardId);
+    }
     for (const p of game.players) {
       if (!p.alive) continue;
       const bot = bots[p.seat];
@@ -149,6 +165,9 @@ export function playGame(opts: RunOptions): GameResult {
       }
     }
 
+    if (gift && (game.round === gift.round || game.round === gift.round + 1)) {
+      giftPlayed ||= game.players[gift.seat].board.some((m) => m.cardId === gift.cardId);
+    }
     for (const p of game.players) {
       if (p.alive) {
         const d = dominant(game, p.seat);
@@ -225,6 +244,7 @@ export function playGame(opts: RunOptions): GameResult {
         triples: p.stats.triples,
         rank6: rank6.get(p.seat) ?? null,
         actions: actionCounts[p.seat],
+        ...(opts.gift?.seat === p.seat ? { giftPlayed } : {}),
       };
     }),
   };
