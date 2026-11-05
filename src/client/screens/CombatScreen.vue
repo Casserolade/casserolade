@@ -4,6 +4,7 @@ import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
+import CelebrationNotices from '#src/client/components/molecules/CelebrationNotices.vue';
 import HeroCorner from '#src/client/components/molecules/HeroCorner.vue';
 import HostLectern from '#src/client/components/molecules/HostLectern.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
@@ -21,6 +22,7 @@ import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
 import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
 import { afterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
+import { celebrationNotices } from '#src/client/tools/celebrationNotices.ts';
 import type { CombatSpeech } from '#src/client/tools/afterCombatSpeech.ts';
 import { combatCharacterIds } from '#src/client/tools/combatCharacterIds.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
@@ -86,7 +88,10 @@ const playback = new CombatPlayback(props.combat.log, {
   jumpTo: (sides) => stage?.jumpTo(sides),
   handleFinished: scheduleClose,
 });
-const { sides, current, narration, finished, speed } = playback;
+const { sides, current, narration, finished, speed, played } = playback;
+/** What each Célébration gives, shown as it plays: all of them at once when the combat is skipped. */
+const allNotices = celebrationNotices(props.combat.log);
+const notices = computed(() => allNotices.filter((notice) => notice.at < played.value));
 const plainSides = computed(() => (stageReady.value || stageFailed.value || finished.value ? sides.value : openingSides));
 const own = computed(() => plainSides.value[props.combat.side]);
 const enemy = computed(() => plainSides.value[props.combat.side === 0 ? 1 : 0]);
@@ -362,6 +367,7 @@ onUnmounted(() => {
         <span class="detail">{{ outcome }}</span>
       </div>
     </template>
+      <CelebrationNotices :notices="notices" :side="props.combat.side" />
 
     <template #overlay>
       <div ref="stageHost" class="stage-host" aria-hidden="true" />

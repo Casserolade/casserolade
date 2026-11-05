@@ -12,6 +12,7 @@
 - Treize gags de plateau deviennent des Vedettes, avec une petite Célébration et souvent leur vraie voix : Delogu, Thévenoud, Cahuzac, Doucet, Rugy, Odoul, Dupont-Aignan, Asselineau, Cheminade, Durif, Arthaud, Poutou, Lassalle. Chaque camp a sa Célébration dès les premiers échelons.
 - Après une défaite, chaque Droit de réponse joue, plus seulement le plus à gauche ; chaque camp en a un, bas dans les échelons.
 - Macron, « la Fête de la musique », double les Célébrations.
+- Chaque Célébration affiche ce qu'elle rapporte, dans un petit bandeau en bas à droite du combat, avec le « ×2 » de Macron.
 - Une Célébration rapporte désormais dans plus d'une victoire sur deux, un Droit de réponse dans une défaite sur deux.
 
 **Le jeu**
