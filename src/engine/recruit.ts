@@ -56,6 +56,18 @@ export function draw(game: Game, tier: number, filter: (cardId: string) => boole
   return null;
 }
 
+/**
+ * Un exemplaire de cet échelon précis, pas en dessous : « un politique de votre échelon » dit ce qu'il donne.
+ * Seul un échelon épuisé se rabat sur l'échelon le plus proche en dessous.
+ */
+export function drawFromTier(game: Game, tier: number): string | null {
+  for (let t = tier; t >= 1; t--) {
+    const id = draw(game, t, (cardId) => CARD_BY_ID[cardId].tier === t);
+    if (id) return id;
+  }
+  return null;
+}
+
 /** Retire un exemplaire précis de la réserve, s'il en reste. */
 export function take(game: Game, cardId: string): boolean {
   const n = game.pool.get(cardId) ?? 0;
@@ -275,7 +287,9 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   golden.bonusDamage = parts.reduce((s, m) => s + m.bonusDamage, 0);
   golden.hpLossOnDeath = parts.reduce((s, m) => s + m.hpLossOnDeath, 0);
   golden.aloneBonus = parts.reduce((s, m) => s + m.aloneBonus, 0);
-  golden.locked = parts.some((m) => m.locked);
+  // Le doré part en main, libre : un bracelet ne le suit pas, et un scandale le recloue ci-dessous s'il le faut.
+  golden.locked = false;
+  delete golden.bracelet;
   if (golden.charges >= scandalThreshold(game, p)) {
     startScandal(game, golden);
     // Un scandale en cours continue sur le doré ; sinon, c'en est un nouveau.
@@ -296,19 +310,28 @@ function queueOffer(p: Player, offer: Offer): void {
 }
 
 /**
- * Trois serviteurs différents, de l'échelon visé si possible, réservés le temps du choix.
+ * Jusqu'à trois serviteurs différents de l'échelon visé, réservés le temps du choix. « De votre échelon » veut dire
+ * cet échelon, jamais en dessous : s'il en manque, le choix est plus court, comme dans Battlegrounds. Seul un échelon
+ * sans aucun candidat (aucun politique à Annonce d'échelon 5) se rabat sur l'échelon le plus proche en dessous.
  * Un camp absent de la partie est ignoré (règle R7). La carte `source`, celle qui découvre, n'est jamais proposée.
  */
 export function offerMinions(game: Game, p: Player, tier: number, camp?: Camp, trigger?: Trigger, source?: string): void {
   const target = Math.max(1, Math.min(tier, game.params.tierMax));
   const campOk = (id: string) => !camp || camp === 'civile' || !game.camps.includes(camp) || isCamp(game, makeMinion(CARD_BY_ID[id], -1), camp);
   const triggerOk = (id: string) => !trigger || (CARD_BY_ID[id].effects ?? []).some((e) => e.when === trigger);
-  const available = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source && campOk(id) && triggerOk(id));
-  let eligible = available.filter(([id]) => CARD_BY_ID[id].tier === target).map(([id]) => id);
-  if (eligible.length < 3) eligible = available.filter(([id]) => CARD_BY_ID[id].tier <= target).map(([id]) => id);
-  const options = game.rng.shuffle(eligible).slice(0, 3);
+  const available = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source && campOk(id) && triggerOk(id)).map(([id]) => id);
+  const options = game.rng.shuffle(closestTier(available, target)).slice(0, 3);
   for (const id of options) take(game, id);
   queueOffer(p, { options, kind: 'serviteur' });
+}
+
+/** Les cartes de l'échelon visé ; à défaut, celles de l'échelon le plus proche en dessous. */
+function closestTier(cardIds: string[], tier: number): string[] {
+  for (let t = tier; t >= 1; t--) {
+    const at = cardIds.filter((id) => CARD_BY_ID[id].tier === t);
+    if (at.length > 0) return at;
+  }
+  return [];
 }
 
 function offerSpells(game: Game, p: Player, tier: number): void {
@@ -351,7 +374,7 @@ function power(m: Minion | null): number {
 }
 
 /** Combien de fois un déclencheur joue : Chirac, Lassalle et Mitterrand doublent, triplent s'ils sont dorés. */
-export function repeatCount(p: Player, trigger: 'annonce' | 'heritage' | 'fin_tour'): number {
+export function repeatCount(p: Player, trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration'): number {
   let count = 1;
   for (const m of p.board) {
     for (const eff of m.effects) {
@@ -387,7 +410,7 @@ export function addDefect(m: Minion, c: Casserole): void {
   m.budgetPerRound += budget;
   scandal.hpLoss += c.hpLossOnDeath ?? 0;
   m.hpLossOnDeath += c.hpLossOnDeath ?? 0;
-  if (c.locked && !m.locked) {
+  if (c.locked) {
     m.locked = true;
     scandal.locked = true;
   }
@@ -413,10 +436,18 @@ function liftScandal(m: Minion): boolean {
   if (!scandal) return false;
   m.budgetPerRound -= scandal.budget;
   m.hpLossOnDeath -= scandal.hpLoss;
-  if (scandal.locked) m.locked = false;
+  // Sous bracelet, il reste cloué : le bracelet tombe à la manche suivante (releaseBracelet).
+  if (scandal.locked) m.locked = Boolean(m.bracelet);
   if (scandal.silenced) m.effects = [...scandal.silenced, ...m.effects];
   delete m.scandal;
   return true;
+}
+
+/** La manche suivante, le bracelet tombe : il bouge et se renvoie de nouveau, sauf si un scandale le cloue encore. */
+export function releaseBracelet(m: Minion): void {
+  if (!m.bracelet) return;
+  delete m.bracelet;
+  m.locked = Boolean(m.scandal?.locked);
 }
 
 /** L'oubli du peuple : les défauts s'effacent, les casseroles restent, comme des médailles. */
@@ -709,6 +740,7 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       if (target) {
         forgetScandal(target);
         target.locked = true;
+        target.bracelet = true;
         p.stats.forgotten++;
       }
       break;
@@ -784,6 +816,17 @@ export function endOfTurn(game: Game, p: Player): void {
       }
     }
   }
+  roped(game, p);
+}
+
+/** Premier de cordée (contexte) : le politique le plus à gauche gagne ses stats, après les Fins de tour. */
+function roped(game: Game, p: Player): void {
+  const gain = game.ctx.firstOfRope;
+  const first = p.board[0];
+  if (!gain || !first) return;
+  const before = tableState(p);
+  addStats(first, gain.atk, gain.hp);
+  p.endOfTurnSteps.push(stepBetween(first.uid, before, tableState(p)));
 }
 
 /** Ce qu'une étape de Fin de tour peut changer sur la table du joueur. */
@@ -886,7 +929,11 @@ export function applyPersist(game: Game, p: Player, persist: CombatPersist): voi
 export function afterCombatSpeech(game: Game, p: Player, uid: number, trigger: 'celebration' | 'droit_de_reponse'): void {
   const m = p.board.find((x) => x.uid === uid);
   if (!m) return;
-  for (const eff of m.effects) if (eff.when === trigger) applyEffect(game, p, m, eff);
+  // Macron double les Célébrations, comme Lassalle les Fins de tour.
+  const repeats = trigger === 'celebration' ? repeatCount(p, 'celebration') : 1;
+  for (let r = 0; r < repeats; r++) {
+    for (const eff of m.effects) if (eff.when === trigger && p.board.includes(m)) applyEffect(game, p, m, eff);
+  }
 }
 
 /** Toutes les cartes de serviteurs qui ont un effet de ce déclencheur : pour les découvertes thématiques. */

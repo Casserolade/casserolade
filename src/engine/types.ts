@@ -167,7 +167,7 @@ export type Action =
   /** Déclenche les effets `trigger` des cibles, une fois par manche au plus pour chacune. */
   | { do: 'declencher'; trigger: 'annonce' | 'heritage' | 'fin_tour' }
   /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). */
-  | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' }
+  | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration' }
   /** Aura : ce serviteur a +atk/+hp par unité du compteur. */
   | { do: 'compteur'; compteur: Counter; atk: number; hp: number }
   /** Aura : il faut `value` casseroles de plus pour faire scandale. */
@@ -337,6 +337,8 @@ export interface Minion {
   /** En scandale jusqu'au début de cette manche : les défauts de ses casseroles s'appliquent. */
   scandal?: Scandal;
   locked: boolean;
+  /** Sous Bracelet électronique : ni déplacé ni renvoyé, jusqu'au début de la manche suivante. */
+  bracelet?: boolean;
   noAttack: boolean;
   token: boolean;
   bonusDamage: number;
@@ -395,8 +397,6 @@ export interface Params {
   tierCost: Record<number, number>;
   shopSize: Record<number, number>;
   copies: Record<number, number>;
-  /** 1 : chaque camp pèse pareil en boutique, quel que soit son nombre de cartes. */
-  poolBalance: number;
   /** Sorts proposés en boutique, en plus des serviteurs. */
   spellSlots: number;
   /** Réduction sur le prix des sorts. */
@@ -430,8 +430,16 @@ export interface Context {
   desc: string;
   params?: Partial<Params>;
   dissolutionRound?: number;
+  /** Dissolution : après la perte, chacun découvre un politique de son échelon. */
+  dissolutionDiscover?: boolean;
   /** Fer à cheval : Insoumis, RN et Reconquête comptent comme un même camp. */
   extremesAllied?: boolean;
+  /** Primaire ouverte : à la première manche, chacun découvre un politique de cet échelon. */
+  firstRoundDiscover?: number;
+  /** Ruissellement : budget en plus, à chaque manche, pour le dernier en sondages (ex æquo compris). */
+  lastPlaceBudget?: number;
+  /** Premier de cordée : à chaque fin de recrutement, le politique le plus à gauche gagne ces stats. */
+  firstOfRope?: { atk: number; hp: number };
 }
 
 export type PlayerAction =
@@ -568,6 +576,9 @@ export interface CombatResult {
   celebrant: { side: 0 | 1; uid: number } | null;
   /** Les survivants du vainqueur qui ont une Célébration : chacun applique son gain (décision du 3 novembre 2026). */
   celebrants: { side: 0 | 1; uid: number }[];
+  /** Celui qui prend la parole pour le perdant : le plus à gauche qui a un Droit de réponse. */
   responder: { side: 0 | 1; uid: number } | null;
+  /** Tous ceux du perdant qui ont un Droit de réponse : chacun l'applique, comme les Célébrations (5 novembre 2026). */
+  responders: { side: 0 | 1; uid: number }[];
   log: CombatEvent[];
 }

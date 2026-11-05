@@ -582,6 +582,8 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
   const celebrant = winner === null ? null : pickCelebrant(sides[winner]);
   const celebrants = winner === null ? [] : sides[winner].units.filter((u) => u.hp > 0 && u.effects.some((eff) => eff.when === 'celebration'));
   const responder = winner === null ? null : pickResponder(winner === 0 ? 1 : 0, winner === 0 ? c : a);
+  const loserBoard = winner === null ? [] : (winner === 0 ? c : a).minions;
+  const responders = loserBoard.filter((m) => m.effects.some((eff) => eff.when === 'droit_de_reponse'));
   if (b.logging && celebrant) b.log.push({ e: 'celebration', side: celebrant.side, uid: celebrant.uid, cardId: celebrant.cardId });
   // Chaque Célébration joue son gain, même si un autre a pris la parole : on la voit sur sa carte.
   if (b.logging) {
@@ -602,6 +604,7 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
     celebrant: celebrant ? { side: celebrant.side, uid: celebrant.uid } : null,
     celebrants: celebrants.map((u) => ({ side: sides[winner as 0 | 1].index, uid: u.uid })),
     responder: responder ? { side: responder.side, uid: responder.uid } : null,
+    responders: responders.map((m) => ({ side: winner === 0 ? 1 : 0, uid: m.uid })),
     log: b.log,
   };
 }

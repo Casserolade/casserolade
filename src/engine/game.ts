@@ -1,4 +1,4 @@
-import type { Camp, Casserole, CombatEvent, Counter, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction } from './types.ts';
+import type { Camp, Casserole, CombatEvent, Context, Counter, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
 import type { CombatRecord, Game, GamePhase, Player, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
@@ -14,7 +14,7 @@ import {
   applyPersist,
   boardLimit,
   chooseDiscover,
-  draw,
+  drawFromTier,
   dropDiscovers,
   endOfTurn,
   fireBoard,
@@ -31,6 +31,8 @@ import {
   maxBudget,
   offerCasserole,
   needsTarget,
+  offerMinions,
+  releaseBracelet,
   rally,
   refillShop,
   releaseMinion,
@@ -45,7 +47,7 @@ import {
 } from './recruit.ts';
 import { CARDS, CARD_BY_ID, PARTY_CAMPS } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
-import { CONTEXTS, HEROES, HERO_BY_ID } from '../data/heroes.ts';
+import { CONTEXTS, HEROES, HERO_BY_ID, RANDOM_CONTEXT } from '../data/heroes.ts';
 import { PARAMS } from '../data/params.ts';
 import { SPELL_BY_ID } from '../data/sorts.ts';
 import { plateauFor } from '../data/plateaux.ts';
@@ -87,23 +89,28 @@ const PHASE_ERRORS: Record<Exclude<GamePhase, 'recrutement'>, string> = {
 };
 const NO_COUNTERS: Record<Counter, number> = { tracts: 0, ecologistes_joues: 0, dores_joues: 0, casseroles: 0, debauchages: 0 };
 
+/** `hasard` draws one of the contexts with a rule; an unknown or missing id is ordinary political life. */
+function contextFor(id: string | undefined, rng: Rng): Context {
+  if (id === RANDOM_CONTEXT) return rng.pick(CONTEXTS.filter((c) => c.id !== CONTEXTS[0].id));
+  return CONTEXTS.find((c) => c.id === id) ?? CONTEXTS[0];
+}
+
+/** A hero's polls at the start: its bonus is a balance lever, never enough to start the game already out. */
+function startingPolls(params: Params, hero: Hero): number {
+  return Math.max(1, params.startHp + hero.hpBonus);
+}
+
 export function createGame(opts: GameOptions): Game {
   const rng = createRng(opts.seed);
-  const ctx = opts.contextId ? (CONTEXTS.find((c) => c.id === opts.contextId) ?? CONTEXTS[0]) : CONTEXTS[0];
+  const ctx = contextFor(opts.contextId, rng);
   const params: Params = { ...PARAMS, ...opts.params, ...ctx.params };
   const seats = opts.seats ?? 8;
   const camps = opts.activeCamps ?? rng.shuffle([...PARTY_CAMPS]).slice(0, params.activeCamps);
 
+  // Comme dans Battlegrounds, chaque carte d'un échelon a le même nombre d'exemplaires, et la boutique tire au
+  // hasard dans ce qui reste. Un camp pèse en boutique par le nombre de ses cartes à cet échelon.
   const pool = new Map<string, number>();
-  const inGame = CARDS.filter((c) => c.camp === 'civile' || camps.includes(c.camp));
-  const sizeOf = (camp: Camp, tier: number) => inGame.filter((c) => c.camp === camp && c.tier === tier).length;
-  for (const card of inGame) {
-    // À échelon égal, un camp fourni a moins de copies de chaque carte : il ne pèse pas plus en boutique.
-    const partyCamps = camps.filter((c) => sizeOf(c, card.tier) > 0);
-    const average = partyCamps.reduce((sum, c) => sum + sizeOf(c, card.tier), 0) / Math.max(1, partyCamps.length);
-    const scale = params.poolBalance && card.camp !== 'civile' ? average / sizeOf(card.camp, card.tier) : 1;
-    pool.set(card.id, Math.max(3, Math.round(params.copies[card.tier] * scale)));
-  }
+  for (const card of CARDS.filter((c) => c.camp === 'civile' || camps.includes(c.camp))) pool.set(card.id, params.copies[card.tier]);
 
   const heroes: Record<string, Hero> = { ...HERO_BY_ID };
   for (const [id, over] of Object.entries(opts.heroOverrides ?? {})) heroes[id] = { ...heroes[id], ...over };
@@ -128,7 +135,7 @@ export function createGame(opts: GameOptions): Game {
       hero,
       heroOffers,
       heroChoices: choices,
-      hp: params.startHp + hero.hpBonus,
+      hp: startingPolls(params, hero),
       tier: 1,
       upgradeCost: params.tierCost[2],
       budget: 0,
@@ -200,7 +207,7 @@ function chooseHero(game: Game, p: Player, i: number): ActionResult {
   const heroId = p.heroOffers[i];
   if (!heroId) return fail('Choix invalide.');
   p.hero = game.heroes[heroId];
-  p.hp = game.params.startHp + p.hero.hpBonus;
+  p.hp = startingPolls(game.params, p.hero);
   p.heroOffers = null;
   withdrawHeroOffer(game, heroId);
   if (game.players.every((x) => !x.heroOffers)) {
@@ -262,10 +269,13 @@ export function startRound(game: Game): void {
   for (const p of game.players) {
     if (!p.alive) continue;
     forgetScandals(game, p);
-    if (game.ctx.dissolutionRound === round && p.board.length > 0) releaseMinion(game, p.board.pop() as Minion);
+    for (const m of p.board) releaseBracelet(m);
+    const dissolved = game.ctx.dissolutionRound === round;
+    if (dissolved && p.board.length > 0) releaseMinion(game, p.board.pop() as Minion);
     const perRound = p.board.reduce((sum, m) => sum + m.budgetPerRound, 0);
     const base = Math.min(maxBudget(game, p), params.startBudget + (round - 1) * params.budgetPerRound);
-    p.budget = Math.max(0, base + (p.hero.mods.budgetPerRound ?? 0) + perRound + p.nextBudgetBonus);
+    const trickle = game.ctx.lastPlaceBudget && isLastInPolls(game, p) ? game.ctx.lastPlaceBudget : 0;
+    p.budget = Math.max(0, base + (p.hero.mods.budgetPerRound ?? 0) + perRound + p.nextBudgetBonus + trickle);
     p.nextBudgetBonus = 0;
     if (round > 1 && p.tier < params.tierMax) p.upgradeCost = Math.max(0, p.upgradeCost - 1);
     p.buysThisRound = 0;
@@ -276,8 +286,15 @@ export function startRound(game: Game): void {
     // Le gel garde aussi la casserole, si elle n'a pas été achetée.
     if (!frozen || !p.casseroleOffer) offerCasserole(game, p);
     followScript(game, p, frozen);
+    if (round === 1 && game.ctx.firstRoundDiscover) offerMinions(game, p, game.ctx.firstRoundDiscover);
+    if (dissolved && game.ctx.dissolutionDiscover) offerMinions(game, p, p.tier);
     startOfTurn(game, p);
   }
+}
+
+/** Ruissellement : the last in the polls, ties included, before this round's budget. */
+function isLastInPolls(game: Game, p: Player): boolean {
+  return p.hp <= Math.min(...game.players.filter((x) => x.alive).map((x) => x.hp));
 }
 
 /** L'oubli du peuple, avant le budget de la manche : les défauts ne coûtent plus rien. */
@@ -408,7 +425,7 @@ function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
     p.board.splice(p.board.indexOf(m) + 1, 0, welcome(game, p, makeToken(c.summon, m.camp, game.nextUid++)));
   }
   for (let i = 0; i < (c.freeRecruit ? mult : 0); i++) {
-    const cardId = draw(game, p.tier);
+    const cardId = drawFromTier(game, p.tier);
     if (cardId) addMinionToHand(game, p, cardId);
   }
   p.stats.casseroles++;
@@ -434,8 +451,8 @@ function moveMinion(p: Player, uid: number, to: number): ActionResult {
   const from = p.board.findIndex((m) => m.uid === uid);
   if (from < 0) return fail('Politique introuvable.');
   if (to < 0 || to >= p.board.length) return fail('Place invalide.');
-  if (p.board[from].locked) return fail('Ce politique porte un bracelet : il ne bouge plus.');
-  if (p.board[to].locked) return fail('Cette place est occupée par un politique sous bracelet.');
+  if (p.board[from].locked) return fail(p.board[from].bracelet ? 'Sous bracelet : il ne bouge plus avant la prochaine manche.' : 'Cloué par son scandale : il ne bouge plus.');
+  if (p.board[to].locked) return fail('Cette place est tenue par un politique qui ne bouge plus.');
   p.board = reorderAroundLocked(p.board, from, to, (x) => x.locked) as Minion[];
   return OK;
 }
@@ -445,6 +462,7 @@ function sell(game: Game, p: Player, uid: number): ActionResult {
   const onBoard = p.board.find((m) => m.uid === uid);
   const m = onBoard ?? p.hand.find((x) => x.uid === uid);
   if (!m) return fail('Politique introuvable.');
+  if (m.bracelet) return fail('Sous bracelet : il ne peut pas être renvoyé avant la prochaine manche.');
   if (onBoard) p.board = p.board.filter((x) => x !== m);
   else p.hand = p.hand.filter((x) => x !== m);
   releaseMinion(game, m);
@@ -871,7 +889,8 @@ function afterCombat(game: Game, p: Player, side: 0 | 1, record: CombatRecord): 
   const { result } = record;
   applyPersist(game, p, result.persist[side]);
   for (const celebrant of result.celebrants) if (celebrant.side === side) afterCombatSpeech(game, p, celebrant.uid, 'celebration');
-  if (result.responder?.side === side) afterCombatSpeech(game, p, result.responder.uid, 'droit_de_reponse');
+  // Chaque Droit de réponse joue, comme chaque Célébration : un seul prend la parole (`responder`).
+  for (const answer of result.responders) if (answer.side === side) afterCombatSpeech(game, p, answer.uid, 'droit_de_reponse');
   const lost = result.winner !== null && result.winner !== side;
   if (lost && p.lossBet > 0) p.nextBudgetBonus += p.lossBet;
   p.lossBet = 0;
