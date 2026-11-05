@@ -138,7 +138,8 @@ const TRIGGER_SCALE: Partial<Record<Trigger, number>> = {
   casserole_recue: 1,
   depense: 2,
   celebration: 0.6,
-  droit_de_reponse: 0.4,
+  // Since 5 November 2026, every reply plays after a defeat, not only the leftmost one.
+  droit_de_reponse: 0.6,
   heritage: 1,
   revanche: 1,
   aura: 1,
@@ -641,7 +642,8 @@ function worstMinion(view: PlayerView, bot?: BotState): Minion | null {
   const keep = (m: Minion) => (bot?.pure && m.camp === bot.commitment && !sellsWell(m) ? 100 : 0) + minionPower(m);
   let worst: Minion | null = null;
   for (const m of view.board) {
-    if (m.golden && !bot?.pure) continue;
+    // Sous bracelet, il ne se renvoie pas avant la prochaine manche.
+    if (m.bracelet || (m.golden && !bot?.pure)) continue;
     if (!worst || keep(m) < keep(worst)) worst = m;
   }
   return worst;
@@ -758,7 +760,7 @@ function debutantTurn(view: PlayerView, bot: BotState): PlayerAction | null {
       if (stats(CARD_BY_ID[id]) > stats(CARD_BY_ID[view.shop[slot]])) slot = i;
     });
     if (view.board.length + view.hand.length < view.boardLimit && handRoom(view, view.shop[slot])) return { t: 'buy', slot, main: true };
-    const worst = [...view.board].sort((x, y) => stats(x) - stats(y))[0];
+    const worst = view.board.filter((m) => !m.bracelet).sort((x, y) => stats(x) - stats(y))[0];
     if (worst && stats(CARD_BY_ID[view.shop[slot]]) > stats(worst) + 3) return { t: 'sell', uid: worst.uid };
   }
   if (bot.place) {

@@ -2,7 +2,7 @@ import { parseArgs } from 'node:util';
 import { playGame } from './simulate.ts';
 import type { GameResult } from './simulate.ts';
 import type { BotLevel, BotStyle } from '../bots/bots.ts';
-import type { Hero } from '../engine/types.ts';
+import type { Hero, Params } from '../engine/types.ts';
 import { HEROES } from '../data/heroes.ts';
 
 /**
@@ -17,8 +17,16 @@ const { values } = parseArgs({
     tune: { type: 'string', default: '0' },
     /** Chaque bot joue le personnage de son héros : c'est ce qu'on affronte à table. */
     personnages: { type: 'boolean', default: false },
+    /** Modifie une règle sans toucher aux données : --set startHp=25 */
+    set: { type: 'string', multiple: true, default: [] },
   },
 });
+
+const params: Partial<Params> = {};
+for (const entry of values.set) {
+  const [key, value] = entry.split('=');
+  (params as Record<string, number>)[key] = Number(value);
+}
 
 const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 const PERSONNAGES: BotStyle[] = Array(8).fill({ personnage: true });
@@ -29,7 +37,7 @@ const level = values.level as BotLevel;
 function run(games: number, overrides: Record<string, Partial<Hero>>, seed: number, lvl = level, styles = STYLES): GameResult[] {
   const out: GameResult[] = [];
   for (let i = 0; i < games; i++) {
-    out.push(playGame({ seed: seed + i * 7919, levels: Array(8).fill(lvl), styles, heroOverrides: overrides }));
+    out.push(playGame({ seed: seed + i * 7919, levels: Array(8).fill(lvl), styles, heroOverrides: overrides, params }));
   }
   return out;
 }
