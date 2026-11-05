@@ -693,3 +693,10 @@ test('combatUnits finds the opening units and the summoned ones, with their side
   ]);
   assert.deepEqual([...units].map(([uid, found]) => [uid, found.side]), [[1, 0], [2, 1], [9, 1]]);
 });
+
+test('the home subtitles: the official one first, all short enough for one line under the logo', async () => {
+  const { TAGLINES } = await import('../src/client/const/taglines.ts');
+  assert.equal(TAGLINES[0], 'Casseroles et tambouille politique');
+  assert.equal(new Set(TAGLINES).size, TAGLINES.length, 'no duplicate');
+  for (const tagline of TAGLINES) assert.ok(tagline.length <= 42, `${tagline} : ${tagline.length} caractères`);
+});

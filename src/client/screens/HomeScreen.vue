@@ -12,6 +12,7 @@ import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import { savePseudo, savedPseudo } from '#src/client/services/localProfile.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { pickOne } from '#src/client/tools/pickOne.ts';
+import { TAGLINES } from '#src/client/const/taglines.ts';
 import { VERSION } from '#src/client/const/version.ts';
 import ChasingReporter from '#src/client/components/organisms/ChasingReporter.vue';
 import { ANIMATEURS } from '#src/data/animateurs.ts';
@@ -52,6 +53,9 @@ watch(pseudo, (value) => savePseudo(value));
 /** Behind the home page, one of the game's TV sets at random, a new one at each visit. */
 const plateauId = pickOne([...PLATEAUX, SECOND_TOUR].map((plateau) => plateau.id), Math.random()) ?? SECOND_TOUR.id;
 
+/** Under the logo, one of the game's subtitles, a new one at each visit. */
+const tagline = pickOne(TAGLINES, Math.random()) ?? TAGLINES[0];
+
 /** The host of that set runs after the mouse; it pulls a face at each game mode clicked. */
 const hostId = ANIMATEURS.find((host) => host.plateau === plateauId)?.id ?? 'bouleau';
 const reactions = ref(0);
@@ -75,7 +79,7 @@ const suitcases = ref(0);
         <!-- An easter egg: Macron shouts « c'est notre projet ! » each time the logo is clicked. -->
         <button type="button" class="logo-button" @click="shout"><img :src="assetUrl('logo/casserolade-fr.webp')" alt="Casserolade" /></button>
       </h1>
-      <p class="tagline">Casseroles et tambouille politique</p>
+      <p class="tagline">{{ tagline }}</p>
       <p v-if="error" class="error" role="alert">{{ error }}</p>
       <p v-if="resume" class="resume" role="status">
         <span>{{ resume.text }}</span>
@@ -133,7 +137,8 @@ const suitcases = ref(0);
 .logo-button { padding: 0; border: 0; background: none; cursor: pointer; line-height: 0; }
 .logo-button:active img { transform: scale(0.96) rotate(-2deg); }
 .logo img { width: auto; height: min(330px, 30dvh); max-width: 88vw; object-fit: contain; filter: drop-shadow(0 18px 30px rgb(0 0 0 / 0.65)); animation: logo-in 0.7s cubic-bezier(0.3, 1.5, 0.5, 1); }
-.tagline { margin-top: -0.9rem; color: #ffe27a; font: 400 1.7rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 5px var(--color-ink); paint-order: stroke fill; }
+/* A subtitle drawn at random: a long one wraps on a phone, in two even, centred lines. */
+.tagline { margin-top: -0.9rem; color: #ffe27a; font: 400 1.7rem / 1 var(--font-number); letter-spacing: 1px; text-align: center; text-wrap: balance; -webkit-text-stroke: 5px var(--color-ink); paint-order: stroke fill; }
 .error { padding: 0.4rem 1rem; border-radius: 999px; background: #7a1420; color: #fff; font-weight: 700; }
 .resume { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1rem; max-width: 52rem; padding: 0.5rem 0.6rem 0.5rem 1.2rem; border-radius: 999px; border: 3px solid #d8b450; background: rgb(12 16 32 / 0.94); color: #fff; font-weight: 700; text-align: center; }
 .resume :deep(.app-button) { font-size: 1.2rem; }
