@@ -75,5 +75,11 @@ for (const [camp, label] of CAMPS) {
   }
   lines.push('');
 }
-writeFileSync('docs/05-catalogue-casseroles.md', lines.join('\n'));
-console.log(`${CASSEROLES.length} casseroles écrites dans docs/05-catalogue-casseroles.md`);
+// Le fichier à écrire est donné en argument ; sans argument, le catalogue s'affiche.
+const target = process.argv[2];
+if (target) {
+  writeFileSync(target, lines.join('\n'));
+  console.log(`${CASSEROLES.length} casseroles écrites dans ${target}`);
+} else {
+  console.log(lines.join('\n'));
+}

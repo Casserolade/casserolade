@@ -10,7 +10,7 @@ function spell(id: string, name: string, tier: number, cost: number, target: boo
 }
 
 /**
- * Les sorts (docs/gameplay/cartes.md) : une carte qu'on achète en boutique, qu'on garde en main
+ * Les sorts : une carte qu'on achète en boutique, qu'on garde en main
  * et qu'on joue quand on veut. Les sorts « gagnés » ne sont jamais en boutique.
  */
 export const SPELLS: Spell[] = [

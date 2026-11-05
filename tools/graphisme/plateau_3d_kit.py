@@ -1,4 +1,4 @@
-"""La 3D soignée des plateaux (docs/09-rendu-et-blender.md, section 2.2, piste A) : ce qui fait un vrai plateau.
+"""La 3D soignée des plateaux, piste A : ce qui fait un vrai plateau.
 
 Treillis et lyres dans la brume, mur LED courbe, sol laqué qui reflète, caméras de plateau détaillées,
 public assis en contre-jour, et au rendu : profondeur de champ et bloom. Même repère que studio_kit.py :

@@ -59,7 +59,7 @@ const body = JSON.stringify(out, null, 2);
 fs.writeFileSync('src/data/phrases.ts', `/**
  * Les petites phrases du jeu, par personne et par moment : seulement les citations vérifiées,
  * mot pour mot. Généré par tools/phrases/genere.ts depuis data/collecte/petites_phrases_*.json et saillies/*.json :
- * ne pas modifier à la main. Les sources sont dans la collecte, et dans docs/gameplay/petites-phrases.md.
+ * ne pas modifier à la main. Les sources sont dans la collecte.
  */
 export type Moment = 'pose' | 'casserole' | 'prison' | 'mort' | 'celebration' | 'heros' | 'achat' | 'actualiser' | 'echelon' | 'triple' | 'victoire' | 'defaite' | 'elimination' | 'attente';
 

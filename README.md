@@ -22,7 +22,7 @@
   <a href="CHANGELOG.md"><img alt="Version 0.2b" src="https://img.shields.io/badge/version-0.2b-6b3fa0"></a>
 </p>
 
-<p align="center"><img src="docs/captures/recrutement.webp" alt="Le recrutement sur le plateau de CNews : la boutique, le plateau et les héros adverses" width="900"></p>
+<p align="center"><img src=".github/captures/recrutement.webp" alt="Le recrutement sur le plateau de CNews : la boutique, le plateau et les héros adverses" width="900"></p>
 
 ## Ce que c'est
 
@@ -41,8 +41,8 @@ Le ton est trash, mais sur le fond, rien n'est inventé. Chaque affaire est rée
 Gratuit, sans publicité, sans inscription, sans rien à vendre.
 
 <p align="center">
-  <img src="docs/captures/combat.webp" alt="Un combat sur CNews, Pascal Praud à son pupitre" width="440">
-  <img src="docs/captures/bestiaire.webp" alt="Le bestiaire et ses filtres : les politiques des Républicains, avec leurs casseroles et leurs sources" width="440">
+  <img src=".github/captures/combat.webp" alt="Un combat sur CNews, Pascal Praud à son pupitre" width="440">
+  <img src=".github/captures/bestiaire.webp" alt="Le bestiaire et ses filtres : les politiques des Républicains, avec leurs casseroles et leurs sources" width="440">
 </p>
 
 ## Comment ça se joue
@@ -84,7 +84,7 @@ Casserolade est libre, et le jeu est encore jeune : vos retours, en jouant comme
 
 La ligne éditoriale tient en une phrase : **trash, mais vrai**. On se moque des faits tels qu'ils sont, mot pour mot, avec la source. Pas de blague dont les victimes sont la cible, et seulement des personnalités publiques.
 
-Une carte est une ligne de données, pas du code : ajouter un politique, c'est ajouter une ligne dans `src/data/cards.ts`. Les tests vérifient que chaque identifiant existe et que chaque texte de carte change vraiment quelque chose. Chaque carte déplace l'équilibre : relancez les simulations (plus bas) et notez les résultats dans `docs/04-resultats-equilibrage.md`.
+Une carte est une ligne de données, pas du code : ajouter un politique, c'est ajouter une ligne dans `src/data/cards.ts`. Les tests vérifient que chaque identifiant existe et que chaque texte de carte change vraiment quelque chose. Chaque carte déplace l'équilibre : relancez les simulations (plus bas).
 
 ## Lancer le jeu chez soi
 
@@ -119,9 +119,8 @@ FUZZ_GAMES=2000 node --test test/fuzz.test.ts # le fuzz long du moteur
 | `src/server/`, `src/lobby/`, `src/protocol/` | Le serveur WebSocket, les salons, les messages. Un bug n'arrête que sa partie, et laisse de quoi la rejouer (`tools/rejouer.ts`). |
 | `src/client/` | L'interface en Vue 3 et Vite, le combat en PixiJS. |
 | `tools/` | La production : découpe des photos, rendus Blender des plateaux, effets, génération des voix, des phrases et des sources du jeu. Les outils internes de collecte et d'écoute ne sont pas publiés. |
-| `docs/` | La spécification du gameplay, les résultats d'équilibrage, le moteur, la direction artistique. |
 
-Toute action passe par `applyAction`, et toute information par `viewFor` : ni le client ni les bots ne touchent à l'état complet de la partie. Le moteur vérifie ses invariants à chaque manche (`docs/12-moteur.md`).
+Toute action passe par `applyAction`, et toute information par `viewFor` : ni le client ni les bots ne touchent à l'état complet de la partie. Le moteur vérifie ses invariants à chaque manche (`src/engine/invariants.ts`).
 
 ## Licence
 

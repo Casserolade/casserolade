@@ -60,7 +60,7 @@ export interface BotStyle {
 export function createBot(level: BotLevel, seed: number, style: BotStyle = {}): BotState {
   const rng = createRng(seed);
   // Les tirages se font toujours dans le même ordre : un style de mesure ne change pas le reste du bot.
-  // Le difficile monte au rythme mesuré comme le meilleur (docs/04, 3 novembre 2026).
+  // Le difficile monte au rythme mesuré comme le meilleur (3 novembre 2026).
   const tempo = level === 'difficile' ? 1 : rng.int(3) - 1;
   const focus = 1 + rng.next() * 2;
   const taste = rng.next();
@@ -868,7 +868,7 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
   }
 
   // La casserole, avec ce qui reste après les politiques et les sorts : l'acheter d'abord coûtait 0,16 place
-  // (docs/13-cycle-gameplay.md, styles comparés), et le bot en achetait onze par partie.
+  // (styles comparés par bilan_styles.ts), et le bot en achetait onze par partie.
   if (view.casseroleOffer && view.casseroleCost !== null && view.budget >= view.casseroleCost && handCount(view) < view.handLimit) {
     if (casseroleTarget(view, CASSEROLE_BY_ID[view.casseroleOffer], bot)) return { t: 'buy_casserole' };
   }

@@ -48,7 +48,7 @@ export interface GameRoomOptions {
   clock: Clock;
   send(seat: number, message: ServerMessage): void;
   onEnd?(ranking: Classement): void;
-  /** A bug stopped the game, or a rule of the engine no longer holds: what to replay it at home (docs/12-moteur.md). */
+  /** A bug stopped the game, or a rule of the engine no longer holds: what to replay it at home (tools/rejouer.ts). */
   onIncident?(incident: RoomIncident): void;
 }
 
