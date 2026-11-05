@@ -31,6 +31,9 @@
 - Des filtres : recherche, type, camp et échelon, gardés dans le lien.
 - Chaque fiche donne ses sources : photos, vraies voix, petites phrases et faits.
 
+**Le site**
+- On peut soutenir le projet sur [Ko-fi](https://ko-fi.com/casserolade) : le lien est sur l'accueil, dans le bestiaire et sur la page À propos. Le jeu reste gratuit, sans publicité ni inscription.
+
 ## 0.1b — 5 novembre 2026
 
 **La boîte à sons**

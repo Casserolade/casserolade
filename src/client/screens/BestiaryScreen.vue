@@ -83,6 +83,7 @@ const carriers = (term: string) => bestiaryFilterQuery({ kind: 'politique', camp
       <a href="/">Jouer</a>
       <a href="/a-propos">À propos</a>
       <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
+      <a href="https://ko-fi.com/casserolade">Soutenir sur Ko-fi</a>
     </footer>
   </main>
 </template>

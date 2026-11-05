@@ -12,6 +12,7 @@
   · <a href="https://casserolade.fr/bestiaire">Le bestiaire</a>
   · <a href="https://casserolade.fr/a-propos">À propos</a>
   · <a href="#contribuer">Contribuer</a>
+  · <a href="https://ko-fi.com/casserolade">Soutenir sur Ko-fi</a>
 </p>
 
 <p align="center">
@@ -79,6 +80,7 @@ Casserolade est libre, et le jeu est encore jeune : vos retours, en jouant comme
 - **Une casserole oubliée, une petite phrase mémorable, un politique qui manque ?** Proposez-la, avec sa source.
 - **Un extrait audio authentique, bien découpé ?** C'est le plus rare. On ne synthétise jamais la voix de quelqu'un : sans vrai extrait, la phrase s'affiche en texte.
 - **Une règle mieux pensée, un bot plus malin, un plateau plus ridicule encore, du code ?** Les *pull requests* sont ouvertes.
+- **Soutenir le projet sans écrire une ligne ?** Un café sur [Ko-fi](https://ko-fi.com/casserolade). Le jeu reste gratuit, sans publicité ni inscription.
 
 La ligne éditoriale tient en une phrase : **trash, mais vrai**. On se moque des faits tels qu'ils sont, mot pour mot, avec la source. Pas de blague dont les victimes sont la cible, et seulement des personnalités publiques.
 
