@@ -37,11 +37,21 @@ def characters():
     result = {}
     for path in sorted(glob.glob(os.path.join(GAME, "personnages/*.json"))):
         character_id = os.path.splitext(os.path.basename(path))[0]
+        if "." in character_id:
+            continue  # another face of a character (tools/graphisme/visages.py), filed under its owner below
         description = read_json(path)
         portrait = portraits.get(character_id, {})
         description["credits"] = {"auteur": portrait.get("auteur"), "licence": portrait.get("licence"),
                                   "source": portrait.get("commons")}
         result[character_id] = description
+    faces = read_json(os.path.join(ROOT, "data/collecte/visages.json"))
+    for path in sorted(glob.glob(os.path.join(GAME, "personnages/*.*.json"))):
+        character_id, face = os.path.splitext(os.path.basename(path))[0].split(".", 1)
+        spec = faces.get(character_id, {}).get(face)
+        if character_id in result and spec:
+            description = read_json(path)
+            description["credits"] = {"auteur": spec.get("auteur"), "licence": spec.get("licence"), "source": spec.get("source")}
+            result[character_id].setdefault("visages", {})[face] = description
     return result
 
 
@@ -71,7 +81,10 @@ def main():
         "effets": effects(),
         "plateaux": {stem: {"decor": path} for stem, path in files_by_stem("plateaux", "*.webp").items()},
         "sons": {"citations": files_by_stem("sons/citations", "*.mp3"),
-                 "bruitages": files_by_stem("sons/bruitages", "*.mp3")},
+                 "bruitages": files_by_stem("sons/bruitages", "*.mp3"),
+                 # The welcome shout, kept apart: the clean-up of the quotes' voices never touches it.
+                 "accueil": files_by_stem("sons/accueil", "*.mp3")},
+        "casseroles": files_by_stem("casseroles", "*.webp"),
         "carte": card_parts(),
     }
     with open(os.path.join(GAME, "manifest.json"), "w", encoding="utf8") as handle:

@@ -1,9 +1,9 @@
 {
  "boyard": {
   "fichier": "assets/photos/raw/boyard.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Louis_Boyard_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Babar BZH",
+  "commons": "https://www.rtl.fr/actu/politique/louis-boyard-tacle-par-le-president-argentin-javier-milei-pour-sa-montre-l-insoumis-denonce-une-polemique-ridicule-7900556010",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.367,
   "pixels": 529.088,
   "profil": 0.035,
@@ -12,7 +12,15 @@
   "yeux": 0.316,
   "portrait": "assets/photos/base/boyard.jpg",
   "score": 2.25,
-  "name": "Louis Boyard"
+  "name": "Louis Boyard",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/boyard.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Louis_Boyard_(cropped).jpg",
+   "auteur": "Babar BZH",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/boyard.jpg"
  },
  "leaument": {
   "fichier": "assets/photos/galerie/leaument/06.jpg",
@@ -33,16 +41,24 @@
   "name": "Thomas Portes",
   "portrait": "assets/photos/base/portes.jpg",
   "fichier": "assets/photos/raw/portes.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Thomas_Portes.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Pioupiou838383",
-  "note": "Personne en arrière-plan à enlever au détourage."
+  "commons": "https://fr.linkedin.com/posts/le-point_info-le-point-thomas-portes-nous-met-activity-7347876129669607424-qxR8",
+  "licence": null,
+  "auteur": null,
+  "note": "Personne en arrière-plan à enlever au détourage.",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/portes.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Thomas_Portes.jpg",
+   "auteur": "Pioupiou838383",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/portes.jpg"
  },
  "trouve": {
   "fichier": "assets/photos/galerie/trouve/02.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Aur%C3%A9lie_Trouv%C3%A9_Besan%C3%A7on_14-01-2022_Toufik-de-Planoise.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Toufik-de-Planoise",
+  "commons": "https://france3-regions.franceinfo.fr/auvergne-rhone-alpes/isere/grenoble/vencorex-le-gouvernement-devra-s-expliquer-une-deputee-demande-une-commission-d-enquete-parlementaire-sur-l-abandon-de-l-usine-3142631.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.499,
   "pixels": 361.797,
   "profil": 0.104,
@@ -51,7 +67,15 @@
   "yeux": 0.275,
   "portrait": "assets/photos/base/trouve.jpg",
   "score": 1.8,
-  "name": "Aurélie Trouvé"
+  "name": "Aurélie Trouvé",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/trouve.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Aur%C3%A9lie_Trouv%C3%A9_Besan%C3%A7on_14-01-2022_Toufik-de-Planoise.jpg",
+   "auteur": "Toufik-de-Planoise",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/trouve.jpg"
  },
  "chikirou": {
   "fichier": "assets/photos/galerie/chikirou/03.jpg",
@@ -70,9 +94,9 @@
  },
  "bompard": {
   "fichier": "assets/photos/raw/bompard.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Bompard_MEP_2019.jpg",
-  "licence": "European Parliament",
-  "auteur": "European Parliament",
+  "commons": "https://www.bfmtv.com/politique/la-france-insoumise/une-fiction-manuel-bompard-reagit-a-la-sortie-du-livre-enquete-sur-la-france-insoumise_AV-202505060881.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.511,
   "pixels": 713.847,
   "profil": 0.107,
@@ -81,7 +105,15 @@
   "yeux": 0.255,
   "portrait": "assets/photos/base/bompard.jpg",
   "score": 2.03,
-  "name": "Manuel Bompard"
+  "name": "Manuel Bompard",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/bompard.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Bompard_MEP_2019.jpg",
+   "auteur": "European Parliament",
+   "licence": "European Parliament"
+  },
+  "recadrage": "assets/photos/base_web/bompard.jpg"
  },
  "panot": {
   "fichier": "assets/photos/galerie/panot/05.jpg",
@@ -100,9 +132,9 @@
  },
  "ruffin": {
   "fichier": "assets/photos/raw/ruffin.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Ruffin_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Thinkerview",
+  "commons": "https://tuni-news.com/francois-ruffin-veut-re-introduire-les-savoir-faire-pratiques-la-couture-la-cuisine-et-le-bricolage-a-lecole/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.402,
   "pixels": 335.012,
   "profil": 0.581,
@@ -111,7 +143,15 @@
   "yeux": 0.354,
   "portrait": "assets/photos/base/ruffin.jpg",
   "score": 0.83,
-  "name": "François Ruffin"
+  "name": "François Ruffin",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/ruffin.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Ruffin_(cropped).jpg",
+   "auteur": "Thinkerview",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/ruffin.jpg"
  },
  "melenchon": {
   "fichier": "assets/photos/raw/melenchon.png",
@@ -130,9 +170,9 @@
  },
  "thevenoud": {
   "fichier": "assets/photos/raw/thevenoud.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Thomas_Thevenoud_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Tthevenoud",
+  "commons": "https://www.unifrance.org/film/54155/de-grandes-esperances",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.358,
   "pixels": 518.757,
   "profil": 0.444,
@@ -141,13 +181,21 @@
   "yeux": 0.18,
   "portrait": "assets/photos/base/thevenoud.jpg",
   "score": 1.01,
-  "name": "Thomas Thévenoud"
+  "name": "Thomas Thévenoud",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/thevenoud.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Thomas_Thevenoud_(cropped).jpg",
+   "auteur": "Tthevenoud",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/thevenoud.jpg"
  },
  "bouamrane": {
   "fichier": "assets/photos/galerie/bouamrane/01.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Karim_Bouamrane_en_2026_(cropped).jpg",
-  "licence": "CC BY 4.0",
-  "auteur": "Oumma",
+  "commons": "http://www.ouragan.cd/2026/04/le-socialiste-karim-bouamrane-dit-quil-pourrait-etre-une-solution-pour-2027",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.358,
   "pixels": 330.332,
   "profil": 0.765,
@@ -156,13 +204,21 @@
   "yeux": 0.353,
   "portrait": "assets/photos/base/bouamrane.jpg",
   "score": 0.36,
-  "name": "Karim Bouamrane"
+  "name": "Karim Bouamrane",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/bouamrane.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Karim_Bouamrane_en_2026_(cropped).jpg",
+   "auteur": "Oumma",
+   "licence": "CC BY 4.0"
+  },
+  "recadrage": "assets/photos/base_web/bouamrane.jpg"
  },
  "guedj": {
   "fichier": "assets/photos/raw/guedj.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:J%C3%A9r%C3%B4me_Guedj_2010.jpg",
-  "licence": "CC BY-SA 2.0",
-  "auteur": "Audrey AK",
+  "commons": "https://france3-regions.franceinfo.fr/paris-ile-de-france/essonne/une-gauche-republicaine-universaliste-et-laique-le-depute-de-l-essonne-jerome-guedj-se-lance-dans-la-course-a-la-presidentielle-3294216.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.361,
   "pixels": 413.807,
   "profil": 0.551,
@@ -171,13 +227,21 @@
   "yeux": 0.328,
   "portrait": "assets/photos/base/guedj.jpg",
   "score": 0.79,
-  "name": "Jérôme Guedj"
+  "name": "Jérôme Guedj",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/guedj.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:J%C3%A9r%C3%B4me_Guedj_2010.jpg",
+   "auteur": "Audrey AK",
+   "licence": "CC BY-SA 2.0"
+  },
+  "recadrage": "assets/photos/base_web/guedj.jpg"
  },
  "vallaud": {
   "fichier": "assets/photos/raw/vallaud.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Boris_Vallaud_en_2023.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Bloody-libu",
+  "commons": "https://www.liberation.fr/politique/demarchandisation-le-mot-de-boris-vallaud-contre-la-logique-du-profit-20260422_UEUVXYNC3BBMFBGUGWSKEYSSAY/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.162,
   "pixels": 187.762,
   "profil": 0.594,
@@ -186,7 +250,15 @@
   "yeux": 0.353,
   "portrait": "assets/photos/base/vallaud.jpg",
   "score": 0.31,
-  "name": "Boris Vallaud"
+  "name": "Boris Vallaud",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/vallaud.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Boris_Vallaud_en_2023.jpg",
+   "auteur": "Bloody-libu",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/vallaud.jpg"
  },
  "cahuzac": {
   "fichier": "assets/photos/raw/cahuzac.jpg",
@@ -205,9 +277,9 @@
  },
  "hidalgo": {
   "fichier": "assets/photos/raw/hidalgo.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:(Anne_Hidalgo)_2020._Jacques_Paquier._P%C3%A9cresse_-_Ollier_-_Hidalgo_(cropped).jpg",
-  "licence": "CC BY 2.0",
-  "auteur": "Jacques Paquier",
+  "commons": "https://www.gala.fr/l_actu/news_de_stars/anne-hidalgo-en-colere-apres-laccord-entre-jean-luc-melenchon-et-le-ps-je-naccepte-pas-cette-injustice_493163",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.284,
   "pixels": 363.282,
   "profil": 0.165,
@@ -216,7 +288,15 @@
   "yeux": 0.276,
   "portrait": "assets/photos/base/hidalgo.jpg",
   "score": 1.53,
-  "name": "Anne Hidalgo"
+  "name": "Anne Hidalgo",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/hidalgo.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:(Anne_Hidalgo)_2020._Jacques_Paquier._P%C3%A9cresse_-_Ollier_-_Hidalgo_(cropped).jpg",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0"
+  },
+  "recadrage": "assets/photos/base_web/hidalgo.jpg"
  },
  "valls": {
   "fichier": "assets/photos/raw/valls.jpg",
@@ -235,9 +315,9 @@
  },
  "faure": {
   "fichier": "assets/photos/raw/faure.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Portrait_d%27Olivier_Faure.jpg",
-  "licence": "CC BY-SA 2.0",
-  "auteur": "Olivier Faure",
+  "commons": "https://www.publicsenat.fr/actualites/politique/elections-municipales-jean-luc-melenchon-est-devenu-le-boulet-de-la-gauche-juge-olivier-faure",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.371,
   "pixels": 412.85,
   "profil": 0.054,
@@ -246,7 +326,15 @@
   "yeux": 0.316,
   "portrait": "assets/photos/base/faure.jpg",
   "score": 2.16,
-  "name": "Olivier Faure"
+  "name": "Olivier Faure",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/faure.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Portrait_d%27Olivier_Faure.jpg",
+   "auteur": "Olivier Faure",
+   "licence": "CC BY-SA 2.0"
+  },
+  "recadrage": "assets/photos/base_web/faure.jpg"
  },
  "cazeneuve": {
   "fichier": "assets/photos/raw/cazeneuve.jpg",
@@ -265,9 +353,9 @@
  },
  "royal": {
   "fichier": "assets/photos/raw/royal.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal_-_Janvier_2012.jpg",
-  "licence": "CC BY 3.0",
-  "auteur": "English : This photo has been taken by Matthieu Riegler  (User:Kyro) and released under the licenses stated below. You are free to use it for any purpose as lon",
+  "commons": "https://www.starmag.com/actu-people/peopolitique/segolene-royal-candidate-a-la-presidentielle-de-2027-un-depute-se-lache-sil-faut-en-rire-1018632.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.397,
   "pixels": 571.372,
   "profil": 0.628,
@@ -276,7 +364,15 @@
   "yeux": 0.339,
   "portrait": "assets/photos/base/royal.jpg",
   "score": 0.56,
-  "name": "Ségolène Royal"
+  "name": "Ségolène Royal",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/royal.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal_-_Janvier_2012.jpg",
+   "auteur": "English : This photo has been taken by Matthieu Riegler  (User:Kyro) and released under the licenses stated below. You are free to use it for any purpose as lon",
+   "licence": "CC BY 3.0"
+  },
+  "recadrage": "assets/photos/base_web/royal.jpg"
  },
  "glucksmann": {
   "fichier": "assets/photos/galerie/glucksmann/01.jpg",
@@ -310,9 +406,9 @@
  },
  "doucet": {
   "fichier": "assets/photos/galerie/doucet/02.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:20210821_doucet.gregory_6654.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Greenbox",
+  "commons": "https://tuni-news.com/gregory-doucet-demande-linterdiction-de-la-marche-pour-quentin-deranque-a-lyon/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.468,
   "pixels": 299.82,
   "profil": 0.402,
@@ -321,13 +417,21 @@
   "yeux": 0.385,
   "portrait": "assets/photos/base/doucet.jpg",
   "score": 1.28,
-  "name": "Grégory Doucet"
+  "name": "Grégory Doucet",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/doucet.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:20210821_doucet.gregory_6654.jpg",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/doucet.jpg"
  },
  "lucas": {
   "fichier": "assets/photos/galerie/lucas/02.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:20210819_lucas.benjamin_5936.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Greenbox",
+  "commons": "https://www.leparisien.fr/elections/presidentielle/presidentielle-2027-le-depute-generations-des-yvelines-benjamin-lucas-lundy-candidat-a-la-primaire-de-la-gauche-14-05-2026-5IHSNWGCWZGE3OFOWSWHDVDJ5E.php",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.362,
   "pixels": 347.801,
   "profil": 0.064,
@@ -336,7 +440,15 @@
   "yeux": 0.392,
   "portrait": "assets/photos/base/lucas.jpg",
   "score": 1.97,
-  "name": "Benjamin Lucas-Lundy"
+  "name": "Benjamin Lucas-Lundy",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/lucas.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:20210819_lucas.benjamin_5936.jpg",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/lucas.jpg"
  },
  "batho": {
   "fichier": "assets/photos/galerie/batho/03.jpg",
@@ -370,9 +482,9 @@
  },
  "mamere": {
   "fichier": "assets/photos/raw/mamere.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Noel.Mamere2006.JPG",
-  "licence": "CC BY 3.0",
-  "auteur": "Kenji-Baptiste OIKAWA",
+  "commons": "https://www.radiofrance.fr/personnes/noel-mamere",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.358,
   "pixels": 351.379,
   "profil": 0.136,
@@ -381,7 +493,15 @@
   "yeux": 0.384,
   "portrait": "assets/photos/base/mamere.jpg",
   "score": 1.97,
-  "name": "Noël Mamère"
+  "name": "Noël Mamère",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/mamere.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Noel.Mamere2006.JPG",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY 3.0"
+  },
+  "recadrage": "assets/photos/base_web/mamere.jpg"
  },
  "piolle": {
   "fichier": "assets/photos/galerie/piolle/07.jpg",
@@ -400,9 +520,9 @@
  },
  "duflot": {
   "fichier": "assets/photos/raw/duflot.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:C%C3%A9cile_Duflot,_2010_(cropped).jpg",
-  "licence": "CC BY 3.0",
-  "auteur": "Marie-Lan Nguyen",
+  "commons": "https://lesjours.fr/obsessions/portrait-yannick-jadot/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.44,
   "pixels": 596.47,
   "profil": 0.195,
@@ -411,7 +531,15 @@
   "yeux": 0.353,
   "portrait": "assets/photos/base/duflot.jpg",
   "score": 1.86,
-  "name": "Cécile Duflot"
+  "name": "Cécile Duflot",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/duflot.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:C%C3%A9cile_Duflot,_2010_(cropped).jpg",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0"
+  },
+  "recadrage": "assets/photos/base_web/duflot.jpg"
  },
  "cohn_bendit": {
   "fichier": "assets/photos/galerie/cohn_bendit/07.jpg",
@@ -445,9 +573,9 @@
  },
  "rousseau": {
   "fichier": "assets/photos/galerie/rousseau/04.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:20210819_rousseau.s_5754.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Greenbox",
+  "commons": "https://www.bfmtv.com/politique/europe-ecologie-les-verts/je-ne-te-comprends-pas-sandrine-rousseau-repond-a-olivier-faure-sur-le-vote-de-la-partie-recettes-du-budget_AV-202511090245.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.311,
   "pixels": 397.738,
   "profil": 0.048,
@@ -456,13 +584,21 @@
   "yeux": 0.354,
   "portrait": "assets/photos/base/rousseau.jpg",
   "score": 1.73,
-  "name": "Sandrine Rousseau"
+  "name": "Sandrine Rousseau",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/rousseau.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:20210819_rousseau.s_5754.jpg",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/rousseau.jpg"
  },
  "tondelier": {
   "fichier": "assets/photos/galerie/tondelier/06.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Huma2023MarineTondelier_(cropped).jpg",
-  "licence": "CC BY 4.0",
-  "auteur": "Selbymay",
+  "commons": "https://www.bvoltaire.fr/marine-tondelier-une-fachologue-invitee-sur-le-plateau-de-rmc/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.35,
   "pixels": 340.821,
   "profil": 0.234,
@@ -471,13 +607,21 @@
   "yeux": 0.313,
   "portrait": "assets/photos/base/tondelier.jpg",
   "score": 1.64,
-  "name": "Marine Tondelier"
+  "name": "Marine Tondelier",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/tondelier.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Huma2023MarineTondelier_(cropped).jpg",
+   "auteur": "Selbymay",
+   "licence": "CC BY 4.0"
+  },
+  "recadrage": "assets/photos/base_web/tondelier.jpg"
  },
  "thevenot": {
   "fichier": "assets/photos/galerie/thevenot/01.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Prisca_Thevenot_2023.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Maxime BOUDET",
+  "commons": "https://www.lemonde.fr/politique/article/2024/05/02/demissions-en-serie-chez-prisca-thevenot_6231122_823448.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.131,
   "pixels": 167.747,
   "profil": 0.895,
@@ -487,13 +631,20 @@
   "portrait": "assets/photos/base/thevenot.jpg",
   "score": -0.67,
   "name": "Prisca Thevenot",
-  "recadrage": "assets/photos/base/thevenot_recadre.jpg"
+  "recadrage": "assets/photos/base_web/thevenot.jpg",
+  "ancien": {
+   "recadrage": "assets/photos/base/thevenot_recadre.jpg",
+   "portrait": "assets/photos/base/thevenot.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Prisca_Thevenot_2023.jpg",
+   "auteur": "Maxime BOUDET",
+   "licence": "CC BY-SA 4.0"
+  }
  },
  "ndiaye": {
   "fichier": "assets/photos/raw/ndiaye.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:MH-Sibeth_(cropped).jpg",
-  "licence": "CC BY-SA 3.0",
-  "auteur": "Hegor",
+  "commons": "https://www.gentside.com/news/jet-de-pierres-sur-la-police-sibeth-ndiaye-au-coeur-d-une-nouvelle-polemique-a-cause-d-une-declaration-tronquee_art95376.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.21,
   "pixels": 338.031,
   "profil": 0.083,
@@ -502,7 +653,15 @@
   "yeux": 0.222,
   "portrait": "assets/photos/base/ndiaye.jpg",
   "score": 1.91,
-  "name": "Sibeth Ndiaye"
+  "name": "Sibeth Ndiaye",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/ndiaye.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:MH-Sibeth_(cropped).jpg",
+   "auteur": "Hegor",
+   "licence": "CC BY-SA 3.0"
+  },
+  "recadrage": "assets/photos/base_web/ndiaye.jpg"
  },
  "bregeon": {
   "fichier": "assets/photos/raw/bregeon.jpg",
@@ -521,9 +680,9 @@
  },
  "maillard": {
   "fichier": "assets/photos/galerie/maillard/04.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Sylvain-Maillard.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Lionel Barbe",
+  "commons": "https://www.leparisien.fr/elections/municipales/municipales-a-paris-je-ferai-campagne-aux-cotes-de-rachida-dati-annonce-sylvain-maillard-28-10-2025-D3AGOBWGJBGXRD2BL7PBLX2EH4.php",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.409,
   "pixels": 261.679,
   "profil": 0.008,
@@ -532,7 +691,15 @@
   "yeux": 0.366,
   "portrait": "assets/photos/base/maillard.jpg",
   "score": 2.24,
-  "name": "Sylvain Maillard"
+  "name": "Sylvain Maillard",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/maillard.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Sylvain-Maillard.jpg",
+   "auteur": "Lionel Barbe",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/maillard.jpg"
  },
  "castaner": {
   "fichier": "assets/photos/raw/castaner.jpg",
@@ -611,9 +778,9 @@
  },
  "dupond_moretti": {
   "fichier": "assets/photos/galerie/dupond_moretti/08.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Eric_Dupond-Moretti.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Linelola54",
+  "commons": "https://holiplaygames.com/eric-dupond-moretti-augmentation/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.366,
   "pixels": 447.084,
   "profil": 0.381,
@@ -622,7 +789,15 @@
   "yeux": 0.376,
   "portrait": "assets/photos/base/dupond_moretti.jpg",
   "score": 1.38,
-  "name": "Éric Dupond-Moretti"
+  "name": "Éric Dupond-Moretti",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/dupond_moretti.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Eric_Dupond-Moretti.jpg",
+   "auteur": "Linelola54",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/dupond_moretti.jpg"
  },
  "lemaire": {
   "fichier": "assets/photos/galerie/lemaire/06.jpg",
@@ -656,9 +831,9 @@
  },
  "philippe": {
   "fichier": "assets/photos/raw/philippe.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:%C3%89douard_Philippe_2019_(cropped).jpg",
-  "licence": "CC BY 2.0",
-  "auteur": "Jacques Paquier",
+  "commons": "https://artistes-productions.com/2023/12/20/contacter-edouard-philippe-adresse-e-mail-courrier-numeros-de-telephone/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.387,
   "pixels": 522.291,
   "profil": 0.246,
@@ -667,13 +842,21 @@
   "yeux": 0.269,
   "portrait": "assets/photos/base/philippe.jpg",
   "score": 1.69,
-  "name": "Édouard Philippe"
+  "name": "Édouard Philippe",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/philippe.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:%C3%89douard_Philippe_2019_(cropped).jpg",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0"
+  },
+  "recadrage": "assets/photos/base_web/philippe.jpg"
  },
  "lecornu": {
   "fichier": "assets/photos/raw/lecornu.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Lecornu_2024_(2x3_crop).jpg",
-  "licence": "Public domain",
-  "auteur": "U.S. Secretary of Defense",
+  "commons": "https://podcasts.apple.com/ch/podcast/sébastien-lecornu-ministre-des-armées-attentats-déjoués/id1691740320?i=1000698909981",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.415,
   "pixels": 597.832,
   "profil": 0.022,
@@ -682,7 +865,15 @@
   "yeux": 0.293,
   "portrait": "assets/photos/base/lecornu.jpg",
   "score": 2.24,
-  "name": "Sébastien Lecornu"
+  "name": "Sébastien Lecornu",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/lecornu.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Lecornu_2024_(2x3_crop).jpg",
+   "auteur": "U.S. Secretary of Defense",
+   "licence": "Public domain"
+  },
+  "recadrage": "assets/photos/base_web/lecornu.jpg"
  },
  "bayrou": {
   "fichier": "assets/photos/raw/bayrou.jpg",
@@ -701,9 +892,9 @@
  },
  "attal": {
   "fichier": "assets/photos/raw/attal.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_2025_(close_crop).jpg",
-  "licence": "CC BY 4.0",
-  "auteur": "Ismail Aissoub",
+  "commons": "https://rmc.bfmtv.com/actualites/economie/travail/sans-ca-on-risque-d-etre-vassalises-le-plan-de-gabriel-attal-pour-faire-exploser-le-salaire-median_AV-202605010407.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.394,
   "pixels": 567.031,
   "profil": 0.157,
@@ -712,7 +903,15 @@
   "yeux": 0.34,
   "portrait": "assets/photos/base/attal.jpg",
   "score": 1.94,
-  "name": "Gabriel Attal"
+  "name": "Gabriel Attal",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/attal.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_2025_(close_crop).jpg",
+   "auteur": "Ismail Aissoub",
+   "licence": "CC BY 4.0"
+  },
+  "recadrage": "assets/photos/base_web/attal.jpg"
  },
  "macron": {
   "fichier": "assets/photos/raw/macron.jpg",
@@ -787,7 +986,8 @@
   "yeux": 0.292,
   "portrait": "assets/photos/base/hortefeux.jpg",
   "score": 2.13,
-  "name": "Brice Hortefeux"
+  "name": "Brice Hortefeux",
+  "recadrage": null
  },
  "cope": {
   "fichier": "assets/photos/raw/cope.jpg",
@@ -866,9 +1066,9 @@
  },
  "ciotti": {
   "fichier": "assets/photos/raw/ciotti.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Ciotti_(2).jpg",
-  "licence": "CC BY-SA 3.0",
-  "auteur": "Frantogian",
+  "commons": "https://www.lejdd.fr/politique/recomposition-de-la-droite-le-grand-remplacement-de-lr-par-ludr-est-engage-estime-eric-ciotti-173679",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.562,
   "pixels": 674.762,
   "profil": 0.418,
@@ -877,7 +1077,15 @@
   "yeux": 0.353,
   "portrait": "assets/photos/base/ciotti.jpg",
   "score": 0.96,
-  "name": "Éric Ciotti"
+  "name": "Éric Ciotti",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/ciotti.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Ciotti_(2).jpg",
+   "auteur": "Frantogian",
+   "licence": "CC BY-SA 3.0"
+  },
+  "recadrage": "assets/photos/base_web/ciotti.jpg"
  },
  "retailleau": {
   "fichier": "assets/photos/galerie/retailleau/08.jpg",
@@ -896,9 +1104,9 @@
  },
  "pecresse": {
   "fichier": "assets/photos/raw/pecresse.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Val%C3%A9rie_P%C3%A9cresse_at_a_2024_Paralympic_Games_media_conference_in_2024_3_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Gail Leenstra",
+  "commons": "https://www.radiofrance.fr/franceinter/podcasts/la-grande-matinale/la-grande-matinale-du-lundi-15-decembre-2025-4133900",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.307,
   "pixels": 401.733,
   "profil": 0.211,
@@ -907,7 +1115,15 @@
   "yeux": 0.345,
   "portrait": "assets/photos/base/pecresse.jpg",
   "score": 1.65,
-  "name": "Valérie Pécresse"
+  "name": "Valérie Pécresse",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/pecresse.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Val%C3%A9rie_P%C3%A9cresse_at_a_2024_Paralympic_Games_media_conference_in_2024_3_(cropped).jpg",
+   "auteur": "Gail Leenstra",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/pecresse.jpg"
  },
  "fillon": {
   "fichier": "assets/photos/raw/fillon.jpg",
@@ -926,9 +1142,9 @@
  },
  "dati": {
   "fichier": "assets/photos/raw/dati.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Festival_automobile_international_2016_-_Photocall_-_043_(cropped).jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Thesupermat",
+  "commons": "https://www.bfmtv.com/paris/elections-municipales-2026-le-maire-du-17e-arrondissement-de-paris-exhorte-rachida-dati-de-se-plier-a-une-primaire_AN-202507100389.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.403,
   "pixels": 546.915,
   "profil": 0.448,
@@ -937,7 +1153,15 @@
   "yeux": 0.335,
   "portrait": "assets/photos/base/dati.jpg",
   "score": 1.19,
-  "name": "Rachida Dati"
+  "name": "Rachida Dati",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/dati.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Festival_automobile_international_2016_-_Photocall_-_043_(cropped).jpg",
+   "auteur": "Thesupermat",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/dati.jpg"
  },
  "sarkozy": {
   "fichier": "assets/photos/galerie/sarkozy/05.jpg",
@@ -956,9 +1180,9 @@
  },
  "odoul": {
   "fichier": "assets/photos/raw/odoul.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Julien_Odoul_-_Besan%C3%A7on_25-04-2019_-_Toufik-de-Planoise.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Toufik-de-Planoise",
+  "commons": "https://www.lyonne.fr/auxerre-89000/actualites/l-heure-du-proces-pour-julien-odoul-dans-l-affaire-des-assistants-parlementaires-du-fn_14570357/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.348,
   "pixels": 299.959,
   "profil": 0.217,
@@ -967,7 +1191,15 @@
   "yeux": 0.319,
   "portrait": "assets/photos/base/odoul.jpg",
   "score": 1.57,
-  "name": "Julien Odoul"
+  "name": "Julien Odoul",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/odoul.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Julien_Odoul_-_Besan%C3%A7on_25-04-2019_-_Toufik-de-Planoise.jpg",
+   "auteur": "Toufik-de-Planoise",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/odoul.jpg"
  },
  "houssin": {
   "fichier": "assets/photos/raw/houssin.jpg",
@@ -986,9 +1218,9 @@
  },
  "chenu": {
   "fichier": "assets/photos/raw/chenu.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Denain_-_S%C3%A9bastien_Chenu_lors_du_conseil_municipal_du_27_juin_2016_(cropped).JPG",
-  "licence": "GFDL 1.2",
-  "auteur": "Jérémy-Günther-Heinz Jähnick",
+  "commons": "https://www.ledauphine.com/elections/2026/03/17/sebastien-chenu-a-avignon-ce-mercredi-18-mars-pour-soutenir-la-candidate-rn-anne-sophie-rigault",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.487,
   "pixels": 285.582,
   "profil": 0.05,
@@ -997,7 +1229,15 @@
   "yeux": 0.229,
   "portrait": "assets/photos/base/chenu.jpg",
   "score": 2.1,
-  "name": "Sébastien Chenu"
+  "name": "Sébastien Chenu",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/chenu.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Denain_-_S%C3%A9bastien_Chenu_lors_du_conseil_municipal_du_27_juin_2016_(cropped).JPG",
+   "auteur": "Jérémy-Günther-Heinz Jähnick",
+   "licence": "GFDL 1.2"
+  },
+  "recadrage": "assets/photos/base_web/chenu.jpg"
  },
  "lavalette": {
   "fichier": "assets/photos/galerie/lavalette/01.jpg",
@@ -1016,9 +1256,9 @@
  },
  "tanguy": {
   "fichier": "assets/photos/galerie/tanguy/03.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Jean-Philippe_Tanguy.jpg",
-  "licence": "CC BY-SA 2.0",
-  "auteur": "Debout la France",
+  "commons": "https://www.bfmtv.com/economie/economie-social/social/c-est-une-injustice-sociale-jean-philippe-tanguy-confirme-que-le-rn-proposera-d-abroger-la-reforme-des-retraites_AV-202409080281.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.461,
   "pixels": 609.572,
   "profil": 0.214,
@@ -1027,7 +1267,15 @@
   "yeux": 0.321,
   "portrait": "assets/photos/base/tanguy.jpg",
   "score": 1.71,
-  "name": "Jean-Philippe Tanguy"
+  "name": "Jean-Philippe Tanguy",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/tanguy.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Jean-Philippe_Tanguy.jpg",
+   "auteur": "Debout la France",
+   "licence": "CC BY-SA 2.0"
+  },
+  "recadrage": "assets/photos/base_web/tanguy.jpg"
  },
  "aliot": {
   "fichier": "assets/photos/raw/aliot.jpg",
@@ -1046,9 +1294,9 @@
  },
  "marechal": {
   "fichier": "assets/photos/galerie/marechal/04.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:MMLePen-010912.JPG",
-  "licence": "CC BY-SA 3.0",
-  "auteur": "Gauthier Bouchet",
+  "commons": "https://www.sudradio.fr/linvite-politique/ce-nest-pas-a-la-france-de-sadapter-a-lislam-affirme-marion-marechal",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.326,
   "pixels": 208.83,
   "profil": 0.071,
@@ -1057,13 +1305,21 @@
   "yeux": 0.379,
   "portrait": "assets/photos/base/marechal.jpg",
   "score": 1.92,
-  "name": "Marion Maréchal"
+  "name": "Marion Maréchal",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/marechal.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:MMLePen-010912.JPG",
+   "auteur": "Gauthier Bouchet",
+   "licence": "CC BY-SA 3.0"
+  },
+  "recadrage": "assets/photos/base_web/marechal.jpg"
  },
  "bardella": {
   "fichier": "assets/photos/galerie/bardella/01.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:1721231397060_20240717_EP-170912A_DLL_199.jpg",
-  "licence": "European Parliament",
-  "auteur": "Daina Le Lardic",
+  "commons": "https://tuni-news.com/jordan-bardella-dorigine-algerienne-il-repond-enfin-oui-je-suis-bien/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.277,
   "pixels": 398.77,
   "profil": 0.063,
@@ -1072,7 +1328,15 @@
   "yeux": 0.341,
   "portrait": "assets/photos/base/bardella.jpg",
   "score": 2.06,
-  "name": "Jordan Bardella"
+  "name": "Jordan Bardella",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/bardella.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:1721231397060_20240717_EP-170912A_DLL_199.jpg",
+   "auteur": "Daina Le Lardic",
+   "licence": "European Parliament"
+  },
+  "recadrage": "assets/photos/base_web/bardella.jpg"
  },
  "jmlp": {
   "fichier": "assets/photos/raw/jmlp.jpg",
@@ -1106,9 +1370,9 @@
  },
  "rigault": {
   "fichier": "assets/photos/raw/rigault.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Stanislas_Rigault_12_novembre_2023.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Siren-Com",
+  "commons": "https://www.bfmtv.com/cote-d-azur/nice-des-etudiants-vent-debout-contre-la-venue-de-stanislas-rigault-proche-d-eric-zemmour-a-un-debat-universitaire_AV-202303070442.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.341,
   "pixels": 432.161,
   "profil": 0.941,
@@ -1118,7 +1382,14 @@
   "portrait": "assets/photos/base/rigault.jpg",
   "score": -0.11,
   "name": "Stanislas Rigault",
-  "recadrage": "assets/photos/base/rigault_recadre.jpg"
+  "recadrage": "assets/photos/base_web/rigault.jpg",
+  "ancien": {
+   "recadrage": "assets/photos/base/rigault_recadre.jpg",
+   "portrait": "assets/photos/base/rigault.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Stanislas_Rigault_12_novembre_2023.jpg",
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 4.0"
+  }
  },
  "bay": {
   "fichier": "assets/photos/galerie/bay/01.jpg",
@@ -1152,9 +1423,9 @@
  },
  "dupont_aignan": {
   "fichier": "assets/photos/raw/dupont_aignan.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan,_homme_politique_fran%C3%A7ais.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "Debout la France",
+  "commons": "https://www.closermag.fr/politique/nicolas-dupont-aignan-va-sortir-un-livre-pour-se-purifier-724103",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.451,
   "pixels": 360.401,
   "profil": 0.011,
@@ -1163,7 +1434,15 @@
   "yeux": 0.28,
   "portrait": "assets/photos/base/dupont_aignan.jpg",
   "score": 2.12,
-  "name": "Nicolas Dupont-Aignan"
+  "name": "Nicolas Dupont-Aignan",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/dupont_aignan.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan,_homme_politique_fran%C3%A7ais.jpg",
+   "auteur": "Debout la France",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/dupont_aignan.jpg"
  },
  "asselineau": {
   "fichier": "assets/photos/raw/asselineau.jpg",
@@ -1178,13 +1457,14 @@
   "yeux": 0.264,
   "portrait": "assets/photos/base/asselineau.jpg",
   "score": 1.82,
-  "name": "François Asselineau"
+  "name": "François Asselineau",
+  "recadrage": null
  },
  "philippot": {
   "fichier": "assets/photos/raw/philippot.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Florian_Philippot.jpg",
-  "licence": "CC BY 4.0",
-  "auteur": "Films et documetnaires",
+  "commons": "https://www.leprogres.fr/p/florian-philippot/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.297,
   "pixels": 412.887,
   "profil": 0.914,
@@ -1193,7 +1473,15 @@
   "yeux": 0.41,
   "portrait": "assets/photos/base/philippot.jpg",
   "score": -0.0,
-  "name": "Florian Philippot"
+  "name": "Florian Philippot",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/philippot.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Florian_Philippot.jpg",
+   "auteur": "Films et documetnaires",
+   "licence": "CC BY 4.0"
+  },
+  "recadrage": "assets/photos/base_web/philippot.jpg"
  },
  "knafo": {
   "fichier": "assets/photos/galerie/knafo/06.jpg",
@@ -1212,9 +1500,9 @@
  },
  "villiers": {
   "fichier": "assets/photos/galerie/villiers/07.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:DE_VILLIERS_Philippe_MEP.jpg",
-  "licence": "European Parliament",
-  "auteur": "European Parliament Multimedia Centre",
+  "commons": "https://www.cnews.fr/france/2026-01-09/colere-des-agriculteurs-il-faut-sortir-de-cette-union-europeenne-sinon-va-etre",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.432,
   "pixels": 606.109,
   "profil": 0.038,
@@ -1223,7 +1511,15 @@
   "yeux": 0.315,
   "portrait": "assets/photos/base/villiers.jpg",
   "score": 2.04,
-  "name": "Philippe de Villiers"
+  "name": "Philippe de Villiers",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/villiers.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:DE_VILLIERS_Philippe_MEP.jpg",
+   "auteur": "European Parliament Multimedia Centre",
+   "licence": "European Parliament"
+  },
+  "recadrage": "assets/photos/base_web/villiers.jpg"
  },
  "zemmour": {
   "fichier": "assets/photos/raw/zemmour.jpg",
@@ -1242,9 +1538,9 @@
  },
  "kazib": {
   "fichier": "assets/photos/raw/kazib.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib,_d%C3%A9cembre_2021.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "PabloMorao27",
+  "commons": "https://www.revolutionpermanente.fr/Bataille-des-retraites-ou-va-l-intersyndicale-Decryptage-d-Anasse-Kazib",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.19,
   "pixels": 164.135,
   "profil": 0.231,
@@ -1253,7 +1549,15 @@
   "yeux": 0.222,
   "portrait": "assets/photos/base/kazib.jpg",
   "score": 1.04,
-  "name": "Anasse Kazib"
+  "name": "Anasse Kazib",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/kazib.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib,_d%C3%A9cembre_2021.jpg",
+   "auteur": "PabloMorao27",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/kazib.jpg"
  },
  "cheminade": {
   "fichier": "assets/photos/raw/cheminade.jpg",
@@ -1272,9 +1576,9 @@
  },
  "durif": {
   "fichier": "assets/photos/raw/durif.png",
-  "commons": "https://commons.wikimedia.org/wiki/File:Sylvain_Durif,_sur_une_aire_d%27autoroute,_en_2013.png",
-  "licence": "CC BY 3.0",
-  "auteur": "chatzefratz",
+  "commons": "https://lelombrik.net/66164",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.368,
   "pixels": 198.673,
   "profil": 0.002,
@@ -1283,13 +1587,21 @@
   "yeux": 0.356,
   "portrait": "assets/photos/base/durif.jpg",
   "score": 2.07,
-  "name": "Sylvain Durif"
+  "name": "Sylvain Durif",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/durif.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Sylvain_Durif,_sur_une_aire_d%27autoroute,_en_2013.png",
+   "auteur": "chatzefratz",
+   "licence": "CC BY 3.0"
+  },
+  "recadrage": "assets/photos/base_web/durif.jpg"
  },
  "lalanne": {
   "fichier": "assets/photos/raw/lalanne.png",
-  "commons": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne.png",
-  "licence": "FAL",
-  "auteur": "Olivier Roller, In Libro Veritas",
+  "commons": "https://www.purepeople.com/media/exclusif-francis-lalanne-people-a-la_m7345941",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.544,
   "pixels": 159.393,
   "profil": 0.038,
@@ -1298,7 +1610,15 @@
   "yeux": 0.304,
   "portrait": "assets/photos/base/lalanne.jpg",
   "score": 1.68,
-  "name": "Francis Lalanne"
+  "name": "Francis Lalanne",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/lalanne.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne.png",
+   "auteur": "Olivier Roller, In Libro Veritas",
+   "licence": "FAL"
+  },
+  "recadrage": "assets/photos/base_web/lalanne.jpg"
  },
  "arthaud": {
   "fichier": "assets/photos/raw/arthaud.jpg",
@@ -1317,9 +1637,9 @@
  },
  "branco": {
   "fichier": "assets/photos/raw/branco.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Juan_Branco_Pick.jpg",
-  "licence": "CC BY 4.0",
-  "auteur": "UPOP Marseille",
+  "commons": "https://zanzibar.substack.com/p/coup-detat-de-juan-branco-un-livre",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.286,
   "pixels": 288.415,
   "profil": 0.137,
@@ -1328,7 +1648,15 @@
   "yeux": 0.332,
   "portrait": "assets/photos/base/branco.jpg",
   "score": 1.72,
-  "name": "Juan Branco"
+  "name": "Juan Branco",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/branco.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Juan_Branco_Pick.jpg",
+   "auteur": "UPOP Marseille",
+   "licence": "CC BY 4.0"
+  },
+  "recadrage": "assets/photos/base_web/branco.jpg"
  },
  "roussel": {
   "fichier": "assets/photos/galerie/roussel/07.jpg",
@@ -1422,9 +1750,9 @@
  },
  "praud": {
   "fichier": "assets/photos/raw/praud.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Pascal_Praud_2025.jpg",
-  "licence": "CC0",
-  "auteur": "ManoSolo13241324",
+  "commons": "https://www.melty.fr/people/celine-dion-raillee-par-pascal-praud-elle-prend-3-ce-caprice-dans-un-hotel-5-etoiles-le-rend-hilare-2306587.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.23,
   "pixels": 291.28,
   "profil": 0.979,
@@ -1433,13 +1761,21 @@
   "yeux": 0.326,
   "portrait": "assets/photos/base/praud.jpg",
   "score": -0.31,
-  "name": "Pascal Praud"
+  "name": "Pascal Praud",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/praud.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Pascal_Praud_2025.jpg",
+   "auteur": "ManoSolo13241324",
+   "licence": "CC0"
+  },
+  "recadrage": "assets/photos/base_web/praud.jpg"
  },
  "ppda": {
   "fichier": "assets/photos/galerie/ppda/07.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:PPDA_-_Brive_2011.jpg",
-  "licence": "CC BY-SA 3.0",
-  "auteur": "Babsy",
+  "commons": "https://www.ohmymag.com/people/actu-people/patrick-poivre-darvor-deux-nouvelles-plaintes-laffaire-samplifie_art188114.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.282,
   "pixels": 405.83,
   "profil": 0.19,
@@ -1448,13 +1784,21 @@
   "yeux": 0.33,
   "portrait": "assets/photos/base/ppda.jpg",
   "score": 1.74,
-  "name": "Patrick Poivre d'Arvor"
+  "name": "Patrick Poivre d'Arvor",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/ppda.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:PPDA_-_Brive_2011.jpg",
+   "auteur": "Babsy",
+   "licence": "CC BY-SA 3.0"
+  },
+  "recadrage": "assets/photos/base_web/ppda.jpg"
  },
  "bouleau": {
   "fichier": "assets/photos/raw/bouleau.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Gilles_Bouleau_Cannes_2016.jpg",
-  "licence": "CC BY-SA 3.0",
-  "auteur": "Georges Biard",
+  "commons": "https://www.rtl.fr/actu/politique/primaire-de-la-droite-pecresse-raffarin-et-juppe-ont-fait-rire-twitter-7785970156",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.282,
   "pixels": 225.887,
   "profil": 0.061,
@@ -1463,7 +1807,15 @@
   "yeux": 0.263,
   "portrait": "assets/photos/base/bouleau.jpg",
   "score": 2.1,
-  "name": "Gilles Bouleau"
+  "name": "Gilles Bouleau",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/bouleau.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Gilles_Bouleau_Cannes_2016.jpg",
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0"
+  },
+  "recadrage": "assets/photos/base_web/bouleau.jpg"
  },
  "barthes": {
   "fichier": "assets/photos/raw/barthes.jpg",
@@ -1505,9 +1857,9 @@
  },
  "ferrari": {
   "fichier": "assets/photos/raw/ferrari.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Laurence_Ferrari_Cannes_2017.jpg",
-  "licence": "CC BY-SA 3.0",
-  "auteur": "Georges Biard",
+  "commons": "https://www.cnews.fr/france/2023-11-15/laurence-ferrari-honte-vous-qui-salissez-la-republique-avec-vos-mensonges-et-vos",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.316,
   "pixels": 252.864,
   "profil": 0.042,
@@ -1516,7 +1868,15 @@
   "yeux": 0.318,
   "portrait": "assets/photos/base/ferrari.jpg",
   "score": 1.9,
-  "name": "Laurence Ferrari"
+  "name": "Laurence Ferrari",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/ferrari.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Laurence_Ferrari_Cannes_2017.jpg",
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0"
+  },
+  "recadrage": "assets/photos/base_web/ferrari.jpg"
  },
  "malherbe": {
   "name": "Apolline de Malherbe",
@@ -1563,13 +1923,20 @@
  },
  "delogu": {
   "fichier": "assets/photos/galerie/delogu/manifestation_3840.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu_Manifestation.jpg",
-  "licence": "CC0",
-  "auteur": "SachaLintignat",
+  "commons": "https://www.bfmtv.com/marseille/vous-incriminez-quelqu-un-qui-n-a-pas-commis-de-crime-sebastien-delogu-prend-la-defense-du-depute-raphael-arnault-apres-la-mort-de-quentin-deranque_AV-202602190972.html",
+  "licence": null,
+  "auteur": null,
   "portrait": "assets/photos/base/delogu.jpg",
-  "recadrage": "assets/photos/base/delogu_recadre.jpg",
+  "recadrage": "assets/photos/base_web/delogu.jpg",
   "name": "Sébastien Delogu",
-  "note": "Choisi à la main : la photo de Wikidata a un micro et une main devant la bouche. Vignette de 3 840 px, recadrée sur lui."
+  "note": "Choisi à la main : la photo de Wikidata a un micro et une main devant la bouche. Vignette de 3 840 px, recadrée sur lui.",
+  "ancien": {
+   "recadrage": "assets/photos/base/delogu_recadre.jpg",
+   "portrait": "assets/photos/base/delogu.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu_Manifestation.jpg",
+   "auteur": "SachaLintignat",
+   "licence": "CC0"
+  }
  },
  "guette": {
   "fichier": "assets/photos/raw/guette.jpg",
@@ -1588,9 +1955,9 @@
  },
  "tache": {
   "fichier": "assets/photos/galerie/tache/original.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "TrisHR",
+  "commons": "https://www.lejdd.fr/politique/taiwan-est-chinoise-le-depute-lfi-aurelien-tache-provoque-un-tolle-apres-un-tweet-pro-pekin-164438",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.197,
   "pixels": 200.636,
   "profil": 0.51,
@@ -1600,7 +1967,15 @@
   "portrait": "assets/photos/base/tache.jpg",
   "score": 0.69,
   "name": "Aurélien Taché",
-  "note": "Seule photo libre : l'original de 1 931 px, pour un visage plus net."
+  "note": "Seule photo libre : l'original de 1 931 px, pour un visage plus net.",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/tache.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
+   "auteur": "TrisHR",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/tache.jpg"
  },
  "coquerel": {
   "fichier": "assets/photos/raw/coquerel.jpg",
@@ -1644,13 +2019,20 @@
  },
  "yann_bompard": {
   "fichier": "assets/photos/fournies/yann_bompard/01.jpg",
-  "commons": null,
-  "licence": "fournie",
+  "commons": "https://www.leparisien.fr/elections/municipales/municipales-2026-a-orange-yann-bompard-perd-de-nouveau-son-fauteuil-de-maire-a-deux-jours-de-lelection-13-03-2026-JCGNFUTYTFBN5AJK6YXRWMUXOA.php",
+  "licence": null,
   "auteur": null,
   "portrait": "assets/photos/base/yann_bompard.jpg",
   "name": "Yann Bompard",
   "note": "Photo fournie par l'utilisateur le 3 novembre 2026 : aucune photo libre sur Commons ni Flickr. Source à compléter. Deux personnes derrière lui : la découpe ne garde que sa tête. La femme à sa droite est peinte en fond uni dans le recadrage.",
-  "recadrage": "assets/photos/base/yann_bompard_recadre.jpg"
+  "recadrage": "assets/photos/base_web/yann_bompard.jpg",
+  "ancien": {
+   "recadrage": "assets/photos/base/yann_bompard_recadre.jpg",
+   "portrait": "assets/photos/base/yann_bompard.jpg",
+   "commons": null,
+   "auteur": null,
+   "licence": "fournie"
+  }
  },
  "poisson": {
   "fichier": "assets/photos/raw/poisson.jpg",
@@ -1718,9 +2100,9 @@
  },
  "mariani": {
   "fichier": "assets/photos/galerie/mariani/01.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:1718282772753_20240611_20240611_MARIANI_Thierry_FR_004.jpg",
-  "licence": "European Parliament",
-  "auteur": "European Union 2024 - Source : EP",
+  "commons": "https://www.leparisien.fr/politique/thierry-mariani/",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.486,
   "pixels": 599.146,
   "profil": 0.138,
@@ -1729,7 +2111,15 @@
   "yeux": 0.314,
   "portrait": "assets/photos/base/mariani.jpg",
   "score": 1.98,
-  "name": "Thierry Mariani"
+  "name": "Thierry Mariani",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/mariani.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:1718282772753_20240611_20240611_MARIANI_Thierry_FR_004.jpg",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament"
+  },
+  "recadrage": "assets/photos/base_web/mariani.jpg"
  },
  "de_gaulle": {
   "fichier": "assets/photos/galerie/de_gaulle/1963.jpg",
@@ -1757,9 +2147,9 @@
  },
  "braun_pivet": {
   "fichier": "assets/photos/raw/braun_pivet.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Ya%C3%ABl_Braun-Pivet_4colonnes_19182.jpg",
-  "licence": "CC BY-SA 4.0",
-  "auteur": "G.Garitan",
+  "commons": "https://mesinfos.fr/75000-paris/interview-exclusive-yael-braun-pivet-une-presidente-citoyenne-150140.html",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.353,
   "pixels": 411.972,
   "profil": 0.331,
@@ -1768,7 +2158,15 @@
   "yeux": 0.366,
   "portrait": "assets/photos/base/braun_pivet.jpg",
   "score": 1.4,
-  "name": "Yaël Braun-Pivet"
+  "name": "Yaël Braun-Pivet",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/braun_pivet.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Ya%C3%ABl_Braun-Pivet_4colonnes_19182.jpg",
+   "auteur": "G.Garitan",
+   "licence": "CC BY-SA 4.0"
+  },
+  "recadrage": "assets/photos/base_web/braun_pivet.jpg"
  },
  "larcher": {
   "fichier": "assets/photos/raw/larcher.jpg",
@@ -1787,9 +2185,9 @@
  },
  "fogiel": {
   "fichier": "assets/photos/raw/fogiel.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Marc-Olivier_Fogiel_2025.jpg",
-  "licence": "CC0",
-  "auteur": "ManoSolo13241324",
+  "commons": "https://www.purepeople.com/media/exclusif-marc-olivier-fogiel-avant-p_m3972439",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.192,
   "pixels": 341.029,
   "profil": 0.932,
@@ -1798,7 +2196,15 @@
   "yeux": 0.267,
   "portrait": "assets/photos/base/fogiel.jpg",
   "score": -0.19,
-  "name": "Marc-Olivier Fogiel"
+  "name": "Marc-Olivier Fogiel",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/fogiel.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Marc-Olivier_Fogiel_2025.jpg",
+   "auteur": "ManoSolo13241324",
+   "licence": "CC0"
+  },
+  "recadrage": "assets/photos/base_web/fogiel.jpg"
  },
  "lescure": {
   "fichier": "assets/photos/raw/lescure.jpg",
