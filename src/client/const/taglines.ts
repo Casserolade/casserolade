@@ -7,12 +7,6 @@ export const TAGLINES: readonly string[] = [
   'C\'est tout ce que ça mérite',
   'Pookie sonne le glas',
   'Bien attachées, où il faut',
-  'Une affaire n\'arrive jamais seule',
-  'Toute ressemblance est volontaire',
+  '49.3 fois plus drôle',
   'Rien d\'inventé, hélas',
-  'Plus c\'est gros, plus ça passe',
-  'Le peuple oublie, la casserole reste',
-  'Toutes les affaires sont bonnes à prendre',
-  'La République, c\'est le jeu',
-  'Ce soir, sur tous les plateaux',
 ];
