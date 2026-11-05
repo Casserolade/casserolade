@@ -12,6 +12,7 @@ import { CASSEROLES } from '../../src/data/casseroles.ts';
 import { HERO_BY_ID } from '../../src/data/heroes.ts';
 import { ANIMATEURS } from '../../src/data/animateurs.ts';
 import { PHRASES } from '../../src/data/phrases.ts';
+import { VOIX } from '../../src/data/voix.ts';
 import { shownText } from '../phrases/shownText.ts';
 import type { CollectedPhrase } from '../phrases/shownText.ts';
 
@@ -59,13 +60,13 @@ function lines() {
     return said.map((texte) => {
       const origin = origins.get(`${id}|${texte}`);
       const links = [origin?.source, ...(origin?.sources ?? [])].filter((url): url is string => Boolean(url && url.startsWith('http')));
-      return { qui: nameOf(id), texte, date: origin?.date ?? '', contexte: origin?.contexte ?? '', sources: [...new Set(links)] };
+      return { id, qui: nameOf(id), texte, date: origin?.date ?? '', contexte: origin?.contexte ?? '', sources: [...new Set(links)] };
     });
   }).sort((a, b) => a.qui.localeCompare(b.qui, 'fr') || a.texte.localeCompare(b.texte, 'fr'));
 }
 
 function casseroles() {
-  return CASSEROLES.map((c) => ({ qui: nameOf(c.owner), nom: c.name, citation: c.citation ?? '', fait: c.fait, statut: c.statut }))
+  return CASSEROLES.map((c) => ({ id: c.id, personne: c.owner, qui: nameOf(c.owner), nom: c.name, citation: c.citation ?? '', fait: c.fait, statut: c.statut }))
     .sort((a, b) => a.qui.localeCompare(b.qui, 'fr') || a.nom.localeCompare(b.nom, 'fr'));
 }
 
@@ -74,9 +75,16 @@ const sources = {
   genere: new Date().toISOString().slice(0, 10),
   phrases: lines(),
   casseroles: casseroles(),
-  voix: (credits.sons ?? []).map((s: Record<string, string>) => ({ nom: s.nom, auteur: s.auteur ?? '', source: s.source ?? '', date: s.date ?? '' })),
-  photos: [...(credits.photos ?? []), ...(credits.illustrations ?? [])].map((p: Record<string, string | null>) => ({
-    nom: photoName(p), auteur: p.auteur ?? '', licence: p.licence === 'inconnue' ? '' : p.licence ?? '', source: p.source ?? '',
+  // `personne` and `casserole` tie each credit to what it shows: the bestiary lists them under each card.
+  voix: (credits.sons ?? []).map((s: Record<string, string>) => {
+    const voice = VOIX.find((v) => v.fichier === s.id);
+    return { nom: s.nom, phrase: voice?.phrase ?? '', personne: voice?.personne ?? '', casserole: voice?.casserole ?? '', auteur: s.auteur ?? '', source: s.source ?? '', date: s.date ?? '' };
+  }),
+  photos: [
+    ...(credits.photos ?? []).map((p: Record<string, string | null>) => ({ ...p, personne: String(p.id ?? '').split('.')[0] })),
+    ...(credits.illustrations ?? []).map((p: Record<string, string | null>) => ({ ...p, casserole: p.id })),
+  ].map((p: Record<string, string | null>) => ({
+    nom: photoName(p), personne: p.personne ?? '', casserole: p.casserole ?? '', auteur: p.auteur ?? '', licence: p.licence === 'inconnue' ? '' : p.licence ?? '', source: p.source ?? '',
   })),
   logos: credits.logos ?? [],
   polices: credits.polices ?? [],

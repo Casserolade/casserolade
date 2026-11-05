@@ -1,15 +1,32 @@
 <script setup lang="ts">
+import ContextNote from '#src/client/components/molecules/ContextNote.vue';
+import CasseroleSheet from '#src/client/components/molecules/CasseroleSheet.vue';
 import HeroOption from '#src/client/components/molecules/HeroOption.vue';
-import BestiaryCamp from '#src/client/components/organisms/BestiaryCamp.vue';
+import KeywordNote from '#src/client/components/molecules/KeywordNote.vue';
+import ShownCardFace from '#src/client/components/molecules/ShownCardFace.vue';
+import SourceDetails from '#src/client/components/molecules/SourceDetails.vue';
+import BestiaryFilters from '#src/client/components/organisms/BestiaryFilters.vue';
+import BestiarySection from '#src/client/components/organisms/BestiarySection.vue';
+import { useBestiary } from '#src/client/stores/useBestiary.ts';
+import { useGameSources } from '#src/client/stores/useGameSources.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
-import { bestiaryCamps } from '#src/client/tools/bestiaryCamps.ts';
-import { CARDS, PARTY_CAMPS } from '#src/data/cards.ts';
-import { CASSEROLES } from '#src/data/casseroles.ts';
-import { HEROES } from '#src/data/heroes.ts';
+import { bestiaryFilterQuery } from '#src/client/tools/bestiaryFilterQuery.ts';
+import { casseroleSources } from '#src/client/tools/casseroleSources.ts';
+import { countLabel } from '#src/client/tools/countLabel.ts';
+import { personSources } from '#src/client/tools/personSources.ts';
+import { CARD_BY_ID } from '#src/data/cards.ts';
 import { PARAMS } from '#src/data/params.ts';
 
-/** The bestiary, in its own tab: every hero, then every politician camp by camp, as the game draws them. */
-const camps = bestiaryCamps(CARDS, CASSEROLES, [...PARTY_CAMPS, 'civile']);
+/**
+ * The bestiary, in its own tab: heroes, politicians camp by camp, casseroles, spells, tokens and contexts,
+ * each with its sources, under filters kept in the link.
+ */
+const { filter, setFilter, resetFilter, counts, total, keywords, heroes, camps, casseroles, spells, tokens, contexts } = useBestiary();
+const sources = useGameSources();
+const forPerson = (id: string) => (sources.value ? personSources(sources.value, id) : null);
+const forCasserole = (id: string) => (sources.value ? casseroleSources(sources.value, id) : null);
+/** The politicians who carry a keyword: a link, so that it opens in a new tab too. */
+const carriers = (term: string) => bestiaryFilterQuery({ kind: 'politique', camp: null, tier: null, query: term });
 </script>
 
 <template>
@@ -17,19 +34,51 @@ const camps = bestiaryCamps(CARDS, CASSEROLES, [...PARTY_CAMPS, 'civile']);
     <header class="masthead">
       <a class="logo" href="/"><img :src="assetUrl('logo/casserolade-fr.webp')" alt="Casserolade" width="1400" height="640" /></a>
       <h1>Le bestiaire</h1>
-      <p class="intro">Tous les politiques du jeu, camp par camp, avec leur échelon, leur texte et leurs casseroles. Et les héros, candidats à la présidentielle compris.</p>
+      <p class="intro">Tout le jeu : les mots-clés expliqués, les héros, les politiques camp par camp, leurs casseroles, les sorts, les jetons et les contextes. Chaque fiche donne ses sources.</p>
     </header>
-    <nav class="jump" aria-label="Aller à">
-      <a href="#heros">Les héros</a>
-      <a v-for="camp in camps" :key="camp.camp" :href="`#${camp.camp}`" :style="{ '--camp-color': `var(--camp-${camp.camp})` }">{{ camp.label }}</a>
-    </nav>
-    <section id="heros" class="heroes-section">
-      <h2>Les héros <span class="count">{{ HEROES.length }} à incarner</span></h2>
-      <ul class="heroes">
-        <li v-for="hero in HEROES" :key="hero.id"><HeroOption as="article" :hero="hero" :start-hp="PARAMS.startHp" /></li>
-      </ul>
-    </section>
-    <BestiaryCamp v-for="camp in camps" :key="camp.camp" :camp="camp" />
+    <BestiaryFilters :model-value="filter" :counts="counts" :total="total" @update:model-value="setFilter" @reset="resetFilter" />
+
+    <BestiarySection v-if="keywords.length" id="mots-cles" title="Les mots-clés" :count="countLabel(keywords.length, 'mot expliqué', 'mots expliqués')" wide>
+      <li v-for="item in keywords" :key="item.key">
+        <KeywordNote :term="item.data.term" :rule="item.data.rule" :politicians="item.data.politicians" :link="item.data.group === 'carte' ? carriers(item.data.term) : null" />
+      </li>
+    </BestiarySection>
+
+    <BestiarySection v-if="heroes.length" id="heros" title="Les héros" :count="countLabel(heroes.length, 'à incarner', 'à incarner')" wide>
+      <li v-for="hero in heroes" :key="hero.key">
+        <HeroOption as="article" :hero="hero.data" :start-hp="PARAMS.startHp" />
+        <SourceDetails :sources="forPerson(hero.key)" />
+      </li>
+    </BestiarySection>
+
+    <BestiarySection v-for="camp in camps" :id="camp.camp" :key="camp.camp" :title="camp.label" :count="countLabel(camp.items.length, 'politique', 'politiques')" :color="`var(--camp-${camp.camp})`">
+      <li v-for="item in camp.items" :key="item.key">
+        <ShownCardFace :card="{ kind: 'minion', face: item.data.face }" />
+        <p v-if="item.data.casseroles.length" class="casseroles"><strong>Casseroles</strong> {{ item.data.casseroles.join(' · ') }}</p>
+        <SourceDetails :sources="forPerson(item.key)" />
+      </li>
+    </BestiarySection>
+
+    <BestiarySection v-if="casseroles.length" id="casseroles" title="Les casseroles" :count="countLabel(casseroles.length, 'casserole', 'casseroles')" wide>
+      <li v-for="item in casseroles" :key="item.key">
+        <CasseroleSheet :casserole="item.data" :owner-name="CARD_BY_ID[item.data.owner]?.name ?? item.data.owner" :owner-multiplier="PARAMS.ownerMultiplier" :sources="forCasserole(item.key)" />
+      </li>
+    </BestiarySection>
+
+    <BestiarySection v-if="spells.length" id="sorts" title="Les sorts" :count="countLabel(spells.length, 'sort en boutique', 'sorts en boutique')">
+      <li v-for="item in spells" :key="item.key"><ShownCardFace :card="{ kind: 'spell', spell: item.data }" /></li>
+    </BestiarySection>
+
+    <BestiarySection v-if="tokens.length" id="jetons" title="Les jetons" :count="countLabel(tokens.length, 'créé par les effets', 'créés par les effets')">
+      <li v-for="item in tokens" :key="item.key"><ShownCardFace :card="item.data" /></li>
+    </BestiarySection>
+
+    <BestiarySection v-if="contexts.length" id="contextes" title="Les contextes" :count="countLabel(contexts.length, 'règle du jour', 'règles du jour')" wide>
+      <li v-for="item in contexts" :key="item.key"><ContextNote :context="item.data" /></li>
+    </BestiarySection>
+
+    <p v-if="total === 0" class="nothing">Rien ne correspond. <button type="button" class="clear" @click="resetFilter">Tout effacer</button></p>
+
     <footer class="links">
       <a href="/">Jouer</a>
       <a href="/a-propos">À propos</a>
@@ -44,14 +93,13 @@ const camps = bestiaryCamps(CARDS, CASSEROLES, [...PARTY_CAMPS, 'civile']);
 .logo img { width: min(100%, 26rem); height: auto; filter: drop-shadow(0 14px 24px rgb(0 0 0 / 0.6)); }
 h1 { color: var(--color-accent); font: 400 3rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 6px var(--color-ink); paint-order: stroke fill; }
 .intro { max-width: 40rem; color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.5; }
-.jump { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); padding: var(--space-3) 0; background: color-mix(in srgb, var(--color-background) 92%, transparent); backdrop-filter: blur(6px); }
-.jump a { padding: 0.3em 0.9em; border-radius: 999px; border: 2px solid var(--camp-color, var(--color-accent)); color: var(--color-text); font-weight: 700; text-decoration: none; }
-.jump a:hover, .jump a:focus-visible { background: var(--camp-color, var(--color-accent)); color: #fff; }
-.heroes-section { scroll-margin-top: 4rem; }
-.heroes-section h2 { display: flex; align-items: baseline; gap: var(--space-3); margin-bottom: var(--space-4); padding-bottom: var(--space-2); border-bottom: 4px solid var(--color-accent); font: 400 2.2rem / 1 var(--font-number); letter-spacing: 1px; }
-.count { color: var(--color-text-muted); font: 500 var(--font-size-normal) / 1 var(--font-card); letter-spacing: 0; }
-.heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 4.5rem var(--space-4); margin: 0; padding: 2rem 0 0; list-style: none; }
-.heroes :deep(.hero) { width: 100%; height: 100%; }
+/* A hero says a line above its head on hover: room for the bubble between rows. */
+#heros :deep(.items) { row-gap: 4.5rem; padding-top: 2rem; }
+#heros :deep(.hero) { width: 100%; }
+.casseroles { margin: 0; color: var(--color-text-muted); font-size: var(--font-size-small); line-height: 1.35; }
+.casseroles strong { display: block; color: var(--color-accent); font-family: var(--font-card-title); }
+.nothing { display: flex; align-items: center; justify-content: center; gap: var(--space-3); color: var(--color-text-muted); font-size: var(--font-size-large); }
+.clear { padding: 0.2em 0.8em; border: 2px solid var(--color-border); border-radius: 999px; background: none; color: var(--color-text); font: inherit; cursor: pointer; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-5); }
 .links a { color: var(--color-accent); font-weight: 700; }
 </style>

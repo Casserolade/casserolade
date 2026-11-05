@@ -1,16 +1,8 @@
-import { assetUrl } from '#src/client/tools/assetUrl.ts';
+import { loadSources } from '#src/client/services/loadSources.ts';
+import type { GameSources } from '#src/client/services/loadSources.ts';
 import { sourceMatches } from '#src/client/tools/sourceMatches.ts';
 
-/** assets/game/sources.json, written by tools/sources/genere_sources.ts. */
-interface Sources {
-  genere: string;
-  phrases: { qui: string; texte: string; date: string; contexte: string; sources: string[] }[];
-  casseroles: { qui: string; nom: string; citation: string; fait: string; statut: string }[];
-  voix: { nom: string; auteur: string; source: string; date: string }[];
-  photos: { nom: string; auteur: string; licence: string; source: string }[];
-  logos: { id: string; source?: string; licence?: string; auteur?: string }[];
-  polices: { nom: string; licence: string }[];
-}
+type Sources = GameSources;
 
 type Part = string | { lien: string } | { gras: string };
 
@@ -72,17 +64,15 @@ async function showSources(button: HTMLButtonElement, panel: HTMLElement): Promi
   if (!host || !search) return;
   button.disabled = true;
   button.textContent = 'Chargement…';
-  try {
-    const response = await fetch(assetUrl('sources.json'));
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    render(await response.json(), host, search);
-    panel.hidden = false;
-    button.hidden = true;
-  } catch (error) {
-    console.error('Sources not loaded', error);
+  const sources = await loadSources();
+  if (!sources) {
     button.disabled = false;
     button.textContent = 'Les sources ne se chargent pas : réessayer';
+    return;
   }
+  render(sources, host, search);
+  panel.hidden = false;
+  button.hidden = true;
 }
 
 const button = document.querySelector<HTMLButtonElement>('#voir-sources');
