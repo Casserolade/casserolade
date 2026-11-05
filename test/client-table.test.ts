@@ -1,6 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { speechForEvent } from '../src/client/tools/afterCombatSpeech.ts';
+import { voixPourPhrase } from '../src/data/trouverVoix.ts';
+import type { Moment } from '../src/data/phrases.ts';
+import { quotesFor } from '../src/client/tools/quotesFor.ts';
+import { voicedSpeaker } from '../src/client/tools/voicedSpeaker.ts';
+import { speechStandIns } from '../src/client/tools/speechStandIns.ts';
+import { hasRecordedLine } from '../src/client/tools/hasRecordedLine.ts';
+import type { CombatEvent, CombatUnit } from '../src/engine/types.ts';
 import { CHANTS } from '../src/data/chants.ts';
 import { fanLayout } from '../src/client/tools/fanLayout.ts';
 import { glossaryFor } from '../src/client/tools/glossaryFor.ts';
@@ -113,10 +120,12 @@ test('after a combat, the celebrant says a real quote, another of its own, or it
   assert.equal(said?.kind, 'celebration');
   assert.equal(said?.line, PHRASES[speaker].celebration?.[0]);
   assert.equal(said?.chant, false);
-  // Doucet has no celebration line, but real quotes of his own: he says one of them.
-  const doucet = speechForEvent({ e: 'celebration', side: 0, uid: 5, cardId: 'doucet' });
-  assert.equal(doucet?.line, PHRASES.doucet.pose?.[0]);
-  assert.equal(doucet?.chant, false);
+  // A politician without any celebration line, but with real quotes of its own, says one of them.
+  const quiet = Object.keys(PHRASES).find((id) => CARD_BY_ID[id] && !PHRASES[id]?.celebration?.length && Object.keys(PHRASES[id]).length);
+  assert.ok(quiet, 'un politique sans phrase de célébration');
+  const said2 = speechForEvent({ e: 'celebration', side: 0, uid: 5, cardId: quiet });
+  assert.ok(said2?.line && Object.values(PHRASES[quiet]).flat().includes(said2.line));
+  assert.equal(said2?.chant, false);
   // Without any real quote, the camp's real slogan, as a chant: nobody talks without a word.
   const silent = CARDS.find((c) => !c.token && !PHRASES[c.id]);
   assert.ok(silent, 'un politique sans aucune petite phrase');
@@ -127,4 +136,69 @@ test('after a combat, the celebrant says a real quote, another of its own, or it
   assert.equal(speechForEvent({ e: 'celebration', side: 1, uid: 4, cardId: 'personne' })?.line, null);
   assert.equal(speechForEvent({ e: 'reponse', side: 1, uid: 2, cardId: 'personne' })?.kind, 'reponse');
   assert.equal(speechForEvent({ e: 'attaque', from: 1, to: 2 }), null);
+});
+
+test('the celebrant draws among its recorded quotes when it has some, among all its quotes otherwise', () => {
+  const moments: Moment[] = ['celebration', 'heros', 'pose', 'casserole', 'mort'];
+  const recorded = (id: string) => quotesFor(id, moments).filter((line) => voixPourPhrase(id, line));
+  const voicedSpeaker = Object.keys(PHRASES).find((id) => recorded(id).length >= 2 && quotesFor(id, moments).length > recorded(id).length);
+  assert.ok(voicedSpeaker);
+  const voiced = recorded(voicedSpeaker);
+  const drawn = [0, 0.5, 0.999].map((roll) => speechForEvent({ e: 'celebration', side: 0, uid: 4, cardId: voicedSpeaker }, roll)?.line);
+  assert.ok(drawn.every((line) => line && voiced.includes(line)), 'a recorded line, to be heard');
+  assert.equal(drawn[0], voiced[0]);
+  assert.equal(drawn[2], voiced.at(-1));
+  const silent = Object.keys(PHRASES).find((id) => quotesFor(id, moments).length >= 3 && recorded(id).length === 0);
+  assert.ok(silent);
+  const quotes = quotesFor(silent, moments);
+  const said = [0, 0.999].map((roll) => speechForEvent({ e: 'celebration', side: 0, uid: 4, cardId: silent }, roll)?.line);
+  assert.deepEqual(said, [quotes[0], quotes.at(-1)]);
+});
+
+function combatUnit(uid: number, cardId: string, extra: Partial<CombatUnit> = {}): CombatUnit {
+  return { uid, cardId, name: cardId, camp: 'civile', tier: 1, atk: 1, hp: 1, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, ...extra };
+}
+
+test('speechStandIns: the winner\'s survivors, Vedettes first; the loser\'s Droits de réponse', () => {
+  const answer = { when: 'droit_de_reponse', to: 'soi', do: 'buff', atk: 1, hp: 1 } as unknown as CombatUnit['effects'][number];
+  const log: CombatEvent[] = [
+    { e: 'debut', first: 0, sides: [[combatUnit(1, 'a'), combatUnit(2, 'b', { effects: [answer] })], [combatUnit(3, 'c')]] },
+    { e: 'fin', winner: 1, sides: [[], [combatUnit(3, 'c'), combatUnit(4, 'd', { keywords: ['vedette'] }), combatUnit(5, 'e', { hp: 0 })]] },
+  ];
+  assert.deepEqual(speechStandIns({ e: 'celebration', side: 1, uid: 3, cardId: 'c' }, log).map((u) => u.uid), [4, 3]);
+  assert.deepEqual(speechStandIns({ e: 'reponse', side: 0, uid: 2, cardId: 'b' }, log).map((u) => u.uid), [2]);
+});
+
+test('voicedSpeaker gives the floor to a survivor with a recorded line, and keeps the chosen one when it has one', () => {
+  const log: CombatEvent[] = [{ e: 'fin', winner: 0, sides: [[combatUnit(1, 'muet'), combatUnit(2, 'bavard')], []] }];
+  const celebration = { e: 'celebration' as const, side: 0 as const, uid: 1, cardId: 'muet' };
+  assert.deepEqual(voicedSpeaker(celebration, log, (id) => id === 'bavard'), { ...celebration, uid: 2, cardId: 'bavard' });
+  assert.equal(voicedSpeaker(celebration, log, () => true), celebration);
+  assert.equal(voicedSpeaker(celebration, log, () => false), celebration);
+});
+
+test('hasRecordedLine: true for someone whose line was recorded, false for a card without any quote', () => {
+  const recorded = Object.keys(PHRASES).find((id) => quotesFor(id, ['celebration', 'pose']).some((line) => voixPourPhrase(id, line)));
+  assert.ok(recorded);
+  assert.equal(hasRecordedLine(recorded, ['celebration', 'pose']), true);
+  assert.equal(hasRecordedLine('personne_inconnue', ['celebration']), false);
+});
+
+test('on a winning streak, the same politician does not say the same line twice: another recorded one, else a bubble', () => {
+  const moments: Moment[] = ['celebration', 'heros', 'pose', 'casserole', 'mort'];
+  const recorded = (id: string) => quotesFor(id, moments).filter((line) => voixPourPhrase(id, line));
+  const once = Object.keys(PHRASES).find((id) => recorded(id).length === 1 && quotesFor(id, moments).length >= 2);
+  assert.ok(once);
+  const event = { e: 'celebration' as const, side: 0 as const, uid: 4, cardId: once };
+  const first = speechForEvent(event, 0.3)?.line;
+  assert.equal(first, recorded(once)[0], 'first time: its recorded line');
+  const again = speechForEvent(event, 0.3, first ?? null)?.line;
+  assert.ok(again && again !== first, 'next time: another line');
+  assert.equal(voixPourPhrase(once, again), null, 'in a bubble: it has no other recording');
+  const twice = Object.keys(PHRASES).find((id) => recorded(id).length >= 2);
+  assert.ok(twice);
+  const voicedEvent = { ...event, cardId: twice };
+  const said = speechForEvent(voicedEvent, 0)?.line ?? null;
+  const next = speechForEvent(voicedEvent, 0, said)?.line ?? null;
+  assert.ok(next && next !== said && voixPourPhrase(twice, next), 'another recorded line when there is one');
 });
