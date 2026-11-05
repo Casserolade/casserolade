@@ -2,6 +2,7 @@
 import { computed, toRef } from 'vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import CampChips from '#src/client/components/molecules/CampChips.vue';
+import ContextBadge from '#src/client/components/molecules/ContextBadge.vue';
 import HeroOption from '#src/client/components/molecules/HeroOption.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import { useCountdown } from '#src/client/stores/useCountdown.ts';
@@ -25,6 +26,7 @@ const secondsLeft = useCountdown(toRef(props, 'deadline'));
       <GameIcon name="hourglass" /> <strong>{{ secondsLeft }}</strong> s, puis le jeu choisit pour vous
     </p>
     <CampChips class="camps" :camps="view.camps" />
+    <ContextBadge :context-id="view.contextId" />
     <p v-if="offers.length === 0" class="waiting">En attente des autres joueurs…</p>
     <div class="offers">
       <HeroOption v-for="(hero, index) in offers" :key="hero.id" class="offer" :style="{ '--i': index }" :hero="hero" :start-hp="view.params.startHp" @click="$emit('choose', index)" />
@@ -42,6 +44,12 @@ const secondsLeft = useCountdown(toRef(props, 'deadline'));
 .waiting { color: #fff; font-size: 1.3rem; }
 .camps { padding: 0.4rem 1rem; border-radius: 999px; background: rgb(12 16 32 / 0.85); }
 .offers { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; margin-top: 1rem; }
-.offer { animation: deal 0.5s cubic-bezier(0.3, 1.4, 0.5, 1) backwards; animation-delay: calc(var(--i) * 0.1s); }
+.offer { position: relative; animation: deal 0.5s cubic-bezier(0.3, 1.4, 0.5, 1) backwards; animation-delay: calc(var(--i) * 0.1s); }
+.offer:hover, .offer:focus-within { z-index: 3; }
+/* The power's glossary beside the card, not under it: under it, a laptop screen cut it off. The last card has it on its left. */
+@media (hover: hover) {
+  .offer :deep(.glossary) { top: 50%; left: calc(100% + 0.6rem); width: 15rem; translate: 0 -50%; }
+  .offer:last-child :deep(.glossary) { left: auto; right: calc(100% + 0.6rem); }
+}
 @keyframes deal { from { transform: translateY(120px) rotate(8deg); opacity: 0; } }
 </style>

@@ -145,6 +145,7 @@ function inspect(event: PointerEvent, minion: Minion): void {
           :casseroles="minion.casseroles"
           :golden="minion.golden"
           :locked="minion.locked"
+          :bracelet="minion.bracelet"
           :charges="minion.charges"
           :scandal-threshold="scandalThreshold"
           :oublie="minion.oublie"

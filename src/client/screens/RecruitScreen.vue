@@ -5,6 +5,7 @@ import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import ReadyButton from '#src/client/components/atoms/ReadyButton.vue';
 import RecruitRope from '#src/client/components/atoms/RecruitRope.vue';
 import CampChips from '#src/client/components/molecules/CampChips.vue';
+import ContextBadge from '#src/client/components/molecules/ContextBadge.vue';
 import DropLine from '#src/client/components/molecules/DropLine.vue';
 import EndOfTurnBanner from '#src/client/components/molecules/EndOfTurnBanner.vue';
 import HeroCorner from '#src/client/components/molecules/HeroCorner.vue';
@@ -91,6 +92,7 @@ watch(tripleCount, (count, before) => {
       <ReadyButton :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" @ready="store.endRecruitment()" />
       <slot name="side-top" />
       <CampChips class="camps" :camps="view.camps" vertical />
+      <ContextBadge :context-id="view.contextId" compact />
     </div>
     <BudgetMeter class="budget" :budget="view.budget" :max="view.maxBudget" :later="view.nextBudget" />
     <RecruitRope :seconds-left="secondsLeft" />

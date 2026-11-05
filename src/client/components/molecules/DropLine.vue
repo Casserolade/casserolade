@@ -20,7 +20,7 @@ const amount = computed(() => (props.guide.mode === 'sell' ? `+${props.guide.amo
     <span class="tag">
       <GameIcon class="arrow" name="tier" />
       <span>{{ label }}</span>
-      <span class="amount"><GameIcon name="coin" />{{ amount }}</span>
+      <span v-if="guide.mode !== 'play'" class="amount"><GameIcon name="coin" />{{ amount }}</span>
     </span>
   </div>
 </template>

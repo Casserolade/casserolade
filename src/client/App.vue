@@ -20,15 +20,16 @@ import { pseudoOrDefault } from '#src/client/tools/pseudoOrDefault.ts';
 import { readInviteCode } from '#src/client/tools/readInviteCode.ts';
 import { SUCCES } from '#src/data/succes.ts';
 import type { OptionsSalon } from '#src/protocol/messages.ts';
+import { RANDOM_CONTEXT } from '#src/data/heroes.ts';
 
 const PLAYER_NAME = 'Vous';
 const HUMAN_SEAT = 0;
-const DEFAULT_ROOM_OPTIONS: OptionsSalon = { bots: 0, niveauBots: 'moyen', minuteur: true };
+const DEFAULT_ROOM_OPTIONS: OptionsSalon = { bots: 0, niveauBots: 'moyen', minuteur: true, contexte: RANDOM_CONTEXT };
 const ROOM_GONE_MESSAGE = 'Votre ancienne partie n\'existe plus.';
 
 /** Away from the home screen without a game store: the career, the tutorial, the achievements board. */
 type Elsewhere = 'story' | 'tutorial' | 'achievements';
-type SoloSettings = { botLevel: BotLevel };
+type SoloSettings = { botLevel: BotLevel; contexte: string };
 
 const params = new URLSearchParams(window.location.search);
 const seedParam = params.get('seed');
@@ -67,14 +68,13 @@ function startSolo(settings: SoloSettings): void {
   isLocal.value = true;
   interrupted.value = null;
   lastSolo = settings;
-  markLocalGame({ kind: 'solo', botLevel: settings.botLevel });
+  markLocalGame({ kind: 'solo', botLevel: settings.botLevel, contexte: settings.contexte });
   store.value?.leave();
   store.value = createGameStore(createLocalTransport({
     pseudo: PLAYER_NAME,
-    ...settings,
+    botLevel: settings.botLevel,
     seed,
-    // An achievement can add a hero to choose from: in this page only.
-    game: { heroChoices: { [HUMAN_SEAT]: achievements.heroChoices.value } },
+    game: { contextId: settings.contexte },
   }));
 }
 
@@ -88,7 +88,7 @@ function resume(): void {
   const mark = interrupted.value;
   interrupted.value = null;
   if (!mark) return;
-  if (mark.kind === 'solo') startSolo({ botLevel: mark.botLevel ?? 'facile' });
+  if (mark.kind === 'solo') startSolo({ botLevel: mark.botLevel ?? 'facile', contexte: mark.contexte ?? RANDOM_CONTEXT });
   else elsewhere.value = mark.kind === 'carriere' ? 'story' : 'tutorial';
 }
 

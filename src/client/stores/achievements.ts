@@ -3,7 +3,7 @@ import { browserStorage } from '#src/client/services/localProfile.ts';
 import type { ProfileStorage } from '#src/client/services/localProfile.ts';
 import { readProgress, readTitle, writeProgress, writeTitle } from '#src/client/services/progressStorage.ts';
 import type { Succes } from '#src/data/succes.ts';
-import { apresResultat, herosAuChoix, titres } from '#src/histoire/succes.ts';
+import { apresResultat, titres } from '#src/histoire/succes.ts';
 import type { Resultat } from '#src/histoire/succes.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 import type { Classement } from '#src/protocol/messages.ts';
@@ -24,7 +24,6 @@ export function createAchievements(storage: ProfileStorage | null = browserStora
   const earnedTitles = computed(() => titres(progress.value));
   /** A title shown only if it was earned here: a stored one may come from an older board. */
   const title = computed(() => (chosenTitle.value && earnedTitles.value.includes(chosenTitle.value) ? chosenTitle.value : null));
-  const heroChoices = computed(() => herosAuChoix(progress.value));
 
   function startGame(): void {
     fresh.value = [];
@@ -49,7 +48,7 @@ export function createAchievements(storage: ProfileStorage | null = browserStora
     writeTitle(next, storage);
   }
 
-  return { progress, fresh, title, earnedTitles, heroChoices, startGame, record, recordGame, chooseTitle };
+  return { progress, fresh, title, earnedTitles, startGame, record, recordGame, chooseTitle };
 }
 
 export type Achievements = ReturnType<typeof createAchievements>;

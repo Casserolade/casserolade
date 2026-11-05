@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<{
   tier: number;
   campLabel?: string;
   locked?: boolean;
+  bracelet?: boolean;
   copies?: number;
   /** Casseroles not yet forgotten, toward a scandal. */
   charges?: number;
@@ -29,7 +30,7 @@ const stars = computed(() => tripleStars(props.copies));
   <span class="chips">
     <span class="chip tier"><AppIcon name="tier" /><span class="sr-only">Échelon </span>{{ tier }}</span>
     <span v-if="campLabel" class="chip">{{ campLabel }}</span>
-    <span v-if="locked" class="chip"><AppIcon name="lock" /><span class="sr-only">Ne bouge plus</span></span>
+    <span v-if="locked" class="chip"><GameIcon v-if="bracelet" name="bracelet" /><AppIcon v-else name="lock" /><span class="sr-only">{{ bracelet ? 'Sous bracelet : ni déplacé ni renvoyé avant la prochaine manche' : 'Ne bouge plus' }}</span></span>
     <span v-if="scandalLeft > 0" class="chip scandal">Scandale {{ scandalLeft }}<span class="sr-only"> manches avant l'oubli</span></span>
     <span v-else-if="charges > 0" class="chip danger"><GameIcon name="pan" /> {{ charges }}/{{ scandalThreshold }}<span class="sr-only"> casseroles avant le scandale</span></span>
     <span v-if="copies > 0" class="chip stars" :class="{ ready: copies >= 2 }" :title="`${copies} sur 3 vers le triple`">
