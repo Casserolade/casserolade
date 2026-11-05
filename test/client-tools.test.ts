@@ -628,3 +628,22 @@ test('dropGuideLabel says when the board is full, and how many places it has', a
   assert.equal(dropGuideLabel({ mode: 'play', armed: true, amount: 0, blocked: 'board', places: 6 }), 'Plateau plein : 6 places');
   assert.equal(dropGuideLabel({ mode: 'sell', armed: true, amount: 1, blocked: 'bracelet' }), 'Sous bracelet');
 });
+
+test('distanceToBox is 0 inside the box, the straight or diagonal gap outside it', async () => {
+  const { distanceToBox } = await import('../src/client/tools/distanceToBox.ts');
+  const box = { left: 0, right: 10, top: 0, bottom: 10 };
+  assert.equal(distanceToBox(box, { x: 5, y: 5 }), 0);
+  assert.equal(distanceToBox(box, { x: 10, y: 0 }), 0);
+  assert.equal(distanceToBox(box, { x: 13, y: 5 }), 3);
+  assert.equal(distanceToBox(box, { x: -3, y: -4 }), 5);
+});
+
+test('suitcaseFlight goes from the middle of the hand to the middle of the link, longer and higher when far', async () => {
+  const { suitcaseFlight } = await import('../src/client/tools/suitcaseFlight.ts');
+  const hand = { left: 90, top: 190, width: 20, height: 20 };
+  const near = suitcaseFlight(hand, { left: 150, top: 150, width: 100, height: 40 });
+  assert.deepEqual([near.x, near.y, near.dx, near.dy], [100, 200, 100, -30]);
+  const far = suitcaseFlight(hand, { left: 900, top: 150, width: 100, height: 40 });
+  assert.ok(far.lift > near.lift && near.lift >= 70);
+  assert.ok(far.seconds > near.seconds && far.seconds <= 0.95 && near.seconds >= 0.45);
+});
