@@ -115,6 +115,7 @@ function react(then: () => void): void {
         <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
         <a class="version" href="https://github.com/casserolade/casserolade/blob/main/CHANGELOG.md" title="Ce qui a changé">v{{ VERSION }}</a>
         <a href="/a-propos#contribuer">Contribuer</a>
+        <a href="https://ko-fi.com/casserolade">Soutenir sur Ko-fi</a>
       </nav>
     </div>
     <ChasingReporter :host-id="hostId" :reactions="reactions" />
