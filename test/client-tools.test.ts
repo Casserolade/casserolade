@@ -12,6 +12,15 @@ import { MEDALLION_LAYOUT } from '../src/client/const/medallionLayout.ts';
 import { cssImage } from '../src/client/tools/cssImage.ts';
 import { fittedNameSize } from '../src/client/tools/fittedNameSize.ts';
 import { orderWithCorpses } from '../src/client/tools/orderWithCorpses.ts';
+import { heroQuotes } from '../src/client/tools/heroQuotes.ts';
+import { nextQuote } from '../src/client/tools/nextQuote.ts';
+import { healthTone } from '../src/client/tools/healthTone.ts';
+import { sourceMatches } from '../src/client/tools/sourceMatches.ts';
+import { pickOne } from '../src/client/tools/pickOne.ts';
+import { chaseStep } from '../src/client/tools/chaseStep.ts';
+import { chaseMood, RESTED } from '../src/client/tools/chaseMood.ts';
+import { otherFaces } from '../src/client/tools/otherFaces.ts';
+import type { FaceTextures } from '../src/client/pixi/loadCombatTextures.ts';
 import { puppetStyle } from '../src/client/tools/puppetStyle.ts';
 import { samplePose } from '../src/client/tools/samplePose.ts';
 import { sheetSpriteStyle } from '../src/client/tools/sheetSpriteStyle.ts';
@@ -272,6 +281,15 @@ test('puppetStyle puts the chin on the neck, as the rig does', () => {
   assert.equal(Number(style['--atlas-width']), 200 * RIG_LAYOUT.headScale);
 });
 
+test('puppetStyle wears another face when the character has it, and its own face otherwise', () => {
+  const own = ART_MANIFEST.personnages.tiberi;
+  const shocked = { ...own, atlas: 'personnages/tiberi.choc.webp', ancres: { ...own.ancres, menton: [50, 170] as [number, number] } };
+  const manifest: GameManifest = { ...ART_MANIFEST, personnages: { tiberi: { ...own, visages: { choc: shocked } } } };
+  assert.equal(puppetStyle(manifest, 'tiberi', 'civile', 'choc')['--atlas-image'], 'url("/personnages/tiberi.choc.webp")');
+  assert.equal(puppetStyle(manifest, 'tiberi', 'civile', 'rire')['--atlas-image'], puppetStyle(manifest, 'tiberi', 'civile')['--atlas-image']);
+  assert.notEqual(puppetStyle(manifest, 'tiberi', 'civile', 'choc')['--head-top'], puppetStyle(manifest, 'tiberi', 'civile')['--head-top']);
+});
+
 test('puppetStyle without a photo gives a body and no head', () => {
   const style = puppetStyle(ART_MANIFEST, 'suppleant', 'civile');
   assert.equal(style['--atlas-image'], undefined);
@@ -502,4 +520,85 @@ test('la ligne du comptoir dit ce que fait le lâcher : acheter, vendre, ou pour
   const sell = dropGuideFor(fromBoard, view);
   assert.deepEqual(sell, { mode: 'sell', armed: true, amount: PARAMS.sellValue, blocked: null });
   assert.equal(dropGuideLabel(sell as never), 'Vendre');
+});
+
+test('a character wears only the other faces that have both their anchors and their images', () => {
+  const face = { atlas: 'personnages/x.rire.webp', pieces: { tete: { x: 0, y: 0, w: 1, h: 1 }, machoire: { x: 0, y: 0, w: 1, h: 1, pose: [0, 0], pivot: [0, 0] } },
+    ancres: { oeil_g: [0, 0, 1], oeil_d: [0, 0, 1], bouche: [0, 0], menton: [0, 0] } } as NonNullable<GameManifest['personnages'][string]['visages']>[string];
+  const art = { ...face, atlas: 'personnages/x.webp', visages: { rire: face, aie: face } };
+  const images = { head: 'head', jaw: 'jaw' } as unknown as FaceTextures;
+  const faces = otherFaces(art, { rire: images, colere: images });
+  assert.deepEqual(Object.keys(faces), ['rire']);
+  assert.equal(faces.rire.art, face);
+  assert.deepEqual(otherFaces(undefined, { rire: images }), {});
+});
+
+test('nextQuote draws another line, never the one just shown when there is a choice', () => {
+  const lines = ['A', 'B', 'C'];
+  for (const roll of [0, 0.4, 0.99]) assert.notEqual(nextQuote(lines, 'B', roll), 'B');
+  assert.equal(nextQuote(['Seule'], 'Seule', 0.5), 'Seule');
+  assert.equal(nextQuote([], null, 0.5), null);
+  assert.deepEqual(new Set([0, 0.5, 0.99].map((roll) => nextQuote(lines, null, roll))), new Set(lines));
+});
+
+test('heroQuotes gives a hero several real lines to say, none too long for the selection screen', () => {
+  const quotes = heroQuotes('melenchon');
+  assert.ok(quotes.length > 1);
+  assert.ok(quotes.every((line) => line.length <= 110));
+  assert.equal(new Set(quotes).size, quotes.length);
+});
+
+test('healthTone: wounded below its highest health of the combat is red, even above the card\'s own value', () => {
+  assert.equal(healthTone('up', 6, 8), 'down');
+  assert.equal(healthTone('up', 8, 8), 'up');
+  assert.equal(healthTone('base', 3, 3), 'base');
+  assert.equal(healthTone('down', 1, 3), 'down');
+});
+
+test('sourceMatches finds every word of the search, in any order, without accents', () => {
+  const line = 'Valérie Pécresse : « Les sondages, ça va et vient » (2022)';
+  assert.ok(sourceMatches(line, 'pecresse sondages'));
+  assert.ok(sourceMatches(line, 'SONDAGES   Pécresse'));
+  assert.ok(sourceMatches(line, ''));
+  assert.ok(!sourceMatches(line, 'pecresse homards'));
+});
+
+test('pickOne chooses by its roll, every item reachable, none from an empty list', () => {
+  assert.equal(pickOne(['a', 'b', 'c'], 0), 'a');
+  assert.equal(pickOne(['a', 'b', 'c'], 0.5), 'b');
+  assert.equal(pickOne(['a', 'b', 'c'], 0.999), 'c');
+  assert.equal(pickOne([], 0.5), null);
+});
+
+test('chaseStep runs toward the target, faster the further it is, faces its way, never overshoots, and stops when close', () => {
+  const start = { x: 0, y: 0, facing: 1, running: false, speed: 0 };
+  const near = chaseStep(start, { x: -200, y: 0 }, 0.1);
+  const far = chaseStep(start, { x: -2000, y: 0 }, 0.1);
+  assert.ok(near.running && near.x < 0, 'runs left');
+  assert.equal(near.facing, -1, 'faces left');
+  assert.ok(far.x < near.x && far.speed > near.speed, 'it sprints when far behind');
+  assert.ok(chaseStep(start, { x: 300, y: 0 }, 10).x < 300, 'never past the target');
+  const close = chaseStep({ ...start, x: 290 }, { x: 300, y: 0 }, 0.1);
+  assert.equal(close.running, false);
+  assert.equal(close.x, 290);
+  // No stop-and-go with the mouse close by: standing, it waits for a real gap before setting off.
+  assert.equal(chaseStep({ ...start, x: 240 }, { x: 300, y: 0 }, 0.1).running, false, 'standing, 60 px away: it waits');
+  assert.equal(chaseStep({ ...start, x: 240, running: true }, { x: 300, y: 0 }, 0.1).running, true, 'running, 60 px away: it goes on');
+  assert.equal(chaseStep({ ...start, facing: 1 }, { x: -10, y: 300 }, 0.1).facing, 1, 'a few pixels sideways: no turning round');
+});
+
+test('chaseMood: it sweats after a long run, flops down when it stops, and sits when bored', () => {
+  let mood = RESTED;
+  mood = chaseMood(mood, true, 0.5);
+  assert.equal(mood.sweating, false);
+  mood = chaseMood(mood, true, 0.7);
+  assert.equal(mood.sweating, false, 'a second and a bit: not yet');
+  mood = chaseMood(mood, true, 0.6);
+  assert.equal(mood.sweating, true, 'a long run: sweat');
+  mood = chaseMood(mood, false, 0.05);
+  assert.equal(mood.sitting, true, 'pouf, it sits');
+  assert.equal(chaseMood(mood, true, 0.05).sitting, false, 'up again to run');
+  const short = chaseMood(chaseMood(RESTED, true, 0.5), false, 0.05);
+  assert.equal(short.sitting, false, 'a short dash: it stays up');
+  assert.equal(chaseMood(short, false, 5).sitting, true, 'bored: it sits');
 });

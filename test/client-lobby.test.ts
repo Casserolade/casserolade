@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { buildInviteLink } from '../src/client/tools/buildInviteLink.ts';
 import { readInviteCode } from '../src/client/tools/readInviteCode.ts';
 import { cardRulesLines } from '../src/client/tools/cardRulesLines.ts';
+import { longTextBonusMs } from '../src/client/tools/longTextBonusMs.ts';
 import { readingDelayMs } from '../src/client/tools/readingDelayMs.ts';
 import { rivalLineForCombat } from '../src/client/tools/rivalLineForCombat.ts';
 import { pollsBase } from '../src/client/tools/pollsBase.ts';
@@ -58,10 +59,15 @@ test('cardRulesLines : le texte du politique s\'affiche en combat, mots-clés en
   }
 });
 
-test('readingDelayMs : assez pour lire, jamais longtemps', () => {
+test('readingDelayMs : assez pour lire, jamais longtemps, et une demi-seconde de plus pour un texte long', () => {
   assert.equal(readingDelayMs('Perdu.'), 2000);
-  assert.equal(readingDelayMs('x'.repeat(100)), 4500);
-  assert.equal(readingDelayMs('x'.repeat(1000)), 6000);
+  assert.equal(readingDelayMs('x'.repeat(100)), 4500 + 500);
+  assert.equal(readingDelayMs('x'.repeat(1000)), 6000 + 500);
+});
+
+test('longTextBonusMs : rien pour une ligne courte, une demi-seconde au-delà de deux lignes', () => {
+  assert.equal(longTextBonusMs('x'.repeat(64)), 0);
+  assert.equal(longTextBonusMs('x'.repeat(65)), 500);
 });
 
 test('storyLineDelayMs : laisse lire le tutoriel, sans dépasser 12 secondes', () => {
