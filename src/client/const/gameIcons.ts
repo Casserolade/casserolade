@@ -26,6 +26,8 @@ export const GAME_ICONS = {
   chevrons: 'M4.4 4.5 11.9 12l-7.5 7.5-2-2L7.9 12 2.4 6.5Zm8.7 0 7.5 7.5-7.5 7.5-2-2 5.5-5.5-5.5-5.5Z',
   magnet: 'M4 3h5v7.5a3 3 0 0 0 6 0V3h5v7.5a8 8 0 0 1-16 0Zm1.6 1.6v2.2h1.8V4.6Zm11 0v2.2h1.8V4.6Z',
   /** An ankle monitor: the strap round the ankle, the box in front, its light. */
+  /** A briefcase, its lid and its base split by a band: the suitcase of banknotes of the Ko-fi link. */
+  suitcase: 'M8.5 6.5V4.2c0-.7.5-1.2 1.2-1.2h4.6c.7 0 1.2.5 1.2 1.2v2.3h-1.8V4.8h-3.4v1.7ZM3 6.5h18a1.5 1.5 0 0 1 1.5 1.5v11a1.5 1.5 0 0 1-1.5 1.5H3A1.5 1.5 0 0 1 1.5 19V8A1.5 1.5 0 0 1 3 6.5ZM1.5 12h21v1.4h-21ZM10.6 12h2.8v1.4h-2.8Z',
   bracelet: 'M2 13a10 7 0 0 1 20 0h-2.4a7.6 4.8 0 0 0-15.2 0ZM2 13a10 7 0 0 0 5 6.06v-2.46a7.6 4.8 0 0 1-2.6-3.6ZM22 13a10 7 0 0 1-5 6.06v-2.46a7.6 4.8 0 0 0 2.6-3.6ZM7 10h10v9.5H7Zm3.8 2.5v2.4h2.4v-2.4Z',
   /** A casserole seen from above, its handle to the right. */
   pan: 'M9 6a7 7 0 1 0 0 14A7 7 0 1 0 9 6Zm0 2.6a4.4 4.4 0 1 1 0 8.8 4.4 4.4 0 0 1 0-8.8Zm7.3 2.5 6.2-2 .7 2.2-6.3 2Z',

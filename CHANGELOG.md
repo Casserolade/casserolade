@@ -33,6 +33,7 @@
 
 **Le site**
 - On peut soutenir le projet sur [Ko-fi](https://ko-fi.com/casserolade) : le lien est sur l'accueil, dans le bestiaire et sur la page À propos. Le jeu reste gratuit, sans publicité ni inscription.
+- Sur l'accueil, approchez la souris de « Financer la campagne » : l'animateur qui vous court après sort une valise de billets et la lance dedans.
 
 ## 0.1b — 5 novembre 2026
 

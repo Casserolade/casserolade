@@ -7,6 +7,7 @@ import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import SoundControl from '#src/client/components/atoms/SoundControl.vue';
 import RoomForm from '#src/client/components/molecules/RoomForm.vue';
 import SoloForm from '#src/client/components/molecules/SoloForm.vue';
+import TipLink from '#src/client/components/molecules/TipLink.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import { savePseudo, savedPseudo } from '#src/client/services/localProfile.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
@@ -60,6 +61,8 @@ function react(then: () => void): void {
   reactions.value++;
   window.setTimeout(then, REACTION_DELAY_MS);
 }
+/** The suitcases of banknotes it has thrown into the Ko-fi link: the link jolts at each one. */
+const suitcases = ref(0);
 
 // No greeting on arrival: Macron's shout is only the logo's easter egg (5 November 2026).
 </script>
@@ -109,16 +112,16 @@ function react(then: () => void): void {
         <AppButton :primary="newcomer" :class="{ beckon: newcomer }" @click="react(() => emit('tutorial'))"><GameIcon name="sparkle" /> {{ newcomer ? 'Première fois ? Le tutoriel' : 'Tutoriel' }}</AppButton>
         <AppButton @click="emit('achievements')"><GameIcon name="star" /> Succès<span v-if="achievements" class="count">{{ achievements }}</span></AppButton>
         <AppButton href="/bestiaire" target="_blank"><GameIcon name="skull" /> Le bestiaire</AppButton>
+        <TipLink :caught="suitcases" />
       </nav>
       <nav class="links" aria-label="Le projet">
         <a href="/a-propos">À propos</a>
         <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
         <a class="version" href="https://github.com/casserolade/casserolade/blob/main/CHANGELOG.md" title="Ce qui a changé">v{{ VERSION }}</a>
         <a href="/a-propos#contribuer">Contribuer</a>
-        <a href="https://ko-fi.com/casserolade">Soutenir sur Ko-fi</a>
       </nav>
     </div>
-    <ChasingReporter :host-id="hostId" :reactions="reactions" />
+    <ChasingReporter :host-id="hostId" :reactions="reactions" @delivered="suitcases++" />
   </MenuBackdrop>
 </template>
 
@@ -159,7 +162,7 @@ h2 { color: #fff; font: 400 1.85rem / 1.05 var(--font-number); text-wrap: balanc
 .mode :deep(.app-button) { white-space: nowrap; font-size: 1.45rem; }
 .mode p { color: #c9cfdc; font-size: 1.02rem; line-height: 1.3; }
 .mode p strong { color: #ffe27a; letter-spacing: 0.1em; }
-.extras { display: flex; gap: 1rem; }
+.extras { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; }
 .links a { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
 .links a:hover, .links a:focus-visible { color: var(--color-text); }

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import MoneySuitcase from '#src/client/components/atoms/MoneySuitcase.vue';
 import PaperPuppet from '#src/client/components/atoms/PaperPuppet.vue';
+import FlyingSuitcase from '#src/client/components/molecules/FlyingSuitcase.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { usePuppetFaces } from '#src/client/stores/usePuppetFaces.ts';
+import { useSuitcaseThrow } from '#src/client/stores/useSuitcaseThrow.ts';
 import { chaseMood, RESTED } from '#src/client/tools/chaseMood.ts';
 import type { ChaseMood } from '#src/client/tools/chaseMood.ts';
 import { chaseStep } from '#src/client/tools/chaseStep.ts';
@@ -19,10 +22,12 @@ const SWEAT_DROPS = 2;
  * The home page's reporter: the host of the TV set behind. It comes out from behind the logo and runs after
  * the mouse at its one plodding pace,
  * arms flailing, body rocking, head wobbling. After a long run it sweats; when it stops, pouf, it sits, and gets
- * up again to run. `reactions` counts the game modes clicked: at each one it pulls a face and jumps.
+ * up again to run. `reactions` counts the game modes clicked: at each one it pulls a face and jumps. Near the
+ * Ko-fi link, it throws a suitcase of banknotes into it (useSuitcaseThrow.ts), and says when it has `delivered`.
  * Only with a mouse, and never when the player asked for less motion.
  */
 const props = defineProps<{ hostId: string; reactions: number }>();
+const emit = defineEmits<{ delivered: [] }>();
 
 const faces = usePuppetFaces();
 const puppet = computed(() => puppetStyle(gameArt.manifest.value, props.hostId, 'civile', faces.face.value));
@@ -41,9 +46,18 @@ let target = { x: chaser.value.x, y: chaser.value.y };
 let frame = 0;
 let last = 0;
 let jumpTimer = 0;
+/** The suitcase in its hand, measured when it lets go. */
+const hand = ref<HTMLElement | null>(null);
+const { phase, aim, flight, notice, deliver, clearFlight } = useSuitcaseThrow({
+  reporterX: () => chaser.value.x,
+  hand: () => hand.value?.getBoundingClientRect() ?? null,
+  onDelivered: () => emit('delivered'),
+});
 
 function follow(event: PointerEvent): void {
-  if (event.pointerType === 'mouse') target = { x: event.clientX + OFFSET.x, y: event.clientY + OFFSET.y };
+  if (event.pointerType !== 'mouse') return;
+  target = { x: event.clientX + OFFSET.x, y: event.clientY + OFFSET.y };
+  notice({ x: event.clientX, y: event.clientY });
 }
 
 function tick(now: number): void {
@@ -95,7 +109,7 @@ onUnmounted(() => {
   <div
     v-if="enabled"
     class="reporter"
-    :class="{ running: chaser.running, sitting: mood.sitting && !chaser.running, sweating: mood.sweating, jumping, left: chaser.facing < 0 }"
+    :class="{ running: chaser.running, sitting: mood.sitting && !chaser.running, sweating: mood.sweating, jumping, holding: phase !== 'idle', throwing: phase === 'throwing', left: (aim || chaser.facing) < 0 }"
     :style="{ translate: `${chaser.x}px ${chaser.y}px`, '--stride': `${stride}s` }"
     aria-hidden="true"
   >
@@ -108,10 +122,11 @@ onUnmounted(() => {
       <span class="piece torso"><span class="cut" /></span>
       <span class="piece leg near"><span class="cut" /></span>
       <span class="puppet-head"><PaperPuppet :puppet="puppet" name="" /></span>
-      <span class="piece arm near"><span class="cut" /><span class="mic" /></span>
+      <span class="piece arm near"><span class="cut" /><span class="mic" /><span ref="hand" class="in-hand"><MoneySuitcase /></span></span>
       <span class="sweat"><i v-for="n in SWEAT_DROPS" :key="n" :style="{ '--n': n }" /></span>
     </span>
   </div>
+  <FlyingSuitcase v-if="enabled && flight" :flight="flight" @landed="deliver" @done="clearFlight" />
 </template>
 
 <style scoped>
@@ -180,4 +195,12 @@ onUnmounted(() => {
 
 .jumping .figure { animation: jump 0.6s cubic-bezier(0.3, 1.6, 0.5, 1); }
 @keyframes jump { 40% { translate: 0 calc(var(--u) * -170); scale: 1.15; rotate: -10deg; } }
+
+/* The suitcase of banknotes, out of nowhere, in place of the mic; then the arm winds back and flings it over its head. */
+.in-hand { position: absolute; left: 84%; top: 56%; width: calc(var(--u) * 145); translate: -50% -30%; scale: 0; transition: scale 0.25s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.holding .in-hand { scale: 1; }
+.holding .mic { visibility: hidden; }
+.holding .arm.near { animation: none; rotate: 35deg; }
+.throwing .arm.near { animation: fling 0.24s ease-in forwards; }
+@keyframes fling { from { rotate: 70deg; } to { rotate: -150deg; } }
 </style>
