@@ -26,7 +26,7 @@ from test_style_cnews import soignee as cnews_soignee  # noqa: E402
 from studio_kit import (LOGO_FONT, ROOT, TEXT_FONT, area, audience, beam, box, chair, curtain, cylinder, fitted_font, glow,  # noqa: E402
                         leaf_cluster, panel, picture, point, rgb, sphere, spot, surface, text_image, torus)
 
-# Plus grand que la table (1920×1080) : des marges pour les écrans qui ne sont pas en 16:9 (docs/09, section 2.4).
+# Plus grand que la table (1920×1080) : des marges pour les écrans qui ne sont pas en 16:9.
 # Le cadre de la table reste celui d'un 22 mm, au centre de l'image.
 TABLE_WIDTH = 1920
 WIDTH, HEIGHT = 2560, 1440

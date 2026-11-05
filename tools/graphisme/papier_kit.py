@@ -1,10 +1,10 @@
 """Le papier découpé façon South Park, dans Blender : des pièces plates, étagées, et leurs ombres courtes.
 
-Recette (docs/09-rendu-et-blender.md, section 2.2, piste B) : des formes plates de l'épaisseur du papier,
+Recette, piste B : des formes plates de l'épaisseur du papier,
 un grain léger, étagées de quelques centimètres, une seule lumière douce en haut à gauche. Les ombres entre
 les couches font le style. Les formes se donnent en pixels de la table, 1920×1080 : 1 unité Blender = 100 px.
 L'image rendue est plus grande (2560×1440) : 320 px de marge à gauche et à droite, 180 en haut et en bas,
-pour les écrans qui ne sont pas en 16:9 (docs/09-rendu-et-blender.md, section 2.4).
+pour les écrans qui ne sont pas en 16:9.
 """
 import math
 

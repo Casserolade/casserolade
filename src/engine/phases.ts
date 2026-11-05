@@ -12,8 +12,7 @@
  * Dans chaque phase, les actions permises (applyAction refuse les autres, sans rien changer) :
  *   choix_heros : « hero » ; recrutement : toutes les autres, et seulement « discover » tant qu'un choix
  *   attend ; combat et fini : aucune.
- * Les états d'un joueur, d'un politique et d'une casserole sont décrits dans docs/12-moteur.md, et
- * vérifiés par invariants.ts.
+ * Les états d'un joueur, d'un politique et d'une casserole sont vérifiés par invariants.ts.
  */
 import type { Game, GamePhase } from './state.ts';
 

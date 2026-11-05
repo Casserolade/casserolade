@@ -1,4 +1,4 @@
-"""Le test de style des plateaux (docs/09-rendu-et-blender.md, livrable 1) : CNews, en deux pistes.
+"""Le test de style des plateaux : CNews, en deux pistes.
 
   uv run --no-project --python 3.11 --with bpy --with pillow python tools/graphisme/test_style_cnews.py papier|soignee [--samples 96]
 

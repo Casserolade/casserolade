@@ -4,7 +4,7 @@
  *
  * La même source de vérité sert au fuzz (test/fuzzHarness.ts, qui exige une liste vide après chaque
  * action) et au serveur, qui la vérifie à chaque manche et signale toute anomalie avec le journal
- * de la partie, pour la rejouer (docs/12-moteur.md).
+ * de la partie, pour la rejouer (tools/rejouer.ts).
  */
 import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';

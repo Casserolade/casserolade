@@ -1,7 +1,7 @@
 import type { Camp, Card, Counter, Effect, Keyword, ShopPick, Target, Trigger } from '../engine/types.ts';
 
 /**
- * Les cartes, deuxième version (docs/gameplay/cartes.md). Une carte est une ligne de données :
+ * Les cartes, deuxième version. Une carte est une ligne de données :
  * stats, mots-clés, et des effets « déclencheur × cible × action × valeur ».
  * Aucune carte ne donne de bonus passif aux voisins du même camp : les camps se parlent par leurs textes.
  */
@@ -50,7 +50,7 @@ export const TOKENS: Record<string, Card> = {
 /**
  * L'échelon suit la notoriété : les inconnus d'abord, les poids lourds à la fin. Comme dans Battlegrounds, chaque
  * camp a deux politiques à l'échelon 1, trois ou quatre au 2, et deux à l'échelon 5 (refonte du 5 novembre 2026,
- * mesurée carte par carte : node src/sim/bilan_cartes.ts, docs/04).
+ * mesurée carte par carte : node src/sim/bilan_cartes.ts).
  */
 export const CARDS: Card[] = [
   // Insoumis : la rue. Les Tracts, sorts gratuits qu'on améliore pour la partie.
@@ -193,7 +193,7 @@ export const CARDS: Card[] = [
   card('bay', 'Nicolas Bay', 'reconquete', 2, 4, 4, { fx: [fx('annonce', 'joueur', { do: 'actualisations_gratuites', value: 3 })] }),
   card('dupont_aignan', 'Nicolas Dupont-Aignan', 'reconquete', 2, 3, 3, { kw: ['vedette'], fx: [fx('actualise', 'soi', buff(1, 1)), fx('celebration', 'joueur', { do: 'actualisations_gratuites', value: 1 })] }),
   // Le stratège numérique de Zemmour, et la cellule WikiZédia : chaque actualisation du fil le fait monter.
-  // Il réécrivait aussi chaque boutique (congrès) : Reconquête gagnait une partie sur trois, retiré le 3 novembre 2026 (docs/13).
+  // Il réécrivait aussi chaque boutique (congrès) : Reconquête gagnait une partie sur trois, retiré le 3 novembre 2026.
   card('lafont', 'Samuel Lafont', 'reconquete', 1, 2, 3, { fx: [fx('actualise', 'soi', buff(2, 0))] }),
   // Maire d'Orange après son père, condamné pour un emploi de collaborateur parlementaire.
   card('yann_bompard', 'Yann Bompard', 'reconquete', 1, 3, 3, { fx: [fx('annonce', 'soi', invoque('assistant_fictif'))] }),

@@ -216,7 +216,7 @@ export const CASSEROLES: Casserole[] = [
     name: 'Blanchiment',
     owner: 'balkany',
     cost: 3,
-    // Retour et du budget à chaque manche, sans défaut : la meilleure casserole de loin (place 3,05). Le budget est retiré (docs/13).
+    // Retour et du budget à chaque manche, sans défaut : la meilleure casserole de loin (place 3,05). Le budget est retiré.
     atk: 1,
     hp: 1,
     keywords: ['retour'],
