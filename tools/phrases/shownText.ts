@@ -8,13 +8,13 @@ export interface CollectedPhrase {
   sources?: string[];
   date?: string;
   contexte?: string;
-  /** The true words, confirmed by a source or by the user's ear: what the bubble shows. */
+  /** The true words, confirmed by a source or by ear: what the bubble shows. */
   texte_exact?: string;
   /** `transcription`: the words come from the speech recogniser, and wait for their true text. */
   texte_origine?: string;
-  /** Removed by the user on the review page: never shown again. */
+  /** Removed on the review page: never shown again. */
   vire?: boolean;
-  /** Waits for the user's decision (an editorial doubt): not shown until then. */
+  /** Waits for a decision (an editorial doubt): not shown until then. */
   a_trancher?: string;
 }
 

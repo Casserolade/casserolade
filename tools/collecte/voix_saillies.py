@@ -56,10 +56,10 @@ def saillies_par_cle():
 
 def texte_affiche(saillie):
     """Les vrais mots de la saillie, ceux que la bulle affiche ; None tant qu'un texte venu de la transcription
-    n'a pas été confirmé (par une source, ou par l'utilisateur à l'écoute), ou quand la saillie est virée ou
+    n'a pas été confirmé (par une source, ou à l'écoute), ou quand la saillie est virée ou
     à trancher. Jamais les mots de l'ASR tels quels."""
     if saillie.get("vire") or saillie.get("a_trancher"):
-        return None  # virée par l'utilisateur, ou en attente de sa décision
+        return None  # virée à la relecture, ou en attente de décision
     if saillie.get("texte_exact"):
         return saillie["texte_exact"]
     if saillie.get("texte_origine") == "transcription":

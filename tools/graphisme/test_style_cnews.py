@@ -4,7 +4,7 @@
 
 Les deux pistes gardent la même mise en page que le jeu : la table couvre le centre (x 300 à 1620, y 156 à 796),
 le pupitre de l'animateur le haut du milieu (x 560 à 1360). Le décor vit sur les bords et dans les coins.
-Retour de l'utilisateur, 3 novembre 2026 : les plateaux en 3D simple sont « moches ». L'utilisateur choisit la piste.
+Retour de partie, 3 novembre 2026 : les plateaux en 3D simple sont « moches ». La piste se choisit à l'œil.
 """
 import argparse
 import math
