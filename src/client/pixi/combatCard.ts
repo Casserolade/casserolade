@@ -1,9 +1,12 @@
 import { Container, Graphics, Sprite, Text } from 'pixi.js';
 import { CARD_LAYOUT } from '#src/client/const/cardLayout.ts';
-import { GAME_ICONS } from '#src/client/const/gameIcons.ts';
 import type { GameManifest } from '#src/client/const/gameManifest.ts';
 import { MEDALLION_LAYOUT } from '#src/client/const/medallionLayout.ts';
 import { CharacterRig } from '#src/client/pixi/characterRig.ts';
+import { MedallionDecor } from '#src/client/pixi/medallionDecor.ts';
+import { MEDALLION_MARGIN, MEDALLION_RESOLUTION } from '#src/client/pixi/medallionCanvas.ts';
+import { medallionFrameTexture } from '#src/client/pixi/medallionFrameTexture.ts';
+import type { Texture } from 'pixi.js';
 import { NUMBER_STYLE } from '#src/client/pixi/createCardDecor.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import { SheetEffect } from '#src/client/pixi/sheetEffect.ts';
@@ -37,72 +40,20 @@ const DISSOLVE_SECONDS = 0.75;
 const HIT_FACE_SECONDS = 0.7;
 /** A hit spins it round one time in two: the cut-out does not always land the same way. */
 const TURN_ON_HIT_CHANCE = 0.5;
-/** The Retour badge: where it sits on the frame, its disc and its arrow, in medallion units. */
-const COMEBACK = { x: 6, y: 18, radius: 18, arrow: 24 };
+/** A golden medallion's oval sits deeper in its thicker frame (`.golden .oval` in MedallionToken.vue). */
+const GOLDEN_OVAL_INSET = 9;
 
 interface RunningEffect {
   effect: SheetEffect;
   onFinished: (() => void) | null;
 }
 
-/** The keyword shapes around a medallion, redrawn when its keywords change. Returns the sashes, which keep moving. */
-function drawKeywords(layer: Container, keywords: Keyword[]): Graphics | null {
-  layer.removeChildren().forEach((child) => child.destroy());
-  let sashes: Graphics | null = null;
-  if (keywords.includes('immunite')) {
-    const bubble = new Graphics()
-      .ellipse(CX, CY, W / 2 + 13, H / 2 + 13).fill({ color: '#ffd650', alpha: 0.22 })
-      .ellipse(CX, CY, W / 2 + 13, H / 2 + 13).stroke({ width: 8, color: '#ffe68a', alpha: 0.95 })
-      .ellipse(CX, CY, W / 2 + 19, H / 2 + 19).stroke({ width: 6, color: '#ffd23a', alpha: 0.35 })
-      .ellipse(CX - 36, CY - 64, 24, 12).fill({ color: '#ffffff', alpha: 0.8 });
-    layer.addChild(bubble);
-  }
-  if (keywords.includes('polemique')) {
-    const slime = new Graphics().ellipse(CX, CY, W / 2 + 3, H / 2 + 3).stroke({ width: 6, color: '#7dff3a', alpha: 0.75 });
-    for (const [x, length] of [[48, 22], [76, 30], [104, 20]]) slime.roundRect(x - 6, H - 22, 12, length, 6).fill('#57d11c');
-    layer.addChild(slime);
-  }
-  if (keywords.includes('cumul')) {
-    sashes = new Graphics()
-      .ellipse(0, 0, W / 2 + 20, 18).stroke({ width: 6, color: '#2a55d6', alpha: 0.95 })
-      .ellipse(0, 12, W / 2 + 16, 15).stroke({ width: 6, color: '#e03a3a', alpha: 0.95 });
-    sashes.position.set(CX, H - 34);
-    layer.addChild(sashes);
-  }
-  if (keywords.includes('retour')) layer.addChild(drawComebackBadge());
-  if (keywords.includes('vedette')) {
-    const star = new Graphics().star(CX, -16, 5, 20, 9).fill('#ffd84a').stroke({ width: 3, color: '#3a2a00' });
-    layer.addChild(star);
-  }
-  return sashes;
-}
-
-/** The Retour badge, top left of the frame: a blue disc and the U-turn arrow of the board. */
-function drawComebackBadge(): Container {
-  const badge = new Container();
-  badge.addChild(new Graphics().circle(0, 0, COMEBACK.radius).fill('#2a7fe0').stroke({ width: 3, color: '#0c2a55' }));
-  const arrow = new Graphics().svg(`<svg viewBox="0 0 24 24"><path d="${GAME_ICONS.comeback}" fill="#ffffff" stroke="#0c2a55" stroke-width="1.6" stroke-linejoin="round"/></svg>`);
-  arrow.scale.set(COMEBACK.arrow / 24);
-  arrow.position.set(-COMEBACK.arrow / 2, -COMEBACK.arrow / 2);
-  badge.addChild(arrow);
-  badge.position.set(COMEBACK.x, COMEBACK.y);
-  return badge;
-}
-
-/** Behind the medallion: the lectern of the Porte-parole, the blue halo of the Retour. */
-function drawBackdrop(layer: Container, keywords: Keyword[]): void {
-  layer.removeChildren().forEach((child) => child.destroy());
-  if (keywords.includes('porte_parole')) {
-    const shield = [CX, -14, W + 20, 4, W + 20, 108, CX, H + 30, -20, 108, -20, 4];
-    layer.addChild(new Graphics().poly(shield).fill('#b9bfca').stroke({ width: 3, color: '#2a2f3a' }));
-    const inner = [CX, -6, W + 12, 9, W + 12, 104, CX, H + 20, -12, 104, -12, 9];
-    layer.addChild(new Graphics().poly(inner).fill('#3a2470'));
-  }
-  if (keywords.includes('retour')) {
-    const halo = new Graphics();
-    for (let i = 4; i >= 1; i--) halo.ellipse(CX, CY, W / 2 + i * 5, H / 2 + i * 5).fill({ color: '#50aaff', alpha: 0.12 });
-    layer.addChild(halo);
-  }
+/** A texture of medallionTextures.ts, placed over the medallion's own units. */
+function medallionSprite(texture: Texture): Sprite {
+  const sprite = new Sprite(texture);
+  sprite.scale.set(1 / MEDALLION_RESOLUTION);
+  sprite.position.set(-MEDALLION_MARGIN, -MEDALLION_MARGIN);
+  return sprite;
 }
 
 /** One unit on the combat stage: the same medallion as on the board, with its puppet and the effects playing on it. */
@@ -117,15 +68,14 @@ export class CombatCard {
   private readonly golden: boolean;
   private readonly rig: CharacterRig;
   private readonly body = new Container();
-  private readonly backdrop = new Container();
-  private readonly keywordLayer = new Container();
+  /** Lectern, halo, bubble, sashes, badges and marks: the same as on the table (MedallionToken.vue). */
+  private readonly decor: MedallionDecor;
   private readonly effectLayer = new Container();
   private readonly attackText: Text;
   private readonly healthText: Text;
   private readonly manifest: GameManifest;
   private readonly textures: CombatTextures;
-  private keywords: Keyword[] = [];
-  private sashes: Graphics | null = null;
+  private keywords: Keyword[] | null = null;
   private pans: Container[] = [];
   private running: RunningEffect[] = [];
   private delayed: { left: number; callback: () => void }[] = [];
@@ -168,12 +118,10 @@ export class CombatCard {
     this.rig.setHome(CARD_LAYOUT.feetX, CARD_LAYOUT.feetY);
     if (unit.scandal) this.rig.restOn('choc');
 
-    const ring = new Graphics()
-      .ellipse(CX, CY + 5, W / 2, H / 2).fill({ color: '#000000', alpha: 0.45 })
-      .ellipse(CX, CY, W / 2, H / 2).fill(unit.golden ? '#b8860b' : '#5a6274')
-      .ellipse(CX, CY - 2, W / 2 - 2, H / 2 - 3).fill(unit.golden ? '#ffd650' : '#c3c9d4');
-    const portrait = new Graphics().ellipse(CX, CY, W / 2 - RING, H / 2 - RING).fill(color).ellipse(CX, CY - 20, W / 2 - 22, H / 2 - 40).fill({ color: '#ffffff', alpha: 0.18 });
-    const mask = new Graphics().ellipse(CX, CY, W / 2 - RING, H / 2 - RING).fill('#ffffff');
+    // The same medallion as on the table (MedallionToken.vue): frame, oval and rays come from one texture.
+    const frame = medallionSprite(medallionFrameTexture({ color, golden: unit.golden, bothSides: unit.keywords.includes('ni_droite_ni_gauche') }));
+    const ovalInset = unit.golden ? GOLDEN_OVAL_INSET : RING;
+    const mask = new Graphics().ellipse(CX, CY, W / 2 - ovalInset, H / 2 - ovalInset).fill('#ffffff');
     const figure = new Container();
     figure.scale.set(figureScale);
     figure.position.set(figureX * figureScale, figureY * figureScale);
@@ -182,7 +130,8 @@ export class CombatCard {
 
     this.attackText = this.createStat(textures.attack, statSize / 2 - 12, H - statSize / 2 + 6);
     this.healthText = this.createStat(textures.health, W - statSize / 2 + 12, H - statSize / 2 + 6);
-    this.body.addChild(this.backdrop, ring, portrait, figure, mask, this.keywordLayer, this.createPans(unit.casseroles, textures));
+    this.decor = new MedallionDecor({ mic: textures.mic, golden: unit.golden });
+    this.body.addChild(this.decor.back, frame, figure, mask, this.decor.front, this.createPans(unit.casseroles, textures));
     this.body.pivot.set(CX, H);
     this.body.position.set(CX, H);
     this.view.addChild(this.body, this.attackText.parent as Container, this.healthText.parent as Container, this.effectLayer);
@@ -235,10 +184,9 @@ export class CombatCard {
     const tones = statTones(this.cardId, this.golden, unit.atk, unit.hp);
     this.attackText.style.fill = TONE_COLORS[tones.atk];
     this.healthText.style.fill = TONE_COLORS[healthTone(tones.hp, unit.hp, this.maxHp)];
-    if (unit.keywords.join() !== this.keywords.join()) {
+    if (this.keywords === null || unit.keywords.join() !== this.keywords.join()) {
       this.keywords = [...unit.keywords];
-      drawBackdrop(this.backdrop, this.keywords);
-      this.sashes = drawKeywords(this.keywordLayer, this.keywords);
+      this.decor.show(this.keywords, unit.effects);
     }
   }
 
@@ -409,7 +357,7 @@ export class CombatCard {
         this.spotlight.alpha = 0.85 + Math.sin(this.time * 6) * 0.15;
       }
     }
-    if (this.sashes) this.sashes.rotation = Math.sin(this.time * 3) * 0.12;
+    this.decor.update(this.time);
     this.pans.forEach((pan, index) => (pan.rotation = Math.sin(this.time * 2.8 + index * 1.7) * 0.18));
   }
 

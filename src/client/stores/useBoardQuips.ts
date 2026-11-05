@@ -6,8 +6,7 @@ import type { Minion } from '#src/engine/types.ts';
 
 /**
  * One bubble at a time over the board, gone by itself once read. The board as it first shows says nothing.
- * Silent: a politician is heard in its real voice only when it celebrates a victory (rule of the user,
- * 3 November 2026).
+ * Silent: a politician is heard in its real voice only when it celebrates a victory (rule of * 3 November 2026).
  */
 export function useBoardQuips(board: () => Minion[]) {
   const quip = shallowRef<BoardQuip | null>(null);
