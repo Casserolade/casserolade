@@ -1,3 +1,4 @@
+import { ralliesOnto } from '#src/client/tools/ralliesOnto.ts';
 import { sellGain } from '#src/client/tools/sellGain.ts';
 import type { Dragging } from '#src/client/stores/useTableGestures.ts';
 import type { PlayerView } from '#src/engine/game.ts';
@@ -19,8 +20,7 @@ export function dropGuideFor(drag: Dragging | null, view: PlayerView): DropGuide
   if (!drag) return null;
   const { item, aim } = drag;
   if (item.from === 'hand' && aim.zone === 'board' && view.board.length >= view.boardLimit) {
-    const rallies = item.minion.keywords.includes('ralliement') && aim.uid !== null;
-    if (!rallies) return { mode: 'play', armed: true, amount: 0, blocked: 'board', places: view.boardLimit };
+    if (!ralliesOnto(item.minion, aim.uid, view.board)) return { mode: 'play', armed: true, amount: 0, blocked: 'board', places: view.boardLimit };
   }
   if (item.from === 'board' || item.from === 'hand') {
     const blocked = item.minion.bracelet ? 'bracelet' : null;

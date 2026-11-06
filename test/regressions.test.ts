@@ -362,3 +362,25 @@ test('une place, un emplacement ou un uid non entier est refusé sans rien chang
   }
   assert.equal(JSON.stringify([p.board, p.hand, p.spells, p.budget]), before);
 });
+
+test('un Ralliement qui porte des casseroles ne rejoint pas un jeton ; sans casserole, si (fuzz du 6 novembre 2026)', () => {
+  // Graine 300017 : Lecornu, Ralliement, revenu en main avec ses casseroles, rejoignait un Électeur fantôme, et le jeton
+  // portait des casseroles, contre la règle : le serveur signalait l'anomalie.
+  const { game, p, buy, pose } = setup();
+  buy('tiberi');
+  const token = p.board.find((m) => m.token);
+  assert.ok(token, 'Tiberi invoque un Électeur fantôme');
+  buy('lecornu');
+  const lecornu = p.board.find((m) => m.cardId === 'lecornu') as Minion;
+  pose('blancos', lecornu);
+  p.board = p.board.filter((m) => m !== lecornu);
+  p.hand.push(lecornu);
+  const refused = applyAction(game, 0, { t: 'play', uid: lecornu.uid, onto: token.uid });
+  assert.deepEqual(refused, { ok: false, error: 'Un jeton ne peut pas porter de casserole.' });
+  assert.ok(p.hand.includes(lecornu), 'il reste en main');
+  assert.equal(applyAction(game, 0, { t: 'play', uid: lecornu.uid, onto: p.board.find((m) => m.cardId === 'tiberi')?.uid }).ok, true, 'sur un vrai politique, il se rallie');
+  buy('lecornu', true);
+  const clean = p.hand.find((m) => m.cardId === 'lecornu') as Minion;
+  assert.equal(applyAction(game, 0, { t: 'play', uid: clean.uid, onto: token.uid }).ok, true, 'sans casserole, il rejoint le jeton');
+  assert.equal(token.casseroles.length, 0);
+});

@@ -700,3 +700,21 @@ test('the home subtitles: the official one first, all short enough for one line 
   assert.equal(new Set(TAGLINES).size, TAGLINES.length, 'no duplicate');
   for (const tagline of TAGLINES) assert.ok(tagline.length <= 42, `${tagline} : ${tagline.length} caractères`);
 });
+
+test('ralliesOnto: a Ralliement joins an ally, but not a token while it carries casseroles', async () => {
+  const { ralliesOnto } = await import('../src/client/tools/ralliesOnto.ts');
+  const { makeMinion, makeToken } = await import('../src/engine/minion.ts');
+  const { CARD_BY_ID } = await import('../src/data/cards.ts');
+  const host = makeMinion(CARD_BY_ID.tiberi, 1);
+  const token = makeToken('electeur_fantome', 'republicains', 2);
+  const board = [host, token];
+  const lecornu = makeMinion(CARD_BY_ID.lecornu, 3);
+  assert.equal(ralliesOnto(lecornu, 1, board), true);
+  assert.equal(ralliesOnto(lecornu, 2, board), true, 'no casserole: a token is fine');
+  assert.equal(ralliesOnto(lecornu, null, board), false, 'between two allies, it takes its own place');
+  assert.equal(ralliesOnto(lecornu, 99, board), false);
+  const carrying = { ...lecornu, casseroles: ['blancos'] };
+  assert.equal(ralliesOnto(carrying, 1, board), true);
+  assert.equal(ralliesOnto(carrying, 2, board), false, 'a token never carries a casserole');
+  assert.equal(ralliesOnto(makeMinion(CARD_BY_ID.tiberi, 4), 1, board), false, 'not a Ralliement');
+});
