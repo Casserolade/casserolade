@@ -8,15 +8,21 @@ import type { Duplex } from 'node:stream';
 import { WebSocket, WebSocketServer } from 'ws';
 import { Lobby } from '../lobby/lobby.ts';
 import type { LobbyOptions } from '../lobby/lobby.ts';
+import { COUNTER_PATH } from '../protocol/counterEvent.ts';
+import type { CounterEvent } from '../protocol/counterEvent.ts';
 import type { ClientMessage, ServerMessage } from '../protocol/messages.ts';
 import { MAX_MESSAGE_BYTES, parseClientMessage } from '../protocol/parseClientMessage.ts';
 import type { Clock, RoomIncident } from './room.ts';
+import { counterEventLabel } from './counterEventLabel.ts';
+import { DASHBOARD_NAMES } from './dashboardNames.ts';
+import { handleCounter } from './handleCounter.ts';
+import type { CounterHandling } from './handleCounter.ts';
 import { openMmrFile } from './mmrFile.ts';
 import type { MmrFile } from './mmrFile.ts';
 import { serveStatic } from './serveStatic.ts';
 import { LiveMetrics } from './liveMetrics.ts';
 import { SiteStats } from './siteStats.ts';
-import type { LiveStats } from './siteStats.ts';
+import type { LiveStats, StatsSnapshot } from './siteStats.ts';
 import { statsPage } from './statsPage.ts';
 import { TokenBucket } from './tokenBucket.ts';
 
@@ -34,6 +40,9 @@ export interface ServerLimits {
   /** Room creations and join or resume attempts per address, which also slows down code guessing. */
   roomRequestBurst: number;
   roomRequestsPerMinute: number;
+  /** Events of the counter per address: a page sends one, a game two. */
+  counterBurst: number;
+  counterPerMinute: number;
   maxRooms: number;
   /** Bad or excessive messages tolerated before closing the connection. */
   maxStrikes: number;
@@ -51,6 +60,8 @@ export const DEFAULT_LIMITS: ServerLimits = {
   addressPerSecond: 60,
   roomRequestBurst: 20,
   roomRequestsPerMinute: 20,
+  counterBurst: 30,
+  counterPerMinute: 12,
   maxRooms: 500,
   maxStrikes: 30,
   heartbeatMs: 30_000,
@@ -80,7 +91,7 @@ export interface GameServerOptions {
   incidentsDir?: string;
   /** The deployed commit (the VERSION file of the image): an incident is replayed with the engine it happened on. */
   version?: string;
-  /** JSON file of the daily statistics (visits, games, incidents), on the private volume. */
+  /** JSON file of the daily statistics (visitors, games, incidents), on the private volume. */
   statsFile?: string;
   /** The secret of the statistics page, /stats/<token>. Without it, there is no such page. */
   statsToken?: string;
@@ -95,13 +106,15 @@ const STATS_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'Content-Security-Policy': "default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'unsafe-inline'; frame-ancestors 'none'",
 };
-/** The dashboard's script, read once: plain JavaScript, no build, served next to the page. */
-const DASHBOARD_SCRIPT = readFileSync(new URL('./stats/tableau.js', import.meta.url), 'utf8');
+/** The dashboard's scripts, read once: plain JavaScript, no build, served next to the page. */
+const DASHBOARD_SCRIPTS = new Map(['tableau.js', 'frequentation.js'].map((name) => [name, readFileSync(new URL(`./stats/${name}`, import.meta.url), 'utf8')]));
 /** A handful of open dashboards at most: the stream is for the admin, not for the crowd. */
 const MAX_STATS_STREAMS = 5;
 const DAYS_EVERY_MS = 30_000;
-/** The pages a visit is counted on: the game, on a computer and on a phone. */
-const VISITED_PAGES = new Set(['/', '/index.html', '/m', '/m/', '/m/index.html']);
+/** The days the dashboard's stream carries: the table shows thirty, the totals come summed. */
+const STREAMED_DAYS = 60;
+/** The container's health check asks here, and is counted nowhere. */
+export const HEALTH_PATH = '/sante';
 
 const HEURE_DE_PARIS = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'medium' });
 
@@ -119,6 +132,7 @@ interface AddressState {
   connections: number;
   messages: TokenBucket;
   roomRequests: TokenBucket;
+  counter: TokenBucket;
   lastSeenAt: number;
 }
 
@@ -144,6 +158,7 @@ export class GameServer {
   private readonly lobby: Lobby;
   private readonly mmrFile: MmrFile | null;
   private readonly stats: SiteStats;
+  private readonly counter: CounterHandling;
   private readonly live = new LiveMetrics();
   private sampler: NodeJS.Timeout | null = null;
   private readonly statsStreams = new Set<ServerResponse>();
@@ -154,7 +169,14 @@ export class GameServer {
     this.options = options;
     this.limits = { ...DEFAULT_LIMITS, ...options.limits };
     this.mmrFile = options.mmrFile ? openMmrFile(options.mmrFile) : null;
-    this.stats = new SiteStats({ file: options.statsFile ?? null, salt: randomUUID() });
+    this.stats = new SiteStats({ file: options.statsFile ?? null });
+    this.counter = {
+      allowedOrigins: options.allowedOrigins,
+      addressOf: (request) => this.clientAddress(request),
+      allow: (address) => this.allowCounterEvent(address),
+      record: (event) => this.recordCounterEvent(event),
+      recordRobot: () => this.stats.robot(),
+    };
     this.lobby = new Lobby({
       ...(this.mmrFile ? { mmr: this.mmrFile } : {}),
       ...options.lobby,
@@ -175,11 +197,19 @@ export class GameServer {
     const staticDir = options.staticDir ? resolve(options.staticDir) : null;
     this.http = createServer((request, response) => {
       if (this.serveStats(request, response)) return;
+      const path = new URL(request.url ?? '/', 'http://localhost').pathname;
+      if (path === HEALTH_PATH) {
+        response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' }).end('ok');
+        return;
+      }
+      if (path === COUNTER_PATH) {
+        void handleCounter(request, response, this.counter);
+        return;
+      }
       if (!staticDir) {
         response.writeHead(404).end();
         return;
       }
-      this.countVisit(request);
       void serveStatic(staticDir, request, response);
     });
     this.http.on('upgrade', (request, socket, head) => this.handleUpgrade(request, socket, head));
@@ -229,11 +259,12 @@ export class GameServer {
   private addressState(address: string): AddressState {
     const known = this.addresses.get(address);
     if (known) return known;
-    const { addressBurst, addressPerSecond, roomRequestBurst, roomRequestsPerMinute } = this.limits;
+    const { addressBurst, addressPerSecond, roomRequestBurst, roomRequestsPerMinute, counterBurst, counterPerMinute } = this.limits;
     const state: AddressState = {
       connections: 0,
       messages: new TokenBucket(addressBurst, addressPerSecond, Date.now),
       roomRequests: new TokenBucket(roomRequestBurst, roomRequestsPerMinute / 60, Date.now),
+      counter: new TokenBucket(counterBurst, counterPerMinute / 60, Date.now),
       lastSeenAt: Date.now(),
     };
     this.addresses.set(address, state);
@@ -273,7 +304,10 @@ export class GameServer {
     if (!path.startsWith(STATS_PREFIX)) return false;
     const token = this.options.statsToken;
     const asked = path.slice(STATS_PREFIX.length);
-    const route = token && request.method === 'GET' ? { [token]: 'page', [`${token}.json`]: 'json', [`${token}/flux`]: 'flux', [`${token}/tableau.js`]: 'script' }[asked] : undefined;
+    const script = token && asked.startsWith(`${token}/`) ? DASHBOARD_SCRIPTS.get(asked.slice(token.length + 1)) : undefined;
+    // A Map, not an object literal: a name like « constructor » must not find an inherited property and open the page.
+    const routes = token ? new Map([[token, 'page'], [`${token}.json`, 'json'], [`${token}/flux`, 'flux']]) : null;
+    const route = routes && request.method === 'GET' ? (script ? 'script' : routes.get(asked)) : undefined;
     if (!route) {
       response.writeHead(404, STATS_HEADERS).end();
       return true;
@@ -283,7 +317,7 @@ export class GameServer {
       return true;
     }
     if (route === 'script') {
-      response.writeHead(200, { ...STATS_HEADERS, 'Content-Type': 'text/javascript; charset=utf-8' }).end(DASHBOARD_SCRIPT);
+      response.writeHead(200, { ...STATS_HEADERS, 'Content-Type': 'text/javascript; charset=utf-8' }).end(script);
       return true;
     }
     const snapshot = this.stats.snapshot(this.liveStats(), this.options.version ?? null);
@@ -305,11 +339,10 @@ export class GameServer {
     const push = (event: string, data: unknown) => response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
     const snapshot = () => this.stats.snapshot(this.liveStats(), this.options.version ?? null);
     const first = snapshot();
-    push('bonjour', { ...this.live.history(), jours: first.days, incidents: first.incidents, version: first.version, demarrage: first.startedAt });
+    push('bonjour', { ...this.live.history(), ...this.daysPayload(first), noms: DASHBOARD_NAMES, version: first.version, demarrage: first.startedAt });
     const unsubscribe = this.live.subscribe((kind, payload) => push(kind === 'sample' ? 'mesure' : 'evenement', payload));
     const days = setInterval(() => {
-      const now = snapshot();
-      push('jours', { jours: now.days, incidents: now.incidents });
+      push('jours', this.daysPayload(snapshot()));
     }, DAYS_EVERY_MS);
     this.statsStreams.add(response);
     response.on('close', () => {
@@ -319,11 +352,24 @@ export class GameServer {
     });
   }
 
-  /** A page of the game loaded: one visit, and its visitor, counted without keeping any address. */
-  private countVisit(request: IncomingMessage): void {
-    if (request.method !== 'GET') return;
-    const path = new URL(request.url ?? '/', 'http://localhost').pathname;
-    if (VISITED_PAGES.has(path)) this.stats.visit(this.clientAddress(request));
+  /** What the dashboard's stream sends of the days: the last ones, the totals since the start, the incidents. */
+  private daysPayload(snapshot: StatsSnapshot): Record<string, unknown> {
+    return { jours: snapshot.days.slice(-STREAMED_DAYS), totaux: snapshot.totaux, cumul: snapshot.cumul, incidents: snapshot.incidents };
+  }
+
+  /** The counter's rate limit, per address: the address is kept in memory only, like the connections'. */
+  private allowCounterEvent(address: string): boolean {
+    const state = this.addressState(address);
+    state.lastSeenAt = Date.now();
+    return state.counter.take();
+  }
+
+  /** An event of a page: added to the day, and shown in the dashboard's feed. */
+  private recordCounterEvent(event: CounterEvent): void {
+    this.stats.record(event);
+    this.stats.flush(false);
+    const label = counterEventLabel(event);
+    if (label) this.live.event(event.type === 'page' ? 'visite' : 'local', label);
   }
 
   private liveStats(): LiveStats {

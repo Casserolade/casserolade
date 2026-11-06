@@ -7,6 +7,10 @@
 - Une version téléphone, sur casserolade.fr/m/, où les téléphones arrivent tout seuls, invitation à un salon comprise. Le jeu se tient en hauteur : la boutique, le plateau et la main l'un sous l'autre, le combat en deux rangées. Toucher une carte l'ouvre en grand, pour la lire et la jouer (recruter, poser, lancer, renvoyer) ; la glisser joue comme sur un ordinateur. La fiche d'un politique liste ses casseroles, chacune avec sa carte et où elle en est. Le choix du héros, les découvertes et le tutoriel sont refaits pour l'écran d'un téléphone. Un lien « Version ordinateur » ramène à la table.
 - Sur un écran tactile, l'explication du pouvoir d'un héros ne recouvre plus la carte suivante.
 
+**Le compteur du site (6 novembre)**
+- Le site compte ses visiteurs pour de vrai : chaque page compte elle-même sa visite, un visiteur par navigateur et par jour, sans cookie ni identifiant, et aucune adresse n'est gardée. Les robots sont comptés à part, et le test de santé du serveur ne passe plus pour une visite.
+- Les parties solo, de carrière et du tutoriel, qui tournent dans la page, disent au serveur quand elles commencent et comment elles finissent : la place, le héros et le nombre de manches.
+
 **La fiche d'une carte**
 - La carte et l'explication de ses mots-clés s'affichent côte à côte : le tout tient à l'écran, et chaque mot-clé tient en une ligne ou deux.
 - Le texte d'une carte n'est plus coupé : ses casseroles se suivent sur une ou deux lignes, et un texte trop long perd sa fin, jamais sa première ligne.

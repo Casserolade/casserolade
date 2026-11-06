@@ -3,8 +3,9 @@ function escapeHtml(text: string): string {
 }
 
 /**
- * La page secrète des statistiques (gameServer.ts, /stats/<jeton>) : une coquille que le script du tableau
- * de bord (stats/tableau.js) remplit en temps réel, depuis le flux SSE de `base`/flux.
+ * La page secrète des statistiques (gameServer.ts, /stats/<jeton>) : une coquille que les scripts du tableau
+ * de bord remplissent en temps réel, depuis le flux SSE de `base`/flux : stats/tableau.js pour le direct,
+ * stats/frequentation.js pour les jours, les visiteurs et les parties.
  */
 export function statsPage(base: string): string {
   const safeBase = escapeHtml(base);
@@ -35,8 +36,12 @@ li { padding: 5px 0; border-bottom: 1px solid var(--bord); } li time { color: va
 li.incident { color: var(--rouge); } li.partie b { color: var(--orange); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; } th, td { padding: 5px 6px; border-bottom: 1px solid var(--bord); text-align: right; }
 th:first-child, td:first-child { text-align: left; } th { color: var(--pale); font-weight: 600; }
-td.bar { width: 16%; } td.bar i { display: block; height: 8px; border-radius: 4px; background: var(--bleu); } td.bar.parties i { background: var(--orange); }
+td.bar { width: 16%; } td.bar i { display: block; height: 8px; border-radius: 4px; background: var(--bleu); }
 .alerte { color: var(--rouge); font-weight: 700; } .scroll { overflow-x: auto; }
+h3 { margin: 14px 0 6px; font-size: 13px; color: var(--pale); } tr.pale td { color: var(--pale); }
+.duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
+li.visite span { color: var(--bleu); } li.local span { color: var(--vert); }
+button { margin-left: 6px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--bord); background: var(--carte); color: var(--texte); font: inherit; cursor: pointer; } button:hover { border-color: var(--or); }
 </style></head><body data-base="${safeBase}">
 <header><h1>Casserolade · en direct</h1><span id="etat" class="etat meta">connexion…</span><span id="version" class="meta"></span><span id="depuis" class="meta"></span></header>
 <h2>Maintenant</h2>
@@ -47,9 +52,22 @@ td.bar { width: 16%; } td.bar i { display: block; height: 8px; border-radius: 4p
   <section><h2>Le fil</h2><ol id="fil"></ol></section>
   <section><h2>Aujourd'hui</h2><div id="jour" class="tiles"></div><h2>Derniers incidents</h2><div id="incidents" class="meta">Aucun incident.</div></section>
 </div>
+<h2>La fréquentation</h2>
+<div class="scroll"><table id="totaux"></table></div>
+<div class="duo">
+  <section><h2>D'où ils viennent, sur trente jours</h2><table id="sources"></table></section>
+  <section><h2>Sur quel écran, sur trente jours</h2><table id="appareils"></table></section>
+</div>
 <h2>Les trente derniers jours</h2>
 <div class="scroll"><table id="jours"></table></div>
-<p class="meta">Les parties solo tournent dans la page du joueur : seules leurs visites passent par le serveur. Aucune adresse n'est gardée.</p>
+<p id="ancienne" class="meta" hidden></p>
+<div class="duo">
+  <section><h2>Les parties solo, par héros</h2><div id="heros"></div></section>
+  <section><h2>Les parties solo, par niveau des bots</h2><table id="niveaux"></table><h2>La carrière, élection par élection</h2><table id="chapitres"></table></section>
+</div>
+<p class="meta">Chaque page du site compte elle-même sa visite : un visiteur par navigateur et par jour, sans cookie ni identifiant, et aucune adresse n'est gardée. Les robots sont comptés à part. Les parties solo, de carrière et du tutoriel tournent dans la page : elle dit au serveur quand elles commencent et comment elles finissent.</p>
+<p id="exclusion" class="meta"></p>
+<script src="${safeBase}/frequentation.js"></script>
 <script src="${safeBase}/tableau.js"></script>
 </body></html>`;
 }

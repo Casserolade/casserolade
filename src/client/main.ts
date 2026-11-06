@@ -1,3 +1,4 @@
+import { keepEntryReferrer } from '#src/client/services/entryReferrer.ts';
 import { computerChosen } from '#src/client/services/versionChoice.ts';
 import { prefersPhoneVersion } from '#src/client/tools/prefersPhoneVersion.ts';
 
@@ -10,5 +11,9 @@ const phone = prefersPhoneVersion({
   shortSide: Math.min(window.screen.width, window.screen.height),
   computerChosen: computerChosen(),
 });
-if (phone) window.location.replace(`/m/${window.location.search}${window.location.hash}`);
-else import('./desktop.ts').catch((error: unknown) => console.error('The game failed to load', error));
+if (phone) {
+  keepEntryReferrer(document.referrer);
+  window.location.replace(`/m/${window.location.search}${window.location.hash}`);
+} else {
+  import('./desktop.ts').catch((error: unknown) => console.error('The game failed to load', error));
+}

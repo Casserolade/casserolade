@@ -7,6 +7,7 @@ import StoryEndScreen from '#src/client/screens/story/StoryEndScreen.vue';
 import StoryHeroScreen from '#src/client/screens/story/StoryHeroScreen.vue';
 import StoryResultScreen from '#src/client/screens/story/StoryResultScreen.vue';
 import { loadCampaign, saveCampaign } from '#src/client/services/campaignStorage.ts';
+import { counter } from '#src/client/services/counter.ts';
 import { clearLocalGame, markLocalGame } from '#src/client/services/interruptedGame.ts';
 import { achievements } from '#src/client/stores/achievements.ts';
 import { createGameStore } from '#src/client/stores/createGameStore.ts';
@@ -31,7 +32,10 @@ const resultShown = computed(() => Boolean(bilan.value && (!store.value || store
 watch(bilan, (result) => {
   if (!result || !store.value || !chapter.value) return;
   const ranking = store.value.ranking.value;
-  if (ranking) achievements.recordGame(ranking, store.value.view.value, result.reussi ? { chapitre: chapter.value.id } : {});
+  if (ranking) {
+    achievements.recordGame(ranking, store.value.view.value, result.reussi ? { chapitre: chapter.value.id } : {});
+    counter.gameEnded({ mode: 'carriere', chapitre: chapter.value.id }, ranking, store.value.view.value, result.reussi);
+  }
   clearLocalGame();
 });
 
@@ -51,6 +55,7 @@ function play(): void {
   run.value = new StoryRun(chapter.value, campaign.value.heroId, campaign.value.bossId);
   store.value = createGameStore(run.value);
   markLocalGame({ kind: 'carriere' });
+  counter.gameStarted({ mode: 'carriere', chapitre: chapter.value.id });
 }
 
 function stopRun(): void {

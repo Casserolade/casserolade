@@ -1,11 +1,10 @@
 // The real-time statistics dashboard of Casserolade (statsPage.ts): one Server-Sent Events stream, tiles,
-// SVG charts over the last five minutes, the live feed of events and the last thirty days.
-// Plain JavaScript, no dependency: the page's CSP only allows this file and the stream.
+// SVG charts over the last five minutes and the live feed of events. The days go to frequentation.js, as a
+// « frequentation » event of the document. Plain JavaScript, no dependency: the page's CSP only allows these files.
 
 const BASE = document.body.dataset.base;
 const HISTORY = 300;
 const TIME = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-const DATE_TIME = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'short' });
 
 /** What the tiles show, from the last measure. */
 const TILES = [
@@ -21,12 +20,8 @@ const CHARTS = [
   ['La boucle d\'événements', [['boucleP99', 'latence p99 (ms)', '#ff5d50'], ['boucleP50', 'latence p50 (ms)', '#ffd84a'], ['occupation', 'occupation (%)', '#4cd07a']]],
   ['Le processus', [['memoireMo', 'mémoire (Mo)', '#4d8dff'], ['tasMo', 'tas JS (Mo)', '#8f98ad'], ['cpu', 'CPU (%)', '#ffaa2e']]],
 ];
-const TODAY = [
-  ['visites', 'visites'], ['visiteurs', 'visiteurs'], ['parties', 'parties en ligne'], ['partiesPubliques', 'parties publiques'],
-  ['joueurs', 'joueurs en ligne'], ['salonsCrees', 'salons créés'], ['picConnexions', 'pic de connexions'], ['incidents', 'incidents'],
-];
 
-const state = { samples: [], events: [], days: [], incidents: [], startedAt: null };
+const state = { samples: [], events: [], startedAt: null };
 
 function element(tag, attributes = {}, text = '') {
   const node = document.createElement(tag);
@@ -89,37 +84,9 @@ function renderFeed() {
   }));
 }
 
-function renderDays() {
-  const days = [...state.days].reverse().slice(0, 30);
-  renderTiles(document.getElementById('jour'), TODAY, days[0]);
-  const most = Math.max(1, ...days.map((d) => d.visites));
-  const mostGames = Math.max(1, ...days.map((d) => d.parties));
-  const head = element('tr');
-  for (const label of ['Jour', 'Visites', '', 'Visiteurs', 'Parties', '', 'Publiques', 'Joueurs', 'Salons', 'Pic', 'Incidents']) head.append(element('th', {}, label));
-  const rows = days.map((d) => {
-    const row = element('tr');
-    const bar = (value, top, kind) => {
-      const cell = element('td', { class: `bar ${kind}` });
-      const fill = element('i');
-      fill.style.width = `${(value / top) * 100}%`;
-      cell.append(fill);
-      return cell;
-    };
-    row.append(element('td', {}, d.jour), element('td', {}, String(d.visites)), bar(d.visites, most, ''), element('td', {}, String(d.visiteurs)),
-      element('td', {}, String(d.parties)), bar(d.parties, mostGames, 'parties'), element('td', {}, String(d.partiesPubliques)),
-      element('td', {}, String(d.joueurs)), element('td', {}, String(d.salonsCrees)), element('td', {}, String(d.picConnexions)),
-      element('td', d.incidents ? { class: 'alerte' } : {}, String(d.incidents)));
-    return row;
-  });
-  document.getElementById('jours').replaceChildren(head, ...rows);
-  const incidents = document.getElementById('incidents');
-  if (state.incidents.length === 0) {
-    incidents.textContent = 'Aucun incident.';
-    return;
-  }
-  const list = element('ol');
-  for (const i of state.incidents) list.append(element('li', { class: 'incident' }, `${DATE_TIME.format(new Date(i.at))} · ${i.kind} · salon ${i.code} · manche ${i.round} : ${i.message}`));
-  incidents.replaceChildren(list);
+/** The days, the totals and the incidents: frequentation.js draws them. */
+function passOnDays(data) {
+  document.dispatchEvent(new CustomEvent('frequentation', { detail: data }));
 }
 
 function renderUptime() {
@@ -145,14 +112,12 @@ function connect() {
     const data = JSON.parse(message.data);
     state.samples = data.samples;
     state.events = data.events;
-    state.days = data.jours;
-    state.incidents = data.incidents;
     state.startedAt = data.demarrage;
     document.getElementById('version').textContent = `version ${data.version ?? 'inconnue'}`;
     renderTiles(document.getElementById('direct'), TILES, state.samples.at(-1));
     renderCharts();
     renderFeed();
-    renderDays();
+    passOnDays(data);
     renderUptime();
   });
   stream.addEventListener('mesure', (message) => {
@@ -168,12 +133,7 @@ function connect() {
     state.events.length = Math.min(state.events.length, 60);
     renderFeed();
   });
-  stream.addEventListener('jours', (message) => {
-    const data = JSON.parse(message.data);
-    state.days = data.jours;
-    state.incidents = data.incidents;
-    renderDays();
-  });
+  stream.addEventListener('jours', (message) => passOnDays(JSON.parse(message.data)));
 }
 
 connect();
