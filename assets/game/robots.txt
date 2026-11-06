@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /compteur
+Disallow: /stats/
+
+Sitemap: https://casserolade.fr/sitemap.xml
