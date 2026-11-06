@@ -64,14 +64,25 @@ export function draw(game: Game, tier: number, filter: (cardId: string) => boole
 
 /**
  * Un exemplaire de cet échelon précis, pas en dessous : « un politique de votre échelon » dit ce qu'il donne.
- * Seul un échelon épuisé se rabat sur l'échelon le plus proche en dessous.
+ * Seul un échelon épuisé passe au plus proche, au-dessus d'abord (règle R12).
  */
 export function drawFromTier(game: Game, tier: number): string | null {
-  for (let t = tier; t >= 1; t--) {
+  for (const t of tiersOutward(tier, game.params.tierMax)) {
     const id = draw(game, t, (cardId) => CARD_BY_ID[cardId].tier === t);
     if (id) return id;
   }
   return null;
+}
+
+/**
+ * L'ordre où chercher « un politique de votre échelon » : le sien, puis au-dessus, et en dessous seulement s'il n'y a
+ * rien au-dessus. Le repli vers le bas faisait croire qu'un sort gardé en main découvrait l'échelon de son achat
+ * (6 novembre 2026).
+ */
+function tiersOutward(tier: number, tierMax: number): number[] {
+  const above = Array.from({ length: Math.max(0, tierMax - tier + 1) }, (_, i) => tier + i);
+  const below = Array.from({ length: Math.max(0, tier - 1) }, (_, i) => tier - 1 - i);
+  return [...above, ...below];
 }
 
 /** Retire un exemplaire précis de la réserve, s'il en reste. */
@@ -320,8 +331,9 @@ function queueOffer(p: Player, offer: Offer): void {
 
 /**
  * Jusqu'à trois serviteurs différents de l'échelon visé, réservés le temps du choix. « De votre échelon » veut dire
- * cet échelon, jamais en dessous : s'il en manque, le choix est plus court, comme dans Battlegrounds. Seul un échelon
- * sans aucun candidat (aucun politique à Annonce d'échelon 5) se rabat sur l'échelon le plus proche en dessous.
+ * l'échelon du joueur au moment où l'effet joue, jamais en dessous : s'il en manque, le choix est plus court, comme
+ * dans Battlegrounds. Un échelon sans aucun candidat dans la partie (pas d'Héritage d'échelon 4 sans le RN) passe au
+ * plus proche au-dessus ; seul un filtre qui n'a rien au-dessus (aucune Fin de tour d'échelon 6) redescend.
  * Un camp absent de la partie est ignoré (règle R7). La carte `source`, celle qui découvre, n'est jamais proposée.
  */
 export function offerMinions(game: Game, p: Player, tier: number, camp?: Camp, trigger?: Trigger, source?: string): void {
@@ -329,14 +341,14 @@ export function offerMinions(game: Game, p: Player, tier: number, camp?: Camp, t
   const campOk = (id: string) => !camp || (camp !== 'civile' && !game.camps.includes(camp)) || isCamp(game, makeMinion(CARD_BY_ID[id], -1), camp);
   const triggerOk = (id: string) => !trigger || (CARD_BY_ID[id].effects ?? []).some((e) => e.when === trigger);
   const available = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source && campOk(id) && triggerOk(id)).map(([id]) => id);
-  const options = game.rng.shuffle(closestTier(available, target)).slice(0, 3);
+  const options = game.rng.shuffle(closestTier(available, target, game.params.tierMax)).slice(0, 3);
   for (const id of options) take(game, id);
   queueOffer(p, { options, kind: 'serviteur' });
 }
 
-/** Les cartes de l'échelon visé ; à défaut, celles de l'échelon le plus proche en dessous. */
-function closestTier(cardIds: string[], tier: number): string[] {
-  for (let t = tier; t >= 1; t--) {
+/** Les cartes de l'échelon visé ; à défaut, celles du plus proche, au-dessus d'abord (règle R12). */
+function closestTier(cardIds: string[], tier: number, tierMax: number): string[] {
+  for (const t of tiersOutward(tier, tierMax)) {
     const at = cardIds.filter((id) => CARD_BY_ID[id].tier === t);
     if (at.length > 0) return at;
   }
