@@ -5,11 +5,12 @@ import type { BotLevel } from '#src/bots/bots.ts';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import SoundControl from '#src/client/components/atoms/SoundControl.vue';
-import RoomForm from '#src/client/components/molecules/RoomForm.vue';
-import SoloForm from '#src/client/components/molecules/SoloForm.vue';
 import TipLink from '#src/client/components/molecules/TipLink.vue';
+import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
+import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
 import { savePseudo, savedPseudo } from '#src/client/services/localProfile.ts';
+import { shareGame } from '#src/client/services/shareGame.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { pickOne } from '#src/client/tools/pickOne.ts';
 import { TAGLINES } from '#src/client/const/taglines.ts';
@@ -17,8 +18,6 @@ import { VERSION } from '#src/client/const/version.ts';
 import ChasingReporter from '#src/client/components/organisms/ChasingReporter.vue';
 import { ANIMATEURS } from '#src/data/animateurs.ts';
 import { PLATEAUX, SECOND_TOUR } from '#src/data/plateaux.ts';
-
-const MAX_PSEUDO_LENGTH = 24;
 
 withDefaults(defineProps<{
   inviteCode: string;
@@ -85,32 +84,18 @@ const suitcases = ref(0);
         <span>{{ resume.text }}</span>
         <AppButton primary @click="emit('resume')">{{ resume.action }}</AppButton>
       </p>
-      <div class="profile">
-        <label class="pseudo">Votre pseudo <input v-model="pseudo" :maxlength="MAX_PSEUDO_LENGTH" placeholder="Sans étiquette" autocomplete="nickname" /></label>
-        <span v-if="title" class="title-badge">« {{ title }} »</span>
-      </div>
-      <div class="modes">
-        <section class="mode main-mode">
-          <h2>Jeu solo contre l'ordinateur</h2>
-          <p>Une partie tout de suite, contre des politiques pilotés par la machine.</p>
-          <SoloForm @start="(settings) => react(() => emit('solo', settings))" />
-        </section>
-        <section class="mode">
-          <h2>Partie publique</h2>
-          <p>Des inconnus de votre niveau, sans compte. Si la table vote pour, des bots prennent les places vides.</p>
-          <AppButton primary @click="react(() => emit('public', pseudo))">Entrer dans la file</AppButton>
-        </section>
-        <section class="mode" :class="{ invited: inviteCode }">
-          <h2>Entre amis</h2>
-          <p v-if="inviteCode">On vous attend au salon <strong>{{ inviteCode }}</strong>.</p>
-          <p v-else>Un lien à partager, sans compte. Les bots prennent les places vides.</p>
-          <RoomForm :invite-code="inviteCode" @create="react(() => emit('create', pseudo))" @join="(code) => react(() => emit('join', code, pseudo))" />
-        </section>
-        <section class="mode">
-          <h2>Jeu solo – Mode carrière</h2>
-          <p>Un politique, sept élections, du canton au second tour. Chacune a sa règle spéciale.</p>
-          <AppButton primary @click="react(() => emit('story'))">Jouer la carrière</AppButton>
-        </section>
+      <span v-if="title" class="title-badge">« {{ title }} »</span>
+      <div class="sides">
+        <LocalModes :highlighted="!inviteCode" @solo="(settings) => react(() => emit('solo', settings))" @story="react(() => emit('story'))" />
+        <OnlineModes
+          v-model:pseudo="pseudo"
+          :invite-code="inviteCode"
+          :highlighted="Boolean(inviteCode)"
+          :share="shareGame"
+          @create="react(() => emit('create', pseudo))"
+          @join="(code) => react(() => emit('join', code, pseudo))"
+          @public="react(() => emit('public', pseudo))"
+        />
       </div>
       <nav class="extras">
         <AppButton :primary="newcomer" :class="{ beckon: newcomer }" @click="react(() => emit('tutorial'))"><GameIcon name="sparkle" /> {{ newcomer ? 'Première fois ? Le tutoriel' : 'Tutoriel' }}</AppButton>
@@ -142,31 +127,9 @@ const suitcases = ref(0);
 .error { padding: 0.4rem 1rem; border-radius: 999px; background: #7a1420; color: #fff; font-weight: 700; }
 .resume { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1rem; max-width: 52rem; padding: 0.5rem 0.6rem 0.5rem 1.2rem; border-radius: 999px; border: 3px solid #d8b450; background: rgb(12 16 32 / 0.94); color: #fff; font-weight: 700; text-align: center; }
 .resume :deep(.app-button) { font-size: 1.2rem; }
-.profile { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1.2rem; }
-.pseudo { flex-direction: row; align-items: center; gap: 0.7rem; color: #fff; font: 400 1.4rem / 1 var(--font-number); letter-spacing: 1px; }
-.pseudo input { width: 15em; font-family: var(--font-card); font-size: 1.05rem; letter-spacing: 0; }
-.title-badge { padding: 0.25rem 0.9rem; border-radius: 999px; background: rgb(255 216 74 / 0.15); border: 2px solid #d8b450; color: #ffe27a; font-weight: 700; font-style: italic; }
-.modes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; width: 100%; }
-.mode {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.7rem;
-  padding: 1.1rem 1.2rem 1.2rem;
-  border-radius: 22px;
-  border: 3px solid rgb(255 255 255 / 0.14);
-  background: linear-gradient(rgb(22 30 58 / 0.94), rgb(11 15 32 / 0.94));
-  box-shadow: 0 16px 40px rgb(0 0 0 / 0.55);
-}
-/* The button sits at the bottom of every card, whatever the text above it. */
-.mode > :last-child { margin-top: auto; }
-.mode :deep(form) { width: 100%; margin-top: auto; }
-.main-mode, .invited { border-color: #d8b450; box-shadow: 0 0 30px rgb(255 200 60 / 0.25), 0 16px 40px rgb(0 0 0 / 0.55); }
-h2 { color: #fff; font: 400 1.85rem / 1.05 var(--font-number); text-wrap: balance; letter-spacing: 1px; -webkit-text-stroke: 5px var(--color-ink); paint-order: stroke fill; }
-.main-mode h2, .invited h2 { color: #ffe27a; }
-.mode :deep(.app-button) { white-space: nowrap; font-size: 1.45rem; }
-.mode p { color: #c9cfdc; font-size: 1.02rem; line-height: 1.3; }
-.mode p strong { color: #ffe27a; letter-spacing: 0.1em; }
+.title-badge { margin-top: -0.4rem; padding: 0.25rem 0.9rem; border-radius: 999px; background: rgb(255 216 74 / 0.15); border: 2px solid var(--color-frame); color: var(--color-title); font-weight: 700; font-style: italic; }
+/* Two sides, alone or online: next to each other on a wide screen, one above the other below. */
+.sides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; width: 100%; }
 .extras { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; }
 .links a { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
@@ -175,6 +138,5 @@ h2 { color: #fff; font: 400 1.85rem / 1.05 var(--font-number); text-wrap: balanc
 @keyframes beckon { 50% { transform: scale(1.06); box-shadow: 0 0 26px rgb(255 216 74 / 0.7), 0 5px 12px rgb(0 0 0 / 0.5); } }
 .count { margin-left: 0.5em; padding: 0 0.45em; border-radius: 999px; background: #ffe27a; color: var(--color-ink); font-size: 0.85em; }
 @keyframes logo-in { from { transform: scale(0.6) rotate(-4deg); opacity: 0; } }
-@media (max-width: 1100px) { .modes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 640px) { .modes { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 1180px) { .sides { grid-template-columns: minmax(0, 1fr); } }
 </style>

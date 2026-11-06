@@ -718,3 +718,35 @@ test('ralliesOnto: a Ralliement joins an ally, but not a token while it carries 
   assert.equal(ralliesOnto(carrying, 2, board), false, 'a token never carries a casserole');
   assert.equal(ralliesOnto(makeMinion(CARD_BY_ID.tiberi, 4), 1, board), false, 'not a Ralliement');
 });
+
+test('shareGame: the share sheet on a phone, the link copied elsewhere, never an exception', async () => {
+  const { shareGame } = await import('../src/client/services/shareGame.ts');
+  const { SHARE_INVITE } = await import('../src/client/const/shareInvite.ts');
+  const saved = { navigator: Object.getOwnPropertyDescriptor(globalThis, 'navigator'), window: Object.getOwnPropertyDescriptor(globalThis, 'window') };
+  const shared: unknown[] = [];
+  const copied: string[] = [];
+  function setup(coarse: boolean, share: ((data: unknown) => Promise<void>) | undefined, write: (text: string) => Promise<void>): void {
+    Object.defineProperty(globalThis, 'navigator', { configurable: true, value: { share, clipboard: { writeText: write } } });
+    Object.defineProperty(globalThis, 'window', { configurable: true, value: { matchMedia: () => ({ matches: coarse }) } });
+  }
+  const quietError = console.error;
+  console.error = () => {};
+  try {
+    setup(true, async (data) => void shared.push(data), async (text) => void copied.push(text));
+    assert.equal(await shareGame(), 'shared');
+    assert.deepEqual(shared, [SHARE_INVITE]);
+    setup(false, async (data) => void shared.push(data), async (text) => void copied.push(text));
+    assert.equal(await shareGame(), 'copied', 'a computer copies the link, even with a share sheet');
+    assert.deepEqual(copied, [SHARE_INVITE.url]);
+    setup(true, async () => { throw new DOMException('closed', 'AbortError'); }, async () => {});
+    assert.equal(await shareGame(), 'cancelled');
+    setup(false, undefined, async () => { throw new Error('denied'); });
+    assert.equal(await shareGame(), 'failed');
+  } finally {
+    console.error = quietError;
+    for (const [name, descriptor] of Object.entries(saved)) {
+      if (descriptor) Object.defineProperty(globalThis, name, descriptor);
+      else delete (globalThis as Record<string, unknown>)[name];
+    }
+  }
+});
