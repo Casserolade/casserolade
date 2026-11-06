@@ -33,8 +33,8 @@ const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[plateauId]
 const speechStyle = computed(() => {
   const said = speech.value;
   if (!said) return {};
-  if (said.at) return { left: `${said.at.x}px`, top: `${said.at.y}px` };
-  return said.side === props.combat.side ? { left: '34vw', top: '84dvh' } : { left: '50vw', top: '20dvh' };
+  if (said.at) return { left: `${said.at.x}px`, top: `${said.at.y}px`, '--x': `${said.at.x}px` };
+  return said.side === props.combat.side ? { left: '34vw', top: '84dvh', '--x': '34vw' } : { left: '50vw', top: '20dvh', '--x': '50vw' };
 });
 </script>
 
@@ -128,7 +128,8 @@ const speechStyle = computed(() => {
 .lost .result { color: #ff6a6a; }
 .detail { max-width: 90vw; padding: 4px 12px; border-radius: 14px; border: 2px solid rgb(255 255 255 / 0.18); background: #0a0c16; color: #fff; font: 700 0.95rem / 1.25 var(--font-card); text-align: center; }
 .speech { position: fixed; z-index: 30; width: 0; height: 0; pointer-events: none; }
-.speech-bubble { position: absolute; left: 0; bottom: calc(var(--s) * 70); translate: -40% 0; display: flex; align-items: flex-end; gap: calc(var(--s) * 8); width: max-content; max-width: min(84vw, calc(var(--s) * 560)); }
+/* Centred on its speaker, but never past the edges: --x is where the speaker stands, 100% the bubble's own width. */
+.speech-bubble { position: absolute; left: 0; bottom: calc(var(--s) * 70); translate: clamp(calc(8px - var(--x)), -50%, calc(100vw - 8px - var(--x) - 100%)) 0; display: flex; align-items: flex-end; gap: calc(var(--s) * 8); width: max-content; max-width: min(84vw, calc(var(--s) * 560)); }
 .below .speech-bubble { bottom: auto; top: calc(var(--s) * 100); align-items: flex-start; }
 .celebration .speech-bubble :deep(.bubble) { font-size: calc(var(--s) * 32); padding: calc(var(--s) * 14) calc(var(--s) * 26); }
 .speaker { --portrait-size: calc(var(--s) * 90); border: calc(var(--s) * 4) solid #fff; }
