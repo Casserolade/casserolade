@@ -9,6 +9,7 @@ import TutorialFlow from '#src/client/screens/tutorial/TutorialFlow.vue';
 import { SCREEN_SET } from '#src/client/const/screenSet.ts';
 import type { ScreenSet } from '#src/client/const/screenSet.ts';
 import { createLocalTransport } from '#src/client/services/createLocalTransport.ts';
+import { counter } from '#src/client/services/counter.ts';
 import { createWebSocketTransport } from '#src/client/services/createWebSocketTransport.ts';
 import { clearLocalGame, interruptedNotice, markLocalGame, takeInterruptedGame } from '#src/client/services/interruptedGame.ts';
 import type { LocalGameMark } from '#src/client/services/interruptedGame.ts';
@@ -58,6 +59,7 @@ const holdsSeat = computed(() => Boolean(store.value?.room.value || store.value?
 watch(() => store.value?.ranking.value, (ranking) => {
   if (!ranking || !store.value || !isLocal.value) return;
   achievements.recordGame(ranking, store.value.view.value);
+  if (lastSolo) counter.gameEnded({ mode: 'solo', niveau: lastSolo.botLevel }, ranking, store.value.view.value);
   clearLocalGame();
 });
 
@@ -73,6 +75,7 @@ function startSolo(settings: SoloSettings): void {
   interrupted.value = null;
   lastSolo = settings;
   markLocalGame({ kind: 'solo', botLevel: settings.botLevel, contexte: settings.contexte });
+  counter.gameStarted({ mode: 'solo', niveau: settings.botLevel });
   store.value?.leave();
   store.value = createGameStore(createLocalTransport({
     pseudo: PLAYER_NAME,

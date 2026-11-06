@@ -3,6 +3,7 @@ import { onUnmounted, shallowRef, watch } from 'vue';
 import TutorialGuide from '#src/client/components/organisms/TutorialGuide.vue';
 import GameScreens from '#src/client/screens/GameScreens.vue';
 import TutorialEndScreen from '#src/client/screens/tutorial/TutorialEndScreen.vue';
+import { counter } from '#src/client/services/counter.ts';
 import { clearLocalGame, markLocalGame } from '#src/client/services/interruptedGame.ts';
 import { achievements } from '#src/client/stores/achievements.ts';
 import { createGameStore } from '#src/client/stores/createGameStore.ts';
@@ -15,6 +16,7 @@ const store = shallowRef(createGameStore(run.value));
 let stopped = false;
 achievements.startGame();
 markLocalGame({ kind: 'tutoriel' });
+counter.gameStarted({ mode: 'tutoriel' });
 
 /** Every step seen: the tutorial is done, even before the game ends. */
 watch(() => run.value.learned.value, (learned) => {
@@ -23,6 +25,7 @@ watch(() => run.value.learned.value, (learned) => {
 watch(() => store.value.ranking.value, (ranking) => {
   if (!ranking) return;
   achievements.recordGame(ranking, store.value.view.value);
+  counter.gameEnded({ mode: 'tutoriel' }, ranking, store.value.view.value, run.value.learned.value);
   clearLocalGame();
 });
 
@@ -33,6 +36,7 @@ function restart(): void {
   stopped = false;
   achievements.startGame();
   markLocalGame({ kind: 'tutoriel' });
+  counter.gameStarted({ mode: 'tutoriel' });
 }
 
 function stop(): void {

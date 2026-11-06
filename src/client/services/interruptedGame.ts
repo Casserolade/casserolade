@@ -1,4 +1,6 @@
 import type { BotLevel } from '#src/bots/bots.ts';
+import { tabStorage } from '#src/client/services/tabStorage.ts';
+import type { TabStorage } from '#src/client/services/tabStorage.ts';
 
 const KEY = 'casserolade.partie_locale';
 const KINDS = ['solo', 'carriere', 'tutoriel'] as const;
@@ -14,20 +16,7 @@ export interface LocalGameMark {
   contexte?: string;
 }
 
-export interface MarkStorage {
-  getItem(key: string): string | null;
-  setItem(key: string, value: string): void;
-  removeItem(key: string): void;
-}
-
-/** The tab's sessionStorage: it survives a reload, not a closed tab. Nothing when the page may not use it. */
-function tabStorage(): MarkStorage | null {
-  try {
-    return typeof sessionStorage === 'undefined' ? null : sessionStorage;
-  } catch {
-    return null;
-  }
-}
+export type MarkStorage = TabStorage;
 
 /** A local game starts: if the page reloads before it ends, the home screen will say so. */
 export function markLocalGame(mark: LocalGameMark, storage: MarkStorage | null = tabStorage()): void {

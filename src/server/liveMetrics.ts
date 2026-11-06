@@ -29,7 +29,7 @@ export interface LiveSample extends LiveStats {
 /** Un événement de la salle, poussé au tableau de bord dès qu'il arrive. */
 export interface LiveEvent {
   t: number;
-  type: 'partie' | 'salon' | 'incident' | 'demarrage';
+  type: 'partie' | 'salon' | 'incident' | 'demarrage' | 'visite' | 'local';
   texte: string;
 }
 

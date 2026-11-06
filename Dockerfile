@@ -32,6 +32,7 @@ RUN rm -rf src/client src/sim && mkdir -p data/serveur && chown node:node data/s
 USER node
 VOLUME /app/data/serveur
 EXPOSE 8080
+# Le test de santé a son adresse, que les statistiques ne comptent pas (il chargeait la page d'accueil toutes les 30 s).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s \
-  CMD node -e "fetch('http://127.0.0.1:'+process.env.PORT+'/').then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"
+  CMD node -e "fetch('http://127.0.0.1:'+process.env.PORT+'/sante').then(r=>process.exit(r.ok?0:1),()=>process.exit(1))"
 CMD ["node", "src/server/main.ts"]

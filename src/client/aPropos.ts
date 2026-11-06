@@ -1,3 +1,4 @@
+import { counter } from '#src/client/services/counter.ts';
 import { loadSources } from '#src/client/services/loadSources.ts';
 import type { GameSources } from '#src/client/services/loadSources.ts';
 import { sourceMatches } from '#src/client/tools/sourceMatches.ts';
@@ -78,3 +79,4 @@ async function showSources(button: HTMLButtonElement, panel: HTMLElement): Promi
 const button = document.querySelector<HTMLButtonElement>('#voir-sources');
 const panel = document.querySelector<HTMLElement>('#liste-sources');
 if (button && panel) button.addEventListener('click', () => void showSources(button, panel));
+counter.page('a_propos');

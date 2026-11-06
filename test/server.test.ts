@@ -475,10 +475,39 @@ test('no player text can reach the page as HTML', () => {
   }
 });
 
-test('the secret statistics page: only with its token, live over Server-Sent Events, and a visit counts', async () => {
+const BROWSER = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36';
+const PAGE_EVENT = JSON.stringify({ type: 'page', page: 'jeu', appareil: 'ordinateur', nouveau: true, premier: true, source: 'discord.com' });
+
+test('the counter: events of the game\'s pages only, checked, robots apart, a rate per address; the health check counts nothing', async () => {
+  const { server, port } = await startServer({ counterBurst: 5, counterPerMinute: 0.001 }, { statsToken: 'jeton-secret' });
+  const base = `http://127.0.0.1:${port}`;
+  const post = (body: string, headers: Record<string, string> = {}) => fetch(`${base}/compteur`, { method: 'POST', body, headers: { origin: ORIGIN, 'user-agent': BROWSER, 'content-type': 'text/plain', ...headers } });
+  const health = await fetch(`${base}/sante`);
+  assert.equal(health.status, 200);
+  assert.equal(await health.text(), 'ok');
+  assert.equal((await fetch(`${base}/compteur`)).status, 405);
+  assert.equal((await post(PAGE_EVENT, { origin: 'https://ailleurs.example' })).status, 403, 'another site cannot count');
+  assert.equal((await post(PAGE_EVENT)).status, 204);
+  assert.equal((await post('{"type":"page"}')).status, 400);
+  assert.equal((await post(JSON.stringify({ type: 'partie', mode: 'tutoriel', remplissage: 'x'.repeat(2000) }))).status, 413);
+  assert.equal((await post('{"type":"partie","mode":"solo","niveau":"moyen"}')).status, 204);
+  assert.equal((await post(PAGE_EVENT, { 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)' })).status, 204);
+  assert.equal((await post(PAGE_EVENT)).status, 429, 'past its burst, an address waits');
+  const json = await (await fetch(`${base}/stats/jeton-secret.json`)).json() as { days: { visiteurs: number; nouveaux: number; robots: number; sources: Record<string, number>; local: { solo: { lancees: number } } }[]; events: { type: string; texte: string }[] };
+  const day = json.days.at(-1);
+  assert.equal(day?.visiteurs, 1);
+  assert.equal(day?.nouveaux, 1);
+  assert.deepEqual(day?.sources, { 'discord.com': 1 });
+  assert.equal(day?.local.solo.lancees, 1);
+  assert.equal(day?.robots, 1, 'the robot is counted apart');
+  assert.ok(json.events.some((event) => event.type === 'visite' && event.texte.includes('discord.com')), 'the feed shows the visit');
+  await server.stop();
+});
+
+test('the secret statistics page: only with its token, live over Server-Sent Events; loading a page counts nothing by itself', async () => {
   const { server, port } = await startServer({}, { staticDir: 'src/client', statsToken: 'jeton-secret' });
   const base = `http://127.0.0.1:${port}`;
-  for (const path of ['/stats/', '/stats/autre', '/stats/jeton-secre', '/stats/jeton-secret/../package.json', '/stats/jeton-secret/flux/x']) {
+  for (const path of ['/stats/', '/stats/autre', '/stats/jeton-secre', '/stats/jeton-secret/../package.json', '/stats/jeton-secret/flux/x', '/stats/constructor', '/stats/__proto__', '/stats/toString', '/stats/jeton-secret/constructor', '/stats/jeton-secret/hasOwnProperty']) {
     assert.equal((await fetch(`${base}${path}`)).status, 404, path);
   }
   assert.equal((await fetch(`${base}/`)).status, 200);
@@ -490,8 +519,10 @@ test('the secret statistics page: only with its token, live over Server-Sent Eve
   const script = await fetch(`${base}/stats/jeton-secret/tableau.js`);
   assert.match(script.headers.get('content-type') ?? '', /javascript/);
   assert.match(await script.text(), /EventSource/);
-  const json = await (await fetch(`${base}/stats/jeton-secret.json`)).json() as { days: { visites: number }[] };
-  assert.equal(json.days.at(-1)?.visites, 1, 'la visite de la page du jeu est comptée');
+  assert.match(await (await fetch(`${base}/stats/jeton-secret/frequentation.js`)).text(), /Ne plus compter ce navigateur/);
+  const json = await (await fetch(`${base}/stats/jeton-secret.json`)).json() as { days: { visiteurs: number; pages: Record<string, number> }[] };
+  assert.equal(json.days.at(-1)?.visiteurs, 0, 'the page counts its own visit, the server does not');
+  assert.equal(json.days.at(-1)?.pages.jeu, 0);
   // The stream: the history first, then a measure each second.
   const controller = new AbortController();
   const stream = await fetch(`${base}/stats/jeton-secret/flux`, { signal: controller.signal });
