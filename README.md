@@ -9,6 +9,7 @@
 
 <p align="center">
   <a href="https://casserolade.fr"><strong>▶ Jouer sur casserolade.fr</strong></a>
+  · <a href="https://www.youtube.com/watch?v=TzZk_kNq-7A">La bande-annonce</a>
   · <a href="https://casserolade.fr/bestiaire">Le bestiaire</a>
   · <a href="https://casserolade.fr/a-propos">À propos</a>
   · <a href="#contribuer">Contribuer</a>
@@ -19,10 +20,10 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.2b" src="https://img.shields.io/badge/version-0.2b-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.2c" src="https://img.shields.io/badge/version-0.2c-6b3fa0"></a>
 </p>
 
-<p align="center"><img src=".github/captures/recrutement.webp" alt="Le recrutement sur le plateau de CNews : la boutique, le plateau et les héros adverses" width="900"></p>
+<p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
 
 ## Ce que c'est
 
@@ -47,6 +48,8 @@ Gratuit, sans publicité, sans inscription, sans rien à vendre.
 
 ## Comment ça se joue
 
+<p align="center"><img src=".github/captures/recrutement.webp" alt="Le recrutement sur le plateau de CNews : la boutique, le plateau et les héros adverses" width="900"></p>
+
 - **Huit joueurs, un seul survivant.** Chacun choisit son héros parmi trois candidats. Chaque manche, on recrute, puis on affronte un adversaire. Le perdant perd des sondages ; à zéro, il est éliminé.
 - **Le budget ne se garde pas.** 3 au départ, +1 par manche jusqu'à 10 : on recrute un politique (3), on actualise la boutique (1), on monte d'échelon pour des politiques plus forts, on achète des sorts et des casseroles.
 - **Une réserve partagée**, comme dans Battlegrounds : chaque politique existe en nombre limité pour les huit joueurs, de 15 exemplaires à l'échelon 1 à 7 au 6. Ce que les autres prennent sort moins chez vous.
@@ -56,7 +59,7 @@ Gratuit, sans publicité, sans inscription, sans rien à vendre.
 - **Les casseroles** donnent un avantage tout de suite, et un bonus de plus sur leur propriétaire. Leur défaut dort jusqu'au scandale.
 - **Après une victoire, la Célébration** : un survivant prononce sa petite phrase, une Vedette d'abord, et chaque survivant qui a une Célébration en tire un gain. **Après une défaite, le Droit de réponse** : chaque politique qui en a un joue le sien, et le plus à gauche répond.
 
-Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/bestiaire?type=mot_cle), et au survol de chaque carte en jeu.
+Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/bestiaire?type=mot_cle), et à côté de chaque carte qu'on pointe en jeu. Une casserole pointée sous son politique montre sa carte, et dit où elle en est : défaut qui dort, scandale en cours ou casserole oubliée.
 
 ## Ce qu'il y a dedans
 
