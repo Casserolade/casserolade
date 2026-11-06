@@ -2,6 +2,11 @@
 
 ## 0.2c — 6 novembre 2026
 
+**Correctif d'interface (6 novembre, nuit)**
+- L'accueil tient en deux côtés : en local à un joueur (partie rapide, carrière) et en ligne (entre amis, partie classée). La partie classée ouvrira quand il y aura assez de monde en ligne ; en attendant, un bouton partage le jeu.
+- Une version téléphone, sur casserolade.fr/m/, où les téléphones arrivent tout seuls, invitation à un salon comprise. Le jeu se tient en hauteur : la boutique, le plateau et la main l'un sous l'autre, le combat en deux rangées. Toucher une carte l'ouvre en grand, pour la lire et la jouer (recruter, poser, lancer, renvoyer) ; la glisser joue comme sur un ordinateur. La fiche d'un politique liste ses casseroles, chacune avec sa carte et où elle en est. Le choix du héros, les découvertes et le tutoriel sont refaits pour l'écran d'un téléphone. Un lien « Version ordinateur » ramène à la table.
+- Sur un écran tactile, l'explication du pouvoir d'un héros ne recouvre plus la carte suivante.
+
 **La fiche d'une carte**
 - La carte et l'explication de ses mots-clés s'affichent côte à côte : le tout tient à l'écran, et chaque mot-clé tient en une ligne ou deux.
 - Le texte d'une carte n'est plus coupé : ses casseroles se suivent sur une ou deux lignes, et un texte trop long perd sa fin, jamais sa première ligne.

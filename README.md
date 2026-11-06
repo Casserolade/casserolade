@@ -72,7 +72,8 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | **657 répliques** | Toutes sourcées, dont 244 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
-| **Des modes** | Seul contre l'ordinateur, la carrière (sept élections, du canton au second tour), parties publiques et salons entre amis par lien. |
+| **Des modes** | Seul contre l'ordinateur, la carrière (sept élections, du canton au second tour), et des salons entre amis par lien. La partie classée ouvrira quand il y aura assez de monde en ligne. |
+| **Sur téléphone** | Une version tenue en hauteur, faite pour le pouce (casserolade.fr/m/) : les téléphones y arrivent tout seuls. |
 | **[Le bestiaire](https://casserolade.fr/bestiaire)** | Tout le jeu, avec des filtres : mots-clés, héros, politiques, casseroles, sorts, jetons, contextes. Chaque fiche donne ses sources. |
 
 ## Contribuer
@@ -95,7 +96,7 @@ Il faut [Node.js](https://nodejs.org) 22.18 ou plus, qui exécute directement le
 
 ```sh
 npm install
-npm run dev        # le jeu dans le navigateur ; le solo et la carrière tournent dans la page
+npm run dev        # le jeu dans le navigateur (sa version téléphone sur /m/) ; le solo et la carrière tournent dans la page
 npm run server     # le serveur des parties en ligne (WebSocket, port 8080), pour les salons et les parties publiques
 npm test           # le moteur, les données, le protocole, le salon, le client
 npm run typecheck  # TypeScript et gabarits Vue
