@@ -100,6 +100,8 @@ const DASHBOARD_SCRIPT = readFileSync(new URL('./stats/tableau.js', import.meta.
 /** A handful of open dashboards at most: the stream is for the admin, not for the crowd. */
 const MAX_STATS_STREAMS = 5;
 const DAYS_EVERY_MS = 30_000;
+/** The pages a visit is counted on: the game, on a computer and on a phone. */
+const VISITED_PAGES = new Set(['/', '/index.html', '/m', '/m/', '/m/index.html']);
 
 const HEURE_DE_PARIS = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'medium' });
 
@@ -321,7 +323,7 @@ export class GameServer {
   private countVisit(request: IncomingMessage): void {
     if (request.method !== 'GET') return;
     const path = new URL(request.url ?? '/', 'http://localhost').pathname;
-    if (path === '/' || path === '/index.html') this.stats.visit(this.clientAddress(request));
+    if (VISITED_PAGES.has(path)) this.stats.visit(this.clientAddress(request));
   }
 
   private liveStats(): LiveStats {

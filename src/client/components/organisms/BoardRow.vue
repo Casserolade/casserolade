@@ -177,13 +177,9 @@ function inspect(event: PointerEvent, minion: Minion): void {
 </template>
 
 <style scoped>
+/* Placed and sized by the screen that shows it (position, left, top, width, height): a positioned box. */
 .board-zone {
   --medal-w: calc(var(--s) * 150);
-  position: absolute;
-  left: calc(var(--s) * 316);
-  top: calc(var(--s) * 452);
-  width: calc(var(--s) * 1288);
-  height: calc(var(--s) * 300);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -191,7 +187,8 @@ function inspect(event: PointerEvent, minion: Minion): void {
   transition: background-color 0.15s, box-shadow 0.15s;
 }
 .receiving { background: rgb(255 255 255 / 0.04); box-shadow: inset 0 0 0 calc(var(--s) * 3) rgb(255 255 255 / 0.18); }
-.row { list-style: none; margin: 0; padding: calc(var(--s) * 34) 0 0; display: flex; gap: calc(var(--s) * 30); }
+/* The phone tightens the row (--board-gap, --board-top): seven medallions across a narrow screen. */
+.row { list-style: none; margin: 0; padding: var(--board-top, calc(var(--s) * 34)) 0 0; display: flex; gap: var(--board-gap, calc(var(--s) * 30)); }
 .slot { position: relative; touch-action: none; }
 .movable { cursor: grab; }
 .slot > .medallion { transition: transform 0.15s ease-out, filter 0.15s, opacity 0.15s; }

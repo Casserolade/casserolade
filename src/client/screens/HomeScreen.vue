@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import type { BotLevel } from '#src/bots/bots.ts';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
@@ -9,15 +9,13 @@ import TipLink from '#src/client/components/molecules/TipLink.vue';
 import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
-import { savePseudo, savedPseudo } from '#src/client/services/localProfile.ts';
 import { shareGame } from '#src/client/services/shareGame.ts';
+import { useHomePage } from '#src/client/stores/useHomePage.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
-import { pickOne } from '#src/client/tools/pickOne.ts';
-import { TAGLINES } from '#src/client/const/taglines.ts';
+import { chooseVersion } from '#src/client/services/versionChoice.ts';
 import { VERSION } from '#src/client/const/version.ts';
 import ChasingReporter from '#src/client/components/organisms/ChasingReporter.vue';
 import { ANIMATEURS } from '#src/data/animateurs.ts';
-import { PLATEAUX, SECOND_TOUR } from '#src/data/plateaux.ts';
 
 withDefaults(defineProps<{
   inviteCode: string;
@@ -45,15 +43,10 @@ const emit = defineEmits<{
   achievements: [];
 }>();
 
-/** One pseudo for every online mode, kept for the next visit. */
-const pseudo = ref(savedPseudo());
-watch(pseudo, (value) => savePseudo(value));
-
-/** Behind the home page, one of the game's TV sets at random, a new one at each visit. */
-const plateauId = pickOne([...PLATEAUX, SECOND_TOUR].map((plateau) => plateau.id), Math.random()) ?? SECOND_TOUR.id;
-
-/** Under the logo, one of the game's subtitles, a new one at each visit. */
-const tagline = pickOne(TAGLINES, Math.random()) ?? TAGLINES[0];
+/** The pseudo of the online modes, the TV set behind, the subtitle under the logo. */
+const { pseudo, plateauId, tagline } = useHomePage();
+/** A touch screen that chose this version, a tablet or a phone: the phone version stays one link away. */
+const touchScreen = window.matchMedia('(pointer: coarse)').matches;
 
 /** The host of that set runs after the mouse; it pulls a face at each game mode clicked. */
 const hostId = ANIMATEURS.find((host) => host.plateau === plateauId)?.id ?? 'bouleau';
@@ -108,6 +101,7 @@ const suitcases = ref(0);
         <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
         <a class="version" href="https://github.com/casserolade/casserolade/blob/main/CHANGELOG.md" title="Ce qui a changé">v{{ VERSION }}</a>
         <a href="/a-propos#contribuer">Contribuer</a>
+        <a v-if="touchScreen" href="/m/" @click="chooseVersion('telephone')">Version téléphone</a>
       </nav>
     </div>
     <ChasingReporter :host-id="hostId" :reactions="reactions" @delivered="suitcases++" />

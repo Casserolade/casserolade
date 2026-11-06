@@ -3,10 +3,7 @@ import { computed, onMounted, ref } from 'vue';
 import CardGlossary from '#src/client/components/molecules/CardGlossary.vue';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import ShownCardFace from '#src/client/components/molecules/ShownCardFace.vue';
-import type { ShownCard } from '#src/client/tools/shownCard.ts';
-import { CARD_BY_ID } from '#src/data/cards.ts';
-import { SPELL_BY_ID } from '#src/data/sorts.ts';
-import { makeMinion } from '#src/engine/minion.ts';
+import { discoverCards } from '#src/client/tools/discoverCards.ts';
 
 /** A real choice: three big cards in the middle of a darkened table. One click takes one; nothing to close. */
 const props = defineProps<{ choices: string[]; kind: 'serviteur' | 'sort' | null }>();
@@ -14,13 +11,7 @@ const emit = defineEmits<{ choose: [index: number] }>();
 
 const chosen = ref<number | null>(null);
 const hovered = ref<number | null>(null);
-const cards = computed(() => props.choices.map((id): ShownCard | null => {
-  if (props.kind === 'sort') return SPELL_BY_ID[id] ? { kind: 'spell', spell: SPELL_BY_ID[id] } : null;
-  const card = CARD_BY_ID[id];
-  if (!card) return null;
-  const { cardId, name, camp, tier, atk, hp, keywords, effects, golden } = makeMinion(card, -1);
-  return { kind: 'minion', face: { cardId, name, camp, tier, atk, hp, keywords, effects, golden } };
-}));
+const cards = computed(() => discoverCards(props.choices, props.kind));
 
 function choose(index: number): void {
   if (chosen.value !== null) return;

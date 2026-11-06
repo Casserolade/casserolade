@@ -18,6 +18,8 @@ defineEmits<{ career: [] }>();
 
 const rect = ref<{ left: number; top: number; width: number; height: number } | null>(null);
 const below = ref(false);
+/** On a phone, the instruction never covers what it points at: below the table when that is in the upper half. */
+const atBottom = computed(() => rect.value !== null && rect.value.top + rect.value.height / 2 < window.innerHeight * 0.5);
 
 function measure(): void {
   const selectors = props.step ? (TUTORIAL_TARGETS[props.step.fini] ?? []) : [];
@@ -61,7 +63,7 @@ const ringStyle = computed(() => (rect.value ? {
   <div class="guide" aria-live="polite">
     <div class="stage">
       <Transition name="say" mode="out-in">
-        <div v-if="step" :key="step.fini" class="bubble" :class="{ last: learned }" :style="bubbleTop">
+        <div v-if="step" :key="step.fini" class="bubble" :class="{ last: learned, 'at-bottom': atBottom }" :style="bubbleTop">
           <span class="kicker">{{ learned ? 'Bravo' : 'Tutoriel' }}</span>
           <p><RichText :text="step.texte" /></p>
           <AppButton v-if="learned" class="career" primary @click="$emit('career')">Passer à la carrière</AppButton>
@@ -111,4 +113,16 @@ const ringStyle = computed(() => (rect.value ? {
 .below .arrow { top: calc(100% + 6px); bottom: auto; rotate: 180deg; }
 @keyframes ring-pulse { 50% { box-shadow: 0 0 0 4px rgb(20 17 12 / 0.7), 0 0 40px 12px rgb(255 224 102 / 0.9); } }
 @keyframes arrow-bob { 50% { transform: translateY(-12px); } }
+</style>
+
+<style>
+/*
+ * The phone version (html.mobile, /m/): no table of 1920×1080, the instruction is a band across the screen. Not
+ * scoped: Vue's :global() keeps only `html.mobile` of such a selector, and would style the page itself.
+ */
+html.mobile .guide .stage { position: static; translate: none; width: auto; height: auto; }
+html.mobile .guide .bubble { position: fixed; left: 10px; right: 10px; top: calc(env(safe-area-inset-top) + 94px); width: auto; padding: 10px 14px 12px; border-width: 3px; border-radius: 16px; font-size: 0.95rem; box-shadow: 4px 6px 0 rgb(0 0 0 / 0.35), 0 0 20px rgb(255 220 90 / 0.35); }
+html.mobile .guide .bubble.at-bottom { top: auto; bottom: calc(env(safe-area-inset-bottom) + 92px); }
+html.mobile .guide .kicker { margin-bottom: 4px; font-size: 1.05rem; }
+html.mobile .guide .career { margin-top: 8px; font-size: 1.1rem; }
 </style>

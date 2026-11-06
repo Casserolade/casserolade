@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { computed, ref, shallowRef, watch } from 'vue';
+import { computed, inject, ref, shallowRef, watch } from 'vue';
 import type { BotLevel } from '#src/bots/bots.ts';
 import AchievementsScreen from '#src/client/screens/AchievementsScreen.vue';
 import FailureScreen from '#src/client/screens/FailureScreen.vue';
 import GameScreens from '#src/client/screens/GameScreens.vue';
-import HomeScreen from '#src/client/screens/HomeScreen.vue';
 import StoryFlow from '#src/client/screens/story/StoryFlow.vue';
 import TutorialFlow from '#src/client/screens/tutorial/TutorialFlow.vue';
+import { SCREEN_SET } from '#src/client/const/screenSet.ts';
+import type { ScreenSet } from '#src/client/const/screenSet.ts';
 import { createLocalTransport } from '#src/client/services/createLocalTransport.ts';
 import { createWebSocketTransport } from '#src/client/services/createWebSocketTransport.ts';
 import { clearLocalGame, interruptedNotice, markLocalGame, takeInterruptedGame } from '#src/client/services/interruptedGame.ts';
@@ -30,6 +31,9 @@ const ROOM_GONE_MESSAGE = 'Votre ancienne partie n\'existe plus.';
 /** Away from the home screen without a game store: the career, the tutorial, the achievements board. */
 type Elsewhere = 'story' | 'tutorial' | 'achievements';
 type SoloSettings = { botLevel: BotLevel; contexte: string };
+
+/** The computer's screens or the phone's: provided by the page's entry (desktop.ts, mobile.ts). */
+const screens = inject(SCREEN_SET) as ScreenSet;
 
 const params = new URLSearchParams(window.location.search);
 const seedParam = params.get('seed');
@@ -135,7 +139,8 @@ function backHomeWithError(message: string): void {
   <StoryFlow v-if="elsewhere === 'story'" @leave="elsewhere = null" />
   <TutorialFlow v-else-if="elsewhere === 'tutorial'" @leave="elsewhere = null" @career="elsewhere = 'story'" />
   <AchievementsScreen v-else-if="elsewhere === 'achievements'" @leave="elsewhere = null" />
-  <HomeScreen
+  <component
+    :is="screens.home"
     v-else-if="!store"
     :invite-code="inviteCode"
     :error="homeError"

@@ -183,13 +183,9 @@ function inspect(event: PointerEvent, card: ShownCard): void {
 </template>
 
 <style scoped>
+/* Placed and sized by the screen that shows it (position, left, top, width, height): a positioned box. */
 .shop-zone {
   --medal-w: calc(var(--s) * 150 * var(--fit, 1));
-  position: absolute;
-  left: calc(var(--s) * 326);
-  top: calc(var(--s) * 174);
-  width: calc(var(--s) * 1268);
-  height: calc(var(--s) * 252);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,7 +194,8 @@ function inspect(event: PointerEvent, card: ShownCard): void {
 .shop-move { transition: transform 0.22s ease-out; }
 /* Bought: gone at once (it is flying to the hand), the others slide over. */
 .shop-leave-active { display: none; animation: none !important; }
-.row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: nowrap; align-items: center; gap: calc(var(--s) * 30 * var(--fit, 1)); }
+/* The phone lets the counter wrap (--shop-wrap) and tightens it (--shop-gap): the spell and the casserole go below. */
+.row { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: var(--shop-wrap, nowrap); justify-content: center; align-items: center; gap: var(--shop-gap, calc(var(--s) * 30 * var(--fit, 1))); }
 .item { position: relative; cursor: pointer; touch-action: none; animation: shop-drop 0.5s cubic-bezier(0.3, 1.4, 0.5, 1) backwards; animation-delay: var(--drop-delay); }
 .item > :first-child { transition: transform 0.12s ease-out, filter 0.12s; }
 .item:hover > :first-child, .item:focus-visible > :first-child { transform: translateY(calc(var(--s) * -8)) scale(1.04); }

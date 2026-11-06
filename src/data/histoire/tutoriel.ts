@@ -55,7 +55,7 @@ export const TUTORIEL = {
     { fini: 'porte_parole', texte: 'Sébastien Delogu est **Porte-parole** : les ennemis doivent l\'attaquer avant les autres. Posez-le, il protège votre plateau.' },
     { fini: 'immunite', texte: 'Claude Guéant a l\'**Immunité** : le premier coup qu\'il reçoit est annulé. Elle tombe pendant le combat, et revient au suivant.' },
     { fini: 'fin_de_tour', texte: 'Sylvain Durif agit en **Fin de tour** : à la fin du recrutement, juste avant le combat, il donne +1/+1 à deux alliés au hasard. Posez-le, puis appuyez sur Prêt pour le voir jouer.' },
-    { fini: 'casserole_posee', texte: 'Une casserole ! Posez-la sur un politique : son avantage joue tout de suite, et pour toujours, encore plus fort sur son propriétaire. Son défaut, lui, dort. Pointez-la ensuite sous le médaillon : elle montre sa carte.' },
+    { fini: 'casserole_posee', texte: 'Une casserole ! Posez-la sur un politique : son avantage joue tout de suite, et pour toujours, encore plus fort sur son propriétaire. Son défaut, lui, dort. Pointez-la ensuite, ou touchez son politique : elle montre sa carte.' },
     { fini: 'scandale', texte: 'Une deuxième casserole sur le même politique : **Scandale** ! Pendant deux manches, les défauts de ses casseroles s\'appliquent : ici, du budget perdu, et il ne bouge plus.' },
     { fini: 'deplace', texte: 'Le cadenas : cloué par son scandale, il garde sa place. Les autres bougent autour de lui, et l\'ordre compte : glissez un autre politique à une autre place.' },
     { fini: 'triple', texte: 'Trois exemplaires du même politique fusionnent en une version dorée : stats doublées, et chaque effet compte double. Achetez des Cheminade.' },

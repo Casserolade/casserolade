@@ -74,8 +74,8 @@ export function isMinionItem(item: GestureItem): item is Extract<GestureItem, { 
   return 'minion' in item;
 }
 
-/** The zone under the pointer: by its height on the table only, across the whole width (DROP_ZONES). */
-function zoneAt(point: Point): Zone | null {
+/** The computer's zones: by the height on the table only, across the whole width (DROP_ZONES). */
+function tableZoneAt(point: Point): Zone | null {
   const stage = document.querySelector('.table .stage');
   if (!stage) return null;
   const box = stage.getBoundingClientRect();
@@ -92,11 +92,21 @@ function boardElement(uid: number): Element | null {
   return document.querySelector(`[data-board-uid="${uid}"]`);
 }
 
+/** What a screen may change in the gestures: where each zone is, and what a click or a touch does. */
+export interface GestureOptions {
+  view: () => PlayerView;
+  act: (action: PlayerAction) => void;
+  /** The zone under a point. The computer's table cuts it in bands; the phone asks its own sections. */
+  zoneAt?: (point: Point) => Zone | null;
+  /** A click on something of the table. The computer acts at once (`actOn`); the phone opens its card first. */
+  onTap?: (item: GestureItem, source: Element | null) => void;
+}
+
 /**
  * Every gesture of the recruitment: pick up, carry, drop, click, and aim at an ally.
  * Nothing changes in the game before the drop; every action goes through `act`, so the engine decides.
  */
-export function useTableGestures({ view, act }: { view: () => PlayerView; act: (action: PlayerAction) => void }) {
+export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: GestureOptions) {
   const dragging = shallowRef<Dragging | null>(null);
   const targeting = shallowRef<Targeting | null>(null);
   const pointer = ref<Point>({ x: 0, y: 0 });
@@ -225,8 +235,15 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
 
   // —— Clicks ——
 
+  /** A click, or a touch: the screen decides what it does (`onTap`), acting at once by default. */
   function click(item: GestureItem, source: Element): void {
     if (performance.now() < swallowUntil || targeting.value) return;
+    if (onTap) onTap(item, source);
+    else actOn(item, source);
+  }
+
+  /** What a click does on the computer, and the phone's card once its button is pressed: buy, lay down, cast. */
+  function actOn(item: GestureItem, source: Element | null): void {
     if (item.from === 'hand' && !isPlayable(item.minion.uid, view().hand.some((m) => m.uid === item.minion.uid))) return;
     if (item.from === 'hand-spell' && !isPlayable(item.held.uid, view().spells.some((s) => s.uid === item.held.uid))) return;
     const from = centerOf(source);
@@ -248,8 +265,19 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
     }
   }
 
+  /** On the board, a click picks the ally being aimed at; otherwise, on the phone, it opens its card. */
   function clickBoardMinion(uid: number): void {
-    if (targeting.value) chooseTarget(uid);
+    if (targeting.value) {
+      chooseTarget(uid);
+      return;
+    }
+    const index = board().findIndex((m) => m.uid === uid);
+    if (onTap && index >= 0 && performance.now() >= swallowUntil) onTap({ from: 'board', minion: board()[index], index }, boardElement(uid));
+  }
+
+  /** Sent back from its card on the phone: the coins burst from the button pressed. */
+  function sendBack(minion: Minion, source: Element | null): void {
+    sell(minion, centerOf(source) ?? pointer.value);
   }
 
   // —— Carrying ——
@@ -444,7 +472,7 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
     window.removeEventListener('keydown', handleKey);
   });
 
-  return { dragging, targeting, pointer, boardPreview, press, click, clickBoardMinion, chooseTarget, cancelTargeting, isCarried };
+  return { dragging, targeting, pointer, boardPreview, press, click, actOn, sendBack, clickBoardMinion, chooseTarget, cancelTargeting, isCarried };
 }
 
 export type TableGestures = ReturnType<typeof useTableGestures>;
