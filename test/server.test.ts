@@ -475,6 +475,22 @@ test('no player text can reach the page as HTML', () => {
   }
 });
 
+test('robots.txt, the sitemap, the icons and the search engine verification are served with their types', async () => {
+  const { server, port } = await startServer({}, { staticDir: 'assets/game' });
+  const base = `http://127.0.0.1:${port}`;
+  const robots = await fetch(`${base}/robots.txt`);
+  assert.match(robots.headers.get('content-type') ?? '', /^text\/plain/);
+  assert.match(await robots.text(), /^Sitemap: https:\/\/casserolade\.fr\/sitemap\.xml$/m);
+  const sitemap = await fetch(`${base}/sitemap.xml`);
+  assert.match(sitemap.headers.get('content-type') ?? '', /^application\/xml/);
+  const pages = [...(await sitemap.text()).matchAll(/<loc>(.+?)<\/loc>/g)].map((match) => match[1]);
+  assert.deepEqual(pages, ['https://casserolade.fr/', 'https://casserolade.fr/bestiaire', 'https://casserolade.fr/a-propos']);
+  assert.equal((await fetch(`${base}/favicon.ico`)).headers.get('content-type'), 'image/x-icon');
+  assert.equal((await fetch(`${base}/icone-192.png`)).headers.get('content-type'), 'image/png');
+  assert.equal(await (await fetch(`${base}/google4ee2fc5ee14f5830.html`)).text(), 'google-site-verification: google4ee2fc5ee14f5830.html');
+  await server.stop();
+});
+
 const BROWSER = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36';
 const PAGE_EVENT = JSON.stringify({ type: 'page', page: 'jeu', appareil: 'ordinateur', nouveau: true, premier: true, source: 'discord.com' });
 
