@@ -1,6 +1,11 @@
 # Changelog
 
-## Prochaine version
+## 0.2c — 6 novembre 2026
+
+**La fiche d'une carte**
+- La carte et l'explication de ses mots-clés s'affichent côte à côte : le tout tient à l'écran, et chaque mot-clé tient en une ligne ou deux.
+- Le texte d'une carte n'est plus coupé : ses casseroles se suivent sur une ou deux lignes, et un texte trop long perd sa fin, jamais sa première ligne.
+- Pointez une casserole sous un médaillon : elle montre sa carte, avec son avantage, son défaut et le bonus de son propriétaire, et dit où elle en est. Défaut qui dort, scandale en cours ou casserole oubliée, et bonus de propriétaire acquis ou non.
 
 **Doubler rapporte toujours**
 - Le « ×2 sur son propriétaire » des casseroles devient un bonus de propriétaire écrit sur chaque carte : « Sur Nicolas Sarkozy, en plus : +3/+3 ». Quatorze casseroles ne rapportaient presque rien de plus à leur propriétaire, parce qu'un mot-clé, un échange ou un oubli ne double pas. Sur son propriétaire, une casserole donne désormais ses nombres encore une fois, et au moins +1/+1 ; Mélenchon a un deuxième Hologramme, Fillon un deuxième Assistant fictif.
@@ -10,6 +15,8 @@
 - Rejoué par Lassalle, Chirac, Mitterrand ou Macron, un mot-clé que l'allié a déjà passe à un autre allié, au lieu de se perdre. Un mot-clé donné « au hasard » va toujours à un allié qui ne l'a pas : les deux Retours de Royal ne tombent plus sur le même.
 
 **Corrections**
+- Un Ralliement qui porte des casseroles ne rejoint plus un jeton : le jeton se retrouvait avec des casseroles, ce que la règle interdit. Posé sur un jeton, il prend sa propre place.
+- Un sort de découverte gardé en main découvre l'échelon où vous le lancez. Quand la partie n'a aucun politique du genre demandé à cet échelon (pas d'Héritage à l'échelon 4 sans le RN), il passe à l'échelon au-dessus : il redescendait, comme s'il gardait l'échelon de son achat.
 - Chirac posé à côté d'Hidalgo se détruisait lui-même en relançant son Annonce. Une Annonce qui détruit ne se relance plus, et une Annonce ciblée relancée vise un autre allié au hasard, jamais celui qui la relance. Seconde délibération et Tribune libre refusent un politique qui n'a rien à relancer.
 - Un triple ou un Ralliement ne prolonge plus un scandale en cours.
 - Bayrou compte un Ralliement doré pour un, et non pour trois.
@@ -29,7 +36,7 @@
 **Le tutoriel**
 - Il montre les mots-clés en jeu : Delogu est **Porte-parole**, Guéant a l'**Immunité**. Les mots-clés sont en gras dans la consigne.
 - Sylvain Durif apprend la **Fin de tour** : posé, il joue à la fin du recrutement, sous vos yeux, juste avant le combat.
-- Les casseroles, pas à pas : une première casserole, un bonus ; une deuxième sur le même politique, le scandale, qui le cloue sur place (le cadenas), et l'on déplace les autres autour de lui ; puis l'oubli du peuple, en dernier. Le Bracelet électronique est expliqué au passage.
+- Les casseroles, pas à pas : une première casserole, un bonus ; une deuxième sur le même politique, le scandale, qui le cloue sur place (le cadenas), et l'on déplace les autres autour de lui ; puis l'oubli du peuple, en dernier. Le Bracelet électronique est expliqué au passage, et l'on apprend à pointer une casserole pour relire sa carte.
 
 **Les voix**
 - Sur une partie, on n'entend jamais deux fois la même voix : politiques, animateurs et héros.
