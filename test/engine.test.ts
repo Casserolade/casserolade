@@ -14,7 +14,7 @@ import { CARDS, CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
 import { CASSEROLES } from '../src/data/casseroles.ts';
 import { HEROES, RANDOM_CONTEXT } from '../src/data/heroes.ts';
 import { PARAMS } from '../src/data/params.ts';
-import { SPELLS } from '../src/data/sorts.ts';
+import { SPELLS, SPELL_BY_ID } from '../src/data/sorts.ts';
 import { PLATEAUX, SECOND_TOUR, plateauFor } from '../src/data/plateaux.ts';
 import { playGame } from '../src/sim/simulate.ts';
 
@@ -435,25 +435,44 @@ test('Je traverse la rue trouve un politique gratuit de l\'échelon du joueur', 
   assert.equal(CARD_BY_ID[found.cardId].tier, p.tier);
 });
 
-/** Casts a discover spell at this tier and gives the tiers it offers. */
-function discoveredTiers(spellId: string, tier: number): number[] {
+/** Casts a discover spell at this tier: the tiers it offers, and the tiers where the game has a politician it may offer. */
+function discovered(spellId: string, tier: number): { tiers: number[]; candidateTiers: number[] } {
   const { game, p } = setup();
+  const trigger = SPELL_BY_ID[spellId].effects.find((effect) => effect.do === 'decouvrir')?.declencheur;
+  const candidateTiers = [...game.pool.keys()].filter((id) => !trigger || (CARD_BY_ID[id].effects ?? []).some((e) => e.when === trigger)).map((id) => CARD_BY_ID[id].tier);
   p.tier = tier;
   p.spells.push({ uid: 9001, spellId });
   assert.equal(applyAction(game, 0, { t: 'cast', uid: 9001 }).ok, true);
   assert.ok(p.discover && p.discover.options.length > 0);
-  return p.discover.options.map((id) => CARD_BY_ID[id].tier);
+  return { tiers: p.discover.options.map((id) => CARD_BY_ID[id].tier), candidateTiers };
 }
 
 test('« un politique de votre échelon » : la découverte ne propose jamais un échelon plus bas', () => {
   for (const tier of [2, 3, 4, 5, 6]) {
-    assert.deepEqual(discoveredTiers('motion_de_synthese', tier), [tier, tier, tier], `Motion de synthèse à l'échelon ${tier}`);
-    for (const tiers of [discoveredTiers('programme', tier), discoveredTiers('testament_politique', tier), discoveredTiers('ouverture', tier)]) {
-      // Fewer choices rather than a lower tier; a tier with no such card at all falls back to the closest one below.
-      assert.equal(new Set(tiers).size, 1, `un seul échelon proposé à l'échelon ${tier}`);
-      assert.ok(tiers[0] <= tier);
+    assert.deepEqual(discovered('motion_de_synthese', tier).tiers, [tier, tier, tier], `Motion de synthèse à l'échelon ${tier}`);
+    for (const spellId of ['programme', 'testament_politique', 'ouverture']) {
+      const { tiers, candidateTiers } = discovered(spellId, tier);
+      // Fewer choices rather than a lower tier. A tier with nothing to offer goes up; down only when nothing is above.
+      assert.equal(new Set(tiers).size, 1, `${spellId} : un seul échelon proposé à l'échelon ${tier}`);
+      const expected = Math.min(...candidateTiers.filter((t) => t >= tier));
+      assert.equal(tiers[0], Number.isFinite(expected) ? expected : Math.max(...candidateTiers), `${spellId} à l'échelon ${tier}`);
     }
   }
+});
+
+test('un sort de découverte gardé en main découvre l\'échelon où il est lancé, pas celui de son achat', () => {
+  // Sans le RN, pas d'Héritage d'échelon 4 : le Testament politique acheté à l'échelon 3 et lancé à l'échelon 4
+  // redescendait à l'échelon 3, celui de l'achat (6 novembre 2026). Il monte désormais : Hollande, à l'échelon 5.
+  const game = createGame({ seed: 5, seats: 2, heroes: ['attal', 'attal'], activeCamps: ['socialistes', 'macronie', 'republicains', 'reconquete', 'ecologistes'] });
+  const p = game.players[0];
+  p.budget = 100;
+  p.tier = 3;
+  p.shopSpells = ['testament_politique'];
+  assert.equal(applyAction(game, 0, { t: 'buy_spell', slot: 0 }).ok, true);
+  p.tier = 4;
+  const held = p.spells.find((s) => s.spellId === 'testament_politique') as { uid: number };
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
+  assert.deepEqual(p.discover?.options, ['hollande']);
 });
 
 test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () => {
