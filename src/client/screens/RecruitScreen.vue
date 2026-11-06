@@ -77,10 +77,10 @@ watch(tripleCount, (count, before) => {
 
 <template>
   <GameTable :plateau-id="view.plateau.id" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
-    <HostDesk :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
+    <HostDesk class="host-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
     <ScoreBoard :table="view.table" :seat="view.seat" :seen="view.seen" />
-    <ShopRow :view="view" :gestures="gestures" />
-    <BoardRow :board="view.board" :owned="owned" :gestures="gestures" :scandal-threshold="view.scandalThreshold" :round="view.round" :end-of-turn="store.endOfTurn.value" />
+    <ShopRow class="shop-place" :view="view" :gestures="gestures" />
+    <BoardRow class="board-place" :board="view.board" :owned="owned" :gestures="gestures" :scandal-threshold="view.scandalThreshold" :round="view.round" :end-of-turn="store.endOfTurn.value" />
     <EndOfTurnBanner v-if="store.endOfTurn.value?.banner.value" />
 
     <div class="hero-spot">
@@ -112,6 +112,10 @@ watch(tripleCount, (count, before) => {
 </template>
 
 <style scoped>
+/* Where the table's parts stand, in pixels of the 1920×1080 table. */
+.host-place { position: absolute; left: calc(var(--s) * 560); top: 0; }
+.shop-place { position: absolute; left: calc(var(--s) * 326); top: calc(var(--s) * 174); width: calc(var(--s) * 1268); height: calc(var(--s) * 252); }
+.board-place { position: absolute; left: calc(var(--s) * 316); top: calc(var(--s) * 452); width: calc(var(--s) * 1288); height: calc(var(--s) * 300); }
 .hero-spot { position: absolute; left: calc(var(--s) * 52); bottom: calc(var(--s) * 22); }
 .right-rail { position: absolute; right: calc(var(--s) * 40); top: calc(var(--s) * 300); width: calc(var(--s) * 220); display: flex; flex-direction: column; align-items: center; gap: calc(var(--s) * 30); }
 .right-rail .camps { padding: calc(var(--s) * 12); border-radius: calc(var(--s) * 18); background: rgb(12 16 32 / 0.8); }

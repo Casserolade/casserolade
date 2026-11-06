@@ -147,7 +147,8 @@ function roll(): void {
 </template>
 
 <style scoped>
-.host-desk { position: absolute; left: calc(var(--s) * 560); top: 0; width: calc(var(--s) * 800); height: calc(var(--s) * 160); z-index: 5; }
+/* Placed by the screen that shows it (position, left, top): 800 by 160 table pixels. */
+.host-desk { width: calc(var(--s) * 800); height: calc(var(--s) * 160); z-index: 5; }
 .desk {
   position: absolute;
   left: 0;

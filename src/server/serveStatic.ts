@@ -32,9 +32,12 @@ function resolveInside(root: string, urlPath: string): string | null {
   return absolute === root || absolute.startsWith(root + sep) ? absolute : null;
 }
 
-/** The file behind a URL: itself, or a page named without its extension (/a-propos for a-propos.html). */
+/**
+ * The file behind a URL: itself, a page named without its extension (/a-propos for a-propos.html), or the index of a
+ * folder (/m/ and /m for m/index.html, the phone version).
+ */
 async function findFile(root: string, urlPath: string): Promise<string | null> {
-  const paths = urlPath === '/' ? ['/index.html'] : extname(urlPath) || urlPath.endsWith('/') ? [urlPath] : [urlPath, `${urlPath}.html`];
+  const paths = urlPath.endsWith('/') ? [`${urlPath}index.html`] : extname(urlPath) ? [urlPath] : [urlPath, `${urlPath}.html`, `${urlPath}/index.html`];
   for (const path of paths) {
     const candidate = resolveInside(root, path);
     if (candidate && (await stat(candidate).catch(() => null))?.isFile()) return candidate;

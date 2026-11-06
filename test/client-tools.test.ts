@@ -734,7 +734,7 @@ test('shareGame: the share sheet on a phone, the link copied elsewhere, never an
   try {
     setup(true, async (data) => void shared.push(data), async (text) => void copied.push(text));
     assert.equal(await shareGame(), 'shared');
-    assert.deepEqual(shared, [SHARE_INVITE]);
+    assert.deepEqual([...shared], [SHARE_INVITE]);
     setup(false, async (data) => void shared.push(data), async (text) => void copied.push(text));
     assert.equal(await shareGame(), 'copied', 'a computer copies the link, even with a share sheet');
     assert.deepEqual(copied, [SHARE_INVITE.url]);

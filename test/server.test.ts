@@ -428,6 +428,12 @@ test('the game server serves the built client, and nothing outside its folder', 
   const bestiary = await fetch(`http://127.0.0.1:${port}/bestiaire`);
   assert.equal(bestiary.status, 200);
   assert.match(await bestiary.text(), /<div id="bestiaire">/);
+  // The phone version: the index of its folder, with or without the last slash.
+  for (const path of ['/m/', '/m']) {
+    const phone = await fetch(`http://127.0.0.1:${port}${path}`);
+    assert.equal(phone.status, 200, path);
+    assert.match(await phone.text(), /mobile\.ts/, path);
+  }
   for (const path of ['/../../package.json', '/%2e%2e/%2e%2e/package.json', '/..%2f..%2fpackage.json', '/absent.js', '/%zz']) {
     const response = await fetch(`http://127.0.0.1:${port}${path}`);
     assert.equal(response.status, 404, path);

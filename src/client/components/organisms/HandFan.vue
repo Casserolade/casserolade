@@ -6,10 +6,9 @@ import type { GestureItem, TableGestures } from '#src/client/stores/useTableGest
 import { fanLayout } from '#src/client/tools/fanLayout.ts';
 import { handCards } from '#src/client/tools/handCards.ts';
 import type { HandCard } from '#src/client/tools/handCards.ts';
-import { minionFace, scandalLeft } from '#src/client/tools/shownCard.ts';
+import { handCardShown } from '#src/client/tools/handCardShown.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
 import type { PlayerView } from '#src/engine/game.ts';
-import { tripleCopies } from '#src/engine/minion.ts';
 
 /** In design pixels of the 1920×1080 table. */
 const CARD_WIDTH = 196;
@@ -29,7 +28,6 @@ const props = defineProps<{ view: PlayerView; gestures: TableGestures }>();
 const cards = computed(() => handCards(props.view.hand, props.view.spells));
 const hovered = ref<number | null>(null);
 const isBusy = computed(() => props.gestures.dragging.value !== null || props.gestures.targeting.value !== null);
-const owned = computed(() => [...props.view.board, ...props.view.hand]);
 /** Something carried from the shop: the hand glows, brighter when it is right over it. */
 const receiving = computed(() => {
   const drag = props.gestures.dragging.value;
@@ -43,16 +41,7 @@ watch(isBusy, (busy) => busy && (hovered.value = null));
 const slots = computed(() => fanLayout(cards.value.length, hovered.value, FAN));
 
 function shown(card: HandCard): ShownCard {
-  if (card.kind === 'minion') {
-    const copies = card.minion.golden ? 0 : tripleCopies(owned.value, card.minion.cardId).length;
-    const { minion } = card;
-    return {
-      kind: 'minion',
-      face: minionFace(minion, { copies: copies >= 2 ? copies : 0, charges: minion.charges, scandalThreshold: props.view.scandalThreshold, scandalLeft: scandalLeft(minion, props.view.round) }),
-    };
-  }
-  if (card.kind === 'casserole') return { kind: 'casserole', casserole: card.casserole };
-  return { kind: 'spell', spell: card.spell, count: card.held.count, tier: card.held.tier, tract: props.view.tract };
+  return handCardShown(card, props.view);
 }
 
 function item(card: HandCard): GestureItem {

@@ -1,0 +1,3 @@
+/* The phone version, held upright: touched, never zoomed by a double tap, never pulled past its edges. */
+html.mobile { font-size: 16px; }
+html.mobile body { touch-action: manipulation; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }

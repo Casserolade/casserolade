@@ -40,6 +40,8 @@ export interface CombatStageOptions {
   criticalKills: Set<number>;
   speed: () => number;
   playSound: (name: SynthName, strength?: number) => void;
+  /** Where the medallions stand: the computer's table (combatLayout), or the phone held upright. */
+  layout?: typeof combatLayout;
 }
 
 /**
@@ -314,7 +316,7 @@ export class CombatStage {
     // PixiJS 8: dividing it by the resolution shrank the table toward the top left on any screen with a
     // device pixel ratio above 1.)
     const { screen } = this.app.renderer;
-    const layout = combatLayout(screen.width, screen.height, enemyOrder.length, ownOrder.length);
+    const layout = (this.options.layout ?? combatLayout)(screen.width, screen.height, enemyOrder.length, ownOrder.length);
     const place = (uid: number, position: { x: number; y: number }) => {
       const card = this.cards.get(uid);
       if (!card) return;

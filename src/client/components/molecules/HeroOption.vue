@@ -91,7 +91,8 @@ function sayIt(): void {
 .glossary { position: absolute; left: 50%; top: calc(100% + 0.6rem); z-index: 2; display: flex; flex-direction: column; gap: 0.35rem; width: 100%; padding: 0.6rem 0.8rem; translate: -50% 0; border-radius: 14px; border: 2px solid rgb(255 255 255 / 0.18); background: rgb(12 14 24 / 0.95); box-shadow: 0 10px 30px rgb(0 0 0 / 0.6); color: #e8eaf0; font: 500 0.95rem / 1.25 var(--font-card); text-align: left; pointer-events: none; opacity: 0; transition: opacity 0.12s; }
 .glossary strong { display: block; color: var(--color-accent); font: 800 1rem / 1.1 var(--font-card-title); }
 .hero:hover .glossary, .hero:focus-visible .glossary { opacity: 1; }
-@media (hover: none) { .glossary { opacity: 1; } }
+/* On a touch screen it is always shown: in the card's flow, never over the card below. */
+@media (hover: none) { .glossary { position: static; translate: none; opacity: 1; box-shadow: none; } }
 .polls { display: flex; gap: 0.5rem; margin-top: auto; font: 400 1.4rem / 1 var(--font-number); }
 .hp, .base { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.15rem 0.6rem; border-radius: 999px; border: 2px solid #e8ecf2; }
 .hp { background: #a8132a; }

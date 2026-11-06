@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { computed, onUnmounted, ref, watch } from 'vue';
+import { computed, inject, onUnmounted, ref, watch } from 'vue';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
-import LeaveGameButton from '#src/client/components/atoms/LeaveGameButton.vue';
 import AchievementBanner from '#src/client/components/molecules/AchievementBanner.vue';
-import CombatScreen from '#src/client/screens/CombatScreen.vue';
-import ChatPanel from '#src/client/components/organisms/ChatPanel.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import EliminatedScreen from '#src/client/screens/EliminatedScreen.vue';
 import EndScreen from '#src/client/screens/EndScreen.vue';
-import HeroScreen from '#src/client/screens/HeroScreen.vue';
 import QueueScreen from '#src/client/screens/QueueScreen.vue';
-import RecruitScreen from '#src/client/screens/RecruitScreen.vue';
 import WaitingRoomScreen from '#src/client/screens/WaitingRoomScreen.vue';
+import { SCREEN_SET } from '#src/client/const/screenSet.ts';
+import type { ScreenSet } from '#src/client/const/screenSet.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import type { Succes } from '#src/data/succes.ts';
+
+/** The computer's screens or the phone's, provided by the page's entry. */
+const screens = inject(SCREEN_SET) as ScreenSet;
 
 /** The table is slow to come: past this, the loading screen offers a way home. */
 const SLOW_LOADING_MS = 10_000;
@@ -57,7 +57,8 @@ function again(): void {
 </script>
 
 <template>
-  <CombatScreen
+  <component
+    :is="screens.combat"
     v-if="store.screen.value === 'combat' && store.combat.value"
     :key="store.combat.value.round"
     :combat="store.combat.value"
@@ -98,10 +99,10 @@ function again(): void {
     @leave="$emit('leave')"
     @settings="(options) => store.updateRoomSettings(options)"
   />
-  <HeroScreen v-else-if="store.screen.value === 'hero' && store.view.value" :view="store.view.value" :deadline="store.deadline.value" @choose="(i) => store.act({ t: 'hero', i })" />
-  <RecruitScreen v-else-if="store.screen.value === 'recruit' && store.view.value" :view="store.view.value" :store="store" :power-note="powerNote">
+  <component :is="screens.hero" v-else-if="store.screen.value === 'hero' && store.view.value" :view="store.view.value" :deadline="store.deadline.value" @choose="(i: number) => store.act({ t: 'hero', i })" />
+  <component :is="screens.recruit" v-else-if="store.screen.value === 'recruit' && store.view.value" :view="store.view.value" :store="store" :power-note="powerNote">
     <template #side-top><slot name="recruit-side" /></template>
-  </RecruitScreen>
+  </component>
   <EliminatedScreen
     v-else-if="store.screen.value === 'eliminated' && store.view.value"
     :view="store.view.value"
@@ -116,24 +117,15 @@ function again(): void {
       <AppButton @click="$emit('leave')">Retour à l'accueil</AppButton>
     </template>
   </MenuBackdrop>
-  <div v-if="inGame" class="corner">
-    <LeaveGameButton class="leave" @leave="$emit('leave')" />
-  </div>
-  <div v-if="showChat" class="corner chat-layer">
-    <ChatPanel floating :messages="store.chat.value" :seat="seat" @send="(text) => store.sendChat(text)" />
-  </div>
-  <p v-if="store.connection.value === 'reconnecting'" class="reconnecting" role="status">Connexion perdue : reconnexion en cours…</p>
-  <p v-if="store.notice.value" class="notice" role="status">{{ store.notice.value }}</p>
+  <component :is="screens.frame" :in-game="inGame" :show-chat="showChat" :messages="store.chat.value" :seat="seat" @leave="$emit('leave')" @send="(text: string) => store.sendChat(text)" />
+  <p v-if="store.connection.value === 'reconnecting'" class="reconnecting game-reconnecting" role="status">Connexion perdue : reconnexion en cours…</p>
+  <p v-if="store.notice.value" class="notice game-notice" role="status">{{ store.notice.value }}</p>
 </template>
 
 <style scoped>
 .loading { margin-top: 40dvh; color: #ffe27a; font: 400 2.2rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 5px var(--color-ink); paint-order: stroke fill; animation: loading 1.2s ease-in-out infinite; }
 .slow { color: #c9cfdc; font-size: 1.2rem; }
 @keyframes loading { 50% { opacity: 0.5; } }
-/* The table's own frame, over every game screen: the door sits under the sound, in the top right corner. */
-.corner { position: fixed; z-index: 60; left: 50%; top: 50%; width: calc(var(--s) * 1920); height: calc(var(--s) * 1080); translate: -50% -50%; pointer-events: none; }
-.chat-layer { z-index: 61; }
-.leave { position: absolute; right: calc(var(--s) * 26); top: calc(var(--s) * 100); --leave-size: calc(var(--s) * 64); }
 .reconnecting {
   position: fixed;
   z-index: 75;
@@ -171,4 +163,13 @@ function again(): void {
 }
 @keyframes notice-in { from { transform: scale(0.4); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .reconnecting { animation: none; } }
+</style>
+
+<style>
+/*
+ * The phone version (html.mobile, /m/): the notices at a reading size, under the bar, instead of in pixels of the
+ * computer's table. Not scoped: Vue's :global() keeps only `html.mobile` of such a selector.
+ */
+html.mobile .game-notice { top: calc(env(safe-area-inset-top) + 100px); bottom: auto; max-width: calc(100vw - 24px); padding: 8px 16px; border-width: 3px; border-radius: 18px; font-size: 1rem; box-shadow: 4px 5px 0 rgb(0 0 0 / 0.35); }
+html.mobile .game-reconnecting { top: calc(env(safe-area-inset-top) + 8px); padding: 6px 14px; border-width: 3px; border-radius: 18px; font-size: 0.95rem; box-shadow: 4px 5px 0 rgb(0 0 0 / 0.35); }
 </style>
