@@ -2,7 +2,7 @@ import type { Camp, Casserole, CasseroleBonus, CombatEvent, Context, Counter, Ef
 import type { CombatRecord, Game, GamePhase, Player, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
-import { effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
+import { canRallyOnto, effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { insertAroundLocked, reorderAroundLocked } from './reorderAroundLocked.ts';
 import {
@@ -319,6 +319,7 @@ function playFromHand(game: Game, p: Player, m: Minion, to: number, targetUid?: 
     if (!m.keywords.includes('ralliement')) return fail('Seul un Ralliement peut rejoindre un allié.');
     const onto = p.board.find((x) => x.uid === ontoUid);
     if (!onto) return fail('Allié introuvable.');
+    if (!canRallyOnto(onto, m)) return fail('Un jeton ne peut pas porter de casserole.');
     host = onto;
   } else if (p.board.length >= boardLimit(game, p)) {
     return fail('Plateau complet.');

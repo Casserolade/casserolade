@@ -8,6 +8,7 @@ import { DROP_ZONES } from '#src/client/const/dropZones.ts';
 import { insertionIndex } from '#src/client/tools/insertionIndex.ts';
 import { nearestInsertion } from '#src/client/tools/nearestInsertion.ts';
 import { nearestSlotIndex } from '#src/client/tools/nearestSlotIndex.ts';
+import { ralliesOnto } from '#src/client/tools/ralliesOnto.ts';
 import type { SlotBox } from '#src/client/tools/nearestSlotIndex.ts';
 import { zoneForTableY } from '#src/client/tools/zoneForTableY.ts';
 import { allyTargets, annonceNeedsTarget, destroysTarget, heldSpellEffects, spellNeedsTarget, spellTargets } from '#src/client/tools/playTargets.ts';
@@ -332,7 +333,7 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
         return;
       case 'hand':
         if (aim.zone === 'shop') sell(item.minion, point);
-        else if (aim.zone === 'board' && item.minion.keywords.includes('ralliement') && aim.uid !== null) play(item.minion, aim.index, aim.uid);
+        else if (aim.zone === 'board' && ralliesOnto(item.minion, aim.uid, board())) play(item.minion, aim.index, aim.uid ?? undefined);
         else if (aim.zone === 'board') play(item.minion, aim.index);
         return;
       case 'hand-spell': {
@@ -383,7 +384,7 @@ export function useTableGestures({ view, act }: { view: () => PlayerView; act: (
       return { ...still, order: reorderAroundLocked(current, item.index, aim.index, (m) => m.locked) ?? current, ghost: item.minion.uid };
     }
     if (item.from === 'hand') {
-      if (item.minion.keywords.includes('ralliement') && aim.uid !== null) return { ...still, host: aim.uid };
+      if (ralliesOnto(item.minion, aim.uid, current)) return { ...still, host: aim.uid };
       if (current.length >= view().boardLimit) return still;
       const ghost = { ...item.minion, uid: GHOST_UID };
       return { ...still, order: insertAroundLocked(current, ghost, aim.index, (m) => m.locked) ?? current, ghost: GHOST_UID };

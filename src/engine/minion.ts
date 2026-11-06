@@ -85,6 +85,14 @@ export function rallyEffect(m: Pick<Minion, 'cardId' | 'golden'>, eff: Effect): 
   return copy;
 }
 
+/**
+ * Un Ralliement qui porte des casseroles, même oubliées, ne rejoint pas un jeton : un jeton n'en porte jamais. Le fuzz
+ * l'a trouvé le 6 novembre 2026 : Lecornu doré, avec ses casseroles, sur un Électeur fantôme.
+ */
+export function canRallyOnto(host: Pick<Minion, 'token'>, m: Pick<Minion, 'casseroles'>): boolean {
+  return !host.token || m.casseroles.length === 0;
+}
+
 /** L'effet de carte ou de casserole dont celui-ci vient : lui-même, sauf pour une copie ralliée. */
 export function effectOrigin(eff: Effect): Effect {
   return RALLIED_ORIGIN.get(eff) ?? eff;
