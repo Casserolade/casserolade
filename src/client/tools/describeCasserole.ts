@@ -1,5 +1,6 @@
 import type { Casserole } from '#src/engine/types.ts';
 import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
+import { casseroleDefects } from '#src/client/tools/casseroleDefects.ts';
 import { describeEffect } from '#src/client/tools/describeEffect.ts';
 import { signed } from '#src/client/tools/signed.ts';
 import { TOKENS } from '#src/data/cards.ts';
@@ -23,11 +24,7 @@ export function describeCasserole(casserole: Casserole): string[] {
   if (casserole.aloneBonus) lines.push(`+${casserole.aloneBonus}/+${casserole.aloneBonus} en combat s'il est seul de son camp`);
   if (casserole.forgetsAll) lines.push('Le peuple oublie tout, tout de suite');
   if ((casserole.charges ?? 1) > 1) lines.push('Compte double : fait **Scandale** à elle seule');
-  const defects: string[] = [];
-  if ((casserole.budgetPerRound ?? 0) < 0) defects.push(`${casserole.budgetPerRound} budget par manche`);
-  if (casserole.locked) defects.push('ne bouge plus');
-  if (casserole.silence) defects.push('perd ses effets');
-  if (casserole.hpLossOnDeath) defects.push(`vous perdez ${casserole.hpLossOnDeath} sondages à sa mort`);
+  const defects = casseroleDefects(casserole);
   if (defects.length > 0) lines.push(`**Scandale** : ${defects.join(', ')}`);
   return lines;
 }

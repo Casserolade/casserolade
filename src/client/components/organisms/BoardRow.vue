@@ -11,7 +11,10 @@ import { endOfTurnNoteLabel } from '#src/client/tools/endOfTurnNoteLabel.ts';
 import type { EndOfTurnPlayback } from '#src/client/stores/createEndOfTurnPlayback.ts';
 import { braceletTargetUid, casseroleOutcome } from '#src/client/tools/casseroleOutcome.ts';
 import type { CasseroleOutcome } from '#src/client/tools/casseroleOutcome.ts';
+import { pointedCasseroleIndex } from '#src/client/tools/pointedCasseroleIndex.ts';
 import { minionFace, scandalLeft } from '#src/client/tools/shownCard.ts';
+import type { ShownCard } from '#src/client/tools/shownCard.ts';
+import { wornCasserole } from '#src/client/tools/wornCasserole.ts';
 import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
 import { SPELL_BY_ID } from '#src/data/sorts.ts';
 import { tripleCopies } from '#src/engine/minion.ts';
@@ -93,15 +96,23 @@ function press(event: PointerEvent, minion: Minion): void {
   props.gestures.press(event, { from: 'board', minion, index: realIndex(minion) });
 }
 
-function inspect(event: PointerEvent, minion: Minion): void {
-  if (minion.uid < 0) return;
+/** The card of what the pointer is on: one of the casseroles hanging under the politician, or the politician. */
+function inspectedCard(minion: Minion, casseroleIndex: number | null): ShownCard {
+  const casserole = casseroleIndex === null ? undefined : CASSEROLE_BY_ID[minion.casseroles[casseroleIndex]];
+  if (casserole && casseroleIndex !== null) return { kind: 'casserole', casserole, worn: wornCasserole(minion, casseroleIndex, props.round) };
   const face = minionFace(minion, {
     copies: copiesOf(minion),
     charges: minion.charges,
     scandalThreshold: props.scandalThreshold,
     scandalLeft: scandalLeft(minion, props.round),
   });
-  cardInspector.show({ kind: 'minion', face }, event.currentTarget as Element);
+  return { kind: 'minion', face, onBoard: true };
+}
+
+/** Over the medallion or one of its casseroles: the card comes up beside the slot, the same place for both. */
+function inspect(event: PointerEvent, minion: Minion): void {
+  if (minion.uid < 0) return;
+  cardInspector.show(inspectedCard(minion, pointedCasseroleIndex(event.target)), event.currentTarget as Element);
 }
 </script>
 
@@ -130,7 +141,7 @@ function inspect(event: PointerEvent, minion: Minion): void {
         @pointerdown="press($event, minion)"
         @click="gestures.clickBoardMinion(minion.uid)"
         @keydown.enter.space.prevent="gestures.clickBoardMinion(minion.uid)"
-        @pointerenter="inspect($event, minion)"
+        @pointerover="inspect($event, minion)"
         @pointerleave="cardInspector.hide()"
       >
         <MedallionToken

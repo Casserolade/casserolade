@@ -26,7 +26,8 @@ const SPELL_SHOCK_MS = SHOCK_MS + 700;
 
 /**
  * A minion on the table: an oval portrait, attack bottom left, health bottom right, nothing to read.
- * Its keywords show as shapes around it; small icons say what its card hides. The card comes up on hover.
+ * Its keywords show as shapes around it; small icons say what its card hides. The card comes up on hover, and each
+ * casserole hanging under it shows its own.
  * Sized by --medal-w on a parent: everything inside is in 1/150 of it.
  */
 const props = withDefaults(defineProps<{
@@ -204,6 +205,7 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
         class="pan"
         :class="{ medal: pan.medal, smoking: inScandal && !pan.medal, minted: pan.medal && isMinted(index) }"
         :style="{ '--pan-index': index }"
+        :data-casserole-index="index"
       >
         <img v-if="pan.image" :key="pan.medal && isMinted(index) ? `minted-${minted?.key}` : 'pan'" :src="assetUrl(pan.image)" alt="" />
         <span v-if="pan.medal && isMinted(index)" :key="`glint-${minted?.key}`" class="glint" aria-hidden="true" />
@@ -455,6 +457,9 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
 .pan { position: relative; width: calc(var(--mu) * 34); height: calc(var(--mu) * 34); transform-origin: 50% -40%; animation: pan-swing 2.2s ease-in-out infinite; animation-delay: calc(var(--pan-index) * -0.5s); }
 .pan::before { content: ''; position: absolute; left: 50%; top: calc(var(--mu) * -12); width: 1px; height: calc(var(--mu) * 14); background: #ccc; }
 .pan img { width: 100%; height: 100%; object-fit: contain; }
+/* Pointed at, a casserole shows its own card (BoardRow): it grows a little to say so. */
+.pan { cursor: help; transition: scale 0.12s ease-out; }
+.pan:hover { z-index: 1; scale: 1.3; }
 .rumor { align-self: center; padding: 0 calc(var(--mu) * 6); border-radius: calc(var(--mu) * 10); background: #5a4a14; color: #ffe9a0; font: 400 calc(var(--mu) * 20) / 1.3 var(--font-number); white-space: nowrap; }
 /* Forgotten: a shiny medal that no longer swings. */
 .pan.medal { animation: none; filter: sepia(1) saturate(4) hue-rotate(-12deg) brightness(1.15) drop-shadow(0 0 calc(var(--mu) * 4) rgb(255 210 80 / 0.8)); }

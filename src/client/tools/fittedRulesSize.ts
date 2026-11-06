@@ -6,7 +6,8 @@ const LINE_HEIGHT = 1.1;
 const GAP = 6;
 /** The average width of a character of Alegreya Sans, as a share of the font size, word wrapping included. */
 const CHARACTER_WIDTH = 0.5;
-const SIZES = [42, 38, 34, 31, 28, 26, 24, 22, 20];
+/** Down to 16: a golden politician with four keywords and three casseroles still fits, and nothing is cut. */
+const SIZES = [42, 38, 34, 31, 28, 26, 24, 22, 20, 18, 16];
 
 /** How many rows these lines take at this size, each line starting a new row. */
 function rowsAt(lines: string[], size: number): number {
