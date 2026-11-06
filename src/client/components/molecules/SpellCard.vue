@@ -149,7 +149,8 @@ const rulesSize = computed(() => fittedRulesSize(lines.value));
   height: calc(var(--u) * 186);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* Safe: a text too long loses its end, never its first line. */
+  justify-content: safe center;
   gap: calc(var(--u) * 6);
   overflow: hidden;
   font-size: calc(var(--u) * var(--rules-size));

@@ -1,5 +1,6 @@
 import { cardRuleLines } from '#src/client/tools/describeEffect.ts';
 import { casseroleCardLines, spellCardLines } from '#src/client/tools/spellCardLines.ts';
+import type { WornCasserole } from '#src/client/tools/wornCasserole.ts';
 import { CARD_BY_ID } from '#src/data/cards.ts';
 import type { Camp, Casserole, Effect, Keyword, Spell } from '#src/engine/types.ts';
 
@@ -36,11 +37,14 @@ export function scandalLeft(minion: { scandal?: { until: number } }, round: numb
   return minion.scandal ? Math.max(1, minion.scandal.until - round) : 0;
 }
 
-/** Any card the table can show in full: a minion, a spell, or a casserole. */
+/**
+ * Any card the table can show in full: a minion, a spell, or a casserole. A minion of the board has its casseroles
+ * hanging under it, each one pointable; a casserole pointed there says what it does now (`worn`).
+ */
 export type ShownCard =
-  | { kind: 'minion'; face: MinionFace }
+  | { kind: 'minion'; face: MinionFace; onBoard?: boolean }
   | { kind: 'spell'; spell: Spell; count?: number; tier?: number; tract?: { atk: number; hp: number } }
-  | { kind: 'casserole'; casserole: Casserole };
+  | { kind: 'casserole'; casserole: Casserole; worn?: WornCasserole };
 
 /** The rule lines printed on a card, with its keywords between ** : what the glossary explains. */
 export function shownCardLines(card: ShownCard): string[] {

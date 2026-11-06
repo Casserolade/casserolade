@@ -10,6 +10,7 @@ import { gameArt } from '#src/client/stores/gameArt.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 import { cardFaceStyle } from '#src/client/tools/cardFaceStyle.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
+import { casseroleFlowLine } from '#src/client/tools/casseroleFlowLine.ts';
 import { cardRuleLines } from '#src/client/tools/describeEffect.ts';
 import { fittedNameSize } from '#src/client/tools/fittedNameSize.ts';
 import { fittedRulesSize } from '#src/client/tools/fittedRulesSize.ts';
@@ -68,8 +69,8 @@ const casseroleList = computed(() => props.casseroles.flatMap((id, index) => {
 }));
 const nameSize = computed(() => fittedNameSize(props.name));
 const rulesSize = computed(() => {
-  const all = [...lines.value, ...casseroleList.value.map((item) => item.name)];
-  return fittedRulesSize(all);
+  const names = casseroleList.value.map((item) => item.name);
+  return fittedRulesSize(names.length > 0 ? [...lines.value, casseroleFlowLine(names)] : lines.value);
 });
 const tones = computed(() => statTones(props.cardId, Boolean(props.golden), props.atk, props.hp));
 </script>
@@ -83,8 +84,10 @@ const tones = computed(() => statTones(props.cardId, Boolean(props.golden), prop
     <strong class="name" :style="{ '--name-size': nameSize }">{{ name }}</strong>
     <span class="rules" :style="{ '--rules-size': rulesSize }">
       <RichText v-for="line in lines" :key="line" :text="line" />
-      <span v-for="casserole in casseroleList" :key="casserole.key" class="casserole" :class="casserole.state">
-        <img v-if="casserole.icon" :src="assetUrl(casserole.icon)" alt="" />{{ casserole.name }}<span v-if="casserole.state === 'forgotten'" class="sr-only"> (oubliée)</span>
+      <span v-if="casseroleList.length" class="casseroles">
+        <span v-for="casserole in casseroleList" :key="casserole.key" class="casserole" :class="casserole.state">
+          <img v-if="casserole.icon" :src="assetUrl(casserole.icon)" alt="" />{{ casserole.name }}<span v-if="casserole.state === 'forgotten'" class="sr-only"> (oubliée)</span>
+        </span>
       </span>
     </span>
     <span class="medal attack" :class="`tone-${tones.atk}`"><span class="sr-only">Attaque </span>{{ atk }}</span>
@@ -150,7 +153,8 @@ const tones = computed(() => statTones(props.cardId, Boolean(props.golden), prop
   height: calc(var(--u) * 176);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* Safe: a text too long loses its end, never its first line. */
+  justify-content: safe center;
   gap: calc(var(--u) * 6);
   overflow: hidden;
   font-size: calc(var(--u) * var(--rules-size));
@@ -159,7 +163,9 @@ const tones = computed(() => statTones(props.cardId, Boolean(props.golden), prop
 }
 .rules > * { display: block; }
 .rules :deep(strong) { font-weight: 700; color: #6a1d08; }
-.casserole { display: flex; align-items: center; justify-content: center; gap: calc(var(--u) * 6); font-weight: 700; color: #7a2a12; }
+/* Its casseroles follow one another, wrapping like words: three of them take two rows, not three. */
+.casseroles { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 calc(var(--u) * 16); }
+.casserole { display: inline-flex; align-items: center; gap: calc(var(--u) * 6); font-weight: 700; color: #7a2a12; }
 .rules img { width: 1.1em; height: 1.1em; flex: none; }
 /* Forgotten: a medal, gold and harmless. In scandal: red hot. */
 .forgotten { color: #8a6410; }
