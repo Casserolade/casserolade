@@ -1,21 +1,26 @@
 import type { CombatEvent } from '../engine/types.ts';
 
+/**
+ * How long each event holds the stage before the next one, as nervous as Battlegrounds (7 November 2026): an attack
+ * lasts until its lunge lands, so that the blow that follows lands at the contact; a death plays on under what comes
+ * next. The client plays the two blows of one exchange almost together (combatEventGapMs), never slower than this.
+ */
 const DURATION_MS: Record<CombatEvent['e'], number> = {
-  debut: 900,
-  attaque: 450,
-  degats: 300,
-  immunite: 500,
-  polemique: 600,
-  resiste: 500,
-  stats: 250,
-  mot_cle: 250,
-  effet: 500,
-  mort: 500,
-  retour: 500,
-  penalite: 300,
-  invocation: 400,
-  exil: 500,
-  fin: 1200,
+  debut: 650,
+  attaque: 250,
+  degats: 360,
+  immunite: 380,
+  polemique: 450,
+  resiste: 400,
+  stats: 220,
+  mot_cle: 220,
+  effet: 420,
+  mort: 420,
+  retour: 450,
+  penalite: 250,
+  invocation: 350,
+  exil: 400,
+  fin: 800,
   /** La bulle du Célébrant : la petite phrase doit se lire. */
   celebration: 2200,
   reponse: 1800,

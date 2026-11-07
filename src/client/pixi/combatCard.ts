@@ -265,6 +265,13 @@ export class CombatCard {
     this.spotlight.visible = true;
   }
 
+  /** Its line was passed: back in its row at once, with its own face, the right way round. */
+  stopCelebrating(): void {
+    if (this.pose >= 0) return;
+    this.pose = -0.0001;
+    this.rig.settle();
+  }
+
   /** Plays a ground effect once. Without its images, the impact and the end still happen. */
   playEffect(name: string, onImpact: (() => void) | null = null, onFinished: (() => void) | null = null): void {
     const frames = this.textures.effects[name];

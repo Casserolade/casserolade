@@ -18,7 +18,7 @@ const emit = defineEmits<{ close: [] }>();
 
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
 const {
-  SPEEDS, playback, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
+  SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
 } = useCombatShow(props, () => emit('close'), stageHost);
@@ -60,7 +60,7 @@ const speechStyle = computed(() => {
     </div>
 
     <div v-if="!finished" class="controls">
-      <button v-for="value in SPEEDS" :key="value" type="button" class="control" :aria-pressed="speed === value" @click="playback.setSpeed(value)">×{{ value }}</button>
+      <button v-for="value in SPEEDS" :key="value" type="button" class="control" :aria-pressed="speed === value" @click="chooseSpeed(value)">×{{ value }}</button>
       <button type="button" class="control skip" @click="playback.skip()">Passer</button>
     </div>
     <p class="sr-only" aria-live="polite">{{ narration }}</p>

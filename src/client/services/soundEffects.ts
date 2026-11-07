@@ -4,6 +4,7 @@ import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { heardVoices } from '#src/client/stores/heardVoices.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
+import { releaseSpeech } from '#src/client/tools/releaseSpeech.ts';
 import { claimSpeech, claimVoice, createMixerState, varySound } from '#src/client/tools/soundMixer.ts';
 
 export type { SynthName } from '#src/client/services/synthSounds.ts';
@@ -28,6 +29,8 @@ const VOICE_GAIN = 0.45;
 /** A voice is a short sound effect: a longer file is faded out there. */
 const MAX_VOICE_SECONDS = 9;
 const VOICE_FADE_SECONDS = 0.4;
+/** A passed line fades out this fast: a cut, without a click. */
+const VOICE_CUT_SECONDS = 0.12;
 /** A hit this strong also gets the recorded punch, quietly. */
 const BIG_HIT = 1.4;
 const PUNCH_GAIN = 0.28;
@@ -62,6 +65,10 @@ export const soundSettings = { muted: ref(readStored(MUTED_KEY) === '1'), volume
 let context: AudioContext | null = null;
 let master: GainNode | null = null;
 const mixer = createMixerState();
+/** The real voice that speaks now: cut short when the player passes its line. */
+let speaking: { source: AudioBufferSourceNode; level: GainNode } | null = null;
+/** Bumped at each cut: a voice still loading when its line was passed never starts. */
+let voiceGeneration = 0;
 const samples = new Map<string, Promise<AudioBuffer | null>>();
 
 function masterLevel(): number {
@@ -159,9 +166,11 @@ export function preloadVoice(key: string | null): void {
 export async function playVoice(key: string | null): Promise<number> {
   const path = key ? gameArt.manifest.value.sons.citations?.[key] : undefined;
   if (!key || !path || soundSettings.muted.value || heardVoices.has(key)) return 0;
+  const generation = voiceGeneration;
   const buffer = await loadSample(`voice-${key}`, path);
   const graph = audio();
-  if (!buffer || !graph || soundSettings.muted.value) return 0;
+  // Passed while it was loading: it never starts.
+  if (!buffer || !graph || soundSettings.muted.value || generation !== voiceGeneration) return 0;
   const seconds = Math.min(buffer.duration, MAX_VOICE_SECONDS);
   if (!claimSpeech(mixer, performance.now(), seconds * 1000)) return 0;
   try {
@@ -174,6 +183,10 @@ export async function playVoice(key: string | null): Promise<number> {
     level.connect(graph.master);
     source.start(start);
     heardVoices.remember(key);
+    speaking = { source, level };
+    source.addEventListener('ended', () => {
+      if (speaking?.source === source) speaking = null;
+    });
     if (buffer.duration > MAX_VOICE_SECONDS) {
       level.gain.setValueAtTime(VOICE_GAIN, start + seconds - VOICE_FADE_SECONDS);
       level.gain.linearRampToValueAtTime(0, start + seconds);
@@ -184,6 +197,27 @@ export async function playVoice(key: string | null): Promise<number> {
     return 0;
   }
   return seconds * 1000;
+}
+
+/**
+ * The player passed the line: the voice that speaks fades out at once, and one still loading never starts. A voice
+ * once started is heard: heardVoices keeps it, it never plays again in this game.
+ */
+export function stopVoice(): void {
+  voiceGeneration++;
+  const voice = speaking;
+  speaking = null;
+  if (!voice || !context) return;
+  const now = context.currentTime;
+  try {
+    voice.level.gain.cancelScheduledValues(now);
+    voice.level.gain.setValueAtTime(voice.level.gain.value, now);
+    voice.level.gain.linearRampToValueAtTime(0, now + VOICE_CUT_SECONDS);
+    voice.source.stop(now + VOICE_CUT_SECONDS + 0.02);
+  } catch (error) {
+    console.error('Voice could not stop', error);
+  }
+  releaseSpeech(mixer, performance.now());
 }
 
 /** A recorded sound effect of the manifest, at a low gain and slightly varied. Silence if it is missing. */
