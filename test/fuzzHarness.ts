@@ -28,7 +28,7 @@ export const MAX_ROUNDS = 45;
 const KEYWORDS: Keyword[] = ['immunite', 'porte_parole', 'cumul', 'polemique', 'retour', 'ni_droite_ni_gauche', 'ralliement', 'vedette'];
 const VIEW_KEYS = [
   'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'buyCost',
-  'rollCost', 'freeRolls', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
+  'rollCost', 'freeRolls', 'relaunched', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
   'shopSpells', 'shopSpellCosts', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'discoverKind', 'tract', 'counters', 'stats', 'camps',
   'contextId', 'params', 'seen', 'table',
 ].sort();

@@ -116,6 +116,8 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
   let swallowUntil = 0;
 
   const board = () => view().board;
+  /** What a cast depends on beyond its target, as the engine reads it: the shop, the room on the board, the relaunches. */
+  const spellTable = () => ({ shopSize: view().shop.length, boardLimit: view().boardLimit, relaunched: view().relaunched ?? [] });
 
   // —— Actions, with the effect that answers each one ——
 
@@ -200,7 +202,7 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
 
   /** A spell that needs a minion: straight on it if there is only one and it loses nothing, else the player points. */
   function aimSpell(held: HandSpell, card: ShownCard, origin: Point): void {
-    const valid = spellTargets(held, board());
+    const valid = spellTargets(held, board(), spellTable());
     if (valid.length === 0) {
       send({ t: 'cast', uid: held.uid });
       return;
@@ -372,7 +374,7 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
           cast(item.held, item.card, undefined, point);
           return;
         }
-        const valid = spellTargets(item.held, board());
+        const valid = spellTargets(item.held, board(), spellTable());
         if (aim.uid !== null && valid.includes(aim.uid)) cast(item.held, item.card, aim.uid, point);
         else aimSpell(item.held, item.card, point);
         return;
@@ -404,7 +406,7 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
     if (!drag) return still;
     const { item, aim } = drag;
     if (item.from === 'hand-spell' && spellNeedsTarget(item.held)) {
-      const valid = spellTargets(item.held, current);
+      const valid = spellTargets(item.held, current, spellTable());
       return { ...still, valid, host: aim.uid !== null && valid.includes(aim.uid) ? aim.uid : null };
     }
     if (aim.zone !== 'board') return item.from === 'board' ? { ...still, ghost: item.minion.uid } : still;
