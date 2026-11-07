@@ -24,11 +24,7 @@ const DEATHS: Record<DeathKind, Death> = {
   light: lightDeath,
 };
 
-/**
- * Plays a politician's death. The death owns the card from now on, and destroys it once it is over. Asked for less
- * motion, nobody is thrown across the screen nor blown up: it breaks, or goes out in light.
- */
+/** Plays a politician's death (deathPlayed.ts says which). It owns the card from now on, and destroys it once over. */
 export function playDeath(kind: DeathKind, card: CombatCard, scene: DeathScene, blow: KillingBlowFx): StageEffect {
-  const calmer = kind === 'eject' || kind === 'pop' ? 'light' : kind === 'explode' ? 'shatter' : kind;
-  return DEATHS[scene.reducedMotion ? calmer : kind](card, scene, blow);
+  return DEATHS[kind](card, scene, blow);
 }

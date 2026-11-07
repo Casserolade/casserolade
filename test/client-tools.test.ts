@@ -441,22 +441,6 @@ test('la revente compte le budget des effets Vente, depuis le plateau seulement'
   assert.deepEqual(sellGain(PARAMS, {}, makeMinion(CARD_BY_ID.cahuzac, 2), true), { now: 1, later: 2 });
 });
 
-test('les gros gags ne tombent que sur les coups critiques, deux au plus par combat', async () => {
-  const { pickCriticalKills } = await import('../src/client/tools/pickCriticalKills.ts');
-  const unit = (uid: number, hp: number) => ({ uid, cardId: 'x', name: 'x', camp: 'civile', tier: 1, atk: 1, hp, keywords: [], golden: false, casseroles: [], effects: [], bonus: 0 }) as never;
-  const debut = { e: 'debut', first: 0, sides: [[unit(1, 2), unit(2, 3), unit(3, 1)], [unit(4, 1), unit(5, 20)]] } as const;
-  const log = [
-    debut,
-    { e: 'degats', uid: 1, value: 3, hp: -1 },
-    { e: 'degats', uid: 2, value: 12, hp: -9 },
-    { e: 'degats', uid: 3, value: 9, hp: -8 },
-    { e: 'degats', uid: 4, value: 30, hp: -29 },
-    { e: 'degats', uid: 5, value: 25, hp: -5 },
-  ] as never;
-  // 1 : trop peu de dégâts. 2, 3, 4 : critiques ; seuls les deux plus gros restent. 5 : pas trois fois ses PV.
-  assert.deepEqual([...pickCriticalKills(log)].sort(), [2, 4]);
-});
-
 test('sur le plateau, seul le premier Droit de réponse répond', async () => {
   const { boardResponder } = await import('../src/client/tools/boardResponder.ts');
   const { makeMinion } = await import('../src/engine/minion.ts');

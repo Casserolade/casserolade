@@ -7,6 +7,7 @@ import { screenPlacement } from '../src/client/tools/screenPlacement.ts';
 import { combatEventGapMs } from '../src/client/tools/combatEventGapMs.ts';
 import { compactStat } from '../src/client/tools/compactStat.ts';
 import { deathKind } from '../src/client/tools/deathKind.ts';
+import { deathPlayed } from '../src/client/tools/deathPlayed.ts';
 import { elasticPop } from '../src/client/tools/elasticPop.ts';
 import { hitStopSeconds } from '../src/client/tools/hitStopSeconds.ts';
 import { hitTrauma } from '../src/client/tools/hitTrauma.ts';
@@ -188,6 +189,17 @@ test('each death fits its blow and its politician', () => {
   assert.equal(deathKind(unit(1, { keywords: ['vedette'] }), { value: 2, before: 2 }, false), 'tv-off');
   assert.equal(deathKind(unit(1, { token: true }), { value: 2, before: 2 }, false), 'pop');
   assert.equal(deathKind(unit(1), undefined, false), 'light');
+});
+
+test('asked for less motion, or without WebGL, the deaths stay gentle', () => {
+  assert.equal(deathPlayed('eject', false, true), 'eject');
+  assert.equal(deathPlayed('eject', true, true), 'light');
+  assert.equal(deathPlayed('pop', true, true), 'light');
+  assert.equal(deathPlayed('explode', true, true), 'shatter');
+  assert.equal(deathPlayed('burn', true, true), 'burn');
+  assert.equal(deathPlayed('burn', false, false), 'light');
+  assert.equal(deathPlayed('tv-off', false, false), 'light');
+  assert.equal(deathPlayed('gold', true, false), 'gold');
 });
 
 test('the last death of the beaten side is the finale; a comeback is not planned', () => {
