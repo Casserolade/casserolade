@@ -581,10 +581,12 @@ function handMove(view: PlayerView, bot: BotState, margin = 3): PlayerAction | n
   if (candidates.length === 0) return null;
   const ranked = [...candidates].sort((a, b) => Number(b.golden) - Number(a.golden) || minionPower(b) - minionPower(a));
   const m = ranked[0];
-  // Un Ralliement rejoint le plus fort quand le plateau est plein, ou quand il n'a presque pas de corps.
+  // Un Ralliement rejoint le plus fort quand le plateau est plein, quand il n'a presque pas de corps, ou quand un
+  // allié en profite (Maillard, Bayrou, Macron qui double l'hôte : re-spécification du 7 novembre 2026).
   if (m.keywords.includes('ralliement') && view.board.length > 0) {
     const host = strongest(view.board.filter((x) => !x.token));
-    if (host && (view.board.length >= view.boardLimit || m.atk + m.hp <= 6)) return { t: 'play', uid: m.uid, onto: host.uid };
+    const payoff = view.board.some((x) => x.effects.some((e) => e.when === 'rallie' || e.do === 'buff_par_ralliement'));
+    if (host && (view.board.length >= view.boardLimit || m.atk + m.hp <= 6 || payoff)) return { t: 'play', uid: m.uid, onto: host.uid };
   }
   if (view.board.length < view.boardLimit) {
     const target = targetFor(m.effects.filter((e) => e.when === 'annonce'), view.board, null);

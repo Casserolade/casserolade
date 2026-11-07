@@ -23,7 +23,7 @@ test('a spell never names the same recipient twice', () => {
 
 test('the legends say what they double', () => {
   assert.deepEqual(cardRuleLines(CARD_BY_ID.cohn_bendit), ['**Fin de tour** : doublez les stats de ses voisins.']);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['**Héritage** : doublez les stats de vos autres Socialistes pour de bon.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['**Héritage** : doublez les stats de vos autres Socialistes pour de bon. Une fois par combat.']);
   assert.match(cardRuleLines(CARD_BY_ID.melenchon).join(' '), /vos \*\*Tracts\*\* donnent le double pour le reste de la partie/);
   assert.match(cardRuleLines(CARD_BY_ID.zemmour).join(' '), /gagne \+1\/\+1 par actualisation faite cette partie/);
   assert.match(cardRuleLines(CARD_BY_ID.schiappa).join(' '), /^\*\*Ni droite ni gauche\*\*\. \*\*Vedette\*\*\. Tous les deux sorts que vous lancez, gagne \+1\/\+1\./);

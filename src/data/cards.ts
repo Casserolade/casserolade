@@ -102,9 +102,12 @@ export const CARDS: Card[] = [
     kw: ['vedette'],
     fx: [fx('annonce', 'aleatoire', motCle('retour')), fx('annonce', 'aleatoire', motCle('retour')), fx('celebration', 'allie_suivant', buff(2, 2))],
   }),
-  card('glucksmann', 'Raphaël Glucksmann', 'socialistes', 5, 8, 11, { fx: [fx('meeting', 'allies', { do: 'declencher', trigger: 'heritage' }, { once: 'combat' })] }),
+  card('glucksmann', 'Raphaël Glucksmann', 'socialistes', 5, 9, 12, {
+    kw: ['retour'], fx: [fx('meeting', 'allies', { do: 'declencher', trigger: 'heritage' }, { once: 'combat' })] }),
   // Échelon 6, clé de voûte de la mort comme ressource : sa mort, son sacrifice ou sa relance doublent ses Socialistes.
-  card('hollande', 'François Hollande', 'socialistes', 6, 5, 7, { fx: [fx('heritage', 'autres_camp', { do: 'doubler_stats' }, { camp: 'socialistes', perma: true })] }),
+  // Une fois par combat : relancé par Glucksmann et doublé par Mitterrand, il multipliait le camp par seize à chaque
+  // combat, et les Socialistes passaient premiers de loin (4,32 en mono-camp, mesuré le 7 novembre 2026).
+  card('hollande', 'François Hollande', 'socialistes', 6, 5, 7, { fx: [fx('heritage', 'autres_camp', { do: 'doubler_stats' }, { camp: 'socialistes', perma: true, once: 'combat' })] }),
 
   // Écologistes : la pousse. La Fin de tour, et la boutique qu'on fait grandir.
   // « Le Tour de France est machiste et polluant » : le gag écologiste, en Vedette.
@@ -192,7 +195,7 @@ export const CARDS: Card[] = [
   card('lavalette', 'Laure Lavalette', 'rn', 2, 3, 3, { fx: [fx('annonce', 'soi', debauche('plus_fort')), fx('droit_de_reponse', 'soi', debauche('plus_faible'))] }),
   // Partie avec Mégret en 1998, revenue au FN en 2016 : la dynastie transmet deux fois.
   card('mc_lepen', 'Marie-Caroline Le Pen', 'rn', 2, 2, 2, { kw: ['retour'], fx: [fx('heritage', 'allie_suivant', { do: 'transmettre' })] }),
-  card('tanguy', 'Jean-Philippe Tanguy', 'rn', 3, 2, 4, { fx: [fx('aura', 'soi', compteur('debauchages', 3, 3))] }),
+  card('tanguy', 'Jean-Philippe Tanguy', 'rn', 3, 2, 4, { fx: [fx('aura', 'soi', compteur('debauchages', 2, 2))] }),
   card('aliot', 'Louis Aliot', 'rn', 4, 4, 5, { fx: [fx('fin_tour', 'soi', debauche('plus_faible'))] }),
   // De LR au RN, avec un détour par la Crimée : il prend chez le voisin ce qu'il y a de plus gros.
   // Un transfuge qui se rallie : son débauchage profite à son hôte (7 novembre 2026).
@@ -222,13 +225,14 @@ export const CARDS: Card[] = [
   // 1,45 % à la primaire de 2016, rallié à Zemmour en 2021 : on le renvoie, il ramène quelqu'un.
   card('poisson', 'Jean-Frédéric Poisson', 'reconquete', 2, 5, 5, { fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'serviteur', camp: 'reconquete', echelon: 0 })] }),
   // De LR à Reconquête : il se rallie, et apporte sa Polémique à son hôte (7 novembre 2026).
-  card('peltier', 'Guillaume Peltier', 'reconquete', 4, 4, 5, { kw: ['ralliement', 'polemique'] }),
+  card('peltier', 'Guillaume Peltier', 'reconquete', 4, 6, 7, { kw: ['ralliement', 'polemique'] }),
   card('philippot', 'Florian Philippot', 'reconquete', 4, 6, 7, { kw: ['polemique'], fx: [fx('droit_de_reponse', 'joueur', { do: 'actualisations_gratuites', value: 3 })] }),
   // Chaque buzz lance sa cagnotte.
   card('messiha', 'Jean Messiha', 'reconquete', 3, 6, 7, { fx: [fx('actualise', 'joueur', { do: 'budget', value: 1 }, { once: 'manche' })] }),
   // 5 novembre 2026 : elle faisait aussi grandir la main à chaque actualisation, et portait seule Reconquête (+3,6 places offerte).
-  // 7 novembre 2026 : monte à l'échelon 5 et reprend la main de Zemmour, parti au 6.
-  card('knafo', 'Sarah Knafo', 'reconquete', 5, 7, 7, { fx: [fx('actualise', 'toute_la_main', buff(1, 1), { camp: 'reconquete' })] }),
+  // 7 novembre 2026 : monte à l'échelon 5. La main de Zemmour ne servait pas (0,51 place) : chaque actualisation fait
+  // grandir un autre politique de Reconquête.
+  card('knafo', 'Sarah Knafo', 'reconquete', 5, 7, 7, { fx: [fx('actualise', 'aleatoire', buff(2, 2), { camp: 'reconquete' })] }),
   card('villiers', 'Philippe de Villiers', 'reconquete', 5, 6, 8, {
     kw: ['vedette'],
     fx: [fx('debut_combat', 'tous_ennemis', { do: 'degats', value: 2 }), fx('celebration', 'joueur', { do: 'actualisations_gratuites', value: 2 })],
@@ -265,8 +269,8 @@ export const CARDS: Card[] = [
   // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV.
   card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 9, 12, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
   // 3 novembre 2026 : sur 300 parties, une seule finissait avec lui ; son Annonce rejoue tout de suite celles du plateau.
-  card('chirac', 'Jacques Chirac', 'civile', 6, 10, 10, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
-  card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(3, 3))] }),
+  card('chirac', 'Jacques Chirac', 'civile', 6, 12, 12, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
+  card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(4, 4))] }),
 ];
 
 // Une carte partage ses effets, par identité, avec chacun de ses serviteurs, dans toutes les parties : figés, rien
