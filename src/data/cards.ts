@@ -110,6 +110,16 @@ export const CARDS: Card[] = [
   // Échelon 6, clé de voûte de la mort comme ressource : chaque allié tombé fait gonfler tout le camp, pour la partie
   // (re-spécification du 7 novembre 2026). Suppléants, Retours et Héritages nourrissent la synergie.
   card('hollande', 'François Hollande', 'socialistes', 6, 5, 7, { fx: [fx('revanche', 'joueur', campBuff(1, 1), { n: 1, camp: 'socialistes' })] }),
+  // Le favori des sondages de 2011 : il grandit avec son camp à chaque attaque, et sa chute arme les autres
+  // (7 novembre 2026). Glucksmann relance son Héritage, Mitterrand le double, un Retour le fait tomber deux fois.
+  // Il lègue son attaque, pas toutes ses stats : avec ses stats, les Socialistes passaient de 4,80 à 4,56 de place
+  // moyenne en mono-camp (3 000 parties), loin devant les autres camps ; avec son attaque, 4,64.
+  card('strauss_kahn', 'Dominique Strauss-Kahn', 'socialistes', 6, 6, 8, {
+    fx: [
+      fx('meeting', 'soi', { do: 'buff_par_membre', atk: 1, hp: 1 }, { camp: 'socialistes', perma: true }),
+      fx('heritage', 'autres_camp', { do: 'transmettre' }, { camp: 'socialistes', perma: true }),
+    ],
+  }),
 
   // Écologistes : la pousse. La Fin de tour, et la boutique qu'on fait grandir.
   // « Le Tour de France est machiste et polluant » : le gag écologiste, en Vedette.

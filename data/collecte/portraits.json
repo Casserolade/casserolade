@@ -2250,5 +2250,14 @@
   "portrait": "assets/photos/base/lapix.jpg",
   "score": 0.04,
   "name": "Anne-Sophie Lapix"
+ },
+ "strauss_kahn": {
+  "fichier": "assets/photos/raw/strauss_kahn.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Strauss-Kahn,_Dominique_(official_portrait_2008).jpg",
+  "licence": "Public domain",
+  "auteur": "International Monetary Fund",
+  "portrait": "assets/photos/base/strauss_kahn.jpg",
+  "name": "Dominique Strauss-Kahn",
+  "note": "Portrait officiel du FMI, 2008. Choisi à la main : de face, neutre, grande définition."
  }
 }

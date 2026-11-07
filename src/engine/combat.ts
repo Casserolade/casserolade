@@ -347,7 +347,14 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       break;
     }
     case 'transmettre':
-      transmit(b, side, self, index, eff.tout ?? false, k, eff.perma ?? false);
+      if (eff.to === 'allie_suivant') {
+        transmit(b, side, self, index, eff.tout ?? false, k, eff.perma ?? false);
+        break;
+      }
+      // À plusieurs cibles : Strauss-Kahn lègue ses stats à chacun de ses autres Socialistes.
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) {
+        if (u !== self) addStats(b, side, u, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.peak) * k : 0, eff.perma);
+      }
       break;
     case 'invoquer':
       summon(b, side, self, index, eff.token, eff.count * k);

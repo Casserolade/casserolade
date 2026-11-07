@@ -554,6 +554,11 @@
   "hauteur_visage_source": 439,
   "visages": 1
  },
+ "strauss_kahn": {
+  "basse_definition": false,
+  "hauteur_visage_source": 1055,
+  "visages": 1
+ },
  "tache": {
   "basse_definition": false,
   "hauteur_visage_source": 402,

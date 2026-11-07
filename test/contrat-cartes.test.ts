@@ -26,6 +26,7 @@ const TRIGGER_CARDS = ['houssin', 'castaner'];
 /** Des textes qui ne jouent que dans une situation que ce banc ne construit pas : chacun sa raison. */
 const SITUATIONAL: Record<string, string> = {
   'hollande heritage': 'À 5/7, il survit aux ennemis d\'échelon 3 du banc : son Héritage est vérifié dans test/respecification.test.ts',
+  'strauss_kahn heritage': 'Il survit aux deux premiers bancs et tombe après le seul autre Socialiste du troisième : son Héritage est vérifié dans test/respecification.test.ts',
 };
 
 interface World {

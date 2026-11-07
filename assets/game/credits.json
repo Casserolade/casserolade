@@ -889,6 +889,14 @@
    "partage_identique": true
   },
   {
+   "id": "strauss_kahn",
+   "nom": "Dominique Strauss-Kahn",
+   "auteur": "International Monetary Fund",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Strauss-Kahn,_Dominique_(official_portrait_2008).jpg",
+   "partage_identique": false
+  },
+  {
    "id": "tache",
    "nom": "Aurélien Taché",
    "auteur": null,
@@ -3331,6 +3339,14 @@
    "note": "Extrait de 30.5 à 31.4 s, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute.json)."
   },
   {
+   "id": "cest_notre_projet_complet",
+   "nom": "Emmanuel Macron, « Ce que je veux, c'est que vous, partout, vous alliez le faire gagner, parce que c'est notre projet ! Vive la République ! Vive la France ! »",
+   "auteur": "Le Point, « Extrait du discours d'Emmanuel Macron à la Porte de Versailles »",
+   "source": "https://www.youtube.com/watch?v=a1r8Ad6nFSA",
+   "date": "2016-12-10",
+   "note": "Cri d'accueil (assets/game/sons/accueil/), 14,6 s : de 8,6 à 23,2 s du passage téléchargé par tools/collecte/cri_accueil.sh (sections 18,9 à 37,9 s), calé sur la phrase avec WhisperX, volume relevé (+8 dB, limiteur). Transcrit par WhisperX."
+  },
+  {
    "id": "aliot_episode_clos",
    "nom": "Louis Aliot, « L'épisode est clos. »",
    "auteur": "Europe 1, « Mediapart : \"L'épisode est clos\" (Louis Aliot) #mediapart #bardella #politique »",
@@ -5083,6 +5099,62 @@
    "note": "Extrait de 0.01 à 6.27 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "strauss_kahn_dsk_bouche_nez",
+   "nom": "Dominique Strauss-Kahn, « Il faut voter pour Jacques Chirac, même en se bouchant le nez. »",
+   "auteur": "LCI, « Dominique Strauss-Kahn invité de LCI : \"Il faut empêcher la majorité absolue du RN\" »",
+   "source": "https://www.youtube.com/watch?v=CUeFmHnz9OU",
+   "date": "2024-07-02",
+   "note": "Extrait de 239.26 à 242.18 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "strauss_kahn_dsk_deux_perdants",
+   "nom": "Dominique Strauss-Kahn, « Il y a deux grands perdants dans cette histoire. C'est M. Macron et M. Mélenchon. »",
+   "auteur": "LCI, « Dominique Strauss-Kahn invité de LCI : \"Il faut empêcher la majorité absolue du RN\" »",
+   "source": "https://www.youtube.com/watch?v=CUeFmHnz9OU",
+   "date": "2024-07-02",
+   "note": "Extrait de 456.47 à 461.66 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "strauss_kahn_dsk_faute_morale",
+   "nom": "Dominique Strauss-Kahn, « Je crois que c'est plus grave qu'une faiblesse. Je crois que c'est une faute morale. »",
+   "auteur": "TV5MONDE, « TV5Monde - DSK : \"J'ai commis une faute morale\" lors de son itw sur TF1 »",
+   "source": "https://www.youtube.com/watch?v=lgI3KbJhjHs",
+   "date": "2011-09-18",
+   "note": "Extrait de 78.0 à 80.99 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "strauss_kahn_dsk_inappropriee",
+   "nom": "Dominique Strauss-Kahn, « Ce qui s'est passé, c'est une relation non seulement inappropriée, mais plus que ça, une faute. »",
+   "auteur": "TV5MONDE, « TV5Monde - DSK : \"J'ai commis une faute morale\" lors de son itw sur TF1 »",
+   "source": "https://www.youtube.com/watch?v=lgI3KbJhjHs",
+   "date": "2011-09-18",
+   "note": "Extrait de 38.27 à 47.07 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "strauss_kahn_dsk_ni_ni",
+   "nom": "Dominique Strauss-Kahn, « Qu'est-ce que ça veut dire de dire ni-ni quand un des deux ni n'existe pas ? »",
+   "auteur": "LCI, « Dominique Strauss-Kahn invité de LCI : \"Il faut empêcher la majorité absolue du RN\" »",
+   "source": "https://www.youtube.com/watch?v=CUeFmHnz9OU",
+   "date": "2024-07-02",
+   "note": "Extrait de 500.82 à 504.53 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "strauss_kahn_dsk_rendez_vous",
+   "nom": "Dominique Strauss-Kahn, « J'ai manqué mon rendez-vous avec les Français. »",
+   "auteur": "TV5MONDE, « TV5Monde - DSK : \"J'ai commis une faute morale\" lors de son itw sur TF1 »",
+   "source": "https://www.youtube.com/watch?v=lgI3KbJhjHs",
+   "date": "2011-09-18",
+   "note": "Extrait de 64.01 à 66.95 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "strauss_kahn_dsk_talent_destruction",
+   "nom": "Dominique Strauss-Kahn, « Je lui reconnais un talent formidable. Notamment dans la destruction de la gauche aujourd'hui. »",
+   "auteur": "LCI, « Dominique Strauss-Kahn invité de LCI : \"Il faut empêcher la majorité absolue du RN\" »",
+   "source": "https://www.youtube.com/watch?v=CUeFmHnz9OU",
+   "date": "2024-07-02",
+   "note": "Extrait de 430.42 à 435.26 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "tache_tache_police_tue",
    "nom": "Aurélien Taché, « La police tue partout. »",
    "auteur": "RMC, « \"La police tue partout\" : Aurélien Taché assume ses propos dans les Grandes Gueules »",
@@ -5257,14 +5329,6 @@
    "source": "https://www.youtube.com/watch?v=w8ue6g6nEHQ",
    "date": "2010-03-06",
    "note": "Extrait de 548.1 à 554.97 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
-  },
-  {
-   "id": "cest_notre_projet_complet",
-   "nom": "Emmanuel Macron, « Ce que je veux, c'est que vous, partout, vous alliez le faire gagner, parce que c'est notre projet ! Vive la République ! Vive la France ! »",
-   "auteur": "Le Point, « Extrait du discours d'Emmanuel Macron à la Porte de Versailles »",
-   "source": "https://www.youtube.com/watch?v=a1r8Ad6nFSA",
-   "date": "2016-12-10",
-   "note": "Cri d'accueil (assets/game/sons/accueil/), 14,6 s : de 8,6 à 23,2 s du passage téléchargé par tools/collecte/cri_accueil.sh (sections 18,9 à 37,9 s), calé sur la phrase avec WhisperX, volume relevé (+8 dB, limiteur). Transcrit par WhisperX."
   }
  ],
  "logos": [

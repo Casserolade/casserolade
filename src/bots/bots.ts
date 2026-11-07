@@ -194,7 +194,7 @@ function actionValue(e: Effect): number {
     case 'exiler':
       return 6;
     case 'transmettre':
-      return e.tout ? 6 : 3;
+      return (e.tout ? 6 : 3) * r;
     case 'carte':
       return e.count * (e.card === 'tract' ? 2 : 4);
     case 'decouvrir':
@@ -537,12 +537,16 @@ function strongest(board: Minion[], except?: Minion): Minion | null {
   return best;
 }
 
-/** L'allié qu'on peut sacrifier : un jeton, sinon le plus faible, de préférence avec un Héritage. */
+/**
+ * L'allié qu'on peut sacrifier : un jeton, sinon le plus faible, de préférence avec un Héritage. Jamais un exemplaire
+ * de la carte qui sacrifie : ce serait l'échanger contre lui-même (Hidalgo sacrifiait l'Hidalgo d'avant, redécouvrait
+ * Hidalgo et tournait en rond : fuzz, graine 156, 7 novembre 2026).
+ */
 function sacrificial(board: Minion[], except?: Minion): Minion | null {
   let best: Minion | null = null;
   const cost = (m: Minion) => (m.token ? -50 : 0) + minionPower(m) - (m.effects.some((e) => e.when === 'heritage') ? 8 : 0) + (m.golden ? 40 : 0);
   for (const m of board) {
-    if (m === except) continue;
+    if (m === except || (except && m.cardId === except.cardId)) continue;
     if (!best || cost(m) < cost(best)) best = m;
   }
   return best;
@@ -597,8 +601,14 @@ function handMove(view: PlayerView, bot: BotState, margin = 3): PlayerAction | n
     if (host && (view.board.length >= view.boardLimit || m.atk + m.hp <= 6 || payoff)) return { t: 'play', uid: m.uid, onto: host.uid };
   }
   if (view.board.length < view.boardLimit) {
-    const target = targetFor(m.effects.filter((e) => e.when === 'annonce'), view.board, null);
-    return target ? { t: 'play', uid: m.uid, target: target.uid } : { t: 'play', uid: m.uid };
+    const annonce = m.effects.filter((e) => e.when === 'annonce');
+    const target = targetFor(annonce, view.board, m);
+    if (target) return { t: 'play', uid: m.uid, target: target.uid };
+    // Sans bonne cible, une Annonce qui détruit viserait le premier allié, souvent le meilleur : le politique attend.
+    const destroys = annonce.some((e) => e.to === 'cible' && (e.do === 'detruire' || e.do === 'sacrifier'));
+    if (!destroys || view.board.length === 0) return { t: 'play', uid: m.uid };
+    bot.kept.add(m.uid);
+    return handMove(view, bot, margin);
   }
   const worst = worstMinion(view, bot);
   if (worst && (m.golden || minionPower(m) > minionPower(worst) + margin)) return { t: 'sell', uid: worst.uid };

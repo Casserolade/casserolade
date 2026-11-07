@@ -141,7 +141,7 @@ export type Action =
   | { do: 'exiler' }
   /** Le peuple oublie tout de suite le scandale le plus long. Il ne bouge plus. */
   | { do: 'oublier' }
-  /** À l'allié suivant (le premier s'il est le dernier). `tout` : donne ses stats ; sinon son attaque. */
+  /** À l'allié suivant (le premier s'il est le dernier), ou à chacune des cibles. `tout` : donne ses stats ; sinon son attaque. */
   | { do: 'transmettre'; tout?: boolean }
   /** Ajoute une carte à la main : un serviteur, un sort, `sort_aleatoire`, ou `copie` de lui-même (prise dans la réserve, règle R3). */
   | { do: 'carte'; card: string; count: number }
