@@ -3,22 +3,17 @@ import { Application, Assets, Container, TextureSource } from 'pixi.js';
 import { TRIGGER_LABELS } from '#src/client/const/effectLabels.ts';
 import type { GameManifest } from '#src/client/const/gameManifest.ts';
 import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
-import { MEDALLION_LAYOUT } from '#src/client/const/medallionLayout.ts';
 import { CombatCard } from '#src/client/pixi/combatCard.ts';
-import type { KillingBlowFx, SheetFrames } from '#src/client/pixi/deaths/deathScene.ts';
+import type { SheetFrames } from '#src/client/pixi/deaths/deathScene.ts';
 import { playDeath } from '#src/client/pixi/deaths/playDeath.ts';
 import { loadCombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
-import { dashLines, sparkBurst } from '#src/client/pixi/particleBursts.ts';
+import { StageBlows } from '#src/client/pixi/stageBlows.ts';
 import { StageFx } from '#src/client/pixi/stageFx.ts';
 import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { combatLayout } from '#src/client/tools/combatLayout.ts';
-import { compactStat } from '#src/client/tools/compactStat.ts';
 import type { DeathKind } from '#src/client/tools/deathKind.ts';
 import { deathPlayed } from '#src/client/tools/deathPlayed.ts';
-import { hitStopSeconds } from '#src/client/tools/hitStopSeconds.ts';
-import { hitStrength } from '#src/client/tools/hitStrength.ts';
-import { hitTrauma } from '#src/client/tools/hitTrauma.ts';
 import { orderWithCorpses } from '#src/client/tools/orderWithCorpses.ts';
 import type { DeathPlan } from '#src/client/tools/planDeaths.ts';
 import { statsChangeLabel } from '#src/client/tools/statsChangeLabel.ts';
@@ -29,13 +24,6 @@ const GAIN_COLOR = '#7dff9e';
 const INFO_COLOR = '#ffd84a';
 const DAMAGE_COLOR = '#ff5a5a';
 const GAIN_LIGHT = '#ffe680';
-const SHIELD_SPARKS = ['#ffffff', '#bff0ff', '#7fd8ff'];
-/** A blow this hard bends the table under a small shock ring. */
-const RINGING_STRENGTH = 1.6;
-/** Where a blow lands: this share of the medallion's width from its center, toward the one who struck. */
-const CONTACT_REACH = 0.42;
-/** The damage badge: its size from the blow's strength, how long it stays; a killing blow's sits above its victim. */
-const BADGE = { scale: 0.55, perStrength: 0.15, seconds: 0.85, lethalSeconds: 0.6, lethalLift: 0.62, smallest: 0.5 };
 /** These deaths play where the politician stood: its place in the row waits for them. */
 const IN_PLACE: ReadonlySet<DeathKind> = new Set(['burn', 'tv-off', 'light']);
 /** The finale's slow motion, in milliseconds of the combat at normal speed: the result waits for it. */
@@ -62,21 +50,19 @@ export interface CombatStageOptions {
 
 /**
  * The combat, drawn with PixiJS. It only reads the journal: every event comes from CombatPlayback, with the state
- * after that event. Effects overlap the next events and are pushed by the combat's speed; StageFx makes every blow felt.
+ * after that event. Effects overlap the next events and are pushed by the combat's speed; StageFx makes every blow
+ * felt, StageBlows plays the attacks, and each death plays its own way (deaths/).
  */
 export class CombatStage {
   private readonly app = new Application();
   private readonly options: CombatStageOptions;
   private readonly cardLayer = new Container();
   private fx!: StageFx;
+  private blows!: StageBlows;
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   private readonly cards = new Map<number, CombatCard>();
   /** Dead, still playing their death where they stood: their place in the row waits. */
   private readonly corpses = new Set<number>();
-  /** The last blow each one took: where it came from and how hard, for the death that may follow. */
-  private readonly lastBlows = new Map<number, KillingBlowFx>();
-  /** The attack playing now: its two blows fly from one to the other. */
-  private exchange: { from: number; to: number } | null = null;
   private order: [number[], number[]] = [[], []];
   /** The medallions' scale on the stage (1 on a computer's 1080p table, about a third on a phone): every effect follows it. */
   private fxScale = 1;
@@ -114,6 +100,13 @@ export class CombatStage {
       sheet: (name) => this.sheet(name),
       sound: this.options.playSound,
       onShock: this.options.onShock,
+    });
+    this.blows = new StageBlows({
+      fx: this.fx,
+      reducedMotion: this.reducedMotion,
+      playSound: this.options.playSound,
+      cardOf: (uid) => this.cards.get(uid),
+      isOwn: (uid) => this.order[this.options.side].includes(uid),
     });
     host.append(this.app.canvas);
     this.app.stage.addChild(this.fx.view);
@@ -180,10 +173,11 @@ export class CombatStage {
         this.playAttack(event.from, event.to);
         return;
       case 'degats':
-        this.playHit(event.uid, event.value);
+        this.withCard(event.uid, (card) => this.blows.hit(card, event.value));
         return;
       case 'immunite':
-        this.playShieldBreak(event.uid);
+        this.withCard(event.uid, (card) => this.blows.shieldBreak(card));
+        this.float(event.uid, KEYWORD_RULES.immunite.label, INFO_COLOR);
         return;
       case 'resiste':
         this.cards.get(event.uid)?.playEffect('immunite');
@@ -222,66 +216,17 @@ export class CombatStage {
     }
   }
 
+  private withCard(uid: number, play: (card: CombatCard) => void): void {
+    const card = this.cards.get(uid);
+    if (card) play(card);
+  }
+
   private playAttack(from: number, to: number): void {
     const attacker = this.cards.get(from);
     const target = this.cards.get(to);
     if (!attacker || !target) return;
-    this.exchange = { from, to };
     this.cardLayer.addChild(attacker.view);
-    attacker.attack(target);
-    if (!this.reducedMotion) {
-      const dx = target.centerX() - attacker.centerX();
-      const dy = target.centerY() - attacker.centerY();
-      const length = Math.hypot(dx, dy) || 1;
-      dashLines(this.fx.particles, attacker.centerX(), attacker.centerY(), dx / length, dy / length, attacker.scale);
-    }
-    this.options.playSound('lunge');
-  }
-
-  /**
-   * A blow lands: the stage freezes on the contact (hit-stop), the medallion blinks white and is knocked back, sparks
-   * fly from the contact, its damage pops on a red splat and bounces; the harder, the more the camera shakes.
-   */
-  private playHit(uid: number, value: number): void {
-    const card = this.cards.get(uid);
-    if (!card) return;
-    const strength = hitStrength(value, card.hp);
-    const { x: dirX, y: dirY } = this.blowDirection(card);
-    this.lastBlows.set(uid, { dirX, dirY, strength });
-    card.takeHit(dirX, dirY, strength);
-    this.fx.clock.freeze(hitStopSeconds(strength));
-    this.fx.addShake(hitTrauma(strength));
-    const reach = MEDALLION_LAYOUT.width * card.scale * CONTACT_REACH;
-    const contactX = card.centerX() - dirX * reach;
-    const contactY = card.centerY() - dirY * reach;
-    if (!this.reducedMotion) {
-      this.fx.impacts.add(contactX, contactY, strength * 0.7, card.scale);
-      this.fx.lights.hit(contactX, contactY, strength, card.scale);
-      sparkBurst(this.fx.particles, contactX, contactY, dirX, dirY, strength, undefined, undefined, card.scale);
-      if (strength >= RINGING_STRENGTH) this.fx.shockwave(contactX, contactY, 0.45 * card.scale);
-    }
-    // A killing blow's badge sits above its victim and goes sooner: the death is what counts.
-    const lethal = value >= card.hp;
-    const badgeY = card.centerY() - (lethal ? MEDALLION_LAYOUT.height * card.scale * BADGE.lethalLift : 6);
-    const badgeScale = (BADGE.scale + strength * BADGE.perStrength) * Math.max(BADGE.smallest, card.scale);
-    this.fx.badges.add(`−${compactStat(value)}`, card.centerX(), badgeY, badgeScale, lethal ? BADGE.lethalSeconds : BADGE.seconds);
-    this.options.playSound('hit', strength);
-  }
-
-  /** An Immunité breaks: a blue flash, the bubble bursting into shards of light. */
-  private playShieldBreak(uid: number): void {
-    const card = this.cards.get(uid);
-    if (!card) return;
-    card.playEffect('immunite');
-    const { x: dirX, y: dirY } = this.blowDirection(card);
-    if (!this.reducedMotion) {
-      this.fx.lights.shield(card.centerX(), card.centerY(), card.scale);
-      sparkBurst(this.fx.particles, card.centerX(), card.centerY(), dirX, dirY, 1.4, Math.PI, SHIELD_SPARKS, card.scale);
-    }
-    this.fx.clock.freeze(0.05);
-    this.fx.addShake(0.15);
-    this.float(uid, KEYWORD_RULES.immunite.label, INFO_COLOR);
-    this.options.playSound('clang', 0.6);
+    this.blows.attack(attacker, target);
   }
 
   /**
@@ -299,7 +244,6 @@ export class CombatStage {
       return;
     }
     const plan = this.options.deaths.get(uid) ?? NO_PLAN;
-    const blow = this.lastBlows.get(uid) ?? { dirX: 0, dirY: this.isOwn(uid) ? 1 : -1, strength: 1 };
     if (plan.finale) {
       this.fx.finale(card.centerX(), card.centerY());
       this.options.holdPlayback?.(FINALE_HOLD_MS / this.options.speed());
@@ -308,7 +252,7 @@ export class CombatStage {
     const kind = deathPlayed(plan.kind, this.reducedMotion, this.app.renderer.name === 'webgl');
     if (IN_PLACE.has(kind)) this.corpses.add(uid);
     else this.fx.deathLayer.addChild(card.view);
-    const death = playDeath(kind, card, this.fx.scene, blow);
+    const death = playDeath(kind, card, this.fx.scene, this.blows.lastBlow(uid));
     this.fx.play({
       update: (deltaSeconds) => death.update(deltaSeconds),
       destroy: () => {
@@ -323,22 +267,6 @@ export class CombatStage {
     if (!this.corpses.delete(uid) || this.isDestroyed) return;
     this.order = [this.order[0].filter((other) => other !== uid), this.order[1].filter((other) => other !== uid)];
     this.placeCards(false);
-  }
-
-  /** Where the blow on this medallion comes from: the other one of the attack playing now, or straight across. */
-  private blowDirection(card: CombatCard): { x: number; y: number } {
-    const exchange = this.exchange;
-    const otherUid = exchange?.to === card.uid ? exchange.from : exchange?.from === card.uid ? exchange.to : null;
-    const other = otherUid === null ? undefined : this.cards.get(otherUid);
-    if (!other) return { x: 0, y: this.isOwn(card.uid) ? 1 : -1 };
-    const dx = card.centerX() - other.centerX();
-    const dy = card.centerY() - other.centerY();
-    const length = Math.hypot(dx, dy) || 1;
-    return { x: dx / length, y: dy / length };
-  }
-
-  private isOwn(uid: number): boolean {
-    return this.order[this.options.side].includes(uid);
   }
 
   private floatStatsChange(uid: number, atk: number, hp: number): void {
