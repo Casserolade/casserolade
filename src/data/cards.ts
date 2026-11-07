@@ -58,7 +58,7 @@ export const CARDS: Card[] = [
   card('leaument', 'Antoine Léaument', 'insoumis', 1, 3, 4, { fx: [fx('vente', 'joueur', carte('tract', 2)), fx('droit_de_reponse', 'joueur', carte('tract'))] }),
   // L'ancien garde du corps de Mélenchon : il protège, et le drapeau reste.
   card('delogu', 'Sébastien Delogu', 'insoumis', 1, 2, 4, { kw: ['porte_parole', 'vedette'], fx: [fx('heritage', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract'))] }),
-  card('portes', 'Thomas Portes', 'insoumis', 2, 3, 5, { fx: [fx('fin_tour', 'aleatoire', tract)] }),
+  card('portes', 'Thomas Portes', 'insoumis', 2, 3, 5, { fx: [fx('fin_tour', 'aleatoire', tract), fx('fin_tour', 'aleatoire', tract)] }),
   card('trouve', 'Aurélie Trouvé', 'insoumis', 3, 1, 4, { fx: [fx('aura', 'soi', compteur('tracts', 1, 1))] }),
   // Elle a coordonné L'Avenir en commun : celle qui écrit les promesses en distribue.
   card('guette', 'Clémence Guetté', 'insoumis', 2, 4, 5, { fx: [fx('annonce', 'joueur', carte('promesse'))] }),
@@ -140,7 +140,7 @@ export const CARDS: Card[] = [
     fx: [fx('depense', 'soi', buff(1, 1), { n: 5 }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
   }),
   // 7 novembre 2026 : grandit tous les deux sorts. À chaque Tract, un échelon 2 dépassait les légendes.
-  card('schiappa', 'Marlène Schiappa', 'macronie', 2, 1, 2, {
+  card('schiappa', 'Marlène Schiappa', 'macronie', 2, 2, 3, {
     kw: ['ni_droite_ni_gauche', 'vedette'],
     fx: [fx('sort', 'soi', buff(1, 1), { n: 2 }), fx('celebration', 'joueur', carte('sort_aleatoire'))],
   }),
@@ -154,19 +154,20 @@ export const CARDS: Card[] = [
   card('darmanin', 'Gérald Darmanin', 'macronie', 4, 5, 6, { kw: ['ralliement'], fx: [fx('meeting', 'soi', buff(2, 2), { perma: true })] }),
   card('philippe', 'Édouard Philippe', 'macronie', 5, 8, 9, { fx: [fx('annonce', 'cible', { do: 'dorer', maxTier: 4 })] }),
   card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
-  card('bayrou', 'François Bayrou', 'macronie', 4, 6, 8, { kw: ['ni_droite_ni_gauche'], fx: [fx('fin_tour', 'allies', { do: 'buff_par_ralliement', atk: 1, hp: 1 })] }),
-  card('attal', 'Gabriel Attal', 'macronie', 5, 8, 8, { fx: [fx('aura', 'soi', compteur('dores_joues', 4, 4))] }),
+  card('bayrou', 'François Bayrou', 'macronie', 4, 6, 8, { kw: ['ni_droite_ni_gauche'], fx: [fx('fin_tour', 'allies', { do: 'buff_par_ralliement', atk: 2, hp: 2 })] }),
+  card('attal', 'Gabriel Attal', 'macronie', 5, 8, 8, { fx: [fx('aura', 'soi', compteur('dores_joues', 6, 6))] }),
   // La Fête de la musique à l'Élysée, 21 juin 2018 : il fait la fête deux fois plus fort que les autres.
   // Échelon 6, clé de voûte du Ralliement : chaque Ralliement fait gonfler son hôte, d'autant plus qu'il en a déjà
   // reçu. Vedette sans gain : il prend la lumière et double les Célébrations des autres (7 novembre 2026).
   card('macron', 'Emmanuel Macron', 'macronie', 6, 9, 9, {
     kw: ['ni_droite_ni_gauche', 'vedette'],
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 3, hp: 3 })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 4, hp: 4 })],
   }),
 
   // Républicains : l'Immunité en combat, les affaires hors combat.
-  // 7 novembre 2026 : un « Quand il attaque » dès l'échelon 1 ; l'Immunité le garde en vie pour attaquer encore.
-  card('gueant', 'Claude Guéant', 'republicains', 1, 3, 2, { kw: ['immunite'], fx: [fx('meeting', 'soi', buff(1, 0), { perma: true })] }),
+  // Déjà l'un des meilleurs achats du début de partie : grandir en attaquant le rendait écrasant (Républicains 3,85 en
+  // plateaux mixtes, 7 novembre 2026).
+  card('gueant', 'Claude Guéant', 'republicains', 1, 3, 2, { kw: ['immunite'] }),
   card('tiberi', 'Jean Tiberi', 'republicains', 1, 2, 3, { fx: [fx('annonce', 'soi', invoque('electeur_fantome'))] }),
   card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
   card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
@@ -276,7 +277,7 @@ export const CARDS: Card[] = [
   // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV.
   card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 11, 14, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
   // 3 novembre 2026 : sur 300 parties, une seule finissait avec lui ; son Annonce rejoue tout de suite celles du plateau.
-  card('chirac', 'Jacques Chirac', 'civile', 6, 14, 14, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
+  card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
   card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(4, 4))] }),
 ];
 
