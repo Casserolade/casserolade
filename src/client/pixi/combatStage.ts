@@ -15,6 +15,7 @@ import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { combatLayout } from '#src/client/tools/combatLayout.ts';
 import { compactStat } from '#src/client/tools/compactStat.ts';
 import type { DeathKind } from '#src/client/tools/deathKind.ts';
+import { deathPlayed } from '#src/client/tools/deathPlayed.ts';
 import { hitStopSeconds } from '#src/client/tools/hitStopSeconds.ts';
 import { hitStrength } from '#src/client/tools/hitStrength.ts';
 import { hitTrauma } from '#src/client/tools/hitTrauma.ts';
@@ -298,10 +299,10 @@ export class CombatStage {
       this.options.holdPlayback?.(FINALE_HOLD_MS / this.options.speed());
     }
     this.cards.delete(uid);
-    const inPlace = IN_PLACE.has(plan.kind) && !this.reducedMotion;
-    if (inPlace) this.corpses.add(uid);
+    const kind = deathPlayed(plan.kind, this.reducedMotion, this.app.renderer.name === 'webgl');
+    if (IN_PLACE.has(kind)) this.corpses.add(uid);
     else this.fx.deathLayer.addChild(card.view);
-    const death = playDeath(plan.kind, card, this.fx.scene, blow);
+    const death = playDeath(kind, card, this.fx.scene, blow);
     this.fx.play({
       update: (deltaSeconds) => death.update(deltaSeconds),
       destroy: () => {
