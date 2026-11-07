@@ -36,3 +36,21 @@ test('every casserole but the two that make people forget has a défaut, said in
   assert.deepEqual(casseroleDefects(CASSEROLE_BY_ID.benalla), ['-2 sondages par manche']);
   assert.deepEqual(casseroleDefects(CASSEROLE_BY_ID.arbre_mort), ['ne bouge plus', 'n\'attaque plus']);
 });
+
+test('the room settings say how many bots will fill the table', async () => {
+  const { botsAtTable } = await import('../src/client/tools/botsAtTable.ts');
+  const { botsAtTableLabel } = await import('../src/client/tools/botsAtTableLabel.ts');
+  assert.equal(botsAtTable(2, 1), 1);
+  assert.equal(botsAtTable(2, 3), 0, 'more humans than seats: no bot');
+  assert.equal(botsAtTable(8, 2), 6);
+  assert.equal(botsAtTableLabel(0), 'Sans bot : la table est complète.');
+  assert.equal(botsAtTableLabel(1), 'Un bot complète la table.');
+  assert.equal(botsAtTableLabel(6), '6 bots complètent la table.');
+});
+
+test('the plateaux follow the campaign at a table of two; the second round debate ends a bigger table', async () => {
+  const { plateauFor, SECOND_TOUR, PLATEAUX } = await import('../src/data/plateaux.ts');
+  assert.equal(plateauFor(1, 2, 2), PLATEAUX[0]);
+  assert.equal(plateauFor(1, 2), SECOND_TOUR);
+  assert.equal(plateauFor(9, 2, 8), SECOND_TOUR);
+});

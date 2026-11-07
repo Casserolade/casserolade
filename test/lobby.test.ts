@@ -333,3 +333,48 @@ test('le chat : du texte seulement, pas plus de 5 lignes en 10 secondes, et rien
   assert.deepEqual(parseClientMessage(JSON.stringify({ type: 'chat', texte: 'gg', extra: 1 })), { type: 'chat', texte: 'gg' });
   t.lobby.destroy();
 });
+
+// Une table de 2 à 8 (7 novembre 2026), comme un salon privé de Battlegrounds : deux amis, avec ou sans bots.
+
+test('la table se règle de 2 à 8 : les bots ne prennent que les places vides, et la table grandit avec les humains', () => {
+  const t = creerTable();
+  const code = creerSalon(t);
+  t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, table: 2 } });
+  assert.equal(t.salon('a').options.table, 2);
+  assert.deepEqual(t.salon('a').joueurs.map((j) => j.bot), [false, true], 'seul, un bot en face');
+  t.dire('b', { type: 'rejoindre', code, pseudo: 'Bob' });
+  assert.deepEqual(t.salon('a').joueurs.map((j) => j.bot), [false, false], 'à deux, sans bot');
+  t.dire('c', { type: 'rejoindre', code, pseudo: 'Cléo' });
+  assert.equal(t.salon('a').joueurs.length, 3, 'un troisième humain agrandit la table');
+  t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, table: 5 } });
+  assert.equal(t.salon('a').joueurs.filter((j) => j.bot).length, 2);
+  t.lobby.destroy();
+});
+
+test('une table de deux humains se joue jusqu\'au classement, sur les plateaux de la campagne', () => {
+  const t = creerTable();
+  const code = creerSalon(t);
+  t.dire('a', { type: 'regler_salon', options: { ...OPTIONS, table: 2, minuteur: false } });
+  t.dire('b', { type: 'rejoindre', code, pseudo: 'Bob' });
+  t.dire('a', { type: 'lancer' });
+  assert.equal(t.salon('a').etat, 'en_jeu');
+  for (const c of ['a', 'b']) t.dire(c, { type: 'action', seq: 1, action: { t: 'hero', i: 0 } });
+  for (let n = 0; n < 400 && !t.dernier('a', 'fin'); n++) {
+    for (const c of ['a', 'b']) {
+      if (t.vue(c).phase === 'recrutement' && t.vue(c).alive) t.dire(c, { type: 'pret' });
+      if (t.vue(c).phase === 'combat' || t.dernier(c, 'combat')) t.dire(c, { type: 'vu' });
+    }
+    t.horloge.avancer(1000);
+  }
+  const fin = t.dernier('a', 'fin');
+  assert.ok(fin, 'la partie va au bout');
+  assert.equal(fin.classement.length, 2);
+  t.lobby.destroy();
+});
+
+test('le protocole refuse une table de moins de 2 ou de plus de 8', () => {
+  for (const table of [0, 1, 9, 2.5]) {
+    assert.equal(parseClientMessage(JSON.stringify({ type: 'regler_salon', options: { ...OPTIONS, table } })), null, `table ${table}`);
+  }
+  assert.deepEqual(parseClientMessage(JSON.stringify({ type: 'regler_salon', options: { ...OPTIONS, table: 2 } })), { type: 'regler_salon', options: { ...OPTIONS, table: 2 } });
+});

@@ -16,6 +16,11 @@ export interface OptionsSalon {
   contexte?: string;
   /** False: no timers, to take one's time in solo. */
   minuteur: boolean;
+  /**
+   * How many sit at the table, 2 to 8, humans first: bots take the empty seats. 8 when absent. Like a Battlegrounds
+   * private lobby, two friends can play head to head, with or without bots.
+   */
+  table?: number;
 }
 
 export interface VueSalon {

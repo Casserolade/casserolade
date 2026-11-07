@@ -3,6 +3,9 @@ import { computed } from 'vue';
 import type { BotLevel } from '#src/bots/bots.ts';
 import BotLevelSelect from '#src/client/components/atoms/BotLevelSelect.vue';
 import ContextSelect from '#src/client/components/atoms/ContextSelect.vue';
+import TableSizeSelect from '#src/client/components/atoms/TableSizeSelect.vue';
+import { botsAtTable } from '#src/client/tools/botsAtTable.ts';
+import { botsAtTableLabel } from '#src/client/tools/botsAtTableLabel.ts';
 import { RANDOM_CONTEXT } from '#src/data/heroes.ts';
 import type { OptionsSalon } from '#src/protocol/messages.ts';
 
@@ -17,6 +20,12 @@ const contexte = computed<string>({
   get: () => props.options.contexte ?? RANDOM_CONTEXT,
   set: (value) => emit('update', { ...props.options, contexte: value }),
 });
+const tableSize = computed<number>({
+  get: () => props.options.table ?? 8,
+  set: (table) => emit('update', { ...props.options, table }),
+});
+const bots = computed(() => botsAtTable(tableSize.value, props.humanCount));
+const botsLabel = computed(() => botsAtTableLabel(bots.value));
 const useTimer = computed<boolean>({
   get: () => props.options.minuteur,
   set: (minuteur) => emit('update', { ...props.options, minuteur }),
@@ -25,7 +34,9 @@ const useTimer = computed<boolean>({
 
 <template>
   <div class="stack">
-    <BotLevelSelect v-model="level" :disabled="!isHost" />
+    <TableSizeSelect v-model="tableSize" :disabled="!isHost" />
+    <p class="muted small">{{ botsLabel }}</p>
+    <BotLevelSelect v-if="bots > 0" v-model="level" :disabled="!isHost" />
     <ContextSelect v-model="contexte" :disabled="!isHost" />
     <label class="check"><input v-model="useTimer" type="checkbox" :disabled="!isHost" /> Avec minuteur</label>
     <p v-if="humanCount === 1" class="muted small">Seul à table, vous jouerez sans minuteur.</p>
