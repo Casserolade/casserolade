@@ -48,7 +48,7 @@ export class LightLayer {
 
   /** `strength` from about 0.6 (a scratch) to 2 (a knockout blow); `scale` is the medallions' (smaller on a phone). */
   hit(x: number, y: number, strength: number, scale = 1): void {
-    const size = (90 + 70 * strength) * scale;
+    const size = (70 + 55 * strength) * scale;
     this.spawn({ texture: this.textures.glow, x, y, color: WARM, seconds: 0.32, from: [size * 0.4, size * 0.4], to: [size, size], peakAt: 0.15 });
     this.spawn({ texture: this.textures.ring, x, y, color: '#ffffff', seconds: 0.4, from: [size * 0.3, size * 0.3], to: [size * 1.5, size * 1.5], alpha: 0.7 });
   }

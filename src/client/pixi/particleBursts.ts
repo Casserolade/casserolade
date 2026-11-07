@@ -27,6 +27,23 @@ export function sparkBurst(layer: ParticleLayer, x: number, y: number, dirX: num
   }
 }
 
+/**
+ * Speed lines behind a medallion that dashes from (x, y) along (`dirX`, `dirY`): thin streaks racing with it, as in a
+ * manga panel. They leave as it leaves, a little after its wind-up.
+ */
+export function dashLines(layer: ParticleLayer, x: number, y: number, dirX: number, dirY: number, scale = 1): void {
+  const across = { x: -dirY, y: dirX };
+  for (let index = 0; index < 7; index++) {
+    const side = between(-55, 55) * scale;
+    const speed = between(900, 1400) * scale;
+    layer.spawn({
+      texture: 'streak', x: x + across.x * side - dirX * between(10, 60) * scale, y: y + across.y * side - dirY * between(10, 60) * scale,
+      vx: dirX * speed, vy: dirY * speed, life: between(0.12, 0.2), size: [between(30, 60) * scale, 6 * scale], alpha: [0.7, 0],
+      drag: 5, stretch: 0.03, additive: true, delay: 0.09 + between(0, 0.04),
+    });
+  }
+}
+
 /** Embers rising from a fire, drifting, flickering out. */
 export function emberRise(layer: ParticleLayer, x: number, y: number, width: number, count: number, color: string, scale = 1): void {
   for (let index = 0; index < count; index++) {

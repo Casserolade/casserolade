@@ -97,6 +97,14 @@ onUnmounted(() => {
   background:
     radial-gradient(ellipse 60% 75% at 50% 62%, color-mix(in srgb, var(--accent) 80%, #ffffff) 0%, transparent 70%),
     linear-gradient(color-mix(in srgb, var(--accent) 55%, #0a0c18), #0a0c18);
+}
+/* The studio light breathes on the screen: a white veil fading in and out (opacity only, cheap on a phone). */
+.backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 50% 55%, rgb(255 255 255 / 0.22), transparent 75%);
+  opacity: 0;
   animation: backdrop-breathe 3.2s ease-in-out infinite;
 }
 /* The face, big, looking out of the set: no round frame here. */
@@ -115,8 +123,7 @@ onUnmounted(() => {
 .scanlines {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(rgb(0 0 0 / 0.22) 0 1px, transparent 1px 3px);
-  mix-blend-mode: multiply;
+  background: repeating-linear-gradient(rgb(0 0 0 / 0.2) 0 1px, transparent 1px 3px);
   pointer-events: none;
 }
 .snow {
@@ -151,7 +158,7 @@ onUnmounted(() => {
 .glitching .face { animation: glitch-face 0.52s steps(6) 1; }
 .glitching .snow { animation: snow-burst 0.52s steps(6); }
 .glitching .backdrop { filter: hue-rotate(80deg) saturate(2); }
-@keyframes backdrop-breathe { 50% { filter: brightness(1.15); } }
+@keyframes backdrop-breathe { 50% { opacity: 1; } }
 @keyframes face-in { from { translate: -50% 10%; scale: 0.7; } }
 @keyframes face-bob { 50% { transform: translateY(calc(var(--w) * -0.012)) rotate(-1.5deg); } }
 @keyframes chatter { 50% { transform: translateY(calc(var(--w) * 0.012)); } }
@@ -166,7 +173,7 @@ onUnmounted(() => {
   80% { translate: -52% -50%; filter: saturate(3) brightness(1.6); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .backdrop, .face, .face :deep(.jaw), .live { animation: none; }
+  .backdrop::after, .face, .face :deep(.jaw), .live { animation: none; }
   .zapping .glass, .zapping .snow, .glitching .face, .glitching .snow { animation: none; }
 }
 </style>
