@@ -30,7 +30,7 @@ const {
   SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
-} = useCombatShow(props, () => emit('close'), stageHost, portraitCombatLayout);
+} = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') }, portraitCombatLayout);
 
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[plateauId]?.decor));
 /** The set's lights falter with the combat's big shocks, as on a computer. */
@@ -50,7 +50,7 @@ const speechStyle = computed(() => {
   <div class="mobile-combat">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
     <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
-    <div class="rival" :class="{ shaken: rivalShaken }">
+    <div ref="rivalHero" class="rival" :class="{ shaken: rivalShaken }">
       <MobileHeroBadge :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line"><SpeechBubble tail="up">{{ rivalLine }}</SpeechBubble></div>
@@ -59,7 +59,7 @@ const speechStyle = computed(() => {
       <HostLectern class="host" :puppet="hostPuppet" :name="host.nom" :talking="hostTalking" :mic-image="lecternMic" />
       <SpeechBubble v-if="hostTalking" class="host-line" tail="up">{{ hostLine }}</SpeechBubble>
     </div>
-    <div v-if="view" class="me" :class="{ draining, hurt }">
+    <div v-if="view" ref="ownHero" class="me" :class="{ draining, hurt }">
       <MobileHeroBadge :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
     </div>
 
