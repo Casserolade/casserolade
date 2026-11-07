@@ -161,9 +161,10 @@ export class CombatStage {
     this.resizeObserver?.disconnect();
     // Still starting (the player left a combat that was loading): start() destroys the app itself once
     // it is ready. Destroying it twice throws inside PixiJS.
+    // The renderer goes first: the effects' own textures are destroyed once nothing can still be bound to them.
     if (this.isStarted) {
-      this.fx.destroy();
       this.app.destroy({ removeView: true }, { children: true });
+      this.fx.destroy();
     }
   }
 
