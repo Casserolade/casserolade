@@ -20919,6 +20919,21 @@
    "impact": 4,
    "tient": true
   },
+  "explosion": {
+   "atlas": "effets/explosion.webp",
+   "cols": 4,
+   "rows": 4,
+   "images": 16,
+   "cell": [
+    320,
+    320
+   ],
+   "fps": 24,
+   "ancre": [
+    0.5,
+    0.55
+   ]
+  },
   "dore": {
    "atlas": "effets/dore.webp",
    "cols": 4,

@@ -9,6 +9,7 @@ import { gameArt } from '#src/client/stores/gameArt.ts';
 import { heardVoices } from '#src/client/stores/heardVoices.ts';
 import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
 import { startedCombats } from '#src/client/stores/startedCombats.ts';
+import { studioShock } from '#src/client/stores/studioShock.ts';
 import { useHurry } from '#src/client/stores/useHurry.ts';
 import { afterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
@@ -24,7 +25,7 @@ import { freshVoice } from '#src/client/tools/freshVoice.ts';
 import { hostQuote } from '#src/client/tools/hostQuote.ts';
 import { hurryStep } from '#src/client/tools/hurryStep.ts';
 import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
-import { pickCriticalKills } from '#src/client/tools/pickCriticalKills.ts';
+import { planDeaths } from '#src/client/tools/planDeaths.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { quotesFor } from '#src/client/tools/quotesFor.ts';
 import { readingDelayMs } from '#src/client/tools/readingDelayMs.ts';
@@ -354,10 +355,12 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
         manifest: gameArt.manifest.value,
         side: props.combat.side,
         characterIds: combatCharacterIds(props.combat.log),
-        criticalKills: pickCriticalKills(props.combat.log),
+        deaths: planDeaths(props.combat.log),
         speed: () => speed.value,
         playSound,
         layout,
+        holdPlayback: (ms) => playback.hold(ms),
+        onShock: (strength) => studioShock.hit(strength),
       });
       stage = created;
       await created.start();
