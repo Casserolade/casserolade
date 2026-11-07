@@ -61,12 +61,31 @@ export interface CombatShowProps {
   line: string | null;
 }
 
+/** Where the two heroes' portraits stand on the screen: the winners' strike lands on the beaten one. */
+export interface HeroSpots {
+  own: Readonly<Ref<HTMLElement | null>>;
+  rival: Readonly<Ref<HTMLElement | null>>;
+}
+
+/** The middle of an element on the page, where a strike lands. */
+function middleOf(element: HTMLElement | null): { x: number; y: number } | null {
+  const box = element?.getBoundingClientRect();
+  return box ? { x: box.left + box.width / 2, y: box.top + box.height / 2 } : null;
+}
+
 /**
  * Everything a combat screen plays, whatever its layout: the stage drawn in `stageHost` with `layout`, the journal
- * played event by event, the voices and the bubbles, the Célébrations, the result and the polls that drain. The
- * screen only places it: the computer's table, or the phone held upright. `onClose` is called once it is all seen.
+ * played event by event, the voices and the bubbles, the Célébrations, the result, the strike on the beaten hero and
+ * the polls that drain. The screen only places it: the computer's table, or the phone held upright. `onClose` is called
+ * once it is all seen.
  */
-export function useCombatShow(props: CombatShowProps, onClose: () => void, stageHost: Readonly<Ref<HTMLElement | null>>, layout: typeof combatLayout = combatLayout) {
+export function useCombatShow(
+  props: CombatShowProps,
+  onClose: () => void,
+  stageHost: Readonly<Ref<HTMLElement | null>>,
+  heroSpots: HeroSpots,
+  layout: typeof combatLayout = combatLayout,
+) {
   let stage: CombatStage | null = null;
   let hasLeft = false;
   let closeTimer = 0;
@@ -158,12 +177,15 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
     if (!polls) return 0;
     const own = drainSteps(polls.own.before, polls.own.after);
     const enemy = polls.enemy ? drainSteps(polls.enemy.before, polls.enemy.after) : [];
-    const at = (ms: number, callback: () => void) => drainTimers.push(window.setTimeout(callback, ms));
+    // The winners strike first: the polls drain once their comets land.
+    const strikeMs = strikeBeatenHero(own.length > 0, enemy.length > 0);
+    const at = (ms: number, callback: () => void) => drainTimers.push(window.setTimeout(callback, strikeMs + ms));
     enemy.forEach((value, index) => at(DRAIN.zoomMs + index * DRAIN.stepMs, () => (opponentHp.value = value)));
-    const enemyEnd = enemy.length ? DRAIN.zoomMs + enemy.length * DRAIN.stepMs : 0;
+    const enemyEnd = strikeMs + (enemy.length ? DRAIN.zoomMs + enemy.length * DRAIN.stepMs : 0);
     const blowEnd = won.value && polls.enemy && polls.enemy.after <= 0 ? dropFatalBlow(enemyEnd) : 0;
     if (own.length === 0) return Math.max(enemyEnd, blowEnd);
-    draining.value = true;
+    // The hero comes forward once struck: the comets land on it where it stands.
+    at(0, () => (draining.value = true));
     own.forEach((value, index) => at(DRAIN.zoomMs + index * DRAIN.stepMs, () => {
       ownHp.value = value;
       playSound('tick', 0.7);
@@ -177,7 +199,14 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
       hurt.value = false;
       draining.value = false;
     });
-    return Math.max(end + DRAIN.hurtMs, blowEnd);
+    return Math.max(strikeMs + end + DRAIN.hurtMs, blowEnd);
+  }
+
+  /** The winners' comets fly to the beaten hero's portrait. Returns how long until the first one lands, 0 for none. */
+  function strikeBeatenHero(ownLoses: boolean, rivalLoses: boolean): number {
+    if (ownLoses === rivalLoses || !stage) return 0;
+    const target = middleOf((ownLoses ? heroSpots.own : heroSpots.rival).value);
+    return target ? stage.strike(ownLoses ? 'enemy' : 'own', target) : 0;
   }
 
   /**

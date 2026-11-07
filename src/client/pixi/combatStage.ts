@@ -6,6 +6,8 @@ import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
 import { CombatCard } from '#src/client/pixi/combatCard.ts';
 import type { SheetFrames } from '#src/client/pixi/deaths/deathScene.ts';
 import { playDeath } from '#src/client/pixi/deaths/playDeath.ts';
+import { STRIKE_LANDS_MS, heroStrike } from '#src/client/pixi/heroStrike.ts';
+import type { StrikeTarget } from '#src/client/pixi/heroStrike.ts';
 import { loadCombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import { StageBlows } from '#src/client/pixi/stageBlows.ts';
@@ -29,6 +31,8 @@ const IN_PLACE: ReadonlySet<DeathKind> = new Set(['burn', 'tv-off', 'light']);
 /** The finale's slow motion, in milliseconds of the combat at normal speed: the result waits for it. */
 const FINALE_HOLD_MS = 1100;
 const NO_PLAN: DeathPlan = { kind: 'eject', finale: false };
+/** The comets of the strike on the beaten hero: gold when you strike, red when you are struck. */
+const STRIKE_COLORS = { own: '#ffd84a', enemy: '#ff4a3a' };
 
 export interface CombatStageOptions {
   host: HTMLElement;
@@ -154,6 +158,24 @@ export class CombatStage {
   /** The player passed the line: whoever celebrates is back in its row. */
   endCelebration(): void {
     this.cards.forEach((card) => card.stopCelebrating());
+  }
+
+  /**
+   * The winners strike the beaten hero (`target`, its portrait's middle on the page): a comet from each survivor of
+   * the winning side (`own`: the player's). Returns how long until the first one lands, in page milliseconds, 0 when
+   * nobody is left to strike or the player asked for less motion.
+   */
+  strike(winner: 'own' | 'enemy', target: StrikeTarget): number {
+    if (!this.isStarted || this.reducedMotion) return 0;
+    const side = winner === 'own' ? this.options.side : this.options.side === 0 ? 1 : 0;
+    const sources = this.order[side].flatMap((uid) => {
+      const card = this.cards.get(uid);
+      return card ? [{ x: card.centerX(), y: card.centerY(), scale: card.scale }] : [];
+    });
+    if (sources.length === 0) return 0;
+    const color = winner === 'own' ? STRIKE_COLORS.own : STRIKE_COLORS.enemy;
+    this.fx.play(heroStrike(this.fx, sources, target, color, this.options.playSound));
+    return STRIKE_LANDS_MS / this.options.speed();
   }
 
   destroy(): void {

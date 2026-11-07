@@ -23,7 +23,7 @@ const {
   SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
-} = useCombatShow(props, () => emit('close'), stageHost);
+} = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') });
 
 /** The set's screens show the face-to-face: yours, then the rival's. */
 const faceOff = computed(() => [props.view?.heroId, props.combat.opponent.heroId].filter((id): id is string => Boolean(id)));
@@ -42,7 +42,7 @@ const speechStyle = computed(() => {
 
 <template>
   <GameTable :plateau-id="plateauId" :faces="faceOff">
-    <div class="opponent" :class="{ shaken: rivalShaken }">
+    <div ref="rivalHero" class="opponent" :class="{ shaken: rivalShaken }">
       <HeroCorner :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line">
@@ -53,7 +53,7 @@ const speechStyle = computed(() => {
       <HostLectern class="host" :puppet="hostPuppet" :name="host.nom" :talking="hostTalking" :mic-image="lecternMic" />
       <SpeechBubble v-if="hostTalking" class="host-line" tail="left">{{ hostLine }}</SpeechBubble>
     </div>
-    <div v-if="view" class="hero-spot" :class="{ draining, hurt }">
+    <div v-if="view" ref="ownHero" class="hero-spot" :class="{ draining, hurt }">
       <HeroCorner :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
     </div>
 
