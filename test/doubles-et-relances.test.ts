@@ -314,7 +314,8 @@ test('Bayrou compte un Ralliement pour un, même doré', () => {
   assert.equal(host.merged.length, 3, 'ses trois exemplaires retourneront à la réserve');
   const before = host.atk;
   endOfTurn(game, game.players[0]);
-  assert.equal(host.atk - before, 1);
+  const perRally = (CARD_BY_ID.bayrou.effects?.[0] as { atk: number }).atk;
+  assert.equal(host.atk - before, perRally, 'un Ralliement, une fois son gain');
 });
 
 test('l\'Investiture d\'un doré ne se perd pas quand son Annonce remplit la main', () => {

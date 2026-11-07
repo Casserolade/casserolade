@@ -212,7 +212,7 @@ test('Macron : chaque Ralliement fait gonfler son hôte, d\'autant plus qu\'il e
     assert.equal(applyAction(game, 0, { t: 'play', uid: rally.uid, onto: host.uid }).ok, true);
     gains.push(host.atk - before);
   }
-  assert.deepEqual(gains, [3, 6], '+3/+3 par Ralliement reçu');
+  assert.deepEqual(gains, [4, 8], '+4/+4 par Ralliement reçu');
 });
 
 test('Darmanin rallié apprend à son hôte à grandir en attaquant', () => {
