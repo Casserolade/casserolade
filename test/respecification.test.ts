@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { applyAction, createGame, startRound } from '../src/engine/game.ts';
+import { applyAction, createGame, startRound, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { resolveCombat } from '../src/engine/combat.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
@@ -330,4 +330,85 @@ test('les stats plafonnent à un milliard', () => {
   const m = unit(MAX_STAT - 1, MAX_STAT - 1);
   doubleStats(m, 3);
   assert.deepEqual([m.atk, m.hp], [MAX_STAT, MAX_STAT]);
+});
+
+// Une relance perdue est refusée : le sort reste en main (7 novembre 2026, Seconde délibération sur De Gaulle).
+
+test('Seconde délibération refuse un politique déjà relancé cette manche, et reste en main', () => {
+  const game = startTable(['macronie', 'socialistes', 'republicains', 'ecologistes', 'reconquete']);
+  const p = game.players[0];
+  lay(game, 'kazib');
+  const deGaulle = lay(game, 'de_gaulle');
+  lay(game, 'chirac'); // Son Annonce relance celle de De Gaulle.
+  assert.ok(p.retriggered.has(deGaulle.uid));
+  addSpellToHand(game, p, 'seconde_deliberation');
+  const held = p.spells.find((s) => s.spellId === 'seconde_deliberation') as { uid: number };
+  const refused = applyAction(game, 0, { t: 'cast', uid: held.uid, target: deGaulle.uid });
+  assert.equal(refused.ok, false);
+  assert.match(refused.ok ? '' : refused.error, /une fois par manche/);
+  assert.ok(p.spells.some((s) => s.spellId === 'seconde_deliberation'), 'le sort reste en main');
+  assert.deepEqual(viewFor(game, 0).relaunched, [...p.retriggered], 'la vue le dit, pour ne pas proposer la cible');
+});
+
+test('à la manche suivante, la relance repart', () => {
+  const game = startTable(['macronie', 'socialistes', 'republicains', 'ecologistes', 'reconquete']);
+  const p = game.players[0];
+  const kazib = lay(game, 'kazib');
+  const deGaulle = lay(game, 'de_gaulle');
+  cast(game, 'seconde_deliberation', deGaulle);
+  startRound(game);
+  p.budget = 500;
+  const before = kazib.atk;
+  cast(game, 'seconde_deliberation', deGaulle);
+  assert.equal(kazib.atk - before, 4, 'l\'Annonce de De Gaulle, +4/+4 à vos politiques');
+});
+
+test('Conseil des ministres sans Fin de tour à relancer est refusé', () => {
+  const game = startTable(['macronie', 'socialistes', 'republicains', 'ecologistes', 'reconquete']);
+  const p = game.players[0];
+  lay(game, 'kazib');
+  addSpellToHand(game, p, 'conseil_des_ministres');
+  const held = p.spells.find((s) => s.spellId === 'conseil_des_ministres') as { uid: number };
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, false);
+  assert.ok(p.spells.some((s) => s.spellId === 'conseil_des_ministres'));
+});
+
+test('l\'écran ne propose pas une relance sur un politique déjà relancé', async () => {
+  const { spellTargets } = await import('../src/client/tools/playTargets.ts');
+  const deGaulle = makeMinion(CARD_BY_ID.de_gaulle, 41);
+  const kazib = makeMinion(CARD_BY_ID.kazib, 42);
+  const held = { uid: 1, spellId: 'seconde_deliberation' };
+  assert.deepEqual(spellTargets(held, [deGaulle, kazib]), [41, 42]);
+  assert.deepEqual(spellTargets(held, [deGaulle, kazib], { shopSize: 3, boardLimit: 7, relaunched: [41] }), [42]);
+});
+
+test('un sort perdu est refusé et reste en main : mot-clé déjà là, boutique vide, invocation sans place', () => {
+  const refused = (game: Game, spellId: string, target?: Minion) => {
+    const p = game.players[0];
+    addSpellToHand(game, p, spellId);
+    const held = p.spells.find((s) => s.spellId === spellId) as { uid: number };
+    const r = applyAction(game, 0, { t: 'cast', uid: held.uid, ...(target ? { target: target.uid } : {}) });
+    return !r.ok && p.spells.some((s) => s.uid === held.uid);
+  };
+  const game = startTable(['macronie', 'socialistes', 'republicains', 'ecologistes', 'reconquete']);
+  const p = game.players[0];
+  const gueant = lay(game, 'gueant');
+  assert.ok(refused(game, 'immunite_parlementaire', gueant), 'il a déjà l\'Immunité');
+  assert.ok(!refused(game, 'elements_de_langage', gueant), 'Éléments de langage donne aussi +0/+2 : jamais perdu');
+  p.shop = [];
+  assert.ok(refused(game, 'debauchage', gueant), 'personne à débaucher');
+  const full = startTable(['socialistes', 'macronie', 'republicains', 'ecologistes', 'reconquete']);
+  const bouamrane = lay(full, 'bouamrane');
+  for (const id of ['kazib', 'cheminade', 'durif', 'lalanne', 'gueant', 'poutou']) lay(full, id);
+  assert.ok(refused(full, 'tribune_libre', bouamrane), 'son Suppléant n\'aurait pas de place');
+});
+
+test('keywordsAlreadyThere ne vise que les sorts qui ne donnent que des mots-clés', async () => {
+  const { keywordsAlreadyThere } = await import('../src/engine/keywordsAlreadyThere.ts');
+  const { SPELL_BY_ID } = await import('../src/data/sorts.ts');
+  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.immunite_parlementaire.effects, ['immunite']), true);
+  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.immunite_parlementaire.effects, []), false);
+  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.elements_de_langage.effects, ['porte_parole']), false);
+  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.temps_de_parole.effects, ['porte_parole']), false);
+  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.sondage_flatteur.effects, []), false);
 });

@@ -6,6 +6,7 @@ import { relaunchable } from '../engine/relaunch.ts';
 import { createRng } from '../engine/rng.ts';
 import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
+import { lostSpellReason } from '../engine/lostSpellReason.ts';
 import { CONTEXTS } from '../data/heroes.ts';
 import { PERSONNALITES } from '../data/personnalites.ts';
 import type { Personnalite } from '../data/personnalites.ts';
@@ -623,13 +624,18 @@ function castAction(view: PlayerView, bot: BotState, held: HandSpell): PlayerAct
   }
   const spell = SPELL_BY_ID[held.spellId as string];
   if (spell.effects.some((e) => e.do === 'oublier')) return braceletUseful(view) ? { t: 'cast', uid: held.uid } : null;
+  // Jamais un sort que le moteur refuserait : il serait perdu (7 novembre 2026).
+  const table = { board: view.board, shopSize: view.shop.length, boardLimit: view.boardLimit, relaunched: view.relaunched };
   if (!spell.target) {
+    if (lostSpellReason(spell, null, table)) return null;
     // Une découverte attend que la main ait de la place.
     if (spell.effects.some((e) => e.do === 'decouvrir' || e.do === 'carte') && handCount(view) >= view.handLimit) return null;
     return { t: 'cast', uid: held.uid };
   }
   if (view.board.length === 0) return null;
-  const target = targetFor(spell.effects, view.board, null, spell.maxTargetTier);
+  const candidates = view.board.filter((m) => lostSpellReason(spell, m, table) === null);
+  if (candidates.length === 0) return null;
+  const target = targetFor(spell.effects, candidates, null, spell.maxTargetTier);
   if (!target) return null;
   if (spell.effects.some((e) => e.do === 'sacrifier' || e.do === 'detruire') && (target.golden || minionPower(target) > 12)) return null;
   return { t: 'cast', uid: held.uid, target: target.uid };

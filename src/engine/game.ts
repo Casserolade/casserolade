@@ -3,7 +3,7 @@ import type { CombatRecord, Game, GamePhase, Player, ShopScript } from './state.
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
 import { canRallyOnto, effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
-import { relaunchable } from './relaunch.ts';
+import { lostSpellReason } from './lostSpellReason.ts';
 import { insertAroundLocked, reorderAroundLocked } from './reorderAroundLocked.ts';
 import {
   addMinionToHand,
@@ -380,11 +380,11 @@ function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): A
     if (spell.maxTargetTier !== undefined && (target.golden || target.token || target.simple || target.tier > spell.maxTargetTier)) {
       return fail(`Il faut un politique non doré d'échelon ${spell.maxTargetTier} ou moins.`);
     }
-    // Une relance sur un politique qui n'a rien à relancer serait perdue (une Annonce qui détruit ne se relance pas).
-    for (const eff of spell.effects) {
-      if (eff.do === 'declencher' && relaunchable(target.effects, eff.trigger).length === 0) return fail('Ce politique n\'a rien à relancer.');
-    }
   }
+  // Un sort qui serait perdu est refusé, et reste en main : rien à relancer, déjà relancé cette manche (R4), mot-clé
+  // déjà là, boutique vide, invocation sans place (7 novembre 2026).
+  const lost = lostSpellReason(spell, target, { board: p.board, shopSize: p.shop.length, boardLimit: boardLimit(game, p), relaunched: [...p.retriggered] });
+  if (lost) return fail(lost);
   if (held.count && held.count > 1) held.count--;
   else p.spells = p.spells.filter((x) => x !== held);
   if (spell.id === 'tract' && target) {
@@ -616,6 +616,8 @@ export interface PlayerView {
   buyCost: number;
   rollCost: number;
   freeRolls: number;
+  /** Les politiques déjà relancés cette manche (règle R4) : une relance ne les vise plus avant la suivante. */
+  relaunched: number[];
   boardLimit: number;
   scandalThreshold: number;
   heroId: string;
@@ -710,6 +712,7 @@ export function viewFor(game: Game, seat: number): PlayerView {
     buyCost: buyCost(game, p),
     rollCost: rollCost(game, p),
     freeRolls: p.freeRolls,
+    relaunched: [...p.retriggered],
     boardLimit: boardLimit(game, p),
     scandalThreshold: scandalThreshold(game, p),
     heroId: p.hero.id,

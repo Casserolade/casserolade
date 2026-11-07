@@ -1,6 +1,10 @@
 import { SPELL_BY_ID } from '#src/data/sorts.ts';
-import { relaunchable } from '#src/engine/relaunch.ts';
+import { lostSpellReason } from '#src/engine/lostSpellReason.ts';
+import type { SpellTable } from '#src/engine/lostSpellReason.ts';
 import type { Effect, HandSpell, Minion } from '#src/engine/types.ts';
+
+/** A table with room everywhere: only the target itself decides. */
+const NO_LIMITS: Omit<SpellTable, 'board'> = { shopSize: 1, boardLimit: Infinity, relaunched: [] };
 
 /** Its Annonce asks the player to point at an ally. */
 export function annonceNeedsTarget(effects: Effect[]): boolean {
@@ -27,18 +31,17 @@ export function spellNeedsTarget(held: HandSpell): boolean {
 }
 
 /**
- * The minions of the board that this spell or casserole may land on, as the engine checks them. A relaunch (Seconde
- * délibération, Tribune libre) only lands on a minion that has something to relaunch.
+ * The minions of the board that this spell or casserole may land on, as the engine checks them: never one on which
+ * the spell would be lost (nothing to relaunch, already relaunched this round, a keyword it already has).
  */
-export function spellTargets(held: HandSpell, board: Minion[]): number[] {
+export function spellTargets(held: HandSpell, board: Minion[], table: Omit<SpellTable, 'board'> = NO_LIMITS): number[] {
   if (held.casseroleId) return board.filter((m) => !m.token).map((m) => m.uid);
   const spell = held.spellId ? SPELL_BY_ID[held.spellId] : undefined;
   if (!spell?.target) return [];
   const maxTier = spell.maxTargetTier;
-  const relaunch = spell.effects.find((effect) => effect.do === 'declencher');
   return board
     .filter((m) => maxTier === undefined || (!m.golden && !m.token && !m.simple && m.tier <= maxTier))
-    .filter((m) => relaunch?.do !== 'declencher' || relaunchable(m.effects, relaunch.trigger).length > 0)
+    .filter((m) => lostSpellReason(spell, m, { ...table, board }) === null)
     .map((m) => m.uid);
 }
 
