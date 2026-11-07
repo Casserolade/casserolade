@@ -54,21 +54,20 @@ export const TOKENS: Record<string, Card> = {
  */
 export const CARDS: Card[] = [
   // Insoumis : la rue. Les Tracts, sorts gratuits qu'on améliore pour la partie.
-  card('boyard', 'Louis Boyard', 'insoumis', 2, 4, 4, { kw: ['vedette'], fx: [fx('annonce', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract', 2))] }),
+  card('boyard', 'Louis Boyard', 'insoumis', 2, 4, 5, { kw: ['vedette'], fx: [fx('annonce', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract', 2))] }),
   card('leaument', 'Antoine Léaument', 'insoumis', 1, 3, 4, { fx: [fx('vente', 'joueur', carte('tract', 2)), fx('droit_de_reponse', 'joueur', carte('tract'))] }),
   // L'ancien garde du corps de Mélenchon : il protège, et le drapeau reste.
   card('delogu', 'Sébastien Delogu', 'insoumis', 1, 2, 4, { kw: ['porte_parole', 'vedette'], fx: [fx('heritage', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract'))] }),
-  card('portes', 'Thomas Portes', 'insoumis', 2, 3, 4, { fx: [fx('fin_tour', 'aleatoire', tract)] }),
+  card('portes', 'Thomas Portes', 'insoumis', 2, 3, 5, { fx: [fx('fin_tour', 'aleatoire', tract)] }),
   card('trouve', 'Aurélie Trouvé', 'insoumis', 3, 1, 4, { fx: [fx('aura', 'soi', compteur('tracts', 1, 1))] }),
   // Elle a coordonné L'Avenir en commun : celle qui écrit les promesses en distribue.
-  card('guette', 'Clémence Guetté', 'insoumis', 2, 4, 4, { fx: [fx('annonce', 'joueur', carte('promesse'))] }),
+  card('guette', 'Clémence Guetté', 'insoumis', 2, 4, 5, { fx: [fx('annonce', 'joueur', carte('promesse'))] }),
   // PS, LREM, EDS, EELV, LFI : il se pose sur n'importe qui.
   card('tache', 'Aurélien Taché', 'insoumis', 2, 1, 2, { kw: ['ralliement'], fx: [fx('fin_tour', 'aleatoire', tract)] }),
-  card('chikirou', 'Sophia Chikirou', 'insoumis', 3, 4, 7, { fx: [fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract)] }),
-  // 7 novembre 2026 : il distribue ses Tracts en attaquant, et ses voisins les gardent.
-  card('bompard', 'Manuel Bompard', 'insoumis', 4, 4, 6, { fx: [fx('meeting', 'voisins', tract, { perma: true })] }),
+  card('chikirou', 'Sophia Chikirou', 'insoumis', 3, 5, 8, { fx: [fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract)] }),
+  card('bompard', 'Manuel Bompard', 'insoumis', 4, 4, 6, { fx: [fx('fin_tour', 'voisins', tract)] }),
   // Un insoumis préside la commission des Finances.
-  card('coquerel', 'Éric Coquerel', 'insoumis', 3, 4, 6, { fx: [fx('annonce', 'joueur', { do: 'budget', value: 2 })] }),
+  card('coquerel', 'Éric Coquerel', 'insoumis', 3, 4, 6, { fx: [fx('annonce', 'joueur', { do: 'budget', value: 3 })] }),
   // 7 novembre 2026 : monte à l'échelon 5, à la place de Mélenchon parti au 6.
   card('panot', 'Mathilde Panot', 'insoumis', 5, 8, 8, { fx: [fx('annonce', 'joueur', { do: 'tract_bonus', atk: 2, hp: 2 })] }),
   card('ruffin', 'François Ruffin', 'insoumis', 5, 6, 7, {
@@ -77,10 +76,11 @@ export const CARDS: Card[] = [
   // Les faux billets de 500 € offerts à Juncker : tout le monde en reçoit.
   card('aubry', 'Manon Aubry', 'insoumis', 4, 6, 7, { fx: [fx('annonce', 'autres', tract)] }),
   // Échelon 6. Le meeting en hologramme (2017), dans sept villes à la fois : vos « Quand il attaque » jouent deux fois,
-  // et chacune de ses attaques gonfle vos Tracts pour la partie (re-spécification du 7 novembre 2026).
+  // et chacune de ses attaques fait gonfler tous les Insoumis, pour de bon (re-spécification du 7 novembre 2026 ; gonfler
+  // la valeur des Tracts payait trop tard, -0,09 place offert à la manche 9).
   card('melenchon', 'Jean-Luc Mélenchon', 'insoumis', 6, 8, 8, {
     kw: ['vedette'],
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'meeting' }), fx('meeting', 'joueur', { do: 'tract_bonus', atk: 1, hp: 1 })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'meeting' }), fx('meeting', 'camp', tract, { camp: 'insoumis', perma: true })],
   }),
 
   // Socialistes : le retour. La mort comme ressource, et les Suppléants.
@@ -89,9 +89,9 @@ export const CARDS: Card[] = [
   // 7 novembre 2026 : le frondeur grandit en attaquant ; avec son Retour, il attaque deux fois par combat (règle R17).
   card('guedj', 'Jérôme Guedj', 'socialistes', 2, 3, 2, {
     kw: ['retour'],
-    fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })],
+    fx: [fx('meeting', 'soi', buff(1, 0), { perma: true })],
   }),
-  card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'joueur', campBuff(1, 0), { n: 4, camp: 'socialistes' })] }),
+  card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'joueur', campBuff(1, 0), { n: 5, camp: 'socialistes' })] }),
   card('cahuzac', 'Jérôme Cahuzac', 'socialistes', 2, 4, 5, {
     kw: ['vedette'],
     fx: [fx('vente', 'joueur', { do: 'budget', value: 2, plus_tard: true }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
@@ -159,13 +159,14 @@ export const CARDS: Card[] = [
   // La Fête de la musique à l'Élysée, 21 juin 2018 : il fait la fête deux fois plus fort que les autres.
   // Échelon 6, clé de voûte du Ralliement : chaque Ralliement fait gonfler son hôte, d'autant plus qu'il en a déjà
   // reçu. Vedette sans gain : il prend la lumière et double les Célébrations des autres (7 novembre 2026).
-  card('macron', 'Emmanuel Macron', 'macronie', 6, 8, 8, {
+  card('macron', 'Emmanuel Macron', 'macronie', 6, 9, 9, {
     kw: ['ni_droite_ni_gauche', 'vedette'],
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 2, hp: 2 })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 3, hp: 3 })],
   }),
 
   // Républicains : l'Immunité en combat, les affaires hors combat.
-  card('gueant', 'Claude Guéant', 'republicains', 1, 3, 2, { kw: ['immunite'] }),
+  // 7 novembre 2026 : un « Quand il attaque » dès l'échelon 1 ; l'Immunité le garde en vie pour attaquer encore.
+  card('gueant', 'Claude Guéant', 'republicains', 1, 3, 2, { kw: ['immunite'], fx: [fx('meeting', 'soi', buff(1, 0), { perma: true })] }),
   card('tiberi', 'Jean Tiberi', 'republicains', 1, 2, 3, { fx: [fx('annonce', 'soi', invoque('electeur_fantome'))] }),
   card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
   card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
@@ -191,7 +192,8 @@ export const CARDS: Card[] = [
   card('sarkozy', 'Nicolas Sarkozy', 'republicains', 6, 6, 7, { kw: ['immunite'], fx: [fx('casserole_recue', 'joue', { do: 'doubler_stats' })] }),
 
   // RN : la dynastie. Le débauchage de la boutique, et l'héritage durable.
-  card('odoul', 'Julien Odoul', 'rn', 2, 4, 5, { kw: ['vedette'], fx: [fx('heritage', 'allie_suivant', { do: 'transmettre' }), fx('celebration', 'aleatoire', buff(1, 1), { camp: 'rn' })] }),
+  // 7 novembre 2026 : la dynastie grandit en attaquant ; son Héritage ne jouait presque jamais (0,47 place).
+  card('odoul', 'Julien Odoul', 'rn', 2, 4, 5, { kw: ['vedette'], fx: [fx('meeting', 'allie_suivant', buff(1, 1), { perma: true }), fx('celebration', 'aleatoire', buff(1, 1), { camp: 'rn' })] }),
   card('houssin', 'Timothée Houssin', 'rn', 1, 1, 1, { fx: [fx('annonce', 'soi', debauche('plus_fort'))] }),
   // « Que de la main-d'œuvre locale », puis des travailleurs détachés à 5 € de l'heure : il embauche le moins cher, un autre en profite.
   card('fournas', 'Grégoire de Fournas', 'rn', 1, 1, 1, { fx: [fx('annonce', 'aleatoire', debauche('plus_fort'))] }),
@@ -210,7 +212,7 @@ export const CARDS: Card[] = [
     fx: [fx('annonce', 'cible', debauche('plus_fort')), fx('annonce', 'cible', debauche('plus_fort')), fx('celebration', 'main', debauche('plus_fort'))],
   }),
   // 7 novembre 2026 : monte à l'échelon 5, et la dynastie garde ce qu'il transmet.
-  card('jmlp', 'Jean-Marie Le Pen', 'rn', 5, 7, 9, { fx: [fx('heritage', 'allie_suivant', { do: 'transmettre', tout: true }, { perma: true })] }),
+  card('jmlp', 'Jean-Marie Le Pen', 'rn', 5, 6, 8, { fx: [fx('heritage', 'allie_suivant', { do: 'transmettre', tout: true }, { perma: true })] }),
   // Échelon 6, clé de voûte du débauchage : chaque débauché donne ses stats à tout le RN, pour la partie (7 novembre 2026).
   card('lepen', 'Marine Le Pen', 'rn', 6, 7, 8, { fx: [fx('debauche', 'joueur', { do: 'gain_debauche' }, { camp: 'rn' })] }),
 
@@ -224,7 +226,8 @@ export const CARDS: Card[] = [
   card('lafont', 'Samuel Lafont', 'reconquete', 1, 2, 3, { fx: [fx('actualise', 'soi', buff(2, 0))] }),
   // Maire d'Orange après son père, condamné pour un emploi de collaborateur parlementaire.
   card('yann_bompard', 'Yann Bompard', 'reconquete', 1, 3, 3, { fx: [fx('annonce', 'soi', invoque('assistant_fictif'))] }),
-  card('rigault', 'Stanislas Rigault', 'reconquete', 2, 3, 4, { kw: ['polemique'] }),
+  // 7 novembre 2026 : le plus faible de l'échelon 2 (0,39 place) grandit en attaquant.
+  card('rigault', 'Stanislas Rigault', 'reconquete', 2, 3, 4, { kw: ['polemique'], fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })] }),
   card('asselineau', 'François Asselineau', 'reconquete', 3, 3, 4, { kw: ['vedette'], fx: [fx('actualise', 'aleatoire', buff(1, 1), { camp: 'reconquete' }), fx('celebration', 'joueur', carte('sort_aleatoire'))] }),
   // 1,45 % à la primaire de 2016, rallié à Zemmour en 2021 : on le renvoie, il ramène quelqu'un.
   card('poisson', 'Jean-Frédéric Poisson', 'reconquete', 2, 5, 5, { fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'serviteur', camp: 'reconquete', echelon: 0 })] }),
@@ -256,14 +259,14 @@ export const CARDS: Card[] = [
     fx: [fx('fin_tour', 'aleatoire', buff(1, 1)), fx('fin_tour', 'aleatoire', buff(1, 1)), fx('celebration', 'aleatoire', buff(2, 2))],
   }),
   card('lalanne', 'Francis Lalanne', 'civile', 2, 5, 6, { kw: ['vedette'], fx: [fx('celebration', 'joueur', carte('copie'))] }),
-  card('arthaud', 'Nathalie Arthaud', 'civile', 3, 4, 6, { kw: ['vedette'], fx: [fx('annonce', 'joueur', boutique(1, 1)), fx('celebration', 'joueur', boutique(1, 1))] }),
+  card('arthaud', 'Nathalie Arthaud', 'civile', 3, 5, 7, { kw: ['vedette'], fx: [fx('annonce', 'joueur', boutique(1, 1)), fx('celebration', 'joueur', boutique(1, 1))] }),
   card('branco', 'Juan Branco', 'civile', 2, 3, 2, {
     fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 }), fx('droit_de_reponse', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 })],
   }),
   card('roussel', 'Fabien Roussel', 'civile', 3, 1, 3, { fx: [fx('sort', 'allies', buff(1, 0))] }),
   // « Nous, on n'a pas d'immunité ouvrière » : il répond quand on perd.
   card('poutou', 'Philippe Poutou', 'civile', 3, 4, 6, { kw: ['vedette'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
-  card('lassalle', 'Jean Lassalle', 'civile', 5, 5, 9, { kw: ['vedette'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
+  card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { kw: ['vedette'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).
   // Société civile : tout le monde peut les viser, quel que soit son camp.
@@ -271,9 +274,9 @@ export const CARDS: Card[] = [
   card('de_gaulle', 'Charles de Gaulle', 'civile', 6, 9, 9, { fx: [fx('annonce', 'allies', motCle('ni_droite_ni_gauche')), fx('annonce', 'allies', buff(4, 4))] }),
   // « Au revoir » (19 mai 1981) : il se lève, et la caméra reste sur sa chaise vide. Il est revenu ensuite, longtemps.
   // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV.
-  card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 9, 12, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
+  card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 11, 14, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
   // 3 novembre 2026 : sur 300 parties, une seule finissait avec lui ; son Annonce rejoue tout de suite celles du plateau.
-  card('chirac', 'Jacques Chirac', 'civile', 6, 12, 12, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
+  card('chirac', 'Jacques Chirac', 'civile', 6, 14, 14, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
   card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(4, 4))] }),
 ];
 

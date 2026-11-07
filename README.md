@@ -66,13 +66,13 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | | |
 |---|---|
 | **28 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
-| **106 politiques** | Sept partis, plus la Société civile et son Panthéon d'anciens présidents à l'échelon 6. |
+| **106 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
 | **65 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
 | **26 sorts** | Tract, Note de frais, Temps de parole, Remaniement, Congrès… |
 | **657 répliques** | Toutes sourcées, dont 244 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
-| **Des modes** | Seul contre l'ordinateur, la carrière (sept élections, du canton au second tour), et des salons entre amis par lien. La partie classée ouvrira quand il y aura assez de monde en ligne. |
+| **Des modes** | Seul contre l'ordinateur, la carrière (sept élections, du canton au second tour), et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |
 | **Sur téléphone** | Une version tenue en hauteur, faite pour le pouce (casserolade.fr/m/) : les téléphones y arrivent tout seuls. |
 | **[Le bestiaire](https://casserolade.fr/bestiaire)** | Tout le jeu, avec des filtres : mots-clés, héros, politiques, casseroles, sorts, jetons, contextes. Chaque fiche donne ses sources. |
 
