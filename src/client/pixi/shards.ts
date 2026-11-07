@@ -74,7 +74,7 @@ export class Shards {
         vx: (outX / away) * speed * 0.7 + blast.dirX * speed,
         vy: (outY / away) * speed * 0.7 + blast.dirY * speed - 180 * blast.power * blast.scale,
         spin: (Math.random() - 0.5) * 16,
-        tumble: 4 + Math.random() * 9,
+        tumble: 2 + Math.random() * 5,
         phase: Math.random() * Math.PI,
       };
     });

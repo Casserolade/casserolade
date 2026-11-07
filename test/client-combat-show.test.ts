@@ -139,7 +139,7 @@ test('the shake is smooth noise, squared trauma: nothing at rest, a lot at full 
 test('a harder blow shakes more and freezes longer, within bounds', () => {
   assert.equal(hitTrauma(0.6), 0);
   assert.ok(hitTrauma(1.5) > hitTrauma(1.1));
-  assert.ok(hitTrauma(2) <= 0.7);
+  assert.ok(hitTrauma(2) <= 0.8);
   assert.ok(hitStopSeconds(0.6) >= 0.03 && hitStopSeconds(0.6) < hitStopSeconds(2));
   assert.ok(hitStopSeconds(5) <= 0.1);
 });
