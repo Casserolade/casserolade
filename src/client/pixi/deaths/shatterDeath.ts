@@ -12,5 +12,5 @@ export function shatterDeath(card: CombatCard, scene: DeathScene, blow: KillingB
   scene.lights.hit(x, y, blow.strength + 0.6, card.scale);
   scene.sound('shatter', 0.9 + blow.strength * 0.2);
   scene.shake(0.3);
-  return breakMedallion(card, scene, blow, { wedges: 5, power: 1 + blow.strength * 0.35 });
+  return breakMedallion(card, scene, blow, { wedges: 5, power: 0.8 + blow.strength * 0.25, life: 1.2 });
 }
