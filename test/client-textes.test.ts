@@ -27,9 +27,9 @@ test('the legends say what they do, on attack and with their camp', () => {
   assert.deepEqual(cardRuleLines(CARD_BY_ID.melenchon), [
     '**Vedette**.',
     'Vos effets « Quand il attaque » se déclenchent deux fois.',
-    'Quand il attaque, vos **Tracts** donnent +1/+1 de plus pour le reste de la partie.',
+    'Quand il attaque, joue un **Tract** sur chacun de vos Insoumis pour de bon.',
   ]);
-  assert.match(cardRuleLines(CARD_BY_ID.macron).join(' '), /Après que vous ralliez un politique, ce politique gagne \+2\/\+2 par \*\*Ralliement\*\* reçu/);
+  assert.match(cardRuleLines(CARD_BY_ID.macron).join(' '), /Après que vous ralliez un politique, ce politique gagne \+3\/\+3 par \*\*Ralliement\*\* reçu/);
   assert.match(cardRuleLines(CARD_BY_ID.sarkozy).join(' '), /doublez les stats de ce politique/);
   assert.match(cardRuleLines(CARD_BY_ID.zemmour).join(' '), /gagne \+1\/\+1 par actualisation faite cette partie/);
   assert.match(cardRuleLines(CARD_BY_ID.schiappa).join(' '), /^\*\*Ni droite ni gauche\*\*\. \*\*Vedette\*\*\. Tous les deux sorts que vous lancez, gagne \+1\/\+1\./);

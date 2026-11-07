@@ -462,6 +462,8 @@ function preferredOrder(board: Minion[]): Minion[] {
     if (m.keywords.includes('polemique')) s += 25;
     // Glucksmann relance l'Héritage du premier : les Héritages devant.
     if (m.effects.some((e) => e.when === 'heritage')) s -= 10;
+    // « Quand il attaque » : devant, il attaque le premier et plus souvent (re-spécification du 7 novembre 2026).
+    if (m.effects.some((e) => e.when === 'meeting')) s -= 30;
     return s;
   };
   return [...board].sort((a, b) => score(a) - score(b));
@@ -586,8 +588,11 @@ function handMove(view: PlayerView, bot: BotState, margin = 3): PlayerAction | n
   // Un Ralliement rejoint le plus fort quand le plateau est plein, quand il n'a presque pas de corps, ou quand un
   // allié en profite (Maillard, Bayrou, Macron qui double l'hôte : re-spécification du 7 novembre 2026).
   if (m.keywords.includes('ralliement') && view.board.length > 0) {
-    const host = strongest(view.board.filter((x) => !x.token));
-    const payoff = view.board.some((x) => x.effects.some((e) => e.when === 'rallie' || e.do === 'buff_par_ralliement'));
+    // Un Ralliement qui arme (Immunité, Cumul, Retour, « Quand il attaque ») rejoint de préférence celui qui attaque.
+    const arms = m.keywords.some((k) => k === 'immunite' || k === 'cumul' || k === 'retour') || m.effects.some((e) => e.when === 'meeting');
+    const attackers = view.board.filter((x) => !x.token && x.effects.some((e) => e.when === 'meeting'));
+    const host = (arms ? strongest(attackers) : null) ?? strongest(view.board.filter((x) => !x.token));
+    const payoff = view.board.some((x) => x.effects.some((e) => e.when === 'rallie' || e.do === 'buff_par_ralliement')) || (arms && attackers.length > 0);
     if (host && (view.board.length >= view.boardLimit || m.atk + m.hp <= 6 || payoff)) return { t: 'play', uid: m.uid, onto: host.uid };
   }
   if (view.board.length < view.boardLimit) {

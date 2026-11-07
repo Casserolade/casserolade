@@ -159,17 +159,19 @@ test('Cohn-Bendit : à la Fin de tour, vos Écologistes gagnent +1/+1 par Écolo
   assert.equal(kazib.atk, before[2], 'la Société civile ne pousse pas');
 });
 
-test('Mélenchon : vos « Quand il attaque » jouent deux fois, et ses attaques gonflent vos Tracts pour la partie', () => {
+test('Mélenchon : vos « Quand il attaque » jouent deux fois, et chacune de ses attaques fait gonfler les Insoumis', () => {
   // Mélenchon ne tombe pas : le multiplicateur ne joue que s'il est vivant.
   const melenchon = { ...makeMinion(CARD_BY_ID.melenchon, uid++), hp: 1000 };
+  const leaument = { ...makeMinion(CARD_BY_ID.leaument, uid++), hp: 1000 };
   const guedj = makeMinion(CARD_BY_ID.guedj, uid++);
-  const r = fight([melenchon, guedj], [unit(1, 500)], 3);
+  const r = fight([melenchon, leaument, guedj], [unit(1, 500)], 3);
   const attacks = r.log.filter((e) => e.e === 'attaque' && e.from === melenchon.uid).length;
   assert.ok(attacks > 0);
-  assert.deepEqual(r.persist[0].tractBonus, { atk: 2 * attacks, hp: 2 * attacks }, 'son propre « Quand il attaque » joue deux fois');
+  const tracts = r.persist[0].buffs.filter((g) => g.uid === leaument.uid);
+  assert.equal(tracts.length, 2 * attacks, 'un Tract pour de bon à chaque Insoumis, deux fois par attaque');
   const guedjAttacks = r.log.filter((e) => e.e === 'attaque' && e.from === guedj.uid).length;
   const guedjGains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid).length;
-  assert.equal(guedjGains, 2 * guedjAttacks, 'celui de Guedj aussi');
+  assert.equal(guedjGains, 2 * guedjAttacks, 'le « Quand il attaque » de Guedj aussi');
 });
 
 test('les Tracts gagnés en combat restent pour la partie', () => {
@@ -185,7 +187,7 @@ test('Guedj grandit pour de bon en attaquant, et avec son Retour il attaque de n
   const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(1, 300)], 6);
   const gains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid);
   assert.ok(gains.length >= 2, 'une attaque, un Retour, et une autre attaque');
-  assert.ok(gains.every((g) => g.atk === 1 && g.hp === 1));
+  assert.ok(gains.every((g) => g.atk === 1 && g.hp === 0));
 });
 
 test('Hollande : chaque allié tombé fait gonfler les Socialistes, partout, pour la partie', () => {
@@ -210,7 +212,7 @@ test('Macron : chaque Ralliement fait gonfler son hôte, d\'autant plus qu\'il e
     assert.equal(applyAction(game, 0, { t: 'play', uid: rally.uid, onto: host.uid }).ok, true);
     gains.push(host.atk - before);
   }
-  assert.deepEqual(gains, [2, 4], '+2/+2 par Ralliement reçu');
+  assert.deepEqual(gains, [3, 6], '+3/+3 par Ralliement reçu');
 });
 
 test('Darmanin rallié apprend à son hôte à grandir en attaquant', () => {
