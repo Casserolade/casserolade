@@ -1,5 +1,37 @@
 # Changelog
 
+## Prochaine version
+
+**Des fins de partie qui explosent (7 novembre)**
+- L'échelon 6 passe de 4 à 11 légendes : les quatre anciens présidents, et le chef de chaque camp, qui ferme son moteur.
+  - Mélenchon (le meeting en hologramme) fait jouer deux fois vos effets « Quand il attaque », et chacune de ses attaques donne un Tract, pour de bon, à chaque Insoumis.
+  - Hollande fait grandir tous les Socialistes à chaque allié tombé ; Cohn-Bendit, les Écologistes selon leur nombre ; Macron, l'hôte de chaque Ralliement selon ceux qu'il a déjà reçus.
+  - Sarkozy double celui qui reçoit une casserole ; Marine Le Pen donne à tout le RN les stats de chaque débauché ; Zemmour grandit de plus en plus vite à chaque actualisation.
+- « Quand il attaque » devient un moteur : Guéant, Rigault, Odoul, Guedj et Darmanin gagnent pour de bon en attaquant. Cumul des mandats, Retour en politique et Immunité font attaquer plus souvent.
+- Les transfuges deviennent des Ralliements : Ciotti, Cazeneuve, Mariani, Peltier et Dupont-Aignan rejoignent un allié. Rallié, Darmanin apprend à son hôte à grandir en attaquant.
+- Le débauché est remplacé en boutique, et le sort Débauchage arrive à l'échelon 2, pour 1.
+- Schiappa grandit tous les deux sorts.
+- Les casseroles sont plus fortes, leurs stats doublent ; et chacune a un défaut qui fait mal en scandale : sondages qui baissent à chaque manche, politique qui n'attaque plus, budget ou effets perdus. Seules les deux qui font tout oublier n'en ont pas.
+
+**Le combat façon flipper (7 novembre)**
+- Le combat est plus nerveux : le coup tombe au contact, et un combat dure en moyenne 11,6 secondes au lieu de 18.
+- Un toucher, un clic ou la barre d'espace accélère : le combat passe à ×4, puis à sa fin ; une Célébration ou la fin de tour se passent, la voix coupée. Rien n'oblige à toucher : le jeu enchaîne seul. Les boutons ×1, ×2 et ×4 gardent la vitesse choisie.
+- À chaque coup : arrêt sur image, secousse qui croît avec les dégâts, recul, éclair, étincelles, et un chiffre qui rebondit.
+- Des morts variées : éjecté en toupie, brisé en éclats, explosion en 3D, brûlé par la Polémique, Vedette coupée à l'antenne, doré en pluie de pièces. La dernière mort du camp battu se joue au ralenti, puis chaque survivant frappe le héros battu.
+- Des plateaux vivants : un écran montre les candidats en direct (le face-à-face au second tour), les lumières vacillent et les écrans grésillent sur un gros choc, le tapis s'embrase, et l'ALERTE INFO de BFM annonce le résultat.
+- Les stats de 1 000 et plus s'écrivent court, sans jamais arrondir vers le haut : 1k, 1,2k, 12k, 1,5M.
+
+**Règles**
+- La Polémique se perd au premier coup qui blesse, même quand les dégâts suffisaient à tuer.
+- Un politique revenu (Retour en politique) compte comme neuf : il attaque de nouveau au tour suivant de son camp, et ses coups en cours s'arrêtent à sa mort.
+- Une relance suit les multiplicateurs : avec Lassalle, Conseil des ministres joue chaque Fin de tour deux fois ; de même Seconde délibération avec Chirac, et Tribune libre avec Mitterrand.
+
+**Salons**
+- Une table de 2 à 8 joueurs : deux amis peuvent jouer seuls, ou avec autant de bots qu'ils veulent. Les bots ne prennent que les places vides.
+
+**Textes**
+- Un sort qui donne deux choses au même politique le dit en une phrase.
+
 ## 0.2c — 6 novembre 2026
 
 **Correctif d'interface (6 novembre, nuit)**
