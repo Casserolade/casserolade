@@ -36,9 +36,9 @@ export class ImpactLayer {
   readonly view = new Container();
   private impacts: Impact[] = [];
 
-  /** `strength` from about 0.5 (a scratch) to 2 (a knockout blow). */
-  add(x: number, y: number, strength: number): void {
-    const size = 34 + 26 * strength;
+  /** `strength` from about 0.5 (a scratch) to 2 (a knockout blow); `scale` is the medallions' (smaller on a phone). */
+  add(x: number, y: number, strength: number, scale = 1): void {
+    const size = (34 + 26 * strength) * scale;
     const view = drawImpact(size);
     view.position.set(x, y);
     view.scale.set(0.3);

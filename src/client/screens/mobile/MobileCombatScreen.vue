@@ -4,11 +4,15 @@ import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
+import StudioFlicker from '#src/client/components/atoms/StudioFlicker.vue';
+import BreakingNews from '#src/client/components/molecules/BreakingNews.vue';
 import CelebrationNotices from '#src/client/components/molecules/CelebrationNotices.vue';
 import HostLectern from '#src/client/components/molecules/HostLectern.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
 import MobileHeroBadge from '#src/client/components/molecules/MobileHeroBadge.vue';
+import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { studioShock } from '#src/client/stores/studioShock.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 import { portraitCombatLayout } from '#src/client/tools/portraitCombatLayout.ts';
@@ -23,12 +27,16 @@ const emit = defineEmits<{ close: [] }>();
 
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
 const {
-  SPEEDS, playback, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
+  SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
-} = useCombatShow(props, () => emit('close'), stageHost, portraitCombatLayout);
+} = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') }, portraitCombatLayout);
 
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[plateauId]?.decor));
+/** The set's lights falter with the combat's big shocks, as on a computer. */
+const shock = computed(() => studioShock.last.value);
+/** On a news channel's set, the result also runs as breaking news. */
+const breakingNews = computed(() => BREAKING_NEWS_SETS.has(plateauId) && resultShown.value);
 /** Without its medallion on the stage (dead, or no WebGL), the line comes from its hero: yours below, the rival's above. */
 const speechStyle = computed(() => {
   const said = speech.value;
@@ -41,7 +49,8 @@ const speechStyle = computed(() => {
 <template>
   <div class="mobile-combat">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
-    <div class="rival" :class="{ shaken: rivalShaken }">
+    <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
+    <div ref="rivalHero" class="rival" :class="{ shaken: rivalShaken }">
       <MobileHeroBadge :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line"><SpeechBubble tail="up">{{ rivalLine }}</SpeechBubble></div>
@@ -50,7 +59,7 @@ const speechStyle = computed(() => {
       <HostLectern class="host" :puppet="hostPuppet" :name="host.nom" :talking="hostTalking" :mic-image="lecternMic" />
       <SpeechBubble v-if="hostTalking" class="host-line" tail="up">{{ hostLine }}</SpeechBubble>
     </div>
-    <div v-if="view" class="me" :class="{ draining, hurt }">
+    <div v-if="view" ref="ownHero" class="me" :class="{ draining, hurt }">
       <MobileHeroBadge :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
     </div>
 
@@ -64,7 +73,7 @@ const speechStyle = computed(() => {
     </div>
 
     <div v-if="!finished" class="controls">
-      <button v-for="value in SPEEDS" :key="value" type="button" class="control" :aria-pressed="speed === value" @click="playback.setSpeed(value)">×{{ value }}</button>
+      <button v-for="value in SPEEDS" :key="value" type="button" class="control" :aria-pressed="speed === value" @click="chooseSpeed(value)">×{{ value }}</button>
       <button type="button" class="control skip" @click="playback.skip()">Passer</button>
     </div>
     <p class="sr-only" aria-live="polite">{{ narration }}</p>
@@ -78,6 +87,7 @@ const speechStyle = computed(() => {
       <strong class="result">{{ eliminated ? 'Éliminé !' : won ? 'Victoire !' : lost ? 'Défaite…' : 'Égalité' }}</strong>
       <span class="detail">{{ outcome }}</span>
     </div>
+    <BreakingNews v-if="breakingNews" class="breaking-news" :news="outcome" />
 
     <div ref="stageHost" class="stage-host" aria-hidden="true" />
     <div v-if="speech" :key="`${speech.kind}-${speech.uid}`" class="speech" :class="[speech.kind, { below: speech.below }]" :style="speechStyle" role="status">
@@ -95,6 +105,9 @@ const speechStyle = computed(() => {
 /* --s sizes what was drawn for the computer's table (bubbles, notices): at a reading size on a phone. */
 .mobile-combat { --s: 0.62px; position: fixed; inset: 0; overflow: hidden; background: #0b0e18; color: var(--color-text); user-select: none; -webkit-user-select: none; }
 .decor { position: absolute; inset: -2%; background: center / cover no-repeat; filter: blur(2px) brightness(0.55) saturate(1.1); }
+.flicker { z-index: 1; }
+/* The breaking news, under the rival and the host, above its row, at a reading size. */
+.breaking-news { --s: 0.62px; position: absolute; z-index: 21; left: 8px; right: 8px; top: calc(env(safe-area-inset-top) + 15%); }
 .rival { --u: 0.6px; --badge-size: 56px; position: absolute; z-index: 25; left: 50%; top: calc(env(safe-area-inset-top) + 8px); translate: -50% 0; }
 .fatal-blow { position: absolute; left: 50%; top: -70px; translate: -50% 0; z-index: 3; }
 .rival.shaken { animation: rival-shake 0.45s linear; }

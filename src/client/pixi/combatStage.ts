@@ -4,31 +4,35 @@ import { TRIGGER_LABELS } from '#src/client/const/effectLabels.ts';
 import type { GameManifest } from '#src/client/const/gameManifest.ts';
 import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
 import { CombatCard } from '#src/client/pixi/combatCard.ts';
-import { FloaterLayer } from '#src/client/pixi/floaterLayer.ts';
-import { ImpactLayer } from '#src/client/pixi/impactLayer.ts';
-import { LightLayer } from '#src/client/pixi/lightLayer.ts';
+import type { SheetFrames } from '#src/client/pixi/deaths/deathScene.ts';
+import { playDeath } from '#src/client/pixi/deaths/playDeath.ts';
+import { STRIKE_LANDS_MS, heroStrike } from '#src/client/pixi/heroStrike.ts';
+import type { StrikeTarget } from '#src/client/pixi/heroStrike.ts';
 import { loadCombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
+import { StageBlows } from '#src/client/pixi/stageBlows.ts';
+import { StageFx } from '#src/client/pixi/stageFx.ts';
 import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { combatLayout } from '#src/client/tools/combatLayout.ts';
-import { hitStrength } from '#src/client/tools/hitStrength.ts';
+import type { DeathKind } from '#src/client/tools/deathKind.ts';
+import { deathPlayed } from '#src/client/tools/deathPlayed.ts';
 import { orderWithCorpses } from '#src/client/tools/orderWithCorpses.ts';
+import type { DeathPlan } from '#src/client/tools/planDeaths.ts';
 import { statsChangeLabel } from '#src/client/tools/statsChangeLabel.ts';
 import type { CombatSides } from '#src/engine/replay.ts';
 import type { CombatEvent, CombatUnit } from '#src/engine/types.ts';
 
-const POLEMIQUE_SECONDS = 1.5;
-/** A critical kill goes out in a bigger light, with a jolt of the stage: no object falls on a politician. */
-const CRITICAL_LIGHT_SCALE = 1.8;
-const CRITICAL_SHAKE = { seconds: 0.32, amplitude: 12 };
-const DAMAGE_COLOR = '#ff5a5a';
 const GAIN_COLOR = '#7dff9e';
 const INFO_COLOR = '#ffd84a';
+const DAMAGE_COLOR = '#ff5a5a';
 const GAIN_LIGHT = '#ffe680';
-/** A hit this hard shakes the whole table for a moment. */
-const SHAKE_FROM_DAMAGE = 6;
-const SHAKE_SECONDS = 0.28;
-const MAX_SHAKE_PX = 14;
+/** These deaths play where the politician stood: its place in the row waits for them. */
+const IN_PLACE: ReadonlySet<DeathKind> = new Set(['burn', 'tv-off', 'light']);
+/** The finale's slow motion, in milliseconds of the combat at normal speed: the result waits for it. */
+const FINALE_HOLD_MS = 1100;
+const NO_PLAN: DeathPlan = { kind: 'eject', finale: false };
+/** The comets of the strike on the beaten hero: gold when you strike, red when you are struck. */
+const STRIKE_COLORS = { own: '#ffd84a', enemy: '#ff4a3a' };
 
 export interface CombatStageOptions {
   host: HTMLElement;
@@ -36,33 +40,36 @@ export interface CombatStageOptions {
   /** The side the player sits on: it is drawn at the bottom. */
   side: 0 | 1;
   characterIds: string[];
-  /** The units killed by a critical hit: they go out in a bigger light. */
-  criticalKills: Set<number>;
+  /** How each politician dies (planDeaths), by uid. */
+  deaths: Map<number, DeathPlan>;
   speed: () => number;
   playSound: (name: SynthName, strength?: number) => void;
   /** Where the medallions stand: the computer's table (combatLayout), or the phone held upright. */
   layout?: typeof combatLayout;
+  /** The combat's finale plays in slow motion: the journal waits this long before going on. */
+  holdPlayback?: (ms: number) => void;
+  /** A big shock: the TV set around the stage flickers with it (0.45 to 1). */
+  onShock?: (strength: number) => void;
 }
 
 /**
- * The combat, drawn with PixiJS. It only reads the journal: every event comes from CombatPlayback,
- * with the state after that event. Effects overlap the next events and are pushed by the combat's speed.
+ * The combat, drawn with PixiJS. It only reads the journal: every event comes from CombatPlayback, with the state
+ * after that event. Effects overlap the next events and are pushed by the combat's speed; StageFx makes every blow
+ * felt, StageBlows plays the attacks, and each death plays its own way (deaths/).
  */
 export class CombatStage {
   private readonly app = new Application();
   private readonly options: CombatStageOptions;
   private readonly cardLayer = new Container();
-  private readonly floaters = new FloaterLayer();
-  private readonly impacts = new ImpactLayer();
-  private readonly lights = new LightLayer();
+  private fx!: StageFx;
+  private blows!: StageBlows;
   private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  private shake = { left: 0, amplitude: 0 };
   private readonly cards = new Map<number, CombatCard>();
+  /** Dead, still playing their death where they stood: their place in the row waits. */
   private readonly corpses = new Set<number>();
-  private readonly polemiqueVictims = new Set<number>();
-  private readonly pendingRemovals = new Set<number>();
   private order: [number[], number[]] = [[], []];
-  private sides: CombatSides = [[], []];
+  /** The medallions' scale on the stage (1 on a computer's 1080p table, about a third on a phone): every effect follows it. */
+  private fxScale = 1;
   private textures!: CombatTextures;
   private resizeObserver: ResizeObserver | null = null;
   private isDestroyed = false;
@@ -90,8 +97,23 @@ export class CombatStage {
       this.app.destroy({ removeView: true }, { children: true });
       return;
     }
+    this.fx = new StageFx(this.cardLayer, {
+      renderer: this.app.renderer,
+      reducedMotion: this.reducedMotion,
+      screen: () => this.app.renderer.screen,
+      sheet: (name) => this.sheet(name),
+      sound: this.options.playSound,
+      onShock: this.options.onShock,
+    });
+    this.blows = new StageBlows({
+      fx: this.fx,
+      reducedMotion: this.reducedMotion,
+      playSound: this.options.playSound,
+      cardOf: (uid) => this.cards.get(uid),
+      isOwn: (uid) => this.order[this.options.side].includes(uid),
+    });
     host.append(this.app.canvas);
-    this.app.stage.addChild(this.cardLayer, this.impacts.view, this.lights.view, this.floaters.view);
+    this.app.stage.addChild(this.fx.view);
     this.app.ticker.add((ticker) => this.update(ticker.deltaMS / 1000));
     this.resizeObserver = new ResizeObserver(() => this.handleResize());
     this.resizeObserver.observe(host);
@@ -101,7 +123,6 @@ export class CombatStage {
 
   /** Plays one event of the journal. `sides` is the state right after it. */
   handleEvent(event: CombatEvent, sides: CombatSides): void {
-    this.sides = sides;
     this.playEvent(event);
     this.showUnits(sides);
     this.placeCards(false);
@@ -110,9 +131,8 @@ export class CombatStage {
   /** The player skipped: straight to the final state, nothing left playing. */
   jumpTo(sides: CombatSides): void {
     if (!this.isStarted) return;
-    this.sides = sides;
+    this.fx.clear();
     this.corpses.clear();
-    this.pendingRemovals.clear();
     this.cards.forEach((card) => card.destroy());
     this.cards.clear();
     this.order = [[], []];
@@ -123,7 +143,7 @@ export class CombatStage {
   /** Where a unit stands on the canvas, its center: the bubble of the one who celebrates goes there. */
   unitPosition(uid: number): { x: number; y: number; top: number } | null {
     const card = this.cards.get(uid);
-    if (!card || this.corpses.has(uid)) return null;
+    if (!card) return null;
     return { x: card.centerX(), y: card.centerY(), top: card.view.y };
   }
 
@@ -135,32 +155,52 @@ export class CombatStage {
     card.celebrate(seconds);
   }
 
+  /** The player passed the line: whoever celebrates is back in its row. */
+  endCelebration(): void {
+    this.cards.forEach((card) => card.stopCelebrating());
+  }
+
+  /**
+   * The winners strike the beaten hero (`target`, its portrait's middle on the page): a comet from each survivor of
+   * the winning side (`own`: the player's). Returns how long until the first one lands, in page milliseconds, 0 when
+   * nobody is left to strike or the player asked for less motion.
+   */
+  strike(winner: 'own' | 'enemy', target: StrikeTarget): number {
+    if (!this.isStarted || this.reducedMotion) return 0;
+    const side = winner === 'own' ? this.options.side : this.options.side === 0 ? 1 : 0;
+    const sources = this.order[side].flatMap((uid) => {
+      const card = this.cards.get(uid);
+      return card ? [{ x: card.centerX(), y: card.centerY(), scale: card.scale }] : [];
+    });
+    if (sources.length === 0) return 0;
+    const color = winner === 'own' ? STRIKE_COLORS.own : STRIKE_COLORS.enemy;
+    this.fx.play(heroStrike(this.fx, sources, target, color, this.options.playSound));
+    return STRIKE_LANDS_MS / this.options.speed();
+  }
+
   destroy(): void {
     this.isDestroyed = true;
     this.resizeObserver?.disconnect();
     // Still starting (the player left a combat that was loading): start() destroys the app itself once
     // it is ready. Destroying it twice throws inside PixiJS.
+    // The renderer goes first: the effects' own textures are destroyed once nothing can still be bound to them.
     if (this.isStarted) {
-      this.lights.destroy();
       this.app.destroy({ removeView: true }, { children: true });
+      this.fx.destroy();
     }
   }
 
   private playEvent(event: CombatEvent): void {
     switch (event.e) {
-      case 'debut':
-        return;
       case 'attaque':
         this.playAttack(event.from, event.to);
         return;
       case 'degats':
-        this.playHit(event.uid, event.value);
+        this.withCard(event.uid, (card) => this.blows.hit(card, event.value));
         return;
       case 'immunite':
-        this.cards.get(event.uid)?.playEffect('immunite');
-        this.lightAt(event.uid, (x, y) => this.lights.shield(x, y));
+        this.withCard(event.uid, (card) => this.blows.shieldBreak(card));
         this.float(event.uid, KEYWORD_RULES.immunite.label, INFO_COLOR);
-        this.options.playSound('clang', 0.6);
         return;
       case 'resiste':
         this.cards.get(event.uid)?.playEffect('immunite');
@@ -168,8 +208,8 @@ export class CombatStage {
         this.options.playSound('clang', 0.6);
         return;
       case 'polemique':
-        this.polemiqueVictims.add(event.uid);
         this.cards.get(event.uid)?.playEffect('polemique');
+        this.lightAt(event.uid, (x, y) => this.fx.lights.gain(x, y, '#9dff5a', this.fxScale));
         return;
       case 'stats':
         this.floatStatsChange(event.uid, event.atk, event.hp);
@@ -182,7 +222,7 @@ export class CombatStage {
         this.float(event.uid, `${TRIGGER_LABELS[event.when]} !`, INFO_COLOR);
         return;
       case 'mort':
-        this.playDeath(event.uid, event.revient);
+        this.playFall(event.uid, event.revient);
         return;
       case 'retour':
         this.cards.get(event.uid)?.comeBack();
@@ -192,10 +232,16 @@ export class CombatStage {
         this.float(event.uid, `−${event.value} sondages`, DAMAGE_COLOR);
         return;
       case 'exil':
-        this.removeCard(event.uid);
+        this.cards.get(event.uid)?.destroy();
+        this.cards.delete(event.uid);
         return;
       default:
     }
+  }
+
+  private withCard(uid: number, play: (card: CombatCard) => void): void {
+    const card = this.cards.get(uid);
+    if (card) play(card);
   }
 
   private playAttack(from: number, to: number): void {
@@ -203,68 +249,45 @@ export class CombatStage {
     const target = this.cards.get(to);
     if (!attacker || !target) return;
     this.cardLayer.addChild(attacker.view);
-    attacker.attack(target);
-    this.options.playSound('lunge');
-  }
-
-  /** A manga flash on the one hit, its number popping out, a padded punch; the hardest blows shake the table. */
-  private playHit(uid: number, value: number): void {
-    const card = this.cards.get(uid);
-    if (!card) return;
-    const strength = hitStrength(value, card.hp);
-    card.takeHit();
-    if (!this.reducedMotion) {
-      this.impacts.add(card.centerX(), card.centerY() - 10, strength * 0.7);
-      this.lights.hit(card.centerX(), card.centerY() - 10, strength);
-    }
-    this.floaters.add(`−${value}`, DAMAGE_COLOR, card.centerX(), card.centerY(), 'damage', 0.8 + strength * 0.25);
-    this.options.playSound('hit', strength);
-    if (value >= SHAKE_FROM_DAMAGE && !this.reducedMotion) this.shake = { left: SHAKE_SECONDS, amplitude: Math.min(MAX_SHAKE_PX, 4 + value) };
+    this.blows.attack(attacker, target);
   }
 
   /**
-   * A politician goes out in light, a bigger one after a critical hit. Nothing falls on a politician
-   * (decision of 3 November 2026): a comeback is dazed by its birds, a Polémique victim is squashed flat.
+   * A politician falls. One that comes back is dazed by its birds; any other dies its own death (planDeaths): thrown
+   * out, broken, blown up, burnt, off the air… The death owns the medallion from now on. The finale plays in slow
+   * motion, and the journal waits for it.
    */
-  private playDeath(uid: number, comesBack: boolean): void {
+  private playFall(uid: number, comesBack: boolean): void {
     const card = this.cards.get(uid);
     if (!card) return;
-    this.cardLayer.addChild(card.view);
-    const critical = this.options.criticalKills.has(uid);
-    if (!this.reducedMotion) {
-      this.lights.death(card.centerX(), card.centerY(), card.view.scale.x * (critical ? CRITICAL_LIGHT_SCALE : 1));
-      if (critical) this.shake = { left: CRITICAL_SHAKE.seconds, amplitude: CRITICAL_SHAKE.amplitude };
-    }
     if (comesBack) {
       this.options.playSound('fall', 0.5);
+      this.lightAt(uid, (x, y) => this.fx.lights.death(x, y, card.scale * 0.7));
       card.showBirds();
       return;
     }
-    this.corpses.add(uid);
-    if (this.polemiqueVictims.delete(uid)) {
-      card.flatten();
-      this.options.playSound('scandal');
-      card.after(POLEMIQUE_SECONDS, () => this.removeCard(uid));
-      return;
+    const plan = this.options.deaths.get(uid) ?? NO_PLAN;
+    if (plan.finale) {
+      this.fx.finale(card.centerX(), card.centerY());
+      this.options.holdPlayback?.(FINALE_HOLD_MS / this.options.speed());
     }
-    this.options.playSound('fall', critical ? 0.9 : 0.5);
-    card.dissolve(() => this.removeCard(uid));
-  }
-
-  /** Effects call this from inside a card's update: the card goes away once the tick is over. */
-  private removeCard(uid: number): void {
-    this.pendingRemovals.add(uid);
-  }
-
-  private removePendingCards(): void {
-    this.pendingRemovals.forEach((uid) => this.destroyCard(uid));
-    this.pendingRemovals.clear();
-  }
-
-  private destroyCard(uid: number): void {
-    this.corpses.delete(uid);
-    this.cards.get(uid)?.destroy();
     this.cards.delete(uid);
+    const kind = deathPlayed(plan.kind, this.reducedMotion, this.app.renderer.name === 'webgl');
+    if (IN_PLACE.has(kind)) this.corpses.add(uid);
+    else this.fx.deathLayer.addChild(card.view);
+    const death = playDeath(kind, card, this.fx.scene, this.blows.lastBlow(uid));
+    this.fx.play({
+      update: (deltaSeconds) => death.update(deltaSeconds),
+      destroy: () => {
+        death.destroy();
+        this.freePlace(uid);
+      },
+    });
+  }
+
+  /** A death that played where its politician stood is over: the row closes up. */
+  private freePlace(uid: number): void {
+    if (!this.corpses.delete(uid) || this.isDestroyed) return;
     this.order = [this.order[0].filter((other) => other !== uid), this.order[1].filter((other) => other !== uid)];
     this.placeCards(false);
   }
@@ -274,7 +297,7 @@ export class CombatStage {
     const label = card && statsChangeLabel(card.atk, card.hp, atk, hp);
     if (!label) return;
     this.float(uid, label, GAIN_COLOR);
-    if (atk >= (card?.atk ?? 0) && hp >= (card?.hp ?? 0)) this.lightAt(uid, (x, y) => this.lights.gain(x, y, GAIN_LIGHT));
+    if (atk >= (card?.atk ?? 0) && hp >= (card?.hp ?? 0)) this.lightAt(uid, (x, y) => this.fx.lights.gain(x, y, GAIN_LIGHT, this.fxScale));
   }
 
   /** A light on a card, unless the player asked for less motion. */
@@ -286,7 +309,13 @@ export class CombatStage {
   private float(uid: number, label: string, color: string): void {
     const card = this.cards.get(uid);
     if (!card) return;
-    this.floaters.add(label, color, card.centerX(), card.centerY());
+    this.fx.floaters.add(label, color, card.centerX(), card.centerY());
+  }
+
+  private sheet(name: string): SheetFrames | null {
+    const frames = this.textures.effects[name];
+    const art = this.options.manifest.effets[name];
+    return frames && art ? { frames, art } : null;
   }
 
   /** Creates the units that just appeared, and refreshes every number and keyword. */
@@ -317,6 +346,8 @@ export class CombatStage {
     // device pixel ratio above 1.)
     const { screen } = this.app.renderer;
     const layout = (this.options.layout ?? combatLayout)(screen.width, screen.height, enemyOrder.length, ownOrder.length);
+    this.fxScale = layout.scale;
+    this.fx.setScale(layout.scale);
     const place = (uid: number, position: { x: number; y: number }) => {
       const card = this.cards.get(uid);
       if (!card) return;
@@ -333,23 +364,9 @@ export class CombatStage {
   }
 
   private update(realDeltaSeconds: number): void {
-    const deltaSeconds = realDeltaSeconds * this.options.speed();
+    const deltaSeconds = this.fx.update(realDeltaSeconds, this.options.speed());
     this.cards.forEach((card) => card.update(deltaSeconds, realDeltaSeconds));
-    this.removePendingCards();
-    this.impacts.update(deltaSeconds);
-    this.lights.update(deltaSeconds);
-    this.floaters.update(deltaSeconds);
-    this.updateShake(deltaSeconds);
   }
-
-  /** The table trembles, less and less, then stands still exactly where it was. */
-  private updateShake(deltaSeconds: number): void {
-    if (this.shake.left <= 0) return;
-    this.shake.left = Math.max(0, this.shake.left - deltaSeconds);
-    const amplitude = this.shake.amplitude * (this.shake.left / SHAKE_SECONDS);
-    this.app.stage.position.set((Math.random() * 2 - 1) * amplitude, (Math.random() * 2 - 1) * amplitude);
-  }
-
 }
 
 async function loadFonts(): Promise<void> {

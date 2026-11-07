@@ -22,7 +22,14 @@ export type SynthName =
   | 'fall'
   | 'bonk'
   | 'celebrate'
-  | 'tick';
+  | 'tick'
+  | 'boom'
+  | 'shatter'
+  | 'bumper'
+  | 'zap'
+  | 'pop'
+  | 'sizzle'
+  | 'coins';
 
 export interface SynthOptions {
   /** Multiplies every frequency: the slight variation of each play. */
@@ -258,5 +265,66 @@ export const SYNTH_SOUNDS: Record<SynthName, { seconds: number; play: Recipe }> 
   tick: {
     seconds: 0.08,
     play: (c, o, t, v) => tone(c, o, t, v, { type: 'triangle', from: 880, duration: 0.06, gain: 0.2 }),
+  },
+  // A politician blown up: a deep thump, a crackle, the rumble dying away.
+  boom: {
+    seconds: 0.9,
+    play: (c, o, t, v) => {
+      tone(c, o, t, v, { from: 120, to: 32, duration: 0.5, gain: 0.55 });
+      noise(c, o, t, v, { filter: 'lowpass', from: 2400, to: 140, duration: 0.85, gain: 0.5, attack: 0.005 });
+      noise(c, o, t, v, { filter: 'highpass', from: 3500, start: 0.02, duration: 0.18, gain: 0.12 });
+    },
+  },
+  // A medallion broken like glass: bright inharmonic tinkles over a crack.
+  shatter: {
+    seconds: 0.5,
+    play: (c, o, t, v) => {
+      noise(c, o, t, v, { filter: 'highpass', from: 2600, duration: 0.09, gain: 0.3 });
+      [3100, 4270, 2390, 5150, 3720].forEach((from, index) => tone(c, o, t, v, { from, start: 0.02 + index * 0.035, duration: 0.14, gain: 0.06 }));
+      tone(c, o, t, v, { from: 180, to: 70, duration: 0.12, gain: 0.25 });
+    },
+  },
+  // A pinball bumper: a bright ding that drops, with a spring under it.
+  bumper: {
+    seconds: 0.4,
+    play: (c, o, t, v) => {
+      tone(c, o, t, v, { type: 'square', from: 1320, to: 660, duration: 0.12, gain: 0.07 });
+      tone(c, o, t, v, { type: 'triangle', from: 1760, duration: 0.3, gain: 0.08 });
+      tone(c, o, t, v, { from: 160, to: 60, duration: 0.15, gain: 0.3 });
+    },
+  },
+  // An old television switched off: a falling whine and a click.
+  zap: {
+    seconds: 0.6,
+    play: (c, o, t, v) => {
+      noise(c, o, t, v, { filter: 'bandpass', from: 4000, to: 1200, duration: 0.45, gain: 0.12, q: 2 });
+      tone(c, o, t, v, { type: 'sawtooth', from: 2400, to: 90, duration: 0.5, gain: 0.05 });
+      tone(c, o, t, v, { type: 'square', from: 140, start: 0.5, duration: 0.04, gain: 0.12 });
+    },
+  },
+  // A balloon popping.
+  pop: {
+    seconds: 0.2,
+    play: (c, o, t, v) => {
+      noise(c, o, t, v, { filter: 'bandpass', from: 1800, duration: 0.06, gain: 0.4, q: 0.7 });
+      tone(c, o, t, v, { from: 420, to: 160, duration: 0.08, gain: 0.2 });
+    },
+  },
+  // A toxic flame: a hiss that grows and dies.
+  sizzle: {
+    seconds: 0.9,
+    play: (c, o, t, v) => {
+      noise(c, o, t, v, { filter: 'highpass', from: 2000, to: 5000, duration: 0.85, gain: 0.16, attack: 0.15 });
+      noise(c, o, t, v, { filter: 'lowpass', from: 600, to: 200, duration: 0.6, gain: 0.18, attack: 0.05 });
+    },
+  },
+  // A piggy bank breaking: coins on the floor.
+  coins: {
+    seconds: 0.7,
+    play: (c, o, t, v) => {
+      noise(c, o, t, v, { filter: 'highpass', from: 3000, duration: 0.05, gain: 0.2 });
+      [2637, 3136, 2794, 3520, 2349, 3951, 2960].forEach((from, index) =>
+        tone(c, o, t, v, { type: 'triangle', from, start: 0.03 + index * 0.075, duration: 0.12, gain: 0.07 }));
+    },
   },
 };
