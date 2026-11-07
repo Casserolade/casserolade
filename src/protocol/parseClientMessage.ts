@@ -6,6 +6,9 @@ import type { ClientMessage, OptionsSalon } from './messages.ts';
 export const MAX_MESSAGE_BYTES = 2048;
 const MAX_INTEGER = 1_000_000_000;
 const MAX_BOTS = 7;
+/** A table seats 2 to 8: at least two participants, humans or bots. */
+const MIN_TABLE = 2;
+const MAX_TABLE = 8;
 const LEVELS: readonly BotLevel[] = ['debutant', 'facile', 'moyen', 'difficile'];
 const TEXT_LIMIT = 64;
 
@@ -73,11 +76,13 @@ function parseOptions(raw: Record<string, unknown>): OptionsSalon | null {
   if (!LEVELS.includes(raw.niveauBots as BotLevel)) return null;
   if (typeof raw.minuteur !== 'boolean') return null;
   if (raw.contexte !== undefined && !isShortText(raw.contexte)) return null;
+  if (raw.table !== undefined && (!isCount(raw.table) || raw.table < MIN_TABLE || raw.table > MAX_TABLE)) return null;
   return {
     bots: raw.bots,
     niveauBots: raw.niveauBots as BotLevel,
     minuteur: raw.minuteur,
     ...(raw.contexte ? { contexte: raw.contexte as string } : {}),
+    ...(raw.table !== undefined ? { table: raw.table } : {}),
   };
 }
 

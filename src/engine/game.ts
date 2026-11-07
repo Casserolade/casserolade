@@ -691,7 +691,7 @@ function viewMinion(m: Minion): Minion {
 export function viewFor(game: Game, seat: number): PlayerView {
   const p = game.players[seat];
   const offer = p.casseroleOffer ? CASSEROLE_BY_ID[p.casseroleOffer] : null;
-  const plateau = plateauFor(Math.max(1, game.round), game.players.filter((x) => x.alive).length);
+  const plateau = plateauFor(Math.max(1, game.round), game.players.filter((x) => x.alive).length, game.players.length);
   return {
     seat,
     round: game.round,

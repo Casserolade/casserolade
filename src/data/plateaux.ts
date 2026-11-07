@@ -26,7 +26,7 @@ export const PLATEAUX: Plateau[] = [
   { id: 'tf1_20h', chaine: 'TF1', emission: 'Le 20 heures', ambiance: 'Vous avez six minutes, et la moitié de la France à table.' },
 ];
 
-/** Le dernier plateau, réservé aux deux derniers joueurs. */
+/** Le dernier plateau, réservé aux deux derniers joueurs d'une table qui en comptait plus. */
 export const SECOND_TOUR: Plateau = {
   id: 'tf1_second_tour',
   chaine: 'TF1',
@@ -34,7 +34,9 @@ export const SECOND_TOUR: Plateau = {
   ambiance: 'Deux pupitres, deux chronos, des millions de téléspectateurs. Tout le monde a préparé sa petite phrase.',
 };
 
-export function plateauFor(round: number, playersAlive: number): Plateau {
-  if (playersAlive <= 2) return SECOND_TOUR;
+export function plateauFor(round: number, playersAlive: number, seats = 8): Plateau {
+  // À deux dès le départ (une table de deux, 7 novembre 2026), la partie suit les plateaux : le débat d'entre-deux-tours
+  // reste la finale d'une partie qui a éliminé du monde.
+  if (playersAlive <= 2 && seats > 2) return SECOND_TOUR;
   return PLATEAUX[Math.min(round - 1, PLATEAUX.length - 1)];
 }

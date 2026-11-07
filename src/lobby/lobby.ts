@@ -11,6 +11,8 @@ import { GameRoom } from '../server/room.ts';
 import type { Clock, RoomIncident, RoomSeat, RoomTimers } from '../server/room.ts';
 
 export const SIEGES = 8;
+/** Au moins deux participants à une table, humains ou bots. */
+export const TABLE_MIN = 2;
 const LONGUEUR_CODE = 6;
 /** Sans 0/O ni 1/I/L : un code se dicte. */
 const ALPHABET_CODE = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
@@ -360,7 +362,7 @@ export class Lobby {
     const room = new GameRoom({
       seed: (this.options.graine ?? generateSeed)(),
       seats: salon.sieges,
-      // 8 sièges toujours : les règles ne changent pas selon le nombre d'humains.
+      // De 2 à 8 sièges, selon la table choisie : les règles ne changent pas selon le nombre d'humains.
       game: { contextId: salon.options.contexte },
       timers: this.chronosPour(salon),
       clock: this.options.clock,
@@ -379,9 +381,15 @@ export class Lobby {
     return salon.options.minuteur && salon.humains.length > 1 ? chronos.avec : chronos.sans;
   }
 
+  /**
+   * Les humains, puis des bots jusqu'à la taille de table choisie (2 à 8, 8 par défaut) : comme un salon privé de
+   * Battlegrounds, deux amis peuvent jouer seuls, ou avec les bots qu'ils veulent (7 novembre 2026). La table s'agrandit
+   * si plus d'humains la rejoignent.
+   */
   private composerTable(salon: Salon): RoomSeat[] {
     const humains: RoomSeat[] = salon.humains.map((h) => ({ pseudo: h.pseudo, level: null }));
-    const bots: RoomSeat[] = Array.from({ length: SIEGES - humains.length }, (_, i) => ({
+    const taille = Math.max(humains.length, salon.options.table ?? SIEGES);
+    const bots: RoomSeat[] = Array.from({ length: taille - humains.length }, (_, i) => ({
       pseudo: `Bot ${i + 1}`,
       level: salon.options.niveauBots,
     }));
@@ -503,12 +511,14 @@ export class Lobby {
 
   private optionsValides(options: OptionsSalon): OptionsSalon {
     const contexte = options.contexte === RANDOM_CONTEXT || CONTEXTS.some((c) => c.id === options.contexte) ? options.contexte : undefined;
+    const table = Number.isInteger(options.table) ? Math.min(SIEGES, Math.max(TABLE_MIN, options.table as number)) : undefined;
     return {
-      // Le nombre de bots se déduit des présents au lancement.
+      // Le nombre de bots se déduit des présents au lancement, et de la taille de la table.
       bots: 0,
       niveauBots: TOUS_NIVEAUX.includes(options.niveauBots) ? options.niveauBots : 'moyen',
       minuteur: options.minuteur,
       ...(contexte ? { contexte } : {}),
+      ...(table !== undefined ? { table } : {}),
     };
   }
 
