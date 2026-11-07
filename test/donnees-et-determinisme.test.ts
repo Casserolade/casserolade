@@ -28,7 +28,7 @@ const ACTIONS: Record<Action['do'], true> = {
   retirer: true, basculer: true, exiler: true, oublier: true, transmettre: true, carte: true, decouvrir: true, camp_buff: true, boutique_buff: true,
   tract_bonus: true, jouer_tract: true, debaucher: true, dorer: true, detruire: true, sacrifier: true, declencher: true, doubler: true,
   compteur: true, scandale_plus: true, actualiser: true, actualisations_gratuites: true, budget_max: true, pari_defaite: true, congres: true, butin: true,
-  doubler_stats: true, doubler_tracts: true, gain_debauche: true, buff_compteur: true, chaise_vide: true,
+  doubler_stats: true, buff_par_membre: true, gain_debauche: true, buff_compteur: true, chaise_vide: true,
 };
 const KEYWORDS: Record<Keyword, true> = {
   immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true,

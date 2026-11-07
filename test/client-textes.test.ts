@@ -21,10 +21,16 @@ test('a spell never names the same recipient twice', () => {
   for (const spell of Object.values(SPELL_BY_ID)) assert.doesNotMatch(describeSpell(spell), /(à un politique).*\1/, spell.id);
 });
 
-test('the legends say what they double', () => {
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.cohn_bendit), ['**Fin de tour** : doublez les stats de ses voisins.']);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['**Héritage** : doublez les stats de vos autres Socialistes pour de bon. Une fois par combat.']);
-  assert.match(cardRuleLines(CARD_BY_ID.melenchon).join(' '), /vos \*\*Tracts\*\* donnent le double pour le reste de la partie/);
+test('the legends say what they do, on attack and with their camp', () => {
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.cohn_bendit), ['**Fin de tour** : vos Écologistes gagnent +1/+1 par Écologiste de votre plateau.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['Après la mort d\'un allié, vos Socialistes, partout, gagnent +1/+1 pour le reste de la partie.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.melenchon), [
+    '**Vedette**.',
+    'Vos effets « Quand il attaque » se déclenchent deux fois.',
+    'Quand il attaque, vos **Tracts** donnent +1/+1 de plus pour le reste de la partie.',
+  ]);
+  assert.match(cardRuleLines(CARD_BY_ID.macron).join(' '), /Après que vous ralliez un politique, ce politique gagne \+2\/\+2 par \*\*Ralliement\*\* reçu/);
+  assert.match(cardRuleLines(CARD_BY_ID.sarkozy).join(' '), /doublez les stats de ce politique/);
   assert.match(cardRuleLines(CARD_BY_ID.zemmour).join(' '), /gagne \+1\/\+1 par actualisation faite cette partie/);
   assert.match(cardRuleLines(CARD_BY_ID.schiappa).join(' '), /^\*\*Ni droite ni gauche\*\*\. \*\*Vedette\*\*\. Tous les deux sorts que vous lancez, gagne \+1\/\+1\./);
   assert.match(cardRuleLines(CARD_BY_ID.giscard).join(' '), /invoque une Chaise vide \*\*Porte-parole\*\* qui a ses PV/);

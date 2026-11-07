@@ -65,7 +65,8 @@ export const CARDS: Card[] = [
   // PS, LREM, EDS, EELV, LFI : il se pose sur n'importe qui.
   card('tache', 'Aurélien Taché', 'insoumis', 2, 1, 2, { kw: ['ralliement'], fx: [fx('fin_tour', 'aleatoire', tract)] }),
   card('chikirou', 'Sophia Chikirou', 'insoumis', 3, 4, 7, { fx: [fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract)] }),
-  card('bompard', 'Manuel Bompard', 'insoumis', 4, 4, 6, { fx: [fx('fin_tour', 'voisins', tract)] }),
+  // 7 novembre 2026 : il distribue ses Tracts en attaquant, et ses voisins les gardent.
+  card('bompard', 'Manuel Bompard', 'insoumis', 4, 4, 6, { fx: [fx('meeting', 'voisins', tract, { perma: true })] }),
   // Un insoumis préside la commission des Finances.
   card('coquerel', 'Éric Coquerel', 'insoumis', 3, 4, 6, { fx: [fx('annonce', 'joueur', { do: 'budget', value: 2 })] }),
   // 7 novembre 2026 : monte à l'échelon 5, à la place de Mélenchon parti au 6.
@@ -75,18 +76,20 @@ export const CARDS: Card[] = [
   }),
   // Les faux billets de 500 € offerts à Juncker : tout le monde en reçoit.
   card('aubry', 'Manon Aubry', 'insoumis', 4, 6, 7, { fx: [fx('annonce', 'autres', tract)] }),
-  // Échelon 6, clé de voûte des Tracts (re-spécification du 7 novembre 2026) : ils doublent à chaque Fin de tour.
+  // Échelon 6. Le meeting en hologramme (2017), dans sept villes à la fois : vos « Quand il attaque » jouent deux fois,
+  // et chacune de ses attaques gonfle vos Tracts pour la partie (re-spécification du 7 novembre 2026).
   card('melenchon', 'Jean-Luc Mélenchon', 'insoumis', 6, 8, 8, {
     kw: ['vedette'],
-    fx: [fx('fin_tour', 'joueur', { do: 'doubler_tracts' }), fx('fin_tour', 'camp', tract, { camp: 'insoumis' })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'meeting' }), fx('meeting', 'joueur', { do: 'tract_bonus', atk: 1, hp: 1 })],
   }),
 
   // Socialistes : le retour. La mort comme ressource, et les Suppléants.
   card('thevenoud', 'Thomas Thévenoud', 'socialistes', 1, 2, 2, { kw: ['retour', 'vedette'], fx: [fx('celebration', 'soi', buff(1, 1))] }),
   card('bouamrane', 'Karim Bouamrane', 'socialistes', 1, 2, 2, { fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
+  // 7 novembre 2026 : le frondeur grandit en attaquant ; avec son Retour, il attaque deux fois par combat (règle R17).
   card('guedj', 'Jérôme Guedj', 'socialistes', 2, 3, 2, {
     kw: ['retour'],
-    fx: [fx('fin_tour', 'soi', buff(1, 1))],
+    fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })],
   }),
   card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'joueur', campBuff(1, 0), { n: 4, camp: 'socialistes' })] }),
   card('cahuzac', 'Jérôme Cahuzac', 'socialistes', 2, 4, 5, {
@@ -104,10 +107,9 @@ export const CARDS: Card[] = [
   }),
   card('glucksmann', 'Raphaël Glucksmann', 'socialistes', 5, 9, 12, {
     kw: ['retour'], fx: [fx('meeting', 'allies', { do: 'declencher', trigger: 'heritage' }, { once: 'combat' })] }),
-  // Échelon 6, clé de voûte de la mort comme ressource : sa mort, son sacrifice ou sa relance doublent ses Socialistes.
-  // Une fois par combat : relancé par Glucksmann et doublé par Mitterrand, il multipliait le camp par seize à chaque
-  // combat, et les Socialistes passaient premiers de loin (4,32 en mono-camp, mesuré le 7 novembre 2026).
-  card('hollande', 'François Hollande', 'socialistes', 6, 5, 7, { fx: [fx('heritage', 'autres_camp', { do: 'doubler_stats' }, { camp: 'socialistes', perma: true, once: 'combat' })] }),
+  // Échelon 6, clé de voûte de la mort comme ressource : chaque allié tombé fait gonfler tout le camp, pour la partie
+  // (re-spécification du 7 novembre 2026). Suppléants, Retours et Héritages nourrissent la synergie.
+  card('hollande', 'François Hollande', 'socialistes', 6, 5, 7, { fx: [fx('revanche', 'joueur', campBuff(1, 1), { n: 1, camp: 'socialistes' })] }),
 
   // Écologistes : la pousse. La Fin de tour, et la boutique qu'on fait grandir.
   // « Le Tour de France est machiste et polluant » : le gag écologiste, en Vedette.
@@ -118,8 +120,8 @@ export const CARDS: Card[] = [
   card('mamere', 'Noël Mamère', 'ecologistes', 2, 2, 3, { fx: [fx('aura', 'soi', compteur('ecologistes_joues', 1, 1)), fx('droit_de_reponse', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
   card('piolle', 'Éric Piolle', 'ecologistes', 3, 3, 6, { fx: [fx('fin_tour', 'voisins', buff(1, 1))] }),
   card('duflot', 'Cécile Duflot', 'ecologistes', 4, 6, 7, { fx: [fx('joue', 'joue', buff(3, 3), { camp: 'ecologistes' })] }),
-  // Échelon 6, clé de voûte de la Fin de tour : ses voisins doublent. Le placement décide (7 novembre 2026).
-  card('cohn_bendit', 'Daniel Cohn-Bendit', 'ecologistes', 6, 6, 8, { fx: [fx('fin_tour', 'voisins', { do: 'doubler_stats' })] }),
+  // Échelon 6, clé de voûte de la Fin de tour : plus il y a d'Écologistes, plus ils poussent (7 novembre 2026).
+  card('cohn_bendit', 'Daniel Cohn-Bendit', 'ecologistes', 6, 6, 8, { fx: [fx('fin_tour', 'camp', { do: 'buff_par_membre', atk: 1, hp: 1 }, { camp: 'ecologistes' })] }),
   card('jadot', 'Yannick Jadot', 'ecologistes', 4, 7, 9, { fx: [fx('fin_tour', 'voisins', { do: 'declencher', trigger: 'fin_tour' })] }),
   card('rousseau', 'Sandrine Rousseau', 'ecologistes', 5, 6, 6, {
     kw: ['vedette'],
@@ -147,17 +149,19 @@ export const CARDS: Card[] = [
   card('dupond_moretti', 'Éric Dupond-Moretti', 'macronie', 3, 1, 2, { kw: ['ralliement', 'immunite'] }),
   // 5 novembre 2026 : 2 de budget au lieu de 1. Une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie (5,11 en mono-camp).
   card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 2 })] }),
-  card('darmanin', 'Gérald Darmanin', 'macronie', 4, 8, 9, { kw: ['ralliement', 'porte_parole'] }),
+  // 7 novembre 2026 : « le premier flic de France » grandit en attaquant, et rallié, il l'apprend à son hôte. Avec
+  // l'Immunité de Dupond-Moretti, le Cumul de Castaner et le Retour de Lecornu, l'hôte de tête gonfle à chaque coup.
+  card('darmanin', 'Gérald Darmanin', 'macronie', 4, 5, 6, { kw: ['ralliement'], fx: [fx('meeting', 'soi', buff(2, 2), { perma: true })] }),
   card('philippe', 'Édouard Philippe', 'macronie', 5, 8, 9, { fx: [fx('annonce', 'cible', { do: 'dorer', maxTier: 4 })] }),
   card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
   card('bayrou', 'François Bayrou', 'macronie', 4, 6, 8, { kw: ['ni_droite_ni_gauche'], fx: [fx('fin_tour', 'allies', { do: 'buff_par_ralliement', atk: 1, hp: 1 })] }),
   card('attal', 'Gabriel Attal', 'macronie', 5, 8, 8, { fx: [fx('aura', 'soi', compteur('dores_joues', 4, 4))] }),
   // La Fête de la musique à l'Élysée, 21 juin 2018 : il fait la fête deux fois plus fort que les autres.
-  // Échelon 6, clé de voûte du Ralliement : chaque politique rallié double son hôte. Vedette sans gain : il prend la
-  // lumière et double les Célébrations des autres (7 novembre 2026).
+  // Échelon 6, clé de voûte du Ralliement : chaque Ralliement fait gonfler son hôte, d'autant plus qu'il en a déjà
+  // reçu. Vedette sans gain : il prend la lumière et double les Célébrations des autres (7 novembre 2026).
   card('macron', 'Emmanuel Macron', 'macronie', 6, 8, 8, {
     kw: ['ni_droite_ni_gauche', 'vedette'],
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'doubler_stats' })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 2, hp: 2 })],
   }),
 
   // Républicains : l'Immunité en combat, les affaires hors combat.
