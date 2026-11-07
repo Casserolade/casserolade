@@ -166,12 +166,12 @@ export const CARDS: Card[] = [
 
   // Républicains : l'Immunité en combat, les affaires hors combat.
   // Déjà l'un des meilleurs achats du début de partie : grandir à chaque attaque le rendait écrasant (Républicains 3,85
-  // en plateaux mixtes), sans rien les Républicains tombaient derniers (5,15) : une fois par combat (7 novembre 2026).
+  // en plateaux mixtes), sans rien les Républicains tombaient derniers (5,15). Une fois par combat, les sept camps
+  // tiennent en 0,15 place en mono-camp (7 novembre 2026).
   card('gueant', 'Claude Guéant', 'republicains', 1, 3, 2, { kw: ['immunite'], fx: [fx('meeting', 'soi', buff(1, 0), { perma: true, once: 'combat' })] }),
   card('tiberi', 'Jean Tiberi', 'republicains', 1, 2, 3, { fx: [fx('annonce', 'soi', invoque('electeur_fantome'))] }),
   card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
-  // 7 novembre 2026 : la synergie de l'Immunité gonfle (+2/+2 à chaque Immunité qui tombe, au lieu de +1/+1).
-  card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(2, 2), { perma: true })] }),
+  card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
   card('cope', 'Jean-François Copé', 'republicains', 2, 3, 4, { kw: ['porte_parole'], fx: [fx('heritage', 'premier_allie', motCle('immunite'))] }),
   card('morano', 'Nadine Morano', 'republicains', 2, 5, 5, { kw: ['vedette'], fx: [fx('celebration', 'aleatoire', motCle('immunite'))] }),
   card('lisnard', 'David Lisnard', 'republicains', 3, 2, 2, { kw: ['immunite'], fx: [fx('fin_tour', 'allie_suivant', motCle('immunite'))] }),
