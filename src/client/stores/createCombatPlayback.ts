@@ -1,8 +1,9 @@
 import { computed, ref, shallowRef } from 'vue';
+import type { Ref } from 'vue';
 import { applyCombatEvent } from '#src/engine/replay.ts';
 import type { CombatSides } from '#src/engine/replay.ts';
 import type { CombatEvent } from '#src/engine/types.ts';
-import { combatEventDuration } from '#src/protocol/combatDuration.ts';
+import { combatEventGapMs } from '#src/client/tools/combatEventGapMs.ts';
 import { narrateCombatEvent } from '#src/client/tools/narrateCombatEvent.ts';
 
 /** Whoever draws the combat: it gets each event with the state right after it. */
@@ -18,7 +19,7 @@ export class CombatPlayback {
   readonly sides = shallowRef<CombatSides>([[], []]);
   readonly current = shallowRef<CombatEvent | null>(null);
   readonly narration = ref('');
-  readonly speed = ref(1);
+  readonly speed: Ref<number>;
   /** Comes after the last event has played its whole duration: the final state stays readable. */
   readonly finished = ref(false);
   private readonly index = ref(0);
@@ -30,9 +31,11 @@ export class CombatPlayback {
   /** When the next event plays, on the page's clock. */
   private nextAt = 0;
 
-  constructor(log: CombatEvent[], listener: CombatPlaybackListener | null = null) {
+  /** `speed`: the pace it starts at, the one the player chose last. */
+  constructor(log: CombatEvent[], listener: CombatPlaybackListener | null = null, speed = 1) {
     this.log = log;
     this.listener = listener;
+    this.speed = ref(speed);
   }
 
   start(): void {
@@ -44,6 +47,7 @@ export class CombatPlayback {
   }
 
   skip(): void {
+    if (this.finished.value) return;
     window.clearTimeout(this.timer);
     this.sides.value = this.log.reduce<CombatSides>(applyCombatEvent, this.sides.value);
     this.index.value = this.log.length;
@@ -51,6 +55,13 @@ export class CombatPlayback {
     this.narration.value = 'Le débat est terminé.';
     this.listener?.jumpTo(this.sides.value);
     this.finish();
+  }
+
+  /** The event playing now is cut short, the next one plays at once: a speech the player passed. */
+  advance(): void {
+    if (this.finished.value || this.index.value === 0) return;
+    window.clearTimeout(this.timer);
+    this.playNext();
   }
 
   destroy(): void {
@@ -88,7 +99,7 @@ export class CombatPlayback {
     this.sides.value = applyCombatEvent(this.sides.value, event);
     this.listener?.handleEvent(event, this.sides.value);
     this.index.value++;
-    const duration = combatEventDuration(event) / this.speed.value;
+    const duration = combatEventGapMs(event, this.log[this.index.value]) / this.speed.value;
     this.nextAt = performance.now() + duration;
     this.timer = window.setTimeout(() => this.playNext(), duration);
   }

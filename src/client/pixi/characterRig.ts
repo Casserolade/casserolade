@@ -182,6 +182,18 @@ export class CharacterRig {
     this.talkLeft = seconds;
   }
 
+  /** Every moment ends now: its resting face, the right way round, its resting eyes, the mouth shut. */
+  settle(): void {
+    this.faceLeft = 0;
+    if (this.restingFace) this.wearFace(this.restingFace);
+    this.turnLeft = 0;
+    this.setFacing(1);
+    this.eyesLeft = 0;
+    this.setEyes(this.restingEyes);
+    this.talkLeft = 0;
+    this.setJawOpening(0);
+  }
+
   play(name: RigAnimationName, options: PlayOptions = {}): void {
     this.animation = RIG_ANIMATIONS[name];
     this.animationTime = 0;

@@ -74,7 +74,7 @@ scrollDown();
 </script>
 
 <template>
-  <div class="chat" :class="{ floating, open }">
+  <div class="chat" :class="{ floating, open }" data-no-hurry>
     <button v-if="floating" type="button" class="toggle" :aria-expanded="open" :aria-label="open ? 'Fermer le chat' : `Ouvrir le chat${unread ? `, ${unread} message${unread > 1 ? 's' : ''} non lu${unread > 1 ? 's' : ''}` : ''}`" @click="toggle">
       <GameIcon name="speech" />
       <span v-if="unread" class="badge">{{ unread > 9 ? '9+' : unread }}</span>

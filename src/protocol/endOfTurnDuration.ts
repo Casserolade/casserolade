@@ -1,10 +1,10 @@
 import type { EndOfTurnStep } from '../engine/types.ts';
 
 /** The banner « Fin de tour », before the first effect plays and after the last one. */
-export const END_OF_TURN_FRAME_MS = 700;
+export const END_OF_TURN_FRAME_MS = 550;
 /** One effect lights up and its numbers change; many effects play faster, the whole stays short. */
-const STEP_MS = 650;
-const ALL_STEPS_MAX_MS = 4_500;
+const STEP_MS = 520;
+const ALL_STEPS_MAX_MS = 3_600;
 
 /** How long each step of the end of turn plays, at normal speed. */
 export function endOfTurnStepMs(steps: number): number {

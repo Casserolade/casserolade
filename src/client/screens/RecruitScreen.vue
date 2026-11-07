@@ -26,6 +26,7 @@ import { playSound } from '#src/client/services/soundEffects.ts';
 import { cardInspector } from '#src/client/stores/cardInspector.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { useCountdown } from '#src/client/stores/useCountdown.ts';
+import { useEndOfTurnHurry } from '#src/client/stores/useEndOfTurnHurry.ts';
 import { useTableGestures } from '#src/client/stores/useTableGestures.ts';
 import { dropGuideFor } from '#src/client/tools/dropGuideFor.ts';
 import { minionFace } from '#src/client/tools/shownCard.ts';
@@ -37,6 +38,7 @@ const props = withDefaults(defineProps<{ view: PlayerView; store: GameStore; pow
 
 const secondsLeft = useCountdown(props.store.deadline);
 const gestures = useTableGestures({ view: () => props.view, act: (action) => props.store.act(action) });
+useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 /** While something is carried: the counter line says what a drop across it does. */
 const dropGuide = computed(() => dropGuideFor(gestures.dragging.value, props.view));

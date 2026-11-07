@@ -19,6 +19,7 @@ import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import type { Point } from '#src/client/stores/tableFx.ts';
 import { useCountdown } from '#src/client/stores/useCountdown.ts';
+import { useEndOfTurnHurry } from '#src/client/stores/useEndOfTurnHurry.ts';
 import { useTableGestures } from '#src/client/stores/useTableGestures.ts';
 import type { GestureItem, Zone } from '#src/client/stores/useTableGestures.ts';
 import { cardSheetFor } from '#src/client/tools/cardSheetFor.ts';
@@ -43,6 +44,7 @@ const secondsLeft = useCountdown(props.store.deadline);
 const sheet = shallowRef<CardSheet | null>(null);
 const heroOpen = ref(false);
 const gestures = useTableGestures({ view: () => props.view, act: (action) => props.store.act(action), zoneAt: zoneOnPhone, onTap: openSheet });
+useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.view.plateau.id]?.decor));
 const aimHint = computed(() => {

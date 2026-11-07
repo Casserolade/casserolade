@@ -136,6 +136,11 @@ export class CombatStage {
     card.celebrate(seconds);
   }
 
+  /** The player passed the line: whoever celebrates is back in its row. */
+  endCelebration(): void {
+    this.cards.forEach((card) => card.stopCelebrating());
+  }
+
   destroy(): void {
     this.isDestroyed = true;
     this.resizeObserver?.disconnect();
