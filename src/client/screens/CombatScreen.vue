@@ -4,11 +4,13 @@ import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
+import BreakingNews from '#src/client/components/molecules/BreakingNews.vue';
 import CelebrationNotices from '#src/client/components/molecules/CelebrationNotices.vue';
 import HeroCorner from '#src/client/components/molecules/HeroCorner.vue';
 import HostLectern from '#src/client/components/molecules/HostLectern.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
 import GameTable from '#src/client/components/organisms/GameTable.vue';
+import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 
@@ -18,10 +20,15 @@ const emit = defineEmits<{ close: [] }>();
 
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
 const {
-  SPEEDS, playback, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
+  SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
-} = useCombatShow(props, () => emit('close'), stageHost);
+} = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') });
+
+/** The set's screens show the face-to-face: yours, then the rival's. */
+const faceOff = computed(() => [props.view?.heroId, props.combat.opponent.heroId].filter((id): id is string => Boolean(id)));
+/** On a news channel's set, the result also runs as breaking news. */
+const breakingNews = computed(() => BREAKING_NEWS_SETS.has(plateauId) && resultShown.value);
 
 /** Without its medallion on the stage (dead, or no WebGL), the line comes from its side of the table. */
 const speechStyle = computed(() => {
@@ -34,8 +41,8 @@ const speechStyle = computed(() => {
 </script>
 
 <template>
-  <GameTable :plateau-id="plateauId">
-    <div class="opponent" :class="{ shaken: rivalShaken }">
+  <GameTable :plateau-id="plateauId" :faces="faceOff">
+    <div ref="rivalHero" class="opponent" :class="{ shaken: rivalShaken }">
       <HeroCorner :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line">
@@ -46,7 +53,7 @@ const speechStyle = computed(() => {
       <HostLectern class="host" :puppet="hostPuppet" :name="host.nom" :talking="hostTalking" :mic-image="lecternMic" />
       <SpeechBubble v-if="hostTalking" class="host-line" tail="left">{{ hostLine }}</SpeechBubble>
     </div>
-    <div v-if="view" class="hero-spot" :class="{ draining, hurt }">
+    <div v-if="view" ref="ownHero" class="hero-spot" :class="{ draining, hurt }">
       <HeroCorner :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
     </div>
 
@@ -60,7 +67,7 @@ const speechStyle = computed(() => {
     </div>
 
     <div v-if="!finished" class="controls">
-      <button v-for="value in SPEEDS" :key="value" type="button" class="control" :aria-pressed="speed === value" @click="playback.setSpeed(value)">×{{ value }}</button>
+      <button v-for="value in SPEEDS" :key="value" type="button" class="control" :aria-pressed="speed === value" @click="chooseSpeed(value)">×{{ value }}</button>
       <button type="button" class="control skip" @click="playback.skip()">Passer</button>
     </div>
     <p class="sr-only" aria-live="polite">{{ narration }}</p>
@@ -73,6 +80,7 @@ const speechStyle = computed(() => {
         <strong class="result">{{ eliminated ? 'Éliminé !' : won ? 'Victoire !' : lost ? 'Défaite…' : 'Égalité' }}</strong>
         <span class="detail">{{ outcome }}</span>
       </div>
+      <BreakingNews v-if="breakingNews" class="breaking-news" :news="outcome" />
     </template>
 
     <template #overlay>
@@ -173,6 +181,8 @@ const speechStyle = computed(() => {
   animation: speed-lines 0.25s steps(2, end) infinite;
 }
 .outcome.won { top: calc(var(--s) * 300); }
+/* The breaking news runs at the foot of the table, between your hero and the corner. */
+.breaking-news { position: absolute; left: calc(var(--s) * 300); bottom: calc(var(--s) * 120); z-index: 21; max-width: calc(var(--s) * 1320); }
 .outcome.lost { top: calc(var(--s) * 610); }
 @keyframes outcome-in { from { transform: scale(0.3); opacity: 0; } }
 @keyframes speed-lines { 50% { rotate: 4deg; } }

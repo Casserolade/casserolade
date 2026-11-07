@@ -1,20 +1,24 @@
 import { Container, Graphics, Sprite, Text } from 'pixi.js';
+import type { Renderer, Texture } from 'pixi.js';
 import { CARD_LAYOUT } from '#src/client/const/cardLayout.ts';
 import type { GameManifest } from '#src/client/const/gameManifest.ts';
 import { MEDALLION_LAYOUT } from '#src/client/const/medallionLayout.ts';
+import { CardMotion } from '#src/client/pixi/cardMotion.ts';
+import { celebrationSpotlight } from '#src/client/pixi/celebrationSpotlight.ts';
 import { CharacterRig } from '#src/client/pixi/characterRig.ts';
+import { NUMBER_STYLE } from '#src/client/pixi/createCardDecor.ts';
+import { hangingPans } from '#src/client/pixi/hangingPans.ts';
+import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import { MedallionDecor } from '#src/client/pixi/medallionDecor.ts';
 import { MEDALLION_MARGIN, MEDALLION_RESOLUTION } from '#src/client/pixi/medallionCanvas.ts';
 import { medallionFrameTexture } from '#src/client/pixi/medallionFrameTexture.ts';
-import type { Texture } from 'pixi.js';
-import { NUMBER_STYLE } from '#src/client/pixi/createCardDecor.ts';
-import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import { SheetEffect } from '#src/client/pixi/sheetEffect.ts';
 import { campArtKey } from '#src/client/tools/campArtKey.ts';
-import { otherFaces } from '#src/client/tools/otherFaces.ts';
+import { compactStat } from '#src/client/tools/compactStat.ts';
 import { healthTone } from '#src/client/tools/healthTone.ts';
+import { otherFaces } from '#src/client/tools/otherFaces.ts';
+import { statFontScale } from '#src/client/tools/statFontScale.ts';
 import { statTones } from '#src/client/tools/statTone.ts';
-import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
 import type { CombatUnit, Keyword } from '#src/engine/types.ts';
 
 const { width: W, height: H, ring: RING, figureScale, figureX, figureY, statSize } = MEDALLION_LAYOUT;
@@ -24,14 +28,9 @@ const CY = H / 2;
 const GROUND_EFFECT_WIDTH = 250;
 const GROUND_Y = H + 4;
 const BIRDS_WIDTH = 190;
-const SLIDE_PER_SECOND = 9;
 const TONE_COLORS = { base: '#ffffff', up: '#7dff9e', down: '#ff7b7b' } as const;
-/** The lunge of an attack, in seconds: wind up, dash, back. The hit lands between dash and back. */
-const LUNGE = { windUp: 0.1, dash: 0.14, back: 0.2, reach: 0.82 };
-/** The medallion leans back as it winds up, into the blow as it dashes, in radians. */
-const LEAN = { back: 0.1, forward: 0.18, across: 250 };
-/** The casseroles hang under the medallion, as on the table. */
-const PAN = { size: 34, gap: 2, top: 8, string: 12 };
+/** A stat's number in its badge, at full size: as `.stat` in MedallionToken.vue. */
+const STAT_FONT = { size: 40, stroke: 6 };
 /** The one who celebrates rises this high, in medallion units, under a spotlight. */
 const CELEBRATION_LIFT = 34;
 /** Going out in light, in combat seconds. */
@@ -42,10 +41,25 @@ const HIT_FACE_SECONDS = 0.7;
 const TURN_ON_HIT_CHANCE = 0.5;
 /** A golden medallion's oval sits deeper in its thicker frame (`.golden .oval` in MedallionToken.vue). */
 const GOLDEN_OVAL_INSET = 9;
+/** A blow whitens the medallion for a blink, and knocks it back: pixels a second, plus as much again per strength. */
+const HIT_FLASH_SECONDS = 0.08;
+const KNOCK = { push: 260, perStrength: 220 };
+/** A blow squashes the medallion for a moment, more for a harder one. */
+const SQUASH = { seconds: 0.25, base: 0.1, perStrength: 0.05 };
 
 interface RunningEffect {
   effect: SheetEffect;
   onFinished: (() => void) | null;
+}
+
+/** Past 999 the number is written short (3k), smaller when it is long: the same as on the table. */
+function showStat(text: Text, value: number): void {
+  const label = compactStat(value);
+  if (text.text === label) return;
+  const scale = statFontScale(label);
+  text.text = label;
+  text.style.fontSize = STAT_FONT.size * scale;
+  text.style.stroke = { color: '#111111', width: STAT_FONT.stroke * scale };
 }
 
 /** A texture of medallionTextures.ts, placed over the medallion's own units. */
@@ -56,18 +70,37 @@ function medallionSprite(texture: Texture): Sprite {
   return sprite;
 }
 
+function createStat(texture: CombatTextures['attack'], x: number, y: number): Text {
+  const holder = new Container();
+  holder.position.set(x, y);
+  if (texture) {
+    const medal = new Sprite(texture);
+    medal.anchor.set(0.5);
+    medal.setSize(statSize, statSize);
+    holder.addChild(medal);
+  }
+  const text = new Text({ text: '', style: { ...NUMBER_STYLE, fontSize: STAT_FONT.size, stroke: { color: '#111111', width: STAT_FONT.stroke } } });
+  text.anchor.set(0.5);
+  text.y = -2;
+  holder.addChild(text);
+  return text;
+}
+
 /** One unit on the combat stage: the same medallion as on the board, with its puppet and the effects playing on it. */
 export class CombatCard {
   readonly view = new Container();
   readonly uid: number;
+  readonly golden: boolean;
+  /** Its camp's colour: the chips of a broken frame. */
+  readonly color: string;
   atk: number;
   hp: number;
   /** The most health it had in this combat: below it, it is wounded, and its number turns red. */
   private maxHp = 0;
   private readonly cardId: string;
-  private readonly golden: boolean;
   private readonly rig: CharacterRig;
   private readonly body = new Container();
+  private readonly motion: CardMotion;
   /** Lectern, halo, bubble, sashes, badges and marks: the same as on the table (MedallionToken.vue). */
   private readonly decor: MedallionDecor;
   private readonly effectLayer = new Container();
@@ -76,21 +109,20 @@ export class CombatCard {
   private readonly manifest: GameManifest;
   private readonly textures: CombatTextures;
   private keywords: Keyword[] | null = null;
-  private pans: Container[] = [];
+  private readonly pans: Container[];
   private running: RunningEffect[] = [];
   private delayed: { left: number; callback: () => void }[] = [];
   private birds: SheetEffect | null = null;
   /** Going out in light: how far along, and what to do once gone. */
   private fading: { left: number; onFinished: () => void } | null = null;
   private readonly wash = new Graphics();
+  /** The blink of white on a blow. */
+  private readonly flash = new Graphics();
+  private flashLeft = 0;
   /** The light on the one who celebrates: a beam from above and a glow around it, while it speaks. */
   private spotlight: Graphics | null = null;
-  private targetX = 0;
-  private targetY = 0;
-  private targetScale = 1;
-  private isPlaced = false;
-  private lunge: { time: number; dx: number; dy: number } | null = null;
   private pose = 0;
+  private squash = 0;
   private time = Math.random() * 10;
 
   constructor(unit: CombatUnit, manifest: GameManifest, textures: CombatTextures) {
@@ -102,7 +134,7 @@ export class CombatCard {
     this.manifest = manifest;
     this.textures = textures;
     const campKey = campArtKey(unit.camp);
-    const color = manifest.camps[campKey]?.couleur ?? '#8c8574';
+    this.color = manifest.camps[campKey]?.couleur ?? '#8c8574';
     const character = textures.characters[unit.cardId];
     this.rig = new CharacterRig({
       art: character ? manifest.personnages[unit.cardId] : null,
@@ -119,7 +151,7 @@ export class CombatCard {
     if (unit.scandal) this.rig.restOn('choc');
 
     // The same medallion as on the table (MedallionToken.vue): frame, oval and rays come from one texture.
-    const frame = medallionSprite(medallionFrameTexture({ color, golden: unit.golden, bothSides: unit.keywords.includes('ni_droite_ni_gauche') }));
+    const frame = medallionSprite(medallionFrameTexture({ color: this.color, golden: unit.golden, bothSides: unit.keywords.includes('ni_droite_ni_gauche') }));
     const ovalInset = unit.golden ? GOLDEN_OVAL_INSET : RING;
     const mask = new Graphics().ellipse(CX, CY, W / 2 - ovalInset, H / 2 - ovalInset).fill('#ffffff');
     const figure = new Container();
@@ -128,50 +160,20 @@ export class CombatCard {
     figure.addChild(this.rig.view);
     figure.mask = mask;
 
-    this.attackText = this.createStat(textures.attack, statSize / 2 - 12, H - statSize / 2 + 6);
-    this.healthText = this.createStat(textures.health, W - statSize / 2 + 12, H - statSize / 2 + 6);
+    this.attackText = createStat(textures.attack, statSize / 2 - 12, H - statSize / 2 + 6);
+    this.healthText = createStat(textures.health, W - statSize / 2 + 12, H - statSize / 2 + 6);
     this.decor = new MedallionDecor({ mic: textures.mic, golden: unit.golden });
-    this.body.addChild(this.decor.back, frame, figure, mask, this.decor.front, this.createPans(unit.casseroles, textures));
+    const { row, pans } = hangingPans(unit.casseroles, textures);
+    this.pans = pans;
+    this.flash.ellipse(CX, CY, W / 2 - 4, H / 2 - 4).fill('#ffffff');
+    this.flash.blendMode = 'add';
+    this.flash.alpha = 0;
+    this.body.addChild(this.decor.back, frame, figure, mask, this.decor.front, row, this.flash);
     this.body.pivot.set(CX, H);
     this.body.position.set(CX, H);
     this.view.addChild(this.body, this.attackText.parent as Container, this.healthText.parent as Container, this.effectLayer);
+    this.motion = new CardMotion(this.view, this.body);
     this.show(unit);
-  }
-
-  /** Its casseroles, each on its string, swinging a little: the same as on the table. */
-  private createPans(casseroles: string[], textures: CombatTextures): Container {
-    const row = new Container();
-    const span = casseroles.length * PAN.size + Math.max(0, casseroles.length - 1) * PAN.gap;
-    casseroles.forEach((id, index) => {
-      const texture = textures.pans[CASSEROLE_BY_ID[id]?.kind ?? 'affaire'];
-      if (!texture) return;
-      const pan = new Container();
-      pan.position.set(CX - span / 2 + index * (PAN.size + PAN.gap) + PAN.size / 2, H + PAN.top);
-      const string = new Graphics().moveTo(0, -PAN.string).lineTo(0, 2).stroke({ color: '#cccccc', width: 1 });
-      const sprite = new Sprite(texture);
-      sprite.anchor.set(0.5, 0);
-      sprite.setSize(PAN.size, PAN.size);
-      pan.addChild(string, sprite);
-      this.pans.push(pan);
-      row.addChild(pan);
-    });
-    return row;
-  }
-
-  private createStat(texture: CombatTextures['attack'], x: number, y: number): Text {
-    const holder = new Container();
-    holder.position.set(x, y);
-    if (texture) {
-      const medal = new Sprite(texture);
-      medal.anchor.set(0.5);
-      medal.setSize(statSize, statSize);
-      holder.addChild(medal);
-    }
-    const text = new Text({ text: '', style: { ...NUMBER_STYLE, fontSize: 40, stroke: { color: '#111111', width: 6 } } });
-    text.anchor.set(0.5);
-    text.y = -2;
-    holder.addChild(text);
-    return text;
   }
 
   /** Numbers and keywords as the journal has them now. */
@@ -179,8 +181,8 @@ export class CombatCard {
     this.atk = unit.atk;
     this.hp = unit.hp;
     this.maxHp = Math.max(this.maxHp, unit.hp);
-    this.attackText.text = String(unit.atk);
-    this.healthText.text = String(Math.max(0, unit.hp));
+    showStat(this.attackText, unit.atk);
+    showStat(this.healthText, Math.max(0, unit.hp));
     const tones = statTones(this.cardId, this.golden, unit.atk, unit.hp);
     this.attackText.style.fill = TONE_COLORS[tones.atk];
     this.healthText.style.fill = TONE_COLORS[healthTone(tones.hp, unit.hp, this.maxHp)];
@@ -192,41 +194,47 @@ export class CombatCard {
 
   /** The medallion slides there. The first time, it just appears there. */
   moveTo(x: number, y: number, scale: number): void {
-    this.targetX = x;
-    this.targetY = y;
-    this.targetScale = scale;
-    if (!this.isPlaced) this.jumpToTarget();
-    this.isPlaced = true;
+    this.motion.moveTo(x, y, scale);
   }
 
   jumpToTarget(): void {
-    this.view.position.set(this.targetX, this.targetY);
-    this.view.scale.set(this.targetScale);
+    this.motion.jumpToTarget();
   }
 
   centerX(): number {
-    return this.targetX + (W * this.targetScale) / 2;
+    return this.motion.center(W, H).x;
   }
 
   centerY(): number {
-    return this.targetY + (H * this.targetScale) / 2;
+    return this.motion.center(W, H).y;
+  }
+
+  /** Its size on the stage, for a death that plays over it. */
+  get scale(): number {
+    return this.motion.scale;
   }
 
   /** The whole medallion winds up, dashes at its target and comes back, the puppet screaming. */
   attack(target: CombatCard): void {
-    this.lunge = { time: 0, dx: target.centerX() - this.centerX(), dy: target.centerY() - this.centerY() };
+    this.motion.lungeBy(target.centerX() - this.centerX(), target.centerY() - this.centerY());
     this.rig.talk(0.4);
   }
 
-  /** Hit: its face winces, and one time in two it spins round like a slapped cut-out, then it is itself again. */
-  takeHit(): void {
+  /**
+   * Hit from (`dirX`, `dirY`), as hard as `strength` (hitStrength): it blinks white, is knocked back and squashed, its
+   * face winces, and one time in two it spins round like a slapped cut-out, then it is itself again.
+   */
+  takeHit(dirX: number, dirY: number, strength: number): void {
     this.rig.showFace('aie', HIT_FACE_SECONDS);
     if (Math.random() < TURN_ON_HIT_CHANCE) this.rig.turnAround(HIT_FACE_SECONDS);
     // Drawn crossed eyes only for a cut-out without a wincing face of its own: over a real face, they spoil it.
     if (!this.rig.hasFace('aie')) this.rig.flashEyes('croix', 1);
     this.rig.showStars(1.2);
     this.rig.play('hit');
-    this.pose = 0.25;
+    this.pose = SQUASH.seconds;
+    this.squash = SQUASH.base + SQUASH.perStrength * strength;
+    this.flashLeft = HIT_FLASH_SECONDS;
+    this.motion.knock(dirX, dirY, KNOCK.push + KNOCK.perStrength * strength);
   }
 
   talk(seconds = 0.5): void {
@@ -240,15 +248,17 @@ export class CombatCard {
     this.rig.talk(seconds);
     this.pose = -seconds;
     if (!this.spotlight) {
-      this.spotlight = new Graphics()
-        .poly([CX - 26, -260, CX + 26, -260, CX + W * 0.78, H + 10, CX - W * 0.78, H + 10]).fill({ color: '#fff3c4', alpha: 0.16 })
-        .ellipse(CX, CY, W * 0.78, H * 0.74).fill({ color: '#ffd84a', alpha: 0.12 })
-        .ellipse(CX, CY, W * 0.66, H * 0.63).fill({ color: '#ffd84a', alpha: 0.16 })
-        .ellipse(CX, CY, W * 0.56, H * 0.54).fill({ color: '#fff0a0', alpha: 0.22 })
-        .ellipse(CX, H + 12, W * 0.6, 16).fill({ color: '#fff3c4', alpha: 0.3 });
+      this.spotlight = celebrationSpotlight();
       this.view.addChildAt(this.spotlight, 0);
     }
     this.spotlight.visible = true;
+  }
+
+  /** Its line was passed: back in its row at once, with its own face, the right way round. */
+  stopCelebrating(): void {
+    if (this.pose >= 0) return;
+    this.pose = -0.0001;
+    this.rig.settle();
   }
 
   /** Plays a ground effect once. Without its images, the impact and the end still happen. */
@@ -273,8 +283,7 @@ export class CombatCard {
 
   /** Goes out in light: the medallion whitens, rises a little and fades away. */
   dissolve(onFinished: () => void): void {
-    this.rig.holdEyes('croix');
-    this.rig.play('hit');
+    this.knockOut();
     this.fading = { left: DISSOLVE_SECONDS, onFinished };
     this.wash.clear().ellipse(CX, CY, W / 2, H / 2).fill('#fff6d8');
     this.wash.blendMode = 'add';
@@ -282,11 +291,37 @@ export class CombatCard {
     this.body.addChild(this.wash);
   }
 
-  /** Flat under the hammer, cross-eyed. */
-  flatten(): void {
+  /** Out cold: crossed eyes for good, its wincing face, the dazed pose. */
+  knockOut(): void {
     this.rig.holdEyes('croix');
-    this.rig.play('flattened');
-    this.body.scale.set(1.15, 0.45);
+    this.rig.showFace('aie', 5);
+    this.rig.play('hit');
+  }
+
+  /**
+   * A death takes it over: its row no longer moves it, and it turns about its own center from now on (its position is
+   * then its center's).
+   */
+  detach(): void {
+    this.motion.detach();
+    const scale = this.view.scale.x;
+    this.view.pivot.set(CX, CY);
+    this.view.position.set(this.view.x + CX * scale, this.view.y + CY * scale);
+  }
+
+  /** Turned edge-on by `angle`: a medallion tumbling through the air, seen from the front. */
+  tumble(angle: number): void {
+    this.body.scale.x = Math.cos(angle);
+  }
+
+  /**
+   * Its picture as it is now, for the pieces it breaks into: the texture, and where its top left corner sits in the
+   * medallion's own units.
+   */
+  snapshot(renderer: Renderer): { texture: Texture; x: number; y: number } {
+    const bounds = this.view.getLocalBounds();
+    const texture = renderer.generateTexture({ target: this.view, resolution: Math.min(2, renderer.resolution) });
+    return { texture, x: bounds.x, y: bounds.y };
   }
 
   showBirds(): void {
@@ -317,7 +352,15 @@ export class CombatCard {
     this.delayed = this.delayed.filter((entry) => this.updateDelayed(entry, deltaSeconds));
     this.updatePose(deltaSeconds);
     this.updateFading(deltaSeconds);
-    this.slide(realDeltaSeconds, deltaSeconds);
+    // The blink runs on the page's clock: a hit-stop freezes the medallion, never its blink into a white blob.
+    this.flashLeft = Math.max(0, this.flashLeft - realDeltaSeconds);
+    this.flash.alpha = (this.flashLeft / HIT_FLASH_SECONDS) * 0.75;
+    this.motion.update(realDeltaSeconds, deltaSeconds);
+  }
+
+  destroy(): void {
+    this.running.forEach(({ effect }) => effect.destroy());
+    this.view.destroy({ children: true });
   }
 
   private updateFading(deltaSeconds: number): void {
@@ -334,17 +377,12 @@ export class CombatCard {
     onFinished();
   }
 
-  destroy(): void {
-    this.running.forEach(({ effect }) => effect.destroy());
-    this.view.destroy({ children: true });
-  }
-
   /** A hit squashes the medallion for a moment; a celebration makes it big. */
   private updatePose(deltaSeconds: number): void {
     if (this.pose > 0) {
       this.pose = Math.max(0, this.pose - deltaSeconds);
-      const squash = Math.sin((this.pose / 0.25) * Math.PI) * 0.12;
-      if (this.body.scale.y > 0.5) this.body.scale.set(1 + squash, 1 - squash);
+      const squash = Math.sin((this.pose / SQUASH.seconds) * Math.PI) * this.squash;
+      this.body.scale.set(1 + squash, 1 - squash);
     } else if (this.pose < 0) {
       this.pose = Math.min(0, this.pose + deltaSeconds);
       const celebrating = this.pose < 0;
@@ -373,37 +411,5 @@ export class CombatCard {
     if (entry.left > 0) return true;
     entry.callback();
     return false;
-  }
-
-  /** Where the lunge is, as a fraction of the way to the target (negative: winding up). */
-  private lungeProgress(deltaSeconds: number): number {
-    if (!this.lunge) return 0;
-    this.lunge.time += deltaSeconds;
-    const { windUp, dash, back, reach } = LUNGE;
-    const t = this.lunge.time;
-    if (t < windUp) return -0.08 * (t / windUp);
-    if (t < windUp + dash) return -0.08 + (reach + 0.08) * ((t - windUp) / dash) ** 2;
-    if (t < windUp + dash + back) return reach * (1 - (t - windUp - dash) / back);
-    this.lunge = null;
-    return 0;
-  }
-
-  /** Slides in real time; the lunge follows the combat's speed. */
-  private slide(realDeltaSeconds: number, deltaSeconds: number): void {
-    const progress = Math.min(1, realDeltaSeconds * SLIDE_PER_SECOND);
-    this.view.scale.set(this.view.scale.x + (this.targetScale - this.view.scale.x) * progress);
-    const lunge = this.lunge;
-    const fraction = this.lungeProgress(deltaSeconds);
-    const offsetX = lunge ? lunge.dx * fraction : 0;
-    const offsetY = lunge ? lunge.dy * fraction : 0;
-    if (lunge) {
-      this.view.position.set(this.targetX + offsetX, this.targetY + offsetY);
-      const side = Math.max(-1, Math.min(1, lunge.dx / LEAN.across));
-      this.body.rotation = fraction < 0 ? side * LEAN.back * (fraction / 0.08) : side * LEAN.forward * Math.min(1, fraction / 0.4);
-      return;
-    }
-    this.body.rotation = 0;
-    this.view.x += (this.targetX - this.view.x) * progress;
-    this.view.y += (this.targetY - this.view.y) * progress;
   }
 }

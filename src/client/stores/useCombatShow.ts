@@ -2,12 +2,15 @@ import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
 import type { Ref } from 'vue';
 import { ANSWER_MOMENTS, CELEBRATION_MOMENTS } from '#src/client/const/speechMoments.ts';
 import type { CombatStage } from '#src/client/pixi/combatStage.ts';
-import { playSound, playVoice, preloadVoice } from '#src/client/services/soundEffects.ts';
+import { playSound, playVoice, preloadVoice, stopVoice } from '#src/client/services/soundEffects.ts';
+import { COMBAT_SPEEDS, combatSpeed } from '#src/client/stores/combatSpeed.ts';
 import { CombatPlayback } from '#src/client/stores/createCombatPlayback.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { heardVoices } from '#src/client/stores/heardVoices.ts';
 import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
 import { startedCombats } from '#src/client/stores/startedCombats.ts';
+import { studioShock } from '#src/client/stores/studioShock.ts';
+import { useHurry } from '#src/client/stores/useHurry.ts';
 import { afterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import { speechForEvent } from '#src/client/tools/afterCombatSpeech.ts';
@@ -20,8 +23,9 @@ import { combatLayout } from '#src/client/tools/combatLayout.ts';
 import { drainSteps } from '#src/client/tools/drainSteps.ts';
 import { freshVoice } from '#src/client/tools/freshVoice.ts';
 import { hostQuote } from '#src/client/tools/hostQuote.ts';
+import { hurryStep } from '#src/client/tools/hurryStep.ts';
 import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
-import { pickCriticalKills } from '#src/client/tools/pickCriticalKills.ts';
+import { planDeaths } from '#src/client/tools/planDeaths.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { quotesFor } from '#src/client/tools/quotesFor.ts';
 import { readingDelayMs } from '#src/client/tools/readingDelayMs.ts';
@@ -35,9 +39,10 @@ import type { CombatSides } from '#src/engine/replay.ts';
 import type { CombatEvent } from '#src/engine/types.ts';
 import { combatEventDuration } from '#src/protocol/combatDuration.ts';
 
-const SPEEDS = [1, 2, 4];
+const SPEEDS = COMBAT_SPEEDS;
+const FASTEST = Math.max(...COMBAT_SPEEDS);
 /** The last blows settle (the gag, the numbers that rise) before the result is written over them. */
-const RESULT_DELAY_MS = 700;
+const RESULT_DELAY_MS = 450;
 /** Seen, the combat stays until the next round comes: past this, the screen says what it waits for. */
 const WAIT_HINT_MS = 1500;
 /** A speaker whose top is in the upper part of the screen, as a share of its height, speaks below itself. */
@@ -56,12 +61,31 @@ export interface CombatShowProps {
   line: string | null;
 }
 
+/** Where the two heroes' portraits stand on the screen: the winners' strike lands on the beaten one. */
+export interface HeroSpots {
+  own: Readonly<Ref<HTMLElement | null>>;
+  rival: Readonly<Ref<HTMLElement | null>>;
+}
+
+/** The middle of an element on the page, where a strike lands. */
+function middleOf(element: HTMLElement | null): { x: number; y: number } | null {
+  const box = element?.getBoundingClientRect();
+  return box ? { x: box.left + box.width / 2, y: box.top + box.height / 2 } : null;
+}
+
 /**
  * Everything a combat screen plays, whatever its layout: the stage drawn in `stageHost` with `layout`, the journal
- * played event by event, the voices and the bubbles, the Célébrations, the result and the polls that drain. The
- * screen only places it: the computer's table, or the phone held upright. `onClose` is called once it is all seen.
+ * played event by event, the voices and the bubbles, the Célébrations, the result, the strike on the beaten hero and
+ * the polls that drain. The screen only places it: the computer's table, or the phone held upright. `onClose` is called
+ * once it is all seen.
  */
-export function useCombatShow(props: CombatShowProps, onClose: () => void, stageHost: Readonly<Ref<HTMLElement | null>>, layout: typeof combatLayout = combatLayout) {
+export function useCombatShow(
+  props: CombatShowProps,
+  onClose: () => void,
+  stageHost: Readonly<Ref<HTMLElement | null>>,
+  heroSpots: HeroSpots,
+  layout: typeof combatLayout = combatLayout,
+) {
   let stage: CombatStage | null = null;
   let hasLeft = false;
   let closeTimer = 0;
@@ -97,7 +121,9 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
     handleEvent: (event, sides) => stage?.handleEvent(event, sides),
     jumpTo: (sides) => stage?.jumpTo(sides),
     handleFinished: scheduleClose,
-  });
+  }, combatSpeed.chosen.value);
+  /** Seen to the end (or passed): nothing left to hurry, the show waits for the next round. */
+  let hasClosed = false;
   const { sides, current, narration, finished, speed, played } = playback;
   /** What each Célébration gives, all at once, as the one who celebrates starts to speak (or when the combat is skipped). */
   const allNotices = celebrationNotices(props.combat.log);
@@ -151,12 +177,15 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
     if (!polls) return 0;
     const own = drainSteps(polls.own.before, polls.own.after);
     const enemy = polls.enemy ? drainSteps(polls.enemy.before, polls.enemy.after) : [];
-    const at = (ms: number, callback: () => void) => drainTimers.push(window.setTimeout(callback, ms));
+    // The winners strike first: the polls drain once their comets land.
+    const strikeMs = strikeBeatenHero(own.length > 0, enemy.length > 0);
+    const at = (ms: number, callback: () => void) => drainTimers.push(window.setTimeout(callback, strikeMs + ms));
     enemy.forEach((value, index) => at(DRAIN.zoomMs + index * DRAIN.stepMs, () => (opponentHp.value = value)));
-    const enemyEnd = enemy.length ? DRAIN.zoomMs + enemy.length * DRAIN.stepMs : 0;
+    const enemyEnd = strikeMs + (enemy.length ? DRAIN.zoomMs + enemy.length * DRAIN.stepMs : 0);
     const blowEnd = won.value && polls.enemy && polls.enemy.after <= 0 ? dropFatalBlow(enemyEnd) : 0;
     if (own.length === 0) return Math.max(enemyEnd, blowEnd);
-    draining.value = true;
+    // The hero comes forward once struck: the comets land on it where it stands.
+    at(0, () => (draining.value = true));
     own.forEach((value, index) => at(DRAIN.zoomMs + index * DRAIN.stepMs, () => {
       ownHp.value = value;
       playSound('tick', 0.7);
@@ -170,7 +199,14 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
       hurt.value = false;
       draining.value = false;
     });
-    return Math.max(end + DRAIN.hurtMs, blowEnd);
+    return Math.max(strikeMs + end + DRAIN.hurtMs, blowEnd);
+  }
+
+  /** The winners' comets fly to the beaten hero's portrait. Returns how long until the first one lands, 0 for none. */
+  function strikeBeatenHero(ownLoses: boolean, rivalLoses: boolean): number {
+    if (ownLoses === rivalLoses || !stage) return 0;
+    const target = middleOf((ownLoses ? heroSpots.own : heroSpots.rival).value);
+    return target ? stage.strike(ownLoses ? 'enemy' : 'own', target) : 0;
   }
 
   /**
@@ -192,8 +228,50 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
   }
 
   function close(): void {
+    if (hasClosed) return;
+    hasClosed = true;
+    window.clearTimeout(closeTimer);
     onClose();
     waitTimer = window.setTimeout(() => (waitingNext.value = true), WAIT_HINT_MS);
+  }
+
+  /** The buttons ×1, ×2, ×4: this combat goes at that pace, and the next ones start at it. */
+  function chooseSpeed(value: number): void {
+    combatSpeed.choose(value);
+    playback.setSpeed(value);
+  }
+
+  /**
+   * A tap, a click or a key hurries the show along, one notch at a time (hurryStep): a speech ends and its voice is cut,
+   * the fight speeds up and then jumps to its end, the result comes and then gives way. The game never waits for it.
+   */
+  function hurry(): boolean {
+    const step = hurryStep({
+      finished: finished.value, speaking: speech.value !== null, resultShown: resultShown.value, closed: hasClosed, speed: speed.value, fastest: FASTEST,
+    });
+    if (step === 'end-speech') endSpeech();
+    else if (step === 'speed-up') playback.setSpeed(FASTEST);
+    else if (step === 'skip-fight') playback.skip();
+    else if (step === 'show-result') {
+      window.clearTimeout(resultTimer);
+      speechEndsAt = 0;
+      showResult();
+    } else if (step === 'close') {
+      stopVoice();
+      close();
+    }
+    return step !== null;
+  }
+  useHurry(hurry);
+
+  /** The speech that plays now ends at once, its voice cut: heard, that voice never plays again in this game. */
+  function endSpeech(): void {
+    stopVoice();
+    window.clearTimeout(speechTimer);
+    speech.value = null;
+    speechEndsAt = 0;
+    stage?.endCelebration();
+    playback.advance();
   }
 
   /**
@@ -306,10 +384,12 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
         manifest: gameArt.manifest.value,
         side: props.combat.side,
         characterIds: combatCharacterIds(props.combat.log),
-        criticalKills: pickCriticalKills(props.combat.log),
+        deaths: planDeaths(props.combat.log),
         speed: () => speed.value,
         playSound,
         layout,
+        holdPlayback: (ms) => playback.hold(ms),
+        onShock: (strength) => studioShock.hit(strength),
       });
       stage = created;
       await created.start();
@@ -350,7 +430,7 @@ export function useCombatShow(props: CombatShowProps, onClose: () => void, stage
   });
 
   return {
-    SPEEDS, playback, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
+    SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
     notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
     host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
   };

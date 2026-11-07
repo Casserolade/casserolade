@@ -46,9 +46,9 @@ export class LightLayer {
   private readonly textures: LightTextures = createLightTextures();
   private lights: Light[] = [];
 
-  /** `strength` from about 0.6 (a scratch) to 2 (a knockout blow). */
-  hit(x: number, y: number, strength: number): void {
-    const size = 90 + 70 * strength;
+  /** `strength` from about 0.6 (a scratch) to 2 (a knockout blow); `scale` is the medallions' (smaller on a phone). */
+  hit(x: number, y: number, strength: number, scale = 1): void {
+    const size = (70 + 55 * strength) * scale;
     this.spawn({ texture: this.textures.glow, x, y, color: WARM, seconds: 0.32, from: [size * 0.4, size * 0.4], to: [size, size], peakAt: 0.15 });
     this.spawn({ texture: this.textures.ring, x, y, color: '#ffffff', seconds: 0.4, from: [size * 0.3, size * 0.3], to: [size * 1.5, size * 1.5], alpha: 0.7 });
   }
@@ -70,17 +70,19 @@ export class LightLayer {
   }
 
   /** A gain: a glow that swells around the card, a few glints going up. `color` is the gain's color. */
-  gain(x: number, y: number, color: string): void {
-    this.spawn({ texture: this.textures.glow, x, y, color, seconds: 0.7, from: [120, 120], to: [260, 260], peakAt: 0.35, alpha: 0.55 });
+  gain(x: number, y: number, color: string, scale = 1): void {
+    const s = scale;
+    this.spawn({ texture: this.textures.glow, x, y, color, seconds: 0.7, from: [120 * s, 120 * s], to: [260 * s, 260 * s], peakAt: 0.35, alpha: 0.55 });
     for (let index = 0; index < 4; index++) {
-      this.spawn({ texture: this.textures.spark, x: x + (Math.random() - 0.5) * 80, y: y + 20, color, seconds: 0.8, from: [26, 26], to: [10, 10], dy: -120 - Math.random() * 60, delay: index * 0.07 });
+      this.spawn({ texture: this.textures.spark, x: x + (Math.random() - 0.5) * 80 * s, y: y + 20 * s, color, seconds: 0.8, from: [26 * s, 26 * s], to: [10 * s, 10 * s], dy: (-120 - Math.random() * 60) * s, delay: index * 0.07 });
     }
   }
 
   /** An immunity breaks: a blue flash and a ring that bursts. */
-  shield(x: number, y: number): void {
-    this.spawn({ texture: this.textures.glow, x, y, color: '#9fe6ff', seconds: 0.4, from: [120, 120], to: [240, 240], peakAt: 0.1 });
-    this.spawn({ texture: this.textures.ring, x, y, color: '#bff0ff', seconds: 0.45, from: [140, 140], to: [320, 320] });
+  shield(x: number, y: number, scale = 1): void {
+    const s = scale;
+    this.spawn({ texture: this.textures.glow, x, y, color: '#9fe6ff', seconds: 0.4, from: [120 * s, 120 * s], to: [240 * s, 240 * s], peakAt: 0.1 });
+    this.spawn({ texture: this.textures.ring, x, y, color: '#bff0ff', seconds: 0.45, from: [140 * s, 140 * s], to: [320 * s, 320 * s] });
   }
 
   update(deltaSeconds: number): void {
