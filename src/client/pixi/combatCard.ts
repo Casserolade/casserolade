@@ -42,7 +42,7 @@ const TURN_ON_HIT_CHANCE = 0.5;
 /** A golden medallion's oval sits deeper in its thicker frame (`.golden .oval` in MedallionToken.vue). */
 const GOLDEN_OVAL_INSET = 9;
 /** A blow whitens the medallion for a blink, and knocks it back: pixels a second, plus as much again per strength. */
-const HIT_FLASH_SECONDS = 0.11;
+const HIT_FLASH_SECONDS = 0.08;
 const KNOCK = { push: 260, perStrength: 220 };
 /** A blow squashes the medallion for a moment, more for a harder one. */
 const SQUASH = { seconds: 0.25, base: 0.1, perStrength: 0.05 };
@@ -352,8 +352,9 @@ export class CombatCard {
     this.delayed = this.delayed.filter((entry) => this.updateDelayed(entry, deltaSeconds));
     this.updatePose(deltaSeconds);
     this.updateFading(deltaSeconds);
-    this.flashLeft = Math.max(0, this.flashLeft - deltaSeconds);
-    this.flash.alpha = (this.flashLeft / HIT_FLASH_SECONDS) * 0.85;
+    // The blink runs on the page's clock: a hit-stop freezes the medallion, never its blink into a white blob.
+    this.flashLeft = Math.max(0, this.flashLeft - realDeltaSeconds);
+    this.flash.alpha = (this.flashLeft / HIT_FLASH_SECONDS) * 0.75;
     this.motion.update(realDeltaSeconds, deltaSeconds);
   }
 

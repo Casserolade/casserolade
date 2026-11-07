@@ -9,7 +9,7 @@ import type { KillingBlowFx, SheetFrames } from '#src/client/pixi/deaths/deathSc
 import { playDeath } from '#src/client/pixi/deaths/playDeath.ts';
 import { loadCombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
-import { sparkBurst } from '#src/client/pixi/particleBursts.ts';
+import { dashLines, sparkBurst } from '#src/client/pixi/particleBursts.ts';
 import { StageFx } from '#src/client/pixi/stageFx.ts';
 import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { combatLayout } from '#src/client/tools/combatLayout.ts';
@@ -229,6 +229,12 @@ export class CombatStage {
     this.exchange = { from, to };
     this.cardLayer.addChild(attacker.view);
     attacker.attack(target);
+    if (!this.reducedMotion) {
+      const dx = target.centerX() - attacker.centerX();
+      const dy = target.centerY() - attacker.centerY();
+      const length = Math.hypot(dx, dy) || 1;
+      dashLines(this.fx.particles, attacker.centerX(), attacker.centerY(), dx / length, dy / length, attacker.scale);
+    }
     this.options.playSound('lunge');
   }
 
