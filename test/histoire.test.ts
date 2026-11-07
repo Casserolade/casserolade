@@ -178,7 +178,7 @@ test('les objectifs se mesurent sur ce que le joueur a vraiment fait', () => {
   const base = viewFor(game, 0);
   const suivi = creerSuivi(chapitre);
   suivi.observer({ ...base, round: 2 });
-  const enScandale = { ...makeMinion(CARD_BY_ID[base.shop[0]], 501), casseroles: ['homards', 'lapsus'], oublie: 0, scandal: { until: 5, budget: -2, hpLoss: 0, locked: false, silenced: null } };
+  const enScandale = { ...makeMinion(CARD_BY_ID[base.shop[0]], 501), casseroles: ['homards', 'lapsus'], oublie: 0, scandal: { until: 5, budget: -2, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false } };
   suivi.observer({ ...base, round: 3, board: [enScandale] });
   const b = suivi.conclure({ ...base, round: 3 }, 1);
   assert.equal(b.reussi, true);

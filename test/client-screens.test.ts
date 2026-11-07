@@ -22,7 +22,7 @@ function minion(cardId: string, uid: number, extra: Partial<Minion> = {}): Minio
   return { ...makeMinion(CARD_BY_ID[cardId], uid), ...extra };
 }
 
-const IN_SCANDAL = { until: 5, budget: 0, hpLoss: 0, locked: false, silenced: null };
+const IN_SCANDAL = { until: 5, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false };
 
 test('casseroleOutcome : la deuxième casserole fait scandale, le double va au propriétaire', () => {
   const ecoutes = CASSEROLE_BY_ID.ecoutes;

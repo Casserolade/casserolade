@@ -1,5 +1,6 @@
 import type { Camp, Card, Counter, Effect, Keyword, Spell, Target, Trigger } from '#src/engine/types.ts';
 import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
+import { mergeSameRecipient } from '#src/client/tools/mergeSameRecipient.ts';
 import { signed } from '#src/client/tools/signed.ts';
 import { CARD_BY_ID, TOKENS } from '#src/data/cards.ts';
 import { SPELL_BY_ID } from '#src/data/sorts.ts';
@@ -48,6 +49,7 @@ const COUNTER_TEXT: Record<Counter, string> = {
   dores_joues: 'politique doré joué',
   casseroles: 'casserole reçue par vos politiques',
   debauchages: 'débauchage',
+  actualisations: 'actualisation faite',
 };
 
 const TRIGGER_WORD: Partial<Record<Trigger, string>> = { annonce: 'Annonce', heritage: 'Héritage', fin_tour: 'Fin de tour' };
@@ -156,6 +158,7 @@ function goldenEffect(e: Effect): Effect {
     case 'boutique_buff':
     case 'tract_bonus':
     case 'compteur':
+    case 'buff_compteur':
       return { ...e, atk: e.atk * 2, hp: e.hp * 2 };
     case 'budget':
     case 'degats':
@@ -275,6 +278,19 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
       return `actualisez la boutique avec des politiques du camp ${dest === 'un politique' ? 'd\'un politique' : `de ${dest}`}`;
     case 'butin':
       return `donne ${twice}${e.part === 'pv' ? 'les PV max' : 'les stats'} de sa victime ${to(dest)}`;
+    case 'doubler_stats': {
+      const times = golden ? ', deux fois' : '';
+      if (self) return `double ses stats${times}`;
+      return `doublez les stats ${of(dest)}${times}`;
+    }
+    case 'doubler_tracts':
+      return `vos **Tracts** donnent ${golden ? 'le quadruple' : 'le double'} pour le reste de la partie`;
+    case 'gain_debauche':
+      return `${e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques'}, partout, gagnent ${golden ? 'deux fois ' : ''}les stats du débauché pour le reste de la partie`;
+    case 'buff_compteur':
+      return `${self ? 'gagne' : `donne ${to(dest)}`} ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
+    case 'chaise_vide':
+      return `invoque ${golden ? 'deux Chaises vides' : 'une Chaise vide'} **Porte-parole** qui ${golden ? 'ont' : 'a'} ses PV`;
   }
 }
 
@@ -294,6 +310,8 @@ function prefix(e: Effect): string {
     case 'vente_allie':
       return 'Quand vous renvoyez un autre politique, ';
     case 'sort':
+      if ((e.n ?? 1) === 2) return 'Tous les deux sorts que vous lancez, ';
+      if ((e.n ?? 1) > 2) return `Tous les ${e.n} sorts que vous lancez, `;
       return e.card === 'tract' ? 'Après que vous lancez un **Tract**, ' : 'Après que vous lancez un sort, ';
     case 'actualise':
       return 'Quand vous actualisez la boutique, ';
@@ -351,7 +369,7 @@ export function describeEffect(effect: Effect, golden = false): string {
 
 /** Le texte d'un sort : ses effets jouent quand on le lance, sans déclencheur. */
 export function describeSpell(spell: Spell): string {
-  return `${capitalize(spell.effects.map((e) => action(e, true)).join(', et '))}.`;
+  return `${capitalize(mergeSameRecipient(spell.effects.map((e) => action(e, true))).join(', et '))}.`;
 }
 
 /** « deux fois », « trois fois » : un effet répété sur la carte. */

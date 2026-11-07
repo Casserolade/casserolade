@@ -42,7 +42,7 @@ test('wornCasserole: the first oublie ones are forgotten, the others asleep or i
   const minion = wearer({ casseroles: ['playboy', 'fonds_marianne', 'bygmalion'], oublie: 1, ownerCasseroles: ['playboy', 'fonds_marianne'] });
   assert.deepEqual(wornCasserole(minion, 0, 6), { state: 'forgotten', scandalLeft: 0, owned: true });
   assert.deepEqual(wornCasserole(minion, 2, 6), { state: 'dormant', scandalLeft: 0, owned: false });
-  const inScandal = { ...minion, scandal: { until: 8, budget: 0, hpLoss: 0, locked: false, silenced: null } };
+  const inScandal = { ...minion, scandal: { until: 8, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false } };
   assert.deepEqual(wornCasserole(inScandal, 1, 6), { state: 'scandal', scandalLeft: 2, owned: true });
   assert.deepEqual(wornCasserole(inScandal, 0, 6).state, 'forgotten', 'forgotten stays forgotten during a new scandal');
 });
@@ -61,7 +61,7 @@ test('wornCasseroleLines says what its défaut does now, and whether the owner b
   ]);
   assert.match(wornCasseroleLines(locked, { state: 'scandal', scandalLeft: 1, owned: false })[0], /encore une manche\.$/);
   assert.match(wornCasseroleLines(locked, { state: 'forgotten', scandalLeft: 0, owned: false })[0], /ne jouera plus, son avantage reste/);
-  const harmless = CASSEROLE_BY_ID.playboy;
+  const harmless = CASSEROLE_BY_ID.quel_facebook; // Elle fait tout oublier : la seule sorte sans défaut (7 novembre 2026).
   assert.deepEqual(casseroleDefects(harmless), []);
   assert.equal(wornCasseroleLines(harmless, { state: 'dormant', scandalLeft: 0, owned: true })[0], 'Sans défaut, mais elle compte pour le **Scandale**.');
   assert.equal(wornCasseroleLines(harmless, { state: 'scandal', scandalLeft: 2, owned: true })[0], 'Sans défaut : le **Scandale** en cours ne lui coûte rien.');

@@ -121,7 +121,7 @@ export type Target =
 export type ShopPick = 'plus_faible' | 'plus_fort';
 
 /** Ce qu'un joueur compte pendant la partie : les cartes « cette partie » le lisent. */
-export type Counter = 'tracts' | 'ecologistes_joues' | 'dores_joues' | 'casseroles' | 'debauchages';
+export type Counter = 'tracts' | 'ecologistes_joues' | 'dores_joues' | 'casseroles' | 'debauchages' | 'actualisations';
 
 export type Action =
   | { do: 'buff'; atk: number; hp: number }
@@ -182,7 +182,20 @@ export type Action =
   /** Une actualisation, avec des serviteurs du camp de la cible : « Quand vous actualisez » joue aussi. */
   | { do: 'congres' }
   /** Donne aux cibles les stats de la victime (déclencheur `tue`) : `pv` seulement, ou `tout`. */
-  | { do: 'butin'; part: 'pv' | 'tout' };
+  | { do: 'butin'; part: 'pv' | 'tout' }
+  /**
+   * Doublez : les cibles gagnent leur attaque et leurs PV actuels (re-spécification du 7 novembre 2026). Doré, il double
+   * deux fois. En combat, `perma` le garde après le combat : le politique double alors pour de bon.
+   */
+  | { do: 'doubler_stats' }
+  /** Vos Tracts donnent le double, pour le reste de la partie. */
+  | { do: 'doubler_tracts' }
+  /** Après un débauchage : les politiques du camp `camp`, partout, gagnent les stats du débauché pour le reste de la partie. */
+  | { do: 'gain_debauche' }
+  /** Les cibles gagnent +atk/+hp par unité du compteur, une fois, au moment où l'effet joue. */
+  | { do: 'buff_compteur'; compteur: Counter; atk: number; hp: number }
+  /** Invoque une Chaise vide Porte-parole qui a les PV de ce politique. */
+  | { do: 'chaise_vide' };
 
 export type Effect = {
   when: Trigger;
@@ -271,6 +284,10 @@ export interface Casserole {
   bonusDamage?: number;
   /** Sondages perdus à la mort du serviteur. */
   hpLossOnDeath?: number;
+  /** Sondages perdus au début de chaque manche du scandale. */
+  pollsPerRound?: number;
+  /** N'attaque plus pendant le scandale. */
+  noAttack?: boolean;
   /** Invoque ce jeton à côté du serviteur. */
   summon?: string;
   /** Effets ajoutés au serviteur. */
@@ -319,6 +336,10 @@ export interface Scandal {
   locked: boolean;
   /** Ses effets propres, retirés par un scandale qui le réduit au silence. */
   silenced: Effect[] | null;
+  /** Sondages perdus au début de chaque manche du scandale. */
+  polls: number;
+  /** Le scandale l'empêche d'attaquer. */
+  grounded: boolean;
 }
 
 export interface Minion {
@@ -505,6 +526,8 @@ export interface CombatPersist {
   cards: string[];
   /** Les copies simples gagnées : jamais dorées, hors réserve (règle R3). */
   copies: string[];
+  /** Les politiques qui doublent pour de bon après le combat, une fois par entrée, dans l'ordre. */
+  doubles: number[];
 }
 
 /** Ce que le client sait d'un serviteur en combat. Liste blanche : rien d'autre ne sort. */

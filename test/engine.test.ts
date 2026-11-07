@@ -10,8 +10,8 @@ import { invariantViolations } from '../src/engine/invariants.ts';
 import { createBot, decide } from '../src/bots/bots.ts';
 import { createRng } from '../src/engine/rng.ts';
 import type { Card, Effect, Keyword, Minion } from '../src/engine/types.ts';
-import { CARDS, CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
-import { CASSEROLES } from '../src/data/casseroles.ts';
+import { CARDS, CARD_BY_ID, PARTY_CAMPS, TOKENS } from '../src/data/cards.ts';
+import { CASSEROLES, CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
 import { HEROES, RANDOM_CONTEXT } from '../src/data/heroes.ts';
 import { PARAMS } from '../src/data/params.ts';
 import { SPELLS, SPELL_BY_ID } from '../src/data/sorts.ts';
@@ -226,19 +226,19 @@ test('Roussel : après chaque sort, vos serviteurs gagnent +1/+0', () => {
 
 test('une casserole s\'achète, va en main, et vaut double sur son propriétaire', () => {
   const { game, p, buy } = setup(9);
-  buy('sarkozy');
+  buy('cope');
   buy('kazib');
-  const [sarko, kazib] = p.board;
-  poseCasserole(game, 'ecoutes', sarko);
+  const [cope, kazib] = p.board;
+  poseCasserole(game, 'pain_au_chocolat', cope);
   poseCasserole(game, 'ecoutes', kazib);
-  const perCasserole = (CARD_BY_ID.sarkozy.effects ?? []).find((e) => e.when === 'casserole_recue') as Effect & { atk: number };
-  assert.equal(sarko.atk, CARD_BY_ID.sarkozy.atk + 6 + perCasserole.atk, 'double, plus Sarkozy qui grandit à la première casserole de la manche');
+  const painAuChocolat = CASSEROLE_BY_ID.pain_au_chocolat;
+  assert.equal(cope.atk, CARD_BY_ID.cope.atk + (painAuChocolat.atk ?? 0) + (painAuChocolat.ownerBonus.atk ?? 0), 'son avantage, et son bonus de propriétaire');
   // « Ne bouge plus » est un défaut : il dort tant qu'il n'y a pas de scandale.
-  assert.equal(sarko.locked, false);
-  poseCasserole(game, 'homards', sarko);
-  assert.ok(sarko.scandal);
-  assert.equal(sarko.locked, true);
-  assert.equal(applyAction(game, 0, { t: 'move', uid: sarko.uid, to: 1 }).ok, false);
+  assert.equal(kazib.locked, false);
+  poseCasserole(game, 'homards', kazib);
+  assert.ok(kazib.scandal);
+  assert.equal(kazib.locked, true);
+  assert.equal(applyAction(game, 0, { t: 'move', uid: kazib.uid, to: 1 }).ok, false);
 });
 
 /** Joue le combat de la manche et passe à la suivante. */
@@ -252,7 +252,7 @@ test('une casserole seule : son avantage tout de suite, son défaut dort', () =>
   const m = p.board[0];
   const avant = { atk: m.atk, hp: m.hp };
   poseCasserole(game, 'homards', m);
-  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 3, hp: avant.hp + 3 });
+  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 6, hp: avant.hp + 6 });
   assert.equal(m.scandal, undefined);
   assert.equal(m.budgetPerRound, 0, 'le budget perdu dort tant qu\'il n\'y a pas de scandale');
 });
@@ -265,7 +265,7 @@ test('deux casseroles : scandale deux manches, puis l\'oubli du peuple efface le
   for (let i = 0; i < 2; i++) poseCasserole(game, 'homards', m);
   assert.equal(viewFor(game, 0).scandalThreshold, 2);
   assert.ok(m.scandal);
-  assert.equal(m.budgetPerRound, -2, 'pendant le scandale, les deux défauts s\'appliquent');
+  assert.equal(m.budgetPerRound, -4, 'pendant le scandale, les deux défauts s\'appliquent');
   assert.equal(p.board.includes(m), true, 'le scandale ne l\'éloigne pas du plateau');
   manche(game);
   assert.ok(m.scandal, 'encore en scandale à la deuxième manche');
@@ -274,8 +274,9 @@ test('deux casseroles : scandale deux manches, puis l\'oubli du peuple efface le
   assert.equal(m.budgetPerRound, 0);
   assert.equal(m.oublie, 2);
   assert.equal(m.charges, 0);
-  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 6, hp: avant.hp + 6 }, 'les avantages restent');
-  // Une nouvelle casserole repart seule : pas de scandale.
+  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 12, hp: avant.hp + 12 }, 'les avantages restent');
+  // Une nouvelle casserole repart seule : pas de scandale. Le scandale a mangé le budget de la manche.
+  p.budget = 100;
   poseCasserole(game, 'homards', m);
   assert.equal(m.scandal, undefined);
 });
@@ -391,7 +392,7 @@ test('un triple d\'un serviteur en scandale ne garde pas de défaut orphelin', (
   assert.ok(dore);
   // Ses deux casseroles pas oubliées refont scandale sur le doré, avec leurs défauts, une seule fois.
   assert.ok(dore.scandal);
-  assert.equal(dore.budgetPerRound, -2);
+  assert.equal(dore.budgetPerRound, -4);
 });
 
 test('les casseroles suivent leurs propriétaires, changent à l\'actualisation et restent au gel', () => {
@@ -462,7 +463,7 @@ test('« un politique de votre échelon » : la découverte ne propose jamais un
 
 test('un sort de découverte gardé en main découvre l\'échelon où il est lancé, pas celui de son achat', () => {
   // Sans le RN, pas d'Héritage d'échelon 4 : le Testament politique acheté à l'échelon 3 et lancé à l'échelon 4
-  // redescendait à l'échelon 3, celui de l'achat (6 novembre 2026). Il monte désormais : Hollande, à l'échelon 5.
+  // redescendait à l'échelon 3, celui de l'achat (6 novembre 2026). Il monte désormais au plus proche au-dessus.
   const game = createGame({ seed: 5, seats: 2, heroes: ['attal', 'attal'], activeCamps: ['socialistes', 'macronie', 'republicains', 'reconquete', 'ecologistes'] });
   const p = game.players[0];
   p.budget = 100;
@@ -472,7 +473,8 @@ test('un sort de découverte gardé en main découvre l\'échelon où il est lan
   p.tier = 4;
   const held = p.spells.find((s) => s.spellId === 'testament_politique') as { uid: number };
   assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
-  assert.deepEqual(p.discover?.options, ['hollande']);
+  // Depuis la re-spécification du 7 novembre 2026, l'échelon 5 n'a plus d'Héritage sans le RN : les légendes, au 6.
+  assert.deepEqual([...(p.discover?.options ?? [])].sort(), ['giscard', 'hollande', 'mitterrand']);
 });
 
 test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () => {
@@ -494,7 +496,9 @@ test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () =
 test('l\'échelon 6, le Panthéon : De Gaulle fait de tous vos politiques des Ni droite ni gauche, Giscard laisse sa chaise vide', () => {
   assert.equal(PARAMS.tierMax, 6);
   const legendes = CARDS.filter((c) => c.tier === 6);
-  assert.ok(legendes.length >= 4 && legendes.every((c) => c.camp === 'civile'), 'au-dessus des partis');
+  // Les quatre présidents, au-dessus des partis ; et le chef de chaque camp, clé de voûte de son moteur (7 novembre 2026).
+  for (const id of ['de_gaulle', 'giscard', 'chirac', 'mitterrand']) assert.equal(CARD_BY_ID[id].camp, 'civile', 'au-dessus des partis');
+  for (const camp of PARTY_CAMPS) assert.equal(legendes.filter((c) => c.camp === camp).length, 1, `un chef ${camp}`);
   const { game, p, buy } = setup();
   buy('boyard');
   buy('houssin');
@@ -508,7 +512,7 @@ test('l\'échelon 6, le Panthéon : De Gaulle fait de tous vos politiques des Ni
   const giscard = q.board[0];
   assert.ok(giscard.keywords.includes('retour'));
   assert.deepEqual(TOKENS.chaise_vide.keywords, ['porte_parole']);
-  assert.ok(giscard.effects.some((e) => e.when === 'heritage' && e.do === 'invoquer' && e.token === 'chaise_vide'));
+  assert.ok(giscard.effects.some((e) => e.when === 'heritage' && e.do === 'chaise_vide'));
 });
 
 test('Lafont : chaque actualisation lui donne +2/+0, et la boutique reste tirée au hasard', () => {
@@ -531,7 +535,8 @@ test('le débauchage prend les stats du serviteur de la boutique, gains compris'
   // Houssin a lui-même +1/+1 de la boutique, et prend Chirac avec son +1/+1.
   const [h, c] = [CARD_BY_ID.houssin, CARD_BY_ID.chirac];
   assert.deepEqual([houssin.atk, houssin.hp], [h.atk + 1 + c.atk + 1, h.hp + 1 + c.hp + 1]);
-  assert.equal(p.shop.length, 0);
+  assert.equal(p.shop.length, 1, 'le débauché est remplacé (7 novembre 2026)');
+  assert.notEqual(p.shop[0], 'chirac');
   assert.equal(p.counters.debauchages, 1);
 });
 
@@ -562,8 +567,8 @@ test('Jadot relance la Fin de tour de ses voisins, une seule fois par manche (r�
   const doucet = p.board[0];
   const before = doucet.atk;
   startCombats(game);
-  // Doucet joue deux fois (Lassalle), Jadot le relance une fois, malgré Lassalle.
-  assert.equal(doucet.atk, before + 3);
+  // Doucet joue deux fois (Lassalle). Jadot ne le relance qu'une fois (R4), mais la relance suit Lassalle (R18).
+  assert.equal(doucet.atk, before + 4);
 });
 
 test('Hollande : son Héritage rend le camp plus fort pour de bon, même en combat', () => {

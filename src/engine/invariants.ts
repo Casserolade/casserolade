@@ -102,6 +102,9 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
     if (s.locked) check(m.locked, 'un scandale qui cloue, sur un politique libre');
     if (live.some((c) => c.locked)) check(m.locked, 'le défaut « ne bouge plus » n\'est pas appliqué');
     if (live.some((c) => c.silence)) check(Boolean(s.silenced), 'le défaut « perd ses effets » n\'est pas appliqué');
+    const polls = live.reduce((sum, c) => sum + (c.pollsPerRound ?? 0), 0);
+    check(s.polls === polls, `scandale : ${s.polls} sondages par manche, attendu ${polls}`);
+    if (live.some((c) => c.noAttack)) check(s.grounded && m.noAttack, 'le défaut « n\'attaque plus » n\'est pas appliqué');
   }
 
   // Les effets : ceux de la carte, des casseroles, des bonus de propriétaire et des cartes ralliées (une fois par

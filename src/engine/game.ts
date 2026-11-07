@@ -89,7 +89,7 @@ const PHASE_ERRORS: Record<Exclude<GamePhase, 'recrutement'>, string> = {
   combat: 'Le recrutement est terminé.',
   fini: 'La partie est terminée.',
 };
-const NO_COUNTERS: Record<Counter, number> = { tracts: 0, ecologistes_joues: 0, dores_joues: 0, casseroles: 0, debauchages: 0 };
+const NO_COUNTERS: Record<Counter, number> = { tracts: 0, ecologistes_joues: 0, dores_joues: 0, casseroles: 0, debauchages: 0, actualisations: 0 };
 
 /** `hasard` draws one of the contexts with a rule; an unknown or missing id is ordinary political life. */
 function contextFor(id: string | undefined, rng: Rng): Context {
@@ -278,6 +278,9 @@ export function startRound(game: Game): void {
     const trickle = game.ctx.lastPlaceBudget && isLastInPolls(game, p) ? game.ctx.lastPlaceBudget : 0;
     p.budget = Math.max(0, base + (p.hero.mods.budgetPerRound ?? 0) + perRound + p.nextBudgetBonus + trickle);
     p.nextBudgetBonus = 0;
+    // Les sondages baissent pendant l'affaire, au même moment que le budget : jamais sous 1 de cette façon.
+    const polls = [...p.board, ...p.hand].reduce((sum, m) => sum + (m.scandal?.polls ?? 0), 0);
+    if (polls > 0) p.hp = Math.max(1, p.hp - polls);
     forgetScandals(game, p);
     for (const m of p.board) releaseBracelet(m);
     if (round > 1 && p.tier < params.tierMax) p.upgradeCost = Math.max(0, p.upgradeCost - 1);

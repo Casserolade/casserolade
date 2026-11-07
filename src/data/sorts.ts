@@ -32,10 +32,11 @@ export const SPELLS: Spell[] = [
   spell('temps_de_parole', 'Temps de parole', 2, 1, true, [fx('cible', { do: 'basculer', keyword: 'porte_parole' })]),
   spell('loi_de_finances', 'Loi de finances', 2, 3, false, [fx('joueur', { do: 'budget_max', value: 1 })]),
   spell('bracelet_electronique', 'Bracelet électronique', 2, 1, false, [fx('joueur', { do: 'oublier' })]),
+  // 7 novembre 2026 : à l'échelon 2 et pour 1, le débauchage se monte plus tôt.
+  spell('debauchage', 'Débauchage', 2, 1, true, [fx('cible', { do: 'debaucher', pick: 'plus_fort' })]),
 
   // Échelon 3
   spell('immunite_parlementaire', 'Immunité parlementaire', 3, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'immunite' })]),
-  spell('debauchage', 'Débauchage', 3, 2, true, [fx('cible', { do: 'debaucher', pick: 'plus_fort' })]),
   spell('campagne_de_terrain', 'Campagne de terrain', 3, 3, false, [fx('allies', { do: 'buff', atk: 1, hp: 1 })]),
   spell('seconde_chance', 'Seconde chance', 3, 2, true, [fx('cible', { do: 'mot_cle', keyword: 'retour' })]),
   spell('ouverture', 'Ouverture', 3, 3, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0, declencheur: 'annonce' })]),

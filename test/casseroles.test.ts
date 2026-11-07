@@ -76,7 +76,7 @@ test('aucune casserole ne donne à son propriétaire un mot-clé qu\'il a déjà
 test('chaque casserole a un propriétaire en jeu, et rien n\'y est une valeur de blague', () => {
   for (const c of CASSEROLES) {
     assert.ok(CARD_BY_ID[c.owner], `« ${c.name} » : propriétaire ${c.owner} inconnu`);
-    for (const key of ['atk', 'hp'] as const) assert.ok(Math.abs(c[key] ?? 0) <= 8, `« ${c.name} » : ${key} ${c[key]}`);
+    for (const key of ['atk', 'hp'] as const) assert.ok(Math.abs(c[key] ?? 0) <= 16, `« ${c.name} » : ${key} ${c[key]}`);
   }
 });
 
