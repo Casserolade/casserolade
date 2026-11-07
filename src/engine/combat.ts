@@ -96,7 +96,7 @@ function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
     deathTransmitUsed: false,
     polemiqueResistUsed: false,
     penalty: 0,
-    persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [] },
+    persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 0, hp: 0 } },
     campBuffs: [...(s.campBuffs ?? [])],
   };
 }
@@ -384,6 +384,17 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
     case 'chaise_vide':
       summonChair(b, side, self, index, k);
       break;
+    case 'tract_bonus':
+      // Pour le reste de la partie : les Tracts de ce combat en profitent déjà, et ceux d'après aussi.
+      side.tract = { atk: side.tract.atk + eff.atk * k, hp: side.tract.hp + eff.hp * k };
+      side.persist.tractBonus.atk += eff.atk * k;
+      side.persist.tractBonus.hp += eff.hp * k;
+      break;
+    case 'buff_par_membre': {
+      const n = side.units.filter((u) => u.hp > 0 && isCampOf(u, eff.camp ?? self.camp, b.ctx?.extremesAllied ?? false)).length;
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, eff.perma);
+      break;
+    }
     default:
       // Le reste ne se joue qu'au recrutement.
       break;
@@ -428,7 +439,7 @@ function summonChair(b: Battle, side: Side, self: Unit, index: number, count: nu
 }
 
 /** Combien de fois jouent les effets d'un déclencheur de ce camp : un multiplicateur vivant (Mitterrand, Macron) les double, les triple doré. */
-function repeatsOf(units: Unit[], trigger: 'heritage' | 'celebration'): number {
+function repeatsOf(units: Unit[], trigger: 'heritage' | 'celebration' | 'meeting'): number {
   let count = 1;
   for (const u of units) {
     if (u.hp <= 0) continue;
@@ -533,8 +544,12 @@ function strike(b: Battle, atkSide: Side, defSide: Side, attacker: Unit, target:
     return hit;
   };
   const attackerIndex = atkSide.units.indexOf(attacker);
-  for (const eff of attacker.effects) {
-    if (eff.when === 'meeting') runEffect(b, atkSide, attacker, atkSide.units.indexOf(attacker), eff);
+  // « Quand il attaque » : Mélenchon vivant les joue deux fois (re-spécification du 7 novembre 2026).
+  const meetings = attacker.effects.some((eff) => eff.when === 'meeting') ? repeatsOf(atkSide.units, 'meeting') : 1;
+  for (let r = 0; r < meetings && attacker.hp > 0; r++) {
+    for (const eff of attacker.effects) {
+      if (eff.when === 'meeting') runEffect(b, atkSide, attacker, atkSide.units.indexOf(attacker), eff, undefined, r > 0);
+    }
   }
   if (attacker.hp <= 0 || target.hp <= 0 || attackerIndex < 0) return;
   if (b.logging) b.log.push({ e: 'attaque', from: attacker.uid, to: target.uid });

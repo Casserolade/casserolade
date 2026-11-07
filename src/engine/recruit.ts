@@ -759,9 +759,11 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     case 'doubler_stats':
       for (const t of targets()) doubleStats(t, k);
       break;
-    case 'doubler_tracts':
-      for (let i = 0; i < k; i++) p.tract = { atk: Math.min(MAX_STAT, p.tract.atk * 2), hp: Math.min(MAX_STAT, p.tract.hp * 2) };
+    case 'buff_par_membre': {
+      const n = p.board.filter((m) => isCamp(game, m, eff.camp ?? self?.camp ?? 'civile')).length;
+      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k);
       break;
+    }
     case 'gain_debauche':
       if (ctx.poached) applyCampBuff(game, p, { camp: eff.camp, atk: ctx.poached.atk * k, hp: ctx.poached.hp * k });
       break;
@@ -1064,6 +1066,9 @@ export function applyPersist(game: Game, p: Player, persist: CombatPersist): voi
   for (const uid of persist.doubles) {
     const m = p.board.find((x) => x.uid === uid);
     if (m) doubleStats(m);
+  }
+  if (persist.tractBonus.atk || persist.tractBonus.hp) {
+    p.tract = { atk: Math.min(MAX_STAT, p.tract.atk + persist.tractBonus.atk), hp: Math.min(MAX_STAT, p.tract.hp + persist.tractBonus.hp) };
   }
   for (const gain of persist.campBuffs) applyCampBuff(game, p, gain);
   for (const id of persist.cards) addCard(game, p, id, null);

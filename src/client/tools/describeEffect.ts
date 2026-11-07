@@ -159,6 +159,7 @@ function goldenEffect(e: Effect): Effect {
     case 'tract_bonus':
     case 'compteur':
     case 'buff_compteur':
+    case 'buff_par_membre':
       return { ...e, atk: e.atk * 2, hp: e.hp * 2 };
     case 'budget':
     case 'degats':
@@ -258,6 +259,8 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'declencher':
       return `déclenche ${twice}${e.trigger === 'fin_tour' ? 'la ' : 'l\''}**${TRIGGER_WORD[e.trigger]}** ${of(dest)}`;
     case 'doubler':
+      // « Quand il attaque » est une phrase, pas un mot-clé : sans gras.
+      if (e.trigger === 'meeting') return `vos effets « Quand il attaque » se déclenchent ${golden ? 'trois' : 'deux'} fois`;
       return `vos **${TRIGGER_WORDS[e.trigger]}** se déclenchent ${golden ? 'trois' : 'deux'} fois`;
     case 'compteur':
       return `a ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
@@ -279,12 +282,15 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'butin':
       return `donne ${twice}${e.part === 'pv' ? 'les PV max' : 'les stats'} de sa victime ${to(dest)}`;
     case 'doubler_stats': {
-      const times = golden ? ', deux fois' : '';
-      if (self) return `double ses stats${times}`;
-      return `doublez les stats ${of(dest)}${times}`;
+      const times = golden ? 'deux fois ' : '';
+      if (self) return `double ${times}ses stats`;
+      return `doublez ${times}les stats ${of(dest)}`;
     }
-    case 'doubler_tracts':
-      return `vos **Tracts** donnent ${golden ? 'le quadruple' : 'le double'} pour le reste de la partie`;
+    case 'buff_par_membre': {
+      const member = e.camp ? CAMP_ONE[e.camp] : 'politique de son camp';
+      const many = e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques de son camp';
+      return `${self ? 'gagne' : `${many} gagnent`} ${stats(e.atk, e.hp)} par ${member} de votre plateau`;
+    }
     case 'gain_debauche':
       return `${e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques'}, partout, gagnent ${golden ? 'deux fois ' : ''}les stats du débauché pour le reste de la partie`;
     case 'buff_compteur':

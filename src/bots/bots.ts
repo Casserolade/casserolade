@@ -143,6 +143,8 @@ const TRIGGER_SCALE: Partial<Record<Trigger, number>> = {
   droit_de_reponse: 0.6,
   heritage: 1,
   revanche: 1,
+  // « Quand il attaque » : une à trois attaques par combat, plus avec Cumul des mandats ou un Retour.
+  meeting: 1.5,
   aura: 1,
 };
 
@@ -238,8 +240,8 @@ function actionValue(e: Effect): number {
     // Re-spécification du 7 novembre 2026 : les doublements valent cher, et d'autant plus qu'ils touchent du monde.
     case 'doubler_stats':
       return 14 * r;
-    case 'doubler_tracts':
-      return 20;
+    case 'buff_par_membre':
+      return (e.atk + e.hp) * 3 * r;
     case 'gain_debauche':
       return 16;
     case 'buff_compteur':

@@ -165,8 +165,8 @@ export type Action =
   | { do: 'sacrifier'; echelon?: number }
   /** Déclenche les effets `trigger` des cibles, une fois par manche au plus pour chacune (règle R4). Doré, il les joue deux fois. */
   | { do: 'declencher'; trigger: 'annonce' | 'heritage' | 'fin_tour' }
-  /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). */
-  | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration' }
+  /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). `meeting` : « Quand il attaque ». */
+  | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration' | 'meeting' }
   /** Aura : ce serviteur a +atk/+hp par unité du compteur. */
   | { do: 'compteur'; compteur: Counter; atk: number; hp: number }
   /** Aura : il faut `value` casseroles de plus pour faire scandale. */
@@ -188,8 +188,8 @@ export type Action =
    * deux fois. En combat, `perma` le garde après le combat : le politique double alors pour de bon.
    */
   | { do: 'doubler_stats' }
-  /** Vos Tracts donnent le double, pour le reste de la partie. */
-  | { do: 'doubler_tracts' }
+  /** Les cibles gagnent +atk/+hp par politique du camp `camp` sur votre plateau, lui compris. */
+  | { do: 'buff_par_membre'; atk: number; hp: number }
   /** Après un débauchage : les politiques du camp `camp`, partout, gagnent les stats du débauché pour le reste de la partie. */
   | { do: 'gain_debauche' }
   /** Les cibles gagnent +atk/+hp par unité du compteur, une fois, au moment où l'effet joue. */
@@ -528,6 +528,8 @@ export interface CombatPersist {
   copies: string[];
   /** Les politiques qui doublent pour de bon après le combat, une fois par entrée, dans l'ordre. */
   doubles: number[];
+  /** Ce que vos Tracts gagnent pour le reste de la partie, pendant le combat (Mélenchon, quand il attaque). */
+  tractBonus: { atk: number; hp: number };
 }
 
 /** Ce que le client sait d'un serviteur en combat. Liste blanche : rien d'autre ne sort. */

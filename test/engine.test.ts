@@ -474,7 +474,7 @@ test('un sort de découverte gardé en main découvre l\'échelon où il est lan
   const held = p.spells.find((s) => s.spellId === 'testament_politique') as { uid: number };
   assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
   // Depuis la re-spécification du 7 novembre 2026, l'échelon 5 n'a plus d'Héritage sans le RN : les légendes, au 6.
-  assert.deepEqual([...(p.discover?.options ?? [])].sort(), ['giscard', 'hollande', 'mitterrand']);
+  assert.deepEqual([...(p.discover?.options ?? [])].sort(), ['giscard', 'mitterrand']);
 });
 
 test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () => {
@@ -571,15 +571,17 @@ test('Jadot relance la Fin de tour de ses voisins, une seule fois par manche (r�
   assert.equal(doucet.atk, before + 4);
 });
 
-test('Hollande : son Héritage rend le camp plus fort pour de bon, même en combat', () => {
+test('Hollande : chaque allié tombé rend les Socialistes plus forts pour de bon, même en combat', () => {
   const { game, p, buy } = setup();
   buy('hollande');
   buy('thevenoud');
-  const thevenoud = p.board[1];
+  const [hollande, thevenoud] = p.board;
+  hollande.hp = 500; // Il survit : sa Revanche joue à chaque allié tombé.
   const before = thevenoud.atk;
   for (const q of game.players.slice(1)) q.board = [makeMinion(CARD_BY_ID.chirac, 50000 + q.seat), { ...makeMinion(CARD_BY_ID.mitterrand, 60000 + q.seat), atk: 30, hp: 30 }];
   startCombats(game);
-  assert.ok(thevenoud.atk >= before + 1, 'l\'Héritage de Hollande, pour de bon');
+  assert.ok(p.campBuffs.some((g) => g.camp === 'socialistes' && g.atk === 1 && g.hp === 1), 'pour le reste de la partie');
+  assert.ok(thevenoud.atk >= before + 1, 'et tout de suite, sur le plateau');
 });
 
 test('Durif, à chaque fin de tour, donne deux fois +1/+1 à un autre allié', () => {

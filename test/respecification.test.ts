@@ -4,7 +4,7 @@ import { applyAction, createGame, startRound } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { resolveCombat } from '../src/engine/combat.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
-import { addMinionToHand, addSpellToHand, doubleStats, endOfTurn, take } from '../src/engine/recruit.ts';
+import { addMinionToHand, addSpellToHand, applyPersist, doubleStats, endOfTurn, take } from '../src/engine/recruit.ts';
 import { MAX_STAT, makeMinion } from '../src/engine/minion.ts';
 import { createRng } from '../src/engine/rng.ts';
 import { CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
@@ -138,7 +138,8 @@ test('R18 : en combat, Glucksmann relance les Héritages deux fois quand Mitterr
   assert.equal(count(true), 2);
 });
 
-// Doublez : les clés de voûte des légendes (section 3 et 4 de la re-spécification).
+// Les clés de voûte des légendes : des effets en attaquant et des synergies qui gonflent ; le doublement, avec
+// parcimonie (Sarkozy). Sections 3 et 4 de la re-spécification.
 
 function startTable(camps: Camp[], seed = 7): Game {
   const game = table(camps, seed);
@@ -146,59 +147,80 @@ function startTable(camps: Camp[], seed = 7): Game {
   return game;
 }
 
-test('Cohn-Bendit : à la Fin de tour, ses voisins doublent', () => {
+test('Cohn-Bendit : à la Fin de tour, vos Écologistes gagnent +1/+1 par Écologiste du plateau', () => {
   const game = startTable(['ecologistes', 'macronie', 'republicains', 'socialistes', 'reconquete']);
   const p = game.players[0];
-  const left = lay(game, 'kazib');
+  const lucas = lay(game, 'lucas');
   lay(game, 'cohn_bendit');
-  const right = lay(game, 'cheminade');
-  const far = lay(game, 'gueant');
-  const before = [left.atk, left.hp, right.atk, right.hp];
-  const farBefore = [far.atk, far.hp];
+  const kazib = lay(game, 'kazib');
+  const before = [lucas.atk, lucas.hp, kazib.atk];
   endOfTurn(game, p);
-  assert.deepEqual([left.atk, left.hp, right.atk, right.hp], before.map((v) => v * 2));
-  assert.deepEqual([far.atk, far.hp], farBefore, 'ses voisins seulement');
+  assert.deepEqual([lucas.atk, lucas.hp], [before[0] + 2, before[1] + 2], 'deux Écologistes : +2/+2');
+  assert.equal(kazib.atk, before[2], 'la Société civile ne pousse pas');
 });
 
-test('Mélenchon : à la Fin de tour, vos Tracts donnent le double, puis un Tract sur chaque Insoumis', () => {
+test('Mélenchon : vos « Quand il attaque » jouent deux fois, et ses attaques gonflent vos Tracts pour la partie', () => {
+  // Mélenchon ne tombe pas : le multiplicateur ne joue que s'il est vivant.
+  const melenchon = { ...makeMinion(CARD_BY_ID.melenchon, uid++), hp: 1000 };
+  const guedj = makeMinion(CARD_BY_ID.guedj, uid++);
+  const r = fight([melenchon, guedj], [unit(1, 500)], 3);
+  const attacks = r.log.filter((e) => e.e === 'attaque' && e.from === melenchon.uid).length;
+  assert.ok(attacks > 0);
+  assert.deepEqual(r.persist[0].tractBonus, { atk: 2 * attacks, hp: 2 * attacks }, 'son propre « Quand il attaque » joue deux fois');
+  const guedjAttacks = r.log.filter((e) => e.e === 'attaque' && e.from === guedj.uid).length;
+  const guedjGains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid).length;
+  assert.equal(guedjGains, 2 * guedjAttacks, 'celui de Guedj aussi');
+});
+
+test('les Tracts gagnés en combat restent pour la partie', () => {
   const game = startTable(['insoumis', 'macronie', 'republicains', 'socialistes', 'reconquete']);
   const p = game.players[0];
-  const leaument = lay(game, 'leaument');
-  lay(game, 'melenchon');
-  const before = leaument.atk;
-  endOfTurn(game, p);
-  assert.deepEqual(p.tract, { atk: 2, hp: 2 });
-  assert.equal(leaument.atk, before + 2, 'le Tract joué ensuite donne déjà le double');
+  const before = { ...p.tract };
+  applyPersist(game, p, { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 4, hp: 4 } });
+  assert.deepEqual(p.tract, { atk: before.atk + 4, hp: before.hp + 4 });
 });
 
-test('Hollande : sacrifié au recrutement, ses autres Socialistes doublent', () => {
-  const game = startTable(['socialistes', 'macronie', 'republicains', 'ecologistes', 'reconquete']);
-  const thevenoud = lay(game, 'thevenoud');
-  const kazib = lay(game, 'kazib');
-  const hollande = lay(game, 'hollande');
-  const before = [thevenoud.atk, thevenoud.hp, kazib.atk];
-  cast(game, 'primaire', hollande);
-  assert.deepEqual([thevenoud.atk, thevenoud.hp], [before[0] * 2, before[1] * 2]);
-  assert.equal(kazib.atk, before[2], 'la Société civile ne double pas');
+test('Guedj grandit pour de bon en attaquant, et avec son Retour il attaque de nouveau', () => {
+  const guedj = makeMinion(CARD_BY_ID.guedj, uid++);
+  const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(1, 300)], 6);
+  const gains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid);
+  assert.ok(gains.length >= 2, 'une attaque, un Retour, et une autre attaque');
+  assert.ok(gains.every((g) => g.atk === 1 && g.hp === 1));
 });
 
-test('Hollande : mort au combat, ses Socialistes doublent tout de suite, et pour de bon', () => {
+test('Hollande : chaque allié tombé fait gonfler les Socialistes, partout, pour la partie', () => {
   const hollande = makeMinion(CARD_BY_ID.hollande, uid++);
-  const valls = makeMinion(CARD_BY_ID.valls, uid++);
-  const r = fight([{ ...hollande, hp: 1, keywords: ['porte_parole'] }, valls], [unit(5, 100)], 2);
-  assert.deepEqual(r.persist[0].doubles, [valls.uid]);
+  const r = fight([hollande, { ...makeMinion(CARD_BY_ID.thevenoud, uid++), hp: 1 }, unit(1, 1)], [unit(3, 500)], 2);
+  const deaths = r.log.filter((e) => e.e === 'mort' && e.uid !== hollande.uid).length;
+  assert.ok(deaths > 0);
+  assert.ok(r.persist[0].campBuffs.length >= 1);
+  assert.ok(r.persist[0].campBuffs.every((g) => g.camp === 'socialistes' && g.atk === 1 && g.hp === 1));
 });
 
-test('Macron : chaque Ralliement double son hôte', () => {
+test('Macron : chaque Ralliement fait gonfler son hôte, d\'autant plus qu\'il en a reçu', () => {
   const game = startTable(['macronie', 'socialistes', 'republicains', 'ecologistes', 'reconquete']);
   const p = game.players[0];
   lay(game, 'macron');
   const host = lay(game, 'kazib');
-  assert.ok(take(game, 'castaner'));
-  const rally = addMinionToHand(game, p, 'castaner') as Minion;
-  const expected = [(host.atk + rally.atk) * 2, (host.hp + rally.hp) * 2];
+  const gains: number[] = [];
+  for (const id of ['castaner', 'berge']) {
+    assert.ok(take(game, id));
+    const rally = addMinionToHand(game, p, id) as Minion;
+    const before = host.atk + rally.atk;
+    assert.equal(applyAction(game, 0, { t: 'play', uid: rally.uid, onto: host.uid }).ok, true);
+    gains.push(host.atk - before);
+  }
+  assert.deepEqual(gains, [2, 4], '+2/+2 par Ralliement reçu');
+});
+
+test('Darmanin rallié apprend à son hôte à grandir en attaquant', () => {
+  const game = startTable(['macronie', 'socialistes', 'republicains', 'ecologistes', 'reconquete']);
+  const p = game.players[0];
+  const host = lay(game, 'kazib');
+  assert.ok(take(game, 'darmanin'));
+  const rally = addMinionToHand(game, p, 'darmanin') as Minion;
   assert.equal(applyAction(game, 0, { t: 'play', uid: rally.uid, onto: host.uid }).ok, true);
-  assert.deepEqual([host.atk, host.hp], expected);
+  assert.ok(host.effects.some((e) => e.when === 'meeting' && e.do === 'buff' && e.perma));
 });
 
 test('Sarkozy : un allié qui reçoit une casserole double, avantage compris', () => {
