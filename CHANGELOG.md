@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2e — 7 novembre 2026
+
+**Dominique Strauss-Kahn (7 novembre, au soir)**
+- Une seconde légende chez les Socialistes, à l'échelon 6. Quand il attaque, il gagne +1/+1 pour de bon par Socialiste du plateau ; à sa mort, chacun de ses autres Socialistes gagne son attaque, pour de bon. Glucksmann relance son Héritage, Mitterrand le double.
+- Quatre casseroles : Troussage au Sofitel, la Porsche, la MNEF, et Résident fiscal au Maroc.
+- Sept extraits de sa vraie voix, au 20 heures de TF1 en 2011 et sur LCI en 2024.
+
+**Corrections**
+- Un bot ne sacrifie plus un exemplaire de la carte qu'il pose : Hidalgo ne tourne plus en rond en sacrifiant l'Hidalgo d'avant.
+
 ## 0.2d — 7 novembre 2026
 
 **Des fins de partie qui explosent (7 novembre)**
