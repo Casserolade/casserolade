@@ -16,6 +16,8 @@ import { fittedNameSize } from '#src/client/tools/fittedNameSize.ts';
 import { fittedRulesSize } from '#src/client/tools/fittedRulesSize.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { sheetSpriteStyle } from '#src/client/tools/sheetSpriteStyle.ts';
+import { compactStat } from '#src/client/tools/compactStat.ts';
+import { statFontScale } from '#src/client/tools/statFontScale.ts';
 import { statTones } from '#src/client/tools/statTone.ts';
 import { CARD_BY_ID } from '#src/data/cards.ts';
 import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
@@ -73,6 +75,9 @@ const rulesSize = computed(() => {
   return fittedRulesSize(names.length > 0 ? [...lines.value, casseroleFlowLine(names)] : lines.value);
 });
 const tones = computed(() => statTones(props.cardId, Boolean(props.golden), props.atk, props.hp));
+/** Past 999, written short (3k), as on the medallions. */
+const atkLabel = computed(() => compactStat(props.atk));
+const hpLabel = computed(() => compactStat(Math.max(0, props.hp)));
 </script>
 
 <template>
@@ -90,8 +95,8 @@ const tones = computed(() => statTones(props.cardId, Boolean(props.golden), prop
         </span>
       </span>
     </span>
-    <span class="medal attack" :class="`tone-${tones.atk}`"><span class="sr-only">Attaque </span>{{ atk }}</span>
-    <span class="medal health" :class="`tone-${tones.hp}`"><span class="sr-only">PV </span>{{ Math.max(0, hp) }}</span>
+    <span class="medal attack" :class="`tone-${tones.atk}`" :style="{ '--stat-scale': statFontScale(atkLabel) }"><span class="sr-only">Attaque {{ atk }}</span><span aria-hidden="true">{{ atkLabel }}</span></span>
+    <span class="medal health" :class="`tone-${tones.hp}`" :style="{ '--stat-scale': statFontScale(hpLabel) }"><span class="sr-only">PV {{ Math.max(0, hp) }}</span><span aria-hidden="true">{{ hpLabel }}</span></span>
     <CardChips :tier="tier" :camp-label="CAMP_LABELS[camp]" :locked="locked" :bracelet="bracelet" :copies="copies" :charges="charges" :scandal-threshold="scandalThreshold" :scandal-left="scandalLeft" />
     <span v-if="golden" class="sr-only">Doré</span>
     <SheetSprite v-if="shine" class="shine" :sprite="shine" />
@@ -179,8 +184,8 @@ const tones = computed(() => statTones(props.cardId, Boolean(props.golden), prop
   align-items: center;
   justify-content: center;
   color: #fff;
-  font: 400 calc(var(--u) * 70) / 1 var(--font-number);
-  -webkit-text-stroke: calc(var(--u) * 8) var(--color-ink);
+  font: 400 calc(var(--u) * 70 * var(--stat-scale, 1)) / 1 var(--font-number);
+  -webkit-text-stroke: calc(var(--u) * 8 * var(--stat-scale, 1)) var(--color-ink);
   paint-order: stroke fill;
   background-position: center;
   background-size: 100% 100%;
