@@ -1,6 +1,6 @@
 # Changelog
 
-## Prochaine version
+## 0.2d — 7 novembre 2026
 
 **Des fins de partie qui explosent (7 novembre)**
 - L'échelon 6 passe de 4 à 11 légendes : les quatre anciens présidents, et le chef de chaque camp, qui ferme son moteur.
@@ -31,6 +31,9 @@
 
 **Textes**
 - Un sort qui donne deux choses au même politique le dit en une phrase.
+
+**Corrections**
+- Un sort qui serait perdu est refusé, et reste en main. Seconde délibération ou Tribune libre sur un politique déjà relancé cette manche partait sans rien faire : De Gaulle, relancé par Chirac, ne redonnait pas son +4/+4. De même pour une relance sur un politique qui n'a rien à relancer, Conseil des ministres sans rien à relancer, un mot-clé donné à qui l'a déjà (Immunité parlementaire, Petite phrase, Seconde chance, Cumul des mandats), Débauchage quand la boutique est vide, et une invocation relancée sur un plateau plein. Ces cibles ne sont plus proposées.
 
 ## 0.2c — 6 novembre 2026
 
