@@ -279,14 +279,14 @@ test('un scandale coûte ses deux manches de budget', () => {
   const p = game.players[0];
   const m = lay(game, 'gueant');
   pose(game, 'bygmalion', m); // −2 par manche en scandale
-  pose(game, 'homards', m); // −1
+  pose(game, 'homards', m); // −2 (re-spécification du 7 novembre 2026 : les défauts font mal)
   const base = (round: number) => Math.min(PARAMS.maxBudget, PARAMS.startBudget + (round - 1) * PARAMS.budgetPerRound) + 1; // + le pouvoir de Philippe
   const paid: number[] = [];
   for (let i = 0; i < 3; i++) {
     resolveRound(game);
     paid.push(base(game.round) - p.budget);
   }
-  assert.deepEqual(paid, [3, 3, 0]);
+  assert.deepEqual(paid, [4, 4, 0]);
   assert.equal(m.scandal, undefined);
 });
 
@@ -401,6 +401,7 @@ const IN_COMBAT: Record<Action['do'], boolean> = {
   camp_buff: true, boutique_buff: false, tract_bonus: false, jouer_tract: true, debaucher: false, dorer: false, detruire: false,
   sacrifier: false, declencher: true, doubler: true, compteur: true, scandale_plus: true, actualiser: false, actualisations_gratuites: false,
   budget_max: false, pari_defaite: false, congres: false, butin: true,
+  doubler_stats: true, doubler_tracts: false, gain_debauche: false, buff_compteur: false, chaise_vide: true,
 };
 const COMBAT_TRIGGERS: Trigger[] = ['debut_combat', 'heritage', 'riposte', 'meeting', 'tue', 'revanche', 'immunite_perdue'];
 

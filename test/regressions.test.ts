@@ -173,11 +173,11 @@ test('le tutoriel suit son script quelle que soit la graine : ses camps sont tou
 
 test('le jeton d\'une casserole reçoit les gains de camp déjà acquis, comme tout serviteur à venir', () => {
   const { p, buy, pose } = setup();
-  buy('sarkozy'); // Quand un allié reçoit une casserole : les Républicains ont +2/+1 pour la partie.
+  buy('fillon'); // Quand un allié reçoit une casserole : les Républicains ont +1/+1 pour la partie, une fois par manche.
   buy('cheminade');
   pose('homards', p.board[1]);
   assert.equal(p.campBuffs.length, 1);
-  pose('emploi_fictif', p.board[0]); // Invoque un Assistant fictif, Républicain comme Sarkozy.
+  pose('emploi_fictif', p.board[0]); // Invoque un Assistant fictif, Républicain comme Fillon.
   const assistant = p.board.find((m) => m.cardId === 'assistant_fictif') as Minion;
   assert.ok(assistant);
   assert.equal(assistant.camp, 'republicains');

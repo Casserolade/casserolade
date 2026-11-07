@@ -1,6 +1,9 @@
 import type { Camp, Card, Effect, Minion } from './types.ts';
 import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 
+/** Plafond des stats, par sûreté : aucun doublement ne doit sortir des entiers sûrs (re-spécification, 7 novembre 2026). */
+export const MAX_STAT = 1_000_000_000;
+
 export function makeMinion(card: Card, uid: number): Minion {
   return {
     uid,

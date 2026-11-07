@@ -1,7 +1,7 @@
 import type { Camp, Casserole, CombatPersist, Counter, Effect, EndOfTurnNote, EndOfTurnStep, Keyword, Minion, Trigger } from './types.ts';
 import type { Game, Offer, Player, StatGain } from './state.ts';
 import { isCamp as isCampOf } from './camps.ts';
-import { effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
+import { MAX_STAT, effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { CARDS, CARD_BY_ID } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
@@ -21,6 +21,8 @@ export interface EffectContext {
    * Rejoué, un mot-clé ou une dorure que la cible a déjà passe à un autre allié, et un sacrifice ne détruit plus.
    */
   replay?: boolean;
+  /** Les stats du politique qui vient d'être débauché : déclencheur « Après que vous débauchez ». */
+  poached?: { atk: number; hp: number };
 }
 
 export function isCamp(game: Game, m: Pick<Minion, 'camp' | 'keywords'>, camp: Camp): boolean {
@@ -417,8 +419,8 @@ function casseroleEffects(m: Minion): Set<Effect> {
 }
 
 /**
- * Le défaut d'une casserole rejoint le scandal en cours : budget perdu à chaque manche, sondages
- * perdus à sa mort, cloué sur place, réduit au silence. Tout est noté pour être rendu à l'oubli.
+ * Le défaut d'une casserole rejoint le scandal en cours : budget perdu à chaque manche, sondages perdus à chaque
+ * manche ou à sa mort, cloué sur place, réduit au silence, privé d'attaque. Tout est noté pour être rendu à l'oubli.
  */
 export function addDefect(m: Minion, c: Casserole): void {
   const scandal = m.scandal;
@@ -437,6 +439,11 @@ export function addDefect(m: Minion, c: Casserole): void {
     scandal.silenced = m.effects.filter((e) => !fromCasseroles.has(e));
     m.effects = m.effects.filter((e) => fromCasseroles.has(e));
   }
+  scandal.polls += c.pollsPerRound ?? 0;
+  if (c.noAttack) {
+    m.noAttack = true;
+    scandal.grounded = true;
+  }
 }
 
 /**
@@ -444,7 +451,7 @@ export function addDefect(m: Minion, c: Casserole): void {
  * un scandale en cours qui continue (triple, Ralliement) garde sa date.
  */
 export function startScandal(game: Game, m: Minion, until = game.round + game.params.scandalRounds): void {
-  m.scandal = { until, budget: 0, hpLoss: 0, locked: false, silenced: null };
+  m.scandal = { until, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false };
   for (const id of m.casseroles.slice(m.oublie)) addDefect(m, CASSEROLE_BY_ID[id]);
 }
 
@@ -460,6 +467,7 @@ function liftScandal(m: Minion): number | null {
   // Sous bracelet, il reste cloué : le bracelet tombe à la manche suivante (releaseBracelet).
   if (scandal.locked) m.locked = Boolean(m.bracelet);
   if (scandal.silenced) m.effects = [...scandal.silenced, ...m.effects];
+  if (scandal.grounded) m.noAttack = CARD_BY_ID[m.cardId]?.noAttack ?? false;
   delete m.scandal;
   return scandal.until;
 }
@@ -581,8 +589,13 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
 }
 
 function addStats(m: Minion, atk: number, hp: number): void {
-  m.atk += atk;
-  m.hp += hp;
+  m.atk = Math.min(MAX_STAT, m.atk + atk);
+  m.hp = Math.min(MAX_STAT, m.hp + hp);
+}
+
+/** Doublez : il gagne son attaque et ses PV actuels, `times` fois de suite (un doré double deux fois). */
+export function doubleStats(m: Minion, times = 1): void {
+  for (let i = 0; i < times; i++) addStats(m, m.atk, m.hp);
 }
 
 /**
@@ -638,6 +651,9 @@ function poachFromShop(game: Game, p: Player, pick: 'plus_faible' | 'plus_fort')
   const stats = value(p.shop[best]);
   const [id] = p.shop.splice(best, 1);
   returnToPool(game, id);
+  // Le débauché est remplacé : une chaîne de débauchages trouve toujours quelqu'un (re-spécification, 7 novembre 2026).
+  const fresh = draw(game, p.tier);
+  if (fresh) p.shop.splice(best, 0, fresh);
   return stats;
 }
 
@@ -658,7 +674,8 @@ export function playTract(game: Game, p: Player, target: Minion, k = 1): void {
 export function afterSpell(game: Game, p: Player, spellId: string): void {
   p.stats.spells++;
   if (spellId === 'tract') incrementCounter(p, 'tracts');
-  fireBoard(game, p, 'sort', {}, (_owner, eff) => !eff.card || eff.card === spellId);
+  // « Tous les deux sorts que vous lancez » (`n`) : au deuxième, au quatrième, et ainsi de suite, dans la partie.
+  fireBoard(game, p, 'sort', {}, (_owner, eff) => (!eff.card || eff.card === spellId) && p.stats.spells % Math.max(1, eff.n ?? 1) === 0);
 }
 
 /** Applique un effet hors combat. `self` est la source : le serviteur, ou rien pour un sort. */
@@ -736,7 +753,31 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       if (!stats) break;
       for (const t of list) addStats(t, stats.atk * k, stats.hp * k);
       incrementCounter(p, 'debauchages');
-      fireBoard(game, p, 'debauche', {});
+      fireBoard(game, p, 'debauche', { poached: stats });
+      break;
+    }
+    case 'doubler_stats':
+      for (const t of targets()) doubleStats(t, k);
+      break;
+    case 'doubler_tracts':
+      for (let i = 0; i < k; i++) p.tract = { atk: Math.min(MAX_STAT, p.tract.atk * 2), hp: Math.min(MAX_STAT, p.tract.hp * 2) };
+      break;
+    case 'gain_debauche':
+      if (ctx.poached) applyCampBuff(game, p, { camp: eff.camp, atk: ctx.poached.atk * k, hp: ctx.poached.hp * k });
+      break;
+    case 'buff_compteur': {
+      const n = p.counters[eff.compteur];
+      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k);
+      break;
+    }
+    case 'chaise_vide': {
+      // Giscard : la caméra reste sur sa chaise vide, qui tient ce qu'il tenait.
+      const at = self && p.board.includes(self) ? p.board.indexOf(self) + 1 : Math.max(0, index);
+      for (let i = 0; i < k && p.board.length < boardLimit(game, p); i++) {
+        const chair = welcome(game, p, makeToken('chaise_vide', 'civile', game.nextUid++));
+        chair.hp = Math.max(chair.hp, self?.hp ?? 0);
+        p.board.splice(Math.min(at, p.board.length), 0, chair);
+      }
       break;
     }
     case 'dorer':
@@ -854,13 +895,19 @@ function makeGolden(p: Player, m: Minion): void {
  * ni le relanceur ; une Annonce qui détruit (Hidalgo) demande un choix, et ne se relance pas.
  */
 function relaunch(game: Game, p: Player, source: Minion | null, t: Minion, trigger: Trigger): void {
-  for (const other of relaunchable(t.effects, trigger)) {
-    if (other.to !== 'cible') {
-      applyEffect(game, p, t, other, { replay: true });
-      continue;
+  // Règle R18 : ce qui est relancé suit les multiplicateurs. Avec Lassalle, Conseil des ministres joue chaque Fin de
+  // tour deux fois ; avec Chirac, Seconde délibération rejoue l'Annonce deux fois ; avec Mitterrand, Tribune libre
+  // rejoue l'Héritage deux fois.
+  const repeats = trigger === 'annonce' || trigger === 'heritage' || trigger === 'fin_tour' ? repeatCount(p, trigger) : 1;
+  for (let r = 0; r < repeats; r++) {
+    for (const other of relaunchable(t.effects, trigger)) {
+      if (other.to !== 'cible') {
+        applyEffect(game, p, t, other, { replay: true });
+        continue;
+      }
+      const allies = p.board.filter((m) => m !== t && m !== source);
+      if (allies.length > 0) applyEffect(game, p, t, other, { target: game.rng.pick(allies), replay: true });
     }
-    const allies = p.board.filter((m) => m !== t && m !== source);
-    if (allies.length > 0) applyEffect(game, p, t, other, { target: game.rng.pick(allies), replay: true });
   }
 }
 
@@ -869,6 +916,7 @@ function relaunch(game: Game, p: Player, source: Minion | null, t: Minion, trigg
  * casserole change aussi, puis « Quand vous actualisez » joue.
  */
 export function refreshShop(game: Game, p: Player, camp?: Camp): void {
+  incrementCounter(p, 'actualisations');
   p.frozen = false;
   refillShop(game, p, camp);
   if (game.params.casseroleOnRoll) offerCasserole(game, p);
@@ -1012,6 +1060,10 @@ export function applyPersist(game: Game, p: Player, persist: CombatPersist): voi
   for (const gain of persist.buffs) {
     const m = p.board.find((x) => x.uid === gain.uid);
     if (m) addStats(m, gain.atk, gain.hp);
+  }
+  for (const uid of persist.doubles) {
+    const m = p.board.find((x) => x.uid === uid);
+    if (m) doubleStats(m);
   }
   for (const gain of persist.campBuffs) applyCampBuff(game, p, gain);
   for (const id of persist.cards) addCard(game, p, id, null);

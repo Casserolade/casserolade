@@ -111,7 +111,7 @@ test('spell and casserole cards say what they do', () => {
   assert.match(spellCardLines(SPELL_BY_ID.investiture, { tier: 4 })[0], /échelon 4/);
   assert.match(spellCardLines(SPELL_BY_ID.matinale)[0], /2 prochaines actualisations sont gratuites/i);
   const casserole = CASSEROLE_BY_ID.ecoutes;
-  assert.equal(casseroleCardLines(casserole).at(-1), 'Sur Nicolas Sarkozy, en plus\u00a0: +3/+3.');
+  assert.equal(casseroleCardLines(casserole).at(-1), 'Sur Nicolas Sarkozy, en plus\u00a0: +6/+6.');
 });
 
 test('after a combat, the celebrant says a real quote, another of its own, or its camp\'s chant', () => {
@@ -206,9 +206,9 @@ test('on a winning streak, the same politician does not say the same line twice:
 
 test('describeOwnerBonus says what each casserole gives its owner on top, as the engine applies it', () => {
   for (const casserole of CASSEROLES) assert.match(describeOwnerBonus(casserole) ?? '', /^Sur .+, en plus\u00a0: .+\.$/, casserole.id);
-  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.ecoutes), 'Sur Nicolas Sarkozy, en plus\u00a0: +3/+3.');
-  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.hologramme), 'Sur Jean-Luc Mélenchon, en plus\u00a0: +1/+0 et un deuxième Hologramme.');
-  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.accent), 'Sur Jean-Luc Mélenchon, en plus\u00a0: +2/+0 et son effet joue deux fois.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.ecoutes), 'Sur Nicolas Sarkozy, en plus\u00a0: +6/+6.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.hologramme), 'Sur Jean-Luc Mélenchon, en plus\u00a0: +2/+0 et un deuxième Hologramme.');
+  assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.accent), 'Sur Jean-Luc Mélenchon, en plus\u00a0: +4/+0 et son effet joue deux fois.');
   assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.traverser_la_rue), 'Sur Emmanuel Macron, en plus\u00a0: un deuxième politique gratuit de votre échelon.');
   assert.equal(describeOwnerBonus(CASSEROLE_BY_ID.compte_suisse), 'Sur Jérôme Cahuzac, en plus\u00a0: +2 budget par manche.');
 });

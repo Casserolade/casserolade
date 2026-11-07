@@ -235,6 +235,17 @@ function actionValue(e: Effect): number {
       return 2;
     case 'butin':
       return 4;
+    // Re-spécification du 7 novembre 2026 : les doublements valent cher, et d'autant plus qu'ils touchent du monde.
+    case 'doubler_stats':
+      return 14 * r;
+    case 'doubler_tracts':
+      return 20;
+    case 'gain_debauche':
+      return 16;
+    case 'buff_compteur':
+      return (e.atk + e.hp) * 6;
+    case 'chaise_vide':
+      return 8;
   }
 }
 
@@ -400,6 +411,9 @@ function defectCost(c: Casserole, m: Minion): number {
   // Le scandale coûte ses deux manches de budget : le peuple oublie une fois le budget de la deuxième versé.
   let v = -Math.min(0, c.budgetPerRound ?? 0) * 2 * 2;
   v += (c.hpLossOnDeath ?? 0) * 1.5;
+  // Les sondages perdus à chaque manche du scandale, et un politique qui n'attaque plus (7 novembre 2026).
+  v += (c.pollsPerRound ?? 0) * 2 * 1.5;
+  if (c.noAttack) v += m.atk * 0.5 + 2;
   if (c.locked) v += 1;
   if (c.silence) v += m.effects.reduce((sum, e) => sum + effectValue(e), 0);
   return v;

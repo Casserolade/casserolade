@@ -13,7 +13,7 @@ import type {
   Params,
   Rng,
 } from './types.ts';
-import { effectPower, makeToken } from './minion.ts';
+import { MAX_STAT, effectPower, makeToken } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { isCamp as isCampOf } from './camps.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
@@ -24,6 +24,8 @@ const MAX_RIPOSTES = 200;
 
 interface Unit extends Minion {
   attacked: boolean;
+  /** Ses retours en politique dans ce combat : revenu, il compte comme neuf, et ses coups en cours s'arrêtent (règle R17). */
+  comebacks: number;
   /** Bonus de solitude compris dans atk et hp. */
   bonus: number;
   /** Morts alliées comptées pour la Revanche. */
@@ -82,7 +84,7 @@ function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
   const bonuses = combatBonuses(s.minions, extremes);
   const units: Unit[] = s.minions.map((m, i) => {
     const extra = bonuses[i];
-    return { ...m, keywords: [...m.keywords], effects: m.effects, atk: m.atk + extra, hp: m.hp + extra, attacked: false, bonus: extra, avenge: 0, peak: m.hp + extra };
+    return { ...m, keywords: [...m.keywords], effects: m.effects, atk: m.atk + extra, hp: m.hp + extra, attacked: false, comebacks: 0, bonus: extra, avenge: 0, peak: m.hp + extra };
   });
   return {
     index,
@@ -94,7 +96,7 @@ function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
     deathTransmitUsed: false,
     polemiqueResistUsed: false,
     penalty: 0,
-    persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [] },
+    persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [] },
     campBuffs: [...(s.campBuffs ?? [])],
   };
 }
@@ -117,8 +119,8 @@ function lose(b: Battle, u: Minion, k: Keyword): void {
 
 function addStats(b: Battle, side: Side, u: Unit, atk: number, hp: number, perma = false): void {
   if (atk === 0 && hp === 0) return;
-  u.atk += atk;
-  u.hp += hp;
+  u.atk = Math.min(MAX_STAT, u.atk + atk);
+  u.hp = Math.min(MAX_STAT, u.hp + hp);
   u.peak = Math.max(u.peak, u.hp);
   if (b.logging) b.log.push({ e: 'stats', uid: u.uid, atk: u.atk, hp: u.hp });
   if (perma && u.uid < b.firstSummonUid) side.persist.buffs.push({ uid: u.uid, atk, hp });
@@ -345,7 +347,7 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       break;
     }
     case 'transmettre':
-      transmit(b, side, self, index, eff.tout ?? false, k);
+      transmit(b, side, self, index, eff.tout ?? false, k, eff.perma ?? false);
       break;
     case 'invoquer':
       summon(b, side, self, index, eff.token, eff.count * k);
@@ -362,11 +364,25 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
         if (u === self || b.retriggered.has(u.uid)) continue;
         b.retriggered.add(u.uid);
         const at = side.units.indexOf(u);
-        // Doré, il joue deux fois ce qu'il relance ; une relance compte comme un effet rejoué.
-        for (let i = 0; i < k; i++) {
+        // Doré, il joue deux fois ce qu'il relance ; une relance compte comme un effet rejoué. Les multiplicateurs
+        // s'appliquent aussi à ce qui est relancé : Mitterrand vivant double les Héritages relancés (règle R18).
+        const repeats = eff.trigger === 'heritage' ? repeatsOf(side.units, 'heritage') : 1;
+        for (let i = 0; i < k * repeats; i++) {
           for (const other of relaunchable(u.effects, eff.trigger)) runEffect(b, side, u, at, other, undefined, true);
         }
       }
+      break;
+    case 'doubler_stats':
+      // Doublez : tout de suite dans le combat, et pour de bon après s'il le dit (Hollande). Doré, deux fois.
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) {
+        for (let i = 0; i < k; i++) {
+          addStats(b, side, u, u.atk, u.hp);
+          if (eff.perma && u.uid < b.firstSummonUid) side.persist.doubles.push(u.uid);
+        }
+      }
+      break;
+    case 'chaise_vide':
+      summonChair(b, side, self, index, k);
       break;
     default:
       // Le reste ne se joue qu'au recrutement.
@@ -374,12 +390,12 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
   }
 }
 
-/** Transmet son attaque (ou toutes ses stats) à l'allié suivant. */
-function transmit(b: Battle, side: Side, self: Unit, index: number, all: boolean, k: number): void {
+/** Transmet son attaque (ou toutes ses stats) à l'allié suivant ; `perma` : il les garde après le combat (Jean-Marie Le Pen). */
+function transmit(b: Battle, side: Side, self: Unit, index: number, all: boolean, k: number, perma = false): void {
   const next = side.units.slice(index + 1).find((u) => u.hp > 0) ?? side.units.find((u) => u.hp > 0 && u !== self);
   if (!next) return;
   const atk = Math.max(1, self.atk) * k;
-  addStats(b, side, next, atk, all ? Math.max(1, self.peak) * k : 0);
+  addStats(b, side, next, atk, all ? Math.max(1, self.peak) * k : 0, perma);
 }
 
 function summon(b: Battle, side: Side, self: Minion, index: number, tokenId: string, count: number): void {
@@ -392,10 +408,22 @@ function summon(b: Battle, side: Side, self: Minion, index: number, tokenId: str
         m.hp += gain.hp;
       }
     }
-    const unit: Unit = { ...m, attacked: false, bonus: 0, avenge: 0, peak: m.hp };
+    const unit: Unit = { ...m, attacked: false, comebacks: 0, bonus: 0, avenge: 0, peak: m.hp };
     const at = Math.min(index + 1 + i, side.units.length);
     side.units.splice(at, 0, unit);
     if (b.logging) b.log.push({ e: 'invocation', side: side.index, index: at, unit: toCombatUnit(unit) });
+  }
+}
+
+/** Giscard : une Chaise vide Porte-parole qui a les PV les plus hauts qu'il ait eus, à sa place. */
+function summonChair(b: Battle, side: Side, self: Unit, index: number, count: number): void {
+  const before = side.units.length;
+  summon(b, side, self, index, 'chaise_vide', count);
+  for (const chair of side.units.slice(index + 1, index + 1 + (side.units.length - before))) {
+    if (chair.cardId !== 'chaise_vide') continue;
+    chair.hp = Math.max(chair.hp, self.peak);
+    chair.peak = chair.hp;
+    if (b.logging) b.log.push({ e: 'stats', uid: chair.uid, atk: chair.atk, hp: chair.hp });
   }
 }
 
@@ -443,6 +471,10 @@ function resolveDeaths(b: Battle, order: [Side, Side]): void {
           if (!has(u, 'retour')) side.deathRetourUsed = true;
           u.keywords = u.keywords.filter((x) => x !== 'retour');
           u.hp = 1;
+          // Règle R17 : revenu, il compte comme neuf. Il n'a pas encore attaqué : le plus à gauche à ne pas l'avoir
+          // fait attaque le premier, et un attaquant tombé puis revenu attaque de nouveau au prochain tour de son camp.
+          u.attacked = false;
+          u.comebacks++;
           if (b.logging) b.log.push({ e: 'retour', uid: u.uid, hp: 1 });
           for (let r = 0; r < repeats; r++) {
             for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i, eff, undefined, r > 0);
@@ -483,19 +515,21 @@ function pickTarget(b: Battle, enemy: Side): Unit | null {
 }
 
 function strike(b: Battle, atkSide: Side, defSide: Side, attacker: Unit, target: Unit): void {
-  /** La Polémique détruit le serviteur blessé, puis se perd, comme une toxine. */
+  /**
+   * La Polémique détruit le serviteur blessé, puis se perd, comme une toxine : au premier coup qui blesse, qu'il tue par
+   * ses dégâts, par la Polémique, ou que la victime y résiste (règle R16). Une Immunité qui pare le coup la garde.
+   */
   const landed = (from: Unit, to: Unit, toSide: Side): boolean => {
     const hit = dealDamage(b, toSide, to, from.atk);
-    if (hit && has(from, 'polemique') && to.hp > 0) {
-      if (toSide.mods.firstPolemiqueResist && !toSide.polemiqueResistUsed) {
-        toSide.polemiqueResistUsed = true;
-        if (b.logging) b.log.push({ e: 'resiste', uid: to.uid });
-      } else {
-        to.hp = 0;
-        if (b.logging) b.log.push({ e: 'polemique', uid: to.uid, from: from.uid });
-        lose(b, from, 'polemique');
-      }
+    if (!hit || !has(from, 'polemique')) return hit;
+    if (to.hp > 0 && toSide.mods.firstPolemiqueResist && !toSide.polemiqueResistUsed) {
+      toSide.polemiqueResistUsed = true;
+      if (b.logging) b.log.push({ e: 'resiste', uid: to.uid });
+    } else if (to.hp > 0) {
+      to.hp = 0;
+      if (b.logging) b.log.push({ e: 'polemique', uid: to.uid, from: from.uid });
     }
+    lose(b, from, 'polemique');
     return hit;
   };
   const attackerIndex = atkSide.units.indexOf(attacker);
@@ -599,7 +633,9 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
     idle = 0;
     const swings = has(attacker, 'cumul') ? 2 : 1;
     attacker.attacked = true;
-    for (let s = 0; s < swings && attacker.hp > 0; s++) {
+    // Tombé puis revenu pendant ses coups, il s'arrête : le revenant attaquera à son tour, comme neuf (règle R17).
+    const comebacks = attacker.comebacks;
+    for (let s = 0; s < swings && attacker.hp > 0 && attacker.comebacks === comebacks; s++) {
       const target = pickTarget(b, enemy);
       if (!target) break;
       strike(b, side, enemy, attacker, target);

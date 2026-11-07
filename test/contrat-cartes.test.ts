@@ -24,7 +24,9 @@ const FIXED_ALLIES = ['durif', 'gueant'];
 /** The cards `fire` plays to set off a trigger: as allies, their third copy would make a triple instead. */
 const TRIGGER_CARDS = ['houssin', 'castaner'];
 /** Des textes qui ne jouent que dans une situation que ce banc ne construit pas : chacun sa raison. */
-const SITUATIONAL: Record<string, string> = {};
+const SITUATIONAL: Record<string, string> = {
+  'hollande heritage': 'À 5/7, il survit aux ennemis d\'échelon 3 du banc : son Héritage est vérifié dans test/respecification.test.ts',
+};
 
 interface World {
   game: Game;
@@ -177,8 +179,12 @@ function fire(w: World, when: Trigger, variant: number): string {
       applyAction(game, 0, { t: 'sell', uid: allies[2].uid });
       break;
     case 'sort': {
-      const tract = p.spells.find((s) => s.spellId === 'tract');
-      if (tract) applyAction(game, 0, { t: 'cast', uid: tract.uid, target: allies[variant % allies.length].uid });
+      // Deux sorts : « Tous les deux sorts que vous lancez » (Schiappa) joue au deuxième.
+      for (let i = 0; i < 2; i++) {
+        if (i > 0) addSpellToHand(game, p, 'tract');
+        const tract = p.spells.find((s) => s.spellId === 'tract');
+        if (tract) applyAction(game, 0, { t: 'cast', uid: tract.uid, target: allies[variant % allies.length].uid });
+      }
       break;
     }
     case 'actualise':
