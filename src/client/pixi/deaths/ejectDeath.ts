@@ -2,6 +2,7 @@ import { Sprite } from 'pixi.js';
 import type { CombatCard } from '#src/client/pixi/combatCard.ts';
 import type { DeathScene, KillingBlowFx, StageEffect } from '#src/client/pixi/deaths/deathScene.ts';
 import { sparkBurst } from '#src/client/pixi/particleBursts.ts';
+import { releaseTexture } from '#src/client/pixi/releaseTexture.ts';
 
 /** Thrown out: pixels a second, plus as much again per strength, upward, falling in an arc like a pinball shot. */
 const THROW = { speed: 860, perStrength: 300, sideways: 0.9, lift: 0.6, gravity: 1500 };
@@ -90,7 +91,7 @@ export function ejectDeath(card: CombatCard, scene: DeathScene, blow: KillingBlo
     },
     destroy() {
       ghosts.forEach((ghost) => ghost.sprite.destroy());
-      snapshot.texture.destroy(true);
+      releaseTexture(snapshot.texture);
       card.destroy();
     },
   };

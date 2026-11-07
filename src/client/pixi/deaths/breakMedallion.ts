@@ -1,5 +1,6 @@
 import type { CombatCard } from '#src/client/pixi/combatCard.ts';
 import type { DeathScene, KillingBlowFx, StageEffect } from '#src/client/pixi/deaths/deathScene.ts';
+import { releaseTexture } from '#src/client/pixi/releaseTexture.ts';
 import { Shards } from '#src/client/pixi/shards.ts';
 
 export interface BreakLook {
@@ -35,7 +36,7 @@ export function breakMedallion(card: CombatCard, scene: DeathScene, blow: Killin
     update: (deltaSeconds) => shards.update(deltaSeconds),
     destroy() {
       shards.destroy();
-      snapshot.texture.destroy(true);
+      releaseTexture(snapshot.texture);
     },
   };
 }
