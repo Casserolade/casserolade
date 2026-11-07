@@ -19157,6 +19157,56 @@
     }
    }
   },
+  "strauss_kahn": {
+   "atlas": "personnages/strauss_kahn.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 268,
+     "h": 346
+    },
+    "machoire": {
+     "x": 272,
+     "y": 0,
+     "w": 206,
+     "h": 97,
+     "pose": [
+      36.0,
+      249.0
+     ],
+     "pivot": [
+      112.3,
+      10.4
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     97.8,
+     174.5,
+     36.5
+    ],
+    "oeil_d": [
+     189.1,
+     174.5,
+     34.3
+    ],
+    "bouche": [
+     148.3,
+     259.4
+    ],
+    "menton": [
+     151.7,
+     336.9
+    ]
+   },
+   "credits": {
+    "auteur": "International Monetary Fund",
+    "licence": "Public domain",
+    "source": "https://commons.wikimedia.org/wiki/File:Strauss-Kahn,_Dominique_(official_portrait_2008).jpg"
+   }
+  },
   "tache": {
    "atlas": "personnages/tache.webp",
    "pieces": {
@@ -20919,21 +20969,6 @@
    "impact": 4,
    "tient": true
   },
-  "explosion": {
-   "atlas": "effets/explosion.webp",
-   "cols": 4,
-   "rows": 4,
-   "images": 16,
-   "cell": [
-    320,
-    320
-   ],
-   "fps": 24,
-   "ancre": [
-    0.5,
-    0.55
-   ]
-  },
   "dore": {
    "atlas": "effets/dore.webp",
    "cols": 4,
@@ -20949,6 +20984,21 @@
     0.0
    ],
    "boucle": true
+  },
+  "explosion": {
+   "atlas": "effets/explosion.webp",
+   "cols": 4,
+   "rows": 4,
+   "images": 16,
+   "cell": [
+    320,
+    320
+   ],
+   "fps": 24,
+   "ancre": [
+    0.5,
+    0.55
+   ]
   },
   "immunite": {
    "atlas": "effets/immunite.webp",
@@ -21405,7 +21455,14 @@
    "zemmour_zemmour_corinne": "sons/citations/zemmour_zemmour_corinne.mp3",
    "zemmour_zemmour_milipol": "sons/citations/zemmour_zemmour_milipol.mp3",
    "zemmour_zemmour_petain_onpc": "sons/citations/zemmour_zemmour_petain_onpc.mp3",
-   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3"
+   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3",
+   "strauss_kahn_dsk_rendez_vous": "sons/citations/strauss_kahn_dsk_rendez_vous.mp3",
+   "strauss_kahn_dsk_bouche_nez": "sons/citations/strauss_kahn_dsk_bouche_nez.mp3",
+   "strauss_kahn_dsk_deux_perdants": "sons/citations/strauss_kahn_dsk_deux_perdants.mp3",
+   "strauss_kahn_dsk_faute_morale": "sons/citations/strauss_kahn_dsk_faute_morale.mp3",
+   "strauss_kahn_dsk_inappropriee": "sons/citations/strauss_kahn_dsk_inappropriee.mp3",
+   "strauss_kahn_dsk_ni_ni": "sons/citations/strauss_kahn_dsk_ni_ni.mp3",
+   "strauss_kahn_dsk_talent_destruction": "sons/citations/strauss_kahn_dsk_talent_destruction.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",

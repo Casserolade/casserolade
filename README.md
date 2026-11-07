@@ -31,7 +31,7 @@ Casserolade n'est pas vraiment un jeu. C'est un pastiche de la politique frança
 
 - **Hearthstone Battlegrounds** ou TFT pour le gameplay : un autobattler stratégique, avec ses synergies, ses sorts et ses compositions ;
 - **South Park** pour le ton, l'irrévérence et les avatars en marionnettes découpées ;
-- **une boîte à sons géante** : plus de 650 répliques politiques, dont près de 250 avec la vraie voix.
+- **une boîte à sons géante** : plus de 650 répliques politiques, dont plus de 250 avec la vraie voix.
 
 La forme est celle des autobattlers : on recrute ses troupes, on fait grandir son plateau, puis les combats se jouent tout seuls. Sauf qu'ici, les troupes sont de vrais politiques, et chaque manche se joue sur un plateau télé, et plutôt les pires : Cyril Hanouna, Pascal Praud sur CNews, PPDA de retour au 20 heures de TF1. La lie de la télé, jusqu'au débat d'entre-deux-tours.
 
@@ -66,10 +66,10 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | | |
 |---|---|
 | **28 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
-| **106 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
-| **65 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
+| **107 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
+| **69 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
 | **26 sorts** | Tract, Note de frais, Temps de parole, Remaniement, Congrès… |
-| **657 répliques** | Toutes sourcées, dont 244 avec la vraie voix, en effets sonores courts. |
+| **664 répliques** | Toutes sourcées, dont 251 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
 | **Des modes** | Seul contre l'ordinateur, la carrière (sept élections, du canton au second tour), et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |

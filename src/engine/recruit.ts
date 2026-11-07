@@ -838,10 +838,13 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       break;
     }
     case 'transmettre': {
-      const next = nextAlly(p.board, self, index);
-      if (!next || !self) break;
-      // Comme en combat : un doré transmet le double, de son attaque ou de toutes ses stats.
-      addStats(next, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.hp) * k : 0);
+      if (!self) break;
+      // Comme en combat : un doré transmet le double, de son attaque ou de toutes ses stats ; à l'allié suivant
+      // (Jean-Marie Le Pen), ou à chacune de ses cibles (Strauss-Kahn et ses autres Socialistes).
+      const heirs = eff.to === 'allie_suivant' ? [nextAlly(p.board, self, index)] : targets();
+      for (const heir of heirs) {
+        if (heir && heir !== self) addStats(heir, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.hp) * k : 0);
+      }
       break;
     }
     default:

@@ -2068,6 +2068,33 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Ce qui m'a marqué, c'est manger des pommes."
     ]
   },
+  "strauss_kahn": {
+    "defaite": [
+      "J'ai manqué mon rendez-vous avec les Français."
+    ],
+    "mort": [
+      "J'ai manqué mon rendez-vous avec les Français."
+    ],
+    "casserole": [
+      "Je crois que c'est plus grave qu'une faiblesse. Je crois que c'est une faute morale.",
+      "Ce qui s'est passé, c'est une relation non seulement inappropriée, mais plus que ça, une faute."
+    ],
+    "prison": [
+      "Je crois que c'est plus grave qu'une faiblesse. Je crois que c'est une faute morale."
+    ],
+    "pose": [
+      "Je lui reconnais un talent formidable. Notamment dans la destruction de la gauche aujourd'hui.",
+      "Il faut voter pour Jacques Chirac, même en se bouchant le nez.",
+      "Qu'est-ce que ça veut dire de dire ni-ni quand un des deux ni n'existe pas ?"
+    ],
+    "victoire": [
+      "Je lui reconnais un talent formidable. Notamment dans la destruction de la gauche aujourd'hui.",
+      "Il y a deux grands perdants dans cette histoire. C'est M. Macron et M. Mélenchon."
+    ],
+    "celebration": [
+      "Il y a deux grands perdants dans cette histoire. C'est M. Macron et M. Mélenchon."
+    ]
+  },
   "lassalle": {
     "celebration": [
       "Même si c'est France Info, c'est un chien. C'est un chien !"

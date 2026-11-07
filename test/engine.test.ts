@@ -474,7 +474,7 @@ test('un sort de découverte gardé en main découvre l\'échelon où il est lan
   const held = p.spells.find((s) => s.spellId === 'testament_politique') as { uid: number };
   assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
   // Depuis la re-spécification du 7 novembre 2026, l'échelon 5 n'a plus d'Héritage sans le RN : les légendes, au 6.
-  assert.deepEqual([...(p.discover?.options ?? [])].sort(), ['giscard', 'mitterrand']);
+  assert.deepEqual([...(p.discover?.options ?? [])].sort(), ['giscard', 'mitterrand', 'strauss_kahn']);
 });
 
 test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () => {
@@ -497,8 +497,9 @@ test('l\'échelon 6, le Panthéon : De Gaulle fait de tous vos politiques des Ni
   assert.equal(PARAMS.tierMax, 6);
   const legendes = CARDS.filter((c) => c.tier === 6);
   // Les quatre présidents, au-dessus des partis ; et le chef de chaque camp, clé de voûte de son moteur (7 novembre 2026).
+  // Les Socialistes, le plus petit camp, en ont un second : Strauss-Kahn, le favori de 2011 (7 novembre 2026).
   for (const id of ['de_gaulle', 'giscard', 'chirac', 'mitterrand']) assert.equal(CARD_BY_ID[id].camp, 'civile', 'au-dessus des partis');
-  for (const camp of PARTY_CAMPS) assert.equal(legendes.filter((c) => c.camp === camp).length, 1, `un chef ${camp}`);
+  for (const camp of PARTY_CAMPS) assert.equal(legendes.filter((c) => c.camp === camp).length, camp === 'socialistes' ? 2 : 1, `les légendes ${camp}`);
   const { game, p, buy } = setup();
   buy('boyard');
   buy('houssin');
