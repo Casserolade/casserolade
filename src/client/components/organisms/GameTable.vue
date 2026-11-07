@@ -31,6 +31,8 @@ const shock = computed(() => studioShock.last.value);
     <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
     <div class="stage">
       <div class="mat" aria-hidden="true" />
+      <!-- The carpet's LED rim flares with a big shock, like a pinball table's lights. -->
+      <span v-if="shock.count" :key="shock.count" class="mat-flare" :style="{ '--shock': shock.strength }" aria-hidden="true" />
       <slot />
     </div>
     <slot name="overlay" />
@@ -105,6 +107,28 @@ const shock = computed(() => studioShock.last.value);
     inset 0 0 calc(var(--s) * 70) rgb(0 0 0 / 0.55),
     0 calc(var(--s) * 30) calc(var(--s) * 70) rgb(0 0 0 / 0.65);
 }
+.mat-flare {
+  position: absolute;
+  left: calc(var(--s) * 300);
+  top: calc(var(--s) * 156);
+  width: calc(var(--s) * 1320);
+  height: calc(var(--s) * 640);
+  border-radius: calc(var(--s) * 48);
+  pointer-events: none;
+  opacity: 0;
+  box-shadow:
+    0 0 0 calc(var(--s) * 4) #fff,
+    0 0 calc(var(--s) * 30) calc(var(--s) * 6) color-mix(in srgb, var(--accent) 80%, #fff),
+    inset 0 0 calc(var(--s) * 60) color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: mat-flare 0.6s steps(6, end) forwards;
+}
+@keyframes mat-flare {
+  0% { opacity: var(--shock); }
+  33% { opacity: 0.2; }
+  50% { opacity: calc(var(--shock) * 0.7); }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .mat-flare { animation: mat-flare 0.6s ease-out forwards; } }
 /* The shop is the counter at the back of the carpet. */
 .mat::before {
   content: '';
