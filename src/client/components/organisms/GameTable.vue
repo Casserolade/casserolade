@@ -1,26 +1,34 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import SoundControl from '#src/client/components/atoms/SoundControl.vue';
+import StudioFlicker from '#src/client/components/atoms/StudioFlicker.vue';
 import StudioLife from '#src/client/components/atoms/StudioLife.vue';
+import StudioScreens from '#src/client/components/organisms/StudioScreens.vue';
 import { DEFAULT_STUDIO_LOOK, STUDIO_LOOKS } from '#src/client/const/studioLights.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { studioShock } from '#src/client/stores/studioShock.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 
 /**
  * The table, the same for recruiting and fighting: the TV set all around, blurred into the background,
  * and in the middle one even surface where everything is played. Drawn for 1920×1080, scaled by --s.
+ * The set lives: its screens show the candidates (`faces`, character ids), and its lights falter with the combat's
+ * big shocks.
  */
-const props = defineProps<{ plateauId: string }>();
+const props = withDefaults(defineProps<{ plateauId: string; faces?: string[] }>(), { faces: () => [] });
 
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.plateauId]?.decor));
 const accent = computed(() => (STUDIO_LOOKS[props.plateauId] ?? DEFAULT_STUDIO_LOOK).colors[0]);
+const shock = computed(() => studioShock.last.value);
 </script>
 
 <template>
   <main class="table" :style="{ '--accent': accent }">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
     <StudioLife :plateau-id="plateauId" />
+    <StudioScreens class="screens" :plateau-id="plateauId" :faces="faces" />
     <div class="vignette" aria-hidden="true" />
+    <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
     <div class="stage">
       <div class="mat" aria-hidden="true" />
       <slot />
@@ -34,7 +42,20 @@ const accent = computed(() => (STUDIO_LOOKS[props.plateauId] ?? DEFAULT_STUDIO_L
 </template>
 
 <style scoped>
-.table { position: fixed; inset: 0; z-index: 0; isolation: isolate; overflow: hidden; background: #0b0e18; user-select: none; -webkit-user-select: none; }
+/* --k: page pixels per pixel of the set's picture, which covers the table's box (see .decor): its screens use it. */
+.table {
+  --k: max(calc(max(calc(var(--s) * 2560), 100vw) / 2560), calc(max(calc(var(--s) * 1440), 100dvh) / 1440));
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0b0e18;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.table :deep(.screens) { z-index: -2; }
+.table :deep(.flicker) { z-index: -1; }
 /*
  * The set is drawn larger than the table (2560×1440 around its 1920×1080) and scaled with it, not with the window:
  * the logo in a corner stays where the table leaves room for it, on any screen. A little dimmed, so the play surface leads.

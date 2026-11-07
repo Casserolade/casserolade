@@ -1,6 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { CombatClock } from '../src/client/pixi/combatClock.ts';
+import { candidateFaces } from '../src/client/tools/candidateFaces.ts';
+import { screenFaces } from '../src/client/tools/screenFaces.ts';
+import { screenPlacement } from '../src/client/tools/screenPlacement.ts';
 import { combatEventGapMs } from '../src/client/tools/combatEventGapMs.ts';
 import { compactStat } from '../src/client/tools/compactStat.ts';
 import { deathKind } from '../src/client/tools/deathKind.ts';
@@ -215,6 +218,23 @@ test('no finale when nobody is wiped out', () => {
     { e: 'fin', winner: null, sides: [[unit(1)], [unit(2), unit(3)]] },
   ];
   assert.equal(planDeaths(log).size, 0);
+});
+
+test('the set shows you, then the candidates still in the race, the best polled first', () => {
+  const row = (seat: number, heroId: string | null, hp: number, alive = true) => ({ seat, heroId, hp, alive, tier: 1, boardSize: 0, place: 0, triples: 0 });
+  const table = [row(0, 'macron', 20), row(1, 'le_pen', 12), row(2, 'melenchon', 30), row(3, 'zemmour', 0, false), row(4, null, 25)];
+  assert.deepEqual(candidateFaces(table, 0), ['macron', 'melenchon', 'le_pen']);
+  assert.deepEqual(screenFaces(['a', 'b', 'c'], 1, 0), ['a', 'b', 'c']);
+  assert.deepEqual(screenFaces(['a', 'b', 'c'], 2, 1), ['b']);
+  assert.deepEqual(screenFaces(['a'], 2, 1), ['a']);
+});
+
+test('a screen stays on its sign of the set, whatever the window', () => {
+  const place = screenPlacement({ x: 1915, y: 268, width: 236, turn: -16 });
+  assert.equal(place.left, 'calc(50% + 635 * var(--k))');
+  assert.equal(place.top, 'calc(50% + -452 * var(--k))');
+  assert.equal(place['--screen-width'], 'calc(236 * var(--k))');
+  assert.equal(place['--turn'], '-16deg');
 });
 
 test('a medallion breaks into pieces that cover it all', () => {

@@ -28,6 +28,7 @@ import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { useCountdown } from '#src/client/stores/useCountdown.ts';
 import { useEndOfTurnHurry } from '#src/client/stores/useEndOfTurnHurry.ts';
 import { useTableGestures } from '#src/client/stores/useTableGestures.ts';
+import { candidateFaces } from '#src/client/tools/candidateFaces.ts';
 import { dropGuideFor } from '#src/client/tools/dropGuideFor.ts';
 import { minionFace } from '#src/client/tools/shownCard.ts';
 import type { PlayerView } from '#src/engine/game.ts';
@@ -78,7 +79,7 @@ watch(tripleCount, (count, before) => {
 </script>
 
 <template>
-  <GameTable :plateau-id="view.plateau.id" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
+  <GameTable :plateau-id="view.plateau.id" :faces="candidateFaces(view.table, view.seat)" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
     <HostDesk class="host-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
     <ScoreBoard :table="view.table" :seat="view.seat" :seen="view.seen" />
     <ShopRow class="shop-place" :view="view" :gestures="gestures" />
