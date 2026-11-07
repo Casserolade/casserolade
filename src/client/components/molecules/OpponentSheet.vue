@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { compactStat } from '#src/client/tools/compactStat.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
 /**
@@ -33,7 +34,7 @@ defineProps<{
       <span v-if="seen" class="board">
         <span v-if="seen.board.length === 0" class="muted">plateau vide</span>
         <span v-for="minion in seen.board" :key="minion.uid" class="minion" :class="{ golden: minion.golden }">
-          {{ minion.name }} <b>{{ minion.atk }}/{{ minion.hp }}</b>
+          {{ minion.name }} <b>{{ compactStat(minion.atk) }}/{{ compactStat(minion.hp) }}</b>
         </span>
       </span>
     </template>

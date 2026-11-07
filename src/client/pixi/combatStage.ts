@@ -11,6 +11,7 @@ import { loadCombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { SynthName } from '#src/client/services/synthSounds.ts';
 import { combatLayout } from '#src/client/tools/combatLayout.ts';
+import { compactStat } from '#src/client/tools/compactStat.ts';
 import { hitStrength } from '#src/client/tools/hitStrength.ts';
 import { orderWithCorpses } from '#src/client/tools/orderWithCorpses.ts';
 import { statsChangeLabel } from '#src/client/tools/statsChangeLabel.ts';
@@ -217,7 +218,7 @@ export class CombatStage {
       this.impacts.add(card.centerX(), card.centerY() - 10, strength * 0.7);
       this.lights.hit(card.centerX(), card.centerY() - 10, strength);
     }
-    this.floaters.add(`−${value}`, DAMAGE_COLOR, card.centerX(), card.centerY(), 'damage', 0.8 + strength * 0.25);
+    this.floaters.add(`−${compactStat(value)}`, DAMAGE_COLOR, card.centerX(), card.centerY(), 'damage', 0.8 + strength * 0.25);
     this.options.playSound('hit', strength);
     if (value >= SHAKE_FROM_DAMAGE && !this.reducedMotion) this.shake = { left: SHAKE_SECONDS, amplitude: Math.min(MAX_SHAKE_PX, 4 + value) };
   }

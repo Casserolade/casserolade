@@ -11,8 +11,10 @@ import { NUMBER_STYLE } from '#src/client/pixi/createCardDecor.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import { SheetEffect } from '#src/client/pixi/sheetEffect.ts';
 import { campArtKey } from '#src/client/tools/campArtKey.ts';
+import { compactStat } from '#src/client/tools/compactStat.ts';
 import { otherFaces } from '#src/client/tools/otherFaces.ts';
 import { healthTone } from '#src/client/tools/healthTone.ts';
+import { statFontScale } from '#src/client/tools/statFontScale.ts';
 import { statTones } from '#src/client/tools/statTone.ts';
 import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
 import type { CombatUnit, Keyword } from '#src/engine/types.ts';
@@ -26,6 +28,8 @@ const GROUND_Y = H + 4;
 const BIRDS_WIDTH = 190;
 const SLIDE_PER_SECOND = 9;
 const TONE_COLORS = { base: '#ffffff', up: '#7dff9e', down: '#ff7b7b' } as const;
+/** A stat's number in its badge, at full size: as `.stat` in MedallionToken.vue. */
+const STAT_FONT = { size: 40, stroke: 6 };
 /** The lunge of an attack, in seconds: wind up, dash, back. The hit lands between dash and back. */
 const LUNGE = { windUp: 0.1, dash: 0.14, back: 0.2, reach: 0.82 };
 /** The medallion leans back as it winds up, into the blow as it dashes, in radians. */
@@ -46,6 +50,16 @@ const GOLDEN_OVAL_INSET = 9;
 interface RunningEffect {
   effect: SheetEffect;
   onFinished: (() => void) | null;
+}
+
+/** Past 999 the number is written short (3k), smaller when it is long: the same as on the table. */
+function showStat(text: Text, value: number): void {
+  const label = compactStat(value);
+  if (text.text === label) return;
+  const scale = statFontScale(label);
+  text.text = label;
+  text.style.fontSize = STAT_FONT.size * scale;
+  text.style.stroke = { color: '#111111', width: STAT_FONT.stroke * scale };
 }
 
 /** A texture of medallionTextures.ts, placed over the medallion's own units. */
@@ -167,7 +181,7 @@ export class CombatCard {
       medal.setSize(statSize, statSize);
       holder.addChild(medal);
     }
-    const text = new Text({ text: '', style: { ...NUMBER_STYLE, fontSize: 40, stroke: { color: '#111111', width: 6 } } });
+    const text = new Text({ text: '', style: { ...NUMBER_STYLE, fontSize: STAT_FONT.size, stroke: { color: '#111111', width: STAT_FONT.stroke } } });
     text.anchor.set(0.5);
     text.y = -2;
     holder.addChild(text);
@@ -179,8 +193,8 @@ export class CombatCard {
     this.atk = unit.atk;
     this.hp = unit.hp;
     this.maxHp = Math.max(this.maxHp, unit.hp);
-    this.attackText.text = String(unit.atk);
-    this.healthText.text = String(Math.max(0, unit.hp));
+    showStat(this.attackText, unit.atk);
+    showStat(this.healthText, Math.max(0, unit.hp));
     const tones = statTones(this.cardId, this.golden, unit.atk, unit.hp);
     this.attackText.style.fill = TONE_COLORS[tones.atk];
     this.healthText.style.fill = TONE_COLORS[healthTone(tones.hp, unit.hp, this.maxHp)];

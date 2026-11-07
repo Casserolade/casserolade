@@ -8,8 +8,10 @@ import { usePuppetFaces } from '#src/client/stores/usePuppetFaces.ts';
 import { rememberOblivion } from '#src/client/stores/seenOblivion.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 import { cardFaceStyle } from '#src/client/tools/cardFaceStyle.ts';
+import { compactStat } from '#src/client/tools/compactStat.ts';
 import { medallionMarks } from '#src/client/tools/medallionMarks.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
+import { statFontScale } from '#src/client/tools/statFontScale.ts';
 import { statTones } from '#src/client/tools/statTone.ts';
 import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
 import type { Camp, Effect, Keyword } from '#src/engine/types.ts';
@@ -76,6 +78,9 @@ const puppet = computed(() => {
   return puppetStyle(manifest, props.cardId, props.camp, faces.face.value ?? (inScandal.value ? 'choc' : null));
 });
 const tones = computed(() => statTones(props.cardId, Boolean(props.golden), props.atk, props.hp));
+/** Past 999, a number is written short (3k), its font shrinking to fit the badge: the same as on the combat stage. */
+const atkLabel = computed(() => compactStat(props.atk));
+const hpLabel = computed(() => compactStat(Math.max(0, props.hp)));
 const marks = computed(() => medallionMarks(props.effects));
 /** Stars per row on the tier pennant, as in a tavern: 1, 2 or 3 on one row, then 2 + 2, 3 + 2 and 3 + 3. */
 const tierColumns = computed(() => ((props.tier ?? 0) <= 3 ? props.tier : Math.ceil((props.tier ?? 0) / 2)));
@@ -196,8 +201,8 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
       <GameIcon v-if="marks.reponse" class="mark answer" :class="{ idle: !answers }" name="speech" />
       <GameIcon v-if="locked" class="mark lock" :name="bracelet ? 'bracelet' : 'lock'" />
     </span>
-    <span class="stat atk" :class="[`tone-${tones.atk}`, { pop: popAtk }]"><span class="sr-only">Attaque </span>{{ atk }}</span>
-    <span class="stat hp" :class="[`tone-${tones.hp}`, { pop: popHp }]"><span class="sr-only">PV </span>{{ Math.max(0, hp) }}</span>
+    <span class="stat atk" :class="[`tone-${tones.atk}`, { pop: popAtk }]" :style="{ '--stat-scale': statFontScale(atkLabel) }"><span class="sr-only">Attaque {{ atk }}</span><span aria-hidden="true">{{ atkLabel }}</span></span>
+    <span class="stat hp" :class="[`tone-${tones.hp}`, { pop: popHp }]" :style="{ '--stat-scale': statFontScale(hpLabel) }"><span class="sr-only">PV {{ Math.max(0, hp) }}</span><span aria-hidden="true">{{ hpLabel }}</span></span>
     <TransitionGroup v-if="pans.length" tag="span" name="pan-drop" class="pans" aria-label="Casseroles">
       <span
         v-for="(pan, index) in pans"
@@ -417,8 +422,8 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   align-items: center;
   justify-content: center;
   color: #fff;
-  font: 400 calc(var(--mu) * 40) / 1 var(--font-number);
-  -webkit-text-stroke: calc(var(--mu) * 6) var(--color-ink);
+  font: 400 calc(var(--mu) * 40 * var(--stat-scale, 1)) / 1 var(--font-number);
+  -webkit-text-stroke: calc(var(--mu) * 6 * var(--stat-scale, 1)) var(--color-ink);
   paint-order: stroke fill;
   background-size: 100% 100%;
   filter: drop-shadow(0 calc(var(--mu) * 3) calc(var(--mu) * 3) rgb(0 0 0 / 0.6));
