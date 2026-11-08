@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.2e" src="https://img.shields.io/badge/version-0.2e-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.3b" src="https://img.shields.io/badge/version-0.3b-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -37,7 +37,7 @@ La forme est celle des autobattlers : on recrute ses troupes, on fait grandir so
 
 Les casseroles sont leurs vraies affaires et leurs vrais ridicules. Dans le jeu, une casserole ne coule personne : elle rend plus fort. Deux casseroles font un scandale, le scandale dure deux manches, puis le peuple oublie, et il ne reste que l'avantage. Ce n'est pas une règle inventée pour le jeu, c'est une observation.
 
-Le ton est trash, mais sur le fond, rien n'est inventé. Chaque affaire est réelle et datée, chaque citation est mot pour mot. Quand un politique parle, c'est sa vraie voix ; sinon, sa phrase s'affiche. Tous les camps prennent les mêmes coups, et aucun ne gagne d'office : l'équilibrage est la seule neutralité qu'on doit à tout le monde.
+Le ton est trash, mais sur le fond, rien n'est inventé. Chaque affaire est réelle et datée, chaque citation est mot pour mot. Quand un politique parle, c'est sa vraie voix ; sinon, sa phrase s'affiche. Seules les carrières inventent, et le disent : elles partent de faits vrais, puis tout déraille. Tous les camps prennent les mêmes coups, et aucun ne gagne d'office : l'équilibrage est la seule neutralité qu'on doit à tout le monde.
 
 Gratuit, sans publicité, sans inscription, sans rien à vendre.
 
@@ -72,7 +72,8 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | **664 répliques** | Toutes sourcées, dont 251 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
-| **Des modes** | Seul contre l'ordinateur, la carrière (sept élections, du canton au second tour), et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |
+| **Des modes** | Seul contre l'ordinateur, la carrière, et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |
+| **Les carrières** | Mélenchon et Marine Le Pen rejouent leur histoire en six chapitres, jusqu'au débat de TF1 l'un contre l'autre, avec des cinématiques en marionnettes. Les autres candidats remontent sept élections, du conseil municipal au second tour. |
 | **Sur téléphone** | Une version tenue en hauteur, faite pour le pouce (casserolade.fr/m/) : les téléphones y arrivent tout seuls. |
 | **[Le bestiaire](https://casserolade.fr/bestiaire)** | Tout le jeu, avec des filtres : mots-clés, héros, politiques, casseroles, sorts, jetons, contextes. Chaque fiche donne ses sources. |
 
@@ -100,7 +101,10 @@ npm run dev        # le jeu dans le navigateur (sa version téléphone sur /m/) 
 npm run server     # le serveur des parties en ligne (WebSocket, port 8080), pour les salons et les parties publiques
 npm test           # le moteur, les données, le protocole, le salon, le client
 npm run typecheck  # TypeScript et gabarits Vue
+node tools/histoire/valider_carrieres.ts lepen   # une carrière : tout ce qu'elle nomme existe, ses cinématiques tiennent
 ```
+
+En développement, `/cinematiques.html` joue les cinématiques une à une, et `/cutscenes/ecoute.html` leurs musiques et leurs bruitages.
 
 Pour l'équilibrage :
 
@@ -121,7 +125,8 @@ FUZZ_GAMES=2000 node --test test/fuzz.test.ts # le fuzz long du moteur
 | `src/bots/` | Les bots, de débutant à difficile. Ils ne voient que la vue d'un joueur. |
 | `src/sim/` | Le simulateur d'équilibrage. |
 | `src/server/`, `src/lobby/`, `src/protocol/` | Le serveur WebSocket, les salons, les messages. Un bug n'arrête que sa partie, et laisse de quoi la rejouer (`tools/rejouer.ts`). |
-| `src/client/` | L'interface en Vue 3 et Vite, le combat en PixiJS. |
+| `src/client/` | L'interface en Vue 3 et Vite, le combat en PixiJS, les cinématiques en GSAP. |
+| `src/histoire/`, `src/data/histoire/` | La carrière : les chapitres, les carrières par candidat et leurs cinématiques, une ligne de données par scène. |
 | `tools/` | La production : découpe des photos, rendus Blender des plateaux, effets, génération des voix, des phrases et des sources du jeu. Les outils internes de collecte et d'écoute ne sont pas publiés. |
 
 Toute action passe par `applyAction`, et toute information par `viewFor` : ni le client ni les bots ne touchent à l'état complet de la partie. Le moteur vérifie ses invariants à chaque manche (`src/engine/invariants.ts`).
