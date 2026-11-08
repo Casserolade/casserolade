@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3b — 9 novembre 2026
+
+**Les carrières (8 et 9 novembre)**
+- Jean-Luc Mélenchon et Marine Le Pen ont chacun leur carrière : six chapitres tirés de leur histoire, avec les rivaux de l'époque à la table, jusqu'au second tour de 2027. Au bout, le débat de TF1 contre l'autre : chacun est le boss de l'autre.
+  - Mélenchon : le non de 2005, le parachutage d'Hénin-Beaumont, les hologrammes, la perquisition, « Faites mieux ! », puis le second tour.
+  - Le Pen : Hénin-Beaumont en 2007, puis contre Mélenchon en 2012, les régionales du Nord, la présidentielle de 2022, l'inéligibilité, puis le second tour.
+- Un tour scénarisé par carrière. À Hénin-Beaumont en 2012, la théorie du fer à cheval range Insoumis, RN et Reconquête dans un même camp. Inéligible, Le Pen joue avec le pouvoir de Bardella jusqu'à l'arrêt d'appel, à la manche 6 : elle reprend le sien et gagne 5 sondages.
+- Seize cinématiques en marionnettes de papier aux grosses têtes : une à l'entrée de la carrière, une avant chaque grand moment, puis la victoire ou la défaite. Les musiques et les bruitages sont faits en code. Chacune se joue une fois par carrière, et un geste la passe.
+- Ici, et seulement ici, on invente : une carrière part de faits vrais, puis tout déraille. L'écran du choix le dit une fois.
+- Les autres candidats gardent la carrière en sept élections, du conseil municipal au débat de TF1.
+
+**Corrections**
+- Sous Firefox, poser une carte pendant que l'éventail de la main bouge ne l'empile plus au centre.
+- Un double clic n'achète ni ne joue plus deux cartes, et la carte posée quitte la main aussitôt. En ligne, le plateau ne revient plus en arrière avant la réponse du serveur.
+
 ## 0.2e — 7 novembre 2026
 
 **Dominique Strauss-Kahn (7 novembre, au soir)**
