@@ -248,3 +248,29 @@ test('a broken rule is reported once per round, with the violations, and the gam
   for (let i = 0; i < 20; i++) fake.advance(60_000);
   assert.ok(room.game.round > incidents[0].round, 'la partie continue');
 });
+
+// Retour de partie du 9 novembre 2026 : à cinq, un adversaire sans visage et une victoire d'office. Toutes les parties
+// passent par une GameRoom (solo, carrière, tutoriel, salons, file publique) : à une table impaire, le joueur en trop
+// affronte le fantôme, et son écran sait de qui il prend les traits.
+test('à une table impaire, le joueur en trop affronte un fantôme qui a un visage, celui d\'un autre joueur en lice', () => {
+  const fake = createFakeClock();
+  const inbox: ServerMessage[] = [];
+  const seats: RoomSeat[] = [{ pseudo: 'H0', level: null }, ...Array.from({ length: 4 }, (_, i) => ({ pseudo: `B${i + 1}`, level: 'facile' as const }))];
+  const room = new GameRoom({ seed: 9, seats, clock: fake.clock, timers: { heroMs: null, recruitMs: null, graceMs: 10_000 }, send(seat, message) {
+    if (seat === 0) inbox.push(JSON.parse(JSON.stringify(message)));
+  } });
+  room.start();
+  room.handleMessage(0, { type: 'action', seq: 1, action: { t: 'hero', i: 0 } });
+  let ghost: Extract<ServerMessage, { type: 'combat' }>['combat']['opponent'] | null = null;
+  for (let i = 0; i < 40 && !ghost; i++) {
+    room.handleMessage(0, { type: 'pret' });
+    const last = inbox.at(-1);
+    if (last?.type !== 'combat') continue;
+    if (last.combat.opponent.seat === -1) ghost = last.combat.opponent;
+    room.handleMessage(0, { type: 'vu' });
+  }
+  assert.ok(ghost, 'le joueur doit croiser le fantôme');
+  assert.equal(ghost.heroId, 'fantome');
+  const others = room.game.players.filter((p) => p.seat !== 0).map((p) => p.hero.id);
+  assert.ok(ghost.ghostOf && others.includes(ghost.ghostOf), `visage du fantôme : ${ghost.ghostOf}`);
+});

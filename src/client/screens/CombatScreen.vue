@@ -43,7 +43,7 @@ const speechStyle = computed(() => {
 <template>
   <GameTable :plateau-id="plateauId" :faces="faceOff">
     <div ref="rivalHero" class="opponent" :class="{ shaken: rivalShaken }">
-      <HeroCorner :hero-id="combat.opponent.heroId" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
+      <HeroCorner :hero-id="combat.opponent.ghostOf ?? combat.opponent.heroId" :ghost="combat.opponent.seat < 0" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line">
         <SpeechBubble tail="left">{{ rivalLine }}</SpeechBubble>

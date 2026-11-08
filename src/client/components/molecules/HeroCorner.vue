@@ -9,10 +9,17 @@ import { boldGlossaryTerms, glossaryFor } from '#src/client/tools/glossaryFor.ts
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { HERO_BY_ID } from '#src/data/heroes.ts';
 
-/** A hero in its niche, with its polls. Its power is told on hover only: nothing to read while playing. */
-const props = withDefaults(defineProps<{ heroId: string; hp: number; startHp: number; powerNote?: string | null; showPower?: boolean }>(), { powerNote: null, showPower: true });
+/**
+ * A hero in its niche, with its polls. Its power is told on hover only: nothing to read while playing. `ghost`: the
+ * ghost of an odd table, wearing this hero's face, faded, with neither polls nor power.
+ */
+const props = withDefaults(defineProps<{ heroId: string; hp: number; startHp: number; powerNote?: string | null; showPower?: boolean; ghost?: boolean }>(), { powerNote: null, showPower: true, ghost: false });
 
 const hero = computed(() => HERO_BY_ID[props.heroId]);
+const name = computed(() => {
+  if (!hero.value) return 'Le fantôme';
+  return props.ghost ? `Le fantôme de ${hero.value.name}` : hero.value.name;
+});
 const puppet = computed(() => puppetStyle(gameArt.manifest.value, props.heroId, 'civile'));
 const archImage = computed(() => cssImage(gameArt.manifest.value.carte.arche));
 /** Its power as the cards write theirs: the keywords in bold, and what they mean. */
@@ -21,11 +28,11 @@ const glossary = computed(() => glossaryFor([powerText.value]));
 </script>
 
 <template>
-  <div class="hero-corner">
-    <ArchPortrait class="arch" :puppet="puppet" :name="hero?.name ?? 'Le fantôme'" :frame-image="archImage" hide-name>
-      <PollsBadge class="polls" :hp="hp" :start-hp="startHp" />
+  <div class="hero-corner" :class="{ ghost }">
+    <ArchPortrait class="arch" :puppet="puppet" :name="name" :frame-image="archImage" hide-name>
+      <PollsBadge v-if="!ghost" class="polls" :hp="hp" :start-hp="startHp" />
     </ArchPortrait>
-    <span v-if="showPower && hero" class="power" role="tooltip">
+    <span v-if="showPower && hero && !ghost" class="power" role="tooltip">
       <strong>{{ hero.power }}</strong>
       <RichText :text="powerText" />
       <span v-for="entry in glossary" :key="entry.term" class="entry"><b>{{ entry.term }}</b> {{ entry.rule }}</span>
@@ -35,6 +42,7 @@ const glossary = computed(() => glossaryFor([powerText.value]));
 
 <style scoped>
 .hero-corner { position: relative; }
+.ghost :deep(.head) { opacity: 0.6; filter: grayscale(1); }
 .arch { --arch-width: calc(var(--s) * 150); }
 .arch :deep(.name) { font-size: calc(var(--s) * 20); }
 .polls { --polls-scale: 1; }

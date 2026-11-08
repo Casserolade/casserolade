@@ -1,4 +1,4 @@
-import type { Camp, Casserole, CasseroleBonus, CombatEvent, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
+import type { Camp, Casserole, CasseroleBonus, CombatEvent, CombatSide, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
 import type { CombatRecord, Game, GamePhase, Player, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
@@ -668,8 +668,8 @@ export interface CombatView {
   round: number;
   /** Le camp de ce siège dans le journal. */
   side: 0 | 1;
-  /** -1 contre le fantôme du dernier éliminé. */
-  opponent: { seat: number; heroId: string };
+  /** -1 contre le fantôme, qui prend les traits d'un héros (`ghostOf`) : le dernier éliminé, ou celui dont il copie le plateau. */
+  opponent: { seat: number; heroId: string; ghostOf?: string };
   log: CombatEvent[];
   winner: 0 | 1 | null;
   /** Sondages perdus par chaque camp à cause de ce combat. */
@@ -770,7 +770,7 @@ export function combatViewFor(game: Game, seat: number): CombatView | null {
   return {
     round: game.round,
     side,
-    opponent: { seat: opponentSeat, heroId: opponentSeat < 0 ? 'fantome' : game.players[opponentSeat].hero.id },
+    opponent: opponentSeat < 0 ? { seat: opponentSeat, heroId: 'fantome', ...(record.ghostOf ? { ghostOf: record.ghostOf } : {}) } : { seat: opponentSeat, heroId: game.players[opponentSeat].hero.id },
     log: record.result.log,
     winner: record.result.winner,
     damage: record.damage,
@@ -892,9 +892,8 @@ function damageCap(game: Game, alive: number): number {
   return cap;
 }
 
-function hit(game: Game, winner: Player | null, loser: Player, result: CombatRecord['result'], winSide: 0 | 1): number {
-  const tier = winner ? winner.tier : (game.lastEliminated ? 3 : 1);
-  const raw = tier + result.survivors[winSide] * game.params.damagePerSurvivor + result.bonusDamage[winSide];
+function hit(game: Game, winnerTier: number, loser: Player, result: CombatRecord['result'], winSide: 0 | 1): number {
+  const raw = winnerTier + result.survivors[winSide] * game.params.damagePerSurvivor + result.bonusDamage[winSide];
   const alive = game.players.filter((p) => p.alive).length;
   const damage = Math.min(raw, damageCap(game, alive));
   loser.hp -= damage;
@@ -953,15 +952,12 @@ export function startCombats(game: Game): void {
   for (const [sa, sb] of pairs) {
     const pa = game.players[sa];
     const pb = sb === null ? null : game.players[sb];
-    const ghost = game.lastEliminated ?? [];
-    const opponentBoard = pb ? pb.board : ghost;
-    const result = resolveCombat(
-      { minions: pa.board, mods: pa.hero.mods, hp: pa.hp, tier: pa.tier, tract: pa.tract, campBuffs: pa.campBuffs },
-      { minions: opponentBoard, mods: pb ? pb.hero.mods : {}, hp: pb ? pb.hp : 0, tier: pb ? pb.tier : 3, tract: pb?.tract, campBuffs: pb?.campBuffs },
-      { params: game.params, ctx: game.ctx, rng: game.rng, uidStart: startUid, log: game.combatLog },
-    );
+    const ghost = pb ? null : ghostFor(game, pa);
+    const opponent = pb ? combatSide(pb) : ghost!.side;
+    const opponentBoard = opponent.minions;
+    const result = resolveCombat(combatSide(pa), opponent, { params: game.params, ctx: game.ctx, rng: game.rng, uidStart: startUid, log: game.combatLog });
     const damage: [number, number] = [result.deathPenalty[0], pb ? result.deathPenalty[1] : 0];
-    const record: CombatRecord = { a: sa, b: sb ?? -1, result, evenBoards: pa.board.length === opponentBoard.length, damage };
+    const record: CombatRecord = { a: sa, b: sb ?? -1, ...(ghost ? { ghostOf: ghost.heroId } : {}), result, evenBoards: pa.board.length === opponentBoard.length, damage };
     game.roundCombats.push(record);
 
     pa.seen = remember(pa.seen, { seat: sb ?? GHOST, heroId: pb?.hero.id ?? 'fantome', round: game.round, board: opponentBoard.map(copyMinion) });
@@ -973,8 +969,8 @@ export function startCombats(game: Game): void {
 
     pa.hp -= result.deathPenalty[0];
     if (pb) pb.hp -= result.deathPenalty[1];
-    if (result.winner === 0 && pb) damage[1] += hit(game, pa, pb, result, 0);
-    if (result.winner === 1) damage[0] += hit(game, pb, pa, result, 1);
+    if (result.winner === 0 && pb) damage[1] += hit(game, pa.tier, pb, result, 0);
+    if (result.winner === 1) damage[0] += hit(game, opponent.tier ?? GHOST_TIER, pa, result, 1);
 
     afterCombat(game, pa, 0, record);
     if (pb) afterCombat(game, pb, 1, record);
@@ -991,6 +987,30 @@ export function startCombats(game: Game): void {
   game.hpSnapshot.set(game.round, game.players.map((p) => (p.alive ? p.hp : -999)));
   settleEliminations(game, before);
   enterPhase(game, 'combat');
+}
+
+/** Un joueur tel qu'il entre en combat. */
+function combatSide(p: Player): CombatSide {
+  return { minions: p.board, mods: p.hero.mods, hp: p.hp, tier: p.tier, tract: p.tract, campBuffs: p.campBuffs };
+}
+
+/** L'échelon du fantôme d'un éliminé : en combat, et pour les dégâts quand il gagne. */
+const GHOST_TIER = 3;
+
+/**
+ * En nombre impair, le joueur en trop affronte un fantôme : le dernier éliminé et son dernier plateau, comme à
+ * Battlegrounds. Avant la première élimination (une table impaire dès le départ : une carrière à cinq, un salon à
+ * trois), personne n'est encore tombé : le fantôme copie le plateau d'un autre joueur en lice, tiré au sort, comme
+ * à TFT, un plateau qui n'est pas vide quand il y en a. Il ne laissait sinon qu'un plateau vide, une victoire gratuite
+ * (retour de partie du 9 novembre 2026). Ce joueur n'en sait rien : le combat ne lui coûte ni ne lui rapporte rien.
+ */
+function ghostFor(game: Game, facing: Player): { heroId: string; side: CombatSide } {
+  const last = game.lastEliminated;
+  if (last) return { heroId: last.heroId, side: { minions: last.board, mods: {}, hp: 0, tier: GHOST_TIER } };
+  const others = game.players.filter((p) => p.alive && p !== facing);
+  const withBoard = others.filter((p) => p.board.length > 0);
+  const lender = game.rng.pick(withBoard.length ? withBoard : others);
+  return { heroId: lender.hero.id, side: { ...combatSide(lender), minions: lender.board.map(copyMinion) } };
 }
 
 /** Le dernier plateau vu de chaque adversaire, le plus récent d'abord : un par siège, le fantôme compris. */
@@ -1012,7 +1032,8 @@ function settleEliminations(game: Game, before: number[]): void {
     dropDiscovers(game, p);
     p.shop = [];
   });
-  game.lastEliminated = dead[dead.length - 1].board.map(copyMinion);
+  const last = dead[dead.length - 1];
+  game.lastEliminated = { heroId: last.hero.id, board: last.board.map(copyMinion) };
   if (allDead) {
     const best = dead[dead.length - 1];
     best.place = 1;
