@@ -52,6 +52,8 @@ h2 { margin: 0.6rem 0 0; }
 .fiction { max-width: 46rem; margin: 0; padding: 0.7rem 1rem; border: 3px dashed var(--color-accent); border-radius: 0.8rem; text-align: center; font-style: italic; }
 /* Many politicians at a glance: small cards, many per row. */
 .heroes { display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 0.8rem; width: min(110rem, 96vw); }
+/* The few careers stay centred under their title. */
+.careers .heroes { grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem)); justify-content: center; }
 .career { display: flex; flex-direction: column; gap: 0.3rem; }
 .career .pitch { margin: 0; font-style: italic; text-align: center; }
 .career .level { margin: 0; font-size: 0.9rem; text-align: center; opacity: 0.85; }
