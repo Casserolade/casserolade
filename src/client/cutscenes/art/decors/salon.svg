@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Salon, le soir</title>
+<defs>
+  <linearGradient id="sa-wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfc59a"/><stop offset="0.6" stop-color="#e3d9b0"/><stop offset="1" stop-color="#c9bd8e"/></linearGradient>
+  <pattern id="sa-paper" width="120" height="150" patternUnits="userSpaceOnUse">
+    <rect width="120" height="150" fill="url(#sa-wall)"/>
+    <rect x="0" width="34" height="150" fill="#b9ad7c" opacity="0.35"/>
+    <g fill="#8f7f4c" opacity="0.55">
+      <circle cx="77" cy="40" r="7"/><circle cx="77" cy="26" r="5"/><circle cx="77" cy="54" r="5"/><circle cx="63" cy="40" r="5"/><circle cx="91" cy="40" r="5"/>
+      <circle cx="77" cy="115" r="3.5"/>
+    </g>
+  </pattern>
+  <linearGradient id="sa-panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1ead2"/><stop offset="1" stop-color="#d8cca6"/></linearGradient>
+  <linearGradient id="sa-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e3d1c"/><stop offset="1" stop-color="#9a5a2a"/></linearGradient>
+  <pattern id="sa-planks" width="260" height="46" patternUnits="userSpaceOnUse">
+    <rect width="260" height="46" fill="none"/>
+    <path d="M0 45 H260 M60 0 V46 M190 0 V23" stroke="#3e1f0b" stroke-width="4" opacity="0.55"/>
+    <path d="M10 14 Q60 10 110 16 M140 32 Q190 28 240 34" stroke="#c98a4e" stroke-width="3" fill="none" opacity="0.35"/>
+  </pattern>
+  <linearGradient id="sa-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1236"/><stop offset="0.7" stop-color="#1d2f6e"/><stop offset="1" stop-color="#3a3f7a"/></linearGradient>
+  <linearGradient id="sa-curtain" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#14224f"/><stop offset="0.3" stop-color="#2c4498"/><stop offset="0.55" stop-color="#1b2c66"/><stop offset="0.8" stop-color="#3550a8"/><stop offset="1" stop-color="#14224f"/></linearGradient>
+  <linearGradient id="sa-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.45" stop-color="#e2ac3a"/><stop offset="1" stop-color="#8a5a10"/></linearGradient>
+  <radialGradient id="sa-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffe6a0" stop-opacity="0.85"/><stop offset="0.5" stop-color="#ffc860" stop-opacity="0.3"/><stop offset="1" stop-color="#ffc860" stop-opacity="0"/></radialGradient>
+  <linearGradient id="sa-screen" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a3a6a"/><stop offset="0.5" stop-color="#0c1430"/><stop offset="1" stop-color="#1a2650"/></linearGradient>
+  <linearGradient id="sa-wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a4f26"/><stop offset="1" stop-color="#4e2810"/></linearGradient>
+  <linearGradient id="sa-sisal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b89a62"/><stop offset="0.5" stop-color="#e2c992"/><stop offset="1" stop-color="#a88a52"/></linearGradient>
+  <linearGradient id="sa-plush" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9d2c4"/><stop offset="1" stop-color="#a49c8c"/></linearGradient>
+  <linearGradient id="sa-rug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a1622"/><stop offset="1" stop-color="#a8283a"/></linearGradient>
+  <linearGradient id="sa-door" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e8dfc4"/><stop offset="0.5" stop-color="#f6efd8"/><stop offset="1" stop-color="#d6cba8"/></linearGradient>
+  <radialGradient id="sa-vignette" cx="0.5" cy="0.45" r="0.75"><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#140c04" stop-opacity="0.55"/></radialGradient>
+</defs>
+
+<!-- The wall: striped wallpaper, a picture rail, wainscoting. -->
+<rect width="1920" height="800" fill="url(#sa-paper)"/>
+<rect y="108" width="1920" height="16" fill="#efe6c6" stroke="#141022" stroke-width="6"/>
+<rect y="600" width="1920" height="200" fill="url(#sa-panel)" stroke="#141022" stroke-width="8"/>
+<g fill="none" stroke="#141022" stroke-width="5" opacity="0.75">
+  <rect x="30" y="630" width="250" height="140" rx="6"/><rect x="310" y="630" width="250" height="140" rx="6"/>
+  <rect x="590" y="630" width="250" height="140" rx="6"/><rect x="870" y="630" width="250" height="140" rx="6"/>
+  <rect x="1150" y="630" width="250" height="140" rx="6"/><rect x="1430" y="630" width="200" height="140" rx="6"/>
+</g>
+<rect y="776" width="1920" height="26" fill="#f6efd8" stroke="#141022" stroke-width="7"/>
+
+<!-- The floor: parquet, and a rug. -->
+<rect y="800" width="1920" height="280" fill="url(#sa-floor)"/>
+<rect y="800" width="1920" height="280" fill="url(#sa-planks)"/>
+<path d="M430 880 L1500 880 L1640 1060 L290 1060 Z" fill="url(#sa-rug)" stroke="#141022" stroke-width="9" stroke-linejoin="round"/>
+<path d="M480 900 L1452 900 L1566 1040 L364 1040 Z" fill="none" stroke="#e8b84a" stroke-width="7" stroke-dasharray="26 14"/>
+<g fill="#e8b84a" opacity="0.8"><circle cx="965" cy="970" r="34"/><circle cx="740" cy="970" r="16"/><circle cx="1190" cy="970" r="16"/></g>
+<circle cx="965" cy="970" r="18" fill="#7a1622"/>
+
+<!-- The window, a winter night, and its heavy curtains. -->
+<rect x="880" y="176" width="300" height="392" fill="url(#sa-night)" stroke="#141022" stroke-width="10"/>
+<g fill="#fff6d0"><circle cx="1110" cy="244" r="30"/><circle cx="1122" cy="236" r="26" fill="url(#sa-night)"/></g>
+<g fill="#fff6d0" opacity="0.9"><circle cx="930" cy="230" r="3"/><circle cx="1010" cy="300" r="2.5"/><circle cx="960" cy="380" r="2"/><circle cx="1060" cy="420" r="3"/><circle cx="1140" cy="340" r="2"/></g>
+<path d="M880 520 L940 488 L1000 506 L1050 470 L1110 498 L1180 476 V568 H880 Z" fill="#0a0f26" opacity="0.85"/>
+<g stroke="#f6efd8" stroke-width="12"><path d="M1030 176 V568 M880 306 H1180 M880 436 H1180"/></g>
+<g stroke="#141022" stroke-width="3" opacity="0.6"><path d="M1024 176 V568 M1036 176 V568"/></g>
+<rect x="866" y="564" width="328" height="24" rx="4" fill="#f6efd8" stroke="#141022" stroke-width="8"/>
+<path d="M800 132 C840 260 820 420 852 610 L900 610 C884 420 896 250 920 132 Z" fill="url(#sa-curtain)" stroke="#141022" stroke-width="9" stroke-linejoin="round"/>
+<path d="M1260 132 C1220 260 1240 420 1208 610 L1160 610 C1176 420 1164 250 1140 132 Z" fill="url(#sa-curtain)" stroke="#141022" stroke-width="9" stroke-linejoin="round"/>
+<path d="M786 128 H1274 V170 Q1240 196 1206 170 Q1172 196 1138 170 Q1104 196 1070 170 Q1036 196 1002 170 Q968 196 934 170 Q900 196 866 170 Q832 196 786 170 Z" fill="#2c4498" stroke="#141022" stroke-width="9" stroke-linejoin="round"/>
+<g stroke="#e2ac3a" stroke-width="8" fill="none"><path d="M826 450 Q862 470 892 446"/><path d="M1234 450 Q1198 470 1168 446"/></g>
+
+<!-- The cat's portrait, framed in gold. -->
+<rect x="404" y="214" width="292" height="232" rx="10" fill="url(#sa-gold)" stroke="#141022" stroke-width="9"/>
+<rect x="430" y="240" width="240" height="180" fill="#27304a" stroke="#141022" stroke-width="6"/>
+<path d="M500 420 C500 352 512 320 550 312 L534 270 L566 300 Q550 296 582 300 L614 270 L598 312 C636 320 648 352 648 420 Z" fill="#d88a3a" stroke="#141022" stroke-width="6" stroke-linejoin="round"/>
+<g fill="#7dff9e" stroke="#141022" stroke-width="3"><ellipse cx="556" cy="346" rx="11" ry="8"/><ellipse cx="592" cy="346" rx="11" ry="8"/></g>
+<g stroke="#141022" stroke-width="4"><path d="M556 340 V352 M592 340 V352"/><path d="M566 368 L574 374 L582 368 M520 362 H546 M520 374 H546 M602 362 H628 M602 374 H628"/></g>
+
+<!-- The clock: nine in the evening. -->
+<circle cx="1340" cy="262" r="64" fill="#f6efd8" stroke="#141022" stroke-width="10"/>
+<circle cx="1340" cy="262" r="50" fill="none" stroke="#e2ac3a" stroke-width="5"/>
+<g stroke="#141022" stroke-width="7" stroke-linecap="round"><path d="M1340 262 V218"/><path d="M1340 262 H1306"/></g>
+<g fill="#141022"><circle cx="1340" cy="262" r="7"/><circle cx="1340" cy="222" r="0"/></g>
+<g stroke="#141022" stroke-width="5" stroke-linecap="round"><path d="M1340 206 V214 M1340 310 V318 M1284 262 H1292 M1388 262 H1396"/></g>
+
+<!-- The television, on its cabinet. -->
+<rect x="1262" y="640" width="296" height="138" rx="8" fill="url(#sa-wood)" stroke="#141022" stroke-width="9"/>
+<g stroke="#141022" stroke-width="6"><path d="M1410 650 V768"/></g>
+<g fill="#e2ac3a" stroke="#141022" stroke-width="4"><circle cx="1392" cy="712" r="7"/><circle cx="1428" cy="712" r="7"/></g>
+<rect x="1384" y="612" width="52" height="30" fill="#2a2a34" stroke="#141022" stroke-width="7"/>
+<rect x="1252" y="432" width="316" height="186" rx="10" fill="#1a1a22" stroke="#141022" stroke-width="10"/>
+<rect x="1268" y="446" width="284" height="156" rx="4" fill="url(#sa-screen)"/>
+<path d="M1280 456 L1360 456 L1290 560 Z" fill="#fff" opacity="0.12"/>
+
+<!-- The floor lamp and its warm light. -->
+<ellipse cx="1652" cy="400" rx="240" ry="260" fill="url(#sa-glow)"/>
+<path d="M1652 380 V770" stroke="#141022" stroke-width="16" stroke-linecap="round"/>
+<path d="M1652 380 V770" stroke="#c99a3a" stroke-width="8" stroke-linecap="round"/>
+<ellipse cx="1652" cy="776" rx="70" ry="16" fill="#3a2a1a" stroke="#141022" stroke-width="8"/>
+<path d="M1590 300 L1714 300 L1748 392 L1556 392 Z" fill="#f8e6b8" stroke="#141022" stroke-width="9" stroke-linejoin="round"/>
+<g stroke="#d8b878" stroke-width="5" opacity="0.8"><path d="M1610 306 L1590 386 M1640 306 L1630 386 M1664 306 L1674 386 M1694 306 L1714 386"/></g>
+
+<!-- The door to the hall, with a cat flap. -->
+<rect x="1760" y="250" width="200" height="540" fill="#3b2a1e" stroke="#141022" stroke-width="10"/>
+<rect x="1776" y="266" width="170" height="524" fill="url(#sa-door)" stroke="#141022" stroke-width="7"/>
+<g fill="none" stroke="#141022" stroke-width="5" opacity="0.7"><rect x="1796" y="292" width="130" height="200" rx="6"/><rect x="1796" y="520" width="130" height="150" rx="6"/></g>
+<rect x="1812" y="694" width="96" height="76" rx="12" fill="#5a5048" stroke="#141022" stroke-width="7"/>
+<rect x="1820" y="702" width="80" height="58" rx="8" fill="#8a8070" opacity="0.6"/>
+<rect x="1786" y="500" width="34" height="14" rx="6" fill="#e2ac3a" stroke="#141022" stroke-width="6"/>
+
+<!-- The cat tree, with its cubby and its bed at the top. -->
+<g stroke="#141022" stroke-width="8" stroke-linejoin="round">
+  <rect x="150" y="300" width="34" height="480" fill="url(#sa-sisal)"/>
+  <rect x="250" y="520" width="34" height="260" fill="url(#sa-sisal)"/>
+  <rect x="70" y="744" width="300" height="40" rx="10" fill="url(#sa-plush)"/>
+  <rect x="200" y="590" width="150" height="110" rx="16" fill="url(#sa-plush)"/>
+  <ellipse cx="275" cy="652" rx="34" ry="30" fill="#4a4238"/>
+  <rect x="200" y="500" width="150" height="30" rx="10" fill="url(#sa-plush)"/>
+  <rect x="96" y="420" width="140" height="28" rx="10" fill="url(#sa-plush)"/>
+  <path d="M90 300 Q166 250 244 300 L234 330 Q166 304 100 330 Z" fill="url(#sa-plush)"/>
+</g>
+<g stroke="#8a6a32" stroke-width="3" opacity="0.6"><path d="M152 340 L182 326 M152 380 L182 366 M152 420 L182 406 M152 470 L182 456 M152 520 L182 506 M152 570 L182 556 M152 620 L182 606 M152 670 L182 656 M152 720 L182 706 M252 560 L282 546 M252 610 L282 596 M252 660 L282 646 M252 710 L282 696"/></g>
+<path d="M250 448 Q262 470 254 500" stroke="#141022" stroke-width="5" fill="none"/>
+<circle cx="254" cy="508" r="12" fill="#c8102e" stroke="#141022" stroke-width="5"/>
+
+<rect width="1920" height="1080" fill="url(#sa-vignette)"/>
+</svg>

@@ -1,4 +1,4 @@
-import type { Camp, CombatResult, Context, Counter, EndOfTurnStep, Hero, HandSpell, Minion, Params, Rng } from './types.ts';
+import type { Camp, CombatResult, Context, Counter, EndOfTurnStep, Hero, HandSpell, HeroMods, Minion, Params, Rng } from './types.ts';
 
 /** Un choix entre trois cartes : serviteurs ou sorts. Les serviteurs proposés sont réservés dans la réserve. */
 export interface Offer {
@@ -125,4 +125,9 @@ export interface ShopScript {
   sorts?: Record<number, string[]>;
   /** Manche → casserole proposée. */
   casseroles?: Record<number, string>;
+  /**
+   * Manche → ce qui arrive au siège au début de cette manche, dans une carrière : un autre pouvoir (`mods`), des points
+   * de sondage en plus ou en moins. Le Pen joue avec le pouvoir de Bardella jusqu'à l'arrêt d'appel, puis reprend le sien.
+   */
+  evenements?: Record<number, { mods?: HeroMods; sondages?: number }>;
 }

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 560">
+  <defs>
+    <linearGradient id="po-metal" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#8f97a8"/>
+      <stop offset="0.45" stop-color="#e3e7ef"/>
+      <stop offset="1" stop-color="#6d7486"/>
+    </linearGradient>
+    <linearGradient id="po-top" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#3a4256"/>
+      <stop offset="1" stop-color="#1d2232"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#141022" stroke-width="8" stroke-linejoin="round">
+    <rect x="14" y="70" width="58" height="476" rx="10" fill="url(#po-metal)"/>
+    <rect x="248" y="70" width="58" height="476" rx="10" fill="url(#po-metal)"/>
+    <rect x="8" y="22" width="304" height="72" rx="14" fill="url(#po-top)"/>
+    <rect x="4" y="530" width="82" height="22" rx="8" fill="#2b3042"/>
+    <rect x="234" y="530" width="82" height="22" rx="8" fill="#2b3042"/>
+  </g>
+  <circle cx="160" cy="58" r="20" fill="#ff3b3b" stroke="#141022" stroke-width="6"/>
+  <circle cx="153" cy="51" r="6" fill="#ffd0d0"/>
+  <g fill="#7dff9e" stroke="#141022" stroke-width="3">
+    <rect x="30" y="140" width="26" height="12" rx="3"/><rect x="30" y="170" width="26" height="12" rx="3"/><rect x="30" y="200" width="26" height="12" rx="3"/>
+    <rect x="264" y="140" width="26" height="12" rx="3"/><rect x="264" y="170" width="26" height="12" rx="3"/><rect x="264" y="200" width="26" height="12" rx="3"/>
+  </g>
+</svg>

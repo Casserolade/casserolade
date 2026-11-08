@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width="200" height="150">
+<title>Chat qui s'en va</title>
+<defs>
+  <linearGradient id="ch-fur" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0a85a"/><stop offset="1" stop-color="#c8742e"/></linearGradient>
+</defs>
+<ellipse cx="96" cy="142" rx="74" ry="7" fill="#140c04" opacity="0.3"/>
+<g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M34 82 C10 70 6 34 22 14 C26 10 32 12 30 18 C20 40 26 62 44 72 Z" fill="url(#ch-fur)"/>
+  <path d="M40 96 C40 70 64 62 100 64 C128 64 140 72 146 84 L146 112 C120 118 70 118 44 112 Z" fill="url(#ch-fur)"/>
+  <path d="M52 108 L48 140 L62 140 L66 112 Z M82 112 L80 140 L94 140 L96 112 Z M114 112 L114 140 L128 140 L128 112 Z M134 108 L138 140 L152 140 L148 106 Z" fill="url(#ch-fur)"/>
+  <path d="M132 86 C130 58 146 44 166 44 C184 44 196 58 194 78 C192 96 176 104 160 104 C144 104 134 98 132 86 Z" fill="url(#ch-fur)"/>
+  <path d="M142 54 L144 26 L162 46 Z M172 44 L188 24 L190 56 Z" fill="url(#ch-fur)"/>
+</g>
+<path d="M148 48 L148 34 L156 44 Z M180 44 L186 34 L186 50 Z" fill="#f6c6a6"/>
+<g stroke="#9a5420" stroke-width="5" stroke-linecap="round" opacity="0.8">
+  <path d="M70 70 L74 86 M90 66 L92 84 M110 66 L110 84 M128 70 L126 86"/>
+  <path d="M18 34 L28 38 M14 52 L26 52"/>
+</g>
+<g fill="#7dff9e" stroke="#141022" stroke-width="3"><ellipse cx="160" cy="70" rx="7" ry="8"/><ellipse cx="181" cy="70" rx="7" ry="8"/></g>
+<g stroke="#141022" stroke-width="3.5" stroke-linecap="round" fill="none">
+  <path d="M161 64 V76 M182 64 V76"/>
+  <path d="M168 84 L171 88 L174 84 M171 88 Q166 94 162 92 M171 88 Q176 94 180 92"/>
+  <path d="M152 84 H134 M152 90 L136 96 M186 84 H198 M186 90 L198 96"/>
+</g>
+<path d="M168 80 L174 80 L171 84 Z" fill="#e87a8a" stroke="#141022" stroke-width="2"/>
+</svg>

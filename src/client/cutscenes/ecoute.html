@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Écoute · musiques et bruitages des cinématiques</title>
+  </head>
+  <body>
+    <main class="screen ecoute">
+      <header class="stack">
+        <h1>Musiques et bruitages des cinématiques</h1>
+        <p>Faits en code (WebAudio), joués par la sortie son du jeu : son coupé, rien ne joue ; le volume du joueur s'applique. « WAV » rend le son hors ligne, deux tours de boucle pour une musique, et donne sa crête et son niveau moyen.</p>
+      </header>
+      <section class="stack" aria-labelledby="titre-son">
+        <h2 id="titre-son">Sortie son</h2>
+        <div class="row ecoute-reglages">
+          <label><input type="checkbox" id="son-coupe" /> Son coupé</label>
+          <label>Volume <input type="range" id="volume" min="0" max="1" step="0.05" /></label>
+        </div>
+      </section>
+      <section class="stack" aria-labelledby="titre-musiques">
+        <h2 id="titre-musiques">Musiques <small>(un clic lance, un autre arrête)</small></h2>
+        <ul class="ecoute-liste" id="musiques"></ul>
+      </section>
+      <section class="stack" aria-labelledby="titre-bruitages">
+        <h2 id="titre-bruitages">Bruitages</h2>
+        <ul class="ecoute-liste" id="bruitages"></ul>
+      </section>
+    </main>
+    <script type="module" src="./ecoute.ts"></script>
+  </body>
+</html>

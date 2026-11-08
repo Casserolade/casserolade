@@ -7,11 +7,10 @@ import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
-import { CHAPITRES } from '#src/data/histoire/chapitres.ts';
 import type { Chapitre } from '#src/data/histoire/chapitres.ts';
 import { CONTEXTS, HERO_BY_ID } from '#src/data/heroes.ts';
 import type { Campagne } from '#src/histoire/campagne.ts';
-import { texteObjectif } from '#src/histoire/campagne.ts';
+import { chapitresDe, texteObjectif } from '#src/histoire/campagne.ts';
 
 /**
  * Before an election: the road so far, the challenge of this one, its special rule, who stands
@@ -23,7 +22,9 @@ const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1
 defineEmits<{ play: []; abandon: []; leave: [] }>();
 
 const hero = computed(() => HERO_BY_ID[props.campaign.heroId]);
-const index = computed(() => CHAPITRES.indexOf(props.chapter));
+/** This campaign's chapters: the hero's own career, or the generic elections. */
+const chapters = computed(() => chapitresDe(props.campaign));
+const index = computed(() => chapters.value.findIndex((c) => c.id === props.chapter.id));
 const archImage = computed(() => cssImage(gameArt.manifest.value.carte.arche));
 const heroPuppet = computed(() => puppetStyle(gameArt.manifest.value, props.campaign.heroId, 'civile'));
 const boss = computed(() => (props.chapter.boss ? HERO_BY_ID[props.chapter.id === 'outre_tombe' ? 'giscard' : props.campaign.bossId] : null));
@@ -34,9 +35,9 @@ const rule = computed(() => {
 });
 const goal = computed(() => (props.chapter.placeRequise === 1 ? 'Finir premier' : `Finir dans les ${props.chapter.placeRequise} premiers`));
 const rivals = computed(() => props.chapter.adversaires.length);
-const road = computed(() => CHAPITRES.map((c, i) => ({
+const road = computed(() => chapters.value.map((c, i) => ({
   id: c.id,
-  name: capitalize(c.election.replace(/^(Les?|La|L') ?/u, '')),
+  name: `${c.annee ? `${c.annee} · ` : ''}${capitalize(c.election.replace(/^(Les?|La|L') ?/u, ''))}`,
   state: i < index.value ? 'done' : i === index.value ? 'current' : 'later',
   stars: props.campaign.etoiles[c.id] ?? 0,
 })));
@@ -59,7 +60,7 @@ const road = computed(() => CHAPITRES.map((c, i) => ({
         <span class="muted">candidat</span>
       </div>
       <div class="election">
-        <p class="kicker">{{ index >= 0 ? `Élection ${index + 1} sur ${CHAPITRES.length}` : 'Épilogue' }}</p>
+        <p class="kicker">{{ index >= 0 ? `${chapter.annee ? `${chapter.annee} · ` : ''}Chapitre ${index + 1} sur ${chapters.length}` : 'Épilogue' }}</p>
         <h1 class="name">{{ chapter.election }}</h1>
         <p class="challenge">{{ chapter.decouverte }}</p>
         <p v-if="rule" class="rule"><span class="tag">Règle spéciale</span> <strong>{{ rule.name }}</strong> : {{ rule.desc }}</p>

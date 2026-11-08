@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Assemblée nationale, la tribune</title>
+<defs><linearGradient id="av-an-marble" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe7da"/><stop offset="1" stop-color="#d6cbb8"/></linearGradient><linearGradient id="av-an-woodH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a200f"/><stop offset="0.2" stop-color="#7a3a1e"/><stop offset="0.5" stop-color="#a5552e"/><stop offset="0.8" stop-color="#7a3a1e"/><stop offset="1" stop-color="#4a200f"/></linearGradient><linearGradient id="av-an-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.4" stop-color="#f6c64a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><radialGradient id="av-an-vignette" gradientUnits="userSpaceOnUse" cx="960" cy="520" r="1150"><stop offset="0.55" stop-color="#120a10" stop-opacity="0"/><stop offset="1" stop-color="#120a10" stop-opacity="0.7"/></radialGradient><clipPath id="av-an-front"><path d="M780 756 H1140 V790 H1124 L1108 1094 H812 L796 790 H780 Z"/></clipPath></defs>
+
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M800 775 H1120 L1104 1090 H816 Z" fill="url(#av-an-woodH)"/>
+    <rect x="782" y="760" width="356" height="28" rx="6" fill="url(#av-an-gold)"/>
+    <rect x="850" y="820" width="220" height="200" rx="10" fill="url(#av-an-marble)"/>
+  </g>
+  
+  <path d="M942.5 992.9 A70 70 0 1 1 946 855" fill="none" stroke="#a8700f" stroke-width="5"/>
+  <path d="M977.5 992.9 A70 70 0 1 0 974 855" fill="none" stroke="#a8700f" stroke-width="5"/>
+  <g fill="url(#av-an-gold)" stroke="#7a5108" stroke-width="2.5"><ellipse cx="977.3" cy="992.8" rx="17" ry="8" transform="rotate(15.7 977.3 992.8)"/><ellipse cx="1000.1" cy="982.4" rx="17" ry="8" transform="rotate(-5 1000.1 982.4)"/><ellipse cx="1017.7" cy="964.6" rx="17" ry="8" transform="rotate(-25.6 1017.7 964.6)"/><ellipse cx="1028" cy="941.7" rx="17" ry="8" transform="rotate(-46.2 1028 941.7)"/><ellipse cx="1029.5" cy="916.7" rx="17" ry="8" transform="rotate(-66.8 1029.5 916.7)"/><ellipse cx="1022.1" cy="892.7" rx="17" ry="8" transform="rotate(-87.5 1022.1 892.7)"/><ellipse cx="1006.8" cy="872.9" rx="17" ry="8" transform="rotate(-108.1 1006.8 872.9)"/><ellipse cx="942.7" cy="992.8" rx="17" ry="8" transform="rotate(164.3 942.7 992.8)"/><ellipse cx="919.9" cy="982.4" rx="17" ry="8" transform="rotate(185 919.9 982.4)"/><ellipse cx="902.3" cy="964.6" rx="17" ry="8" transform="rotate(205.6 902.3 964.6)"/><ellipse cx="892" cy="941.7" rx="17" ry="8" transform="rotate(226.2 892 941.7)"/><ellipse cx="890.5" cy="916.7" rx="17" ry="8" transform="rotate(246.8 890.5 916.7)"/><ellipse cx="897.9" cy="892.7" rx="17" ry="8" transform="rotate(267.5 897.9 892.7)"/><ellipse cx="913.2" cy="872.9" rx="17" ry="8" transform="rotate(288.1 913.2 872.9)"/></g>
+  <g fill="#c8303c" stroke="#7a1018" stroke-width="2.5"><path d="M960 995 l-24 -12 v24 Z M960 995 l24 -12 v24 Z"/><circle cx="960" cy="995" r="7"/></g>
+  <path d="M870 840 H1050" stroke="#fffaf0" stroke-width="5" opacity="0.6" stroke-linecap="round"/>
+  <path d="M790 768 H1130" stroke="#fff4c8" stroke-width="4" opacity="0.8"/>
+  <path d="M1086 760 Q1086 732 1062 722" fill="none" stroke="#141022" stroke-width="9" stroke-linecap="round"/>
+  <path d="M1086 760 Q1086 732 1062 722" fill="none" stroke="#3b3f52" stroke-width="4" stroke-linecap="round"/>
+  <rect x="1040" y="712" width="24" height="17" rx="6" fill="#2a2d3e" stroke="#141022" stroke-width="4"/><g clip-path="url(#av-an-front)"><rect width="1920" height="1080" fill="url(#av-an-vignette)"/></g>
+</svg>

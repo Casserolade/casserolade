@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Clé</title>
+<defs><linearGradient id="a-cl-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.4" stop-color="#f6c64a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><linearGradient id="a-cl-ribbon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a64"/><stop offset="1" stop-color="#a8182a"/></linearGradient></defs>
+
+  <g transform="rotate(-36 256 256) translate(10 0)">
+    <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M204 236 H452 Q466 236 466 250 V262 Q466 276 452 276 H204 Z" fill="url(#a-cl-gold)"/>
+      <path d="M372 270 H462 V330 H446 V310 H428 V340 H404 V310 H388 V334 H372 Z" fill="url(#a-cl-gold)"/>
+      <path d="M130 176 C176 176 210 210 210 256 C210 302 176 336 130 336 C84 336 50 302 50 256 C50 210 84 176 130 176 Z M130 216 C142 228 158 230 166 226 C162 240 162 272 166 286 C158 282 142 284 130 296 C118 284 102 282 94 286 C98 272 98 240 94 226 C102 230 118 228 130 216 Z" fill="url(#a-cl-gold)" fill-rule="evenodd"/>
+      <rect x="198" y="222" width="22" height="68" rx="8" fill="url(#a-cl-gold)"/>
+      <rect x="226" y="228" width="16" height="56" rx="6" fill="url(#a-cl-gold)"/>
+    </g>
+    <path d="M240 246 H450" stroke="#fff6cf" stroke-width="6" stroke-linecap="round" opacity="0.85"/>
+    <path d="M72 230 Q90 196 128 192" stroke="#fff6cf" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.85"/>
+  </g>
+  <g transform="translate(236 272) scale(0.62) translate(-176 -288)">
+    <g stroke="#141022" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M160 300 L120 392 L150 386 L162 414 L188 314 Z" fill="url(#a-cl-ribbon)"/>
+      <path d="M184 302 L204 404 L224 380 L250 392 L204 296 Z" fill="url(#a-cl-ribbon)"/>
+      <path d="M150 276 Q106 236 132 220 Q166 214 176 284 Z M190 284 Q206 220 242 230 Q262 262 196 298 Z" fill="url(#a-cl-ribbon)"/>
+      <circle cx="178" cy="288" r="20" fill="url(#a-cl-ribbon)"/>
+    </g>
+  </g>
+</svg>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, shallowRef, watch } from 'vue';
+import { computed, defineAsyncComponent, ref, shallowRef, watch } from 'vue';
 import StoryFeed from '#src/client/components/organisms/StoryFeed.vue';
 import GameScreens from '#src/client/screens/GameScreens.vue';
 import StoryChapterScreen from '#src/client/screens/story/StoryChapterScreen.vue';
@@ -14,8 +14,13 @@ import { createGameStore } from '#src/client/stores/createGameStore.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { StoryRun } from '#src/client/stores/createStoryRun.ts';
 import { apresChapitre, chapitreCourant, nouvelleCampagne } from '#src/histoire/campagne.ts';
+import { cinematiqueDe } from '#src/histoire/carrieres.ts';
+import type { Cinematique } from '#src/data/histoire/cinematique.ts';
 import type { Campagne } from '#src/histoire/campagne.ts';
 import { generateSeed } from '#src/server/generateSeed.ts';
+
+/** The cutscenes and their animation library load only when a career plays one. */
+const CutscenePlayer = defineAsyncComponent(() => import('#src/client/components/organisms/CutscenePlayer.vue'));
 
 const emit = defineEmits<{ leave: [] }>();
 
@@ -39,6 +44,38 @@ watch(bilan, (result) => {
   clearLocalGame();
 });
 
+/** The cutscene playing over everything, and what comes after it. Each one plays once in a campaign. */
+const cutscene = shallowRef<Cinematique | null>(null);
+let afterCutscene: (() => void) | null = null;
+
+function showCutscene(scene: Cinematique | null, then: () => void): void {
+  const current = campaign.value;
+  if (!scene || !current || current.vues?.includes(scene.id)) {
+    then();
+    return;
+  }
+  setCampaign({ ...current, vues: [...(current.vues ?? []), scene.id] });
+  afterCutscene = then;
+  cutscene.value = scene;
+}
+
+function endCutscene(): void {
+  const then = afterCutscene;
+  afterCutscene = null;
+  cutscene.value = null;
+  then?.();
+}
+
+/** The duel at the end of a career: winning it, or losing it, has its own scene. */
+function isFinal(): boolean {
+  return Boolean(campaign.value?.carriere && chapter.value?.boss && chapter.value.id !== 'outre_tombe');
+}
+
+watch(bilan, (result) => {
+  if (!result || result.reussi || !campaign.value || !isFinal()) return;
+  showCutscene(cinematiqueDe(campaign.value.heroId, 'defaite'), () => undefined);
+});
+
 function setCampaign(next: Campagne | null): void {
   campaign.value = next;
   saveCampaign(next);
@@ -46,9 +83,17 @@ function setCampaign(next: Campagne | null): void {
 
 function chooseHero(heroId: string): void {
   setCampaign(nouvelleCampagne(heroId, generateSeed()));
+  showCutscene(cinematiqueDe(heroId, 'intro'), () => undefined);
 }
 
+/** A chapter of a career may open with its scene, the first time it is played. */
 function play(): void {
+  if (!campaign.value || !chapter.value) return;
+  const scene = campaign.value.carriere ? cinematiqueDe(campaign.value.heroId, 'avant_chapitre', chapter.value.id) : null;
+  showCutscene(scene, startChapter);
+}
+
+function startChapter(): void {
   if (!campaign.value || !chapter.value) return;
   stopRun();
   achievements.startGame();
@@ -67,8 +112,10 @@ function stopRun(): void {
 
 function finishChapter(): void {
   if (!campaign.value || !chapter.value || !bilan.value) return;
+  const elected = isFinal() && bilan.value.reussi;
   setCampaign(apresChapitre(campaign.value, chapter.value, bilan.value));
   stopRun();
+  if (elected && campaign.value) showCutscene(cinematiqueDe(campaign.value.heroId, 'victoire'), () => undefined);
 }
 
 function abandon(): void {
@@ -83,6 +130,7 @@ function leave(): void {
 </script>
 
 <template>
+  <CutscenePlayer v-if="cutscene" :key="cutscene.id" :cinematique="cutscene" @end="endCutscene" />
   <StoryHeroScreen v-if="!campaign" @choose="chooseHero" @leave="leave" />
   <StoryResultScreen
     v-else-if="bilan && chapter && resultShown"

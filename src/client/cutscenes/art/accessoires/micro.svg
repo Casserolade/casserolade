@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Micro</title>
+<defs><radialGradient id="a-mi-head" cx="0.35" cy="0.35" r="0.7"><stop offset="0" stop-color="#f4f6fa"/><stop offset="0.6" stop-color="#b8bfcc"/><stop offset="1" stop-color="#6a7286"/></radialGradient><linearGradient id="a-mi-cube" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a64"/><stop offset="1" stop-color="#b81e2c"/></linearGradient><linearGradient id="a-mi-cubeSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a8182a"/><stop offset="1" stop-color="#7a0e1c"/></linearGradient><linearGradient id="a-mi-handle" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a2d3e"/><stop offset="0.4" stop-color="#4a4e66"/><stop offset="1" stop-color="#141622"/></linearGradient></defs>
+
+  <g transform="rotate(-28 256 256)">
+    <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M222 286 H290 L280 486 Q256 500 232 486 Z" fill="url(#a-mi-handle)"/>
+    </g>
+    <path d="M240 300 L246 470" stroke="#7a7e98" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+    <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M176 212 H336 L320 300 H192 Z" fill="url(#a-mi-cubeSide)"/>
+      <path d="M176 212 H336 V286 H176 Z" fill="url(#a-mi-cube)"/>
+    </g>
+    <path d="M192 226 H320" stroke="#ff9aa0" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"><circle cx="256" cy="134" r="86" fill="url(#a-mi-head)"/></g>
+    <clipPath id="a-mi-clip"><circle cx="256" cy="134" r="80"/></clipPath>
+    <g clip-path="url(#a-mi-clip)" transform="translate(56 6)"><path d="M146 78 V178 M148 74 H252M164 72 V184 M142 92 H258M182 66 V190 M136 110 H264M200 60 V196 M130 128 H270M218 66 V190 M136 146 H264M236 72 V184 M142 164 H258M254 78 V178 M148 182 H252" stroke="#5a6276" stroke-width="5" opacity="0.7"/></g>
+    <ellipse cx="226" cy="98" rx="24" ry="16" fill="#ffffff" opacity="0.7" transform="rotate(-30 226 98)"/>
+    <g stroke="#141022" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><rect x="200" y="200" width="112" height="22" rx="8" fill="#3a3e52"/></g>
+  </g>
+</svg>

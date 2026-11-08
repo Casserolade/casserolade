@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Dossier</title>
+<defs><linearGradient id="a-do-back" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8b070"/><stop offset="1" stop-color="#b88a48"/></linearGradient><linearGradient id="a-do-front" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4d8a0"/><stop offset="1" stop-color="#e0b878"/></linearGradient><linearGradient id="a-do-clip" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8ecf4"/><stop offset="1" stop-color="#8a92a8"/></linearGradient></defs>
+
+  <ellipse cx="256" cy="476" rx="210" ry="16" fill="#141022" opacity="0.18"/>
+  <g transform="rotate(-5 256 256)">
+    <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M70 90 H200 L222 66 H330 L352 90 H442 V448 H70 Z" fill="url(#a-do-back)"/>
+    </g>
+    <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="104" y="86" width="290" height="200" fill="#ffffff" transform="rotate(4 250 186)"/>
+      <rect x="96" y="96" width="290" height="200" fill="#f6f4ee"/>
+    </g>
+    <path d="M124 128 H330 M124 152 H360 M124 176 H300 M124 200 H350" stroke="#9aa0b0" stroke-width="7" stroke-linecap="round"/>
+    <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M62 196 H450 L440 452 H72 Z" fill="url(#a-do-front)"/>
+    </g>
+    <path d="M80 214 H432" stroke="#fff4dc" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+    <path d="M330 74 Q330 48 352 48 Q374 48 374 74 V170 Q374 186 360 186 Q346 186 346 170 V80" fill="none" stroke="#141022" stroke-width="16" stroke-linecap="round"/>
+    <path d="M330 74 Q330 48 352 48 Q374 48 374 74 V170 Q374 186 360 186 Q346 186 346 170 V80" fill="none" stroke="url(#a-do-clip)" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <g transform="rotate(-14 256 316)">
+    <rect x="82" y="272" width="348" height="84" rx="12" fill="none" stroke="#d01e2e" stroke-width="10"/>
+    <path d="M125.6 308.9C125.4 305.7 124.8 303.6 123.5 301.5C121.2 297.6 117.4 295.5 112.8 295.5C104.2 295.5 98.8 303.1 98.8 315.4C98.8 327.6 104.2 335.2 112.7 335.2C120.3 335.2 125.3 329.7 125.7 321.1L119.6 321.1C119.2 325.9 116.7 328.6 112.8 328.6C108 328.6 105.1 323.8 105.1 315.5C105.1 307.1 108.1 302.1 113 302.1C116.7 302.1 118.7 304.3 119.6 308.9ZM144.1 295.5C139.9 295.5 136.3 297.2 133.7 300.7C131 304.4 129.5 309.7 129.5 315.3C129.5 321 131 326.4 133.7 329.9C136.4 333.5 139.8 335.2 144.2 335.2C148.5 335.2 152 333.5 154.6 329.9C157.2 326.5 158.9 321 158.9 315.6C158.9 309.7 157.3 304.3 154.6 300.7C151.9 297.1 148.6 295.5 144.1 295.5ZM144.2 302.1C149.3 302.1 152.6 307.3 152.6 315.5C152.6 323.3 149.2 328.5 144.2 328.5C139.1 328.5 135.8 323.3 135.8 315.3C135.8 307.3 139.1 302.1 144.2 302.1ZM182.6 334L188.9 334L188.9 296.1L182.6 296.1L182.6 321.9L170.5 296.1L164 296.1L164 334L170.3 334L170.3 307.8ZM201.6 317.7L215 317.7L215 311.2L201.6 311.2L201.6 302.6L216.8 302.6L216.8 296.1L195.3 296.1L195.3 334L201.6 334ZM227.5 296.1L221.3 296.1L221.3 334L227.5 334ZM234.3 334L246.2 334C250.9 334 253.8 332.7 255.9 329.6C258.3 326 259.6 321 259.6 315C259.6 309.1 258.3 304.1 255.9 300.5C253.8 297.4 250.9 296.1 246.2 296.1L234.3 296.1ZM240.6 327.5L240.6 302.6L246.2 302.6C251 302.6 253.3 306.7 253.3 315.1C253.3 323.4 251 327.5 246.2 327.5ZM271.7 317.7L286.3 317.7L286.3 311.2L271.7 311.2L271.7 302.6L287.4 302.6L287.4 296.1L265.4 296.1L265.4 334L288.2 334L288.2 327.5L271.7 327.5ZM312.2 334L318.5 334L318.5 296.1L312.2 296.1L312.2 321.9L300.1 296.1L293.6 296.1L293.6 334L299.9 334L299.9 307.8ZM338 302.6L346.9 302.6L346.9 296.1L322.4 296.1L322.4 302.6L331.7 302.6L331.7 334L338 334ZM357.2 296.1L350.9 296.1L350.9 334L357.2 334ZM370.3 317.7L384.9 317.7L384.9 311.2L370.3 311.2L370.3 302.6L386.1 302.6L386.1 296.1L364 296.1L364 334L386.8 334L386.8 327.5L370.3 327.5ZM399 296.1L392.8 296.1L392.8 334L413.7 334L413.7 327.5L399 327.5Z" fill="#d01e2e"/>
+    <path d="M100 290 h30 M300 342 h40 M200 280 h16" stroke="#e0b878" stroke-width="5" opacity="0.8"/>
+  </g>
+</svg>

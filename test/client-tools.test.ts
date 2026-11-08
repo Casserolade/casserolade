@@ -734,3 +734,52 @@ test('shareGame: the share sheet on a phone, the link copied elsewhere, never an
     }
   }
 });
+
+// —— Les cinématiques des carrières ——
+import { lineSeconds } from '../src/client/tools/lineSeconds.ts';
+import { actionSeconds } from '../src/client/tools/actionSeconds.ts';
+import { cameraFraming } from '../src/client/tools/cameraFraming.ts';
+import { hashText } from '../src/client/tools/hashText.ts';
+
+test('une réplique dure sa vraie voix, sinon le temps de la lire, jamais moins de 1,6 s', () => {
+  assert.equal(lineSeconds('Non !'), 1.6);
+  assert.equal(lineSeconds('x'.repeat(100)), 7.000000000000001);
+  assert.equal(lineSeconds('Au revoir.', 3.1), 3.1);
+  assert.equal(lineSeconds('Au revoir.', 0.4), 1);
+});
+
+test('une action de cinématique dure ce que dit son script, accélérée par son plan', () => {
+  assert.equal(actionSeconds({ entre: 'a', par: 'gauche', x: 50 }), 0.6);
+  assert.equal(actionSeconds({ va: 'a', x: 50, en: 2 }, 2), 1);
+  assert.equal(actionSeconds({ pense: 'a', texte: 'Personne n\'a rien vu.' }), lineSeconds('Personne n\'a rien vu.'));
+  assert.equal(actionSeconds({ dit: 'a', texte: 'Au revoir.', source: 'INA', voix: 'v' }, 1, () => 2.5), 2.5);
+  assert.equal(actionSeconds({ bruitage: 'gong' }), 0);
+  assert.equal(actionSeconds({ poursuite: ['a', 'b'], tours: 2 }, 2), 1.4);
+});
+
+test('la caméra cadre la scène, un plan serré ou un gros plan, sans jamais montrer le bord', () => {
+  assert.deepEqual(cameraFraming('large'), { scale: 1, x: 0, y: 0 });
+  assert.equal(cameraFraming('serre').scale, 1.3);
+  const corner = cameraFraming({ x: 0, y: 0 });
+  assert.equal(corner.x, ((1.65 - 1) * 1920) / 2);
+  assert.equal(corner.y, ((1.65 - 1) * 1080) / 2);
+  assert.deepEqual(cameraFraming({ x: 960, y: 540 }), { scale: 1.65, x: -0, y: -0 });
+});
+
+test('le hasard d\'une cinématique vient de son id : toujours le même', () => {
+  assert.equal(hashText('melenchon_intro'), hashText('melenchon_intro'));
+  assert.notEqual(hashText('melenchon_intro'), hashText('melenchon_victoire'));
+});
+
+import { strideBeats } from '../src/client/tools/strideBeats.ts';
+
+test('une foulée tient pile dans son déplacement, en un nombre pair de demi-pas : rien ne déborde sur la pose suivante', () => {
+  for (const [seconds, half] of [[1, 0.42], [1.6, 0.42], [0.6, 0.07], [2.6, 0.31], [0.2, 0.42]]) {
+    const { halves, beat } = strideBeats(seconds, half);
+    assert.equal(halves % 2, 0);
+    assert.ok(halves >= 2);
+    assert.ok(Math.abs(halves * beat - seconds) < 1e-9);
+  }
+  assert.deepEqual(strideBeats(1, 0.42), { halves: 2, beat: 0.5 });
+  assert.equal(strideBeats(1.6, 0.42).halves, 4);
+});

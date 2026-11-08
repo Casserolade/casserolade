@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <path d="M200 10 L238 120 L352 70 L290 170 L392 214 L282 238 L330 352 L222 282 L190 392 L160 282 L50 340 L108 236 L8 200 L112 162 L56 60 L166 116 Z" fill="#ffd84a" stroke="#141022" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M200 70 L226 150 L300 118 L256 184 L326 214 L250 228 L282 302 L212 256 L192 326 L172 256 L104 296 L144 226 L72 200 L144 176 L106 110 L178 150 Z" fill="#ff6a1f"/>
+  <text x="200" y="226" text-anchor="middle" font-family="Bangers, Impact, sans-serif" font-size="84" fill="#fff3c4" stroke="#141022" stroke-width="10" paint-order="stroke fill" transform="rotate(-8 200 210)">BOUM !</text>
+</svg>

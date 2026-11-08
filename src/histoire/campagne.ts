@@ -9,6 +9,7 @@ import { PERSONNALITES } from '../data/personnalites.ts';
 import { createRng } from '../engine/rng.ts';
 import type { GameOptions, PlayerView } from '../engine/game.ts';
 import type { Camp, Hero, PlayerAction } from '../engine/types.ts';
+import { CARRIERE_PAR_HEROS, chapitresDeCarriere } from './carrieres.ts';
 
 export interface CompositionTable {
   /** Le héros et le niveau de chaque siège. Le joueur est au siège 0. */
@@ -40,11 +41,14 @@ function tirerCamps(chapitre: Chapitre, heroId: string, seed: number): Camp[] | 
 export function composerTable(chapitre: Chapitre, heroId: string, seed: number, bossChoisi?: string): CompositionTable {
   const rng = createRng(seed * 19 + 11);
   const bossId = chapitre.id === OUTRE_TOMBE.id ? 'giscard' : chapitre.boss ? (bossChoisi ?? tirerBoss(heroId, seed)) : null;
-  const autres = rng.shuffle(HEROES.map((h) => h.id).filter((id) => id !== heroId && id !== bossId));
+  // The rivals of a career's chapter sit first, in their order; the boss last; chance fills the other seats.
+  const imposes = (chapitre.rivaux ?? []).filter((id) => id !== heroId && id !== bossId && HERO_BY_ID[id]);
+  const autres = rng.shuffle(HEROES.map((h) => h.id).filter((id) => id !== heroId && id !== bossId && !imposes.includes(id)));
   const sieges: CompositionTable['sieges'] = [{ heroId, level: null }];
   chapitre.adversaires.forEach((level, i) => {
     const boss = bossId && i === chapitre.adversaires.length - 1;
-    sieges.push({ heroId: boss ? bossId : autres[i % autres.length], level });
+    const rival = imposes[i] ?? autres[(i - Math.min(i, imposes.length)) % autres.length];
+    sieges.push({ heroId: boss ? bossId : rival, level });
   });
 
   const params = { ...PARAMS, ...chapitre.regles };
@@ -58,6 +62,14 @@ export function composerTable(chapitre: Chapitre, heroId: string, seed: number, 
       mods: chapitre.pouvoirs ? hero.mods : {},
     };
   }
+  // A career's scripted round: the player starts with another hero's power, and gets things back on given rounds.
+  const scenario = chapitre.scenario;
+  const lent = scenario?.pouvoirDe ? HERO_BY_ID[scenario.pouvoirDe] : undefined;
+  if (lent && chapitre.pouvoirs) heroOverrides[heroId] = { ...heroOverrides[heroId], mods: lent.mods };
+  const evenements = Object.fromEntries(Object.entries(scenario?.manches ?? {}).map(([manche, change]) => [
+    Number(manche),
+    { ...(change.pouvoirPropre ? { mods: HERO_BY_ID[heroId].mods } : {}), ...(change.sondages ? { sondages: change.sondages } : {}) },
+  ]));
   const contexte = chapitre.contexteId ?? (chapitre.contexte ? rng.pick(CONTEXTS.filter((c) => c.id !== 'normal')).id : undefined);
   const camps = tirerCamps(chapitre, heroId, seed);
   return {
@@ -69,6 +81,7 @@ export function composerTable(chapitre: Chapitre, heroId: string, seed: number, 
       heroOverrides,
       ...(contexte ? { contextId: contexte } : {}),
       ...(camps ? { activeCamps: camps } : {}),
+      ...(Object.keys(evenements).length ? { script: { seat: 0, evenements } } : {}),
     },
   };
 }
@@ -284,15 +297,27 @@ export interface Campagne {
   elu: boolean;
   /** L'épilogue contre Giscard est gagné, ou il a déjà été le boss vaincu. */
   outreTombe: boolean;
+  /** Vrai : le héros joue sa propre carrière (carrieres.ts), ses vrais moments et son boss ; sinon la carrière générique. */
+  carriere?: boolean;
+  /** Les cinématiques déjà vues : elles ne reviennent pas à chaque essai. */
+  vues?: string[];
 }
 
 export function nouvelleCampagne(heroId: string, graine: number): Campagne {
+  const carriere = CARRIERE_PAR_HEROS[heroId];
+  if (carriere) return { heroId, graine, chapitre: 0, bossId: carriere.boss, etoiles: {}, elu: false, outreTombe: false, carriere: true, vues: [] };
   return { heroId, graine, chapitre: 0, bossId: tirerBoss(heroId, graine), etoiles: {}, elu: false, outreTombe: false };
+}
+
+/** Les chapitres de cette campagne : ceux de la carrière du héros, ou les élections génériques. */
+export function chapitresDe(c: Campagne): Chapitre[] {
+  return (c.carriere ? chapitresDeCarriere(c.heroId) : null) ?? CHAPITRES;
 }
 
 /** Le chapitre à jouer, null si tout est terminé. */
 export function chapitreCourant(c: Campagne): Chapitre | null {
-  if (c.chapitre < CHAPITRES.length) return CHAPITRES[c.chapitre];
+  const chapitres = chapitresDe(c);
+  if (c.chapitre < chapitres.length) return chapitres[c.chapitre];
   return c.outreTombe ? null : OUTRE_TOMBE;
 }
 
@@ -301,7 +326,8 @@ export function apresChapitre(c: Campagne, chapitre: Chapitre, bilan: Bilan): Ca
   const suite: Campagne = { ...c, etoiles: { ...c.etoiles, [chapitre.id]: Math.max(c.etoiles[chapitre.id] ?? 0, etoiles) } };
   if (!bilan.reussi) return suite;
   if (chapitre.id === OUTRE_TOMBE.id) return { ...suite, outreTombe: true };
-  const estFinal = chapitre.id === CHAPITRES[CHAPITRES.length - 1].id;
+  const chapitres = chapitresDe(c);
+  const estFinal = chapitre.id === chapitres[chapitres.length - 1].id;
   return {
     ...suite,
     chapitre: c.chapitre + 1,

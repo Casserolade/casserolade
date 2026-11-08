@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Trône</title>
+<defs><linearGradient id="a-tr-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.4" stop-color="#f6c64a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><linearGradient id="a-tr-goldH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8700f"/><stop offset="0.3" stop-color="#f6c64a"/><stop offset="0.5" stop-color="#fff0b8"/><stop offset="0.7" stop-color="#f6c64a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><linearGradient id="a-tr-velvet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d83848"/><stop offset="1" stop-color="#7a1020"/></linearGradient><linearGradient id="a-tr-seat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e85060"/><stop offset="1" stop-color="#9a1828"/></linearGradient></defs>
+
+  <ellipse cx="256" cy="490" rx="190" ry="14" fill="#141022" opacity="0.2"/>
+  <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M140 330 V110 Q140 60 196 50 Q226 14 256 14 Q286 14 316 50 Q372 60 372 110 V330 Z" fill="url(#a-tr-goldH)"/>
+    <path d="M168 320 V118 Q168 82 206 76 Q230 46 256 46 Q282 46 306 76 Q344 82 344 118 V320 Z" fill="url(#a-tr-velvet)"/>
+  </g>
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" fill="url(#a-tr-gold)">
+    <path d="M256 70 l10 20 22 3 -16 15 4 22 -20 -10 -20 10 4 -22 -16 -15 22 -3 Z"/>
+  </g>
+  <g fill="#ffd0d4" opacity="0.6"><circle cx="210" cy="170" r="5"/><circle cx="302" cy="170" r="5"/><circle cx="210" cy="250" r="5"/><circle cx="302" cy="250" r="5"/><circle cx="256" cy="210" r="5"/></g>
+  <path d="M186 130 Q190 100 220 92" stroke="#ff8a96" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M110 380 L120 476 H160 L168 380 Z" fill="url(#a-tr-gold)"/>
+    <path d="M402 380 L392 476 H352 L344 380 Z" fill="url(#a-tr-gold)"/>
+    <path d="M110 330 H402 V396 Q256 420 110 396 Z" fill="url(#a-tr-goldH)"/>
+    <path d="M118 296 Q256 268 394 296 L398 340 Q256 360 114 340 Z" fill="url(#a-tr-seat)"/>
+    <path d="M92 300 Q86 244 120 230 H148 V346 H104 Q92 330 92 300 Z" fill="url(#a-tr-goldH)"/>
+    <path d="M420 300 Q426 244 392 230 H364 V346 H408 Q420 330 420 300 Z" fill="url(#a-tr-goldH)"/>
+  </g>
+  <g fill="none" stroke="#141022" stroke-width="6" stroke-linecap="round">
+    <path d="M106 262 q14 -18 30 -6 q-6 16 -20 10"/><path d="M406 262 q-14 -18 -30 -6 q6 16 20 10"/>
+
+  </g>
+  <path d="M244 370 l12 -14 12 14 -12 14 Z" fill="url(#a-tr-gold)" stroke="#141022" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M134 300 Q256 282 378 300" stroke="#ffb0b8" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.6"/>
+</svg>

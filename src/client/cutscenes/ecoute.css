@@ -1,0 +1,60 @@
+.ecoute {
+  max-width: 980px;
+}
+
+.ecoute p {
+  color: var(--color-text-muted);
+}
+
+.ecoute-reglages label {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.ecoute-liste {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ecoute-liste li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.ecoute-liste button {
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.ecoute-liste button:first-child {
+  min-width: 16rem;
+  text-align: left;
+}
+
+.ecoute-liste button:hover,
+.ecoute-liste button:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.ecoute-liste button[aria-pressed='true'] {
+  background: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.ecoute-liste button[aria-pressed='true']::before {
+  content: '■ ';
+}
+
+.ecoute-mesure {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}

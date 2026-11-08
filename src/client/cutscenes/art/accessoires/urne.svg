@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Urne</title>
+<defs><linearGradient id="a-ur-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6f4ff" stop-opacity="0.75"/><stop offset="1" stop-color="#a8cdf0" stop-opacity="0.6"/></linearGradient><linearGradient id="a-ur-metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8ecf4"/><stop offset="0.5" stop-color="#a8b0c4"/><stop offset="1" stop-color="#6a7290"/></linearGradient><linearGradient id="a-ur-metalH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6a7290"/><stop offset="0.3" stop-color="#c8cede"/><stop offset="0.6" stop-color="#eef1f8"/><stop offset="1" stop-color="#7a82a0"/></linearGradient><linearGradient id="a-ur-env" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ab0e8"/><stop offset="1" stop-color="#4a86c8"/></linearGradient><linearGradient id="a-ur-kraft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8c898"/><stop offset="1" stop-color="#c89a5a"/></linearGradient></defs>
+
+  <ellipse cx="256" cy="462" rx="190" ry="20" fill="#141022" opacity="0.18"/>
+  <g stroke="#141022" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"><rect x="106" y="176" width="300" height="270" rx="10" fill="url(#a-ur-glass)"/></g>
+  <g transform="rotate(-12 196 400)"><rect x="142" y="364" width="108" height="72" rx="4" fill="url(#a-ur-env)" stroke="#141022" stroke-width="5"/><path d="M142 364 L196 404 L250 364" fill="none" stroke="#141022" stroke-width="4" stroke-linejoin="round"/></g><g transform="rotate(14 300 404)"><rect x="246" y="368" width="108" height="72" rx="4" fill="url(#a-ur-kraft)" stroke="#141022" stroke-width="5"/><path d="M246 368 L300 408 L354 368" fill="none" stroke="#141022" stroke-width="4" stroke-linejoin="round"/></g><g transform="rotate(4 250 372)"><rect x="196" y="336" width="108" height="72" rx="4" fill="url(#a-ur-env)" stroke="#141022" stroke-width="5"/><path d="M196 336 L250 376 L304 336" fill="none" stroke="#141022" stroke-width="4" stroke-linejoin="round"/></g><g transform="rotate(24 160 350)"><rect x="106" y="314" width="108" height="72" rx="4" fill="url(#a-ur-kraft)" stroke="#141022" stroke-width="5"/><path d="M106 314 L160 354 L214 314" fill="none" stroke="#141022" stroke-width="4" stroke-linejoin="round"/></g>
+  <rect x="106" y="176" width="300" height="270" rx="10" fill="#cfe6ff" opacity="0.25"/>
+  <path d="M132 206 L176 206 L132 300 Z" fill="#ffffff" opacity="0.65"/>
+  <path d="M362 420 L382 380" stroke="#ffffff" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <g stroke="#141022" stroke-width="9" stroke-linejoin="round" stroke-linecap="round" fill="url(#a-ur-metalH)">
+    <rect x="96" y="166" width="26" height="290" rx="6"/>
+    <rect x="390" y="166" width="26" height="290" rx="6"/>
+    <rect x="96" y="436" width="320" height="24" rx="6"/>
+  </g>
+  <g stroke="#141022" stroke-width="10" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="88" y="138" width="336" height="44" rx="8" fill="url(#a-ur-metal)"/>
+    <path d="M196 120 H316 L328 140 H184 Z" fill="url(#a-ur-metal)"/>
+  </g>
+  <rect x="210" y="150" width="92" height="14" rx="5" fill="#141022"/>
+  <g stroke="#141022" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="330" y="96" width="70" height="44" rx="6" fill="url(#a-ur-metal)"/>
+    <path d="M300 112 L330 118" fill="none"/>
+  </g>
+  <rect x="342" y="106" width="46" height="22" rx="3" fill="#24306a"/>
+  <path d="M352 117 h8 M366 117 h8" stroke="#7dff9e" stroke-width="5" stroke-linecap="round"/>
+  <g stroke="#141022" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M226 230 Q226 206 248 206 Q270 206 270 230" fill="none" stroke="#141022" stroke-width="16"/>
+    <path d="M226 230 Q226 206 248 206 Q270 206 270 230" fill="none" stroke="#c8cede" stroke-width="7"/>
+    <rect x="214" y="226" width="68" height="54" rx="8" fill="url(#a-ur-metal)"/>
+  </g>
+  <circle cx="248" cy="248" r="7" fill="#141022"/><path d="M248 250 V266" stroke="#141022" stroke-width="6" stroke-linecap="round"/>
+</svg>
