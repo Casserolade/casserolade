@@ -245,6 +245,8 @@ function inspect(event: PointerEvent, minion: Minion): void {
 
 
 .board-move { transition: transform 0.22s ease-out; }
+/* Sold, or the place of a drop that the landed politician takes: gone at once, it no longer widens the row for two frames. */
+.board-leave-active { display: none; }
 .board-enter-active > .medallion { animation: land 0.5s ease-out; }
 /* The preview of a drop does not land: it fades in where it would go. */
 .ghost.board-enter-active > .medallion { animation: ghost-in 0.18s ease-out; }

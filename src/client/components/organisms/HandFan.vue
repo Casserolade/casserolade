@@ -109,7 +109,7 @@ function leave(index: number): void {
         @focus="enter(index)"
         @blur="leave(index)"
         @pointerdown="gestures.press($event, item(card))"
-        @click="gestures.click(item(card), $event.currentTarget as Element)"
+        @click="gestures.click(item(card), $event.currentTarget as Element, $event.detail)"
         @keydown.enter.space.prevent="gestures.click(item(card), $event.currentTarget as Element)"
       >
         <ShownCardFace :card="shown(card)" />
@@ -151,6 +151,11 @@ function leave(index: number): void {
  * animates a move only when the move class has a transform transition: this one has none, so the cards are never moved.
  */
 .card.hand-in-place { transition: none; }
+/*
+ * Played, cast or sent back: gone at once, as on the phone; its medallion or its effect takes over. Vue kept it for the
+ * length of its own transition: a card laid on the board came back whole in the hand for a fifth of a second (8 November 2026).
+ */
+.card.hand-leave-active { display: none; transition: none; }
 .card:focus-visible { outline: none; }
 .card:focus-visible > :first-child { filter: drop-shadow(0 0 calc(var(--s) * 10) var(--color-accent)) drop-shadow(0 0 calc(var(--s) * 4) var(--color-accent)); }
 .glossary { position: absolute; z-index: 30; bottom: calc(var(--s) * 18); width: calc(var(--s) * 380); pointer-events: none; }
