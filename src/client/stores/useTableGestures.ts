@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, ref, shallowRef } from 'vue';
+import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
 import { cardInspector } from '#src/client/stores/cardInspector.ts';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import { carrySwing } from '#src/client/stores/carrySwing.ts';
@@ -23,6 +23,8 @@ const DRAG_THRESHOLD_PX = 8;
 const SWALLOW_MS = 350;
 /** A card of the hand sent once is not sent again while the game has not answered: a double click plays it once. */
 const SENT_MS = 1500;
+/** A drop keeps its picture until the game answers, never longer than this (a refused action goes back). */
+const SETTLE_MS = 600;
 
 export type Zone = 'board' | 'shop' | 'hand';
 
@@ -106,7 +108,7 @@ export interface GestureOptions {
  * Every gesture of the recruitment: pick up, carry, drop, click, and aim at an ally.
  * Nothing changes in the game before the drop; every action goes through `act`, so the engine decides.
  */
-export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: GestureOptions) {
+export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, onTap }: GestureOptions) {
   const dragging = shallowRef<Dragging | null>(null);
   const targeting = shallowRef<Targeting | null>(null);
   const pointer = ref<Point>({ x: 0, y: 0 });
@@ -114,12 +116,26 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
   /** The board slots when the drag began: they shift afterwards and must not move the target with them. */
   let slotsAtStart: { uid: number; box: DOMRect }[] = [];
   let swallowUntil = 0;
+  /**
+   * A drop that sent an action, and what the board showed then: it stays so until the game answers. Online, the answer
+   * comes a few frames later, and the table went back in between: a politician moved on the board went back to its
+   * place, then came again; the gap of a card laid from the hand closed, then opened again (8 November 2026).
+   */
+  const settling = shallowRef<{ preview: BoardPreview; item: GestureItem } | null>(null);
+  let settleTimer = 0;
+  let actionsSent = 0;
 
   const board = () => view().board;
   /** What a cast depends on beyond its target, as the engine reads it: the shop, the room on the board, the relaunches. */
   const spellTable = () => ({ shopSize: view().shop.length, boardLimit: view().boardLimit, relaunched: view().relaunched ?? [] });
 
   // —— Actions, with the effect that answers each one ——
+
+  /** Every action of the table goes to the game through here. */
+  function act(action: PlayerAction): void {
+    actionsSent++;
+    sendToGame(action);
+  }
 
   /** What was bought jumps into the hand, if the purse and the hand allow it: the engine has the last word. */
   function flyToHand(from: Point | null, cost: number, shown: { minion: Minion } | { card: ShownCard }): void {
@@ -237,9 +253,13 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
 
   // —— Clicks ——
 
-  /** A click, or a touch: the screen decides what it does (`onTap`), acting at once by default. */
-  function click(item: GestureItem, source: Element): void {
-    if (performance.now() < swallowUntil || targeting.value) return;
+  /**
+   * A click, or a touch: the screen decides what it does (`onTap`), acting at once by default. The second click of a
+   * double click (`clicksInARow`, the event's detail) does nothing: the card under it is no longer the one clicked but
+   * the one that took its place, and a double click bought or played two cards (8 November 2026).
+   */
+  function click(item: GestureItem, source: Element, clicksInARow = 1): void {
+    if (clicksInARow > 1 || performance.now() < swallowUntil || targeting.value) return;
     if (onTap) onTap(item, source);
     else actOn(item, source);
   }
@@ -307,6 +327,7 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
   }
 
   function beginDrag(item: GestureItem, point: Point): void {
+    stopSettling();
     slotsAtStart = boardSlots();
     cardInspector.pause(true);
     carrySwing.start(point.x, point.y);
@@ -350,8 +371,25 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
     if (!pressed || event.pointerId !== pressed.pointerId) return;
     stopListening();
     const current = dragging.value;
+    const shown = boardPreview.value;
     endDrag();
-    if (current) drop(current.item, current.aim, current.point);
+    if (!current) return;
+    const sentBefore = actionsSent;
+    drop(current.item, current.aim, current.point);
+    if (actionsSent > sentBefore) settle(shown, current.item);
+  }
+
+  /** The drop went to the game: the board keeps what it showed, and the source stays faint, until the answer. */
+  function settle(shown: BoardPreview, item: GestureItem): void {
+    // The aim is over: what was chosen stays, not the glow of the allies that could have been.
+    settling.value = { preview: { ...shown, valid: null, host: null }, item };
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(stopSettling, SETTLE_MS);
+  }
+
+  function stopSettling(): void {
+    window.clearTimeout(settleTimer);
+    settling.value = null;
   }
 
   function drop(item: GestureItem, aim: Aim, point: Point): void {
@@ -393,6 +431,13 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
   // —— What the board shows ——
 
   const boardPreview = computed<BoardPreview>(() => {
+    const held = settling.value;
+    if (held && !dragging.value && !targeting.value) return held.preview;
+    return livePreview();
+  });
+
+  /** The board as the gesture under way would leave it. */
+  function livePreview(): BoardPreview {
     const current = board();
     const aiming = targeting.value;
     if (aiming?.kind === 'play') {
@@ -420,13 +465,16 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
       return { ...still, order: insertAroundLocked(current, ghost, aim.index, (m) => m.locked) ?? current, ghost: GHOST_UID };
     }
     return still;
-  });
+  }
 
-  /** The source of a gesture waits as a faint copy where it was. */
+  /** The source of a gesture waits as a faint copy where it was, until the game has answered its drop. */
   function isCarried(match: (item: GestureItem) => boolean): boolean {
-    const item = dragging.value?.item;
+    const item = dragging.value?.item ?? settling.value?.item;
     return Boolean(item && match(item));
   }
+
+  // The game has answered: the table shows the game again.
+  watch(view, stopSettling);
 
   // —— Aiming: the pointer, Escape, and a click anywhere else ——
 
@@ -468,6 +516,7 @@ export function useTableGestures({ view, act, zoneAt = tableZoneAt, onTap }: Ges
   onUnmounted(() => {
     stopListening();
     endDrag();
+    stopSettling();
     window.removeEventListener('pointermove', trackPointer);
     window.removeEventListener('pointerdown', handlePressAnywhere, { capture: true });
     window.removeEventListener('click', swallowClick, { capture: true });
