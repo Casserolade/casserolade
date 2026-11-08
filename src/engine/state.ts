@@ -69,7 +69,7 @@ export interface Player {
   onceThisRound: Set<string>;
   alive: boolean;
   place: number;
-  /** Ses adversaires, manche après manche : un siège, ou -1 pour le fantôme du dernier éliminé. */
+  /** Ses adversaires, manche après manche : un siège, ou -1 pour le fantôme. */
   opponents: number[];
   /** Plateaux adverses vus en combat : la seule information sur les autres. */
   seen: { seat: number; heroId: string; round: number; board: Minion[] }[];
@@ -80,8 +80,10 @@ export interface Player {
 
 export interface CombatRecord {
   a: number;
-  /** -1 contre le fantôme du dernier éliminé. */
+  /** -1 contre le fantôme. */
   b: number;
+  /** Contre le fantôme : le héros dont il prend les traits, celui dont il joue le plateau. */
+  ghostOf?: string;
   result: CombatResult;
   /** Égalité d'effectif au début du combat. */
   evenBoards: boolean;
@@ -103,7 +105,8 @@ export interface Game {
   poolTotal: ReadonlyMap<string, number>;
   players: Player[];
   nextUid: number;
-  lastEliminated: Minion[] | null;
+  /** Le dernier éliminé, son héros et son dernier plateau : le fantôme d'une table en nombre impair. */
+  lastEliminated: { heroId: string; board: Minion[] } | null;
   ranks: number[];
   roundCombats: CombatRecord[];
   heroes: Record<string, Hero>;
