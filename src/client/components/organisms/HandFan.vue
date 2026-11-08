@@ -93,7 +93,7 @@ function leave(index: number): void {
 <template>
   <section class="hand-zone" :class="receiving" aria-label="Votre main" :style="{ '--card-w': CARD_WIDTH, '--card-h': CARD_HEIGHT, '--hidden': HIDDEN_AT_REST }">
     <span v-if="receiving" class="welcome" aria-hidden="true" />
-    <TransitionGroup name="hand" tag="ol" class="fan">
+    <TransitionGroup name="hand" tag="ol" class="fan" move-class="hand-in-place">
       <li
         v-for="(card, index) in cards"
         :key="card.uid"
@@ -144,6 +144,13 @@ function leave(index: number): void {
 .hovered > :first-child { filter: drop-shadow(0 calc(var(--s) * 16) calc(var(--s) * 26) rgb(0 0 0 / 0.75)); }
 .golden > :first-child { filter: drop-shadow(0 0 calc(var(--s) * 14) rgb(255 210 60 / 0.95)); }
 .carried { opacity: 0.25; }
+/*
+ * Each card is placed by its inline transform, and its own transition carries it to a new place. Vue's move animation
+ * would overwrite that transform, then clear it: in Firefox, a drop during a card's transition did so, and the hand
+ * piled up in the middle, the last card on top, the only one that could still be taken (8 November 2026). Vue
+ * animates a move only when the move class has a transform transition: this one has none, so the cards are never moved.
+ */
+.card.hand-in-place { transition: none; }
 .card:focus-visible { outline: none; }
 .card:focus-visible > :first-child { filter: drop-shadow(0 0 calc(var(--s) * 10) var(--color-accent)) drop-shadow(0 0 calc(var(--s) * 4) var(--color-accent)); }
 .glossary { position: absolute; z-index: 30; bottom: calc(var(--s) * 18); width: calc(var(--s) * 380); pointer-events: none; }
