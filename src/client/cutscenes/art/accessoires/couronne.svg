@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Couronne</title>
+<defs><linearGradient id="a-cr-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.4" stop-color="#f6c64a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><linearGradient id="a-cr-goldH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8700f"/><stop offset="0.3" stop-color="#f6c64a"/><stop offset="0.5" stop-color="#fff0b8"/><stop offset="0.7" stop-color="#f6c64a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><radialGradient id="a-cr-velvet" cx="0.4" cy="0.3" r="0.8"><stop offset="0" stop-color="#e04050"/><stop offset="1" stop-color="#7a1020"/></radialGradient><radialGradient id="a-cr-pearl" cx="0.35" cy="0.35" r="0.7"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c8c4d8"/></radialGradient></defs>
+
+  <ellipse cx="256" cy="452" rx="200" ry="20" fill="#141022" opacity="0.2"/>
+  <g stroke="#141022" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"><path d="M110 300 Q100 160 256 150 Q412 160 402 300 Z" fill="url(#a-cr-velvet)"/></g>
+  <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"><path d="M70 330 L80 150 L150 250 L200 110 L256 230 L312 110 L362 250 L432 150 L442 330 Z" fill="url(#a-cr-gold)"/></g>
+  <path d="M96 200 L102 300" stroke="#fff6cf" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <g stroke="#141022" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" fill="url(#a-cr-pearl)">
+    <circle cx="80" cy="140" r="20"/><circle cx="200" cy="98" r="22"/><circle cx="312" cy="98" r="22"/><circle cx="432" cy="140" r="20"/>
+  </g>
+  <g stroke="#141022" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" fill="url(#a-cr-gold)"><circle cx="256" cy="122" r="18"/><path d="M256 104 V58 M234 78 H278" fill="none" stroke="#141022" stroke-width="22" stroke-linecap="round"/></g>
+  <path d="M256 102 V62 M238 80 H274" stroke="url(#a-cr-gold)" stroke-width="10" stroke-linecap="round"/>
+  <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"><path d="M60 320 Q256 290 452 320 L446 410 Q256 380 66 410 Z" fill="url(#a-cr-goldH)"/></g>
+  <path d="M74 336 Q256 310 438 336" stroke="#fff6cf" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><path d="M256 326 L280 356 L256 386 L232 356 Z" fill="#e03040"/></g><path d="M247 347 L256 335" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.8"/><path d="M256 356 L271 362" stroke="#7a1020" stroke-width="3"/><g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><path d="M150 340 L167.6 362 L150 384 L132.4 362 Z" fill="#2a6ae0"/></g><path d="M143.4 355.4 L150 346.6" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.8"/><path d="M150 362 L161 366.4" stroke="#123a8a" stroke-width="3"/><g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"><path d="M362 340 L379.6 362 L362 384 L344.4 362 Z" fill="#2a6ae0"/></g><path d="M355.4 355.4 L362 346.6" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.8"/><path d="M362 362 L373 366.4" stroke="#123a8a" stroke-width="3"/>
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="#3fc070"><circle cx="96" cy="370" r="11"/><circle cx="416" cy="370" r="11"/></g>
+</svg>

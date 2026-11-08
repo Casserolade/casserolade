@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Soucoupe</title>
+<defs><linearGradient id="a-so-beam" gradientUnits="userSpaceOnUse" x1="0" y1="190" x2="0" y2="500"><stop offset="0" stop-color="#f4ff9a" stop-opacity="0.75"/><stop offset="0.5" stop-color="#c8ff7a" stop-opacity="0.35"/><stop offset="1" stop-color="#c8ff7a" stop-opacity="0.03"/></linearGradient><linearGradient id="a-so-hull" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f4fa"/><stop offset="0.5" stop-color="#b4bccc"/><stop offset="1" stop-color="#6a7288"/></linearGradient><linearGradient id="a-so-under" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a8298"/><stop offset="1" stop-color="#3a3e52"/></linearGradient><radialGradient id="a-so-dome" cx="0.4" cy="0.35" r="0.75"><stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="0.4" stop-color="#bff0ff" stop-opacity="0.85"/><stop offset="1" stop-color="#5ab0e0" stop-opacity="0.9"/></radialGradient><radialGradient id="a-so-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f4ff9a" stop-opacity="0.9"/><stop offset="1" stop-color="#f4ff9a" stop-opacity="0"/></radialGradient></defs>
+
+  <path d="M190 190 H322 L448 500 H64 Z" fill="url(#a-so-beam)"/>
+  <ellipse cx="256" cy="300" rx="120" ry="21.6" fill="none" stroke="#fbffd0" stroke-width="4" opacity="0.6"/><ellipse cx="256" cy="380" rx="160" ry="28.8" fill="none" stroke="#fbffd0" stroke-width="4" opacity="0.6"/><ellipse cx="256" cy="460" rx="196" ry="35.3" fill="none" stroke="#fbffd0" stroke-width="4" opacity="0.6"/>
+  <ellipse cx="256" cy="194" rx="90" ry="26" fill="url(#a-so-glow)"/>
+  <g stroke="#141022" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M70 140 Q256 98 442 140 Q470 150 442 166 Q256 214 70 166 Q42 150 70 140 Z" fill="url(#a-so-hull)"/>
+    <path d="M150 188 Q256 214 362 188 L340 204 Q256 226 172 204 Z" fill="url(#a-so-under)"/>
+    <path d="M160 132 Q166 40 256 36 Q346 40 352 132 Q256 150 160 132 Z" fill="url(#a-so-dome)"/>
+  </g>
+  <path d="M190 100 Q204 66 240 58" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M84 146 Q256 116 428 146" stroke="#ffffff" stroke-width="5" fill="none" opacity="0.7"/>
+  <circle cx="86" cy="152" r="13" fill="#ffd84a" stroke="#141022" stroke-width="5"/><circle cx="82" cy="148" r="4" fill="#ffffff"/><circle cx="146" cy="170" r="13" fill="#ff5a6a" stroke="#141022" stroke-width="5"/><circle cx="142" cy="166" r="4" fill="#ffffff"/><circle cx="214" cy="178" r="13" fill="#7dff9e" stroke="#141022" stroke-width="5"/><circle cx="210" cy="174" r="4" fill="#ffffff"/><circle cx="298" cy="178" r="13" fill="#ffd84a" stroke="#141022" stroke-width="5"/><circle cx="294" cy="174" r="4" fill="#ffffff"/><circle cx="366" cy="170" r="13" fill="#ff5a6a" stroke="#141022" stroke-width="5"/><circle cx="362" cy="166" r="4" fill="#ffffff"/><circle cx="426" cy="152" r="13" fill="#7dff9e" stroke="#141022" stroke-width="5"/><circle cx="422" cy="148" r="4" fill="#ffffff"/>
+</svg>

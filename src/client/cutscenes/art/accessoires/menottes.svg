@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<title>Menottes</title>
+<defs><linearGradient id="a-me-steel" gradientUnits="userSpaceOnUse" x1="0" y1="160" x2="0" y2="460"><stop offset="0" stop-color="#f2f4f8"/><stop offset="0.45" stop-color="#b4bac8"/><stop offset="1" stop-color="#5a6276"/></linearGradient><linearGradient id="a-me-block" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d8dce6"/><stop offset="1" stop-color="#7a8296"/></linearGradient></defs>
+
+  <ellipse cx="256" cy="470" rx="210" ry="16" fill="#141022" opacity="0.18"/>
+  <g transform="rotate(0 256 142)"><rect x="219" y="122" width="74" height="40" rx="20" fill="none" stroke="#141022" stroke-width="22"/><rect x="219" y="122" width="74" height="40" rx="20" fill="none" stroke="url(#a-me-steel)" stroke-width="10"/></g><g transform="rotate(70 206 150)"><rect x="176" y="133" width="60" height="34" rx="17" fill="none" stroke="#141022" stroke-width="22"/><rect x="176" y="133" width="60" height="34" rx="17" fill="none" stroke="url(#a-me-steel)" stroke-width="10"/></g><g transform="rotate(-70 306 150)"><rect x="276" y="133" width="60" height="34" rx="17" fill="none" stroke="#141022" stroke-width="22"/><rect x="276" y="133" width="60" height="34" rx="17" fill="none" stroke="url(#a-me-steel)" stroke-width="10"/></g>
+  
+    <circle cx="150" cy="320" r="96" fill="none" stroke="#141022" stroke-width="50"/>
+    <circle cx="150" cy="320" r="96" fill="none" stroke="url(#a-me-steel)" stroke-width="30"/>
+    <path d="M80 270 A86 86 0 0 1 170 236" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+    <circle cx="150" cy="320" r="72" fill="none" stroke="#141022" stroke-width="4" opacity="0.5"/>
+    <g stroke="#141022" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><rect x="156" y="170" width="80" height="74" rx="12" fill="url(#a-me-block)" transform="rotate(24 196 207)"/></g>
+    <circle cx="200" cy="208" r="9" fill="#141022"/>
+    <circle cx="362" cy="320" r="96" fill="none" stroke="#141022" stroke-width="50"/>
+    <circle cx="362" cy="320" r="96" fill="none" stroke="url(#a-me-steel)" stroke-width="30"/>
+    <path d="M292 270 A86 86 0 0 1 382 236" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+    <circle cx="362" cy="320" r="72" fill="none" stroke="#141022" stroke-width="4" opacity="0.5"/>
+    <g stroke="#141022" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><rect x="276" y="170" width="80" height="74" rx="12" fill="url(#a-me-block)" transform="rotate(-24 316 207)"/></g>
+    <circle cx="312" cy="208" r="9" fill="#141022"/>
+</svg>

@@ -266,3 +266,44 @@ test('le suivi compte les sorts joués et voit les Annonces, sans compter les ca
   const bilan = suivi.conclure({ ...base, spells: [] }, 1);
   assert.deepEqual(bilan.objectifs.map((o) => [o.texte, o.atteint]), [['Jouer 3 sorts', false], ['Finir en 9 manches ou moins', true]]);
 });
+
+// —— Les carrières par politique ——
+import { execFileSync } from 'node:child_process';
+import { CARRIERES } from '../src/histoire/carrieres.ts';
+import { chapitreCourant as chapitreDeCampagne, composerTable as tableDeChapitre, nouvelleCampagne as campagneNeuve } from '../src/histoire/campagne.ts';
+
+test('un héros qui a sa carrière la joue : ses chapitres, ses rivaux, son boss', () => {
+  const campagne = campagneNeuve('melenchon', 42);
+  assert.equal(campagne.carriere, true);
+  assert.equal(campagne.bossId, 'lepen');
+  assert.equal(chapitreDeCampagne(campagne)?.id, 'non_2005');
+  const henin = chapitreDeCampagne({ ...campagne, chapitre: 1 });
+  assert.ok(henin);
+  const table = tableDeChapitre(henin, 'melenchon', 42, campagne.bossId);
+  assert.deepEqual(table.sieges.slice(1, 3).map((s) => s.heroId), ['lepen', 'tondelier']);
+  const duel = chapitreDeCampagne({ ...campagne, chapitre: 5 });
+  assert.ok(duel?.boss);
+  assert.equal(tableDeChapitre(duel, 'melenchon', 42, campagne.bossId).sieges.at(-1)?.heroId, 'lepen');
+});
+
+test('un héros sans carrière garde la carrière générique', () => {
+  const campagne = campagneNeuve('lassalle', 42);
+  assert.equal(campagne.carriere, undefined);
+  assert.equal(chapitreDeCampagne(campagne)?.id, 'municipales');
+});
+
+test('chaque carrière jouable passe le validateur, cinématiques comprises', () => {
+  for (const carriere of CARRIERES) {
+    const sortie = execFileSync(process.execPath, ['tools/histoire/valider_carrieres.ts', carriere.heros], { encoding: 'utf8' });
+    assert.match(sortie, / 0 erreur\(s\)/, sortie);
+  }
+});
+
+test('le tour scénarisé de Le Pen : le pouvoir de Bardella, puis le sien et 5 sondages à la manche 6', () => {
+  const campagne = campagneNeuve('lepen', 7);
+  const chapitre = chapitreDeCampagne({ ...campagne, chapitre: 4 });
+  assert.equal(chapitre?.id, 'ineligible');
+  const table = tableDeChapitre(chapitre!, 'lepen', 7, campagne.bossId);
+  assert.deepEqual(table.game.heroOverrides?.lepen?.mods, HERO_BY_ID.bardella.mods);
+  assert.deepEqual(table.game.script, { seat: 0, evenements: { 6: { mods: HERO_BY_ID.lepen.mods, sondages: 5 } } });
+});

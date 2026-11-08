@@ -65,7 +65,16 @@ export interface Chapitre {
   /** Le défi du chapitre, une ligne. */
   decouverte: string;
   adversaires: BotLevel[];
-  /** Le dernier adversaire est le boss, tiré au sort. */
+  /** Des héros précis à la table, dans l'ordre des adversaires (les rivaux d'une carrière). */
+  rivaux?: string[];
+  /** L'année du vrai moment, dans une carrière. */
+  annee?: string;
+  /**
+   * Le tour scénarisé d'une carrière, quand il change le pouvoir ou les sondages du joueur : il part avec le pouvoir d'un
+   * autre héros (`pouvoirDe`), puis, au début de certaines manches, reprend le sien ou gagne des points de sondage.
+   */
+  scenario?: { pouvoirDe?: string; manches?: Record<number, { pouvoirPropre?: boolean; sondages?: number }> };
+  /** Le dernier adversaire est le boss : tiré au sort, ou celui de la carrière. */
   boss?: boolean;
   /** Il faut finir à cette place ou mieux pour passer au chapitre suivant. */
   placeRequise: number;

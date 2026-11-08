@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 520">
+  <defs>
+    <linearGradient id="po-bois" x1="0" x2="1">
+      <stop offset="0" stop-color="#6e4223"/>
+      <stop offset="0.5" stop-color="#9a6436"/>
+      <stop offset="1" stop-color="#5c361b"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#141022" stroke-width="10" stroke-linejoin="round">
+    <rect x="10" y="10" width="240" height="505" rx="8" fill="#3b2a1e"/>
+    <rect x="28" y="26" width="204" height="489" rx="6" fill="url(#po-bois)"/>
+    <rect x="52" y="54" width="156" height="150" rx="6" fill="none" stroke-width="7"/>
+    <rect x="52" y="330" width="156" height="150" rx="6" fill="none" stroke-width="7"/>
+    <rect x="44" y="222" width="172" height="86" rx="10" fill="#f3ecd8"/>
+    <circle cx="200" cy="280" r="0" />
+  </g>
+  <g stroke="#141022" stroke-width="7">
+    <rect x="186" y="318" width="34" height="14" rx="6" fill="#d9b24a"/>
+  </g>
+</svg>

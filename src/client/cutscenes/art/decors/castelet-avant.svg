@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Castelet, la bande</title>
+<defs><linearGradient id="av-ca-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.35" stop-color="#f6c64a"/><stop offset="0.75" stop-color="#c48a1c"/><stop offset="1" stop-color="#8a5a0c"/></linearGradient><linearGradient id="av-ca-goldh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c48a1c"/><stop offset="0.2" stop-color="#f6c64a"/><stop offset="0.5" stop-color="#fff0b8"/><stop offset="0.8" stop-color="#f6c64a"/><stop offset="1" stop-color="#c48a1c"/></linearGradient><linearGradient id="av-ca-burg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a52a3a"/><stop offset="0.5" stop-color="#7e1a28"/><stop offset="1" stop-color="#4e0d18"/></linearGradient><linearGradient id="av-ca-burgh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4e0d18"/><stop offset="0.25" stop-color="#7e1a28"/><stop offset="0.5" stop-color="#a52a3a"/><stop offset="0.75" stop-color="#7e1a28"/><stop offset="1" stop-color="#4e0d18"/></linearGradient><radialGradient id="av-ca-spot" gradientUnits="userSpaceOnUse" cx="960" cy="470" r="760"><stop offset="0" stop-color="#fff3c4" stop-opacity="0.32"/><stop offset="0.6" stop-color="#ffd27a" stop-opacity="0.08"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient><radialGradient id="av-ca-vignette" gradientUnits="userSpaceOnUse" cx="960" cy="520" r="1150"><stop offset="0.55" stop-color="#05040a" stop-opacity="0"/><stop offset="1" stop-color="#05040a" stop-opacity="0.75"/></radialGradient><clipPath id="av-ca-low"><rect x="0" y="686" width="1920" height="394"/></clipPath>
+  <clipPath id="av-ca-front"><rect x="146" y="686" width="1628" height="318"/><rect x="136" y="956" width="1648" height="48"/></clipPath></defs>
+<g clip-path="url(#av-ca-low)">
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="150" y="236" width="180" height="764" fill="url(#av-ca-burgh)"/>
+  </g>
+  <g fill="none" stroke="url(#av-ca-gold)" stroke-width="7">
+    <rect x="176" y="300" width="128" height="360" rx="10"/>
+    <rect x="176" y="720" width="128" height="220" rx="10"/>
+  </g>
+  <g fill="none" stroke="#141022" stroke-width="2.5" opacity="0.7">
+    <rect x="172" y="296" width="136" height="368" rx="13"/>
+    <rect x="172" y="716" width="136" height="228" rx="13"/>
+  </g>
+  <g stroke="#141022" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="url(#av-ca-gold)">
+    <path d="M240 420l34 60l-34 60l-34 -60z"/>
+    <circle cx="240" cy="830" r="26"/>
+  </g>
+  <circle cx="233" cy="822" r="8" fill="#fff6cf" opacity="0.8"/>
+  <path d="M230 445l10 -18" stroke="#fff6cf" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="url(#av-ca-gold)">
+    <rect x="136" y="236" width="208" height="34" rx="6"/>
+    <rect x="140" y="960" width="200" height="40" rx="6"/>
+  </g>
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="1590" y="236" width="180" height="764" fill="url(#av-ca-burgh)"/>
+  </g>
+  <g fill="none" stroke="url(#av-ca-gold)" stroke-width="7">
+    <rect x="1616" y="300" width="128" height="360" rx="10"/>
+    <rect x="1616" y="720" width="128" height="220" rx="10"/>
+  </g>
+  <g fill="none" stroke="#141022" stroke-width="2.5" opacity="0.7">
+    <rect x="1612" y="296" width="136" height="368" rx="13"/>
+    <rect x="1612" y="716" width="136" height="228" rx="13"/>
+  </g>
+  <g stroke="#141022" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="url(#av-ca-gold)">
+    <path d="M1680 420l34 60l-34 60l-34 -60z"/>
+    <circle cx="1680" cy="830" r="26"/>
+  </g>
+  <circle cx="1673" cy="822" r="8" fill="#fff6cf" opacity="0.8"/>
+  <path d="M1670 445l10 -18" stroke="#fff6cf" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="url(#av-ca-gold)">
+    <rect x="1576" y="236" width="208" height="34" rx="6"/>
+    <rect x="1580" y="960" width="200" height="40" rx="6"/>
+  </g></g>
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="330" y="698" width="1260" height="302" fill="url(#av-ca-burg)"/>
+  </g>
+  <rect x="334" y="728" width="1252" height="60" fill="#0b0716" opacity="0.28"/>
+  <g fill="none" stroke="url(#av-ca-gold)" stroke-width="8">
+    <rect x="370" y="748" width="1180" height="202" rx="18"/>
+  </g>
+  <rect x="365" y="743" width="1190" height="212" rx="22" fill="none" stroke="#141022" stroke-width="2.5" opacity="0.7"/>
+  <g fill="none" stroke="#141022" stroke-width="15" stroke-linecap="round"><path d="M810 850 C730 800 640 810 600 850 C560 890 490 880 470 846"/><path d="M1110 850 C1190 800 1280 810 1320 850 C1360 890 1430 880 1450 846"/></g>
+  <g fill="none" stroke="url(#av-ca-goldh)" stroke-width="8" stroke-linecap="round"><path d="M810 850 C730 800 640 810 600 850 C560 890 490 880 470 846"/><path d="M1110 850 C1190 800 1280 810 1320 850 C1360 890 1430 880 1450 846"/></g>
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="960" cy="850" rx="150" ry="96" fill="url(#av-ca-gold)"/>
+    <ellipse cx="960" cy="850" rx="120" ry="70" fill="#4e0d18"/>
+  </g>
+  <g transform="rotate(-7 960 850)">
+    <path d="M868 820 C830 840 840 880 820 906 M868 820 C844 856 860 890 848 920 M1052 820 C1090 840 1080 880 1100 906 M1052 820 C1076 856 1060 890 1072 920" fill="none" stroke="#141022" stroke-width="15" stroke-linecap="round"/>
+    <path d="M868 820 C830 840 840 880 820 906 M868 820 C844 856 860 890 848 920 M1052 820 C1090 840 1080 880 1100 906 M1052 820 C1076 856 1060 890 1072 920" fill="none" stroke="#e04a55" stroke-width="8" stroke-linecap="round"/>
+    <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M866 804 Q910 780 960 794 Q1010 780 1054 804 C1064 854 1026 910 960 920 C894 910 856 854 866 804 Z" fill="url(#av-ca-gold)"/>
+      <path d="M892 846 Q916 818 942 846 Q916 834 892 846 Z M1028 846 Q1004 818 978 846 Q1004 834 1028 846 Z" fill="#4e0d18"/>
+      <path d="M906 864 Q960 924 1014 864 Q960 884 906 864 Z" fill="#4e0d18"/>
+    </g>
+    <path d="M888 826 Q914 806 942 824 M1032 826 Q1006 806 978 824" fill="none" stroke="#8a5a0c" stroke-width="5" stroke-linecap="round"/>
+    <path d="M954 820 Q960 854 952 858" fill="none" stroke="#8a5a0c" stroke-width="4" stroke-linecap="round"/>
+    <path d="M886 804 Q920 788 952 798" fill="none" stroke="#fff4c8" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  </g>
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M300 690 H1620 V722 H300 Z" fill="url(#av-ca-gold)"/>
+  </g>
+  <path d="M306 697 H1614" stroke="#fff4c8" stroke-width="5" stroke-linecap="round"/>
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" fill="url(#av-ca-gold)">
+    <rect x="330" y="966" width="1260" height="34"/>
+  </g>
+  <path d="M330 970 H1590" stroke="#fff4c8" stroke-width="3" opacity="0.7"/><g clip-path="url(#av-ca-front)"><rect x="120" y="40" width="1680" height="960" fill="url(#av-ca-spot)" opacity="0.6"/><rect width="1920" height="1080" fill="url(#av-ca-vignette)"/></g>
+</svg>

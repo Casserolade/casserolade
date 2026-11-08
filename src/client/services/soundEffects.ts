@@ -121,6 +121,14 @@ function audio(): { context: AudioContext; master: GainNode } | null {
 }
 
 /**
+ * The output for the sounds made elsewhere (the cutscenes' music and sound effects): the audio context and the
+ * master gain, which carries the player's volume. Null when the sound is off or cannot play.
+ */
+export function soundOutput(): { context: AudioContext; master: GainNode } | null {
+  return soundSettings.muted.value ? null : audio();
+}
+
+/**
  * A short sound of the table, made in code. `strength` makes it louder or softer (a big hit, a small one).
  * Never twice in the same instant, never more than a few at once, and each time a little different.
  */

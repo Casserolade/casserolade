@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+<title>Bureau du ministre, le bureau plat</title>
+<defs><linearGradient id="av-bu-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0b8"/><stop offset="0.4" stop-color="#f0c04a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><linearGradient id="av-bu-goldH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a8700f"/><stop offset="0.3" stop-color="#f0c04a"/><stop offset="0.5" stop-color="#fff0b8"/><stop offset="0.7" stop-color="#f0c04a"/><stop offset="1" stop-color="#a8700f"/></linearGradient><linearGradient id="av-bu-wood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a3418"/><stop offset="0.5" stop-color="#5a240e"/><stop offset="1" stop-color="#341306"/></linearGradient><linearGradient id="av-bu-woodH" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#341306"/><stop offset="0.2" stop-color="#6a2c12"/><stop offset="0.5" stop-color="#8a4020"/><stop offset="0.8" stop-color="#6a2c12"/><stop offset="1" stop-color="#341306"/></linearGradient><linearGradient id="av-bu-leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f6a46"/><stop offset="1" stop-color="#1d4a30"/></linearGradient><linearGradient id="av-bu-phone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4ead2"/><stop offset="1" stop-color="#c8b890"/></linearGradient></defs>
+
+  
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M520 794 H620 L606 776 H534 Z" fill="url(#av-bu-gold)"/>
+    <rect x="564" y="728" width="12" height="50" fill="url(#av-bu-gold)"/>
+    <path d="M500 738 H640 L616 684 H524 Z" fill="#2f6a46"/>
+  </g>
+  <path d="M530 692 L514 730" stroke="#6fae80" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+  <g stroke="#141022" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M500 800 H1420 L1440 834 H480 Z" fill="url(#av-bu-leather)"/>
+    <path d="M470 832 H1450 V900 Q1400 916 1360 930 Q1200 900 960 900 Q720 900 560 930 Q520 916 470 900 Z" fill="url(#av-bu-woodH)"/>
+    <path d="M486 900 Q520 930 530 1000 Q536 1060 520 1090 H600 Q590 1020 570 960 Q560 930 560 930 Z" fill="url(#av-bu-wood)"/>
+    <path d="M1434 900 Q1400 930 1390 1000 Q1384 1060 1400 1090 H1320 Q1330 1020 1350 960 Q1360 930 1360 930 Z" fill="url(#av-bu-wood)"/>
+  </g>
+  <path d="M500 806 H1420" stroke="#e0b450" stroke-width="4" opacity="0.8"/>
+  <path d="M478 836 H1442" stroke="url(#av-bu-goldH)" stroke-width="8"/>
+  <g stroke="#141022" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="url(#av-bu-gold)">
+    <path d="M900 846 C920 890 1000 890 1020 846 C1000 870 920 870 900 846 Z M940 852 Q960 830 980 852 Q960 900 940 852 Z"/>
+    <path d="M470 836 Q500 880 486 920 L506 920 Q520 870 500 836 Z"/>
+    <path d="M1450 836 Q1420 880 1434 920 L1414 920 Q1400 870 1420 836 Z"/>
+    <path d="M520 1090 L512 1074 H608 L600 1090 Z M1400 1090 L1408 1074 H1312 L1320 1090 Z"/>
+  </g>
+  <path d="M640 870 Q760 880 880 860 M1040 860 Q1160 880 1280 870" stroke="#e0b450" stroke-width="5" fill="none" stroke-linecap="round"/>
+  
+  <g stroke="#141022" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="700" y="776" width="150" height="20" rx="3" fill="#24306a" transform="rotate(-3 700 776)"/>
+    <rect x="706" y="758" width="146" height="20" rx="3" fill="#b3202d" transform="rotate(2 700 758)"/>
+    <rect x="698" y="740" width="150" height="20" rx="3" fill="#e8d9a8" transform="rotate(-2 700 740)"/>
+  </g>
+  <g stroke="#141022" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"><rect x="1040" y="782" width="70" height="14" rx="3" fill="#2a2d3e"/><path d="M1060 782 L1090 740" stroke="#141022" stroke-width="6" stroke-linecap="round"/><path d="M1060 782 L1090 740" stroke="#e0b450" stroke-width="2.5" stroke-linecap="round"/></g>
+  
+  <g stroke="#141022" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M1240 798 L1256 750 H1364 L1380 798 Z" fill="url(#av-bu-phone)"/>
+    <ellipse cx="1310" cy="774" rx="30" ry="14" fill="#fbf6ea"/>
+    <path d="M1236 742 Q1230 716 1254 712 H1366 Q1390 716 1384 742 Q1370 750 1354 738 H1266 Q1250 750 1236 742 Z" fill="url(#av-bu-phone)"/>
+  </g>
+  <g fill="#c8b890"><circle cx="1327.8" cy="769.9" r="4"/><circle cx="1330" cy="774.3" r="4"/><circle cx="1327.2" cy="778.6" r="4"/><circle cx="1320.2" cy="781.7" r="4"/><circle cx="1310.6" cy="783" r="4"/><circle cx="1300.9" cy="782" r="4"/><circle cx="1293.5" cy="779.1" r="4"/><circle cx="1290.1" cy="774.8" r="4"/><circle cx="1291.6" cy="770.4" r="4"/><circle cx="1297.7" cy="766.9" r="4"/></g>
+  <path d="M1380 790 C1420 800 1410 760 1440 770 C1460 778 1450 800 1470 798" stroke="#141022" stroke-width="5" fill="none" stroke-linecap="round"/>
+</svg>

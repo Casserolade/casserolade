@@ -265,6 +265,15 @@ function followScript(game: Game, p: Player, frozen: boolean): void {
   if (casserole) p.casseroleOffer = casserole;
 }
 
+/** Ce qu'une carrière fait arriver au siège en début de manche : un autre pouvoir, des points de sondage. */
+function followEvents(game: Game, p: Player): void {
+  const script = game.script;
+  const event = script && script.seat === p.seat ? script.evenements?.[game.round] : undefined;
+  if (!event) return;
+  if (event.mods) p.hero = { ...p.hero, mods: { ...event.mods } };
+  if (event.sondages) p.hp = Math.max(1, p.hp + event.sondages);
+}
+
 export function startRound(game: Game): void {
   game.round++;
   const { params, round } = game;
@@ -292,6 +301,7 @@ export function startRound(game: Game): void {
     // Le gel garde aussi la casserole, si elle n'a pas été achetée.
     if (!frozen || !p.casseroleOffer) offerCasserole(game, p);
     followScript(game, p, frozen);
+    followEvents(game, p);
     if (round === 1 && game.ctx.firstRoundDiscover) offerMinions(game, p, game.ctx.firstRoundDiscover);
     if (dissolved && game.ctx.dissolutionDiscover) offerMinions(game, p, p.tier);
     startOfTurn(game, p);

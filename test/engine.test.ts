@@ -915,3 +915,16 @@ test('un héros au bonus de sondages négatif ne commence jamais la partie élim
   const game = createGame({ seed: 3, heroes: Array(8).fill('bouamrane'), params: { startHp: 4 } });
   assert.ok(game.players.every((p) => p.hp >= 1 && p.alive));
 });
+
+test('un événement de carrière change le pouvoir et les sondages du siège, au début de sa manche seulement', () => {
+  const probe = createGame({ seed: 5, seats: 2, heroes: ['lepen', 'macron'] });
+  const next = probe.round + 1;
+  const game = createGame({ seed: 5, seats: 2, heroes: ['lepen', 'macron'], script: { seat: 0, evenements: { [next]: { mods: { upgradeDiscount: 3 }, sondages: 5 } } } });
+  const before = { mods: { ...game.players[0].hero.mods }, hp: game.players[0].hp };
+  assert.notDeepEqual(before.mods, { upgradeDiscount: 3 });
+  startRound(game);
+  assert.equal(game.round, next);
+  assert.deepEqual(game.players[0].hero.mods, { upgradeDiscount: 3 });
+  assert.equal(game.players[0].hp, before.hp + 5);
+  assert.notDeepEqual(game.players[1].hero.mods, { upgradeDiscount: 3 });
+});
