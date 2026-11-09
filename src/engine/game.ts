@@ -45,6 +45,7 @@ import {
   spend,
   startOfTurn,
   take,
+  topUpShop,
   welcome,
 } from './recruit.ts';
 import { CARDS, CARD_BY_ID, PARTY_CAMPS } from '../data/cards.ts';
@@ -296,8 +297,11 @@ export function startRound(game: Game): void {
     p.buysThisRound = 0;
     p.rollsThisRound = 0;
     const frozen = p.frozen;
-    if (frozen) p.frozen = false;
-    else refillShop(game, p);
+    // Gelée, la boutique garde ses cartes et complète ses places vides ; sinon elle se renouvelle.
+    if (frozen) {
+      p.frozen = false;
+      topUpShop(game, p);
+    } else refillShop(game, p);
     // Le gel garde aussi la casserole, si elle n'a pas été achetée.
     if (!frozen || !p.casseroleOffer) offerCasserole(game, p);
     followScript(game, p, frozen);

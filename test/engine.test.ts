@@ -928,3 +928,32 @@ test('un événement de carrière change le pouvoir et les sondages du siège, a
   assert.equal(game.players[0].hp, before.hp + 5);
   assert.notDeepEqual(game.players[1].hero.mods, { upgradeDiscount: 3 });
 });
+
+// Retour de partie du 9 novembre 2026 : une boutique gelée après un achat revenait avec une carte de moins.
+test('une boutique gelée garde ses cartes et remplit ses places vides à la manche suivante, sort compris', () => {
+  const game = createGame({ seed: 11, seats: 2, heroes: ['lassalle', 'macron'] });
+  const p = game.players[0];
+  p.budget = 30;
+  assert.ok(applyAction(game, 0, { t: 'buy', slot: 0 }).ok);
+  assert.ok(p.shopSpells.length > 0 && applyAction(game, 0, { t: 'buy_spell', slot: 0 }).ok);
+  const kept = [...p.shop];
+  assert.equal(kept.length, game.params.shopSize[p.tier] - 1);
+  assert.ok(applyAction(game, 0, { t: 'freeze' }).ok);
+  resolveRound(game);
+  assert.deepEqual(p.shop.slice(0, kept.length), kept, 'les cartes gelées restent');
+  assert.equal(p.shop.length, game.params.shopSize[p.tier], 'la place vide se remplit');
+  assert.equal(p.shopSpells.length, game.params.spellSlots, 'le sort acheté est remplacé');
+});
+
+test('geler puis monter d\'échelon : la manche suivante a les places du nouvel échelon', () => {
+  const game = createGame({ seed: 12, seats: 2, heroes: ['lassalle', 'macron'] });
+  const p = game.players[0];
+  p.budget = 30;
+  const kept = [...p.shop];
+  assert.ok(applyAction(game, 0, { t: 'freeze' }).ok);
+  assert.ok(applyAction(game, 0, { t: 'upgrade' }).ok);
+  resolveRound(game);
+  assert.deepEqual(p.shop.slice(0, kept.length), kept);
+  assert.equal(p.shop.length, game.params.shopSize[p.tier]);
+  assert.ok(game.params.shopSize[p.tier] > kept.length, 'l\'échelon 2 a plus de places que le 1');
+});

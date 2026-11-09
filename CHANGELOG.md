@@ -14,6 +14,7 @@
 **Corrections**
 - Sous Firefox, poser une carte pendant que l'éventail de la main bouge ne l'empile plus au centre.
 - Un double clic n'achète ni ne joue plus deux cartes, et la carte posée quitte la main aussitôt. En ligne, le plateau ne revient plus en arrière avant la réponse du serveur.
+- Une boutique gelée garde ses cartes et remplit ses places vides à la manche suivante : un politique ou un sort acheté, ou un échelon de plus, ne laissent plus moins de cartes qu'attendu.
 - À une table en nombre impair, avant la première élimination, le fantôme n'a plus un plateau vide : il copie celui d'un autre joueur, tiré au sort. On ne gagne plus un combat d'office, par exemple à cinq à Hénin-Beaumont. Le fantôme montre, grisé, le visage de celui dont il joue le plateau, au lieu d'un micro.
 
 ## 0.2e — 7 novembre 2026
