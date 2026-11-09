@@ -6,8 +6,9 @@ import type { Scene } from '#src/data/histoire/cinematique.ts';
 import { CARRIERES, cinematiquesParEtape } from '#src/histoire/carrieres.ts';
 
 /**
- * The cinematheque of the careers, opened by the cinema cheat: every cutscene of every career, step by step, to watch
- * again. Watching one changes nothing in the campaign: it is not counted as seen.
+ * The cinematheque of the careers, opened by the cinema cheat (its button sits with the career screens' own buttons):
+ * every cutscene of every career, step by step, to watch again. Watching one changes nothing in the campaign: it is not
+ * counted as seen.
  */
 const emit = defineEmits<{ play: [scene: Scene] }>();
 
@@ -19,6 +20,8 @@ const careers = [...CARRIERES]
 function open(): void {
   dialog.value?.showModal();
 }
+
+defineExpose({ open });
 
 function play(scene: Scene): void {
   dialog.value?.close();
@@ -32,28 +35,24 @@ function closeOutside(event: MouseEvent): void {
 </script>
 
 <template>
-  <div class="cinema-corner">
-    <AppButton @click="open">Cinémathèque</AppButton>
-    <dialog ref="dialog" class="shelf" aria-labelledby="cinema-title" @click="closeOutside">
-      <h2 id="cinema-title">Cinémathèque</h2>
-      <section v-for="career in careers" :key="career.heroId" class="career" :aria-label="career.name">
-        <h3>{{ career.name }}</h3>
-        <ol>
-          <li v-for="step in career.steps" :key="step.scene.id">
-            <button type="button" class="step" @click="play(step.scene)">
-              <span class="mark" aria-hidden="true">▶</span>
-              <span>{{ step.etape }}</span>
-            </button>
-          </li>
-        </ol>
-      </section>
-      <form method="dialog" class="actions"><AppButton type="submit">Fermer</AppButton></form>
-    </dialog>
-  </div>
+  <dialog ref="dialog" class="shelf" aria-labelledby="cinema-title" @click="closeOutside">
+    <h2 id="cinema-title">Cinémathèque</h2>
+    <section v-for="career in careers" :key="career.heroId" class="career" :aria-label="career.name">
+      <h3>{{ career.name }}</h3>
+      <ol>
+        <li v-for="step in career.steps" :key="step.scene.id">
+          <button type="button" class="step" @click="play(step.scene)">
+            <span class="mark" aria-hidden="true">▶</span>
+            <span>{{ step.etape }}</span>
+          </button>
+        </li>
+      </ol>
+    </section>
+    <form method="dialog" class="actions"><AppButton type="submit">Fermer</AppButton></form>
+  </dialog>
 </template>
 
 <style scoped>
-.cinema-corner { position: fixed; z-index: 30; left: 1rem; bottom: 1rem; }
 .shelf {
   width: min(44rem, 94vw);
   max-height: 88dvh;

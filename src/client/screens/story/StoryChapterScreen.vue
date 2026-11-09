@@ -16,10 +16,10 @@ import { chapitresDe, texteObjectif } from '#src/histoire/campagne.ts';
  * Before an election: the road so far, the challenge of this one, its special rule, who stands
  * against you and what earns the stars. One button to go.
  */
-const props = defineProps<{ chapter: Chapitre; campaign: Campagne }>();
+const props = withDefaults(defineProps<{ chapter: Chapitre; campaign: Campagne; cinema?: boolean }>(), { cinema: false });
 
 const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
-defineEmits<{ play: []; abandon: []; leave: [] }>();
+defineEmits<{ play: []; abandon: []; cinema: []; leave: [] }>();
 
 const hero = computed(() => HERO_BY_ID[props.campaign.heroId]);
 /** This campaign's chapters: the hero's own career, or the generic elections. */
@@ -92,6 +92,7 @@ const road = computed(() => chapters.value.map((c, i) => ({
     <div class="actions">
       <AppButton primary @click="$emit('play')">Entrer en campagne</AppButton>
       <AppButton @click="$emit('abandon')">Changer de politique</AppButton>
+      <AppButton v-if="cinema" @click="$emit('cinema')">Cinémathèque</AppButton>
       <AppButton @click="$emit('leave')">Accueil</AppButton>
     </div>
   </MenuBackdrop>
