@@ -1,9 +1,10 @@
 import { HEROES } from '../data/heroes.ts';
-import { CHAPITRES, OUTRE_TOMBE } from '../data/histoire/chapitres.ts';
+import { CHAPITRES_COMPTES } from '../histoire/carrieres.ts';
 import { BOT_LEVELS, DEVICES, HOST_NAME, MAX_COUNTER_BYTES, PAGE_KINDS } from './counterEvent.ts';
 import type { CounterEvent, GameResult, GameSettings } from './counterEvent.ts';
 
-const CHAPTER_IDS: ReadonlySet<string> = new Set([...CHAPITRES, OUTRE_TOMBE].map((chapter) => chapter.id));
+/** The generic elections and every career's chapters (`durif.bugarach`). */
+const CHAPTER_IDS: ReadonlySet<string> = new Set(CHAPITRES_COMPTES.map((chapter) => chapter.id));
 /** The heroes a human can play: bosses only sit at the bots' seats. */
 const HERO_IDS: ReadonlySet<string> = new Set(HEROES.map((hero) => hero.id));
 /** A version as players see it: 0.2c. */

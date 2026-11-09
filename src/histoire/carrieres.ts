@@ -1,4 +1,6 @@
 import type { Carriere, ChapitreCarriere } from '../data/histoire/carriere.ts';
+import { HERO_BY_ID } from '../data/heroes.ts';
+import { CHAPITRES, OUTRE_TOMBE } from '../data/histoire/chapitres.ts';
 import type { Chapitre } from '../data/histoire/chapitres.ts';
 import type { Moment, Scene } from '../data/histoire/cinematique.ts';
 import { carriere as durif } from '../data/histoire/carrieres/durif.ts';
@@ -94,3 +96,17 @@ export function cinematiquesParEtape(heroId: string): EtapeCinematique[] {
   for (const scene of carriere.cinematiques) ajouter(scene.id, scene);
   return etapes;
 }
+
+/** L'id d'un chapitre pour le compteur du site : celui d'une carrière porte le nom de son héros (deux carrières ont un « second_tour »). */
+export function idCompteur(heroId: string | null, chapitreId: string): string {
+  return heroId ? `${heroId}.${chapitreId}` : chapitreId;
+}
+
+/** Les chapitres que le compteur connaît, avec leur nom au tableau de bord : les élections génériques, puis ceux des carrières. */
+export const CHAPITRES_COMPTES: { id: string; nom: string }[] = [
+  ...[...CHAPITRES, OUTRE_TOMBE].map((chapitre) => ({ id: chapitre.id, nom: chapitre.election })),
+  ...CARRIERES.flatMap((carriere) => carriere.chapitres.map((chapitre) => ({
+    id: idCompteur(carriere.heros, chapitre.id),
+    nom: `${HERO_BY_ID[carriere.heros]?.name ?? carriere.heros} · ${chapitre.election}`,
+  }))),
+];

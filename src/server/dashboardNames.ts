@@ -1,8 +1,8 @@
 import { HEROES } from '../data/heroes.ts';
-import { CHAPITRES, OUTRE_TOMBE } from '../data/histoire/chapitres.ts';
+import { CHAPITRES_COMPTES } from '../histoire/carrieres.ts';
 
-/** The names the dashboard shows for the ids it counts: heroes, and the career's elections in their order. */
+/** The names the dashboard shows for the ids it counts: heroes, the generic elections in their order, then each career's. */
 export const DASHBOARD_NAMES = {
   heros: Object.fromEntries(HEROES.map((hero) => [hero.id, hero.name])),
-  chapitres: [...CHAPITRES, OUTRE_TOMBE].map((chapter) => ({ id: chapter.id, nom: chapter.election })),
+  chapitres: CHAPITRES_COMPTES,
 };
