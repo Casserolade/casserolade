@@ -166,10 +166,8 @@ function leave(): void {
   <template v-else-if="store && run">
     <!-- Leaving the game gives up this election: back to its page, to play it again or go home. -->
     <GameScreens :store="store" @leave="stopRun">
-      <template #recruit-side>
-        <StoryQuest v-if="quest" :quest="quest" />
-        <StoryFeed v-if="currentLine" :line="currentLine" :hero-id="campaign.heroId" :boss-id="run.bossId" />
-      </template>
+      <template #recruit-line><StoryFeed v-if="currentLine" :line="currentLine" :hero-id="campaign.heroId" :boss-id="run.bossId" /></template>
+      <template #recruit-quest><StoryQuest v-if="quest" :quest="quest" /></template>
     </GameScreens>
   </template>
   <StoryChapterScreen v-else-if="chapter" :chapter="chapter" :campaign="campaign" @play="play" @abandon="abandon" @leave="leave" />

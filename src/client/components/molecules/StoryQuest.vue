@@ -26,10 +26,10 @@ const state = computed(() => {
 .quest {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--s) * 6);
+  gap: calc(var(--s) * 4);
   width: 100%;
   margin: 0;
-  padding: calc(var(--s) * 10) calc(var(--s) * 14);
+  padding: calc(var(--s) * 8) calc(var(--s) * 14);
   border-radius: calc(var(--s) * 14);
   border: calc(var(--s) * 4) solid var(--color-ink);
   background: #fffbe8;
@@ -37,8 +37,8 @@ const state = computed(() => {
   box-shadow: calc(var(--s) * 4) calc(var(--s) * 6) 0 rgb(0 0 0 / 0.35);
   rotate: -1deg;
 }
-.label { font: 400 calc(var(--s) * 24) / 1 var(--font-number); letter-spacing: calc(var(--s) * 1); color: #c8102e; }
-.count { font: 400 calc(var(--s) * 40) / 1 var(--font-number); }
+.label { font: 400 calc(var(--s) * 21) / 1 var(--font-number); letter-spacing: calc(var(--s) * 1); color: #c8102e; }
+.count { font: 400 calc(var(--s) * 32) / 1 var(--font-number); }
 .bar { display: block; height: calc(var(--s) * 12); border-radius: 999px; border: calc(var(--s) * 3) solid var(--color-ink); background: #e8dfc0; overflow: hidden; }
 .fill { display: block; height: 100%; background: #e2a400; transition: width 0.4s ease-out; }
 .state { font: 700 calc(var(--s) * 20) / 1 var(--font-card); text-transform: uppercase; letter-spacing: 0.06em; }
