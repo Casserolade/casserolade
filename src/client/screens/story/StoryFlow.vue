@@ -17,7 +17,7 @@ import { createGameStore } from '#src/client/stores/createGameStore.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { StoryRun } from '#src/client/stores/createStoryRun.ts';
 import { apresChapitre, chapitreCourant, nouvelleCampagne } from '#src/histoire/campagne.ts';
-import { cinematiqueApres, cinematiqueDe } from '#src/histoire/carrieres.ts';
+import { cinematiqueApres, cinematiqueDe, idCompteur } from '#src/histoire/carrieres.ts';
 import type { Scene } from '#src/data/histoire/cinematique.ts';
 import type { Campagne } from '#src/histoire/campagne.ts';
 import { generateSeed } from '#src/server/generateSeed.ts';
@@ -36,6 +36,8 @@ const currentLine = computed(() => run.value?.currentLine.value ?? null);
 const bilan = computed(() => run.value?.bilan.value ?? null);
 /** The quest of a career's chapter (sponsorships, an ultimatum), as the player sees it. */
 const quest = computed(() => store.value?.view.value?.quete ?? null);
+/** The chapter as the site counter knows it: a career's carries its hero's name. */
+const countedChapter = computed(() => (campaign.value && chapter.value ? idCompteur(campaign.value.carriere ? campaign.value.heroId : null, chapter.value.id) : ''));
 /** The election night comes once the game screens are done: after the combat, and after the elimination. */
 const resultShown = computed(() => Boolean(bilan.value && (!store.value || store.value.screen.value === 'end')));
 
@@ -45,7 +47,7 @@ watch(bilan, (result) => {
   const ranking = store.value.ranking.value;
   if (ranking) {
     achievements.recordGame(ranking, store.value.view.value, result.reussi ? { chapitre: chapter.value.id } : {});
-    counter.gameEnded({ mode: 'carriere', chapitre: chapter.value.id }, ranking, store.value.view.value, result.reussi);
+    counter.gameEnded({ mode: 'carriere', chapitre: countedChapter.value }, ranking, store.value.view.value, result.reussi);
   }
   clearLocalGame();
 });
@@ -121,7 +123,7 @@ function startChapter(): void {
   run.value = new StoryRun(chapter.value, campaign.value.heroId, campaign.value.bossId);
   store.value = createGameStore(run.value);
   markLocalGame({ kind: 'carriere' });
-  counter.gameStarted({ mode: 'carriere', chapitre: chapter.value.id });
+  counter.gameStarted({ mode: 'carriere', chapitre: countedChapter.value });
 }
 
 function stopRun(): void {

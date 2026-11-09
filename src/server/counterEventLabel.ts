@@ -1,10 +1,10 @@
 import { HERO_BY_ID } from '../data/heroes.ts';
-import { CHAPITRES, OUTRE_TOMBE } from '../data/histoire/chapitres.ts';
+import { CHAPITRES_COMPTES } from '../histoire/carrieres.ts';
 import type { CounterEvent, Device, GameEndEvent, GameStartEvent, PageEvent, PageKind } from '../protocol/counterEvent.ts';
 
 const PAGES: Record<PageKind, string> = { jeu: 'le jeu', jeu_telephone: 'le jeu sur téléphone', bestiaire: 'le bestiaire', a_propos: 'la page À propos' };
 const DEVICE_NAMES: Record<Device, string> = { telephone: 'téléphone', tablette: 'tablette', ordinateur: 'ordinateur' };
-const ELECTIONS: Record<string, string> = Object.fromEntries([...CHAPITRES, OUTRE_TOMBE].map((chapter) => [chapter.id, chapter.election]));
+const ELECTIONS: Record<string, string> = Object.fromEntries(CHAPITRES_COMPTES.map((chapter) => [chapter.id, chapter.nom]));
 
 function visitLabel(event: PageEvent): string | null {
   if (!event.premier) return null;

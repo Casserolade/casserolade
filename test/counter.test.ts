@@ -1,3 +1,4 @@
+import { idCompteur } from '../src/histoire/carrieres.ts';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseCounterEvent } from '../src/protocol/parseCounterEvent.ts';
@@ -108,4 +109,12 @@ test('the totals of a run of days, and the statistics file read in both formats'
   assert.equal(current.days[0].pages.a_propos, 0, 'a field missing from the file is completed');
   assert.deepEqual(current.cumul.heros, {});
   assert.equal(current.cumul.niveaux.moyen.lancees, 1);
+});
+
+test('a career chapter is counted under its hero, with its own name on the dashboard', () => {
+  assert.deepEqual(parseCounterEvent('{"type":"partie","mode":"carriere","chapitre":"durif.bugarach"}'), { type: 'partie', mode: 'carriere', chapitre: 'durif.bugarach' });
+  assert.equal(parseCounterEvent('{"type":"partie","mode":"carriere","chapitre":"durif.inventee"}'), null);
+  assert.equal(counterEventLabel({ type: 'partie', mode: 'carriere', chapitre: 'melenchon.second_tour' }), 'Carrière lancée : Jean-Luc Mélenchon · Le second tour');
+  assert.equal(idCompteur('durif', 'second_tour'), 'durif.second_tour');
+  assert.equal(idCompteur(null, 'municipales'), 'municipales');
 });
