@@ -101,7 +101,8 @@ function again(): void {
   />
   <component :is="screens.hero" v-else-if="store.screen.value === 'hero' && store.view.value" :view="store.view.value" :deadline="store.deadline.value" @choose="(i: number) => store.act({ t: 'hero', i })" />
   <component :is="screens.recruit" v-else-if="store.screen.value === 'recruit' && store.view.value" :view="store.view.value" :store="store" :power-note="powerNote">
-    <template #side-top><slot name="recruit-side" /></template>
+    <template #story-line><slot name="recruit-line" /></template>
+    <template #story-quest><slot name="recruit-quest" /></template>
   </component>
   <EliminatedScreen
     v-else-if="store.screen.value === 'eliminated' && store.view.value"

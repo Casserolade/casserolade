@@ -91,9 +91,11 @@ watch(tripleCount, (count, before) => {
     </div>
     <HandFan :view="view" :gestures="gestures" />
 
+    <!-- A career's line (narrator, host) in the free top-left corner, its quest above the ready button: the rail keeps its size. -->
+    <div class="story-line-place"><slot name="story-line" /></div>
+    <div class="story-quest-place"><slot name="story-quest" /></div>
     <div class="right-rail">
       <ReadyButton :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" @ready="store.endRecruitment()" />
-      <slot name="side-top" />
       <CampChips class="camps" :camps="view.camps" vertical />
       <ContextBadge :context-id="view.contextId" compact />
     </div>
@@ -120,6 +122,8 @@ watch(tripleCount, (count, before) => {
 .shop-place { position: absolute; left: calc(var(--s) * 326); top: calc(var(--s) * 174); width: calc(var(--s) * 1268); height: calc(var(--s) * 252); }
 .board-place { position: absolute; left: calc(var(--s) * 316); top: calc(var(--s) * 452); width: calc(var(--s) * 1288); height: calc(var(--s) * 300); }
 .hero-spot { position: absolute; left: calc(var(--s) * 52); bottom: calc(var(--s) * 22); }
+.story-line-place { position: absolute; left: calc(var(--s) * 16); top: calc(var(--s) * 14); width: calc(var(--s) * 530); }
+.story-quest-place { position: absolute; right: calc(var(--s) * 40); top: calc(var(--s) * 172); width: calc(var(--s) * 220); }
 .right-rail { position: absolute; right: calc(var(--s) * 40); top: calc(var(--s) * 300); width: calc(var(--s) * 220); display: flex; flex-direction: column; align-items: center; gap: calc(var(--s) * 30); }
 .right-rail .camps { padding: calc(var(--s) * 12); border-radius: calc(var(--s) * 18); background: rgb(12 16 32 / 0.8); }
 .budget { position: absolute; right: calc(var(--s) * 30); bottom: calc(var(--s) * 26); }
