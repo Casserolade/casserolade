@@ -33,7 +33,12 @@ const rule = computed(() => {
   if (props.chapter.contexteId) return CONTEXTS.find((c) => c.id === props.chapter.contexteId) ?? null;
   return null;
 });
-const goal = computed(() => (props.chapter.placeRequise === 1 ? 'Finir premier' : `Finir dans les ${props.chapter.placeRequise} premiers`));
+/** A rival to finish ahead of decides the chapter alone, whatever the place. */
+const rivalAhead = computed(() => props.chapter.scenario?.regles?.devant ?? null);
+const goal = computed(() => {
+  if (rivalAhead.value) return `Finir devant ${HERO_BY_ID[rivalAhead.value]?.name ?? rivalAhead.value}`;
+  return props.chapter.placeRequise === 1 ? 'Finir premier' : `Finir dans les ${props.chapter.placeRequise} premiers`;
+});
 const rivals = computed(() => props.chapter.adversaires.length);
 const road = computed(() => chapters.value.map((c, i) => ({
   id: c.id,
