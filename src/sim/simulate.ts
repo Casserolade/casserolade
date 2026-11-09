@@ -1,3 +1,4 @@
+import type { Quest } from '../engine/state.ts';
 import { applyAction, createGame, resolveRound, viewFor } from '../engine/game.ts';
 import type { Game, GameOptions } from '../engine/game.ts';
 import type { Hero, Params } from '../engine/types.ts';
@@ -27,6 +28,8 @@ export interface SeatResult {
   scandals: number;
   triples: number;
   rank6: number | null;
+  /** La quête d'un chapitre de carrière, à la fin de la partie : elle décide parfois du chapitre. */
+  quest?: Quest | null;
   /** Nombre d'actions par type : vérifie que le bot fait bien ce qu'on croit. */
   actions: Record<string, number>;
   /** La carte offerte (`RunOptions.gift`) a-t-elle été posée dans sa manche ou la suivante ? Vérifie que le bot la joue. */
@@ -247,6 +250,7 @@ export function playGame(opts: RunOptions): GameResult {
         triples: p.stats.triples,
         rank6: rank6.get(p.seat) ?? null,
         actions: actionCounts[p.seat],
+        ...(p.quest ? { quest: { ...p.quest } } : {}),
         ...(opts.gift?.seat === p.seat ? { giftPlayed } : {}),
       };
     }),

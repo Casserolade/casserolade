@@ -359,3 +359,20 @@ test('Durif : minuit, les parrainages et les vaisseaux passent au moteur, la rè
   const script = tableDeChapitre(vaisseau, 'durif', 5, campagne.bossId).game.script;
   assert.deepEqual(script?.evenements?.[6], { enleve: { quoi: 'plus_faible', retour: 7, dore: true } });
 });
+
+test('Mélenchon et Le Pen : chaque règle de tour arrive au moteur, et l\'écran la dit', () => {
+  const regles = (heros: string, chapitre: number) => {
+    const campagne = campagneNeuve(heros, 3);
+    const ch = chapitreDeCampagne({ ...campagne, chapitre })!;
+    return { ch, script: tableDeChapitre(ch, heros, 3, campagne.bossId).game.script };
+  };
+  assert.equal(regles('melenchon', 0).script?.regles?.devant, 'hollande');
+  assert.deepEqual(regles('melenchon', 2).script?.evenements?.[4], { enleve: { quoi: 'plus_fort', retour: 5, bonus: 5 } });
+  assert.equal(regles('melenchon', 3).script?.regles?.retour, 5);
+  assert.equal(regles('melenchon', 4).script?.regles?.devant, 'lepen');
+  assert.equal(regles('lepen', 1).script?.regles?.devant, 'melenchon');
+  assert.equal(regles('lepen', 2).script?.regles?.devant, 'bertrand');
+  for (const [heros, chapitre] of [['melenchon', 0], ['melenchon', 2], ['melenchon', 3], ['melenchon', 4], ['lepen', 1], ['lepen', 2]] as const) {
+    assert.ok(regles(heros, chapitre).ch.consigne, `${heros}, chapitre ${chapitre} : la règle s'affiche`);
+  }
+});

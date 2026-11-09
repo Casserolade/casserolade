@@ -45,7 +45,10 @@ for (const chapitre of chapitres) {
       manches += r.rounds;
       parties++;
       refus += r.rejected;
-      if (r.seats[0].place <= chapitre.placeRequise) ok++;
+      // The same verdict as the game (campagne.ts): a decisive quest decides alone, a failed eliminating one loses.
+      const quest = r.seats[0].quest;
+      const won = quest?.decisive ? quest.etat === 'reussie' : r.seats[0].place <= chapitre.placeRequise && !(quest?.eliminatoire && quest.etat === 'ratee');
+      if (won) ok++;
     }
     cellules.push(`${((100 * ok) / games).toFixed(0)} %`.padEnd(11));
   }
