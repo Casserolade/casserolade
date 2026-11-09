@@ -6,6 +6,45 @@
 export type Moment = 'pose' | 'casserole' | 'prison' | 'mort' | 'celebration' | 'heros' | 'achat' | 'actualiser' | 'echelon' | 'triple' | 'victoire' | 'defaite' | 'elimination' | 'attente';
 
 export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
+  "riner": {
+    "heros": [
+      "Aujourd'hui, on vit côte à côte. Je crains que demain, on doive vivre face à face.",
+      "Je m'appelle Teddy Riner, et aujourd'hui, je vous le dis les yeux dans les yeux : je suis candidat à l'élection présidentielle de 2027.",
+      "La France n'a pas besoin d'un politicien professionnel qui récite des leçons et se querelle à longueur de journée.",
+      "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République.",
+      "La résignation n'est pas une option.",
+      "Je suis candidat à l'élection présidentielle de 2027"
+    ],
+    "pose": [
+      "Aujourd'hui, on vit côte à côte. Je crains que demain, on doive vivre face à face.",
+      "Je m'appelle Teddy Riner, et aujourd'hui, je vous le dis les yeux dans les yeux : je suis candidat à l'élection présidentielle de 2027.",
+      "La France n'a pas besoin d'un politicien professionnel qui récite des leçons et se querelle à longueur de journée.",
+      "Ce combat pour redresser la France, je ne le ferai pas pour vous en restant en haut, je le ferai avec vous et pour vous.",
+      "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République.",
+      "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire.",
+      "Moi je lui répondrai que je vais l'inviter sur un tatami et qu'on va trouver les moyens après.",
+      "La résignation n'est pas une option.",
+      "Je suis candidat à l'élection présidentielle de 2027",
+      "Ce combat pour redresser la France, je ne le ferai pas pour vous en restant en haut."
+    ],
+    "casserole": [
+      "Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires."
+    ],
+    "defaite": [
+      "Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires."
+    ],
+    "echelon": [
+      "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République."
+    ],
+    "achat": [
+      "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire."
+    ],
+    "celebration": [
+      "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire.",
+      "Moi je lui répondrai que je vais l'inviter sur un tatami et qu'on va trouver les moyens après.",
+      "La résignation n'est pas une option."
+    ]
+  },
   "thevenoud": {
     "casserole": [
       "J'ai soigné ma phobie administrative.",

@@ -100,8 +100,12 @@ def largest_component(mask):
     return np.where(labels == best, 255, 0).astype(np.uint8)
 
 
-def build_head_mask(classes, matte, landmarks, size):
-    """Hair, face and ears, without neck or clothes."""
+def build_head_mask(classes, matte, landmarks, size, bald=False):
+    """Hair, face and ears, without neck or clothes.
+
+    A shaved skull is read as body skin, and its shine as nothing at all: the segmentation cuts the top off. For a bald
+    head (`crane_rase` in portraits.json), the background matte draws the outline above the mouth line.
+    """
     height, width = size[1], size[0]
     probability = np.maximum.reduce([classes[HAIR], classes[FACE_SKIN], classes[ACCESSORY]])
     mask = (probability > 0.5).astype(np.uint8) * 255
@@ -109,6 +113,10 @@ def build_head_mask(classes, matte, landmarks, size):
     ears = (classes[BODY_SKIN] > 0.5).astype(np.uint8) * 255
     ears[ears_limit:, :] = 0
     mask = cv2.bitwise_or(mask, ears)
+    if bald:
+        skull = (matte > 128).astype(np.uint8) * 255
+        skull[ears_limit:, :] = 0
+        mask = cv2.bitwise_or(mask, skull)
     cv2.fillPoly(mask, [landmarks[FACE_OVAL].astype(np.int32)], 255)
     mask = cv2.bitwise_and(mask, (matte > 128).astype(np.uint8) * 255)
     mask = cv2.bitwise_and(mask, head_zone(landmarks, size))
@@ -201,7 +209,7 @@ def eye_anchor(landmarks, iris, corners):
     return float(landmarks[iris][0]), float(landmarks[iris][1]), width
 
 
-def cut_character(character_id, photo_path):
+def cut_character(character_id, photo_path, bald=False):
     photo = cv2.imread(photo_path)
     photo_rgb = cv2.cvtColor(photo, cv2.COLOR_BGR2RGB)
     landmarks, face_count = detect_landmarks(photo_rgb)
@@ -216,7 +224,7 @@ def cut_character(character_id, photo_path):
     aligned_matte = cv2.warpAffine(matte, matrix, size, flags=cv2.INTER_LINEAR)
     points = cv2.transform(landmarks[None, :, :], matrix)[0]
 
-    head_mask = build_head_mask(aligned_classes, aligned_matte, points, size)
+    head_mask = build_head_mask(aligned_classes, aligned_matte, points, size, bald)
     head_polygon = scissor_polygon(head_mask)
     head_alpha = fill_antialiased([head_polygon], size)
     jaw_polygon = build_jaw_polygon(points)
@@ -284,7 +292,7 @@ def main():
     for character_id in wanted:
         photo = os.path.join(ROOT, portraits[character_id].get("recadrage") or portraits[character_id]["portrait"])
         try:
-            _, report[character_id] = cut_character(character_id, photo)
+            _, report[character_id] = cut_character(character_id, photo, bool(portraits[character_id].get("crane_rase")))
             size = os.path.getsize(os.path.join(OUTPUT_DIR, f"{character_id}.webp"))
             print(character_id, report[character_id], f"{size / 1024:.0f} Ko", flush=True)
         except Exception as error:  # one bad photo must not stop the batch

@@ -295,7 +295,8 @@ test('a client can only act on its own seat, and illegal actions are refused ove
   // A forged seat field is dropped by the protocol check: the host buys for itself.
   host.send('{"type":"action","seq":3,"seat":1,"action":{"t":"buy","slot":0}}');
   const bought = await host.waitFor((m) => m.type === 'vue');
-  assert.ok(bought.type === 'vue' && bought.vue.board.length === 1);
+  // At least one: the card bought, plus whatever its Annonce brings.
+  assert.ok(bought.type === 'vue' && bought.vue.board.length >= 1);
   await new Promise((done) => setTimeout(done, 50));
   assert.equal(guest.inbox.filter((m) => m.type === 'vue').length, 0, 'the guest must not see anything from the host\'s action');
 

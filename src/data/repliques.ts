@@ -175,6 +175,12 @@ export const REPLIQUES: Record<string, Record<EvenementReplique, string>> = {
     defaite: 'J\'écris une chanson là-dessus.',
     elimine: 'On se retrouvera.',
   },
+  riner: {
+    debut: 'Président ou rien.',
+    victoire: 'Ippon.',
+    defaite: 'Tomber, se relever. Toujours.',
+    elimine: 'Bon. Il reste Los Angeles 2028.',
+  },
   giscard: {
     debut: 'Je vous avais dit au revoir. Pas adieu.',
     victoire: 'Vous n\'avez pas le monopole du caveau.',

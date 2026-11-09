@@ -65,11 +65,11 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 
 | | |
 |---|---|
-| **28 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
-| **107 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
-| **69 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
+| **29 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
+| **108 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
+| **70 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
 | **26 sorts** | Tract, Note de frais, Temps de parole, Remaniement, Congrès… |
-| **664 répliques** | Toutes sourcées, dont 251 avec la vraie voix, en effets sonores courts. |
+| **675 répliques** | Toutes sourcées, dont 259 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
 | **Des modes** | Seul contre l'ordinateur, la carrière, et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |

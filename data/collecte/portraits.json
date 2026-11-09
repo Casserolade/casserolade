@@ -2259,5 +2259,15 @@
   "portrait": "assets/photos/base/strauss_kahn.jpg",
   "name": "Dominique Strauss-Kahn",
   "note": "Portrait officiel du FMI, 2008. Choisi à la main : de face, neutre, grande définition."
+ },
+ "riner": {
+  "fichier": "assets/photos/raw/riner.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Teddy_Riner_Cannes_2016.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Georges Biard",
+  "portrait": "assets/photos/base/riner.jpg",
+  "name": "Teddy Riner",
+  "note": "Festival de Cannes, 2016. Choisi à la main : le portrait de Wikipédia, crâne rasé comme aujourd'hui.",
+  "crane_rase": true
  }
 }
