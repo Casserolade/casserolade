@@ -66,9 +66,9 @@ export function composerTable(chapitre: Chapitre, heroId: string, seed: number, 
   const scenario = chapitre.scenario;
   const lent = scenario?.pouvoirDe ? HERO_BY_ID[scenario.pouvoirDe] : undefined;
   if (lent && chapitre.pouvoirs) heroOverrides[heroId] = { ...heroOverrides[heroId], mods: lent.mods };
-  const evenements = Object.fromEntries(Object.entries(scenario?.manches ?? {}).map(([manche, change]) => [
+  const evenements = Object.fromEntries(Object.entries(scenario?.manches ?? {}).map(([manche, { pouvoirPropre, ...change }]) => [
     Number(manche),
-    { ...(change.pouvoirPropre ? { mods: HERO_BY_ID[heroId].mods } : {}), ...(change.sondages ? { sondages: change.sondages } : {}) },
+    { ...(pouvoirPropre ? { mods: HERO_BY_ID[heroId].mods } : {}), ...change },
   ]));
   const contexte = chapitre.contexteId ?? (chapitre.contexte ? rng.pick(CONTEXTS.filter((c) => c.id !== 'normal')).id : undefined);
   const camps = tirerCamps(chapitre, heroId, seed);
@@ -81,7 +81,7 @@ export function composerTable(chapitre: Chapitre, heroId: string, seed: number, 
       heroOverrides,
       ...(contexte ? { contextId: contexte } : {}),
       ...(camps ? { activeCamps: camps } : {}),
-      ...(Object.keys(evenements).length ? { script: { seat: 0, evenements } } : {}),
+      ...(Object.keys(evenements).length || scenario?.regles ? { script: { seat: 0, evenements, ...(scenario?.regles ? { regles: scenario.regles } : {}) } } : {}),
     },
   };
 }
@@ -123,6 +123,8 @@ export interface Bilan {
   place: number;
   objectifs: { objectif: Objectif; texte: string; atteint: boolean }[];
   lignes: Ligne[];
+  /** Quand la quête d'un tour scénarisé a fait perdre le chapitre : ce qui a manqué (« Parrainages : 300 sur 500 »). */
+  motif?: string;
 }
 
 export function texteObjectif(o: Objectif): string {
@@ -175,6 +177,22 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
   let manche = 0;
   let sondages = 0;
   let avant: { casseroles: number; tier: number; board: number; possedes: number; sorts: number; uids: Set<number>; ordre: number[]; finDeTour: boolean; round: number; shop: string[] } | null = null;
+
+  const evenementsVus = new Set<string>();
+
+  /**
+   * Ce que le tour scénarisé lui a fait depuis la dernière vue : chaque événement se raconte une fois, avec la quête
+   * (`{valeur}`, `{cible}`) et le politique qu'il touche (`{politique}`).
+   */
+  const raconterEvenements = (view: PlayerView, sortie: Ligne[]) => {
+    view.evenements.forEach((evenement, i) => {
+      const id = `${view.round}:${i}:${evenement.key}`;
+      if (evenementsVus.has(id)) return;
+      evenementsVus.add(id);
+      const lignes = chapitre.dialogues.filter((l) => l.quand === evenement.key);
+      sortie.push(...lignes.map((l) => ({ ...l, texte: raconter(l.texte, view.quete, evenement.cardId) })));
+    });
+  };
 
   const dire = (d: Declencheur, sortie: Ligne[], repete = false) => {
     if (dits.has(d) && !repete) return;
@@ -232,6 +250,7 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
       if (combat?.gagne) dire('combat_gagne', sortie);
       if (combat?.perdu) dire('combat_perdu', sortie);
       if (view.hp <= 8) dire('sondages_bas', sortie);
+      raconterEvenements(view, sortie);
       avant = {
         casseroles: posees,
         tier: view.tier,
@@ -248,7 +267,9 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
     },
     conclure(view, place) {
       memoriser(view);
-      const reussi = place <= chapitre.placeRequise;
+      // La quête d'un tour scénarisé : « devant » décide seule ; une quête ratée qui élimine fait perdre le chapitre.
+      const quete = view.quete;
+      const reussi = quete?.decisive ? quete.etat === 'reussie' : place <= chapitre.placeRequise && !(quete?.eliminatoire && quete.etat === 'ratee');
       const atteint = (o: Objectif): boolean => {
         switch (o.type) {
           case 'manches_max':
@@ -269,15 +290,26 @@ export function creerSuivi(chapitre: Chapitre): Suivi {
             return sondages >= o.n;
         }
       };
+      const perduParLaQuete = !reussi && quete && quete.etat !== 'reussie' && (quete.decisive || quete.eliminatoire);
       return {
         reussi,
         place,
+        ...(perduParLaQuete ? { motif: quete.decisive ? `${quete.libelle} : raté.` : `${quete.libelle} : ${quete.valeur} sur ${quete.cible}.` } : {}),
         // Un objectif secondaire n'a de sens que si le chapitre est gagné.
         objectifs: chapitre.objectifs.map((objectif) => ({ objectif, texte: texteObjectif(objectif), atteint: reussi && atteint(objectif) })),
         lignes: chapitre.dialogues.filter((l) => l.quand === (reussi ? 'victoire' : 'defaite')),
       };
     },
   };
+}
+
+/** Le texte d'un événement de tour scénarisé : la quête où elle en est, le politique qu'il touche. */
+function raconter(texte: string, quete: PlayerView['quete'], cardId: string | undefined): string {
+  const politique = cardId ? (CARD_BY_ID[cardId]?.name ?? 'un politique') : 'un politique';
+  return texte
+    .replaceAll('{valeur}', String(quete?.valeur ?? 0))
+    .replaceAll('{cible}', String(quete?.cible ?? 0))
+    .replaceAll('{politique}', politique);
 }
 
 export function remplir(texte: string, heroId: string, adversaireId: string | null): string {

@@ -1,20 +1,30 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import CutscenePlayer from '#src/client/components/organisms/CutscenePlayer.vue';
+import LiveCutscenePlayer from '#src/client/components/organisms/LiveCutscenePlayer.vue';
 import { DEMO_CUTSCENE } from '#src/client/const/demoCutscene.ts';
 import type { Cutscene } from '#src/client/cutscenes/createCutscene.ts';
 import { WRITTEN_CAREERS } from '#src/client/const/writtenCareers.ts';
-import type { Cinematique } from '#src/data/histoire/cinematique.ts';
+import type { Scene } from '#src/data/histoire/cinematique.ts';
 
 /**
  * Development only: the cutscenes of every career, to watch before they enter the game. One plays at a time; at its
  * end, or with « Tout jouer », the next one follows.
  */
 const careers = computed(() => [...WRITTEN_CAREERS].sort((a, b) => a.difficulte - b.difficulte || a.heros.localeCompare(b.heros)));
-const playing = ref<Cinematique | null>(null);
-const queue = ref<Cinematique[]>([]);
+const playing = ref<Scene | null>(null);
+const queue = ref<Scene[]>([]);
+/** A HyperFrames page drawn live, or puppets described in data. */
+const page = computed(() => (playing.value && 'page' in playing.value ? playing.value : null));
+const puppets = computed(() => (playing.value && !('page' in playing.value) ? playing.value : null));
 
-function play(list: Cinematique[]): void {
+/** One line per cutscene: where it plays, and how it is made. */
+function describe(scene: Scene): string {
+  const made = 'page' in scene ? `HyperFrames · ${scene.titre}` : `${scene.style} · ${scene.decor}`;
+  return `${scene.id} · ${scene.moment}${scene.chapitre ? ` (${scene.chapitre})` : ''} · ${made} · ${scene.duree} s`;
+}
+
+function play(list: Scene[]): void {
   queue.value = list.slice(1);
   playing.value = list[0] ?? null;
 }
@@ -43,11 +53,12 @@ function next(): void {
       <ul>
         <li v-for="cutscene in career.cinematiques" :key="cutscene.id">
           <button type="button" @click="play([cutscene])">▶</button>
-          {{ cutscene.id }} · {{ cutscene.moment }} · {{ cutscene.style }} · {{ cutscene.duree }} s · {{ cutscene.decor }}
+          {{ describe(cutscene) }}
         </li>
       </ul>
     </section>
-    <CutscenePlayer v-if="playing" :key="playing.id" :cinematique="playing" @end="next" @ready="expose" />
+    <LiveCutscenePlayer v-if="page" :key="page.id" :cinematique="page" @end="next" />
+    <CutscenePlayer v-else-if="puppets" :key="puppets.id" :cinematique="puppets" @end="next" @ready="expose" />
   </main>
 </template>
 

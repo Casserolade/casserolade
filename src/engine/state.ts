@@ -74,6 +74,14 @@ export interface Player {
   /** Plateaux adverses vus en combat : la seule information sur les autres. */
   seen: { seat: number; heroId: string; round: number; board: Minion[] }[];
   lostLast: boolean;
+  /** Les politiques partis pour un temps (en cellule, enlevés par une soucoupe) : ils reviennent à la manche `back`. */
+  away: AwayMinion[];
+  /** La quête d'une carrière (parrainages, ultimatum, Congrès), quand ses règles en donnent une. */
+  quest: Quest | null;
+  /** Le retour d'une carrière : une fois, des sondages à zéro ne l'éliminent pas. Déjà servi : vrai. */
+  comebackUsed: boolean;
+  /** Ce qui lui est arrivé depuis le début de la manche, dans une carrière : la campagne le raconte. */
+  events: ScriptEventNote[];
   /** Ce que le joueur a fait dans la partie : les succès s'en nourrissent. */
   stats: { casseroles: number; scandals: number; forgotten: number; triples: number; spells: number };
 }
@@ -132,5 +140,95 @@ export interface ShopScript {
    * Manche → ce qui arrive au siège au début de cette manche, dans une carrière : un autre pouvoir (`mods`), des points
    * de sondage en plus ou en moins. Le Pen joue avec le pouvoir de Bardella jusqu'à l'arrêt d'appel, puis reprend le sien.
    */
-  evenements?: Record<number, { mods?: HeroMods; sondages?: number }>;
+  evenements?: Record<number, ScriptEvent>;
+  /** Les règles d'une carrière pour ce siège, tout le chapitre durant. */
+  regles?: ScriptRules;
+}
+
+/** Ce qui arrive au siège au début d'une manche, dans une carrière. */
+export interface ScriptEvent {
+  mods?: HeroMods;
+  sondages?: number;
+  /** Du budget en plus pour cette manche. */
+  budget?: number;
+  /**
+   * Son politique le plus fort ou le plus faible (attaque et PV) quitte le plateau : il ne combat pas, et revient au
+   * début de la manche `retour`, doré, ou avec `bonus` en attaque et en PV, pour de bon.
+   */
+  enleve?: { quoi: 'plus_fort' | 'plus_faible'; retour: number; dore?: boolean; bonus?: number };
+  /** L'adversaire du dernier siège quitte la table, s'il est encore en lice et qu'il en reste au moins deux autres. */
+  abandon?: boolean;
+}
+
+/** Ce que raconte la campagne : un départ, un retour, un abandon, un retour de sondages, une quête qui avance. */
+export type ScriptEventKey = 'enleve' | 'revient' | 'abandon' | 'retour' | 'quete' | 'quete_reussie' | 'quete_ratee';
+
+/** Un événement raconté, avec le politique qu'il touche quand il en touche un (parti, revenu). */
+export interface ScriptEventNote {
+  key: ScriptEventKey;
+  cardId?: string;
+}
+
+/** Un politique parti pour un temps. */
+export interface AwayMinion {
+  minion: Minion;
+  back: number;
+  golden: boolean;
+  bonus: number;
+}
+
+/**
+ * Les règles d'une carrière pour un siège (8 et 9 novembre 2026) : de quoi raconter un tour scénarisé sans toucher aux
+ * autres joueurs. Chacune est simple et a sa fin.
+ */
+export interface ScriptRules {
+  /** Monter d'échelon lui est impossible avant cette manche, et coûte `remise` de moins ensuite (Philippot). */
+  echelon?: { apres: number; remise: number; motif: string };
+  /** Renvoyer un politique de ce camp lui rapporte ce budget en plus (Ruffin). */
+  renvoi?: { camp: Camp; budget: number };
+  /** Au début de chacun de ses combats, le premier politique adverse perd ses effets pour ce combat (Lassalle chante). */
+  silenceAdverse?: boolean;
+  /** Une fois, des sondages à zéro ne l'éliminent pas : il repart avec autant (le retour de Hollande). */
+  retour?: number;
+  /** Ses combats gagnés comptent (parrainages, ultimatum, Congrès). */
+  compteur?: WinCounter;
+  /** Le chapitre se gagne si ce héros est éliminé avant lui, quelle que soit la place (Roussel devant Mélenchon). */
+  devant?: string;
+  /** Après le combat de cette manche, la partie s'arrête : classement par sondages, puis par les stats du plateau. */
+  finApres?: number;
+}
+
+/** Une quête qui compte les combats gagnés. */
+export interface WinCounter {
+  libelle: string;
+  /** Ce que rapporte un combat gagné : 100 parrainages, une voix du Congrès. */
+  parVictoire: number;
+  cible: number;
+  /** Les manches où les combats comptent. Toutes par défaut. */
+  de?: number;
+  a?: number;
+  /** Dans ces manches, une égalité ou une défaite fait échouer tout de suite (l'ultimatum). */
+  sansFaute?: boolean;
+  /** Pas atteinte à la fin du combat de cette manche : ratée. */
+  avant?: number;
+  /** Autant de défaites : ratée. */
+  defaitesMax?: number;
+  /** Ratée, elle l'élimine et perd le chapitre ; sinon, rien ne se passe. */
+  eliminatoire: boolean;
+  /** Atteinte : la séance est levée, la partie s'arrête et il la gagne (le Congrès). */
+  fin?: boolean;
+  /** Atteinte : ce qu'il gagne tout de suite. */
+  recompense?: { sondages?: number; budget?: number };
+}
+
+/** Une quête en cours, telle que le joueur la voit. */
+export interface Quest {
+  libelle: string;
+  valeur: number;
+  cible: number;
+  defaites: number;
+  etat: 'en_cours' | 'reussie' | 'ratee';
+  /** Ratée, le chapitre est perdu ; « devant », elle seule décide du chapitre. */
+  eliminatoire: boolean;
+  decisive: boolean;
 }

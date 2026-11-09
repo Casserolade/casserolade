@@ -30,7 +30,7 @@ export function census(game: Game): Map<string, number> {
     for (const offer of [p.discover, ...p.discoverQueue]) {
       if (offer?.kind === 'serviteur') for (const id of offer.options) add(id, 1);
     }
-    for (const m of [...p.board, ...p.hand]) {
+    for (const m of [...p.board, ...p.hand, ...p.away.map((a) => a.minion)]) {
       if (m.copies > 0) add(m.cardId, m.copies);
       for (const id of m.merged) add(id, 1);
     }
@@ -210,7 +210,7 @@ export function invariantViolations(game: Game): string[] {
   const uids: number[] = [];
   for (const p of game.players) {
     if (!p.alive) continue;
-    for (const m of [...p.board, ...p.hand]) uids.push(m.uid);
+    for (const m of [...p.board, ...p.hand, ...p.away.map((a) => a.minion)]) uids.push(m.uid);
     for (const s of p.spells) uids.push(s.uid);
     out.push(...playerViolations(game, p));
   }

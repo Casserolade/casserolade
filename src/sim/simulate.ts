@@ -64,6 +64,8 @@ export interface RunOptions {
   gift?: { seat: number; round: number; cardId: string };
   /** Le camp que vise chaque bot dès le départ, au lieu d'un tirage. */
   commitments?: (string | undefined)[];
+  /** Les règles d'un chapitre de carrière pour un siège (bilan_histoire.ts). */
+  script?: GameOptions['script'];
 }
 
 function dominant(game: Game, seat: number): { camp: string | null; count: number } {
@@ -115,6 +117,7 @@ export function playGame(opts: RunOptions): GameResult {
     heroOverrides: opts.heroOverrides,
     heroes: opts.heroes,
     activeCamps: opts.activeCamps,
+    script: opts.script,
   };
   const game = createGame(gameOpts);
   const bots: BotState[] = opts.levels.map((lvl, i) => createBot(lvl, opts.seed * 31 + i + 1, opts.styles?.[i]));

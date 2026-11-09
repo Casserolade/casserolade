@@ -132,7 +132,7 @@ function autoPlay(client: Client): void {
 }
 
 const FORBIDDEN_KEYS = new Set(['seed', 'graine', 'rng', 'pool', 'reserve', 'players', 'nextUid', 'hpSnapshot', 'roundCombats', 'jeu', 'game', 'log_actions']);
-const VIEW_KEYS = new Set(['seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'upgradeCost', 'buyCost', 'rollCost', 'boardLimit', 'scandalThreshold', 'stats', 'heroId', 'mods', 'board', 'hand', 'handLimit', 'shop', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'camps', 'maxBudget', 'nextBudget', 'freeRolls', 'relaunched', 'spells', 'shopGains', 'shopSpells', 'shopSpellCosts', 'discoverKind', 'tract', 'counters', 'contextId', 'params', 'seen', 'table']);
+const VIEW_KEYS = new Set(['seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'upgradeCost', 'buyCost', 'rollCost', 'boardLimit', 'scandalThreshold', 'stats', 'heroId', 'mods', 'board', 'hand', 'handLimit', 'shop', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'camps', 'maxBudget', 'nextBudget', 'freeRolls', 'relaunched', 'spells', 'shopGains', 'shopSpells', 'shopSpellCosts', 'discoverKind', 'tract', 'counters', 'contextId', 'params', 'seen', 'table', 'upgradeLock', 'quete', 'evenements', 'absents']);
 const TABLE_KEYS = new Set(['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples']);
 
 function assertNoForbiddenKey(value: unknown, path = ''): void {

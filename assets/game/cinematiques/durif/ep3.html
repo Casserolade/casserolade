@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Christ cosmique, épisode 3 : Le tournoi d’Arques</title>
+    <script src="../gsap.min.js"></script>
+    <script>window.__timelines = {};</script>
+    <script src="anime.js"></script>
+    <script src="marionnettes.js"></script>
+    <style>
+      @font-face { font-family: "Bangers"; src: url("../../fontes/bangers-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Alegreya Sans"; src: url("../../fontes/alegreya-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #141018; }
+      #root { position: relative; width: 100%; height: 100%; background: #141018; }
+    
+      [data-composition-id] { position: absolute; inset: 0; }
+      #root { position: relative; }
+/* compositions/titre.html */
+
+    #titre { position: absolute; inset: 0; overflow: hidden; background: #F7F4EA; }
+    #titre-cam { position: absolute; inset: -40px; }
+    #titre-art { position: absolute; left: 40px; top: 40px; width: 1920px; height: 1080px; }
+    #titre-band { position: absolute; left: 0; right: 0; bottom: 0; height: 190px; background: #141018; display: flex; align-items: center; gap: 44px; padding-left: 150px; }
+    #titre-ep { font-family: "Bangers", sans-serif; font-size: 92px; color: #FFD23F; letter-spacing: 3px; white-space: nowrap; flex: none; }
+    #titre-name { font-family: "Alegreya Sans", sans-serif; font-weight: 700; font-size: 62px; line-height: 1.05; color: #F7F4EA; max-width: 1350px; }
+    #titre-jp { position: absolute; right: 120px; top: 0; height: 890px; width: 170px; background: #C0262D; border-left: 10px solid #141018; border-right: 10px solid #141018; display: flex; justify-content: center; padding-top: 50px; }
+    #titre-jp span { writing-mode: vertical-rl; font-family: "Noto Sans JP", sans-serif; font-weight: 900; font-size: 104px; color: #F7F4EA; letter-spacing: 8px; }
+    #titre-flash { position: absolute; inset: 0; background: #141018; opacity: 0; }
+  
+/* compositions/e3-tournoi.html */
+
+    #e3-tournoi { position: absolute; inset: 0; overflow: hidden; background: #7FC4F0; }
+    #e3t-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #e3t-box { position: absolute; left: 70px; top: 190px; padding: 16px 30px; background: #FFFDF5; border: 6px solid #141018; font: 700 52px "Alegreya Sans", sans-serif; color: #141018; }
+    .e3t-t { font-family: "Bangers", sans-serif; stroke: #141018; paint-order: stroke; stroke-linejoin: round; }
+  
+/* compositions/e3-salle.html */
+
+    #e3-salle { position: absolute; inset: 0; overflow: hidden; background: #E9DFC0; }
+    #e3s-art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.0" data-width="1920" data-height="1080">
+      <div id="titre" data-composition-id="titre" data-variable-values='{"episode":"ÉPISODE 3","nom":"Le tournoi d’Arques"}' data-start="0" data-duration="2.2" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:1">
+    <div id="titre-cam">
+      <svg id="titre-art" viewBox="0 0 1920 1080">
+        <path id="titre-burst" fill="#E9483B" opacity="0.9" />
+        <g id="titre-words" font-family="Bangers" text-anchor="middle" data-layout-allow-overlap>
+          <text x="842" y="452" font-size="300" fill="#C0262D" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">CHRIST</text>
+          <text x="830" y="440" font-size="300" fill="#FFD23F" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">CHRIST</text>
+          <text x="842" y="742" font-size="300" fill="#C0262D" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">COSMIQUE</text>
+          <text x="830" y="730" font-size="300" fill="#FFD23F" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">COSMIQUE</text>
+        </g>
+      </svg>
+    </div>
+    <div id="titre-jp"><span>宇宙のキリスト</span></div>
+    <div id="titre-band"><span id="titre-ep" data-var-text="episode">ÉPISODE 3</span><span id="titre-name" data-var-text="nom">Le tournoi d’Arques</span></div>
+    <div id="titre-flash"></div>
+  </div>
+      <div id="e3-tournoi" data-composition-id="e3-tournoi" data-start="2.2" data-duration="13.3" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:2">
+    <svg id="e3t-cam" viewBox="0 0 1920 1080">
+      <defs><g id="e3t-defs"></g></defs>
+      <rect x="-60" y="-60" width="2040" height="1200" fill="#7FC4F0" data-layout-ignore />
+      <path d="M120 200 q60 -60 150 -20 q60 -40 120 10 q50 50 -20 60 h-220 q-70 -20 -30 -50Z M1350 150 q70 -60 160 -15 q70 -40 130 15 q40 50 -30 60 h-240 q-60 -25 -20 -60Z" fill="#FFFDF5" stroke="#141018" stroke-width="7" />
+      <path d="M-20 560 Q300 470 620 520 Q960 580 1300 500 Q1650 440 1940 520 L1940 700 L-20 700Z" fill="#6DAA5C" stroke="#141018" stroke-width="9" />
+      <g>
+        <rect x="700" y="330" width="520" height="300" fill="#E9D8B4" stroke="#141018" stroke-width="10" />
+        <path d="M680 340 L960 230 L1240 340Z" fill="#B5644A" stroke="#141018" stroke-width="10" stroke-linejoin="round" />
+        <text x="960" y="400" text-anchor="middle" font-family="Bangers" font-size="62" fill="#141018">MAIRIE</text>
+        <rect x="760" y="430" width="90" height="120" fill="#6C7A86" stroke="#141018" stroke-width="7" /><rect x="1070" y="430" width="90" height="120" fill="#6C7A86" stroke="#141018" stroke-width="7" />
+        <rect x="905" y="470" width="110" height="160" fill="#8B5A2B" stroke="#141018" stroke-width="7" />
+        <path d="M960 230 v-90" stroke="#141018" stroke-width="7" /><rect x="960" y="140" width="40" height="44" fill="#2F5BD3" /><rect x="1000" y="140" width="40" height="44" fill="#FFFDF5" /><rect x="1040" y="140" width="40" height="44" fill="#C0262D" /><rect x="960" y="140" width="120" height="44" fill="none" stroke="#141018" stroke-width="5" />
+      </g>
+      <g id="e3t-crowd"></g>
+      <path d="M300 760 L1620 760 L1780 1000 L140 1000Z" fill="#B9B4AA" stroke="#141018" stroke-width="12" stroke-linejoin="round" />
+      <path d="M140 1000 L1780 1000 L1780 1080 L140 1080Z" fill="#8C877D" stroke="#141018" stroke-width="12" />
+      <path d="M520 760 L440 1000 M960 760 V1000 M1400 760 L1480 1000 M240 880 H1680" stroke="#141018" stroke-width="5" opacity="0.4" />
+      <g id="e3t-banner">
+        <path d="M560 40 L1360 40 L1330 90 L1360 140 L560 140 L590 90Z" fill="#C0262D" stroke="#141018" stroke-width="9" stroke-linejoin="round" />
+        <text class="e3t-t" x="960" y="118" text-anchor="middle" font-size="86" fill="#FFFDF5" stroke-width="12">MUNICIPALES 2014</text>
+      </g>
+      <path id="e3t-lines" fill="#141018" opacity="0" />
+      <g id="e3t-waves"></g>
+      <path id="e3t-aura" fill="#FFFDF5" stroke="#141018" stroke-width="9" />
+      <g id="e3t-rig" transform="translate(960 640) scale(0.48)"></g>
+      <g id="e3t-van" opacity="0"></g>
+      <g id="e3t-dishes" opacity="0">
+        <g transform="translate(895 352) rotate(-30)"><path d="M0 0 v-40" stroke="#141018" stroke-width="8" /><path d="M-46 -40 Q0 -100 46 -40Z" fill="#C3CAD8" stroke="#141018" stroke-width="7" /></g>
+        <g transform="translate(1010 352) rotate(30)"><path d="M0 0 v-40" stroke="#141018" stroke-width="8" /><path d="M-46 -40 Q0 -100 46 -40Z" fill="#C3CAD8" stroke="#141018" stroke-width="7" /></g>
+      </g>
+      <g id="e3t-name1" opacity="0" data-layout-allow-overlap>
+        <text class="e3t-t" x="72" y="560" font-size="116" fill="#C0262D" stroke-width="18">UNITÉ MOBILE DE</text>
+        <text class="e3t-t" x="60" y="548" font-size="116" fill="#FFFDF5" stroke-width="18">UNITÉ MOBILE DE</text>
+        <text class="e3t-t" x="72" y="682" font-size="116" fill="#C0262D" stroke-width="18">MÉDECINE NATURELLE !</text>
+        <text class="e3t-t" x="60" y="670" font-size="116" fill="#7CE36A" stroke-width="18">MÉDECINE NATURELLE !</text>
+      </g>
+      <g id="e3t-ticker" opacity="0" data-layout-allow-overflow data-layout-allow-overlap>
+        <rect x="-40" y="190" width="2000" height="170" fill="#141018" />
+        <text id="e3t-ticker-text" class="e3t-t" x="1920" y="318" font-size="124" fill="#FFD23F" stroke-width="0">CENTRE DE RECHERCHE EN COMMUNICATION NUMÉRIQUE ET TÉLÉPATHIQUE AVANCÉE !</text>
+      </g>
+      <g id="e3t-gauge" opacity="0" data-layout-allow-overlap>
+        <rect x="560" y="860" width="800" height="170" rx="20" fill="#141018" stroke="#FFFDF5" stroke-width="8" />
+        <text class="e3t-t" x="610" y="972" font-size="76" fill="#FFFDF5" stroke-width="0">VOIX</text>
+        <text id="e3t-votes" class="e3t-t" x="1310" y="990" text-anchor="end" font-size="140" fill="#FFD23F" stroke-width="0">0</text>
+      </g>
+    </svg>
+    <div id="e3t-box">Arques, mars 2014. 248 habitants.</div>
+  </div>
+      <div id="e3-salle" data-composition-id="e3-salle" data-start="15.5" data-duration="8.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:3">
+    <svg id="e3s-art" viewBox="0 0 1920 1080">
+      <defs><filter id="e3s-paper" x="-10%" y="-10%" width="125%" height="130%"><feDropShadow dx="5" dy="8" stdDeviation="3" flood-color="#000" flood-opacity="0.3" /></filter></defs>
+      <g id="e3s-cam">
+        <rect width="1920" height="1080" fill="#E9DFC0" />
+        <rect y="0" width="1920" height="70" fill="#D8CBA6" />
+        <rect y="820" width="1920" height="260" fill="#B79A72" />
+        <path d="M0 820 H1920" stroke="#FFFFFF" stroke-width="6" />
+        <g filter="url(#e3s-paper)">
+          <rect x="160" y="140" width="820" height="600" fill="#C49A6C" stroke="#FFFFFF" stroke-width="6" />
+          <rect x="210" y="180" width="720" height="520" fill="#FFFDF4" stroke="#FFFFFF" stroke-width="5" transform="rotate(-1.2 570 440)" />
+          <g transform="rotate(-1.2 570 440)">
+            <text x="570" y="250" text-anchor="middle" font-family="Alegreya Sans" font-weight="700" font-size="40" fill="#14110c">MUNICIPALES — ARQUES</text>
+            <text x="570" y="296" text-anchor="middle" font-family="Alegreya Sans" font-weight="700" font-size="32" fill="#5E5A55">mars 2014 · résultats</text>
+            <rect x="260" y="340" width="420" height="26" fill="#C9C2B5" /><rect x="760" y="340" width="110" height="26" fill="#C9C2B5" />
+            <rect x="260" y="400" width="380" height="26" fill="#C9C2B5" /><rect x="760" y="400" width="110" height="26" fill="#C9C2B5" />
+            <rect x="260" y="460" width="440" height="26" fill="#C9C2B5" /><rect x="760" y="460" width="110" height="26" fill="#C9C2B5" />
+            <rect x="250" y="530" width="640" height="62" fill="#FFE14D" />
+            <text x="262" y="575" font-family="Alegreya Sans" font-weight="700" font-size="40" fill="#C0262D">DURIF Sylvain</text>
+            <text x="880" y="575" text-anchor="end" font-family="Alegreya Sans" font-weight="700" font-size="40" fill="#C0262D">7 voix · 5,03 %</text>
+          </g>
+          <circle cx="250" cy="200" r="12" fill="#C0262D" /><circle cx="890" cy="196" r="12" fill="#C0262D" />
+        </g>
+        <g filter="url(#e3s-paper)">
+          <rect x="1150" y="610" width="430" height="210" fill="#8B5A2B" stroke="#FFFFFF" stroke-width="6" />
+          <rect x="1270" y="470" width="190" height="150" fill="#DCE6EE" stroke="#FFFFFF" stroke-width="6" opacity="0.92" />
+          <rect x="1330" y="466" width="70" height="10" fill="#14110c" />
+          <path d="M1500 120 v360" stroke="#5E5A55" stroke-width="7" />
+          <rect x="1500" y="120" width="56" height="90" fill="#2F5BD3" stroke="#FFFFFF" stroke-width="4" /><rect x="1556" y="120" width="56" height="90" fill="#FFFDF5" stroke="#FFFFFF" stroke-width="4" /><rect x="1612" y="120" width="56" height="90" fill="#C0262D" stroke="#FFFFFF" stroke-width="4" />
+        </g>
+        <g id="e3s-puppet" filter="url(#e3s-paper)"></g>
+      </g>
+    </svg>
+  </div>
+    </div>
+    
+      <script>
+(function () {
+      const tl = gsap.timeline({ paused: true });
+      const burst = document.getElementById("titre-burst");
+      const cam = document.getElementById("titre-cam");
+      Anime.drive(tl, 2.2, (t) => {
+        burst.setAttribute("d", Anime.sunburst({ cx: 830, cy: 560, count: 28, turn: t * 0.12 }));
+        const s = Anime.shake(t, [{ at: 0.12, amp: 26 }]);
+        cam.style.transform = `translate(${s.x}px, ${s.y}px)`;
+      });
+      tl.fromTo("#titre-words", { scale: 1.9, opacity: 0, transformOrigin: "830px 560px" }, { scale: 1, opacity: 1, duration: 0.14, ease: "expo.out" }, 0.12);
+      tl.fromTo("#titre-flash", { opacity: 0 }, { opacity: 0.92, duration: 0.01 }, 0.12);
+      tl.to("#titre-flash", { opacity: 0, duration: 0.01 }, 0.19);
+      tl.fromTo("#titre-jp", { x: 360 }, { x: 0, duration: 0.3, ease: "expo.out" }, 0.4);
+      tl.fromTo("#titre-band", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.28, ease: "power4.out" }, 0.5);
+      window.__timelines["titre"] = tl;
+    })();
+    </script>
+    <script>
+(function () {
+      const A = Anime;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (k) => document.getElementById("e3t-" + k);
+      const HEADS = ["serieux", "cri"];
+      const ATTACK1 = 2.5, VAN = 3.0, ATTACK2 = 6.5, GAUGE = 11.2, SEVEN = 12.3;
+      $("defs").innerHTML = A.stripes("e3t-hoodie", 52, 0);
+      $("rig").innerHTML = A.rig("e3t-durif", { heads: HEADS, fill: "url(#e3t-hoodie)", hairColor: "#FFE14D" });
+      const cr = A.rng(2014);
+      const skins = ["#F2C29B", "#E0A57A", "#C98B5F", "#F6D3B3"], hairs = ["#3B2A1E", "#8A6239", "#C9C2B5", "#141018", "#B08A55"];
+      let crowd = "";
+      for (let row = 0; row < 4; row++) for (let i = 0; i < 16; i++) {
+        for (const side of [0, 1]) {
+          const x = (side ? 1260 : 20) + i * 40 + (row % 2) * 20 + cr() * 8, y = 610 + row * 42 + cr() * 6;
+          crowd += `<circle cx="${x}" cy="${y}" r="21" fill="${skins[Math.floor(cr() * 4)]}" stroke="#141018" stroke-width="4"/><path d="M${x - 21} ${y - 4} q21 -30 42 0" fill="${hairs[Math.floor(cr() * 5)]}" stroke="#141018" stroke-width="4"/>`;
+        }
+      }
+      $("crowd").innerHTML = crowd;
+      $("van").innerHTML = `<g transform="translate(0 0)"><path d="M-170 -120 h250 q60 0 90 60 l30 60 v60 h-370Z" fill="#3FA34D" stroke="#141018" stroke-width="10" stroke-linejoin="round"/>
+        <path d="M90 -110 l60 70 h-60Z" fill="#BFE6FF" stroke="#141018" stroke-width="7"/><path d="M-120 -120 q60 -110 150 -60 q-40 60 -150 60Z" fill="#7CE36A" stroke="#141018" stroke-width="8"/>
+        <circle cx="-60" cy="-50" r="34" fill="#FFFDF5" stroke="#141018" stroke-width="6"/><path d="M-60 -78 q14 14 0 28 q-14 -14 0 -28Z M-88 -50 q14 -14 28 0 q-14 14 -28 0Z M-32 -50 q-14 -14 -28 0 q14 14 28 0Z M-60 -22 q14 -14 0 -28 q-14 14 0 28Z" fill="#FF8AB8"/>
+        <circle cx="-110" cy="62" r="42" fill="#2B2B30" stroke="#141018" stroke-width="7"/><circle cx="130" cy="62" r="42" fill="#2B2B30" stroke="#141018" stroke-width="7"/></g>`;
+      A.drive(tl, 13.3, (t) => {
+        const frame = A.boil(t);
+        const shouting = (t >= ATTACK1 && t < ATTACK1 + 3) || (t >= ATTACK2 && t < ATTACK2 + 4.5);
+        A.face("e3t-durif", HEADS, shouting ? "cri" : "serieux");
+        $("durif-hair").setAttribute("d", A.hair({ ...A.skull("neutre"), len: 1.75, up: 0.9, lift: 22, sharp: true, seed: 50 + (frame % 4) }));
+        $("aura").setAttribute("d", A.flame({ cx: 960, cy: 770, rx: 150, ry: 180, n: 13, seed: frame * 3, amp: 0.3, up: 0.6 }));
+        const since = Math.min(...[ATTACK1, ATTACK2, SEVEN].map((a) => (t >= a ? t - a : 9)));
+        $("lines").setAttribute("d", A.speedLines({ cx: 960, cy: 520, count: 100, inner: 420, seed: 800 + frame, width: [2, 8] }));
+        $("lines").setAttribute("opacity", Math.max(0, 0.7 - since * 1.4).toFixed(2));
+        // The leaf ambulance crosses the ring.
+        const run = Math.min(1, Math.max(0, (t - VAN) / 3.2));
+        $("van").setAttribute("opacity", t >= VAN && run < 1 ? 1 : 0);
+        $("van").setAttribute("transform", `translate(${2250 - run * 2700} ${905 + Math.sin(t * 30) * 4}) scale(-1.35 1.35)`);
+        // Telepathy: dishes on the bald dome, rings towards the crowd.
+        const tele = t >= ATTACK2 + 0.3 && t < GAUGE;
+        $("dishes").setAttribute("opacity", tele ? 1 : 0);
+        let waves = "";
+        if (tele) for (let i = 0; i < 5; i++) {
+          const rr = (((t - ATTACK2) * 420 + i * 160) % 800) + 40;
+          waves += `<circle cx="960" cy="300" r="${rr.toFixed(1)}" fill="none" stroke="#FF8AB8" stroke-width="${Math.max(2, 16 - rr / 60).toFixed(1)}" opacity="${(1 - rr / 840).toFixed(2)}"/>`;
+        }
+        $("waves").innerHTML = waves;
+        $("ticker-text").setAttribute("x", (1920 - Math.max(0, t - ATTACK2) * 1350).toFixed(1));
+        // The votes spin up, then fall to seven.
+        let votes = 0;
+        if (t >= GAUGE && t < SEVEN) votes = Math.floor(Math.min(1, (t - GAUGE) / 0.75) * 248) + (frame % 3);
+        if (t >= SEVEN) votes = 7;
+        $("votes").textContent = String(Math.min(votes, 248));
+        const s = A.shake(t, [{ at: ATTACK1, amp: 16 }, { at: VAN + 0.6, amp: 10 }, { at: ATTACK2, amp: 16 }, { at: SEVEN, amp: 34 }]);
+        $("cam").style.transform = `translate(${s.x}px, ${s.y}px)`;
+      });
+      tl.fromTo("#e3t-box", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.25, ease: "power4.out" }, 0.2);
+      tl.to("#e3t-box", { opacity: 0, duration: 0.15 }, 2.3);
+      tl.fromTo("#e3t-name1", { opacity: 0, scale: 1.6, transformOrigin: "500px 600px" }, { opacity: 1, scale: 1, duration: 0.13, ease: "expo.out" }, ATTACK1);
+      tl.to("#e3t-name1", { opacity: 0, duration: 0.12 }, ATTACK2 - 0.6);
+      tl.fromTo("#e3t-ticker", { opacity: 0 }, { opacity: 1, duration: 0.08 }, ATTACK2);
+      tl.to("#e3t-ticker", { opacity: 0, duration: 0.12 }, GAUGE - 0.2);
+      tl.fromTo("#e3t-gauge", { opacity: 0, y: 200 }, { opacity: 1, y: 0, duration: 0.3, ease: "expo.out" }, GAUGE);
+      tl.fromTo("#e3t-votes", { scale: 1 }, { scale: 1.6, duration: 0.06, transformOrigin: "1240px 950px", yoyo: true, repeat: 1 }, SEVEN);
+      window.__timelines["e3-tournoi"] = tl;
+    })();
+    </script>
+    <script>
+(function () {
+      const A = Anime;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (k) => document.getElementById("e3s-" + k);
+      const P = A.puppet("e3s-durif", { x: 1240, y: 1010, k: 1.05, faces: ["durif"] });
+      $("puppet").innerHTML = P.markup;
+      const DROP = 3.6;
+      const jaw = document.getElementById("e3s-durif-jaw-durif");
+      A.drive(tl, 8.5, (t) => {
+        const r = A.rng(9100 + A.boil(t));
+        A.pose("e3s-durif", P, { armFar: 8, armNear: 8, sway: (r() - 0.5) * 1.4 });
+        if (t >= DROP) {
+          const k = Math.min(1, (t - DROP) / 0.35);
+          const fall = k * k * 175;
+          const bounce = t > DROP + 0.35 ? Math.abs(Math.sin((t - DROP - 0.35) * 14)) * Math.exp(-(t - DROP - 0.35) * 6) * 40 : 0;
+          const [px, py] = P.pivots.jaw.durif;
+          jaw.setAttribute("transform", `translate(${k * 60} ${fall - bounce}) rotate(${k * 38} ${px} ${py})`);
+        }
+      });
+      tl.fromTo("#e3s-cam", { scale: 2.1, x: -237, y: -636, svgOrigin: "0 0" }, { scale: 2.1, x: -237, y: -636, duration: 0.01 }, 0);
+      tl.to("#e3s-cam", { scale: 1, x: 0, y: 0, duration: 0.7, ease: "power3.inOut" }, 2.0);
+      window.__timelines["e3-salle"] = tl;
+    })();
+    </script>
+    <script src="../film.js"></script>
+  </body>
+</html>

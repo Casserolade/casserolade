@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, ref, shallowRef, watch } from 'vue';
 import StoryFeed from '#src/client/components/organisms/StoryFeed.vue';
+import StoryQuest from '#src/client/components/molecules/StoryQuest.vue';
 import GameScreens from '#src/client/screens/GameScreens.vue';
 import StoryChapterScreen from '#src/client/screens/story/StoryChapterScreen.vue';
 import StoryEndScreen from '#src/client/screens/story/StoryEndScreen.vue';
@@ -14,13 +15,14 @@ import { createGameStore } from '#src/client/stores/createGameStore.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { StoryRun } from '#src/client/stores/createStoryRun.ts';
 import { apresChapitre, chapitreCourant, nouvelleCampagne } from '#src/histoire/campagne.ts';
-import { cinematiqueDe } from '#src/histoire/carrieres.ts';
-import type { Cinematique } from '#src/data/histoire/cinematique.ts';
+import { cinematiqueApres, cinematiqueDe } from '#src/histoire/carrieres.ts';
+import type { Scene } from '#src/data/histoire/cinematique.ts';
 import type { Campagne } from '#src/histoire/campagne.ts';
 import { generateSeed } from '#src/server/generateSeed.ts';
 
 /** The cutscenes and their animation library load only when a career plays one. */
 const CutscenePlayer = defineAsyncComponent(() => import('#src/client/components/organisms/CutscenePlayer.vue'));
+const LiveCutscenePlayer = defineAsyncComponent(() => import('#src/client/components/organisms/LiveCutscenePlayer.vue'));
 
 const emit = defineEmits<{ leave: [] }>();
 
@@ -30,6 +32,8 @@ const store = shallowRef<GameStore | null>(null);
 const chapter = computed(() => (campaign.value ? chapitreCourant(campaign.value) : null));
 const currentLine = computed(() => run.value?.currentLine.value ?? null);
 const bilan = computed(() => run.value?.bilan.value ?? null);
+/** The quest of a career's chapter (sponsorships, an ultimatum), as the player sees it. */
+const quest = computed(() => store.value?.view.value?.quete ?? null);
 /** The election night comes once the game screens are done: after the combat, and after the elimination. */
 const resultShown = computed(() => Boolean(bilan.value && (!store.value || store.value.screen.value === 'end')));
 
@@ -45,10 +49,13 @@ watch(bilan, (result) => {
 });
 
 /** The cutscene playing over everything, and what comes after it. Each one plays once in a campaign. */
-const cutscene = shallowRef<Cinematique | null>(null);
+const cutscene = shallowRef<Scene | null>(null);
+/** A HyperFrames page drawn live, or puppets described in data: both play in the page, never as a video. */
+const page = computed(() => (cutscene.value && 'page' in cutscene.value ? cutscene.value : null));
+const puppets = computed(() => (cutscene.value && !('page' in cutscene.value) ? cutscene.value : null));
 let afterCutscene: (() => void) | null = null;
 
-function showCutscene(scene: Cinematique | null, then: () => void): void {
+function showCutscene(scene: Scene | null, then: () => void): void {
   const current = campaign.value;
   if (!scene || !current || current.vues?.includes(scene.id)) {
     then();
@@ -110,12 +117,15 @@ function stopRun(): void {
   clearLocalGame();
 }
 
+/** A won chapter may close on its scene; the career's last one, on the victory. */
 function finishChapter(): void {
   if (!campaign.value || !chapter.value || !bilan.value) return;
   const elected = isFinal() && bilan.value.reussi;
+  const closing = bilan.value.reussi && campaign.value.carriere ? cinematiqueApres(campaign.value.heroId, chapter.value.id) : null;
   setCampaign(apresChapitre(campaign.value, chapter.value, bilan.value));
   stopRun();
-  if (elected && campaign.value) showCutscene(cinematiqueDe(campaign.value.heroId, 'victoire'), () => undefined);
+  if (!campaign.value) return;
+  showCutscene(elected ? cinematiqueDe(campaign.value.heroId, 'victoire') : closing, () => undefined);
 }
 
 function abandon(): void {
@@ -130,7 +140,8 @@ function leave(): void {
 </script>
 
 <template>
-  <CutscenePlayer v-if="cutscene" :key="cutscene.id" :cinematique="cutscene" @end="endCutscene" />
+  <LiveCutscenePlayer v-if="page" :key="page.id" :cinematique="page" @end="endCutscene" />
+  <CutscenePlayer v-else-if="puppets" :key="puppets.id" :cinematique="puppets" @end="endCutscene" />
   <StoryHeroScreen v-if="!campaign" @choose="chooseHero" @leave="leave" />
   <StoryResultScreen
     v-else-if="bilan && chapter && resultShown"
@@ -146,7 +157,10 @@ function leave(): void {
   <template v-else-if="store && run">
     <!-- Leaving the game gives up this election: back to its page, to play it again or go home. -->
     <GameScreens :store="store" @leave="stopRun">
-      <template #recruit-side><StoryFeed v-if="currentLine" :line="currentLine" :hero-id="campaign.heroId" :boss-id="run.bossId" /></template>
+      <template #recruit-side>
+        <StoryQuest v-if="quest" :quest="quest" />
+        <StoryFeed v-if="currentLine" :line="currentLine" :hero-id="campaign.heroId" :boss-id="run.bossId" />
+      </template>
     </GameScreens>
   </template>
   <StoryChapterScreen v-else-if="chapter" :chapter="chapter" :campaign="campaign" @play="play" @abandon="abandon" @leave="leave" />

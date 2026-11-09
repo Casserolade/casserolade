@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Christ cosmique, épisode 6 : Le rival</title>
+    <script src="../gsap.min.js"></script>
+    <script>window.__timelines = {};</script>
+    <script src="anime.js"></script>
+    <script src="marionnettes.js"></script>
+    <style>
+      @font-face { font-family: "Bangers"; src: url("../../fontes/bangers-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+      @font-face { font-family: "Alegreya Sans"; src: url("../../fontes/alegreya-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: #141018; }
+      #root { position: relative; width: 100%; height: 100%; background: #141018; }
+    
+      [data-composition-id] { position: absolute; inset: 0; }
+      #root { position: relative; }
+/* compositions/titre.html */
+
+    #titre { position: absolute; inset: 0; overflow: hidden; background: #F7F4EA; }
+    #titre-cam { position: absolute; inset: -40px; }
+    #titre-art { position: absolute; left: 40px; top: 40px; width: 1920px; height: 1080px; }
+    #titre-band { position: absolute; left: 0; right: 0; bottom: 0; height: 190px; background: #141018; display: flex; align-items: center; gap: 44px; padding-left: 150px; }
+    #titre-ep { font-family: "Bangers", sans-serif; font-size: 92px; color: #FFD23F; letter-spacing: 3px; white-space: nowrap; flex: none; }
+    #titre-name { font-family: "Alegreya Sans", sans-serif; font-weight: 700; font-size: 62px; line-height: 1.05; color: #F7F4EA; max-width: 1350px; }
+    #titre-jp { position: absolute; right: 120px; top: 0; height: 890px; width: 170px; background: #C0262D; border-left: 10px solid #141018; border-right: 10px solid #141018; display: flex; justify-content: center; padding-top: 50px; }
+    #titre-jp span { writing-mode: vertical-rl; font-family: "Noto Sans JP", sans-serif; font-weight: 900; font-size: 104px; color: #F7F4EA; letter-spacing: 8px; }
+    #titre-flash { position: absolute; inset: 0; background: #141018; opacity: 0; }
+  
+/* compositions/e6-duel.html */
+
+    #e6-duel { position: absolute; inset: 0; overflow: hidden; background: #F28A3D; }
+    #e6d-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #e6d-box { position: absolute; left: 70px; top: 60px; padding: 16px 30px; background: #FFFDF5; border: 6px solid #141018; font: 700 52px "Alegreya Sans", sans-serif; color: #141018; }
+    .e6d-t { font-family: "Bangers", sans-serif; stroke: #141018; paint-order: stroke; stroke-linejoin: round; }
+  
+/* compositions/e6-debat.html */
+
+    #e6-debat { position: absolute; inset: 0; overflow: hidden; background: #1D3E9E; }
+    #e6b-art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    .e6b-bubble { position: absolute; padding: 20px 32px; border: 6px solid #14110c; border-radius: 40px; background: #fffdf4; font: 700 52px / 1.12 "Alegreya Sans", sans-serif; color: #14110c; text-align: center; box-shadow: 7px 9px 0 rgb(0 0 0 / 0.35); }
+    .e6b-bubble::after { content: ""; position: absolute; bottom: -34px; width: 44px; height: 38px; background: #fffdf4; border: 6px solid #14110c; border-top: none; border-left: none; transform: skewX(-25deg) rotate(35deg); }
+    #e6b-say-l { right: 120px; top: 110px; max-width: 760px; }
+    #e6b-say-l::after { left: 30%; }
+    #e6b-say-d { left: 380px; top: 210px; }
+    #e6b-say-d::after { left: 40%; }
+  
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.2" data-width="1920" data-height="1080">
+      <div id="titre" data-composition-id="titre" data-variable-values='{"episode":"ÉPISODE 6","nom":"Le rival"}' data-start="0" data-duration="2.2" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:1">
+    <div id="titre-cam">
+      <svg id="titre-art" viewBox="0 0 1920 1080">
+        <path id="titre-burst" fill="#E9483B" opacity="0.9" />
+        <g id="titre-words" font-family="Bangers" text-anchor="middle" data-layout-allow-overlap>
+          <text x="842" y="452" font-size="300" fill="#C0262D" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">CHRIST</text>
+          <text x="830" y="440" font-size="300" fill="#FFD23F" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">CHRIST</text>
+          <text x="842" y="742" font-size="300" fill="#C0262D" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">COSMIQUE</text>
+          <text x="830" y="730" font-size="300" fill="#FFD23F" stroke="#141018" stroke-width="22" paint-order="stroke" stroke-linejoin="round">COSMIQUE</text>
+        </g>
+      </svg>
+    </div>
+    <div id="titre-jp"><span>宇宙のキリスト</span></div>
+    <div id="titre-band"><span id="titre-ep" data-var-text="episode">ÉPISODE 6</span><span id="titre-name" data-var-text="nom">Le rival</span></div>
+    <div id="titre-flash"></div>
+  </div>
+      <div id="e6-duel" data-composition-id="e6-duel" data-start="2.2" data-duration="14.0" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:2">
+    <svg id="e6d-cam" viewBox="0 0 1920 1080">
+      <defs><g id="e6d-defs"></g></defs>
+      <g id="e6d-sunset">
+        <rect x="-60" y="-60" width="2040" height="1200" fill="#F28A3D" />
+        <rect x="-60" y="-60" width="2040" height="300" fill="#E2482C" />
+        <circle cx="960" cy="560" r="300" fill="#FFD23F" stroke="#141018" stroke-width="10" />
+        <path d="M600 520 h720 M640 600 h640 M700 680 h520" stroke="#F28A3D" stroke-width="26" />
+      </g>
+      <g id="e6d-pink" opacity="0">
+        <rect x="-60" y="-60" width="2040" height="1200" fill="#FFC4DE" />
+        <g id="e6d-bubbles"></g>
+      </g>
+      <path d="M-40 1100 L-40 760 L200 700 L430 760 L560 820 L640 1100Z M1960 1100 L1960 760 L1720 700 L1490 760 L1360 820 L1280 1100Z" fill="#5A3A2A" stroke="#141018" stroke-width="12" stroke-linejoin="round" />
+      <path id="e6d-aura-d" fill="#FFFDF5" stroke="#141018" stroke-width="9" />
+      <path id="e6d-aura-l" fill="#8E3FB5" stroke="#141018" stroke-width="9" />
+      <path id="e6d-beam-d" fill="#FFD23F" stroke="#141018" stroke-width="8" opacity="0" />
+      <path id="e6d-beam-l" fill="#B57CE0" stroke="#141018" stroke-width="8" opacity="0" />
+      <path id="e6d-clash" fill="#FFFDF5" opacity="0" />
+      <g id="e6d-durif-pos"><g id="e6d-durif" transform="translate(470 600) scale(0.5)"></g></g>
+      <g id="e6d-lalanne-pos"><g id="e6d-lalanne" transform="translate(1450 600) scale(0.5)"></g></g>
+      <g id="e6d-vs" opacity="0" data-layout-allow-overlap>
+        <text class="e6d-t" x="960" y="330" text-anchor="middle" font-size="260" fill="#FFFDF5" stroke-width="24">VS</text>
+      </g>
+      <g id="e6d-names" opacity="0" data-layout-allow-overlap>
+        <text class="e6d-t" x="70" y="230" font-size="96" fill="#FFD23F" stroke-width="16">FLÛTE DE PAN COSMIQUE !</text>
+        <text class="e6d-t" x="1850" y="350" text-anchor="end" font-size="96" fill="#D9A6FF" stroke-width="16">ON SE RETROUVERA !</text>
+      </g>
+      <text id="e6d-fusion" class="e6d-t" x="960" y="260" text-anchor="middle" font-size="110" fill="#FF6FB0" stroke-width="14" opacity="0">FUSION ?</text>
+      <g id="e6d-stamp" opacity="0" transform="rotate(-8 960 540)">
+        <rect x="200" y="400" width="1520" height="280" fill="#C0262D" stroke="#141018" stroke-width="14" />
+        <rect x="226" y="426" width="1468" height="228" fill="none" stroke="#FFFDF5" stroke-width="8" />
+        <text class="e6d-t" x="960" y="582" text-anchor="middle" font-size="128" fill="#FFFDF5" stroke-width="0">AUCUNE ALLIANCE N’EST PRÉVUE.</text>
+      </g>
+    </svg>
+    <div id="e6d-box">2027. Le rival.</div>
+  </div>
+      <div id="e6-debat" data-composition-id="e6-debat" data-start="16.2" data-duration="8.0" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:3">
+    <svg id="e6b-art" viewBox="0 0 1920 1080">
+      <defs><filter id="e6b-paper" x="-10%" y="-10%" width="125%" height="130%"><feDropShadow dx="5" dy="8" stdDeviation="3" flood-color="#000" flood-opacity="0.35" /></filter></defs>
+      <rect width="1920" height="1080" fill="#1D3E9E" />
+      <g filter="url(#e6b-paper)">
+        <rect x="560" y="90" width="800" height="380" fill="#0F2466" stroke="#FFFFFF" stroke-width="6" />
+        <text x="960" y="200" text-anchor="middle" font-family="Bangers" font-size="92" fill="#FFFFFF">SECOND TOUR</text>
+        <rect x="620" y="240" width="320" height="190" fill="#2F5BD3" stroke="#FFFFFF" stroke-width="4" /><rect x="980" y="240" width="320" height="190" fill="#2F5BD3" stroke="#FFFFFF" stroke-width="4" />
+        <text x="780" y="355" text-anchor="middle" font-family="Bangers" font-size="70" fill="#FFD23F">50 %</text><text x="1140" y="355" text-anchor="middle" font-family="Bangers" font-size="70" fill="#FFD23F">50 %</text>
+      </g>
+      <path d="M0 860 H1920 V1080 H0Z" fill="#132C78" />
+      <g id="e6b-durif" filter="url(#e6b-paper)"></g>
+      <g id="e6b-lalanne" filter="url(#e6b-paper)" transform="translate(2720 0) scale(-1 1)"></g>
+      <g filter="url(#e6b-paper)">
+        <path d="M340 760 L780 760 L740 1080 L380 1080Z" fill="#F7F4EA" stroke="#FFFFFF" stroke-width="6" />
+        <rect x="400" y="800" width="320" height="70" fill="#2F5BD3" /><text x="560" y="852" text-anchor="middle" font-family="Alegreya Sans" font-weight="700" font-size="44" fill="#FFFFFF">S. DURIF</text>
+        <path d="M1140 760 L1580 760 L1540 1080 L1180 1080Z" fill="#F7F4EA" stroke="#FFFFFF" stroke-width="6" />
+        <rect x="1200" y="800" width="320" height="70" fill="#2F5BD3" /><text x="1360" y="852" text-anchor="middle" font-family="Alegreya Sans" font-weight="700" font-size="44" fill="#FFFFFF">F. LALANNE</text>
+      </g>
+    </svg>
+    <div id="e6b-say-l" class="clip e6b-bubble" data-start="0.8" data-duration="3.6">Ma candidature, elle n’est pas loufoque.</div>
+    <div id="e6b-say-d" class="clip e6b-bubble" data-start="5.0" data-duration="2.8">…</div>
+  </div>
+    </div>
+    
+      <script>
+(function () {
+      const tl = gsap.timeline({ paused: true });
+      const burst = document.getElementById("titre-burst");
+      const cam = document.getElementById("titre-cam");
+      Anime.drive(tl, 2.2, (t) => {
+        burst.setAttribute("d", Anime.sunburst({ cx: 830, cy: 560, count: 28, turn: t * 0.12 }));
+        const s = Anime.shake(t, [{ at: 0.12, amp: 26 }]);
+        cam.style.transform = `translate(${s.x}px, ${s.y}px)`;
+      });
+      tl.fromTo("#titre-words", { scale: 1.9, opacity: 0, transformOrigin: "830px 560px" }, { scale: 1, opacity: 1, duration: 0.14, ease: "expo.out" }, 0.12);
+      tl.fromTo("#titre-flash", { opacity: 0 }, { opacity: 0.92, duration: 0.01 }, 0.12);
+      tl.to("#titre-flash", { opacity: 0, duration: 0.01 }, 0.19);
+      tl.fromTo("#titre-jp", { x: 360 }, { x: 0, duration: 0.3, ease: "expo.out" }, 0.4);
+      tl.fromTo("#titre-band", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.28, ease: "power4.out" }, 0.5);
+      window.__timelines["titre"] = tl;
+    })();
+    </script>
+    <script>
+(function () {
+      const A = Anime;
+      const tl = gsap.timeline({ paused: true });
+      const $ = (k) => document.getElementById("e6d-" + k);
+      const FACE = 2.0, AURA = 3.6, NAMES = 4.6, FIRE = 5.4, CALM = 9.6, STAMP = 11.0;
+      $("defs").innerHTML = A.stripes("e6d-hoodie", 52, 0);
+      $("durif").innerHTML = A.rig("e6d-d", { heads: ["serieux", "cri"], fill: "url(#e6d-hoodie)", hairColor: "#FFE14D" });
+      const LS = A.skull("lalanne");
+      const lalHair = `<path d="M${LS.cx - LS.rx * 0.95} ${LS.cy - LS.ry * 0.55} Q${LS.cx} ${LS.cy - LS.ry * 1.25} ${LS.cx + LS.rx * 0.95} ${LS.cy - LS.ry * 0.55} L${LS.cx + LS.rx * 1.1} 260 L${LS.cx + LS.rx * 0.55} 300 L${LS.cx + LS.rx * 0.35} 120 L${LS.cx - LS.rx * 0.35} 120 L${LS.cx - LS.rx * 0.55} 300 L${LS.cx - LS.rx * 1.1} 260Z" fill="#1B1820" stroke="#141018" stroke-width="12" stroke-linejoin="round"/>`;
+      $("lalanne").innerHTML = `${A.body("e6d-l-b", "#26232E", false)}${lalHair}${A.headImage("e6d-l-face", "lalanne", null, true)}
+        <g transform="translate(-60 300) rotate(-35)"><path d="M-120 0 q-40 -90 40 -110 q60 -10 80 40 q30 -50 90 -20 q70 50 10 130 q-40 60 -120 40 q-60 30 -100 -80Z" fill="#B5703A" stroke="#141018" stroke-width="10"/><circle cx="20" cy="10" r="30" fill="#3A2416"/><rect x="90" y="-10" width="320" height="34" fill="#5A3A1E" stroke="#141018" stroke-width="8"/></g>`;
+      const flute = `<g transform="translate(150 230)">${Array.from({ length: 8 }, (_, i) => `<rect x="${i * 22}" y="${-160 + i * 15}" width="20" height="${160 - i * 15}" rx="8" fill="#E8C27A" stroke="#141018" stroke-width="6"/>`).join("")}<rect x="-6" y="-70" width="184" height="20" fill="#B5703A" stroke="#141018" stroke-width="6"/></g>`;
+      document.getElementById("e6d-d-front").innerHTML = flute;
+      const br = A.rng(66);
+      const bubbles = Array.from({ length: 26 }, () => [br() * 1920, br() * 1080, 20 + br() * 70]);
+      A.drive(tl, 14.0, (t) => {
+        const frame = A.boil(t);
+        const fighting = t >= AURA && t < CALM;
+        A.face("e6d-d", ["serieux", "cri"], t >= NAMES && t < CALM ? "cri" : "serieux");
+        $("d-hair").setAttribute("d", A.hair({ ...A.skull("neutre"), len: 1.75, up: 0.9, lift: 22, sharp: true, seed: 110 + (frame % 4) }));
+        const aura = fighting ? Math.min(1, (t - AURA) / 0.3) : 0;
+        $("aura-d").setAttribute("d", A.flame({ cx: 470, cy: 700, rx: 180 * aura, ry: 230 * aura, n: 13, seed: frame * 3, amp: 0.3, up: 0.6 }));
+        $("aura-l").setAttribute("d", A.flame({ cx: 1450, cy: 700, rx: 180 * aura, ry: 230 * aura, n: 13, seed: frame * 3 + 7, amp: 0.3, up: 0.6 }));
+        const firing = t >= FIRE && t < CALM;
+        const X = 960 + Math.sin((t - FIRE) * 2.2) * 170;
+        const beam = (x0, x1, w) => `M${x0} ${520 - w * 0.6} L${x1} ${520 - w} L${x1} ${520 + w} L${x0} ${520 + w * 0.6}Z`;
+        const w = 50 + Math.sin(t * 37) * 6;
+        $("beam-d").setAttribute("d", beam(620, X, w));
+        $("beam-l").setAttribute("d", beam(1300, X, w));
+        $("clash").setAttribute("d", A.speedLines({ cx: X, cy: 520, count: 24, inner: 30, seed: 3300 + frame, width: [6, 16], R: 220 }));
+        ["beam-d", "beam-l", "clash"].forEach((k) => $(k).setAttribute("opacity", firing ? 1 : 0));
+        $("bubbles").innerHTML = bubbles.map(([x, y, r]) => `<circle cx="${x}" cy="${(y - t * 40) % 1100}" r="${r}" fill="#FFFFFF" opacity="0.7"/>`).join("");
+        const s = A.shake(t, [{ at: FACE, amp: 10 }, { at: AURA, amp: 14 }, { at: FIRE, amp: 20 }, { at: STAMP, amp: 40 }]);
+        $("cam").style.transform = `translate(${s.x}px, ${s.y}px)`;
+      });
+      tl.fromTo("#e6d-box", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.25, ease: "power4.out" }, 0.2);
+      tl.to("#e6d-box", { opacity: 0, duration: 0.12 }, FACE);
+      tl.fromTo("#e6d-vs", { opacity: 0, scale: 2, transformOrigin: "960px 260px" }, { opacity: 1, scale: 1, duration: 0.13, ease: "expo.out" }, FACE);
+      tl.to("#e6d-vs", { opacity: 0, duration: 0.1 }, NAMES - 0.1);
+      tl.fromTo("#e6d-names", { opacity: 0, scale: 1.5, transformOrigin: "960px 300px" }, { opacity: 1, scale: 1, duration: 0.13, ease: "expo.out" }, NAMES);
+      tl.to("#e6d-names", { opacity: 0, duration: 0.1 }, CALM - 0.3);
+      tl.set("#e6d-pink", { opacity: 1 }, CALM);
+      tl.to("#e6d-durif-pos", { x: 260, duration: 1.2, ease: "power2.inOut" }, CALM);
+      tl.to("#e6d-lalanne-pos", { x: -260, duration: 1.2, ease: "power2.inOut" }, CALM);
+      tl.fromTo("#e6d-fusion", { opacity: 0 }, { opacity: 1, duration: 0.2 }, CALM + 0.3);
+      tl.set(["#e6d-pink", "#e6d-fusion"], { opacity: 0 }, STAMP);
+      tl.fromTo("#e6d-stamp", { opacity: 0, scale: 2.2, svgOrigin: "960 540" }, { opacity: 1, scale: 1, duration: 0.12, ease: "expo.out" }, STAMP);
+      tl.to("#e6d-durif-pos", { x: -60, duration: 0.25, ease: "expo.out" }, STAMP + 0.05);
+      tl.to("#e6d-lalanne-pos", { x: 60, duration: 0.25, ease: "expo.out" }, STAMP + 0.05);
+      window.__timelines["e6-duel"] = tl;
+    })();
+    </script>
+    <script>
+(function () {
+      const A = Anime;
+      const tl = gsap.timeline({ paused: true });
+      const D = A.puppet("e6b-d", { x: 560, y: 1000, k: 0.95, faces: ["durif"] });
+      const L = A.puppet("e6b-l", { x: 1360, y: 1000, k: 0.95, faces: ["lalanne"], body: "../../corps/societe_civile.webp" });
+      document.getElementById("e6b-durif").innerHTML = D.markup;
+      document.getElementById("e6b-lalanne").innerHTML = L.markup;
+      A.drive(tl, 8.0, (t) => {
+        const r = A.rng(8800 + A.boil(t));
+        const talking = t >= 0.8 && t < 3.8;
+        A.pose("e6b-l", L, { armFar: talking ? 20 + Math.sin(t * 5) * 15 : 4, open: talking ? (A.boil(t) % 3 ? 0.6 : 0) : 0, sway: (r() - 0.5) * 1.4 });
+        A.pose("e6b-d", D, { armFar: 4, armNear: 4, open: t > 5.6 ? 0.35 : 0, sway: (r() - 0.5) * 1.4 });
+      });
+      window.__timelines["e6-debat"] = tl;
+    })();
+    </script>
+    <script src="../film.js"></script>
+  </body>
+</html>

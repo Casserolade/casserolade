@@ -27,10 +27,10 @@ import { SPELLS, SPELL_BY_ID } from '../src/data/sorts.ts';
 export const MAX_ROUNDS = 45;
 const KEYWORDS: Keyword[] = ['immunite', 'porte_parole', 'cumul', 'polemique', 'retour', 'ni_droite_ni_gauche', 'ralliement', 'vedette'];
 const VIEW_KEYS = [
-  'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'buyCost',
+  'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'upgradeLock', 'buyCost',
   'rollCost', 'freeRolls', 'relaunched', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
   'shopSpells', 'shopSpellCosts', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'discoverKind', 'tract', 'counters', 'stats', 'camps',
-  'contextId', 'params', 'seen', 'table',
+  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents',
 ].sort();
 const TABLE_KEYS = ['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples'].sort();
 
