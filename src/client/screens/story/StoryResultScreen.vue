@@ -18,7 +18,8 @@ defineEmits<{ next: []; retry: []; leave: [] }>();
   <MenuBackdrop :plateau-id="chapter.plateaux.at(-1)">
     <p class="kicker">{{ chapter.election }}</p>
     <h1 class="title" :class="{ won: bilan.reussi }">{{ bilan.reussi ? 'Élu !' : 'Battu' }}</h1>
-    <p class="place">{{ bilan.place }}<sup>{{ ordinalSuffix(bilan.place) }}</sup> place<template v-if="!bilan.reussi"> : il fallait finir dans les {{ chapter.placeRequise }} premiers.</template></p>
+    <p class="place">{{ bilan.place }}<sup>{{ ordinalSuffix(bilan.place) }}</sup> place<template v-if="!bilan.reussi && !bilan.motif"> : il fallait finir dans les {{ chapter.placeRequise }} premiers.</template></p>
+    <p v-if="bilan.motif" class="place">{{ bilan.motif }}</p>
     <p v-for="line in bilan.lignes" :key="line.texte" class="press">{{ remplir(line.texte, heroId, bossId) }}</p>
     <ul class="stars">
       <li v-for="item in bilan.objectifs" :key="item.texte" :class="{ reached: item.atteint }">

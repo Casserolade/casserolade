@@ -63,6 +63,7 @@ const road = computed(() => chapters.value.map((c, i) => ({
         <p class="kicker">{{ index >= 0 ? `${chapter.annee ? `${chapter.annee} · ` : ''}Chapitre ${index + 1} sur ${chapters.length}` : 'Épilogue' }}</p>
         <h1 class="name">{{ chapter.election }}</h1>
         <p class="challenge">{{ chapter.decouverte }}</p>
+        <p v-if="chapter.consigne" class="rule"><span class="tag">Règle spéciale</span> {{ chapter.consigne }}</p>
         <p v-if="rule" class="rule"><span class="tag">Règle spéciale</span> <strong>{{ rule.name }}</strong> : {{ rule.desc }}</p>
         <p v-else-if="chapter.contexte" class="rule"><span class="tag">Règle spéciale</span> tirée au sort au début de la partie.</p>
         <ul class="terms">

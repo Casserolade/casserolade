@@ -1,10 +1,11 @@
 import type { Camp, Casserole, CasseroleBonus, CombatEvent, CombatSide, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
-import type { CombatRecord, Game, GamePhase, Player, ShopScript } from './state.ts';
+import type { CombatRecord, Game, GamePhase, Player, Quest, ScriptEventNote, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
 import { canRallyOnto, effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
 import { lostSpellReason } from './lostSpellReason.ts';
 import { insertAroundLocked, reorderAroundLocked } from './reorderAroundLocked.ts';
+import { afterScriptedCombats, afterScriptedEliminations, followEvents, retire, sellBonus, silencedSide, startingQuest, upgradeLock, upgradeRebate } from './script.ts';
 import {
   addMinionToHand,
   addSpellToHand,
@@ -171,6 +172,10 @@ export function createGame(opts: GameOptions): Game {
       opponents: [],
       seen: [],
       lostLast: false,
+      away: [],
+      quest: null,
+      comebackUsed: false,
+      events: [],
       stats: { casseroles: 0, scandals: 0, forgotten: 0, triples: 0, spells: 0 },
     });
   }
@@ -195,6 +200,8 @@ export function createGame(opts: GameOptions): Game {
     combatLog: opts.combatLog ?? false,
     script: opts.script ?? null,
   };
+  const scripted = game.script ? game.players[game.script.seat] : undefined;
+  if (scripted) scripted.quest = startingQuest(game.script?.regles, (id) => heroes[id]?.name ?? id);
   if (game.phase === 'recrutement') startRound(game);
   return game;
 }
@@ -266,14 +273,6 @@ function followScript(game: Game, p: Player, frozen: boolean): void {
   if (casserole) p.casseroleOffer = casserole;
 }
 
-/** Ce qu'une carrière fait arriver au siège en début de manche : un autre pouvoir, des points de sondage. */
-function followEvents(game: Game, p: Player): void {
-  const script = game.script;
-  const event = script && script.seat === p.seat ? script.evenements?.[game.round] : undefined;
-  if (!event) return;
-  if (event.mods) p.hero = { ...p.hero, mods: { ...event.mods } };
-  if (event.sondages) p.hp = Math.max(1, p.hp + event.sondages);
-}
 
 export function startRound(game: Game): void {
   game.round++;
@@ -504,7 +503,7 @@ function sell(game: Game, p: Player, uid: number): ActionResult {
   if (onBoard) p.board = p.board.filter((x) => x !== m);
   else p.hand = p.hand.filter((x) => x !== m);
   releaseMinion(game, m);
-  p.budget += game.params.sellValue + (p.hero.mods.sellBonus ?? 0);
+  p.budget += game.params.sellValue + (p.hero.mods.sellBonus ?? 0) + sellBonus(game, p, m);
   if (onBoard) {
     for (const eff of m.effects) if (eff.when === 'vente') applyEffect(game, p, m, eff);
     fireBoard(game, p, 'vente_allie', {});
@@ -585,10 +584,12 @@ export function applyAction(game: Game, seat: number, a: PlayerAction): ActionRe
       return OK;
     case 'upgrade': {
       if (p.tier >= game.params.tierMax) return fail('Échelon maximum atteint.');
+      const lock = upgradeLock(game, p);
+      if (lock) return fail(lock);
       if (p.budget < upgradeCostFor(p)) return fail('Budget insuffisant.');
       spend(game, p, upgradeCostFor(p));
       p.tier++;
-      p.upgradeCost = game.params.tierCost[p.tier + 1] ?? 0;
+      p.upgradeCost = Math.max(0, (game.params.tierCost[p.tier + 1] ?? 0) - upgradeRebate(game, p));
       return OK;
     }
     case 'move':
@@ -627,6 +628,8 @@ export interface PlayerView {
   /** Le budget déjà gagné pour la manche suivante : ventes, effets « plus tard », fin de tour, paris. */
   nextBudget: number;
   upgradeCost: number;
+  /** Dans une carrière, pourquoi monter d'échelon lui est refusé pour l'instant (« Vice-président à rien »). */
+  upgradeLock: string | null;
   buyCost: number;
   rollCost: number;
   freeRolls: number;
@@ -663,6 +666,12 @@ export interface PlayerView {
   params: Params;
   /** Le dernier plateau vu de chaque adversaire, le plus récent d'abord, avec la manche du combat. */
   seen: { seat: number; heroId: string; round: number; board: Minion[] }[];
+  /** La quête d'une carrière, quand il en a une : parrainages, ultimatum, Congrès, devant un rival. */
+  quete: Quest | null;
+  /** Ce qu'une carrière lui a fait depuis le début de la manche : la campagne le raconte. */
+  evenements: ScriptEventNote[];
+  /** Ses politiques partis pour un temps (en cellule, enlevés). */
+  absents: number;
   /** Informations publiques sur chaque joueur, comme à Battlegrounds : sondages, échelon, triples. */
   table: { seat: number; heroId: string | null; hp: number; tier: number; alive: boolean; boardSize: number; place: number; triples: number }[];
 }
@@ -687,7 +696,7 @@ export interface CombatView {
  * suivre le scandale de l'adversaire après coup. Les effets restent les objets des cartes, que le
  * moteur ne modifie jamais et dont il compare l'identité (casseroles d'un effet, silence).
  */
-function copyMinion(m: Minion): Minion {
+export function copyMinion(m: Minion): Minion {
   const copy: Minion = { ...m, keywords: [...m.keywords], effects: [...m.effects], casseroles: [...m.casseroles], merged: [...m.merged], rallied: [...m.rallied], ownerCasseroles: [...m.ownerCasseroles] };
   if (m.scandal) copy.scandal = { ...m.scandal, silenced: m.scandal.silenced ? [...m.scandal.silenced] : null };
   return copy;
@@ -723,6 +732,7 @@ export function viewFor(game: Game, seat: number): PlayerView {
     maxBudget: maxBudget(game, p),
     nextBudget: p.nextBudgetBonus,
     upgradeCost: upgradeCostFor(p),
+    upgradeLock: upgradeLock(game, p),
     buyCost: buyCost(game, p),
     rollCost: rollCost(game, p),
     freeRolls: p.freeRolls,
@@ -751,6 +761,9 @@ export function viewFor(game: Game, seat: number): PlayerView {
     contextId: game.ctx.id,
     params: structuredClone(game.params),
     seen: p.seen.map((s) => ({ seat: s.seat, heroId: s.heroId, round: s.round, board: s.board.map(viewMinion) })),
+    quete: p.quest ? { ...p.quest } : null,
+    evenements: p.events.map((e) => ({ ...e })),
+    absents: p.away.length,
     table: game.players.map((x) => ({
       seat: x.seat,
       // Un héros encore à choisir ne se révèle pas : ce n'est qu'une valeur par défaut.
@@ -959,7 +972,7 @@ export function startCombats(game: Game): void {
     const ghost = pb ? null : ghostFor(game, pa);
     const opponent = pb ? combatSide(pb) : ghost!.side;
     const opponentBoard = opponent.minions;
-    const result = resolveCombat(combatSide(pa), opponent, { params: game.params, ctx: game.ctx, rng: game.rng, uidStart: startUid, log: game.combatLog });
+    const result = resolveCombat(silencedSide(game, combatSide(pa), sb), silencedSide(game, opponent, sa), { params: game.params, ctx: game.ctx, rng: game.rng, uidStart: startUid, log: game.combatLog });
     const damage: [number, number] = [result.deathPenalty[0], pb ? result.deathPenalty[1] : 0];
     const record: CombatRecord = { a: sa, b: sb ?? -1, ...(ghost ? { ghostOf: ghost.heroId } : {}), result, evenBoards: pa.board.length === opponentBoard.length, damage };
     game.roundCombats.push(record);
@@ -988,8 +1001,10 @@ export function startCombats(game: Game): void {
   for (const p of game.players) {
     if (p.alive && p.lostLast && p.hero.mods.lossBudget) p.nextBudgetBonus += p.hero.mods.lossBudget;
   }
+  afterScriptedCombats(game);
   game.hpSnapshot.set(game.round, game.players.map((p) => (p.alive ? p.hp : -999)));
   settleEliminations(game, before);
+  afterScriptedEliminations(game);
   enterPhase(game, 'combat');
 }
 
@@ -1028,14 +1043,7 @@ function settleEliminations(game: Game, before: number[]): void {
   const alive = game.players.filter((p) => p.alive).length;
   dead.sort((a, b) => a.hp - b.hp || before[a.seat] - before[b.seat] || a.seat - b.seat);
   const allDead = dead.length === alive;
-  dead.forEach((p, i) => {
-    p.alive = false;
-    p.place = alive - i;
-    for (const m of [...p.board, ...p.hand]) releaseMinion(game, m);
-    for (const id of p.shop) returnToPool(game, id);
-    dropDiscovers(game, p);
-    p.shop = [];
-  });
+  dead.forEach((p, i) => retire(game, p, alive - i));
   const last = dead[dead.length - 1];
   game.lastEliminated = { heroId: last.hero.id, board: last.board.map(copyMinion) };
   if (allDead) {

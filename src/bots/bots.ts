@@ -749,7 +749,7 @@ function easyTurn(view: PlayerView, bot: BotState): PlayerAction | null {
   if (cast) return cast;
   // Il suit la courbe de montée : monter au hasard le ruinait depuis que les plateaux grandissent au recrutement.
   const behind = view.tier < expectedTier(view, bot);
-  if (view.tier < view.params.tierMax && view.budget >= view.upgradeCost && behind) return { t: 'upgrade' };
+  if (view.tier < view.params.tierMax && !view.upgradeLock && view.budget >= view.upgradeCost && behind) return { t: 'upgrade' };
 
   // Un débutant croit tout ce qu'on lui vend : il prend la casserole sans regarder où elle mène.
   if (view.casseroleOffer && view.casseroleCost !== null && view.budget - view.casseroleCost >= view.buyCost && handCount(view) < view.handLimit) {
@@ -798,7 +798,7 @@ function debutantTurn(view: PlayerView, bot: BotState): PlayerAction | null {
   const cast = castMove(view, bot);
   if (cast) return cast;
   const paliers = [0, 0, 3, 5, 7, 9, 11];
-  if (view.tier < view.params.tierMax && view.round >= paliers[view.tier + 1] && view.budget >= view.upgradeCost) return { t: 'upgrade' };
+  if (view.tier < view.params.tierMax && !view.upgradeLock && view.round >= paliers[view.tier + 1] && view.budget >= view.upgradeCost) return { t: 'upgrade' };
   if (view.casseroleOffer && view.casseroleCost !== null && view.budget >= view.casseroleCost + view.buyCost && handCount(view) < view.handLimit) {
     const c = CASSEROLE_BY_ID[view.casseroleOffer];
     if (casseroleTarget(view, c, bot)) return { t: 'buy_casserole' };
@@ -837,7 +837,8 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
   if (view.discover) return discoverChoice(view, bot);
 
   const wantTier = expectedTier(view, bot);
-  const canUpgrade = view.tier < view.params.tierMax && view.budget >= view.upgradeCost;
+  // Dans une carrière, monter peut être interdit pour un temps (« Vice-président à rien »).
+  const canUpgrade = view.tier < view.params.tierMax && !view.upgradeLock && view.budget >= view.upgradeCost;
   if (canUpgrade) {
     let want = view.tier < wantTier;
     if (bot.level === 'difficile' && view.seen.length > 0) {

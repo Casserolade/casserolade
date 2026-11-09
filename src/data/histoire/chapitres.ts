@@ -1,5 +1,18 @@
 import type { BotLevel } from '../../bots/bots.ts';
 import type { Params, PlayerAction } from '../../engine/types.ts';
+import type { ScriptEvent, ScriptRules } from '../../engine/state.ts';
+
+/**
+ * Le tour scénarisé d'une carrière, pour le joueur seul : il part avec le pouvoir d'un autre héros (`pouvoirDe`) ; au
+ * début de certaines manches, il reprend le sien, gagne ou perd des sondages ou du budget, voit partir un politique (en
+ * cellule, enlevé) ou un rival quitter la table ; et des règles tiennent tout le chapitre (`regles` : une quête de
+ * combats gagnés, un retour, un échelon bloqué, un renvoi qui rapporte, une partie qui s'arrête à son heure).
+ */
+export interface Scenario {
+  pouvoirDe?: string;
+  manches?: Record<number, Omit<ScriptEvent, 'mods'> & { pouvoirPropre?: boolean }>;
+  regles?: ScriptRules;
+}
 
 /**
  * La carrière : un chapitre est une ligne de données, pas du code. Toutes les règles jouent dès le
@@ -38,7 +51,16 @@ export type Declencheur =
   | 'combat_perdu'
   | 'sondages_bas'
   | 'victoire'
-  | 'defaite';
+  | 'defaite'
+  /** Un tour scénarisé : un politique part (en cellule, enlevé), revient, un rival quitte la table, le retour sauve. */
+  | 'enleve'
+  | 'revient'
+  | 'abandon'
+  | 'retour'
+  /** La quête avance (à chaque fois : `{valeur}` et `{cible}` dans le texte), puis réussit ou échoue. */
+  | 'quete'
+  | 'quete_reussie'
+  | 'quete_ratee';
 
 export interface Ligne {
   quand: Declencheur;
@@ -73,7 +95,9 @@ export interface Chapitre {
    * Le tour scénarisé d'une carrière, quand il change le pouvoir ou les sondages du joueur : il part avec le pouvoir d'un
    * autre héros (`pouvoirDe`), puis, au début de certaines manches, reprend le sien ou gagne des points de sondage.
    */
-  scenario?: { pouvoirDe?: string; manches?: Record<number, { pouvoirPropre?: boolean; sondages?: number }> };
+  scenario?: Scenario;
+  /** La règle particulière d'un chapitre de carrière, une phrase affichée avant la partie. */
+  consigne?: string;
   /** Le dernier adversaire est le boss : tiré au sort, ou celui de la carrière. */
   boss?: boolean;
   /** Il faut finir à cette place ou mieux pour passer au chapitre suivant. */

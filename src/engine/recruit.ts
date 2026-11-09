@@ -608,7 +608,7 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
   }
 }
 
-function addStats(m: Minion, atk: number, hp: number): void {
+export function addStats(m: Minion, atk: number, hp: number): void {
   m.atk = Math.min(MAX_STAT, m.atk + atk);
   m.hp = Math.min(MAX_STAT, m.hp + hp);
 }
@@ -908,7 +908,7 @@ function gild(game: Game, p: Player, self: Minion | null, t: Minion, maxTier: nu
 }
 
 /** Rendre doré par un effet : stats de base doublées, effets doublés, mais pas d'Investiture (règle R3). */
-function makeGolden(p: Player, m: Minion): void {
+export function makeGolden(p: Player, m: Minion): void {
   const card = CARD_BY_ID[m.cardId];
   m.golden = true;
   addStats(m, card.atk, card.hp);

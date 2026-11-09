@@ -307,3 +307,55 @@ test('le tour scénarisé de Le Pen : le pouvoir de Bardella, puis le sien et 5 
   assert.deepEqual(table.game.heroOverrides?.lepen?.mods, HERO_BY_ID.bardella.mods);
   assert.deepEqual(table.game.script, { seat: 0, evenements: { 6: { mods: HERO_BY_ID.lepen.mods, sondages: 5 } } });
 });
+
+test('la quête d\'un tour scénarisé se raconte, et décide du chapitre quand elle le doit', () => {
+  const chapitre = {
+    ...CHAPITRES[0],
+    placeRequise: 3,
+    dialogues: [{ quand: 'quete' as const, qui: 'narrateur', texte: 'Parrainages : {valeur} sur {cible}.' }],
+  };
+  const quete = { libelle: 'Parrainages', valeur: 100, cible: 500, defaites: 0, etat: 'en_cours' as const, eliminatoire: true, decisive: false };
+  const suivi = creerSuivi(chapitre);
+  const dites = suivi.observer(vue({ round: 2, quete, evenements: [{ key: 'quete' }] }));
+  assert.deepEqual(dites.map((l) => l.texte), ['Parrainages : 100 sur 500.']);
+  assert.deepEqual(suivi.observer(vue({ round: 2, quete, evenements: [{ key: 'quete' }] })), [], 'un événement ne se raconte qu\'une fois');
+  const ratee = suivi.conclure(vue({ quete: { ...quete, valeur: 300, etat: 'ratee' } }), 1);
+  assert.equal(ratee.reussi, false, 'des parrainages manqués font perdre, même premier');
+  assert.equal(ratee.motif, 'Parrainages : 300 sur 500.');
+  const devant = { libelle: 'Devant Jean-Luc Mélenchon', valeur: 1, cible: 1, defaites: 0, etat: 'reussie' as const, eliminatoire: false, decisive: true };
+  assert.equal(creerSuivi(chapitre).conclure(vue({ quete: devant }), 7).reussi, true, 'devant Mélenchon, la place ne compte pas');
+  assert.equal(creerSuivi(chapitre).conclure(vue({ quete: { ...devant, etat: 'ratee' } }), 1).motif, 'Devant Jean-Luc Mélenchon : raté.');
+});
+
+test('un politique enlevé se raconte avec son nom', () => {
+  const chapitre = { ...CHAPITRES[0], dialogues: [{ quand: 'enleve' as const, qui: 'generique_info', texte: 'ALERTE INFO : un vaisseau enlève {politique}.' }] };
+  const cardId = Object.keys(CARD_BY_ID)[0];
+  const dites = creerSuivi(chapitre).observer(vue({ round: 3, evenements: [{ key: 'enleve', cardId }] }));
+  assert.deepEqual(dites.map((l) => l.texte), [`ALERTE INFO : un vaisseau enlève ${CARD_BY_ID[cardId].name}.`]);
+});
+
+// —— La carrière de Durif : ses épisodes et les règles de ses tours ——
+import { cinematiqueApres, cinematiqueDe } from '../src/histoire/carrieres.ts';
+
+test('Durif : chaque épisode à sa place, la victoire d\'un chapitre n\'est pas celle de la carrière', () => {
+  assert.equal(cinematiqueDe('durif', 'intro')?.id, 'durif_intro');
+  assert.equal(cinematiqueApres('durif', 'bugarach')?.id, 'durif_bugarach');
+  assert.equal(cinematiqueDe('durif', 'avant_chapitre', 'arques')?.id, 'durif_arques');
+  assert.equal(cinematiqueDe('durif', 'avant_chapitre', 'vaisseau_dore')?.id, 'durif_vaisseau');
+  assert.equal(cinematiqueDe('durif', 'victoire')?.id, 'durif_victoire');
+  assert.equal(cinematiqueDe('durif', 'defaite')?.id, 'durif_defaite');
+  assert.equal(cinematiqueApres('melenchon', 'non_2005'), null);
+});
+
+test('Durif : minuit, les parrainages et les vaisseaux passent au moteur, la règle s\'affiche', () => {
+  const campagne = campagneNeuve('durif', 5);
+  const bugarach = chapitreDeCampagne(campagne)!;
+  assert.match(bugarach.consigne ?? '', /minuit/);
+  assert.deepEqual(tableDeChapitre(bugarach, 'durif', 5, campagne.bossId).game.script, { seat: 0, evenements: {}, regles: { finApres: 8 } });
+  const parrainages = chapitreDeCampagne({ ...campagne, chapitre: 2 })!;
+  assert.equal(tableDeChapitre(parrainages, 'durif', 5, campagne.bossId).game.script?.regles?.compteur?.cible, 500);
+  const vaisseau = chapitreDeCampagne({ ...campagne, chapitre: 3 })!;
+  assert.match(vaisseau.consigne ?? '', /doré/);
+  const script = tableDeChapitre(vaisseau, 'durif', 5, campagne.bossId).game.script;
+  assert.deepEqual(script?.evenements?.[6], { enleve: { quoi: 'plus_faible', retour: 7, dore: true } });
+});

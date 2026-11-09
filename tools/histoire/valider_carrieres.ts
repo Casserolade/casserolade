@@ -1,12 +1,13 @@
 /**
  * Vérifie les carrières de `src/data/histoire/carrieres/` : que tout ce qu'elles nomment existe dans le jeu (plateaux,
  * marionnettes, expressions, vraies voix, animateurs, contextes, décors, accessoires), que les cinématiques tiennent
- * dans leur durée et que leurs visages reviennent à la base, qu'il y a un tour scénarisé et un boss.
+ * dans leur durée et que leurs visages reviennent à la base, que la page et le son d'une cinématique HyperFrames existent
+ * sous assets/game (jamais une vidéo), qu'il y a un tour scénarisé et un boss.
  *   node tools/histoire/valider_carrieres.ts            toutes les carrières
  *   node tools/histoire/valider_carrieres.ts melenchon   une seule
  * Les erreurs empêchent l'intégration ; les conseils non.
  */
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { VOIX } from '../../src/data/voix.ts';
@@ -15,7 +16,7 @@ import { PLATEAUX, SECOND_TOUR } from '../../src/data/plateaux.ts';
 import { ANIMATEURS } from '../../src/data/animateurs.ts';
 import { CONTEXTS, HEROES } from '../../src/data/heroes.ts';
 import { ACCESSOIRES, BRUITAGES, DECORS, MUSIQUES, POSES } from '../../src/data/histoire/cinematique.ts';
-import type { Action, Cinematique } from '../../src/data/histoire/cinematique.ts';
+import type { Action, Cinematique, CinematiqueComposee } from '../../src/data/histoire/cinematique.ts';
 import type { Carriere, ChapitreCarriere } from '../../src/data/histoire/carriere.ts';
 
 const RACINE = join(import.meta.dirname, '..', '..');
@@ -177,6 +178,19 @@ function validerCinematique(c: Cinematique, carriere: Carriere): void {
   if (!phraseDuHeros) conseil(ou, `aucune vraie petite phrase de ${carriere.heros} (avec \`source\`) dans cette cinématique`);
 }
 
+/** Une cinématique HyperFrames dessinée en direct : sa page et son son, jamais une vidéo ; sa place, sa durée. */
+function validerComposee(c: CinematiqueComposee, carriere: Carriere): void {
+  const ou = `${carriere.heros} › ${c.id}`;
+  if (c.heros !== carriere.heros) erreur(ou, `heros vaut « ${c.heros} », pas « ${carriere.heros} »`);
+  if (!MOMENTS.has(c.moment)) erreur(ou, `moment inconnu « ${c.moment} »`);
+  if (!c.titre?.trim()) erreur(ou, 'une cinématique HyperFrames a son titre');
+  if (!c.page.endsWith('.html') || !existsSync(join(RACINE, 'assets', 'game', c.page))) erreur(ou, `page introuvable sous assets/game : « ${c.page} »`);
+  if (!/\.(mp3|ogg)$/.test(c.son) || !existsSync(join(RACINE, 'assets', 'game', c.son))) erreur(ou, `son introuvable sous assets/game : « ${c.son} »`);
+  const max = c.moment === 'defaite' ? 18 : 30;
+  if (c.duree < 8 || c.duree > max) erreur(ou, `durée ${c.duree} s hors de 8 à ${max} s`);
+  if (c.chapitre && !carriere.chapitres.some((ch) => ch.id === c.chapitre)) erreur(ou, `chapitre inconnu « ${c.chapitre} »`);
+}
+
 function validerChapitre(ch: ChapitreCarriere, carriere: Carriere, dernier: boolean): void {
   const ou = `${carriere.heros} › chapitre ${ch.id}`;
   if (!ch.annee?.trim()) erreur(ou, '`annee` manque');
@@ -201,6 +215,10 @@ function validerChapitre(ch: ChapitreCarriere, carriere: Carriere, dernier: bool
   if (ch.scenarise) {
     if (!ch.scenarise.consigne?.trim() || !ch.scenarise.regle?.trim()) erreur(ou, 'le tour scénarisé a une consigne et une règle');
     if (ch.scenarise.mecanique === 'nouvelle' && !ch.scenarise.spec?.trim()) erreur(ou, 'une mécanique nouvelle a sa `spec`');
+  }
+  if (ch.scenario && !ch.scenarise && !ch.consigne?.trim()) erreur(ou, 'un chapitre qui a ses règles (`scenario`) les dit au joueur : `consigne`, ou le tour scénarisé');
+  for (const [manche, evenement] of Object.entries(ch.scenario?.manches ?? {})) {
+    if (evenement.enleve && evenement.enleve.retour <= Number(manche)) erreur(ou, `manche ${manche} : le retour doit venir après le départ`);
   }
   for (const id of [ch.avant, ch.apres]) if (id && !carriere.cinematiques.some((c) => c.id === id)) erreur(ou, `cinématique inconnue « ${id} »`);
   if (dernier) {
@@ -235,9 +253,11 @@ function valider(carriere: Carriere, fichier: string): void {
   for (const c of carriere.cinematiques ?? []) {
     if (cines.has(c.id)) erreur(ou, `cinématique en double « ${c.id} »`);
     cines.add(c.id);
-    validerCinematique(c, carriere);
+    if ('page' in c) validerComposee(c, carriere);
+    else validerCinematique(c, carriere);
   }
   for (const moment of OBLIGATOIRES) if (!(carriere.cinematiques ?? []).some((c) => c.moment === moment)) erreur(ou, `il manque la cinématique « ${moment} »`);
+  if (!(carriere.cinematiques ?? []).some((c) => c.moment === 'victoire' && !c.chapitre)) erreur(ou, 'il manque la victoire de la carrière (une cinématique « victoire » sans chapitre)');
 }
 
 const demande = process.argv[2];

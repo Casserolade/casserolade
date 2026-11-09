@@ -109,9 +109,9 @@ function roll(): void {
         icon="tier"
         tone="gold"
         data-control="upgrade"
-        :label="canUpgrade ? `Monter à l'échelon ${view.tier + 1}` : 'Échelon maximum'"
-        :cost="canUpgrade ? view.upgradeCost : null"
-        :disabled="!canUpgrade || view.budget < view.upgradeCost"
+        :label="view.upgradeLock ?? (canUpgrade ? `Monter à l'échelon ${view.tier + 1}` : 'Échelon maximum')"
+        :cost="canUpgrade && !view.upgradeLock ? view.upgradeCost : null"
+        :disabled="!canUpgrade || Boolean(view.upgradeLock) || view.budget < view.upgradeCost"
         @click="act({ t: 'upgrade' })"
       />
       <span class="tier-spot">

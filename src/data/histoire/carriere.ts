@@ -1,7 +1,7 @@
 import type { BotLevel } from '../../bots/bots.ts';
 import type { Params } from '../../engine/types.ts';
 import type { Chapitre, Ligne, Objectif } from './chapitres.ts';
-import type { Cinematique } from './cinematique.ts';
+import type { Scene } from './cinematique.ts';
 
 /**
  * La carrière d'un candidat, inspirée de sa vraie histoire politique (8 novembre 2026) : ses vrais moments, un tour
@@ -64,7 +64,12 @@ export interface ChapitreCarriere {
   dialogues: Ligne[];
   /** Le tour scénarisé : un seul chapitre par carrière en a un. */
   scenarise?: TourScenarise;
-  /** Sa règle, quand elle change le pouvoir ou les sondages du joueur en cours de partie (voir `Chapitre.scenario`). */
+  /**
+   * La règle d'un autre chapitre, quand `scenario` en donne une (la partie qui s'arrête à minuit, les parrainages) : une
+   * phrase affichée avant la partie, comme la consigne du tour scénarisé.
+   */
+  consigne?: string;
+  /** Ses règles pour le joueur seul : un autre pouvoir, des sondages, un politique qui part, une quête (voir `Chapitre.scenario`). */
   scenario?: Chapitre['scenario'];
   /** Les cinématiques jouées avant ce chapitre, et après sa victoire (ids de `cinematiques`). */
   avant?: string;
@@ -84,5 +89,5 @@ export interface Carriere {
   fiction: boolean;
   faits: Fait[];
   chapitres: ChapitreCarriere[];
-  cinematiques: Cinematique[];
+  cinematiques: Scene[];
 }
