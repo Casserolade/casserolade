@@ -13,6 +13,7 @@ import { shareGame } from '#src/client/services/shareGame.ts';
 import { useHomePage } from '#src/client/stores/useHomePage.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { chooseVersion } from '#src/client/services/versionChoice.ts';
+import { CHANGELOG_URL, CODE_URL } from '#src/client/const/codeLinks.ts';
 import { VERSION } from '#src/client/const/version.ts';
 import ChasingReporter from '#src/client/components/organisms/ChasingReporter.vue';
 import { ANIMATEURS } from '#src/data/animateurs.ts';
@@ -98,8 +99,8 @@ const suitcases = ref(0);
       </nav>
       <nav class="links" aria-label="Le projet">
         <a href="/a-propos">À propos</a>
-        <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
-        <a class="version" href="https://github.com/casserolade/casserolade/blob/main/CHANGELOG.md" title="Ce qui a changé">v{{ VERSION }}</a>
+        <a :href="CODE_URL">Le code sur GitHub</a>
+        <a class="version" :href="CHANGELOG_URL" title="Ce qui a changé">v{{ VERSION }}</a>
         <a href="/a-propos#contribuer">Contribuer</a>
         <a v-if="touchScreen" href="/m/" @click="chooseVersion('telephone')">Version téléphone</a>
       </nav>

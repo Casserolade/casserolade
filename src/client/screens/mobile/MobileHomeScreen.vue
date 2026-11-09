@@ -7,6 +7,7 @@ import TipLink from '#src/client/components/molecules/TipLink.vue';
 import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
+import { CHANGELOG_URL, CODE_URL } from '#src/client/const/codeLinks.ts';
 import { VERSION } from '#src/client/const/version.ts';
 import { shareGame } from '#src/client/services/shareGame.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
@@ -75,8 +76,8 @@ const { pseudo, plateauId, tagline } = useHomePage();
       </nav>
       <nav class="links" aria-label="Le projet">
         <a href="/a-propos">À propos</a>
-        <a href="https://github.com/casserolade/casserolade">Le code</a>
-        <a href="https://github.com/casserolade/casserolade/blob/main/CHANGELOG.md" title="Ce qui a changé">v{{ VERSION }}</a>
+        <a :href="CODE_URL">Le code</a>
+        <a :href="CHANGELOG_URL" title="Ce qui a changé">v{{ VERSION }}</a>
         <a href="/" @click="chooseVersion('ordinateur')">Version ordinateur</a>
       </nav>
     </div>
