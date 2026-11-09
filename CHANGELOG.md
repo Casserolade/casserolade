@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3e — 9 novembre 2026
+
+**Correction**
+- Une cinématique ne compte comme vue qu'une fois à l'écran : celle qui n'a pas pu se lancer revient la fois suivante. L'intro de Durif, ratée en 0.3c, ne revenait plus jamais.
+
 ## 0.3d — 9 novembre 2026
 
 **Correction**
