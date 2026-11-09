@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import CutscenePlayer from '#src/client/components/organisms/CutscenePlayer.vue';
-import LiveCutscenePlayer from '#src/client/components/organisms/LiveCutscenePlayer.vue';
 import { DEMO_CUTSCENE } from '#src/client/const/demoCutscene.ts';
-import type { Cutscene } from '#src/client/cutscenes/createCutscene.ts';
+import type { PlayableCutscene } from '#src/client/cutscenes/PlayableCutscene.ts';
 import { WRITTEN_CAREERS } from '#src/client/const/writtenCareers.ts';
 import type { Scene } from '#src/data/histoire/cinematique.ts';
 
@@ -14,13 +13,10 @@ import type { Scene } from '#src/data/histoire/cinematique.ts';
 const careers = computed(() => [...WRITTEN_CAREERS].sort((a, b) => a.difficulte - b.difficulte || a.heros.localeCompare(b.heros)));
 const playing = ref<Scene | null>(null);
 const queue = ref<Scene[]>([]);
-/** A HyperFrames page drawn live, or puppets described in data. */
-const page = computed(() => (playing.value && 'page' in playing.value ? playing.value : null));
-const puppets = computed(() => (playing.value && !('page' in playing.value) ? playing.value : null));
 
 /** One line per cutscene: where it plays, and how it is made. */
 function describe(scene: Scene): string {
-  const made = 'page' in scene ? `HyperFrames · ${scene.titre}` : `${scene.style} · ${scene.decor}`;
+  const made = 'episode' in scene ? `HyperFrames · ${scene.titre}` : `${scene.style} · ${scene.decor}`;
   return `${scene.id} · ${scene.moment}${scene.chapitre ? ` (${scene.chapitre})` : ''} · ${made} · ${scene.duree} s`;
 }
 
@@ -30,8 +26,8 @@ function play(list: Scene[]): void {
 }
 
 /** Browser checks drive the timeline from here: seek it, take pictures. */
-function expose(cutscene: Cutscene): void {
-  (window as unknown as { __cutscene?: Cutscene }).__cutscene = cutscene;
+function expose(cutscene: PlayableCutscene): void {
+  (window as unknown as { __cutscene?: PlayableCutscene }).__cutscene = cutscene;
 }
 
 function next(): void {
@@ -57,8 +53,7 @@ function next(): void {
         </li>
       </ul>
     </section>
-    <LiveCutscenePlayer v-if="page" :key="page.id" :cinematique="page" @end="next" />
-    <CutscenePlayer v-else-if="puppets" :key="puppets.id" :cinematique="puppets" @end="next" @ready="expose" />
+    <CutscenePlayer v-if="playing" :key="playing.id" :cinematique="playing" @end="next" @ready="expose" />
   </main>
 </template>
 

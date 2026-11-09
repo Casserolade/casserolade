@@ -204,10 +204,10 @@ export interface Cinematique {
 }
 
 /**
- * Une cinématique écrite avec HyperFrames et dessinée en direct dans la page, jamais en vidéo (règle du 9 novembre 2026) :
- * une page HTML où ses scènes GSAP sont assemblées, et son son ; le lecteur dessine chaque image à l'heure du son, comme
- * « Paul et Charlène ». Le shōnen de Durif (le délire en anime, la retombée en marionnette de papier) en est fait. Même
- * place dans la carrière, même règle : elle se joue seule, un geste la passe.
+ * Une cinématique écrite avec HyperFrames, jouée par le même lecteur que les marionnettes, jamais en vidéo (règle du
+ * 9 novembre 2026) : ses scènes sont un module du jeu, posé sur la page et animé avec le GSAP du jeu, et l'image suit son
+ * son. Le shōnen de Durif (le délire en anime, la retombée en marionnette de papier) en est fait. Même place dans la
+ * carrière, même règle : elle se joue seule, un geste la passe.
  */
 export interface CinematiqueComposee {
   /** `<heros>_<moment>` ou `<heros>_<chapitre>` : unique dans tout le jeu. */
@@ -218,8 +218,8 @@ export interface CinematiqueComposee {
   chapitre?: string;
   /** Son titre d'épisode. */
   titre: string;
-  /** La page, sous `assets/game/` (`cinematiques/durif/ep1.html`) : elle expose `window.__film`. */
-  page: string;
+  /** Son module, sous `src/client/cutscenes/composed/` (`durif/ep1`), écrit par l'export du projet HyperFrames. */
+  episode: string;
   /** Son son, sous `assets/game/` : il donne l'heure à l'image. */
   son: string;
   /** Secondes. */
