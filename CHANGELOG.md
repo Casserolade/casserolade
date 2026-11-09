@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3c — 9 novembre 2026
+
+**La carrière de Sylvain Durif (9 novembre, au soir)**
+- Le Christ cosmique a sa carrière, en cinq chapitres : la fin du monde à Bugarach (2012), le tournoi d'Arques (2014), les 500 parrainages (2016-2017), le vaisseau doré (2023-2026), puis le duel des improbables contre Francis Lalanne au débat de TF1.
+- Chaque chapitre a sa règle de tour. À Bugarach, le monde finit à minuit : la partie s'arrête après la manche 8. Il faut 500 parrainages en 12 manches, 100 par combat gagné. Aux manches 3, 6 et 9, un vaisseau de la Vierge Marie enlève votre politique le plus faible et le ramène doré.
+- Huit épisodes façon anime de combat, dessinés en direct dans la page au rythme de leur bande-son : le délire en anime, la retombée en marionnette de papier.
+
+**Mélenchon et Le Pen**
+- D'autres chapitres ont leur règle de tour. Mélenchon doit finir devant Hollande en 2005 ; en 2017, son meilleur politique part en meeting en hologramme et revient +5/+5 ; une fois, la perquisition ne l'élimine pas (« Ma personne est sacrée ! ») ; en 2022, il doit finir devant Le Pen. Le Pen doit finir devant Mélenchon en 2012, et devant Bertrand en 2015.
+- L'écran du chapitre dit la règle et qui il faut devancer ; une quête (les parrainages) se suit à côté de la table.
+
+**Teddy Riner (9 novembre)**
+- Un héros, « Candidat de poids » : votre premier politique gagne +2 PV à chaque combat, et le premier à mourir revient.
+- Un politique de la Société civile, à l'échelon 4, Ni droite ni gauche, avec Retour ; la casserole « Conducteur exclusif » ; huit extraits de sa voix et trois visages.
+
+**Corrections**
+- Les parties de carrière sont enfin comptées par le compteur du site, chapitre par chapitre.
+- Pendant une carrière, la réplique du narrateur ou de l'animateur ne pousse plus la liste des camps sous le budget : elle passe en haut à gauche de la table. Sur téléphone, la carrière montre enfin sa quête et ses répliques, au pied de l'écran.
+
 ## 0.3b — 9 novembre 2026
 
 **Les carrières (8 et 9 novembre)**

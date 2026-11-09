@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.3b" src="https://img.shields.io/badge/version-0.3b-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.3c" src="https://img.shields.io/badge/version-0.3c-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -73,7 +73,7 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
 | **Des modes** | Seul contre l'ordinateur, la carrière, et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |
-| **Les carrières** | Mélenchon et Marine Le Pen rejouent leur histoire en six chapitres, jusqu'au débat de TF1 l'un contre l'autre, avec des cinématiques en marionnettes. Les autres candidats remontent sept élections, du conseil municipal au second tour. |
+| **Les carrières** | Mélenchon et Marine Le Pen rejouent leur histoire en six chapitres, jusqu'au débat de TF1 l'un contre l'autre, avec des cinématiques en marionnettes. Sylvain Durif, le Christ cosmique, vit la sienne en épisodes d'anime, de la fin du monde à Bugarach jusqu'au duel contre Francis Lalanne. Chaque chapitre a sa règle de tour. Les autres candidats remontent sept élections, du conseil municipal au second tour. |
 | **Sur téléphone** | Une version tenue en hauteur, faite pour le pouce (casserolade.fr/m/) : les téléphones y arrivent tout seuls. |
 | **[Le bestiaire](https://casserolade.fr/bestiaire)** | Tout le jeu, avec des filtres : mots-clés, héros, politiques, casseroles, sorts, jetons, contextes. Chaque fiche donne ses sources. |
 
