@@ -14,6 +14,7 @@ import { bestiaryFilterQuery } from '#src/client/tools/bestiaryFilterQuery.ts';
 import { casseroleSources } from '#src/client/tools/casseroleSources.ts';
 import { countLabel } from '#src/client/tools/countLabel.ts';
 import { personSources } from '#src/client/tools/personSources.ts';
+import { CODE_URL } from '#src/client/const/codeLinks.ts';
 import { KOFI_URL } from '#src/client/const/supportLink.ts';
 import { CARD_BY_ID } from '#src/data/cards.ts';
 import { PARAMS } from '#src/data/params.ts';
@@ -83,7 +84,7 @@ const carriers = (term: string) => bestiaryFilterQuery({ kind: 'politique', camp
     <footer class="links">
       <a href="/">Jouer</a>
       <a href="/a-propos">À propos</a>
-      <a href="https://github.com/casserolade/casserolade">Le code sur GitHub</a>
+      <a :href="CODE_URL">Le code sur GitHub</a>
       <a :href="KOFI_URL">Soutenir sur Ko-fi</a>
     </footer>
   </main>
