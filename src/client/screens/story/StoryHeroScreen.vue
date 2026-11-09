@@ -10,7 +10,8 @@ import { CARRIERES, CARRIERE_PAR_HEROS } from '#src/histoire/carrieres.ts';
  * Who to play. Those who have their own career come first: their real moments, their nemesis, their scenes. The
  * others climb the generic ladder, from the town council to TF1. The career invents, and says so once, here.
  */
-defineEmits<{ choose: [heroId: string]; leave: [] }>();
+withDefaults(defineProps<{ cinema?: boolean }>(), { cinema: false });
+defineEmits<{ choose: [heroId: string]; cinema: []; leave: [] }>();
 
 const careers = [...CARRIERES].sort((a, b) => a.difficulte - b.difficulte);
 const others = HEROES.filter((hero) => !CARRIERE_PAR_HEROS[hero.id]);
@@ -41,7 +42,10 @@ const others = HEROES.filter((hero) => !CARRIERE_PAR_HEROS[hero.id]);
         <HeroOption v-for="hero in others" :key="hero.id" class="hero-pick" :hero="hero" :start-hp="PARAMS.startHp" @click="$emit('choose', hero.id)" />
       </div>
     </section>
-    <AppButton @click="$emit('leave')">Accueil</AppButton>
+    <div class="actions">
+      <AppButton v-if="cinema" @click="$emit('cinema')">Cinémathèque</AppButton>
+      <AppButton @click="$emit('leave')">Accueil</AppButton>
+    </div>
   </MenuBackdrop>
 </template>
 
@@ -63,4 +67,5 @@ h2 { margin: 0.6rem 0 0; }
 .hero-pick :deep(.power) { font-size: 1rem; }
 .hero-pick :deep(.desc) { font-size: 0.92rem; }
 .hero-pick :deep(.polls) { font-size: 1.15rem; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
 </style>

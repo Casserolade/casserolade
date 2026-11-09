@@ -118,7 +118,12 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
     <MobileHand class="hand" :view="view" :gestures="gestures" />
     <footer class="bottom">
       <p v-if="aimHint" class="aim-hint" aria-live="polite">{{ aimHint }}</p>
-      <p v-else class="hint"><strong>Manche {{ view.round }}</strong> Touchez une carte pour la lire ; glissez-la pour la jouer.</p>
+      <!-- A career's quest and line take the place of the advice, under the round: nothing covers the cards. -->
+      <div v-else class="hint">
+        <slot name="story-quest" />
+        <strong>Manche {{ view.round }}</strong>
+        <slot name="story-line">Touchez une carte pour la lire ; glissez-la pour la jouer.</slot>
+      </div>
       <ReadyButton class="ready" :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" @ready="store.endRecruitment()" />
     </footer>
     <EndOfTurnBanner v-if="store.endOfTurn.value?.banner.value" class="end-banner" />
@@ -178,6 +183,14 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
 .bottom { --s: 0.42px; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex: none; padding: 0 0.2rem 0.3rem 50px; }
 .hint, .aim-hint { flex: 1; margin: 0; color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.25; }
 .hint strong { display: block; color: #fff; font: 400 1.1rem / 1.1 var(--font-number); letter-spacing: 1px; }
+/* The career's slips, made small for the footer: one line for the quest, the line of the moment in reading size. */
+.hint :deep(.quest) { flex-direction: row; align-items: center; gap: 6px; width: auto; margin-bottom: 4px; padding: 2px 8px; border-width: 2px; border-radius: 8px; box-shadow: none; rotate: 0deg; }
+.hint :deep(.quest .label) { font-size: 0.8rem; }
+.hint :deep(.quest .count) { font-size: 0.95rem; }
+.hint :deep(.quest .bar) { flex: 1; height: 7px; border-width: 1px; }
+.hint :deep(.quest .state) { font-size: 0.7rem; }
+.hint :deep(.feed) { margin-top: 3px; padding: 4px 8px; border-width: 2px; border-radius: 8px; box-shadow: none; rotate: 0deg; font: 600 0.85rem / 1.25 var(--font-card); }
+.hint :deep(.feed .speaker) { display: inline; margin: 0 4px 0 0; font-size: 0.95rem; }
 .aim-hint { color: #ffe066; font: 400 1.25rem / 1.1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 3px var(--color-ink); paint-order: stroke fill; }
 .ready { flex: none; }
 .aiming .shop-band, .aiming .hand { filter: brightness(0.55) saturate(0.6); transition: filter 0.2s; }

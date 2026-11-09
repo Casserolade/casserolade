@@ -36,8 +36,4 @@ const speaker = computed(() => speakerName(props.line.qui));
 .slip-enter-active { animation: slip-in 0.35s cubic-bezier(0.3, 1.5, 0.5, 1); }
 .slip-leave-active { animation: slip-in 0.15s ease-in reverse; }
 @keyframes slip-in { from { transform: translateX(30%) rotate(6deg); opacity: 0; } }
-/* On a phone the top console is short: the line floats, and lets taps through. */
-@media (max-width: 1099px) {
-  .feed { position: fixed; z-index: 7; inset-inline: var(--space-2); bottom: 64px; width: auto; pointer-events: none; }
-}
 </style>

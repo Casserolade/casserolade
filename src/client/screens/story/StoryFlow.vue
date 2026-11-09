@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, ref, shallowRef, watch } from 'vue';
+import { computed, defineAsyncComponent, ref, shallowRef, useTemplateRef, watch } from 'vue';
 import StoryFeed from '#src/client/components/organisms/StoryFeed.vue';
 import StoryQuest from '#src/client/components/molecules/StoryQuest.vue';
-import CinemaCorner from '#src/client/components/organisms/CinemaCorner.vue';
+import CinemaShelf from '#src/client/components/organisms/CinemaShelf.vue';
 import { cinemaCheat } from '#src/client/stores/cinemaCheat.ts';
 import GameScreens from '#src/client/screens/GameScreens.vue';
 import StoryChapterScreen from '#src/client/screens/story/StoryChapterScreen.vue';
@@ -68,7 +68,13 @@ function showCutscene(scene: Scene | null, then: () => void): void {
   cutscene.value = scene;
 }
 
-/** The cinematheque (cinema cheat): a cutscene watched again, outside the campaign; it is not counted as seen. */
+/** The cinematheque (cinema cheat): its list, and a cutscene watched again, outside the campaign, not counted as seen. */
+const shelf = useTemplateRef<InstanceType<typeof CinemaShelf>>('shelf');
+
+function openCinema(): void {
+  shelf.value?.open();
+}
+
 function watchAgain(scene: Scene): void {
   afterCutscene = null;
   cutscene.value = scene;
@@ -150,8 +156,8 @@ function leave(): void {
 <template>
   <LiveCutscenePlayer v-if="page" :key="page.id" :cinematique="page" @end="endCutscene" />
   <CutscenePlayer v-else-if="puppets" :key="puppets.id" :cinematique="puppets" @end="endCutscene" />
-  <CinemaCorner v-if="cinemaCheat.enabled.value && !store && !cutscene" @play="watchAgain" />
-  <StoryHeroScreen v-if="!campaign" @choose="chooseHero" @leave="leave" />
+  <CinemaShelf v-if="cinemaCheat.enabled.value" ref="shelf" @play="watchAgain" />
+  <StoryHeroScreen v-if="!campaign" :cinema="cinemaCheat.enabled.value" @choose="chooseHero" @cinema="openCinema" @leave="leave" />
   <StoryResultScreen
     v-else-if="bilan && chapter && resultShown"
     :bilan="bilan"
@@ -170,6 +176,6 @@ function leave(): void {
       <template #recruit-quest><StoryQuest v-if="quest" :quest="quest" /></template>
     </GameScreens>
   </template>
-  <StoryChapterScreen v-else-if="chapter" :chapter="chapter" :campaign="campaign" @play="play" @abandon="abandon" @leave="leave" />
+  <StoryChapterScreen v-else-if="chapter" :chapter="chapter" :campaign="campaign" :cinema="cinemaCheat.enabled.value" @play="play" @abandon="abandon" @cinema="openCinema" @leave="leave" />
   <StoryEndScreen v-else :campaign="campaign" @restart="abandon" @leave="leave" />
 </template>
