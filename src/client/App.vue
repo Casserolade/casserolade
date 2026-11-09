@@ -16,6 +16,8 @@ import type { LocalGameMark } from '#src/client/services/interruptedGame.ts';
 import { playerId, savedPseudo } from '#src/client/services/localProfile.ts';
 import { hasSavedSeat } from '#src/client/services/savedSeat.ts';
 import { achievements } from '#src/client/stores/achievements.ts';
+import { cinemaCheat } from '#src/client/stores/cinemaCheat.ts';
+import CheatNotice from '#src/client/components/molecules/CheatNotice.vue';
 import { createGameStore } from '#src/client/stores/createGameStore.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { pseudoOrDefault } from '#src/client/tools/pseudoOrDefault.ts';
@@ -132,6 +134,9 @@ function leaveGame(): void {
   clearLocalGame();
 }
 
+/** The cinema cheat listens from the start, on every screen: it is typed anywhere. */
+cinemaCheat.listen();
+
 function backHomeWithError(message: string): void {
   leaveGame();
   homeError.value = message;
@@ -170,4 +175,5 @@ function backHomeWithError(message: string): void {
     @again="replaySolo"
     @queue="rejoinQueue"
   />
+  <CheatNotice v-if="cinemaCheat.justToggled.value" :text="cinemaCheat.enabled.value ? 'Cinémathèque ouverte, dans le mode carrière' : 'Cinémathèque refermée'" />
 </template>

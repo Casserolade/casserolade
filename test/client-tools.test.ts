@@ -783,3 +783,14 @@ test('une foulée tient pile dans son déplacement, en un nombre pair de demi-pa
   assert.deepEqual(strideBeats(1, 0.42), { halves: 2, beat: 0.5 });
   assert.equal(strideBeats(1.6, 0.42).halves, 4);
 });
+
+// —— The cinema cheat ——
+import { typedTail } from '../src/client/tools/typedTail.ts';
+
+test('typedTail keeps the last letters typed, in lower case, and ignores the other keys', () => {
+  let tail = '';
+  for (const key of ['x', 'P', 'Shift', 'o', 'p', 'ArrowLeft', 'c', 'o', 'r', 'n']) tail = typedTail(tail, key, 7);
+  assert.equal(tail, 'popcorn');
+  assert.equal(typedTail('popcorn', 's', 7), 'opcorns');
+  assert.equal(typedTail('', 'é', 3), 'é');
+});
