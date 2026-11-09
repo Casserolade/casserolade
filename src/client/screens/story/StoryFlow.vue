@@ -54,6 +54,8 @@ watch(bilan, (result) => {
 /** The cutscene playing over everything, and what comes after it. Each one plays once in a campaign. */
 const cutscene = shallowRef<Scene | null>(null);
 let afterCutscene: (() => void) | null = null;
+/** Whether the cutscene on screen belongs to the campaign (not one watched again in the cinematheque). */
+let campaignScene = false;
 
 function showCutscene(scene: Scene | null, then: () => void): void {
   const current = campaign.value;
@@ -61,9 +63,17 @@ function showCutscene(scene: Scene | null, then: () => void): void {
     then();
     return;
   }
-  setCampaign({ ...current, vues: [...(current.vues ?? []), scene.id] });
   afterCutscene = then;
+  campaignScene = true;
   cutscene.value = scene;
+}
+
+/** A cutscene counts as seen once it is on screen: one that could not be built plays again next time. */
+function markSeen(): void {
+  const current = campaign.value;
+  const scene = cutscene.value;
+  if (!campaignScene || !current || !scene || current.vues?.includes(scene.id)) return;
+  setCampaign({ ...current, vues: [...(current.vues ?? []), scene.id] });
 }
 
 /** The cinematheque (cinema cheat): its list, and a cutscene watched again, outside the campaign, not counted as seen. */
@@ -75,6 +85,7 @@ function openCinema(): void {
 
 function watchAgain(scene: Scene): void {
   afterCutscene = null;
+  campaignScene = false;
   cutscene.value = scene;
 }
 
@@ -152,7 +163,7 @@ function leave(): void {
 </script>
 
 <template>
-  <CutscenePlayer v-if="cutscene" :key="cutscene.id" :cinematique="cutscene" @end="endCutscene" />
+  <CutscenePlayer v-if="cutscene" :key="cutscene.id" :cinematique="cutscene" @ready="markSeen" @end="endCutscene" />
   <CinemaShelf v-if="cinemaCheat.enabled.value" ref="shelf" @play="watchAgain" />
   <StoryHeroScreen v-if="!campaign" :cinema="cinemaCheat.enabled.value" @choose="chooseHero" @cinema="openCinema" @leave="leave" />
   <StoryResultScreen
