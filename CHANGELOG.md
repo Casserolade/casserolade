@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3d — 9 novembre 2026
+
+**Correction**
+- Les épisodes de Sylvain Durif se lancent en ligne : ils passent maintenant par le même lecteur que les cinématiques en marionnettes, sur la page du jeu, au lieu d'une page à part que le site refusait d'afficher.
+
 ## 0.3c — 9 novembre 2026
 
 **La carrière de Sylvain Durif (9 novembre, au soir)**
