@@ -113,11 +113,31 @@ export function refillShop(game: Game, p: Player, camp?: Camp): void {
     const id = draw(game, p.tier, inCamp) ?? (camp ? draw(game, p.tier) : null);
     if (id) p.shop.push(id);
   }
-  const spells = shopSpells(p.tier);
   p.shopSpells = [];
-  for (let i = 0; i < game.params.spellSlots && spells.length > 0; i++) p.shopSpells.push(game.rng.pick(spells).id);
-  // Le Bracelet suit les scandales : il arrive quand il sert, même à l'échelon 1.
-  if (p.shopSpells.length > 0 && braceletTarget(p) && game.rng.next() < game.params.braceletChance) p.shopSpells[0] = 'bracelet_electronique';
+  fillShopSpells(game, p);
+}
+
+/**
+ * Une boutique gelée garde ses cartes, et ses places vides se remplissent, comme à Battlegrounds : un politique ou un
+ * sort acheté, avant ou après le gel, ou un échelon de plus, ne laissent pas la manche suivante avec moins de cartes
+ * qu'attendu (retour de partie du 9 novembre 2026).
+ */
+export function topUpShop(game: Game, p: Player): void {
+  const size = game.params.shopSize[p.tier];
+  while (p.shop.length < size) {
+    const id = draw(game, p.tier);
+    if (!id) break;
+    p.shop.push(id);
+  }
+  fillShopSpells(game, p);
+}
+
+/** Les sorts de la boutique, jusqu'à ses places. Le Bracelet suit les scandales : il arrive quand il sert, même à l'échelon 1. */
+function fillShopSpells(game: Game, p: Player): void {
+  const spells = shopSpells(p.tier);
+  const empty = p.shopSpells.length === 0;
+  while (p.shopSpells.length < game.params.spellSlots && spells.length > 0) p.shopSpells.push(game.rng.pick(spells).id);
+  if (empty && p.shopSpells.length > 0 && braceletTarget(p) && game.rng.next() < game.params.braceletChance) p.shopSpells[0] = 'bracelet_electronique';
 }
 
 function sumGains(game: Game, gains: StatGain[], m: Pick<Minion, 'camp' | 'keywords' | 'cardId'>): { atk: number; hp: number } {
