@@ -2,6 +2,8 @@
 import { computed, defineAsyncComponent, ref, shallowRef, watch } from 'vue';
 import StoryFeed from '#src/client/components/organisms/StoryFeed.vue';
 import StoryQuest from '#src/client/components/molecules/StoryQuest.vue';
+import CinemaCorner from '#src/client/components/organisms/CinemaCorner.vue';
+import { cinemaCheat } from '#src/client/stores/cinemaCheat.ts';
 import GameScreens from '#src/client/screens/GameScreens.vue';
 import StoryChapterScreen from '#src/client/screens/story/StoryChapterScreen.vue';
 import StoryEndScreen from '#src/client/screens/story/StoryEndScreen.vue';
@@ -63,6 +65,12 @@ function showCutscene(scene: Scene | null, then: () => void): void {
   }
   setCampaign({ ...current, vues: [...(current.vues ?? []), scene.id] });
   afterCutscene = then;
+  cutscene.value = scene;
+}
+
+/** The cinematheque (cinema cheat): a cutscene watched again, outside the campaign; it is not counted as seen. */
+function watchAgain(scene: Scene): void {
+  afterCutscene = null;
   cutscene.value = scene;
 }
 
@@ -142,6 +150,7 @@ function leave(): void {
 <template>
   <LiveCutscenePlayer v-if="page" :key="page.id" :cinematique="page" @end="endCutscene" />
   <CutscenePlayer v-else-if="puppets" :key="puppets.id" :cinematique="puppets" @end="endCutscene" />
+  <CinemaCorner v-if="cinemaCheat.enabled.value && !store && !cutscene" @play="watchAgain" />
   <StoryHeroScreen v-if="!campaign" @choose="chooseHero" @leave="leave" />
   <StoryResultScreen
     v-else-if="bilan && chapter && resultShown"

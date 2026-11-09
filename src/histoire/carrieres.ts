@@ -65,3 +65,32 @@ export function cinematiqueApres(heroId: string, chapitreId: string): Scene | nu
 function sceneParId(carriere: Carriere, id: string | undefined): Scene | null {
   return id ? (carriere.cinematiques.find((c) => c.id === id) ?? null) : null;
 }
+
+export interface EtapeCinematique {
+  /** Où elle se joue dans la carrière : « Intro », « 2. Le tournoi d'Arques (2014) », « Victoire »… */
+  etape: string;
+  scene: Scene;
+}
+
+/**
+ * Toutes les cinématiques d'une carrière, dans l'ordre où on les voit : l'intro, chaque chapitre (celle qui l'ouvre, puis
+ * celle qui suit sa victoire), la victoire finale, la défaite ; celles qu'aucune étape ne nomme viennent à la fin.
+ */
+export function cinematiquesParEtape(heroId: string): EtapeCinematique[] {
+  const carriere = CARRIERE_PAR_HEROS[heroId];
+  if (!carriere) return [];
+  const etapes: EtapeCinematique[] = [];
+  const ajouter = (etape: string, scene: Scene | null) => {
+    if (scene && !etapes.some((e) => e.scene.id === scene.id)) etapes.push({ etape, scene });
+  };
+  ajouter('Intro', cinematiqueDe(heroId, 'intro'));
+  carriere.chapitres.forEach((chapitre, i) => {
+    const nom = `${i + 1}. ${chapitre.election} (${chapitre.annee})`;
+    ajouter(nom, sceneParId(carriere, chapitre.avant));
+    ajouter(`${nom}, après la victoire`, sceneParId(carriere, chapitre.apres));
+  });
+  ajouter('Victoire', cinematiqueDe(heroId, 'victoire'));
+  ajouter('Défaite', cinematiqueDe(heroId, 'defaite'));
+  for (const scene of carriere.cinematiques) ajouter(scene.id, scene);
+  return etapes;
+}

@@ -376,3 +376,26 @@ test('Mélenchon et Le Pen : chaque règle de tour arrive au moteur, et l\'écra
     assert.ok(regles(heros, chapitre).ch.consigne, `${heros}, chapitre ${chapitre} : la règle s'affiche`);
   }
 });
+
+// —— La cinémathèque (code de triche) ——
+import { cinematiquesParEtape } from '../src/histoire/carrieres.ts';
+
+test('la cinémathèque range chaque cinématique de chaque carrière à son étape, sans en oublier ni en doubler', () => {
+  for (const carriere of CARRIERES) {
+    const etapes = cinematiquesParEtape(carriere.heros);
+    assert.deepEqual(new Set(etapes.map((e) => e.scene.id)), new Set(carriere.cinematiques.map((c) => c.id)), carriere.heros);
+    assert.equal(etapes.length, carriere.cinematiques.length, `${carriere.heros} : une cinématique en double`);
+    assert.equal(etapes[0].etape, 'Intro');
+  }
+  assert.deepEqual(cinematiquesParEtape('durif').map((e) => e.etape), [
+    'Intro',
+    '1. La fin du monde (2012), après la victoire',
+    '2. Le tournoi d\'Arques (2014)',
+    '3. Les 500 parrainages (2016-2017)',
+    '4. Le vaisseau doré (2023-2026)',
+    '5. Le duel des improbables (2027)',
+    'Victoire',
+    'Défaite',
+  ]);
+  assert.deepEqual(cinematiquesParEtape('lassalle'), []);
+});
