@@ -147,7 +147,8 @@ test('chaque Vedette survivante applique sa Célébration, une seule prononce sa
   const tracts = countTracts();
   startCombats(game);
   const record = game.roundCombats[0];
-  assert.equal(record.result.winner, 0);
+  // Le joueur 0 n'est pas toujours à gauche : l'appariement suit la graine, qui bouge à chaque carte ajoutée.
+  assert.equal(record.result.winner, record.a === 0 ? 0 : 1);
   assert.equal(record.result.celebrants.length, 2, 'Boyard et Villiers célèbrent tous les deux');
   assert.equal(record.result.log.filter((e) => e.e === 'celebration').length, 1, 'une seule petite phrase');
   assert.equal(p.freeRolls, 2, 'les actualisations de Villiers, même derrière Boyard');
@@ -892,7 +893,7 @@ test('Droit de réponse : après une défaite, chacun joue le sien, et le plus �
   const before = p.nextBudgetBonus;
   startCombats(game);
   const record = game.roundCombats[0];
-  assert.equal(record.result.winner, 1);
+  assert.equal(record.result.winner, record.a === 0 ? 1 : 0, 'le joueur 0 perd');
   assert.equal(record.result.responders.length, 2, 'Ndiaye et Poutou');
   assert.equal(record.result.responder?.uid, p.board[0].uid, 'le plus à gauche parle');
   assert.equal(p.nextBudgetBonus, before + 2, '+1 de Ndiaye, +1 de Poutou');
@@ -905,7 +906,8 @@ test('Macron double les Célébrations : la Fête de la musique', () => {
     const count = () => p.spells.filter((s) => s.spellId === 'tract').reduce((sum, s) => sum + (s.count ?? 1), 0);
     const before = count();
     startCombats(game);
-    assert.equal(game.roundCombats[0].result.winner, 0);
+    const record = game.roundCombats[0];
+    assert.equal(record.result.winner, record.a === 0 ? 0 : 1, 'le joueur 0 gagne');
     return count() - before;
   };
   assert.equal(tractsAfter(['boyard', 'macron']), 2 * tractsAfter(['boyard', 'leaument']));

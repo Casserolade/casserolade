@@ -31,6 +31,9 @@ export const HEROES: Hero[] = [
   { id: 'kazib', name: 'Anasse Kazib', power: 'La grève', desc: 'La première actualisation de chaque manche est gratuite, et +1 budget à la manche suivante après une défaite.', hpBonus: 0, mods: { freeRollsPerRound: 1, lossBudget: 1 } },
   { id: 'durif', name: 'Sylvain Durif', power: 'Le Christ cosmique', desc: 'Le premier politique à mourir revient à chaque combat, mais les échelons coûtent 1 de plus.', hpBonus: 8, mods: { firstDeathRetour: true, upgradeDiscount: -1 } },
   { id: 'lalanne', name: 'Francis Lalanne', power: 'On se retrouvera', desc: 'Le premier politique à mourir transmet son attaque au suivant, et +1 budget à la manche suivante après une défaite.', hpBonus: 0, mods: { firstDeathTransmit: true, lossBudget: 1 } },
+  // Candidat le 9 novembre 2026. « C'est un candidat… de poids » (Édouard Philippe, BFMTV, le jour même) ; « tomber,
+  // se relever toujours » (sa vidéo de candidature).
+  { id: 'riner', name: 'Teddy Riner', power: 'Candidat de poids', desc: 'Votre premier politique gagne +2 PV à chaque combat, et le premier politique à mourir revient à chaque combat.', hpBonus: -3, mods: { frontHp: 2, firstDeathRetour: true } },
 ];
 
 /** Les boss du mode histoire y figurent pour leur nom, mais ne sont jamais tirés ni proposés : ils sont hors de HEROES. */

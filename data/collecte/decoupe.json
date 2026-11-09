@@ -514,6 +514,11 @@
   "hauteur_visage_source": 428,
   "visages": 1
  },
+ "riner": {
+  "basse_definition": false,
+  "hauteur_visage_source": 332,
+  "visages": 1
+ },
  "rousseau": {
   "basse_definition": false,
   "hauteur_visage_source": 406,

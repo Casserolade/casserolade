@@ -825,6 +825,14 @@
    "partage_identique": false
   },
   {
+   "id": "riner",
+   "nom": "Teddy Riner",
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Teddy_Riner_Cannes_2016.jpg",
+   "partage_identique": true
+  },
+  {
    "id": "rousseau",
    "nom": "Sandrine Rousseau",
    "auteur": null,
@@ -2993,6 +3001,30 @@
    "partage_identique": false
   },
   {
+   "id": "riner.aie",
+   "nom": "Teddy Riner",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.ladepeche.fr/article/2010/09/14/906418-teddy-riner-crie-sa-colere.html",
+   "partage_identique": false
+  },
+  {
+   "id": "riner.choc",
+   "nom": "Teddy Riner",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.leparisien.fr/jo-paris-2024/judo/2028-je-nai-pas-dit-non-teddy-riner-se-voit-bien-continuer-apres-les-jeux-de-paris-04-03-2023-FMEGNGBJBJG3HK7IGHWNT6I5JI.php",
+   "partage_identique": false
+  },
+  {
+   "id": "riner.rire",
+   "nom": "Teddy Riner",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.leprogres.fr/sport/2024/08/02/teddy-riner-se-sait-attendu-il-faudra-etre-le-plus-malin",
+   "partage_identique": false
+  },
+  {
    "id": "rousseau.aie",
    "nom": "Sandrine Rousseau",
    "auteur": null,
@@ -4929,6 +4961,70 @@
    "source": "https://www.youtube.com/watch?v=f810eBkIgZo",
    "date": "2024-09-23",
    "note": "Extrait de 28.76 à 36.6 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_cote_a_cote",
+   "nom": "Teddy Riner, « Aujourd'hui, on vit côte à côte. Je crains que demain, on doive vivre face à face. »",
+   "auteur": "Le Huffington Post, « Teddy Riner déclare sa candidature à l'élection présidentielle »",
+   "source": "https://www.youtube.com/watch?v=pXymIk94Nzk",
+   "date": "2026-11-09",
+   "note": "Extrait de 0.25 à 4.75 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_en_restant_en_haut",
+   "nom": "Teddy Riner, « Ce combat pour redresser la France, je ne le ferai pas pour vous en restant en haut, je le ferai avec vous et pour vous. »",
+   "auteur": "AFP, « Teddy Riner annonce sa candidature à la présidentielle »",
+   "source": "https://www.youtube.com/watch?v=Lj6r8Bdzwfo",
+   "date": "2026-11-09",
+   "note": "Extrait de 114.52 à 120.36 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_jamais_plante",
+   "nom": "Teddy Riner, « Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires. »",
+   "auteur": "BFMTV, « Sommet Choose France, engagement politique...l'interview de Teddy Riner en intégralité »",
+   "source": "https://www.youtube.com/watch?v=Fx0hC0SLJOc",
+   "date": "2025-05-19",
+   "note": "Extrait de 256.48 à 260.93 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_politicien_professionnel",
+   "nom": "Teddy Riner, « La France n'a pas besoin d'un politicien professionnel qui récite des leçons et se querelle à longueur de journée. »",
+   "auteur": "AFP, « Teddy Riner annonce sa candidature à la présidentielle »",
+   "source": "https://www.youtube.com/watch?v=Lj6r8Bdzwfo",
+   "date": "2026-11-09",
+   "note": "Extrait de 101.17 à 107.87 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_president_pas_ministre",
+   "nom": "Teddy Riner, « Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République. »",
+   "auteur": "BFMTV, « Sommet Choose France, engagement politique...l'interview de Teddy Riner en intégralité »",
+   "source": "https://www.youtube.com/watch?v=Fx0hC0SLJOc",
+   "date": "2025-05-19",
+   "note": "Extrait de 397.8 à 402.9 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_tatami_melenchon",
+   "nom": "Teddy Riner, « Moi je lui répondrai que je vais l'inviter sur un tatami et qu'on va trouver les moyens après. »",
+   "auteur": "BFMTV, « Riner invite Mélenchon à parler des JO sur un tatami »",
+   "source": "https://www.youtube.com/watch?v=53ygfkaHjx8",
+   "date": "2015-06-23",
+   "note": "Extrait de 13.08 à 16.53 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_triple_a",
+   "nom": "Teddy Riner, « Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire. »",
+   "auteur": "BFMTV, « Sommet Choose France, engagement politique...l'interview de Teddy Riner en intégralité »",
+   "source": "https://www.youtube.com/watch?v=Fx0hC0SLJOc",
+   "date": "2025-05-19",
+   "note": "Extrait de 234.19 à 240.37 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_yeux_dans_les_yeux",
+   "nom": "Teddy Riner, « Je m'appelle Teddy Riner, et aujourd'hui, je vous le dis les yeux dans les yeux : je suis candidat à l'élection présidentielle de 2027. »",
+   "auteur": "Le Huffington Post, « Teddy Riner déclare sa candidature à l'élection présidentielle »",
+   "source": "https://www.youtube.com/watch?v=pXymIk94Nzk",
+   "date": "2026-11-09",
+   "note": "Extrait de 21.98 à 28.36 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "rousseau_sro_homme_deconstruit",

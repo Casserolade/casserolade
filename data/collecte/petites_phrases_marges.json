@@ -2175,5 +2175,92 @@
     ],
     "meilleure": 0,
     "note": "Rien de vérifié par deux sources : toutes les phrases viennent de Puremédias ou du Tribunal du Net, souvent avec la vidéo d'origine, mais sans archive officielle retrouvée. « meilleure » pointe donc une phrase à recouper. Écarté : « Je ne savais pas » (réaction à l'affaire PPDA), sujet exclu par la ligne éditoriale."
+  },
+  {
+    "id": "riner",
+    "nom": "Teddy Riner",
+    "phrases": [
+      {
+        "texte": "La résignation n'est pas une option.",
+        "contexte": "Vidéo publiée sur X pour annoncer sa candidature à la présidentielle de 2027",
+        "date": "2026-11-09",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/la-resignation-n-est-pas-une-option-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-2027_8274359.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "heros",
+          "pose",
+          "celebration"
+        ],
+        "note": "Citée entre guillemets par franceinfo (9 novembre 2026, 11 h 42)."
+      },
+      {
+        "texte": "Je suis candidat à l'élection présidentielle de 2027",
+        "contexte": "Vidéo publiée sur X pour annoncer sa candidature à la présidentielle de 2027",
+        "date": "2026-11-09",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/la-resignation-n-est-pas-une-option-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-2027_8274359.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "heros",
+          "pose"
+        ],
+        "note": "Citée entre guillemets par franceinfo (9 novembre 2026, 11 h 42)."
+      },
+      {
+        "texte": "Le combat a toujours fait partie de moi. Je sais ce que c'est de se battre, de tomber, de se relever toujours",
+        "contexte": "Vidéo publiée sur X pour annoncer sa candidature à la présidentielle de 2027",
+        "date": "2026-11-09",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/la-resignation-n-est-pas-une-option-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-2027_8274359.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "mort"
+        ],
+        "note": "Citée entre guillemets par franceinfo (9 novembre 2026, 11 h 42). Virée le 9 novembre 2026 avec sa saillie, à l'écoute.",
+        "vire": true
+      },
+      {
+        "texte": "Si refuser de baisser la tête et refuser le chaos fait de moi un fou, alors oui, je suis complètement fou",
+        "contexte": "Même vidéo, face aux critiques qu'il attend",
+        "date": "2026-11-09",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/la-resignation-n-est-pas-une-option-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-2027_8274359.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "celebration",
+          "pose"
+        ],
+        "note": "Citée entre guillemets par franceinfo (9 novembre 2026, 11 h 42). Virée le 9 novembre 2026 avec sa saillie, à l'écoute.",
+        "vire": true
+      },
+      {
+        "texte": "La France n'a pas besoin d'un politicien professionnel qui récite des leçons et se querelle à longueur de journée.",
+        "contexte": "Vidéo publiée sur X pour annoncer sa candidature à la présidentielle de 2027",
+        "date": "2026-11-09",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/la-resignation-n-est-pas-une-option-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-2027_8274359.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "heros",
+          "pose"
+        ],
+        "note": "Citée entre guillemets par franceinfo (9 novembre 2026, 11 h 42)."
+      },
+      {
+        "texte": "Ce combat pour redresser la France, je ne le ferai pas pour vous en restant en haut.",
+        "contexte": "Vidéo publiée sur X pour annoncer sa candidature à la présidentielle de 2027",
+        "date": "2026-11-09",
+        "source": "https://www.franceinfo.fr/elections/presidentielle/la-resignation-n-est-pas-une-option-teddy-riner-annonce-sa-candidature-a-l-election-presidentielle-2027_8274359.html",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose"
+        ],
+        "note": "Citée entre guillemets par franceinfo (9 novembre 2026, 11 h 42)."
+      }
+    ],
+    "meilleure": 3
   }
 ]

@@ -17841,6 +17841,208 @@
     }
    }
   },
+  "riner": {
+   "atlas": "personnages/riner.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 245,
+     "h": 355
+    },
+    "machoire": {
+     "x": 249,
+     "y": 0,
+     "w": 166,
+     "h": 100,
+     "pose": [
+      58.0,
+      246.0
+     ],
+     "pivot": [
+      117.1,
+      9.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     127.7,
+     160.7,
+     36.9
+    ],
+    "oeil_d": [
+     206.6,
+     160.7,
+     29.0
+    ],
+    "bouche": [
+     175.1,
+     255.6
+    ],
+    "menton": [
+     181.5,
+     332.0
+    ]
+   },
+   "credits": {
+    "auteur": "Georges Biard",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Teddy_Riner_Cannes_2016.jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/riner.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 286,
+       "h": 341
+      },
+      "machoire": {
+       "x": 290,
+       "y": 0,
+       "w": 245,
+       "h": 111,
+       "pose": [
+        5.0,
+        180.0
+       ],
+       "pivot": [
+        106.7,
+        15.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       73.7,
+       111.0,
+       37.2
+      ],
+      "oeil_d": [
+       171.2,
+       111.0,
+       40.5
+      ],
+      "bouche": [
+       111.7,
+       195.9
+      ],
+      "menton": [
+       106.3,
+       277.8
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.ladepeche.fr/article/2010/09/14/906418-teddy-riner-crie-sa-colere.html"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/riner.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 302,
+       "h": 350
+      },
+      "machoire": {
+       "x": 306,
+       "y": 0,
+       "w": 241,
+       "h": 113,
+       "pose": [
+        6.0,
+        186.0
+       ],
+       "pivot": [
+        104.4,
+        19.4
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       70.4,
+       112.1,
+       41.7
+      ],
+      "oeil_d": [
+       179.4,
+       112.1,
+       46.3
+      ],
+      "bouche": [
+       110.4,
+       205.4
+      ],
+      "menton": [
+       103.7,
+       286.5
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.leparisien.fr/jo-paris-2024/judo/2028-je-nai-pas-dit-non-teddy-riner-se-voit-bien-continuer-apres-les-jeux-de-paris-04-03-2023-FMEGNGBJBJG3HK7IGHWNT6I5JI.php"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/riner.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 242,
+       "h": 353
+      },
+      "machoire": {
+       "x": 246,
+       "y": 0,
+       "w": 186,
+       "h": 102,
+       "pose": [
+        25.0,
+        241.0
+       ],
+       "pivot": [
+        89.1,
+        10.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       61.8,
+       161.3,
+       39.2
+      ],
+      "oeil_d": [
+       152.4,
+       161.3,
+       39.2
+      ],
+      "bouche": [
+       114.1,
+       251.8
+      ],
+      "menton": [
+       114.2,
+       330.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.leprogres.fr/sport/2024/08/02/teddy-riner-se-sait-attendu-il-faudra-etre-le-plus-malin"
+     }
+    }
+   }
+  },
   "rousseau": {
    "atlas": "personnages/rousseau.webp",
    "pieces": {
@@ -21413,6 +21615,8 @@
    "pujadas_pujadas_fin_justifie_les_moyens": "sons/citations/pujadas_pujadas_fin_justifie_les_moyens.mp3",
    "pujadas_pujadas_regrettez_ces_violences": "sons/citations/pujadas_pujadas_regrettez_ces_violences.mp3",
    "retailleau_retailleau_retablir_ordre": "sons/citations/retailleau_retailleau_retablir_ordre.mp3",
+   "riner_en_restant_en_haut": "sons/citations/riner_en_restant_en_haut.mp3",
+   "riner_politicien_professionnel": "sons/citations/riner_politicien_professionnel.mp3",
    "rousseau_sro_homme_deconstruit": "sons/citations/rousseau_sro_homme_deconstruit.mp3",
    "rousseau_sro_rien_a_peter": "sons/citations/rousseau_sro_rien_a_peter.mp3",
    "roussel_roussel_culotte_slip": "sons/citations/roussel_roussel_culotte_slip.mp3",
@@ -21434,6 +21638,13 @@
    "sarkozy_sarko_homme_africain": "sons/citations/sarkozy_sarko_homme_africain.mp3",
    "sarkozy_sarko_passion_privee": "sons/citations/sarkozy_sarko_passion_privee.mp3",
    "sarkozy_sarko_racailles": "sons/citations/sarkozy_sarko_racailles.mp3",
+   "strauss_kahn_dsk_bouche_nez": "sons/citations/strauss_kahn_dsk_bouche_nez.mp3",
+   "strauss_kahn_dsk_deux_perdants": "sons/citations/strauss_kahn_dsk_deux_perdants.mp3",
+   "strauss_kahn_dsk_faute_morale": "sons/citations/strauss_kahn_dsk_faute_morale.mp3",
+   "strauss_kahn_dsk_inappropriee": "sons/citations/strauss_kahn_dsk_inappropriee.mp3",
+   "strauss_kahn_dsk_ni_ni": "sons/citations/strauss_kahn_dsk_ni_ni.mp3",
+   "strauss_kahn_dsk_rendez_vous": "sons/citations/strauss_kahn_dsk_rendez_vous.mp3",
+   "strauss_kahn_dsk_talent_destruction": "sons/citations/strauss_kahn_dsk_talent_destruction.mp3",
    "tache_tache_police_tue": "sons/citations/tache_tache_police_tue.mp3",
    "tache_tache_serre_tete": "sons/citations/tache_tache_serre_tete.mp3",
    "tanguy_flagrant_delit_faillite": "sons/citations/tanguy_flagrant_delit_faillite.mp3",
@@ -21456,13 +21667,12 @@
    "zemmour_zemmour_milipol": "sons/citations/zemmour_zemmour_milipol.mp3",
    "zemmour_zemmour_petain_onpc": "sons/citations/zemmour_zemmour_petain_onpc.mp3",
    "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3",
-   "strauss_kahn_dsk_rendez_vous": "sons/citations/strauss_kahn_dsk_rendez_vous.mp3",
-   "strauss_kahn_dsk_bouche_nez": "sons/citations/strauss_kahn_dsk_bouche_nez.mp3",
-   "strauss_kahn_dsk_deux_perdants": "sons/citations/strauss_kahn_dsk_deux_perdants.mp3",
-   "strauss_kahn_dsk_faute_morale": "sons/citations/strauss_kahn_dsk_faute_morale.mp3",
-   "strauss_kahn_dsk_inappropriee": "sons/citations/strauss_kahn_dsk_inappropriee.mp3",
-   "strauss_kahn_dsk_ni_ni": "sons/citations/strauss_kahn_dsk_ni_ni.mp3",
-   "strauss_kahn_dsk_talent_destruction": "sons/citations/strauss_kahn_dsk_talent_destruction.mp3"
+   "riner_cote_a_cote": "sons/citations/riner_cote_a_cote.mp3",
+   "riner_yeux_dans_les_yeux": "sons/citations/riner_yeux_dans_les_yeux.mp3",
+   "riner_jamais_plante": "sons/citations/riner_jamais_plante.mp3",
+   "riner_president_pas_ministre": "sons/citations/riner_president_pas_ministre.mp3",
+   "riner_tatami_melenchon": "sons/citations/riner_tatami_melenchon.mp3",
+   "riner_triple_a": "sons/citations/riner_triple_a.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",

@@ -278,6 +278,9 @@ export const CARDS: Card[] = [
   card('roussel', 'Fabien Roussel', 'civile', 3, 1, 3, { fx: [fx('sort', 'allies', buff(1, 0))] }),
   // « Nous, on n'a pas d'immunité ouvrière » : il répond quand on perd.
   card('poutou', 'Philippe Poutou', 'civile', 3, 4, 6, { kw: ['vedette'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
+  // Candidat le 9 novembre 2026 : « ni de droite, ni de gauche », et « Je sais ce que c'est de se battre, de tomber,
+  // de se relever toujours » (vidéo de sa candidature). Il compte pour chaque parti, et se relève une fois.
+  card('riner', 'Teddy Riner', 'civile', 4, 5, 8, { kw: ['ni_droite_ni_gauche', 'retour'] }),
   card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { kw: ['vedette'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).

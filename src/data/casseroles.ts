@@ -1132,6 +1132,23 @@ export const CASSEROLES: Casserole[] = [
     statut: 'Enquête préliminaire du Parquet national financier pour blanchiment de fraude fiscale aggravée, rendue publique en décembre 2022 ; aucune suite publique trouvée au 7 novembre 2026.',
     verifie: true,
   },
+  // Teddy Riner, candidat le 9 novembre 2026 : six jours après la publication de son redressement confirmé en appel.
+  {
+    id: 'conducteur_exclusif',
+    kind: 'affaire',
+    name: 'Conducteur exclusif',
+    owner: 'riner',
+    cost: 2,
+    ownerBonus: { atk: 6, hp: 6 },
+    atk: 6,
+    hp: 6,
+    // Le redressement : pendant le scandale, le fisc repasse à chaque manche.
+    budgetPerRound: -2,
+    blague: 'Une Ferrari et une Rolls à louer avec chauffeur : zéro chiffre d\'affaires en deux ans, et un seul conducteur, lui. Ses avocats plaident le « contexte géopolitique ».',
+    fait: 'Sa société Pullman Limousine louait des voitures de luxe avec chauffeur. Sa Ferrari et sa Rolls-Royce Wraith n\'ont généré aucun chiffre d\'affaires en 2016 et 2017 (L\'Informé, 6 novembre 2025), et les contrats d\'assurance le désignaient comme conducteur principal ou exclusif. Le fisc y voit des « rémunérations et avantages occultes », environ 289 000 euros selon la presse, et une « intention délibérée » de « minorer l\'impôt » : supplément d\'impôt et majoration de 40 %. Les avocats de la société ont expliqué le peu de locations par un « contexte géopolitique » (AFP, 3 novembre 2026).',
+    statut: 'Redressement fiscal de 2019 (revenus 2016 et 2017), procédure administrative et non pénale : requête rejetée par le tribunal administratif de Cergy-Pontoise en mars 2025, redressement confirmé par la cour administrative d\'appel de Versailles le 15 octobre 2026 (L\'Équipe et AFP, 3 novembre 2026). Pourvoi possible devant le Conseil d\'État ; aucun connu au 9 novembre 2026.',
+    verifie: true,
+  },
 ];
 
 // Les effets d'une casserole se retrouvent par identité sur ses porteurs : figés, rien ne peut les modifier en place.
