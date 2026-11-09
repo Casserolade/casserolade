@@ -1,8 +1,8 @@
 /**
  * Vérifie les carrières de `src/data/histoire/carrieres/` : que tout ce qu'elles nomment existe dans le jeu (plateaux,
  * marionnettes, expressions, vraies voix, animateurs, contextes, décors, accessoires), que les cinématiques tiennent
- * dans leur durée et que leurs visages reviennent à la base, que la page et le son d'une cinématique HyperFrames existent
- * sous assets/game (jamais une vidéo), qu'il y a un tour scénarisé et un boss.
+ * dans leur durée et que leurs visages reviennent à la base, que le module et le son d'une cinématique HyperFrames
+ * existent (jamais une vidéo), qu'il y a un tour scénarisé et un boss.
  *   node tools/histoire/valider_carrieres.ts            toutes les carrières
  *   node tools/histoire/valider_carrieres.ts melenchon   une seule
  * Les erreurs empêchent l'intégration ; les conseils non.
@@ -178,13 +178,13 @@ function validerCinematique(c: Cinematique, carriere: Carriere): void {
   if (!phraseDuHeros) conseil(ou, `aucune vraie petite phrase de ${carriere.heros} (avec \`source\`) dans cette cinématique`);
 }
 
-/** Une cinématique HyperFrames dessinée en direct : sa page et son son, jamais une vidéo ; sa place, sa durée. */
+/** Une cinématique HyperFrames : son module exporté et son son, jamais une vidéo ; sa place, sa durée. */
 function validerComposee(c: CinematiqueComposee, carriere: Carriere): void {
   const ou = `${carriere.heros} › ${c.id}`;
   if (c.heros !== carriere.heros) erreur(ou, `heros vaut « ${c.heros} », pas « ${carriere.heros} »`);
   if (!MOMENTS.has(c.moment)) erreur(ou, `moment inconnu « ${c.moment} »`);
   if (!c.titre?.trim()) erreur(ou, 'une cinématique HyperFrames a son titre');
-  if (!c.page.endsWith('.html') || !existsSync(join(RACINE, 'assets', 'game', c.page))) erreur(ou, `page introuvable sous assets/game : « ${c.page} »`);
+  if (!existsSync(join(RACINE, 'src', 'client', 'cutscenes', 'composed', `${c.episode}.ts`))) erreur(ou, `module introuvable sous src/client/cutscenes/composed : « ${c.episode} »`);
   if (!/\.(mp3|ogg)$/.test(c.son) || !existsSync(join(RACINE, 'assets', 'game', c.son))) erreur(ou, `son introuvable sous assets/game : « ${c.son} »`);
   const max = c.moment === 'defaite' ? 18 : 30;
   if (c.duree < 8 || c.duree > max) erreur(ou, `durée ${c.duree} s hors de 8 à ${max} s`);
@@ -253,7 +253,7 @@ function valider(carriere: Carriere, fichier: string): void {
   for (const c of carriere.cinematiques ?? []) {
     if (cines.has(c.id)) erreur(ou, `cinématique en double « ${c.id} »`);
     cines.add(c.id);
-    if ('page' in c) validerComposee(c, carriere);
+    if ('episode' in c) validerComposee(c, carriere);
     else validerCinematique(c, carriere);
   }
   for (const moment of OBLIGATOIRES) if (!(carriere.cinematiques ?? []).some((c) => c.moment === moment)) erreur(ou, `il manque la cinématique « ${moment} »`);

@@ -24,7 +24,6 @@ import { generateSeed } from '#src/server/generateSeed.ts';
 
 /** The cutscenes and their animation library load only when a career plays one. */
 const CutscenePlayer = defineAsyncComponent(() => import('#src/client/components/organisms/CutscenePlayer.vue'));
-const LiveCutscenePlayer = defineAsyncComponent(() => import('#src/client/components/organisms/LiveCutscenePlayer.vue'));
 
 const emit = defineEmits<{ leave: [] }>();
 
@@ -54,9 +53,6 @@ watch(bilan, (result) => {
 
 /** The cutscene playing over everything, and what comes after it. Each one plays once in a campaign. */
 const cutscene = shallowRef<Scene | null>(null);
-/** A HyperFrames page drawn live, or puppets described in data: both play in the page, never as a video. */
-const page = computed(() => (cutscene.value && 'page' in cutscene.value ? cutscene.value : null));
-const puppets = computed(() => (cutscene.value && !('page' in cutscene.value) ? cutscene.value : null));
 let afterCutscene: (() => void) | null = null;
 
 function showCutscene(scene: Scene | null, then: () => void): void {
@@ -156,8 +152,7 @@ function leave(): void {
 </script>
 
 <template>
-  <LiveCutscenePlayer v-if="page" :key="page.id" :cinematique="page" @end="endCutscene" />
-  <CutscenePlayer v-else-if="puppets" :key="puppets.id" :cinematique="puppets" @end="endCutscene" />
+  <CutscenePlayer v-if="cutscene" :key="cutscene.id" :cinematique="cutscene" @end="endCutscene" />
   <CinemaShelf v-if="cinemaCheat.enabled.value" ref="shelf" @play="watchAgain" />
   <StoryHeroScreen v-if="!campaign" :cinema="cinemaCheat.enabled.value" @choose="chooseHero" @cinema="openCinema" @leave="leave" />
   <StoryResultScreen

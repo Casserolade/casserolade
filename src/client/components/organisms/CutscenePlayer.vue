@@ -1,24 +1,26 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
-import { Cutscene } from '#src/client/cutscenes/createCutscene.ts';
+import type { PlayableCutscene } from '#src/client/cutscenes/PlayableCutscene.ts';
+import { createPlayableCutscene } from '#src/client/cutscenes/createPlayableCutscene.ts';
 import { CutsceneSound } from '#src/client/cutscenes/cutsceneSound.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { isHurryKey } from '#src/client/tools/isHurryKey.ts';
-import type { Cinematique } from '#src/data/histoire/cinematique.ts';
+import type { Scene } from '#src/data/histoire/cinematique.ts';
 
 /** The stage of a cutscene, drawn for this size and fitted to the window. */
 const STAGE = { width: 1920, height: 1080 };
 
 /**
- * A career cutscene, full screen: it plays by itself and the career goes on when it ends. A touch, a click or a key
- * (Space, Enter, →, Escape) passes it: nothing has to be clicked, nothing has to be closed.
+ * A career cutscene, full screen, whatever made it (puppets from data, a HyperFrames episode): it plays by itself and the
+ * career goes on when it ends. A touch, a click or a key (Space, Enter, →, Escape) passes it: nothing has to be clicked,
+ * nothing has to be closed. One that cannot be built is passed too.
  */
-const props = defineProps<{ cinematique: Cinematique }>();
-const emit = defineEmits<{ end: []; ready: [cutscene: Cutscene] }>();
+const props = defineProps<{ cinematique: Scene }>();
+const emit = defineEmits<{ end: []; ready: [cutscene: PlayableCutscene] }>();
 
 const frame = useTemplateRef<HTMLElement>('frame');
 const scale = ref(1);
-let cutscene: Cutscene | null = null;
+let cutscene: PlayableCutscene | null = null;
 let sound: CutsceneSound | null = null;
 let ended = false;
 
@@ -52,7 +54,16 @@ onMounted(async () => {
   if (ended || !frame.value) return;
   sound = new CutsceneSound();
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  cutscene = new Cutscene(frame.value, props.cinematique, { manifest: gameArt.manifest.value, onCue: (cue) => sound?.cue(cue), reducedMotion });
+  const built = await createPlayableCutscene(frame.value, props.cinematique, { manifest: gameArt.manifest.value, onCue: (cue) => sound?.cue(cue), reducedMotion }).catch((error: unknown) => {
+    console.error('Cutscene could not be built', error);
+    return null;
+  });
+  if (!built || ended) {
+    built?.destroy();
+    end();
+    return;
+  }
+  cutscene = built;
   cutscene.timeline.eventCallback('onComplete', end);
   emit('ready', cutscene);
   cutscene.play();
