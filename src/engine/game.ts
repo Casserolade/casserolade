@@ -194,6 +194,7 @@ export function createGame(opts: GameOptions): Game {
     nextUid: 1,
     lastEliminated: null,
     ranks: [],
+    pairs: [],
     roundCombats: [],
     heroes,
     hpSnapshot: new Map(),
@@ -309,6 +310,8 @@ export function startRound(game: Game): void {
     if (dissolved && game.ctx.dissolutionDiscover) offerMinions(game, p, p.tier);
     startOfTurn(game, p);
   }
+  // Une fois chacun entré dans sa manche : une carrière peut avoir fait quitter la table à un rival.
+  game.pairs = pairPlayers(game);
 }
 
 /** Ruissellement : the last in the polls, ties included, before this round's budget. */
@@ -673,6 +676,18 @@ export interface PlayerView {
   absents: number;
   /** Informations publiques sur chaque joueur, comme à Battlegrounds : sondages, échelon, triples. */
   table: { seat: number; heroId: string | null; hp: number; tier: number; alive: boolean; boardSize: number; place: number; triples: number }[];
+  /** Pendant le recrutement, l'adversaire du prochain combat, comme à Battlegrounds ; null hors recrutement. */
+  nextOpponent: Opponent | null;
+}
+
+/**
+ * Un adversaire : un siège, ou -1 pour le fantôme, qui prend les traits d'un héros (`ghostOf`) : le dernier éliminé,
+ * ou celui dont il copie le plateau, qu'on ne connaît qu'au combat avant la première élimination.
+ */
+export interface Opponent {
+  seat: number;
+  heroId: string;
+  ghostOf?: string;
 }
 
 /** Ce qu'un siège voit de son propre combat. */
@@ -680,8 +695,7 @@ export interface CombatView {
   round: number;
   /** Le camp de ce siège dans le journal. */
   side: 0 | 1;
-  /** -1 contre le fantôme, qui prend les traits d'un héros (`ghostOf`) : le dernier éliminé, ou celui dont il copie le plateau. */
-  opponent: { seat: number; heroId: string; ghostOf?: string };
+  opponent: Opponent;
   log: CombatEvent[];
   winner: 0 | 1 | null;
   /** Sondages perdus par chaque camp à cause de ce combat. */
@@ -774,7 +788,27 @@ export function viewFor(game: Game, seat: number): PlayerView {
       place: x.place,
       triples: x.stats.triples,
     })),
+    nextOpponent: nextOpponentOf(game, p),
   };
+}
+
+/** Le siège face à `seat` dans ces rencontres ; -1 pour le fantôme, undefined s'il n'y figure pas. */
+function opponentSeatIn(pairs: readonly (readonly [number, number | null])[], seat: number): number | undefined {
+  const pair = pairs.find(([a, b]) => a === seat || b === seat);
+  if (!pair) return undefined;
+  return (pair[0] === seat ? pair[1] : pair[0]) ?? GHOST;
+}
+
+function opponentAt(game: Game, seat: number, ghostOf: string | undefined): Opponent {
+  if (seat !== GHOST) return { seat, heroId: game.players[seat].hero.id };
+  return { seat, heroId: 'fantome', ...(ghostOf ? { ghostOf } : {}) };
+}
+
+/** Pendant le recrutement, celui qu'il affrontera : le fantôme a les traits du dernier éliminé, s'il y en a un. */
+function nextOpponentOf(game: Game, p: Player): Opponent | null {
+  if (game.phase !== 'recrutement' || !p.alive) return null;
+  const seat = opponentSeatIn(game.pairs, p.seat);
+  return seat === undefined ? null : opponentAt(game, seat, game.lastEliminated?.heroId);
 }
 
 /** Le combat de ce siège pour la manche en cours : le seul moment où il voit un plateau adverse. */
@@ -782,11 +816,10 @@ export function combatViewFor(game: Game, seat: number): CombatView | null {
   const record = game.roundCombats.find((c) => c.a === seat || c.b === seat);
   if (!record) return null;
   const side = record.a === seat ? 0 : 1;
-  const opponentSeat = side === 0 ? record.b : record.a;
   return {
     round: game.round,
     side,
-    opponent: opponentSeat < 0 ? { seat: opponentSeat, heroId: 'fantome', ...(record.ghostOf ? { ghostOf: record.ghostOf } : {}) } : { seat: opponentSeat, heroId: game.players[opponentSeat].hero.id },
+    opponent: opponentAt(game, side === 0 ? record.b : record.a, record.ghostOf),
     log: record.result.log,
     winner: record.result.winner,
     damage: record.damage,
@@ -847,6 +880,17 @@ function pairPlayers(game: Game): [number, number | null][] {
     if (a === GHOST) return [b, null];
     return [a, b === GHOST ? null : b];
   });
+}
+
+/**
+ * Les rencontres tirées au début du recrutement, celles que chacun a vues pendant qu'il recrutait. Elles ne se retirent
+ * que si la table a changé depuis : chaque siège en lice une fois, aucun éliminé.
+ */
+function roundPairs(game: Game): [number, number | null][] {
+  const paired = game.pairs.flatMap(([a, b]) => (b === null ? [a] : [a, b]));
+  const alive = game.players.filter((p) => p.alive).map((p) => p.seat);
+  const same = paired.length === alive.length && alive.every((seat) => paired.includes(seat));
+  return same ? game.pairs : pairPlayers(game);
 }
 
 /** Tous les appariements parfaits de `nodes`. */
@@ -963,7 +1007,7 @@ export function startCombats(game: Game): void {
 
   game.roundCombats = [];
   const before = game.players.map((p) => p.hp);
-  const pairs = pairPlayers(game);
+  const pairs = roundPairs(game);
   const startUid = game.nextUid + 1_000_000;
   for (const [sa, sb] of pairs) {
     const pa = game.players[sa];

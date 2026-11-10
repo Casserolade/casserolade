@@ -30,7 +30,7 @@ const VIEW_KEYS = [
   'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'upgradeLock', 'buyCost',
   'rollCost', 'freeRolls', 'relaunched', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
   'shopSpells', 'shopSpellCosts', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'discoverKind', 'tract', 'counters', 'stats', 'camps',
-  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents',
+  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents', 'nextOpponent',
 ].sort();
 const TABLE_KEYS = ['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples'].sort();
 
@@ -523,10 +523,19 @@ export function runFuzzGame(seed: number, cov: Coverage): FuzzResult {
     }
     for (const p of game.players) if (p.alive) checkView(game, p.seat, where, p.seat === game.round % game.players.length);
     const aliveBefore = game.players.filter((p) => p.alive).map((p) => p.seat);
+    const announced = new Map(aliveBefore.map((seat) => [seat, viewFor(game, seat).nextOpponent]));
     startCombats(game);
     const after = `${tag} combats de la manche ${game.round}`;
     assert.equal(game.phase, 'combat', `${after} : phase`);
     checkCombats(game, cov, after, aliveBefore);
+    // Chacun affronte celui que le recrutement lui annonçait ; le fantôme d'un éliminé garde ses traits.
+    for (const [seat, next] of announced) {
+      assert.ok(next, `${where} : ${seat} recrute sans prochain adversaire`);
+      const met = combatViewFor(game, seat)?.opponent;
+      assert.equal(met?.seat, next?.seat, `${after} : ${seat} n'affronte pas l'adversaire annoncé`);
+      if (next?.ghostOf) assert.equal(met?.ghostOf, next.ghostOf, `${after} : le fantôme annoncé n'est pas celui du combat`);
+      if (viewFor(game, seat).nextOpponent !== null) assert.fail(`${after} : un prochain adversaire hors du recrutement`);
+    }
     for (const p of game.players) {
       const before = snapshotPlayer(game, p, counter.calls());
       assert.equal(applyAction(game, p.seat, { t: 'roll' }).ok, false, `${after} : action pendant le combat`);

@@ -116,6 +116,11 @@ export interface Game {
   /** Le dernier éliminé, son héros et son dernier plateau : le fantôme d'une table en nombre impair. */
   lastEliminated: { heroId: string; board: Minion[] } | null;
   ranks: number[];
+  /**
+   * Les rencontres de la manche, tirées dès le début du recrutement : chacun voit son prochain adversaire pendant qu'il
+   * recrute, comme à Battlegrounds. `null` à la place d'un siège : le fantôme.
+   */
+  pairs: [number, number | null][];
   roundCombats: CombatRecord[];
   heroes: Record<string, Hero>;
   hpSnapshot: Map<number, number[]>;

@@ -43,6 +43,7 @@ import { nearestSlotIndex } from '../src/client/tools/nearestSlotIndex.ts';
 import { previewCombatBonuses } from '../src/client/tools/previewCombatBonuses.ts';
 import { slotOffset } from '../src/client/tools/slotOffset.ts';
 import { reorderAroundLocked } from '../src/engine/reorderAroundLocked.ts';
+import { facelessGhostNext, nextOpponentSeat } from '../src/client/tools/nextOpponentSeat.ts';
 import { seenBoardSummary } from '../src/client/tools/seenBoardSummary.ts';
 import { signed } from '../src/client/tools/signed.ts';
 import { summarizeCombatOutcome } from '../src/client/tools/summarizeCombatOutcome.ts';
@@ -794,4 +795,17 @@ test('typedTail keeps the last letters typed, in lower case, and ignores the oth
   assert.equal(tail, 'popcorn');
   assert.equal(typedTail('popcorn', 's', 7), 'opcorns');
   assert.equal(typedTail('', 'é', 3), 'é');
+});
+
+test('the next opponent is marked on its row; a ghost on the eliminated seat it wears, or apart before the first elimination', () => {
+  const row = (seat: number, heroId: string, alive: boolean) => ({ seat, heroId, hp: alive ? 20 : 0, tier: 2, alive, boardSize: 3, place: alive ? 0 : 5, triples: 0 });
+  const table = [row(0, 'macron', true), row(1, 'bardella', true), row(2, 'ruffin', false)];
+  assert.equal(nextOpponentSeat(table, { seat: 1, heroId: 'bardella' }), 1);
+  assert.equal(nextOpponentSeat(table, { seat: -1, heroId: 'fantome', ghostOf: 'ruffin' }), 2);
+  assert.equal(nextOpponentSeat(table, { seat: -1, heroId: 'fantome' }), null);
+  assert.equal(nextOpponentSeat(table, null), null);
+  assert.equal(facelessGhostNext(table, { seat: -1, heroId: 'fantome' }), true);
+  assert.equal(facelessGhostNext(table, { seat: -1, heroId: 'fantome', ghostOf: 'ruffin' }), false);
+  assert.equal(facelessGhostNext(table, { seat: 1, heroId: 'bardella' }), false);
+  assert.equal(facelessGhostNext(table, null), false);
 });

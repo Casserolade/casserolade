@@ -18,13 +18,16 @@ withDefaults(defineProps<{
   /** The last combat against this player; null when never met. */
   seen: PlayerView['seen'][number] | null;
   isOwn: boolean;
-}>(), { player: null });
+  /** Met at the coming combat: this seat, or its ghost. */
+  next?: boolean;
+}>(), { player: null, next: false });
 </script>
 
 <template>
   <span class="sheet" role="tooltip">
     <strong class="name">{{ name }}</strong>
     <span v-if="player" class="player">{{ player }}</span>
+    <span v-if="next" class="next">{{ alive ? 'Votre prochain adversaire' : 'Son fantôme sera votre prochain adversaire' }}</span>
     <span v-if="power" class="power"><b>{{ power.name }}</b> : {{ power.desc }}</span>
     <span class="figures">
       <span>Échelon {{ tier }}</span>
@@ -68,6 +71,7 @@ withDefaults(defineProps<{
 .name { color: var(--color-accent); font: 800 calc(var(--s) * 26) / 1.1 var(--font-card-title); }
 .player { margin-top: calc(var(--s) * -4); color: #fff; font: 700 calc(var(--s) * 20) / 1.1 var(--font-card); }
 .power b { color: #ffe27a; }
+.next { color: #ff8a7e; font-weight: 800; }
 .figures { display: flex; flex-wrap: wrap; gap: calc(var(--s) * 6); }
 .figures > span { padding: calc(var(--s) * 2) calc(var(--s) * 10); border-radius: calc(var(--s) * 12); background: rgb(255 255 255 / 0.08); }
 .seen-title { margin-top: calc(var(--s) * 4); color: #b9c0d0; font-weight: 700; }

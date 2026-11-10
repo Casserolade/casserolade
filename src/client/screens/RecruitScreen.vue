@@ -81,7 +81,7 @@ watch(tripleCount, (count, before) => {
 <template>
   <GameTable :plateau-id="view.plateau.id" :faces="candidateFaces(view.table, view.seat)" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
     <HostDesk class="host-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
-    <ScoreBoard :table="view.table" :seat="view.seat" :seen="view.seen" :names="store.names.value" />
+    <ScoreBoard :table="view.table" :seat="view.seat" :seen="view.seen" :names="store.names.value" :next="view.nextOpponent" />
     <ShopRow class="shop-place" :view="view" :gestures="gestures" />
     <BoardRow class="board-place" :board="view.board" :owned="owned" :gestures="gestures" :scandal-threshold="view.scandalThreshold" :round="view.round" :end-of-turn="store.endOfTurn.value" />
     <EndOfTurnBanner v-if="store.endOfTurn.value?.banner.value" />
