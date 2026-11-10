@@ -9,6 +9,12 @@ import type { Scene } from '#src/data/histoire/cinematique.ts';
 
 /** The stage of a cutscene, drawn for this size and fitted to the window. */
 const STAGE = { width: 1920, height: 1080 };
+/**
+ * How long the two clicks of a double click may lie apart. The second must neither pass the cutscene the first one
+ * opened (a double click on « Élection suivante » made the episode after a won chapter vanish unseen, for good), nor
+ * land on the screen a passed cutscene reveals (it entered the next chapter without its page): 10 November 2026.
+ */
+const DOUBLE_CLICK_MS = 500;
 
 /**
  * A career cutscene, full screen, whatever made it (puppets from data, a HyperFrames episode): it plays by itself and the
@@ -23,6 +29,7 @@ const scale = ref(1);
 let cutscene: PlayableCutscene | null = null;
 let sound: CutsceneSound | null = null;
 let ended = false;
+const shownAt = performance.now();
 
 function fit(): void {
   scale.value = Math.min(window.innerWidth / STAGE.width, window.innerHeight / STAGE.height);
@@ -35,9 +42,23 @@ function end(): void {
   emit('end');
 }
 
-function skip(): void {
+/** Passed by a gesture: not by the second click of the double click that opened it. */
+function skip(): boolean {
+  if (ended || performance.now() - shownAt < DOUBLE_CLICK_MS) return false;
   cutscene?.finish();
   end();
+  return true;
+}
+
+/** The clicks of the gesture that passed it end with it: the screen underneath does not receive them. */
+function skipByPointer(): void {
+  if (!skip()) return;
+  const swallow = (event: MouseEvent) => {
+    event.stopPropagation();
+    event.preventDefault();
+  };
+  window.addEventListener('click', swallow, { capture: true });
+  window.setTimeout(() => window.removeEventListener('click', swallow, { capture: true }), DOUBLE_CLICK_MS);
 }
 
 function handleKey(event: KeyboardEvent): void {
@@ -78,7 +99,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="cutscene-player" @pointerdown="skip">
+  <div class="cutscene-player" @pointerdown="skipByPointer">
     <div ref="frame" class="frame" :style="{ scale }" />
     <p class="hint" aria-hidden="true">Un geste pour passer</p>
   </div>
