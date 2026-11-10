@@ -6,8 +6,9 @@ import type { AddressInfo } from 'node:net';
 import { join, resolve } from 'node:path';
 import type { Duplex } from 'node:stream';
 import { WebSocket, WebSocketServer } from 'ws';
+import { HERO_BY_ID } from '../data/heroes.ts';
 import { Lobby } from '../lobby/lobby.ts';
-import type { LobbyOptions } from '../lobby/lobby.ts';
+import type { EvenementSalon, LobbyOptions } from '../lobby/lobby.ts';
 import { COUNTER_PATH } from '../protocol/counterEvent.ts';
 import type { CounterEvent } from '../protocol/counterEvent.ts';
 import type { ClientMessage, ServerMessage } from '../protocol/messages.ts';
@@ -15,11 +16,15 @@ import { MAX_MESSAGE_BYTES, parseClientMessage } from '../protocol/parseClientMe
 import type { Clock, RoomIncident } from './room.ts';
 import { counterEventLabel } from './counterEventLabel.ts';
 import { DASHBOARD_NAMES } from './dashboardNames.ts';
+import { appendToArchive, archiveGame } from './gameArchive.ts';
+import type { ArchivedGame } from './gameArchive.ts';
 import { handleCounter } from './handleCounter.ts';
 import type { CounterHandling } from './handleCounter.ts';
 import { openMmrFile } from './mmrFile.ts';
 import type { MmrFile } from './mmrFile.ts';
 import { serveStatic } from './serveStatic.ts';
+import { liveGames } from './liveGames.ts';
+import type { LiveGame } from './liveGames.ts';
 import { LiveMetrics } from './liveMetrics.ts';
 import { SiteStats } from './siteStats.ts';
 import type { LiveStats, StatsSnapshot } from './siteStats.ts';
@@ -93,6 +98,11 @@ export interface GameServerOptions {
   version?: string;
   /** JSON file of the daily statistics (visitors, games, incidents), on the private volume. */
   statsFile?: string;
+  /**
+   * Folder where each online game played to the end is kept for balancing (gameArchive.ts): a summary of each seat,
+   * and what replays it. On the private volume, never served. Without it, the games are only counted.
+   */
+  archiveDir?: string;
   /** The secret of the statistics page, /stats/<token>. Without it, there is no such page. */
   statsToken?: string;
 }
@@ -111,6 +121,8 @@ const DASHBOARD_SCRIPTS = new Map(['tableau.js', 'frequentation.js'].map((name) 
 /** A handful of open dashboards at most: the stream is for the admin, not for the crowd. */
 const MAX_STATS_STREAMS = 5;
 const DAYS_EVERY_MS = 30_000;
+/** The games in progress, on the dashboard: rounds and polls move every few seconds. */
+const GAMES_EVERY_MS = 2_000;
 /** The days the dashboard's stream carries: the table shows thirty, the totals come summed. */
 const STREAMED_DAYS = 60;
 /** The container's health check asks here, and is counted nowhere. */
@@ -183,16 +195,7 @@ export class GameServer {
       clock: realClock,
       send: (id, message) => this.send(id, message),
       signaler: (incident, code) => this.recordIncident(incident, code),
-      evenement: (evenement) => {
-        if (evenement.type === 'salon_cree') {
-          this.stats.salonCree();
-          this.live.event('salon', 'Salon privé créé');
-          return;
-        }
-        this.stats.partie(evenement.publique, evenement.humains);
-        const humains = `${evenement.humains} humain${evenement.humains > 1 ? 's' : ''}`;
-        this.live.event('partie', `Partie ${evenement.publique ? 'publique' : 'privée'} lancée, ${humains}`);
-      },
+      evenement: (evenement) => this.lobbyEvent(evenement),
     });
     const staticDir = options.staticDir ? resolve(options.staticDir) : null;
     this.http = createServer((request, response) => {
@@ -321,7 +324,7 @@ export class GameServer {
       return true;
     }
     const snapshot = this.stats.snapshot(this.liveStats(), this.options.version ?? null);
-    if (route === 'json') response.writeHead(200, { ...STATS_HEADERS, 'Content-Type': 'application/json' }).end(JSON.stringify({ ...snapshot, ...this.live.history() }));
+    if (route === 'json') response.writeHead(200, { ...STATS_HEADERS, 'Content-Type': 'application/json' }).end(JSON.stringify({ ...snapshot, ...this.live.history(), parties: this.gamesInProgress() }));
     else response.writeHead(200, { ...STATS_HEADERS, 'Content-Type': 'text/html; charset=utf-8' }).end(statsPage(`${STATS_PREFIX}${token}`));
     return true;
   }
@@ -339,15 +342,17 @@ export class GameServer {
     const push = (event: string, data: unknown) => response.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
     const snapshot = () => this.stats.snapshot(this.liveStats(), this.options.version ?? null);
     const first = snapshot();
-    push('bonjour', { ...this.live.history(), ...this.daysPayload(first), noms: DASHBOARD_NAMES, version: first.version, demarrage: first.startedAt });
+    push('bonjour', { ...this.live.history(), ...this.daysPayload(first), parties: this.gamesInProgress(), noms: DASHBOARD_NAMES, version: first.version, demarrage: first.startedAt });
     const unsubscribe = this.live.subscribe((kind, payload) => push(kind === 'sample' ? 'mesure' : 'evenement', payload));
     const days = setInterval(() => {
       push('jours', this.daysPayload(snapshot()));
     }, DAYS_EVERY_MS);
+    const games = setInterval(() => push('parties', this.gamesInProgress()), GAMES_EVERY_MS);
     this.statsStreams.add(response);
     response.on('close', () => {
       unsubscribe();
       clearInterval(days);
+      clearInterval(games);
       this.statsStreams.delete(response);
     });
   }
@@ -355,6 +360,55 @@ export class GameServer {
   /** What the dashboard's stream sends of the days: the last ones, the totals since the start, the incidents. */
   private daysPayload(snapshot: StatsSnapshot): Record<string, unknown> {
     return { jours: snapshot.days.slice(-STREAMED_DAYS), totaux: snapshot.totaux, cumul: snapshot.cumul, incidents: snapshot.incidents };
+  }
+
+  private gamesInProgress(): LiveGame[] {
+    return liveGames(this.lobby.partiesEnCours, Date.now());
+  }
+
+  /** What the lobby tells: counted for the day, shown in the dashboard's feed, and each finished game archived. */
+  private lobbyEvent(evenement: EvenementSalon): void {
+    const table = (publique: boolean) => (publique ? 'publique' : 'privée');
+    const when = (round: number) => (round === 0 ? 'au choix des héros' : `manche ${round}`);
+    switch (evenement.type) {
+      case 'salon_cree':
+        this.stats.salonCree();
+        this.live.event('salon', 'Salon privé créé');
+        return;
+      case 'partie': {
+        this.stats.partie(evenement.publique, evenement.humains);
+        const humains = `${evenement.humains} humain${evenement.humains > 1 ? 's' : ''}`;
+        this.live.event('partie', `Partie ${table(evenement.publique)} lancée, ${humains}`);
+        return;
+      }
+      case 'partie_finie': {
+        const game = archiveGame(evenement.room, { publique: evenement.publique, commit: this.options.version ?? null, now: Date.now() });
+        this.stats.partieFinie(game);
+        this.live.event('partie', finishedGameLabel(game));
+        this.archive(game);
+        break;
+      }
+      case 'partie_abandonnee':
+        this.stats.partieAbandonnee();
+        this.live.event('partie', `Partie ${table(evenement.publique)} abandonnée par ses humains, ${when(evenement.room.game.round)}`);
+        break;
+      case 'reprise':
+        this.stats.reprise();
+        this.live.event('reprise', `Un joueur ne revient pas : un bot reprend son siège (partie ${table(evenement.publique)}, ${when(evenement.manche)})`);
+        break;
+    }
+    this.stats.flush(false);
+  }
+
+  /** A finished game on the private volume, for balancing: a disk that refuses costs the game, never the server. */
+  private archive(game: ArchivedGame): void {
+    const dir = this.options.archiveDir;
+    if (!dir) return;
+    try {
+      appendToArchive(dir, game);
+    } catch (error) {
+      this.options.journal?.(`${HEURE_DE_PARIS.format(new Date())} !! · partie non archivée : ${error instanceof Error ? error.message : String(error)}`);
+    }
   }
 
   /** The counter's rate limit, per address: the address is kept in memory only, like the connections'. */
@@ -470,4 +524,14 @@ export class GameServer {
     }
     this.report();
   }
+}
+
+/** The feed's line for a finished online game: its length, its winner, and where its humans finished. */
+function finishedGameLabel(game: ArchivedGame): string {
+  const place = (n: number) => (n === 1 ? '1re' : `${n}e`);
+  const winner = game.joueurs.find((seat) => seat.place === 1);
+  const humans = game.joueurs.filter((seat) => seat.niveau === null).sort((a, b) => a.place - b.place);
+  const who = winner ? `${HERO_BY_ID[winner.heros]?.name ?? winner.heros} gagne (${winner.niveau !== null ? `bot ${winner.niveau}` : winner.repris ? 'humain remplacé par un bot' : 'humain'})` : 'sans vainqueur';
+  const minutes = Math.round(game.dureeMs / 60_000);
+  return `Partie ${game.publique ? 'publique' : 'privée'} finie en ${game.manches} manches, ${minutes} min : ${who} ; humains ${humans.map((seat) => place(seat.place)).join(', ')}`;
 }

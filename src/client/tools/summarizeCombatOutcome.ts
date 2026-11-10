@@ -4,10 +4,19 @@ function sondages(count: number): string {
   return `${count} point${count > 1 ? 's' : ''} de sondage`;
 }
 
-/** The result as the player feels it, from their side of the combat. `eliminated`: it took their last polls. */
-export function summarizeCombatOutcome({ side, winner, damage }: CombatView, { eliminated = false } = {}): string {
+/**
+ * The result as the player feels it, from their side of the combat. `eliminated`: it took their last polls. `who`: the
+ * survivor followed from outside the game, named instead of « vous ».
+ */
+export function summarizeCombatOutcome({ side, winner, damage }: CombatView, { eliminated = false, who = null as string | null } = {}): string {
   const lost = damage[side];
   const dealt = damage[side === 0 ? 1 : 0];
+  if (who) {
+    if (eliminated) return lost > 0 ? `${who} perd ${sondages(lost)} : fin de la campagne.` : `Les électeurs sont lassés : fin de la campagne pour ${who}.`;
+    if (winner === side) return lost > 0 ? `${who} gagne. L'adversaire perd ${sondages(dealt)}, et ${who} ${sondages(lost)}.` : `${who} gagne : l'adversaire perd ${sondages(dealt)}.`;
+    if (winner === null) return lost > 0 ? `Égalité, mais ${who} perd ${sondages(lost)}.` : 'Égalité : personne ne perd de sondages.';
+    return `Perdu : ${who} perd ${sondages(lost)}.`;
+  }
   if (eliminated) return lost > 0 ? `Vous perdez ${sondages(lost)} : vous êtes éliminé.` : 'Les électeurs sont lassés : vous êtes éliminé.';
   if (winner === side) return lost > 0 ? `Gagné, ${sondages(dealt)} pour l'adversaire, ${sondages(lost)} pour vous.` : `Gagné : l'adversaire perd ${sondages(dealt)}.`;
   if (winner === null) return lost > 0 ? `Égalité, mais vous perdez ${sondages(lost)}.` : 'Égalité : personne ne perd de sondages.';

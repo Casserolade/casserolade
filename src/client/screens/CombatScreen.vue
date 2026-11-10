@@ -2,6 +2,7 @@
 import { computed, useTemplateRef } from 'vue';
 import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import SeatTag from '#src/client/components/atoms/SeatTag.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
 import BreakingNews from '#src/client/components/molecules/BreakingNews.vue';
@@ -14,8 +15,11 @@ import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 
-/** `view`: the player's view when the combat began. The next round's view never changes what is shown here. */
-const props = defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null }>();
+/**
+ * `view`: the player's view when the combat began. The next round's view never changes what is shown here. Online,
+ * `rivalName` names the rival under its portrait; out of the game, `watching` names the survivor followed live.
+ */
+const props = withDefaults(defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null; rivalName?: string | null; watching?: string | null }>(), { rivalName: null, watching: null });
 const emit = defineEmits<{ close: [] }>();
 
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
@@ -44,6 +48,7 @@ const speechStyle = computed(() => {
   <GameTable :plateau-id="plateauId" :faces="faceOff">
     <div ref="rivalHero" class="opponent" :class="{ shaken: rivalShaken }">
       <HeroCorner :hero-id="combat.opponent.ghostOf ?? combat.opponent.heroId" :ghost="combat.opponent.seat < 0" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
+      <SeatTag v-if="rivalName" class="rival-name" :label="rivalName" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line">
         <SpeechBubble tail="left">{{ rivalLine }}</SpeechBubble>
@@ -56,6 +61,7 @@ const speechStyle = computed(() => {
     <div v-if="view" ref="ownHero" class="hero-spot" :class="{ draining, hurt }">
       <HeroCorner :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
     </div>
+    <SeatTag v-if="watching" class="watching" :label="watching" live />
 
     <div v-if="!stageReady" class="plain" :class="{ loading: !stageFailed }">
       <ol class="plain-row enemy">
@@ -105,6 +111,10 @@ const speechStyle = computed(() => {
 .opponent.shaken :deep(.hero-corner) { animation: rival-shake 0.45s linear; }
 @keyframes rival-shake { 0%, 100% { translate: 0 0; } 20% { translate: calc(var(--s) * -8) calc(var(--s) * 6); } 45% { translate: calc(var(--s) * 7) calc(var(--s) * 2); } 70% { translate: calc(var(--s) * -4) 0; } }
 .opponent :deep(.arch) { --arch-width: calc(var(--s) * 124); }
+/* The rival's pseudo, online: on a plate across the foot of its portrait. */
+.rival-name { position: absolute; z-index: 2; left: 50%; bottom: calc(var(--s) * -14); translate: -50% 0; }
+/* Followed from outside the game: whose combat this is, in the top left corner beside the chat's button, above the host. */
+.watching { position: absolute; z-index: 26; left: calc(var(--s) * 120); top: calc(var(--s) * 30); }
 /* The rival sits at the top of the screen: its power opens downward, never above the edge. */
 .opponent :deep(.power) { bottom: auto; top: calc(var(--s) * 8); }
 /* The host at its lectern, on the left of the table, between the corner and our hero. */

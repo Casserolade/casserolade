@@ -10,6 +10,7 @@ import WaitingRoomScreen from '#src/client/screens/WaitingRoomScreen.vue';
 import { SCREEN_SET } from '#src/client/const/screenSet.ts';
 import type { ScreenSet } from '#src/client/const/screenSet.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
+import { seatLabel } from '#src/client/tools/seatNames.ts';
 import type { Succes } from '#src/data/succes.ts';
 
 /** The computer's screens or the phone's, provided by the page's entry. */
@@ -38,6 +39,16 @@ const replayHint = computed(() => (room.value && !isHost.value && !isPublic.valu
 /** Playing: the door to leave is in the corner. Out of the game, the screens have their own way back. */
 const inGame = computed(() => ['hero', 'recruit', 'combat'].includes(props.store.screen.value));
 const combatView = computed(() => props.store.combatView.value ?? props.store.view.value);
+/** Online, the rival's pseudo under its portrait (a bot has none). */
+const rivalName = computed(() => {
+  const seat = props.store.combat.value?.opponent.seat ?? -1;
+  return seat < 0 ? null : (props.store.names.value.get(seat)?.pseudo ?? null);
+});
+/** Out of the game, the survivor whose combat is on screen. */
+const watching = computed(() => {
+  const seat = props.store.spectating.value;
+  return seat === null ? null : seatLabel(props.store.names.value.get(seat));
+});
 /** The chat follows the table through the game, and stays for the « gg » at the end. Never in solo. */
 const showChat = computed(() => props.store.canChat.value && ['hero', 'recruit', 'combat', 'eliminated', 'end'].includes(props.store.screen.value));
 
@@ -60,10 +71,12 @@ function again(): void {
   <component
     :is="screens.combat"
     v-if="store.screen.value === 'combat' && store.combat.value"
-    :key="store.combat.value.round"
+    :key="`${store.combat.value.round}-${store.spectating.value ?? 'own'}`"
     :combat="store.combat.value"
     :view="combatView"
     :line="combatView?.animateur.repliques.coup ?? null"
+    :rival-name="rivalName"
+    :watching="watching"
     @close="store.closeCombat()"
   />
   <EndScreen
@@ -108,7 +121,10 @@ function again(): void {
     v-else-if="store.screen.value === 'eliminated' && store.view.value"
     :view="store.view.value"
     :ranking-ready="store.ranking.value !== null"
+    :names="store.names.value"
+    :following="store.following.value"
     @ranking="store.showRanking()"
+    @follow="(seat: number | null) => store.follow(seat)"
     @leave="$emit('leave')"
   />
   <MenuBackdrop v-else>

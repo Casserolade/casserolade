@@ -66,8 +66,8 @@ test('buyAction and sellAction say why they cannot be done, as the engine would 
   assert.equal(buyAction({ ...view, budget: 2 }, 3).reason, 'Budget insuffisant');
   assert.equal(buyAction({ ...view, budget: 10, hand: Array(view.handLimit).fill(makeMinion(CARD_BY_ID.tiberi, 1)) }, 3).reason, 'Main pleine');
   const minion = makeMinion(CARD_BY_ID.tiberi, 5);
-  assert.deepEqual(sellAction(view, minion, true), { id: 'sell', label: 'Renvoyer', gain: view.params.sellValue + (view.mods.sellBonus ?? 0), reason: null, primary: false });
-  assert.match(sellAction(view, { ...minion, bracelet: true }, true).reason ?? '', /bracelet/);
+  assert.deepEqual(sellAction(view, minion), { id: 'sell', label: 'Renvoyer', gain: view.params.sellValue + (view.mods.sellBonus ?? 0), reason: null, primary: false });
+  assert.match(sellAction(view, { ...minion, bracelet: true }).reason ?? '', /bracelet/);
 });
 
 test('cardSheetFor: the card a touch opens, with its button, for the shop, the hand and the board', () => {
@@ -82,7 +82,7 @@ test('cardSheetFor: the card a touch opens, with its button, for the shop, the h
   const empty = cardSheetFor({ from: 'hand-spell', held, card: { kind: 'casserole', casserole } }, { ...view, board: [] });
   assert.equal(empty.actions[0].reason, 'Aucun politique sur le plateau', 'a casserole needs a politician to land on');
   const inHand = makeMinion(CARD_BY_ID.tiberi, 80);
-  assert.deepEqual(cardSheetFor({ from: 'hand', minion: inHand }, { ...view, hand: [inHand] }).actions.map((a) => a.id), ['play', 'sell']);
+  assert.deepEqual(cardSheetFor({ from: 'hand', minion: inHand }, { ...view, hand: [inHand] }).actions.map((a) => a.id), ['play'], 'a politician of the hand is played before it can be sent back');
   const full = Array.from({ length: view.boardLimit }, (_, i) => makeMinion(CARD_BY_ID.tiberi, 200 + i));
   assert.equal(cardSheetFor({ from: 'hand', minion: inHand }, { ...view, hand: [inHand], board: full }).actions[0].reason, 'Plateau plein');
   const carrier = { ...makeMinion(CARD_BY_ID.schiappa, 90), casseroles: ['playboy', 'bygmalion'], oublie: 1, ownerCasseroles: ['playboy'] };

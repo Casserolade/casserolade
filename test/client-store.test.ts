@@ -316,6 +316,45 @@ test('éliminé bien avant la fin (en ligne) : le classement s\'affiche dès qu\
   store.leave();
 });
 
+test('éliminé, on suit un survivant : son combat passe en direct, vu de son côté, puis l\'écran d\'élimination revient', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  const { transport, sent, receive } = fakeTransport();
+  const store = createGameStore(transport);
+  const own = baseView({ alive: false, place: 7 });
+  const survivor = own.table.find((row) => row.seat === 3);
+  assert.ok(survivor);
+  receive({ type: 'vue', vue: { ...own, table: own.table.map((row) => (row.seat === 3 ? { ...row, heroId: 'hollande', hp: 17 } : row)) }, reste_ms: null });
+  assert.equal(store.screen.value, 'eliminated');
+  store.follow(3);
+  assert.deepEqual(sent.at(-1), { type: 'suivre', siege: 3 });
+  assert.equal(store.following.value, 3);
+  receive({ type: 'spectacle', siege: 3, combat: combatOf({ opponent: { seat: 5, heroId: 'ruffin' } }) });
+  assert.equal(store.screen.value, 'combat');
+  assert.equal(store.spectating.value, 3);
+  assert.equal(store.combatView.value?.heroId, 'hollande', 'the survivor\'s hero, not ours');
+  assert.equal(store.combatView.value?.hp, 17);
+  assert.equal(summarizeCombatOutcome(combatOf(), { who: 'Léa' }), 'Perdu : Léa perd 3 points de sondage.');
+  store.closeCombat();
+  assert.deepEqual(sent.at(-1), { type: 'vu' }, 'the round waits for the follower');
+  assert.equal(store.screen.value, 'eliminated');
+  assert.equal(store.spectating.value, null);
+  // The survivor falls out: nobody is followed any more.
+  receive({ type: 'vue', vue: { ...own, table: own.table.map((row) => (row.seat === 3 ? { ...row, alive: false, place: 6 } : row)) }, reste_ms: null });
+  assert.equal(store.following.value, null);
+  store.leave();
+});
+
+test('les noms de la table : le héros partout, et en ligne le pseudo des humains', async () => {
+  const { seatLabel, seatNames } = await import('../src/client/tools/seatNames.ts');
+  const table = baseView().table.slice(0, 3).map((row, i) => ({ ...row, heroId: ['hollande', 'ruffin', null][i] }));
+  const room = { etat: 'en_jeu' as const, joueurs: [{ siege: 0, pseudo: 'Léa', bot: false, connecte: true }, { siege: 1, pseudo: 'Bot 1', bot: true, connecte: true }] };
+  const names = seatNames(table, room);
+  assert.equal(seatLabel(names.get(0)), 'Léa · François Hollande');
+  assert.deepEqual(names.get(1), { hero: 'François Ruffin', pseudo: null, bot: true });
+  assert.equal(seatLabel(names.get(2)), '…');
+  assert.equal(seatLabel(seatNames(table, null).get(0)), 'François Hollande', 'no pseudo in a game of this page');
+});
+
 // 11. Une partie locale coupée par un rechargement se dit à l'accueil.
 
 test('une partie locale coupée par un rechargement se dit une fois, et une partie finie ne dit rien', () => {

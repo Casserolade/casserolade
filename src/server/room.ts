@@ -1,13 +1,14 @@
 import { createBot, decide } from '../bots/bots.ts';
 import type { BotLevel, BotState } from '../bots/bots.ts';
 import { applyAction, chooseRemainingHeroes, combatViewFor, createGame, finalRanking, finishRound, startCombats, viewFor } from '../engine/game.ts';
-import type { Game, GameOptions, GamePhase } from '../engine/game.ts';
+import type { CombatView, Game, GameOptions, GamePhase } from '../engine/game.ts';
 import { invariantViolations } from '../engine/invariants.ts';
 import type { PlayerAction } from '../engine/types.ts';
 import { combatEventDuration } from '../protocol/combatDuration.ts';
 import { endOfTurnDurationMs } from '../protocol/endOfTurnDuration.ts';
 import { PARTIE_PLANTEE } from '../protocol/messages.ts';
 import type { Classement, ClientMessage, ServerMessage } from '../protocol/messages.ts';
+import type { RoomRecord } from './replayRoom.ts';
 
 const MAX_BOT_ACTIONS = 40;
 const TAKEOVER_LEVEL: BotLevel = 'moyen';
@@ -50,6 +51,8 @@ export interface GameRoomOptions {
   onEnd?(ranking: Classement): void;
   /** A bug stopped the game, or a rule of the engine no longer holds: what to replay it at home (tools/rejouer.ts). */
   onIncident?(incident: RoomIncident): void;
+  /** A disconnected player's grace is over: a bot plays the seat until the player returns. */
+  onTakeover?(seat: number): void;
 }
 
 /**
@@ -67,27 +70,29 @@ export type RoomLogEntry =
  * anomaly (an invariant that no longer holds) is reported once per round, and the game goes on.
  * With the seed, the options and the log, `tools/rejouer.ts` replays it exactly.
  */
-export interface RoomIncident {
+export interface RoomIncident extends RoomRecord {
   kind: 'crash' | 'anomalie';
   message: string;
   stack: string | null;
   violations: string[];
-  seed: number;
-  seats: RoomSeat[];
-  game: Partial<GameOptions> | null;
   round: number;
   phase: GamePhase;
-  log: RoomLogEntry[];
 }
 
 export class GameRoom {
   readonly game: Game;
   readonly log: RoomLogEntry[] = [];
+  /** When the room was built, on its clock. */
+  readonly startedAt: number;
+  /** Human seats a bot played for a while, after a disconnection: their results say less about the player. */
+  readonly takenOver = new Set<number>();
   private readonly options: GameRoomOptions;
   private readonly bots = new Map<number, BotState>();
   private readonly connected = new Set<number>();
   private readonly ready = new Set<number>();
   private readonly waitingForCombat = new Set<number>();
+  /** Eliminated humans who follow a survivor: their seat, and the seat they follow. */
+  private readonly following = new Map<number, number>();
   private readonly graceTimers = new Map<number, unknown>();
   private phaseTimer: unknown = null;
   private deadline: number | null = null;
@@ -97,6 +102,7 @@ export class GameRoom {
 
   constructor(options: GameRoomOptions) {
     this.options = options;
+    this.startedAt = options.clock.now();
     this.game = createGame({
       ...options.game,
       seed: options.seed,
@@ -124,6 +130,7 @@ export class GameRoom {
       if (message.type === 'action') this.handleAction(seat, message.seq, message.action);
       else if (message.type === 'pret') this.markReady(seat);
       else if (message.type === 'vu') this.acknowledgeCombat(seat);
+      else if (message.type === 'suivre') this.follow(seat, message.siege);
     });
   }
 
@@ -143,6 +150,30 @@ export class GameRoom {
       // When nobody is left to acknowledge, the combat timer stays in charge: the player may come back.
       if (this.game.phase === 'combat' && this.waitingForCombat.size === 0 && this.connected.size > 0) this.closeRound();
     });
+  }
+
+  /** The seats as the room was built: a level for each bot, null for each human. */
+  get seats(): readonly RoomSeat[] {
+    return this.options.seats;
+  }
+
+  /** Recruitment has a timer: the players were pressed for time. */
+  get timed(): boolean {
+    return this.options.timers.recruitMs !== null;
+  }
+
+  isConnected(seat: number): boolean {
+    return this.connected.has(seat);
+  }
+
+  /** What replays this game with tools/rejouer.ts: its seed, its seats, its options and its log, as copies. */
+  record(): RoomRecord {
+    return {
+      seed: this.options.seed,
+      seats: this.options.seats.map((seat) => ({ ...seat })),
+      game: this.options.game ? { ...this.options.game } : null,
+      log: this.log.map((entry) => structuredClone(entry)),
+    };
   }
 
   destroy(): void {
@@ -193,15 +224,7 @@ export class GameRoom {
   }
 
   private incident(kind: RoomIncident['kind'], message: string, stack: string | null, violations: string[]): RoomIncident {
-    return {
-      kind, message, stack, violations,
-      seed: this.options.seed,
-      seats: this.options.seats.map((seat) => ({ ...seat })),
-      game: this.options.game ? { ...this.options.game } : null,
-      round: this.game.round,
-      phase: this.game.phase,
-      log: this.log.map((entry) => structuredClone(entry)),
-    };
+    return { kind, message, stack, violations, ...this.record(), round: this.game.round, phase: this.game.phase };
   }
 
   private beginHeroChoice(): void {
@@ -245,7 +268,12 @@ export class GameRoom {
       longest = Math.max(longest, watched);
       if (this.connected.has(seat)) this.waitingForCombat.add(seat);
     }
-    // No human has a combat to watch: every human is out, the bots finish the game at full speed.
+    // Those who are out and follow a survivor watch its combat live: the round waits for them too.
+    for (const [seat, target] of this.following) {
+      const combat = this.connected.has(seat) ? this.showFollowed(seat, target) : null;
+      if (combat) longest = Math.max(longest, combat.log.reduce((sum, event) => sum + combatEventDuration(event), 0));
+    }
+    // Nobody has a combat to watch: every human is out, the bots finish the game at full speed.
     if (longest === 0) this.closeRound();
     else this.setPhaseTimer(longest + COMBAT_MARGIN_MS, () => this.closeRound());
   }
@@ -296,6 +324,38 @@ export class GameRoom {
     if (this.alivePlayersWaited().every((seat) => this.ready.has(seat))) this.endRecruitment();
   }
 
+  /**
+   * Out of the game, a player follows a survivor (null: nobody). In the middle of the combats, the survivor's combat
+   * shows at once; from then on, each of its combats.
+   */
+  private follow(seat: number, target: number | null): void {
+    if (this.options.seats[seat].level || this.game.players[seat].alive) return;
+    if (target === null || target === seat || !this.game.players[target]?.alive) {
+      this.following.delete(seat);
+      return;
+    }
+    this.following.set(seat, target);
+    if (this.game.phase === 'combat') this.showFollowed(seat, target);
+  }
+
+  /**
+   * Sends the followed survivor's combat, seen from its side; the round waits for the follower's « vu », unless `wait`
+   * is false (back in the middle of the combats, like a player). A survivor out of the game is no longer followed.
+   */
+  private showFollowed(seat: number, target: number, wait = true): CombatView | null {
+    if (!this.game.players[target].alive) {
+      this.following.delete(seat);
+      return null;
+    }
+    const seen = combatViewFor(this.game, target);
+    if (!seen) return null;
+    // Without its end of turn: that one plays on the survivor's own recruitment table, which the follower does not see.
+    const combat = { ...seen, endOfTurn: [] };
+    this.options.send(seat, { type: 'spectacle', siege: target, combat });
+    if (wait && this.connected.has(seat)) this.waitingForCombat.add(seat);
+    return combat;
+  }
+
   private acknowledgeCombat(seat: number): void {
     if (this.game.phase !== 'combat') return;
     this.waitingForCombat.delete(seat);
@@ -307,6 +367,8 @@ export class GameRoom {
     this.graceTimers.delete(seat);
     const bot = createBot(TAKEOVER_LEVEL, this.options.seed * 37 + seat + 1);
     this.bots.set(seat, bot);
+    this.takenOver.add(seat);
+    this.options.onTakeover?.(seat);
     if (this.game.phase === 'choix_heros') this.handleHeroTakeover(seat, bot);
     else if (this.game.phase === 'recrutement') {
       this.playSeat(seat, bot);
@@ -364,8 +426,15 @@ export class GameRoom {
 
   private sendState(seat: number): void {
     this.sendView(seat);
-    const combat = this.game.phase === 'combat' ? combatViewFor(this.game, seat) : null;
-    if (combat) this.options.send(seat, { type: 'combat', combat });
+    if (this.game.phase !== 'combat') return;
+    const combat = combatViewFor(this.game, seat);
+    if (combat) {
+      this.options.send(seat, { type: 'combat', combat });
+      return;
+    }
+    // Back in the middle of the combats, a follower finds the survivor's combat again; the round does not wait for it.
+    const target = this.following.get(seat);
+    if (target !== undefined) this.showFollowed(seat, target, false);
   }
 
   private setPhaseTimer(ms: number, callback: () => void): void {

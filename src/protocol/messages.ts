@@ -87,7 +87,12 @@ export type ClientMessage =
   /** « Lancer avec des bots »: yes or no, changeable while waiting. `quitter` leaves the queue. */
   | { type: 'file_vote'; oui: boolean }
   /** A line for everyone in the room, in the waiting room and during the game. */
-  | { type: 'chat'; texte: string };
+  | { type: 'chat'; texte: string }
+  /**
+   * Out of the game, follow a survivor: each of its combats is shown live (`spectacle`), from now on. Null stops.
+   * The follower's « vu » counts like a player's: the round waits for it, up to the combat's own timer.
+   */
+  | { type: 'suivre'; siege: number | null };
 
 export type ServerMessage =
   /** `reste_ms`: time left in the current phase, null without a timer. */
@@ -102,5 +107,7 @@ export type ServerMessage =
   | { type: 'file'; file: VueFile | null }
   /** After a public game, sent along with `fin`. */
   | { type: 'mmr'; avant: number; apres: number }
+  /** The combat of the survivor this eliminated player follows (`suivre`), seen from that survivor's side. */
+  | { type: 'spectacle'; siege: number; combat: CombatView }
   /** New chat lines. `historique`: the room's last lines, sent on arrival or return, which replace the client's. */
   | { type: 'chat'; messages: MessageChat[]; historique?: boolean };

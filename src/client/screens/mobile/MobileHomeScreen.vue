@@ -8,7 +8,7 @@ import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
 import { CHANGELOG_URL, CODE_URL } from '#src/client/const/codeLinks.ts';
-import { VERSION } from '#src/client/const/version.ts';
+import { VERSION } from '#src/protocol/version.ts';
 import { shareGame } from '#src/client/services/shareGame.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { chooseVersion } from '#src/client/services/versionChoice.ts';

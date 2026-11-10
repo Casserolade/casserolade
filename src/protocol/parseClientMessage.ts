@@ -117,6 +117,8 @@ function parseFields(raw: Record<string, unknown>): ClientMessage | null {
       return isShortText(raw.pseudo) && isPlayerId(raw.joueur) ? { type: 'file_rejoindre', pseudo: raw.pseudo, joueur: raw.joueur } : null;
     case 'file_vote':
       return typeof raw.oui === 'boolean' ? { type: 'file_vote', oui: raw.oui } : null;
+    case 'suivre':
+      return raw.siege === null || isCount(raw.siege) ? { type: 'suivre', siege: raw.siege as number | null } : null;
     case 'chat':
       return typeof raw.texte === 'string' && raw.texte.length > 0 && raw.texte.length <= CHAT_LONGUEUR ? { type: 'chat', texte: raw.texte } : null;
     default:

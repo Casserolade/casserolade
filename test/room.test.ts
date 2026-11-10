@@ -274,3 +274,37 @@ test('à une table impaire, le joueur en trop affronte un fantôme qui a un visa
   const others = room.game.players.filter((p) => p.seat !== 0).map((p) => p.hero.id);
   assert.ok(ghost.ghostOf && others.includes(ghost.ghostOf), `visage du fantôme : ${ghost.ghostOf}`);
 });
+
+test('out of the game, a player follows a survivor: its combats come live, and the round waits for them', async () => {
+  const { retire } = await import('../src/engine/script.ts');
+  const { room, inbox, lastView } = createRoom({ humans: 2, recruitMs: null });
+  room.start();
+  room.handleMessage(0, { type: 'action', seq: 1, action: { t: 'hero', i: 0 } });
+  room.handleMessage(1, { type: 'action', seq: 1, action: { t: 'hero', i: 0 } });
+  // Seat 1 is out: it follows seat 3, a bot still in the game.
+  retire(room.game, room.game.players[1], 8);
+  room.handleMessage(1, { type: 'suivre', siege: 1 });
+  room.handleMessage(1, { type: 'suivre', siege: 99 });
+  room.handleMessage(0, { type: 'suivre', siege: 3 });
+  room.handleMessage(1, { type: 'suivre', siege: 3 });
+  room.handleMessage(0, { type: 'pret' });
+  const shown = inbox.get(1)?.at(-1);
+  assert.ok(shown?.type === 'spectacle', 'the follower gets the survivor\'s combat');
+  assert.equal(shown.siege, 3);
+  assert.equal(shown.combat.round, 1);
+  assert.deepEqual(shown.combat.endOfTurn, [], 'never the survivor\'s own end of turn');
+  assert.ok(!(inbox.get(0) ?? []).some((m) => m.type === 'spectacle'), 'a player still in the game follows nobody');
+  room.handleMessage(0, { type: 'vu' });
+  assert.equal(lastView(0).round, 1, 'the round waits for the follower');
+  room.handleMessage(1, { type: 'vu' });
+  assert.equal(lastView(0).round, 2);
+  // Back in the middle of the combats, the follower finds the combat again; « null » stops following.
+  room.handleMessage(0, { type: 'pret' });
+  room.setConnected(1, false);
+  room.setConnected(1, true);
+  assert.equal(inbox.get(1)?.at(-1)?.type, 'spectacle');
+  room.handleMessage(1, { type: 'suivre', siege: null });
+  room.handleMessage(0, { type: 'vu' });
+  room.handleMessage(0, { type: 'pret' });
+  assert.equal(inbox.get(1)?.at(-1)?.type, 'vue', 'no more combats once it stops');
+});

@@ -30,6 +30,7 @@ const server = new GameServer({
   mmrFile: process.env.MMR_FILE ?? 'data/serveur/mmr.json',
   incidentsDir: process.env.INCIDENTS_DIR ?? 'data/serveur/incidents',
   statsFile: process.env.STATS_FILE ?? 'data/serveur/stats.json',
+  archiveDir: process.env.PARTIES_DIR ?? 'data/serveur/parties',
   statsToken: statsToken(process.env.STATS_TOKEN_FILE ?? 'data/serveur/stats_token'),
   version: process.env.CASSEROLADE_VERSION,
   journal: (line) => console.log(line),

@@ -160,7 +160,7 @@ test('le choix est réservé : les autres ne peuvent pas le vider, et on rend ce
   assert.equal(game.pool.get(offered[1]), during[1] + 1);
 });
 
-test('une carte de la main se renvoie, et un bracelet garde sa place quand on pose à côté', () => {
+test('une carte de la main ne se renvoie pas, et un bracelet garde sa place quand on pose à côté', () => {
   const { game, p, buy } = setup();
   buy('kazib');
   buy('cheminade');
@@ -172,10 +172,13 @@ test('une carte de la main se renvoie, et un bracelet garde sa place quand on po
   assert.equal(p.board[0].cardId, 'kazib');
   assert.equal(p.board[1].cardId, 'durif');
   buy('lalanne', { main: true });
+  // Comme à Battlegrounds, on ne renvoie que depuis le plateau : un politique de la main se pose d'abord (10 novembre 2026).
   const budget = p.budget;
-  assert.equal(applyAction(game, 0, { t: 'sell', uid: p.hand[0].uid }).ok, true);
-  assert.equal(p.hand.length, 0);
-  assert.equal(p.budget, budget + 1);
+  const refused = applyAction(game, 0, { t: 'sell', uid: p.hand[0].uid });
+  assert.equal(refused.ok, false);
+  assert.match(refused.ok ? '' : refused.error, /Posez-le d'abord/);
+  assert.equal(p.hand.length, 1);
+  assert.equal(p.budget, budget);
 });
 
 test('la vue montre sa main, jamais celle des autres', () => {

@@ -6,17 +6,30 @@ import OpponentSheet from '#src/client/components/molecules/OpponentSheet.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { ordinalSuffix } from '#src/client/tools/ordinalSuffix.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
+import type { SeatName } from '#src/client/tools/seatNames.ts';
 import { HERO_BY_ID } from '#src/data/heroes.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
-/** The eight players down the side of the table: a face, the polls, the tier. On hover, a sheet: power, triples, last board seen. */
-const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; seen?: PlayerView['seen'] }>(), { seen: () => [] });
+/**
+ * The eight players down the side of the table: a face, the polls, the tier, and online the pseudo. On hover, a sheet:
+ * the hero and who plays it, power, triples, last board seen.
+ */
+const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; seen?: PlayerView['seen']; names?: Map<number, SeatName> }>(), {
+  seen: () => [],
+  names: () => new Map(),
+});
 
 const rows = computed(() => [...props.table].sort((a, b) => Number(b.alive) - Number(a.alive) || b.hp - a.hp));
 
 function nameOf(row: PlayerView['table'][number]): string {
-  if (row.seat === props.seat) return 'Vous';
-  return row.heroId ? (HERO_BY_ID[row.heroId]?.name ?? '…') : '…';
+  return props.names.get(row.seat)?.hero ?? (row.heroId ? (HERO_BY_ID[row.heroId]?.name ?? '…') : '…');
+}
+
+/** Who plays it, online: « Vous », a pseudo, or « Bot ». Nobody in a game of this page. */
+function playerOf(row: PlayerView['table'][number]): string | null {
+  const name = props.names.get(row.seat);
+  if (row.seat === props.seat) return name?.pseudo ? 'Vous' : null;
+  return name?.pseudo ?? (name?.bot ? 'Bot' : null);
 }
 
 /** The last board seen of this seat: `seen` holds one per opponent, most recent first. */
@@ -36,12 +49,16 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
       <li v-for="row in rows" :key="row.seat" class="player" :class="{ own: row.seat === seat, out: !row.alive }">
         <HeadPortrait v-if="row.heroId" class="face" :puppet="puppetStyle(gameArt.manifest.value, row.heroId, 'civile')" />
         <span v-else class="face empty" />
-        <span v-if="row.alive" class="hp" :aria-label="`${row.hp} sondages`"><GameIcon name="heart" />{{ row.hp }}</span>
-        <span v-else class="hp place" :aria-label="`${row.place}${ordinalSuffix(row.place)}, éliminé`">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
+        <span class="score">
+          <span v-if="row.alive" class="hp" :aria-label="`${row.hp} sondages`"><GameIcon name="heart" />{{ row.hp }}</span>
+          <span v-else class="hp place" :aria-label="`${row.place}${ordinalSuffix(row.place)}, éliminé`">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
+          <span v-if="names.get(row.seat)?.pseudo && row.seat !== seat" class="who">{{ names.get(row.seat)?.pseudo }}</span>
+        </span>
         <span v-if="row.alive" class="tier" :aria-label="`Échelon ${row.tier}`">{{ row.tier }}</span>
         <OpponentSheet
           class="about"
-          :name="nameOf(row)"
+          :name="row.seat === seat && !playerOf(row) ? 'Vous' : nameOf(row)"
+          :player="playerOf(row)"
           :power="powerOf(row.heroId)"
           :tier="row.tier"
           :hp="row.hp"
@@ -72,6 +89,8 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
 }
 .face { --portrait-size: calc(var(--s) * 62); border: calc(var(--s) * 3) solid #9aa3b4; }
 .empty { width: calc(var(--s) * 62); height: calc(var(--s) * 62); border-radius: 50%; background: #20263a; }
+.score { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.who { overflow: hidden; max-width: calc(var(--s) * 80); color: #ffe27a; font: 800 calc(var(--s) * 16) / 1.1 var(--font-card); white-space: nowrap; text-overflow: ellipsis; }
 .hp { display: flex; align-items: center; gap: calc(var(--s) * 4); color: #fff; font: 400 calc(var(--s) * 34) / 1 var(--font-number); }
 .hp .game-icon { color: #e0303e; font-size: calc(var(--s) * 26); }
 .place sup { font-size: 0.6em; }

@@ -1,5 +1,5 @@
-// The real-time statistics dashboard of Casserolade (statsPage.ts): one Server-Sent Events stream, tiles,
-// SVG charts over the last five minutes and the live feed of events. The days go to frequentation.js, as a
+// The real-time statistics dashboard of Casserolade (statsPage.ts): one Server-Sent Events stream, tiles, the online
+// games in progress, SVG charts over the last five minutes and the live feed of events. The days go to frequentation.js, as a
 // « frequentation » event of the document. Plain JavaScript, no dependency: the page's CSP only allows these files.
 
 const BASE = document.body.dataset.base;
@@ -21,7 +21,9 @@ const CHARTS = [
   ['Le processus', [['memoireMo', 'mémoire (Mo)', '#4d8dff'], ['tasMo', 'tas JS (Mo)', '#8f98ad'], ['cpu', 'CPU (%)', '#ffaa2e']]],
 ];
 
-const state = { samples: [], events: [], startedAt: null };
+const PHASES = { choix_heros: 'choix des héros', recrutement: 'recrutement', combat: 'combat', fini: 'finie' };
+
+const state = { samples: [], events: [], startedAt: null, heroes: {} };
 
 function element(tag, attributes = {}, text = '') {
   const node = document.createElement(tag);
@@ -84,6 +86,46 @@ function renderFeed() {
   }));
 }
 
+/** One seat of a game in progress: its hero, its polls and level, or its place once out. */
+function seatChip(seat) {
+  const classes = ['siege', seat.humain ? 'humain' : 'bot'];
+  if (!seat.vivant) classes.push('mort');
+  if (seat.humain && !seat.connecte) classes.push('deco');
+  if (seat.repris) classes.push('repris');
+  const name = seat.heros ? (state.heroes[seat.heros] ?? seat.heros) : '…';
+  const where = seat.vivant ? `${seat.sondages} · éch. ${seat.echelon}` : `${seat.place}e`;
+  const who = seat.humain ? (seat.connecte ? 'humain' : 'humain déconnecté') : 'bot';
+  return element('span', { class: classes.join(' '), title: who }, `${name} ${where}`);
+}
+
+/** The online games in progress, the oldest first: where they are, who is still connected, who is still in. */
+function renderGames(games) {
+  const host = document.getElementById('parties');
+  if (games.length === 0) {
+    host.replaceChildren(element('p', { class: 'meta' }, 'Aucune partie en ligne en ce moment.'));
+    return;
+  }
+  const head = element('tr');
+  for (const title of ['Table', 'Depuis', 'Manche', 'Humains connectés', 'Sièges']) head.append(element('th', {}, title));
+  const lines = games.map((game) => {
+    const humans = game.sieges.filter((seat) => seat.humain);
+    const line = element('tr');
+    line.append(
+      element('td', {}, `${game.publique ? 'Publique' : 'Privée'}${game.minuteur ? ', minutée' : ''}`),
+      element('td', {}, `${Math.floor(game.depuisMs / 60_000)} min`),
+      element('td', {}, `${game.manche}, ${PHASES[game.phase] ?? game.phase}`),
+      element('td', {}, `${humans.filter((seat) => seat.connecte).length} / ${humans.length}`),
+    );
+    const seats = element('td', { class: 'sieges' });
+    seats.append(...[...game.sieges].sort((a, b) => Number(b.vivant) - Number(a.vivant) || b.sondages - a.sondages || a.place - b.place).map(seatChip));
+    line.append(seats);
+    return line;
+  });
+  const table = element('table');
+  table.append(head, ...lines);
+  host.replaceChildren(table, element('p', { class: 'meta' }, 'En orange les humains, en pointillé un humain déconnecté, barré un éliminé ; « bot » : un bot a repris le siège.'));
+}
+
 /** The days, the totals and the incidents: frequentation.js draws them. */
 function passOnDays(data) {
   document.dispatchEvent(new CustomEvent('frequentation', { detail: data }));
@@ -113,13 +155,16 @@ function connect() {
     state.samples = data.samples;
     state.events = data.events;
     state.startedAt = data.demarrage;
+    state.heroes = data.noms?.heros ?? {};
     document.getElementById('version').textContent = `version ${data.version ?? 'inconnue'}`;
     renderTiles(document.getElementById('direct'), TILES, state.samples.at(-1));
     renderCharts();
     renderFeed();
+    renderGames(data.parties ?? []);
     passOnDays(data);
     renderUptime();
   });
+  stream.addEventListener('parties', (message) => renderGames(JSON.parse(message.data)));
   stream.addEventListener('mesure', (message) => {
     const sample = JSON.parse(message.data);
     state.samples.push(sample);

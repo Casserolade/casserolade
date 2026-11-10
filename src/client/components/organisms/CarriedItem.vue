@@ -38,7 +38,8 @@ const mood = computed(() => {
   if (!current) return null;
   const { item, aim } = current;
   if (item.from === 'shop' || item.from === 'shop-spell' || item.from === 'shop-casserole') return aim.zone === 'hand' || aim.zone === 'board' ? 'buy' : null;
-  if ((item.from === 'hand' || item.from === 'board') && aim.zone === 'shop') return 'sell';
+  // Only the board sends back: a politician of the hand is played first.
+  if (item.from === 'board' && aim.zone === 'shop') return 'sell';
   if (props.gestures.boardPreview.value.host !== null) return 'target';
   if (item.from === 'hand' && aim.zone === 'board') return 'lay';
   return null;

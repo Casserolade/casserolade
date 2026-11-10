@@ -400,8 +400,8 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
         if (aim.zone === 'hand' || aim.zone === 'board') buy(item, point);
         return;
       case 'hand':
-        if (aim.zone === 'shop') sell(item.minion, point);
-        else if (aim.zone === 'board' && ralliesOnto(item.minion, aim.uid, board())) play(item.minion, aim.index, aim.uid ?? undefined);
+        // Only the board sends back: a politician of the hand dropped on the shop goes back to the hand.
+        if (aim.zone === 'board' && ralliesOnto(item.minion, aim.uid, board())) play(item.minion, aim.index, aim.uid ?? undefined);
         else if (aim.zone === 'board') play(item.minion, aim.index);
         return;
       case 'hand-spell': {

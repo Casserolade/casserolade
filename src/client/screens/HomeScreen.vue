@@ -14,7 +14,7 @@ import { useHomePage } from '#src/client/stores/useHomePage.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { chooseVersion } from '#src/client/services/versionChoice.ts';
 import { CHANGELOG_URL, CODE_URL } from '#src/client/const/codeLinks.ts';
-import { VERSION } from '#src/client/const/version.ts';
+import { VERSION } from '#src/protocol/version.ts';
 import ChasingReporter from '#src/client/components/organisms/ChasingReporter.vue';
 import { ANIMATEURS } from '#src/data/animateurs.ts';
 

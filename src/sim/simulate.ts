@@ -5,6 +5,7 @@ import type { Hero, Params } from '../engine/types.ts';
 import { createBot, decide } from '../bots/bots.ts';
 import type { BotLevel, BotState, BotStyle } from '../bots/bots.ts';
 import { resolveCombat } from '../engine/combat.ts';
+import { dominantCamp } from '../engine/dominantCamp.ts';
 import { addMinionToHand, take } from '../engine/recruit.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { HEROES } from '../data/heroes.ts';
@@ -69,22 +70,6 @@ export interface RunOptions {
   commitments?: (string | undefined)[];
   /** Les règles d'un chapitre de carrière pour un siège (bilan_histoire.ts). */
   script?: GameOptions['script'];
-}
-
-function dominant(game: Game, seat: number): { camp: string | null; count: number } {
-  const counts = new Map<string, number>();
-  for (const m of game.players[seat].board) {
-    if (!m.token) counts.set(m.camp, (counts.get(m.camp) ?? 0) + 1);
-  }
-  let camp: string | null = null;
-  let count = 0;
-  for (const [c, n] of counts) {
-    if (n > count) {
-      camp = c;
-      count = n;
-    }
-  }
-  return { camp, count };
 }
 
 /**
@@ -176,7 +161,7 @@ export function playGame(opts: RunOptions): GameResult {
     }
     for (const p of game.players) {
       if (p.alive) {
-        const d = dominant(game, p.seat);
+        const d = dominantCamp(p.board);
         finalBoards.set(p.seat, { camp: d.camp, count: d.count, size: p.board.length, tier: p.tier });
       }
     }
@@ -301,7 +286,7 @@ function spearman(pairs: [number, number][]): number {
   return dx && dy ? num / Math.sqrt(dx * dy) : 0;
 }
 
-function groupStats(rows: { key: string | null; place: number }[]): { id: string; avgPlace: number; winRate: number; n: number }[] {
+export function groupStats(rows: { key: string | null; place: number }[]): { id: string; avgPlace: number; winRate: number; n: number }[] {
   const groups = new Map<string, number[]>();
   for (const r of rows) {
     if (!r.key) continue;

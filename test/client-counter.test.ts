@@ -9,7 +9,7 @@ import { humanResult } from '../src/client/tools/humanResult.ts';
 import { parisDay } from '../src/client/tools/parisDay.ts';
 import { referrerSource } from '../src/client/tools/referrerSource.ts';
 import { visitFlags } from '../src/client/tools/visitFlags.ts';
-import { VERSION } from '../src/client/const/version.ts';
+import { VERSION } from '../src/protocol/version.ts';
 import type { PlayerView } from '../src/engine/game.ts';
 import type { CounterEvent } from '../src/protocol/counterEvent.ts';
 import type { Classement } from '../src/protocol/messages.ts';

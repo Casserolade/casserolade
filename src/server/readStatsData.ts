@@ -27,6 +27,7 @@ function fromCurrentFormat(saved: SavedDay): DayStats {
     appareils: { ...day.appareils, ...saved.appareils },
     pages: { ...day.pages, ...saved.pages },
     local: { ...day.local, ...saved.local },
+    heures: { ...day.heures, ...saved.heures },
     sources: { ...saved.sources },
   };
 }

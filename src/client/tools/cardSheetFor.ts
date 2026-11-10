@@ -30,7 +30,8 @@ export function cardSheetFor(item: GestureItem, view: PlayerView): CardSheet {
     case 'hand': {
       const play: SheetAction = { id: 'play', label: 'Poser', reason: view.board.length >= view.boardLimit ? 'Plateau plein' : null, primary: true };
       const card = handCardShown({ kind: 'minion', uid: item.minion.uid, minion: item.minion }, view);
-      return { item, card, actions: [play, sellAction(view, item.minion, false)], casseroles: wornCasseroles(item.minion, view.round) };
+      // Only the board sends back: a politician of the hand is played first.
+      return { item, card, actions: [play], casseroles: wornCasseroles(item.minion, view.round) };
     }
     case 'hand-spell': {
       const casserole = item.card.kind === 'casserole';
@@ -38,6 +39,6 @@ export function cardSheetFor(item: GestureItem, view: PlayerView): CardSheet {
       return { item, card: item.card, actions: [{ id: 'cast', label: casserole ? 'Poser sur un politique' : 'Lancer', reason, primary: true }], casseroles: [] };
     }
     case 'board':
-      return { item, card: boardMinionShown(item.minion, view), actions: [sellAction(view, item.minion, true)], casseroles: wornCasseroles(item.minion, view.round) };
+      return { item, card: boardMinionShown(item.minion, view), actions: [sellAction(view, item.minion)], casseroles: wornCasseroles(item.minion, view.round) };
   }
 }

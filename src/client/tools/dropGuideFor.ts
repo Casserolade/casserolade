@@ -22,9 +22,11 @@ export function dropGuideFor(drag: Dragging | null, view: PlayerView): DropGuide
   if (item.from === 'hand' && aim.zone === 'board' && view.board.length >= view.boardLimit) {
     if (!ralliesOnto(item.minion, aim.uid, view.board)) return { mode: 'play', armed: true, amount: 0, blocked: 'board', places: view.boardLimit };
   }
-  if (item.from === 'board' || item.from === 'hand') {
+  // Only the board sends back: a politician of the hand is played first.
+  if (item.from === 'hand') return null;
+  if (item.from === 'board') {
     const blocked = item.minion.bracelet ? 'bracelet' : null;
-    return { mode: 'sell', armed: aim.zone === 'shop', amount: sellGain(view.params, view.mods, item.minion, item.from === 'board').now, blocked };
+    return { mode: 'sell', armed: aim.zone === 'shop', amount: sellGain(view.params, view.mods, item.minion).now, blocked };
   }
   let cost: number;
   switch (item.from) {

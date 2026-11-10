@@ -435,10 +435,9 @@ test('la revente compte le budget des effets Vente, depuis le plateau seulement'
   const { CARD_BY_ID } = await import('../src/data/cards.ts');
   const { PARAMS } = await import('../src/data/params.ts');
   const assistant = makeToken('assistant_fictif', 'civile', 1);
-  assert.deepEqual(sellGain(PARAMS, {}, assistant, true), { now: 2, later: 0 });
-  assert.deepEqual(sellGain(PARAMS, {}, assistant, false), { now: 1, later: 0 });
-  assert.deepEqual(sellGain(PARAMS, { sellBonus: 1 }, { ...assistant, golden: true }, true), { now: 4, later: 0 });
-  assert.deepEqual(sellGain(PARAMS, {}, makeMinion(CARD_BY_ID.cahuzac, 2), true), { now: 1, later: 2 });
+  assert.deepEqual(sellGain(PARAMS, {}, assistant), { now: 2, later: 0 });
+  assert.deepEqual(sellGain(PARAMS, { sellBonus: 1 }, { ...assistant, golden: true }), { now: 4, later: 0 });
+  assert.deepEqual(sellGain(PARAMS, {}, makeMinion(CARD_BY_ID.cahuzac, 2)), { now: 1, later: 2 });
 });
 
 test('sur le plateau, seul le premier Droit de réponse répond', async () => {
@@ -504,6 +503,8 @@ test('la ligne du comptoir dit ce que fait le lâcher : acheter, vendre, ou pour
   const sell = dropGuideFor(fromBoard, view);
   assert.deepEqual(sell, { mode: 'sell', armed: true, amount: PARAMS.sellValue, blocked: null });
   assert.equal(dropGuideLabel(sell as never), 'Vendre');
+  const fromHand = { item: { from: 'hand', minion }, point: { x: 0, y: 0 }, aim: { zone: 'shop', index: 0, uid: null } } as never;
+  assert.equal(dropGuideFor(fromHand, view), null, 'the hand sends nothing back: it is played first');
 });
 
 test('a character wears only the other faces that have both their anchors and their images', () => {

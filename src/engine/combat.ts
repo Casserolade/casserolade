@@ -43,6 +43,8 @@ interface Side {
   deathRetourUsed: boolean;
   deathTransmitUsed: boolean;
   polemiqueResistUsed: boolean;
+  /** Un seul exil par joueur et par combat, quel que soit le nombre de 49.3 qui exilent (10 novembre 2026). */
+  exileUsed: boolean;
   penalty: number;
   persist: CombatPersist;
   /** Gains de camp du joueur, et ceux obtenus pendant ce combat : les serviteurs invoqués en profitent. */
@@ -95,6 +97,7 @@ function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
     deathRetourUsed: false,
     deathTransmitUsed: false,
     polemiqueResistUsed: false,
+    exileUsed: false,
     penalty: 0,
     persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 0, hp: 0 } },
     campBuffs: [...(s.campBuffs ?? [])],
@@ -256,6 +259,11 @@ function foeTargets(b: Battle, enemy: Side, eff: Effect): Unit[] {
       return alive.slice(0, 1);
     case 'dernier_ennemi':
       return alive.slice(-1);
+    case 'ennemi_plus_faible': {
+      // Le moins fort : la plus petite somme attaque + PV ; à égalité, le plus à gauche.
+      const weakest = alive.reduce<Unit | null>((low, u) => (!low || u.atk + u.hp < low.atk + low.hp ? u : low), null);
+      return weakest ? [weakest] : [];
+    }
     case 'tous_ennemis':
       return alive;
     default:
@@ -283,6 +291,8 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
     if (b.once.has(key)) return;
     b.once.add(key);
   }
+  // Un seul exil par joueur et par combat : les autres 49.3 qui exilent se taisent.
+  if (eff.do === 'exiler' && side.exileUsed) return;
   if (b.logging) logEffect(b, self, eff);
   // La main ne combat pas : ce qui la vise est mis de côté et appliqué après le combat.
   if (eff.to === 'main' || eff.to === 'toute_la_main') {
@@ -340,7 +350,8 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       for (const u of foeTargets(b, enemy, eff)) lose(b, u, eff.keyword);
       break;
     case 'exiler': {
-      const gone = foeTargets(b, enemy, eff);
+      const gone = foeTargets(b, enemy, eff).slice(0, 1);
+      side.exileUsed = true;
       // Retiré du combat sans mourir : pas d'Héritage ni de Retour en politique.
       if (b.logging) for (const u of gone) b.log.push({ e: 'exil', uid: u.uid });
       enemy.units = enemy.units.filter((u) => !gone.includes(u));

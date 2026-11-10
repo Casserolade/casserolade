@@ -59,6 +59,8 @@ export interface CombatShowProps {
   combat: CombatView;
   view: PlayerView | null;
   line: string | null;
+  /** Out of the game, the survivor whose combat this is: the result names it instead of « vous ». */
+  watching?: string | null;
 }
 
 /** Where the two heroes' portraits stand on the screen: the winners' strike lands on the beaten one. */
@@ -151,7 +153,7 @@ export function useCombatShow(
   });
   let drainTimers: number[] = [];
   const eliminated = polls?.eliminated ?? false;
-  const outcome = computed(() => summarizeCombatOutcome(props.combat, { eliminated }));
+  const outcome = computed(() => summarizeCombatOutcome(props.combat, { eliminated, who: props.watching ?? null }));
   const rivalLine = computed(() => rivalLineForCombat(props.combat, polls?.enemy?.before ?? null));
   /** The set and its host stay those of this round: the next round's view may arrive before the end. */
   const host = props.view?.animateur ?? null;

@@ -112,9 +112,19 @@ export interface LobbyOptions {
   mmr?: MmrStore;
   /** Reçoit chaque incident d'une partie (plantage ou anomalie), avec le code du salon : le serveur l'enregistre. */
   signaler?: (incident: RoomIncident, code: string) => void;
-  /** Pour les statistiques du site : un salon créé, une partie lancée. */
-  evenement?: (evenement: { type: 'salon_cree' } | { type: 'partie'; publique: boolean; humains: number }) => void;
+  /**
+   * Pour les statistiques du site et l'archive des parties : un salon créé, une partie lancée, finie (le serveur la
+   * garde pour l'équilibrage) ou abandonnée par tous ses humains, un siège repris par un bot après une déconnexion.
+   */
+  evenement?: (evenement: EvenementSalon) => void;
 }
+
+export type EvenementSalon =
+  | { type: 'salon_cree' }
+  | { type: 'partie'; publique: boolean; humains: number }
+  | { type: 'partie_finie'; publique: boolean; room: GameRoom }
+  | { type: 'partie_abandonnee'; publique: boolean; room: GameRoom }
+  | { type: 'reprise'; publique: boolean; manche: number };
 
 function octetsCrypto(n: number): Uint8Array {
   return crypto.getRandomValues(new Uint8Array(n));
@@ -158,6 +168,13 @@ export class Lobby {
     let n = 0;
     for (const salon of this.salons.values()) if (salon.etat === 'en_jeu') n++;
     return n;
+  }
+
+  /** Les parties en cours, pour le tableau de bord du serveur : leur salle, et si la table est publique. */
+  get partiesEnCours(): { room: GameRoom; publique: boolean }[] {
+    const parties: { room: GameRoom; publique: boolean }[] = [];
+    for (const salon of this.salons.values()) if (salon.etat === 'en_jeu' && salon.room) parties.push({ room: salon.room, publique: Boolean(salon.publique) });
+    return parties;
   }
 
   /** Les humains connectés à une partie en cours. */
@@ -235,7 +252,8 @@ export class Lobby {
     this.file.clear();
     if (this.ticFile !== null) this.options.clock.clearTimeout(this.ticFile);
     this.ticFile = null;
-    for (const salon of [...this.salons.values()]) this.supprimer(salon);
+    // L'arrêt du serveur n'est l'abandon de personne.
+    for (const salon of [...this.salons.values()]) this.supprimer(salon, false);
   }
 
   private creer(connexion: string, pseudo: string, options: OptionsSalon): void {
@@ -369,6 +387,7 @@ export class Lobby {
       send: (siege, message) => this.envoyerAuSiege(salon, siege, message),
       onEnd: (classement) => this.terminer(salon, room, classement),
       onIncident: (incident) => this.surIncident(salon, room, incident),
+      onTakeover: () => this.options.evenement?.({ type: 'reprise', publique: Boolean(salon.publique), manche: room.game.round }),
     });
     salon.room = room;
     this.diffuser(salon);
@@ -401,6 +420,7 @@ export class Lobby {
     salon.etat = 'fini';
     salon.classement = classement;
     if (salon.publique) this.compterMmr(salon, salon.publique, classement);
+    this.options.evenement?.({ type: 'partie_finie', publique: Boolean(salon.publique), room });
     // Ceux qui sont partis pendant la partie libèrent leur place pour la suivante.
     for (const humain of [...salon.humains]) if (!humain.connexion) this.oublier(salon, humain);
     if (salon.humains.length === 0) {
@@ -462,7 +482,8 @@ export class Lobby {
     salon.humains = salon.humains.filter((h) => h !== humain);
   }
 
-  private supprimer(salon: Salon): void {
+  private supprimer(salon: Salon, abandon = true): void {
+    if (abandon && salon.etat === 'en_jeu' && salon.room) this.options.evenement?.({ type: 'partie_abandonnee', publique: Boolean(salon.publique), room: salon.room });
     salon.room?.destroy();
     this.annulerAbandon(salon);
     for (const humain of [...salon.humains]) this.oublier(salon, humain);

@@ -59,13 +59,13 @@ const fit = computed(() => shopFit(minions.value.length, spells.value.length + (
 /** One of yours carried over the shop: it would be sent back for this much. */
 const sending = computed(() => {
   const drag = props.gestures.dragging.value;
-  return (drag?.item.from === 'board' || drag?.item.from === 'hand') && drag.aim.zone === 'shop';
+  return drag?.item.from === 'board' && drag.aim.zone === 'shop';
 });
-/** What the carried one brings back: its Vente budget counts too, from the board. */
+/** What the carried one brings back, its Vente budget included: only the board sends back. */
 const sellHint = computed(() => {
   const item = props.gestures.dragging.value?.item;
-  if (!item || (item.from !== 'board' && item.from !== 'hand')) return null;
-  return sellGain(props.view.params, props.view.mods, item.minion, item.from === 'board');
+  if (item?.from !== 'board') return null;
+  return sellGain(props.view.params, props.view.mods, item.minion);
 });
 
 /** A new shop drops in, after a flash sweeps the old one away; a purchase only takes one away. */
