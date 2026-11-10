@@ -96,3 +96,40 @@ test('table impaire après une élimination : le fantôme est le dernier élimin
   assert.equal(record.ghostOf, dead.hero.id);
   assert.deepEqual(ghostBoardSeenBy(game, record.a), dead.board.map((m) => m.uid));
 });
+
+// 10 novembre 2026 : à Battlegrounds, on sait pendant le recrutement qui l'on affrontera. Les rencontres se tirent donc
+// au début du recrutement, et non plus au combat.
+test('pendant le recrutement, chacun voit son prochain adversaire, et c\'est bien lui qu\'il affronte', () => {
+  for (const seats of [8, 5]) {
+    for (let seed = 1; seed <= 10; seed++) {
+      const game = createGame({ seed, seats });
+      for (let round = 0; round < 4; round++) {
+        recruit(game, seed);
+        const announced = game.players.map((p) => viewFor(game, p.seat).nextOpponent);
+        for (const p of game.players) if (p.alive) assert.ok(announced[p.seat], `${seats} sièges, graine ${seed} : pas d'adversaire annoncé`);
+        // Chacun est annoncé à un seul adversaire, qui le voit en retour.
+        announced.forEach((next, seat) => next && next.seat >= 0 && assert.equal(announced[next.seat]?.seat, seat));
+        startCombats(game);
+        game.players.forEach((p, seat) => assert.deepEqual(combatViewFor(game, seat)?.opponent.seat, announced[seat]?.seat, `${seats} sièges, graine ${seed}, manche ${game.round}`));
+        assert.equal(viewFor(game, 0).nextOpponent, null, 'hors du recrutement, aucun prochain adversaire');
+        finishRound(game);
+      }
+    }
+  }
+});
+
+test('le fantôme annoncé a les traits du dernier éliminé, quand il y en a un', () => {
+  const game = createGame({ seed: 4, seats: 4 });
+  recruit(game, 4);
+  startCombats(game);
+  const dead = game.players[3];
+  dead.hp = 0;
+  dead.alive = false;
+  game.lastEliminated = { heroId: dead.hero.id, board: dead.board.map((m) => ({ ...m })) };
+  finishRound(game);
+  const facingGhost = game.players.find((p) => viewFor(game, p.seat).nextOpponent?.seat === -1);
+  assert.ok(facingGhost, 'à trois, quelqu\'un affronte le fantôme');
+  assert.deepEqual(viewFor(game, facingGhost.seat).nextOpponent, { seat: -1, heroId: 'fantome', ghostOf: dead.hero.id });
+  startCombats(game);
+  assert.deepEqual(combatViewFor(game, facingGhost.seat)?.opponent, { seat: -1, heroId: 'fantome', ghostOf: dead.hero.id });
+});

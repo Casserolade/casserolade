@@ -105,7 +105,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
   <div class="mobile-recruit" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
     <MobileTopBar :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :budget="view.budget" :max-budget="view.maxBudget" @hero="heroOpen = true" />
-    <MobileOpponents :table="view.table" :seat="view.seat" :names="store.names.value" />
+    <MobileOpponents :table="view.table" :seat="view.seat" :names="store.names.value" :next="view.nextOpponent" />
     <div class="desk-band">
       <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
     </div>

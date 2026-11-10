@@ -4,6 +4,7 @@ import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
 import OpponentSheet from '#src/client/components/molecules/OpponentSheet.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { facelessGhostNext, nextOpponentSeat } from '#src/client/tools/nextOpponentSeat.ts';
 import { ordinalSuffix } from '#src/client/tools/ordinalSuffix.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import type { SeatName } from '#src/client/tools/seatNames.ts';
@@ -12,14 +13,18 @@ import type { PlayerView } from '#src/engine/game.ts';
 
 /**
  * The eight players down the side of the table: a face, the polls, the tier, and online the pseudo. On hover, a sheet:
- * the hero and who plays it, power, triples, last board seen.
+ * the hero and who plays it, power, triples, last board seen. During recruitment, the next opponent is marked, as in
+ * Battlegrounds; a ghost on the eliminated seat it wears, or on a row of its own before the first elimination.
  */
-const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; seen?: PlayerView['seen']; names?: Map<number, SeatName> }>(), {
+const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; seen?: PlayerView['seen']; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
   seen: () => [],
   names: () => new Map(),
+  next: null,
 });
 
 const rows = computed(() => [...props.table].sort((a, b) => Number(b.alive) - Number(a.alive) || b.hp - a.hp));
+const nextSeat = computed(() => nextOpponentSeat(props.table, props.next));
+const facelessGhost = computed(() => facelessGhostNext(props.table, props.next));
 
 function nameOf(row: PlayerView['table'][number]): string {
   return props.names.get(row.seat)?.hero ?? (row.heroId ? (HERO_BY_ID[row.heroId]?.name ?? '…') : '…');
@@ -46,7 +51,8 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
 <template>
   <section class="scoreboard" aria-label="Classement">
     <ol class="list">
-      <li v-for="row in rows" :key="row.seat" class="player" :class="{ own: row.seat === seat, out: !row.alive }">
+      <li v-for="row in rows" :key="row.seat" class="player" :class="{ own: row.seat === seat, out: !row.alive, next: row.seat === nextSeat }">
+        <span v-if="row.seat === nextSeat" class="next-tag"><GameIcon name="sword" />{{ row.alive ? 'Prochain adversaire' : 'Prochain : son fantôme' }}</span>
         <HeadPortrait v-if="row.heroId" class="face" :puppet="puppetStyle(gameArt.manifest.value, row.heroId, 'civile')" />
         <span v-else class="face empty" />
         <span class="score">
@@ -66,7 +72,13 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
           :alive="row.alive"
           :seen="lastSeen(row.seat)"
           :is-own="row.seat === seat"
+          :next="row.seat === nextSeat"
         />
+      </li>
+      <li v-if="facelessGhost" class="player next ghost">
+        <span class="next-tag"><GameIcon name="sword" />Prochain adversaire</span>
+        <span class="face empty" />
+        <span class="ghost-name">Un fantôme</span>
       </li>
     </ol>
   </section>
@@ -109,5 +121,27 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
 .own { border-color: var(--color-accent); box-shadow: 0 0 calc(var(--s) * 14) rgb(255 197 61 / 0.5); }
 .own .face { border-color: var(--color-accent); }
 .out { opacity: 0.45; filter: grayscale(1); }
+/* The next opponent, in red, its tag astride the top edge. A ghost's seat stays grey, its tag does not. */
+.next { border-color: #ff5d50; box-shadow: 0 0 calc(var(--s) * 16) rgb(255 93 80 / 0.55); }
+.next .face { border-color: #ff5d50; }
+.out.next { opacity: 1; filter: none; }
+.out.next .face, .out.next .score { opacity: 0.55; filter: grayscale(1); }
+.next-tag {
+  position: absolute;
+  z-index: 2;
+  top: calc(var(--s) * -13);
+  left: calc(var(--s) * 58);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--s) * 4);
+  padding: calc(var(--s) * 1) calc(var(--s) * 10);
+  border-radius: calc(var(--s) * 10);
+  background: #d62839;
+  color: #fff;
+  font: 800 calc(var(--s) * 14) / 1.3 var(--font-card);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.ghost-name { color: #c9cfdc; font: 800 calc(var(--s) * 20) / 1.1 var(--font-card); }
 .player:hover .about { visibility: visible; }
 </style>
