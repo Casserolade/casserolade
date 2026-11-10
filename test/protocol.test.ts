@@ -14,6 +14,8 @@ test('valid messages pass', () => {
     { type: 'creer_salon', pseudo: 'Jojo', options: { bots: 6, niveauBots: 'moyen', minuteur: true } },
     { type: 'rejoindre', code: 'ABCD', pseudo: 'Jojo' },
     { type: 'reprendre', jeton: 'abc' },
+    { type: 'suivre', siege: 3 },
+    { type: 'suivre', siege: null },
   ];
   for (const message of valid) assert.deepEqual(parseClientMessage(JSON.stringify(message)), message);
 });
@@ -35,6 +37,9 @@ test('anything malformed is rejected', () => {
     '{"type":"action","seq":1,"action":{"t":"buy","slot":"0"}}',
     '{"type":"action","seq":1,"action":{"t":"buy","slot":1e300}}',
     '{"type":"action","seq":1,"action":{"t":"move","uid":1}}',
+    '{"type":"suivre"}',
+    '{"type":"suivre","siege":-1}',
+    '{"type":"suivre","siege":"3"}',
     '{"type":"creer_salon","pseudo":"","options":{"bots":1,"niveauBots":"moyen","minuteur":true}}',
     '{"type":"creer_salon","pseudo":"x","options":{"bots":99,"niveauBots":"moyen","minuteur":true}}',
     '{"type":"creer_salon","pseudo":"x","options":{"bots":1,"niveauBots":"dieu","minuteur":true}}',

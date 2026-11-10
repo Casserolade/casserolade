@@ -1,9 +1,11 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import type { CounterEvent, GameEndEvent, GameStartEvent, PageEvent } from '../protocol/counterEvent.ts';
+import { parisDay, parisHour } from './parisDay.ts';
 import { readStatsData } from './readStatsData.ts';
 import { emptyDay, emptyGameCount, STATS_FORMAT } from './statsData.ts';
-import type { DayStats, RunningTotals, StatsIncident } from './statsData.ts';
+import type { DayStats, HeroResults, OnlineResults, RunningTotals, StatsIncident } from './statsData.ts';
+import type { ArchivedGame } from './gameArchive.ts';
 import { sumDays } from './sumDays.ts';
 import type { DayTotals } from './sumDays.ts';
 
@@ -38,9 +40,10 @@ const MAX_SOURCES = 40;
 const OTHER_SOURCES = 'autres';
 const DIRECT = 'direct';
 const TOP_PLACES = 4;
+/** A camp counts from this many politicians of it on the last board, as in the simulations. */
+const CAMP_FROM = 3;
 /** Written to disk at most once a minute. */
 const FLUSH_MS = 60_000;
-const PARIS_DAY = new Intl.DateTimeFormat('fr-CA', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
 
 export interface SiteStatsOptions {
   /** The JSON file of the days, on the private volume. Without it, everything is forgotten on restart. */
@@ -91,6 +94,33 @@ export class SiteStats {
     day.parties++;
     if (publique) day.partiesPubliques++;
     day.joueurs += humains;
+    day.heures.parties[this.hour()]++;
+    this.dirty = true;
+  }
+
+  /** An online game played to the end: the day's count, and its seats in the results of its version. */
+  partieFinie(game: ArchivedGame): void {
+    const day = this.today();
+    day.partiesFinies++;
+    day.manchesFinies += game.manches;
+    day.dureeFiniesMs += game.dureeMs;
+    const results = (this.cumul.enLigne[game.version] ??= { heros: {}, camps: {}, sieges: {} } satisfies OnlineResults);
+    for (const seat of game.joueurs) {
+      addPlace(results.sieges, seat.niveau ?? 'humain', seat.place);
+      if (seat.niveau || seat.repris) continue;
+      addPlace(results.heros, seat.heros, seat.place);
+      if (seat.camp && seat.campCount >= CAMP_FROM) addPlace(results.camps, seat.camp, seat.place);
+    }
+    this.dirty = true;
+  }
+
+  partieAbandonnee(): void {
+    this.today().partiesAbandonnees++;
+    this.dirty = true;
+  }
+
+  reprise(): void {
+    this.today().reprises++;
     this.dirty = true;
   }
 
@@ -146,6 +176,7 @@ export class SiteStats {
     day.pages[event.page]++;
     if (!event.premier) return;
     day.visiteurs++;
+    day.heures.visiteurs[this.hour()]++;
     if (event.nouveau) day.nouveaux++;
     day.appareils[event.appareil]++;
     const source = event.source || DIRECT;
@@ -155,7 +186,9 @@ export class SiteStats {
   }
 
   private gameStarted(event: GameStartEvent): void {
-    this.today().local[event.mode].lancees++;
+    const day = this.today();
+    day.local[event.mode].lancees++;
+    day.heures.parties[this.hour()]++;
     if (event.mode === 'solo') this.levelCount(event.niveau).lancees++;
     if (event.mode === 'carriere') this.chapterCount(event.chapitre).lancees++;
   }
@@ -174,12 +207,11 @@ export class SiteStats {
     level.finies++;
     level.places += event.place;
     if (event.gagnee) level.gagnees++;
-    const heroes = (this.cumul.heros[event.version] ??= {});
-    const hero = (heroes[event.heros] ??= { parties: 0, places: 0, victoires: 0, top4: 0 });
-    hero.parties++;
-    hero.places += event.place;
-    if (event.place === 1) hero.victoires++;
-    if (event.place <= TOP_PLACES) hero.top4++;
+    addPlace((this.cumul.heros[event.version] ??= {}), event.heros, event.place);
+  }
+
+  private hour(): number {
+    return parisHour(this.now());
   }
 
   private levelCount(level: string): RunningTotals['niveaux'][string] {
@@ -191,11 +223,20 @@ export class SiteStats {
   }
 
   private today(): DayStats {
-    const jour = PARIS_DAY.format(this.now());
+    const jour = parisDay(this.now());
     const last = this.days.at(-1);
     if (last?.jour === jour) return last;
     const day = emptyDay(jour);
     this.days = [...this.days, day].slice(-KEEP_DAYS);
     return day;
   }
+}
+
+/** One more finished game for a hero, a camp or a kind of seat, at this place. */
+function addPlace(table: Record<string, HeroResults>, key: string, place: number): void {
+  const results = (table[key] ??= { parties: 0, places: 0, victoires: 0, top4: 0 });
+  results.parties++;
+  results.places += place;
+  if (place === 1) results.victoires++;
+  if (place <= TOP_PLACES) results.top4++;
 }

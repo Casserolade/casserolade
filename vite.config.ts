@@ -1,12 +1,15 @@
 import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { assetVersions } from './src/server/assetVersions.ts';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   root: 'src/client',
   // Everything the game loads, described by manifest.json (contract 1), served from the site root.
   publicDir: '../../assets/game',
   plugins: [vue()],
+  // The version of each of these files, for their addresses (assetUrl): the server lets browsers keep them for good.
+  define: { __ASSET_VERSIONS__: command === 'build' ? JSON.stringify(assetVersions('assets/game')) : 'undefined' },
   server: {
     port: 5173,
     strictPort: false,
@@ -27,4 +30,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

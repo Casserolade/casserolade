@@ -13,18 +13,22 @@ export interface DayTotals {
   local: Record<LocalMode, GameCount>;
   parties: number;
   joueurs: number;
+  partiesFinies: number;
+  partiesAbandonnees: number;
 }
 
 /** The totals of a run of days, the whole history for one. */
 export function sumDays(days: readonly DayStats[]): DayTotals {
   const local = Object.fromEntries(LOCAL_MODES.map((mode) => [mode, emptyGameCount()])) as Record<LocalMode, GameCount>;
-  const totals: DayTotals = { jours: days.length, visiteurs: 0, nouveaux: 0, pages: 0, local, parties: 0, joueurs: 0 };
+  const totals: DayTotals = { jours: days.length, visiteurs: 0, nouveaux: 0, pages: 0, local, parties: 0, joueurs: 0, partiesFinies: 0, partiesAbandonnees: 0 };
   for (const day of days) {
     totals.visiteurs += day.visiteurs;
     totals.nouveaux += day.nouveaux;
     totals.pages += Object.values(day.pages).reduce((sum, value) => sum + value, 0);
     totals.parties += day.parties;
     totals.joueurs += day.joueurs;
+    totals.partiesFinies += day.partiesFinies;
+    totals.partiesAbandonnees += day.partiesAbandonnees;
     for (const mode of LOCAL_MODES) {
       totals.local[mode].lancees += day.local[mode].lancees;
       totals.local[mode].finies += day.local[mode].finies;

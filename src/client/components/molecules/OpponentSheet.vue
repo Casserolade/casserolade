@@ -6,8 +6,10 @@ import type { PlayerView } from '#src/engine/game.ts';
  * What a player of the table looks like on hover, as in Battlegrounds: the hero and its power, the
  * tier, the polls, the triples, and the last board seen in combat against it.
  */
-defineProps<{
+withDefaults(defineProps<{
   name: string;
+  /** Who plays this hero, online: « Vous », a pseudo or « Bot ». */
+  player?: string | null;
   power: { name: string; desc: string } | null;
   tier: number;
   hp: number;
@@ -16,12 +18,13 @@ defineProps<{
   /** The last combat against this player; null when never met. */
   seen: PlayerView['seen'][number] | null;
   isOwn: boolean;
-}>();
+}>(), { player: null });
 </script>
 
 <template>
   <span class="sheet" role="tooltip">
     <strong class="name">{{ name }}</strong>
+    <span v-if="player" class="player">{{ player }}</span>
     <span v-if="power" class="power"><b>{{ power.name }}</b> : {{ power.desc }}</span>
     <span class="figures">
       <span>Échelon {{ tier }}</span>
@@ -63,6 +66,7 @@ defineProps<{
   pointer-events: none;
 }
 .name { color: var(--color-accent); font: 800 calc(var(--s) * 26) / 1.1 var(--font-card-title); }
+.player { margin-top: calc(var(--s) * -4); color: #fff; font: 700 calc(var(--s) * 20) / 1.1 var(--font-card); }
 .power b { color: #ffe27a; }
 .figures { display: flex; flex-wrap: wrap; gap: calc(var(--s) * 6); }
 .figures > span { padding: calc(var(--s) * 2) calc(var(--s) * 10); border-radius: calc(var(--s) * 12); background: rgb(255 255 255 / 0.08); }

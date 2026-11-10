@@ -13,7 +13,7 @@ const KEYWORDS: Record<string, string> = {
   ni_droite_ni_gauche: 'Ni droite ni gauche',
 };
 const TRIGGERS: Record<string, string> = { debut_combat: '49.3', riposte: 'Riposte', heritage: 'Héritage', annonce: 'Annonce', fin_recrutement: 'Fin de recrutement' };
-const TARGETS: Record<string, string> = { premier_ennemi: 'au premier ennemi', dernier_ennemi: 'au dernier ennemi', tous_ennemis: 'à tous les ennemis', allies: 'à tous les alliés' };
+const TARGETS: Record<string, string> = { premier_ennemi: 'au premier ennemi', dernier_ennemi: 'au dernier ennemi', ennemi_plus_faible: 'à l\'ennemi le plus faible', tous_ennemis: 'à tous les ennemis', allies: 'à tous les alliés' };
 
 function effect(e: Effect): string {
   const to = TARGETS[e.to] ?? '';

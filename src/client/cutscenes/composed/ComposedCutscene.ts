@@ -38,9 +38,8 @@ function soundReady(audio: HTMLAudioElement): Promise<void> {
   });
 }
 
-/** The episodes write their images from the site's root: elsewhere than at /, they go through assetUrl. */
+/** The episodes write their images from the site's root: they go through assetUrl, for the base and the versions. */
 function resolveAssetPaths(root: HTMLElement): void {
-  if (assetUrl('') === '/') return;
   for (const element of root.querySelectorAll<HTMLElement>('[href^="/"], [src^="/"]')) {
     for (const attribute of ['href', 'src']) {
       const value = element.getAttribute(attribute);

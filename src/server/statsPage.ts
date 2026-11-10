@@ -40,17 +40,22 @@ td.bar { width: 16%; } td.bar i { display: block; height: 8px; border-radius: 4p
 .alerte { color: var(--rouge); font-weight: 700; } .scroll { overflow-x: auto; }
 h3 { margin: 14px 0 6px; font-size: 13px; color: var(--pale); } tr.pale td { color: var(--pale); }
 .duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; }
-li.visite span { color: var(--bleu); } li.local span { color: var(--vert); }
+li.visite span { color: var(--bleu); } li.local span { color: var(--vert); } li.reprise span { color: var(--orange); }
+#parties th:last-child, td.sieges { text-align: left; } #parties td:not(.sieges), #parties th:not(:last-child) { width: 1%; white-space: nowrap; padding-right: 14px; } .siege { display: inline-block; margin: 2px 4px 2px 0; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--bord); font-size: 12px; white-space: nowrap; }
+.siege.humain { border-color: var(--orange); color: var(--orange); } .siege.deco { border-style: dashed; } .siege.mort { opacity: .45; text-decoration: line-through; } .siege.repris::after { content: ' · bot'; }
+.heures { display: flex; justify-content: space-between; color: var(--pale); font-size: 11px; font-variant-numeric: tabular-nums; }
 button { margin-left: 6px; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--bord); background: var(--carte); color: var(--texte); font: inherit; cursor: pointer; } button:hover { border-color: var(--or); }
 </style></head><body data-base="${safeBase}">
 <header><h1>Casserolade · en direct</h1><span id="etat" class="etat meta">connexion…</span><span id="version" class="meta"></span><span id="depuis" class="meta"></span></header>
 <h2>Maintenant</h2>
 <div id="direct" class="tiles"></div>
+<h2>Les parties en ligne en cours</h2>
+<div id="parties" class="scroll"><p class="meta">…</p></div>
 <h2>Les cinq dernières minutes, seconde par seconde</h2>
 <div id="courbes" class="charts"></div>
 <div class="cols">
   <section><h2>Le fil</h2><ol id="fil"></ol></section>
-  <section><h2>Aujourd'hui</h2><div id="jour" class="tiles"></div><h2>Derniers incidents</h2><div id="incidents" class="meta">Aucun incident.</div></section>
+  <section><h2>Aujourd'hui</h2><div id="jour" class="tiles"></div><h2>Heure par heure</h2><figure id="heures"></figure><h2>Derniers incidents</h2><div id="incidents" class="meta">Aucun incident.</div></section>
 </div>
 <h2>La fréquentation</h2>
 <div class="scroll"><table id="totaux"></table></div>
@@ -65,7 +70,9 @@ button { margin-left: 6px; padding: 4px 10px; border-radius: 8px; border: 1px so
   <section><h2>Les parties solo, par héros</h2><div id="heros"></div></section>
   <section><h2>Les parties solo, par niveau des bots</h2><table id="niveaux"></table><h2>La carrière, élection par élection</h2><table id="chapitres"></table></section>
 </div>
-<p class="meta">Chaque page du site compte elle-même sa visite : un visiteur par navigateur et par jour, sans cookie ni identifiant, et aucune adresse n'est gardée. Les robots sont comptés à part. Les parties solo, de carrière et du tutoriel tournent dans la page : elle dit au serveur quand elles commencent et comment elles finissent.</p>
+<h2>Les parties en ligne allées au bout</h2>
+<div id="enligne"></div>
+<p class="meta">Chaque page du site compte elle-même sa visite : un visiteur par navigateur et par jour, sans cookie ni identifiant, et aucune adresse n'est gardée. Les robots sont comptés à part. Les parties solo, de carrière et du tutoriel tournent dans la page : elle dit au serveur quand elles commencent et comment elles finissent. Les parties en ligne allées au bout sont gardées sur le serveur pour l'équilibrage, sans pseudo ni adresse.</p>
 <p id="exclusion" class="meta"></p>
 <script src="${safeBase}/frequentation.js"></script>
 <script src="${safeBase}/tableau.js"></script>

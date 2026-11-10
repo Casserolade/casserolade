@@ -938,12 +938,14 @@ export const CASSEROLES: Casserole[] = [
     name: 'Direction Saint-Pierre-et-Miquelon',
     owner: 'wauquiez',
     cost: 3,
-    ownerBonus: { effects: [{ when: 'debut_combat', to: 'dernier_ennemi', do: 'exiler' }] },
+    // 10 novembre 2026 : l'exil visait le dernier ennemi, deux fois sur Wauquiez, une fois par porteur : trop fort. Un seul
+    // exil par joueur et par combat (moteur), sur l'ennemi le plus faible ; Wauquiez y gagne des stats.
+    ownerBonus: { atk: 2, hp: 4 },
     atk: -1,
     silence: true,
-    effects: [{ when: 'debut_combat', to: 'dernier_ennemi', do: 'exiler' }],
+    effects: [{ when: 'debut_combat', to: 'ennemi_plus_faible', do: 'exiler' }],
     citation: 'Donald Trump de chez Wish.',
-    blague: 'Envoie le dernier ennemi à 4 000 km, le temps du combat, et perd ses effets en route. Les écolos se cotisent pour son billet.',
+    blague: 'Envoie l\'ennemi le plus faible à 4 000 km, le temps du combat, et perd ses effets en route. Un seul billet par combat : les écolos ne se cotisent qu\'une fois.',
     fait: 'En avril 2025, il propose d\'enfermer les OQTF dangereux à Saint-Pierre-et-Miquelon. La citation est du président du Conseil territorial de l\'archipel, et les élus écologistes d\'Auvergne-Rhône-Alpes lancent une cagnotte pour lui offrir le voyage (3 500 €).',
     statut: 'Pas une affaire judiciaire. Il persiste et signe.',
     verifie: true,

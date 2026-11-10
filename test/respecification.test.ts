@@ -454,3 +454,31 @@ test('keywordsAlreadyThere ne vise que les sorts qui ne donnent que des mots-cl�
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.temps_de_parole.effects, ['porte_parole']), false);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.sondage_flatteur.effects, []), false);
 });
+
+// R19 : un seul exil par joueur et par combat, sur l'ennemi le plus faible (10 novembre 2026).
+
+test('R19 : plusieurs 49.3 qui exilent n\'exilent qu\'une fois, et visent l\'ennemi le plus faible', () => {
+  const pierre = CASSEROLE_BY_ID.saint_pierre;
+  const exile = (pierre.effects ?? [])[0];
+  assert.equal(exile.do, 'exiler');
+  assert.equal(exile.to, 'ennemi_plus_faible');
+  for (let seed = 1; seed <= 6; seed++) {
+    const exilers = [unit(2, 6, [], [exile]), unit(2, 6, [], [exile]), unit(2, 6, [], [exile, exile])];
+    // L'ennemi le plus faible est au milieu ; à égalité, le plus à gauche part.
+    const foes = [unit(5, 5), unit(1, 2), unit(3, 3), unit(2, 1), unit(4, 6)];
+    const { log } = fight(exilers, foes, seed);
+    const gone = log.filter((e): e is Extract<CombatEvent, { e: 'exil' }> => e.e === 'exil');
+    assert.deepEqual(gone.map((e) => e.uid), [foes[1].uid], `graine ${seed}`);
+    const exileEffects = log.filter((e) => e.e === 'effet' && 'effect' in e && e.effect.do === 'exiler');
+    assert.equal(exileEffects.length, 1, 'les autres 49.3 qui exilent se taisent');
+  }
+});
+
+test('R19 : chaque joueur a son exil', () => {
+  const exile = (CASSEROLE_BY_ID.saint_pierre.effects ?? [])[0];
+  const a = [unit(5, 5, [], [exile]), unit(1, 1)];
+  const b = [unit(5, 5, [], [exile]), unit(1, 2)];
+  const { log } = fight(a, b);
+  const gone = log.filter((e): e is Extract<CombatEvent, { e: 'exil' }> => e.e === 'exil').map((e) => e.uid);
+  assert.deepEqual(gone.sort((x, y) => x - y), [a[1].uid, b[1].uid].sort((x, y) => x - y));
+});

@@ -494,20 +494,19 @@ function moveMinion(p: Player, uid: number, to: number): ActionResult {
   return OK;
 }
 
-/** Renvoyer : du plateau, la Vente joue ; de la main, rien. */
+/**
+ * Renvoyer, depuis le plateau seulement : comme à Battlegrounds, un politique de la main se pose d'abord (10 novembre
+ * 2026 : renvoyer de la main faisait de l'argent sans jamais jouer la carte).
+ */
 function sell(game: Game, p: Player, uid: number): ActionResult {
-  const onBoard = p.board.find((m) => m.uid === uid);
-  const m = onBoard ?? p.hand.find((x) => x.uid === uid);
-  if (!m) return fail('Politique introuvable.');
+  const m = p.board.find((x) => x.uid === uid);
+  if (!m) return fail(p.hand.some((x) => x.uid === uid) ? 'Posez-le d\'abord : on ne renvoie que depuis le plateau.' : 'Politique introuvable.');
   if (m.bracelet) return fail('Sous bracelet : il ne peut pas être renvoyé avant la prochaine manche.');
-  if (onBoard) p.board = p.board.filter((x) => x !== m);
-  else p.hand = p.hand.filter((x) => x !== m);
+  p.board = p.board.filter((x) => x !== m);
   releaseMinion(game, m);
   p.budget += game.params.sellValue + (p.hero.mods.sellBonus ?? 0) + sellBonus(game, p, m);
-  if (onBoard) {
-    for (const eff of m.effects) if (eff.when === 'vente') applyEffect(game, p, m, eff);
-    fireBoard(game, p, 'vente_allie', {});
-  }
+  for (const eff of m.effects) if (eff.when === 'vente') applyEffect(game, p, m, eff);
+  fireBoard(game, p, 'vente_allie', {});
   return OK;
 }
 

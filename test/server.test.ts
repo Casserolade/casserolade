@@ -1,6 +1,7 @@
 import { test, after, before } from 'node:test';
 import assert from 'node:assert/strict';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { WebSocket } from 'ws';
 import type { CombatView, PlayerView } from '../src/engine/game.ts';
@@ -9,6 +10,7 @@ import type { SocketLike } from '../src/client/services/createWebSocketTransport
 import { reconnectDelay } from '../src/client/tools/reconnectDelay.ts';
 import type { ClientMessage, ServerMessage } from '../src/protocol/messages.ts';
 import { MAX_MESSAGE_BYTES } from '../src/protocol/parseClientMessage.ts';
+import { assetVersions, contentHash } from '../src/server/assetVersions.ts';
 import { GameServer, SOCKET_PATH } from '../src/server/gameServer.ts';
 import type { GameServerOptions, ServerLimits } from '../src/server/gameServer.ts';
 import { TokenBucket } from '../src/server/tokenBucket.ts';
@@ -277,6 +279,31 @@ test('two people play a full game online, and no message reveals hidden informat
   assert.ok(!JSON.stringify(host.inbox).includes(jetonOf(guest)), 'the guest\'s token reached the host');
 });
 
+test('a game played to the end is archived for balancing, counted for the day, and shown live while it runs', async () => {
+  const archiveDir = mkdtempSync(join(tmpdir(), 'parties-'));
+  const { server, port, url } = await startServer({}, { archiveDir, statsToken: 'jeton', version: 'abc1234' });
+  const { host, guest } = await createRoomWithTwo(url);
+  autoPlay(host);
+  autoPlay(guest);
+  host.send({ type: 'lancer' });
+  await host.waitFor((m) => m.type === 'vue', 'vue');
+  const live = await (await fetch(`http://127.0.0.1:${port}/stats/jeton.json`)).json() as { parties: { sieges: { humain: boolean }[] }[] };
+  assert.equal(live.parties.length, 1, 'the game in progress shows on the dashboard');
+  assert.equal(live.parties[0].sieges.filter((seat) => seat.humain).length, 2);
+  await Promise.all([host, guest].map((c) => c.waitFor((m) => m.type === 'fin', 'fin')));
+  const [file] = readdirSync(archiveDir);
+  const archived = JSON.parse(readFileSync(join(archiveDir, file), 'utf8'));
+  assert.equal(archived.commit, 'abc1234');
+  assert.equal(archived.seed, SEED);
+  assert.equal(archived.joueurs.length, 8);
+  assert.ok(!JSON.stringify(archived).includes('Hôte'), 'no pseudo in the archive');
+  const stats = await (await fetch(`http://127.0.0.1:${port}/stats/jeton.json`)).json() as { parties: unknown[]; days: { partiesFinies: number }[]; cumul: { enLigne: Record<string, unknown> } };
+  assert.equal(stats.parties.length, 0);
+  assert.equal(stats.days.at(-1)?.partiesFinies, 1);
+  assert.equal(Object.keys(stats.cumul.enLigne).length, 1);
+  await server.stop();
+});
+
 test('a client can only act on its own seat, and illegal actions are refused over the network', async () => {
   const { host, guest } = await createRoomWithTwo(shared.url);
   host.send({ type: 'lancer' });
@@ -415,7 +442,7 @@ test('a silent connection is closed, and so is one that stops answering pings', 
   await server.stop();
 });
 
-test('the game server serves the built client, and nothing outside its folder', async () => {
+test('the game server serves the built client, its pages asked again each time', async () => {
   const { server, port } = await startServer({}, { staticDir: 'src/client' });
   const page = await fetch(`http://127.0.0.1:${port}/`);
   assert.equal(page.status, 200);
@@ -435,6 +462,50 @@ test('the game server serves the built client, and nothing outside its folder', 
     assert.equal(phone.status, 200, path);
     assert.match(await phone.text(), /mobile\.ts/, path);
   }
+  // Caching: a page is asked again each time, answered « not modified » when it did not change.
+  assert.equal(page.headers.get('cache-control'), 'no-cache');
+  const etag = page.headers.get('etag') as string;
+  assert.match(etag, /^"[\w-]{10}"$/);
+  const again = await fetch(`http://127.0.0.1:${port}/`, { headers: { 'If-None-Match': etag } });
+  assert.equal(again.status, 304);
+  assert.equal(await again.text(), '');
+  await server.stop();
+});
+
+test('an address that names its version is kept for good; an old version or no version is asked again', async () => {
+  const dir = mkdtempSync(join(tmpdir(), 'site-'));
+  mkdirSync(join(dir, 'assets'));
+  mkdirSync(join(dir, 'personnages'));
+  writeFileSync(join(dir, 'assets', 'main-abc123.js'), 'console.log(1);');
+  writeFileSync(join(dir, 'personnages', 'macron.webp'), 'image');
+  writeFileSync(join(dir, 'personnages', 'macron.json'), '{}');
+  writeFileSync(join(dir, 'manifest.json'), '{}');
+  const versions = assetVersions(dir);
+  assert.deepEqual(Object.keys(versions).sort(), ['manifest.json', 'personnages/macron.webp'], 'what only feeds the manifest has no version');
+  assert.equal(versions['personnages/macron.webp'], contentHash('image'));
+  const { server, port } = await startServer({}, { staticDir: dir });
+  const get = (path: string, headers: Record<string, string> = {}) => fetch(`http://127.0.0.1:${port}${path}`, { headers });
+  const forever = 'public, max-age=31536000, immutable';
+  assert.equal((await get('/assets/main-abc123.js')).headers.get('cache-control'), forever, 'Vite names its bundles by their content');
+  const versioned = await get(`/personnages/macron.webp?v=${versions['personnages/macron.webp']}`);
+  assert.equal(versioned.headers.get('cache-control'), forever);
+  assert.equal(versioned.headers.get('content-length'), '5');
+  assert.equal(versioned.headers.get('etag'), `"${versions['personnages/macron.webp']}"`);
+  assert.equal(await versioned.text(), 'image');
+  assert.equal((await get('/personnages/macron.webp?v=ancienne')).headers.get('cache-control'), 'no-cache', 'an old page asking an old version');
+  assert.equal((await get('/personnages/macron.webp')).headers.get('cache-control'), 'no-cache');
+  // A proxy that compresses may weaken the tag: it still matches.
+  assert.equal((await get('/manifest.json', { 'If-None-Match': `W/"${versions['manifest.json']}"` })).status, 304);
+  // The file changes under a running server (a rebuild): its version follows.
+  writeFileSync(join(dir, 'personnages', 'macron.webp'), 'autre image');
+  const changed = await get('/personnages/macron.webp', { 'If-None-Match': `"${versions['personnages/macron.webp']}"` });
+  assert.equal(changed.status, 200);
+  assert.equal(changed.headers.get('etag'), `"${contentHash('autre image')}"`);
+  await server.stop();
+});
+
+test('nothing outside the client\'s folder can be reached', async () => {
+  const { server, port } = await startServer({}, { staticDir: 'src/client' });
   for (const path of ['/../../package.json', '/%2e%2e/%2e%2e/package.json', '/..%2f..%2fpackage.json', '/absent.js', '/%zz']) {
     const response = await fetch(`http://127.0.0.1:${port}${path}`);
     assert.equal(response.status, 404, path);

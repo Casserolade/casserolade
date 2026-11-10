@@ -21,7 +21,7 @@ const TRIGGERS: Record<Trigger, true> = {
 const TARGETS: Record<Target, true> = {
   soi: true, voisins: true, meme_camp: true, camp: true, allies: true, autres: true, autres_camp: true, premier_allie: true, dernier_allie: true,
   allie_suivant: true, dores: true, cible: true, aleatoire: true, joue: true, declencheur: true, main: true, toute_la_main: true,
-  premier_ennemi: true, dernier_ennemi: true, tous_ennemis: true, ennemi_aleatoire: true, joueur: true,
+  premier_ennemi: true, dernier_ennemi: true, ennemi_plus_faible: true, tous_ennemis: true, ennemi_aleatoire: true, joueur: true,
 };
 const ACTIONS: Record<Action['do'], true> = {
   buff: true, buff_par_allie: true, buff_par_camp: true, buff_par_ralliement: true, degats: true, invoquer: true, budget: true, mot_cle: true,

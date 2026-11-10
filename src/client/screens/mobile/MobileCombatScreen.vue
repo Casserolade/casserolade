@@ -2,6 +2,7 @@
 import { computed, useTemplateRef } from 'vue';
 import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import SeatTag from '#src/client/components/atoms/SeatTag.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
 import StudioFlicker from '#src/client/components/atoms/StudioFlicker.vue';
@@ -22,7 +23,7 @@ import type { CombatView, PlayerView } from '#src/engine/game.ts';
  * The combat on a phone held upright: the rival and the host on top, the two rows of medallions in the middle, your
  * hero at the bottom. The same show as on a computer (useCombatShow): only the places change.
  */
-const props = defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null }>();
+const props = withDefaults(defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null; rivalName?: string | null; watching?: string | null }>(), { rivalName: null, watching: null });
 const emit = defineEmits<{ close: [] }>();
 
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
@@ -52,6 +53,7 @@ const speechStyle = computed(() => {
     <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
     <div ref="rivalHero" class="rival" :class="{ shaken: rivalShaken }">
       <MobileHeroBadge :hero-id="combat.opponent.ghostOf ?? combat.opponent.heroId" :ghost="combat.opponent.seat < 0" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
+      <SeatTag v-if="rivalName" class="rival-name" :label="rivalName" />
       <SheetSprite v-if="fatalBlow && fatalSprite" class="fatal-blow" :sprite="fatalSprite" />
       <div v-if="resultShown && speaker === 'rival' && rivalLine" class="rival-line"><SpeechBubble tail="up">{{ rivalLine }}</SpeechBubble></div>
     </div>
@@ -61,6 +63,7 @@ const speechStyle = computed(() => {
     </div>
     <div v-if="view" ref="ownHero" class="me" :class="{ draining, hurt }">
       <MobileHeroBadge :hero-id="view.heroId" :hp="ownHp" :start-hp="view.params.startHp" />
+      <SeatTag v-if="watching" class="watching" :label="watching" live />
     </div>
 
     <div v-if="!stageReady" class="plain" :class="{ loading: !stageFailed }">
@@ -111,6 +114,9 @@ const speechStyle = computed(() => {
 .rival { --u: 0.6px; --badge-size: 56px; position: absolute; z-index: 25; left: 50%; top: calc(env(safe-area-inset-top) + 8px); translate: -50% 0; }
 .fatal-blow { position: absolute; left: 50%; top: -70px; translate: -50% 0; z-index: 3; }
 .rival.shaken { animation: rival-shake 0.45s linear; }
+.rival-name { position: absolute; z-index: 2; left: 50%; top: calc(100% - 6px); translate: -50% 0; --s: 0.7px; }
+/* Followed from outside the game: whose combat this is, beside its badge. */
+.watching { position: absolute; left: calc(100% + 8px); bottom: 6px; --s: 0.7px; }
 .rival-line { position: absolute; z-index: 20; left: 50%; top: calc(100% + 10px); translate: -50% 0; width: max-content; max-width: 84vw; }
 .booth { position: absolute; z-index: 24; left: 6px; top: calc(env(safe-area-inset-top) + 2px); }
 .host { --lectern-width: 84px; }

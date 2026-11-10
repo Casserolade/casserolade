@@ -111,6 +111,8 @@ export type Target =
   | 'toute_la_main'
   | 'premier_ennemi'
   | 'dernier_ennemi'
+  /** L'ennemi le moins fort : la plus petite somme attaque + PV, le plus à gauche à égalité. */
+  | 'ennemi_plus_faible'
   | 'tous_ennemis'
   /** Un ennemi au hasard. */
   | 'ennemi_aleatoire'
@@ -138,6 +140,7 @@ export type Action =
   | { do: 'retirer'; keyword: Keyword }
   /** Donne le mot-clé s'il manque, le retire s'il est là (Temps de parole). */
   | { do: 'basculer'; keyword: Keyword }
+  /** Retire la cible du combat, sans mourir. Un seul exil par joueur et par combat (10 novembre 2026). */
   | { do: 'exiler' }
   /** Le peuple oublie tout de suite le scandale le plus long. Il ne bouge plus. */
   | { do: 'oublier' }

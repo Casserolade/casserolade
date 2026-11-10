@@ -192,7 +192,8 @@ function actionValue(e: Effect): number {
     case 'retirer':
       return 2;
     case 'exiler':
-      return 6;
+      // Un seul exil par combat, sur l'ennemi le plus faible (10 novembre 2026).
+      return 3;
     case 'transmettre':
       return (e.tout ? 6 : 3) * r;
     case 'carte':

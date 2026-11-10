@@ -68,7 +68,7 @@ function chooseAction(id: SheetAction['id'], source: Element | null): void {
   const opened = sheet.value;
   sheet.value = null;
   if (!opened) return;
-  if (id === 'sell' && (opened.item.from === 'board' || opened.item.from === 'hand')) gestures.sendBack(opened.item.minion, source);
+  if (id === 'sell' && opened.item.from === 'board') gestures.sendBack(opened.item.minion, source);
   else gestures.actOn(opened.item, source);
 }
 
@@ -105,7 +105,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
   <div class="mobile-recruit" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
     <MobileTopBar :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :budget="view.budget" :max-budget="view.maxBudget" @hero="heroOpen = true" />
-    <MobileOpponents :table="view.table" :seat="view.seat" />
+    <MobileOpponents :table="view.table" :seat="view.seat" :names="store.names.value" />
     <div class="desk-band">
       <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
     </div>

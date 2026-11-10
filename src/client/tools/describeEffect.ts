@@ -106,6 +106,8 @@ function who(to: Target, camp?: Camp, onSpell = false): string {
       return 'le premier ennemi';
     case 'dernier_ennemi':
       return 'le dernier ennemi';
+    case 'ennemi_plus_faible':
+      return 'l\'ennemi le plus faible';
     case 'tous_ennemis':
       return 'tous les ennemis';
     case 'ennemi_aleatoire':

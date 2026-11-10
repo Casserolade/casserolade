@@ -2,6 +2,8 @@ import { computed, ref, shallowRef } from 'vue';
 import type { ConnectionStatus, ConnectionWatch } from '#src/client/services/connectionStatus.ts';
 import { EndOfTurnPlayback } from '#src/client/stores/createEndOfTurnPlayback.ts';
 import { hostQuote } from '#src/client/tools/hostQuote.ts';
+import { seatNames } from '#src/client/tools/seatNames.ts';
+import { spectatorView } from '#src/client/tools/spectatorView.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 import type { PlayerAction } from '#src/engine/types.ts';
 import { CHAT_LONGUEUR, PARTIE_DISPARUE, PARTIE_PLANTEE } from '#src/protocol/messages.ts';
@@ -39,6 +41,10 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
   const endOfTurn = shallowRef<EndOfTurnPlayback | null>(null);
   /** The view the combat started from: what the combat shows does not move when the next round's view comes in. */
   const combatView = shallowRef<PlayerView | null>(null);
+  /** Out of the game, the survivor followed (`suivre`): each of its combats is shown live. */
+  const following = ref<number | null>(null);
+  /** The combat on screen is the followed survivor's, not ours: its seat. */
+  const spectating = ref<number | null>(null);
   const ranking = shallowRef<Classement | null>(null);
   const room = shallowRef<VueSalon | null>(null);
   /** The saved seat points to a room that no longer exists. */
@@ -68,6 +74,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
   const mmrChange = shallowRef<MmrChange | null>(null);
   /** The room's chat, oldest first. */
   const chat = shallowRef<MessageChat[]>([]);
+  /** Each seat named: the hero, and online the pseudo. */
+  const names = computed(() => seatNames(view.value?.table ?? [], room.value));
   /** At least two people to talk: a room alone with bots, or a solo game, has no chat. */
   const canChat = computed(() => (room.value?.joueurs.filter((player) => !player.bot).length ?? 0) > 1 || chat.value.length > 0);
   /** The eliminated screen is shown, for a while, before a ranking already known. */
@@ -112,8 +120,13 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
     const next = view.value;
     if (!ranking.value && (!next || (next.round <= shown.round && next.alive))) return;
     clearTimeout(combatTimer);
+    dropCombat();
+  }
+
+  function dropCombat(): void {
     combat.value = null;
     combatView.value = null;
+    spectating.value = null;
   }
 
   /** The eliminated screen shows once the combat that eliminated is over; a ranking already there waits behind it. */
@@ -134,6 +147,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
       hostLineCount.value++;
     }
     pendingHostLine = null;
+    // A survivor who falls out is no longer followed: the server stops too.
+    if (following.value !== null && !next.table.some((row) => row.seat === following.value && row.alive)) following.value = null;
     view.value = next;
     deadline.value = timeLeft === null ? null : Date.now() + timeLeft;
   }
@@ -160,8 +175,31 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
 
   function showCombat(next: CombatView): void {
     combatSeen = false;
+    spectating.value = null;
     combatView.value = view.value;
     combat.value = next;
+  }
+
+  /**
+   * Out of the game, the followed survivor's combat, live: shown from its side, with its hero and its polls. A combat
+   * of ours still on screen (the one that eliminated us) is not cut; the same one sent again is not replayed.
+   */
+  function receiveSpectacle(seat: number, next: CombatView): void {
+    const own = view.value;
+    if (!own || own.alive) return;
+    following.value = seat;
+    if (combat.value && (spectating.value === null || (spectating.value === seat && combat.value.round === next.round))) return;
+    clearTimeout(combatTimer);
+    combatSeen = false;
+    spectating.value = seat;
+    combatView.value = spectatorView(own, seat);
+    combat.value = next;
+  }
+
+  /** Out of the game, follow a survivor, or nobody (null). Its combat shows as soon as the server sends it. */
+  function follow(seat: number | null): void {
+    following.value = seat;
+    transport.send({ type: 'suivre', siege: seat });
   }
 
   function resetGame(): void {
@@ -170,8 +208,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
     endOfTurn.value = null;
     endOfTurnRound = -1;
     view.value = null;
-    combat.value = null;
-    combatView.value = null;
+    dropCombat();
+    following.value = null;
     ranking.value = null;
     combatSeen = false;
     seenCombatRound = -1;
@@ -223,6 +261,9 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
         break;
       case 'combat':
         receiveCombat(message.combat);
+        break;
+      case 'spectacle':
+        receiveSpectacle(message.siege, message.combat);
         break;
       case 'fin':
         ranking.value = message.classement;
@@ -318,8 +359,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
     transport.send({ type: 'vu' });
     combatTimer = setTimeout(() => {
       if (combat.value !== shown) return;
-      combat.value = null;
-      combatView.value = null;
+      dropCombat();
       noteElimination();
     }, COMBAT_HOLD_MS);
     releaseCombat();
@@ -392,6 +432,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
   return {
     room, roomGone, refused, connection, connectionLost, retry, createRoom, joinRoom, launchRoom, updateRoomSettings,
     queue, queueing, queueLost, queueLostReason, queueSeenAt, mmrChange, joinQueue, voteQueue, chat, canChat, sendChat,
+    names, following, spectating, follow,
     view, combat, combatView, endOfTurn, ranking, showRanking, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, screen, act, endRecruitment, closeCombat, leave,
   };
 }

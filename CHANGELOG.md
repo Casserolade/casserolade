@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.3f — 10 novembre 2026
+
+**Équilibrage**
+- Le 49.3 qui exile ne joue qu'une fois par joueur et par combat, quel que soit le nombre de politiques qui le portent, et il vise désormais l'ennemi le plus faible. La casserole « Direction Saint-Pierre-et-Miquelon » donne +2/+4 à Wauquiez à la place de son second exil.
+- On ne renvoie plus un politique depuis la main : il se pose d'abord sur le plateau, comme à Battlegrounds.
+
+**En ligne**
+- On voit qui est à la table : le héros au survol du classement et, en ligne, le pseudo de chaque joueur, sous ses sondages, au survol et sous le rival en combat. Sur téléphone, il suffit de toucher un visage.
+- Éliminé d'un salon, on peut suivre un survivant : ses combats passent en direct jusqu'à la fin de la partie.
+- Les parties de salon allées au bout sont gardées sur le serveur pour l'équilibrage, sans pseudo ni adresse.
+
+**Chargement**
+- Le navigateur garde les fichiers du jeu : une seconde visite ne retélécharge que ce qui a changé (117 Ko au lieu de 1,9 Mo pour l'accueil), et une partie ne recharge plus plusieurs fois les mêmes images.
+
 ## 0.3e — 9 novembre 2026
 
 **Correction**

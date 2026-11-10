@@ -1,5 +1,5 @@
 import { EARLIER_VISIT_KEYS } from '#src/client/const/earlierVisitKeys.ts';
-import { VERSION } from '#src/client/const/version.ts';
+import { VERSION } from '#src/protocol/version.ts';
 import { takeEntryReferrer } from '#src/client/services/entryReferrer.ts';
 import { browserStorage, read, write } from '#src/client/services/localProfile.ts';
 import type { ProfileStorage } from '#src/client/services/localProfile.ts';

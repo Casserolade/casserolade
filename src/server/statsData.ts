@@ -33,6 +33,16 @@ export interface DayStats {
   partiesPubliques: number;
   /** Humans seated in these games. */
   joueurs: number;
+  /** Online games played to the end, with their rounds and durations summed (the averages come from them). */
+  partiesFinies: number;
+  manchesFinies: number;
+  dureeFiniesMs: number;
+  /** Online games that every human left before the end. */
+  partiesAbandonnees: number;
+  /** Seats a bot took over, after a player's disconnection outlasted its grace. */
+  reprises: number;
+  /** The day hour by hour, Paris time: visitors arriving, and games started (in the page and online). */
+  heures: { visiteurs: number[]; parties: number[] };
   salonsCrees: number;
   picConnexions: number;
   incidents: number;
@@ -48,7 +58,7 @@ export interface StatsIncident {
   message: string;
 }
 
-/** The finished solo games of one hero: the sum of the places gives the average. */
+/** Finished games of one hero (or camp, or kind of seat): the sum of the places gives the average. */
 export interface HeroResults {
   parties: number;
   places: number;
@@ -64,6 +74,20 @@ export interface RunningTotals {
   niveaux: Record<string, GameCount & { places: number }>;
   /** Finished solo games, by version of the game, then by hero. */
   heros: Record<string, Record<string, HeroResults>>;
+  /** Finished online games, by version of the game. */
+  enLigne: Record<string, OnlineResults>;
+}
+
+/**
+ * The seats of finished online games. Heroes and camps count the humans who played to the end, without a bot in their
+ * place; seats compare the humans with each level of bots.
+ */
+export interface OnlineResults {
+  heros: Record<string, HeroResults>;
+  /** The last board's main camp, from three politicians of it. */
+  camps: Record<string, HeroResults>;
+  /** « humain », or a bot's level. */
+  sieges: Record<string, HeroResults>;
 }
 
 /** What the statistics file holds. Format 2 since the counter of 6 November 2026; format 1 had no number. */
@@ -96,6 +120,12 @@ export function emptyDay(jour: string): DayStats {
     parties: 0,
     partiesPubliques: 0,
     joueurs: 0,
+    partiesFinies: 0,
+    manchesFinies: 0,
+    dureeFiniesMs: 0,
+    partiesAbandonnees: 0,
+    reprises: 0,
+    heures: { visiteurs: Array(24).fill(0), parties: Array(24).fill(0) },
     salonsCrees: 0,
     picConnexions: 0,
     incidents: 0,
@@ -103,5 +133,5 @@ export function emptyDay(jour: string): DayStats {
 }
 
 export function emptyRunningTotals(): RunningTotals {
-  return { chapitres: {}, niveaux: {}, heros: {} };
+  return { chapitres: {}, niveaux: {}, heros: {}, enLigne: {} };
 }
