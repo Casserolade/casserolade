@@ -71,6 +71,6 @@ onUnmounted(stop);
   />
   <template v-else>
     <GameScreens :store="store" @leave="leave" />
-    <TutorialGuide v-if="store.screen.value === 'recruit'" :step="run.step.value" :learned="run.learned.value" :players="store.view.value?.table.length ?? 4" @career="toCareer" />
+    <TutorialGuide v-if="store.screen.value === 'recruit'" :step="run.step.value" :learned="run.learned.value" :players="store.view.value?.table.length ?? 4" :nudge="store.refusals.value" @career="toCareer" />
   </template>
 </template>

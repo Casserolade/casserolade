@@ -97,7 +97,8 @@ function boardElement(uid: number): Element | null {
 /** What a screen may change in the gestures: where each zone is, and what a click or a touch does. */
 export interface GestureOptions {
   view: () => PlayerView;
-  act: (action: PlayerAction) => void;
+  /** Sends the action; false when it was refused before leaving (the tutorial's rails): nothing flies then. */
+  act: (action: PlayerAction) => boolean | void;
   /** The zone under a point. The computer's table cuts it in bands; the phone asks its own sections. */
   zoneAt?: (point: Point) => Zone | null;
   /** A click on something of the table. The computer acts at once (`actOn`); the phone opens its card first. */
@@ -131,16 +132,21 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
 
   // —— Actions, with the effect that answers each one ——
 
-  /** Every action of the table goes to the game through here. */
-  function act(action: PlayerAction): void {
+  /** Every action of the table goes to the game through here. False when it never left (refused by the tutorial's rails). */
+  function act(action: PlayerAction): boolean {
+    if (sendToGame(action) === false) return false;
     actionsSent++;
-    sendToGame(action);
+    return true;
   }
 
-  /** What was bought jumps into the hand, if the purse and the hand allow it: the engine has the last word. */
-  function flyToHand(from: Point | null, cost: number, shown: { minion: Minion } | { card: ShownCard }): void {
+  /**
+   * What was bought jumps into the hand, if the purse and the hand allowed it before the purchase and the purchase
+   * left: the engine has the last word.
+   */
+  function buyAndFly(action: PlayerAction, from: Point | null, cost: number, shown: { minion: Minion } | { card: ShownCard }): void {
     const current = view();
-    if (current.budget < cost || current.hand.length + current.spells.length >= current.handLimit) return;
+    const fits = current.budget >= cost && current.hand.length + current.spells.length < current.handLimit;
+    if (!act(action) || !fits) return;
     playSound('buy');
     const to = centerOf(document.querySelector('.hand-zone'));
     if (from && to) tableFx.add({ kind: 'recruit', from, to, ...shown });
@@ -149,23 +155,20 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
   function buy(item: GestureItem, from: Point | null): void {
     const current = view();
     if (item.from === 'shop') {
-      flyToHand(from, current.buyCost, { minion: item.minion });
-      act({ t: 'buy', slot: item.slot, main: true });
+      buyAndFly({ t: 'buy', slot: item.slot, main: true }, from, current.buyCost, { minion: item.minion });
     } else if (item.from === 'shop-spell') {
-      flyToHand(from, current.shopSpellCosts[item.slot] ?? item.spell.cost, { card: { kind: 'spell', spell: item.spell } });
-      act({ t: 'buy_spell', slot: item.slot });
+      buyAndFly({ t: 'buy_spell', slot: item.slot }, from, current.shopSpellCosts[item.slot] ?? item.spell.cost, { card: { kind: 'spell', spell: item.spell } });
     } else if (item.from === 'shop-casserole') {
-      flyToHand(from, current.casseroleCost ?? item.casserole.cost, { card: { kind: 'casserole', casserole: item.casserole } });
-      act({ t: 'buy_casserole' });
+      buyAndFly({ t: 'buy_casserole' }, from, current.casseroleCost ?? item.casserole.cost, { card: { kind: 'casserole', casserole: item.casserole } });
     }
   }
 
   /** Sent back to the shop: coins burst from it toward the budget. */
   function sell(minion: Minion, from: Point): void {
+    if (!act({ t: 'sell', uid: minion.uid })) return;
     playSound('sell');
     const to = centerOf(document.querySelector('.budget'));
     if (to) tableFx.add({ kind: 'coins', from, to });
-    act({ t: 'sell', uid: minion.uid });
   }
 
   /** The card of the hand last sent to the game, and the view it was sent from. */
@@ -174,7 +177,7 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
   /** A card of the hand goes to the game: until its answer, a second click on it does nothing. */
   function send(action: Extract<PlayerAction, { t: 'play' | 'cast' }>): void {
     sent = { uid: action.uid, view: view(), at: performance.now() };
-    act(action);
+    if (!act(action)) sent = null;
   }
 
   /**

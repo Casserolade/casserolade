@@ -1,31 +1,37 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import RichText from '#src/client/components/atoms/RichText.vue';
 import { TUTORIAL_TARGETS } from '#src/client/const/tutorialTargets.ts';
-import type { Etape } from '#src/data/histoire/tutoriel.ts';
+import type { Consigne } from '#src/histoire/tutoriel.ts';
 
 const MEASURE_MS = 200;
+const SHAKE_MS = 600;
 /** Room around the ring, in screen pixels. */
 const RING_PAD = 10;
 
 /**
- * The tutorial's one instruction, beside the table, and a ring with an arrow on what it is about.
- * It never blocks anything and has nothing to close: the instruction goes when it is done.
+ * The tutorial's one instruction, beside the table, and a ring with an arrow on each thing it is about: the budget,
+ * the card, the button. It never blocks anything and has nothing to close: the instruction goes when it is done. A
+ * gesture refused by the rails (`nudge` counts them) shakes it, and its rings flash.
  */
-const props = withDefaults(defineProps<{ step: Etape | null; learned: boolean; players?: number }>(), { players: 4 });
+const props = withDefaults(defineProps<{ step: Consigne | null; learned: boolean; players?: number; nudge?: number }>(), { players: 4, nudge: 0 });
 defineEmits<{ career: [] }>();
 
-const rect = ref<{ left: number; top: number; width: number; height: number } | null>(null);
-const below = ref(false);
-/** On a phone, the instruction never covers what it points at: below the table when that is in the upper half. */
-const atBottom = computed(() => rect.value !== null && rect.value.top + rect.value.height / 2 < window.innerHeight * 0.5);
+interface Ring { left: number; top: number; width: number; height: number; below: boolean }
+const rings = ref<Ring[]>([]);
+/** The reminders between two lessons. */
+const reminder = computed(() => props.step !== null && ['choix', 'plein', 'sorts', 'budget', 'pret'].includes(props.step.cle));
+/** On a phone, the instruction never covers what it points at: below the table when the first ring is in the upper half. */
+const atBottom = computed(() => {
+  const first = rings.value[0];
+  return first !== undefined && first.top + first.height / 2 < window.innerHeight * 0.5;
+});
 
-function measure(): void {
-  const selectors = props.step ? (TUTORIAL_TARGETS[props.step.fini] ?? []) : [];
-  // A choice covers the table: only what is on it may be pointed at.
-  const choosing = document.querySelector('.discover') !== null;
+/** The first of these selectors on the table, as a ring around it. */
+function ringAround(selectors: string[], choosing: boolean): Ring | null {
   for (const selector of selectors) {
+    // A choice covers the table: only what is on it may be pointed at.
     if (choosing && !selector.startsWith('.discover')) continue;
     const element = document.querySelector(selector);
     if (!element) continue;
@@ -33,46 +39,62 @@ function measure(): void {
     if (box.width === 0 || box.height === 0) continue;
     const top = Math.max(0, box.top);
     const bottom = Math.min(window.innerHeight, box.bottom);
-    rect.value = { left: box.left - RING_PAD, top: top - RING_PAD, width: box.width + RING_PAD * 2, height: bottom - top + RING_PAD * 2 };
     // Near the top of the screen, the arrow comes from below.
-    below.value = top < window.innerHeight * 0.22;
-    return;
+    return { left: box.left - RING_PAD, top: top - RING_PAD, width: box.width + RING_PAD * 2, height: bottom - top + RING_PAD * 2, below: top < window.innerHeight * 0.22 };
   }
-  rect.value = null;
+  return null;
 }
+
+function measure(): void {
+  const groups = props.step && !props.learned ? (TUTORIAL_TARGETS[props.step.cle] ?? []) : [];
+  const choosing = document.querySelector('.discover') !== null;
+  rings.value = groups.map((selectors) => ringAround(selectors, choosing)).filter((ring): ring is Ring => ring !== null);
+}
+
+/** A refused gesture: the bubble shakes, the rings flash. */
+const shaking = ref(false);
+let shakeTimer = 0;
+watch(() => props.nudge, () => {
+  shaking.value = false;
+  window.clearTimeout(shakeTimer);
+  requestAnimationFrame(() => (shaking.value = true));
+  shakeTimer = window.setTimeout(() => (shaking.value = false), SHAKE_MS);
+});
 
 let timer = 0;
 onMounted(() => {
   measure();
   timer = window.setInterval(measure, MEASURE_MS);
 });
-onUnmounted(() => window.clearInterval(timer));
+onUnmounted(() => {
+  window.clearInterval(timer);
+  window.clearTimeout(shakeTimer);
+});
 
 /** Under the last row of the scores (ScoreBoard: top 176, rows of 70 every 80), whatever the size of the table. */
 const bubbleTop = computed(() => ({ '--bubble-top': String(176 + props.players * 80 + 12) }));
 
-const ringStyle = computed(() => (rect.value ? {
-  left: `${rect.value.left}px`,
-  top: `${rect.value.top}px`,
-  width: `${rect.value.width}px`,
-  height: `${rect.value.height}px`,
-} : {}));
+function ringStyle(ring: Ring): Record<string, string> {
+  return { left: `${ring.left}px`, top: `${ring.top}px`, width: `${ring.width}px`, height: `${ring.height}px` };
+}
 </script>
 
 <template>
   <div class="guide" aria-live="polite">
     <div class="stage">
       <Transition name="say" mode="out-in">
-        <div v-if="step" :key="step.fini" class="bubble" :class="{ last: learned, 'at-bottom': atBottom }" :style="bubbleTop">
-          <span class="kicker">{{ learned ? 'Bravo' : 'Tutoriel' }}</span>
+        <div v-if="step" :key="step.cle" class="bubble" :class="{ last: learned, 'at-bottom': atBottom, shaking }" :style="bubbleTop">
+          <span class="kicker">{{ learned ? 'Bravo' : reminder ? 'Rappel' : 'Tutoriel' }}</span>
           <p><RichText :text="step.texte" /></p>
           <AppButton v-if="learned" class="career" primary @click="$emit('career')">Passer à la carrière</AppButton>
         </div>
       </Transition>
     </div>
-    <div v-if="rect && step && !learned" :key="step.fini" class="ring" :class="{ below }" :style="ringStyle" aria-hidden="true">
-      <svg class="arrow" viewBox="0 0 40 48"><path d="M13 2h14v22h11L20 46 2 24h11Z" /></svg>
-    </div>
+    <template v-if="step && !learned">
+      <div v-for="(ring, index) in rings" :key="`${step.cle}-${index}`" class="ring" :class="{ below: ring.below, flash: shaking }" :style="ringStyle(ring)" aria-hidden="true">
+        <svg class="arrow" viewBox="0 0 40 48"><path d="M13 2h14v22h11L20 46 2 24h11Z" /></svg>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -112,6 +134,12 @@ const ringStyle = computed(() => (rect.value ? {
 .arrow { position: absolute; left: 50%; bottom: calc(100% + 6px); width: 46px; height: 56px; translate: -50% 0; fill: #ffe066; stroke: var(--color-ink); stroke-width: 3; stroke-linejoin: round; filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.5)); animation: arrow-bob 0.8s ease-in-out infinite; }
 .below .arrow { top: calc(100% + 6px); bottom: auto; rotate: 180deg; }
 @keyframes ring-pulse { 50% { box-shadow: 0 0 0 4px rgb(20 17 12 / 0.7), 0 0 40px 12px rgb(255 224 102 / 0.9); } }
+/* A refused gesture: the bubble says no with its head, the rings flash red. */
+.shaking { animation: shake 0.5s ease-in-out; }
+.flash { border-color: #ff5a4a; animation: ring-flash 0.2s ease-in-out 3; }
+@keyframes shake { 20%, 60% { translate: calc(var(--s) * -14) 0; } 40%, 80% { translate: calc(var(--s) * 14) 0; } }
+@keyframes ring-flash { 50% { box-shadow: 0 0 0 4px rgb(20 17 12 / 0.7), 0 0 44px 16px rgb(255 90 74 / 0.95); } }
+@media (prefers-reduced-motion: reduce) { .shaking { animation: none; } }
 @keyframes arrow-bob { 50% { transform: translateY(-12px); } }
 </style>
 

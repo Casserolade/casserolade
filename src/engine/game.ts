@@ -259,14 +259,23 @@ export function chooseRemainingHeroes(game: Game): void {
 }
 
 
-/** Le tutoriel remplace la boutique de cette manche par la sienne, pris dans la réserve, sauf si elle a été gelée. */
-function followScript(game: Game, p: Player, frozen: boolean): void {
+/**
+ * Le tutoriel remplace la boutique de cette manche par la sienne, prise dans la réserve. Gelée, elle garde ses cartes,
+ * et le script ne fait que compléter ce qui lui manque : deux Cheminade gardés, le troisième arrive.
+ */
+function followScript(game: Game, p: Player, kept: string[] | null): void {
   const script = game.script;
   if (!script || script.seat !== p.seat) return;
   const minions = script.boutique?.[game.round];
-  if (minions && !frozen) {
+  if (minions) {
     for (const id of p.shop) returnToPool(game, id);
-    p.shop = minions.filter((id) => take(game, id));
+    const missing = [...minions];
+    for (const id of kept ?? []) {
+      const at = missing.indexOf(id);
+      if (at >= 0) missing.splice(at, 1);
+    }
+    const room = Math.max(minions.length, game.params.shopSize[p.tier]) - missing.length;
+    p.shop = [...(kept ?? []).slice(0, Math.max(0, room)), ...missing].filter((id) => take(game, id));
   }
   const spells = script.sorts?.[game.round];
   if (spells) p.shopSpells = [...spells];
@@ -297,6 +306,7 @@ export function startRound(game: Game): void {
     p.buysThisRound = 0;
     p.rollsThisRound = 0;
     const frozen = p.frozen;
+    const kept = frozen ? [...p.shop] : null;
     // Gelée, la boutique garde ses cartes et complète ses places vides ; sinon elle se renouvelle.
     if (frozen) {
       p.frozen = false;
@@ -304,7 +314,7 @@ export function startRound(game: Game): void {
     } else refillShop(game, p);
     // Le gel garde aussi la casserole, si elle n'a pas été achetée.
     if (!frozen || !p.casseroleOffer) offerCasserole(game, p);
-    followScript(game, p, frozen);
+    followScript(game, p, kept);
     followEvents(game, p);
     if (round === 1 && game.ctx.firstRoundDiscover) offerMinions(game, p, game.ctx.firstRoundDiscover);
     if (dissolved && game.ctx.dissolutionDiscover) offerMinions(game, p, p.tier);

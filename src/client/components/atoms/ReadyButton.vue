@@ -4,15 +4,18 @@ import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 
 const HURRY_SECONDS = 15;
 
-/** The end of the turn, where the timer is: the seconds left, and a press ends the recruitment. */
-const props = defineProps<{ secondsLeft: number | null; done: boolean }>();
+/**
+ * The end of the turn, where the timer is: the seconds left, and a press ends the recruitment. Refused for now (the
+ * tutorial: budget left, a lesson waiting), it goes dull, and a press only says why.
+ */
+const props = withDefaults(defineProps<{ secondsLeft: number | null; done: boolean; refusal?: string | null }>(), { refusal: null });
 defineEmits<{ ready: [] }>();
 
 const hurry = computed(() => props.secondsLeft !== null && props.secondsLeft <= HURRY_SECONDS && !props.done);
 </script>
 
 <template>
-  <button type="button" class="ready" :class="{ hurry, done }" :disabled="done" :aria-label="done ? 'En attente des autres joueurs' : 'Terminer le recrutement'" @click="$emit('ready')">
+  <button type="button" class="ready" :class="{ hurry, done, refused: refusal && !done }" :disabled="done" :aria-label="done ? 'En attente des autres joueurs' : refusal ?? 'Terminer le recrutement'" @click="$emit('ready')">
     <span class="dial">
       <GameIcon v-if="secondsLeft === null" class="glass" name="hourglass" />
       <span v-if="secondsLeft !== null" class="seconds">{{ secondsLeft }}</span>
@@ -44,6 +47,8 @@ const hurry = computed(() => props.secondsLeft !== null && props.secondsLeft <= 
 .ready:focus-visible .dial { outline: calc(var(--s) * 4) solid var(--color-accent); outline-offset: calc(var(--s) * 4); }
 .hurry .dial { background: radial-gradient(circle at 40% 30%, #e0503a, #6a140c 72%); box-shadow: 0 calc(var(--s) * 10) calc(var(--s) * 20) rgb(0 0 0 / 0.6), 0 0 calc(var(--s) * 34) rgb(255 90 60 / 0.6); animation: hurry 1s steps(2, end) infinite; }
 .done { cursor: default; }
+.refused .dial { filter: grayscale(0.85) brightness(0.65); box-shadow: 0 calc(var(--s) * 10) calc(var(--s) * 20) rgb(0 0 0 / 0.6); }
+.refused .label { opacity: 0.6; }
 .done .dial { filter: grayscale(0.8) brightness(0.7); }
 @keyframes hurry { 50% { transform: scale(1.07); } }
 @media (prefers-reduced-motion: reduce) { .hurry .dial { animation: none; } }

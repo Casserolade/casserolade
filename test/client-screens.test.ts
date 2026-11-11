@@ -95,10 +95,14 @@ test('rewardLabel : chaque récompense se dit en quelques mots', () => {
   for (const item of SUCCES) if (item.recompense) assert.ok(rewardLabel(item.recompense).length > 5, item.id);
 });
 
-test('le tutoriel montre du doigt chaque consigne, sauf la dernière', () => {
-  for (const step of TUTORIEL.etapes) {
-    if (step.fini === 'victoire') continue;
-    assert.ok(TUTORIAL_TARGETS[step.fini]?.length, `rien à montrer pour ${step.fini}`);
+test('le tutoriel montre du doigt chaque consigne et chaque rappel, sauf la dernière', () => {
+  const cles = [...Object.keys(TUTORIEL.etapes), ...Object.keys(TUTORIEL.rappels)] as (keyof typeof TUTORIAL_TARGETS)[];
+  for (const cle of cles) {
+    if (cle === 'victoire') continue;
+    assert.ok(TUTORIAL_TARGETS[cle]?.length, `rien à montrer pour ${cle}`);
+  }
+  for (const cle of ['premier_achat', 'budget']) {
+    assert.ok(TUTORIAL_TARGETS[cle as 'budget']?.some((ring) => ring.includes('[data-control="budget"]')), `${cle} montre le budget`);
   }
 });
 
