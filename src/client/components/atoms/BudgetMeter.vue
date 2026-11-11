@@ -24,7 +24,7 @@ watch(() => props.budget, (budget, before) => {
 </script>
 
 <template>
-  <div class="budget" :aria-label="`Budget : ${budget} sur ${max}${later ? `, et ${later} à la prochaine manche` : ''}`">
+  <div class="budget" data-control="budget" :aria-label="`Budget : ${budget} sur ${max}${later ? `, et ${later} à la prochaine manche` : ''}`">
     <span class="big-coin"><GameIcon name="coin" /></span>
     <span class="amount">{{ budget }}<span class="max">/{{ max }}</span></span>
     <span class="coins" aria-hidden="true">

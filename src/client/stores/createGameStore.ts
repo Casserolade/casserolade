@@ -30,9 +30,17 @@ export interface MmrChange {
   apres: number;
 }
 
+/**
+ * A local game may refuse a gesture before it leaves: the tutorial, on rails. The reason is told to the player, and
+ * nothing is sent.
+ */
+export interface ActionGuard {
+  refusal(action: PlayerAction | 'pret'): string | null;
+}
+
 /** Everything the screens know about the game. It alone talks to the transport. */
 
-export function createGameStore(transport: Transport & Partial<ConnectionWatch>) {
+export function createGameStore(transport: Transport & Partial<ConnectionWatch> & Partial<ActionGuard>) {
   // A new game: no voice heard yet (a voice is never heard twice in the same game).
   heardVoices.forget();
   const view = shallowRef<PlayerView | null>(null);
@@ -61,6 +69,10 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
   const hostLineCount = ref(0);
   const deadline = ref<number | null>(null);
   const hasEndedRecruitment = ref(false);
+  /** Why « Prêt » is refused for now (the tutorial: budget left, a lesson waiting); null when it may go. */
+  const readyRefusal = computed(() => (view.value ? (transport.refusal?.('pret') ?? null) : null));
+  /** Gestures refused before they left: the tutorial's guide shakes at each one. */
+  const refusals = ref(0);
   /** The public queue as the server last showed it; null before its first answer. */
   const queue = shallowRef<VueFile | null>(null);
   /** In the public queue, or on the way there. */
@@ -332,17 +344,30 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
     else if (action.t === 'upgrade') pendingHostLine = hostQuote(host.id, 'echelon', hostTurn++);
   }
 
-  function act(action: PlayerAction): void {
+  /** The guard refuses this gesture: the player is told why, and it does not leave. */
+  function refuse(action: PlayerAction | 'pret'): boolean {
+    const reason = transport.refusal?.(action) ?? null;
+    if (!reason) return false;
+    showNotice(reason);
+    refusals.value++;
+    return true;
+  }
+
+  /** Sends the action. False when it did not leave: no connection, or refused on the spot. */
+  function act(action: PlayerAction): boolean {
     // Sent now, it would be played later on a table that has moved on: the player is told instead.
     if (connection.value !== 'open') {
       showNotice(RECONNECTING_NOTICE);
-      return;
+      return false;
     }
+    if (refuse(action)) return false;
     updateHostLine(action);
     transport.send({ type: 'action', seq: nextSeq++, action });
+    return true;
   }
 
   function endRecruitment(): void {
+    if (refuse('pret')) return;
     hasEndedRecruitment.value = true;
     transport.send({ type: 'pret' });
   }
@@ -433,7 +458,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch>)
     room, roomGone, refused, connection, connectionLost, retry, createRoom, joinRoom, launchRoom, updateRoomSettings,
     queue, queueing, queueLost, queueLostReason, queueSeenAt, mmrChange, joinQueue, voteQueue, chat, canChat, sendChat,
     names, following, spectating, follow,
-    view, combat, combatView, endOfTurn, ranking, showRanking, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, screen, act, endRecruitment, closeCombat, leave,
+    view, combat, combatView, endOfTurn, ranking, showRanking, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, readyRefusal, refusals, screen, act, endRecruitment, closeCombat, leave,
   };
 }
 

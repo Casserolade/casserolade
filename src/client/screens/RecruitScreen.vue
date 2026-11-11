@@ -95,7 +95,7 @@ watch(tripleCount, (count, before) => {
     <div class="story-line-place"><slot name="story-line" /></div>
     <div class="story-quest-place"><slot name="story-quest" /></div>
     <div class="right-rail">
-      <ReadyButton :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" @ready="store.endRecruitment()" />
+      <ReadyButton :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" :refusal="store.readyRefusal.value" @ready="store.endRecruitment()" />
       <CampChips class="camps" :camps="view.camps" vertical />
       <ContextBadge :context-id="view.contextId" compact />
     </div>

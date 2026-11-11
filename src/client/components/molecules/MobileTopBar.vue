@@ -24,7 +24,7 @@ const polls = computed(() => splitPolls(props.hp, props.startHp));
       <span class="count health"><GameIcon name="heart" />{{ polls.polls }}</span>
       <span v-if="polls.electoralBase > 0" class="count base"><GameIcon name="shield" />{{ polls.electoralBase }}</span>
     </button>
-    <span class="budget" :aria-label="`Budget : ${budget} sur ${maxBudget}`"><GameIcon name="coin" />{{ budget }}<small>/{{ maxBudget }}</small></span>
+    <span class="budget" data-control="budget" :aria-label="`Budget : ${budget} sur ${maxBudget}`"><GameIcon name="coin" />{{ budget }}<small>/{{ maxBudget }}</small></span>
   </header>
 </template>
 

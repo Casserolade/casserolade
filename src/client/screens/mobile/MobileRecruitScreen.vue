@@ -124,7 +124,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
         <strong>Manche {{ view.round }}</strong>
         <slot name="story-line">Touchez une carte pour la lire ; glissez-la pour la jouer.</slot>
       </div>
-      <ReadyButton class="ready" :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" @ready="store.endRecruitment()" />
+      <ReadyButton class="ready" :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" :refusal="store.readyRefusal.value" @ready="store.endRecruitment()" />
     </footer>
     <EndOfTurnBanner v-if="store.endOfTurn.value?.banner.value" class="end-banner" />
     <div v-if="showTriple" :key="triples" class="triple" aria-live="polite"><strong>Triple !</strong></div>

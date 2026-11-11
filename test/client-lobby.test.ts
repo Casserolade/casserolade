@@ -84,8 +84,9 @@ test('le chapitre 1 se lit dans le temps imparti : 45 secondes à la première m
 });
 
 test('le tutoriel enseigne le glisser, sans parler de cliquer', () => {
-  for (const etape of TUTORIEL.etapes) assert.doesNotMatch(etape.texte, /cliqu/i, etape.texte);
-  assert.ok(TUTORIEL.etapes.some((etape) => /[Gg]lissez/.test(etape.texte)));
+  const textes = [...Object.values(TUTORIEL.etapes).map((etape) => etape.texte), ...Object.values(TUTORIEL.rappels), ...Object.values(TUTORIEL.refus)];
+  for (const texte of textes) assert.doesNotMatch(texte, /cliqu/i, texte);
+  assert.ok(textes.some((texte) => /[Gg]lissez/.test(texte)));
 });
 
 test('pollsBase : la base commune est le départ du héros le moins doté, à toute échelle', () => {

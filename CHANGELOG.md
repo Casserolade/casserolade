@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3h — 11 novembre 2026
+
+**Le tutoriel, sur des rails**
+- Chaque manche a sa leçon, dans l'ordre, et seul le geste demandé passe : on ne sort plus du chemin, et une actualisation ne fait plus disparaître la carte dont parle la consigne.
+- Une consigne ne parle plus jamais d'un politique absent ni d'un triple impossible.
+- Le budget est montré du doigt, et le combat attend qu'il soit dépensé : « Prêt » reste grisé tant qu'il en reste. Entre deux leçons, le tutoriel rappelle d'actualiser et de geler.
+- Le triple se fait en une manche : le gel garde deux Cheminade, la boutique apporte le troisième, et le budget suffit.
+- Au scandale, le Bracelet électronique est en boutique : on apprend à effacer un scandale tout de suite.
+
+**Correction**
+- En entrant dans une carrière ou en la reprenant, la cinématique du chapitre passe toujours, ou l'introduction si le chapitre n'en a pas.
+
 ## 0.3g — 11 novembre 2026
 
 **Équilibrage**
