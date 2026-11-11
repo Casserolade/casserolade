@@ -57,15 +57,35 @@ let afterCutscene: (() => void) | null = null;
 /** Whether the cutscene on screen belongs to the campaign (not one watched again in the cinematheque). */
 let campaignScene = false;
 
+function playCampaignScene(scene: Scene, then: () => void): void {
+  afterCutscene = then;
+  campaignScene = true;
+  cutscene.value = scene;
+}
+
 function showCutscene(scene: Scene | null, then: () => void): void {
   const current = campaign.value;
   if (!scene || !current || current.vues?.includes(scene.id)) {
     then();
     return;
   }
-  afterCutscene = then;
-  campaignScene = true;
-  cutscene.value = scene;
+  playCampaignScene(scene, then);
+}
+
+/**
+ * Entering a career (a new one, or one taken up again) always opens on its scene, even one already seen: the chapter's
+ * own, or the career's introduction when the chapter has none. Retries of the same election then play nothing again.
+ */
+let entrySceneDue = true;
+
+function showEntryScene(heroId: string, chapterId: string, then: () => void): void {
+  entrySceneDue = false;
+  const scene = cinematiqueDe(heroId, 'avant_chapitre', chapterId) ?? cinematiqueDe(heroId, 'intro');
+  if (!scene) {
+    then();
+    return;
+  }
+  playCampaignScene(scene, then);
 }
 
 /** A cutscene counts as seen once it is on screen: one that could not be built plays again next time. */
@@ -113,12 +133,18 @@ function setCampaign(next: Campagne | null): void {
 
 function chooseHero(heroId: string): void {
   setCampaign(nouvelleCampagne(heroId, generateSeed()));
+  // A new career's introduction is its entry scene.
+  entrySceneDue = false;
   showCutscene(cinematiqueDe(heroId, 'intro'), () => undefined);
 }
 
-/** A chapter of a career may open with its scene, the first time it is played. */
+/** A chapter of a career opens with its scene: always on entering the career, otherwise the first time it is played. */
 function play(): void {
   if (!campaign.value || !chapter.value) return;
+  if (campaign.value.carriere && entrySceneDue) {
+    showEntryScene(campaign.value.heroId, chapter.value.id, startChapter);
+    return;
+  }
   const scene = campaign.value.carriere ? cinematiqueDe(campaign.value.heroId, 'avant_chapitre', chapter.value.id) : null;
   showCutscene(scene, startChapter);
 }
