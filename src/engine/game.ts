@@ -637,6 +637,8 @@ export interface PlayerView {
   freeRolls: number;
   /** Les politiques déjà relancés cette manche (règle R4) : une relance ne les vise plus avant la suivante. */
   relaunched: number[];
+  /** Les effets « une fois par manche » déjà joués, `uid:index` dans les effets du politique (Sarkozy, Fillon, Messiha). */
+  onceThisRound: string[];
   boardLimit: number;
   scandalThreshold: number;
   heroId: string;
@@ -750,6 +752,7 @@ export function viewFor(game: Game, seat: number): PlayerView {
     rollCost: rollCost(game, p),
     freeRolls: p.freeRolls,
     relaunched: [...p.retriggered],
+    onceThisRound: [...p.onceThisRound],
     boardLimit: boardLimit(game, p),
     scandalThreshold: scandalThreshold(game, p),
     heroId: p.hero.id,

@@ -281,6 +281,33 @@ test('Sarkozy : un allié qui reçoit une casserole double, avantage compris', (
   assert.deepEqual([kazib.atk, kazib.hp], expected);
 });
 
+test('Sarkozy ne double qu\'une fois par manche : la deuxième casserole donne son avantage, sans doubler', () => {
+  const game = startTable(['republicains', 'macronie', 'socialistes', 'ecologistes', 'reconquete']);
+  const p = game.players[0];
+  const sarkozy = lay(game, 'sarkozy');
+  const kazib = lay(game, 'kazib');
+  const lucas = lay(game, 'lucas');
+  const pose = (id: string, m: Minion) => {
+    p.casseroleOffer = id;
+    p.budget = 10;
+    assert.equal(applyAction(game, 0, { t: 'buy_casserole' }).ok, true);
+    const held = p.spells.find((s) => s.casseroleId === id) as { uid: number };
+    assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid, target: m.uid }).ok, true);
+  };
+  pose('homards', kazib);
+  const key = `${sarkozy.uid}:${sarkozy.effects.findIndex((e) => e.do === 'doubler_stats')}`;
+  assert.deepEqual(viewFor(game, 0).onceThisRound, [key], 'la vue dit que le doublement est joué');
+  const before = [lucas.atk, lucas.hp];
+  const ecoutes = CASSEROLE_BY_ID.ecoutes;
+  pose('ecoutes', lucas);
+  assert.deepEqual([lucas.atk, lucas.hp], [before[0] + (ecoutes.atk ?? 0), before[1] + (ecoutes.hp ?? 0)], 'pas de second doublement');
+  p.onceThisRound = new Set();
+  const again = [kazib.atk, kazib.hp];
+  pose('benalla', kazib);
+  const benalla = CASSEROLE_BY_ID.benalla;
+  assert.deepEqual([kazib.atk, kazib.hp], [(again[0] + (benalla.atk ?? 0)) * 2, (again[1] + (benalla.hp ?? 0)) * 2], 'la manche suivante, il double de nouveau');
+});
+
 test('Marine Le Pen : chaque débauché donne ses stats à tout le RN, pour la partie', () => {
   const game = startTable(['rn', 'macronie', 'republicains', 'socialistes', 'reconquete']);
   const p = game.players[0];

@@ -8,6 +8,7 @@ import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { lostSpellReason } from '../engine/lostSpellReason.ts';
 import { CONTEXTS } from '../data/heroes.ts';
+import { FORCE_CARTES } from '../data/forceCartes.ts';
 import { PERSONNALITES } from '../data/personnalites.ts';
 import type { Personnalite } from '../data/personnalites.ts';
 import { SPELL_BY_ID } from '../data/sorts.ts';
@@ -42,6 +43,13 @@ export interface BotState {
   place: boolean;
   /** Style de mesure (simulateur seulement) : voir BotStyle. */
   rollDown: boolean;
+  /**
+   * Les combos des humains, que le difficile joue : les casseroles de Sarkozy et le Bracelet, les multiplicateurs, le
+   * voisinage, le gel de la boutique, l'ordre de pose.
+   */
+  combos: boolean;
+  /** Le facile, distrait certaines manches : le budget qu'il oubliera de dépenser (0 s'il ne l'est pas). */
+  forgets: number;
 }
 
 export interface BotStyle {
@@ -57,6 +65,8 @@ export interface BotStyle {
   casseroleTaste?: number;
   /** Mesure : à partir de l'échelon 3, une boutique qui déçoit s'actualise avant de dépenser ailleurs (huit fois au plus). */
   rollDown?: boolean;
+  /** Mesure : les combos de casseroles, au difficile par défaut ; `false` les retire pour comparer. */
+  combos?: boolean;
 }
 
 export function createBot(level: BotLevel, seed: number, style: BotStyle = {}): BotState {
@@ -83,6 +93,8 @@ export function createBot(level: BotLevel, seed: number, style: BotStyle = {}): 
     perso: null,
     place: style.place ?? false,
     rollDown: style.rollDown ?? false,
+    combos: style.combos ?? level === 'difficile',
+    forgets: 0,
   };
 }
 
@@ -98,7 +110,8 @@ function incarner(view: PlayerView, bot: BotState): void {
   const chezLui = perso.camp !== null && view.camps.includes(perso.camp);
   bot.willCommit = chezLui || perso.fidelite >= 0.5;
   if (chezLui) bot.commitment = perso.camp;
-  bot.pure = bot.willCommit && bot.rng.next() < perso.purete;
+  // Le difficile garde le camp de son personnage sans s'y enfermer : un camp pur coûtait près d'une place.
+  bot.pure = bot.willCommit && bot.rng.next() < perso.purete && bot.level !== 'difficile';
 }
 
 /** Les goûts du personnage : ils orientent le choix sans changer le niveau de jeu. */
@@ -358,8 +371,41 @@ function campScore(card: Card, view: PlayerView, bot: BotState): number {
   return v;
 }
 
+/** La force moyenne de chaque échelon dans la table de force, seule et dans son camp. */
+const TIER_FORCE: Record<number, { seul: number; camp: number }> = (() => {
+  const sums: Record<number, { seul: number; camp: number; n: number }> = {};
+  for (const [id, f] of Object.entries(FORCE_CARTES)) {
+    const tier = CARD_BY_ID[id]?.tier;
+    if (!tier) continue;
+    const s = (sums[tier] ??= { seul: 0, camp: 0, n: 0 });
+    s.seul += f.seul;
+    s.camp += f.camp;
+    s.n++;
+  }
+  return Object.fromEntries(Object.entries(sums).map(([t, s]) => [t, { seul: s.seul / s.n, camp: s.camp / s.n }]));
+})();
+
+/** Le poids de cette connaissance : une place gagnée vaut autant que 10 de stats. */
+const KNOWLEDGE = 10;
+
+/**
+ * Ce qu'un joueur qui connaît le jeu sait d'une carte (difficile) : de combien de places elle dépasse la moyenne de son
+ * échelon (`src/data/forceCartes.ts`), dans le camp que suit le bot, ou seule. Cohn-Bendit, Hollande, Zemmour gagnent des
+ * parties ; la formule de valeur ne voyait que leurs stats et un forfait par effet.
+ */
+function knownForce(cardId: string, view: PlayerView, bot: BotState): number {
+  const f = FORCE_CARTES[cardId];
+  const card = CARD_BY_ID[cardId];
+  const mean = card ? TIER_FORCE[card.tier] : undefined;
+  if (!bot.combos || !f || !card || !mean) return 0;
+  const main = bot.commitment ?? dominantCamp(view.board);
+  const inCamp = card.camp !== 'civile' && card.camp === main;
+  return KNOWLEDGE * (inCamp ? f.camp - mean.camp : f.seul - mean.seul);
+}
+
 function cardScore(card: Card, view: PlayerView, bot: BotState): number {
   let v = cardPower(card) + campScore(card, view, bot);
+  if (bot.combos) v += doublerWorth(card.effects ?? [], view) + engineWorth(card.effects ?? [], Boolean(card.golden), view) + knownForce(card.id, view, bot);
   const copies = owned(view, card.id);
   if (copies === 2) v += 20;
   else if (copies === 1) v += 4;
@@ -373,7 +419,8 @@ function cardScore(card: Card, view: PlayerView, bot: BotState): number {
  */
 function boardScore(m: Minion, view: PlayerView, bot: BotState): number {
   const card = CARD_BY_ID[m.cardId];
-  return minionPower(m) + (card ? campScore(card, view, bot) : 0);
+  const combo = bot.combos ? doublerWorth(m.effects, view) + engineWorth(m.effects, m.golden, view, m.uid) + (m.token ? 0 : knownForce(m.cardId, view, bot)) : 0;
+  return minionPower(m) + (card ? campScore(card, view, bot) : 0) + combo;
 }
 
 function expectedTier(view: PlayerView, bot: BotState): number {
@@ -434,18 +481,132 @@ function scandalCost(c: Casserole, m: Minion, view: PlayerView): number {
   return [...m.casseroles.slice(m.oublie).map((id) => CASSEROLE_BY_ID[id]), c].reduce((s, x) => s + defectCost(x, m), 0);
 }
 
-function casseroleTarget(view: PlayerView, c: Casserole, bot: BotState): Minion | null {
+/**
+ * Le politique qui reçoit la casserole. Avec les combos, le doublement de Sarkozy encore à jouer la fait aller au plus
+ * gros, et un Bracelet (en main, ou acheté juste avant, `braceletPrice`) ramène le scandale qu'elle ferait à son prix.
+ */
+function casseroleTarget(view: PlayerView, c: Casserole, bot: BotState, braceletPrice = braceletInHand(view) ? BUDGET_WORTH : Infinity): Minion | null {
   let best: Minion | null = null;
   let bestScore = 1 + (1 - bot.casseroleTaste) * 3;
   for (const m of view.board) {
     if (m.token) continue;
-    const score = casseroleValue(c, m, view) - scandalCost(c, m, view) + minionPower(m) * 0.1;
+    const scandal = bot.combos ? Math.min(scandalCost(c, m, view), braceletPrice) : scandalCost(c, m, view);
+    const doubling = bot.combos ? doublingGain(view, m, c) * 0.8 : 0;
+    const score = casseroleValue(c, m, view) + doubling - scandal + minionPower(m) * 0.1;
     if (score > bestScore) {
       best = m;
       bestScore = score;
     }
   }
   return best;
+}
+
+// Les combos du difficile (10 novembre 2026) : ce que les humains font des casseroles, et que les bots ne faisaient pas.
+
+/** La puissance de chaque doublement de Sarkozy encore à jouer cette manche : 1, ou 2 pour un doré. */
+function readyDoublings(view: PlayerView): number[] {
+  const powers: number[] = [];
+  for (const s of view.board) {
+    s.effects.forEach((e, i) => {
+      if (e.when !== 'casserole_recue' || e.do !== 'doubler_stats') return;
+      if (e.once === 'manche' && view.onceThisRound.includes(`${s.uid}:${i}`)) return;
+      powers.push(e.power ?? 1);
+    });
+  }
+  return powers;
+}
+
+/** Ce que les doublements encore à jouer ajoutent au politique qui reçoit cette casserole, son avantage compris. */
+function doublingGain(view: PlayerView, m: Minion, c: Casserole): number {
+  const times = readyDoublings(view).reduce((sum, k) => sum + k, 0);
+  if (times === 0) return 0;
+  const bonus = m.cardId === c.owner ? c.ownerBonus : {};
+  const size = m.atk + m.hp + Math.max(0, (c.atk ?? 0) + (c.hp ?? 0)) + Math.max(0, (bonus.atk ?? 0) + (bonus.hp ?? 0));
+  return size * (2 ** Math.min(times, 6) - 1);
+}
+
+/** Sarkozy, ou une carte qui double comme lui : il vaut ce qu'il doublera, le plus gros politique du plateau. */
+function doublerWorth(effects: Effect[], view: PlayerView): number {
+  if (!effects.some((e) => e.when === 'casserole_recue' && e.do === 'doubler_stats')) return 0;
+  return view.board.reduce((best, m) => Math.max(best, m.token ? 0 : m.atk + m.hp), 0) * 0.5;
+}
+
+const isBracelet = (held: HandSpell): boolean => Boolean(held.spellId && SPELL_BY_ID[held.spellId]?.effects.some((e) => e.do === 'oublier'));
+
+function braceletInHand(view: PlayerView): boolean {
+  return view.spells.some(isBracelet);
+}
+
+/** L'emplacement du Bracelet dans la boutique, ou -1. */
+function braceletSlot(view: PlayerView): number {
+  return view.shopSpells.findIndex((id) => SPELL_BY_ID[id].effects.some((e) => e.do === 'oublier'));
+}
+
+/**
+ * La casserole du doublement, achetée avant les politiques : sur un gros politique, elle rapporte plus que tout achat.
+ * Si elle le ferait tomber en scandale et que la boutique a un Bracelet, le Bracelet d'abord, pour l'effacer aussitôt.
+ */
+function casseroleCombo(view: PlayerView, bot: BotState): PlayerAction | null {
+  if (!bot.combos || !view.casseroleOffer || view.casseroleCost === null || readyDoublings(view).length === 0) return null;
+  const c = CASSEROLE_BY_ID[view.casseroleOffer];
+  const slot = braceletSlot(view);
+  const canBuyBracelet = !braceletInHand(view) && slot >= 0 && view.budget >= view.shopSpellCosts[slot] + view.casseroleCost && handCount(view) + 2 <= view.handLimit;
+  const target = casseroleTarget(view, c, bot, braceletInHand(view) ? BUDGET_WORTH : canBuyBracelet ? view.shopSpellCosts[slot] * BUDGET_WORTH : Infinity);
+  if (!target || doublingGain(view, target, c) < 12) return null;
+  if (canBuyBracelet && scandalCost(c, target, view) > 3) return { t: 'buy_spell', slot };
+  if (view.budget >= view.casseroleCost && handCount(view) < view.handLimit) return { t: 'buy_casserole' };
+  return null;
+}
+
+/** Le Bracelet gardé en main pour le scandale à venir : Sarkozy au plateau, et de la place en main. */
+function wantsBracelet(view: PlayerView): boolean {
+  return !braceletInHand(view) && view.board.some((m) => doublerWorth(m.effects, view) > 0) && handCount(view) + 2 <= view.handLimit;
+}
+
+// Les multiplicateurs (difficile) : Lassalle, Chirac, Mitterrand, Mélenchon, Macron valent ce qu'ils doublent, et une
+// carte vaut plus quand son déclencheur est déjà doublé. Avant, un multiplicateur valait 12, quel que soit le plateau.
+
+type Multiplied = 'annonce' | 'heritage' | 'fin_tour' | 'celebration' | 'meeting';
+const MULTIPLIED: Multiplied[] = ['annonce', 'heritage', 'fin_tour', 'celebration', 'meeting'];
+
+/** Combien de fois un déclencheur joue avec ce plateau : 1, 2, ou 3 avec un multiplicateur doré (le plus fort compte). */
+function multiplier(board: Minion[], trigger: Multiplied): number {
+  let n = 1;
+  for (const m of board) {
+    for (const e of m.effects) if (e.when === 'aura' && e.do === 'doubler' && e.trigger === trigger) n = Math.max(n, (e.power ?? (m.golden ? 2 : 1)) > 1 ? 3 : 2);
+  }
+  return n;
+}
+
+/** Ce que valent les effets `trigger` du plateau et de la main, puissance comprise. */
+function triggerWorth(view: PlayerView, trigger: Multiplied, except?: number): number {
+  let v = 0;
+  for (const m of [...view.board, ...view.hand]) {
+    if (m.uid === except) continue;
+    for (const e of m.effects) if (e.when === trigger) v += effectValue(e) * (e.power ?? (m.golden ? 2 : 1));
+  }
+  return v;
+}
+
+/**
+ * Ce qu'une carte ajoute aux moteurs du plateau : un multiplicateur, ce qu'il double de plus ; un relanceur (« déclenche
+ * l'Annonce de vos autres politiques »), ce qu'il relance ; un effet déjà doublé, sa valeur une fois de plus.
+ */
+function engineWorth(effects: Effect[], golden: boolean, view: PlayerView, self?: number): number {
+  let v = 0;
+  const power = (e: Effect) => e.power ?? (golden ? 2 : 1);
+  for (const e of effects) {
+    if (e.when === 'aura' && e.do === 'doubler') {
+      const now = multiplier(view.board.filter((m) => m.uid !== self), e.trigger);
+      const next = Math.max(now, power(e) > 1 ? 3 : 2);
+      v += triggerWorth(view, e.trigger, self) * (next - now) - actionValue(e);
+    } else if (e.do === 'declencher') {
+      const relaunched = e.to === 'voisins' ? 0.4 : e.to === 'autres' ? 1 : 0.3;
+      v += triggerWorth(view, e.trigger, self) * relaunched * power(e) - actionValue(e);
+    }
+    if ((MULTIPLIED as string[]).includes(e.when)) v += effectValue(e) * power(e) * (multiplier(view.board.filter((m) => m.uid !== self), e.when as Multiplied) - 1);
+  }
+  return v * 0.5;
 }
 
 /** Le Bracelet : un scandale qui coûte. */
@@ -505,18 +666,43 @@ function strength(board: Minion[], view: PlayerView, runs = 2): number {
   return recent.length ? total / (recent.length * runs) : 0;
 }
 
-function bestOrdering(view: PlayerView): Minion[] {
+/**
+ * Ce que les effets de voisinage rapportent selon l'ordre (difficile) : Jadot entre deux Fins de tour, un gain aux voisins
+ * ou à l'allié suivant (celui de droite, ou le premier, règle R15) sur un vrai politique plutôt qu'un jeton, un mot-clé à
+ * qui ne l'a pas encore.
+ */
+function neighborWorth(order: Minion[]): number {
+  let v = 0;
+  const power = (m: Minion, e: Effect) => e.power ?? (m.golden ? 2 : 1);
+  const gain = (e: Effect, to: Minion | undefined): number => {
+    if (!to) return 0;
+    if (e.do === 'declencher') return to.effects.filter((x) => x.when === e.trigger).reduce((sum, x) => sum + effectValue(x) * power(to, x), 0);
+    if (e.do === 'mot_cle') return to.token || to.keywords.includes(e.keyword) ? 0 : 3;
+    return to.token ? 0 : 2;
+  };
+  order.forEach((m, i) => {
+    for (const e of m.effects) {
+      if (e.to === 'voisins') v += (gain(e, order[i - 1]) + gain(e, order[i + 1])) * power(m, e);
+      else if (e.to === 'allie_suivant' && order.length > 1) v += gain(e, order[i + 1] ?? order[0]) * power(m, e);
+    }
+  });
+  return v;
+}
+
+function bestOrdering(view: PlayerView, bot: BotState): Minion[] {
   // Le point de départ ne dépend pas de l'ordre actuel : sinon chaque déplacement change la cible,
   // et le bot passe son tour à échanger deux serviteurs.
   let best = preferredOrder([...view.board].sort((a, b) => a.uid - b.uid));
-  if (view.seen.length === 0 || best.length < 2) return best;
-  let bestScore = strength(best, view);
+  if (best.length < 2 || (!bot.combos && view.seen.length === 0)) return best;
+  // Le combat contre les plateaux vus ; avec les combos, le voisinage au recrutement, qui compte dès la première manche.
+  const score = (order: Minion[]) => (view.seen.length > 0 ? strength(order, view) : 0) + (bot.combos ? neighborWorth(order) : 0);
+  let bestScore = score(best);
   for (let i = 0; i < best.length; i++) {
     for (let j = i + 1; j < best.length; j++) {
       if (best[i].locked || best[j].locked) continue;
       const next = [...best];
       [next[i], next[j]] = [next[j], next[i]];
-      const s = strength(next, view);
+      const s = score(next);
       if (s > bestScore + 1) {
         best = next;
         bestScore = s;
@@ -589,7 +775,16 @@ function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxT
 function handMove(view: PlayerView, bot: BotState, margin = 3): PlayerAction | null {
   const candidates = view.hand.filter((m) => !bot.kept.has(m.uid));
   if (candidates.length === 0) return null;
-  const ranked = [...candidates].sort((a, b) => Number(b.golden) - Number(a.golden) || minionPower(b) - minionPower(a));
+  // Le difficile pose d'abord ce qui profite des suivants : « quand vous jouez un Écologiste » avant les Écologistes,
+  // Maillard ou Macron avant les Ralliements.
+  const feeds = (m: Minion) =>
+    bot.combos &&
+    m.effects.some(
+      (e) =>
+        (e.when === 'joue' && candidates.some((o) => o !== m && !o.keywords.includes('ralliement') && (!e.camp || o.camp === e.camp))) ||
+        (e.when === 'rallie' && candidates.some((o) => o !== m && o.keywords.includes('ralliement'))),
+    );
+  const ranked = [...candidates].sort((a, b) => Number(feeds(b)) - Number(feeds(a)) || Number(b.golden) - Number(a.golden) || minionPower(b) - minionPower(a));
   const m = ranked[0];
   // Un Ralliement rejoint le plus fort quand le plateau est plein, quand il n'a presque pas de corps, ou quand un
   // allié en profite (Maillard, Bayrou, Macron qui double l'hôte : re-spécification du 7 novembre 2026).
@@ -623,7 +818,8 @@ function castMove(view: PlayerView, bot: BotState): PlayerAction | null {
     if (bot.kept.has(held.uid)) continue;
     const action = castAction(view, bot, held);
     if (action) return action;
-    bot.kept.add(held.uid);
+    // Avec les combos, le Bracelet attend le scandale que la casserole suivante va faire, dans la même manche.
+    if (!(bot.combos && isBracelet(held))) bot.kept.add(held.uid);
   }
   return null;
 }
@@ -663,7 +859,7 @@ function spellBuy(view: PlayerView, reserve: number, bot: BotState): PlayerActio
     if (spell.target && view.board.length === 0) return;
     const frees = spell.effects.some((e) => e.do === 'oublier');
     // Le Bracelet ne vaut que s'il y a un scandale qui coûte.
-    const value = frees ? (braceletUseful(view) ? 8 : 0) : spellWorth(spell, view, bot);
+    const value = frees ? (braceletUseful(view) ? 8 : bot.combos && wantsBracelet(view) ? 5 : 0) : spellWorth(spell, view, bot);
     const score = value - cost * BUDGET_WORTH;
     if (score > 0 && (!best || score > best.score)) best = { slot, score };
   });
@@ -686,10 +882,25 @@ function shopChoice(view: PlayerView, bot: BotState): { slot: number; score: num
   return best;
 }
 
+/**
+ * Geler la boutique en fin de tour (difficile), quand le budget ne suffit plus et qu'elle garde de quoi compléter un
+ * triple, ou une pièce de combo (multiplicateur, relanceur, Sarkozy) : la manche suivante, elle est encore là.
+ */
+function freezeMove(view: PlayerView, bot: BotState): PlayerAction | null {
+  if (!bot.combos || view.frozen || view.shop.length === 0 || view.budget >= view.buyCost) return null;
+  const keeps = view.shop.some((id) => {
+    const card = CARD_BY_ID[id];
+    if (owned(view, id) >= 2) return true;
+    return doublerWorth(card.effects ?? [], view) + engineWorth(card.effects ?? [], Boolean(card.golden), view) > 10;
+  });
+  return keeps ? { t: 'freeze' } : null;
+}
+
 function worstMinion(view: PlayerView, bot?: BotState): Minion | null {
   // Un bot pur garde son camp, sauf ce qui rapporte à la revente (Poisson) : le vendre, c'est jouer la carte.
   const sellsWell = (m: Minion) => m.effects.some((e) => e.when === 'vente');
-  const keep = (m: Minion) => (bot?.pure && m.camp === bot.commitment && !sellsWell(m) ? 100 : 0) + minionPower(m);
+  const combo = (m: Minion) => (bot?.combos ? doublerWorth(m.effects, view) + engineWorth(m.effects, m.golden, view, m.uid) + (m.token ? 0 : knownForce(m.cardId, view, bot)) : 0);
+  const keep = (m: Minion) => (bot?.pure && m.camp === bot.commitment && !sellsWell(m) ? 100 : 0) + minionPower(m) + combo(m);
   let worst: Minion | null = null;
   for (const m of view.board) {
     // Sous bracelet, il ne se renvoie pas avant la prochaine manche.
@@ -740,6 +951,14 @@ function discoverChoice(view: PlayerView, bot: BotState): PlayerAction {
     }
   });
   return { t: 'discover', i: bestI };
+}
+
+const SPENDS = new Set<PlayerAction['t']>(['buy', 'buy_spell', 'buy_casserole', 'roll', 'upgrade']);
+
+/** Le facile distrait : il pose et lance encore ce qu'il a en main, mais oublie le budget qui lui reste. */
+function distracted(action: PlayerAction | null, view: PlayerView, bot: BotState): PlayerAction | null {
+  if (action && SPENDS.has(action.t) && view.budget <= bot.forgets) return null;
+  return action;
 }
 
 function easyTurn(view: PlayerView, bot: BotState): PlayerAction | null {
@@ -830,10 +1049,15 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
     bot.ordered = false;
     bot.rolls = 0;
     bot.kept = new Set();
-    if (bot.willCommit && !bot.commitment) bot.commitment = bot.rng.pick(view.camps);
+    // Le difficile ne tire pas de camp au hasard : il suit celui que son plateau a pris (`dominantCamp`). Sauf le bot de
+    // mesure « pur », qui doit avoir un camp.
+    if (bot.willCommit && !bot.commitment && (bot.level !== 'difficile' || bot.pure)) bot.commitment = bot.rng.pick(view.camps);
+    // Le facile oublie parfois ses derniers sous : à partir de la manche 3, une manche sur sept, il cesse de dépenser
+    // quand il lui reste 2 ou 3 de budget.
+    if (bot.level === 'facile') bot.forgets = view.round >= 3 && bot.rng.next() < 0.15 ? 2 + bot.rng.int(2) : 0;
   }
   if (bot.level === 'debutant') return debutantTurn(view, bot);
-  if (bot.level === 'facile') return easyTurn(view, bot);
+  if (bot.level === 'facile') return distracted(easyTurn(view, bot), view, bot);
 
   if (view.discover) return discoverChoice(view, bot);
 
@@ -855,6 +1079,8 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
   if (fromHand) return fromHand;
   const cast = castMove(view, bot);
   if (cast) return cast;
+  const combo = casseroleCombo(view, bot);
+  if (combo) return combo;
 
   if (bot.rollDown && view.tier >= 3 && bot.rolls < 8 && view.budget >= view.rollCost + view.buyCost && bestShopScore(view, bot) < 6 + 3 * view.tier) {
     bot.rolls++;
@@ -933,8 +1159,11 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
   const lastSpell = spellBuy(view, 0, bot);
   if (lastSpell) return lastSpell;
 
+  const freeze = freezeMove(view, bot);
+  if (freeze) return freeze;
+
   if (!bot.ordered) {
-    const target = bot.level === 'difficile' ? bestOrdering(view) : preferredOrder(view.board);
+    const target = bot.level === 'difficile' ? bestOrdering(view, bot) : preferredOrder(view.board);
     const move = firstOrderingMove(view.board, target);
     if (move) return move;
     bot.ordered = true;

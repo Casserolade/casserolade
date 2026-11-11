@@ -30,7 +30,7 @@ const VIEW_KEYS = [
   'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'upgradeLock', 'buyCost',
   'rollCost', 'freeRolls', 'relaunched', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
   'shopSpells', 'shopSpellCosts', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'discoverKind', 'tract', 'counters', 'stats', 'camps',
-  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents', 'nextOpponent',
+  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents', 'nextOpponent', 'onceThisRound',
 ].sort();
 const TABLE_KEYS = ['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples'].sort();
 

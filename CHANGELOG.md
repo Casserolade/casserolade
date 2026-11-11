@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3g — 11 novembre 2026
+
+**Équilibrage**
+- Nicolas Sarkozy ne double plus qu'une fois par manche. Il doublait à chaque casserole, et les plus gros politiques des parties de bots, jusqu'à 89 millions, venaient tous de lui.
+
+**Les bots**
+- Le bot difficile joue les combos : avec Sarkozy, la casserole qui double sur son plus gros politique, et le Bracelet électronique pour effacer le scandale dans la manche ; les multiplicateurs, les voisins bien placés, la boutique gelée quand un triplé l'attend. Il suit son plateau au lieu d'un camp tiré d'avance, et connaît la force de chaque carte. Seul contre sept bots moyens, il finit en moyenne 3,8e au lieu de 4,4e. Les chapitres de carrière face à un rival difficile s'en ressentent.
+- Le bot facile est parfois distrait : il lui arrive d'oublier de dépenser ses derniers sous.
+
 ## 0.3f — 10 novembre 2026
 
 **Équilibrage**
