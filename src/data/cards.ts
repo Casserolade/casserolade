@@ -200,8 +200,10 @@ export const CARDS: Card[] = [
     fx: [fx('aura', 'joueur', { do: 'scandale_plus', value: 1 }), fx('casserole_recue', 'joueur', campBuff(1, 1), { camp: 'republicains', once: 'manche' })],
   }),
   card('dati', 'Rachida Dati', 'republicains', 4, 5, 5, { kw: ['immunite'], fx: [fx('meeting', 'allie_suivant', motCle('immunite'))] }),
-  // Échelon 6, clé de voûte des casseroles : chaque casserole double celui qui la reçoit. Deux font scandale (7 novembre 2026).
-  card('sarkozy', 'Nicolas Sarkozy', 'republicains', 6, 6, 7, { kw: ['immunite'], fx: [fx('casserole_recue', 'joue', { do: 'doubler_stats' })] }),
+  // Échelon 6, clé de voûte des casseroles : une casserole double celui qui la reçoit (7 novembre 2026). Une fois par
+  // manche depuis le 10 novembre au soir : chaque casserole doublait, et neuf casseroles en trois manches menaient un
+  // Chirac à 89 millions ; une fois par manche, il grandit vers quelques milliers en fin de partie.
+  card('sarkozy', 'Nicolas Sarkozy', 'republicains', 6, 6, 7, { kw: ['immunite'], fx: [fx('casserole_recue', 'joue', { do: 'doubler_stats' }, { once: 'manche' })] }),
 
   // RN : la dynastie. Le débauchage de la boutique, et l'héritage durable.
   // 7 novembre 2026 : la dynastie grandit en attaquant ; son Héritage ne jouait presque jamais (0,47 place).

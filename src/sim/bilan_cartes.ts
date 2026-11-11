@@ -7,6 +7,7 @@ import type { Camp } from '../engine/types.ts';
 import type { BotLevel, BotStyle } from '../bots/bots.ts';
 import { createRng } from '../engine/rng.ts';
 import { playGame } from './simulate.ts';
+import { writeForceTable } from './forceTable.ts';
 
 /**
  * La force de chaque carte, mesurée par un cadeau : un bot la reçoit gratuitement au début d'une manche, et sa
@@ -16,6 +17,7 @@ import { playGame } from './simulate.ts';
  * Le camp de la carte est toujours en jeu, puisqu'on ne la voit jamais autrement.
  *   node src/sim/bilan_cartes.ts --games 300 --manches 5,9
  *   node src/sim/bilan_cartes.ts --cartes ndiaye,macron --games 600
+ *   node src/sim/bilan_cartes.ts --niveau moyen --manches 5 --games 200 --table src/data/forceCartes.ts   (la table du bot difficile)
  */
 const { values } = parseArgs({
   options: {
@@ -27,6 +29,8 @@ const { values } = parseArgs({
     workers: { type: 'string', default: String(Math.max(1, availableParallelism() - 4)) },
     seed: { type: 'string', default: '1' },
     out: { type: 'string', default: '' },
+    // La table de force du bot difficile, src/data/forceCartes.ts : avec --niveau moyen et la manche 5.
+    table: { type: 'string', default: '' },
   },
 });
 
@@ -87,6 +91,7 @@ async function main(): Promise<void> {
   const rows = summarize(outcomes, cards.map((c) => c.id), contexts, rounds);
   print(rows, contexts, rounds, games, (Date.now() - started) / 1000);
   if (values.out) fs.writeFileSync(values.out, JSON.stringify(rows, null, 1));
+  if (values.table) writeForceTable(values.table, rows, `node src/sim/bilan_cartes.ts --niveau ${level} --manches ${values.manches} --games ${games} --table ${values.table}`);
 }
 
 function runAll(jobs: Job[], workers: number): Promise<Outcome[]> {
