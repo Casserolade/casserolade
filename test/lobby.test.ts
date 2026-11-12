@@ -378,3 +378,21 @@ test('le protocole refuse une table de moins de 2 ou de plus de 8', () => {
   }
   assert.deepEqual(parseClientMessage(JSON.stringify({ type: 'regler_salon', options: { ...OPTIONS, table: 2 } })), { type: 'regler_salon', options: { ...OPTIONS, table: 2 } });
 });
+
+test('pour l\'accueil, une partie en ligne par joueur : connecté, et encore en lice une fois la partie lancée', () => {
+  const t = creerTable();
+  const code = creerSalon(t);
+  t.dire('b', { type: 'rejoindre', code, pseudo: 'Bob' });
+  t.dire('c', { type: 'rejoindre', code, pseudo: 'Cléo' });
+  assert.equal(t.lobby.partiesEnLigne, 3, 'trois humains qui attendent, les bots ne comptent pas');
+  t.dire('a', { type: 'lancer' });
+  assert.equal(t.lobby.partiesEnLigne, 3);
+  t.lobby.disconnect('c');
+  assert.equal(t.lobby.partiesEnLigne, 2, 'un joueur parti ne joue plus');
+  const room = t.lobby.partiesEnCours[0].room;
+  room.game.players[t.vue('b').seat].alive = false;
+  assert.equal(t.lobby.partiesEnLigne, 1, 'un éliminé a fini sa partie');
+  creerSalon(t, 'd', 'Dédé');
+  assert.equal(t.lobby.partiesEnLigne, 2);
+  t.lobby.destroy();
+});

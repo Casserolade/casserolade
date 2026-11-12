@@ -604,7 +604,7 @@ test('the home page\'s live count: rooms and games in the pages, players online,
   assert.equal((await post('{"type":"presence"}', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')).status, 204);
   assert.deepEqual(await live(), { parties: 2, enLigne: 0, joueurs: 2, discord: null }, 'the robot is not a player');
   const { host, guest } = await createRoomWithTwo(`ws://127.0.0.1:${port}${SOCKET_PATH}`);
-  assert.deepEqual(await live(), { parties: 3, enLigne: 1, joueurs: 4, discord: null }, 'a room waiting for its players is a table, its two players are online');
+  assert.deepEqual(await live(), { parties: 4, enLigne: 2, joueurs: 4, discord: null }, 'a room counts one game per player in it, as in solo');
   host.socket.close();
   guest.socket.close();
   const answer = await fetch(`${base}/en-direct`);

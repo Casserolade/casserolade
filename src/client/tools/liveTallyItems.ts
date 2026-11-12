@@ -7,8 +7,8 @@ export interface LiveTallyItem {
 }
 
 /**
- * What the home page's « en direct » shows, once the server answered: every game in progress (online rooms, solo,
- * career, tutorial), and the players online (those of the last hour), never fewer than one: whoever reads it is
+ * What the home page's « en direct » shows, once the server answered: the games in progress, one per player (online,
+ * solo, career, tutorial), and the players online (those of the last hour), never fewer than one: whoever reads it is
  * online, even before the server counted them.
  */
 export function liveTallyItems(count: LiveCount | null): LiveTallyItem[] {

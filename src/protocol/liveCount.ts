@@ -15,9 +15,9 @@ export interface DiscordCount {
 }
 
 export interface LiveCount {
-  /** Every table: the online rooms, playing or waiting for their players, and the games in a page against bots. */
+  /** The games in progress, one per player: online, in a room, and in a page against bots (solo, career, tutorial). */
   parties: number;
-  /** Of which online rooms. */
+  /** Of which online. */
   enLigne: number;
   /** The players online: the browsers that came on the game in the last hour. */
   joueurs: number;
