@@ -7,19 +7,18 @@ import TipLink from '#src/client/components/molecules/TipLink.vue';
 import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
-import ShareButton from '#src/client/components/molecules/ShareButton.vue';
+import TutorialButton from '#src/client/components/molecules/TutorialButton.vue';
 import { CHANGELOG_URL, CODE_URL } from '#src/client/const/codeLinks.ts';
 import { DISCORD_URL } from '#src/protocol/discord.ts';
 import { VERSION } from '#src/protocol/version.ts';
-import { shareGame } from '#src/client/services/shareGame.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { chooseVersion } from '#src/client/services/versionChoice.ts';
 import { useHomePage } from '#src/client/stores/useHomePage.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 
 /**
- * The home page of the phone version: the same two sides as on a computer, one above the other, online first. A
- * newcomer finds the tutorial in the solo side, first of the career.
+ * The home page of the phone version: the same two sides as on a computer, one above the other, online first. The
+ * tutorial comes first of the extras, under them; it shines for a newcomer.
  */
 withDefaults(defineProps<{
   inviteCode: string;
@@ -40,7 +39,7 @@ const emit = defineEmits<{
   achievements: [];
 }>();
 
-const { pseudo, plateauId, tagline, live, discordMembers } = useHomePage();
+const { pseudo, plateauId, tagline, live, discordMembers, twitchLive } = useHomePage();
 </script>
 
 <template>
@@ -63,15 +62,16 @@ const { pseudo, plateauId, tagline, live, discordMembers } = useHomePage();
         :invite-code="inviteCode"
         :live="live"
         :discord-members="discordMembers"
+        :twitch-live="twitchLive"
         @create="emit('create', pseudo)"
         @join="(code) => emit('join', code, pseudo)"
         @public="emit('public', pseudo)"
       />
-      <LocalModes :newcomer="newcomer" @solo="(settings) => emit('solo', settings)" @story="emit('story')" @tutorial="emit('tutorial')" />
+      <LocalModes @solo="(settings) => emit('solo', settings)" @story="emit('story')" />
       <nav class="extras">
+        <TutorialButton class="tutorial" :newcomer="newcomer" @open="emit('tutorial')" />
         <AppButton @click="emit('achievements')"><GameIcon name="star" /> Succès<span v-if="achievements" class="count">{{ achievements }}</span></AppButton>
         <AppButton href="/bestiaire"><GameIcon name="skull" /> Le bestiaire</AppButton>
-        <ShareButton class="share" :share="shareGame" :primary="false" />
         <TipLink :caught="0" />
       </nav>
       <nav class="links" aria-label="Le projet">
@@ -97,8 +97,8 @@ const { pseudo, plateauId, tagline, live, discordMembers } = useHomePage();
 .resume { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 0.7rem; border-radius: 18px; border: 3px solid var(--color-frame); background: rgb(12 16 32 / 0.94); color: #fff; font-weight: 700; text-align: center; }
 .extras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
 .extras :deep(.app-button) { display: flex; align-items: center; justify-content: center; gap: 0.3em; font-size: 1.05rem; text-align: center; }
-.extras :deep(.tip-link), .extras .share { grid-column: 1 / -1; }
-.extras .share { align-items: stretch; }
+/* The tutorial and the Ko-fi take the whole width, the achievements and the bestiary share a row between them. */
+.extras .tutorial, .extras :deep(.tip-link) { grid-column: 1 / -1; }
 .count { margin-left: 0.4em; padding: 0 0.45em; border-radius: 999px; background: var(--color-title); color: var(--color-ink); font-size: 0.85em; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.2rem; }
 .links a { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }

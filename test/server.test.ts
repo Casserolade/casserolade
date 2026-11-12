@@ -599,12 +599,12 @@ test('the home page\'s live count: rooms and games in the pages, players online,
   const base = `http://127.0.0.1:${port}`;
   const post = (body: string, userAgent = BROWSER) => fetch(`${base}/compteur`, { method: 'POST', body, headers: { origin: ORIGIN, 'user-agent': userAgent, 'content-type': 'text/plain' } });
   const live = async () => (await fetch(`${base}/en-direct`)).json() as Promise<Record<string, unknown>>;
-  assert.deepEqual(await live(), { parties: 0, enLigne: 0, joueurs: 0, discord: null });
+  assert.deepEqual(await live(), { parties: 0, enLigne: 0, joueurs: 0, discord: null, twitch: false });
   for (const body of ['{"type":"presence"}', '{"type":"presence"}', '{"type":"en_jeu","mode":"solo"}', '{"type":"en_jeu","mode":"tutoriel"}']) assert.equal((await post(body)).status, 204);
   assert.equal((await post('{"type":"presence"}', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')).status, 204);
-  assert.deepEqual(await live(), { parties: 2, enLigne: 0, joueurs: 2, discord: null }, 'the robot is not a player');
+  assert.deepEqual(await live(), { parties: 2, enLigne: 0, joueurs: 2, discord: null, twitch: false }, 'the robot is not a player');
   const { host, guest } = await createRoomWithTwo(`ws://127.0.0.1:${port}${SOCKET_PATH}`);
-  assert.deepEqual(await live(), { parties: 4, enLigne: 2, joueurs: 4, discord: null }, 'a room counts one game per player in it, as in solo');
+  assert.deepEqual(await live(), { parties: 4, enLigne: 2, joueurs: 4, discord: null, twitch: false }, 'a room counts one game per player in it, as in solo');
   host.socket.close();
   guest.socket.close();
   const answer = await fetch(`${base}/en-direct`);

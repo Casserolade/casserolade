@@ -16,6 +16,9 @@ import { DiscordCounter } from '../src/server/discordCount.ts';
 import { LivePresence } from '../src/server/livePresence.ts';
 import { readDiscordCount } from '../src/server/readDiscordCount.ts';
 import { readPresenceMarks } from '../src/server/readPresenceMarks.ts';
+import { readTwitchCredentials } from '../src/server/readTwitchCredentials.ts';
+import { readTwitchLive } from '../src/server/readTwitchLive.ts';
+import { TwitchWatch } from '../src/server/twitchLive.ts';
 
 const T0 = Date.parse('2026-11-12T20:00:00Z');
 const LIVE = { connexions: 4, adresses: 3, salons: 2, enJeu: 1, enFile: 0, locales: 3, presents: 9 };
@@ -48,8 +51,66 @@ test('LivePresence: a game beating every minute counts once, a browser saying it
 });
 
 test('buildLiveCount: online tables and local games together, never fewer players than those connected now', () => {
-  assert.deepEqual(buildLiveCount(LIVE, 2, null), { parties: 5, enLigne: 2, joueurs: 9, discord: null });
-  assert.deepEqual(buildLiveCount({ ...LIVE, presents: 0 }, 2, { membres: 30, connectes: 4 }), { parties: 5, enLigne: 2, joueurs: 7, discord: { membres: 30, connectes: 4 } });
+  assert.deepEqual(buildLiveCount(LIVE, 2, null, false), { parties: 5, enLigne: 2, joueurs: 9, discord: null, twitch: false });
+  assert.deepEqual(buildLiveCount({ ...LIVE, presents: 0 }, 2, { membres: 30, connectes: 4 }, true), { parties: 5, enLigne: 2, joueurs: 7, discord: { membres: 30, connectes: 4 }, twitch: true });
+});
+
+test('Twitch: a live stream in the answer, credentials read from the volume, nothing else', () => {
+  assert.equal(readTwitchLive({ data: [{ user_login: 'thesadguitarist', type: 'live' }], pagination: {} }), true);
+  for (const data of [{ data: [] }, { data: [{ type: '' }] }, { data: [null] }, {}, null, 'live']) assert.equal(readTwitchLive(data), false, JSON.stringify(data));
+  assert.deepEqual(readTwitchCredentials('{"clientId":" abc ","clientSecret":"xyz\\n"}'), { clientId: 'abc', clientSecret: 'xyz' });
+  for (const text of ['', 'null', '{}', '{"clientId":"abc"}', '{"clientId":"abc","clientSecret":" "}', '{"clientId":1,"clientSecret":"x"}', 'pas du json']) assert.equal(readTwitchCredentials(text), null, text);
+});
+
+test('TwitchWatch: one token for many questions, a new one when Twitch refuses it, off air without access or answer', async () => {
+  const CHANNEL = 'thesadguitarist';
+  const asked: string[] = [];
+  let live = true;
+  let tokens = 0;
+  let refuseToken: string | null = null;
+  let down = false;
+  const fakeFetch = (async (url: string | URL | Request, init?: RequestInit) => {
+    const address = String(url);
+    asked.push(address.split('?')[0]);
+    if (down) throw new Error('réseau coupé');
+    if (address === 'https://id.twitch.tv/oauth2/token') {
+      const form = init?.body as URLSearchParams;
+      assert.deepEqual([form.get('client_id'), form.get('client_secret'), form.get('grant_type')], ['id', 'secret', 'client_credentials']);
+      return new Response(JSON.stringify({ access_token: `jeton${++tokens}`, expires_in: 5_000_000, token_type: 'bearer' }));
+    }
+    assert.equal(address, `https://api.twitch.tv/helix/streams?user_login=${CHANNEL}`);
+    const headers = init?.headers as Record<string, string>;
+    assert.equal(headers['Client-Id'], 'id');
+    if (headers.Authorization === `Bearer ${refuseToken}`) return new Response('', { status: 401 });
+    return new Response(JSON.stringify({ data: live ? [{ type: 'live' }] : [] }));
+  }) as typeof fetch;
+  let access: { clientId: string; clientSecret: string } | null = null;
+  const journal: string[] = [];
+  const watch = new TwitchWatch({ channel: CHANNEL, credentials: () => access, journal: (line) => journal.push(line), fetcher: fakeFetch });
+  await watch.refresh();
+  assert.equal(watch.live, false, 'without access, off air');
+  assert.deepEqual(asked, [], 'and Twitch is not asked');
+  access = { clientId: 'id', clientSecret: 'secret' };
+  await watch.refresh();
+  assert.equal(watch.live, true, 'access put on the volume works without a restart');
+  live = false;
+  await watch.refresh();
+  assert.equal(watch.live, false);
+  assert.equal(tokens, 1, 'the token is kept between questions');
+  refuseToken = 'jeton1';
+  live = true;
+  await watch.refresh();
+  assert.equal(watch.live, true, 'a refused token is replaced, and the question asked again');
+  assert.equal(tokens, 2);
+  down = true;
+  await watch.refresh();
+  await watch.refresh();
+  assert.equal(watch.live, false, 'Twitch away: off air, rather than a false « en ce moment »');
+  assert.deepEqual(journal, ['Twitch : réseau coupé'], 'the trouble is written once');
+  down = false;
+  await watch.refresh();
+  assert.equal(watch.live, true);
+  assert.deepEqual(journal, ['Twitch : réseau coupé', 'Twitch répond de nouveau']);
 });
 
 test('the counts of a Discord invitation are read, and kept when Discord fails', async () => {
@@ -111,16 +172,16 @@ test('the running local game is read without being forgotten; a reload\'s readin
 
 test('the home page shows the games and the players online in the right number, and the Discord once it has members enough', () => {
   assert.deepEqual(liveTallyItems(null), [], 'nothing before the server answered');
-  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 1, discord: null }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }]);
-  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 0, discord: null }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }], 'whoever reads it is online');
-  assert.deepEqual(liveTallyItems({ parties: 7, enLigne: 2, joueurs: 12, discord: null }), [{ value: 7, label: 'parties en cours' }, { value: 12, label: 'joueurs en ligne' }]);
+  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 1, discord: null, twitch: false }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }]);
+  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 0, discord: null, twitch: false }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }], 'whoever reads it is online');
+  assert.deepEqual(liveTallyItems({ parties: 7, enLigne: 2, joueurs: 12, discord: null, twitch: false }), [{ value: 7, label: 'parties en cours' }, { value: 12, label: 'joueurs en ligne' }]);
   assert.equal(discordMembersLabel(null), null);
   assert.equal(discordMembersLabel({ membres: 3, connectes: 2 }), null, 'a handful is not shown');
   assert.equal(discordMembersLabel({ membres: 42, connectes: 1 }), '42 membres, dont 1 connecté');
   assert.equal(discordMembersLabel({ membres: 42, connectes: 9 }), '42 membres, dont 9 connectés');
   assert.equal(discordMembersLabel({ membres: 42, connectes: 0 }), '42 membres');
-  assert.deepEqual(readLiveCount({ parties: 3, enLigne: 1, joueurs: 8, discord: { membres: 20, connectes: 2 } }), { parties: 3, enLigne: 1, joueurs: 8, discord: { membres: 20, connectes: 2 } });
-  assert.deepEqual(readLiveCount({ parties: 3, enLigne: 1, joueurs: 8, discord: 'x' }), { parties: 3, enLigne: 1, joueurs: 8, discord: null });
+  assert.deepEqual(readLiveCount({ parties: 3, enLigne: 1, joueurs: 8, discord: { membres: 20, connectes: 2 }, twitch: true }), { parties: 3, enLigne: 1, joueurs: 8, discord: { membres: 20, connectes: 2 }, twitch: true });
+  assert.deepEqual(readLiveCount({ parties: 3, enLigne: 1, joueurs: 8, discord: 'x', twitch: 'oui' }), { parties: 3, enLigne: 1, joueurs: 8, discord: null, twitch: false }, 'only a true live counts');
   for (const data of [null, '<!doctype html>', {}, { parties: -1, enLigne: 0, joueurs: 0 }, { parties: 1.5, enLigne: 0, joueurs: 0 }]) assert.equal(readLiveCount(data), null);
 });
 

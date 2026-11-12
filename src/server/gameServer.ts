@@ -19,6 +19,8 @@ import { counterEventLabel } from './counterEventLabel.ts';
 import { DASHBOARD_NAMES } from './dashboardNames.ts';
 import { buildLiveCount } from './buildLiveCount.ts';
 import { DiscordCounter } from './discordCount.ts';
+import type { TwitchCredentials } from './readTwitchCredentials.ts';
+import { TwitchWatch } from './twitchLive.ts';
 import { appendToArchive, archiveGame } from './gameArchive.ts';
 import type { ArchivedGame } from './gameArchive.ts';
 import { handleCounter } from './handleCounter.ts';
@@ -113,6 +115,11 @@ export interface GameServerOptions {
   /** The invitation of the community's Discord server, whose counts the home page shows. Without it, none. */
   discordInvite?: string;
   /**
+   * The game's Twitch channel, and the access of the Twitch application that asks whether it is live, read again at
+   * each check. Without it, or without access, the channel counts as off air and the home page hides its link.
+   */
+  twitch?: { channel: string; credentials: () => TwitchCredentials | null };
+  /**
    * JSON file where the times of the last hour's presences wait for a restart, on the private volume: without it, the
    * players online start again from zero at each deploy. Times only.
    */
@@ -187,6 +194,7 @@ export class GameServer {
   private readonly live = new LiveMetrics();
   private readonly presence: LivePresence;
   private readonly discord: DiscordCounter | null;
+  private readonly twitch: TwitchWatch | null;
   private sampler: NodeJS.Timeout | null = null;
   private readonly statsStreams = new Set<ServerResponse>();
   private heartbeat: NodeJS.Timeout | null = null;
@@ -198,6 +206,7 @@ export class GameServer {
     this.mmrFile = options.mmrFile ? openMmrFile(options.mmrFile) : null;
     this.stats = new SiteStats({ file: options.statsFile ?? null });
     this.discord = options.discordInvite ? new DiscordCounter(options.discordInvite) : null;
+    this.twitch = options.twitch ? new TwitchWatch({ ...options.twitch, journal: (line) => this.options.journal?.(`${HEURE_DE_PARIS.format(new Date())}    · ${line}`) }) : null;
     this.presence = new LivePresence(options.presenceFile && existsSync(options.presenceFile) ? readPresenceMarks(readFileSync(options.presenceFile, 'utf8'), Date.now()) : []);
     this.counter = {
       allowedOrigins: options.allowedOrigins,
@@ -245,6 +254,7 @@ export class GameServer {
     this.sampler = setInterval(() => this.live.sample(this.liveStats(), this.lobby.joueursEnJeu), 1000);
     this.live.event('demarrage', `Serveur démarré, version ${this.options.version ?? 'inconnue'}`);
     this.discord?.start();
+    this.twitch?.start();
     return (this.http.address() as AddressInfo).port;
   }
 
@@ -252,6 +262,7 @@ export class GameServer {
     if (this.heartbeat) clearInterval(this.heartbeat);
     if (this.sampler) clearInterval(this.sampler);
     this.discord?.stop();
+    this.twitch?.stop();
     for (const stream of this.statsStreams) stream.end();
     this.live.stop();
     this.lobby.destroy();
@@ -460,7 +471,7 @@ export class GameServer {
       response.writeHead(405, LIVE_COUNT_HEADERS).end();
       return;
     }
-    const count = buildLiveCount(this.liveStats(), this.lobby.partiesEnLigne, this.discord?.current ?? null);
+    const count = buildLiveCount(this.liveStats(), this.lobby.partiesEnLigne, this.discord?.current ?? null, this.twitch?.live ?? false);
     response.writeHead(200, LIVE_COUNT_HEADERS).end(request.method === 'GET' ? JSON.stringify(count) : undefined);
   }
 

@@ -20,5 +20,7 @@ export function useHomePage() {
   const { count } = useLiveCount();
   const live = computed(() => liveTallyItems(count.value));
   const discordMembers = computed(() => discordMembersLabel(count.value?.discord ?? null));
-  return { pseudo, plateauId, tagline, live, discordMembers };
+  /** The Twitch channel is live: the online side shows its link. */
+  const twitchLive = computed(() => count.value?.twitch ?? false);
+  return { pseudo, plateauId, tagline, live, discordMembers, twitchLive };
 }
