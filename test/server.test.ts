@@ -594,6 +594,28 @@ test('the counter: events of the game\'s pages only, checked, robots apart, a ra
   await server.stop();
 });
 
+test('the home page\'s live count: rooms and games in the pages, players online, robots ignored, the day\'s totals untouched', async () => {
+  const { server, port } = await startServer({}, { statsToken: 'jeton-secret' });
+  const base = `http://127.0.0.1:${port}`;
+  const post = (body: string, userAgent = BROWSER) => fetch(`${base}/compteur`, { method: 'POST', body, headers: { origin: ORIGIN, 'user-agent': userAgent, 'content-type': 'text/plain' } });
+  const live = async () => (await fetch(`${base}/en-direct`)).json() as Promise<Record<string, unknown>>;
+  assert.deepEqual(await live(), { parties: 0, enLigne: 0, joueurs: 0, discord: null });
+  for (const body of ['{"type":"presence"}', '{"type":"presence"}', '{"type":"en_jeu","mode":"solo"}', '{"type":"en_jeu","mode":"tutoriel"}']) assert.equal((await post(body)).status, 204);
+  assert.equal((await post('{"type":"presence"}', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)')).status, 204);
+  assert.deepEqual(await live(), { parties: 2, enLigne: 0, joueurs: 2, discord: null }, 'the robot is not a player');
+  const { host, guest } = await createRoomWithTwo(`ws://127.0.0.1:${port}${SOCKET_PATH}`);
+  assert.deepEqual(await live(), { parties: 3, enLigne: 1, joueurs: 4, discord: null }, 'a room waiting for its players is a table, its two players are online');
+  host.socket.close();
+  guest.socket.close();
+  const answer = await fetch(`${base}/en-direct`);
+  assert.equal(answer.headers.get('cache-control'), 'no-store');
+  assert.equal((await fetch(`${base}/en-direct`, { method: 'POST' })).status, 405);
+  const json = await (await fetch(`${base}/stats/jeton-secret.json`)).json() as { days: { robots: number; pages: Record<string, number> }[]; events: unknown[]; samples: unknown[] };
+  assert.equal(json.days.at(-1)?.robots, 0, 'a robot\'s presence is not even a robot\'s visit');
+  assert.deepEqual(json.events.filter((event) => ['visite', 'local'].includes((event as { type: string }).type)), [], 'the presence signals stay out of the feed');
+  await server.stop();
+});
+
 test('the secret statistics page: only with its token, live over Server-Sent Events; loading a page counts nothing by itself', async () => {
   const { server, port } = await startServer({}, { staticDir: 'src/client', statsToken: 'jeton-secret' });
   const base = `http://127.0.0.1:${port}`;

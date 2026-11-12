@@ -1,6 +1,6 @@
 import { HEROES } from '../data/heroes.ts';
 import { CHAPITRES_COMPTES } from '../histoire/carrieres.ts';
-import { BOT_LEVELS, DEVICES, HOST_NAME, MAX_COUNTER_BYTES, PAGE_KINDS } from './counterEvent.ts';
+import { BOT_LEVELS, DEVICES, HOST_NAME, LOCAL_MODES, MAX_COUNTER_BYTES, PAGE_KINDS } from './counterEvent.ts';
 import type { CounterEvent, GameResult, GameSettings } from './counterEvent.ts';
 
 /** The generic elections and every career's chapters (`durif.bugarach`). */
@@ -55,6 +55,8 @@ export function parseCounterEvent(text: string): CounterEvent | null {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
   const fields = raw as Record<string, unknown>;
   if (fields.type === 'page') return parsePage(fields);
+  if (fields.type === 'presence') return { type: 'presence' };
+  if (fields.type === 'en_jeu') return isOneOf(LOCAL_MODES, fields.mode) ? { type: 'en_jeu', mode: fields.mode } : null;
   if (fields.type !== 'partie' && fields.type !== 'fin') return null;
   const settings = parseSettings(fields);
   if (!settings) return null;

@@ -6,7 +6,7 @@ import { SHARE_MESSAGES } from '#src/client/const/shareMessages.ts';
 import type { ShareOutcome } from '#src/client/services/shareGame.ts';
 
 /** « Partager le jeu », and what came of it under the button. The parent gives the way to share. */
-const props = defineProps<{ share: () => Promise<ShareOutcome> }>();
+const props = withDefaults(defineProps<{ share: () => Promise<ShareOutcome>; primary?: boolean }>(), { primary: true });
 
 const outcome = ref<ShareOutcome | null>(null);
 const sharing = ref(false);
@@ -21,7 +21,7 @@ async function press(): Promise<void> {
 
 <template>
   <span class="share">
-    <AppButton primary :disabled="sharing" @click="press"><GameIcon name="megaphone" /> Partager le jeu</AppButton>
+    <AppButton :primary="primary" :disabled="sharing" @click="press"><GameIcon name="megaphone" /> Partager le jeu</AppButton>
     <span class="message" role="status">{{ message }}</span>
   </span>
 </template>

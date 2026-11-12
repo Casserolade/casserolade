@@ -1,6 +1,7 @@
 import { randomBytes } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { DISCORD_INVITE } from '../protocol/discord.ts';
 import { GameServer } from './gameServer.ts';
 
 /**
@@ -33,6 +34,8 @@ const server = new GameServer({
   archiveDir: process.env.PARTIES_DIR ?? 'data/serveur/parties',
   statsToken: statsToken(process.env.STATS_TOKEN_FILE ?? 'data/serveur/stats_token'),
   version: process.env.CASSEROLADE_VERSION,
+  discordInvite: process.env.DISCORD_INVITE ?? DISCORD_INVITE,
+  presenceFile: process.env.PRESENCE_FILE ?? 'data/serveur/presences.json',
   journal: (line) => console.log(line),
 });
 

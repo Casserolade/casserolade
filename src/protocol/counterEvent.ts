@@ -1,8 +1,8 @@
 import type { BotLevel } from '../bots/bots.ts';
 
 /**
- * What a page of the site tells the server's counter: a page opened, a game played in the page started or finished.
- * Names and numbers only, no id and no address: the server adds them to the day's totals and keeps nothing else.
+ * What a page of the site tells the server's counter: a page opened, a game played in the page started, running or
+ * finished, a browser still there. Names and numbers only, no id and no address: the server adds them to the day's totals and keeps nothing else.
  */
 export const COUNTER_PATH = '/compteur';
 export const MAX_COUNTER_BYTES = 512;
@@ -51,4 +51,24 @@ export interface GameResult {
 
 export type GameEndEvent = { type: 'fin' } & GameSettings & GameResult;
 
-export type CounterEvent = PageEvent | GameStartEvent | GameEndEvent;
+/** A browser on the game, once an hour at most: the players of the last hour are counted on it. */
+export interface PresenceEvent {
+  type: 'presence';
+}
+
+/** A game in the page still running: once a minute, while its page is in view. */
+export interface PlayingEvent {
+  type: 'en_jeu';
+  mode: LocalMode;
+}
+
+/** What the day's totals keep. */
+export type CountedEvent = PageEvent | GameStartEvent | GameEndEvent;
+/** What only says who is here right now: kept in memory for the home page, never in the day's totals. */
+export type LiveSignal = PresenceEvent | PlayingEvent;
+
+export type CounterEvent = CountedEvent | LiveSignal;
+
+export function isLiveSignal(event: CounterEvent): event is LiveSignal {
+  return event.type === 'presence' || event.type === 'en_jeu';
+}
