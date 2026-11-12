@@ -159,9 +159,20 @@ function renderDays(days) {
   note.textContent = `Avant le compteur du 6 novembre 2026, l'ancienne mesure comptait le test de santé du serveur (2 867 « visites » par jour) et recomptait tout le monde à chaque redémarrage : ${old.map((day) => `${dayLabel(day.jour)}, ${shown(day.ancienneMesure.visites)} visites et ${shown(day.ancienneMesure.visiteurs)} visiteurs`).join(' ; ')}.`;
 }
 
+/**
+ * A version as a number to sort on. The letters came first, b for the first of a series: the 0.3i is the 0.3.7, and
+ * the 0.3.8 follows it.
+ */
+function versionRank(version) {
+  const parts = /^(\d+)\.(\d+)(?:\.(\d+)|([a-z]))?$/.exec(version);
+  if (!parts) return -1;
+  const patch = parts[3] !== undefined ? Number(parts[3]) : parts[4] ? parts[4].charCodeAt(0) - 'b'.charCodeAt(0) : 0;
+  return Number(parts[1]) * 1e6 + Number(parts[2]) * 1e3 + patch;
+}
+
 /** The versions of the game, the latest first. */
 function latestFirst(results) {
-  return Object.keys(results).sort((a, b) => b.localeCompare(a, 'fr', { numeric: true }));
+  return Object.keys(results).sort((a, b) => versionRank(b) - versionRank(a));
 }
 
 /** Finished games of heroes, camps or seats, the best average place first; pale under a few games. */

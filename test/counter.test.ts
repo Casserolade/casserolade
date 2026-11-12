@@ -18,6 +18,7 @@ test('the counter reads the events of the pages, field by field', () => {
   assert.deepEqual(parseCounterEvent('{"type":"partie","mode":"carriere","chapitre":"municipales"}'), { type: 'partie', mode: 'carriere', chapitre: 'municipales' });
   assert.deepEqual(parseCounterEvent('{"type":"partie","mode":"tutoriel"}'), { type: 'partie', mode: 'tutoriel' });
   assert.deepEqual(parseCounterEvent(JSON.stringify(END)), END);
+  for (const version of ['0.3i', '0.3.8', '0.3.12', '1.0']) assert.deepEqual(parseCounterEvent(JSON.stringify({ ...END, version })), { ...END, version }, version);
   assert.deepEqual(parseCounterEvent(JSON.stringify({ ...END, extra: 'ignorée' })), END, 'an unknown field is dropped, not kept');
 });
 
@@ -44,6 +45,8 @@ test('the counter refuses anything unknown, missing or out of bounds', () => {
     JSON.stringify({ ...END, heros: 'constructor' }),
     JSON.stringify({ ...END, gagnee: 1 }),
     JSON.stringify({ ...END, version: 'latest' }),
+    JSON.stringify({ ...END, version: '0.3.8a' }),
+    JSON.stringify({ ...END, version: '0.3.' }),
     JSON.stringify({ ...END, mode: 'carriere' }),
     JSON.stringify({ ...PAGE, source: 'a.b', bourrage: 'x'.repeat(600) }),
   ];

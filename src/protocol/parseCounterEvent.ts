@@ -7,8 +7,8 @@ import type { CounterEvent, GameResult, GameSettings } from './counterEvent.ts';
 const CHAPTER_IDS: ReadonlySet<string> = new Set(CHAPITRES_COMPTES.map((chapter) => chapter.id));
 /** The heroes a human can play: bosses only sit at the bots' seats. */
 const HERO_IDS: ReadonlySet<string> = new Set(HEROES.map((hero) => hero.id));
-/** A version as players see it: 0.2c. */
-const GAME_VERSION = /^\d{1,2}\.\d{1,2}[a-z]?$/;
+/** A version as players see it: 0.2c, then from the 0.3.8 on, numbers only. */
+const GAME_VERSION = /^\d{1,2}\.\d{1,2}(?:[a-z]|\.\d{1,3})?$/;
 const MAX_PLACE = 8;
 const MAX_ROUNDS = 60;
 

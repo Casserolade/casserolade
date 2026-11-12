@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.3f" src="https://img.shields.io/badge/version-0.3f-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.3.8" src="https://img.shields.io/badge/version-0.3.8-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>

@@ -95,6 +95,12 @@ test('the dashboard draws every section from the stream: games in progress, hour
     version: '0.3e', manches: 12, dureeMs: 20 * 60_000,
     joueurs: [{ siege: 0, niveau: null, repris: false, heros: 'bardella', place: 1, sondages: 9, echelon: 5, camp: 'rn', campCount: 5, plateau: [], casseroles: 1, scandales: 0, triples: 1, sorts: 2, actions: {} }],
   } as unknown as ArchivedGame);
+  for (const version of ['0.3.8', '0.3i']) {
+    stats.partieFinie({
+      version, manches: 9, dureeMs: 20 * 60_000,
+      joueurs: [{ siege: 0, niveau: null, repris: false, heros: 'bardella', place: 1, sondages: 5, echelon: 4, camp: 'rn', campCount: 4, plateau: [], casseroles: 0, scandales: 0, triples: 0, sorts: 1, actions: {} }],
+    } as unknown as ArchivedGame);
+  }
   const snapshot = stats.snapshot({ connexions: 1, adresses: 1, salons: 1, enJeu: 1, enFile: 0, locales: 0, presents: 0, lanceesEnLigne: 0, lanceesLocales: 0 }, 'abc1234');
   const { emit, element } = openDashboard();
   emit('bonjour', {
@@ -108,7 +114,7 @@ test('the dashboard draws every section from the stream: games in progress, hour
   assert.ok(element('heures').all().some((node) => node.tag === 'rect'), 'the hour bars are drawn');
   assert.match(element('jours').textContent, /10 nov/, 'the thirty days are drawn');
   assert.match(element('heros').textContent, /Emmanuel Macron/, 'the solo heroes come after the days, and are drawn too');
-  assert.match(element('enligne').textContent, /Version 0\.3e/);
+  assert.match(element('enligne').textContent, /Version 0\.3\.8 \(avant : 0\.3i, 0\.3e\)/, 'the 0.3.8 comes after the letters');
   assert.match(element('enligne').textContent, /Jordan Bardella/);
   assert.match(element('jour').textContent, /20 min/, 'the average length of the day\'s online games');
   emit('parties', []);

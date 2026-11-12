@@ -353,19 +353,30 @@ function queueOffer(p: Player, offer: Offer): void {
 
 /**
  * Jusqu'à trois serviteurs différents de l'échelon visé, réservés le temps du choix. « De votre échelon » veut dire
- * l'échelon du joueur au moment où l'effet joue, jamais en dessous : s'il en manque, le choix est plus court, comme
- * dans Battlegrounds. Un échelon sans aucun candidat dans la partie (pas d'Héritage d'échelon 4 sans le RN) passe au
- * plus proche au-dessus ; seul un filtre qui n'a rien au-dessus (aucune Fin de tour d'échelon 6) redescend.
+ * l'échelon du joueur au moment où l'effet joue, ni en dessous ni au-dessus : s'il en manque, le choix est plus court,
+ * comme dans Battlegrounds. Un filtre qui n'a aucun candidat à cet échelon (pas d'Héritage d'échelon 4 sans le RN)
+ * tombe, et l'échelon reste (12 novembre 2026 : le Testament politique lancé au 4 sautait jusqu'aux légendes du 6).
+ * Seule une réserve vide à cet échelon fait passer au plus proche, au-dessus d'abord.
  * Un camp absent de la partie est ignoré (règle R7). La carte `source`, celle qui découvre, n'est jamais proposée.
  */
 export function offerMinions(game: Game, p: Player, tier: number, camp?: Camp, trigger?: Trigger, source?: string): void {
   const target = Math.max(1, Math.min(tier, game.params.tierMax));
   const campOk = (id: string) => !camp || (camp !== 'civile' && !game.camps.includes(camp)) || isCamp(game, makeMinion(CARD_BY_ID[id], -1), camp);
   const triggerOk = (id: string) => !trigger || (CARD_BY_ID[id].effects ?? []).some((e) => e.when === trigger);
-  const available = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source && campOk(id) && triggerOk(id)).map(([id]) => id);
-  const options = game.rng.shuffle(closestTier(available, target, game.params.tierMax)).slice(0, 3);
+  const inPool = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source).map(([id]) => id);
+  const candidates = discoverCandidates(inPool, (id) => campOk(id) && triggerOk(id), target, game.params.tierMax);
+  const options = game.rng.shuffle(candidates).slice(0, 3);
   for (const id of options) take(game, id);
   queueOffer(p, { options, kind: 'serviteur' });
+}
+
+/** Ceux du filtre à l'échelon visé ; sinon tous ceux de cet échelon ; sinon, réserve vide, le plus proche (règle R12). */
+function discoverCandidates(inPool: string[], fits: (id: string) => boolean, tier: number, tierMax: number): string[] {
+  const atTier = inPool.filter((id) => CARD_BY_ID[id].tier === tier);
+  const wanted = atTier.filter(fits);
+  if (wanted.length > 0) return wanted;
+  if (atTier.length > 0) return atTier;
+  return closestTier(inPool, tier, tierMax);
 }
 
 /** Les cartes de l'échelon visé ; à défaut, celles du plus proche, au-dessus d'abord (règle R12). */
