@@ -4,6 +4,7 @@ import { SCREEN_SET } from '#src/client/const/screenSet.ts';
 import { MOBILE_SCREENS } from '#src/client/screens/mobile/mobileScreens.ts';
 import { counter } from '#src/client/services/counter.ts';
 import { startLiveBeat } from '#src/client/services/liveBeat.ts';
+import { whenOpened } from '#src/client/services/whenOpened.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import './styles/fonts.css';
 import './styles/tokens.css';
@@ -13,5 +14,7 @@ import './styles/mobile.css';
 /** The phone version (/m/), held upright: the same game, with screens of its own. */
 gameArt.load();
 createApp(App).provide(SCREEN_SET, MOBILE_SCREENS).mount('#app');
-counter.page('jeu_telephone');
-startLiveBeat();
+whenOpened(() => {
+  counter.page('jeu_telephone');
+  startLiveBeat();
+});

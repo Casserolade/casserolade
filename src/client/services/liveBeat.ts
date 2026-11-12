@@ -10,11 +10,18 @@ function beat(): void {
   if (game) counter.playing(game.kind);
 }
 
+/** A tab opened in the background says it is there as soon as it is shown; its game keeps to the minute's beat. */
+function sayPresenceInView(): void {
+  if (document.visibilityState === 'visible') counter.presence();
+}
+
 /**
- * The game's page tells the server who is here right now, for the home page's « en direct »: once on opening, then
- * once a minute. A page left in the background says nothing, so that a forgotten tab does not count as a player.
+ * The game's page tells the server who is here right now, for the home page's « en direct »: once opened (whenOpened)
+ * or as soon as its tab is shown, then once a minute. A page left in the background says nothing, so that a forgotten tab does
+ * not count as a player.
  */
 export function startLiveBeat(): void {
   beat();
   window.setInterval(beat, PLAYING_BEAT_MS);
+  document.addEventListener('visibilitychange', sayPresenceInView);
 }
