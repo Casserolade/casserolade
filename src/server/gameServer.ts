@@ -32,7 +32,7 @@ import { liveGames } from './liveGames.ts';
 import type { LiveGame } from './liveGames.ts';
 import { LiveMetrics } from './liveMetrics.ts';
 import { LivePresence } from './livePresence.ts';
-import { readPresenceMarks } from './readPresenceMarks.ts';
+import { readSavedPresence } from './readSavedPresence.ts';
 import { SiteStats } from './siteStats.ts';
 import type { LiveStats, StatsSnapshot } from './siteStats.ts';
 import { statsPage } from './statsPage.ts';
@@ -120,8 +120,8 @@ export interface GameServerOptions {
    */
   twitch?: { channel: string; credentials: () => TwitchCredentials | null };
   /**
-   * JSON file where the times of the last hour's presences wait for a restart, on the private volume: without it, the
-   * players online start again from zero at each deploy. Times only.
+   * JSON file where the times of the last hour, presences and games launched, wait for a restart, on the private
+   * volume: without it, the players online and the games launched start again from zero at each deploy. Times only.
    */
   presenceFile?: string;
 }
@@ -207,7 +207,7 @@ export class GameServer {
     this.stats = new SiteStats({ file: options.statsFile ?? null });
     this.discord = options.discordInvite ? new DiscordCounter(options.discordInvite) : null;
     this.twitch = options.twitch ? new TwitchWatch({ ...options.twitch, journal: (line) => this.options.journal?.(`${HEURE_DE_PARIS.format(new Date())}    · ${line}`) }) : null;
-    this.presence = new LivePresence(options.presenceFile && existsSync(options.presenceFile) ? readPresenceMarks(readFileSync(options.presenceFile, 'utf8'), Date.now()) : []);
+    this.presence = new LivePresence(options.presenceFile && existsSync(options.presenceFile) ? readSavedPresence(readFileSync(options.presenceFile, 'utf8'), Date.now()) : {});
     this.counter = {
       allowedOrigins: options.allowedOrigins,
       addressOf: (request) => this.clientAddress(request),
@@ -412,6 +412,7 @@ export class GameServer {
         return;
       case 'partie': {
         this.stats.partie(evenement.publique, evenement.humains);
+        this.presence.launched('en_ligne', evenement.humains);
         const humains = `${evenement.humains} humain${evenement.humains > 1 ? 's' : ''}`;
         this.live.event('partie', `Partie ${table(evenement.publique)} lancée, ${humains}`);
         return;
@@ -459,7 +460,7 @@ export class GameServer {
     if (!file) return;
     try {
       mkdirSync(dirname(file), { recursive: true });
-      writeFileSync(file, JSON.stringify(this.presence.savedPresences()));
+      writeFileSync(file, JSON.stringify(this.presence.saved()));
     } catch (error) {
       this.options.journal?.(`${HEURE_DE_PARIS.format(new Date())} !! · présences non gardées : ${error instanceof Error ? error.message : String(error)}`);
     }
@@ -483,6 +484,7 @@ export class GameServer {
     }
     this.stats.record(event);
     this.stats.flush(false);
+    if (event.type === 'partie') this.presence.launched('locale', 1);
     const label = counterEventLabel(event);
     if (label) this.live.event(event.type === 'page' ? 'visite' : 'local', label);
   }
@@ -498,6 +500,8 @@ export class GameServer {
       enFile: this.lobby.nombreEnFile,
       locales: this.presence.localGames(),
       presents: this.presence.players(),
+      lanceesEnLigne: this.presence.launchedGames('en_ligne'),
+      lanceesLocales: this.presence.launchedGames('locale'),
     };
   }
 

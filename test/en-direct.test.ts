@@ -15,13 +15,13 @@ import { buildLiveCount } from '../src/server/buildLiveCount.ts';
 import { DiscordCounter } from '../src/server/discordCount.ts';
 import { LivePresence } from '../src/server/livePresence.ts';
 import { readDiscordCount } from '../src/server/readDiscordCount.ts';
-import { readPresenceMarks } from '../src/server/readPresenceMarks.ts';
+import { readSavedPresence } from '../src/server/readSavedPresence.ts';
 import { readTwitchCredentials } from '../src/server/readTwitchCredentials.ts';
 import { readTwitchLive } from '../src/server/readTwitchLive.ts';
 import { TwitchWatch } from '../src/server/twitchLive.ts';
 
 const T0 = Date.parse('2026-11-12T20:00:00Z');
-const LIVE = { connexions: 4, adresses: 3, salons: 2, enJeu: 1, enFile: 0, locales: 3, presents: 9 };
+const LIVE = { connexions: 4, adresses: 3, salons: 2, enJeu: 1, enFile: 0, locales: 3, presents: 9, lanceesEnLigne: 0, lanceesLocales: 0 };
 
 function memory(): TabStorage & { data: Map<string, string> } {
   const data = new Map<string, string>();
@@ -50,8 +50,21 @@ test('LivePresence: a game beating every minute counts once, a browser saying it
   assert.equal(live.players(T0 + PRESENCE_MS + 1), 1, 'a presence older than an hour is forgotten');
 });
 
-test('buildLiveCount: online tables and local games together, never fewer players than those connected now', () => {
-  assert.deepEqual(buildLiveCount(LIVE, 2, null, false), { parties: 5, enLigne: 2, joueurs: 9, discord: null, twitch: false });
+test('LivePresence: the games launched in the last hour, one per human player of a room, one per game in a page', () => {
+  const live = new LivePresence();
+  live.launched('en_ligne', 3, T0);
+  live.launched('locale', 1, T0 + 10 * 60_000);
+  live.launched('locale', 1, T0 + 20 * 60_000);
+  assert.equal(live.launchedGames('en_ligne', T0 + 30 * 60_000), 3);
+  assert.equal(live.launchedGames('locale', T0 + 30 * 60_000), 2);
+  assert.equal(live.launchedGames('en_ligne', T0 + PRESENCE_MS + 1), 0, 'a game launched more than an hour ago is forgotten');
+  assert.equal(live.launchedGames('locale', T0 + PRESENCE_MS + 1), 2);
+});
+
+test('buildLiveCount: the games launched in the hour, online and in the pages, never fewer than those running; players likewise', () => {
+  assert.deepEqual(buildLiveCount(LIVE, 2, null, false), { parties: 5, enLigne: 2, joueurs: 9, discord: null, twitch: false }, 'nothing launched in the hour: the games running');
+  assert.deepEqual(buildLiveCount({ ...LIVE, lanceesEnLigne: 6, lanceesLocales: 4 }, 2, null, false), { parties: 10, enLigne: 6, joueurs: 9, discord: null, twitch: false }, 'the games launched in the hour, together');
+  assert.deepEqual(buildLiveCount({ ...LIVE, lanceesEnLigne: 1, lanceesLocales: 1 }, 2, null, false), { parties: 5, enLigne: 2, joueurs: 9, discord: null, twitch: false }, 'never fewer than those running now');
   assert.deepEqual(buildLiveCount({ ...LIVE, presents: 0 }, 2, { membres: 30, connectes: 4 }, true), { parties: 5, enLigne: 2, joueurs: 7, discord: { membres: 30, connectes: 4 }, twitch: true });
 });
 
@@ -172,9 +185,9 @@ test('the running local game is read without being forgotten; a reload\'s readin
 
 test('the home page shows the games and the players online in the right number, and the Discord once it has members enough', () => {
   assert.deepEqual(liveTallyItems(null), [], 'nothing before the server answered');
-  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 1, discord: null, twitch: false }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }]);
-  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 0, discord: null, twitch: false }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }], 'whoever reads it is online');
-  assert.deepEqual(liveTallyItems({ parties: 7, enLigne: 2, joueurs: 12, discord: null, twitch: false }), [{ value: 7, label: 'parties en cours' }, { value: 12, label: 'joueurs en ligne' }]);
+  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 1, discord: null, twitch: false }), [{ value: 0, label: 'partie lancée' }, { value: 1, label: 'joueur en ligne' }]);
+  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 0, discord: null, twitch: false }), [{ value: 0, label: 'partie lancée' }, { value: 1, label: 'joueur en ligne' }], 'whoever reads it is online');
+  assert.deepEqual(liveTallyItems({ parties: 7, enLigne: 2, joueurs: 12, discord: null, twitch: false }), [{ value: 7, label: 'parties lancées' }, { value: 12, label: 'joueurs en ligne' }]);
   assert.equal(discordMembersLabel(null), null);
   assert.equal(discordMembersLabel({ membres: 3, connectes: 2 }), null, 'a handful is not shown');
   assert.equal(discordMembersLabel({ membres: 42, connectes: 1 }), '42 membres, dont 1 connecté');
@@ -185,17 +198,24 @@ test('the home page shows the games and the players online in the right number, 
   for (const data of [null, '<!doctype html>', {}, { parties: -1, enLigne: 0, joueurs: 0 }, { parties: 1.5, enLigne: 0, joueurs: 0 }]) assert.equal(readLiveCount(data), null);
 });
 
-test('the presences of the last hour are kept over a restart, times only', () => {
+test('the presences and the games launched of the last hour are kept over a restart, times only', () => {
   const before = new LivePresence();
   before.record({ type: 'presence' }, T0 - 2 * PRESENCE_MS);
   before.record({ type: 'presence' }, T0 - 30 * 60_000);
   before.record({ type: 'presence' }, T0 - 60_000);
   before.record({ type: 'en_jeu', mode: 'solo' }, T0 - 1000);
-  const saved = JSON.stringify(before.savedPresences(T0));
-  assert.deepEqual(JSON.parse(saved), [T0 - 30 * 60_000, T0 - 60_000]);
-  const after = new LivePresence(readPresenceMarks(saved, T0 + 1000));
+  before.launched('en_ligne', 2, T0 - 2 * PRESENCE_MS);
+  before.launched('en_ligne', 2, T0 - 40 * 60_000);
+  before.launched('locale', 1, T0 - 5 * 60_000);
+  const saved = JSON.stringify(before.saved(T0));
+  assert.deepEqual(JSON.parse(saved), { presences: [T0 - 30 * 60_000, T0 - 60_000], lanceesEnLigne: [T0 - 40 * 60_000, T0 - 40 * 60_000], lanceesLocales: [T0 - 5 * 60_000] });
+  const after = new LivePresence(readSavedPresence(saved, T0 + 1000));
   assert.equal(after.players(T0 + 1000), 2);
+  assert.equal(after.launchedGames('en_ligne', T0 + 1000), 2);
+  assert.equal(after.launchedGames('locale', T0 + 1000), 1);
   assert.equal(after.localGames(T0 + 1000), 0, 'the running games come back by themselves within a minute');
-  assert.deepEqual(readPresenceMarks(JSON.stringify([T0, 'x', null, T0 - PRESENCE_MS - 1, T0 + 999_999, T0 - 5]), T0), [T0 - 5, T0]);
-  for (const text of ['', 'pas du json', '{}', 'null']) assert.deepEqual(readPresenceMarks(text, T0), []);
+  const marks = [T0, 'x', null, T0 - PRESENCE_MS - 1, T0 + 999_999, T0 - 5];
+  assert.deepEqual(readSavedPresence(JSON.stringify(marks), T0), { presences: [T0 - 5, T0], lanceesEnLigne: [], lanceesLocales: [] }, 'the older file: presences only');
+  assert.deepEqual(readSavedPresence(JSON.stringify({ presences: marks, lanceesEnLigne: 'x', lanceesLocales: marks }), T0), { presences: [T0 - 5, T0], lanceesEnLigne: [], lanceesLocales: [T0 - 5, T0] });
+  for (const text of ['', 'pas du json', '{}', 'null']) assert.deepEqual(readSavedPresence(text, T0), { presences: [], lanceesEnLigne: [], lanceesLocales: [] });
 });

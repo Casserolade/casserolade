@@ -10,7 +10,7 @@ import { TWITCH_URL } from '#src/protocol/twitch.ts';
     <GameIcon name="twitch" :outline="false" class="mark" />
     <span class="words">
       <em class="riddle">Homme ou machine, nul n'imagine, quel est son secret, nul ne le sait. Mais quand on lui pose des questions, il y répond…</em>
-      <span>Un étrange streamer joue en ce moment sur Twitch. <span class="go">Voir la chaîne</span></span>
+      <span>Un étrange streamer joue en ce moment sur Twitch. <span class="go">Voir le live</span></span>
     </span>
   </a>
 </template>

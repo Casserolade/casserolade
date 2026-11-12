@@ -1,6 +1,6 @@
 /**
- * What the home page shows of the life on the server (GET /en-direct): the games in progress, online and in the pages,
- * the players of the last hour, the community's Discord, and whether the game's Twitch channel is live. Totals only,
+ * What the home page shows of the life on the server (GET /en-direct): the games launched in the last hour, online and
+ * in the pages, the players of the last hour, the community's Discord, and whether the game's Twitch channel is live. Totals only,
  * like the counter: no id, no address.
  */
 export const LIVE_COUNT_PATH = '/en-direct';
@@ -16,7 +16,10 @@ export interface DiscordCount {
 }
 
 export interface LiveCount {
-  /** The games in progress, one per player: online, in a room, and in a page against bots (solo, career, tutorial). */
+  /**
+   * The games launched in the last hour, one per player: online, in a room, and in a page against bots (solo, career,
+   * tutorial); never fewer than those running right now.
+   */
   parties: number;
   /** Of which online. */
   enLigne: number;

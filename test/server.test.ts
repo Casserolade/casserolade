@@ -616,6 +616,29 @@ test('the home page\'s live count: rooms and games in the pages, players online,
   await server.stop();
 });
 
+test('the games launched in the last hour: one per player of a room, one per game in a page, kept over a restart', async () => {
+  const presenceFile = join(mkdtempSync(join(tmpdir(), 'presences-')), 'presences.json');
+  const first = await startServer({}, { presenceFile });
+  const live = async (port: number) => (await fetch(`http://127.0.0.1:${port}/en-direct`)).json() as Promise<Record<string, unknown>>;
+  for (const body of ['{"type":"partie","mode":"tutoriel"}', '{"type":"partie","mode":"solo","niveau":"facile"}']) {
+    const sent = await fetch(`http://127.0.0.1:${first.port}/compteur`, { method: 'POST', body, headers: { origin: ORIGIN, 'user-agent': BROWSER, 'content-type': 'text/plain' } });
+    assert.equal(sent.status, 204);
+  }
+  assert.deepEqual(await live(first.port), { parties: 2, enLigne: 0, joueurs: 0, discord: null, twitch: false }, 'a game in a page counts, though it does not beat yet');
+  const { host, guest } = await createRoomWithTwo(first.url);
+  host.send({ type: 'lancer' });
+  await Promise.all([host, guest].map((client) => client.waitFor((m) => m.type === 'vue', 'vue')));
+  assert.deepEqual(await live(first.port), { parties: 4, enLigne: 2, joueurs: 2, discord: null, twitch: false }, 'a room launched counts one game per human player');
+  host.socket.close();
+  guest.socket.close();
+  await first.server.stop();
+  const second = await startServer({}, { presenceFile });
+  const count = await live(second.port);
+  assert.equal(count.parties, 4, 'a restart keeps the games launched in the last hour');
+  assert.equal(count.enLigne, 2);
+  await second.server.stop();
+});
+
 test('the secret statistics page: only with its token, live over Server-Sent Events; loading a page counts nothing by itself', async () => {
   const { server, port } = await startServer({}, { staticDir: 'src/client', statsToken: 'jeton-secret' });
   const base = `http://127.0.0.1:${port}`;
