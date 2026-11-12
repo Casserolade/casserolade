@@ -22,3 +22,8 @@ function submit(): void {
     <AppButton primary type="submit">Lancer la partie</AppButton>
   </form>
 </template>
+
+<style scoped>
+/* Given more height than it needs, the form keeps its button at the bottom. */
+.stack > :last-child { margin-top: auto; }
+</style>

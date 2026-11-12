@@ -5,8 +5,8 @@
 **L'accueil, tourné vers le jeu en ligne**
 - Le jeu en ligne passe devant. Un bandeau « En direct » donne les parties en cours, une par joueur (en ligne, en solo, en carrière ou au tutoriel), et les joueurs en ligne. Ces chiffres ne gardent ni adresse ni identifiant.
 - Casserolade a son Discord : on y trouve une table, on y poste ses codes de salon, on y exhibe ses plateaux à 3k. Le lien est sur l'accueil et sur la page À propos.
-- Un étrange streamer joue peut-être sur Twitch, et répond à toutes les questions sur le jeu.
-- Le jeu solo réunit la carrière, où se range désormais le tutoriel, et la partie rapide. La partie classée, encore fermée, ne prend plus de place en attendant.
+- Pendant un direct sur Twitch, l'accueil le dit : un étrange streamer y joue, et répond à toutes les questions sur le jeu.
+- Le jeu solo réunit la carrière et la partie rapide. Le tutoriel passe en bas de l'accueil, avant les succès. La partie classée, encore fermée, ne prend plus de place en attendant, ni le bouton de partage.
 - Moins de texte.
 
 ## 0.3h — 11 novembre 2026

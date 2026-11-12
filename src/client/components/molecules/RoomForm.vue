@@ -29,6 +29,8 @@ function submit(): void {
 </template>
 
 <style scoped>
+/* The fields share the width of the row, the button keeps its size; on a narrow side, they go one under the other. */
 .room-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-3) var(--space-4); }
-input { text-transform: uppercase; letter-spacing: 0.2em; width: 9em; }
+.room-form > label, :slotted(label) { flex: 1 1 12rem; min-width: 0; }
+input { text-transform: uppercase; letter-spacing: 0.2em; }
 </style>

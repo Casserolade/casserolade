@@ -9,8 +9,7 @@ import TipLink from '#src/client/components/molecules/TipLink.vue';
 import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
-import ShareButton from '#src/client/components/molecules/ShareButton.vue';
-import { shareGame } from '#src/client/services/shareGame.ts';
+import TutorialButton from '#src/client/components/molecules/TutorialButton.vue';
 import { useHomePage } from '#src/client/stores/useHomePage.ts';
 import { shout } from '#src/client/services/soundEffects.ts';
 import { chooseVersion } from '#src/client/services/versionChoice.ts';
@@ -25,7 +24,7 @@ withDefaults(defineProps<{
   error: string | null;
   title?: string | null;
   achievements?: string | null;
-  /** Never been through the tutorial: the solo side offers it first. */
+  /** Never been through the tutorial: its button shines, first of the extras. */
   newcomer?: boolean;
   /** A local game the last reload cut short: what to say, and the button that starts it again. */
   resume?: { text: string; action: string } | null;
@@ -47,7 +46,7 @@ const emit = defineEmits<{
 }>();
 
 /** The pseudo of the online modes, the TV set behind, the subtitle under the logo, the life on the server. */
-const { pseudo, plateauId, tagline, live, discordMembers } = useHomePage();
+const { pseudo, plateauId, tagline, live, discordMembers, twitchLive } = useHomePage();
 /** A touch screen that chose this version, a tablet or a phone: the phone version stays one link away. */
 const touchScreen = window.matchMedia('(pointer: coarse)').matches;
 
@@ -87,21 +86,17 @@ const suitcases = ref(0);
           :invite-code="inviteCode"
           :live="live"
           :discord-members="discordMembers"
+          :twitch-live="twitchLive"
           @create="react(() => emit('create', pseudo))"
           @join="(code) => react(() => emit('join', code, pseudo))"
           @public="react(() => emit('public', pseudo))"
         />
-        <LocalModes
-          :newcomer="newcomer"
-          @solo="(settings) => react(() => emit('solo', settings))"
-          @story="react(() => emit('story'))"
-          @tutorial="react(() => emit('tutorial'))"
-        />
+        <LocalModes @solo="(settings) => react(() => emit('solo', settings))" @story="react(() => emit('story'))" />
       </div>
       <nav class="extras">
+        <TutorialButton :newcomer="newcomer" @open="react(() => emit('tutorial'))" />
         <AppButton @click="emit('achievements')"><GameIcon name="star" /> Succès<span v-if="achievements" class="count">{{ achievements }}</span></AppButton>
         <AppButton href="/bestiaire" target="_blank"><GameIcon name="skull" /> Le bestiaire</AppButton>
-        <ShareButton :share="shareGame" :primary="false" />
         <TipLink :caught="suitcases" />
       </nav>
       <nav class="links" aria-label="Le projet">
@@ -132,8 +127,8 @@ const suitcases = ref(0);
 .resume :deep(.app-button) { font-size: 1.2rem; }
 .title-badge { margin-top: -0.4rem; padding: 0.25rem 0.9rem; border-radius: 999px; background: rgb(255 216 74 / 0.15); border: 2px solid var(--color-frame); color: var(--color-title); font-weight: 700; font-style: italic; }
 /* Two sides, alone or online: next to each other on a wide screen, one above the other below. */
-/* Online first and wider: it is where the game lives. */
-.sides { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: start; gap: 1.2rem; width: 100%; }
+/* Online first and wider: it is where the game lives. Both sides end at the same height. */
+.sides { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 1.2rem; width: 100%; }
 .extras { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 1rem; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; }
 .links a { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }

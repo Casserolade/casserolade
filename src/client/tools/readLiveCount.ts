@@ -13,7 +13,7 @@ function readDiscord(value: unknown): DiscordCount | null {
 /** The server's answer to GET /en-direct, checked: null when it is not what the home page expects. */
 export function readLiveCount(data: unknown): LiveCount | null {
   if (!data || typeof data !== 'object') return null;
-  const { parties, enLigne, joueurs, discord } = data as Record<string, unknown>;
+  const { parties, enLigne, joueurs, discord, twitch } = data as Record<string, unknown>;
   if (!isCount(parties) || !isCount(enLigne) || !isCount(joueurs)) return null;
-  return { parties, enLigne, joueurs, discord: readDiscord(discord) };
+  return { parties, enLigne, joueurs, discord: readDiscord(discord), twitch: twitch === true };
 }
