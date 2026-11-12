@@ -8,7 +8,7 @@ import { LiveMetrics } from '../src/server/liveMetrics.ts';
 import { SiteStats } from '../src/server/siteStats.ts';
 import { statsPage } from '../src/server/statsPage.ts';
 
-const LIVE = { connexions: 3, adresses: 2, salons: 1, enJeu: 1, enFile: 0, locales: 2, presents: 5 };
+const LIVE = { connexions: 3, adresses: 2, salons: 1, enJeu: 1, enFile: 0, locales: 2, presents: 5, lanceesEnLigne: 0, lanceesLocales: 0 };
 
 function visit(premier: boolean, nouveau: boolean, extra: Partial<Extract<CounterEvent, { type: 'page' }>> = {}): CounterEvent {
   return { type: 'page', page: 'jeu', appareil: 'ordinateur', nouveau, premier, source: '', ...extra };

@@ -21,6 +21,10 @@ export interface LiveStats {
   locales: number;
   /** Browsers that came on the game in the last hour. */
   presents: number;
+  /** Games launched in the last hour in the rooms, one per human player. */
+  lanceesEnLigne: number;
+  /** Games launched in the last hour in the pages: solo, career, tutorial. */
+  lanceesLocales: number;
 }
 
 export interface StatsSnapshot {
