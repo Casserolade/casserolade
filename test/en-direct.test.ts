@@ -112,6 +112,7 @@ test('the running local game is read without being forgotten; a reload\'s readin
 test('the home page shows the games and the players online in the right number, and the Discord once it has members enough', () => {
   assert.deepEqual(liveTallyItems(null), [], 'nothing before the server answered');
   assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 1, discord: null }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }]);
+  assert.deepEqual(liveTallyItems({ parties: 0, enLigne: 0, joueurs: 0, discord: null }), [{ value: 0, label: 'partie en cours' }, { value: 1, label: 'joueur en ligne' }], 'whoever reads it is online');
   assert.deepEqual(liveTallyItems({ parties: 7, enLigne: 2, joueurs: 12, discord: null }), [{ value: 7, label: 'parties en cours' }, { value: 12, label: 'joueurs en ligne' }]);
   assert.equal(discordMembersLabel(null), null);
   assert.equal(discordMembersLabel({ membres: 3, connectes: 2 }), null, 'a handful is not shown');

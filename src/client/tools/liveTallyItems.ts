@@ -8,13 +8,14 @@ export interface LiveTallyItem {
 
 /**
  * What the home page's « en direct » shows, once the server answered: every game in progress (online rooms, solo,
- * career, tutorial), and the players online (those of the last hour).
+ * career, tutorial), and the players online (those of the last hour), never fewer than one: whoever reads it is
+ * online, even before the server counted them.
  */
 export function liveTallyItems(count: LiveCount | null): LiveTallyItem[] {
   if (!count) return [];
   const items = [
     { value: count.parties, words: LIVE_TALLY_LABELS.games },
-    { value: count.joueurs, words: LIVE_TALLY_LABELS.players },
+    { value: Math.max(count.joueurs, 1), words: LIVE_TALLY_LABELS.players },
   ];
   return items.map(({ value, words }) => ({ value, label: value > 1 ? words.many : words.one }));
 }
