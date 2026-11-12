@@ -19,6 +19,11 @@
   --color-frame: #d8b450;
   --panel-background: linear-gradient(rgb(22 30 58 / 0.94), rgb(11 15 32 / 0.94));
   --panel-shadow: 0 16px 40px rgb(0 0 0 / 0.55);
+  /* The community's Discord, in its own colours; the red of a TV set's « en direct ». */
+  --color-discord: #5865f2;
+  --color-discord-dark: #3a43b8;
+  --color-twitch: #9146ff;
+  --color-on-air: #e3242b;
 
   --camp-insoumis: #c8323c;
   --camp-socialistes: #e0528a;

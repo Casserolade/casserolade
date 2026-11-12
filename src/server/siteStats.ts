@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import type { CounterEvent, GameEndEvent, GameStartEvent, PageEvent } from '../protocol/counterEvent.ts';
+import type { CountedEvent, GameEndEvent, GameStartEvent, PageEvent } from '../protocol/counterEvent.ts';
 import { parisDay, parisHour } from './parisDay.ts';
 import { readStatsData } from './readStatsData.ts';
 import { emptyDay, emptyGameCount, STATS_FORMAT } from './statsData.ts';
@@ -17,6 +17,10 @@ export interface LiveStats {
   salons: number;
   enJeu: number;
   enFile: number;
+  /** Games played in a page against bots, running right now (livePresence.ts). */
+  locales: number;
+  /** Browsers that came on the game in the last hour. */
+  presents: number;
 }
 
 export interface StatsSnapshot {
@@ -76,7 +80,7 @@ export class SiteStats {
   }
 
   /** An event of a page: a page opened, a game in the page started or finished. */
-  record(event: CounterEvent): void {
+  record(event: CountedEvent): void {
     if (event.type === 'page') this.page(event);
     else if (event.type === 'partie') this.gameStarted(event);
     else this.gameEnded(event);

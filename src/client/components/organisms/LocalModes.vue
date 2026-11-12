@@ -1,24 +1,36 @@
 <script setup lang="ts">
 import type { BotLevel } from '#src/bots/bots.ts';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
+import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import HomeChoice from '#src/client/components/molecules/HomeChoice.vue';
 import HomeSide from '#src/client/components/molecules/HomeSide.vue';
 import SoloForm from '#src/client/components/molecules/SoloForm.vue';
 
-/** Alone at the table, against the machine: a quick game, or the career. Nothing online. */
-defineProps<{ highlighted?: boolean }>();
-const emit = defineEmits<{ solo: [settings: { botLevel: BotLevel; contexte: string }]; story: [] }>();
+/**
+ * Alone at the table, against the machine: the career first, which the tutorial opens, then a quick game. Nothing
+ * online. For a newcomer, the tutorial is the button that shines.
+ */
+withDefaults(defineProps<{ newcomer?: boolean }>(), { newcomer: false });
+const emit = defineEmits<{ solo: [settings: { botLevel: BotLevel; contexte: string }]; story: []; tutorial: [] }>();
 </script>
 
 <template>
-  <HomeSide title="Local · 1 joueur" icon="robot" :highlighted="highlighted">
-    <HomeChoice title="Partie rapide">
-      <p>Une partie tout de suite, contre des politiques pilotés par la machine.</p>
-      <SoloForm @start="(settings) => emit('solo', settings)" />
-    </HomeChoice>
+  <HomeSide title="Jeu solo" icon="robot">
     <HomeChoice title="Carrière">
-      <p>Un politique, sept élections, du canton au second tour. Chacune a sa règle spéciale.</p>
-      <AppButton primary @click="emit('story')">Jouer la carrière</AppButton>
+      <p>Sept élections, du canton au second tour.</p>
+      <div class="stack">
+        <AppButton :primary="!newcomer" @click="emit('story')">Jouer la carrière</AppButton>
+        <AppButton :primary="newcomer" :class="{ beckon: newcomer }" @click="emit('tutorial')"><GameIcon name="sparkle" /> Le tutoriel</AppButton>
+      </div>
+    </HomeChoice>
+    <HomeChoice title="Partie rapide">
+      <SoloForm @start="(settings) => emit('solo', settings)" />
     </HomeChoice>
   </HomeSide>
 </template>
+
+<style scoped>
+.beckon { animation: beckon 1.6s ease-in-out infinite; }
+@keyframes beckon { 50% { transform: scale(1.06); box-shadow: 0 0 26px rgb(255 216 74 / 0.7), 0 5px 12px rgb(0 0 0 / 0.5); } }
+@media (prefers-reduced-motion: reduce) { .beckon { animation: none; } }
+</style>

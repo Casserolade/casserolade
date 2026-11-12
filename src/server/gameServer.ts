@@ -1,21 +1,24 @@
 import { randomUUID } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import type { IncomingMessage, Server, ServerResponse } from 'node:http';
 import type { AddressInfo } from 'node:net';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
 import type { Duplex } from 'node:stream';
 import { WebSocket, WebSocketServer } from 'ws';
 import { HERO_BY_ID } from '../data/heroes.ts';
 import { Lobby } from '../lobby/lobby.ts';
 import type { EvenementSalon, LobbyOptions } from '../lobby/lobby.ts';
-import { COUNTER_PATH } from '../protocol/counterEvent.ts';
+import { COUNTER_PATH, isLiveSignal } from '../protocol/counterEvent.ts';
 import type { CounterEvent } from '../protocol/counterEvent.ts';
+import { LIVE_COUNT_PATH } from '../protocol/liveCount.ts';
 import type { ClientMessage, ServerMessage } from '../protocol/messages.ts';
 import { MAX_MESSAGE_BYTES, parseClientMessage } from '../protocol/parseClientMessage.ts';
 import type { Clock, RoomIncident } from './room.ts';
 import { counterEventLabel } from './counterEventLabel.ts';
 import { DASHBOARD_NAMES } from './dashboardNames.ts';
+import { buildLiveCount } from './buildLiveCount.ts';
+import { DiscordCounter } from './discordCount.ts';
 import { appendToArchive, archiveGame } from './gameArchive.ts';
 import type { ArchivedGame } from './gameArchive.ts';
 import { handleCounter } from './handleCounter.ts';
@@ -26,6 +29,8 @@ import { serveStatic } from './serveStatic.ts';
 import { liveGames } from './liveGames.ts';
 import type { LiveGame } from './liveGames.ts';
 import { LiveMetrics } from './liveMetrics.ts';
+import { LivePresence } from './livePresence.ts';
+import { readPresenceMarks } from './readPresenceMarks.ts';
 import { SiteStats } from './siteStats.ts';
 import type { LiveStats, StatsSnapshot } from './siteStats.ts';
 import { statsPage } from './statsPage.ts';
@@ -105,6 +110,13 @@ export interface GameServerOptions {
   archiveDir?: string;
   /** The secret of the statistics page, /stats/<token>. Without it, there is no such page. */
   statsToken?: string;
+  /** The invitation of the community's Discord server, whose counts the home page shows. Without it, none. */
+  discordInvite?: string;
+  /**
+   * JSON file where the times of the last hour's presences wait for a restart, on the private volume: without it, the
+   * players online start again from zero at each deploy. Times only.
+   */
+  presenceFile?: string;
 }
 
 /** The secret statistics page lives under this path; anything else under it is a plain 404. */
@@ -127,6 +139,7 @@ const GAMES_EVERY_MS = 2_000;
 const STREAMED_DAYS = 60;
 /** The container's health check asks here, and is counted nowhere. */
 export const HEALTH_PATH = '/sante';
+const LIVE_COUNT_HEADERS = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 
 const HEURE_DE_PARIS = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'medium' });
 
@@ -172,6 +185,8 @@ export class GameServer {
   private readonly stats: SiteStats;
   private readonly counter: CounterHandling;
   private readonly live = new LiveMetrics();
+  private readonly presence: LivePresence;
+  private readonly discord: DiscordCounter | null;
   private sampler: NodeJS.Timeout | null = null;
   private readonly statsStreams = new Set<ServerResponse>();
   private heartbeat: NodeJS.Timeout | null = null;
@@ -182,6 +197,8 @@ export class GameServer {
     this.limits = { ...DEFAULT_LIMITS, ...options.limits };
     this.mmrFile = options.mmrFile ? openMmrFile(options.mmrFile) : null;
     this.stats = new SiteStats({ file: options.statsFile ?? null });
+    this.discord = options.discordInvite ? new DiscordCounter(options.discordInvite) : null;
+    this.presence = new LivePresence(options.presenceFile && existsSync(options.presenceFile) ? readPresenceMarks(readFileSync(options.presenceFile, 'utf8'), Date.now()) : []);
     this.counter = {
       allowedOrigins: options.allowedOrigins,
       addressOf: (request) => this.clientAddress(request),
@@ -209,6 +226,10 @@ export class GameServer {
         void handleCounter(request, response, this.counter);
         return;
       }
+      if (path === LIVE_COUNT_PATH) {
+        this.serveLiveCount(request, response);
+        return;
+      }
       if (!staticDir) {
         response.writeHead(404).end();
         return;
@@ -223,17 +244,20 @@ export class GameServer {
     this.heartbeat = setInterval(() => this.checkConnections(), this.limits.heartbeatMs);
     this.sampler = setInterval(() => this.live.sample(this.liveStats(), this.lobby.joueursEnJeu), 1000);
     this.live.event('demarrage', `Serveur démarré, version ${this.options.version ?? 'inconnue'}`);
+    this.discord?.start();
     return (this.http.address() as AddressInfo).port;
   }
 
   async stop(): Promise<void> {
     if (this.heartbeat) clearInterval(this.heartbeat);
     if (this.sampler) clearInterval(this.sampler);
+    this.discord?.stop();
     for (const stream of this.statsStreams) stream.end();
     this.live.stop();
     this.lobby.destroy();
     this.mmrFile?.flush();
     this.stats.flush();
+    this.savePresences();
     for (const connection of this.connections.values()) connection.socket.terminate();
     await new Promise((done) => this.http.close(done));
   }
@@ -418,8 +442,34 @@ export class GameServer {
     return state.counter.take();
   }
 
-  /** An event of a page: added to the day, and shown in the dashboard's feed. */
+  /** The last hour's presences, for the next start: a disk that refuses costs the count, never the stop. */
+  private savePresences(): void {
+    const file = this.options.presenceFile;
+    if (!file) return;
+    try {
+      mkdirSync(dirname(file), { recursive: true });
+      writeFileSync(file, JSON.stringify(this.presence.savedPresences()));
+    } catch (error) {
+      this.options.journal?.(`${HEURE_DE_PARIS.format(new Date())} !! · présences non gardées : ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+
+  /** The life on the server, for the home page: totals only, read again every half minute by each open home page. */
+  private serveLiveCount(request: IncomingMessage, response: ServerResponse): void {
+    if (request.method !== 'GET' && request.method !== 'HEAD') {
+      response.writeHead(405, LIVE_COUNT_HEADERS).end();
+      return;
+    }
+    const count = buildLiveCount(this.liveStats(), this.lobby.tablesOuvertes, this.discord?.current ?? null);
+    response.writeHead(200, LIVE_COUNT_HEADERS).end(request.method === 'GET' ? JSON.stringify(count) : undefined);
+  }
+
+  /** An event of a page: added to the day, and shown in the dashboard's feed. Who is here right now stays in memory. */
   private recordCounterEvent(event: CounterEvent): void {
+    if (isLiveSignal(event)) {
+      this.presence.record(event);
+      return;
+    }
     this.stats.record(event);
     this.stats.flush(false);
     const label = counterEventLabel(event);
@@ -429,7 +479,15 @@ export class GameServer {
   private liveStats(): LiveStats {
     let addresses = 0;
     for (const state of this.addresses.values()) if (state.connections > 0) addresses++;
-    return { connexions: this.connections.size, adresses: addresses, salons: this.lobby.nombreDeSalons, enJeu: this.lobby.nombreEnJeu, enFile: this.lobby.nombreEnFile };
+    return {
+      connexions: this.connections.size,
+      adresses: addresses,
+      salons: this.lobby.nombreDeSalons,
+      enJeu: this.lobby.nombreEnJeu,
+      enFile: this.lobby.nombreEnFile,
+      locales: this.presence.localGames(),
+      presents: this.presence.players(),
+    };
   }
 
   /** A game stopped by a bug, or a broken invariant: one line in the journal, the full report on the private volume. */

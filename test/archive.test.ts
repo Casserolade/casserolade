@@ -109,7 +109,7 @@ test('the online results count humans against each level of bots, and the heroes
   stats.partieFinie(game);
   stats.partieAbandonnee();
   stats.reprise();
-  const snapshot = stats.snapshot({ connexions: 0, adresses: 0, salons: 0, enJeu: 0, enFile: 0 }, null);
+  const snapshot = stats.snapshot({ connexions: 0, adresses: 0, salons: 0, enJeu: 0, enFile: 0, locales: 0, presents: 0 }, null);
   const day = snapshot.days.at(-1);
   assert.equal(day?.partiesFinies, 1);
   assert.equal(day?.manchesFinies, 14);

@@ -1,5 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import { MAX_COUNTER_BYTES } from '../protocol/counterEvent.ts';
+import { isLiveSignal } from '../protocol/counterEvent.ts';
 import type { CounterEvent } from '../protocol/counterEvent.ts';
 import { parseCounterEvent } from '../protocol/parseCounterEvent.ts';
 import { isRobot } from './isRobot.ts';
@@ -35,7 +36,8 @@ export async function handleCounter(request: IncomingMessage, response: ServerRe
   const body = await readBody(request, MAX_COUNTER_BYTES);
   const event = body === null ? null : parseCounterEvent(body);
   if (!event) return answer(response, 400);
-  if (isRobot(request.headers['user-agent'])) handling.recordRobot();
-  else handling.record(event);
+  // A robot's page is counted apart; its signals of presence say nothing of who is here.
+  if (!isRobot(request.headers['user-agent'])) handling.record(event);
+  else if (!isLiveSignal(event)) handling.recordRobot();
   answer(response, 204);
 }

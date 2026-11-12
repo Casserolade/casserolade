@@ -1,47 +1,44 @@
 <script setup lang="ts">
 import AppButton from '#src/client/components/atoms/AppButton.vue';
+import DiscordCall from '#src/client/components/molecules/DiscordCall.vue';
 import HomeChoice from '#src/client/components/molecules/HomeChoice.vue';
 import HomeSide from '#src/client/components/molecules/HomeSide.vue';
+import LiveTally from '#src/client/components/molecules/LiveTally.vue';
 import RoomForm from '#src/client/components/molecules/RoomForm.vue';
-import ShareButton from '#src/client/components/molecules/ShareButton.vue';
+import TwitchLink from '#src/client/components/molecules/TwitchLink.vue';
 import { RANKED_QUEUE_OPEN } from '#src/client/const/rankedQueue.ts';
-import type { ShareOutcome } from '#src/client/services/shareGame.ts';
+import type { LiveTallyItem } from '#src/client/tools/liveTallyItems.ts';
 
 const MAX_PSEUDO_LENGTH = 24;
 
 /**
- * Online: a room with friends, by a link, and the ranked games, which open once enough people play at the same time.
- * The pseudo only matters here.
+ * Online, the first side of the home page: who is here right now, the community's Discord to find players, a room
+ * with friends, by a link, and, quieter, the Twitch channel. The ranked games only show once they open. The pseudo
+ * only matters here.
  */
-defineProps<{ inviteCode: string; highlighted?: boolean; share: () => Promise<ShareOutcome> }>();
+defineProps<{ inviteCode: string; live: LiveTallyItem[]; discordMembers: string | null }>();
 const pseudo = defineModel<string>('pseudo', { required: true });
 const emit = defineEmits<{ create: []; join: [code: string]; public: [] }>();
 </script>
 
 <template>
-  <HomeSide title="En ligne" icon="people" :highlighted="highlighted">
-    <template #before>
-      <label class="pseudo">Votre pseudo <input v-model="pseudo" :maxlength="MAX_PSEUDO_LENGTH" placeholder="Sans étiquette" autocomplete="nickname" /></label>
-    </template>
+  <HomeSide title="En ligne" icon="people" highlighted :columns="1">
+    <template #aside><LiveTally :items="live" /></template>
+    <DiscordCall :members="discordMembers" />
     <HomeChoice title="Entre amis">
       <p v-if="inviteCode">On vous attend au salon <strong>{{ inviteCode }}</strong>.</p>
-      <p v-else>Un lien à partager, sans compte. Les bots prennent les places vides.</p>
-      <RoomForm :invite-code="inviteCode" @create="emit('create')" @join="(code) => emit('join', code)" />
+      <RoomForm :invite-code="inviteCode" @create="emit('create')" @join="(code) => emit('join', code)">
+        <label class="pseudo">Votre pseudo <input v-model="pseudo" :maxlength="MAX_PSEUDO_LENGTH" placeholder="Sans étiquette" autocomplete="nickname" /></label>
+      </RoomForm>
     </HomeChoice>
-    <HomeChoice title="Partie classée">
-      <template v-if="RANKED_QUEUE_OPEN">
-        <p>Des inconnus de votre niveau, avec un classement. Si la table vote pour, des bots prennent les places vides.</p>
-        <AppButton primary @click="emit('public')">Entrer dans la file</AppButton>
-      </template>
-      <template v-else>
-        <p>Des inconnus de votre niveau, avec un classement. Elle ouvrira quand il y aura assez de monde en ligne : faites passer le mot !</p>
-        <ShareButton :share="share" />
-      </template>
+    <HomeChoice v-if="RANKED_QUEUE_OPEN" title="Partie classée">
+      <p>Des inconnus de votre niveau, avec un classement. Si la table vote pour, des bots prennent les places vides.</p>
+      <AppButton primary @click="emit('public')">Entrer dans la file</AppButton>
     </HomeChoice>
+    <TwitchLink />
   </HomeSide>
 </template>
 
 <style scoped>
-.pseudo { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.7rem; color: #fff; font: 400 1.3rem / 1 var(--font-number); letter-spacing: 1px; }
-.pseudo input { flex: 1; min-width: 10em; max-width: 18em; font-family: var(--font-card); font-size: 1.05rem; letter-spacing: 0; }
+.pseudo input { width: 13em; max-width: 100%; }
 </style>

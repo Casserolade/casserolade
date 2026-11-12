@@ -14,7 +14,7 @@ export default defineConfig(({ command }) => ({
     port: 5173,
     strictPort: false,
     // Online games in development: `npm run server` in another terminal.
-    proxy: { '/ws': { target: 'ws://localhost:8080', ws: true } },
+    proxy: { '/ws': { target: 'ws://localhost:8080', ws: true }, '/en-direct': 'http://localhost:8080' },
   },
   build: {
     outDir: '../../dist',

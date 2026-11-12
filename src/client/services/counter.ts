@@ -6,15 +6,18 @@ import type { ProfileStorage } from '#src/client/services/localProfile.ts';
 import { deviceKind } from '#src/client/tools/deviceKind.ts';
 import { humanResult } from '#src/client/tools/humanResult.ts';
 import { parisDay } from '#src/client/tools/parisDay.ts';
+import { presenceIsDue } from '#src/client/tools/presenceIsDue.ts';
 import { referrerSource } from '#src/client/tools/referrerSource.ts';
 import { visitFlags } from '#src/client/tools/visitFlags.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 import { COUNTER_PATH } from '#src/protocol/counterEvent.ts';
-import type { CounterEvent, Device, GameSettings, PageKind } from '#src/protocol/counterEvent.ts';
+import type { CounterEvent, Device, GameSettings, LocalMode, PageKind } from '#src/protocol/counterEvent.ts';
 import type { Classement } from '#src/protocol/messages.ts';
 
 const FIRST_VISIT_KEY = 'casserolade.premiere_visite';
 const LAST_DAY_KEY = 'casserolade.dernier_jour';
+/** When this browser last said it was on the game: shared by its tabs, so that it counts once an hour. */
+const LAST_PRESENCE_KEY = 'casserolade.presence';
 /** Set from the statistics page, on the browsers of the one who reads them: they are not counted. */
 const NOT_COUNTED_KEY = 'casserolade.compteur';
 const NOT_COUNTED = 'non';
@@ -58,6 +61,26 @@ export function createCounter(setup: CounterSetup) {
     setup.send({ type: 'page', page: kind, appareil: device, ...flags, source: referrerSource(referrer, host) });
   }
 
+  /** Without storage, the page remembers on its own: it must not say it is there at every check. */
+  let presenceSaidAt: number | null = null;
+
+  /** The browser is on the game: said once an hour at most, the players of the last hour are counted on it. */
+  function presence(): void {
+    if (!counts()) return;
+    const now = setup.now().getTime();
+    const stored = Number(read(setup.storage, LAST_PRESENCE_KEY) ?? Number.NaN);
+    const lastSaidAt = Number.isFinite(stored) ? Math.max(stored, presenceSaidAt ?? stored) : presenceSaidAt;
+    if (!presenceIsDue(lastSaidAt, now)) return;
+    presenceSaidAt = now;
+    write(setup.storage, LAST_PRESENCE_KEY, String(now));
+    setup.send({ type: 'presence' });
+  }
+
+  /** A game in the page is still running: said once a minute, the games in progress are counted on it. */
+  function playing(mode: LocalMode): void {
+    if (counts()) setup.send({ type: 'en_jeu', mode });
+  }
+
   function gameStarted(settings: GameSettings): void {
     if (counts()) setup.send({ type: 'partie', ...settings });
   }
@@ -69,7 +92,7 @@ export function createCounter(setup: CounterSetup) {
     setup.send({ type: 'fin', ...settings, ...result, gagnee: won ?? result.place === 1, version: VERSION });
   }
 
-  return { page, gameStarted, gameEnded };
+  return { page, presence, playing, gameStarted, gameEnded };
 }
 
 export type Counter = ReturnType<typeof createCounter>;

@@ -95,7 +95,7 @@ test('the dashboard draws every section from the stream: games in progress, hour
     version: '0.3e', manches: 12, dureeMs: 20 * 60_000,
     joueurs: [{ siege: 0, niveau: null, repris: false, heros: 'bardella', place: 1, sondages: 9, echelon: 5, camp: 'rn', campCount: 5, plateau: [], casseroles: 1, scandales: 0, triples: 1, sorts: 2, actions: {} }],
   } as unknown as ArchivedGame);
-  const snapshot = stats.snapshot({ connexions: 1, adresses: 1, salons: 1, enJeu: 1, enFile: 0 }, 'abc1234');
+  const snapshot = stats.snapshot({ connexions: 1, adresses: 1, salons: 1, enJeu: 1, enFile: 0, locales: 0, presents: 0 }, 'abc1234');
   const { emit, element } = openDashboard();
   emit('bonjour', {
     samples: [], events: [], jours: snapshot.days, totaux: snapshot.totaux, cumul: snapshot.cumul, incidents: [],

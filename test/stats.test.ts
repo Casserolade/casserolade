@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import type { CounterEvent } from '../src/protocol/counterEvent.ts';
+import type { CountedEvent as CounterEvent } from '../src/protocol/counterEvent.ts';
 import { LiveMetrics } from '../src/server/liveMetrics.ts';
 import { SiteStats } from '../src/server/siteStats.ts';
 import { statsPage } from '../src/server/statsPage.ts';
 
-const LIVE = { connexions: 3, adresses: 2, salons: 1, enJeu: 1, enFile: 0 };
+const LIVE = { connexions: 3, adresses: 2, salons: 1, enJeu: 1, enFile: 0, locales: 2, presents: 5 };
 
 function visit(premier: boolean, nouveau: boolean, extra: Partial<Extract<CounterEvent, { type: 'page' }>> = {}): CounterEvent {
   return { type: 'page', page: 'jeu', appareil: 'ordinateur', nouveau, premier, source: '', ...extra };

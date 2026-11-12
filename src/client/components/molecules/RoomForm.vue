@@ -4,7 +4,10 @@ import AppButton from '#src/client/components/atoms/AppButton.vue';
 
 const MAX_CODE_LENGTH = 6;
 
-/** A private room: create one, or join one with its code. The pseudo is typed once, on the home screen. */
+/**
+ * A private room: create one, or join one with its code. The fields the parent adds (the pseudo) come first, in the
+ * same form: Enter in any of them sends it.
+ */
 const props = defineProps<{ inviteCode: string }>();
 const emit = defineEmits<{ create: []; join: [code: string] }>();
 
@@ -18,12 +21,14 @@ function submit(): void {
 </script>
 
 <template>
-  <form class="stack" @submit.prevent="submit">
-    <label>Code du salon, si on vous en a donné un <input v-model="code" :maxlength="MAX_CODE_LENGTH" autocomplete="off" spellcheck="false" /></label>
+  <form class="room-form" @submit.prevent="submit">
+    <slot />
+    <label>Code du salon, si on vous l'a donné <input v-model="code" :maxlength="MAX_CODE_LENGTH" autocomplete="off" spellcheck="false" /></label>
     <AppButton primary type="submit">{{ code.trim() ? 'Rejoindre le salon' : 'Créer un salon' }}</AppButton>
   </form>
 </template>
 
 <style scoped>
+.room-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-3) var(--space-4); }
 input { text-transform: uppercase; letter-spacing: 0.2em; width: 9em; }
 </style>

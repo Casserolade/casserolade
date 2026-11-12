@@ -38,13 +38,19 @@ export function clearLocalGame(storage: MarkStorage | null = tabStorage()): void
 
 /** The local game a reload cut short, once: reading it forgets it. */
 export function takeInterruptedGame(storage: MarkStorage | null = tabStorage()): LocalGameMark | null {
+  const mark = runningLocalGame(storage);
+  clearLocalGame(storage);
+  return mark;
+}
+
+/** The local game running in this tab, if any: it was marked when it started, and is cleared when it ends. */
+export function runningLocalGame(storage: MarkStorage | null = tabStorage()): LocalGameMark | null {
   let raw: string | null = null;
   try {
     raw = storage?.getItem(KEY) ?? null;
   } catch {
     return null;
   }
-  clearLocalGame(storage);
   if (!raw) return null;
   try {
     const mark = JSON.parse(raw) as Partial<LocalGameMark>;

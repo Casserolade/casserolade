@@ -170,6 +170,13 @@ export class Lobby {
     return n;
   }
 
+  /** Les tables en ligne, pour l'accueil : les parties en cours, et les salons où quelqu'un attend ses joueurs. */
+  get tablesOuvertes(): number {
+    let n = 0;
+    for (const salon of this.salons.values()) if (salon.etat === 'en_jeu' || (salon.etat === 'attente' && salon.humains.some((h) => h.connexion))) n++;
+    return n;
+  }
+
   /** Les parties en cours, pour le tableau de bord du serveur : leur salle, et si la table est publique. */
   get partiesEnCours(): { room: GameRoom; publique: boolean }[] {
     const parties: { room: GameRoom; publique: boolean }[] = [];

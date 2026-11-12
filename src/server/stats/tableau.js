@@ -9,7 +9,7 @@ const TIME = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', hour: 
 /** What the tiles show, from the last measure. */
 const TILES = [
   ['connexions', 'connexions'], ['adresses', 'adresses'], ['joueurs', 'joueurs en partie'], ['enJeu', 'parties en cours'],
-  ['salons', 'salons ouverts'], ['enFile', 'dans la file publique'], ['messagesIn', 'messages reçus / s'], ['messagesOut', 'messages envoyés / s'],
+  ['salons', 'salons ouverts'], ['enFile', 'dans la file publique'], ['locales', 'parties locales en cours'], ['presents', 'joueurs en ligne (dans l\'heure)'], ['messagesIn', 'messages reçus / s'], ['messagesOut', 'messages envoyés / s'],
   ['kioOut', 'Kio envoyés / s'], ['boucleP99', 'latence boucle p99 (ms)', 100], ['occupation', 'occupation boucle (%)', 70],
   ['cpu', 'CPU (% d\'un cœur)', 80], ['memoireMo', 'mémoire (Mo)'], ['tasMo', 'tas JS (Mo)'],
 ];
