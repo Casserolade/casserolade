@@ -2,14 +2,14 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { combatBonuses, resolveCombat } from '../src/engine/combat.ts';
 import { isCamp } from '../src/engine/camps.ts';
-import { addMinionToHand, addSpellToHand, endOfTurn, offerCasserole, refillShop } from '../src/engine/recruit.ts';
+import { addMinionToHand, addSpellToHand, endOfTurn, offerCasserole, offerMinions, refillShop } from '../src/engine/recruit.ts';
 import { applyAction, createGame, resolveRound, startCombats, startRound, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { effectOrigin, makeMinion } from '../src/engine/minion.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
 import { createBot, decide } from '../src/bots/bots.ts';
 import { createRng } from '../src/engine/rng.ts';
-import type { Card, Effect, Keyword, Minion } from '../src/engine/types.ts';
+import type { Camp, Card, Effect, Keyword, Minion, Trigger } from '../src/engine/types.ts';
 import { CARDS, CARD_BY_ID, PARTY_CAMPS, TOKENS } from '../src/data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
 import { HEROES, RANDOM_CONTEXT } from '../src/data/heroes.ts';
@@ -449,22 +449,44 @@ function discovered(spellId: string, tier: number): { tiers: number[]; candidate
   return { tiers: p.discover.options.map((id) => CARD_BY_ID[id].tier), candidateTiers };
 }
 
-test('« un politique de votre échelon » : la découverte ne propose jamais un échelon plus bas', () => {
+test('« un politique de votre échelon » : la découverte propose toujours cet échelon, ni en dessous ni au-dessus', () => {
   for (const tier of [2, 3, 4, 5, 6]) {
     assert.deepEqual(discovered('motion_de_synthese', tier).tiers, [tier, tier, tier], `Motion de synthèse à l'échelon ${tier}`);
     for (const spellId of ['programme', 'testament_politique', 'ouverture']) {
       const { tiers, candidateTiers } = discovered(spellId, tier);
-      // Fewer choices rather than a lower tier. A tier with nothing to offer goes up; down only when nothing is above.
-      assert.equal(new Set(tiers).size, 1, `${spellId} : un seul échelon proposé à l'échelon ${tier}`);
-      const expected = Math.min(...candidateTiers.filter((t) => t >= tier));
-      assert.equal(tiers[0], Number.isFinite(expected) ? expected : Math.max(...candidateTiers), `${spellId} à l'échelon ${tier}`);
+      // Fewer choices rather than another tier; a filter with nothing at this tier falls, and three of the tier come.
+      assert.ok(tiers.every((t) => t === tier), `${spellId} à l'échelon ${tier} : ${tiers.join(', ')}`);
+      if (!candidateTiers.includes(tier)) assert.equal(tiers.length, 3, `${spellId} sans candidat à l'échelon ${tier} : trois politiques de l'échelon`);
+    }
+  }
+});
+
+test('toute découverte d\'un politique tombe à l\'échelon visé, quels que soient les camps de la partie', () => {
+  // Retour de partie du 12 novembre 2026 : à l'échelon 4, sans le RN, le Testament politique proposait l'échelon 6 ;
+  // Programme redescendait parfois, Ouverture montait. Tous les camps, et des parties à cinq camps.
+  const campSets = [undefined, ['insoumis', 'socialistes', 'macronie', 'republicains', 'reconquete'], ['ecologistes', 'rn', 'reconquete', 'macronie', 'socialistes'], ['insoumis', 'ecologistes', 'republicains', 'reconquete', 'socialistes']];
+  const SOURCES: { name: string; tierShift: number; camp?: Camp; trigger?: Trigger }[] = [
+    { name: 'Motion de synthèse', tierShift: 0 }, { name: 'Investiture', tierShift: 1 }, { name: 'Ciotti', tierShift: 0, camp: 'rn' },
+    { name: 'Ouverture', tierShift: 0, trigger: 'annonce' }, { name: 'Testament politique', tierShift: 0, trigger: 'heritage' }, { name: 'Programme', tierShift: 0, trigger: 'fin_tour' },
+  ];
+  for (const [i, activeCamps] of campSets.entries()) {
+    for (const source of SOURCES) {
+      for (let tier = 1; tier <= 6; tier++) {
+        const game = createGame({ seed: 40 + i, heroes: Array(8).fill('attal'), ...(activeCamps ? { activeCamps: activeCamps as Camp[] } : {}) });
+        const p = game.players[0];
+        p.tier = tier;
+        offerMinions(game, p, tier + source.tierShift, source.camp, source.trigger);
+        const target = Math.min(tier + source.tierShift, PARAMS.tierMax);
+        const tiers = (p.discover?.options ?? []).map((id) => CARD_BY_ID[id].tier);
+        assert.ok(tiers.length > 0 && tiers.every((t) => t === target), `${source.name} à l'échelon ${tier} (${activeCamps?.join(', ') ?? 'tous les camps'}) : ${tiers.join(', ')}`);
+      }
     }
   }
 });
 
 test('un sort de découverte gardé en main découvre l\'échelon où il est lancé, pas celui de son achat', () => {
   // Sans le RN, pas d'Héritage d'échelon 4 : le Testament politique acheté à l'échelon 3 et lancé à l'échelon 4
-  // redescendait à l'échelon 3, celui de l'achat (6 novembre 2026). Il monte désormais au plus proche au-dessus.
+  // redescendait à l'échelon 3, celui de l'achat (6 novembre 2026).
   const game = createGame({ seed: 5, seats: 2, heroes: ['attal', 'attal'], activeCamps: ['socialistes', 'macronie', 'republicains', 'reconquete', 'ecologistes'] });
   const p = game.players[0];
   p.budget = 100;
@@ -474,8 +496,11 @@ test('un sort de découverte gardé en main découvre l\'échelon où il est lan
   p.tier = 4;
   const held = p.spells.find((s) => s.spellId === 'testament_politique') as { uid: number };
   assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
-  // Depuis la re-spécification du 7 novembre 2026, l'échelon 5 n'a plus d'Héritage sans le RN : les légendes, au 6.
-  assert.deepEqual([...(p.discover?.options ?? [])].sort(), ['giscard', 'mitterrand', 'strauss_kahn']);
+  // Sans le RN, aucun Héritage au 4 ni au 5 : le Testament sautait jusqu'aux légendes du 6 (12 novembre 2026, retour de
+  // partie : « des niveaux 6 » à l'échelon 4). Le filtre tombe, l'échelon reste : trois politiques d'échelon 4.
+  const offered = p.discover?.options ?? [];
+  assert.equal(offered.length, 3);
+  assert.ok(offered.every((id) => CARD_BY_ID[id].tier === 4), offered.join(', '));
 });
 
 test('le Ralliement fusionne avec l\'allié : stats, mots-clés et effets', () => {

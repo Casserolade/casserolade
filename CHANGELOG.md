@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.8 — 12 novembre 2026
+
+**Les découvertes tiennent parole**
+- « Découvrez un politique à Héritage (ou à Annonce, ou à Fin de tour) de votre échelon » propose toujours votre échelon. Quand la partie n'a aucun politique de ce genre à votre échelon, elle en propose trois de votre échelon, quels qu'ils soient. À l'échelon 4, sans le RN, le Testament politique proposait jusqu'ici les légendes de l'échelon 6, et Programme redescendait parfois d'un échelon.
+
+**Numéros de version**
+- Les versions se comptent désormais en chiffres : après la 0.3i, qui était la 0.3.7, vient la 0.3.8.
+
 ## 0.3i — 12 novembre 2026
 
 **L'accueil, tourné vers le jeu en ligne**
