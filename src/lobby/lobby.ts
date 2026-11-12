@@ -170,11 +170,22 @@ export class Lobby {
     return n;
   }
 
-  /** Les tables en ligne, pour l'accueil : les parties en cours, et les salons où quelqu'un attend ses joueurs. */
-  get tablesOuvertes(): number {
+  /**
+   * Les parties en ligne, pour l'accueil : une par joueur, comme en solo. Les humains connectés d'un salon qui attend,
+   * et ceux d'une partie en cours qui sont encore en lice ; un éliminé a fini la sienne, les bots ne comptent pas.
+   */
+  get partiesEnLigne(): number {
     let n = 0;
-    for (const salon of this.salons.values()) if (salon.etat === 'en_jeu' || (salon.etat === 'attente' && salon.humains.some((h) => h.connexion))) n++;
+    for (const salon of this.salons.values()) {
+      if (salon.etat === 'fini') continue;
+      for (const humain of salon.humains) if (humain.connexion && this.encoreEnLice(salon, humain)) n++;
+    }
     return n;
+  }
+
+  private encoreEnLice(salon: Salon, humain: Humain): boolean {
+    if (salon.etat !== 'en_jeu') return true;
+    return humain.siegeJeu !== null && Boolean(salon.room?.game.players[humain.siegeJeu]?.alive);
   }
 
   /** Les parties en cours, pour le tableau de bord du serveur : leur salle, et si la table est publique. */

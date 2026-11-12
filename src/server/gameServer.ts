@@ -460,7 +460,7 @@ export class GameServer {
       response.writeHead(405, LIVE_COUNT_HEADERS).end();
       return;
     }
-    const count = buildLiveCount(this.liveStats(), this.lobby.tablesOuvertes, this.discord?.current ?? null);
+    const count = buildLiveCount(this.liveStats(), this.lobby.partiesEnLigne, this.discord?.current ?? null);
     response.writeHead(200, LIVE_COUNT_HEADERS).end(request.method === 'GET' ? JSON.stringify(count) : undefined);
   }
 
