@@ -54,7 +54,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       'Chaque casserole a désormais un défaut qui coûte, et un scandale peut éclabousser ses voisins.',
       'De Gaulle, Giscard, Chirac, Mitterrand et Macron passent au niveau des chefs de camp.',
       'Quatre nouveaux politiques, Rima Hassan, Élisabeth Borne, Michel Barnier et Alain Juppé. Dix-huit casseroles, dont dix pour le RN, Reconquête et les Écologistes, qui en avaient le moins.',
-      'Les casseroles sortent toutes à égalité en boutique. Deux nouveaux sorts et Francis Lalanne en font découvrir.',
+      'En boutique, chaque camp a autant de chances de voir sortir une de ses casseroles. Deux nouveaux sorts et Francis Lalanne en font découvrir.',
       'Les sorts sont répartis de l\'échelon 1 au 6, selon leur force. Trois sorts qui ne servaient presque à rien sont retirés.',
     ],
     rules: [
@@ -74,7 +74,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       {
         term: 'La casserole de la boutique',
         before: 'Les affaires « à la une » sortaient trois fois plus souvent, et une fois sur deux, celles de vos politiques.',
-        after: 'Chaque casserole de la partie sort à égalité. Pour celles de vos politiques, il y a le sort « À la une ».',
+        after: 'Un camp de la partie est tiré à égalité, puis une de ses casseroles : un camp qui a beaucoup d\'affaires ne sort pas plus souvent qu\'un autre. Pour celles de vos politiques, il y a le sort « À la une ».',
       },
       { term: 'Découvrez une casserole', after: 'Trois casseroles de la partie au choix, jamais une que vous avez déjà. Elle arrive en main, gratuite.' },
       {

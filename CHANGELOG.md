@@ -21,7 +21,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Dix casseroles pour les camps qui en avaient le moins : Jean-Marie Le Pen (« Un point de détail »), Grégoire de Fournas, Jean-Philippe Tanguy et Julien Odoul au RN ; Nicolas Bay, Nicolas Dupont-Aignan et Sarah Knafo à Reconquête ; Delphine Batho, Yannick Jadot et Marine Tondelier chez les Écologistes.
 
 **Casseroles et sorts**
-- La casserole de la boutique est tirée à égalité parmi celles de la partie : plus de poids pour les affaires « à la une », ni pour celles de vos politiques.
+- La casserole de la boutique : un camp de la partie est tiré à égalité, puis une de ses casseroles. Plus de poids pour les affaires « à la une » ni pour celles de vos politiques, et un camp qui a beaucoup d'affaires ne sort pas plus souvent qu'un autre.
 - Deux nouveaux sorts : « Fuite dans la presse » (échelon 2) découvre une casserole, « À la une » (échelon 3) découvre d'abord celles de vos politiques. Francis Lalanne découvre un Ridicule.
 - Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Temps de parole, Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
 
