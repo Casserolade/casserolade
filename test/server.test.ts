@@ -558,7 +558,7 @@ test('robots.txt, the sitemap, the icons and the search engine verification are 
   const sitemap = await fetch(`${base}/sitemap.xml`);
   assert.match(sitemap.headers.get('content-type') ?? '', /^application\/xml/);
   const pages = [...(await sitemap.text()).matchAll(/<loc>(.+?)<\/loc>/g)].map((match) => match[1]);
-  assert.deepEqual(pages, ['https://casserolade.fr/', 'https://casserolade.fr/bestiaire', 'https://casserolade.fr/a-propos']);
+  assert.deepEqual(pages, ['https://casserolade.fr/', 'https://casserolade.fr/bestiaire', 'https://casserolade.fr/a-propos', 'https://casserolade.fr/mises-a-jour']);
   assert.equal((await fetch(`${base}/favicon.ico`)).headers.get('content-type'), 'image/x-icon');
   assert.equal((await fetch(`${base}/icone-192.png`)).headers.get('content-type'), 'image/png');
   assert.equal(await (await fetch(`${base}/google4ee2fc5ee14f5830.html`)).text(), 'google-site-verification: google4ee2fc5ee14f5830.html');

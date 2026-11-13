@@ -1,21 +1,30 @@
 <script setup lang="ts">
-/** A section of the bestiary: its title and count, then its items, given as list items, in a grid. */
-withDefaults(defineProps<{ id: string; title: string; count: string; color?: string; wide?: boolean }>(), {
+import { computed } from 'vue';
+
+/**
+ * A section of the bestiary or of the update notes: its title and count, then its items, given as list items, in a
+ * grid. `itemWidth` is the narrowest an item gets (a card, or a card before and after); `wide` is the notes' width.
+ */
+const props = withDefaults(defineProps<{ id: string; title: string; count: string; color?: string; wide?: boolean; level?: 2 | 3; itemWidth?: string }>(), {
   color: 'var(--color-accent)',
   wide: false,
+  level: 2,
+  itemWidth: undefined,
 });
+
+const width = computed(() => props.itemWidth ?? (props.wide ? '15rem' : '11.5rem'));
 </script>
 
 <template>
-  <section :id="id" class="section" :style="{ '--section-color': color }">
-    <h2>{{ title }} <span class="count">{{ count }}</span></h2>
-    <ul class="items" :class="{ wide }"><slot /></ul>
+  <section :id="id" class="section" :style="{ '--section-color': color, '--item-width': width }">
+    <component :is="`h${level}`" class="title">{{ title }} <span class="count">{{ count }}</span></component>
+    <ul class="items"><slot /></ul>
   </section>
 </template>
 
 <style scoped>
 .section { scroll-margin-top: var(--space-5); }
-h2 {
+.title {
   display: flex;
   align-items: baseline;
   gap: var(--space-3);
@@ -27,7 +36,6 @@ h2 {
   letter-spacing: 1px;
 }
 .count { color: var(--color-text-muted); font: 500 var(--font-size-normal) / 1 var(--font-card); letter-spacing: 0; }
-.items { display: grid; grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr)); gap: var(--space-5) var(--space-4); margin: 0; padding: 0; list-style: none; }
-.items.wide { grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); }
+.items { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--item-width)), 1fr)); gap: var(--space-5) var(--space-4); margin: 0; padding: 0; list-style: none; }
 .items > :deep(li) { display: flex; flex-direction: column; gap: var(--space-2); }
 </style>

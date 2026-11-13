@@ -3,19 +3,18 @@ import ContextNote from '#src/client/components/molecules/ContextNote.vue';
 import CasseroleSheet from '#src/client/components/molecules/CasseroleSheet.vue';
 import HeroOption from '#src/client/components/molecules/HeroOption.vue';
 import KeywordNote from '#src/client/components/molecules/KeywordNote.vue';
+import PageLinks from '#src/client/components/molecules/PageLinks.vue';
+import PageMasthead from '#src/client/components/molecules/PageMasthead.vue';
 import ShownCardFace from '#src/client/components/molecules/ShownCardFace.vue';
 import SourceDetails from '#src/client/components/molecules/SourceDetails.vue';
 import BestiaryFilters from '#src/client/components/organisms/BestiaryFilters.vue';
 import BestiarySection from '#src/client/components/organisms/BestiarySection.vue';
 import { useBestiary } from '#src/client/stores/useBestiary.ts';
 import { useGameSources } from '#src/client/stores/useGameSources.ts';
-import { assetUrl } from '#src/client/tools/assetUrl.ts';
 import { bestiaryFilterQuery } from '#src/client/tools/bestiaryFilterQuery.ts';
 import { casseroleSources } from '#src/client/tools/casseroleSources.ts';
 import { countLabel } from '#src/client/tools/countLabel.ts';
 import { personSources } from '#src/client/tools/personSources.ts';
-import { CODE_URL } from '#src/client/const/codeLinks.ts';
-import { KOFI_URL } from '#src/client/const/supportLink.ts';
 import { CARD_BY_ID } from '#src/data/cards.ts';
 import { PARAMS } from '#src/data/params.ts';
 
@@ -33,11 +32,7 @@ const carriers = (term: string) => bestiaryFilterQuery({ kind: 'politique', camp
 
 <template>
   <main class="bestiary">
-    <header class="masthead">
-      <a class="logo" href="/"><img :src="assetUrl('logo/casserolade-fr.webp')" alt="Casserolade" width="1400" height="640" /></a>
-      <h1>Le bestiaire</h1>
-      <p class="intro">Tout le jeu : les mots-clés expliqués, les héros, les politiques camp par camp, leurs casseroles, les sorts, les jetons et les contextes. Chaque fiche donne ses sources.</p>
-    </header>
+    <PageMasthead title="Le bestiaire" intro="Tout le jeu : les mots-clés expliqués, les héros, les politiques camp par camp, leurs casseroles, les sorts, les jetons et les contextes. Chaque fiche donne ses sources." />
     <BestiaryFilters :model-value="filter" :counts="counts" :total="total" @update:model-value="setFilter" @reset="resetFilter" />
 
     <BestiarySection v-if="keywords.length" id="mots-cles" title="Les mots-clés" :count="countLabel(keywords.length, 'mot expliqué', 'mots expliqués')" wide>
@@ -81,21 +76,12 @@ const carriers = (term: string) => bestiaryFilterQuery({ kind: 'politique', camp
 
     <p v-if="total === 0" class="nothing">Rien ne correspond. <button type="button" class="clear" @click="resetFilter">Tout effacer</button></p>
 
-    <footer class="links">
-      <a href="/">Jouer</a>
-      <a href="/a-propos">À propos</a>
-      <a :href="CODE_URL">Le code sur GitHub</a>
-      <a :href="KOFI_URL">Soutenir sur Ko-fi</a>
-    </footer>
+    <footer><PageLinks current="bestiaire" /></footer>
   </main>
 </template>
 
 <style scoped>
 .bestiary { display: flex; flex-direction: column; gap: 3rem; max-width: 90rem; margin: 0 auto; padding: var(--space-5) var(--space-4) 4rem; }
-.masthead { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); text-align: center; }
-.logo img { width: min(100%, 26rem); height: auto; filter: drop-shadow(0 14px 24px rgb(0 0 0 / 0.6)); }
-h1 { color: var(--color-accent); font: 400 3rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 6px var(--color-ink); paint-order: stroke fill; }
-.intro { max-width: 40rem; color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.5; }
 /* A hero says a line above its head on hover: room for the bubble between rows. */
 #heros :deep(.items) { row-gap: 4.5rem; padding-top: 2rem; }
 #heros :deep(.hero) { width: 100%; }
@@ -103,6 +89,4 @@ h1 { color: var(--color-accent); font: 400 3rem / 1 var(--font-number); letter-s
 .casseroles strong { display: block; color: var(--color-accent); font-family: var(--font-card-title); }
 .nothing { display: flex; align-items: center; justify-content: center; gap: var(--space-3); color: var(--color-text-muted); font-size: var(--font-size-large); }
 .clear { padding: 0.2em 0.8em; border: 2px solid var(--color-border); border-radius: 999px; background: none; color: var(--color-text); font: inherit; cursor: pointer; }
-.links { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-5); }
-.links a { color: var(--color-accent); font-weight: 700; }
 </style>

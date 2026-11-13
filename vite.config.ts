@@ -19,12 +19,14 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: '../../dist',
     emptyOutDir: true,
-    // The game, its phone version (/m/), the bestiary (/bestiaire) and the « À propos » page (/a-propos).
+    // The game, its phone version (/m/), the bestiary (/bestiaire), the update notes (/mises-a-jour) and the « À propos »
+    // page (/a-propos).
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./src/client/index.html', import.meta.url)),
         apropos: fileURLToPath(new URL('./src/client/a-propos.html', import.meta.url)),
         bestiaire: fileURLToPath(new URL('./src/client/bestiaire.html', import.meta.url)),
+        misesAJour: fileURLToPath(new URL('./src/client/mises-a-jour.html', import.meta.url)),
         // The phone version, held upright (6 November 2026): phones are sent there from the home page.
         mobile: fileURLToPath(new URL('./src/client/m/index.html', import.meta.url)),
       },

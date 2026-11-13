@@ -2,7 +2,7 @@ import { HERO_BY_ID } from '../data/heroes.ts';
 import { CHAPITRES_COMPTES } from '../histoire/carrieres.ts';
 import type { CountedEvent, Device, GameEndEvent, GameStartEvent, PageEvent, PageKind } from '../protocol/counterEvent.ts';
 
-const PAGES: Record<PageKind, string> = { jeu: 'le jeu', jeu_telephone: 'le jeu sur téléphone', bestiaire: 'le bestiaire', a_propos: 'la page À propos' };
+const PAGES: Record<PageKind, string> = { jeu: 'le jeu', jeu_telephone: 'le jeu sur téléphone', bestiaire: 'le bestiaire', a_propos: 'la page À propos', mises_a_jour: 'les mises à jour' };
 const DEVICE_NAMES: Record<Device, string> = { telephone: 'téléphone', tablette: 'tablette', ordinateur: 'ordinateur' };
 const ELECTIONS: Record<string, string> = Object.fromEntries(CHAPITRES_COMPTES.map((chapter) => [chapter.id, chapter.nom]));
 

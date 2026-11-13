@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.3.9 — 13 novembre 2026
+
+Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jour
+
+**Règles**
+- Le Retour en politique devient une vraie réincarnation : le politique meurt pour de bon, son Héritage joue et ses jetons sortent, puis il revient à sa place comme sa carte nue, avec 1 PV et les mots-clés de sa carte, s'il reste de la place. Ses gains, ses casseroles et ses Ralliements restent au politique du plateau.
+- Nouveau mot-clé, le Coup de balai : ses attaques touchent aussi les voisins de sa cible. Poutou et Mélenchon l'ont, la casserole « Le Kärcher » et le sort Grand ménage le donnent.
+- Chaque casserole a un défaut qui coûte à tout porteur : dix-huit sont retouchées. Nouveau défaut, l'éclaboussure : en scandale, le politique fait perdre -2/-2 à ses voisins en combat.
+- Nouveau déclencheur, « Après l'oubli du peuple » : quand le scandale d'un allié s'efface, avec le temps ou le Bracelet électronique.
+
+**Nouveaux politiques**
+- Rima Hassan chez les Insoumis, Élisabeth Borne dans la Macronie (vos 49.3 jouent deux fois), Michel Barnier et Alain Juppé chez les Républicains, avec huit casseroles.
+
+**Équilibrage**
+- Les présidents passent au niveau des chefs de camp : la Chaise vide de Giscard a ses stats, l'Héritage de Mitterrand reste pour de bon, Chirac rejoue les Annonces à chaque fin de tour, chaque politique joué après de Gaulle devient Ni droite ni gauche avec +2/+2, et Macron amène Darmanin dans votre main.
+- Les Socialistes, dont le Retour est le moteur, sont renforcés après la réincarnation : Thévenoud 2/3, Guedj +1/+1 quand il attaque, Valls 3/3. Riner passe à 6/9, Peltier à 7/8, Mélenchon à 7/7 avec le Coup de balai.
+
+**Le site**
+- Une page « Mises à jour et équilibrages » montre chaque version, ses règles et ses cartes, avant et après.
+
 ## 0.3.8 — 12 novembre 2026
 
 **Les découvertes tiennent parole**

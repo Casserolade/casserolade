@@ -103,7 +103,7 @@ const suitcases = ref(0);
         <a :href="DISCORD_URL" target="_blank" rel="noopener">Le Discord</a>
         <a href="/a-propos">À propos</a>
         <a :href="CODE_URL">Le code sur GitHub</a>
-        <a class="version" :href="CHANGELOG_URL" title="Ce qui a changé">v{{ VERSION }}</a>
+        <a class="version" :href="CHANGELOG_URL" title="Ce qui a changé">Mises à jour · v{{ VERSION }}</a>
         <a href="/a-propos#contribuer">Contribuer</a>
         <a v-if="touchScreen" href="/m/" @click="chooseVersion('telephone')">Version téléphone</a>
       </nav>

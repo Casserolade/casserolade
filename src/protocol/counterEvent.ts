@@ -9,7 +9,7 @@ export const MAX_COUNTER_BYTES = 512;
 /** A source's host name: letters, digits and hyphens, in at least two labels. */
 export const HOST_NAME = /^(?=.{3,80}$)[a-z0-9-]+(\.[a-z0-9-]+)+$/;
 
-export const PAGE_KINDS = ['jeu', 'jeu_telephone', 'bestiaire', 'a_propos'] as const;
+export const PAGE_KINDS = ['jeu', 'jeu_telephone', 'bestiaire', 'a_propos', 'mises_a_jour'] as const;
 export type PageKind = (typeof PAGE_KINDS)[number];
 
 export const DEVICES = ['telephone', 'tablette', 'ordinateur'] as const;

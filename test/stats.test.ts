@@ -37,7 +37,7 @@ test('les statistiques du jour : visiteurs comptés par la page, nouveaux, appar
   assert.equal(day?.nouveaux, 2);
   assert.deepEqual(day?.appareils, { telephone: 1, tablette: 1, ordinateur: 1 });
   assert.deepEqual(day?.sources, { 'discord.com': 2, direct: 1 });
-  assert.deepEqual(day?.pages, { jeu: 2, jeu_telephone: 1, bestiaire: 1, a_propos: 0 });
+  assert.deepEqual(day?.pages, { jeu: 2, jeu_telephone: 1, bestiaire: 1, a_propos: 0, mises_a_jour: 0 });
   assert.deepEqual(day?.local, { solo: { lancees: 1, finies: 1, gagnees: 1 }, carriere: { lancees: 0, finies: 0, gagnees: 0 }, tutoriel: { lancees: 1, finies: 0, gagnees: 0 } });
   assert.equal(day?.robots, 1);
   assert.equal(day?.parties, 2);

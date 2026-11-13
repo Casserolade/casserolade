@@ -1,5 +1,6 @@
 import { CAMP_LABELS } from '#src/client/const/campLabels.ts';
 import { bestiaryCamps } from '#src/client/tools/bestiaryCamps.ts';
+import { cardFace } from '#src/client/tools/cardFace.ts';
 import type { BestiaryEntry } from '#src/client/tools/bestiaryCamps.ts';
 import type { BestiaryItem } from '#src/client/tools/matchesBestiaryFilter.ts';
 import { shownCardLines } from '#src/client/tools/shownCard.ts';
@@ -56,7 +57,7 @@ export function bestiaryCatalog(data: BestiaryData): BestiaryCatalog {
   const cardOf = (id: string) => data.cards.find((c) => c.id === id);
   const campOf = (id: string) => cardOf(id)?.camp ?? null;
   const spell = (s: Spell): ShownCard => ({ kind: 'spell', spell: s });
-  const token = (c: Card): ShownCard => ({ kind: 'minion', face: { cardId: c.id, name: c.name, camp: c.camp, tier: c.tier, atk: c.atk, hp: c.hp, keywords: c.keywords ?? [], effects: c.effects ?? [] } });
+  const token = (c: Card): ShownCard => ({ kind: 'minion', face: cardFace(c) });
   const camps = bestiaryCamps(data.cards, data.casseroles, data.campOrder).map((camp) => ({
     camp: camp.camp,
     label: camp.label,
