@@ -445,6 +445,27 @@ test('Chirac relance en fin de tour une Annonce qui rapporte du budget : il arri
   assert.ok(p.endOfTurnSteps.some((step) => step.notes.includes('budget')), 'la Fin de tour le montre');
 });
 
+test('une affaire n\'arrive qu\'une fois : deux découvertes de casseroles ne proposent ni la même, ni celle de la boutique', () => {
+  for (let seed = 1; seed <= 40; seed++) {
+    const game = table(['macronie', 'republicains', 'socialistes', 'insoumis', 'reconquete'], seed);
+    const p = game.players[0];
+    game.round = PARAMS.casseroleFromRound;
+    offerCasserole(game, p);
+    const gold = golden(game, 'lalanne');
+    assert.equal(applyAction(game, 0, { t: 'play', uid: gold.uid }).ok, true);
+    const first = p.discover?.options ?? [];
+    const second = p.discoverQueue[0]?.options ?? [];
+    assert.equal(first.length, 3);
+    assert.equal(second.length, 3);
+    assert.deepEqual(first.filter((id) => second.includes(id)), [], `graine ${seed} : la même casserole dans les deux choix`);
+    assert.ok(![...first, ...second].includes(p.casseroleOffer as string), `graine ${seed} : la casserole de la boutique dans un choix`);
+    settle(game);
+    const held = p.spells.flatMap((s) => (s.casseroleId ? [s.casseroleId] : []));
+    assert.equal(new Set(held).size, held.length, `graine ${seed} : une casserole deux fois en main`);
+    assert.deepEqual(invariantViolations(game), []);
+  }
+});
+
 test('un effet de combat n\'emploie que ce que le combat sait jouer : rien ne s\'y perd sans bruit', () => {
   const lost = allEffects().filter(({ effect }) => COMBAT_TRIGGERS.includes(effect.when) && !IN_COMBAT[effect.do]);
   assert.deepEqual(lost.map(({ owner, effect }) => `${owner} : ${effect.when} → ${effect.do}`), []);
