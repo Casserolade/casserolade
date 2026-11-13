@@ -99,10 +99,10 @@ test('Seconde délibération refuse un politique qui n\'a rien à relancer', () 
 test('une Annonce ciblée relancée ne vise ni le relancé ni le relanceur', () => {
   for (let seed = 1; seed <= 12; seed++) {
     const game = table(['rn', 'macronie', 'republicains', 'socialistes', 'insoumis'], seed);
-    const chenu = lay(game, 'chenu');
     const ally = lay(game, 'gueant');
+    const chenu = lay(game, 'chenu');
     const before = { atk: ally.atk, hp: ally.hp };
-    // Chirac relance les Annonces du plateau en fin de tour (13 novembre 2026).
+    // Chirac relance en fin de tour les Annonces de ses voisins : Chenu est à côté de lui.
     const chirac = lay(game, 'chirac');
     endOfTurn(game, game.players[0]);
     assert.deepEqual([chirac.atk, chirac.hp], [CARD_BY_ID.chirac.atk, CARD_BY_ID.chirac.hp], `graine ${seed} : Chirac ne débauche pas pour lui`);
@@ -497,6 +497,26 @@ test('R4 : Lassalle fait rejouer la Fin de tour de Chirac, qui relance encore le
   };
   assert.equal(gained(false), 2);
   assert.equal(gained(true), 4, 'doubler rapporte toujours');
+});
+
+test('Chirac ne relance que les Annonces de ses voisins', () => {
+  const game = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+  const p = game.players[0];
+  lay(game, 'kazib');
+  lay(game, 'gueant');
+  lay(game, 'chirac');
+  const far = tracts(game);
+  endOfTurn(game, p);
+  assert.equal(tracts(game), far, 'Kazib est à deux places : son Annonce ne rejoue pas');
+
+  const other = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+  lay(other, 'gueant');
+  lay(other, 'kazib');
+  lay(other, 'chirac');
+  lay(other, 'boyard');
+  const near = tracts(other);
+  endOfTurn(other, other.players[0]);
+  assert.equal(tracts(other) - near, 4, 'Kazib et Boyard, de chaque côté : un Tract chacun, deux fois');
 });
 
 test('R4 : Conseil des ministres rapporte aussi aux voisins de Jadot', () => {
