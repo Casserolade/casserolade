@@ -221,7 +221,7 @@ test('a card says how many times an effect repeats, and a golden card always say
   assert.deepEqual(cardRuleLines(CARD_BY_ID.bertrand, { isGolden: true }), ['**Annonce** : donne **Immunité** à un autre allié, et à un deuxième au hasard.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.morano, { isGolden: true }).at(-1), '**Célébration** : donne **Immunité** à deux autres alliés au hasard.');
   assert.deepEqual(cardRuleLines(CARD_BY_ID.philippe, { isGolden: true }), ['**Annonce** : rend doré un autre allié d\'échelon 4 ou moins, et un deuxième au hasard.']);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.hidalgo, { isGolden: true }), ['**Annonce** : détruisez un autre allié et **découvrez** deux fois un politique de son camp.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.hidalgo, { isGolden: true }), ['**Annonce** : détruisez un autre allié et **découvrez** deux fois un politique de son camp, de votre échelon.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.jadot, { isGolden: true }), ['**Fin de tour** : déclenche deux fois la **Fin de tour** de ses voisins.']);
 });
 
