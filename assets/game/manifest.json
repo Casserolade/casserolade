@@ -1801,6 +1801,108 @@
     "auteur": "Florian David",
     "licence": "CC BY-SA 4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Barnier_Portrait.jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/barnier.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 292,
+       "h": 380
+      },
+      "machoire": {
+       "x": 296,
+       "y": 0,
+       "w": 162,
+       "h": 94,
+       "pose": [
+        64.0,
+        285.0
+       ],
+       "pivot": [
+        38.8,
+        10.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       55.2,
+       198.1,
+       26.2
+      ],
+      "oeil_d": [
+       133.4,
+       198.1,
+       41.4
+      ],
+      "bouche": [
+       102.8,
+       295.8
+      ],
+      "menton": [
+       107.9,
+       365.7
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://ecoledelartoratoire.com/article/discours-de-michel-barnier/"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/barnier.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 251,
+       "h": 350
+      },
+      "machoire": {
+       "x": 255,
+       "y": 0,
+       "w": 192,
+       "h": 105,
+       "pose": [
+        10.0,
+        245.0
+       ],
+       "pivot": [
+        49.4,
+        13.6
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       34.1,
+       162.4,
+       26.8
+      ],
+      "oeil_d": [
+       108.7,
+       162.4,
+       34.5
+      ],
+      "bouche": [
+       59.4,
+       258.6
+      ],
+      "menton": [
+       48.0,
+       337.6
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.rfi.fr/fr/france/20241121-france-face-aux-maires-en-colère-le-premier-ministre-michel-barnier-tente-de-jouer-l-apaisement"
+     }
+    }
    }
   },
   "barthes": {
@@ -3871,6 +3973,158 @@
     "auteur": "Frantogian",
     "licence": "CC BY-SA 3.0",
     "source": "https://commons.wikimedia.org/wiki/File:José_Bové_2012.jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/bove.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 294,
+       "h": 356
+      },
+      "machoire": {
+       "x": 298,
+       "y": 0,
+       "w": 185,
+       "h": 95,
+       "pose": [
+        47.0,
+        261.0
+       ],
+       "pivot": [
+        93.8,
+        13.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       100.2,
+       179.7,
+       36.3
+      ],
+      "oeil_d": [
+       192.0,
+       179.7,
+       34.7
+      ],
+      "bouche": [
+       140.8,
+       274.8
+      ],
+      "menton": [
+       139.4,
+       348.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.bfmtv.com/politique/colere-des-agriculteurs-jose-bove-plaide-pour-une-charte-intersyndicale_AN-202411270548.html"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/bove.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 290,
+       "h": 369
+      },
+      "machoire": {
+       "x": 294,
+       "y": 0,
+       "w": 179,
+       "h": 90,
+       "pose": [
+        70.0,
+        279.0
+       ],
+       "pivot": [
+        133.5,
+        10.6
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       165.0,
+       190.5,
+       40.5
+      ],
+      "oeil_d": [
+       248.9,
+       190.5,
+       32.1
+      ],
+      "bouche": [
+       203.5,
+       289.6
+      ],
+      "menton": [
+       195.5,
+       356.5
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.ina.fr/ina-eclaire-actu/video/i09043668/jose-bove-pour-la-desobeissance-civique"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/bove.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 262,
+       "h": 342
+      },
+      "machoire": {
+       "x": 266,
+       "y": 0,
+       "w": 195,
+       "h": 109,
+       "pose": [
+        10.0,
+        233.0
+       ],
+       "pivot": [
+        56.2,
+        12.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       37.7,
+       158.8,
+       25.5
+      ],
+      "oeil_d": [
+       110.0,
+       158.8,
+       34.5
+      ],
+      "bouche": [
+       66.2,
+       245.9
+      ],
+      "menton": [
+       49.6,
+       327.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.lapresse.ca/actualites/201610/12/01-5029650-jose-bove-pourra-rester-au-canada-sept-jours.php"
+     }
+    }
    }
   },
   "boyard": {
@@ -8366,6 +8620,56 @@
       "licence": null,
       "source": "https://www.youtube.com/watch?v=I1G0Sr1UDLc"
      }
+    },
+    "rire": {
+     "atlas": "personnages/dupont_aignan.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 269,
+       "h": 376
+      },
+      "machoire": {
+       "x": 273,
+       "y": 0,
+       "w": 181,
+       "h": 101,
+       "pose": [
+        43.0,
+        275.0
+       ],
+       "pivot": [
+        86.3,
+        13.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       83.3,
+       200.4,
+       37.1
+      ],
+      "oeil_d": [
+       175.6,
+       200.4,
+       38.3
+      ],
+      "bouche": [
+       129.3,
+       288.9
+      ],
+      "menton": [
+       128.8,
+       368.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://actu.fr/normandie/saint-hilaire-du-harcouet_50484/elections-regionales-nicolas-dupont-aignan-en-visite_214117.html"
+     }
     }
    }
   },
@@ -9984,6 +10288,56 @@
       "licence": null,
       "source": "https://www.parismatch.com/Actu/Politique/Nouvelle-mise-en-examen-de-Claude-Gueant-1574852"
      }
+    },
+    "rire": {
+     "atlas": "personnages/gueant.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 280,
+       "h": 316
+      },
+      "machoire": {
+       "x": 284,
+       "y": 0,
+       "w": 220,
+       "h": 111,
+       "pose": [
+        34.0,
+        199.0
+       ],
+       "pivot": [
+        112.3,
+        14.4
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       93.0,
+       121.6,
+       35.1
+      ],
+      "oeil_d": [
+       184.4,
+       121.6,
+       33.7
+      ],
+      "bouche": [
+       146.3,
+       213.4
+      ],
+      "menton": [
+       151.1,
+       296.8
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.purepeople.com/diapo/escroquerie-de-frais-de-campagne-6-mois-de-prison-ferme-amenages-pour-claude-gueant_a500456/1"
+     }
     }
    }
   },
@@ -10135,6 +10489,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.ohmymag.com/people/actu-people/jerome-guedj-candidat-en-2027-vie-privee-parcours-et-ambitions-presidentielles_art179036.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/guedj.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 260,
+       "h": 366
+      },
+      "machoire": {
+       "x": 264,
+       "y": 0,
+       "w": 176,
+       "h": 102,
+       "pose": [
+        16.0,
+        262.0
+       ],
+       "pivot": [
+        71.5,
+        12.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       42.7,
+       175.2,
+       33.0
+      ],
+      "oeil_d": [
+       124.9,
+       175.2,
+       36.1
+      ],
+      "bouche": [
+       87.5,
+       274.7
+      ],
+      "menton": [
+       84.2,
+       351.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.zinfos974.com/presidentielle-2027-le-socialiste-jerome-guedj-annonce-sa-candidature-hors-primaire-de-la-gauche/"
      }
     }
    }
@@ -10439,6 +10843,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.purepeople.com/diapo/-quel-abruti-un-tare-cyril-hanouna-explose-de-colere-contre-gilles-verdez-dans-tpmp_a483775/1"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/hanouna.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 279,
+       "h": 393
+      },
+      "machoire": {
+       "x": 283,
+       "y": 0,
+       "w": 188,
+       "h": 94,
+       "pose": [
+        18.0,
+        279.0
+       ],
+       "pivot": [
+        68.8,
+        11.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       43.3,
+       199.1,
+       35.6
+      ],
+      "oeil_d": [
+       126.9,
+       199.1,
+       39.2
+      ],
+      "bouche": [
+       86.8,
+       290.3
+      ],
+      "menton": [
+       87.0,
+       359.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.starmag.com/medias/cyril-hanouna-en-colere-contre-c8-ces-procedes-qui-ne-lui-plaisent-pas-328490.html"
      }
     },
     "rire": {
@@ -11754,6 +12208,56 @@
       "licence": null,
       "source": "https://www.lepoint.fr/politique/municipales-a-paris-yannick-jadot-dans-le-lac-aux-requins-21-01-2025-2580419_20.php"
      }
+    },
+    "rire": {
+     "atlas": "personnages/jadot.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 283,
+       "h": 380
+      },
+      "machoire": {
+       "x": 287,
+       "y": 0,
+       "w": 170,
+       "h": 98,
+       "pose": [
+        56.0,
+        281.0
+       ],
+       "pivot": [
+        93.8,
+        13.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       111.1,
+       197.0,
+       38.7
+      ],
+      "oeil_d": [
+       199.7,
+       197.0,
+       37.5
+      ],
+      "bouche": [
+       149.8,
+       294.3
+      ],
+      "menton": [
+       147.1,
+       366.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.frenchclasses.com/guinguette/news/des-hauts-et-des-bas-pour-les-deputes-ecologistes-au-parlement-europeen/"
+     }
     }
    }
   },
@@ -12007,6 +12511,108 @@
     "auteur": "Eva joly 2012",
     "licence": "CC BY-SA 3.0",
     "source": "https://commons.wikimedia.org/wiki/File:EVA_JOLY_011.jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/joly.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 372,
+       "h": 421
+      },
+      "machoire": {
+       "x": 376,
+       "y": 0,
+       "w": 209,
+       "h": 91,
+       "pose": [
+        88.0,
+        289.0
+       ],
+       "pivot": [
+        121.0,
+        9.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       157.1,
+       194.0,
+       43.1
+      ],
+      "oeil_d": [
+       257.4,
+       194.0,
+       38.9
+      ],
+      "bouche": [
+       209.0,
+       298.8
+      ],
+      "menton": [
+       213.4,
+       368.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.rfi.fr/fr/emission/20120202-presidentielle-eelv-joly-gachis"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/joly.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 389,
+       "h": 376
+      },
+      "machoire": {
+       "x": 393,
+       "y": 0,
+       "w": 197,
+       "h": 98,
+       "pose": [
+        124.0,
+        278.0
+       ],
+       "pivot": [
+        71.9,
+        10.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       155.4,
+       198.0,
+       36.3
+      ],
+      "oeil_d": [
+       247.6,
+       198.0,
+       42.3
+      ],
+      "bouche": [
+       195.9,
+       288.5
+      ],
+      "menton": [
+       189.1,
+       367.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.parismatch.com/bio/eva-joly"
+     }
+    }
    }
   },
   "juppe": {
@@ -12816,6 +13422,106 @@
       "licence": null,
       "source": "https://www.msn.com/fr-fr/divertissement/celebrites/il-m-a-empoigné-un-chroniqueur-fait-des-révélations-choquantes-sur-francis-lalanne/ar-AA1R6MKi"
      }
+    },
+    "choc": {
+     "atlas": "personnages/lalanne.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 266,
+       "h": 367
+      },
+      "machoire": {
+       "x": 270,
+       "y": 0,
+       "w": 179,
+       "h": 96,
+       "pose": [
+        42.0,
+        268.0
+       ],
+       "pivot": [
+        104.8,
+        11.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       106.1,
+       184.4,
+       37.9
+      ],
+      "oeil_d": [
+       194.3,
+       184.4,
+       36.2
+      ],
+      "bouche": [
+       146.8,
+       279.8
+      ],
+      "menton": [
+       144.2,
+       350.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://mcetv.ouest-france.fr/2023/tpmp-cyril-hanouna-eclate-de-rire-face-a-la-demande-de-francis-lalanne-09022023/"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/lalanne.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 379,
+       "h": 442
+      },
+      "machoire": {
+       "x": 383,
+       "y": 0,
+       "w": 206,
+       "h": 96,
+       "pose": [
+        72.0,
+        262.0
+       ],
+       "pivot": [
+        112.9,
+        9.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       138.2,
+       181.8,
+       37.6
+      ],
+      "oeil_d": [
+       230.9,
+       181.8,
+       35.3
+      ],
+      "bouche": [
+       184.9,
+       271.1
+      ],
+      "menton": [
+       186.3,
+       351.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.public.fr/diaporamas/francis-lalanne-fait-un-aveu-de-taille-apres-le-divorce-d-avec-la-mere-de-ses-enfants-38-ans-d-ecart-avec-sa-nouvelle-compagne"
+     }
     }
    }
   },
@@ -13120,6 +13826,56 @@
       "licence": null,
       "source": "https://www.tf1info.fr/actualite/gerard-larcher-10526/3/"
      }
+    },
+    "rire": {
+     "atlas": "personnages/larcher.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 277,
+       "h": 364
+      },
+      "machoire": {
+       "x": 281,
+       "y": 0,
+       "w": 216,
+       "h": 98,
+       "pose": [
+        27.0,
+        266.0
+       ],
+       "pivot": [
+        100.0,
+        14.2
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       75.7,
+       190.2,
+       35.8
+      ],
+      "oeil_d": [
+       164.8,
+       190.2,
+       36.0
+      ],
+      "bouche": [
+       127.0,
+       280.2
+      ],
+      "menton": [
+       125.3,
+       353.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.linternaute.com/actualite/politique/4577625-le-droit-du-sol-supprime-dans-tous-les-territoires-d-outre-mer-une-idee-de-gerard-larcher/"
+     }
     }
    }
   },
@@ -13221,6 +13977,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.gala.fr/l_actu/news_de_stars/video-javais-peur-jean-lassalle-ses-confidences-hilarantes-sur-sa-participation-a-lemission-les-traitres_524349"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/lassalle.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 316,
+       "h": 334
+      },
+      "machoire": {
+       "x": 320,
+       "y": 0,
+       "w": 230,
+       "h": 95,
+       "pose": [
+        76.0,
+        239.0
+       ],
+       "pivot": [
+        153.8,
+        13.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       162.2,
+       160.4,
+       44.0
+      ],
+      "oeil_d": [
+       263.6,
+       160.4,
+       36.3
+      ],
+      "bouche": [
+       229.8,
+       252.0
+      ],
+      "menton": [
+       238.5,
+       321.6
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.gqmagazine.fr/pop-culture/news/videos/jean-lassalle-se-met-dans-une-colere-noire-a-lassemblee-nationale/34620"
      }
     },
     "rire": {
@@ -14486,6 +15292,106 @@
       "licence": null,
       "source": "https://tvmag.lefigaro.fr/programme-tv/actu-tele/des-reactions-outrancieres-pierre-lescure-retropedale-et-renonce-finalement-a-rejoindre-sud-radio-20250904"
      }
+    },
+    "choc": {
+     "atlas": "personnages/lescure.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 258,
+       "h": 362
+      },
+      "machoire": {
+       "x": 262,
+       "y": 0,
+       "w": 178,
+       "h": 90,
+       "pose": [
+        53.0,
+        271.0
+       ],
+       "pivot": [
+        104.2,
+        11.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       125.7,
+       186.6,
+       35.5
+      ],
+      "oeil_d": [
+       206.7,
+       186.6,
+       33.4
+      ],
+      "bouche": [
+       157.2,
+       282.0
+      ],
+      "menton": [
+       154.8,
+       347.7
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.closermag.fr/people/pierre-lescure-triste-et-pathetique-lenorme-coup-de-gueule-3594130"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/lescure.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 260,
+       "h": 383
+      },
+      "machoire": {
+       "x": 264,
+       "y": 0,
+       "w": 190,
+       "h": 112,
+       "pose": [
+        30.0,
+        269.0
+       ],
+       "pivot": [
+        87.1,
+        16.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       56.6,
+       202.1,
+       37.9
+      ],
+      "oeil_d": [
+       149.4,
+       202.1,
+       36.9
+      ],
+      "bouche": [
+       117.1,
+       285.8
+      ],
+      "menton": [
+       121.4,
+       367.7
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.public.fr/diaporamas/photos-ces-animateurs-tele-qui-ont-l-age-de-partir-a-la-retraite"
+     }
     }
    }
   },
@@ -15246,6 +16152,56 @@
       "licence": null,
       "source": "https://www.ici.fr/infos/politique/voeux-du-president-difficile-d-envisager-un-avenir-radieux-estime-noel-mamere-1609409301"
      }
+    },
+    "rire": {
+     "atlas": "personnages/mamere.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 277,
+       "h": 372
+      },
+      "machoire": {
+       "x": 281,
+       "y": 0,
+       "w": 185,
+       "h": 107,
+       "pose": [
+        72.0,
+        262.0
+       ],
+       "pivot": [
+        113.6,
+        11.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       149.6,
+       184.4,
+       36.8
+      ],
+      "oeil_d": [
+       230.9,
+       184.4,
+       32.4
+      ],
+      "bouche": [
+       185.6,
+       273.3
+      ],
+      "menton": [
+       188.3,
+       355.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.france24.com/fr/émissions/avec-judith/20251019-l-écologie-est-un-outil-de-lutte-contre-les-inégalités-noël-mamère-se-confie-à-judith"
+     }
     }
    }
   },
@@ -15802,6 +16758,56 @@
       "licence": null,
       "source": "https://www.ici.fr/infos/politique/legislatives-2024-je-ne-me-sens-pas-parachutee-dit-marie-caroline-le-pen-candidate-rn-en-sarthe-2103343"
      }
+    },
+    "rire": {
+     "atlas": "personnages/mc_lepen.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 363,
+       "h": 419
+      },
+      "machoire": {
+       "x": 367,
+       "y": 0,
+       "w": 203,
+       "h": 104,
+       "pose": [
+        66.0,
+        268.0
+       ],
+       "pivot": [
+        128.7,
+        14.8
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       151.6,
+       190.4,
+       40.6
+      ],
+      "oeil_d": [
+       242.0,
+       190.4,
+       34.7
+      ],
+      "bouche": [
+       194.7,
+       282.8
+      ],
+      "menton": [
+       202.2,
+       359.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.tatler.com/article/who-is-marie-caroline-le-pen-marie-le-pen-sister"
+     }
     }
    }
   },
@@ -16156,6 +17162,56 @@
       "licence": null,
       "source": "https://oumma.com/messiha-en-colere-a-cause-du-ramadan-il-n-y-a-plus-de-livreurs-musulmans-pour-lui-fournir-son-petit-plat/"
      }
+    },
+    "rire": {
+     "atlas": "personnages/messiha.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 255,
+       "h": 343
+      },
+      "machoire": {
+       "x": 259,
+       "y": 0,
+       "w": 181,
+       "h": 105,
+       "pose": [
+        29.0,
+        238.0
+       ],
+       "pivot": [
+        89.0,
+        16.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       72.9,
+       161.4,
+       36.2
+      ],
+      "oeil_d": [
+       165.4,
+       161.4,
+       35.8
+      ],
+      "bouche": [
+       118.0,
+       254.9
+      ],
+      "menton": [
+       115.8,
+       331.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.purebreak.com/media/rassemblement-organise-par-jean-messiha-848324.html"
+     }
     }
    }
   },
@@ -16460,6 +17516,56 @@
       "licence": null,
       "source": "https://www.closermag.fr/politique/nadine-morano-tres-en-colere-apres-avoir-perdu-son-proces-contre-guy-bedos-648222"
      }
+    },
+    "rire": {
+     "atlas": "personnages/morano.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 317,
+       "h": 380
+      },
+      "machoire": {
+       "x": 321,
+       "y": 0,
+       "w": 183,
+       "h": 106,
+       "pose": [
+        74.0,
+        274.0
+       ],
+       "pivot": [
+        106.6,
+        12.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       137.6,
+       196.9,
+       38.9
+      ],
+      "oeil_d": [
+       223.3,
+       196.9,
+       36.0
+      ],
+      "bouche": [
+       180.6,
+       286.5
+      ],
+      "menton": [
+       181.4,
+       368.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.nouvelobs.com/politique/20111223.OBS7475/un-cafe-avec-nadine-morano.html"
+     }
     }
    }
   },
@@ -16763,6 +17869,106 @@
       "auteur": null,
       "licence": null,
       "source": "https://favoritehunks.blogspot.com/2025/11/julien-odoul-deputy-disrobed.html"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/odoul.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 258,
+       "h": 379
+      },
+      "machoire": {
+       "x": 262,
+       "y": 0,
+       "w": 177,
+       "h": 91,
+       "pose": [
+        59.0,
+        279.0
+       ],
+       "pivot": [
+        133.3,
+        11.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       144.7,
+       184.0,
+       41.0
+      ],
+      "oeil_d": [
+       227.8,
+       184.0,
+       31.1
+      ],
+      "bouche": [
+       192.3,
+       290.0
+      ],
+      "menton": [
+       192.9,
+       356.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.sudradio.fr/linvite-politique/julien-odoul-les-francais-en-ont-marre-de-payer-pour-tout"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/odoul.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 249,
+       "h": 345
+      },
+      "machoire": {
+       "x": 253,
+       "y": 0,
+       "w": 198,
+       "h": 105,
+       "pose": [
+        35.0,
+        239.0
+       ],
+       "pivot": [
+        110.5,
+        12.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       98.6,
+       165.0,
+       37.4
+      ],
+      "oeil_d": [
+       186.5,
+       165.0,
+       34.8
+      ],
+      "bouche": [
+       145.5,
+       251.1
+      ],
+      "menton": [
+       146.9,
+       331.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://deputes-rn.fr/depute/julien-odoul"
      }
     }
    }
@@ -18030,6 +19236,106 @@
       "licence": null,
       "source": "https://www.businessbourse.com/2021/12/28/jean-frederic-poisson-retour-de-linfantilisation-dans-la-strategie-gouvernementale-cette-etape-necessaire-au-processus-de-culpabilisation-de-masse-propre-au-regime-totalitaire-ce-qui-se/"
      }
+    },
+    "choc": {
+     "atlas": "personnages/poisson.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 290,
+       "h": 378
+      },
+      "machoire": {
+       "x": 294,
+       "y": 0,
+       "w": 223,
+       "h": 101,
+       "pose": [
+        27.0,
+        276.0
+       ],
+       "pivot": [
+        99.9,
+        12.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       91.8,
+       189.1,
+       38.6
+      ],
+      "oeil_d": [
+       189.8,
+       189.1,
+       42.0
+      ],
+      "bouche": [
+       126.9,
+       288.5
+      ],
+      "menton": [
+       123.7,
+       364.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.lefigaro.fr/politique/florian-philippot-et-jean-frederic-poisson-annoncent-une-liste-commune-pour-les-elections-europeennes-20240404"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/poisson.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 283,
+       "h": 396
+      },
+      "machoire": {
+       "x": 287,
+       "y": 0,
+       "w": 241,
+       "h": 101,
+       "pose": [
+        35.0,
+        260.0
+       ],
+       "pivot": [
+        127.5,
+        12.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       105.4,
+       182.4,
+       41.9
+      ],
+      "oeil_d": [
+       207.9,
+       182.4,
+       38.6
+      ],
+      "bouche": [
+       162.5,
+       272.0
+      ],
+      "menton": [
+       165.9,
+       348.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.ledauphine.com/politique/2023/06/24/jean-frederic-poisson-on-va-inscrire-le-droit-de-tuer-dans-la-loi"
+     }
     }
    }
   },
@@ -18334,6 +19640,56 @@
       "licence": null,
       "source": "https://www.gala.fr/l_actu/news_de_stars/philippe-poutou-chez-laurent-ruquier-ce-jour-ou-il-a-ete-humilie-sur-son-plateau_488987"
      }
+    },
+    "rire": {
+     "atlas": "personnages/poutou.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 260,
+       "h": 381
+      },
+      "machoire": {
+       "x": 264,
+       "y": 0,
+       "w": 171,
+       "h": 103,
+       "pose": [
+        29.0,
+        278.0
+       ],
+       "pivot": [
+        69.6,
+        15.2
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       46.7,
+       202.4,
+       37.5
+      ],
+      "oeil_d": [
+       134.4,
+       202.4,
+       40.0
+      ],
+      "bouche": [
+       98.6,
+       293.2
+      ],
+      "menton": [
+       95.1,
+       368.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://actu.fr/occitanie/toulouse_31555/presidentielle-2022-l-anticapitaliste-philippe-poutou-en-meeting-s-a-toulouse_45760622.html"
+     }
     }
    }
   },
@@ -18485,6 +19841,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.purepeople.com/media/patrick-poivre-d-arvor-dans-l-emission_m6132365"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/ppda.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 303,
+       "h": 383
+      },
+      "machoire": {
+       "x": 307,
+       "y": 0,
+       "w": 183,
+       "h": 103,
+       "pose": [
+        58.0,
+        278.0
+       ],
+       "pivot": [
+        89.8,
+        15.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       101.1,
+       197.0,
+       39.8
+      ],
+      "oeil_d": [
+       192.6,
+       197.0,
+       39.7
+      ],
+      "bouche": [
+       147.8,
+       293.7
+      ],
+      "menton": [
+       148.8,
+       368.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.telestar.fr/actu-tv/autres-emissions/patrick-poivre-d-arvor-je-n-ai-plus-jamais-regarde-un-journal-depuis-mon-depart-de-tf1-305976"
      }
     }
    }
@@ -20862,6 +22268,106 @@
       "licence": null,
       "source": "https://www.closermag.fr/politique/marleneschiappaen-colere-elle-dement-formellement-le-vol-de-son-disque-durexterne-1324659"
      }
+    },
+    "choc": {
+     "atlas": "personnages/schiappa.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 385,
+       "h": 431
+      },
+      "machoire": {
+       "x": 389,
+       "y": 0,
+       "w": 205,
+       "h": 96,
+       "pose": [
+        107.0,
+        257.0
+       ],
+       "pivot": [
+        82.5,
+        12.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       148.1,
+       178.0,
+       39.5
+      ],
+      "oeil_d": [
+       243.9,
+       178.0,
+       43.0
+      ],
+      "bouche": [
+       189.5,
+       269.1
+      ],
+      "menton": [
+       186.6,
+       339.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.gala.fr/l_actu/news_de_stars/video-marlene-schiappa-cette-etonnante-revelation-qui-a-surpris-anne-elisabeth-lemoine_455951"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/schiappa.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 374,
+       "h": 456
+      },
+      "machoire": {
+       "x": 378,
+       "y": 0,
+       "w": 190,
+       "h": 102,
+       "pose": [
+        108.0,
+        276.0
+       ],
+       "pivot": [
+        82.8,
+        9.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       147.7,
+       199.7,
+       37.6
+      ],
+      "oeil_d": [
+       236.6,
+       199.7,
+       40.8
+      ],
+      "bouche": [
+       190.8,
+       285.9
+      ],
+      "menton": [
+       187.6,
+       365.0
+      ]
+     },
+     "credits": {
+      "auteur": "Nantilus",
+      "licence": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Marl%C3%A8ne_Schiappa,_2017_(cropped).jpg"
+     }
     }
    }
   },
@@ -21318,6 +22824,106 @@
       "licence": null,
       "source": "https://www.lanouvellerepublique.fr/indre-et-loire/commune/nouatre/crue-de-la-vienne-en-indre-et-loire-la-ministre-prisca-thevenot-vient-soutenir-les-sinistres"
      }
+    },
+    "choc": {
+     "atlas": "personnages/thevenot.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 341,
+       "h": 441
+      },
+      "machoire": {
+       "x": 345,
+       "y": 0,
+       "w": 176,
+       "h": 81,
+       "pose": [
+        90.0,
+        283.0
+       ],
+       "pivot": [
+        52.5,
+        9.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       106.0,
+       188.6,
+       35.2
+      ],
+      "oeil_d": [
+       194.1,
+       188.6,
+       42.5
+      ],
+      "bouche": [
+       142.5,
+       292.5
+      ],
+      "menton": [
+       144.2,
+       350.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.europe1.fr/emissions/lentretien-de-romain-desarbres/prisca-thevenot-letat-se-tiendra-present-pour-rappeler-que-la-laicite-sapplique-a-tous-4238552"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/thevenot.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 392,
+       "h": 443
+      },
+      "machoire": {
+       "x": 396,
+       "y": 0,
+       "w": 208,
+       "h": 99,
+       "pose": [
+        82.0,
+        262.0
+       ],
+       "pivot": [
+        112.8,
+        10.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       148.5,
+       184.5,
+       43.3
+      ],
+      "oeil_d": [
+       242.0,
+       184.5,
+       41.2
+      ],
+      "bouche": [
+       194.8,
+       272.0
+      ],
+      "menton": [
+       196.9,
+       352.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.purepeople.com/diapo/prisca-thevenot-la-porte-parole-du-gouvernement-poste-beaucoup-de-photos-intimes-elle-reagit-avec-mon-mari_a523172/1"
+     }
     }
    }
   },
@@ -21723,6 +23329,106 @@
       "auteur": null,
       "licence": null,
       "source": "https://almouwatin.com/2026/05/01/marine-tondelier-en-colere-contre-les-propos-de-francois-ruffin-sur-limmigration-de-travail-qui-a-convoque-les-sujets-de-lextreme-droite/"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/tondelier.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 346,
+       "h": 458
+      },
+      "machoire": {
+       "x": 350,
+       "y": 0,
+       "w": 178,
+       "h": 80,
+       "pose": [
+        82.0,
+        300.0
+       ],
+       "pivot": [
+        112.6,
+        8.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       158.2,
+       204.9,
+       41.7
+      ],
+      "oeil_d": [
+       245.7,
+       204.9,
+       37.3
+      ],
+      "bouche": [
+       194.6,
+       308.7
+      ],
+      "menton": [
+       194.2,
+       366.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.bfmtv.com/politique/j-ai-du-hausser-le-ton-parfois-m-agacer-me-mettre-en-colere-marine-tondelier-evoque-l-entre-deux-tours-des-legislatives_VN-202407120228.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/tondelier.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 382,
+       "h": 452
+      },
+      "machoire": {
+       "x": 386,
+       "y": 0,
+       "w": 216,
+       "h": 97,
+       "pose": [
+        91.0,
+        277.0
+       ],
+       "pivot": [
+        88.7,
+        12.4
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       135.7,
+       195.5,
+       37.6
+      ],
+      "oeil_d": [
+       228.1,
+       195.5,
+       41.6
+      ],
+      "bouche": [
+       179.7,
+       289.4
+      ],
+      "menton": [
+       177.4,
+       361.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.journaldesfemmes.fr/people/magazine/3244620-la-semaine-des-stars-actu-people-france-octobre-giulia-sarkozy-florent-pagny/3245078-marine-tondelier"
      }
     }
    }
@@ -22331,6 +24037,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.la-croix.com/europe-1-et-cnews-se-rapprochent-encore-avec-l-emission-face-a-philippe-de-villiers-20240120"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/villiers.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 276,
+       "h": 380
+      },
+      "machoire": {
+       "x": 280,
+       "y": 0,
+       "w": 188,
+       "h": 111,
+       "pose": [
+        53.0,
+        269.0
+       ],
+       "pivot": [
+        99.6,
+        16.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       119.5,
+       196.5,
+       32.4
+      ],
+      "oeil_d": [
+       203.8,
+       196.5,
+       33.0
+      ],
+      "bouche": [
+       152.6,
+       285.3
+      ],
+      "menton": [
+       150.7,
+       367.8
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.youtube.com/watch?v=wJcbSqwRtA4"
      }
     }
    }
@@ -23334,7 +25090,16 @@
    "zemmour_zemmour_corinne": "sons/citations/zemmour_zemmour_corinne.mp3",
    "zemmour_zemmour_milipol": "sons/citations/zemmour_zemmour_milipol.mp3",
    "zemmour_zemmour_petain_onpc": "sons/citations/zemmour_zemmour_petain_onpc.mp3",
-   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3"
+   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3",
+   "bove_bove_mcdo_merde": "sons/citations/bove_bove_mcdo_merde.mp3",
+   "bove_bove_fusil_loup": "sons/citations/bove_bove_fusil_loup.mp3",
+   "juppe_juppe_super_peche": "sons/citations/juppe_juppe_super_peche.mp3",
+   "barnier_barnier_valeur_ajoutee": "sons/citations/barnier_barnier_valeur_ajoutee.mp3",
+   "barnier_barnier_agir_que_parler": "sons/citations/barnier_barnier_agir_que_parler.mp3",
+   "borne_borne_pari_retraites": "sons/citations/borne_borne_pari_retraites.mp3",
+   "joly_joly_enfants_de_france": "sons/citations/joly_joly_enfants_de_france.mp3",
+   "joly_joly_sans_hulot": "sons/citations/joly_joly_sans_hulot.mp3",
+   "bove_bove_squelette_loup": "sons/citations/bove_bove_squelette_loup.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",
