@@ -90,7 +90,6 @@ export const CARTES: VersionCards = {
     {"before":{"id":"petite_phrase","name":"Petite phrase","tier":4,"cost":3,"target":true,"effects":[{"when":"annonce","to":"cible","do":"mot_cle","keyword":"polemique"}]},"after":{"id":"petite_phrase","name":"Petite phrase","tier":5,"cost":3,"target":true,"effects":[{"when":"annonce","to":"cible","do":"mot_cle","keyword":"polemique"}]}},
     {"before":{"id":"grand_debat","name":"Grand débat national","tier":5,"cost":4,"target":false,"effects":[{"when":"annonce","to":"allies","do":"buff","atk":2,"hp":2}]},"after":{"id":"grand_debat","name":"Grand débat national","tier":6,"cost":4,"target":false,"effects":[{"when":"annonce","to":"allies","do":"buff","atk":2,"hp":2}]}},
     {"after":{"id":"grand_menage","name":"Grand ménage","tier":6,"cost":3,"target":true,"effects":[{"when":"annonce","to":"cible","do":"mot_cle","keyword":"balai"}]}},
-    {"before":{"id":"temps_de_parole","name":"Temps de parole","tier":2,"cost":1,"target":true,"effects":[{"when":"annonce","to":"cible","do":"basculer","keyword":"porte_parole"}]}},
     {"before":{"id":"loi_de_finances","name":"Loi de finances","tier":2,"cost":3,"target":false,"effects":[{"when":"annonce","to":"joueur","do":"budget_max","value":1}]}},
     {"before":{"id":"tribune_libre","name":"Tribune libre","tier":4,"cost":2,"target":true,"effects":[{"when":"annonce","to":"cible","do":"declencher","trigger":"heritage"}]}},
   ],

@@ -25,7 +25,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 **Casseroles et sorts**
 - La casserole de la boutique : un camp de la partie est tiré à égalité, puis une de ses casseroles. Plus de poids pour les affaires « à la une » ni pour celles de vos politiques, et un camp qui a beaucoup d'affaires ne sort pas plus souvent qu'un autre.
 - Deux nouveaux sorts : « Fuite dans la presse » (échelon 2) découvre une casserole, « À la une » (échelon 3) découvre d'abord celles de vos politiques. Francis Lalanne découvre un Ridicule qui coûte 2 ou moins, et ne se copie plus à chaque victoire : sa Célébration donne le Retour en politique à un autre allié.
-- Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Temps de parole, Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
+- Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
 
 **Équilibrage**
 - Les camps les plus fournis rendent des cartes, pour que la boutique propose chaque camp à parts plus égales : Clémence Guetté et Manon Aubry (Insoumis), Aurore Bergé et Sébastien Lecornu (Macronie) et Jean-François Copé (Républicains) quittent la boutique, avec leurs casseroles. De 11 à 17 cartes par camp avant, de 13 à 16 désormais.

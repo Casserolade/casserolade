@@ -56,7 +56,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       'Six nouveaux politiques : Rima Hassan, Élisabeth Borne, Michel Barnier, Alain Juppé, José Bové et Eva Joly. Vingt-deux casseroles, dont quatorze pour le RN, Reconquête et les Écologistes, qui en avaient le moins.',
       'Les camps les plus fournis rendent des cartes : Clémence Guetté, Manon Aubry, Aurore Bergé, Sébastien Lecornu et Jean-François Copé quittent la boutique. Avec Bové et Joly, les Écologistes passent de 11 à 13 cartes : chaque camp sort à parts plus égales.',
       'En boutique, chaque camp a autant de chances de voir sortir une de ses casseroles. Deux nouveaux sorts et Francis Lalanne en font découvrir ; Lalanne ne se copie plus à chaque victoire.',
-      'Les sorts sont répartis de l\'échelon 1 au 6, selon leur force. Trois sorts qui ne servaient presque à rien sont retirés.',
+      'Les sorts sont répartis de l\'échelon 1 au 6, selon leur force. Deux sorts qui ne servaient presque à rien sont retirés.',
     ],
     rules: [
       {
@@ -144,7 +144,6 @@ export const MISES_A_JOUR: PatchNote[] = [
       fuite_dans_la_presse: 'Une fuite, et l\'affaire sort : trois casseroles au choix.',
       a_la_une: 'Vos politiques font la une : leurs casseroles d\'abord, avec leur bonus de propriétaire.',
       grand_menage: 'Le Coup de balai, sur le politique de votre choix.',
-      temps_de_parole: 'Retiré : il ne changeait presque rien à une partie.',
       loi_de_finances: 'Retiré : il ne changeait presque rien à une partie.',
       tribune_libre: 'Retiré : il ne changeait presque rien à une partie.',
     },

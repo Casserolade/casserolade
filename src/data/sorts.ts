@@ -19,8 +19,8 @@ export const SPELLS: Spell[] = [
   spell('investiture', 'Investiture', 1, 0, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 1 })], { token: true }),
 
   // Les échelons, revus le 13 novembre 2026 : chaque sort à la hauteur de sa force mesurée (node src/sim/bilan_sorts.ts),
-  // et des sorts jusqu'à l'échelon 6, comme les politiques. Retirés : Temps de parole, Loi de finances et Tribune libre,
-  // qui ne changeaient presque rien à une partie.
+  // et des sorts jusqu'à l'échelon 6, comme les politiques. Retirés : Loi de finances et Tribune libre, qui ne
+  // changeaient presque rien à une partie.
 
   // Échelon 1
   spell('sondage_flatteur', 'Sondage flatteur', 1, 1, true, [fx('cible', { do: 'buff', atk: 1, hp: 2 })]),
@@ -31,6 +31,10 @@ export const SPELLS: Spell[] = [
   // Échelon 2
   spell('primaire', 'Primaire', 2, 1, true, [fx('cible', { do: 'sacrifier', echelon: 0 })]),
   spell('matinale', 'Matinale', 2, 1, false, [fx('joueur', { do: 'actualisations_gratuites', value: 2 })]),
+  // Le temps de parole que l'Arcom décompte : on le donne à qui ne l'a pas, on le reprend à qui l'a. C'est le seul
+  // moyen de retirer Porte-parole : face au Coup de balai, on choisit qui prend les coups, même quand un politique ne
+  // bouge plus. Un bot n'en tire presque rien, un joueur qui place son plateau, si (13 novembre 2026).
+  spell('temps_de_parole', 'Temps de parole', 2, 1, true, [fx('cible', { do: 'basculer', keyword: 'porte_parole' })]),
   spell('bracelet_electronique', 'Bracelet électronique', 2, 1, false, [fx('joueur', { do: 'oublier' })]),
   spell('motion_de_censure', 'Motion de censure', 2, 1, false, [fx('joueur', { do: 'pari_defaite', value: 3 })]),
   // Une fuite, et l'affaire sort : trois casseroles au choix, parmi celles de la partie (13 novembre 2026).
