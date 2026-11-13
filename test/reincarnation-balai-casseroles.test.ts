@@ -75,7 +75,7 @@ test('Retour en politique : il revient tel qu\'il est entré en combat, Polémiq
 
 test('Retour en politique : les gains du combat ne survivent pas à la mort, ceux pour de bon restent au politique du plateau', () => {
   const guedj = makeMinion(CARD_BY_ID.guedj, uid++);
-  const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(1, 300)], 6);
+  const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(5, 300)], 6);
   const back = r.log.find((e): e is Of<'retour'> => isRetour(e) && e.from === guedj.uid);
   assert.ok(back, 'il revient');
   assert.equal(back.unit.atk, guedj.atk, 'sa réincarnation a l\'attaque de son entrée en combat');

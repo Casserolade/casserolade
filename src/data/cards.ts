@@ -91,6 +91,8 @@ export const CARDS: Card[] = [
   card('thevenoud', 'Thomas Thévenoud', 'socialistes', 1, 2, 2, { kw: ['retour', 'vedette'], fx: [fx('celebration', 'soi', buff(1, 1))] }),
   card('bouamrane', 'Karim Bouamrane', 'socialistes', 1, 2, 2, { fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   // 7 novembre 2026 : le frondeur grandit en attaquant ; avec son Retour, il attaque deux fois par combat (règle R17).
+  // 13 novembre 2026 : sa réincarnation (R20) n'emporte plus les gains du combat (1,09 → 0,58 place). Le compenser
+  // (3/3, ou +1/+1 par attaque) faisait passer les Socialistes, déjà premiers, de 4,56 à 4,39-4,44 en mono-camp.
   card('guedj', 'Jérôme Guedj', 'socialistes', 2, 3, 2, {
     kw: ['retour'],
     fx: [fx('meeting', 'soi', buff(1, 0), { perma: true })],
@@ -207,7 +209,7 @@ export const CARDS: Card[] = [
   card('barnier', 'Michel Barnier', 'republicains', 4, 6, 6, { kw: ['retour'], fx: [fx('debut_combat', 'autres', buff(2, 2)), fx('debut_combat', 'soi', { do: 'detruire' })] }),
   // Condamné en 2004 pour les emplois du RPR, parti enseigner au Québec, revenu maire de Bordeaux en 2006 puis ministre :
   // « le meilleur d'entre nous » (Chirac). Le peuple oublie, il revient plus fort (13 novembre 2026).
-  card('juppe', 'Alain Juppé', 'republicains', 4, 5, 7, { kw: ['immunite'], fx: [fx('oubli', 'joue', buff(4, 4)), fx('oubli', 'joue', motCle('immunite'))] }),
+  card('juppe', 'Alain Juppé', 'republicains', 4, 4, 6, { kw: ['immunite'], fx: [fx('oubli', 'joue', buff(4, 4)), fx('oubli', 'joue', motCle('immunite'))] }),
   card('pecresse', 'Valérie Pécresse', 'republicains', 5, 6, 6, { fx: [fx('fin_tour', 'voisins', motCle('immunite'))] }),
   // 7 novembre 2026 : monte à l'échelon 5 et reprend le moteur de casseroles de Sarkozy, parti au 6. La casserole
   // Emploi fictif garde les Assistants.
@@ -261,7 +263,7 @@ export const CARDS: Card[] = [
   // 1,45 % à la primaire de 2016, rallié à Zemmour en 2021 : on le renvoie, il ramène quelqu'un.
   card('poisson', 'Jean-Frédéric Poisson', 'reconquete', 2, 5, 5, { fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'serviteur', camp: 'reconquete', echelon: 0 })] }),
   // De LR à Reconquête : il se rallie, et apporte sa Polémique à son hôte (7 novembre 2026).
-  card('peltier', 'Guillaume Peltier', 'reconquete', 4, 6, 7, { kw: ['ralliement', 'polemique'] }),
+  card('peltier', 'Guillaume Peltier', 'reconquete', 4, 7, 8, { kw: ['ralliement', 'polemique'] }),
   card('philippot', 'Florian Philippot', 'reconquete', 4, 6, 7, { kw: ['polemique'], fx: [fx('droit_de_reponse', 'joueur', { do: 'actualisations_gratuites', value: 3 })] }),
   // Chaque buzz lance sa cagnotte.
   card('messiha', 'Jean Messiha', 'reconquete', 3, 6, 7, { fx: [fx('actualise', 'joueur', { do: 'budget', value: 1 }, { once: 'manche' })] }),
@@ -298,7 +300,7 @@ export const CARDS: Card[] = [
   card('poutou', 'Philippe Poutou', 'civile', 3, 2, 6, { kw: ['vedette', 'balai'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
   // Candidat le 9 novembre 2026 : « ni de droite, ni de gauche », et « Je sais ce que c'est de se battre, de tomber,
   // de se relever toujours » (vidéo de sa candidature). Il compte pour chaque parti, et se relève une fois.
-  card('riner', 'Teddy Riner', 'civile', 4, 5, 8, { kw: ['ni_droite_ni_gauche', 'retour'] }),
+  card('riner', 'Teddy Riner', 'civile', 4, 6, 9, { kw: ['ni_droite_ni_gauche', 'retour'] }),
   card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { kw: ['vedette'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).
@@ -307,7 +309,7 @@ export const CARDS: Card[] = [
   card('de_gaulle', 'Charles de Gaulle', 'civile', 6, 9, 9, { fx: [fx('annonce', 'allies', motCle('ni_droite_ni_gauche')), fx('annonce', 'allies', buff(4, 4))] }),
   // « Au revoir » (19 mai 1981) : il se lève, et la caméra reste sur sa chaise vide. Il est revenu ensuite, longtemps.
   // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV.
-  card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 11, 14, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
+  card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 13, 16, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
   // 3 novembre 2026 : sur 300 parties, une seule finissait avec lui ; son Annonce rejoue tout de suite celles du plateau.
   card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
   card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(4, 4))] }),
