@@ -1,39 +1,46 @@
 import type { Context, Hero } from '../engine/types.ts';
 import { BOSS_SPECIAUX } from './histoire/boss.ts';
 
+/** L'armure la plus haute qu'un héros puisse recevoir : au-delà, c'est son pouvoir qu'il faut revoir. */
+export const MAX_ARMOR = 20;
+
+/**
+ * Tous les héros partent avec les mêmes sondages (`PARAMS.startHp`) : seule leur armure, le socle électoral, les
+ * départage (13 novembre 2026). Elle se règle par mesure : `node src/sim/balance.ts --tune 3`.
+ */
 export const HEROES: Hero[] = [
-  { id: 'lepen', name: 'Marine Le Pen', power: 'TVA à 5,5 %', desc: 'Le premier recrutement de chaque manche coûte 1 de moins.', hpBonus: -2, mods: { firstBuyDiscount: 1 } },
-  { id: 'philippe', name: 'Édouard Philippe', power: 'Deux heures de plus', desc: '+1 budget par manche, mais les échelons coûtent 1 de plus.', hpBonus: 2, mods: { budgetPerRound: 1, upgradeDiscount: -1 } },
-  { id: 'attal', name: 'Gabriel Attal', power: 'Choc des savoirs', desc: 'Les échelons coûtent 1 de moins.', hpBonus: 8, mods: { upgradeDiscount: 1 } },
-  { id: 'zemmour', name: 'Éric Zemmour', power: 'Polémique permanente', desc: 'Votre premier politique a Polémique à chaque combat.', hpBonus: -1, mods: { frontPolemique: true } },
-  { id: 'tondelier', name: 'Marine Tondelier', power: 'Première République écologique', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1.', hpBonus: -4, mods: { frontGrowth: 1 } },
-  { id: 'melenchon', name: 'Jean-Luc Mélenchon', power: 'La rue', desc: 'Au début de chaque manche, ajoutez un Tract à votre main.', hpBonus: -4, mods: { startTracts: 1 } },
-  { id: 'sarkozy', name: 'Nicolas Sarkozy', power: 'Casier', desc: 'Les casseroles coûtent 1 de moins, et il en faut une de plus pour faire scandale.', hpBonus: 4, mods: { casseroleDiscount: 1, scandalThresholdDelta: 1 } },
-  { id: 'macron', name: 'Emmanuel Macron', power: 'En même temps', desc: 'La première Annonce de chaque manche se déclenche deux fois.', hpBonus: 9, mods: { firstAnnonceTwice: true } },
-  { id: 'hollande', name: 'François Hollande', power: 'Le retour', desc: 'À chaque combat, le premier politique à mourir se réincarne : comme sa carte, avec 1 PV.', hpBonus: 0, mods: { firstDeathRetour: true } },
-  { id: 'retailleau', name: 'Bruno Retailleau', power: 'L\'ordre', desc: 'Votre premier politique gagne +4 PV à chaque combat.', hpBonus: 5, mods: { frontHp: 4 } },
-  { id: 'glucksmann', name: 'Raphaël Glucksmann', power: 'Taxe Zucman', desc: '+2 budget à la manche suivante après une défaite.', hpBonus: 0, mods: { lossBudget: 2 } },
-  { id: 'bardella', name: 'Jordan Bardella', power: 'Le dauphin', desc: 'Le premier politique à mourir transmet son attaque au suivant.', hpBonus: 7, mods: { firstDeathTransmit: true } },
-  { id: 'lassalle', name: 'Jean Lassalle', power: 'Tour de France à pied', desc: 'Les deux premières actualisations de chaque manche sont gratuites.', hpBonus: 6, mods: { freeRollsPerRound: 2 } },
-  { id: 'balkany', name: 'Patrick Balkany', power: 'Blanchiment', desc: 'Renvoyer un politique rapporte 1 de plus.', hpBonus: 6, mods: { sellBonus: 1 } },
+  { id: 'lepen', name: 'Marine Le Pen', power: 'TVA à 5,5 %', desc: 'Le premier recrutement de chaque manche coûte 1 de moins.', armor: 3, mods: { firstBuyDiscount: 1 } },
+  { id: 'philippe', name: 'Édouard Philippe', power: 'Deux heures de plus', desc: '+1 budget par manche, mais les échelons coûtent 1 de plus.', armor: 6, mods: { budgetPerRound: 1, upgradeDiscount: -1 } },
+  { id: 'attal', name: 'Gabriel Attal', power: 'Choc des savoirs', desc: 'Les échelons coûtent 1 de moins.', armor: 14, mods: { upgradeDiscount: 1 } },
+  { id: 'zemmour', name: 'Éric Zemmour', power: 'Polémique permanente', desc: 'Votre premier politique a Polémique à chaque combat.', armor: 4, mods: { frontPolemique: true } },
+  { id: 'tondelier', name: 'Marine Tondelier', power: 'Première République écologique', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1.', armor: 5, mods: { frontGrowth: 1 } },
+  { id: 'melenchon', name: 'Jean-Luc Mélenchon', power: 'La rue', desc: 'Au début de chaque manche, ajoutez un Tract à votre main.', armor: 5, mods: { startTracts: 1 } },
+  { id: 'sarkozy', name: 'Nicolas Sarkozy', power: 'Casier', desc: 'Les casseroles coûtent 1 de moins, et il en faut une de plus pour faire scandale.', armor: 8, mods: { casseroleDiscount: 1, scandalThresholdDelta: 1 } },
+  { id: 'macron', name: 'Emmanuel Macron', power: 'En même temps', desc: 'La première Annonce de chaque manche se déclenche deux fois.', armor: 13, mods: { firstAnnonceTwice: true } },
+  { id: 'hollande', name: 'François Hollande', power: 'Le retour', desc: 'À chaque combat, le premier politique à mourir se réincarne : comme sa carte, avec 1 PV.', armor: 11, mods: { firstDeathRetour: true } },
+  { id: 'retailleau', name: 'Bruno Retailleau', power: 'L\'ordre', desc: 'Votre premier politique gagne +4 PV à chaque combat.', armor: 13, mods: { frontHp: 4 } },
+  { id: 'glucksmann', name: 'Raphaël Glucksmann', power: 'Taxe Zucman', desc: '+2 budget à la manche suivante après une défaite.', armor: 4, mods: { lossBudget: 2 } },
+  { id: 'bardella', name: 'Jordan Bardella', power: 'Le dauphin', desc: 'Le premier politique à mourir transmet son attaque au suivant.', armor: 14, mods: { firstDeathTransmit: true } },
+  { id: 'lassalle', name: 'Jean Lassalle', power: 'Tour de France à pied', desc: 'Les deux premières actualisations de chaque manche sont gratuites.', armor: 10, mods: { freeRollsPerRound: 2 } },
+  { id: 'balkany', name: 'Patrick Balkany', power: 'Blanchiment', desc: 'Renvoyer un politique rapporte 1 de plus.', armor: 13, mods: { sellBonus: 1 } },
   // Les candidats déclarés à la présidentielle de 2027 (liste de Wikipédia, 4 novembre 2026), qui ont déjà leur carte.
-  { id: 'roussel', name: 'Fabien Roussel', power: 'Les jours heureux', desc: '+1 budget par manche.', hpBonus: -5, mods: { budgetPerRound: 1 } },
-  { id: 'ruffin', name: 'François Ruffin', power: 'Merci patron !', desc: 'Renvoyer un politique rapporte 1 de plus, et +1 budget à la manche suivante après une défaite.', hpBonus: 1, mods: { sellBonus: 1, lossBudget: 1 } },
-  { id: 'bertrand', name: 'Xavier Bertrand', power: 'Toujours candidat', desc: 'Les échelons coûtent 1 de moins, et votre premier politique gagne +2 PV à chaque combat.', hpBonus: 3, mods: { upgradeDiscount: 1, frontHp: 2 } },
-  { id: 'lisnard', name: 'David Lisnard', power: 'Libérer les énergies', desc: 'Le premier recrutement de chaque manche coûte 1 de moins, et renvoyer un politique rapporte 1 de plus.', hpBonus: -7, mods: { firstBuyDiscount: 1, sellBonus: 1 } },
-  { id: 'dupont_aignan', name: 'Nicolas Dupont-Aignan', power: 'Debout la France', desc: 'La première actualisation de chaque manche est gratuite, et votre premier politique gagne +2 PV à chaque combat.', hpBonus: 2, mods: { freeRollsPerRound: 1, frontHp: 2 } },
-  { id: 'philippot', name: 'Florian Philippot', power: 'Le Frexit', desc: 'À chaque combat, la première Polémique adverse ne vous tue personne, et les deux premières actualisations de chaque manche sont gratuites.', hpBonus: 3, mods: { firstPolemiqueResist: true, freeRollsPerRound: 2 } },
-  { id: 'arthaud', name: 'Nathalie Arthaud', power: 'Travailleuses, travailleurs', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et +1 budget à la manche suivante après une défaite.', hpBonus: -7, mods: { frontGrowth: 1, lossBudget: 1 } },
-  { id: 'asselineau', name: 'François Asselineau', power: 'L\'article 50', desc: 'Les échelons coûtent 1 de moins, et la première actualisation de chaque manche est gratuite.', hpBonus: 0, mods: { upgradeDiscount: 1, freeRollsPerRound: 1 } },
-  { id: 'cazeneuve', name: 'Bernard Cazeneuve', power: 'L\'homme d\'État', desc: 'Votre premier politique gagne +2 PV à chaque combat, et il faut une casserole de plus pour faire scandale.', hpBonus: 7, mods: { frontHp: 2, scandalThresholdDelta: 1 } },
-  { id: 'bouamrane', name: 'Karim Bouamrane', power: 'Saint-Ouen olympique', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et +2 PV à chaque combat.', hpBonus: -10, mods: { frontGrowth: 1, frontHp: 2 } },
-  { id: 'batho', name: 'Delphine Batho', power: 'La décroissance', desc: 'Votre plateau n\'a que 6 places au lieu de 7, mais vous gagnez +1 budget par manche.', hpBonus: 3, mods: { boardDelta: -1, budgetPerRound: 1 } },
-  { id: 'kazib', name: 'Anasse Kazib', power: 'La grève', desc: 'La première actualisation de chaque manche est gratuite, et +1 budget à la manche suivante après une défaite.', hpBonus: 0, mods: { freeRollsPerRound: 1, lossBudget: 1 } },
-  { id: 'durif', name: 'Sylvain Durif', power: 'Le Christ cosmique', desc: 'À chaque combat, le premier politique à mourir se réincarne (comme sa carte, avec 1 PV), mais les échelons coûtent 1 de plus.', hpBonus: 8, mods: { firstDeathRetour: true, upgradeDiscount: -1 } },
-  { id: 'lalanne', name: 'Francis Lalanne', power: 'On se retrouvera', desc: 'Le premier politique à mourir transmet son attaque au suivant, et +1 budget à la manche suivante après une défaite.', hpBonus: 0, mods: { firstDeathTransmit: true, lossBudget: 1 } },
+  { id: 'roussel', name: 'Fabien Roussel', power: 'Les jours heureux', desc: '+1 budget par manche.', armor: 0, mods: { budgetPerRound: 1 } },
+  { id: 'ruffin', name: 'François Ruffin', power: 'Merci patron !', desc: 'Renvoyer un politique rapporte 1 de plus, et +1 budget à la manche suivante après une défaite.', armor: 6, mods: { sellBonus: 1, lossBudget: 1 } },
+  { id: 'bertrand', name: 'Xavier Bertrand', power: 'Toujours candidat', desc: 'Les échelons coûtent 1 de moins, et votre premier politique gagne +2 PV à chaque combat.', armor: 10, mods: { upgradeDiscount: 1, frontHp: 2 } },
+  { id: 'lisnard', name: 'David Lisnard', power: 'Libérer les énergies', desc: 'Le premier recrutement de chaque manche coûte 1 de moins, et renvoyer un politique rapporte 1 de plus.', armor: 0, mods: { firstBuyDiscount: 1, sellBonus: 1 } },
+  { id: 'dupont_aignan', name: 'Nicolas Dupont-Aignan', power: 'Debout la France', desc: 'La première actualisation de chaque manche est gratuite, et votre premier politique gagne +2 PV à chaque combat.', armor: 7, mods: { freeRollsPerRound: 1, frontHp: 2 } },
+  { id: 'philippot', name: 'Florian Philippot', power: 'Le Frexit', desc: 'À chaque combat, la première Polémique adverse ne vous tue personne, et les deux premières actualisations de chaque manche sont gratuites.', armor: 6, mods: { firstPolemiqueResist: true, freeRollsPerRound: 2 } },
+  { id: 'arthaud', name: 'Nathalie Arthaud', power: 'Travailleuses, travailleurs', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et +1 budget à la manche suivante après une défaite.', armor: 0, mods: { frontGrowth: 1, lossBudget: 1 } },
+  { id: 'asselineau', name: 'François Asselineau', power: 'L\'article 50', desc: 'Les échelons coûtent 1 de moins, et la première actualisation de chaque manche est gratuite.', armor: 3, mods: { upgradeDiscount: 1, freeRollsPerRound: 1 } },
+  { id: 'cazeneuve', name: 'Bernard Cazeneuve', power: 'L\'homme d\'État', desc: 'Votre premier politique gagne +2 PV à chaque combat, et il faut une casserole de plus pour faire scandale.', armor: 14, mods: { frontHp: 2, scandalThresholdDelta: 1 } },
+  { id: 'bouamrane', name: 'Karim Bouamrane', power: 'Saint-Ouen olympique', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et +2 PV à chaque combat.', armor: 0, mods: { frontGrowth: 1, frontHp: 2 } },
+  { id: 'batho', name: 'Delphine Batho', power: 'La décroissance', desc: 'Votre plateau n\'a que 6 places au lieu de 7, mais vous gagnez +1 budget par manche.', armor: 10, mods: { boardDelta: -1, budgetPerRound: 1 } },
+  { id: 'kazib', name: 'Anasse Kazib', power: 'La grève', desc: 'La première actualisation de chaque manche est gratuite, et +1 budget à la manche suivante après une défaite.', armor: 4, mods: { freeRollsPerRound: 1, lossBudget: 1 } },
+  { id: 'durif', name: 'Sylvain Durif', power: 'Le Christ cosmique', desc: 'À chaque combat, le premier politique à mourir se réincarne (comme sa carte, avec 1 PV), mais les échelons coûtent 1 de plus.', armor: 20, mods: { firstDeathRetour: true, upgradeDiscount: -1 } },
+  { id: 'lalanne', name: 'Francis Lalanne', power: 'On se retrouvera', desc: 'Le premier politique à mourir transmet son attaque au suivant, et +1 budget à la manche suivante après une défaite.', armor: 5, mods: { firstDeathTransmit: true, lossBudget: 1 } },
   // Candidat le 9 novembre 2026. « C'est un candidat… de poids » (Édouard Philippe, BFMTV, le jour même) ; « tomber,
   // se relever toujours » (sa vidéo de candidature).
-  { id: 'riner', name: 'Teddy Riner', power: 'Candidat de poids', desc: 'Votre premier politique gagne +2 PV à chaque combat, et le premier politique à mourir se réincarne (comme sa carte, avec 1 PV).', hpBonus: -3, mods: { frontHp: 2, firstDeathRetour: true } },
+  { id: 'riner', name: 'Teddy Riner', power: 'Candidat de poids', desc: 'Votre premier politique gagne +2 PV à chaque combat, et le premier politique à mourir se réincarne (comme sa carte, avec 1 PV).', armor: 6, mods: { frontHp: 2, firstDeathRetour: true } },
 ];
 
 /** Les boss du mode histoire y figurent pour leur nom, mais ne sont jamais tirés ni proposés : ils sont hors de HEROES. */

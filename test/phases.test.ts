@@ -34,7 +34,7 @@ test('choosing a hero sets it and its sondages; the round starts when all have c
   const heroId = game.players[0].heroOffers?.[1] as string;
   assert.deepEqual(applyAction(game, 0, { t: 'hero', i: 1 }), { ok: true });
   assert.equal(game.players[0].hero.id, heroId);
-  assert.equal(game.players[0].hp, PARAMS.startHp + HERO_BY_ID[heroId].hpBonus);
+  assert.equal(game.players[0].hp, PARAMS.startHp + HERO_BY_ID[heroId].armor);
   assert.equal(game.phase, 'choix_heros');
   assert.deepEqual(applyAction(game, 0, { t: 'hero', i: 0 }), { ok: false, error: 'Héros déjà choisi.' });
   assert.deepEqual(applyAction(game, 1, { t: 'hero', i: 9 }), { ok: false, error: 'Choix invalide.' });

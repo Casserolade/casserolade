@@ -7,7 +7,6 @@ import { cardRulesLines } from '../src/client/tools/cardRulesLines.ts';
 import { longTextBonusMs } from '../src/client/tools/longTextBonusMs.ts';
 import { readingDelayMs } from '../src/client/tools/readingDelayMs.ts';
 import { rivalLineForCombat } from '../src/client/tools/rivalLineForCombat.ts';
-import { pollsBase } from '../src/client/tools/pollsBase.ts';
 import { speakerName } from '../src/client/tools/speakerName.ts';
 import { splitPolls } from '../src/client/tools/splitPolls.ts';
 import { storyLineDelayMs } from '../src/client/tools/storyLineDelayMs.ts';
@@ -89,27 +88,18 @@ test('le tutoriel enseigne le glisser, sans parler de cliquer', () => {
   assert.ok(textes.some((texte) => /[Gg]lissez/.test(texte)));
 });
 
-test('pollsBase : la base commune est le départ du héros le moins doté, à toute échelle', () => {
-  const lowest = Math.min(...HEROES.map((hero) => hero.hpBonus));
-  assert.equal(pollsBase(PARAMS.startHp), PARAMS.startHp + lowest);
-  assert.ok(pollsBase(7) >= 1, 'un chapitre court garde une base');
-});
-
-test('splitPolls : aucun héros n\'a de socle négatif, et le total ne change jamais', () => {
+test('splitPolls : les mêmes sondages pour tous, et l\'armure du héros au-dessus, à toute échelle', () => {
   for (const startHp of [PARAMS.startHp, ...CHAPITRES.map((c) => c.regles.startHp ?? PARAMS.startHp)]) {
     for (const hero of Object.values(HERO_BY_ID)) {
-      const scaled = Math.round((hero.hpBonus * startHp) / PARAMS.startHp);
-      const { polls, electoralBase } = splitPolls(startHp + scaled, startHp);
-      assert.ok(electoralBase >= 0, `${hero.id} à ${startHp}`);
-      assert.equal(polls + electoralBase, startHp + scaled);
+      const scaled = Math.round((hero.armor * startHp) / PARAMS.startHp);
+      assert.deepEqual(splitPolls(startHp + scaled, startHp), { polls: startHp, electoralBase: scaled }, `${hero.id} à ${startHp}`);
     }
   }
 });
 
 test('splitPolls : le socle part en premier, puis les sondages', () => {
-  const base = pollsBase(28);
-  assert.deepEqual(splitPolls(base + 19, 28), { polls: base, electoralBase: 19 });
-  assert.deepEqual(splitPolls(base + 3, 28), { polls: base, electoralBase: 3 });
-  assert.deepEqual(splitPolls(base, 28), { polls: base, electoralBase: 0 });
-  assert.deepEqual(splitPolls(5, 28), { polls: 5, electoralBase: 0 });
+  assert.deepEqual(splitPolls(30 + 19, 30), { polls: 30, electoralBase: 19 });
+  assert.deepEqual(splitPolls(30 + 3, 30), { polls: 30, electoralBase: 3 });
+  assert.deepEqual(splitPolls(30, 30), { polls: 30, electoralBase: 0 });
+  assert.deepEqual(splitPolls(5, 30), { polls: 5, electoralBase: 0 });
 });

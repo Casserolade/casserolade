@@ -2,9 +2,11 @@
 import { computed, onUnmounted, ref } from 'vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import PollsCount from '#src/client/components/atoms/PollsCount.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { facelessGhostNext, nextOpponentSeat } from '#src/client/tools/nextOpponentSeat.ts';
 import { ordinalSuffix } from '#src/client/tools/ordinalSuffix.ts';
+import { pollsLabel } from '#src/client/tools/pollsLabel.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { seatLabel } from '#src/client/tools/seatNames.ts';
 import type { SeatName } from '#src/client/tools/seatNames.ts';
@@ -14,11 +16,12 @@ import type { PlayerView } from '#src/engine/game.ts';
 const NAME_MS = 2500;
 
 /**
- * The other candidates, in a strip under the bar: the healthiest first, the eliminated last, with their place. A touch
+ * The other candidates, in a strip under the bar: the healthiest first, the eliminated last, with their place. Under
+ * each face, its polls, and its electoral base (its armor) while some is left. A touch
  * on a face names it (the hero, and online the pseudo), for a moment. During recruitment, the next opponent wears a red
  * ring and a sword, as on the desktop table; a ghost without a face yet has a place of its own, at the end.
  */
-const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
+const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; startHp: number; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
   names: () => new Map(),
   next: null,
 });
@@ -50,11 +53,11 @@ onUnmounted(() => window.clearTimeout(nameTimer));
   <ol class="opponents" aria-label="Les autres candidats">
     <li v-for="row in rows" :key="row.seat" class="opponent" :class="{ out: !row.alive, next: row.seat === nextSeat }">
       <GameIcon v-if="row.seat === nextSeat" class="next-mark" name="sword" />
-      <button type="button" class="face-button" :aria-label="`${nameOf(row.seat)} : ${row.alive ? `${row.hp} sondages, échelon ${row.tier}` : `${row.place}e, éliminé`}`" @click="show(row.seat)">
+      <button type="button" class="face-button" :aria-label="`${nameOf(row.seat)} : ${row.alive ? `${pollsLabel(row.hp, startHp)}, échelon ${row.tier}` : `${row.place}e, éliminé`}`" @click="show(row.seat)">
         <HeadPortrait v-if="row.heroId" class="face" :puppet="puppetStyle(gameArt.manifest.value, row.heroId, 'civile')" />
         <span v-else class="face empty" />
-        <span v-if="row.alive" class="hp"><GameIcon name="heart" />{{ row.hp }}</span>
-        <span v-else class="hp place">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
+        <PollsCount v-if="row.alive" class="polls" look="pills" :hp="row.hp" :start-hp="startHp" />
+        <span v-else class="place">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
       </button>
       <span v-if="named === row.seat" class="name" role="status">{{ nameOf(row.seat) }}</span>
     </li>
@@ -74,7 +77,8 @@ onUnmounted(() => window.clearTimeout(nameTimer));
 .face-button { display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
 .face { --portrait-size: 34px; border: 2px solid #9aa3b4; border-radius: 50%; background: #1b2240; }
 .empty { display: block; width: 34px; height: 34px; }
-.hp { display: inline-flex; align-items: center; gap: 1px; margin-top: -6px; padding: 0 0.3em; border-radius: 999px; background: #a8132a; color: #fff; font: 400 0.8rem / 1.2 var(--font-number); }
+.polls, .place { margin-top: -6px; font: 400 0.8rem / 1.2 var(--font-number); }
+.polls { flex-direction: column; gap: 1px; }
 .out { opacity: 0.45; filter: grayscale(1); }
 /* The next opponent: a red ring and a sword over the face; a ghost's seat stays grey, its mark does not. */
 .next .face { border-color: #ff5d50; box-shadow: 0 0 8px rgb(255 93 80 / 0.8); }
@@ -82,7 +86,7 @@ onUnmounted(() => window.clearTimeout(nameTimer));
 .out.next .face-button { opacity: 0.6; filter: grayscale(1); }
 .next-mark { position: absolute; z-index: 2; top: -5px; right: -3px; color: #ff5d50; font-size: 15px; pointer-events: none; }
 .ghost { display: flex; align-items: center; justify-content: center; color: #c9cfdc; font: 800 1rem / 1 var(--font-card); }
-.place { background: #3a3f4c; }
+.place { display: inline-flex; align-items: center; padding: 0 0.3em; border-radius: 999px; background: #3a3f4c; color: #fff; }
 /* The touched face's name, under it, kept inside the screen by the strip's own edges. */
 .name { position: absolute; z-index: 40; top: calc(100% + 4px); left: 50%; translate: -50% 0; width: max-content; max-width: 70vw; padding: 3px 10px; border-radius: 12px; border: 2px solid #111; background: #fff7d6; color: var(--color-ink); font: 800 0.8rem / 1.2 var(--font-card); box-shadow: 3px 4px 0 rgb(0 0 0 / 0.35); pointer-events: none; }
 .opponent:first-child .name { left: 0; translate: 0 0; }

@@ -18,7 +18,7 @@ import type { Hero } from '#src/engine/types.ts';
 /** A hero to choose: the face in its niche, its power, its polls. A real choice: one click. */
 const props = withDefaults(defineProps<{ hero: Hero; startHp: number; as?: 'button' | 'article' }>(), { as: 'button' });
 
-const split = computed(() => splitPolls(props.startHp + props.hero.hpBonus, props.startHp));
+const split = computed(() => splitPolls(props.startHp + props.hero.armor, props.startHp));
 const puppet = computed(() => puppetStyle(gameArt.manifest.value, props.hero.id, 'civile'));
 const archImage = computed(() => cssImage(gameArt.manifest.value.carte.arche));
 /** Its power as the cards write theirs: the keywords in bold, and what they mean right under the card. */
@@ -95,6 +95,6 @@ function sayIt(): void {
 @media (hover: none) { .glossary { position: static; translate: none; opacity: 1; box-shadow: none; } }
 .polls { display: flex; gap: 0.5rem; margin-top: auto; font: 400 1.4rem / 1 var(--font-number); }
 .hp, .base { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.15rem 0.6rem; border-radius: 999px; border: 2px solid #e8ecf2; }
-.hp { background: #a8132a; }
-.base { background: #24406e; }
+.hp { background: var(--color-polls); }
+.base { background: var(--color-electoral-base); }
 </style>

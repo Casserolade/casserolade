@@ -1,8 +1,10 @@
+import { MAX_ARMOR } from '#src/data/heroes.ts';
 import { PARAMS } from '#src/data/params.ts';
 
 /** The words of the game itself, beside those of the cards: the bestiary explains them with the keywords. */
 export const GAME_CONCEPTS: Record<string, string> = {
-  Sondages: `Vos points de vie : ${PARAMS.startHp} au départ, un peu plus ou un peu moins selon le héros. Le perdant d'un combat en perd, d'autant plus que le vainqueur a un échelon élevé et des survivants ; à zéro, il est éliminé.`,
+  Sondages: `Vos points de vie : ${PARAMS.startHp} au départ, pour tous les héros. Le perdant d'un combat en perd, d'autant plus que le vainqueur a un échelon élevé et des survivants ; à zéro, il est éliminé.`,
+  'Socle électoral': `L'armure du héros, le bouclier à côté de ses sondages : de 0 à ${MAX_ARMOR} selon le héros, d'autant plus que son pouvoir est discret. Elle encaisse les coups avant les sondages.`,
   Budget: `${PARAMS.startBudget} au départ, +${PARAMS.budgetPerRound} par manche jusqu'à ${PARAMS.maxBudget}. Il ne se garde pas d'une manche à l'autre. Un politique coûte ${PARAMS.buyCost}, actualiser la boutique ${PARAMS.rollCost}, et renvoyer un politique du plateau en rend ${PARAMS.sellValue}.`,
   Échelon: `Le niveau de votre boutique, de 1 à ${PARAMS.tierMax}. Monter coûte du budget, 1 de moins à chaque manche d'attente, et la boutique propose alors des politiques plus forts.`,
   Geler: 'Garde la boutique, casserole comprise, pour la manche suivante. Ses places vides se remplissent.',

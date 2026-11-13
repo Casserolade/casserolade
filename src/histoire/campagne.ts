@@ -58,7 +58,7 @@ export function composerTable(chapitre: Chapitre, heroId: string, seed: number, 
     const hero: Hero = HERO_BY_ID[id];
     heroOverrides[id] = {
       ...hero,
-      hpBonus: id === bossId ? hero.hpBonus : Math.round(hero.hpBonus * echelle),
+      armor: id === bossId ? hero.armor : Math.round(hero.armor * echelle),
       mods: chapitre.pouvoirs ? hero.mods : {},
     };
   }

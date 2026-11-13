@@ -16,7 +16,7 @@ import type { Hero } from '#src/engine/types.ts';
 const props = defineProps<{ hero: Hero; startHp: number }>();
 const emit = defineEmits<{ choose: [] }>();
 
-const split = computed(() => splitPolls(props.startHp + props.hero.hpBonus, props.startHp));
+const split = computed(() => splitPolls(props.startHp + props.hero.armor, props.startHp));
 const puppet = computed(() => puppetStyle(gameArt.manifest.value, props.hero.id, 'civile'));
 const desc = computed(() => boldGlossaryTerms(props.hero.desc));
 const glossary = computed(() => glossaryFor([desc.value]));
@@ -56,6 +56,6 @@ function choose(): void {
 .entry strong { color: var(--color-accent); }
 .polls { display: flex; gap: 0.4rem; margin-top: 0.2rem; font: 400 1.1rem / 1 var(--font-number); }
 .hp, .base { display: inline-flex; align-items: center; gap: 0.2rem; padding: 0.1rem 0.5rem; border-radius: 999px; border: 2px solid #e8ecf2; }
-.hp { background: #a8132a; }
-.base { background: #24406e; }
+.hp { background: var(--color-polls); }
+.base { background: var(--color-electoral-base); }
 </style>

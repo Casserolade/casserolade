@@ -3,12 +3,12 @@ import { playGame } from './simulate.ts';
 import type { GameResult } from './simulate.ts';
 import type { BotLevel, BotStyle } from '../bots/bots.ts';
 import type { Hero, Params } from '../engine/types.ts';
-import { HEROES } from '../data/heroes.ts';
+import { HEROES, MAX_ARMOR } from '../data/heroes.ts';
 
 /**
  * Mesure l'équilibre avec des bots qui s'engagent : la moitié reste mono-camp, ce qui
  * répartit les plateaux entre les camps au lieu de suivre la formule de valeur.
- * --tune cherche aussi les bonus de sondages qui ramènent chaque héros vers la moyenne.
+ * --tune cherche aussi l'armure (le socle électoral) qui ramène chaque héros vers la moyenne.
  */
 const { values } = parseArgs({
   options: {
@@ -60,7 +60,7 @@ function table(rows: { key: string | null; place: number }[]): { id: string; pla
 
 const games = Number(values.games);
 const overrides: Record<string, Partial<Hero>> = {};
-const bonus: Record<string, number> = Object.fromEntries(HEROES.map((h) => [h.id, h.hpBonus]));
+const armor: Record<string, number> = Object.fromEntries(HEROES.map((h) => [h.id, h.armor]));
 
 /** Le réglage se fait sur quatre tables : une seule table corrige trop le héros qui lui convient. */
 function tableaux(pass: number): { key: string; place: number }[] {
@@ -84,8 +84,9 @@ function tableaux(pass: number): { key: string; place: number }[] {
 
 for (let pass = 0; pass < Number(values.tune); pass++) {
   for (const h of tableaux(pass)) {
-    bonus[h.key] = Math.max(-12, Math.min(16, bonus[h.key] + Math.round((h.place - 4.5) * 4)));
-    overrides[h.key] = { hpBonus: bonus[h.key] };
+    // Une armure déplace un héros d'environ 0,08 place par point : la moitié de l'écart se corrige à chaque passe.
+    armor[h.key] = Math.max(0, Math.min(MAX_ARMOR, armor[h.key] + Math.round((h.place - 4.5) * 6)));
+    overrides[h.key] = { armor: armor[h.key] };
   }
 }
 
@@ -104,8 +105,8 @@ for (const c of table(seats.filter((s) => s.style === 'libre').map((s) => ({ key
 }
 console.log('Héros :');
 for (const h of table(seats.map((s) => ({ key: s.heroId, place: s.place })))) {
-  const b = overrides[h.id]?.hpBonus ?? HEROES.find((x) => x.id === h.id)?.hpBonus ?? 0;
-  console.log(`  ${h.id.padEnd(14)} place ${h.place.toFixed(2)}  victoires ${pct(h.win)}  bonus ${b}`);
+  const a = overrides[h.id]?.armor ?? HEROES.find((x) => x.id === h.id)?.armor ?? 0;
+  console.log(`  ${h.id.padEnd(14)} place ${h.place.toFixed(2)}  victoires ${pct(h.win)}  armure ${a}`);
 }
 const places = table(seats.map((s) => ({ key: s.style, place: s.place })));
 console.log('Styles :', places.map((p) => `${p.id} ${p.place.toFixed(2)}`).join('  '));

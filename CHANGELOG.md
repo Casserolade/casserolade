@@ -12,7 +12,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Les relances s'additionnent : chaque relanceur relance un politique une fois, et un multiplicateur fait rejouer le relanceur. Seconde délibération rapporte à côté de Chirac, Conseil des ministres à côté de Jadot, et Lassalle fait rejouer la Fin de tour de Chirac et de Jadot.
 - Les Tracts joués en combat (Mélenchon) comptent comme des sorts lancés, une fois le combat fini : Trouvé, Schiappa et Roussel les voient.
 - Une découverte née d'une Fin de tour n'est plus prise d'office : le choix s'affiche au début du recrutement suivant.
-- Les parties commencent à 34 sondages au lieu de 28 : une manche de plus en moyenne.
+- Tous les héros partent à 30 sondages, et seul leur socle électoral, leur armure (de 0 à 20), les départage. Avant : 28 sondages, plus ou moins selon le héros. La liste des joueurs montre les sondages et le socle côte à côte, sur ordinateur comme sur téléphone. Les parties durent deux manches de plus en moyenne.
 - Le pouvoir « le premier politique à mourir revient » (Hollande, Durif, Riner) attend un politique : un jeton tombé ne le consomme plus.
 
 **Nouveaux politiques et nouvelles casseroles**
