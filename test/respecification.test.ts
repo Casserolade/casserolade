@@ -57,7 +57,8 @@ test('R16 : une Immunité qui pare le coup laisse la Polémique', () => {
 
 test('R17 : un attaquant tombé puis réincarné attaque de nouveau au tour suivant de son camp', () => {
   for (let seed = 1; seed <= 8; seed++) {
-    const phoenix = unit(3, 1, ['retour']);
+    // Léaument, 3/4 : il revient à 3 d'attaque, comme sa carte.
+    const phoenix = { ...makeMinion(CARD_BY_ID.leaument, uid++), hp: 1, keywords: ['retour'] as Keyword[] };
     const wall = unit(1, 50, ['porte_parole']);
     const foe = unit(1, 200);
     const r = fight([phoenix, wall], [foe], seed);
@@ -72,7 +73,7 @@ test('R17 : un attaquant tombé puis réincarné attaque de nouveau au tour suiv
 
 test('R17 : tombé pendant son Cumul des mandats, son second coup est perdu', () => {
   for (let seed = 1; seed <= 8; seed++) {
-    const phoenix = unit(3, 1, ['retour', 'cumul']);
+    const phoenix = { ...makeMinion(CARD_BY_ID.leaument, uid++), hp: 1, keywords: ['retour', 'cumul'] as Keyword[] };
     const foe = unit(1, 200);
     const r = fight([phoenix, unit(1, 50, ['porte_parole'])], [foe], seed);
     const back = r.log.findIndex((e) => e.e === 'retour' && e.from === phoenix.uid);
@@ -192,7 +193,7 @@ test('Guedj grandit pour de bon en attaquant, et avec son Retour il attaque de n
   const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(5, 300)], 6);
   const gains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid);
   assert.ok(gains.length >= 2, 'une attaque, un Retour, et une autre attaque');
-  assert.ok(gains.every((g) => g.atk === 1 && g.hp === 0));
+  assert.ok(gains.every((g) => g.atk === 1 && g.hp === 1), '+1/+1 par attaque (13 novembre 2026)');
 });
 
 test('Strauss-Kahn : quand il attaque, il gagne +1/+1 pour de bon par Socialiste de votre plateau', () => {
@@ -413,7 +414,9 @@ test('Seconde délibération refuse un politique déjà relancé cette manche, e
   const p = game.players[0];
   lay(game, 'kazib');
   const deGaulle = lay(game, 'de_gaulle');
-  lay(game, 'chirac'); // Son Annonce relance celle de De Gaulle.
+  addSpellToHand(game, p, 'seconde_deliberation');
+  const first = p.spells.find((s) => s.spellId === 'seconde_deliberation') as { uid: number };
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: first.uid, target: deGaulle.uid }).ok, true, 'une première relance de De Gaulle');
   assert.ok(p.retriggered.has(deGaulle.uid));
   addSpellToHand(game, p, 'seconde_deliberation');
   const held = p.spells.find((s) => s.spellId === 'seconde_deliberation') as { uid: number };

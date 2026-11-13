@@ -618,7 +618,13 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
       return ctx.target && board.includes(ctx.target) ? [ctx.target] : [];
     case 'aleatoire': {
       // Un mot-clé au hasard va à un allié qui ne l'a pas encore : Royal ne donne pas deux fois son Retour au même.
-      const pool = others(p, self).filter((m) => (!eff.camp || isCamp(game, m, eff.camp)) && !(eff.do === 'mot_cle' && m.keywords.includes(eff.keyword)));
+      // Une relance au hasard vise un allié qu'elle peut relancer : il a cet effet, et personne ne l'a relancé dans la manche.
+      const pool = others(p, self).filter(
+        (m) =>
+          (!eff.camp || isCamp(game, m, eff.camp)) &&
+          !(eff.do === 'mot_cle' && m.keywords.includes(eff.keyword)) &&
+          !(eff.do === 'declencher' && (p.retriggered.has(m.uid) || relaunchable(m.effects, eff.trigger).length === 0)),
+      );
       return pool.length > 0 ? [game.rng.pick(pool)] : [];
     }
     case 'joue':

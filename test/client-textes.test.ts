@@ -33,7 +33,7 @@ test('the legends say what they do, on attack and with their camp', () => {
   assert.match(cardRuleLines(CARD_BY_ID.sarkozy).join(' '), /doublez les stats de ce politique/);
   assert.match(cardRuleLines(CARD_BY_ID.zemmour).join(' '), /gagne \+1\/\+1 par actualisation faite cette partie/);
   assert.match(cardRuleLines(CARD_BY_ID.schiappa).join(' '), /^\*\*Ni droite ni gauche\*\*\. \*\*Vedette\*\*\. Tous les deux sorts que vous lancez, gagne \+1\/\+1\./);
-  assert.match(cardRuleLines(CARD_BY_ID.giscard).join(' '), /invoque une Chaise vide \*\*Porte-parole\*\* qui a ses PV/);
+  assert.match(cardRuleLines(CARD_BY_ID.giscard).join(' '), /invoque une Chaise vide \*\*Porte-parole\*\* qui a ses stats/);
 });
 
 test('every casserole but the two that make people forget has a défaut, said in the words of the cards', () => {

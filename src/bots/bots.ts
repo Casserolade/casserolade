@@ -265,8 +265,9 @@ function actionValue(e: Effect): number {
       return 16;
     case 'buff_compteur':
       return (e.atk + e.hp) * 6;
+    // Une Chaise vide qui a ses stats : un second corps, Porte-parole (13 novembre 2026).
     case 'chaise_vide':
-      return 8;
+      return 14;
   }
 }
 
@@ -729,6 +730,19 @@ function bestOrdering(view: PlayerView, bot: BotState): Minion[] {
 // Les cibles.
 
 /** Le meilleur allié pour recevoir un gain : le plus fort, sauf les jetons. */
+/** Celui dont la réincarnation vaut le plus : sa carte nue, Héritage compris, doré s'il l'est. */
+function bestBareCard(board: Minion[]): Minion | null {
+  const worth = (m: Minion) => {
+    const card = CARD_BY_ID[m.cardId];
+    if (!card) return 0;
+    const heritage = m.effects.filter((e) => e.when === 'heritage').reduce((sum, e) => sum + effectValue(e) * (e.power ?? (m.golden ? 2 : 1)), 0);
+    return cardPower(card) * (m.golden ? 2 : 1) + heritage;
+  };
+  let best: Minion | null = null;
+  for (const m of board) if (!best || worth(m) > worth(best)) best = m;
+  return best;
+}
+
 function strongest(board: Minion[], except?: Minion): Minion | null {
   let best: Minion | null = null;
   for (const m of board) {
@@ -771,6 +785,9 @@ function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxT
     case 'basculer': {
       // Le bot donne le mot-clé au plus fort qui ne l'a pas ; il ne s'en sert pas pour le retirer.
       const lacking = board.filter((m) => m !== self && !m.keywords.includes(first.keyword) && !m.token);
+      // Le Retour réincarne la carte nue, et rejoue son Héritage (13 novembre 2026) : il va à la meilleure carte, pas
+      // au politique le plus gonflé.
+      if (first.keyword === 'retour' && lacking.length > 0) return bestBareCard(lacking);
       return strongest(lacking.length > 0 ? lacking : board, self ?? undefined);
     }
     case 'declencher': {

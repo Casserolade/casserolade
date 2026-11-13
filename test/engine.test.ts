@@ -98,8 +98,10 @@ test('Immunité annule le premier coup ; Polémique tue une fois, puis se perd',
 });
 
 test('Retour en politique ramène le serviteur une seule fois avec 1 PV', () => {
-  assert.equal(fight([unit(1, 1, ['retour'])], [unit(1, 3)]).winner, 1);
-  assert.equal(fight([unit(1, 1, ['retour'])], [unit(1, 1)]).winner, 0);
+  // Roussel, 1/3 : sa réincarnation revient comme sa carte, à 1 d'attaque.
+  const roussel = () => ({ ...makeMinion(CARD_BY_ID.roussel, uid++), hp: 1, keywords: ['retour'] as Keyword[] });
+  assert.equal(fight([roussel()], [unit(1, 3)]).winner, 1);
+  assert.equal(fight([roussel()], [unit(1, 1)]).winner, 0);
 });
 
 test('plus d\'Alliance : deux voisins du même camp gardent leurs stats', () => {
