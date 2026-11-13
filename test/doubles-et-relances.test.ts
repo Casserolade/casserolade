@@ -431,6 +431,20 @@ test('la Chaise vide de Giscard a ses stats au recrutement comme en combat', () 
   assert.ok(summoned && summoned.e === 'stats' && summoned.atk === chair.atk, 'la même attaque en combat');
 });
 
+test('Chirac relance en fin de tour une Annonce qui rapporte du budget : il arrive à la manche suivante', () => {
+  const game = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+  const p = game.players[0];
+  lay(game, 'coquerel');
+  lay(game, 'chirac');
+  p.budget = 2;
+  p.nextBudgetBonus = 0;
+  endOfTurn(game, p);
+  // Coquerel donne 3 de budget, deux fois avec Chirac : rien à dépenser ce tour, tout à la manche suivante.
+  assert.equal(p.budget, 2);
+  assert.equal(p.nextBudgetBonus, 6);
+  assert.ok(p.endOfTurnSteps.some((step) => step.notes.includes('budget')), 'la Fin de tour le montre');
+});
+
 test('un effet de combat n\'emploie que ce que le combat sait jouer : rien ne s\'y perd sans bruit', () => {
   const lost = allEffects().filter(({ effect }) => COMBAT_TRIGGERS.includes(effect.when) && !IN_COMBAT[effect.do]);
   assert.deepEqual(lost.map(({ owner, effect }) => `${owner} : ${effect.when} → ${effect.do}`), []);
