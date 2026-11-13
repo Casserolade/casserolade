@@ -415,6 +415,22 @@ function allEffects(): { owner: string; effect: Effect }[] {
   ];
 }
 
+test('la Chaise vide de Giscard a ses stats au recrutement comme en combat', () => {
+  const game = table(['socialistes', 'macronie', 'republicains', 'rn', 'insoumis']);
+  const p = game.players[0];
+  const giscard = lay(game, 'giscard');
+  lay(game, 'ndiaye');
+  assert.equal(castSpell(game, 'primaire', giscard).ok, true);
+  const chair = p.board.find((m) => m.cardId === 'chaise_vide') as Minion;
+  assert.ok(chair, 'sa chaise reste');
+  assert.deepEqual([chair.atk, chair.hp], [CARD_BY_ID.giscard.atk, CARD_BY_ID.giscard.hp]);
+
+  const fallen = { ...makeMinion(CARD_BY_ID.giscard, 9001), keywords: [] };
+  const r = resolveCombat({ minions: [fallen], mods: {}, hp: 30 }, { minions: [{ ...makeMinion(CARD_BY_ID.chirac, 9002), atk: 60, hp: 60 }], mods: {}, hp: 30 }, { params: PARAMS, ctx: null, rng: createRng(1), log: true });
+  const summoned = r.log.find((e) => e.e === 'stats' && r.log.some((x) => x.e === 'invocation' && x.unit.cardId === 'chaise_vide' && x.unit.uid === e.uid));
+  assert.ok(summoned && summoned.e === 'stats' && summoned.atk === chair.atk, 'la même attaque en combat');
+});
+
 test('un effet de combat n\'emploie que ce que le combat sait jouer : rien ne s\'y perd sans bruit', () => {
   const lost = allEffects().filter(({ effect }) => COMBAT_TRIGGERS.includes(effect.when) && !IN_COMBAT[effect.do]);
   assert.deepEqual(lost.map(({ owner, effect }) => `${owner} : ${effect.when} → ${effect.do}`), []);
