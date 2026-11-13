@@ -395,7 +395,7 @@ export const CASSEROLES: Casserole[] = [
     hp: 1,
     forgetsAll: true,
     citation: 'Je n\'ai pas de compte Facebook.',
-    blague: '« Les banques sont toutes détenues par des juifs » : Mediapart ressort ses messages Messenger de 2013. Lui n\'a « pas de compte Facebook ». Juste la même faute à « Rotschild » sur son Twitter et sur Messenger, à deux minutes d\'écart. Le peuple oublie tout : ni vu ni connu.',
+    blague: 'Mediapart lui attribue des messages Messenger de 2013 : « Les banques sont toutes détenues par des juifs ». Lui n\'a « pas de compte Facebook ». À 22 h 50, son Twitter écrit « Banque Rotschild » ; à 22 h 52, le Messenger qu\'on lui prête fait la même faute. Le peuple oublie tout : ni vu ni connu.',
     fait: 'Le 6 octobre 2026, au siège du RN, Bardella déclare : « J\'ai une page qui est gérée par le service de communication du parti, mais je n\'ai pas de compte Facebook. » Mediapart lui attribue des messages antisémites envoyés sur Messenger en 2013, depuis un compte que Meta nomme « Jordan Bardella ». Le 9 octobre, le Canard enchaîné affirme que les données d\'un de ses anciens comptes militants ont été effacées entre le 28 septembre et le 2 octobre 2026. Le même jour, Libération affirme qu\'un compte Facebook lié à une de ses adresses Hotmail personnelles existe toujours.',
     statut: 'Contesté et non jugé au 4 novembre 2026. Bardella nie être l\'auteur des messages et le RN nie toute connexion ou suppression. Sa plainte en diffamation contre Mediapart, avec constitution de partie civile, a été confirmée par le parquet de Paris le 30 septembre 2026. Ses plaintes pour faux et usage de faux (annoncée le 1er octobre) et contre le Canard enchaîné (annoncée le 9 octobre) n\'ont pas de dépôt confirmé.',
     verifie: true,
