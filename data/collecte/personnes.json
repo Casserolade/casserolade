@@ -628,5 +628,40 @@
   "id": "lapix",
   "name": "Anne-Sophie Lapix",
   "group": "animateur"
+ },
+ {
+  "id": "hassan",
+  "name": "Rima Hassan",
+  "group": "insoumis"
+ },
+ {
+  "id": "borne",
+  "name": "Élisabeth Borne",
+  "group": "macronie"
+ },
+ {
+  "id": "barnier",
+  "name": "Michel Barnier",
+  "group": "republicains"
+ },
+ {
+  "id": "juppe",
+  "name": "Alain Juppé",
+  "group": "republicains"
+ },
+ {
+  "id": "riner",
+  "name": "Teddy Riner",
+  "group": "civile"
+ },
+ {
+  "id": "strauss_kahn",
+  "name": "Dominique Strauss-Kahn",
+  "group": "socialistes"
+ },
+ {
+  "id": "giscard",
+  "name": "Valéry Giscard d'Estaing",
+  "group": "civile"
  }
 ]

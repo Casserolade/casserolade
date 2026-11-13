@@ -1664,6 +1664,69 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Je suis né en 1989, l'année du bicentenaire de la Révolution."
     ]
   },
+  "hassan": {
+    "casserole": [
+      "Le Hamas a une action légitime",
+      "Une explication n'est pas une justification"
+    ],
+    "heros": [
+      "Le Hamas a une action légitime"
+    ],
+    "celebration": [
+      "Une explication n'est pas une justification",
+      "Tremblez. Ce n'est qu'un début."
+    ],
+    "pose": [
+      "Tremblez. Ce n'est qu'un début."
+    ]
+  },
+  "borne": {
+    "celebration": [
+      "Sur le fondement de l'article 49 alinéa 3 de la Constitution, j'engage la responsabilité de mon gouvernement sur l'ensemble du projet de loi de financement rectificative de la Sécurité sociale pour 2023",
+      "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire"
+    ],
+    "pose": [
+      "Sur le fondement de l'article 49 alinéa 3 de la Constitution, j'engage la responsabilité de mon gouvernement sur l'ensemble du projet de loi de financement rectificative de la Sécurité sociale pour 2023",
+      "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire"
+    ]
+  },
+  "barnier": {
+    "pose": [
+      "Vous me permettrez d'ajouter ma propre valeur ajoutée",
+      "Nous devons et nous allons davantage agir que parler, pour trouver partout les solutions qui marchent",
+      "J'arrive avec beaucoup d'humilité"
+    ],
+    "celebration": [
+      "Vous me permettrez d'ajouter ma propre valeur ajoutée",
+      "J'arrive avec beaucoup d'humilité"
+    ],
+    "mort": [
+      "La censure rendra tout plus difficile et plus grave"
+    ],
+    "casserole": [
+      "La censure rendra tout plus difficile et plus grave"
+    ]
+  },
+  "juppe": {
+    "pose": [
+      "Je suis droit dans mes bottes et je crois en la France"
+    ],
+    "heros": [
+      "Je suis droit dans mes bottes et je crois en la France"
+    ],
+    "casserole": [
+      "Pour moi, il est trop tard",
+      "Je suis droit dans mes bottes et je crois en la France"
+    ],
+    "mort": [
+      "Pour moi, il est trop tard",
+      "Je confirme une bonne fois pour toutes que je ne serai pas candidat à la présidence de la République",
+      "Quel gâchis !"
+    ],
+    "celebration": [
+      "Quel gâchis !"
+    ]
+  },
   "praud": {
     "achat": [
       "Il y a beaucoup d'immigration en ce moment. Est-ce que c'est les personnes qui n'ont pas les mêmes conditions d'hygiène […] ?",
@@ -2537,30 +2600,6 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
     ],
     "heros": [
       "C'est à la fois vertigineux et très enthousiasmant."
-    ]
-  },
-  "hassan": {
-    "pose": [
-      "Tremblez. Ce n'est qu'un début."
-    ],
-    "celebration": [
-      "Tremblez. Ce n'est qu'un début."
-    ]
-  },
-  "barnier": {
-    "pose": [
-      "J'arrive avec beaucoup d'humilité"
-    ],
-    "celebration": [
-      "J'arrive avec beaucoup d'humilité"
-    ]
-  },
-  "borne": {
-    "pose": [
-      "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire"
-    ],
-    "celebration": [
-      "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire"
     ]
   }
 };

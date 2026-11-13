@@ -1853,6 +1853,56 @@
     "source": "https://commons.wikimedia.org/wiki/File:Yann_Barth%C3%A8s.jpg"
    },
    "visages": {
+    "aie": {
+     "atlas": "personnages/barthes.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 318,
+       "h": 381
+      },
+      "machoire": {
+       "x": 322,
+       "y": 0,
+       "w": 173,
+       "h": 95,
+       "pose": [
+        69.0,
+        286.0
+       ],
+       "pivot": [
+        67.6,
+        9.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       98.6,
+       190.6,
+       29.6
+      ],
+      "oeil_d": [
+       179.6,
+       190.6,
+       33.9
+      ],
+      "bouche": [
+       136.6,
+       295.3
+      ],
+      "menton": [
+       135.6,
+       367.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://populaction.com/yann-barthes-une-figure-emblematique-de-la-television-francaise/"
+     }
+    },
     "choc": {
      "atlas": "personnages/barthes.choc.webp",
      "pieces": {
@@ -3215,6 +3265,158 @@
     "auteur": "Benoît Granier",
     "licence": "Licence Ouverte",
     "source": "https://commons.wikimedia.org/wiki/File:La_Première_ministre_française_Élisabeth_Borne_(cropped).jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/borne.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 280,
+       "h": 356
+      },
+      "machoire": {
+       "x": 284,
+       "y": 0,
+       "w": 183,
+       "h": 90,
+       "pose": [
+        61.0,
+        266.0
+       ],
+       "pivot": [
+        109.5,
+        11.2
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       115.2,
+       175.4,
+       43.0
+      ],
+      "oeil_d": [
+       215.9,
+       175.4,
+       37.4
+      ],
+      "bouche": [
+       170.5,
+       277.2
+      ],
+      "menton": [
+       171.7,
+       344.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.closermag.fr/politique/elisabeth-borne-ce-surnom-trouve-par-ses-collaborateurs-qui-ne-doit-pas-la-faire-998861"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/borne.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 283,
+       "h": 353
+      },
+      "machoire": {
+       "x": 287,
+       "y": 0,
+       "w": 153,
+       "h": 81,
+       "pose": [
+        47.0,
+        272.0
+       ],
+       "pivot": [
+        66.6,
+        10.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       65.0,
+       170.9,
+       38.5
+      ],
+      "oeil_d": [
+       164.3,
+       170.9,
+       43.1
+      ],
+      "bouche": [
+       113.6,
+       282.1
+      ],
+      "menton": [
+       117.9,
+       341.8
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.midilibre.fr/2022/12/12/video-pourquoi-avez-vous-peur-du-debat-elisabeth-borne-provoque-un-fou-rire-a-lassemblee-nationale-10863478.php"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/borne.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 323,
+       "h": 391
+      },
+      "machoire": {
+       "x": 327,
+       "y": 0,
+       "w": 196,
+       "h": 107,
+       "pose": [
+        66.0,
+        273.0
+       ],
+       "pivot": [
+        88.2,
+        17.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       92.6,
+       198.5,
+       40.1
+      ],
+      "oeil_d": [
+       197.6,
+       198.5,
+       43.8
+      ],
+      "bouche": [
+       154.2,
+       290.9
+      ],
+      "menton": [
+       159.9,
+       366.6
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://peopleauquotidien.com/actualites/elizabeth-borne-sa-crise-de-rire-en-pleine-assemblee/"
+     }
+    }
    }
   },
   "bouamrane": {
@@ -8223,48 +8425,48 @@
       "tete": {
        "x": 0,
        "y": 0,
-       "w": 280,
-       "h": 355
+       "w": 388,
+       "h": 380
       },
       "machoire": {
-       "x": 284,
+       "x": 392,
        "y": 0,
-       "w": 194,
-       "h": 106,
+       "w": 207,
+       "h": 105,
        "pose": [
-        23.0,
-        249.0
+        95.0,
+        275.0
        ],
        "pivot": [
-        58.4,
-        11.4
+        103.7,
+        9.9
        ]
       }
      },
      "ancres": {
       "oeil_g": [
-       38.1,
-       173.5,
-       33.6
+       147.0,
+       200.5,
+       41.1
       ],
       "oeil_d": [
-       129.0,
-       173.5,
-       41.0
+       247.8,
+       200.5,
+       40.6
       ],
       "bouche": [
-       81.4,
-       260.4
+       198.7,
+       284.9
       ],
       "menton": [
-       77.9,
-       343.0
+       197.2,
+       368.0
       ]
      },
      "credits": {
       "auteur": null,
       "licence": null,
-      "source": "https://www.youtube.com/watch?v=qa7GQLcmT20"
+      "source": "https://www.youtube.com/channel/UC5Ig1XQWgmXdPg46qlU_kqw"
      }
     }
    }
@@ -10289,6 +10491,158 @@
     "auteur": "European Union",
     "licence": "European Parliament",
     "source": "https://commons.wikimedia.org/wiki/File:Rima_Hassan_MEP_(2025).jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/hassan.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 375,
+       "h": 428
+      },
+      "machoire": {
+       "x": 379,
+       "y": 0,
+       "w": 222,
+       "h": 108,
+       "pose": [
+        72.0,
+        242.0
+       ],
+       "pivot": [
+        93.2,
+        17.2
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       133.7,
+       165.8,
+       39.3
+      ],
+      "oeil_d": [
+       226.9,
+       165.8,
+       42.0
+      ],
+      "bouche": [
+       165.2,
+       259.2
+      ],
+      "menton": [
+       160.0,
+       336.7
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.brut.media/fr/articles/l-eurodeputee-rima-hassan-en-garde-a-vue-pour-apologie-du-terrorisme"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/hassan.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 261,
+       "h": 348
+      },
+      "machoire": {
+       "x": 265,
+       "y": 0,
+       "w": 196,
+       "h": 98,
+       "pose": [
+        4.0,
+        238.0
+       ],
+       "pivot": [
+        59.3,
+        12.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       47.6,
+       154.5,
+       33.2
+      ],
+      "oeil_d": [
+       134.2,
+       154.5,
+       42.0
+      ],
+      "bouche": [
+       63.3,
+       250.3
+      ],
+      "menton": [
+       49.7,
+       322.1
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.ledauphine.com/politique/2025/03/05/des-eurodeputes-demandent-la-levee-de-l-immunite-parlementaire-de-rima-hassan"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/hassan.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 360,
+       "h": 422
+      },
+      "machoire": {
+       "x": 364,
+       "y": 0,
+       "w": 209,
+       "h": 102,
+       "pose": [
+        83.0,
+        258.0
+       ],
+       "pivot": [
+        114.9,
+        10.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       156.4,
+       181.7,
+       38.5
+      ],
+      "oeil_d": [
+       246.1,
+       181.7,
+       38.3
+      ],
+      "bouche": [
+       197.9,
+       268.7
+      ],
+      "menton": [
+       200.5,
+       349.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://peopleauquotidien.com/celebrites/rima-hassan-denonce-un-harcelement-judiciaire-et-politique-va-t-elle-rester-a-lfi/"
+     }
+    }
    }
   },
   "hidalgo": {
@@ -10946,6 +11300,56 @@
       "licence": null,
       "source": "https://www.ici.fr/normandie/seine-maritime-76/timothee-houssin-m-a-aide-dans-mes-activites-politiques-nationales-reconnait-l-ex-eurodepute-normand-rn-nicolas-bay-7821300"
      }
+    },
+    "rire": {
+     "atlas": "personnages/houssin.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 270,
+       "h": 381
+      },
+      "machoire": {
+       "x": 274,
+       "y": 0,
+       "w": 200,
+       "h": 98,
+       "pose": [
+        29.0,
+        280.0
+       ],
+       "pivot": [
+        87.9,
+        10.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       68.1,
+       200.3,
+       38.3
+      ],
+      "oeil_d": [
+       166.3,
+       200.3,
+       40.5
+      ],
+      "bouche": [
+       116.9,
+       290.9
+      ],
+      "menton": [
+       119.3,
+       365.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://actu.fr/normandie/les-andelys_27016/affaire-des-assistants-parlementaires-europeens-du-fn-le-depute-de-leure-timothee-houssin-devant-la-justice_61714559.html"
+     }
     }
    }
   },
@@ -11250,6 +11654,56 @@
       "licence": null,
       "source": "https://atlantico.fr/article/rdv/jadot-met-la-gauche-en-colere-pecresse-decourage-la-droite-macron-agace-les-contribuables-veronique-reille-soult"
      }
+    },
+    "choc": {
+     "atlas": "personnages/jadot.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 256,
+       "h": 352
+      },
+      "machoire": {
+       "x": 260,
+       "y": 0,
+       "w": 192,
+       "h": 99,
+       "pose": [
+        52.0,
+        252.0
+       ],
+       "pivot": [
+        146.2,
+        14.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       127.1,
+       167.9,
+       38.6
+      ],
+      "oeil_d": [
+       212.4,
+       167.9,
+       31.4
+      ],
+      "bouche": [
+       198.2,
+       266.1
+      ],
+      "menton": [
+       199.7,
+       338.5
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.lepoint.fr/politique/municipales-a-paris-yannick-jadot-dans-le-lac-aux-requins-21-01-2025-2580419_20.php"
+     }
     }
    }
   },
@@ -11503,6 +11957,158 @@
     "auteur": "Florence Cassisi",
     "licence": "CC BY 4.0",
     "source": "https://commons.wikimedia.org/wiki/File:Alain_Juppé_à_Québec_(cropped_3).jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/juppe.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 259,
+       "h": 300
+      },
+      "machoire": {
+       "x": 263,
+       "y": 0,
+       "w": 204,
+       "h": 101,
+       "pose": [
+        6.0,
+        197.0
+       ],
+       "pivot": [
+        58.1,
+        13.4
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       42.7,
+       109.6,
+       30.6
+      ],
+      "oeil_d": [
+       128.8,
+       109.6,
+       39.8
+      ],
+      "bouche": [
+       64.1,
+       210.4
+      ],
+      "menton": [
+       52.3,
+       283.2
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.20minutes.fr/bordeaux/1761991-20160108-bordeaux-alain-juppe-assure-vouloir-personne-etre-bonifie-age"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/juppe.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 249,
+       "h": 349
+      },
+      "machoire": {
+       "x": 253,
+       "y": 0,
+       "w": 178,
+       "h": 88,
+       "pose": [
+        47.0,
+        250.0
+       ],
+       "pivot": [
+        117.6,
+        9.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       120.2,
+       158.7,
+       38.7
+      ],
+      "oeil_d": [
+       206.3,
+       158.7,
+       34.8
+      ],
+      "bouche": [
+       164.6,
+       259.5
+      ],
+      "menton": [
+       161.0,
+       326.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.lemonde.fr/idees/article/2016/11/22/la-dramatique-erreur-d-alain-juppe_5035723_3232.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/juppe.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 262,
+       "h": 325
+      },
+      "machoire": {
+       "x": 266,
+       "y": 0,
+       "w": 195,
+       "h": 102,
+       "pose": [
+        15.0,
+        223.0
+       ],
+       "pivot": [
+        63.1,
+        12.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       39.4,
+       144.7,
+       31.3
+      ],
+      "oeil_d": [
+       123.5,
+       144.7,
+       38.8
+      ],
+      "bouche": [
+       78.1,
+       235.1
+      ],
+      "menton": [
+       68.0,
+       313.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://enap.ca/evenements/classe-maitre-regard-alain-juppe-echanges-atlantiques"
+     }
+    }
    }
   },
   "kazib": {
@@ -11757,6 +12363,56 @@
       "source": "https://www.nextplz.fr/societe/530275-elle-a-dilapide-largent-des-parisiens-sarah-knafo-brutalement-honnete-sur-anne-hidalgo-en-pleine-campagne-pous-les-municipales"
      }
     },
+    "choc": {
+     "atlas": "personnages/knafo.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 333,
+       "h": 443
+      },
+      "machoire": {
+       "x": 337,
+       "y": 0,
+       "w": 190,
+       "h": 86,
+       "pose": [
+        98.0,
+        280.0
+       ],
+       "pivot": [
+        45.0,
+        10.6
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       117.5,
+       189.5,
+       28.6
+      ],
+      "oeil_d": [
+       196.0,
+       189.5,
+       38.9
+      ],
+      "bouche": [
+       143.0,
+       290.6
+      ],
+      "menton": [
+       143.1,
+       351.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.franceinfo.fr/politique/a-droite-je-fais-partie-de-ceux-qui-aimeraient-qu-on-travaille-tous-ensemble-assure-sarah-knafo_7671139.html"
+     }
+    },
     "rire": {
      "atlas": "personnages/knafo.rire.webp",
      "pieces": {
@@ -11865,48 +12521,48 @@
       "tete": {
        "x": 0,
        "y": 0,
-       "w": 275,
-       "h": 377
+       "w": 285,
+       "h": 381
       },
       "machoire": {
-       "x": 279,
+       "x": 289,
        "y": 0,
-       "w": 177,
+       "w": 188,
        "h": 92,
        "pose": [
-        45.0,
-        285.0
+        46.0,
+        289.0
        ],
        "pivot": [
-        87.4,
-        9.4
+        105.3,
+        9.1
        ]
       }
      },
      "ancres": {
       "oeil_g": [
-       85.8,
-       194.0,
-       37.7
+       98.7,
+       196.8,
+       42.4
       ],
       "oeil_d": [
-       182.8,
-       194.0,
-       38.4
+       197.6,
+       196.8,
+       40.4
       ],
       "bouche": [
-       132.4,
-       294.4
+       151.3,
+       298.1
       ],
       "menton": [
-       132.5,
-       365.0
+       149.6,
+       368.0
       ]
      },
      "credits": {
       "auteur": null,
       "licence": null,
-      "source": "https://presseagence.fr/paris-samuel-lafont-dans-causeur-pourquoi-la-tech-americaine-est-en-pleine-mutation-ideologique/"
+      "source": "https://www.connexionfrance.com/news/local-elections-in-france-new-bids-to-allow-non-eu-foreigners-to-vote/771451"
      }
     },
     "choc": {
@@ -13022,6 +13678,106 @@
       "licence": null,
       "source": "https://www.youtube.com/watch?v=tZxc6JVnNsg"
      }
+    },
+    "choc": {
+     "atlas": "personnages/lecornu.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 270,
+       "h": 380
+      },
+      "machoire": {
+       "x": 274,
+       "y": 0,
+       "w": 162,
+       "h": 84,
+       "pose": [
+        60.0,
+        296.0
+       ],
+       "pivot": [
+        131.0,
+        9.9
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       156.4,
+       201.3,
+       40.4
+      ],
+      "oeil_d": [
+       232.9,
+       201.3,
+       28.2
+      ],
+      "bouche": [
+       191.0,
+       305.9
+      ],
+      "menton": [
+       176.3,
+       366.7
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://fr.news.yahoo.com/sébastien-lecornu-dit-très-lucide-184629786.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/lecornu.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 258,
+       "h": 381
+      },
+      "machoire": {
+       "x": 262,
+       "y": 0,
+       "w": 191,
+       "h": 99,
+       "pose": [
+        30.0,
+        280.0
+       ],
+       "pivot": [
+        71.8,
+        13.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       57.4,
+       203.9,
+       36.8
+      ],
+      "oeil_d": [
+       148.4,
+       203.9,
+       39.4
+      ],
+      "bouche": [
+       101.8,
+       293.7
+      ],
+      "menton": [
+       104.7,
+       367.7
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://tuni-news.com/sebastien-lecornu-le-premier-ministre-reconnait-ne-pas-avoir-fini-le-cursus-mentionne-sur-son-cv/"
+     }
     }
    }
   },
@@ -13335,48 +14091,48 @@
     "tete": {
      "x": 0,
      "y": 0,
-     "w": 275,
+     "w": 245,
      "h": 360
     },
     "machoire": {
-     "x": 279,
+     "x": 249,
      "y": 0,
-     "w": 208,
-     "h": 100,
+     "w": 180,
+     "h": 90,
      "pose": [
-      36.0,
-      251.0
+      29.0,
+      269.0
      ],
      "pivot": [
-      102.7,
-      13.3
+      93.3,
+      11.1
      ]
     }
    },
    "ancres": {
     "oeil_g": [
-     99.5,
-     165.7,
-     37.3
+     76.4,
+     179.2,
+     39.6
     ],
     "oeil_d": [
-     190.3,
-     165.7,
-     37.9
+     169.4,
+     179.2,
+     39.9
     ],
     "bouche": [
-     138.7,
-     264.3
+     122.3,
+     280.1
     ],
     "menton": [
-     138.4,
-     338.0
+     121.9,
+     346.0
     ]
    },
    "credits": {
-    "auteur": "Rama",
-    "licence": "CC BY-SA 2.0 fr",
-    "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG"
+    "auteur": null,
+    "licence": null,
+    "source": "https://www.closermag.fr/people/la-regle-des-trois-l-en-pleine-affaire-pierre-palmade-julien-lepers-sort-de-sa-r-1698535"
    },
    "visages": {
     "aie": {
@@ -13477,6 +14233,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.ladepeche.fr/article/2014/06/26/1907699-incident-julien-lepers-devient-fou-zapping-tele-mercredi.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/lepers.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 237,
+       "h": 349
+      },
+      "machoire": {
+       "x": 241,
+       "y": 0,
+       "w": 205,
+       "h": 98,
+       "pose": [
+        17.0,
+        250.0
+       ],
+       "pivot": [
+        101.9,
+        10.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       72.0,
+       171.0,
+       39.3
+      ],
+      "oeil_d": [
+       165.9,
+       171.0,
+       38.3
+      ],
+      "bouche": [
+       118.9,
+       260.5
+      ],
+      "menton": [
+       119.2,
+       336.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.voici.fr/television/un-peu-moins-de-10-000-euros-par-mois-julien-lepers-se-confie-sur-ses-enormes-droits-d-auteur-818503"
      }
     }
    }
@@ -14087,6 +14893,106 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.lefigaro.fr/politique/sylvain-maillard-la-loi-paris-lyon-marseille-est-une-veritable-avancee-democratique-20260414"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/maillard.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 262,
+       "h": 358
+      },
+      "machoire": {
+       "x": 266,
+       "y": 0,
+       "w": 182,
+       "h": 91,
+       "pose": [
+        20.0,
+        267.0
+       ],
+       "pivot": [
+        63.7,
+        12.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       45.5,
+       183.4,
+       31.4
+      ],
+      "oeil_d": [
+       127.0,
+       183.4,
+       36.3
+      ],
+      "bouche": [
+       83.7,
+       279.0
+      ],
+      "menton": [
+       87.3,
+       347.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.canalplus.com/actualites/la-grande-interview-sylvain-maillard/h/42359245_50213"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/maillard.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 246,
+       "h": 354
+      },
+      "machoire": {
+       "x": 250,
+       "y": 0,
+       "w": 203,
+       "h": 104,
+       "pose": [
+        21.0,
+        250.0
+       ],
+       "pivot": [
+        104.5,
+        10.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       83.8,
+       178.9,
+       38.5
+      ],
+      "oeil_d": [
+       169.0,
+       178.9,
+       37.9
+      ],
+      "bouche": [
+       125.5,
+       260.7
+      ],
+      "menton": [
+       126.1,
+       342.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://rh.newstank.fr/article/view/296221/assemblee-nationale-sylvain-maillard-elu-presidence-groupe-renaissance.html"
      }
     }
    }
@@ -16518,6 +17424,106 @@
       "licence": null,
       "source": "https://www.closermag.fr/politique/douard-philippe-loin-de-matignon-sa-derniere-apparition-surprise-fait-sensation-1142110"
      }
+    },
+    "choc": {
+     "atlas": "personnages/philippe.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 273,
+       "h": 378
+      },
+      "machoire": {
+       "x": 277,
+       "y": 0,
+       "w": 173,
+       "h": 91,
+       "pose": [
+        68.0,
+        285.0
+       ],
+       "pivot": [
+        121.0,
+        11.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       146.8,
+       194.2,
+       42.6
+      ],
+      "oeil_d": [
+       230.5,
+       194.2,
+       32.6
+      ],
+      "bouche": [
+       189.0,
+       296.0
+      ],
+      "menton": [
+       184.5,
+       362.5
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.huffingtonpost.fr/politique/article/edouard-philippe-face-a-la-colere-et-une-popularite-en-berne-defend-la-tenacite-du-gouvernement_126810.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/philippe.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 265,
+       "h": 386
+      },
+      "machoire": {
+       "x": 269,
+       "y": 0,
+       "w": 217,
+       "h": 104,
+       "pose": [
+        22.0,
+        266.0
+       ],
+       "pivot": [
+        109.1,
+        12.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       76.2,
+       193.9,
+       42.2
+      ],
+      "oeil_d": [
+       171.7,
+       193.9,
+       40.3
+      ],
+      "bouche": [
+       131.1,
+       278.0
+      ],
+      "menton": [
+       131.1,
+       357.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.nextplz.fr/people/266983-edouard-philippe-metamorphose-nouveau-visage-surprend-internautes"
+     }
     }
    }
   },
@@ -16721,6 +17727,106 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.youtube.com/watch?v=ZDjcU_emfUs"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/piolle.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 285,
+       "h": 352
+      },
+      "machoire": {
+       "x": 289,
+       "y": 0,
+       "w": 215,
+       "h": 93,
+       "pose": [
+        12.0,
+        257.0
+       ],
+       "pivot": [
+        68.6,
+        11.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       46.4,
+       168.1,
+       34.0
+      ],
+      "oeil_d": [
+       140.6,
+       168.1,
+       41.7
+      ],
+      "bouche": [
+       80.6,
+       268.5
+      ],
+      "menton": [
+       79.1,
+       336.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.ledauphine.com/politique/2023/05/28/isere-metropole-de-grenoble-clash-a-la-metro-eric-piolle-choque"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/piolle.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 284,
+       "h": 365
+      },
+      "machoire": {
+       "x": 288,
+       "y": 0,
+       "w": 208,
+       "h": 96,
+       "pose": [
+        42.0,
+        269.0
+       ],
+       "pivot": [
+        109.3,
+        10.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       102.3,
+       194.5,
+       37.7
+      ],
+      "oeil_d": [
+       199.1,
+       194.5,
+       37.2
+      ],
+      "bouche": [
+       151.3,
+       279.1
+      ],
+      "menton": [
+       153.5,
+       356.0
+      ]
+     },
+     "credits": {
+      "auteur": "Greenbox",
+      "licence": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:20210819_piolle.eric5926b.jpg"
      }
     }
    }
@@ -18038,6 +19144,56 @@
       "licence": null,
       "source": "https://mediasinfosblog.wordpress.com/2022/10/19/coup-de-gueule-de-bruce-toussaint-qui-sest-emporte-face-a-stanislas-rigault-a-propos-de-laffaire-lola-en-direct-sur-bfmtv/"
      }
+    },
+    "rire": {
+     "atlas": "personnages/rigault.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 285,
+       "h": 359
+      },
+      "machoire": {
+       "x": 289,
+       "y": 0,
+       "w": 192,
+       "h": 101,
+       "pose": [
+        42.0,
+        258.0
+       ],
+       "pivot": [
+        89.1,
+        12.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       87.8,
+       186.3,
+       35.6
+      ],
+      "oeil_d": [
+       176.8,
+       186.3,
+       37.2
+      ],
+      "bouche": [
+       131.1,
+       270.3
+      ],
+      "menton": [
+       130.3,
+       351.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.youtube.com/watch?v=sxYwQj6RjxU"
+     }
     }
    }
   },
@@ -18695,6 +19851,56 @@
       "auteur": null,
       "licence": null,
       "source": "https://www.huffingtonpost.fr/politique/article/segolene-royal-en-colere-contre-la-fermeture-des-librairies-et-petits-commerces_172962.html"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/royal.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 322,
+       "h": 419
+      },
+      "machoire": {
+       "x": 326,
+       "y": 0,
+       "w": 173,
+       "h": 89,
+       "pose": [
+        68.0,
+        267.0
+       ],
+       "pivot": [
+        67.9,
+        12.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       100.4,
+       177.7,
+       34.9
+      ],
+      "oeil_d": [
+       185.2,
+       177.7,
+       41.2
+      ],
+      "bouche": [
+       135.9,
+       279.7
+      ],
+      "menton": [
+       134.4,
+       343.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.nextplz.fr/people/517364-segolene-royal-72-ans-huee-par-des-femmes-voilees-en-plein-meeting-casse-toi"
      }
     },
     "rire": {
@@ -20164,6 +21370,56 @@
       "licence": null,
       "source": "https://www.youtube.com/watch?v=qDymWeMYPe0"
      }
+    },
+    "rire": {
+     "atlas": "personnages/thevenoud.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 301,
+       "h": 392
+      },
+      "machoire": {
+       "x": 305,
+       "y": 0,
+       "w": 243,
+       "h": 99,
+       "pose": [
+        14.0,
+        273.0
+       ],
+       "pivot": [
+        106.1,
+        9.2
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       77.0,
+       194.3,
+       36.3
+      ],
+      "oeil_d": [
+       176.7,
+       194.3,
+       40.6
+      ],
+      "bouche": [
+       120.1,
+       282.2
+      ],
+      "menton": [
+       115.0,
+       359.0
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.leparisien.fr/politique/cette-annee-thomas-thevenoud-a-rempli-sa-declaration-d-impots-dans-les-temps-07-06-2016-5864165.php"
+     }
     }
    }
   },
@@ -21180,6 +22436,56 @@
       "licence": null,
       "source": "https://www.lemonde.fr/societe/article/2025/12/18/des-peines-d-ineligibilite-requises-contre-le-maire-d-orange-yann-bompard-et-la-deputee-rn-marie-france-lorho_6658580_3224.html"
      }
+    },
+    "rire": {
+     "atlas": "personnages/yann_bompard.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 268,
+       "h": 342
+      },
+      "machoire": {
+       "x": 272,
+       "y": 0,
+       "w": 214,
+       "h": 105,
+       "pose": [
+        47.0,
+        204.0
+       ],
+       "pivot": [
+        135.9,
+        9.4
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       129.1,
+       126.9,
+       40.7
+      ],
+      "oeil_d": [
+       218.5,
+       126.9,
+       33.1
+      ],
+      "bouche": [
+       182.9,
+       213.4
+      ],
+      "menton": [
+       192.4,
+       294.8
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.ledauphine.com/politique/2022/01/28/yann-bompard-maire-d-orange-mon-pere-reste-mon-premier-conseiller"
+     }
     }
    }
   },
@@ -21283,54 +22589,104 @@
       "source": "https://www.dailymotion.com/video/x8aaqu8"
      }
     },
+    "choc": {
+     "atlas": "personnages/zemmour.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 267,
+       "h": 329
+      },
+      "machoire": {
+       "x": 271,
+       "y": 0,
+       "w": 152,
+       "h": 79,
+       "pose": [
+        36.0,
+        250.0
+       ],
+       "pivot": [
+        50.7,
+        10.3
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       46.5,
+       157.8,
+       34.7
+      ],
+      "oeil_d": [
+       130.1,
+       157.8,
+       38.7
+      ],
+      "bouche": [
+       86.7,
+       260.3
+      ],
+      "menton": [
+       89.6,
+       319.9
+      ]
+     },
+     "credits": {
+      "auteur": null,
+      "licence": null,
+      "source": "https://www.telestar.fr/people/eric-zemmour-en-colere-contre-audrey-crespo-mara-sur-le-plateau-de-lci-video-58483"
+     }
+    },
     "rire": {
      "atlas": "personnages/zemmour.rire.webp",
      "pieces": {
       "tete": {
        "x": 0,
        "y": 0,
-       "w": 224,
-       "h": 289
+       "w": 252,
+       "h": 326
       },
       "machoire": {
-       "x": 228,
+       "x": 256,
        "y": 0,
-       "w": 164,
-       "h": 98,
+       "w": 181,
+       "h": 104,
        "pose": [
-        23.0,
-        190.0
+        12.0,
+        222.0
        ],
        "pivot": [
-        76.3,
-        13.0
+        60.0,
+        11.2
        ]
       }
      },
      "ancres": {
       "oeil_g": [
-       52.8,
-       113.9,
-       32.1
+       34.4,
+       149.7,
+       30.0
       ],
       "oeil_d": [
-       134.8,
-       113.9,
-       33.5
+       115.0,
+       149.7,
+       37.4
       ],
       "bouche": [
-       99.3,
-       203.0
+       72.0,
+       233.2
       ],
       "menton": [
-       99.8,
-       275.9
+       64.7,
+       316.9
       ]
      },
      "credits": {
       "auteur": null,
       "licence": null,
-      "source": "https://www.lessentiel.lu/fr/story/polemique-en-france-eric-zemmour-hilare-sur-une-chanson-ouvertement-raciste-103137967"
+      "source": "https://risibank.fr/media/252855-politic-mariniere-2022-rire-president-eric-zemmour-france-candidat-z0zz-cnews"
      }
     }
    }
@@ -21629,10 +22985,12 @@
    "bardella_brebis_galeuses": "sons/citations/bardella_brebis_galeuses.mp3",
    "bardella_feuilleton": "sons/citations/bardella_feuilleton.mp3",
    "bardella_jmlp_pas_antisemite": "sons/citations/bardella_jmlp_pas_antisemite.mp3",
+   "barnier_barnier_censure_plus_grave": "sons/citations/barnier_barnier_censure_plus_grave.mp3",
    "barthes_barthes_melenchon_fait_des_doigts": "sons/citations/barthes_barthes_melenchon_fait_des_doigts.mp3",
    "bay_bay_racaille": "sons/citations/bay_bay_racaille.mp3",
    "bayrou_etoiles_systeme_solaire": "sons/citations/bayrou_etoiles_systeme_solaire.mp3",
    "bertrand_boite_bertrand": "sons/citations/bertrand_boite_bertrand.mp3",
+   "borne_borne_49_3_retraites": "sons/citations/borne_borne_49_3_retraites.mp3",
    "bouamrane_kb_lfi_colonialiste": "sons/citations/bouamrane_kb_lfi_colonialiste.mp3",
    "cahuzac_jc_bourdin_suisse": "sons/citations/cahuzac_jc_bourdin_suisse.mp3",
    "cahuzac_jc_jamais_eu_de_compte": "sons/citations/cahuzac_jc_jamais_eu_de_compte.mp3",
@@ -21694,6 +23052,8 @@
    "hanouna_boite_hanouna_arrete_de_regarder_le_juif": "sons/citations/hanouna_boite_hanouna_arrete_de_regarder_le_juif.mp3",
    "hanouna_boite_hanouna_il_est_juif": "sons/citations/hanouna_boite_hanouna_il_est_juif.mp3",
    "hanouna_hanouna_adrenochrome": "sons/citations/hanouna_hanouna_adrenochrome.mp3",
+   "hassan_hassan_explication_justification": "sons/citations/hassan_hassan_explication_justification.mp3",
+   "hassan_hassan_hamas_action_legitime": "sons/citations/hassan_hassan_hamas_action_legitime.mp3",
    "hollande_boite_hollande_anglais": "sons/citations/hollande_boite_hollande_anglais.mp3",
    "hollande_fh_affaires_privees": "sons/citations/hollande_fh_affaires_privees.mp3",
    "hollande_fh_gouverner_pleuvoir": "sons/citations/hollande_fh_gouverner_pleuvoir.mp3",
@@ -21713,6 +23073,8 @@
    "jmlp_jeanne_au_secours": "sons/citations/jmlp_jeanne_au_secours.mp3",
    "jmlp_point_de_detail": "sons/citations/jmlp_point_de_detail.mp3",
    "jmlp_socialement_de_gauche": "sons/citations/jmlp_socialement_de_gauche.mp3",
+   "juppe_juppe_pas_candidat": "sons/citations/juppe_juppe_pas_candidat.mp3",
+   "juppe_juppe_trop_tard": "sons/citations/juppe_juppe_trop_tard.mp3",
    "kazib_kazib_inadmissible_olivier": "sons/citations/kazib_kazib_inadmissible_olivier.mp3",
    "knafo_knafo_fils_de": "sons/citations/knafo_knafo_fils_de.mp3",
    "larcher_larcher_ferme_ta_gueule": "sons/citations/larcher_larcher_ferme_ta_gueule.mp3",

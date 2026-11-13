@@ -2132,9 +2132,9 @@
  },
  "lepers": {
   "fichier": "assets/photos/raw/lepers.jpg",
-  "commons": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG",
-  "licence": "CC BY-SA 2.0 fr",
-  "auteur": "Rama",
+  "commons": "https://www.closermag.fr/people/la-regle-des-trois-l-en-pleine-affaire-pierre-palmade-julien-lepers-sort-de-sa-r-1698535",
+  "licence": null,
+  "auteur": null,
   "ratio": 0.275,
   "pixels": 527.786,
   "profil": 0.029,
@@ -2143,7 +2143,15 @@
   "yeux": 0.259,
   "portrait": "assets/photos/base/lepers.jpg",
   "score": 2.01,
-  "name": "Julien Lepers"
+  "name": "Julien Lepers",
+  "ancien": {
+   "recadrage": null,
+   "portrait": "assets/photos/base/lepers.jpg",
+   "commons": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG",
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr"
+  },
+  "recadrage": "assets/photos/base_web/lepers.jpg"
  },
  "braun_pivet": {
   "fichier": "assets/photos/raw/braun_pivet.jpg",
