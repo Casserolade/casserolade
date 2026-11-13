@@ -221,10 +221,13 @@ export class CombatStage {
       case 'mot_cle':
         this.float(event.uid, `${event.gain ? '+' : '−'} ${KEYWORD_RULES[event.keyword].label}`, INFO_COLOR);
         return;
-      case 'effet':
+      case 'effet': {
         this.cards.get(event.uid)?.talk();
-        this.float(event.uid, `${TRIGGER_LABELS[event.when]} !`, INFO_COLOR);
+        // A scandal that splashes its neighbours is no 49.3: it says so, in red.
+        const splash = Boolean(event.casserole) && event.effect.do === 'buff' && event.effect.atk < 0;
+        this.float(event.uid, splash ? 'Scandale !' : `${TRIGGER_LABELS[event.when]} !`, splash ? DAMAGE_COLOR : INFO_COLOR);
         return;
+      }
       case 'mort':
         this.playFall(event.uid);
         return;
@@ -305,7 +308,9 @@ export class CombatStage {
     const card = this.cards.get(uid);
     const label = card && statsChangeLabel(card.atk, card.hp, atk, hp);
     if (!label) return;
-    this.float(uid, label, GAIN_COLOR);
+    // A loss (a scandal that splashes its neighbours) floats in red, a gain in green.
+    const loss = atk <= (card?.atk ?? 0) && hp <= (card?.hp ?? 0);
+    this.float(uid, label, loss ? DAMAGE_COLOR : GAIN_COLOR);
     if (atk >= (card?.atk ?? 0) && hp >= (card?.hp ?? 0)) this.lightAt(uid, (x, y) => this.fx.lights.gain(x, y, GAIN_LIGHT, this.fxScale));
   }
 
