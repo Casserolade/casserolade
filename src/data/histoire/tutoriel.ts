@@ -194,7 +194,7 @@ export const TUTORIEL = {
       permis: ['casserole'],
     },
     scandale: {
-      texte: 'Une deuxième casserole : posez-la sur le politique qui porte déjà la première. **Scandale** ! Pendant deux manches, les défauts de ses casseroles s\'appliquent : ici, 2 de budget en moins par manche, et il ne bouge plus.',
+      texte: 'Une deuxième casserole : posez-la sur le politique qui porte déjà la première. **Scandale** ! Pendant deux manches, les défauts de ses casseroles s\'appliquent : ici, 2 de budget en moins par manche, il ne bouge plus et n\'attaque plus.',
       si: ['deuxieme_casserole'],
       permis: ['deuxieme_casserole'],
     },
