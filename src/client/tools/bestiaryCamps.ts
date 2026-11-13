@@ -1,4 +1,5 @@
 import { CAMP_LABELS } from '#src/client/const/campLabels.ts';
+import { cardFace } from '#src/client/tools/cardFace.ts';
 import type { MinionFace } from '#src/client/tools/shownCard.ts';
 import type { Camp, Card, Casserole } from '#src/engine/types.ts';
 
@@ -26,7 +27,7 @@ export function bestiaryCamps(cards: readonly Card[], casseroles: readonly Casse
       .filter((card) => card.camp === camp && !card.token)
       .sort((a, b) => a.tier - b.tier || a.name.localeCompare(b.name, 'fr'))
       .map((card) => ({
-        face: { cardId: card.id, name: card.name, camp: card.camp, tier: card.tier, atk: card.atk, hp: card.hp, keywords: card.keywords ?? [], effects: card.effects ?? [] },
+        face: cardFace(card),
         casseroles: casseroles.filter((c) => c.owner === card.id).map((c) => c.name),
       })),
   }));
