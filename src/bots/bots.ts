@@ -12,6 +12,8 @@ import { FORCE_CARTES } from '../data/forceCartes.ts';
 import { PERSONNALITES } from '../data/personnalites.ts';
 import type { Personnalite } from '../data/personnalites.ts';
 import { SPELL_BY_ID } from '../data/sorts.ts';
+import { keywordFit } from './keywordFit.ts';
+import { rallyHost } from './rallyHost.ts';
 
 /** « debutant » ne joue jamais à table : il imite un joueur humain qui découvre, pour mesurer les autres. */
 export type BotLevel = 'debutant' | 'facile' | 'moyen' | 'difficile';
@@ -48,6 +50,8 @@ export interface BotState {
    * voisinage, le gel de la boutique, l'ordre de pose.
    */
   combos: boolean;
+  /** Un mot-clé va là où il sert (Ralliement, sort) : pas sur un politique qui l'a déjà, la Polémique pas sur le plus gros. */
+  keywordFit: boolean;
   /** Le facile, distrait certaines manches : le budget qu'il oubliera de dépenser (0 s'il ne l'est pas). */
   forgets: number;
 }
@@ -67,6 +71,8 @@ export interface BotStyle {
   rollDown?: boolean;
   /** Mesure : les combos de casseroles, au difficile par défaut ; `false` les retire pour comparer. */
   combos?: boolean;
+  /** Mesure : les mots-clés posés là où ils servent, avec les combos par défaut ; `false` les rend au plus fort. */
+  keywordFit?: boolean;
 }
 
 export function createBot(level: BotLevel, seed: number, style: BotStyle = {}): BotState {
@@ -94,6 +100,7 @@ export function createBot(level: BotLevel, seed: number, style: BotStyle = {}): 
     place: style.place ?? false,
     rollDown: style.rollDown ?? false,
     combos: style.combos ?? level === 'difficile',
+    keywordFit: style.keywordFit ?? style.combos ?? level === 'difficile',
     forgets: 0,
   };
 }
@@ -777,7 +784,7 @@ function sacrificial(board: Minion[], except?: Minion): Minion | null {
 }
 
 /** La cible d'un ensemble d'effets « cible ». Null : rien de bon à viser. */
-function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxTier?: number): Minion | null {
+function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxTier?: number, fitted = false): Minion | null {
   const aimed = effects.filter((e) => e.to === 'cible');
   if (aimed.length === 0) return null;
   const first = aimed[0];
@@ -797,6 +804,8 @@ function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxT
       // Le Retour réincarne la carte nue, et rejoue son Héritage (13 novembre 2026) : il va à la meilleure carte, pas
       // au politique le plus gonflé.
       if (first.keyword === 'retour' && lacking.length > 0) return bestBareCard(lacking);
+      // Le difficile le pose là où il sert : la Polémique sur une petite attaque, pas sur le plus gros.
+      if (fitted && lacking.length > 0) return lacking.reduce((best, m) => (keywordFit(first.keyword, m) > keywordFit(first.keyword, best) ? m : best));
       return strongest(lacking.length > 0 ? lacking : board, self ?? undefined);
     }
     case 'declencher': {
@@ -832,13 +841,15 @@ function handMove(view: PlayerView, bot: BotState, margin = 3): PlayerAction | n
     // Un Ralliement qui arme (Immunité, Cumul, Retour, « Quand il attaque ») rejoint de préférence celui qui attaque.
     const arms = m.keywords.some((k) => k === 'immunite' || k === 'cumul' || k === 'retour') || m.effects.some((e) => e.when === 'meeting');
     const attackers = view.board.filter((x) => !x.token && x.effects.some((e) => e.when === 'meeting'));
-    const host = (arms ? strongest(attackers) : null) ?? strongest(view.board.filter((x) => !x.token));
+    const host = bot.keywordFit
+      ? rallyHost(view.board, m, view.board.length >= view.boardLimit)
+      : ((arms ? strongest(attackers) : null) ?? strongest(view.board.filter((x) => !x.token)));
     const payoff = view.board.some((x) => x.effects.some((e) => e.when === 'rallie' || e.do === 'buff_par_ralliement')) || (arms && attackers.length > 0);
     if (host && (view.board.length >= view.boardLimit || m.atk + m.hp <= 6 || payoff)) return { t: 'play', uid: m.uid, onto: host.uid };
   }
   if (view.board.length < view.boardLimit) {
     const annonce = m.effects.filter((e) => e.when === 'annonce');
-    const target = targetFor(annonce, view.board, m);
+    const target = targetFor(annonce, view.board, m, undefined, bot.keywordFit);
     if (target) return { t: 'play', uid: m.uid, target: target.uid };
     // Sans bonne cible, une Annonce qui détruit viserait le premier allié, souvent le meilleur : le politique attend.
     const destroys = annonce.some((e) => e.to === 'cible' && (e.do === 'detruire' || e.do === 'sacrifier'));
@@ -882,7 +893,7 @@ function castAction(view: PlayerView, bot: BotState, held: HandSpell): PlayerAct
   if (view.board.length === 0) return null;
   const candidates = view.board.filter((m) => lostSpellReason(spell, m, table) === null);
   if (candidates.length === 0) return null;
-  const target = targetFor(spell.effects, candidates, null, spell.maxTargetTier);
+  const target = targetFor(spell.effects, candidates, null, spell.maxTargetTier, bot.keywordFit);
   if (!target) return null;
   if (spell.effects.some((e) => e.do === 'sacrifier' || e.do === 'detruire') && (target.golden || minionPower(target) > 12)) return null;
   return { t: 'cast', uid: held.uid, target: target.uid };
