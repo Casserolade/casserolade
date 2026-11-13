@@ -17,7 +17,8 @@ import { writeForceTable } from './forceTable.ts';
  * Le camp de la carte est toujours en jeu, puisqu'on ne la voit jamais autrement.
  *   node src/sim/bilan_cartes.ts --games 300 --manches 5,9
  *   node src/sim/bilan_cartes.ts --cartes ndiaye,macron --games 600
- *   node src/sim/bilan_cartes.ts --niveau moyen --manches 5 --games 200 --table src/data/forceCartes.ts   (la table du bot difficile)
+ *   node src/sim/bilan_cartes.ts --niveau moyen --manches 5,9 --games 600 --table src/data/forceCartes.ts   (la table du bot difficile ;
+ *   à 200 parties, son bruit coûtait 0,2 place au difficile, 13 novembre 2026)
  */
 const { values } = parseArgs({
   options: {
