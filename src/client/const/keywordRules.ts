@@ -22,8 +22,8 @@ export const TERM_RULES: Record<string, string> = {
   '49.3': 'Au début du combat.',
   Célébration: 'Après un combat gagné, s\'il a survécu. Chaque Célébration joue ; la Vedette prend la parole.',
   'Droit de réponse': 'Après une défaite. Chaque Droit de réponse joue, même mort au combat ; le plus à gauche prend la parole.',
-  Tract: 'Un sort gratuit : +1/+1 à un politique, plus les améliorations de vos Tracts.',
-  découvrez: 'Choisissez une carte parmi trois. Elle va en main.',
+  Tract: 'Un sort gratuit : +1/+1 à un politique, plus les améliorations de vos Tracts. Joué par un effet, même en combat, il compte comme un sort lancé.',
+  découvrez: 'Choisissez une carte parmi trois. Elle va en main. Né d\'une Fin de tour, le choix attend le recrutement suivant.',
   débauchez: 'Retirez un politique de la boutique et prenez ses stats.',
   Scandale: 'Deux casseroles pas encore oubliées sur le même politique : pendant deux manches, leurs défauts s\'appliquent. Puis le peuple oublie : les défauts s\'en vont, les avantages restent.',
 };
