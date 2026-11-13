@@ -1,9 +1,9 @@
 import type { Camp, CombatResult, Context, Counter, EndOfTurnStep, Hero, HandSpell, HeroMods, Minion, Params, Rng } from './types.ts';
 
-/** Un choix entre trois cartes : serviteurs ou sorts. Les serviteurs proposés sont réservés dans la réserve. */
+/** Un choix entre trois cartes : serviteurs, sorts ou casseroles. Les serviteurs proposés sont réservés dans la réserve. */
 export interface Offer {
   options: string[];
-  kind: 'serviteur' | 'sort';
+  kind: 'serviteur' | 'sort' | 'casserole';
 }
 
 /** Un gain permanent, par camp ou pour tous. */

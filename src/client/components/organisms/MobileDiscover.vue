@@ -4,13 +4,14 @@ import RichText from '#src/client/components/atoms/RichText.vue';
 import ShownCardFace from '#src/client/components/molecules/ShownCardFace.vue';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import { discoverCards } from '#src/client/tools/discoverCards.ts';
+import type { PlayerView } from '#src/engine/game.ts';
 import { shownCardLines } from '#src/client/tools/shownCard.ts';
 
 /**
  * A discovery on a phone: the three cards one under the other, each with its text at a reading size beside it.
  * A touch on one takes it. It is a real choice of the game: nothing to close.
  */
-const props = defineProps<{ choices: string[]; kind: 'serviteur' | 'sort' | null }>();
+const props = defineProps<{ choices: string[]; kind: PlayerView['discoverKind'] }>();
 const emit = defineEmits<{ choose: [index: number] }>();
 
 const chosen = ref<number | null>(null);

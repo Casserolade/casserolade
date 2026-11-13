@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { cardFace } from '../src/client/tools/cardFace.ts';
 import { casseroleFromCard } from '../src/client/tools/casseroleFromCard.ts';
 import { patchNoteSections } from '../src/client/tools/patchNoteSections.ts';
+import { tierChangeLine } from '../src/client/tools/tierChangeLine.ts';
 import { KEYWORD_RULES } from '../src/client/const/keywordRules.ts';
 import { MISES_A_JOUR } from '../src/data/misesAJour.ts';
 import type { CasseroleCard } from '../src/data/misesAJour.ts';
@@ -32,15 +33,26 @@ test('la dernière version est celle du jeu', () => {
 });
 
 test('l\'« après » de la dernière version est le jeu tel qu\'il est : politiques, casseroles, sorts', () => {
-  for (const { after } of latest.cards.cards) assert.ok(same(cardFace(after), cardFace(CARD_BY_ID[after.id])), `${after.id} a changé depuis`);
-  for (const { after } of latest.cards.casseroles) assert.ok(same(after, shownCasserole(CASSEROLE_BY_ID[after.id])), `${after.id} a changé depuis`);
-  for (const { after } of latest.cards.spells) assert.ok(same(after, SPELL_BY_ID[after.id]), `${after.id} a changé depuis`);
+  for (const { before, after } of latest.cards.cards) {
+    if (after) assert.ok(same(cardFace(after), cardFace(CARD_BY_ID[after.id])), `${after.id} a changé depuis`);
+    else assert.equal(CARD_BY_ID[before.id], undefined, `${before.id} n'est pas retiré`);
+  }
+  for (const { before, after } of latest.cards.casseroles) {
+    if (after) assert.ok(same(after, shownCasserole(CASSEROLE_BY_ID[after.id])), `${after.id} a changé depuis`);
+    else assert.equal(CASSEROLE_BY_ID[before.id], undefined, `${before.id} n'est pas retirée`);
+  }
+  for (const { before, after } of latest.cards.spells) {
+    if (after) assert.ok(same(after, SPELL_BY_ID[after.id]), `${after.id} a changé depuis`);
+    else assert.equal(SPELL_BY_ID[before.id], undefined, `${before.id} n'est pas retiré`);
+  }
 });
 
-test('chaque politique nouveau ou retouché dit pourquoi, et rien d\'autre n\'en parle', () => {
-  const ids = latest.cards.cards.map((c) => c.after.id);
-  for (const id of ids) assert.ok(latest.why[id], `${id} sans pourquoi`);
-  for (const id of Object.keys(latest.why)) assert.ok(ids.includes(id), `${id} n'a pas changé`);
+test('chaque politique nouveau, retouché ou retiré dit pourquoi, et le pourquoi ne parle que de ce qui change', () => {
+  const idOf = (change: { before?: { id: string }; after?: { id: string } }) => (change.after ?? change.before)?.id as string;
+  const cards = latest.cards.cards.map(idOf);
+  for (const id of cards) assert.ok(latest.why[id], `${id} sans pourquoi`);
+  const changed = [...cards, ...latest.cards.spells.map(idOf), ...latest.cards.casseroles.map(idOf)];
+  for (const id of Object.keys(latest.why)) assert.ok(changed.includes(id), `${id} n'a pas changé`);
 });
 
 test('un mot-clé des règles de la dernière version a le texte du jeu', () => {
@@ -80,6 +92,16 @@ test('patchNoteSections : les nouveaux à part des retouchés, chacun avec son p
   assert.ok(sections.changedCards.every((c) => c.before && c.why));
   assert.ok(sections.changedCards.some((c) => c.key === 'giscard'));
   assert.equal(sections.newCasseroles.length + sections.changedCasseroles.length, latest.cards.casseroles.length);
-  assert.ok(sections.newCasseroles.every((c) => !c.before && c.after.kind === 'casserole'));
-  assert.deepEqual(sections.spells.map((s) => s.key), ['grand_menage']);
+  assert.ok(sections.newCasseroles.every((c) => !c.before && c.after?.kind === 'casserole'));
+  assert.deepEqual(sections.newSpells.map((s) => s.key).sort(), ['a_la_une', 'fuite_dans_la_presse', 'grand_menage']);
+  assert.ok(sections.changedSpells.some((s) => s.key === 'tribune_libre' && s.before && !s.after), 'un sort retiré : avant seulement');
+});
+
+test('tierChangeLine : un changement d\'échelon se lit en clair, rien sinon', () => {
+  assert.equal(tierChangeLine({ tier: 3 }, { tier: 2 }), 'Échelon 3 → 2');
+  assert.equal(tierChangeLine({ tier: 4 }, { tier: 4 }), undefined);
+  assert.equal(tierChangeLine(undefined, { tier: 2 }), undefined);
+  assert.equal(tierChangeLine({ tier: 2 }, undefined), undefined);
+  const censure = patchNoteSections(latest).changedSpells.find((s) => s.key === 'motion_de_censure');
+  assert.equal(censure?.why, 'Échelon 3 → 2');
 });

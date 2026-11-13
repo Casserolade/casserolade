@@ -4,9 +4,10 @@ import CardGlossary from '#src/client/components/molecules/CardGlossary.vue';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import ShownCardFace from '#src/client/components/molecules/ShownCardFace.vue';
 import { discoverCards } from '#src/client/tools/discoverCards.ts';
+import type { PlayerView } from '#src/engine/game.ts';
 
 /** A real choice: three big cards in the middle of a darkened table. One click takes one; nothing to close. */
-const props = defineProps<{ choices: string[]; kind: 'serviteur' | 'sort' | null }>();
+const props = defineProps<{ choices: string[]; kind: PlayerView['discoverKind'] }>();
 const emit = defineEmits<{ choose: [index: number] }>();
 
 const chosen = ref<number | null>(null);

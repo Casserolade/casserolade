@@ -236,6 +236,10 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'decouvrir': {
       const again = golden ? ', deux fois' : '';
       if (e.quoi === 'sort') return `**découvrez** un sort${again}`;
+      if (e.quoi === 'casserole') {
+        const what = e.genre === 'ridicule' ? 'un Ridicule' : e.genre === 'affaire' ? 'une Affaire' : 'une casserole';
+        return `**découvrez** ${what}${e.proprietaires === 'vos_politiques' ? ' de l\'un de vos politiques' : ''}${again}`;
+      }
       const tier = e.echelon === 1 ? ' de l\'échelon au-dessus du vôtre' : e.echelon === 0 ? ' de votre échelon' : '';
       if (e.declencheur) return `**découvrez** un politique à **${TRIGGER_WORD[e.declencheur] ?? e.declencheur}**${tier}${again}`;
       return `**découvrez** un politique${e.camp ? ` ${CAMP_OF[e.camp]}` : ''}${tier}${again}`;

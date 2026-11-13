@@ -235,7 +235,6 @@ test('an effect that tells its power keeps it: a golden Ralliement on a plain ho
 test('a relaunch spell only lands on a minion that has something to relaunch', () => {
   const board = [makeMinion(CARD_BY_ID.hidalgo, 1), makeMinion(CARD_BY_ID.bertrand, 2), makeMinion(CARD_BY_ID.gueant, 3)];
   assert.deepEqual(spellTargets({ uid: 9, spellId: 'seconde_deliberation' }, board), [2]);
-  assert.deepEqual(spellTargets({ uid: 9, spellId: 'tribune_libre' }, board), []);
 });
 
 test('speechForEvent draws a line that can be heard now, or a plain bubble when none can', () => {

@@ -318,6 +318,9 @@ function spellWorth(spell: Spell, view: PlayerView, bot: BotState | null): numbe
       case 'carte':
         return sum + e.count * (e.card === 'tract' ? (view.tract.atk + view.tract.hp) * 1.5 : 4);
       case 'decouvrir':
+        // Une casserole découverte vaut une casserole achetée et choisie, s'il y a un politique pour la porter ; celle de
+        // son propriétaire vaut son bonus en plus (« À la une »).
+        if (e.quoi === 'casserole') return sum + (board.some((m) => !m.token) ? 3 * BUDGET_WORTH + (e.proprietaires ? 3 : 0) : 0);
         // Une découverte vaut un achat, et mieux qu'un achat : on choisit.
         return sum + 7 + (e.echelon ?? 0) * 3 + (e.declencheur ? engines('aura') / 2 : 0);
       case 'actualisations_gratuites':
@@ -495,19 +498,25 @@ function scandalCost(c: Casserole, m: Minion, view: PlayerView): number {
  * gros, et un Bracelet (en main, ou acheté juste avant, `braceletPrice`) ramène le scandale qu'elle ferait à son prix.
  */
 function casseroleTarget(view: PlayerView, c: Casserole, bot: BotState, braceletPrice = braceletInHand(view) ? BUDGET_WORTH : Infinity): Minion | null {
-  let best: Minion | null = null;
-  let bestScore = 1 + (1 - bot.casseroleTaste) * 3;
+  const fit = bestCasseroleFit(view, c, bot, braceletPrice);
+  return fit.score > 1 + (1 - bot.casseroleTaste) * 3 ? fit.target : null;
+}
+
+/** Le politique qui tirerait le plus de cette casserole, et ce qu'elle lui rapporterait, scandale déduit. */
+function bestCasseroleFit(view: PlayerView, c: Casserole, bot: BotState, braceletPrice = braceletInHand(view) ? BUDGET_WORTH : Infinity): { target: Minion | null; score: number } {
+  let target: Minion | null = null;
+  let score = -Infinity;
   for (const m of view.board) {
     if (m.token) continue;
     const scandal = bot.combos ? Math.min(scandalCost(c, m, view), braceletPrice) : scandalCost(c, m, view);
     const doubling = bot.combos ? doublingGain(view, m, c) * 0.8 : 0;
-    const score = casseroleValue(c, m, view) + doubling - scandal + minionPower(m) * 0.1;
-    if (score > bestScore) {
-      best = m;
-      bestScore = score;
+    const value = casseroleValue(c, m, view) + doubling - scandal + minionPower(m) * 0.1;
+    if (value > score) {
+      target = m;
+      score = value;
     }
   }
-  return best;
+  return { target, score };
 }
 
 // Les combos du difficile (10 novembre 2026) : ce que les humains font des casseroles, et que les bots ne faisaient pas.
@@ -975,7 +984,10 @@ function discoverChoice(view: PlayerView, bot: BotState): PlayerAction {
   let bestI = 0;
   let bestScore = -Infinity;
   options.forEach((id, i) => {
-    const s = view.discoverKind === 'sort' ? spellWorth(SPELL_BY_ID[id], view, bot) : cardScore(CARD_BY_ID[id], view, bot);
+    const s =
+      view.discoverKind === 'sort' ? spellWorth(SPELL_BY_ID[id], view, bot)
+      : view.discoverKind === 'casserole' ? bestCasseroleFit(view, CASSEROLE_BY_ID[id], bot).score
+      : cardScore(CARD_BY_ID[id], view, bot);
     if (s > bestScore) {
       bestScore = s;
       bestI = i;

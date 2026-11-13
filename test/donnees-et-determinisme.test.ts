@@ -64,7 +64,7 @@ function effectProblems(owner: string, e: Effect): string[] {
       if (!(e.keyword in KEYWORDS)) out.push(`${at} : mot-clé inconnu ${e.keyword}`);
       break;
     case 'decouvrir':
-      if (!['serviteur', 'sort'].includes(e.quoi)) out.push(`${at} : découverte de ${e.quoi}`);
+      if (!['serviteur', 'sort', 'casserole'].includes(e.quoi)) out.push(`${at} : découverte de ${e.quoi}`);
       if (e.declencheur && !(e.declencheur in TRIGGERS)) out.push(`${at} : déclencheur de découverte inconnu ${e.declencheur}`);
       break;
     case 'compteur':

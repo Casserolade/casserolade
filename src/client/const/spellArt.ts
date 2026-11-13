@@ -17,9 +17,9 @@ export const SPELL_ART: Record<string, SpellArt> = {
   primaire: { color: '#5a5a6e', icon: 'skull' },
   motion_de_synthese: { color: '#d04d8a', icon: 'cards' },
   matinale: { color: '#2b7fd0', icon: 'refresh' },
-  temps_de_parole: { color: '#c0582a', icon: 'mic' },
-  loi_de_finances: { color: '#c8901a', icon: 'column' },
   bracelet_electronique: { color: '#4b5a78', icon: 'bracelet' },
+  fuite_dans_la_presse: { color: '#8a5a2b', icon: 'pan' },
+  a_la_une: { color: '#d8343c', icon: 'paper' },
   immunite_parlementaire: { color: '#d9a400', icon: 'shield' },
   debauchage: { color: '#2a4aa8', icon: 'magnet' },
   campagne_de_terrain: { color: '#c0582a', icon: 'megaphone' },
@@ -31,11 +31,15 @@ export const SPELL_ART: Record<string, SpellArt> = {
   petite_phrase: { color: '#3aa040', icon: 'speech' },
   remaniement: { color: '#d9a400', icon: 'sparkle' },
   seconde_deliberation: { color: '#7a3fc0', icon: 'refresh' },
-  tribune_libre: { color: '#4b4b63', icon: 'skull' },
   cumul_des_mandats: { color: '#c0582a', icon: 'chevrons' },
   congres: { color: '#2a4aa8', icon: 'column' },
   grand_debat: { color: '#d8343c', icon: 'megaphone' },
   conseil_des_ministres: { color: '#2b7fd0', icon: 'bolt' },
+  grand_menage: { color: '#4b5a78', icon: 'broom' },
+  // Retirés le 13 novembre 2026 : la page des mises à jour les montre encore.
+  temps_de_parole: { color: '#c0582a', icon: 'mic' },
+  loi_de_finances: { color: '#c8901a', icon: 'column' },
+  tribune_libre: { color: '#4b4b63', icon: 'skull' },
 };
 
 export const DEFAULT_SPELL_ART: SpellArt = { color: '#5a5a6e', icon: 'sparkle' };

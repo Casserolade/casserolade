@@ -10,11 +10,8 @@ import { CARTES as CARTES_0_3_9 } from './misesAJour/0.3.9.ts';
 /** Une carte de casserole telle qu'elle se montre : sa mécanique, sans son fait ni son statut. */
 export type CasseroleCard = Omit<Casserole, 'blague' | 'citation' | 'fait' | 'statut' | 'verifie'>;
 
-export interface CardChange<T> {
-  /** Absente : la carte est nouvelle. */
-  before?: T;
-  after: T;
-}
+/** Une carte qui arrive (après seulement), qui change (avant et après), ou qui part (avant seulement). */
+export type CardChange<T> = { before?: T; after: T } | { before: T; after?: undefined };
 
 export interface VersionCards {
   cards: CardChange<Card>[];
@@ -35,7 +32,7 @@ export interface PatchNote {
   title: string;
   summary: string[];
   rules: RuleChange[];
-  /** Pourquoi une carte change, en une ligne, par identifiant de politique. */
+  /** Pourquoi une carte change, en une ligne, par identifiant de politique, de sort ou de casserole. */
   why: Record<string, string>;
   /** Ce que les casseroles retouchées ont en commun. */
   casserolesWhy?: string;
@@ -53,7 +50,9 @@ export const MISES_A_JOUR: PatchNote[] = [
       'Nouveau mot-clé, le Coup de balai : l\'attaque touche aussi les voisins de la cible. Le placement compte.',
       'Chaque casserole a désormais un défaut qui coûte, et un scandale peut éclabousser ses voisins.',
       'De Gaulle, Giscard, Chirac, Mitterrand et Macron passent au niveau des chefs de camp.',
-      'Quatre nouveaux politiques, Rima Hassan, Élisabeth Borne, Michel Barnier et Alain Juppé, et huit casseroles.',
+      'Quatre nouveaux politiques, Rima Hassan, Élisabeth Borne, Michel Barnier et Alain Juppé. Dix-huit casseroles, dont dix pour le RN, Reconquête et les Écologistes, qui en avaient le moins.',
+      'Les casseroles sortent toutes à égalité en boutique. Deux nouveaux sorts et Francis Lalanne en font découvrir.',
+      'Les sorts sont répartis de l\'échelon 1 au 6, selon leur force. Trois sorts qui ne servaient presque à rien sont retirés.',
     ],
     rules: [
       {
@@ -69,6 +68,12 @@ export const MISES_A_JOUR: PatchNote[] = [
       },
       { term: 'L\'éclaboussure', after: 'Pendant son scandale, un politique éclabousse ses voisins : −2/−2 en combat, pour les casseroles qui le disent.' },
       { term: 'Après l\'oubli du peuple', after: 'Un nouveau déclencheur : quand le scandale d\'un allié s\'efface, par le temps ou par le Bracelet électronique.' },
+      {
+        term: 'La casserole de la boutique',
+        before: 'Les affaires « à la une » sortaient trois fois plus souvent, et une fois sur deux, celles de vos politiques.',
+        after: 'Chaque casserole de la partie sort à égalité. Pour celles de vos politiques, il y a le sort « À la une ».',
+      },
+      { term: 'Découvrez une casserole', after: 'Trois casseroles de la partie au choix, jamais une que vous avez déjà. Elle arrive en main, gratuite.' },
     ],
     why: {
       hassan: 'Chaque casserole d\'un allié lui rapporte deux Tracts.',
@@ -87,6 +92,13 @@ export const MISES_A_JOUR: PatchNote[] = [
       giscard: 'Sa Chaise vide avait ses PV et 0 d\'attaque ; elle a désormais ses stats : elle tient ce qu\'il tenait.',
       chirac: 'Candidat quatre fois, il revient toujours : les Annonces se rejouent à chaque fin de tour.',
       mitterrand: '« Je ne vous quitterai pas » : son Héritage reste pour de bon.',
+      lalanne: 'Un ridicule en attire un autre : il découvre un Ridicule.',
+      fuite_dans_la_presse: 'Une fuite, et l\'affaire sort : trois casseroles au choix.',
+      a_la_une: 'Vos politiques font la une : leurs casseroles d\'abord, avec leur bonus de propriétaire.',
+      grand_menage: 'Le Coup de balai, sur le politique de votre choix.',
+      temps_de_parole: 'Retiré : il ne changeait presque rien à une partie.',
+      loi_de_finances: 'Retiré : il ne changeait presque rien à une partie.',
+      tribune_libre: 'Retiré : il ne changeait presque rien à une partie.',
     },
     casserolesWhy: 'un vrai défaut pour chacune, qui coûte à tout porteur.',
     cards: CARTES_0_3_9,

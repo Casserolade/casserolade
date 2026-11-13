@@ -667,7 +667,7 @@ export interface PlayerView {
   casseroleCost: number | null;
   /** Le choix en cours : trois serviteurs ou trois sorts. */
   discover: string[] | null;
-  discoverKind: 'serviteur' | 'sort' | null;
+  discoverKind: 'serviteur' | 'sort' | 'casserole' | null;
   /** Ce que donne un Tract. */
   tract: { atk: number; hp: number };
   counters: Record<Counter, number>;
