@@ -262,7 +262,8 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
       // Barnier, censuré par son propre 49.3 : « … et meurt ».
       return self ? 'meurt' : `détruisez ${dest}`;
     case 'sacrifier':
-      return `détruisez ${dest} et **découvrez** ${twice}un politique de son camp`;
+      // L'échelon se dit, comme pour toute découverte : celui du joueur, pas celui du politique détruit.
+      return `détruisez ${dest} et **découvrez** ${twice}un politique de son camp${e.echelon === 1 ? ', de l\'échelon au-dessus du vôtre' : ', de votre échelon'}`;
     case 'declencher':
       return `déclenche ${twice}${e.trigger === 'fin_tour' ? 'la ' : 'l\''}**${TRIGGER_WORD[e.trigger]}** ${of(dest)}`;
     case 'doubler':
