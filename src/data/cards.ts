@@ -336,10 +336,12 @@ export const CARDS: Card[] = [
   // presque à rien ; elle a ses stats, et lui passe de 13/16 à 10/13. Réincarné comme sa carte, il en relaisse une.
   card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 10, 13, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
   // 3 novembre 2026 : sur 300 parties, une seule finissait avec lui ; son Annonce rejoue tout de suite celles du plateau.
-  // 13 novembre 2026 : candidat en 1981, 1988, 1995 et 2002, il revient toujours. Les Annonces du plateau se rejouent
-  // à chaque fin de tour (doublées par lui), le jour de sa pose compris.
+  // 13 novembre 2026 : candidat en 1981, 1988, 1995 et 2002, il revient toujours. Les Annonces se rejouent à chaque
+  // fin de tour (doublées par lui), le jour de sa pose compris. Celles de ses voisins seulement, comme Jadot pour les
+  // Fins de tour : quand il rejouait toutes les Annonces du plateau, il était sur 48 % des plateaux vainqueurs, le plus
+  // souvent avec de Gaulle (+8/+8 à tous à chaque manche). On choisit les deux Annonces qu'on place à côté de lui.
   card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, {
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' }), fx('fin_tour', 'autres', { do: 'declencher', trigger: 'annonce' })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' }), fx('fin_tour', 'voisins', { do: 'declencher', trigger: 'annonce' })],
   }),
   // « Je crois aux forces de l'esprit et je ne vous quitterai pas » (vœux du 31 décembre 1994) : son Héritage reste,
   // pour de bon (13 novembre 2026 ; avant, +4/+4 le temps du combat).

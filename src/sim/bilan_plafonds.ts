@@ -161,10 +161,10 @@ const SETUPS: Setup[] = [
   {
     name: 'Insoumis',
     camps: ['insoumis', 'republicains', 'macronie', 'socialistes', 'ecologistes'],
-    board: ['melenchon', 'trouve', 'panot', 'ruffin', 'aubry', 'chikirou', 'chirac'],
+    board: ['melenchon', 'trouve', 'aubry', 'lassalle', 'panot', 'chirac', 'ruffin'],
     keystone: 'melenchon',
     carrier: 'trouve',
-    note: 'Chirac, Panot (ses Tracts déjà à +3/+3), Ruffin, Aubry, Chikirou, Mélenchon ; 30 Tracts lancés avant ; tous les Tracts sur Trouvé',
+    note: 'Chirac entre Panot (ses Tracts déjà à +3/+3) et Ruffin, Lassalle qui le fait rejouer, Aubry, Mélenchon ; 30 Tracts lancés avant ; tous les Tracts sur Trouvé',
     before: (p) => {
       p.tract = { atk: 3, hp: 3 };
       p.counters.tracts = 30;
@@ -201,10 +201,10 @@ const SETUPS: Setup[] = [
   {
     name: 'RN',
     camps: ['rn', 'republicains', 'macronie', 'socialistes', 'ecologistes'],
-    board: ['lepen', 'bardella', 'aliot', 'chenu', 'odoul', 'chirac'],
+    board: ['lepen', 'aliot', 'odoul', 'bardella', 'chirac', 'chenu'],
     keystone: 'lepen',
     carrier: 'bardella',
-    note: 'Marine Le Pen, Chirac (il rejoue chaque Annonce de débauchage en fin de tour), Aliot, Odoul ; une place libre pour jouer puis renvoyer les débaucheurs de la boutique',
+    note: 'Marine Le Pen, Chirac entre Bardella et Chenu (il rejoue leurs débauchages en fin de tour), Aliot, Odoul ; une place libre pour jouer puis renvoyer les débaucheurs de la boutique',
     turn: (game, p, carrier) => {
       for (let i = 0; i < 40; i++) {
         const spell = buySpell(game, p, 'debauchage');
@@ -220,10 +220,10 @@ const SETUPS: Setup[] = [
   {
     name: 'Macronie',
     camps: ['macronie', 'republicains', 'rn', 'socialistes', 'ecologistes'],
-    board: ['riner', 'macron', 'bayrou', 'maillard', 'lassalle', 'chirac'],
+    board: ['riner', 'bayrou', 'maillard', 'lassalle', 'macron', 'chirac'],
     keystone: 'macron',
     carrier: 'riner',
-    note: 'Macron, Chirac (des Darmanin en main à chaque fin de tour), Bayrou, Lassalle, Maillard ; tous les Ralliements sur Riner',
+    note: 'Macron à côté de Chirac (des Darmanin en main à chaque fin de tour), Bayrou, Lassalle, Maillard ; tous les Ralliements sur Riner',
     turn: (game, p, carrier) => {
       const rallyAll = () => {
         for (const m of [...p.hand]) if (m.keywords.includes('ralliement')) act(game, { t: 'play', uid: m.uid, onto: carrier.uid });

@@ -26,7 +26,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Temps de parole, Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
 
 **Équilibrage**
-- Les présidents passent au niveau des chefs de camp : la Chaise vide de Giscard a ses stats, l'Héritage de Mitterrand reste pour de bon, Chirac rejoue les Annonces à chaque fin de tour, chaque politique joué après de Gaulle devient Ni droite ni gauche avec +2/+2, et Macron amène Darmanin dans votre main.
+- Les présidents passent au niveau des chefs de camp : la Chaise vide de Giscard a ses stats, l'Héritage de Mitterrand reste pour de bon, Chirac rejoue les Annonces de ses voisins à chaque fin de tour, chaque politique joué après de Gaulle devient Ni droite ni gauche avec +2/+2, et Macron amène Darmanin dans votre main.
 - Les Socialistes, dont le Retour est le moteur, sont renforcés après la réincarnation : Thévenoud 2/3, Guedj +1/+1 quand il attaque, Valls 3/3. Riner passe à 6/9, Peltier à 7/8, Mélenchon à 7/7 avec le Coup de balai.
 - Chaque camp a un montage qui gonfle jusqu'en fin de partie. Cohn-Bendit compte les Écologistes joués dans la partie, et non plus ceux du plateau. Strauss-Kahn lègue toutes ses stats et gagne +3/+3 par Socialiste quand il attaque. Odoul fait grossir le RN de la boutique à chaque débauchage. Vallaud gagne +1/+1 pour de bon à chaque allié tombé.
 - Macronie : Maillard donne +2/+2 à l'hôte d'un Ralliement, Castaner passe à 3/4 et Bergé à 4/4.
