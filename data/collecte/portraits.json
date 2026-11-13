@@ -2269,5 +2269,42 @@
   "name": "Teddy Riner",
   "note": "Festival de Cannes, 2016. Choisi à la main : le portrait de Wikipédia, crâne rasé comme aujourd'hui.",
   "crane_rase": true
+ },
+ "hassan": {
+  "fichier": "assets/photos/raw/hassan.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Rima_Hassan_MEP_(2025).jpg",
+  "licence": "European Parliament",
+  "auteur": "European Union",
+  "portrait": "assets/photos/base/hassan.jpg",
+  "name": "Rima Hassan",
+  "note": "Portrait officiel du Parlement européen, 2025. Choisi à la main : de face, neutre, grande définition."
+ },
+ "borne": {
+  "fichier": "assets/photos/raw/borne.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:La_Première_ministre_française_Élisabeth_Borne_(cropped).jpg",
+  "licence": "Licence Ouverte",
+  "auteur": "Benoît Granier",
+  "portrait": "assets/photos/base/borne.jpg",
+  "name": "Élisabeth Borne",
+  "note": "Portrait de la Première ministre, juillet 2022. Choisi à la main : de face."
+ },
+ "barnier": {
+  "fichier": "assets/photos/raw/barnier.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Barnier_Portrait.jpg",
+  "licence": "CC BY-SA 4.0",
+  "auteur": "Florian David",
+  "portrait": "assets/photos/base/barnier.jpg",
+  "name": "Michel Barnier",
+  "note": "Portrait officiel du Premier ministre, 21 octobre 2024, à Matignon. Choisi à la main : de face, neutre."
+ },
+ "juppe": {
+  "fichier": "assets/photos/raw/juppe.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Alain_Juppé_à_Québec_(cropped_3).jpg",
+  "licence": "CC BY 4.0",
+  "auteur": "Florence Cassisi",
+  "portrait": "assets/photos/base/juppe.jpg",
+  "name": "Alain Juppé",
+  "note": "À Québec, 2015 : la ville de son exil après sa condamnation de 2004. Choisi à la main, crâne dégarni.",
+  "crane_rase": true
  }
 }

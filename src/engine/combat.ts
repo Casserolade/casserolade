@@ -24,10 +24,17 @@ const MAX_RIPOSTES = 200;
 
 interface Unit extends Minion {
   attacked: boolean;
-  /** Ses retours en politique dans ce combat : revenu, il compte comme neuf, et ses coups en cours s'arrêtent (règle R17). */
-  comebacks: number;
+  /**
+   * Le politique du plateau qu'il incarne : lui-même, ou celui dont il est la réincarnation (Retour en politique). Ses
+   * gains pour de bon, ses effets « une fois par combat » et ses relances suivent ce politique-là, pas l'incarnation.
+   */
+  origin: number;
+  /** Tel qu'il est entré en combat : sa réincarnation revient avec cette attaque et ces mots-clés, sans Retour. */
+  start: { atk: number; keywords: Keyword[] };
   /** Bonus de solitude compris dans atk et hp. */
   bonus: number;
+  /** Ses stats sur le plateau, avant le bonus de solitude et les éclaboussures : ce que le combat montre d'abord. */
+  board: { atk: number; hp: number };
   /** Morts alliées comptées pour la Revanche. */
   avenge: number;
   /** Les PV les plus hauts atteints : ce que rapporte un butin. */
@@ -82,11 +89,23 @@ export function combatBonuses(minions: Minion[], extremes = false): number[] {
   });
 }
 
+/**
+ * L'éclaboussure d'un scandale : un politique en scandale dont une casserole éclabousse fait perdre -N/-N à chacun de
+ * ses voisins, le temps du combat (13 novembre 2026). Le placement compte, et le cadenas du scandale aussi.
+ */
+export function scandalSplash(minions: Minion[]): number[] {
+  return minions.map((_, i) => (minions[i - 1]?.scandal?.splash ?? 0) + (minions[i + 1]?.scandal?.splash ?? 0));
+}
+
 function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
   const bonuses = combatBonuses(s.minions, extremes);
+  const splashes = scandalSplash(s.minions);
   const units: Unit[] = s.minions.map((m, i) => {
     const extra = bonuses[i];
-    return { ...m, keywords: [...m.keywords], effects: m.effects, atk: m.atk + extra, hp: m.hp + extra, attacked: false, comebacks: 0, bonus: extra, avenge: 0, peak: m.hp + extra };
+    const atk = Math.max(0, m.atk + extra - splashes[i]);
+    const hp = Math.max(1, m.hp + extra - splashes[i]);
+    const start = { atk, keywords: [...m.keywords] };
+    return { ...m, keywords: [...m.keywords], effects: m.effects, atk, hp, attacked: false, origin: m.uid, start, bonus: extra, board: { atk: m.atk, hp: m.hp }, avenge: 0, peak: hp };
   });
   return {
     index,
@@ -126,7 +145,7 @@ function addStats(b: Battle, side: Side, u: Unit, atk: number, hp: number, perma
   u.hp = Math.min(MAX_STAT, u.hp + hp);
   u.peak = Math.max(u.peak, u.hp);
   if (b.logging) b.log.push({ e: 'stats', uid: u.uid, atk: u.atk, hp: u.hp });
-  if (perma && u.uid < b.firstSummonUid) side.persist.buffs.push({ uid: u.uid, atk, hp });
+  if (perma && u.origin < b.firstSummonUid) side.persist.buffs.push({ uid: u.origin, atk, hp });
 }
 
 /** Ses effets tels que le client les lit : chacun dit sa puissance, l'identité des effets ne voyage pas. */
@@ -163,7 +182,7 @@ function snapshot(sides: [Side, Side]): [CombatUnit[], CombatUnit[]] {
  * politique par politique. La Fin de tour, elle, se joue sur la table de recrutement, avant le combat.
  */
 function logOpening(b: Battle, first: 0 | 1): void {
-  const seen = b.sides.map((side) => side.units.map((u) => ({ ...toCombatUnit(u), atk: u.atk - u.bonus, hp: u.hp - u.bonus })));
+  const seen = b.sides.map((side) => side.units.map((u) => ({ ...toCombatUnit(u), atk: u.board.atk, hp: u.board.hp })));
   b.log.push({ e: 'debut', first, sides: [seen[0], seen[1]] });
   b.sides.forEach((side) => {
     for (const u of side.units) {
@@ -171,8 +190,20 @@ function logOpening(b: Battle, first: 0 | 1): void {
       const casserole = u.casseroles.find((id) => (CASSEROLE_BY_ID[id]?.aloneBonus ?? 0) > 0);
       const effect: Effect = { when: 'debut_combat', to: 'soi', do: 'buff', atk: u.bonus, hp: u.bonus };
       b.log.push({ e: 'effet', uid: u.uid, when: 'debut_combat', effect, ...(casserole ? { casserole } : {}) });
-      b.log.push({ e: 'stats', uid: u.uid, atk: u.atk, hp: u.hp });
+      b.log.push({ e: 'stats', uid: u.uid, atk: u.board.atk + u.bonus, hp: u.board.hp + u.bonus });
     }
+    // Les éclaboussures des scandales : la source, sa casserole, puis ses voisins à leurs stats du combat.
+    side.units.forEach((u, i) => {
+      const splash = u.scandal?.splash ?? 0;
+      if (splash <= 0) return;
+      const casserole = u.casseroles.slice(u.oublie).find((id) => (CASSEROLE_BY_ID[id]?.splash ?? 0) > 0);
+      const effect: Effect = { when: 'debut_combat', to: 'voisins', do: 'buff', atk: -splash, hp: -splash };
+      b.log.push({ e: 'effet', uid: u.uid, when: 'debut_combat', effect, ...(casserole ? { casserole } : {}) });
+      for (const n of [side.units[i - 1], side.units[i + 1]]) {
+        if (!n) continue;
+        b.log.push({ e: 'stats', uid: n.uid, atk: n.atk, hp: n.hp });
+      }
+    });
   });
 }
 
@@ -287,7 +318,8 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
   const enemy = otherSide(b, side);
   const k = effectPower(self, eff);
   if (eff.once === 'combat') {
-    const key = `${self.uid}:${self.effects.indexOf(eff)}`;
+    // Sa réincarnation est le même politique : ce qu'il a déjà joué une fois dans le combat ne rejoue pas.
+    const key = `${self.origin}:${self.effects.indexOf(eff)}`;
     if (b.once.has(key)) return;
     b.once.add(key);
   }
@@ -379,8 +411,8 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
     case 'declencher':
       for (const u of allyTargets(b, side, self, index, eff, trigger)) {
         // Règle R4 : un relanceur ne relance pas deux fois le même serviteur dans le combat.
-        if (u === self || b.retriggered.has(u.uid)) continue;
-        b.retriggered.add(u.uid);
+        if (u === self || b.retriggered.has(u.origin)) continue;
+        b.retriggered.add(u.origin);
         const at = side.units.indexOf(u);
         // Doré, il joue deux fois ce qu'il relance ; une relance compte comme un effet rejoué. Les multiplicateurs
         // s'appliquent aussi à ce qui est relancé : Mitterrand vivant double les Héritages relancés (règle R18).
@@ -395,12 +427,18 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       for (const u of allyTargets(b, side, self, index, eff, trigger)) {
         for (let i = 0; i < k; i++) {
           addStats(b, side, u, u.atk, u.hp);
-          if (eff.perma && u.uid < b.firstSummonUid) side.persist.doubles.push(u.uid);
+          if (eff.perma && u.origin < b.firstSummonUid) side.persist.doubles.push(u.origin);
         }
       }
       break;
     case 'chaise_vide':
       summonChair(b, side, self, index, k);
+      break;
+    case 'detruire':
+      // Censuré : il tombe, Immunité ou pas. Sa mort se résout avec les autres, Héritage et Retour compris.
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) {
+        if (u.hp > 0) u.hp = 0;
+      }
       break;
     case 'tract_bonus':
       // Pour le reste de la partie : les Tracts de ce combat en profitent déjà, et ceux d'après aussi.
@@ -437,7 +475,7 @@ function summon(b: Battle, side: Side, self: Minion, index: number, tokenId: str
         m.hp += gain.hp;
       }
     }
-    const unit: Unit = { ...m, attacked: false, comebacks: 0, bonus: 0, avenge: 0, peak: m.hp };
+    const unit: Unit = { ...m, attacked: false, origin: m.uid, start: { atk: m.atk, keywords: [...m.keywords] }, bonus: 0, board: { atk: m.atk, hp: m.hp }, avenge: 0, peak: m.hp };
     const at = Math.min(index + 1 + i, side.units.length);
     side.units.splice(at, 0, unit);
     if (b.logging) b.log.push({ e: 'invocation', side: side.index, index: at, unit: toCombatUnit(unit) });
@@ -457,7 +495,7 @@ function summonChair(b: Battle, side: Side, self: Unit, index: number, count: nu
 }
 
 /** Combien de fois jouent les effets d'un déclencheur de ce camp : un multiplicateur vivant (Mitterrand, Macron) les double, les triple doré. */
-function repeatsOf(units: Unit[], trigger: 'heritage' | 'celebration' | 'meeting'): number {
+function repeatsOf(units: Unit[], trigger: 'heritage' | 'celebration' | 'meeting' | 'debut_combat'): number {
   let count = 1;
   for (const u of units) {
     if (u.hp <= 0) continue;
@@ -481,6 +519,22 @@ function fireAvenge(b: Battle, side: Side, dead: Unit): void {
   }
 }
 
+/**
+ * Le Retour en politique, comme la Réincarnation de Battlegrounds (13 novembre 2026) : le politique meurt pour de bon,
+ * son Héritage joue (ses jetons prennent sa place), puis il se réincarne à la place où il est tombé, s'il reste de la
+ * place sur le plateau. Il revient tel qu'il est entré en combat (son attaque, ses mots-clés : sa Polémique, son
+ * Immunité), avec 1 PV et sans Retour. C'est une nouvelle incarnation : elle n'a pas encore attaqué (règle R17).
+ */
+function reincarnate(b: Battle, side: Side, dead: Unit, at: number): boolean {
+  if (side.units.length >= b.boardSize + (side.mods.boardDelta ?? 0)) return false;
+  const keywords = dead.start.keywords.filter((k) => k !== 'retour');
+  const unit: Unit = { ...dead, uid: b.nextUid++, atk: dead.start.atk, hp: 1, keywords, attacked: false, avenge: 0, peak: 1, bonus: 0 };
+  const index = Math.max(0, Math.min(at, side.units.length));
+  side.units.splice(index, 0, unit);
+  if (b.logging) b.log.push({ e: 'retour', side: side.index, index, unit: toCombatUnit(unit), from: dead.uid });
+  return true;
+}
+
 function resolveDeaths(b: Battle, order: [Side, Side]): void {
   for (let guard = 0; guard < 100; guard++) {
     let changed = false;
@@ -489,36 +543,26 @@ function resolveDeaths(b: Battle, order: [Side, Side]): void {
         const u = side.units[i];
         if (u.hp > 0) continue;
         changed = true;
-        const comesBack = has(u, 'retour') || (side.mods.firstDeathRetour === true && !side.deathRetourUsed);
+        const ownRetour = has(u, 'retour');
+        const comesBack = ownRetour || (side.mods.firstDeathRetour === true && !side.deathRetourUsed);
         if (b.logging) {
-          b.log.push({ e: 'mort', uid: u.uid, revient: comesBack });
+          b.log.push({ e: 'mort', uid: u.uid });
           if (u.hpLossOnDeath > 0) b.log.push({ e: 'penalite', uid: u.uid, side: side.index, value: u.hpLossOnDeath });
         }
         side.penalty += u.hpLossOnDeath;
         const repeats = repeatsOf(side.units, 'heritage');
-        if (comesBack) {
-          if (!has(u, 'retour')) side.deathRetourUsed = true;
-          u.keywords = u.keywords.filter((x) => x !== 'retour');
-          u.hp = 1;
-          // Règle R17 : revenu, il compte comme neuf. Il n'a pas encore attaqué : le plus à gauche à ne pas l'avoir
-          // fait attaque le premier, et un attaquant tombé puis revenu attaque de nouveau au prochain tour de son camp.
-          u.attacked = false;
-          u.comebacks++;
-          if (b.logging) b.log.push({ e: 'retour', uid: u.uid, hp: 1 });
-          for (let r = 0; r < repeats; r++) {
-            for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i, eff, undefined, r > 0);
-          }
-        } else {
-          side.units.splice(i, 1);
-          if (side.mods.firstDeathTransmit && !side.deathTransmitUsed) {
-            side.deathTransmitUsed = true;
-            transmit(b, side, u, i - 1, false, 1);
-          }
-          for (let r = 0; r < repeats; r++) {
-            for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i - 1, eff, undefined, r > 0);
-          }
-          i--;
+        side.units.splice(i, 1);
+        if (side.mods.firstDeathTransmit && !side.deathTransmitUsed) {
+          side.deathTransmitUsed = true;
+          transmit(b, side, u, i - 1, false, 1);
         }
+        for (let r = 0; r < repeats; r++) {
+          for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i - 1, eff, undefined, r > 0);
+        }
+        // Après son Héritage, il se réincarne là où il est tombé, s'il y a la place. Le pouvoir du héros ne se
+        // consomme que s'il a servi.
+        if (comesBack && reincarnate(b, side, u, i) && !ownRetour) side.deathRetourUsed = true;
+        i--;
         fireAvenge(b, side, u);
       }
     }
@@ -543,14 +587,22 @@ function pickTarget(b: Battle, enemy: Side): Unit | null {
   return b.rng.pick(pool.length > 0 ? pool : alive);
 }
 
+/** Les voisins vivants de la cible : un Coup de balai les touche aussi. */
+function sweptNeighbours(side: Side, target: Unit): Unit[] {
+  const alive = side.units.filter((u) => u.hp > 0);
+  const at = alive.indexOf(target);
+  return at < 0 ? [] : [alive[at - 1], alive[at + 1]].filter((u): u is Unit => Boolean(u));
+}
+
 function strike(b: Battle, atkSide: Side, defSide: Side, attacker: Unit, target: Unit): void {
   /**
    * La Polémique détruit le serviteur blessé, puis se perd, comme une toxine : au premier coup qui blesse, qu'il tue par
-   * ses dégâts, par la Polémique, ou que la victime y résiste (règle R16). Une Immunité qui pare le coup la garde.
+   * ses dégâts, par la Polémique, ou que la victime y résiste (règle R16). Une Immunité qui pare le coup la garde. Un
+   * Coup de balai est un seul coup : sa Polémique détruit tous ceux qu'il blesse, puis se perd.
    */
-  const landed = (from: Unit, to: Unit, toSide: Side): boolean => {
+  const wound = (from: Unit, to: Unit, toSide: Side, venom: boolean): boolean => {
     const hit = dealDamage(b, toSide, to, from.atk);
-    if (!hit || !has(from, 'polemique')) return hit;
+    if (!hit || !venom) return hit;
     if (to.hp > 0 && toSide.mods.firstPolemiqueResist && !toSide.polemiqueResistUsed) {
       toSide.polemiqueResistUsed = true;
       if (b.logging) b.log.push({ e: 'resiste', uid: to.uid });
@@ -558,7 +610,11 @@ function strike(b: Battle, atkSide: Side, defSide: Side, attacker: Unit, target:
       to.hp = 0;
       if (b.logging) b.log.push({ e: 'polemique', uid: to.uid, from: from.uid });
     }
-    lose(b, from, 'polemique');
+    return hit;
+  };
+  const landed = (from: Unit, to: Unit, toSide: Side): boolean => {
+    const hit = wound(from, to, toSide, has(from, 'polemique'));
+    if (hit) lose(b, from, 'polemique');
     return hit;
   };
   const attackerIndex = atkSide.units.indexOf(attacker);
@@ -571,9 +627,15 @@ function strike(b: Battle, atkSide: Side, defSide: Side, attacker: Unit, target:
   }
   if (attacker.hp <= 0 || target.hp <= 0 || attackerIndex < 0) return;
   if (b.logging) b.log.push({ e: 'attaque', from: attacker.uid, to: target.uid });
-  const hitTarget = landed(attacker, target, defSide);
+  // Le Coup de balai touche aussi les voisins de la cible, du même coup. Seule la cible riposte.
+  const swept = has(attacker, 'balai') ? sweptNeighbours(defSide, target) : [];
+  const venom = has(attacker, 'polemique');
+  const hitTarget = wound(attacker, target, defSide, venom);
+  const hitSwept = swept.filter((u) => wound(attacker, u, defSide, venom));
+  if (venom && (hitTarget || hitSwept.length > 0)) lose(b, attacker, 'polemique');
   const hitAttacker = landed(target, attacker, atkSide);
   if (hitTarget && target.hp > 0) fireRiposte(b, defSide, target);
+  for (const u of hitSwept) if (u.hp > 0) fireRiposte(b, defSide, u);
   if (hitAttacker && attacker.hp > 0) fireRiposte(b, atkSide, attacker);
   if (hitTarget && target.hp <= 0 && attacker.hp > 0) {
     for (const eff of attacker.effects) {
@@ -597,12 +659,15 @@ function startOfCombat(b: Battle, side: Side, order: [Side, Side]): void {
     if (side.mods.frontPolemique) grant(b, front, 'polemique');
     if (side.mods.frontHp) addStats(b, side, front, 0, side.mods.frontHp);
   }
+  // Borne vivante au début du combat : vos 49.3 se déclenchent deux fois (13 novembre 2026).
+  const repeats = repeatsOf(side.units, 'debut_combat');
   for (const u of [...side.units]) {
-    if (u.hp <= 0) continue;
-    const index = side.units.indexOf(u);
-    if (index < 0) continue;
-    for (const eff of u.effects) {
-      if (eff.when === 'debut_combat') runEffect(b, side, u, side.units.indexOf(u), eff);
+    // Tombé sous un 49.3 adverse, il ne joue pas le sien ; censuré par le sien (Barnier), il le joue jusqu'au bout.
+    if (u.hp <= 0 || !side.units.includes(u)) continue;
+    for (let r = 0; r < repeats; r++) {
+      for (const eff of u.effects) {
+        if (eff.when === 'debut_combat') runEffect(b, side, u, side.units.indexOf(u), eff, undefined, r > 0);
+      }
     }
   }
   resolveDeaths(b, order);
@@ -666,9 +731,8 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
     idle = 0;
     const swings = has(attacker, 'cumul') ? 2 : 1;
     attacker.attacked = true;
-    // Tombé puis revenu pendant ses coups, il s'arrête : le revenant attaquera à son tour, comme neuf (règle R17).
-    const comebacks = attacker.comebacks;
-    for (let s = 0; s < swings && attacker.hp > 0 && attacker.comebacks === comebacks; s++) {
+    // Tombé pendant ses coups, il s'arrête : sa réincarnation attaquera à son tour, comme neuve (règle R17).
+    for (let s = 0; s < swings && attacker.hp > 0 && side.units.includes(attacker); s++) {
       const target = pickTarget(b, enemy);
       if (!target) break;
       strike(b, side, enemy, attacker, target);
@@ -708,7 +772,8 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
     deathPenalty: [sides[0].penalty, sides[1].penalty],
     persist: [sides[0].persist, sides[1].persist],
     celebrant: celebrant ? { side: celebrant.side, uid: celebrant.uid } : null,
-    celebrants: celebrants.map((u) => ({ side: sides[winner as 0 | 1].index, uid: u.uid })),
+    // Le plateau connaît le politique, pas son incarnation : une réincarnation célèbre pour lui.
+    celebrants: celebrants.map((u) => ({ side: sides[winner as 0 | 1].index, uid: u.origin })),
     responder: responder ? { side: responder.side, uid: responder.uid } : null,
     responders: responders.map((m) => ({ side: winner === 0 ? 1 : 0, uid: m.uid })),
     celebrationRepeats,

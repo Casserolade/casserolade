@@ -24,6 +24,8 @@ import type { CombatEvent, CombatUnit } from '#src/engine/types.ts';
 
 const GAIN_COLOR = '#7dff9e';
 const INFO_COLOR = '#ffd84a';
+const REBIRTH_COLOR = '#8fd8ff';
+const SWEEP_COLOR = '#ffb05a';
 const DAMAGE_COLOR = '#ff5a5a';
 const GAIN_LIGHT = '#ffe680';
 /** These deaths play where the politician stood: its place in the row waits for them. */
@@ -126,6 +128,8 @@ export class CombatStage {
     this.playEvent(event);
     this.showUnits(sides);
     this.placeCards(false);
+    // A reincarnation only has its card once the units are shown.
+    if (event.e === 'retour') this.playRebirth(event.unit.uid);
   }
 
   /** The player skipped: straight to the final state, nothing left playing. */
@@ -222,11 +226,7 @@ export class CombatStage {
         this.float(event.uid, `${TRIGGER_LABELS[event.when]} !`, INFO_COLOR);
         return;
       case 'mort':
-        this.playFall(event.uid, event.revient);
-        return;
-      case 'retour':
-        this.cards.get(event.uid)?.comeBack();
-        this.options.playSound('discover');
+        this.playFall(event.uid);
         return;
       case 'penalite':
         this.float(event.uid, `−${event.value} sondages`, DAMAGE_COLOR);
@@ -250,22 +250,31 @@ export class CombatStage {
     if (!attacker || !target) return;
     this.cardLayer.addChild(attacker.view);
     this.blows.attack(attacker, target);
+    // The Coup de balai hits the target's neighbours too: their blows follow in the journal, the sweep is named here.
+    if (attacker.hasKeyword('balai')) this.float(to, `${KEYWORD_RULES.balai.label} !`, SWEEP_COLOR);
   }
 
   /**
-   * A politician falls. One that comes back is dazed by its birds; any other dies its own death (planDeaths): thrown
-   * out, broken, blown up, burnt, off the air… The death owns the medallion from now on. The finale plays in slow
-   * motion, and the journal waits for it.
+   * A Retour en politique: the politician died for good, its Héritage played, and its reincarnation comes down in a
+   * blue light where it fell, with its name on it.
    */
-  private playFall(uid: number, comesBack: boolean): void {
+  private playRebirth(uid: number): void {
     const card = this.cards.get(uid);
     if (!card) return;
-    if (comesBack) {
-      this.options.playSound('fall', 0.5);
-      this.lightAt(uid, (x, y) => this.fx.lights.death(x, y, card.scale * 0.7));
-      card.showBirds();
-      return;
-    }
+    card.reincarnate();
+    this.options.playSound('discover');
+    this.float(uid, KEYWORD_RULES.retour.label, REBIRTH_COLOR);
+    this.lightAt(uid, (x, y) => this.fx.lights.rebirth(x, y, card.scale));
+  }
+
+  /**
+   * A politician falls and dies its own death (planDeaths): thrown out, broken, blown up, burnt, off the air… Even a
+   * Retour en politique: its reincarnation is a new medallion. The death owns the medallion from now on. The finale
+   * plays in slow motion, and the journal waits for it.
+   */
+  private playFall(uid: number): void {
+    const card = this.cards.get(uid);
+    if (!card) return;
     const plan = this.options.deaths.get(uid) ?? NO_PLAN;
     if (plan.finale) {
       this.fx.finale(card.centerX(), card.centerY());

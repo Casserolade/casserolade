@@ -193,6 +193,7 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
     <template v-if="has('cumul')"><span class="sash one" aria-hidden="true" /><span class="sash two" aria-hidden="true" /></template>
     <span v-if="has('retour')" class="comeback" aria-hidden="true"><GameIcon name="comeback" /></span>
     <span v-if="has('vedette')" class="star" aria-hidden="true"><GameIcon name="star" /></span>
+    <span v-if="has('balai')" class="broom" aria-hidden="true"><GameIcon name="broom" /></span>
     <span v-if="hasMarks" class="marks" aria-hidden="true">
       <GameIcon v-if="marks.heritage" class="mark skull" name="skull" />
       <GameIcon v-if="marks.triggered" class="mark bolt" name="bolt" />
@@ -349,6 +350,25 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   box-shadow: 0 0 calc(var(--mu) * 10) rgb(120 200 255 / 0.9);
   --icon-edge: #0c2a55;
 }
+/* Coup de balai: a broom on an orange disc, on the right, swaying as if it swept. */
+.broom {
+  right: calc(var(--mu) * -8);
+  top: calc(var(--mu) * 40);
+  width: calc(var(--mu) * 40);
+  height: calc(var(--mu) * 40);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: calc(var(--mu) * 3) solid #4a1d00;
+  background: radial-gradient(circle at 40% 35%, #ffc27a, #e8731c 70%);
+  color: #fff;
+  font-size: calc(var(--mu) * 24);
+  box-shadow: 0 0 calc(var(--mu) * 10) rgb(255 160 60 / 0.8);
+  --icon-edge: #4a1d00;
+  animation: sweep 1.4s ease-in-out infinite;
+}
+@keyframes sweep { 0%, 100% { rotate: -10deg; } 50% { rotate: 10deg; } }
 /* Polémique: green slime dripping from the frame. */
 .is-toxic .ring { box-shadow: 0 0 calc(var(--mu) * 22) calc(var(--mu) * 6) rgb(120 255 60 / 0.8), 0 calc(var(--mu) * 10) calc(var(--mu) * 16) rgb(0 0 0 / 0.6); }
 .slime { left: calc(var(--mu) * 30); right: calc(var(--mu) * 30); bottom: calc(var(--mu) * 8); height: calc(var(--mu) * 40); pointer-events: none; }
@@ -595,7 +615,7 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
 @keyframes stamp { from { transform: scale(2.4); opacity: 0; } }
 @keyframes pan-swing { 0%, 100% { rotate: -9deg; } 50% { rotate: 9deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .sheen, .bubble, .halo, .slime i, .sash, .star, .pan, .clang, .pan img, .scandal { animation: none !important; }
+  .sheen, .bubble, .halo, .slime i, .sash, .star, .broom, .pan, .clang, .pan img, .scandal { animation: none !important; }
   .clang, .puff, .glint, .oubli { display: none; }
 }
 </style>

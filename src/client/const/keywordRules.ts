@@ -6,10 +6,11 @@ export const KEYWORD_RULES: Record<Keyword, { label: string; rule: string }> = {
   porte_parole: { label: 'Porte-parole', rule: 'Les ennemis doivent l\'attaquer en priorité.' },
   cumul: { label: 'Cumul des mandats', rule: 'Attaque deux fois.' },
   polemique: { label: 'Polémique', rule: 'Détruit le premier politique qu\'il blesse, puis se perd.' },
-  retour: { label: 'Retour en politique', rule: 'Revient une fois avec 1 PV.' },
+  retour: { label: 'Retour en politique', rule: 'Meurt, puis se réincarne une fois à sa place, avec 1 PV et ses mots-clés de départ : après son Héritage, s\'il reste de la place.' },
   ni_droite_ni_gauche: { label: 'Ni droite ni gauche', rule: 'Compte comme un politique de chaque camp, sauf la Société civile.' },
   ralliement: { label: 'Ralliement', rule: 'Depuis la main, peut se poser sur un allié : il fusionne avec lui et lui donne ses stats, ses mots-clés et ses effets.' },
   vedette: { label: 'Vedette', rule: 'Après une victoire, la Vedette survivante la plus à gauche prononce sa petite phrase.' },
+  balai: { label: 'Coup de balai', rule: 'Ses attaques touchent aussi les voisins de sa cible.' },
 };
 
 /** Les autres mots en gras du texte des cartes, avec leur règle. */

@@ -42,7 +42,7 @@ test('wornCasserole: the first oublie ones are forgotten, the others asleep or i
   const minion = wearer({ casseroles: ['playboy', 'fonds_marianne', 'bygmalion'], oublie: 1, ownerCasseroles: ['playboy', 'fonds_marianne'] });
   assert.deepEqual(wornCasserole(minion, 0, 6), { state: 'forgotten', scandalLeft: 0, owned: true });
   assert.deepEqual(wornCasserole(minion, 2, 6), { state: 'dormant', scandalLeft: 0, owned: false });
-  const inScandal = { ...minion, scandal: { until: 8, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false } };
+  const inScandal = { ...minion, scandal: { until: 8, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false, splash: 0 } };
   assert.deepEqual(wornCasserole(inScandal, 1, 6), { state: 'scandal', scandalLeft: 2, owned: true });
   assert.deepEqual(wornCasserole(inScandal, 0, 6).state, 'forgotten', 'forgotten stays forgotten during a new scandal');
 });

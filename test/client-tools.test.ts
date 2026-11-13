@@ -84,7 +84,7 @@ test('highlightForEvent marks both sides of an attack and nothing without an eve
   const attack = highlightForEvent({ e: 'attaque', from: 1, to: 2 });
   assert.equal(attack.get(1), 'attacking');
   assert.equal(attack.get(2), 'hit');
-  assert.equal(highlightForEvent({ e: 'mort', uid: 3, revient: false }).get(3), 'dead');
+  assert.equal(highlightForEvent({ e: 'mort', uid: 3 }).get(3), 'dead');
 });
 
 test('toCardProps drops what the card does not display', () => {

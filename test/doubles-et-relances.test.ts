@@ -399,7 +399,7 @@ test('le bonus de solitude suit les camps : un allié Ni droite ni gauche est de
 const IN_COMBAT: Record<Action['do'], boolean> = {
   buff: true, buff_par_allie: true, buff_par_camp: true, buff_par_ralliement: false, degats: true, invoquer: true, budget: false,
   mot_cle: true, retirer: true, basculer: false, exiler: true, oublier: false, transmettre: true, carte: true, decouvrir: false,
-  camp_buff: true, boutique_buff: false, tract_bonus: true, jouer_tract: true, debaucher: false, dorer: false, detruire: false,
+  camp_buff: true, boutique_buff: false, tract_bonus: true, jouer_tract: true, debaucher: false, dorer: false, detruire: true,
   sacrifier: false, declencher: true, doubler: true, compteur: true, scandale_plus: true, actualiser: false, actualisations_gratuites: false,
   budget_max: false, pari_defaite: false, congres: false, butin: true,
   doubler_stats: true, buff_par_membre: true, gain_debauche: false, buff_compteur: false, chaise_vide: true,

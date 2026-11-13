@@ -11,6 +11,7 @@ const KEYWORDS: Record<string, string> = {
   polemique: 'Polémique',
   retour: 'Retour en politique',
   ni_droite_ni_gauche: 'Ni droite ni gauche',
+  balai: 'Coup de balai',
 };
 const TRIGGERS: Record<string, string> = { debut_combat: '49.3', riposte: 'Riposte', heritage: 'Héritage', annonce: 'Annonce', fin_recrutement: 'Fin de recrutement' };
 const TARGETS: Record<string, string> = { premier_ennemi: 'au premier ennemi', dernier_ennemi: 'au dernier ennemi', ennemi_plus_faible: 'à l\'ennemi le plus faible', tous_ennemis: 'à tous les ennemis', allies: 'à tous les alliés' };
@@ -44,6 +45,9 @@ function summary(c: Casserole): string {
   if (c.locked) defects.push('ne bouge plus');
   if (c.silence) defects.push('perd ses effets');
   if (c.hpLossOnDeath) defects.push(`−${c.hpLossOnDeath} sondage à sa mort`);
+  if (c.pollsPerRound) defects.push(`−${c.pollsPerRound} sondages par manche`);
+  if (c.noAttack) defects.push('n\'attaque plus');
+  if (c.splash) defects.push(`éclabousse ses voisins (−${c.splash}/−${c.splash} en combat)`);
   if (defects.length > 0) out.push(`scandale : ${defects.join(', ')}`);
   return out.join(', ');
 }

@@ -13,6 +13,7 @@ export const TRIGGER_LABELS: Record<Trigger, string> = {
   debauche: 'Débauchage',
   rallie: 'Ralliement',
   casserole_recue: 'Casserole',
+  oubli: 'Oubli du peuple',
   depense: 'Dépense',
   celebration: 'Célébration',
   droit_de_reponse: 'Droit de réponse',

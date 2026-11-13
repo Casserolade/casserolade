@@ -24,7 +24,7 @@ export function highlightForEvent(event: CombatEvent | null): Map<number, UnitHi
       highlights.set(event.uid, 'dead');
       break;
     case 'retour':
-      highlights.set(event.uid, 'back');
+      highlights.set(event.unit.uid, 'back');
       break;
     case 'effet':
       highlights.set(event.uid, 'triggered');

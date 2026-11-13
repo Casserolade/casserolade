@@ -27,7 +27,7 @@ import {
   incrementCounter,
   addDefect,
   braceletTarget,
-  forgetScandal,
+  peopleForget,
   scandalThreshold,
   startScandal,
   maxBudget,
@@ -333,8 +333,7 @@ function isLastInPolls(game: Game, p: Player): boolean {
 function forgetScandals(game: Game, p: Player): void {
   for (const m of [...p.board, ...p.hand]) {
     if (!m.scandal || m.scandal.until > game.round) continue;
-    forgetScandal(m);
-    p.stats.forgotten++;
+    peopleForget(game, p, m);
   }
 }
 
@@ -441,8 +440,7 @@ function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
   if (c.swapStats) [m.atk, m.hp] = [Math.max(0, m.hp), Math.max(1, m.atk)];
   // « Quel compte Facebook ? » : ni vu ni connu, tout est oublié.
   if (c.forgetsAll) {
-    if (m.scandal) p.stats.forgotten++;
-    forgetScandal(m);
+    peopleForget(game, p, m);
   } else {
     m.charges += c.charges ?? 1;
     // Reçue en plein scandale, son défaut s'y ajoute tout de suite.

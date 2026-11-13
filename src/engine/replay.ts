@@ -34,8 +34,6 @@ export function applyCombatEvent(sides: CombatSides, ev: CombatEvent): CombatSid
       return ev.sides;
     case 'degats':
       return updateUnit(sides, ev.uid, (u) => ({ ...u, hp: ev.hp }));
-    case 'retour':
-      return updateUnit(sides, ev.uid, (u) => ({ ...withoutKeyword(u, 'retour'), hp: ev.hp }));
     case 'immunite':
       return updateUnit(sides, ev.uid, (u) => withoutKeyword(u, 'immunite'));
     case 'polemique':
@@ -47,10 +45,10 @@ export function applyCombatEvent(sides: CombatSides, ev: CombatEvent): CombatSid
         ev.gain ? { ...u, keywords: [...u.keywords, ev.keyword] } : withoutKeyword(u, ev.keyword),
       );
     case 'mort':
-      return ev.revient ? sides : removeUnit(sides, ev.uid);
     case 'exil':
       return removeUnit(sides, ev.uid);
     case 'invocation':
+    case 'retour':
       return insertUnit(sides, ev.side, ev.index, ev.unit);
     case 'attaque':
     case 'resiste':

@@ -55,8 +55,8 @@ Gratuit, sans publicité, sans inscription, sans rien à vendre.
 - **Une réserve partagée**, comme dans Battlegrounds : chaque politique existe en nombre limité pour les huit joueurs, de 15 exemplaires à l'échelon 1 à 7 au 6. Ce que les autres prennent sort moins chez vous.
 - **Trois exemplaires du même politique** en font un doré, qui donne une **Investiture** : la découverte d'un politique de l'échelon au-dessus.
 - **Les camps se parlent par le texte des cartes** : Annonces, Fins de tour, Héritages, Ralliements, Tracts, Revanches… Les moteurs se croisent, et les plateaux grandissent au recrutement.
-- **Le combat est automatique**, de gauche à droite, avec des cibles tirées au hasard, sauf le **Porte-parole**, qu'on doit attaquer d'abord.
-- **Les casseroles** donnent un avantage tout de suite, et un bonus de plus sur leur propriétaire. Leur défaut dort jusqu'au scandale.
+- **Le combat est automatique**, de gauche à droite, avec des cibles tirées au hasard, sauf le **Porte-parole**, qu'on doit attaquer d'abord. Le **Coup de balai** frappe aussi les voisins de sa cible, et le **Retour en politique** réincarne un politique à sa place, après son Héritage.
+- **Les casseroles** donnent un avantage tout de suite, et un bonus de plus sur leur propriétaire. Leur défaut dort jusqu'au scandale, et il fait mal : budget, sondages, plus d'attaque, ou les voisins éclaboussés. Puis le peuple oublie, et certains en reviennent plus forts.
 - **Après une victoire, la Célébration** : un survivant prononce sa petite phrase, une Vedette d'abord, et chaque survivant qui a une Célébration en tire un gain. **Après une défaite, le Droit de réponse** : chaque politique qui en a un joue le sien, et le plus à gauche répond.
 
 Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/bestiaire?type=mot_cle), et à côté de chaque carte qu'on pointe en jeu. Une casserole pointée sous son politique montre sa carte, et dit où elle en est : défaut qui dort, scandale en cours ou casserole oubliée.
@@ -66,9 +66,9 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | | |
 |---|---|
 | **29 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
-| **108 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
-| **70 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
-| **26 sorts** | Tract, Note de frais, Temps de parole, Remaniement, Congrès… |
+| **112 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
+| **78 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
+| **27 sorts** | Tract, Note de frais, Temps de parole, Remaniement, Congrès… |
 | **675 répliques** | Toutes sourcées, dont 259 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |

@@ -75,11 +75,15 @@ export const CARDS: Card[] = [
   }),
   // Les faux billets de 500 € offerts à Juncker : tout le monde en reçoit.
   card('aubry', 'Manon Aubry', 'insoumis', 4, 6, 7, { fx: [fx('annonce', 'autres', tract)] }),
+  // « L'élue la plus poursuivie de la Ve République », dit-elle (octobre 2026) : chaque affaire mobilise les siens, et
+  // chacune de ses phrases fait polémique (13 novembre 2026). Les casseroles nourrissent le moteur des Tracts.
+  card('hassan', 'Rima Hassan', 'insoumis', 4, 4, 6, { kw: ['polemique'], fx: [fx('casserole_recue', 'joueur', carte('tract', 2))] }),
   // Échelon 6. Le meeting en hologramme (2017), dans sept villes à la fois : vos « Quand il attaque » jouent deux fois,
   // et chacune de ses attaques fait gonfler tous les Insoumis, pour de bon (re-spécification du 7 novembre 2026 ; gonfler
-  // la valeur des Tracts payait trop tard, -0,09 place offert à la manche 9).
-  card('melenchon', 'Jean-Luc Mélenchon', 'insoumis', 6, 8, 8, {
-    kw: ['vedette'],
+  // la valeur des Tracts payait trop tard, -0,09 place offert à la manche 9). « Qu'ils s'en aillent tous ! » (son livre
+  // de 2010) : le Coup de balai, depuis le 13 novembre 2026.
+  card('melenchon', 'Jean-Luc Mélenchon', 'insoumis', 6, 7, 7, {
+    kw: ['vedette', 'balai'],
     fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'meeting' }), fx('meeting', 'camp', tract, { camp: 'insoumis', perma: true })],
   }),
 
@@ -165,6 +169,10 @@ export const CARDS: Card[] = [
   card('philippe', 'Édouard Philippe', 'macronie', 5, 8, 9, { fx: [fx('annonce', 'cible', { do: 'dorer', maxTier: 4 })] }),
   card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
   card('bayrou', 'François Bayrou', 'macronie', 4, 6, 8, { kw: ['ni_droite_ni_gauche'], fx: [fx('fin_tour', 'allies', { do: 'buff_par_ralliement', atk: 2, hp: 2 })] }),
+  // Vingt-trois 49.3 en vingt mois (2022-2024), le record depuis Rocard : vos 49.3 se déclenchent deux fois, le sien
+  // compris (13 novembre 2026). Un corps de multiplicateur, comme Lassalle, Chirac et Mitterrand. Son 49.3 à tous ses
+  // alliés la mettait en tête de l'échelon 4 (1,72 place) : il va à ses voisins, qu'on place.
+  card('borne', 'Élisabeth Borne', 'macronie', 4, 2, 7, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'debut_combat' }), fx('debut_combat', 'voisins', buff(2, 2))] }),
   card('attal', 'Gabriel Attal', 'macronie', 5, 8, 8, { fx: [fx('aura', 'soi', compteur('dores_joues', 6, 6))] }),
   // La Fête de la musique à l'Élysée, 21 juin 2018 : il fait la fête deux fois plus fort que les autres.
   // Échelon 6, clé de voûte du Ralliement : chaque Ralliement fait gonfler son hôte, d'autant plus qu'il en a déjà
@@ -193,6 +201,13 @@ export const CARDS: Card[] = [
   // Allié au RN en 2024 : un transfuge, qui se rallie (7 novembre 2026).
   card('ciotti', 'Éric Ciotti', 'republicains', 3, 6, 6, { kw: ['ralliement'], fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'serviteur', camp: 'rn', echelon: 0 })] }),
   card('retailleau', 'Bruno Retailleau', 'republicains', 4, 5, 9, { kw: ['porte_parole', 'immunite'] }),
+  // Un 49.3 sur le budget de la Sécurité sociale le 2 décembre 2024, censuré le 4 par 331 députés : le plus court
+  // passage à Matignon de la Ve République. Puis élu député de Paris le 28 septembre 2025 : son 49.3 gonfle les autres,
+  // il tombe, et se réincarne aussitôt (13 novembre 2026). Revanches et Héritages en profitent.
+  card('barnier', 'Michel Barnier', 'republicains', 4, 6, 6, { kw: ['retour'], fx: [fx('debut_combat', 'autres', buff(2, 2)), fx('debut_combat', 'soi', { do: 'detruire' })] }),
+  // Condamné en 2004 pour les emplois du RPR, parti enseigner au Québec, revenu maire de Bordeaux en 2006 puis ministre :
+  // « le meilleur d'entre nous » (Chirac). Le peuple oublie, il revient plus fort (13 novembre 2026).
+  card('juppe', 'Alain Juppé', 'republicains', 4, 5, 7, { kw: ['immunite'], fx: [fx('oubli', 'joue', buff(4, 4)), fx('oubli', 'joue', motCle('immunite'))] }),
   card('pecresse', 'Valérie Pécresse', 'republicains', 5, 6, 6, { fx: [fx('fin_tour', 'voisins', motCle('immunite'))] }),
   // 7 novembre 2026 : monte à l'échelon 5 et reprend le moteur de casseroles de Sarkozy, parti au 6. La casserole
   // Emploi fictif garde les Assistants.
@@ -278,8 +293,9 @@ export const CARDS: Card[] = [
     fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 }), fx('droit_de_reponse', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 })],
   }),
   card('roussel', 'Fabien Roussel', 'civile', 3, 1, 3, { fx: [fx('sort', 'allies', buff(1, 0))] }),
-  // « Nous, on n'a pas d'immunité ouvrière » : il répond quand on perd.
-  card('poutou', 'Philippe Poutou', 'civile', 3, 4, 6, { kw: ['vedette'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
+  // « Nous, on n'a pas d'immunité ouvrière » : il répond quand on perd. Au débat du 4 avril 2017, il tape sur Fillon et
+  // sur Le Pen d'un même élan : le Coup de balai (13 novembre 2026).
+  card('poutou', 'Philippe Poutou', 'civile', 3, 2, 6, { kw: ['vedette', 'balai'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
   // Candidat le 9 novembre 2026 : « ni de droite, ni de gauche », et « Je sais ce que c'est de se battre, de tomber,
   // de se relever toujours » (vidéo de sa candidature). Il compte pour chaque parti, et se relève une fois.
   card('riner', 'Teddy Riner', 'civile', 4, 5, 8, { kw: ['ni_droite_ni_gauche', 'retour'] }),

@@ -16,7 +16,8 @@ const DURATION_MS: Record<CombatEvent['e'], number> = {
   mot_cle: 220,
   effet: 420,
   mort: 420,
-  retour: 450,
+  /** La réincarnation descend dans sa lumière bleue : elle doit se voir. */
+  retour: 700,
   penalite: 250,
   invocation: 350,
   exil: 400,

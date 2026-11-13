@@ -4,7 +4,7 @@ import type { CombatEvent } from '#src/engine/types.ts';
 export function combatCharacterIds(log: CombatEvent[]): string[] {
   const ids = log.flatMap((event) => {
     if (event.e === 'debut') return [...event.sides[0], ...event.sides[1]].map((unit) => unit.cardId);
-    return event.e === 'invocation' ? [event.unit.cardId] : [];
+    return event.e === 'invocation' || event.e === 'retour' ? [event.unit.cardId] : [];
   });
   return [...new Set(ids)];
 }

@@ -35,7 +35,7 @@ export function narrateCombatEvent(event: CombatEvent, sides: CombatSides): stri
     case 'mort':
       return `${findName(sides, event.uid)} est à terre.`;
     case 'retour':
-      return `${findName(sides, event.uid)} fait son retour en politique.`;
+      return `${event.unit.name} se réincarne : retour en politique !`;
     case 'penalite':
       return `Cette mort coûte ${event.value} sondages.`;
     case 'invocation':

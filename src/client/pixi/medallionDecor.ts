@@ -68,6 +68,7 @@ export class MedallionDecor {
     if (has('cumul')) this.addSashes();
     if (has('retour')) this.addComebackBadge();
     if (has('vedette')) this.addStar();
+    if (has('balai')) this.addBroomBadge();
     this.addMarks(effects);
   }
 
@@ -160,6 +161,19 @@ export class MedallionDecor {
     badge.addChild(disc, icon('comeback', 24, '#ffffff', '#0c2a55'));
     badge.position.set(12, 22);
     this.front.addChild(badge);
+  }
+
+  /** The Coup de balai (`.broom`): a broom on an orange disc, on the right, swaying as if it swept. */
+  private addBroomBadge(): void {
+    const badge = new Container();
+    const disc = new Graphics().circle(0, 0, 20).fill('#e8731c').stroke({ width: 3, color: '#4a1d00' });
+    disc.circle(-4, -5, 11).fill({ color: '#ffc27a', alpha: 0.5 });
+    badge.addChild(disc, icon('broom', 24, '#ffffff', '#4a1d00'));
+    badge.position.set(W - 12, 60);
+    this.front.addChild(badge);
+    this.animations.push((time) => {
+      badge.rotation = (Math.sin((time / 1.4) * Math.PI * 2) * 10 * Math.PI) / 180;
+    });
   }
 
   /** The Vedette's star over its head (`.star`), bobbing. */

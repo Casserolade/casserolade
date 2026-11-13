@@ -31,6 +31,7 @@ interface Light extends LightSpec {
 
 const WARM = '#fff1b8';
 const GOLD = '#ffd84a';
+const REBIRTH = '#7fd3ff';
 const DEATH_SPARKS = 12;
 
 function easeOut(progress: number): number {
@@ -75,6 +76,25 @@ export class LightLayer {
     this.spawn({ texture: this.textures.glow, x, y, color, seconds: 0.7, from: [120 * s, 120 * s], to: [260 * s, 260 * s], peakAt: 0.35, alpha: 0.55 });
     for (let index = 0; index < 4; index++) {
       this.spawn({ texture: this.textures.spark, x: x + (Math.random() - 0.5) * 80 * s, y: y + 20 * s, color, seconds: 0.8, from: [26 * s, 26 * s], to: [10 * s, 10 * s], dy: (-120 - Math.random() * 60) * s, delay: index * 0.07 });
+    }
+  }
+
+  /**
+   * A reincarnation (Retour en politique): a blue column comes down where the politician fell, a ring closes in on
+   * the place, and glints fall into it, the opposite of a death.
+   */
+  rebirth(x: number, y: number, scale: number): void {
+    const s = scale;
+    this.spawn({ texture: this.textures.beam, x, y: y + 60 * s, color: REBIRTH, seconds: 0.9, from: [170 * s, 640 * s], to: [60 * s, 120 * s], peakAt: 0.15, rooted: true });
+    this.spawn({ texture: this.textures.ring, x, y, color: '#d6f3ff', seconds: 0.55, from: [380 * s, 240 * s], to: [80 * s, 60 * s], alpha: 0.8, delay: 0.1 });
+    this.spawn({ texture: this.textures.glow, x, y, color: REBIRTH, seconds: 0.8, from: [60 * s, 60 * s], to: [300 * s, 300 * s], peakAt: 0.45, delay: 0.2 });
+    for (let index = 0; index < DEATH_SPARKS; index++) {
+      const size = (16 + Math.random() * 22) * s;
+      this.spawn({
+        texture: this.textures.spark, x: x + (Math.random() - 0.5) * 120 * s, y: y - (180 + Math.random() * 160) * s, color: index % 3 === 0 ? '#ffffff' : REBIRTH,
+        seconds: 0.6 + Math.random() * 0.4, from: [size, size], to: [size * 0.4, size * 0.4], dx: (Math.random() - 0.5) * 40 * s, dy: (160 + Math.random() * 120) * s,
+        peakAt: 0.3, delay: Math.random() * 0.25,
+      });
     }
   }
 

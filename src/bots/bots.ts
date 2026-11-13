@@ -136,6 +136,8 @@ const KEYWORD_VALUE: Record<Keyword, number> = {
   ni_droite_ni_gauche: 1,
   ralliement: 0,
   vedette: 1,
+  /** Un Coup de balai frappe trois politiques au lieu d'un : vaut presque un Cumul des mandats, sans la riposte en plus. */
+  balai: 3,
 };
 
 /** Combien de fois un effet joue dans une partie, en ordre de grandeur. */
@@ -151,6 +153,8 @@ const TRIGGER_SCALE: Partial<Record<Trigger, number>> = {
   debauche: 1.5,
   rallie: 1.5,
   casserole_recue: 1,
+  // L'oubli du peuple : un scandale sur deux ou trois manches, et le Bracelet pour le hâter.
+  oubli: 0.8,
   depense: 2,
   celebration: 0.6,
   // Since 5 November 2026, every reply plays after a defeat, not only the leftmost one.
@@ -267,6 +271,8 @@ function actionValue(e: Effect): number {
 }
 
 function effectValue(e: Effect): number {
+  // Censuré par son propre 49.3 (Barnier) : il ne combat pas, son corps ne compte presque plus.
+  if (e.do === 'detruire' && e.to === 'soi' && e.when === 'debut_combat') return -8;
   return actionValue(e) * (TRIGGER_SCALE[e.when] ?? 1.2);
 }
 
@@ -467,6 +473,8 @@ function defectCost(c: Casserole, m: Minion): number {
   if (c.noAttack) v += m.atk * 0.5 + 2;
   if (c.locked) v += 1;
   if (c.silence) v += m.effects.reduce((sum, e) => sum + effectValue(e), 0);
+  // L'éclaboussure : ses voisins perdent -N/-N en combat, deux combats durant (13 novembre 2026).
+  v += (c.splash ?? 0) * 2 * 2;
   return v;
 }
 
@@ -566,8 +574,8 @@ function wantsBracelet(view: PlayerView): boolean {
 // Les multiplicateurs (difficile) : Lassalle, Chirac, Mitterrand, Mélenchon, Macron valent ce qu'ils doublent, et une
 // carte vaut plus quand son déclencheur est déjà doublé. Avant, un multiplicateur valait 12, quel que soit le plateau.
 
-type Multiplied = 'annonce' | 'heritage' | 'fin_tour' | 'celebration' | 'meeting';
-const MULTIPLIED: Multiplied[] = ['annonce', 'heritage', 'fin_tour', 'celebration', 'meeting'];
+type Multiplied = 'annonce' | 'heritage' | 'fin_tour' | 'celebration' | 'meeting' | 'debut_combat';
+const MULTIPLIED: Multiplied[] = ['annonce', 'heritage', 'fin_tour', 'celebration', 'meeting', 'debut_combat'];
 
 /** Combien de fois un déclencheur joue avec ce plateau : 1, 2, ou 3 avec un multiplicateur doré (le plus fort compte). */
 function multiplier(board: Minion[], trigger: Multiplied): number {
@@ -611,7 +619,9 @@ function engineWorth(effects: Effect[], golden: boolean, view: PlayerView, self?
 
 /** Le Bracelet : un scandale qui coûte. */
 function braceletUseful(view: PlayerView): boolean {
-  return view.board.some((m) => m.scandal && m.casseroles.slice(m.oublie).reduce((s, id) => s + defectCost(CASSEROLE_BY_ID[id], m), 0) > 3);
+  // « Après l'oubli du peuple » (Juppé) : un Bracelet sur n'importe quel scandale paie tout de suite.
+  const forgets = view.board.some((m) => m.effects.some((e) => e.when === 'oubli'));
+  return view.board.some((m) => m.scandal && (forgets || m.casseroles.slice(m.oublie).reduce((s, id) => s + defectCost(CASSEROLE_BY_ID[id], m), 0) > 3));
 }
 
 // Le placement.
@@ -627,6 +637,10 @@ function preferredOrder(board: Minion[]): Minion[] {
     if (m.effects.some((e) => e.when === 'heritage')) s -= 10;
     // « Quand il attaque » : devant, il attaque le premier et plus souvent (re-spécification du 7 novembre 2026).
     if (m.effects.some((e) => e.when === 'meeting')) s -= 30;
+    // Un Coup de balai frappe tôt : devant aussi (13 novembre 2026).
+    if (m.keywords.includes('balai')) s -= 20;
+    // Un scandale qui éclabousse : au bout du plateau, il n'a qu'un voisin (13 novembre 2026).
+    if ((m.scandal?.splash ?? 0) > 0) s += 200;
     return s;
   };
   return [...board].sort((a, b) => score(a) - score(b));
