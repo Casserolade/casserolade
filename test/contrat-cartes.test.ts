@@ -56,6 +56,8 @@ function world(card: Card, when: Trigger, keepTrigger: boolean, variant: number)
   }
   allies[1].golden = true;
   allies[1].copies = 3;
+  // Ce plateau a été joué : les compteurs « cette partie » le savent (Cohn-Bendit compte les Écologistes joués, lui compris).
+  p.counters.ecologistes_joues = allies.filter((m) => m.camp === 'ecologistes').length + (card.camp === 'ecologistes' ? 1 : 0);
   for (const a of allies) {
     a.atk += 3;
     a.hp += 3;
