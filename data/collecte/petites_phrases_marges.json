@@ -2262,5 +2262,62 @@
       }
     ],
     "meilleure": 3
+  },
+  {
+    "id": "hassan",
+    "nom": "Rima Hassan",
+    "phrases": [
+      {
+        "texte": "Tremblez. Ce n'est qu'un début.",
+        "contexte": "Message sur X après que François-Xavier Bellamy a bloqué son élection à la vice-présidence d'une sous-commission du Parlement européen",
+        "date": "2024-07-23",
+        "source": "https://www.publicsenat.fr/actualites/politique/parlement-europeen-francois-xavier-bellamy-porte-plainte-contre-rima-hassan",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Citée entre guillemets par la presse ; Bellamy porte plainte, la présidente du Parlement ouvre une enquête."
+      }
+    ]
+  },
+  {
+    "id": "barnier",
+    "nom": "Michel Barnier",
+    "phrases": [
+      {
+        "texte": "J'arrive avec beaucoup d'humilité",
+        "contexte": "Sa rentrée à l'Assemblée nationale, élu député de Paris neuf mois après sa censure",
+        "date": "2025-09-29",
+        "source": "https://lcp.fr/actualites/j-arrive-avec-beaucoup-d-humilite-michel-barnier-fait-sa-rentree-a-l-assemblee-nationale",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Titre et citation de LCP."
+      }
+    ]
+  },
+  {
+    "id": "borne",
+    "nom": "Élisabeth Borne",
+    "phrases": [
+      {
+        "texte": "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire",
+        "contexte": "À l'Assemblée, en engageant la responsabilité du gouvernement par le 49.3 sur la réforme des retraites",
+        "date": "2023-03-16",
+        "source": "https://www.boursorama.com/actualites/france-retraites-tolle-politique-apres-le-recours-gouvernemental-au-49-3-2bbc953637af65dfe0e20c11da6b5d7f",
+        "type_source": "presse",
+        "fiabilite": "verifie",
+        "moments": [
+          "pose",
+          "celebration"
+        ],
+        "note": "Citée par Reuters le jour même."
+      }
+    ]
   }
 ]

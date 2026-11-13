@@ -189,7 +189,7 @@ test('les Tracts gagnés en combat restent pour la partie', () => {
 
 test('Guedj grandit pour de bon en attaquant, et avec son Retour il attaque de nouveau', () => {
   const guedj = makeMinion(CARD_BY_ID.guedj, uid++);
-  const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(1, 300)], 6);
+  const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(5, 300)], 6);
   const gains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid);
   assert.ok(gains.length >= 2, 'une attaque, un Retour, et une autre attaque');
   assert.ok(gains.every((g) => g.atk === 1 && g.hp === 0));

@@ -2538,6 +2538,30 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
     "heros": [
       "C'est à la fois vertigineux et très enthousiasmant."
     ]
+  },
+  "hassan": {
+    "pose": [
+      "Tremblez. Ce n'est qu'un début."
+    ],
+    "celebration": [
+      "Tremblez. Ce n'est qu'un début."
+    ]
+  },
+  "barnier": {
+    "pose": [
+      "J'arrive avec beaucoup d'humilité"
+    ],
+    "celebration": [
+      "J'arrive avec beaucoup d'humilité"
+    ]
+  },
+  "borne": {
+    "pose": [
+      "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire"
+    ],
+    "celebration": [
+      "On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire"
+    ]
   }
 };
 
