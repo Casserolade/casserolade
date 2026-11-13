@@ -17,6 +17,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 
 **Nouveaux politiques et nouvelles casseroles**
 - Rima Hassan chez les Insoumis, Élisabeth Borne dans la Macronie (vos 49.3 jouent deux fois), Michel Barnier et Alain Juppé chez les Républicains, avec huit casseroles.
+- Rima Hassan, Élisabeth Borne et Alain Juppé ont leurs visages (rire, aïe, choc), et les quatre nouveaux leurs premières vraies voix.
 - Dix casseroles pour les camps qui en avaient le moins : Jean-Marie Le Pen (« Un point de détail »), Grégoire de Fournas, Jean-Philippe Tanguy et Julien Odoul au RN ; Nicolas Bay, Nicolas Dupont-Aignan et Sarah Knafo à Reconquête ; Delphine Batho, Yannick Jadot et Marine Tondelier chez les Écologistes.
 
 **Casseroles et sorts**
