@@ -68,8 +68,8 @@ interface Battle {
   rng: Rng;
   /** Les effets « une fois par combat » déjà joués : `uid:index`. */
   once: Set<string>;
-  /** Les serviteurs déjà relancés pendant ce combat (règle R4). */
-  retriggered: Set<number>;
+  /** Les relances déjà faites pendant ce combat, une clé par relanceur et politique relancé (règle R4). */
+  retriggered: Set<string>;
   /** La taille du plateau : les invocations s'arrêtent là, comme au recrutement. */
   boardSize: number;
   /** Les ripostes déjà jouées : une chaîne de ripostes s'arrête à MAX_RIPOSTES. */
@@ -115,7 +115,7 @@ function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
     polemiqueResistUsed: false,
     exileUsed: false,
     penalty: 0,
-    persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 0, hp: 0 } },
+    persist: { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 0, hp: 0 }, tracts: 0 },
     campBuffs: [...(s.campBuffs ?? [])],
   };
 }
@@ -352,7 +352,11 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       break;
     }
     case 'jouer_tract':
-      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, side.tract.atk * k, side.tract.hp * k, eff.perma);
+      // Un Tract joué par un effet compte comme un sort lancé, en combat aussi (règle R5) : compté après le combat.
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) {
+        addStats(b, side, u, side.tract.atk * k, side.tract.hp * k, eff.perma);
+        side.persist.tracts++;
+      }
       break;
     case 'camp_buff': {
       const gain = { camp: eff.camp, card: eff.card, atk: eff.atk * k, hp: eff.hp * k };
@@ -407,9 +411,10 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       break;
     case 'declencher':
       for (const u of allyTargets(b, side, self, index, eff, trigger)) {
-        // Règle R4 : un relanceur ne relance pas deux fois le même serviteur dans le combat.
-        if (u === self || b.retriggered.has(u.origin)) continue;
-        b.retriggered.add(u.origin);
+        // Règle R4 : un relanceur ne relance pas deux fois le même politique dans le combat ; deux relanceurs s'additionnent.
+        const key = `${self.origin}>${u.origin}`;
+        if (u === self || b.retriggered.has(key)) continue;
+        b.retriggered.add(key);
         const at = side.units.indexOf(u);
         // Doré, il joue deux fois ce qu'il relance ; une relance compte comme un effet rejoué. Les multiplicateurs
         // s'appliquent aussi à ce qui est relancé : Mitterrand vivant double les Héritages relancés (règle R18).

@@ -42,6 +42,7 @@ import {
   returnToPool,
   settleDiscovers,
   shopCardGain,
+  spellRelaunches,
   spellCost,
   spend,
   startOfTurn,
@@ -408,7 +409,7 @@ function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): A
   }
   // Un sort qui serait perdu est refusé, et reste en main : rien à relancer, déjà relancé cette manche (R4), mot-clé
   // déjà là, boutique vide, invocation sans place (7 novembre 2026).
-  const lost = lostSpellReason(spell, target, { board: p.board, shopSize: p.shop.length, boardLimit: boardLimit(game, p), relaunched: [...p.retriggered] });
+  const lost = lostSpellReason(spell, target, { board: p.board, shopSize: p.shop.length, boardLimit: boardLimit(game, p), relaunched: spellRelaunches(p) });
   if (lost) return fail(lost);
   if (held.count && held.count > 1) held.count--;
   else p.spells = p.spells.filter((x) => x !== held);
@@ -643,8 +644,8 @@ export interface PlayerView {
   buyCost: number;
   rollCost: number;
   freeRolls: number;
-  /** Les politiques déjà relancés cette manche (règle R4) : une relance ne les vise plus avant la suivante. */
-  relaunched: number[];
+  /** Ce que les sorts ont déjà relancé cette manche, `annonce:12` (règle R4) : le même sort ne les vise plus avant la suivante. */
+  relaunched: string[];
   /** Les effets « une fois par manche » déjà joués, `uid:index` dans les effets du politique (Sarkozy, Fillon, Messiha). */
   onceThisRound: string[];
   boardLimit: number;
@@ -759,7 +760,7 @@ export function viewFor(game: Game, seat: number): PlayerView {
     buyCost: buyCost(game, p),
     rollCost: rollCost(game, p),
     freeRolls: p.freeRolls,
-    relaunched: [...p.retriggered],
+    relaunched: spellRelaunches(p),
     onceThisRound: [...p.onceThisRound],
     boardLimit: boardLimit(game, p),
     scandalThreshold: scandalThreshold(game, p),
@@ -1010,8 +1011,9 @@ export function startCombats(game: Game): void {
     if (!p.alive) continue;
     p.endOfTurnSteps = [];
     settleDiscovers(game, p);
+    // Une découverte née de la Fin de tour (Chirac relance une Annonce qui découvre) attend le joueur : il choisira
+    // au début du recrutement suivant, comme après un Droit de réponse.
     endOfTurn(game, p);
-    settleDiscovers(game, p);
     heroEndOfTurn(p);
     p.lostLast = false;
   }

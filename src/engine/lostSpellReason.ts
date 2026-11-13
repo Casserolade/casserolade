@@ -7,8 +7,8 @@ export interface SpellTable {
   board: readonly Minion[];
   shopSize: number;
   boardLimit: number;
-  /** The minions already relaunched this round (rule R4). */
-  relaunched: readonly number[];
+  /** What spells already relaunched this round, one key per trigger and minion: `annonce:12` (rule R4). */
+  relaunched: readonly string[];
 }
 
 /**
@@ -21,13 +21,13 @@ export function lostSpellReason(spell: Spell, target: Minion | null, table: Spel
   for (const eff of spell.effects) {
     if (eff.do !== 'declencher') continue;
     if (!target) {
-      const open = table.board.some((m) => !table.relaunched.includes(m.uid) && relaunchable(m.effects, eff.trigger).length > 0);
+      const open = table.board.some((m) => !table.relaunched.includes(`${eff.trigger}:${m.uid}`) && relaunchable(m.effects, eff.trigger).length > 0);
       if (!open) return 'Aucun de vos politiques n\'a d\'effet à relancer cette manche.';
       continue;
     }
     const replayed = relaunchable(target.effects, eff.trigger);
     if (replayed.length === 0) return 'Ce politique n\'a rien à relancer.';
-    if (table.relaunched.includes(target.uid)) return 'Déjà relancé cette manche : un politique ne se relance qu\'une fois par manche.';
+    if (table.relaunched.includes(`${eff.trigger}:${target.uid}`)) return 'Déjà relancé par ce sort : il ne relance un politique qu\'une fois par manche.';
     if (replayed.every((e) => e.do === 'invoquer' || e.do === 'chaise_vide') && table.board.length >= table.boardLimit) {
       return 'Plateau complet : ce qu\'il invoque n\'aurait pas de place.';
     }

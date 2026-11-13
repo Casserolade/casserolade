@@ -610,16 +610,25 @@ test('Lassalle double les Fins de tour', () => {
   assert.equal(doucet.atk, before + 2);
 });
 
-test('Jadot relance la Fin de tour de ses voisins, une seule fois par manche (règle R4)', () => {
+test('Jadot relance la Fin de tour de ses voisins, une fois par passage de la sienne (règle R4)', () => {
   const { game, p, buy } = setup();
   buy('doucet');
   buy('jadot');
-  buy('lassalle');
   const doucet = p.board[0];
-  const before = doucet.atk;
+  const alone = doucet.atk;
   startCombats(game);
-  // Doucet joue deux fois (Lassalle). Jadot ne le relance qu'une fois (R4), mais la relance suit Lassalle (R18).
-  assert.equal(doucet.atk, before + 4);
+  // Sans multiplicateur : sa Fin de tour, puis une relance de Jadot.
+  assert.equal(doucet.atk, alone + 2);
+
+  const other = setup();
+  other.buy('doucet');
+  other.buy('jadot');
+  other.buy('lassalle');
+  const second = other.p.board[0];
+  const before = second.atk;
+  startCombats(other.game);
+  // Doucet joue deux fois (Lassalle). Jadot joue deux fois aussi, et chacune de ses relances suit Lassalle (R18).
+  assert.equal(second.atk, before + 6);
 });
 
 test('Hollande : chaque allié tombé rend les Socialistes plus forts pour de bon, même en combat', () => {
