@@ -304,8 +304,9 @@ export const CARDS: Card[] = [
     fx: [fx('fin_tour', 'aleatoire', buff(1, 1)), fx('fin_tour', 'aleatoire', buff(1, 1)), fx('celebration', 'aleatoire', buff(2, 2))],
   }),
   // Le chanteur en tête de la liste « Alliance jaune » aux européennes de 2019 : un ridicule en attire un autre, il
-  // découvre un Ridicule (13 novembre 2026).
-  card('lalanne', 'Francis Lalanne', 'civile', 2, 5, 6, {
+  // découvre un Ridicule (13 novembre 2026). 4/4 depuis le même jour (5/6 avant) : sa copie à chaque victoire en faisait
+  // le meilleur achat du début de partie, présent sur 41 % des plateaux vainqueurs ; à 4/4, sur 19 %.
+  card('lalanne', 'Francis Lalanne', 'civile', 2, 4, 4, {
     kw: ['vedette'],
     fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'casserole', genre: 'ridicule' }), fx('celebration', 'joueur', carte('copie'))],
   }),

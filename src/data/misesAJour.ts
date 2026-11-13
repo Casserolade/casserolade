@@ -1,5 +1,5 @@
 import type { Card, Casserole, Spell } from '../engine/types.ts';
-import { CARTES as CARTES_0_3_9 } from './misesAJour/0.3.9.ts';
+import { CARTES as CARTES_0_4_0 } from './misesAJour/0.4.0.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -42,12 +42,15 @@ export interface PatchNote {
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
   {
-    version: '0.3.9',
+    version: '0.4.0',
     date: '13 novembre 2026',
-    title: 'Réincarnation, Coup de balai et présidents',
+    title: 'Réincarnation, Coup de balai et clés de voûte',
     summary: [
       'Le Retour en politique devient une vraie réincarnation : le politique meurt, son Héritage joue, puis il revient comme sa carte, avec 1 PV, s\'il reste de la place.',
       'Nouveau mot-clé, le Coup de balai : l\'attaque touche aussi les voisins de la cible. Le placement compte.',
+      'Chaque camp a un montage qui gonfle jusqu\'au bout : Cohn-Bendit compte les Écologistes joués dans la partie, Strauss-Kahn lègue toutes ses stats, Odoul fait grossir le RN de la boutique à chaque débauchage, Vallaud grandit à chaque allié tombé.',
+      'Les relances s\'additionnent : Chirac et Seconde délibération, Jadot et Conseil des ministres ; Lassalle fait rejouer Chirac et Jadot.',
+      'Les parties durent une manche de plus : 34 sondages au départ.',
       'Chaque casserole a désormais un défaut qui coûte, et un scandale peut éclabousser ses voisins.',
       'De Gaulle, Giscard, Chirac, Mitterrand et Macron passent au niveau des chefs de camp.',
       'Quatre nouveaux politiques, Rima Hassan, Élisabeth Borne, Michel Barnier et Alain Juppé. Dix-huit casseroles, dont dix pour le RN, Reconquête et les Écologistes, qui en avaient le moins.',
@@ -74,6 +77,27 @@ export const MISES_A_JOUR: PatchNote[] = [
         after: 'Chaque casserole de la partie sort à égalité. Pour celles de vos politiques, il y a le sort « À la une ».',
       },
       { term: 'Découvrez une casserole', after: 'Trois casseroles de la partie au choix, jamais une que vous avez déjà. Elle arrive en main, gratuite.' },
+      {
+        term: 'Les relances',
+        before: 'Un politique n\'était relancé qu\'une fois par manche, quel que soit le relanceur : un sort de relance ne rapportait rien à côté de Chirac ou de Jadot.',
+        after: 'Chaque relanceur relance un politique une fois : deux relanceurs s\'additionnent, et un multiplicateur fait rejouer le relanceur (Lassalle avec Chirac ou Jadot).',
+      },
+      {
+        term: 'Les Tracts joués en combat',
+        before: 'Ils ne comptaient pas comme des sorts lancés.',
+        after: 'Ils comptent, une fois le combat fini : « par Tract lancé » et « Après que vous lancez un sort » les voient.',
+      },
+      {
+        term: 'Une découverte en fin de tour',
+        before: 'La première carte était prise d\'office.',
+        after: 'Le choix reste ouvert : il s\'affiche au début du recrutement suivant.',
+      },
+      { term: 'Sondages de départ', before: '28.', after: '34 : une manche de plus, en moyenne, pour que les moteurs de fin de partie tournent.' },
+      {
+        term: 'Le premier politique à mourir revient',
+        before: 'Le pouvoir de Hollande, Durif et Riner partait sur le premier mort, même un jeton.',
+        after: 'Il attend un politique : un jeton tombé ne le consomme pas.',
+      },
     ],
     why: {
       hassan: 'Chaque casserole d\'un allié lui rapporte deux Tracts.',
@@ -92,7 +116,14 @@ export const MISES_A_JOUR: PatchNote[] = [
       giscard: 'Sa Chaise vide avait ses PV et 0 d\'attaque ; elle a désormais ses stats : elle tient ce qu\'il tenait.',
       chirac: 'Candidat quatre fois, il revient toujours : les Annonces se rejouent à chaque fin de tour.',
       mitterrand: '« Je ne vous quitterai pas » : son Héritage reste pour de bon.',
-      lalanne: 'Un ridicule en attire un autre : il découvre un Ridicule.',
+      lalanne: 'Un ridicule en attire un autre : il découvre un Ridicule. 4/4 au lieu de 5/6 : sa copie à chaque victoire en faisait le meilleur achat du début de partie.',
+      cohn_bendit: 'Il compte les Écologistes joués dans la partie, et non plus ceux du plateau : son gain grandit tant qu\'on en joue.',
+      strauss_kahn: 'Il lègue toutes ses stats, plus seulement son attaque, et grandit de +3/+3 par Socialiste à chaque attaque.',
+      vallaud: 'Les Socialistes n\'avaient rien qui grandisse hors du politique de tête : chaque allié tombé le fait grandir pour de bon.',
+      odoul: 'Chaque débauchage fait grossir le RN de la boutique, donc le débauchage suivant.',
+      maillard: 'Les Ralliements de la Macronie avaient les corps les plus faibles : +2/+2 à l\'hôte.',
+      castaner: 'Un corps un peu plus solide.',
+      berge: 'Un corps un peu plus solide.',
       fuite_dans_la_presse: 'Une fuite, et l\'affaire sort : trois casseroles au choix.',
       a_la_une: 'Vos politiques font la une : leurs casseroles d\'abord, avec leur bonus de propriétaire.',
       grand_menage: 'Le Coup de balai, sur le politique de votre choix.',
@@ -101,6 +132,6 @@ export const MISES_A_JOUR: PatchNote[] = [
       tribune_libre: 'Retiré : il ne changeait presque rien à une partie.',
     },
     casserolesWhy: 'un vrai défaut pour chacune, qui coûte à tout porteur.',
-    cards: CARTES_0_3_9,
+    cards: CARTES_0_4_0,
   },
 ];
