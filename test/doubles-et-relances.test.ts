@@ -261,6 +261,24 @@ test('une affaire n\'arrive qu\'une fois : la boutique ne propose pas une casser
   }
 });
 
+test('la casserole de la boutique tire un camp d\'abord : un camp qui en a beaucoup ne sort pas plus souvent', () => {
+  const game = table(['republicains', 'reconquete', 'rn', 'ecologistes', 'insoumis']);
+  const p = game.players[0];
+  game.round = PARAMS.casseroleFromRound;
+  const seen: Record<string, number> = {};
+  const draws = 3000;
+  for (let i = 0; i < draws; i++) {
+    offerCasserole(game, p);
+    const camp = CARD_BY_ID[CASSEROLE_BY_ID[p.casseroleOffer as string].owner].camp;
+    seen[camp] = (seen[camp] ?? 0) + 1;
+  }
+  // Six camps avec la Société civile : un sixième chacun, quel que soit le nombre de casseroles du camp.
+  for (const camp of ['republicains', 'reconquete', 'rn', 'ecologistes', 'insoumis', 'civile']) {
+    const share = (seen[camp] ?? 0) / draws;
+    assert.ok(share > 0.13 && share < 0.21, `${camp} : ${(100 * share).toFixed(0)} % des offres`);
+  }
+});
+
 // Le scandale.
 
 test('un triple ne relance pas le scandale : il continue jusqu\'à sa date', () => {

@@ -688,17 +688,45 @@ function casserolesFor(game: Game, p: Player): Casserole[] {
 }
 
 /**
- * La casserole de la boutique, tirée à égalité parmi celles de la partie (13 novembre 2026 : plus de poids pour les
- * affaires « à la une » ni pour celles de vos politiques ; le sort « À la une » découvre celles de vos politiques).
+ * Les casseroles dans l'ordre d'un tirage : à chaque fois un camp d'abord, à égalité parmi ceux qui en ont encore une,
+ * puis une casserole de ce camp. Tirées à égalité entre toutes, celles des camps qui en ont le plus sortaient deux à
+ * quatre fois plus souvent (23 pour les Républicains, 6 pour Reconquête : un tiers des offres contre un dixième).
+ */
+function drawByCamp(game: Game, casseroles: Casserole[]): Casserole[] {
+  const byCamp = new Map<Camp, Casserole[]>();
+  for (const c of casseroles) {
+    const camp = CARD_BY_ID[c.owner].camp;
+    byCamp.set(camp, [...(byCamp.get(camp) ?? []), c]);
+  }
+  const drawn: Casserole[] = [];
+  while (byCamp.size > 0) {
+    const camp = game.rng.pick([...byCamp.keys()]);
+    const left = byCamp.get(camp) as Casserole[];
+    drawn.push(...left.splice(game.rng.int(left.length), 1));
+    if (left.length === 0) byCamp.delete(camp);
+  }
+  return drawn;
+}
+
+/**
+ * La casserole de la boutique : un camp de la partie tiré à égalité, puis une de ses casseroles (13 novembre 2026 :
+ * plus de poids pour les affaires « à la une » ni pour celles de vos politiques ; le sort « À la une » découvre celles
+ * de vos politiques).
  */
 export function offerCasserole(game: Game, p: Player): void {
   const present = game.round < game.params.casseroleFromRound ? [] : casserolesFor(game, p);
-  p.casseroleOffer = present.length > 0 ? game.rng.pick(present).id : null;
+  if (present.length === 0) {
+    p.casseroleOffer = null;
+    return;
+  }
+  const camps = [...new Set(present.map((c) => CARD_BY_ID[c.owner].camp))];
+  const camp = game.rng.pick(camps);
+  p.casseroleOffer = game.rng.pick(present.filter((c) => CARD_BY_ID[c.owner].camp === camp)).id;
 }
 
 /**
  * Trois casseroles à choisir (13 novembre 2026) : d'un genre (les Ridicules de Lalanne), ou d'abord celles de vos
- * politiques, complétées au hasard par d'autres (« À la une »).
+ * politiques, complétées par d'autres (« À la une »). Les autres viennent camp par camp, comme en boutique.
  */
 function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false): void {
   // Une affaire n'arrive qu'une fois : ni celle de la boutique, ni une casserole d'un choix qui attend déjà (un Lalanne
@@ -707,7 +735,7 @@ function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours 
   const present = casserolesFor(game, p).filter((c) => (!kind || c.kind === kind) && !waiting.has(c.id));
   const owned = new Set([...p.board, ...p.hand].map((m) => m.cardId));
   const first = yours ? game.rng.shuffle(present.filter((c) => owned.has(c.owner))) : [];
-  const rest = game.rng.shuffle(present.filter((c) => !first.includes(c)));
+  const rest = drawByCamp(game, present.filter((c) => !first.includes(c)));
   queueOffer(p, { options: [...first, ...rest].slice(0, 3).map((c) => c.id), kind: 'casserole' });
 }
 

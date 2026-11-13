@@ -351,18 +351,22 @@ test('le Bracelet suit les scandales : il arrive en boutique quand il sert, mêm
   assert.ok(pendant > 140 && pendant < 260, `une boutique sur deux pendant un scandale : ${pendant} sur 400`);
 });
 
-test('la boutique tire chaque casserole de la partie à égalité, celles de vos politiques comprises', () => {
+test('la boutique tire un camp d\'abord, puis une de ses casseroles : celles de vos politiques n\'ont pas de poids en plus', () => {
   const { game, p, buy } = setup(11);
   buy('sarkozy');
   game.round = game.params.casseroleFromRound;
   const inGame = CASSEROLES.filter((c) => game.poolTotal.has(c.owner));
-  const sarkozy = inGame.filter((c) => c.owner === 'sarkozy').map((c) => c.id);
+  const campOf = (c: { owner: string }) => CARD_BY_ID[c.owner].camp;
+  const camps = new Set(inGame.map(campOf)).size;
+  const republicans = inGame.filter((c) => campOf(c) === 'republicains');
+  const sarkozy = republicans.filter((c) => c.owner === 'sarkozy').map((c) => c.id);
   let tirages = 0;
   for (let i = 0; i < 6000; i++) {
     offerCasserole(game, p);
     if (sarkozy.includes(p.casseroleOffer as string)) tirages++;
   }
-  const attendu = sarkozy.length / inGame.length;
+  // Son camp une fois sur le nombre de camps, puis ses casseroles à leur part dans celles du camp.
+  const attendu = (1 / camps) * (sarkozy.length / republicans.length);
   assert.ok(Math.abs(tirages / 6000 - attendu) < 0.02, `${tirages / 6000} au lieu de ${attendu}`);
 });
 
