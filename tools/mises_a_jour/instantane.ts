@@ -7,7 +7,7 @@ import type { Card, Casserole, Spell } from '../../src/engine/types.ts';
  * casseroles et les sorts nouveaux ou changés depuis la version précédente. L'ancienne version se lit dans une copie
  * du dépôt à son commit :
  *   git worktree add /tmp/v-avant <commit de la version précédente>
- *   node tools/mises_a_jour/instantane.ts /tmp/v-avant 0.3.9
+ *   node tools/mises_a_jour/instantane.ts /tmp/v-avant 0.4.0
  * Écrit src/data/misesAJour/<version>.ts. Le texte de la version (en bref, règles, pourquoi) s'écrit à la main dans
  * src/data/misesAJour.ts.
  */

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.3.9 — 13 novembre 2026
+## 0.4.0 — 13 novembre 2026
 
 Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jour
 
@@ -9,6 +9,11 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Nouveau mot-clé, le Coup de balai : ses attaques touchent aussi les voisins de sa cible. Poutou et Mélenchon l'ont, la casserole « Le Kärcher » et le sort Grand ménage le donnent.
 - Chaque casserole a un défaut qui coûte à tout porteur : dix-huit sont retouchées. Nouveau défaut, l'éclaboussure : en scandale, le politique fait perdre -2/-2 à ses voisins en combat.
 - Nouveau déclencheur, « Après l'oubli du peuple » : quand le scandale d'un allié s'efface, avec le temps ou le Bracelet électronique.
+- Les relances s'additionnent : chaque relanceur relance un politique une fois, et un multiplicateur fait rejouer le relanceur. Seconde délibération rapporte à côté de Chirac, Conseil des ministres à côté de Jadot, et Lassalle fait rejouer la Fin de tour de Chirac et de Jadot.
+- Les Tracts joués en combat (Mélenchon) comptent comme des sorts lancés, une fois le combat fini : Trouvé, Schiappa et Roussel les voient.
+- Une découverte née d'une Fin de tour n'est plus prise d'office : le choix s'affiche au début du recrutement suivant.
+- Les parties commencent à 34 sondages au lieu de 28 : une manche de plus en moyenne.
+- Le pouvoir « le premier politique à mourir revient » (Hollande, Durif, Riner) attend un politique : un jeton tombé ne le consomme plus.
 
 **Nouveaux politiques et nouvelles casseroles**
 - Rima Hassan chez les Insoumis, Élisabeth Borne dans la Macronie (vos 49.3 jouent deux fois), Michel Barnier et Alain Juppé chez les Républicains, avec huit casseroles.
@@ -22,6 +27,15 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 **Équilibrage**
 - Les présidents passent au niveau des chefs de camp : la Chaise vide de Giscard a ses stats, l'Héritage de Mitterrand reste pour de bon, Chirac rejoue les Annonces à chaque fin de tour, chaque politique joué après de Gaulle devient Ni droite ni gauche avec +2/+2, et Macron amène Darmanin dans votre main.
 - Les Socialistes, dont le Retour est le moteur, sont renforcés après la réincarnation : Thévenoud 2/3, Guedj +1/+1 quand il attaque, Valls 3/3. Riner passe à 6/9, Peltier à 7/8, Mélenchon à 7/7 avec le Coup de balai.
+- Chaque camp a un montage qui gonfle jusqu'en fin de partie. Cohn-Bendit compte les Écologistes joués dans la partie, et non plus ceux du plateau. Strauss-Kahn lègue toutes ses stats et gagne +3/+3 par Socialiste quand il attaque. Odoul fait grossir le RN de la boutique à chaque débauchage. Vallaud gagne +1/+1 pour de bon à chaque allié tombé.
+- Macronie : Maillard donne +2/+2 à l'hôte d'un Ralliement, Castaner passe à 3/4 et Bergé à 4/4.
+- Lalanne passe de 5/6 à 4/4.
+
+**Corrections**
+- Giscard détruit au recrutement laissait une Chaise vide sans attaque : elle a ses stats, comme en combat.
+- Le budget d'une Annonce relancée par Chirac en fin de tour était perdu : il arrive à la manche suivante.
+- Deux découvertes de casseroles à la suite pouvaient proposer la même, ou celle de la boutique.
+- Hidalgo et Primaire disent l'échelon du politique découvert : le vôtre.
 
 **Le site**
 - Une page « Mises à jour et équilibrages » montre chaque version, ses règles et ses cartes, avant et après.
