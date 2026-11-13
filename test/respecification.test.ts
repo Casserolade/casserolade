@@ -472,6 +472,7 @@ test('keywordsAlreadyThere ne vise que les sorts qui ne donnent que des mots-cl√
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.immunite_parlementaire.effects, ['immunite']), true);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.immunite_parlementaire.effects, []), false);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.elements_de_langage.effects, ['porte_parole']), false);
+  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.temps_de_parole.effects, ['porte_parole']), false);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.sondage_flatteur.effects, []), false);
 });
 

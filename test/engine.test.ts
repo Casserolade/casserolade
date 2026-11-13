@@ -386,6 +386,27 @@ test('« À la une » découvre d\'abord les casseroles de vos politiques, compl
   assert.ok(p.spells.some((s) => s.casseroleId === cahuzac[0]), 'la casserole va en main, gratuite');
 });
 
+test('Temps de parole : le seul sort qui retire Porte-parole, même à un politique qui ne bouge plus ; il le rend aussi', () => {
+  const { game, p, buy } = setup();
+  buy('delogu'); // Porte-parole.
+  buy('kazib');
+  const [delogu, kazib] = p.board;
+  delogu.locked = true;
+  const cast = (target: Minion) => {
+    addSpellToHand(game, p, 'temps_de_parole');
+    const held = p.spells.find((x) => x.spellId === 'temps_de_parole') as { uid: number };
+    assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid, target: target.uid }).ok, true);
+  };
+  cast(delogu);
+  assert.ok(!delogu.keywords.includes('porte_parole'), 'on le lui reprend');
+  cast(kazib);
+  assert.ok(kazib.keywords.includes('porte_parole'), 'on le donne à qui ne l\'a pas');
+  cast(delogu);
+  assert.ok(delogu.keywords.includes('porte_parole'), 'et on le lui rend');
+  const removers = SPELLS.filter((spell) => spell.effects.some((e) => (e.do === 'basculer' || e.do === 'retirer') && e.keyword === 'porte_parole'));
+  assert.deepEqual(removers.map((spell) => spell.id), ['temps_de_parole']);
+});
+
 test('Lalanne découvre trois Ridicules à 2 ou moins, jamais une casserole que le joueur a déjà', () => {
   for (let seed = 1; seed <= 20; seed++) {
     const { game, p, buy } = setup(seed);
