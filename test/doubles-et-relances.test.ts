@@ -466,6 +466,105 @@ test('une affaire n\'arrive qu\'une fois : deux découvertes de casseroles ne pr
   }
 });
 
+// La règle R4, par relanceur : deux relanceurs s'additionnent, et un multiplicateur fait rejouer le relanceur.
+
+function tracts(game: Game): number {
+  return game.players[0].spells.find((s) => s.spellId === 'tract')?.count ?? 0;
+}
+
+test('R4 : Seconde délibération et Chirac relancent chacun l\'Annonce du même politique', () => {
+  const game = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+  const p = game.players[0];
+  const kazib = lay(game, 'kazib');
+  lay(game, 'chirac');
+  const start = tracts(game);
+  assert.equal(castSpell(game, 'seconde_deliberation', kazib).ok, true);
+  assert.equal(tracts(game) - start, 2, 'le sort relance Kazib, deux fois avec Chirac');
+  endOfTurn(game, p);
+  assert.equal(tracts(game) - start, 4, 'Chirac le relance encore en fin de tour : le sort n\'est pas perdu');
+  assert.equal(castSpell(game, 'seconde_deliberation', kazib).ok, false, 'le même sort ne le relance pas deux fois dans la manche');
+});
+
+test('R4 : Lassalle fait rejouer la Fin de tour de Chirac, qui relance encore les Annonces', () => {
+  const gained = (withLassalle: boolean) => {
+    const game = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+    lay(game, 'kazib');
+    lay(game, 'chirac');
+    if (withLassalle) lay(game, 'lassalle');
+    const start = tracts(game);
+    endOfTurn(game, game.players[0]);
+    return tracts(game) - start;
+  };
+  assert.equal(gained(false), 2);
+  assert.equal(gained(true), 4, 'doubler rapporte toujours');
+});
+
+test('R4 : Conseil des ministres rapporte aussi aux voisins de Jadot', () => {
+  const grown = (withSpell: boolean) => {
+    const game = table(['ecologistes', 'macronie', 'republicains', 'socialistes', 'insoumis']);
+    const doucet = lay(game, 'doucet');
+    lay(game, 'jadot');
+    const start = doucet.atk;
+    if (withSpell) assert.equal(castSpell(game, 'conseil_des_ministres').ok, true);
+    endOfTurn(game, game.players[0]);
+    return doucet.atk - start;
+  };
+  assert.equal(grown(false), 2, 'sa Fin de tour, puis celle que Jadot relance');
+  assert.ok(grown(true) > grown(false), 'le sort ajoute les siennes');
+});
+
+test('R4 : deux Jadot côte à côte ne se relancent pas sans fin', () => {
+  const game = table(['ecologistes', 'macronie', 'republicains', 'socialistes', 'insoumis']);
+  const p = game.players[0];
+  const doucet = lay(game, 'doucet');
+  lay(game, 'jadot');
+  lay(game, 'jadot');
+  lay(game, 'lassalle');
+  const start = doucet.atk;
+  endOfTurn(game, p);
+  assert.ok(doucet.atk - start >= 4 && doucet.atk - start <= 30, `Doucet gagne ${doucet.atk - start}`);
+  assert.ok(p.retriggered.size <= 3 * 7 * 7, 'un nombre fini de relances');
+});
+
+test('une découverte née de la Fin de tour attend le joueur au recrutement suivant', () => {
+  const game = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+  const p = game.players[0];
+  lay(game, 'branco');
+  settle(game);
+  lay(game, 'chirac');
+  settle(game);
+  const held = p.spells.length;
+  for (const q of game.players) q.hp = 999;
+  resolveRound(game);
+  assert.equal(game.phase, 'recrutement');
+  assert.ok(p.discover && p.discover.kind === 'sort', 'le choix est resté ouvert');
+  assert.equal(offers(game), 2, 'Chirac a relancé deux fois l\'Annonce de Branco');
+  assert.equal(p.spells.length, held, 'rien n\'a été pris d\'office');
+  assert.equal(applyAction(game, 0, { t: 'roll' }).ok, false, 'il choisit d\'abord');
+  settle(game);
+  assert.equal(p.spells.length, held + 2);
+  assert.deepEqual(invariantViolations(game), []);
+});
+
+test('les Tracts que Mélenchon joue en combat comptent comme des Tracts lancés', () => {
+  const game = table(['insoumis', 'macronie', 'republicains', 'rn', 'socialistes']);
+  const p = game.players[0];
+  lay(game, 'melenchon');
+  const trouve = lay(game, 'trouve');
+  const roussel = lay(game, 'roussel');
+  const before = { counted: p.counters.tracts, atk: trouve.atk, hp: trouve.hp, roussel: roussel.atk };
+  for (const q of game.players) q.hp = 999;
+  game.players[1].board = [{ ...makeMinion(CARD_BY_ID.kazib, 9100), atk: 1, hp: 400 }];
+  resolveRound(game);
+  const played = p.counters.tracts - before.counted;
+  assert.ok(played >= 4, `${played} Tracts comptés : deux Insoumis, deux fois par attaque`);
+  // Roussel, qui n'est pas Insoumis, ne reçoit aucun Tract : il gagne +1/+0 par sort lancé, comme tout le plateau.
+  assert.equal(roussel.atk - before.roussel, played);
+  // Trouvé gagne +1/+1 par Tract lancé, en plus des Tracts qu'elle reçoit et du +1/+0 de Roussel.
+  assert.ok(trouve.hp - before.hp > played, `Trouvé gagne ${trouve.hp - before.hp} PV pour ${played} Tracts`);
+  assert.ok(trouve.atk - before.atk > 2 * played);
+});
+
 test('un effet de combat n\'emploie que ce que le combat sait jouer : rien ne s\'y perd sans bruit', () => {
   const lost = allEffects().filter(({ effect }) => COMBAT_TRIGGERS.includes(effect.when) && !IN_COMBAT[effect.do]);
   assert.deepEqual(lost.map(({ owner, effect }) => `${owner} : ${effect.when} → ${effect.do}`), []);

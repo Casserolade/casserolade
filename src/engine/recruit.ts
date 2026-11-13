@@ -23,6 +23,26 @@ export interface EffectContext {
   replay?: boolean;
   /** Les stats du politique qui vient d'être débauché : déclencheur « Après que vous débauchez ». */
   poached?: { atk: number; hp: number };
+  /**
+   * Le passage de l'effet : 0, puis 1 et 2 quand un multiplicateur le fait rejouer (Lassalle, un doré). Un relanceur
+   * relance chaque politique une fois par passage (règle R4).
+   */
+  pass?: number;
+}
+
+/**
+ * La règle R4 : un relanceur ne relance le même politique qu'une fois par passage de son effet, dans la manche. Deux
+ * relanceurs s'additionnent (Chirac en fin de tour et Seconde délibération, Jadot et Conseil des ministres), et un
+ * multiplicateur donne au relanceur un passage de plus (Lassalle et Chirac). Les clés sont en nombre fini (relanceurs ×
+ * passages × politiques) : aucune chaîne de relances ne tourne sans fin.
+ */
+function relaunchKey(self: Minion | null, trigger: Trigger, ctx: EffectContext, target: Minion): string {
+  return `${self ? `m${self.uid}#${ctx.pass ?? 0}` : `sort:${trigger}`}>${target.uid}`;
+}
+
+/** Ce que les sorts ont déjà relancé cette manche, tel que le lisent la vue, les bots et l'écran : `annonce:12`. */
+export function spellRelaunches(p: Player): string[] {
+  return [...p.retriggered].filter((key) => key.startsWith('sort:')).map((key) => key.slice(5).replace('>', ':'));
 }
 
 export function isCamp(game: Game, m: Pick<Minion, 'camp' | 'keywords'>, camp: Camp): boolean {
@@ -625,7 +645,7 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
         (m) =>
           (!eff.camp || isCamp(game, m, eff.camp)) &&
           !(eff.do === 'mot_cle' && m.keywords.includes(eff.keyword)) &&
-          !(eff.do === 'declencher' && (p.retriggered.has(m.uid) || relaunchable(m.effects, eff.trigger).length === 0)),
+          !(eff.do === 'declencher' && (p.retriggered.has(relaunchKey(self, eff.trigger, ctx, m)) || relaunchable(m.effects, eff.trigger).length === 0)),
       );
       return pool.length > 0 ? [game.rng.pick(pool)] : [];
     }
@@ -871,9 +891,10 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     }
     case 'declencher':
       for (const t of targets()) {
-        // Règle R4 : un relanceur ne relance pas deux fois le même serviteur dans la manche.
-        if (t === self || p.retriggered.has(t.uid)) continue;
-        p.retriggered.add(t.uid);
+        // Règle R4 : un relanceur ne relance pas deux fois le même politique par passage de son effet.
+        const key = relaunchKey(self, eff.trigger, ctx, t);
+        if (t === self || p.retriggered.has(key)) continue;
+        p.retriggered.add(key);
         // Doré, il joue deux fois ce qu'il relance.
         for (let i = 0; i < k; i++) relaunch(game, p, self, t, eff.trigger);
       }
@@ -975,11 +996,11 @@ function relaunch(game: Game, p: Player, source: Minion | null, t: Minion, trigg
   for (let r = 0; r < repeats; r++) {
     for (const other of relaunchable(t.effects, trigger)) {
       if (other.to !== 'cible') {
-        applyEffect(game, p, t, other, { replay: true });
+        applyEffect(game, p, t, other, { replay: true, pass: r });
         continue;
       }
       const allies = p.board.filter((m) => m !== t && m !== source);
-      if (allies.length > 0) applyEffect(game, p, t, other, { target: game.rng.pick(allies), replay: true });
+      if (allies.length > 0) applyEffect(game, p, t, other, { target: game.rng.pick(allies), replay: true, pass: r });
     }
   }
 }
@@ -1031,7 +1052,7 @@ export function endOfTurn(game: Game, p: Player): void {
         if (eff.when !== 'fin_tour') continue;
         const before = tableState(p);
         const budget = p.budget;
-        applyEffect(game, p, m, eff, { replay: r > 0 });
+        applyEffect(game, p, m, eff, { replay: r > 0, pass: r });
         // Le recrutement est fini : du budget gagné maintenant (Chirac relance l'Annonce de Coquerel) ne peut plus se
         // dépenser, et la manche suivante l'effacerait. Il attend la prochaine manche, comme tout gain de Fin de tour.
         if (p.budget > budget) {
@@ -1124,7 +1145,7 @@ export function announce(game: Game, p: Player, self: Minion, effects: Effect[],
   const annonces = effects.filter((e) => e.when === 'annonce');
   if (annonces.length > 0) p.annoncesThisRound++;
   for (let r = 0; r < repeats && annonces.length > 0; r++) {
-    for (const eff of annonces) applyEffect(game, p, self, eff, { target, replay: r > 0 });
+    for (const eff of annonces) applyEffect(game, p, self, eff, { target, replay: r > 0, pass: r });
   }
   if (isCamp(game, played, 'ecologistes')) incrementCounter(p, 'ecologistes_joues');
   fireBoard(game, p, 'joue', { played: self }, (owner, eff) => owner !== self && (!eff.camp || isCamp(game, played, eff.camp)));
@@ -1134,6 +1155,9 @@ export function announce(game: Game, p: Player, self: Minion, effects: Effect[],
 export function needsTarget(effects: Effect[], when: Trigger = 'annonce'): boolean {
   return effects.some((e) => e.when === when && e.to === 'cible');
 }
+
+/** Les Tracts d'un combat comptés comme sorts lancés, au plus : un combat ne dure pas plus de 400 attaques. */
+const MAX_COMBAT_TRACTS = 500;
 
 /** Les effets d'un combat qui survivent au combat : gains permanents, gains de camp, cartes, main. */
 export function applyPersist(game: Game, p: Player, persist: CombatPersist): void {
@@ -1149,6 +1173,9 @@ export function applyPersist(game: Game, p: Player, persist: CombatPersist): voi
     p.tract = { atk: Math.min(MAX_STAT, p.tract.atk + persist.tractBonus.atk), hp: Math.min(MAX_STAT, p.tract.hp + persist.tractBonus.hp) };
   }
   for (const gain of persist.campBuffs) applyCampBuff(game, p, gain);
+  // Les Tracts joués en combat (Mélenchon) comptent comme des sorts lancés : les compteurs et « Après que vous lancez
+  // un sort » les voient (règle R5). Bornés, par sûreté.
+  for (let i = 0; i < Math.min(persist.tracts, MAX_COMBAT_TRACTS); i++) afterSpell(game, p, 'tract');
   for (const id of persist.cards) addCard(game, p, id, null);
   for (const id of persist.copies) addCopy(game, p, id);
   for (const gain of persist.handBuffs) {

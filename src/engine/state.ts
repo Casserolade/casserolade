@@ -63,8 +63,8 @@ export interface Player {
   rollsThisRound: number;
   /** Annonces déclenchées pendant cette manche. */
   annoncesThisRound: number;
-  /** Les serviteurs déjà relancés cette manche (règle R4). */
-  retriggered: Set<number>;
+  /** Les relances déjà faites cette manche, une clé par relanceur, passage et politique relancé (règle R4). */
+  retriggered: Set<string>;
   /** Les effets « une fois par manche » déjà joués : `uid:index`. */
   onceThisRound: Set<string>;
   alive: boolean;

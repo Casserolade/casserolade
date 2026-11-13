@@ -545,6 +545,8 @@ export interface CombatPersist {
   doubles: number[];
   /** Ce que vos Tracts gagnent pour le reste de la partie, pendant le combat (Mélenchon, quand il attaque). */
   tractBonus: { atk: number; hp: number };
+  /** Les Tracts joués pendant le combat : chacun compte comme un sort lancé, une fois le combat fini (règle R5). */
+  tracts: number;
 }
 
 /** Ce que le client sait d'un serviteur en combat. Liste blanche : rien d'autre ne sort. */

@@ -174,7 +174,7 @@ test('les Tracts gagnés en combat restent pour la partie', () => {
   const game = startTable(['insoumis', 'macronie', 'republicains', 'socialistes', 'reconquete']);
   const p = game.players[0];
   const before = { ...p.tract };
-  applyPersist(game, p, { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 4, hp: 4 } });
+  applyPersist(game, p, { buffs: [], handBuffs: [], campBuffs: [], cards: [], copies: [], doubles: [], tractBonus: { atk: 4, hp: 4 }, tracts: 0 });
   assert.deepEqual(p.tract, { atk: before.atk + 4, hp: before.hp + 4 });
 });
 
@@ -407,14 +407,14 @@ test('Seconde délibération refuse un politique déjà relancé cette manche, e
   addSpellToHand(game, p, 'seconde_deliberation');
   const first = p.spells.find((s) => s.spellId === 'seconde_deliberation') as { uid: number };
   assert.equal(applyAction(game, 0, { t: 'cast', uid: first.uid, target: deGaulle.uid }).ok, true, 'une première relance de De Gaulle');
-  assert.ok(p.retriggered.has(deGaulle.uid));
+  assert.ok(p.retriggered.has(`sort:annonce>${deGaulle.uid}`));
   addSpellToHand(game, p, 'seconde_deliberation');
   const held = p.spells.find((s) => s.spellId === 'seconde_deliberation') as { uid: number };
   const refused = applyAction(game, 0, { t: 'cast', uid: held.uid, target: deGaulle.uid });
   assert.equal(refused.ok, false);
   assert.match(refused.ok ? '' : refused.error, /une fois par manche/);
   assert.ok(p.spells.some((s) => s.spellId === 'seconde_deliberation'), 'le sort reste en main');
-  assert.deepEqual(viewFor(game, 0).relaunched, [...p.retriggered], 'la vue le dit, pour ne pas proposer la cible');
+  assert.deepEqual(viewFor(game, 0).relaunched, [`annonce:${deGaulle.uid}`], 'la vue le dit, pour ne pas proposer la cible');
 });
 
 test('à la manche suivante, la relance repart', () => {
@@ -446,7 +446,7 @@ test('l\'écran ne propose pas une relance sur un politique déjà relancé', as
   const kazib = makeMinion(CARD_BY_ID.kazib, 42);
   const held = { uid: 1, spellId: 'seconde_deliberation' };
   assert.deepEqual(spellTargets(held, [deGaulle, kazib]), [41, 42]);
-  assert.deepEqual(spellTargets(held, [deGaulle, kazib], { shopSize: 3, boardLimit: 7, relaunched: [41] }), [42]);
+  assert.deepEqual(spellTargets(held, [deGaulle, kazib], { shopSize: 3, boardLimit: 7, relaunched: ['annonce:41'] }), [42]);
 });
 
 test('un sort perdu est refusé et reste en main : mot-clé déjà là, boutique vide, invocation sans place', () => {
