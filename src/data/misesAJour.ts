@@ -55,7 +55,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       'De Gaulle, Giscard, Chirac, Mitterrand et Macron passent au niveau des chefs de camp.',
       'Six nouveaux politiques : Rima Hassan, Élisabeth Borne, Michel Barnier, Alain Juppé, José Bové et Eva Joly. Vingt-deux casseroles, dont quatorze pour le RN, Reconquête et les Écologistes, qui en avaient le moins.',
       'Les camps les plus fournis rendent des cartes : Clémence Guetté, Manon Aubry, Aurore Bergé, Sébastien Lecornu et Jean-François Copé quittent la boutique. Avec Bové et Joly, les Écologistes passent de 11 à 13 cartes : chaque camp sort à parts plus égales.',
-      'En boutique, chaque camp a autant de chances de voir sortir une de ses casseroles. Deux nouveaux sorts et Francis Lalanne en font découvrir.',
+      'En boutique, chaque camp a autant de chances de voir sortir une de ses casseroles. Deux nouveaux sorts et Francis Lalanne en font découvrir ; Lalanne ne se copie plus à chaque victoire.',
       'Les sorts sont répartis de l\'échelon 1 au 6, selon leur force. Trois sorts qui ne servaient presque à rien sont retirés.',
     ],
     rules: [
@@ -65,6 +65,11 @@ export const MISES_A_JOUR: PatchNote[] = [
         after: 'Meurt, puis se réincarne une fois à sa place, comme sa carte nue avec 1 PV : après son Héritage, s\'il reste de la place.',
       },
       { term: 'Coup de balai', after: 'Ses attaques touchent aussi les voisins de sa cible.' },
+      {
+        term: 'Immunité',
+        before: 'Annule le premier coup reçu, puis tombe.',
+        after: 'Annule les premiers dégâts reçus, d\'une attaque ou d\'un effet, puis tombe.',
+      },
       {
         term: 'Les défauts des casseroles',
         before: 'Certains défauts, « perd ses effets » ou « ne bouge plus », ne coûtaient rien à qui n\'avait pas d\'effet ou ne bougeait pas.',
@@ -124,7 +129,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       giscard: 'Sa Chaise vide avait ses PV et 0 d\'attaque ; elle a désormais ses stats : elle tient ce qu\'il tenait.',
       chirac: 'Candidat quatre fois, il revient toujours : à chaque fin de tour, il rejoue les Annonces de ses voisins. On choisit qui placer à côté de lui.',
       mitterrand: '« Je ne vous quitterai pas » : son Héritage reste pour de bon.',
-      lalanne: 'Un ridicule en attire un autre : il découvre un Ridicule. 4/4 au lieu de 5/6 : sa copie à chaque victoire en faisait le meilleur achat du début de partie.',
+      lalanne: 'Un ridicule en attire un autre : il découvre un Ridicule qui coûte 2 ou moins. Il ne se copie plus à chaque victoire : sa Célébration donne le Retour en politique, comme sa chanson « On se retrouvera ». 4/4 au lieu de 5/6.',
       cohn_bendit: 'Il compte les Écologistes joués dans la partie, et non plus ceux du plateau : son gain grandit tant qu\'on en joue.',
       strauss_kahn: 'Il lègue toutes ses stats, plus seulement son attaque, et grandit de +3/+3 par Socialiste à chaque attaque.',
       vallaud: 'Les Socialistes n\'avaient rien qui grandisse hors du politique de tête : chaque allié tombé le fait grandir pour de bon.',

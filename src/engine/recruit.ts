@@ -728,11 +728,11 @@ export function offerCasserole(game: Game, p: Player): void {
  * Trois casseroles à choisir (13 novembre 2026) : d'un genre (les Ridicules de Lalanne), ou d'abord celles de vos
  * politiques, complétées par d'autres (« À la une »). Les autres viennent camp par camp, comme en boutique.
  */
-function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false): void {
+function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false, maxCost = Infinity): void {
   // Une affaire n'arrive qu'une fois : ni celle de la boutique, ni une casserole d'un choix qui attend déjà (un Lalanne
   // doré découvre deux fois, et la même casserole se prenait dans les deux choix).
   const waiting = new Set([p.casseroleOffer, ...[p.discover, ...p.discoverQueue].flatMap((offer) => (offer?.kind === 'casserole' ? offer.options : []))]);
-  const present = casserolesFor(game, p).filter((c) => (!kind || c.kind === kind) && !waiting.has(c.id));
+  const present = casserolesFor(game, p).filter((c) => (!kind || c.kind === kind) && c.cost <= maxCost && !waiting.has(c.id));
   const owned = new Set([...p.board, ...p.hand].map((m) => m.cardId));
   const first = yours ? game.rng.shuffle(present.filter((c) => owned.has(c.owner))) : [];
   const rest = drawByCamp(game, present.filter((c) => !first.includes(c)));
@@ -846,7 +846,7 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     case 'decouvrir':
       for (let i = 0; i < k; i++) {
         if (eff.quoi === 'sort') offerSpells(game, p, p.tier + (eff.echelon ?? 0));
-        else if (eff.quoi === 'casserole') offerCasseroles(game, p, eff.genre, eff.proprietaires === 'vos_politiques');
+        else if (eff.quoi === 'casserole') offerCasseroles(game, p, eff.genre, eff.proprietaires === 'vos_politiques', eff.coutMax);
         // Une découverte ne propose jamais la carte qui la déclenche, comme dans Hearthstone : un Poisson vendu
         // qui se redécouvre rapportait 1 de budget à chaque tour de boucle, sans fin (trouvé par le fuzz).
         else offerMinions(game, p, p.tier + (eff.echelon ?? 0), eff.camp, eff.declencheur, self?.cardId);

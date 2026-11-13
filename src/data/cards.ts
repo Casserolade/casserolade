@@ -303,11 +303,13 @@ export const CARDS: Card[] = [
     fx: [fx('fin_tour', 'aleatoire', buff(1, 1)), fx('fin_tour', 'aleatoire', buff(1, 1)), fx('celebration', 'aleatoire', buff(2, 2))],
   }),
   // Le chanteur en tête de la liste « Alliance jaune » aux européennes de 2019 : un ridicule en attire un autre, il
-  // découvre un Ridicule (13 novembre 2026). 4/4 depuis le même jour (5/6 avant) : sa copie à chaque victoire en faisait
-  // le meilleur achat du début de partie, présent sur 41 % des plateaux vainqueurs ; à 4/4, sur 19 %.
+  // découvre un Ridicule (13 novembre 2026). Sa Célébration ajoutait une copie de lui-même : chaque victoire rapportait
+  // un Ridicule de plus, gratuit, dès la manche 2, et il était le meilleur achat du début de partie (41 % des plateaux
+  // vainqueurs à 5/6, 19 % à 4/4). Le soir même : ses Ridicules coûtent 2 ou moins, sans les plus forts, et sa
+  // Célébration donne le Retour en politique, comme sa chanson de 1986, « On se retrouvera ».
   card('lalanne', 'Francis Lalanne', 'civile', 2, 4, 4, {
     kw: ['vedette'],
-    fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'casserole', genre: 'ridicule' }), fx('celebration', 'joueur', carte('copie'))],
+    fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'casserole', genre: 'ridicule', coutMax: 2 }), fx('celebration', 'aleatoire', motCle('retour'))],
   }),
   card('arthaud', 'Nathalie Arthaud', 'civile', 3, 5, 7, { kw: ['vedette'], fx: [fx('annonce', 'joueur', boutique(1, 1)), fx('celebration', 'joueur', boutique(1, 1))] }),
   card('branco', 'Juan Branco', 'civile', 2, 3, 2, {

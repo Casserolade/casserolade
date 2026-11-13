@@ -386,7 +386,7 @@ test('« À la une » découvre d\'abord les casseroles de vos politiques, compl
   assert.ok(p.spells.some((s) => s.casseroleId === cahuzac[0]), 'la casserole va en main, gratuite');
 });
 
-test('Lalanne découvre trois Ridicules, jamais une casserole que le joueur a déjà', () => {
+test('Lalanne découvre trois Ridicules à 2 ou moins, jamais une casserole que le joueur a déjà', () => {
   for (let seed = 1; seed <= 20; seed++) {
     const { game, p, buy } = setup(seed);
     p.spells.push({ uid: game.nextUid++, casseroleId: 'homards' });
@@ -394,6 +394,7 @@ test('Lalanne découvre trois Ridicules, jamais une casserole que le joueur a d�
     const offer = p.discover as { options: string[]; kind: string };
     assert.equal(offer.kind, 'casserole');
     assert.ok(offer.options.every((id) => CASSEROLE_BY_ID[id].kind === 'ridicule' && id !== 'homards'), offer.options.join());
+    assert.ok(offer.options.every((id) => CASSEROLE_BY_ID[id].cost <= 2), `pas les plus chers : ${offer.options.join()}`);
     assert.ok(offer.options.every((id) => game.poolTotal.has(CASSEROLE_BY_ID[id].owner)), 'seulement celles de la partie');
   }
 });
