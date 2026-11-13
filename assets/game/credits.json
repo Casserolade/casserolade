@@ -611,10 +611,10 @@
   {
    "id": "lepers",
    "nom": "Julien Lepers",
-   "auteur": "Rama",
-   "licence": "CC BY-SA 2.0 fr",
-   "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG",
-   "partage_identique": true
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.closermag.fr/people/la-regle-des-trois-l-en-pleine-affaire-pierre-palmade-julien-lepers-sort-de-sa-r-1698535",
+   "partage_identique": false
   },
   {
    "id": "lescure",
@@ -1241,6 +1241,14 @@
    "partage_identique": false
   },
   {
+   "id": "barthes.aie",
+   "nom": "Yann Barthès",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://populaction.com/yann-barthes-une-figure-emblematique-de-la-television-francaise/",
+   "partage_identique": false
+  },
+  {
    "id": "barthes.choc",
    "nom": "Yann Barthès",
    "auteur": null,
@@ -1398,6 +1406,30 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.youtube.com/watch?v=snny5K6WhI8",
+   "partage_identique": false
+  },
+  {
+   "id": "borne.aie",
+   "nom": "Élisabeth Borne",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.closermag.fr/politique/elisabeth-borne-ce-surnom-trouve-par-ses-collaborateurs-qui-ne-doit-pas-la-faire-998861",
+   "partage_identique": false
+  },
+  {
+   "id": "borne.choc",
+   "nom": "Élisabeth Borne",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.midilibre.fr/2022/12/12/video-pourquoi-avez-vous-peur-du-debat-elisabeth-borne-provoque-un-fou-rire-a-lassemblee-nationale-10863478.php",
+   "partage_identique": false
+  },
+  {
+   "id": "borne.rire",
+   "nom": "Élisabeth Borne",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://peopleauquotidien.com/actualites/elizabeth-borne-sa-crise-de-rire-en-pleine-assemblee/",
    "partage_identique": false
   },
   {
@@ -1989,7 +2021,7 @@
    "nom": "Sylvain Durif",
    "auteur": null,
    "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=qa7GQLcmT20",
+   "source": "https://www.youtube.com/channel/UC5Ig1XQWgmXdPg46qlU_kqw",
    "partage_identique": false
   },
   {
@@ -2217,6 +2249,30 @@
    "partage_identique": false
   },
   {
+   "id": "hassan.aie",
+   "nom": "Rima Hassan",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.brut.media/fr/articles/l-eurodeputee-rima-hassan-en-garde-a-vue-pour-apologie-du-terrorisme",
+   "partage_identique": false
+  },
+  {
+   "id": "hassan.choc",
+   "nom": "Rima Hassan",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.ledauphine.com/politique/2025/03/05/des-eurodeputes-demandent-la-levee-de-l-immunite-parlementaire-de-rima-hassan",
+   "partage_identique": false
+  },
+  {
+   "id": "hassan.rire",
+   "nom": "Rima Hassan",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://peopleauquotidien.com/celebrites/rima-hassan-denonce-un-harcelement-judiciaire-et-politique-va-t-elle-rester-a-lfi/",
+   "partage_identique": false
+  },
+  {
    "id": "hidalgo.aie",
    "nom": "Anne Hidalgo",
    "auteur": null,
@@ -2289,6 +2345,14 @@
    "partage_identique": false
   },
   {
+   "id": "houssin.rire",
+   "nom": "Timothée Houssin",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://actu.fr/normandie/les-andelys_27016/affaire-des-assistants-parlementaires-europeens-du-fn-le-depute-de-leure-timothee-houssin-devant-la-justice_61714559.html",
+   "partage_identique": false
+  },
+  {
    "id": "hurmic.aie",
    "nom": "Pierre Hurmic",
    "auteur": null,
@@ -2321,6 +2385,14 @@
    "partage_identique": false
   },
   {
+   "id": "jadot.choc",
+   "nom": "Yannick Jadot",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.lepoint.fr/politique/municipales-a-paris-yannick-jadot-dans-le-lac-aux-requins-21-01-2025-2580419_20.php",
+   "partage_identique": false
+  },
+  {
    "id": "jmlp.aie",
    "nom": "Jean-Marie Le Pen",
    "auteur": null,
@@ -2342,6 +2414,30 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.24heures.ch/le-passage-explosif-de-jean-marie-le-pen-en-suisse-romande-352270644700",
+   "partage_identique": false
+  },
+  {
+   "id": "juppe.aie",
+   "nom": "Alain Juppé",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.20minutes.fr/bordeaux/1761991-20160108-bordeaux-alain-juppe-assure-vouloir-personne-etre-bonifie-age",
+   "partage_identique": false
+  },
+  {
+   "id": "juppe.choc",
+   "nom": "Alain Juppé",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.lemonde.fr/idees/article/2016/11/22/la-dramatique-erreur-d-alain-juppe_5035723_3232.html",
+   "partage_identique": false
+  },
+  {
+   "id": "juppe.rire",
+   "nom": "Alain Juppé",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://enap.ca/evenements/classe-maitre-regard-alain-juppe-echanges-atlantiques",
    "partage_identique": false
   },
   {
@@ -2369,6 +2465,14 @@
    "partage_identique": false
   },
   {
+   "id": "knafo.choc",
+   "nom": "Sarah Knafo",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.franceinfo.fr/politique/a-droite-je-fais-partie-de-ceux-qui-aimeraient-qu-on-travaille-tous-ensemble-assure-sarah-knafo_7671139.html",
+   "partage_identique": false
+  },
+  {
    "id": "knafo.rire",
    "nom": "Sarah Knafo",
    "auteur": null,
@@ -2381,7 +2485,7 @@
    "nom": "Samuel Lafont",
    "auteur": null,
    "licence": "inconnue",
-   "source": "https://presseagence.fr/paris-samuel-lafont-dans-causeur-pourquoi-la-tech-americaine-est-en-pleine-mutation-ideologique/",
+   "source": "https://www.connexionfrance.com/news/local-elections-in-france-new-bids-to-allow-non-eu-foreigners-to-vote/771451",
    "partage_identique": false
   },
   {
@@ -2505,6 +2609,22 @@
    "partage_identique": false
   },
   {
+   "id": "lecornu.choc",
+   "nom": "Sébastien Lecornu",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://fr.news.yahoo.com/sébastien-lecornu-dit-très-lucide-184629786.html",
+   "partage_identique": false
+  },
+  {
+   "id": "lecornu.rire",
+   "nom": "Sébastien Lecornu",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://tuni-news.com/sebastien-lecornu-le-premier-ministre-reconnait-ne-pas-avoir-fini-le-cursus-mentionne-sur-son-cv/",
+   "partage_identique": false
+  },
+  {
    "id": "lemaire.aie",
    "nom": "Bruno Le Maire",
    "auteur": null,
@@ -2550,6 +2670,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.ladepeche.fr/article/2014/06/26/1907699-incident-julien-lepers-devient-fou-zapping-tele-mercredi.html",
+   "partage_identique": false
+  },
+  {
+   "id": "lepers.rire",
+   "nom": "Julien Lepers",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.voici.fr/television/un-peu-moins-de-10-000-euros-par-mois-julien-lepers-se-confie-sur-ses-enormes-droits-d-auteur-818503",
    "partage_identique": false
   },
   {
@@ -2606,6 +2734,22 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.lefigaro.fr/politique/sylvain-maillard-la-loi-paris-lyon-marseille-est-une-veritable-avancee-democratique-20260414",
+   "partage_identique": false
+  },
+  {
+   "id": "maillard.choc",
+   "nom": "Sylvain Maillard",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.canalplus.com/actualites/la-grande-interview-sylvain-maillard/h/42359245_50213",
+   "partage_identique": false
+  },
+  {
+   "id": "maillard.rire",
+   "nom": "Sylvain Maillard",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://rh.newstank.fr/article/view/296221/assemblee-nationale-sylvain-maillard-elu-presidence-groupe-renaissance.html",
    "partage_identique": false
   },
   {
@@ -2873,6 +3017,22 @@
    "partage_identique": false
   },
   {
+   "id": "philippe.choc",
+   "nom": "Édouard Philippe",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.huffingtonpost.fr/politique/article/edouard-philippe-face-a-la-colere-et-une-popularite-en-berne-defend-la-tenacite-du-gouvernement_126810.html",
+   "partage_identique": false
+  },
+  {
+   "id": "philippe.rire",
+   "nom": "Édouard Philippe",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.nextplz.fr/people/266983-edouard-philippe-metamorphose-nouveau-visage-surprend-internautes",
+   "partage_identique": false
+  },
+  {
    "id": "philippot.aie",
    "nom": "Florian Philippot",
    "auteur": null,
@@ -2887,6 +3047,22 @@
    "licence": "inconnue",
    "source": "https://www.youtube.com/watch?v=ZDjcU_emfUs",
    "partage_identique": false
+  },
+  {
+   "id": "piolle.choc",
+   "nom": "Éric Piolle",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.ledauphine.com/politique/2023/05/28/isere-metropole-de-grenoble-clash-a-la-metro-eric-piolle-choque",
+   "partage_identique": false
+  },
+  {
+   "id": "piolle.rire",
+   "nom": "Éric Piolle",
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210819_piolle.eric5926b.jpg",
+   "partage_identique": true
   },
   {
    "id": "poisson.aie",
@@ -3033,6 +3209,14 @@
    "partage_identique": false
   },
   {
+   "id": "rigault.rire",
+   "nom": "Stanislas Rigault",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.youtube.com/watch?v=sxYwQj6RjxU",
+   "partage_identique": false
+  },
+  {
    "id": "riner.aie",
    "nom": "Teddy Riner",
    "auteur": null,
@@ -3102,6 +3286,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.huffingtonpost.fr/politique/article/segolene-royal-en-colere-contre-la-fermeture-des-librairies-et-petits-commerces_172962.html",
+   "partage_identique": false
+  },
+  {
+   "id": "royal.choc",
+   "nom": "Ségolène Royal",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.nextplz.fr/people/517364-segolene-royal-72-ans-huee-par-des-femmes-voilees-en-plein-meeting-casse-toi",
    "partage_identique": false
   },
   {
@@ -3257,6 +3449,14 @@
    "partage_identique": false
   },
   {
+   "id": "thevenoud.rire",
+   "nom": "Thomas Thévenoud",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.leparisien.fr/politique/cette-annee-thomas-thevenoud-a-rempli-sa-declaration-d-impots-dans-les-temps-07-06-2016-5864165.php",
+   "partage_identique": false
+  },
+  {
    "id": "tiberi.aie",
    "nom": "Jean Tiberi",
    "auteur": null,
@@ -3353,6 +3553,14 @@
    "partage_identique": false
   },
   {
+   "id": "yann_bompard.rire",
+   "nom": "Yann Bompard",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.ledauphine.com/politique/2022/01/28/yann-bompard-maire-d-orange-mon-pere-reste-mon-premier-conseiller",
+   "partage_identique": false
+  },
+  {
    "id": "zemmour.aie",
    "nom": "Éric Zemmour",
    "auteur": null,
@@ -3361,11 +3569,19 @@
    "partage_identique": false
   },
   {
+   "id": "zemmour.choc",
+   "nom": "Éric Zemmour",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.telestar.fr/people/eric-zemmour-en-colere-contre-audrey-crespo-mara-sur-le-plateau-de-lci-video-58483",
+   "partage_identique": false
+  },
+  {
    "id": "zemmour.rire",
    "nom": "Éric Zemmour",
    "auteur": null,
    "licence": "inconnue",
-   "source": "https://www.lessentiel.lu/fr/story/polemique-en-france-eric-zemmour-hilare-sur-une-chanson-ouvertement-raciste-103137967",
+   "source": "https://risibank.fr/media/252855-politic-mariniere-2022-rire-president-eric-zemmour-france-candidat-z0zz-cnews",
    "partage_identique": false
   }
  ],
@@ -3523,6 +3739,14 @@
    "note": "Extrait de 0.01 à 2.43 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "barnier_barnier_censure_plus_grave",
+   "nom": "Michel Barnier, « La censure rendra tout plus difficile et plus grave »",
+   "auteur": "Le Nouvel Obs, « Motion de censure : le camp Barnier fait peser la menace du « chaos » à l'Assemblée nationale »",
+   "source": "https://www.youtube.com/watch?v=hRdOjvTa6Io",
+   "date": "2024-12-03",
+   "note": "Extrait de 10.78 à 14.94 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "barthes_barthes_melenchon_fait_des_doigts",
    "nom": "Yann Barthès, « Non, non, Mélenchon fait des doigts aux journalistes. »",
    "auteur": "Scoop TV News, « JEAN-LUC MÉLENCHON GIVES BENJAMIN DUHAMEL THE FINGER, LIVE ON FRANCE INTER. »",
@@ -3553,6 +3777,14 @@
    "source": "https://www.myinstants.com/fr/instant/bertrand-87625/",
    "date": "",
    "note": "Extrait de 0.98 à 2.48 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "borne_borne_49_3_retraites",
+   "nom": "Élisabeth Borne, « Sur le fondement de l'article 49 alinéa 3 de la Constitution, j'engage la responsabilité de mon gouvernement sur l'ensemble du projet de loi de financement rectificative de la Sécurité sociale pour 2023 »",
+   "auteur": "Europe 1, « Budget de la Sécu : Élisabeth Borne déclenche l'article 49.3 pour la seconde fois »",
+   "source": "https://www.youtube.com/watch?v=RJj5sZirFWY",
+   "date": "2023-03-16",
+   "note": "Extrait de 18.08 à 23.19 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "bouamrane_kb_lfi_colonialiste",
@@ -4035,6 +4267,22 @@
    "note": "Extrait de 152.95 à 156.02 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "hassan_hassan_explication_justification",
+   "nom": "Rima Hassan, « Une explication n'est pas une justification »",
+   "auteur": "Rima Hassan, « Rima Hassan guest of Sud Radio »",
+   "source": "https://www.youtube.com/watch?v=cko8emtpib4",
+   "date": "2025-02-27",
+   "note": "Extrait de 332.04 à 334.27 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "hassan_hassan_hamas_action_legitime",
+   "nom": "Rima Hassan, « Le Hamas a une action légitime »",
+   "auteur": "Rima Hassan, « Rima Hassan guest of Sud Radio »",
+   "source": "https://www.youtube.com/watch?v=cko8emtpib4",
+   "date": "2025-02-27",
+   "note": "Extrait de 576.53 à 578.9 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "hollande_boite_hollande_anglais",
    "nom": "François Hollande, « Be you, be proud of you because you can be do what we want to do. »",
    "auteur": "myinstants, « Hollande anglais »",
@@ -4185,6 +4433,22 @@
    "source": "http://m.ina.fr/video/1987468001009",
    "date": "2002-04-16",
    "note": "Extrait de 48.1 à 59.63 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "juppe_juppe_pas_candidat",
+   "nom": "Alain Juppé, « Je confirme une bonne fois pour toutes que je ne serai pas candidat à la présidence de la République »",
+   "auteur": "TV5MONDE, « Alain Juppé confirme qu'il ne sera pas candidat à la présidentielle »",
+   "source": "https://www.youtube.com/watch?v=ucXDHjwq4ow",
+   "date": "2017-03-06",
+   "note": "Extrait de 22.29 à 29.67 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "juppe_juppe_trop_tard",
+   "nom": "Alain Juppé, « Pour moi, il est trop tard »",
+   "auteur": "BFMTV, « Juppé: \"Je ne veux pas livrer mon honneur et la paix de ma famille en pâture\" »",
+   "source": "https://www.youtube.com/watch?v=ASHq_VmRWd0",
+   "date": "2017-03-06",
+   "note": "Extrait de 30.23 à 32.76 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "kazib_kazib_inadmissible_olivier",
