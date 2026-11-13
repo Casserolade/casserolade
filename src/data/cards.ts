@@ -98,7 +98,10 @@ export const CARDS: Card[] = [
     kw: ['retour'],
     fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })],
   }),
-  card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'joueur', campBuff(1, 0), { n: 5, camp: 'socialistes' })] }),
+  // 13 novembre 2026 : le camp n'avait rien qui grandisse hors du combat de tête. Chaque allié tombé le fait grandir
+  // pour de bon, dès l'échelon 2 (avant : +1/+0 aux Socialistes après cinq morts, presque jamais atteint). Les
+  // Socialistes passent de 5,19 à 4,84 de place moyenne en mono-camp (3 000 parties).
+  card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'soi', buff(1, 1), { n: 1, perma: true })] }),
   card('cahuzac', 'Jérôme Cahuzac', 'socialistes', 2, 4, 5, {
     kw: ['vedette'],
     fx: [fx('vente', 'joueur', { do: 'budget', value: 2, plus_tard: true }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
@@ -119,12 +122,14 @@ export const CARDS: Card[] = [
   card('hollande', 'François Hollande', 'socialistes', 6, 5, 7, { fx: [fx('revanche', 'joueur', campBuff(1, 1), { n: 1, camp: 'socialistes' })] }),
   // Le favori des sondages de 2011 : il grandit avec son camp à chaque attaque, et sa chute arme les autres
   // (7 novembre 2026). Glucksmann relance son Héritage, Mitterrand le double, un Retour le fait tomber deux fois.
-  // Il lègue son attaque, pas toutes ses stats : avec ses stats, les Socialistes passaient de 4,80 à 4,56 de place
-  // moyenne en mono-camp (3 000 parties), loin devant les autres camps ; avec son attaque, 4,64.
+  // Il léguait son attaque seule depuis le 7 novembre (avec ses stats, les Socialistes passaient alors devant). Depuis
+  // la réincarnation comme carte nue, le camp est dernier et ne dépasse pas 77 de stats avec son meilleur montage : il
+  // lègue de nouveau ses stats, et gagne +3/+3 par Socialiste à chaque attaque (13 novembre 2026). Avec Mitterrand et
+  // Glucksmann, c'est le montage qui mène le camp vers 1 000.
   card('strauss_kahn', 'Dominique Strauss-Kahn', 'socialistes', 6, 6, 8, {
     fx: [
-      fx('meeting', 'soi', { do: 'buff_par_membre', atk: 1, hp: 1 }, { camp: 'socialistes', perma: true }),
-      fx('heritage', 'autres_camp', { do: 'transmettre' }, { camp: 'socialistes', perma: true }),
+      fx('meeting', 'soi', { do: 'buff_par_membre', atk: 3, hp: 3 }, { camp: 'socialistes', perma: true }),
+      fx('heritage', 'autres_camp', { do: 'transmettre', tout: true }, { camp: 'socialistes', perma: true }),
     ],
   }),
 
@@ -137,8 +142,10 @@ export const CARDS: Card[] = [
   card('mamere', 'Noël Mamère', 'ecologistes', 2, 2, 3, { fx: [fx('aura', 'soi', compteur('ecologistes_joues', 1, 1)), fx('droit_de_reponse', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
   card('piolle', 'Éric Piolle', 'ecologistes', 3, 3, 6, { fx: [fx('fin_tour', 'voisins', buff(1, 1))] }),
   card('duflot', 'Cécile Duflot', 'ecologistes', 4, 6, 7, { fx: [fx('joue', 'joue', buff(3, 3), { camp: 'ecologistes' })] }),
-  // Échelon 6, clé de voûte de la Fin de tour : plus il y a d'Écologistes, plus ils poussent (7 novembre 2026).
-  card('cohn_bendit', 'Daniel Cohn-Bendit', 'ecologistes', 6, 6, 8, { fx: [fx('fin_tour', 'camp', { do: 'buff_par_membre', atk: 1, hp: 1 }, { camp: 'ecologistes' })] }),
+  // Échelon 6, clé de voûte de la Fin de tour. Il comptait les Écologistes du plateau (+7/+7 au plus, la même chose à
+  // chaque manche) ; il compte ceux joués dans la partie, comme Mamère : le gain grandit tant qu'on joue des Écologistes
+  // (13 novembre 2026). Entre deux Jadot, avec Lassalle, le camp approche 1 000 à la manche 15.
+  card('cohn_bendit', 'Daniel Cohn-Bendit', 'ecologistes', 6, 6, 8, { fx: [fx('fin_tour', 'camp', { do: 'buff_compteur', compteur: 'ecologistes_joues', atk: 1, hp: 1 }, { camp: 'ecologistes' })] }),
   card('jadot', 'Yannick Jadot', 'ecologistes', 4, 7, 9, { fx: [fx('fin_tour', 'voisins', { do: 'declencher', trigger: 'fin_tour' })] }),
   card('rousseau', 'Sandrine Rousseau', 'ecologistes', 5, 6, 6, {
     kw: ['vedette'],
@@ -150,7 +157,9 @@ export const CARDS: Card[] = [
 
   // Macronie : le marché. Le budget, le doré, et le Ralliement. Thevenot et Bregeon sont hors réserve.
   card('ndiaye', 'Sibeth Ndiaye', 'macronie', 1, 2, 4, { kw: ['porte_parole'], fx: [fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
-  card('maillard', 'Sylvain Maillard', 'macronie', 1, 2, 3, { kw: ['ni_droite_ni_gauche'], fx: [fx('rallie', 'joue', buff(2, 1))] }),
+  // 13 novembre 2026 : +2/+2 par Ralliement (au lieu de +2/+1), Castaner 3/4 et Bergé 4/4. La Macronie, dernière en
+  // mono-camp, avait les Ralliements au corps le plus faible.
+  card('maillard', 'Sylvain Maillard', 'macronie', 1, 2, 3, { kw: ['ni_droite_ni_gauche'], fx: [fx('rallie', 'joue', buff(2, 2))] }),
   card('oudea', 'Amélie Oudéa-Castéra', 'macronie', 2, 2, 2, { golden: true, fx: [fx('fin_tour', 'dores', buff(1, 0))] }),
   card('rugy', 'François de Rugy', 'macronie', 2, 2, 3, {
     kw: ['vedette'],
@@ -161,8 +170,8 @@ export const CARDS: Card[] = [
     kw: ['ni_droite_ni_gauche', 'vedette'],
     fx: [fx('sort', 'soi', buff(1, 1), { n: 2 }), fx('celebration', 'joueur', carte('sort_aleatoire'))],
   }),
-  card('castaner', 'Christophe Castaner', 'macronie', 3, 2, 3, { kw: ['ralliement', 'cumul'] }),
-  card('berge', 'Aurore Bergé', 'macronie', 3, 3, 3, { kw: ['ralliement'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
+  card('castaner', 'Christophe Castaner', 'macronie', 3, 3, 4, { kw: ['ralliement', 'cumul'] }),
+  card('berge', 'Aurore Bergé', 'macronie', 3, 4, 4, { kw: ['ralliement'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   card('dupond_moretti', 'Éric Dupond-Moretti', 'macronie', 3, 1, 2, { kw: ['ralliement', 'immunite'] }),
   // 5 novembre 2026 : 2 de budget au lieu de 1. Une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie (5,11 en mono-camp).
   card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 2 })] }),
@@ -226,8 +235,10 @@ export const CARDS: Card[] = [
   card('sarkozy', 'Nicolas Sarkozy', 'republicains', 6, 6, 7, { kw: ['immunite'], fx: [fx('casserole_recue', 'joue', { do: 'doubler_stats' }, { once: 'manche' })] }),
 
   // RN : la dynastie. Le débauchage de la boutique, et l'héritage durable.
-  // 7 novembre 2026 : la dynastie grandit en attaquant ; son Héritage ne jouait presque jamais (0,47 place).
-  card('odoul', 'Julien Odoul', 'rn', 2, 4, 5, { kw: ['vedette'], fx: [fx('meeting', 'allie_suivant', buff(1, 1), { perma: true }), fx('celebration', 'aleatoire', buff(1, 1), { camp: 'rn' })] }),
+  // 13 novembre 2026 : chaque débauchage fait grossir le RN de la boutique, donc le débauchage suivant. Avec Marine
+  // Le Pen, le camp ne dépassait pas 450 de stats : la boutique ne grandissait pas. (Avant : +1/+1 à l'allié suivant
+  // quand il attaque, 0,47 place, l'une des cartes les plus faibles de l'échelon 2.)
+  card('odoul', 'Julien Odoul', 'rn', 2, 4, 5, { kw: ['vedette'], fx: [fx('debauche', 'joueur', boutique(1, 1), { camp: 'rn' }), fx('celebration', 'aleatoire', buff(1, 1), { camp: 'rn' })] }),
   card('houssin', 'Timothée Houssin', 'rn', 1, 1, 1, { fx: [fx('annonce', 'soi', debauche('plus_fort'))] }),
   // « Que de la main-d'œuvre locale », puis des travailleurs détachés à 5 € de l'heure : il embauche le moins cher, un autre en profite.
   card('fournas', 'Grégoire de Fournas', 'rn', 1, 1, 1, { fx: [fx('annonce', 'aleatoire', debauche('plus_fort'))] }),

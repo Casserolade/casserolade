@@ -99,7 +99,7 @@ test('targets follow the rules the engine checks', () => {
 test('medallionMarks shows what the card hides', () => {
   assert.deepEqual(medallionMarks(CARD_BY_ID.bouamrane.effects ?? []), { heritage: true, triggered: false, revanche: null, celebration: false, reponse: false });
   const vallaud = medallionMarks(CARD_BY_ID.vallaud.effects ?? []);
-  assert.equal(vallaud.revanche, 5);
+  assert.equal(vallaud.revanche, 1);
   assert.ok(medallionMarks(CARD_BY_ID.boyard.effects ?? []).celebration);
   assert.ok(medallionMarks(CARD_BY_ID.portes.effects ?? []).triggered);
   assert.ok(medallionMarks(CARD_BY_ID.ndiaye.effects ?? []).reponse);

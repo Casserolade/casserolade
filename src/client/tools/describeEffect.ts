@@ -302,6 +302,7 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'gain_debauche':
       return `${e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques'}, partout, gagnent ${golden ? 'deux fois ' : ''}les stats du débauché pour le reste de la partie`;
     case 'buff_compteur':
+      if (dest.startsWith('vos ')) return `${dest} gagnent ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
       return `${self ? 'gagne' : `donne ${to(dest)}`} ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
     case 'chaise_vide':
       return `invoque ${golden ? 'deux Chaises vides' : 'une Chaise vide'} **Porte-parole** qui ${golden ? 'ont' : 'a'} ses stats`;

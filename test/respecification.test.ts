@@ -186,27 +186,27 @@ test('Guedj grandit pour de bon en attaquant, et avec son Retour il attaque de n
   assert.ok(gains.every((g) => g.atk === 1 && g.hp === 1), '+1/+1 par attaque (13 novembre 2026)');
 });
 
-test('Strauss-Kahn : quand il attaque, il gagne +1/+1 pour de bon par Socialiste de votre plateau', () => {
+test('Strauss-Kahn : quand il attaque, il gagne +3/+3 pour de bon par Socialiste de votre plateau', () => {
   const dsk = makeMinion(CARD_BY_ID.strauss_kahn, uid++);
   const thevenoud = makeMinion(CARD_BY_ID.thevenoud, uid++);
   const r = fight([dsk, { ...thevenoud, hp: 200 }, unit(1, 200)], [unit(0, 400)], 3);
   const gains = r.persist[0].buffs.filter((g) => g.uid === dsk.uid);
   assert.ok(gains.length >= 1, 'au moins une attaque');
-  assert.ok(gains.every((g) => g.atk === 2 && g.hp === 2), 'lui et Thévenoud : deux Socialistes');
+  assert.ok(gains.every((g) => g.atk === 6 && g.hp === 6), 'lui et Thévenoud : deux Socialistes');
 });
 
-test('Strauss-Kahn : son Héritage lègue son attaque à vos autres Socialistes, pour de bon, et à eux seuls', () => {
+test('Strauss-Kahn : son Héritage lègue ses stats à vos autres Socialistes, pour de bon, et à eux seuls', () => {
   const dsk = { ...makeMinion(CARD_BY_ID.strauss_kahn, uid++), hp: 1 };
   const thevenoud = { ...makeMinion(CARD_BY_ID.thevenoud, uid++), hp: 300 };
   const other = unit(1, 300);
   const r = fight([dsk, thevenoud, other], [unit(4, 500)], 4);
   assert.ok(r.log.some((e) => e.e === 'mort' && e.uid === dsk.uid), 'il tombe');
   const heirs = r.persist[0].buffs.filter((g) => g.uid === thevenoud.uid);
-  assert.ok(heirs.some((g) => g.atk >= CARD_BY_ID.strauss_kahn.atk && g.hp === 0), 'Thévenoud hérite de son attaque');
+  assert.ok(heirs.some((g) => g.atk >= CARD_BY_ID.strauss_kahn.atk && g.hp >= 1), 'Thévenoud hérite de son attaque et de ses PV');
   assert.equal(r.persist[0].buffs.filter((g) => g.uid === other.uid).length, 0, 'pas un politique d\'un autre camp');
 });
 
-test('Strauss-Kahn : sacrifié au recrutement, il lègue son attaque aux Socialistes du plateau, et à eux seuls', () => {
+test('Strauss-Kahn : sacrifié au recrutement, il lègue ses stats aux Socialistes du plateau, et à eux seuls', () => {
   const game = table(['socialistes', 'rn', 'macronie', 'republicains', 'reconquete']);
   const p = game.players[0];
   const dsk = lay(game, 'strauss_kahn');
@@ -217,7 +217,7 @@ test('Strauss-Kahn : sacrifié au recrutement, il lègue son attaque aux Sociali
   const hidalgo = addMinionToHand(game, p, 'hidalgo') as Minion;
   assert.equal(applyAction(game, 0, { t: 'play', uid: hidalgo.uid, target: dsk.uid }).ok, true);
   assert.ok(!p.board.some((m) => m.uid === dsk.uid), 'Hidalgo l\'a sacrifié');
-  assert.deepEqual([vallaud.atk, vallaud.hp, durif.atk, durif.hp], [before[0] + dsk.atk, before[1], before[2], before[3]]);
+  assert.deepEqual([vallaud.atk, vallaud.hp, durif.atk, durif.hp], [before[0] + dsk.atk, before[1] + dsk.hp, before[2], before[3]]);
 });
 
 test('Jean-Marie Le Pen ne lègue toujours qu\'à l\'allié suivant', () => {

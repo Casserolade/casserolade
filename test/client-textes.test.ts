@@ -22,7 +22,13 @@ test('a spell never names the same recipient twice', () => {
 });
 
 test('the legends say what they do, on attack and with their camp', () => {
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.cohn_bendit), ['**Fin de tour** : vos Écologistes gagnent +1/+1 par Écologiste de votre plateau.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.cohn_bendit), ['**Fin de tour** : vos Écologistes gagnent +1/+1 par Écologiste joué cette partie.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.strauss_kahn), [
+    'Quand il attaque, gagne +3/+3 par Socialiste de votre plateau pour de bon.',
+    '**Héritage** : donne ses stats à vos autres Socialistes pour de bon.',
+  ]);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.vallaud), ['Après la mort d\'un allié, gagne +1/+1 pour de bon.']);
+  assert.match(cardRuleLines(CARD_BY_ID.odoul).join(' '), /Après que vous \*\*débauchez\*\*, les politiques du RN de la boutique ont \+1\/\+1 pour le reste de la partie/);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['Après la mort d\'un allié, vos Socialistes, partout, gagnent +1/+1 pour le reste de la partie.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.melenchon), [
     '**Vedette**. **Coup de balai**.',
