@@ -292,7 +292,12 @@ export const CARDS: Card[] = [
     kw: ['vedette'],
     fx: [fx('fin_tour', 'aleatoire', buff(1, 1)), fx('fin_tour', 'aleatoire', buff(1, 1)), fx('celebration', 'aleatoire', buff(2, 2))],
   }),
-  card('lalanne', 'Francis Lalanne', 'civile', 2, 5, 6, { kw: ['vedette'], fx: [fx('celebration', 'joueur', carte('copie'))] }),
+  // Le chanteur en tête de la liste « Alliance jaune » aux européennes de 2019 : un ridicule en attire un autre, il
+  // découvre un Ridicule (13 novembre 2026).
+  card('lalanne', 'Francis Lalanne', 'civile', 2, 5, 6, {
+    kw: ['vedette'],
+    fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'casserole', genre: 'ridicule' }), fx('celebration', 'joueur', carte('copie'))],
+  }),
   card('arthaud', 'Nathalie Arthaud', 'civile', 3, 5, 7, { kw: ['vedette'], fx: [fx('annonce', 'joueur', boutique(1, 1)), fx('celebration', 'joueur', boutique(1, 1))] }),
   card('branco', 'Juan Branco', 'civile', 2, 3, 2, {
     fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 }), fx('droit_de_reponse', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 })],

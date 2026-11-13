@@ -351,18 +351,47 @@ test('le Bracelet suit les scandales : il arrive en boutique quand il sert, mêm
   assert.ok(pendant > 140 && pendant < 260, `une boutique sur deux pendant un scandale : ${pendant} sur 400`);
 });
 
-test('les casseroles à la une sortent plus souvent que les autres', () => {
-  const { game, p } = setup(11);
-  const une = new Set(CASSEROLES.filter((c) => c.une).map((c) => c.id));
-  assert.ok(une.has('valise_libyenne') && une.size >= 6 && une.size <= 12);
+test('la boutique tire chaque casserole de la partie à égalité, celles de vos politiques comprises', () => {
+  const { game, p, buy } = setup(11);
+  buy('sarkozy');
   game.round = game.params.casseroleFromRound;
+  const inGame = CASSEROLES.filter((c) => game.poolTotal.has(c.owner));
+  const sarkozy = inGame.filter((c) => c.owner === 'sarkozy').map((c) => c.id);
   let tirages = 0;
   for (let i = 0; i < 6000; i++) {
     offerCasserole(game, p);
-    if (une.has(p.casseroleOffer as string)) tirages++;
+    if (sarkozy.includes(p.casseroleOffer as string)) tirages++;
   }
-  const attendu = (une.size * PARAMS.uneWeight) / (une.size * PARAMS.uneWeight + CASSEROLES.length - une.size);
-  assert.ok(Math.abs(tirages / 6000 - attendu) < 0.03, `${tirages / 6000} au lieu de ${attendu}`);
+  const attendu = sarkozy.length / inGame.length;
+  assert.ok(Math.abs(tirages / 6000 - attendu) < 0.02, `${tirages / 6000} au lieu de ${attendu}`);
+});
+
+test('« À la une » découvre d\'abord les casseroles de vos politiques, complétées par d\'autres', () => {
+  const { game, p, buy } = setup(11);
+  buy('cahuzac');
+  addSpellToHand(game, p, 'a_la_une');
+  const held = p.spells.find((s) => s.spellId === 'a_la_une') as { uid: number };
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
+  const offer = p.discover as { options: string[]; kind: string };
+  assert.equal(offer.kind, 'casserole');
+  assert.equal(offer.options.length, 3);
+  const cahuzac = CASSEROLES.filter((c) => c.owner === 'cahuzac').map((c) => c.id);
+  assert.ok(cahuzac.every((id) => offer.options.includes(id)), 'toutes celles de Cahuzac, puis d\'autres');
+  const pick = offer.options.indexOf(cahuzac[0]);
+  assert.equal(applyAction(game, 0, { t: 'discover', i: pick }).ok, true);
+  assert.ok(p.spells.some((s) => s.casseroleId === cahuzac[0]), 'la casserole va en main, gratuite');
+});
+
+test('Lalanne découvre trois Ridicules, jamais une casserole que le joueur a déjà', () => {
+  for (let seed = 1; seed <= 20; seed++) {
+    const { game, p, buy } = setup(seed);
+    p.spells.push({ uid: game.nextUid++, casseroleId: 'homards' });
+    buy('lalanne');
+    const offer = p.discover as { options: string[]; kind: string };
+    assert.equal(offer.kind, 'casserole');
+    assert.ok(offer.options.every((id) => CASSEROLE_BY_ID[id].kind === 'ridicule' && id !== 'homards'), offer.options.join());
+    assert.ok(offer.options.every((id) => game.poolTotal.has(CASSEROLE_BY_ID[id].owner)), 'seulement celles de la partie');
+  }
 });
 
 test('Fillon repousse le scandale, et « Quel compte Facebook ? » fait tout oublier', () => {
@@ -398,23 +427,16 @@ test('un triple d\'un serviteur en scandale ne garde pas de défaut orphelin', (
   assert.equal(dore.budgetPerRound, -4);
 });
 
-test('les casseroles suivent leurs propriétaires, changent à l\'actualisation et restent au gel', () => {
+test('les casseroles changent à l\'actualisation et restent au gel', () => {
   const { game, p, buy } = setup(11);
-  game.params.casseroleOwnerChance = 1;
   buy('sarkozy');
   game.round = Math.max(game.round, game.params.casseroleFromRound);
-  const sarkozy = new Set(CASSEROLES.filter((c) => c.owner === 'sarkozy').map((c) => c.id));
-  for (let i = 0; i < 10; i++) {
-    assert.equal(applyAction(game, 0, { t: 'roll' }).ok, true);
-    assert.ok(sarkozy.has(p.casseroleOffer as string), 'Actualiser tire une nouvelle casserole, ici toujours de Sarkozy');
-  }
-  game.params.casseroleOwnerChance = 0;
   const vues = new Set<string>();
   for (let i = 0; i < 30; i++) {
-    applyAction(game, 0, { t: 'roll' });
+    assert.equal(applyAction(game, 0, { t: 'roll' }).ok, true);
     vues.add(p.casseroleOffer as string);
   }
-  assert.ok([...vues].some((id) => !sarkozy.has(id)), 'sans le réglage, toutes les casseroles sortent');
+  assert.ok(vues.size > 10, 'actualiser tire une nouvelle casserole');
   const gelee = p.casseroleOffer;
   applyAction(game, 0, { t: 'freeze' });
   resolveRound(game);

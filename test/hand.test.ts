@@ -19,13 +19,17 @@ function setup(seed = 5) {
 }
 
 test('un achat va sur le plateau par défaut, en main sur demande, et en main si le plateau est plein', () => {
-  const { p, buy } = setup();
+  const { game, p, buy } = setup();
   assert.equal(buy('kazib').ok, true);
   assert.equal(p.board.length, 1);
   assert.equal(buy('cheminade', { main: true }).ok, true);
   assert.equal(p.board.length, 1);
   assert.equal(p.hand.length, 1);
-  for (const id of ['durif', 'lalanne', 'arthaud', 'roussel', 'poutou', 'chirac']) buy(id);
+  for (const id of ['durif', 'lalanne', 'arthaud', 'roussel', 'poutou', 'chirac']) {
+    buy(id);
+    // L'Annonce de Lalanne fait choisir un Ridicule avant toute autre action.
+    if (p.discover) applyAction(game, 0, { t: 'discover', i: 0 });
+  }
   assert.equal(p.board.length, PARAMS.boardSize);
   assert.equal(buy('lassalle').ok, true);
   assert.equal(p.hand.map((m) => m.cardId).includes('lassalle'), true);

@@ -11,7 +11,7 @@ defineProps<{ casserole: Casserole; ownerName: string; sources: EntrySources | n
 <template>
   <article class="sheet">
     <ShownCardFace :card="{ kind: 'casserole', casserole }" />
-    <p class="owner"><strong>{{ ownerName }}</strong> · {{ casserole.kind === 'affaire' ? 'Affaire' : 'Ridicule' }}<template v-if="casserole.une">, à la une</template></p>
+    <p class="owner"><strong>{{ ownerName }}</strong> · {{ casserole.kind === 'affaire' ? 'Affaire' : 'Ridicule' }}</p>
     <p class="joke">{{ casserole.blague }}</p>
     <p v-if="casserole.citation" class="quote">« {{ casserole.citation }} »</p>
     <p class="fact"><strong>Le fait</strong> {{ casserole.fait }}</p>

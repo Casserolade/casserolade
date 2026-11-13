@@ -118,16 +118,6 @@ test('R18 : avec Lassalle, Conseil des ministres joue chaque Fin de tour deux fo
   assert.deepEqual([kazib.atk - before[0], kazib.hp - before[1]], [2, 2], 'la Fin de tour de Piolle, relancée deux fois');
 });
 
-test('R18 : avec Mitterrand, Tribune libre rejoue l\'Héritage deux fois', () => {
-  const game = table(['socialistes', 'macronie', 'republicains', 'ecologistes', 'reconquete']);
-  const p = game.players[0];
-  const bouamrane = lay(game, 'bouamrane');
-  lay(game, 'mitterrand');
-  const before = p.board.length;
-  cast(game, 'tribune_libre', bouamrane);
-  assert.equal(p.board.length - before, 2, 'deux Suppléants');
-});
-
 test('R18 : en combat, Glucksmann relance les Héritages deux fois quand Mitterrand vit', () => {
   const unitOf = (id: string) => makeMinion(CARD_BY_ID[id], uid++);
   const count = (withMitterrand: boolean) => {
@@ -474,10 +464,6 @@ test('un sort perdu est refusé et reste en main : mot-clé déjà là, boutique
   assert.ok(!refused(game, 'elements_de_langage', gueant), 'Éléments de langage donne aussi +0/+2 : jamais perdu');
   p.shop = [];
   assert.ok(refused(game, 'debauchage', gueant), 'personne à débaucher');
-  const full = startTable(['socialistes', 'macronie', 'republicains', 'ecologistes', 'reconquete']);
-  const bouamrane = lay(full, 'bouamrane');
-  for (const id of ['kazib', 'cheminade', 'durif', 'lalanne', 'gueant', 'poutou']) lay(full, id);
-  assert.ok(refused(full, 'tribune_libre', bouamrane), 'son Suppléant n\'aurait pas de place');
 });
 
 test('keywordsAlreadyThere ne vise que les sorts qui ne donnent que des mots-clés', async () => {
@@ -486,7 +472,6 @@ test('keywordsAlreadyThere ne vise que les sorts qui ne donnent que des mots-cl�
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.immunite_parlementaire.effects, ['immunite']), true);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.immunite_parlementaire.effects, []), false);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.elements_de_langage.effects, ['porte_parole']), false);
-  assert.equal(keywordsAlreadyThere(SPELL_BY_ID.temps_de_parole.effects, ['porte_parole']), false);
   assert.equal(keywordsAlreadyThere(SPELL_BY_ID.sondage_flatteur.effects, []), false);
 });
 

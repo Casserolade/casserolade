@@ -1,12 +1,13 @@
 import { cardFace } from '#src/client/tools/cardFace.ts';
 import { casseroleFromCard } from '#src/client/tools/casseroleFromCard.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
-import type { PatchNote } from '#src/data/misesAJour.ts';
+import { tierChangeLine } from '#src/client/tools/tierChangeLine.ts';
+import type { CardChange, PatchNote } from '#src/data/misesAJour.ts';
 
 export interface ShownChange {
   key: string;
   before?: ShownCard;
-  after: ShownCard;
+  after?: ShownCard;
   why?: string;
 }
 
@@ -15,31 +16,29 @@ export interface PatchNoteSections {
   changedCards: ShownChange[];
   newCasseroles: ShownChange[];
   changedCasseroles: ShownChange[];
-  spells: ShownChange[];
+  newSpells: ShownChange[];
+  /** Les sorts qui changent, puis ceux qui partent. */
+  changedSpells: ShownChange[];
 }
 
-/** The cards of a version as the update notes show them: new ones first, then the ones that changed, with why. */
+/** The cards of a version as the update notes show them: new ones first, then the ones that changed or left, with why. */
 export function patchNoteSections(note: PatchNote): PatchNoteSections {
-  const cards: ShownChange[] = note.cards.cards.map(({ before, after }) => ({
-    key: after.id,
-    before: before && { kind: 'minion', face: cardFace(before) },
-    after: { kind: 'minion', face: cardFace(after) },
-    why: note.why[after.id],
-  }));
-  const casseroles: ShownChange[] = note.cards.casseroles.map(({ before, after }) => ({
-    key: after.id,
-    before: before && { kind: 'casserole', casserole: casseroleFromCard(before) },
-    after: { kind: 'casserole', casserole: casseroleFromCard(after) },
-  }));
+  function shown<T extends { id: string }>(changes: CardChange<T>[], toCard: (x: T) => ShownCard): ShownChange[] {
+    return changes.map(({ before, after }) => {
+      const key = (after ?? before)?.id ?? '';
+      const tierOf = (card: T | undefined) => (card && 'tier' in card ? { tier: Number(card.tier) } : undefined);
+      return { key, before: before && toCard(before), after: after && toCard(after), why: note.why[key] ?? tierChangeLine(tierOf(before), tierOf(after)) };
+    });
+  }
+  const cards = shown(note.cards.cards, (card) => ({ kind: 'minion', face: cardFace(card) }));
+  const casseroles = shown(note.cards.casseroles, (card) => ({ kind: 'casserole', casserole: casseroleFromCard(card) }));
+  const spells = shown(note.cards.spells, (spell) => ({ kind: 'spell', spell }));
   return {
     newCards: cards.filter((change) => !change.before),
     changedCards: cards.filter((change) => change.before),
     newCasseroles: casseroles.filter((change) => !change.before),
     changedCasseroles: casseroles.filter((change) => change.before),
-    spells: note.cards.spells.map(({ before, after }) => ({
-      key: after.id,
-      before: before && { kind: 'spell', spell: before },
-      after: { kind: 'spell', spell: after },
-    })),
+    newSpells: spells.filter((change) => !change.before),
+    changedSpells: spells.filter((change) => change.before),
   };
 }

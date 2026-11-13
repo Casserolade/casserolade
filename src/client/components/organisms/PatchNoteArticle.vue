@@ -51,8 +51,12 @@ const anchor = computed(() => `v${props.note.version.replaceAll('.', '-')}`);
       </BestiarySection>
     </details>
 
-    <BestiarySection v-if="sections.spells.length" :id="`${anchor}-sorts`" title="Sorts" :count="countLabel(sections.spells.length, 'sort', 'sorts')" :level="3" :item-width="CARD_WIDTH">
-      <li v-for="change in sections.spells" :key="change.key"><CardChange v-bind="change" /></li>
+    <BestiarySection v-if="sections.newSpells.length" :id="`${anchor}-sorts`" title="Nouveaux sorts" :count="countLabel(sections.newSpells.length, 'sort', 'sorts')" :level="3" :item-width="CARD_WIDTH">
+      <li v-for="change in sections.newSpells" :key="change.key"><CardChange v-bind="change" /></li>
+    </BestiarySection>
+
+    <BestiarySection v-if="sections.changedSpells.length" :id="`${anchor}-sorts-retouches`" title="Sorts retouchés ou retirés" :count="countLabel(sections.changedSpells.length, 'sort', 'sorts')" :level="3" :item-width="PAIR_WIDTH">
+      <li v-for="change in sections.changedSpells" :key="change.key"><CardChange v-bind="change" /></li>
     </BestiarySection>
   </article>
 </template>

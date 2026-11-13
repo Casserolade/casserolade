@@ -163,7 +163,8 @@ function playerViolations(game: Game, p: Player): string[] {
     if (!offer) continue;
     check(offer.options.length >= 1 && offer.options.length <= 3, `découverte à ${offer.options.length} cartes`);
     check(new Set(offer.options).size === offer.options.length, 'découverte en double');
-    for (const id of offer.options) check(Boolean(offer.kind === 'sort' ? SPELL_BY_ID[id] : CARD_BY_ID[id]), `découverte ${id}`);
+    const known = (id: string) => (offer.kind === 'sort' ? SPELL_BY_ID[id] : offer.kind === 'casserole' ? CASSEROLE_BY_ID[id] : CARD_BY_ID[id]);
+    for (const id of offer.options) check(Boolean(known(id)), `découverte ${id}`);
   }
   if (!p.discover) check(p.discoverQueue.length === 0, 'des découvertes en file sans choix en cours');
   check(p.stats.forgotten <= p.stats.scandals, `${p.stats.forgotten} oublis pour ${p.stats.scandals} scandales`);

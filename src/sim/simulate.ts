@@ -6,7 +6,7 @@ import { createBot, decide } from '../bots/bots.ts';
 import type { BotLevel, BotState, BotStyle } from '../bots/bots.ts';
 import { resolveCombat } from '../engine/combat.ts';
 import { dominantCamp } from '../engine/dominantCamp.ts';
-import { addMinionToHand, take } from '../engine/recruit.ts';
+import { addMinionToHand, addSpellToHand, take } from '../engine/recruit.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { HEROES } from '../data/heroes.ts';
 
@@ -33,7 +33,7 @@ export interface SeatResult {
   quest?: Quest | null;
   /** Nombre d'actions par type : vérifie que le bot fait bien ce qu'on croit. */
   actions: Record<string, number>;
-  /** La carte offerte (`RunOptions.gift`) a-t-elle été posée dans sa manche ou la suivante ? Vérifie que le bot la joue. */
+  /** La carte offerte (`RunOptions.gift`) a-t-elle été posée (le sort lancé) dans sa manche ou la suivante ? Vérifie que le bot la joue. */
   giftPlayed?: boolean;
 }
 
@@ -64,8 +64,11 @@ export interface RunOptions {
   heroes?: (string | undefined)[];
   styles?: (BotStyle | undefined)[];
   activeCamps?: GameOptions['activeCamps'];
-  /** Mesure d'une carte (bilan_cartes.ts) : elle arrive gratuitement dans la main de ce siège, au début de cette manche. */
-  gift?: { seat: number; round: number; cardId: string };
+  /**
+   * Mesure d'une carte (bilan_cartes.ts) ou d'un sort (bilan_sorts.ts) : il arrive gratuitement dans la main de ce
+   * siège, au début de cette manche.
+   */
+  gift?: { seat: number; round: number; cardId?: string; spellId?: string };
   /** Le camp que vise chaque bot dès le départ, au lieu d'un tirage. */
   commitments?: (string | undefined)[];
   /** Les règles d'un chapitre de carrière pour un siège (bilan_histoire.ts). */
@@ -130,8 +133,11 @@ export function playGame(opts: RunOptions): GameResult {
   while (game.phase === 'recrutement' && game.round < MAX_ROUNDS) {
     const gift = opts.gift;
     if (gift && game.round === gift.round && game.players[gift.seat].alive) {
-      take(game, gift.cardId);
-      addMinionToHand(game, game.players[gift.seat], gift.cardId);
+      if (gift.spellId) addSpellToHand(game, game.players[gift.seat], gift.spellId);
+      else if (gift.cardId) {
+        take(game, gift.cardId);
+        addMinionToHand(game, game.players[gift.seat], gift.cardId);
+      }
     }
     for (const p of game.players) {
       if (!p.alive) continue;
@@ -157,7 +163,8 @@ export function playGame(opts: RunOptions): GameResult {
     }
 
     if (gift && (game.round === gift.round || game.round === gift.round + 1)) {
-      giftPlayed ||= game.players[gift.seat].board.some((m) => m.cardId === gift.cardId);
+      const p = game.players[gift.seat];
+      giftPlayed ||= gift.spellId ? !p.spells.some((s) => s.spellId === gift.spellId) : p.board.some((m) => m.cardId === gift.cardId);
     }
     for (const p of game.players) {
       if (p.alive) {

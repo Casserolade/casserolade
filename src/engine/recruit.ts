@@ -401,6 +401,8 @@ export function chooseDiscover(game: Game, p: Player, i: number): void {
       if (j !== i) returnToPool(game, id);
     });
     addMinionToHand(game, p, offer.options[i]);
+  } else if (offer.kind === 'casserole') {
+    if (!handIsFull(game, p)) p.spells.push({ uid: game.nextUid++, casseroleId: offer.options[i] });
   } else {
     addSpellToHand(game, p, offer.options[i]);
   }
@@ -655,26 +657,35 @@ export function doubleStats(m: Minion, times = 1): void {
  * joueur a déjà, pour que son bonus de propriétaire arrive vraiment. Jamais celle d'un politique absent de la partie :
  * son bonus de propriétaire ne servirait jamais. Jamais une casserole que le joueur a déjà.
  */
-export function offerCasserole(game: Game, p: Player): void {
-  if (game.round < game.params.casseroleFromRound) {
-    p.casseroleOffer = null;
-    return;
-  }
-  // Une affaire n'arrive qu'une fois : pas une casserole que le joueur a déjà, en main ou sur un de ses politiques.
-  // Sans ça, Cahuzac revoyait son compte en Suisse une fois sur deux : sept comptes, 28 de budget par manche.
+/**
+ * Les casseroles que ce joueur peut recevoir : celles des politiques de la partie, sauf celles qu'il a déjà, en main ou
+ * sur un de ses politiques. Une affaire n'arrive qu'une fois : sans ça, Cahuzac revoyait son compte en Suisse une fois
+ * sur deux, sept comptes, 28 de budget par manche.
+ */
+function casserolesFor(game: Game, p: Player): Casserole[] {
   const had = new Set([...p.spells.map((s) => s.casseroleId), ...[...p.board, ...p.hand].flatMap((m) => m.casseroles)]);
-  const present = CASSEROLES.filter((c) => game.poolTotal.has(c.owner) && !had.has(c.id));
-  if (present.length === 0) {
-    p.casseroleOffer = null;
-    return;
-  }
+  return CASSEROLES.filter((c) => game.poolTotal.has(c.owner) && !had.has(c.id));
+}
+
+/**
+ * La casserole de la boutique, tirée à égalité parmi celles de la partie (13 novembre 2026 : plus de poids pour les
+ * affaires « à la une » ni pour celles de vos politiques ; le sort « À la une » découvre celles de vos politiques).
+ */
+export function offerCasserole(game: Game, p: Player): void {
+  const present = game.round < game.params.casseroleFromRound ? [] : casserolesFor(game, p);
+  p.casseroleOffer = present.length > 0 ? game.rng.pick(present).id : null;
+}
+
+/**
+ * Trois casseroles à choisir (13 novembre 2026) : d'un genre (les Ridicules de Lalanne), ou d'abord celles de vos
+ * politiques, complétées au hasard par d'autres (« À la une »).
+ */
+function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false): void {
+  const present = casserolesFor(game, p).filter((c) => !kind || c.kind === kind);
   const owned = new Set([...p.board, ...p.hand].map((m) => m.cardId));
-  const theirs = present.filter((c) => owned.has(c.owner));
-  const pool = theirs.length > 0 && game.rng.next() < game.params.casseroleOwnerChance ? theirs : present;
-  // Les affaires à la une pèsent plus : sur 64 casseroles, les plus connues doivent sortir.
-  const weight = (c: Casserole) => (c.une ? game.params.uneWeight : 1);
-  let r = game.rng.next() * pool.reduce((s, c) => s + weight(c), 0);
-  p.casseroleOffer = (pool.find((c) => (r -= weight(c)) < 0) ?? pool[pool.length - 1]).id;
+  const first = yours ? game.rng.shuffle(present.filter((c) => owned.has(c.owner))) : [];
+  const rest = game.rng.shuffle(present.filter((c) => !first.includes(c)));
+  queueOffer(p, { options: [...first, ...rest].slice(0, 3).map((c) => c.id), kind: 'casserole' });
 }
 
 /**
@@ -784,6 +795,7 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     case 'decouvrir':
       for (let i = 0; i < k; i++) {
         if (eff.quoi === 'sort') offerSpells(game, p, p.tier + (eff.echelon ?? 0));
+        else if (eff.quoi === 'casserole') offerCasseroles(game, p, eff.genre, eff.proprietaires === 'vos_politiques');
         // Une découverte ne propose jamais la carte qui la déclenche, comme dans Hearthstone : un Poisson vendu
         // qui se redécouvre rapportait 1 de budget à chaque tour de boucle, sans fin (trouvé par le fuzz).
         else offerMinions(game, p, p.tier + (eff.echelon ?? 0), eff.camp, eff.declencheur, self?.cardId);

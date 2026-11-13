@@ -34,15 +34,21 @@ function cardShape(c: Card): Card {
 
 /** Ce que montre une carte de casserole : sa mécanique, sans le fait, le statut ni les sources. */
 function casseroleShape(c: Casserole): Partial<Casserole> {
-  const { fait, statut, sources, citation, blague, verifie, ...shown } = c as Casserole & Record<string, unknown>;
+  // « une » : l'ancien poids en boutique des affaires à la une, retiré le 13 novembre 2026, jamais affiché.
+  const { fait, statut, sources, citation, blague, verifie, une, ...shown } = c as Casserole & Record<string, unknown>;
   return shown;
 }
 
+/** Les nouvelles, les changées (avant et après), puis les retirées (avant seulement). */
 function changes<T extends { id: string }>(before: T[], after: T[], shape: (x: T) => unknown) {
   const old = new Map(before.map((x) => [x.id, x]));
-  return after
-    .filter((x) => !old.has(x.id) || JSON.stringify(shape(old.get(x.id) as T)) !== JSON.stringify(shape(x)))
-    .map((x) => (old.has(x.id) ? { before: shape(old.get(x.id) as T), after: shape(x) } : { after: shape(x) }));
+  const kept = new Set(after.map((x) => x.id));
+  return [
+    ...after
+      .filter((x) => !old.has(x.id) || JSON.stringify(shape(old.get(x.id) as T)) !== JSON.stringify(shape(x)))
+      .map((x) => (old.has(x.id) ? { before: shape(old.get(x.id) as T), after: shape(x) } : { after: shape(x) })),
+    ...before.filter((x) => !kept.has(x.id)).map((x) => ({ before: shape(x) })),
+  ];
 }
 
 const [before, after] = await Promise.all([load(path.resolve(oldRoot)), load(newRoot)]);

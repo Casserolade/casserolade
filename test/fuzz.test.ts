@@ -78,20 +78,23 @@ test('chaque carte, chaque sort et chaque casserole passent dans le moteur, inva
             cov.played.add(m.cardId);
           }
         }
-        // Un sort et une casserole par manche, chacun son tour.
+        // Une casserole et un sort par manche, chacun son tour : la casserole d'abord, pour que le Bracelet ait un
+        // scandale à effacer.
         const spellId = spells[(i * 4 + round * 2 + p.seat) % spells.length];
         const casseroleId = CASSEROLES[(i * 4 + round * 2 + p.seat) % CASSEROLES.length].id;
-        addSpellToHand(game, p, spellId, spellId === 'investiture' ? 2 : undefined);
-        const held = p.spells.find((s) => s.spellId === spellId);
-        if (p.discover) act(game, total, p.seat, { t: 'discover', i: 0 }, where);
-        if (held && act(game, total, p.seat, { t: 'cast', uid: held.uid, ...(p.board[0] ? { target: p.board[0].uid } : {}) }, where)) cov.cast.add(spellId);
         for (const target of [p.board[0], p.board[0], p.board[1]]) {
-          if (!target || p.discover) continue;
+          if (p.discover) act(game, total, p.seat, { t: 'discover', i: 0 }, where);
+          if (!target) continue;
           p.casseroleOffer = casseroleId;
           act(game, total, p.seat, { t: 'buy_casserole' }, where);
           const c = p.spells.find((s) => s.casseroleId === casseroleId);
           if (c && act(game, total, p.seat, { t: 'cast', uid: c.uid, target: target.uid }, where)) cov.casseroles.add(casseroleId);
         }
+        addSpellToHand(game, p, spellId, spellId === 'investiture' ? 2 : undefined);
+        const held = p.spells.find((s) => s.spellId === spellId);
+        if (p.discover) act(game, total, p.seat, { t: 'discover', i: 0 }, where);
+        if (held && act(game, total, p.seat, { t: 'cast', uid: held.uid, ...(p.board[0] ? { target: p.board[0].uid } : {}) }, where)) cov.cast.add(spellId);
+        if (p.discover) act(game, total, p.seat, { t: 'discover', i: 0 }, where);
         act(game, total, p.seat, { t: 'sell', uid: p.board[p.board.length - 1]?.uid ?? -1 }, where);
         act(game, total, p.seat, { t: 'roll' }, where);
       }

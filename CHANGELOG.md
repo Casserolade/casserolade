@@ -10,8 +10,14 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Chaque casserole a un défaut qui coûte à tout porteur : dix-huit sont retouchées. Nouveau défaut, l'éclaboussure : en scandale, le politique fait perdre -2/-2 à ses voisins en combat.
 - Nouveau déclencheur, « Après l'oubli du peuple » : quand le scandale d'un allié s'efface, avec le temps ou le Bracelet électronique.
 
-**Nouveaux politiques**
+**Nouveaux politiques et nouvelles casseroles**
 - Rima Hassan chez les Insoumis, Élisabeth Borne dans la Macronie (vos 49.3 jouent deux fois), Michel Barnier et Alain Juppé chez les Républicains, avec huit casseroles.
+- Dix casseroles pour les camps qui en avaient le moins : Jean-Marie Le Pen (« Un point de détail »), Grégoire de Fournas, Jean-Philippe Tanguy et Julien Odoul au RN ; Nicolas Bay, Nicolas Dupont-Aignan et Sarah Knafo à Reconquête ; Delphine Batho, Yannick Jadot et Marine Tondelier chez les Écologistes.
+
+**Casseroles et sorts**
+- La casserole de la boutique est tirée à égalité parmi celles de la partie : plus de poids pour les affaires « à la une », ni pour celles de vos politiques.
+- Deux nouveaux sorts : « Fuite dans la presse » (échelon 2) découvre une casserole, « À la une » (échelon 3) découvre d'abord celles de vos politiques. Francis Lalanne découvre un Ridicule.
+- Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Temps de parole, Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
 
 **Équilibrage**
 - Les présidents passent au niveau des chefs de camp : la Chaise vide de Giscard a ses stats, l'Héritage de Mitterrand reste pour de bon, Chirac rejoue les Annonces à chaque fin de tour, chaque politique joué après de Gaulle devient Ni droite ni gauche avec +2/+2, et Macron amène Darmanin dans votre main.

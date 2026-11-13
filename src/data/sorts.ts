@@ -18,6 +18,10 @@ export const SPELLS: Spell[] = [
   spell('tract', 'Tract', 1, 0, true, [fx('cible', { do: 'jouer_tract' })], { token: true }),
   spell('investiture', 'Investiture', 1, 0, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 1 })], { token: true }),
 
+  // Les échelons, revus le 13 novembre 2026 : chaque sort à la hauteur de sa force mesurée (node src/sim/bilan_sorts.ts),
+  // et des sorts jusqu'à l'échelon 6, comme les politiques. Retirés : Temps de parole, Loi de finances et Tribune libre,
+  // qui ne changeaient presque rien à une partie.
+
   // Échelon 1
   spell('sondage_flatteur', 'Sondage flatteur', 1, 1, true, [fx('cible', { do: 'buff', atk: 1, hp: 2 })]),
   spell('elements_de_langage', 'Éléments de langage', 1, 1, true, [fx('cible', { do: 'mot_cle', keyword: 'porte_parole' }), fx('cible', { do: 'buff', atk: 0, hp: 2 })]),
@@ -26,37 +30,40 @@ export const SPELLS: Spell[] = [
 
   // Échelon 2
   spell('primaire', 'Primaire', 2, 1, true, [fx('cible', { do: 'sacrifier', echelon: 0 })]),
-  spell('motion_de_synthese', 'Motion de synthèse', 2, 2, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0 })]),
   spell('matinale', 'Matinale', 2, 1, false, [fx('joueur', { do: 'actualisations_gratuites', value: 2 })]),
-  // Le temps de parole que l'Arcom décompte : on le donne à qui ne l'a pas, on le reprend à qui l'a.
-  spell('temps_de_parole', 'Temps de parole', 2, 1, true, [fx('cible', { do: 'basculer', keyword: 'porte_parole' })]),
-  spell('loi_de_finances', 'Loi de finances', 2, 3, false, [fx('joueur', { do: 'budget_max', value: 1 })]),
   spell('bracelet_electronique', 'Bracelet électronique', 2, 1, false, [fx('joueur', { do: 'oublier' })]),
-  // 7 novembre 2026 : à l'échelon 2 et pour 1, le débauchage se monte plus tôt.
-  spell('debauchage', 'Débauchage', 2, 1, true, [fx('cible', { do: 'debaucher', pick: 'plus_fort' })]),
+  spell('motion_de_censure', 'Motion de censure', 2, 1, false, [fx('joueur', { do: 'pari_defaite', value: 3 })]),
+  // Une fuite, et l'affaire sort : trois casseroles au choix, parmi celles de la partie (13 novembre 2026).
+  spell('fuite_dans_la_presse', 'Fuite dans la presse', 2, 1, false, [fx('joueur', { do: 'decouvrir', quoi: 'casserole' })]),
 
   // Échelon 3
-  spell('immunite_parlementaire', 'Immunité parlementaire', 3, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'immunite' })]),
+  // 7 novembre 2026 : le débauchage se monte tôt ; il passe de l'échelon 2 au 3 le 13 novembre.
+  spell('debauchage', 'Débauchage', 3, 1, true, [fx('cible', { do: 'debaucher', pick: 'plus_fort' })]),
   spell('campagne_de_terrain', 'Campagne de terrain', 3, 3, false, [fx('allies', { do: 'buff', atk: 1, hp: 1 })]),
   spell('seconde_chance', 'Seconde chance', 3, 2, true, [fx('cible', { do: 'mot_cle', keyword: 'retour' })]),
-  spell('ouverture', 'Ouverture', 3, 3, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0, declencheur: 'annonce' })]),
   spell('testament_politique', 'Testament politique', 3, 3, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0, declencheur: 'heritage' })]),
-  spell('programme', 'Programme', 3, 3, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0, declencheur: 'fin_tour' })]),
-  spell('motion_de_censure', 'Motion de censure', 3, 1, false, [fx('joueur', { do: 'pari_defaite', value: 3 })]),
+  // Vos politiques font la une : leurs casseroles d'abord, celles des autres si les vôtres manquent. Sur leur
+  // propriétaire, elles donnent leur bonus en plus (13 novembre 2026, à la place du poids des affaires « à la une »).
+  spell('a_la_une', 'À la une', 3, 2, false, [fx('joueur', { do: 'decouvrir', quoi: 'casserole', proprietaires: 'vos_politiques' })]),
 
   // Échelon 4
-  spell('petite_phrase', 'Petite phrase', 4, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'polemique' })]),
+  spell('motion_de_synthese', 'Motion de synthèse', 4, 2, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0 })]),
   spell('remaniement', 'Remaniement', 4, 3, true, [fx('cible', { do: 'dorer', maxTier: 3 })], { maxTargetTier: 3 }),
   spell('seconde_deliberation', 'Seconde délibération', 4, 3, true, [fx('cible', { do: 'declencher', trigger: 'annonce' })]),
-  spell('tribune_libre', 'Tribune libre', 4, 2, true, [fx('cible', { do: 'declencher', trigger: 'heritage' })]),
   spell('cumul_des_mandats', 'Cumul des mandats', 4, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'cumul' })]),
   spell('congres', 'Congrès', 4, 2, true, [fx('cible', { do: 'congres' })]),
-  // Le coup de balai (13 novembre 2026) : les attaques de la cible touchent aussi les voisins de la sienne.
-  spell('grand_menage', 'Grand ménage', 4, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'balai' })]),
 
   // Échelon 5
-  spell('grand_debat', 'Grand débat national', 5, 4, false, [fx('allies', { do: 'buff', atk: 2, hp: 2 })]),
+  spell('immunite_parlementaire', 'Immunité parlementaire', 5, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'immunite' })]),
+  spell('ouverture', 'Ouverture', 5, 3, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0, declencheur: 'annonce' })]),
+  spell('programme', 'Programme', 5, 3, false, [fx('joueur', { do: 'decouvrir', quoi: 'serviteur', echelon: 0, declencheur: 'fin_tour' })]),
+  spell('petite_phrase', 'Petite phrase', 5, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'polemique' })]),
   spell('conseil_des_ministres', 'Conseil des ministres', 5, 3, false, [fx('allies', { do: 'declencher', trigger: 'fin_tour' })]),
+
+  // Échelon 6
+  spell('grand_debat', 'Grand débat national', 6, 4, false, [fx('allies', { do: 'buff', atk: 2, hp: 2 })]),
+  // Le coup de balai (13 novembre 2026) : les attaques de la cible touchent aussi les voisins de la sienne.
+  spell('grand_menage', 'Grand ménage', 6, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'balai' })]),
 ];
 
 // Les effets d'un sort servent à chaque lancer, dans toutes les parties : figés, rien ne peut les modifier en place.

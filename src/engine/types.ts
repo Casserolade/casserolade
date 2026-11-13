@@ -153,7 +153,17 @@ export type Action =
   /** Ajoute une carte à la main : un serviteur, un sort, `sort_aleatoire`, ou `copie` de lui-même (prise dans la réserve, règle R3). */
   | { do: 'carte'; card: string; count: number }
   /** Propose trois cartes. `echelon` : relatif à votre échelon. `declencheur` : serviteurs qui ont cet effet. */
-  | { do: 'decouvrir'; quoi: 'serviteur' | 'sort'; camp?: Camp; echelon?: number; declencheur?: Trigger }
+  | {
+      do: 'decouvrir';
+      quoi: 'serviteur' | 'sort' | 'casserole';
+      camp?: Camp;
+      echelon?: number;
+      declencheur?: Trigger;
+      /** Casserole : seulement les affaires, ou seulement les ridicules. */
+      genre?: Casserole['kind'];
+      /** Casserole : d'abord celles de vos politiques (plateau et main), complétées par d'autres. */
+      proprietaires?: 'vos_politiques';
+    }
   /** Les serviteurs du camp `camp` (tous si absent) ont +atk/+hp pour le reste de la partie, ceux à venir compris. */
   | { do: 'camp_buff'; atk: number; hp: number }
   /** Les serviteurs de la boutique (du camp `camp`) ont +atk/+hp pour le reste de la partie. */
@@ -313,8 +323,6 @@ export interface Casserole {
   ownerBonus: CasseroleBonus;
   /** Une affaire judiciaire ou un ridicule public. Les règles sont les mêmes. */
   kind: 'affaire' | 'ridicule';
-  /** À la une : une affaire que tout le monde connaît. Elle sort plus souvent en boutique (params.uneWeight). */
-  une?: boolean;
   /** Le texte affiché sur la carte. */
   blague: string;
   /** Les mots exacts, si la casserole cite quelqu'un. */
@@ -454,12 +462,8 @@ export interface Params {
   wearinessRound: number;
   activeCamps: number;
   casseroleFromRound: number;
-  /** La chance que la casserole en boutique soit celle d'un politique du joueur, s'il en a une. */
-  casseroleOwnerChance: number;
   /** Actualiser change aussi la casserole, comme les serviteurs et le sort. */
   casseroleOnRoll: boolean;
-  /** Le poids en boutique d'une casserole à la une ; les autres pèsent 1. */
-  uneWeight: number;
   /** La chance que la boutique propose le Bracelet électronique quand le joueur a un scandale, à tout échelon. */
   braceletChance: number;
   /** Casseroles pas encore oubliées sur un même serviteur pour faire scandale. */
