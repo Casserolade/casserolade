@@ -252,9 +252,12 @@ export function checkCombats(game: Game, cov: Coverage, where: string, aliveBefo
     for (const side of fin.sides) for (const u of side) assert.ok(u.hp > 0 && Number.isFinite(u.atk), `${where} : survivant à ${u.hp} PV`);
     if (result.winner !== null) assert.ok(result.survivors[result.winner] > 0 && result.survivors[1 - result.winner] === 0, `${where} : vainqueur sans survivant`);
     if (result.celebrant) assert.equal(result.celebrant.side, result.winner, `${where} : le perdant célèbre`);
+    // Une réincarnation (Retour en politique) célèbre pour le politique du plateau qu'elle incarne.
+    const origin = new Map<number, number>();
+    for (const ev of log) if (ev.e === 'retour') origin.set(ev.unit.uid, origin.get(ev.from) ?? ev.from);
     for (const c of result.celebrants) {
       assert.equal(c.side, result.winner, `${where} : un perdant applique sa Célébration`);
-      assert.ok(fin.sides[c.side].some((u) => u.uid === c.uid), `${where} : un mort applique sa Célébration`);
+      assert.ok(fin.sides[c.side].some((u) => (origin.get(u.uid) ?? u.uid) === c.uid), `${where} : un mort applique sa Célébration`);
     }
     if (result.responder) assert.notEqual(result.responder.side, result.winner, `${where} : le vainqueur répond`);
     for (const seat of [record.a, record.b]) {

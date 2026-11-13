@@ -53,7 +53,7 @@ const COUNTER_TEXT: Record<Counter, string> = {
 };
 
 const TRIGGER_WORD: Partial<Record<Trigger, string>> = { annonce: 'Annonce', heritage: 'Héritage', fin_tour: 'Fin de tour' };
-const TRIGGER_WORDS: Partial<Record<Trigger, string>> = { annonce: 'Annonces', heritage: 'Héritages', fin_tour: 'Fins de tour', celebration: 'Célébrations' };
+const TRIGGER_WORDS: Partial<Record<Trigger, string>> = { annonce: 'Annonces', heritage: 'Héritages', fin_tour: 'Fins de tour', celebration: 'Célébrations', debut_combat: '49.3' };
 
 function keyword(k: Keyword): string {
   return `**${KEYWORD_RULES[k].label}**`;
@@ -255,7 +255,8 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'dorer':
       return `rend doré ${dest} d'échelon ${e.maxTier} ou moins${golden ? ', et un deuxième au hasard' : ''}`;
     case 'detruire':
-      return `détruisez ${dest}`;
+      // Barnier, censuré par son propre 49.3 : « … et meurt ».
+      return self ? 'meurt' : `détruisez ${dest}`;
     case 'sacrifier':
       return `détruisez ${dest} et **découvrez** ${twice}un politique de son camp`;
     case 'declencher':
@@ -329,6 +330,8 @@ function prefix(e: Effect): string {
       return 'Après que vous ralliez un politique, ';
     case 'casserole_recue':
       return 'Quand un allié reçoit une casserole, ';
+    case 'oubli':
+      return 'Après que le peuple oublie le **Scandale** d\'un allié, ';
     case 'depense':
       return `Chaque fois que vous dépensez ${e.n ?? 5} budget, `;
     case 'celebration':

@@ -73,6 +73,14 @@
    "partage_identique": false
   },
   {
+   "id": "barnier",
+   "nom": "Michel Barnier",
+   "auteur": "Florian David",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Barnier_Portrait.jpg",
+   "partage_identique": true
+  },
+  {
    "id": "barthes",
    "nom": "Yann Barthès",
    "auteur": "Anipamal",
@@ -126,6 +134,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.bfmtv.com/politique/la-france-insoumise/une-fiction-manuel-bompard-reagit-a-la-sortie-du-livre-enquete-sur-la-france-insoumise_AV-202505060881.html",
+   "partage_identique": false
+  },
+  {
+   "id": "borne",
+   "nom": "Élisabeth Borne",
+   "auteur": "Benoît Granier",
+   "licence": "Licence Ouverte",
+   "source": "https://commons.wikimedia.org/wiki/File:La_Première_ministre_française_Élisabeth_Borne_(cropped).jpg",
    "partage_identique": false
   },
   {
@@ -425,6 +441,14 @@
    "partage_identique": true
   },
   {
+   "id": "hassan",
+   "nom": "Rima Hassan",
+   "auteur": "European Union",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:Rima_Hassan_MEP_(2025).jpg",
+   "partage_identique": false
+  },
+  {
    "id": "hidalgo",
    "nom": "Anne Hidalgo",
    "auteur": null,
@@ -478,6 +502,14 @@
    "auteur": "European Parliament Multimedia Centre",
    "licence": "Attribution",
    "source": "https://commons.wikimedia.org/wiki/File:Le_Pen_Jean-Marie_1999.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "juppe",
+   "nom": "Alain Juppé",
+   "auteur": "Florence Cassisi",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Alain_Juppé_à_Québec_(cropped_3).jpg",
    "partage_identique": false
   },
   {

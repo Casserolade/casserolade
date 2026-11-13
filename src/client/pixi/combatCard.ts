@@ -27,7 +27,6 @@ const CY = H / 2;
 /** Death gags and the Retour are drawn on the ground, under the medallion, wider than it. */
 const GROUND_EFFECT_WIDTH = 250;
 const GROUND_Y = H + 4;
-const BIRDS_WIDTH = 190;
 const TONE_COLORS = { base: '#ffffff', up: '#7dff9e', down: '#ff7b7b' } as const;
 /** A stat's number in its badge, at full size: as `.stat` in MedallionToken.vue. */
 const STAT_FONT = { size: 40, stroke: 6 };
@@ -35,6 +34,9 @@ const STAT_FONT = { size: 40, stroke: 6 };
 const CELEBRATION_LIFT = 34;
 /** Going out in light, in combat seconds. */
 const DISSOLVE_SECONDS = 0.75;
+/** A reincarnation fades in this long, in the blue of its ghost. */
+const APPEAR_SECONDS = 0.6;
+const GHOST_COLOR = '#8fd8ff';
 /** A hit shows its wincing face this long, in combat seconds, when it has one. */
 const HIT_FACE_SECONDS = 0.7;
 /** A hit spins it round one time in two: the cut-out does not always land the same way. */
@@ -112,7 +114,8 @@ export class CombatCard {
   private readonly pans: Container[];
   private running: RunningEffect[] = [];
   private delayed: { left: number; callback: () => void }[] = [];
-  private birds: SheetEffect | null = null;
+  /** A reincarnation fading in: seconds left. */
+  private appearing = 0;
   /** Going out in light: how far along, and what to do once gone. */
   private fading: { left: number; onFinished: () => void } | null = null;
   private readonly wash = new Graphics();
@@ -190,6 +193,10 @@ export class CombatCard {
       this.keywords = [...unit.keywords];
       this.decor.show(this.keywords, unit.effects);
     }
+  }
+
+  hasKeyword(keyword: Keyword): boolean {
+    return this.keywords?.includes(keyword) ?? false;
   }
 
   /** The medallion slides there. The first time, it just appears there. */
@@ -324,20 +331,17 @@ export class CombatCard {
     return { texture, x: bounds.x, y: bounds.y };
   }
 
-  showBirds(): void {
-    const frames = this.textures.effects.oiseaux;
-    const art = this.manifest.effets.oiseaux;
-    if (!frames || !art || this.birds) return;
-    this.birds = new SheetEffect(frames, art, BIRDS_WIDTH);
-    this.birds.view.position.set(CX, 30);
-    this.effectLayer.addChild(this.birds.view);
-  }
-
-  /** Gets back up, limping, with a plaster on the head for the rest of the combat. */
-  comeBack(): void {
-    this.birds?.destroy();
-    this.birds = null;
-    this.body.scale.set(1);
+  /**
+   * Its reincarnation (Retour en politique): a new medallion that fades in where the old one fell, rises in the blue
+   * light, gets up with a plaster on the head for the rest of the combat, and keeps a ghost's tint for a moment.
+   */
+  reincarnate(): void {
+    this.view.alpha = 0;
+    this.appearing = APPEAR_SECONDS;
+    this.wash.clear().ellipse(CX, CY, W / 2, H / 2).fill(GHOST_COLOR);
+    this.wash.blendMode = 'add';
+    this.wash.alpha = 0.6;
+    if (!this.wash.parent) this.body.addChild(this.wash);
     this.rig.holdEyes('normal');
     this.rig.setPlasterVisible(true);
     this.rig.play('comeback');
@@ -347,11 +351,11 @@ export class CombatCard {
   update(deltaSeconds: number, realDeltaSeconds: number): void {
     this.time += deltaSeconds;
     this.rig.update(deltaSeconds);
-    this.birds?.update(deltaSeconds);
     this.running = this.running.filter((entry) => this.updateEffect(entry, deltaSeconds));
     this.delayed = this.delayed.filter((entry) => this.updateDelayed(entry, deltaSeconds));
     this.updatePose(deltaSeconds);
     this.updateFading(deltaSeconds);
+    this.updateAppearing(deltaSeconds);
     // The blink runs on the page's clock: a hit-stop freezes the medallion, never its blink into a white blob.
     this.flashLeft = Math.max(0, this.flashLeft - realDeltaSeconds);
     this.flash.alpha = (this.flashLeft / HIT_FLASH_SECONDS) * 0.75;
@@ -361,6 +365,14 @@ export class CombatCard {
   destroy(): void {
     this.running.forEach(({ effect }) => effect.destroy());
     this.view.destroy({ children: true });
+  }
+
+  private updateAppearing(deltaSeconds: number): void {
+    if (this.appearing <= 0) return;
+    this.appearing = Math.max(0, this.appearing - deltaSeconds);
+    const progress = 1 - this.appearing / APPEAR_SECONDS;
+    this.view.alpha = Math.min(1, progress * 1.4);
+    this.wash.alpha = (1 - progress) * 0.6;
   }
 
   private updateFading(deltaSeconds: number): void {

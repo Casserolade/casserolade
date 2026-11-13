@@ -207,6 +207,18 @@ function fire(w: World, when: Trigger, variant: number): string {
       applyAction(game, 0, { t: 'cast', uid: p.spells[p.spells.length - 1].uid, target: carrier.uid });
       break;
     }
+    case 'oubli': {
+      // Un scandale, puis le Bracelet électronique : le peuple oublie tout de suite.
+      const carrier = variant === 0 ? x : allies[variant % allies.length];
+      for (const id of ['homards', 'pain_au_chocolat']) {
+        p.spells.push({ uid: game.nextUid++, casseroleId: id });
+        applyAction(game, 0, { t: 'cast', uid: p.spells[p.spells.length - 1].uid, target: carrier.uid });
+      }
+      addSpellToHand(game, p, 'bracelet_electronique');
+      const bracelet = p.spells.find((s) => s.spellId === 'bracelet_electronique');
+      if (bracelet) applyAction(game, 0, { t: 'cast', uid: bracelet.uid });
+      break;
+    }
     case 'depense':
       applyAction(game, 0, { t: 'buy', slot: 0, main: true });
       applyAction(game, 0, { t: 'buy', slot: 0, main: true });

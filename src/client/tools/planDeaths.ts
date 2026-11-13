@@ -15,8 +15,8 @@ interface Fall {
 }
 
 /**
- * How each politician of the combat dies (deathKind), read from the whole journal before it plays: by uid, for the
- * death it does not come back from. The last death of the beaten side is the finale, and it explodes (a Polémique
+ * How each politician of the combat dies (deathKind), read from the whole journal before it plays: by uid. A Retour en
+ * politique dies for good too, and its reincarnation is a new unit, with its own uid. The last death of the beaten side is the finale, and it explodes (a Polémique
  * still burns).
  */
 export function planDeaths(log: CombatEvent[]): Map<number, DeathPlan> {
@@ -37,10 +37,10 @@ export function planDeaths(log: CombatEvent[]): Map<number, DeathPlan> {
         event.sides.forEach((side, index) => side.forEach((unit) => meet(unit, index as 0 | 1)));
         break;
       case 'invocation':
+      case 'retour':
         meet(event.unit, event.side);
         break;
       case 'stats':
-      case 'retour':
         health.set(event.uid, event.hp);
         break;
       case 'degats':
@@ -51,7 +51,6 @@ export function planDeaths(log: CombatEvent[]): Map<number, DeathPlan> {
         poisoned.add(event.uid);
         break;
       case 'mort': {
-        if (event.revient) break;
         const known = units.get(event.uid);
         falls.push({ uid: event.uid, side: known?.side ?? 0, plan: { kind: deathKind(known?.unit, lastBlow.get(event.uid), poisoned.has(event.uid)), finale: false } });
         break;

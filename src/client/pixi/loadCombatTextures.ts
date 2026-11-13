@@ -74,9 +74,10 @@ async function loadCharacters(manifest: GameManifest, ids: string[]): Promise<Re
 /**
  * Sheets the manifest still lists but the combat never plays: the prison of the old rules (the
  * graphics demo still uses it), the golden shine, drawn in CSS on the cards, and the objects that
- * fell on politicians (anvil, piano…), retired on 3 November 2026: politicians go out in light.
+ * fell on politicians (anvil, piano…), retired on 3 November 2026: politicians go out in light. The birds of a
+ * Retour en politique went on 13 November 2026: it dies for good, and its reincarnation comes down in a blue light.
  */
-const UNPLAYED_EFFECTS = new Set(['prison', 'dore', 'masse_100t', 'mort_casserole', 'mort_coffre_fort', 'mort_enclume', 'mort_piano']);
+const UNPLAYED_EFFECTS = new Set(['prison', 'dore', 'oiseaux', 'masse_100t', 'mort_casserole', 'mort_coffre_fort', 'mort_enclume', 'mort_piano']);
 const UNUSED_BODIES = new Set(['prison']);
 
 async function loadEffects(manifest: GameManifest): Promise<Record<string, Texture[]>> {

@@ -25,7 +25,7 @@ test('the legends say what they do, on attack and with their camp', () => {
   assert.deepEqual(cardRuleLines(CARD_BY_ID.cohn_bendit), ['**Fin de tour** : vos Écologistes gagnent +1/+1 par Écologiste de votre plateau.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['Après la mort d\'un allié, vos Socialistes, partout, gagnent +1/+1 pour le reste de la partie.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.melenchon), [
-    '**Vedette**.',
+    '**Vedette**. **Coup de balai**.',
     'Vos effets « Quand il attaque » se déclenchent deux fois.',
     'Quand il attaque, joue un **Tract** sur chacun de vos Insoumis pour de bon.',
   ]);

@@ -153,9 +153,10 @@ test('the lobby tells a finished game, an abandoned one and a seat taken over; a
   assert.deepEqual(events.map((e) => e.type), ['salon_cree', 'partie', 'partie_finie']);
   assert.equal(lobby.partiesEnCours.length, 0);
 
+  // The last human leaves: the game is abandoned at once. (A disconnection waits five minutes, and bots that took
+  // over may finish the game before that: how long it lasts depends on the cards, 13 November 2026.)
   say('a', { type: 'lancer' });
-  lobby.disconnect('a');
-  advance(6 * 60_000);
+  say('a', { type: 'quitter' });
   assert.equal(events.at(-1)?.type, 'partie_abandonnee', 'every human gone: the game is abandoned');
 
   say('b', { type: 'creer_salon', pseudo: 'Bob', options: { bots: 0, niveauBots: 'facile', minuteur: true, table: 3 } });

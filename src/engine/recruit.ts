@@ -475,6 +475,7 @@ export function addDefect(m: Minion, c: Casserole): void {
     m.noAttack = true;
     scandal.grounded = true;
   }
+  scandal.splash += c.splash ?? 0;
 }
 
 /**
@@ -482,7 +483,7 @@ export function addDefect(m: Minion, c: Casserole): void {
  * un scandale en cours qui continue (triple, Ralliement) garde sa date.
  */
 export function startScandal(game: Game, m: Minion, until = game.round + game.params.scandalRounds): void {
-  m.scandal = { until, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false };
+  m.scandal = { until, budget: 0, hpLoss: 0, locked: false, silenced: null, polls: 0, grounded: false, splash: 0 };
   for (const id of m.casseroles.slice(m.oublie)) addDefect(m, CASSEROLE_BY_ID[id]);
 }
 
@@ -515,6 +516,20 @@ export function forgetScandal(m: Minion): void {
   liftScandal(m);
   m.oublie = m.casseroles.length;
   m.charges = 0;
+}
+
+/**
+ * Le peuple oublie le scandale d'un politique du joueur (à sa date, par le Bracelet, ou ni vu ni connu) : ses défauts
+ * s'en vont, et « Après l'oubli du peuple » joue sur le plateau (13 novembre 2026). Sans scandale, rien ne se passe.
+ */
+export function peopleForget(game: Game, p: Player, m: Minion): void {
+  if (!m.scandal) {
+    forgetScandal(m);
+    return;
+  }
+  forgetScandal(m);
+  p.stats.forgotten++;
+  fireBoard(game, p, 'oubli', { played: m });
 }
 
 /**
@@ -852,10 +867,9 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     case 'oublier': {
       const target = braceletTarget(p);
       if (target) {
-        forgetScandal(target);
         target.locked = true;
         target.bracelet = true;
-        p.stats.forgotten++;
+        peopleForget(game, p, target);
       }
       break;
     }

@@ -1753,6 +1753,56 @@
     }
    }
   },
+  "barnier": {
+   "atlas": "personnages/barnier.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 290,
+     "h": 357
+    },
+    "machoire": {
+     "x": 294,
+     "y": 0,
+     "w": 200,
+     "h": 86,
+     "pose": [
+      45.0,
+      271.0
+     ],
+     "pivot": [
+      99.8,
+      10.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     97.8,
+     184.0,
+     35.7
+    ],
+    "oeil_d": [
+     186.4,
+     184.0,
+     36.4
+    ],
+    "bouche": [
+     144.8,
+     281.1
+    ],
+    "menton": [
+     146.2,
+     348.0
+    ]
+   },
+   "credits": {
+    "auteur": "Florian David",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Barnier_Portrait.jpg"
+   }
+  },
   "barthes": {
    "atlas": "personnages/barthes.webp",
    "pieces": {
@@ -3115,6 +3165,56 @@
       "source": "https://www.youtube.com/watch?v=snny5K6WhI8"
      }
     }
+   }
+  },
+  "borne": {
+   "atlas": "personnages/borne.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 265,
+     "h": 340
+    },
+    "machoire": {
+     "x": 269,
+     "y": 0,
+     "w": 177,
+     "h": 90,
+     "pose": [
+      53.0,
+      250.0
+     ],
+     "pivot": [
+      94.6,
+      10.8
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     91.6,
+     162.2,
+     43.4
+    ],
+    "oeil_d": [
+     195.1,
+     162.2,
+     41.8
+    ],
+    "bouche": [
+     147.6,
+     260.8
+    ],
+    "menton": [
+     148.7,
+     329.0
+    ]
+   },
+   "credits": {
+    "auteur": "Benoît Granier",
+    "licence": "Licence Ouverte",
+    "source": "https://commons.wikimedia.org/wiki/File:La_Première_ministre_française_Élisabeth_Borne_(cropped).jpg"
    }
   },
   "bouamrane": {
@@ -10141,6 +10241,56 @@
     }
    }
   },
+  "hassan": {
+   "atlas": "personnages/hassan.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 400,
+     "h": 447
+    },
+    "machoire": {
+     "x": 404,
+     "y": 0,
+     "w": 217,
+     "h": 90,
+     "pose": [
+      98.0,
+      281.0
+     ],
+     "pivot": [
+      101.2,
+      9.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     157.4,
+     192.5,
+     42.6
+    ],
+    "oeil_d": [
+     251.1,
+     192.5,
+     44.0
+    ],
+    "bouche": [
+     199.2,
+     290.9
+    ],
+    "menton": [
+     197.7,
+     358.0
+    ]
+   },
+   "credits": {
+    "auteur": "European Union",
+    "licence": "European Parliament",
+    "source": "https://commons.wikimedia.org/wiki/File:Rima_Hassan_MEP_(2025).jpg"
+   }
+  },
   "hidalgo": {
    "atlas": "personnages/hidalgo.webp",
    "pieces": {
@@ -11303,6 +11453,56 @@
       "source": "https://www.24heures.ch/le-passage-explosif-de-jean-marie-le-pen-en-suisse-romande-352270644700"
      }
     }
+   }
+  },
+  "juppe": {
+   "atlas": "personnages/juppe.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 267,
+     "h": 363
+    },
+    "machoire": {
+     "x": 271,
+     "y": 0,
+     "w": 182,
+     "h": 98,
+     "pose": [
+      55.0,
+      260.0
+     ],
+     "pivot": [
+      103.0,
+      11.6
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     116.4,
+     176.0,
+     37.6
+    ],
+    "oeil_d": [
+     206.1,
+     176.0,
+     34.9
+    ],
+    "bouche": [
+     158.0,
+     271.6
+    ],
+    "menton": [
+     160.1,
+     345.0
+    ]
+   },
+   "credits": {
+    "auteur": "Florence Cassisi",
+    "licence": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Alain_Juppé_à_Québec_(cropped_3).jpg"
    }
   },
   "kazib": {
@@ -21615,8 +21815,14 @@
    "pujadas_pujadas_fin_justifie_les_moyens": "sons/citations/pujadas_pujadas_fin_justifie_les_moyens.mp3",
    "pujadas_pujadas_regrettez_ces_violences": "sons/citations/pujadas_pujadas_regrettez_ces_violences.mp3",
    "retailleau_retailleau_retablir_ordre": "sons/citations/retailleau_retailleau_retablir_ordre.mp3",
+   "riner_cote_a_cote": "sons/citations/riner_cote_a_cote.mp3",
    "riner_en_restant_en_haut": "sons/citations/riner_en_restant_en_haut.mp3",
+   "riner_jamais_plante": "sons/citations/riner_jamais_plante.mp3",
    "riner_politicien_professionnel": "sons/citations/riner_politicien_professionnel.mp3",
+   "riner_president_pas_ministre": "sons/citations/riner_president_pas_ministre.mp3",
+   "riner_tatami_melenchon": "sons/citations/riner_tatami_melenchon.mp3",
+   "riner_triple_a": "sons/citations/riner_triple_a.mp3",
+   "riner_yeux_dans_les_yeux": "sons/citations/riner_yeux_dans_les_yeux.mp3",
    "rousseau_sro_homme_deconstruit": "sons/citations/rousseau_sro_homme_deconstruit.mp3",
    "rousseau_sro_rien_a_peter": "sons/citations/rousseau_sro_rien_a_peter.mp3",
    "roussel_roussel_culotte_slip": "sons/citations/roussel_roussel_culotte_slip.mp3",
@@ -21666,13 +21872,7 @@
    "zemmour_zemmour_corinne": "sons/citations/zemmour_zemmour_corinne.mp3",
    "zemmour_zemmour_milipol": "sons/citations/zemmour_zemmour_milipol.mp3",
    "zemmour_zemmour_petain_onpc": "sons/citations/zemmour_zemmour_petain_onpc.mp3",
-   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3",
-   "riner_cote_a_cote": "sons/citations/riner_cote_a_cote.mp3",
-   "riner_yeux_dans_les_yeux": "sons/citations/riner_yeux_dans_les_yeux.mp3",
-   "riner_jamais_plante": "sons/citations/riner_jamais_plante.mp3",
-   "riner_president_pas_ministre": "sons/citations/riner_president_pas_ministre.mp3",
-   "riner_tatami_melenchon": "sons/citations/riner_tatami_melenchon.mp3",
-   "riner_triple_a": "sons/citations/riner_triple_a.mp3"
+   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",

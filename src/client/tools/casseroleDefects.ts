@@ -9,5 +9,6 @@ export function casseroleDefects(casserole: Casserole): string[] {
   if (casserole.pollsPerRound) defects.push(`-${casserole.pollsPerRound} sondages par manche`);
   if (casserole.noAttack) defects.push('n\'attaque plus');
   if (casserole.hpLossOnDeath) defects.push(`vous perdez ${casserole.hpLossOnDeath} sondages à sa mort`);
+  if (casserole.splash) defects.push(`éclabousse ses voisins (-${casserole.splash}/-${casserole.splash} en combat)`);
   return defects;
 }

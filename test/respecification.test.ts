@@ -55,16 +55,18 @@ test('R16 : une Immunité qui pare le coup laisse la Polémique', () => {
 
 // R17 : revenu, il compte comme neuf.
 
-test('R17 : un attaquant tombé puis revenu attaque de nouveau au tour suivant de son camp', () => {
+test('R17 : un attaquant tombé puis réincarné attaque de nouveau au tour suivant de son camp', () => {
   for (let seed = 1; seed <= 8; seed++) {
     const phoenix = unit(3, 1, ['retour']);
     const wall = unit(1, 50, ['porte_parole']);
     const foe = unit(1, 200);
     const r = fight([phoenix, wall], [foe], seed);
-    const back = r.log.findIndex((e) => e.e === 'retour' && e.uid === phoenix.uid);
+    const back = r.log.findIndex((e) => e.e === 'retour' && e.from === phoenix.uid);
     assert.ok(back > 0, `graine ${seed} : il revient`);
+    const reborn = r.log[back];
+    assert.ok(reborn.e === 'retour');
     const nextOurs = attacks(r.log.slice(back)).find((e) => e.from !== foe.uid);
-    assert.equal(nextOurs?.from, phoenix.uid, `graine ${seed} : le revenant, le plus à gauche, attaque avant le Porte-parole`);
+    assert.equal(nextOurs?.from, reborn.unit.uid, `graine ${seed} : le revenant, le plus à gauche, attaque avant le Porte-parole`);
   }
 });
 
@@ -73,7 +75,7 @@ test('R17 : tombé pendant son Cumul des mandats, son second coup est perdu', ()
     const phoenix = unit(3, 1, ['retour', 'cumul']);
     const foe = unit(1, 200);
     const r = fight([phoenix, unit(1, 50, ['porte_parole'])], [foe], seed);
-    const back = r.log.findIndex((e) => e.e === 'retour' && e.uid === phoenix.uid);
+    const back = r.log.findIndex((e) => e.e === 'retour' && e.from === phoenix.uid);
     const next = attacks(r.log.slice(back))[0];
     assert.equal(next?.from, foe.uid, `graine ${seed} : c'est à l'adversaire de jouer`);
   }
@@ -169,7 +171,10 @@ test('Mélenchon : vos « Quand il attaque » jouent deux fois, et chacune de se
   assert.ok(attacks > 0);
   const tracts = r.persist[0].buffs.filter((g) => g.uid === leaument.uid);
   assert.equal(tracts.length, 2 * attacks, 'un Tract pour de bon à chaque Insoumis, deux fois par attaque');
-  const guedjAttacks = r.log.filter((e) => e.e === 'attaque' && e.from === guedj.uid).length;
+  // Ses réincarnations sont lui : leurs gains vont au Guedj du plateau.
+  const incarnations = new Set([guedj.uid]);
+  for (const e of r.log) if (e.e === 'retour' && incarnations.has(e.from)) incarnations.add(e.unit.uid);
+  const guedjAttacks = r.log.filter((e) => e.e === 'attaque' && incarnations.has(e.from)).length;
   const guedjGains = r.persist[0].buffs.filter((g) => g.uid === guedj.uid).length;
   assert.equal(guedjGains, 2 * guedjAttacks, 'le « Quand il attaque » de Guedj aussi');
 });

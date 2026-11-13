@@ -18,14 +18,16 @@ export type Keyword =
   | 'cumul'
   /** Toxicité : détruit le premier serviteur qu'il blesse, puis se perd. */
   | 'polemique'
-  /** Réincarnation : revient une fois avec 1 PV. */
+  /** Réincarnation : meurt, puis revient une fois avec 1 PV, tel qu'il est entré en combat, s'il y a la place. */
   | 'retour'
   /** Compte comme un serviteur de chaque camp, sauf la Société civile. */
   | 'ni_droite_ni_gauche'
   /** Magnétique : depuis la main, peut se poser sur un allié pour fusionner avec lui. */
   | 'ralliement'
   /** Célèbre en priorité, s'il survit. */
-  | 'vedette';
+  | 'vedette'
+  /** Le coup de balai (Cleave) : ses attaques touchent aussi les voisins de sa cible. */
+  | 'balai';
 
 /**
  * Les déclencheurs. Ceux du recrutement sont le cœur du jeu : c'est là que les plateaux grandissent.
@@ -55,6 +57,8 @@ export type Trigger =
   | 'rallie'
   /** Quand un de vos serviteurs reçoit une casserole. */
   | 'casserole_recue'
+  /** Après l'oubli du peuple : le scandale d'un de vos politiques s'efface (cible `joue` : ce politique). */
+  | 'oubli'
   /** Chaque fois que vous avez dépensé `n` budget. */
   | 'depense'
   // Après le combat
@@ -168,8 +172,8 @@ export type Action =
   | { do: 'sacrifier'; echelon?: number }
   /** Déclenche les effets `trigger` des cibles, une fois par manche au plus pour chacune (règle R4). Doré, il les joue deux fois. */
   | { do: 'declencher'; trigger: 'annonce' | 'heritage' | 'fin_tour' }
-  /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). `meeting` : « Quand il attaque ». */
-  | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration' | 'meeting' }
+  /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). `meeting` : « Quand il attaque » ; `debut_combat` : les 49.3. */
+  | { do: 'doubler'; trigger: 'annonce' | 'heritage' | 'fin_tour' | 'celebration' | 'meeting' | 'debut_combat' }
   /** Aura : ce serviteur a +atk/+hp par unité du compteur. */
   | { do: 'compteur'; compteur: Counter; atk: number; hp: number }
   /** Aura : il faut `value` casseroles de plus pour faire scandale. */
@@ -291,6 +295,8 @@ export interface Casserole {
   pollsPerRound?: number;
   /** N'attaque plus pendant le scandale. */
   noAttack?: boolean;
+  /** Éclabousse ses voisins pendant le scandale : en combat, ils ont -N/-N. */
+  splash?: number;
   /** Invoque ce jeton à côté du serviteur. */
   summon?: string;
   /** Effets ajoutés au serviteur. */
@@ -343,6 +349,8 @@ export interface Scandal {
   polls: number;
   /** Le scandale l'empêche d'attaquer. */
   grounded: boolean;
+  /** Ses voisins, éclaboussés, ont -N/-N en combat. */
+  splash: number;
 }
 
 export interface Minion {
@@ -590,9 +598,10 @@ export type CombatEvent =
   | { e: 'mot_cle'; uid: number; keyword: Keyword; gain: boolean }
   /** Un effet se déclenche. `casserole` : la casserole qui l'a apporté, s'il y en a une. */
   | { e: 'effet'; uid: number; when: Trigger; effect: Effect; casserole?: string }
-  /** `revient` : il reste en place, un événement `retour` suit. Sinon, il quitte le plateau. */
-  | { e: 'mort'; uid: number; revient: boolean }
-  | { e: 'retour'; uid: number; hp: number }
+  /** Il quitte le plateau. Un Retour en politique le réincarne ensuite (`retour`), après son Héritage. */
+  | { e: 'mort'; uid: number }
+  /** La réincarnation de `from` (Retour en politique) apparaît à la place `index` : une nouvelle incarnation, à 1 PV. */
+  | { e: 'retour'; side: 0 | 1; index: number; unit: CombatUnit; from: number }
   /** Sondages perdus par le camp `side` à la mort de ce serviteur. */
   | { e: 'penalite'; uid: number; side: 0 | 1; value: number }
   | { e: 'invocation'; side: 0 | 1; index: number; unit: CombatUnit }

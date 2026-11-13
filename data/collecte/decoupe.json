@@ -44,6 +44,11 @@
   "hauteur_visage_source": 396,
   "visages": 1
  },
+ "barnier": {
+  "basse_definition": false,
+  "hauteur_visage_source": 406,
+  "visages": 1
+ },
  "barthes": {
   "basse_definition": true,
   "hauteur_visage_source": 127,
@@ -77,6 +82,11 @@
  "bompard": {
   "basse_definition": false,
   "hauteur_visage_source": 724,
+  "visages": 1
+ },
+ "borne": {
+  "basse_definition": false,
+  "hauteur_visage_source": 333,
   "visages": 1
  },
  "bouamrane": {
@@ -264,6 +274,11 @@
   "hauteur_visage_source": 368,
   "visages": 1
  },
+ "hassan": {
+  "basse_definition": false,
+  "hauteur_visage_source": 1118,
+  "visages": 1
+ },
  "hidalgo": {
   "basse_definition": false,
   "hauteur_visage_source": 363,
@@ -297,6 +312,11 @@
  "jmlp": {
   "basse_definition": false,
   "hauteur_visage_source": 602,
+  "visages": 1
+ },
+ "juppe": {
+  "basse_definition": false,
+  "hauteur_visage_source": 954,
   "visages": 1
  },
  "kazib": {

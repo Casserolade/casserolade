@@ -16,7 +16,7 @@ import type { Effect, Keyword, Minion } from './types.ts';
 
 /** Tous les mots-clés : le compilateur refuse cette table si un mot-clé est ajouté sans elle. */
 const KNOWN_KEYWORDS: Record<Keyword, true> = {
-  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true,
+  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true, balai: true,
 };
 
 /** Les exemplaires de chaque carte, où qu'ils soient : la réserve, les boutiques, les choix, les plateaux et les mains. */
@@ -105,6 +105,8 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
     const polls = live.reduce((sum, c) => sum + (c.pollsPerRound ?? 0), 0);
     check(s.polls === polls, `scandale : ${s.polls} sondages par manche, attendu ${polls}`);
     if (live.some((c) => c.noAttack)) check(s.grounded && m.noAttack, 'le défaut « n\'attaque plus » n\'est pas appliqué');
+    const splash = live.reduce((sum, c) => sum + (c.splash ?? 0), 0);
+    check(s.splash === splash, `scandale : éclabousse de ${s.splash}, attendu ${splash}`);
   }
 
   // Les effets : ceux de la carte, des casseroles, des bonus de propriétaire et des cartes ralliées (une fois par

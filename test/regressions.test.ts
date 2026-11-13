@@ -318,10 +318,14 @@ test('en combat, les invocations respectent la taille du plateau des règles, pa
     { minions: [{ ...makeMinion({ id: 'test', name: 'Test', camp: 'civile', tier: 1, atk: 1, hp: 100 }, 3), keywords: [] }], mods: {}, hp: 10 },
     { params, ctx: null, rng: createRng(2), log: true },
   );
+  const ours = new Set([cazeneuve.uid, allie.uid]);
   let size = 2;
   for (const e of r.log) {
-    if (e.e === 'mort' && !e.revient && e.uid < 100) size--;
-    if (e.e === 'invocation' && e.side === 0) size++;
+    if (e.e === 'mort' && ours.delete(e.uid)) size--;
+    if ((e.e === 'invocation' || e.e === 'retour') && e.side === 0) {
+      ours.add(e.unit.uid);
+      size++;
+    }
     assert.ok(size <= params.boardSize, `plateau à ${size} en combat`);
   }
 });

@@ -73,19 +73,19 @@ test('gains and labels use the short numbers too', () => {
 const ATTACK: CombatEvent = { e: 'attaque', from: 1, to: 2 };
 const BLOW: CombatEvent = { e: 'degats', uid: 2, value: 3, hp: 1 };
 const RETURN_BLOW: CombatEvent = { e: 'degats', uid: 1, value: 2, hp: 0 };
-const DEATH: CombatEvent = { e: 'mort', uid: 1, revient: false };
+const DEATH: CombatEvent = { e: 'mort', uid: 1 };
 
 test('an attack lasts until its lunge lands, and the two blows of an exchange land together', () => {
   assert.ok(combatEventDuration(ATTACK) <= 260, 'the blow lands at the contact');
   assert.ok(combatEventGapMs(BLOW, RETURN_BLOW) <= 100);
   assert.ok(combatEventGapMs(RETURN_BLOW, DEATH) <= 200, 'the victim goes at once');
   assert.equal(combatEventGapMs(RETURN_BLOW, ATTACK), combatEventDuration(RETURN_BLOW));
-  assert.ok(combatEventGapMs(DEATH, { e: 'mort', uid: 2, revient: false }) < combatEventDuration(DEATH));
+  assert.ok(combatEventGapMs(DEATH, { e: 'mort', uid: 2 }) < combatEventDuration(DEATH));
   assert.equal(combatEventGapMs(DEATH, undefined), combatEventDuration(DEATH));
 });
 
 test('the client never plays an event longer than the server counts on', () => {
-  const events: CombatEvent[] = [ATTACK, BLOW, RETURN_BLOW, DEATH, { e: 'mort', uid: 2, revient: false }, { e: 'immunite', uid: 3 }, { e: 'polemique', uid: 3, from: 1 }];
+  const events: CombatEvent[] = [ATTACK, BLOW, RETURN_BLOW, DEATH, { e: 'mort', uid: 2 }, { e: 'immunite', uid: 3 }, { e: 'polemique', uid: 3, from: 1 }];
   events.forEach((event, index) => assert.ok(combatEventGapMs(event, events[index + 1]) <= combatEventDuration(event)));
 });
 
@@ -202,25 +202,26 @@ test('asked for less motion, or without WebGL, the deaths stay gentle', () => {
   assert.equal(deathPlayed('gold', true, false), 'gold');
 });
 
-test('the last death of the beaten side is the finale; a comeback is not planned', () => {
+test('the last death of the beaten side is the finale; a Retour en politique dies for good, and its reincarnation too', () => {
   const log: CombatEvent[] = [
     { e: 'debut', first: 0, sides: [[unit(1, { atk: 9 })], [unit(2, { hp: 1 }), unit(3, { hp: 2, keywords: ['retour'] })]] },
     { e: 'attaque', from: 1, to: 2 },
     { e: 'degats', uid: 2, value: 9, hp: -8 },
-    { e: 'mort', uid: 2, revient: false },
+    { e: 'mort', uid: 2 },
     { e: 'attaque', from: 1, to: 3 },
     { e: 'degats', uid: 3, value: 9, hp: -7 },
-    { e: 'mort', uid: 3, revient: true },
-    { e: 'retour', uid: 3, hp: 1 },
-    { e: 'attaque', from: 1, to: 3 },
-    { e: 'degats', uid: 3, value: 2, hp: -1 },
-    { e: 'mort', uid: 3, revient: false },
+    { e: 'mort', uid: 3 },
+    { e: 'retour', side: 1, index: 0, unit: unit(30, { hp: 1 }), from: 3 },
+    { e: 'attaque', from: 1, to: 30 },
+    { e: 'degats', uid: 30, value: 2, hp: -1 },
+    { e: 'mort', uid: 30 },
     { e: 'fin', winner: 0, sides: [[unit(1)], []] },
   ];
   const plan = planDeaths(log);
   assert.deepEqual(plan.get(2), { kind: 'explode', finale: false });
-  assert.deepEqual(plan.get(3), { kind: 'explode', finale: true });
-  assert.equal(plan.size, 2);
+  assert.equal(plan.get(3)?.finale, false);
+  assert.deepEqual(plan.get(30), { kind: 'explode', finale: true });
+  assert.equal(plan.size, 3);
 });
 
 test('no finale when nobody is wiped out', () => {

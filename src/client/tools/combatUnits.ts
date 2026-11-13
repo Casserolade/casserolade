@@ -5,7 +5,7 @@ export function combatUnits(log: CombatEvent[]): Map<number, { unit: CombatUnit;
   const units = new Map<number, { unit: CombatUnit; side: 0 | 1 }>();
   for (const event of log) {
     if (event.e === 'debut') event.sides.forEach((row, side) => row.forEach((unit) => units.set(unit.uid, { unit, side: side as 0 | 1 })));
-    if (event.e === 'invocation') units.set(event.unit.uid, { unit: event.unit, side: event.side });
+    if (event.e === 'invocation' || event.e === 'retour') units.set(event.unit.uid, { unit: event.unit, side: event.side });
   }
   return units;
 }

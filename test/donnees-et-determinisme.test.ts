@@ -15,7 +15,7 @@ import type { Action, Camp, Counter, Effect, Keyword, Target, Trigger } from '..
  */
 const TRIGGERS: Record<Trigger, true> = {
   annonce: true, fin_tour: true, debut_tour: true, joue: true, vente: true, vente_allie: true, sort: true, actualise: true, debauche: true,
-  rallie: true, casserole_recue: true, depense: true, celebration: true, droit_de_reponse: true, debut_combat: true, heritage: true,
+  rallie: true, casserole_recue: true, oubli: true, depense: true, celebration: true, droit_de_reponse: true, debut_combat: true, heritage: true,
   riposte: true, meeting: true, tue: true, revanche: true, immunite_perdue: true, aura: true,
 };
 const TARGETS: Record<Target, true> = {
@@ -31,7 +31,7 @@ const ACTIONS: Record<Action['do'], true> = {
   doubler_stats: true, buff_par_membre: true, gain_debauche: true, buff_compteur: true, chaise_vide: true,
 };
 const KEYWORDS: Record<Keyword, true> = {
-  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true,
+  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true, balai: true,
 };
 const CAMPS: Record<Camp, true> = { insoumis: true, socialistes: true, ecologistes: true, macronie: true, republicains: true, rn: true, reconquete: true, civile: true };
 const COUNTERS: Record<Counter, true> = { tracts: true, ecologistes_joues: true, dores_joues: true, casseroles: true, debauchages: true, actualisations: true };

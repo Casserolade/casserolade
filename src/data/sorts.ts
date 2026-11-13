@@ -51,6 +51,8 @@ export const SPELLS: Spell[] = [
   spell('tribune_libre', 'Tribune libre', 4, 2, true, [fx('cible', { do: 'declencher', trigger: 'heritage' })]),
   spell('cumul_des_mandats', 'Cumul des mandats', 4, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'cumul' })]),
   spell('congres', 'Congrès', 4, 2, true, [fx('cible', { do: 'congres' })]),
+  // Le coup de balai (13 novembre 2026) : les attaques de la cible touchent aussi les voisins de la sienne.
+  spell('grand_menage', 'Grand ménage', 4, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'balai' })]),
 
   // Échelon 5
   spell('grand_debat', 'Grand débat national', 5, 4, false, [fx('allies', { do: 'buff', atk: 2, hp: 2 })]),
