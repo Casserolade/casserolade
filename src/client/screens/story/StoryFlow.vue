@@ -17,7 +17,8 @@ import { createGameStore } from '#src/client/stores/createGameStore.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { StoryRun } from '#src/client/stores/createStoryRun.ts';
 import { apresChapitre, chapitreCourant, nouvelleCampagne } from '#src/histoire/campagne.ts';
-import { cinematiqueApres, cinematiqueDe, idCompteur } from '#src/histoire/carrieres.ts';
+import { cinematiqueDe, idCompteur } from '#src/histoire/carrieres.ts';
+import { cinematiqueDeFin } from '#src/histoire/cinematiqueDeFin.ts';
 import type { Scene } from '#src/data/histoire/cinematique.ts';
 import type { Campagne } from '#src/histoire/campagne.ts';
 import { generateSeed } from '#src/server/generateSeed.ts';
@@ -116,14 +117,14 @@ function endCutscene(): void {
   then?.();
 }
 
-/** The duel at the end of a career: winning it, or losing it, has its own scene. */
-function isFinal(): boolean {
-  return Boolean(campaign.value?.carriere && chapter.value?.boss && chapter.value.id !== 'outre_tombe');
-}
-
-watch(bilan, (result) => {
-  if (!result || result.reussi || !campaign.value || !isFinal()) return;
-  showCutscene(cinematiqueDe(campaign.value.heroId, 'defaite'), () => undefined);
+/**
+ * What closes a chapter of a career plays as soon as its game is over, before the election night: the episode after a
+ * won chapter, the victory or the defeat of the final duel. It belongs to the chapter just played: played after
+ * « Élection suivante », it read as the next chapter's, which has its own, and two episodes came around one chapter.
+ */
+watch(resultShown, (shown) => {
+  if (!shown || !campaign.value?.carriere || !chapter.value || !bilan.value) return;
+  showCutscene(cinematiqueDeFin(campaign.value.heroId, chapter.value, bilan.value.reussi), () => undefined);
 });
 
 function setCampaign(next: Campagne | null): void {
@@ -166,15 +167,11 @@ function stopRun(): void {
   clearLocalGame();
 }
 
-/** A won chapter may close on its scene; the career's last one, on the victory. */
+/** On to the next election: the scene that closed this one has already played, with its result. */
 function finishChapter(): void {
   if (!campaign.value || !chapter.value || !bilan.value) return;
-  const elected = isFinal() && bilan.value.reussi;
-  const closing = bilan.value.reussi && campaign.value.carriere ? cinematiqueApres(campaign.value.heroId, chapter.value.id) : null;
   setCampaign(apresChapitre(campaign.value, chapter.value, bilan.value));
   stopRun();
-  if (!campaign.value) return;
-  showCutscene(elected ? cinematiqueDe(campaign.value.heroId, 'victoire') : closing, () => undefined);
 }
 
 function abandon(): void {

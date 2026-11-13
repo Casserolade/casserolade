@@ -399,3 +399,23 @@ test('la cinémathèque range chaque cinématique de chaque carrière à son ét
   ]);
   assert.deepEqual(cinematiquesParEtape('lassalle'), []);
 });
+
+import { chapitresDeCarriere } from '../src/histoire/carrieres.ts';
+import { cinematiqueDeFin } from '../src/histoire/cinematiqueDeFin.ts';
+
+test('la cinématique de fin d\'un chapitre : son épisode après une victoire ; au duel final, la victoire ou la défaite', () => {
+  const chapitres = chapitresDeCarriere('durif') ?? [];
+  const [bugarach, arques] = chapitres;
+  const duel = chapitres[chapitres.length - 1];
+  assert.equal(cinematiqueDeFin('durif', bugarach, true)?.id, 'durif_bugarach');
+  assert.equal(cinematiqueDeFin('durif', bugarach, false), null);
+  assert.equal(cinematiqueDeFin('durif', arques, true), null);
+  assert.equal(cinematiqueDeFin('durif', duel, true)?.id, 'durif_victoire');
+  assert.equal(cinematiqueDeFin('durif', duel, false)?.id, 'durif_defaite');
+});
+
+test('un héros sans carrière n\'a aucune cinématique de fin, et l\'épilogue d\'outre-tombe non plus', () => {
+  assert.equal(cinematiqueDeFin('lisnard', CHAPITRES[0], true), null);
+  assert.equal(cinematiqueDeFin('lisnard', CHAPITRES[CHAPITRES.length - 1], true), null);
+  assert.equal(cinematiqueDeFin('durif', OUTRE_TOMBE, true), null);
+});
