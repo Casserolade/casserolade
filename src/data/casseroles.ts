@@ -1164,9 +1164,10 @@ export const CASSEROLES: Casserole[] = [
   },
   // 13 novembre 2026 : Rima Hassan, Élisabeth Borne, Michel Barnier, Alain Juppé ; le Kärcher et le déni de démocratie.
   {
-    id: 'apologie',
+    id: 'plus_poursuivie',
     kind: 'affaire',
-    name: 'Apologie du terrorisme',
+    // Le titre reprend ses mots au procès, pas le nom du délit pour lequel elle est jugée.
+    name: 'L\'élue la plus poursuivie',
     owner: 'hassan',
     cost: 2,
     ownerBonus: { atk: 2, hp: 2 },
@@ -1175,7 +1176,8 @@ export const CASSEROLES: Casserole[] = [
     keywords: ['immunite'],
     // Deux ans d'inéligibilité requis : pendant le scandale, elle n'attaque plus.
     noAttack: true,
-    blague: 'Elle cite sur X un auteur de l\'attentat de l\'aéroport de Lod, puis invoque son immunité de députée européenne. Le parquet répond : flagrant délit, et requiert l\'inéligibilité.',
+    citation: 'L\'élue la plus poursuivie de la Ve République',
+    blague: 'En garde à vue pour un message sur X, elle invoque son immunité de députée européenne. Le parquet répond : flagrant délit. Au procès, elle se dit « l\'élue la plus poursuivie de la Ve République ».',
     fait: 'Le 26 mars 2026, elle publie sur X un message, depuis supprimé, citant Kozo Okamoto, l\'un des auteurs de l\'attentat de l\'aéroport de Lod (1972, 26 morts). Placée en garde à vue le 2 avril 2026, elle invoque son immunité parlementaire ; le parquet de Paris retient le flagrant délit. Jugée les 19 et 20 octobre 2026 pour apologie du terrorisme, elle se dit « l\'élue la plus poursuivie de la Ve République » ; le parquet requiert dix mois de prison avec sursis et deux ans d\'inéligibilité (Le Club des juristes, Ouest-France, 20 octobre 2026).',
     statut: 'Jugée les 19 et 20 octobre 2026 ; délibéré le 30 novembre 2026.',
     verifie: true,
