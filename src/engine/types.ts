@@ -10,7 +10,7 @@ export type Camp =
 
 /** Les mots-clés : ce sont des états, visibles sur le médaillon. */
 export type Keyword =
-  /** Bouclier divin : annule le premier coup reçu. */
+  /** Bouclier divin : annule les premiers dégâts reçus, d'une attaque comme d'un effet (même 1 dégât à tous les ennemis). */
   | 'immunite'
   /** Provocation : doit être attaqué en priorité. */
   | 'porte_parole'
@@ -161,6 +161,8 @@ export type Action =
       declencheur?: Trigger;
       /** Casserole : seulement les affaires, ou seulement les ridicules. */
       genre?: Casserole['kind'];
+      /** Casserole : seulement celles qui coûtent `coutMax` ou moins. */
+      coutMax?: number;
       /** Casserole : d'abord celles de vos politiques (plateau et main), complétées par d'autres. */
       proprietaires?: 'vos_politiques';
     }

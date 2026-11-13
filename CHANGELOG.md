@@ -13,6 +13,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Les Tracts joués en combat (Mélenchon) comptent comme des sorts lancés, une fois le combat fini : Trouvé, Schiappa et Roussel les voient.
 - Une découverte née d'une Fin de tour n'est plus prise d'office : le choix s'affiche au début du recrutement suivant.
 - Tous les héros partent à 30 sondages, et seul leur socle électoral, leur armure (de 0 à 20), les départage. Avant : 28 sondages, plus ou moins selon le héros. La liste des joueurs montre les sondages et le socle côte à côte, sur ordinateur comme sur téléphone. Les parties durent deux manches de plus en moyenne.
+- Le texte de l'Immunité est précisé, sans changement de règle : elle annule les premiers dégâts reçus, d'une attaque ou d'un effet. Un 49.3 qui inflige 1 dégât à tous les ennemis fait donc tomber toutes leurs Immunités.
 - Le pouvoir « le premier politique à mourir revient » (Hollande, Durif, Riner) attend un politique : un jeton tombé ne le consomme plus.
 
 **Nouveaux politiques et nouvelles casseroles**
@@ -23,7 +24,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 
 **Casseroles et sorts**
 - La casserole de la boutique : un camp de la partie est tiré à égalité, puis une de ses casseroles. Plus de poids pour les affaires « à la une » ni pour celles de vos politiques, et un camp qui a beaucoup d'affaires ne sort pas plus souvent qu'un autre.
-- Deux nouveaux sorts : « Fuite dans la presse » (échelon 2) découvre une casserole, « À la une » (échelon 3) découvre d'abord celles de vos politiques. Francis Lalanne découvre un Ridicule.
+- Deux nouveaux sorts : « Fuite dans la presse » (échelon 2) découvre une casserole, « À la une » (échelon 3) découvre d'abord celles de vos politiques. Francis Lalanne découvre un Ridicule qui coûte 2 ou moins, et ne se copie plus à chaque victoire : sa Célébration donne le Retour en politique à un autre allié.
 - Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Temps de parole, Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
 
 **Équilibrage**

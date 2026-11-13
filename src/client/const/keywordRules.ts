@@ -2,7 +2,7 @@ import type { Keyword } from '#src/engine/types.ts';
 
 /** Les mots-clés : toujours le même mot, toujours en gras, et leur règle au survol. */
 export const KEYWORD_RULES: Record<Keyword, { label: string; rule: string }> = {
-  immunite: { label: 'Immunité', rule: 'Annule le premier coup reçu, puis tombe.' },
+  immunite: { label: 'Immunité', rule: 'Annule les premiers dégâts reçus, d\'une attaque ou d\'un effet, puis tombe.' },
   porte_parole: { label: 'Porte-parole', rule: 'Les ennemis doivent l\'attaquer en priorité.' },
   cumul: { label: 'Cumul des mandats', rule: 'Attaque deux fois.' },
   polemique: { label: 'Polémique', rule: 'Détruit le premier politique qu\'il blesse, puis se perd.' },

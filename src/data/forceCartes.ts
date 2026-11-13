@@ -104,7 +104,7 @@ export const FORCE_CARTES: Record<string, { seul: number; camp: number }> = {
   kazib: { seul: 0.36, camp: 0.36 },
   cheminade: { seul: 0.68, camp: 0.68 },
   durif: { seul: 0.76, camp: 0.76 },
-  lalanne: { seul: 1.15, camp: 1.15 },
+  lalanne: { seul: 0.77, camp: 0.77 },
   arthaud: { seul: 1.08, camp: 1.08 },
   branco: { seul: 0.99, camp: 0.99 },
   roussel: { seul: 1.08, camp: 1.08 },

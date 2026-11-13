@@ -294,7 +294,7 @@ test('une copie gagnée en combat se prend dans la réserve ; réserve vide, c\'
   assert.equal(empty.after, 0);
 });
 
-test('trois Lalanne, dont deux gagnés par sa Célébration, font un triple (3 novembre 2026)', async () => {
+test('trois exemplaires, dont deux gagnés par une Célébration qui se copie, font un triple (3 novembre 2026)', async () => {
   const { applyAction, finishRound } = await import('../src/engine/game.ts');
   const { addMinionToHand } = await import('../src/engine/recruit.ts');
   const game = createGame({ seed: 5, seats: 2, heroes: ['attal', 'attal'], activeCamps: ['insoumis', 'rn', 'macronie', 'socialistes', 'ecologistes'] });
@@ -302,6 +302,8 @@ test('trois Lalanne, dont deux gagnés par sa Célébration, font un triple (3 n
   p.budget = 20;
   const lalanne = addMinionToHand(game, p, 'lalanne');
   assert.ok(lalanne && applyAction(game, 0, { t: 'play', uid: lalanne.uid }).ok);
+  // Plus aucune carte ne se copie à sa Célébration (Lalanne le faisait) : l'effet reste dans le moteur, on le lui rend ici.
+  lalanne.effects = [{ when: 'celebration', to: 'joueur', do: 'carte', card: 'copie', count: 1 }];
   for (let win = 0; win < 2 && !p.hand.concat(p.board).some((m) => m.golden); win++) {
     game.players[1].board = [];
     startCombats(game);
