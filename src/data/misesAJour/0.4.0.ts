@@ -31,7 +31,6 @@ export const CARTES: VersionCards = {
     {"before":{"id":"guette","name":"Clémence Guetté","camp":"insoumis","tier":2,"atk":4,"hp":5,"keywords":[],"effects":[{"when":"annonce","to":"joueur","do":"carte","card":"promesse","count":1}]}},
     {"before":{"id":"aubry","name":"Manon Aubry","camp":"insoumis","tier":4,"atk":6,"hp":7,"keywords":[],"effects":[{"when":"annonce","to":"autres","do":"jouer_tract"}]}},
     {"before":{"id":"berge","name":"Aurore Bergé","camp":"macronie","tier":3,"atk":3,"hp":3,"keywords":["ralliement"],"effects":[{"when":"heritage","to":"soi","do":"invoquer","token":"suppleant","count":1}]}},
-    {"before":{"id":"lecornu","name":"Sébastien Lecornu","camp":"macronie","tier":4,"atk":5,"hp":6,"keywords":["ralliement","retour"],"effects":[]}},
     {"before":{"id":"cope","name":"Jean-François Copé","camp":"republicains","tier":2,"atk":3,"hp":4,"keywords":["porte_parole"],"effects":[{"when":"heritage","to":"premier_allie","do":"mot_cle","keyword":"immunite"}]}},
   ],
   casseroles: [
@@ -75,7 +74,6 @@ export const CARTES: VersionCards = {
     {"after":{"id":"mauvais_budget","kind":"ridicule","name":"Un mauvais budget","owner":"batho","cost":2,"ownerBonus":{"atk":4,"hp":4},"atk":4,"hp":4,"budgetPerRound":-2}},
     {"after":{"id":"capitales_baltes","kind":"ridicule","name":"Les capitales baltes","owner":"jadot","cost":2,"ownerBonus":{"atk":4,"hp":4},"atk":4,"hp":4,"pollsPerRound":2}},
     {"after":{"id":"portraits_presidents","kind":"ridicule","name":"Les portraits des présidents","owner":"tondelier","cost":2,"ownerBonus":{"atk":4,"hp":4},"atk":4,"hp":4,"pollsPerRound":2}},
-    {"before":{"id":"quatorze_heures","kind":"ridicule","name":"Le gouvernement de 14 heures","owner":"lecornu","cost":3,"ownerBonus":{"atk":1,"hp":1},"atk":1,"hp":1,"forgetsAll":true}},
     {"before":{"id":"pain_au_chocolat","kind":"ridicule","name":"Le pain au chocolat","owner":"cope","cost":2,"ownerBonus":{"atk":4,"hp":4},"atk":4,"hp":4,"budgetPerRound":-2}},
   ],
   spells: [

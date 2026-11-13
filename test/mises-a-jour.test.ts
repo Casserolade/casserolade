@@ -89,7 +89,7 @@ test('casseroleFromCard : la mécanique de la carte, sans fait ni statut', () =>
 test('patchNoteSections : les nouveaux à part des retouchés, chacun avec son pourquoi', () => {
   const sections = patchNoteSections(latest);
   assert.deepEqual(sections.newCards.map((c) => c.key).sort(), ['barnier', 'borne', 'bove', 'hassan', 'joly', 'juppe']);
-  assert.ok(sections.changedCards.some((c) => c.key === 'lecornu' && c.before && !c.after), 'un politique retiré : avant seulement');
+  assert.ok(sections.changedCards.some((c) => c.key === 'berge' && c.before && !c.after), 'un politique retiré : avant seulement');
   assert.ok(sections.changedCards.every((c) => c.before && c.why));
   assert.ok(sections.changedCards.some((c) => c.key === 'giscard'));
   assert.equal(sections.newCasseroles.length + sections.changedCasseroles.length, latest.cards.casseroles.length);

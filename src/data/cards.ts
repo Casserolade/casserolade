@@ -177,9 +177,11 @@ export const CARDS: Card[] = [
   // 5 novembre 2026 : 2 de budget au lieu de 1. Une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie (5,11 en mono-camp).
   card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 2 })] }),
   // 7 novembre 2026 : « le premier flic de France » grandit en attaquant, et rallié, il l'apprend à son hôte. Avec
-  // l'Immunité de Dupond-Moretti et le Cumul de Castaner, l'hôte de tête gonfle à chaque coup.
+  // l'Immunité de Dupond-Moretti, le Cumul de Castaner et le Retour de Lecornu, l'hôte de tête gonfle à chaque coup.
   card('darmanin', 'Gérald Darmanin', 'macronie', 4, 5, 6, { kw: ['ralliement'], fx: [fx('meeting', 'soi', buff(2, 2), { perma: true })] }),
   card('philippe', 'Édouard Philippe', 'macronie', 5, 8, 9, { fx: [fx('annonce', 'cible', { do: 'dorer', maxTier: 4 })] }),
+  // Premier ministre depuis septembre 2025 : il rallie, et il revient, comme son gouvernement de 14 heures.
+  card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
   card('bayrou', 'François Bayrou', 'macronie', 4, 6, 8, { kw: ['ni_droite_ni_gauche'], fx: [fx('fin_tour', 'allies', { do: 'buff_par_ralliement', atk: 2, hp: 2 })] }),
   // Vingt-trois 49.3 en vingt mois (2022-2024), le record depuis Rocard : vos 49.3 se déclenchent deux fois, le sien
   // compris (13 novembre 2026). Un corps de multiplicateur, comme Lassalle, Chirac et Mitterrand. Son 49.3 à tous ses
@@ -368,7 +370,6 @@ export const RESERVE_CARDS: Card[] = [
   // Les faux billets de 500 € offerts à Juncker : tout le monde en reçoit.
   card('aubry', 'Manon Aubry', 'insoumis', 4, 6, 7, { fx: [fx('annonce', 'autres', tract)] }),
   card('berge', 'Aurore Bergé', 'macronie', 3, 4, 4, { kw: ['ralliement'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
-  card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
   card('cope', 'Jean-François Copé', 'republicains', 2, 3, 4, { kw: ['porte_parole'], fx: [fx('heritage', 'premier_allie', motCle('immunite'))] }),
 ];
 

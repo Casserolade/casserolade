@@ -911,6 +911,22 @@ export const CASSEROLES: Casserole[] = [
     verifie: true,
   },
   {
+    id: 'quatorze_heures',
+    kind: 'ridicule',
+    name: 'Le gouvernement de 14 heures',
+    owner: 'lecornu',
+    cost: 3,
+    ownerBonus: { atk: 1, hp: 1 },
+    atk: 1,
+    hp: 1,
+    // Lecornu a déjà le Retour : son gouvernement de 14 heures s'oublie, lui reste.
+    forgetsAll: true,
+    blague: 'Annoncé le soir, démissionnaire le matin, reconduit quatre jours plus tard. Quatorze heures : le peuple a déjà oublié.',
+    fait: 'Démission le 6 octobre 2025, reconduction le 10 octobre.',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
+  {
     id: 'assumer_mentir',
     kind: 'ridicule',
     name: 'J\'assume de mentir',
@@ -1509,22 +1525,6 @@ for (const c of CASSEROLES) {
 
 /** Les casseroles des politiques de la réserve (`RESERVE_CARDS`) : hors du jeu avec eux, gardées pour leur retour. */
 export const RESERVE_CASSEROLES: Casserole[] = [
-  {
-    id: 'quatorze_heures',
-    kind: 'ridicule',
-    name: 'Le gouvernement de 14 heures',
-    owner: 'lecornu',
-    cost: 3,
-    ownerBonus: { atk: 1, hp: 1 },
-    atk: 1,
-    hp: 1,
-    // Lecornu a déjà le Retour : son gouvernement de 14 heures s'oublie, lui reste.
-    forgetsAll: true,
-    blague: 'Annoncé le soir, démissionnaire le matin, reconduit quatre jours plus tard. Quatorze heures : le peuple a déjà oublié.',
-    fait: 'Démission le 6 octobre 2025, reconduction le 10 octobre.',
-    statut: 'Pas une affaire judiciaire.',
-    verifie: true,
-  },
   {
     id: 'pain_au_chocolat',
     kind: 'ridicule',
