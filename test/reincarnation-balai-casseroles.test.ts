@@ -49,6 +49,15 @@ test('Retour en politique : il meurt pour de bon, son Héritage joue, puis il se
   assert.equal(reborn.index, placed.index, 'il reprend sa place, le Suppléant passe à sa droite');
 });
 
+test('le pouvoir « le premier mort revient » attend un politique : un jeton tombé ne le consomme pas', () => {
+  const token = { ...makeMinion({ id: 'electeur_fantome', name: 'Électeur fantôme', camp: 'civile', tier: 1, atk: 1, hp: 1, token: true }, uid++) };
+  const kazib = { ...makeMinion(CARD_BY_ID.kazib, uid++), hp: 1 };
+  const r = fight([token, kazib], [unit(9, 900)], 3, { firstDeathRetour: true });
+  const back = r.log.filter(isRetour);
+  assert.equal(back.length, 1, 'un seul revient');
+  assert.equal(back[0].from, kazib.uid, 'le politique, pas le jeton');
+});
+
 test('Retour en politique : sans place sur le plateau, pas de réincarnation', () => {
   const giscard = { ...makeMinion(CARD_BY_ID.giscard, uid++), hp: 1, keywords: ['retour', 'porte_parole'] as Keyword[] };
   // Mitterrand double l'Héritage : deux chaises vides remplissent les places.
