@@ -244,7 +244,8 @@ test('en combat, l\'Héritage « voisins » d\'un mort vise ses deux voisins, co
 test('un bot moyen ne rachète et ne revend pas en boucle ce qu\'il vient de poser', () => {
   let sells = 0;
   let resold = 0;
-  for (let seed = 1; seed <= 20; seed++) {
+  // 80 parties : sur 20, le taux allait de 7 à 10 % selon les tirages, pour 8 % en moyenne.
+  for (let seed = 1; seed <= 80; seed++) {
     const game = createGame({ seed });
     const bots = game.players.map((_, i) => createBot('moyen', seed * 31 + i + 1));
     while (game.phase === 'recrutement' && game.round < 40) {

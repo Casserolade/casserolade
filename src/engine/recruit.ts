@@ -681,7 +681,10 @@ export function offerCasserole(game: Game, p: Player): void {
  * politiques, complétées au hasard par d'autres (« À la une »).
  */
 function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false): void {
-  const present = casserolesFor(game, p).filter((c) => !kind || c.kind === kind);
+  // Une affaire n'arrive qu'une fois : ni celle de la boutique, ni une casserole d'un choix qui attend déjà (un Lalanne
+  // doré découvre deux fois, et la même casserole se prenait dans les deux choix).
+  const waiting = new Set([p.casseroleOffer, ...[p.discover, ...p.discoverQueue].flatMap((offer) => (offer?.kind === 'casserole' ? offer.options : []))]);
+  const present = casserolesFor(game, p).filter((c) => (!kind || c.kind === kind) && !waiting.has(c.id));
   const owned = new Set([...p.board, ...p.hand].map((m) => m.cardId));
   const first = yours ? game.rng.shuffle(present.filter((c) => owned.has(c.owner))) : [];
   const rest = game.rng.shuffle(present.filter((c) => !first.includes(c)));
