@@ -841,6 +841,8 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       const at = self && p.board.includes(self) ? p.board.indexOf(self) + 1 : Math.max(0, index);
       for (let i = 0; i < k && p.board.length < boardLimit(game, p); i++) {
         const chair = welcome(game, p, makeToken('chaise_vide', 'civile', game.nextUid++));
+        // Ses stats, comme en combat : son attaque et ses PV.
+        chair.atk = Math.max(chair.atk, self?.atk ?? 0);
         chair.hp = Math.max(chair.hp, self?.hp ?? 0);
         p.board.splice(Math.min(at, p.board.length), 0, chair);
       }
