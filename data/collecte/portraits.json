@@ -2314,5 +2314,23 @@
   "name": "Alain Juppé",
   "note": "À Québec, 2015 : la ville de son exil après sa condamnation de 2004. Choisi à la main, crâne dégarni.",
   "crane_rase": true
+ },
+ "bove": {
+  "fichier": "assets/photos/raw/bove.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:José_Bové_2012.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Frantogian",
+  "portrait": "assets/photos/base/bove.jpg",
+  "name": "José Bové",
+  "note": "En 2012, député européen. Choisi à la main : de face, neutre, bouche fermée, la moustache."
+ },
+ "joly": {
+  "fichier": "assets/photos/raw/joly.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:EVA_JOLY_011.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Eva joly 2012",
+  "portrait": "assets/photos/base/joly.jpg",
+  "name": "Eva Joly",
+  "note": "Février 2011, pendant la campagne de la primaire écologiste. Choisi à la main : de face, les lunettes rouges."
  }
 }

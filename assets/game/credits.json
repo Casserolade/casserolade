@@ -161,6 +161,14 @@
    "partage_identique": false
   },
   {
+   "id": "bove",
+   "nom": "José Bové",
+   "auteur": "Frantogian",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:José_Bové_2012.jpg",
+   "partage_identique": true
+  },
+  {
    "id": "boyard",
    "nom": "Louis Boyard",
    "auteur": null,
@@ -503,6 +511,14 @@
    "licence": "Attribution",
    "source": "https://commons.wikimedia.org/wiki/File:Le_Pen_Jean-Marie_1999.jpg",
    "partage_identique": false
+  },
+  {
+   "id": "joly",
+   "nom": "Eva Joly",
+   "auteur": "Eva joly 2012",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EVA_JOLY_011.jpg",
+   "partage_identique": true
   },
   {
    "id": "juppe",

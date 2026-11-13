@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { VOIX } from '../src/data/voix.ts';
 import { voixPourCasserole, voixPourPhrase } from '../src/data/trouverVoix.ts';
-import { CASSEROLES } from '../src/data/casseroles.ts';
-import { CARD_BY_ID } from '../src/data/cards.ts';
+import { CASSEROLES, RESERVE_CASSEROLES } from '../src/data/casseroles.ts';
+import { CARD_BY_ID, RESERVE_CARDS } from '../src/data/cards.ts';
 import { HEROES } from '../src/data/heroes.ts';
 import { ANIMATEURS } from '../src/data/animateurs.ts';
 import { PHRASES } from '../src/data/phrases.ts';
@@ -12,14 +12,16 @@ import { PHRASES } from '../src/data/phrases.ts';
 const manifeste = JSON.parse(readFileSync('assets/game/manifest.json', 'utf8'));
 
 test('chaque vraie voix a son fichier, sa personne, et sa casserole du même propriétaire', () => {
+  // La réserve garde ses voix : un politique sorti du roster revient avec elles.
   for (const v of VOIX) {
     const chemin = manifeste.sons.citations[v.fichier];
     assert.ok(chemin, `${v.fichier} manque au manifeste`);
     assert.ok(existsSync(`assets/game/${chemin}`), `${chemin} manque`);
     // Une carte, un héros, ou un animateur : son pupitre joue aussi sa vraie voix.
-    assert.ok(CARD_BY_ID[v.personne] || HEROES.some((h) => h.id === v.personne) || ANIMATEURS.some((a) => a.id === v.personne), `${v.personne} inconnu`);
+    const enReserve = RESERVE_CARDS.some((c) => c.id === v.personne);
+    assert.ok(CARD_BY_ID[v.personne] || enReserve || HEROES.some((h) => h.id === v.personne) || ANIMATEURS.some((a) => a.id === v.personne), `${v.personne} inconnu`);
     if (v.casserole) {
-      const c = CASSEROLES.find((x) => x.id === v.casserole);
+      const c = [...CASSEROLES, ...RESERVE_CASSEROLES].find((x) => x.id === v.casserole);
       assert.ok(c, `casserole ${v.casserole} inconnue`);
       assert.equal(c.owner, v.personne, `${v.casserole} n'est pas à ${v.personne}`);
     }

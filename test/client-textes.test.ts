@@ -4,7 +4,7 @@ import { mergeSameRecipient } from '../src/client/tools/mergeSameRecipient.ts';
 import { describeSpell, cardRuleLines } from '../src/client/tools/describeEffect.ts';
 import { casseroleDefects } from '../src/client/tools/casseroleDefects.ts';
 import { CARD_BY_ID } from '../src/data/cards.ts';
-import { CASSEROLES, CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
+import { CASSEROLES, CASSEROLE_BY_ID, RESERVE_CASSEROLES } from '../src/data/casseroles.ts';
 import { SPELL_BY_ID } from '../src/data/sorts.ts';
 
 // Les textes de la re-spécification du 7 novembre 2026.
@@ -43,7 +43,7 @@ test('the legends say what they do, on attack and with their camp', () => {
 });
 
 test('every casserole but the two that make people forget has a défaut, said in the words of the cards', () => {
-  const withoutDefect = CASSEROLES.filter((c) => casseroleDefects(c).length === 0).map((c) => c.id);
+  const withoutDefect = [...CASSEROLES, ...RESERVE_CASSEROLES].filter((c) => casseroleDefects(c).length === 0).map((c) => c.id);
   assert.deepEqual(withoutDefect.sort(), ['quatorze_heures', 'quel_facebook']);
   assert.deepEqual(casseroleDefects(CASSEROLE_BY_ID.benalla), ['-2 sondages par manche']);
   assert.deepEqual(casseroleDefects(CASSEROLE_BY_ID.arbre_mort), ['ne bouge plus', 'n\'attaque plus']);

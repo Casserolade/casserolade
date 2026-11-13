@@ -229,13 +229,13 @@ test('Roussel : après chaque sort, vos serviteurs gagnent +1/+0', () => {
 
 test('une casserole s\'achète, va en main, et vaut double sur son propriétaire', () => {
   const { game, p, buy } = setup(9);
-  buy('cope');
+  buy('morano');
   buy('kazib');
-  const [cope, kazib] = p.board;
-  poseCasserole(game, 'pain_au_chocolat', cope);
+  const [morano, kazib] = p.board;
+  poseCasserole(game, 'amie_tchadienne', morano);
   poseCasserole(game, 'ecoutes', kazib);
-  const painAuChocolat = CASSEROLE_BY_ID.pain_au_chocolat;
-  assert.equal(cope.atk, CARD_BY_ID.cope.atk + (painAuChocolat.atk ?? 0) + (painAuChocolat.ownerBonus.atk ?? 0), 'son avantage, et son bonus de propriétaire');
+  const tchadienne = CASSEROLE_BY_ID.amie_tchadienne;
+  assert.equal(morano.atk, CARD_BY_ID.morano.atk + (tchadienne.atk ?? 0) + (tchadienne.ownerBonus.atk ?? 0), 'son avantage, et son bonus de propriétaire');
   // « Ne bouge plus » est un défaut : il dort tant qu'il n'y a pas de scandale.
   assert.equal(kazib.locked, false);
   poseCasserole(game, 'homards', kazib);

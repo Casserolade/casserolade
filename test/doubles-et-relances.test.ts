@@ -341,7 +341,7 @@ test('Bayrou compte un Ralliement pour un, même doré', () => {
 test('l\'Investiture d\'un doré ne se perd pas quand son Annonce remplit la main', () => {
   const game = table(['insoumis', 'republicains', 'rn', 'macronie', 'socialistes']);
   const p = game.players[0];
-  const gold = golden(game, 'guette');
+  const gold = golden(game, 'boyard');
   for (const id of ['sondage_flatteur', 'note_de_frais', 'matinale', 'primaire', 'motion_de_censure', 'congres', 'debauchage', 'seconde_chance']) addSpellToHand(game, p, id);
   assert.equal(p.hand.length + p.spells.length, 9);
   assert.equal(applyAction(game, 0, { t: 'play', uid: gold.uid }).ok, true);

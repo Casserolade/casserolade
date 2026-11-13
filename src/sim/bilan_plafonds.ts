@@ -161,10 +161,10 @@ const SETUPS: Setup[] = [
   {
     name: 'Insoumis',
     camps: ['insoumis', 'republicains', 'macronie', 'socialistes', 'ecologistes'],
-    board: ['melenchon', 'trouve', 'aubry', 'lassalle', 'panot', 'chirac', 'ruffin'],
+    board: ['melenchon', 'trouve', 'bompard', 'lassalle', 'panot', 'chirac', 'ruffin'],
     keystone: 'melenchon',
     carrier: 'trouve',
-    note: 'Chirac entre Panot (ses Tracts déjà à +3/+3) et Ruffin, Lassalle qui le fait rejouer, Aubry, Mélenchon ; 30 Tracts lancés avant ; tous les Tracts sur Trouvé',
+    note: 'Chirac entre Panot (ses Tracts déjà à +3/+3) et Ruffin, Lassalle qui le fait rejouer, Bompard, Mélenchon ; 30 Tracts lancés avant ; tous les Tracts sur Trouvé',
     before: (p) => {
       p.tract = { atk: 3, hp: 3 };
       p.counters.tracts = 30;

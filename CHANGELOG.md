@@ -18,6 +18,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 **Nouveaux politiques et nouvelles casseroles**
 - Rima Hassan chez les Insoumis, Élisabeth Borne dans la Macronie (vos 49.3 jouent deux fois), Michel Barnier et Alain Juppé chez les Républicains, avec huit casseroles.
 - Rima Hassan, Élisabeth Borne et Alain Juppé ont leurs visages (rire, aïe, choc), et les quatre nouveaux leurs premières vraies voix.
+- José Bové et Eva Joly chez les Écologistes, à l'échelon 3, où le camp n'avait qu'une carte. Chaque politique renvoyé fait grossir les Écologistes de la boutique (Bové) ; chaque Écologiste joué rembourse 1 de budget (Joly). Quatre casseroles : « Le démontage du McDo », « Tirer sur les loups », « Le défilé citoyen » et « 2,31 % ».
 - Dix casseroles pour les camps qui en avaient le moins : Jean-Marie Le Pen (« Un point de détail »), Grégoire de Fournas, Jean-Philippe Tanguy et Julien Odoul au RN ; Nicolas Bay, Nicolas Dupont-Aignan et Sarah Knafo à Reconquête ; Delphine Batho, Yannick Jadot et Marine Tondelier chez les Écologistes.
 
 **Casseroles et sorts**
@@ -26,6 +27,7 @@ Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jo
 - Les sorts sont répartis de l'échelon 1 au 6, selon leur force. Temps de parole, Loi de finances et Tribune libre, qui ne changeaient presque rien, sont retirés.
 
 **Équilibrage**
+- Les camps les plus fournis rendent des cartes, pour que la boutique propose chaque camp à parts plus égales : Clémence Guetté et Manon Aubry (Insoumis), Aurore Bergé et Sébastien Lecornu (Macronie) et Jean-François Copé (Républicains) quittent la boutique, avec leurs casseroles. De 11 à 17 cartes par camp avant, de 13 à 16 désormais.
 - Les présidents passent au niveau des chefs de camp : la Chaise vide de Giscard a ses stats, l'Héritage de Mitterrand reste pour de bon, Chirac rejoue les Annonces de ses voisins à chaque fin de tour, chaque politique joué après de Gaulle devient Ni droite ni gauche avec +2/+2, et Macron amène Darmanin dans votre main.
 - Les Socialistes, dont le Retour est le moteur, sont renforcés après la réincarnation : Thévenoud 2/3, Guedj +1/+1 quand il attaque, Valls 3/3. Riner passe à 6/9, Peltier à 7/8, Mélenchon à 7/7 avec le Coup de balai.
 - Chaque camp a un montage qui gonfle jusqu'en fin de partie. Cohn-Bendit compte les Écologistes joués dans la partie, et non plus ceux du plateau. Strauss-Kahn lègue toutes ses stats et gagne +3/+3 par Socialiste quand il attaque. Odoul fait grossir le RN de la boutique à chaque débauchage. Vallaud gagne +1/+1 pour de bon à chaque allié tombé.

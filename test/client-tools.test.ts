@@ -694,12 +694,12 @@ test('ralliesOnto: a Ralliement joins an ally, but not a token while it carries 
   const host = makeMinion(CARD_BY_ID.tiberi, 1);
   const token = makeToken('electeur_fantome', 'republicains', 2);
   const board = [host, token];
-  const lecornu = makeMinion(CARD_BY_ID.lecornu, 3);
-  assert.equal(ralliesOnto(lecornu, 1, board), true);
-  assert.equal(ralliesOnto(lecornu, 2, board), true, 'no casserole: a token is fine');
-  assert.equal(ralliesOnto(lecornu, null, board), false, 'between two allies, it takes its own place');
-  assert.equal(ralliesOnto(lecornu, 99, board), false);
-  const carrying = { ...lecornu, casseroles: ['blancos'] };
+  const rallying = makeMinion(CARD_BY_ID.castaner, 3);
+  assert.equal(ralliesOnto(rallying, 1, board), true);
+  assert.equal(ralliesOnto(rallying, 2, board), true, 'no casserole: a token is fine');
+  assert.equal(ralliesOnto(rallying, null, board), false, 'between two allies, it takes its own place');
+  assert.equal(ralliesOnto(rallying, 99, board), false);
+  const carrying = { ...rallying, casseroles: ['blancos'] };
   assert.equal(ralliesOnto(carrying, 1, board), true);
   assert.equal(ralliesOnto(carrying, 2, board), false, 'a token never carries a casserole');
   assert.equal(ralliesOnto(makeMinion(CARD_BY_ID.tiberi, 4), 1, board), false, 'not a Ralliement');

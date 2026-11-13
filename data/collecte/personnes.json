@@ -663,5 +663,15 @@
   "id": "giscard",
   "name": "Valéry Giscard d'Estaing",
   "group": "civile"
+ },
+ {
+  "id": "bove",
+  "name": "José Bové",
+  "group": "ecologistes"
+ },
+ {
+  "id": "joly",
+  "name": "Eva Joly",
+  "group": "ecologistes"
  }
 ]
