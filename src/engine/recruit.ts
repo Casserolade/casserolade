@@ -1027,7 +1027,14 @@ export function endOfTurn(game: Game, p: Player): void {
       for (const eff of m.effects) {
         if (eff.when !== 'fin_tour') continue;
         const before = tableState(p);
+        const budget = p.budget;
         applyEffect(game, p, m, eff, { replay: r > 0 });
+        // Le recrutement est fini : du budget gagné maintenant (Chirac relance l'Annonce de Coquerel) ne peut plus se
+        // dépenser, et la manche suivante l'effacerait. Il attend la prochaine manche, comme tout gain de Fin de tour.
+        if (p.budget > budget) {
+          p.nextBudgetBonus += p.budget - budget;
+          p.budget = budget;
+        }
         p.endOfTurnSteps.push(stepBetween(m.uid, before, tableState(p)));
       }
     }
