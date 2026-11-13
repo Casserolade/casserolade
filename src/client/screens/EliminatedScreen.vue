@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import ArchPortrait from '#src/client/components/atoms/ArchPortrait.vue';
-import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import PollsCount from '#src/client/components/atoms/PollsCount.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
@@ -71,7 +71,8 @@ function toggle(seat: number): void {
           <strong>{{ row.seat === view.seat && !playerOf(row.seat) ? 'Vous' : heroOf(row) }}</strong>
           <span v-if="playerOf(row.seat)">{{ playerOf(row.seat) }}</span>
         </span>
-        <span class="state"><template v-if="row.alive"><GameIcon name="heart" /> {{ row.hp }}</template><template v-else>{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></template></span>
+        <PollsCount v-if="row.alive" class="state" :hp="row.hp" :start-hp="view.params.startHp" />
+        <span v-else class="state">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
         <button
           v-if="canFollow && row.alive && row.seat !== view.seat"
           type="button"

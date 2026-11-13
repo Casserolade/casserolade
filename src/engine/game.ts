@@ -100,9 +100,9 @@ function contextFor(id: string | undefined, rng: Rng): Context {
   return CONTEXTS.find((c) => c.id === id) ?? CONTEXTS[0];
 }
 
-/** A hero's polls at the start: its bonus is a balance lever, never enough to start the game already out. */
+/** A hero's polls at the start: the polls every hero shares, and its armor on top (its electoral base). */
 function startingPolls(params: Params, hero: Hero): number {
-  return Math.max(1, params.startHp + hero.hpBonus);
+  return params.startHp + Math.max(0, hero.armor);
 }
 
 export function createGame(opts: GameOptions): Game {

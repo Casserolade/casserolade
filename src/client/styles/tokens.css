@@ -13,6 +13,11 @@
   --color-success: #5fd38d;
   --color-attack: #ffb347;
   --color-health: #ff7a85;
+  /* A hero's polls (the heart) and its electoral base, its armor (the shield): the pills, and the bare icons. */
+  --color-polls: #a8132a;
+  --color-polls-icon: #e0303e;
+  --color-electoral-base: #24406e;
+  --color-electoral-base-icon: #6fa8ff;
   --color-gold: #ffd700;
   /* The menus: yellow titles, gold frames, night-blue panels. */
   --color-title: #ffe27a;

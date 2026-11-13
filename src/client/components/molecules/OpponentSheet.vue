@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { compactStat } from '#src/client/tools/compactStat.ts';
+import { pollsLabel } from '#src/client/tools/pollsLabel.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
 /**
  * What a player of the table looks like on hover, as in Battlegrounds: the hero and its power, the
- * tier, the polls, the triples, and the last board seen in combat against it.
+ * tier, the polls and the electoral base, the triples, and the last board seen in combat against it.
  */
 withDefaults(defineProps<{
   name: string;
@@ -13,6 +14,7 @@ withDefaults(defineProps<{
   power: { name: string; desc: string } | null;
   tier: number;
   hp: number;
+  startHp: number;
   triples: number;
   alive: boolean;
   /** The last combat against this player; null when never met. */
@@ -31,7 +33,7 @@ withDefaults(defineProps<{
     <span v-if="power" class="power"><b>{{ power.name }}</b> : {{ power.desc }}</span>
     <span class="figures">
       <span>Échelon {{ tier }}</span>
-      <span v-if="alive">{{ hp }} sondages</span>
+      <span v-if="alive">{{ pollsLabel(hp, startHp) }}</span>
       <span>{{ triples }} triple{{ triples > 1 ? 's' : '' }}</span>
     </span>
     <template v-if="!isOwn">

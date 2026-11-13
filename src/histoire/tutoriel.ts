@@ -40,7 +40,7 @@ export function composerTutoriel(seed: number): TableTutoriel {
       activeCamps,
       params: TUTORIEL.regles,
       heroes: sieges.map((s) => s.heroId),
-      heroOverrides: { [TUTORIEL.heros]: { hpBonus: (hero?.hpBonus ?? 0) + TUTORIEL.bonusJoueur } },
+      heroOverrides: { [TUTORIEL.heros]: { armor: (hero?.armor ?? 0) + TUTORIEL.bonusJoueur } },
       script: { seat: 0, boutique: TUTORIEL.boutique, sorts: TUTORIEL.sorts, casseroles: TUTORIEL.casseroles, evenements: TUTORIEL.evenements },
     },
   };

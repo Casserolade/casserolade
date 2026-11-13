@@ -4,8 +4,10 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { CARDS, TOKENS } from '../src/data/cards.ts';
 import { CASSEROLES } from '../src/data/casseroles.ts';
-import { HEROES } from '../src/data/heroes.ts';
+import { HEROES, HERO_BY_ID, MAX_ARMOR } from '../src/data/heroes.ts';
 import { SPELLS } from '../src/data/sorts.ts';
+import { PARAMS } from '../src/data/params.ts';
+import { createGame } from '../src/engine/game.ts';
 import type { Action, Camp, Counter, Effect, Keyword, Target, Trigger } from '../src/engine/types.ts';
 
 /*
@@ -132,4 +134,13 @@ test('le moteur, les bots et les données sont déterministes : rien que la grai
     });
   }
   assert.deepEqual(offenders, []);
+});
+
+test('tous les héros partent à 30 sondages : seule leur armure, jamais négative, les départage', () => {
+  assert.equal(PARAMS.startHp, 30);
+  for (const hero of Object.values(HERO_BY_ID)) {
+    assert.ok(Number.isInteger(hero.armor) && hero.armor >= 0 && hero.armor <= MAX_ARMOR, `${hero.id} : armure ${hero.armor}`);
+  }
+  const game = createGame({ seed: 3 });
+  for (const p of game.players) assert.equal(p.hp, PARAMS.startHp + p.hero.armor, p.hero.id);
 });

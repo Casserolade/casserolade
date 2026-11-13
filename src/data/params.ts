@@ -10,9 +10,9 @@ export const PARAMS: Params = {
   rollCost: 1,
   boardSize: 7,
   handSize: 10,
-  // 34 depuis le 13 novembre 2026 (28 avant) : la partie durait 12,6 manches et s'arrêtait une manche après l'échelon 6.
-  // À 34, elle en dure 13,9, et les moteurs de fin de partie ont le temps de tourner.
-  startHp: 34,
+  // 30 pour tous les héros (13 novembre 2026) : leur armure s'y ajoute (`armor`, le socle électoral), de 0 à 20.
+  // À 28 sans armure, la partie durait 12,6 manches et s'arrêtait une manche après l'échelon 6.
+  startHp: 30,
   tierMax: 6,
   tierCost: { 2: 4, 3: 6, 4: 8, 5: 9, 6: 10 },
   shopSize: { 1: 3, 2: 4, 3: 4, 4: 5, 5: 5, 6: 6 },

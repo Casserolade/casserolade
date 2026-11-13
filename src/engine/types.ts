@@ -431,8 +431,11 @@ export interface Hero {
   name: string;
   power: string;
   desc: string;
-  /** Points de sondage en plus : le levier d'équilibrage du héros. */
-  hpBonus: number;
+  /**
+   * Son socle électoral, l'armure du héros : des sondages en plus des 30 que tous partagent. Jamais négatif.
+   * C'est le seul levier d'équilibrage d'un héros : plus son pouvoir est fort, moins il en a.
+   */
+  armor: number;
   mods: HeroMods;
 }
 

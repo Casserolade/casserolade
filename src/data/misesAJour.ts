@@ -50,7 +50,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       'Nouveau mot-clé, le Coup de balai : l\'attaque touche aussi les voisins de la cible. Le placement compte.',
       'Chaque camp a un montage qui gonfle jusqu\'au bout : Cohn-Bendit compte les Écologistes joués dans la partie, Strauss-Kahn lègue toutes ses stats, Odoul fait grossir le RN de la boutique à chaque débauchage, Vallaud grandit à chaque allié tombé.',
       'Les relances s\'additionnent : Chirac et Seconde délibération, Jadot et Conseil des ministres ; Lassalle fait rejouer Chirac et Jadot. Chirac rejoue les Annonces de ses voisins.',
-      'Les parties durent une manche de plus : 34 sondages au départ.',
+      'Tous les héros partent à 30 sondages. Seul leur socle électoral, leur armure, les départage : de 0 à 20, à côté des sondages dans la liste des joueurs. Les parties durent deux manches de plus.',
       'Chaque casserole a désormais un défaut qui coûte, et un scandale peut éclabousser ses voisins.',
       'De Gaulle, Giscard, Chirac, Mitterrand et Macron passent au niveau des chefs de camp.',
       'Quatre nouveaux politiques, Rima Hassan, Élisabeth Borne, Michel Barnier et Alain Juppé. Dix-huit casseroles, dont dix pour le RN, Reconquête et les Écologistes, qui en avaient le moins.',
@@ -92,7 +92,11 @@ export const MISES_A_JOUR: PatchNote[] = [
         before: 'La première carte était prise d\'office.',
         after: 'Le choix reste ouvert : il s\'affiche au début du recrutement suivant.',
       },
-      { term: 'Sondages de départ', before: '28.', after: '34 : une manche de plus, en moyenne, pour que les moteurs de fin de partie tournent.' },
+      {
+        term: 'Sondages de départ',
+        before: '28, plus ou moins selon le héros : de 18 à 37.',
+        after: '30 pour tous. Chaque héros y ajoute son socle électoral, son armure : de 0 à 20, d\'autant plus que son pouvoir est discret. Deux manches de plus par partie, en moyenne, pour que les moteurs de fin de partie tournent.',
+      },
       {
         term: 'Le premier politique à mourir revient',
         before: 'Le pouvoir de Hollande, Durif et Riner partait sur le premier mort, même un jeton.',

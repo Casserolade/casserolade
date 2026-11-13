@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import PollsCount from '#src/client/components/atoms/PollsCount.vue';
 import OpponentSheet from '#src/client/components/molecules/OpponentSheet.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { facelessGhostNext, nextOpponentSeat } from '#src/client/tools/nextOpponentSeat.ts';
@@ -12,11 +13,12 @@ import { HERO_BY_ID } from '#src/data/heroes.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
 /**
- * The eight players down the side of the table: a face, the polls, the tier, and online the pseudo. On hover, a sheet:
+ * The eight players down the side of the table: a face, the polls and beside them the electoral base (the armor)
+ * that is left, the tier, and online the pseudo. On hover, a sheet:
  * the hero and who plays it, power, triples, last board seen. During recruitment, the next opponent is marked, as in
  * Battlegrounds; a ghost on the eliminated seat it wears, or on a row of its own before the first elimination.
  */
-const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; seen?: PlayerView['seen']; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
+const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; startHp: number; seen?: PlayerView['seen']; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
   seen: () => [],
   names: () => new Map(),
   next: null,
@@ -56,7 +58,7 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
         <HeadPortrait v-if="row.heroId" class="face" :puppet="puppetStyle(gameArt.manifest.value, row.heroId, 'civile')" />
         <span v-else class="face empty" />
         <span class="score">
-          <span v-if="row.alive" class="hp" :aria-label="`${row.hp} sondages`"><GameIcon name="heart" />{{ row.hp }}</span>
+          <PollsCount v-if="row.alive" class="hp" :hp="row.hp" :start-hp="startHp" />
           <span v-else class="hp place" :aria-label="`${row.place}${ordinalSuffix(row.place)}, éliminé`">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
           <span v-if="names.get(row.seat)?.pseudo && row.seat !== seat" class="who">{{ names.get(row.seat)?.pseudo }}</span>
         </span>
@@ -68,6 +70,7 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
           :power="powerOf(row.heroId)"
           :tier="row.tier"
           :hp="row.hp"
+          :start-hp="startHp"
           :triples="row.triples"
           :alive="row.alive"
           :seen="lastSeen(row.seat)"
@@ -85,7 +88,7 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
 </template>
 
 <style scoped>
-.scoreboard { position: absolute; left: calc(var(--s) * 34); top: calc(var(--s) * 176); width: calc(var(--s) * 200); }
+.scoreboard { position: absolute; left: calc(var(--s) * 34); top: calc(var(--s) * 176); width: calc(var(--s) * 250); }
 .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: calc(var(--s) * 10); }
 .player {
   position: relative;
@@ -103,8 +106,8 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
 .empty { width: calc(var(--s) * 62); height: calc(var(--s) * 62); border-radius: 50%; background: #20263a; }
 .score { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
 .who { overflow: hidden; max-width: calc(var(--s) * 80); color: #ffe27a; font: 800 calc(var(--s) * 16) / 1.1 var(--font-card); white-space: nowrap; text-overflow: ellipsis; }
-.hp { display: flex; align-items: center; gap: calc(var(--s) * 4); color: #fff; font: 400 calc(var(--s) * 34) / 1 var(--font-number); }
-.hp .game-icon { color: #e0303e; font-size: calc(var(--s) * 26); }
+.hp { color: #fff; font: 400 calc(var(--s) * 28) / 1 var(--font-number); }
+.place { display: flex; align-items: center; }
 .place sup { font-size: 0.6em; }
 .tier {
   margin-left: auto;

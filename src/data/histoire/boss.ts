@@ -15,8 +15,8 @@ export const GISCARD: Hero = {
   id: 'giscard',
   name: 'Valéry Giscard d\'Estaing',
   power: 'Au revoir',
-  desc: 'D\'outre-tombe. Son premier politique à mourir revient à chaque combat, et il a +1 budget par manche : les diamants. Mais il est mort, et ça coûte 8 points de sondage.',
-  hpBonus: -8,
+  desc: 'D\'outre-tombe. Son premier politique à mourir revient à chaque combat, et il a +1 budget par manche : les diamants. Mais il est mort : plus aucun socle électoral.',
+  armor: 0,
   mods: { firstDeathRetour: true, budgetPerRound: 1 },
 };
 
