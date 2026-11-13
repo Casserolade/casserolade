@@ -566,7 +566,8 @@ function resolveDeaths(b: Battle, order: [Side, Side]): void {
         if (u.hp > 0) continue;
         changed = true;
         const ownRetour = has(u, 'retour');
-        const comesBack = ownRetour || (side.mods.firstDeathRetour === true && !side.deathRetourUsed);
+        // Le pouvoir « le premier politique à mourir revient » attend un politique : un jeton ne le consomme pas.
+        const comesBack = ownRetour || (side.mods.firstDeathRetour === true && !side.deathRetourUsed && !u.token);
         if (b.logging) {
           b.log.push({ e: 'mort', uid: u.uid });
           if (u.hpLossOnDeath > 0) b.log.push({ e: 'penalite', uid: u.uid, side: side.index, value: u.hpLossOnDeath });
