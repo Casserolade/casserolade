@@ -102,7 +102,9 @@ test('une Annonce ciblée relancée ne vise ni le relancé ni le relanceur', () 
     const chenu = lay(game, 'chenu');
     const ally = lay(game, 'gueant');
     const before = { atk: ally.atk, hp: ally.hp };
+    // Chirac relance les Annonces du plateau en fin de tour (13 novembre 2026).
     const chirac = lay(game, 'chirac');
+    endOfTurn(game, game.players[0]);
     assert.deepEqual([chirac.atk, chirac.hp], [CARD_BY_ID.chirac.atk, CARD_BY_ID.chirac.hp], `graine ${seed} : Chirac ne débauche pas pour lui`);
     assert.ok(ally.atk + ally.hp > before.atk + before.hp, `graine ${seed} : l'Annonce de Chenu, relancée, sert l'autre allié`);
     assert.ok(game.players[0].board.includes(chenu));

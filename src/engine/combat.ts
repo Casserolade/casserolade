@@ -13,7 +13,7 @@ import type {
   Params,
   Rng,
 } from './types.ts';
-import { MAX_STAT, effectPower, makeToken } from './minion.ts';
+import { MAX_STAT, cardOf, effectPower, makeMinion, makeToken } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { isCamp as isCampOf } from './camps.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
@@ -29,8 +29,6 @@ interface Unit extends Minion {
    * gains pour de bon, ses effets « une fois par combat » et ses relances suivent ce politique-là, pas l'incarnation.
    */
   origin: number;
-  /** Tel qu'il est entré en combat : sa réincarnation revient avec cette attaque et ces mots-clés, sans Retour. */
-  start: { atk: number; keywords: Keyword[] };
   /** Bonus de solitude compris dans atk et hp. */
   bonus: number;
   /** Ses stats sur le plateau, avant le bonus de solitude et les éclaboussures : ce que le combat montre d'abord. */
@@ -104,8 +102,7 @@ function toSide(index: 0 | 1, s: CombatSide, extremes: boolean): Side {
     const extra = bonuses[i];
     const atk = Math.max(0, m.atk + extra - splashes[i]);
     const hp = Math.max(1, m.hp + extra - splashes[i]);
-    const start = { atk, keywords: [...m.keywords] };
-    return { ...m, keywords: [...m.keywords], effects: m.effects, atk, hp, attacked: false, origin: m.uid, start, bonus: extra, board: { atk: m.atk, hp: m.hp }, avenge: 0, peak: hp };
+    return { ...m, keywords: [...m.keywords], effects: m.effects, atk, hp, attacked: false, origin: m.uid, bonus: extra, board: { atk: m.atk, hp: m.hp }, avenge: 0, peak: hp };
   });
   return {
     index,
@@ -465,29 +462,42 @@ function transmit(b: Battle, side: Side, self: Unit, index: number, all: boolean
   addStats(b, side, next, atk, all ? Math.max(1, self.peak) * k : 0, perma);
 }
 
+/** Les gains de camp du joueur qui valent pour ce nouveau venu : un jeton invoqué, une réincarnation. */
+function campGains(b: Battle, side: Side, m: Minion): { atk: number; hp: number } {
+  const total = { atk: 0, hp: 0 };
+  for (const gain of side.campBuffs) {
+    if ((!gain.camp || isCampOf(m, gain.camp, b.ctx?.extremesAllied ?? false)) && (!gain.card || m.cardId === gain.card)) {
+      total.atk += gain.atk;
+      total.hp += gain.hp;
+    }
+  }
+  return total;
+}
+
 function summon(b: Battle, side: Side, self: Minion, index: number, tokenId: string, count: number): void {
   for (let i = 0; i < count; i++) {
     if (side.units.length >= b.boardSize + (side.mods.boardDelta ?? 0)) return;
     const m = makeToken(tokenId, self.camp, b.nextUid++);
-    for (const gain of side.campBuffs) {
-      if ((!gain.camp || isCampOf(m, gain.camp, b.ctx?.extremesAllied ?? false)) && (!gain.card || m.cardId === gain.card)) {
-        m.atk += gain.atk;
-        m.hp += gain.hp;
-      }
-    }
-    const unit: Unit = { ...m, attacked: false, origin: m.uid, start: { atk: m.atk, keywords: [...m.keywords] }, bonus: 0, board: { atk: m.atk, hp: m.hp }, avenge: 0, peak: m.hp };
+    const gain = campGains(b, side, m);
+    m.atk += gain.atk;
+    m.hp += gain.hp;
+    const unit: Unit = { ...m, attacked: false, origin: m.uid, bonus: 0, board: { atk: m.atk, hp: m.hp }, avenge: 0, peak: m.hp };
     const at = Math.min(index + 1 + i, side.units.length);
     side.units.splice(at, 0, unit);
     if (b.logging) b.log.push({ e: 'invocation', side: side.index, index: at, unit: toCombatUnit(unit) });
   }
 }
 
-/** Giscard : une Chaise vide Porte-parole qui a les PV les plus hauts qu'il ait eus, à sa place. */
+/**
+ * Giscard : une Chaise vide Porte-parole qui a son attaque et les PV les plus hauts qu'il ait eus, à sa place. Elle
+ * tient ce qu'il tenait (13 novembre 2026 : à 0 d'attaque, elle ne servait presque à rien).
+ */
 function summonChair(b: Battle, side: Side, self: Unit, index: number, count: number): void {
   const before = side.units.length;
   summon(b, side, self, index, 'chaise_vide', count);
   for (const chair of side.units.slice(index + 1, index + 1 + (side.units.length - before))) {
     if (chair.cardId !== 'chaise_vide') continue;
+    chair.atk = Math.max(chair.atk, self.atk);
     chair.hp = Math.max(chair.hp, self.peak);
     chair.peak = chair.hp;
     if (b.logging) b.log.push({ e: 'stats', uid: chair.uid, atk: chair.atk, hp: chair.hp });
@@ -522,13 +532,20 @@ function fireAvenge(b: Battle, side: Side, dead: Unit): void {
 /**
  * Le Retour en politique, comme la Réincarnation de Battlegrounds (13 novembre 2026) : le politique meurt pour de bon,
  * son Héritage joue (ses jetons prennent sa place), puis il se réincarne à la place où il est tombé, s'il reste de la
- * place sur le plateau. Il revient tel qu'il est entré en combat (son attaque, ses mots-clés : sa Polémique, son
- * Immunité), avec 1 PV et sans Retour. C'est une nouvelle incarnation : elle n'a pas encore attaqué (règle R17).
+ * place sur le plateau. Il revient **comme sa carte nue**, avec 1 PV (décision du 13 novembre 2026, pour que l'Héritage
+ * compte) : l'attaque de sa carte (doublée s'il est doré), ses mots-clés de carte sans Retour (sa Polémique, son
+ * Immunité), ses seuls effets de carte. Ses gains, ses casseroles et ses Ralliements restent sur le plateau ; les gains
+ * de camp du joueur lui donnent leur attaque, comme à un jeton. C'est une nouvelle incarnation : elle n'a pas encore
+ * attaqué (règle R17).
  */
 function reincarnate(b: Battle, side: Side, dead: Unit, at: number): boolean {
   if (side.units.length >= b.boardSize + (side.mods.boardDelta ?? 0)) return false;
-  const keywords = dead.start.keywords.filter((k) => k !== 'retour');
-  const unit: Unit = { ...dead, uid: b.nextUid++, atk: dead.start.atk, hp: 1, keywords, attacked: false, avenge: 0, peak: 1, bonus: 0 };
+  const card = cardOf(dead);
+  const bare: Minion = { ...makeMinion(card, b.nextUid++), camp: dead.camp, golden: dead.golden };
+  bare.keywords = bare.keywords.filter((k) => k !== 'retour');
+  bare.atk = Math.min(MAX_STAT, card.atk * (dead.golden ? 2 : 1) + campGains(b, side, bare).atk);
+  bare.hp = 1;
+  const unit: Unit = { ...bare, attacked: false, origin: dead.origin, bonus: 0, board: { atk: bare.atk, hp: 1 }, avenge: 0, peak: 1 };
   const index = Math.max(0, Math.min(at, side.units.length));
   side.units.splice(index, 0, unit);
   if (b.logging) b.log.push({ e: 'retour', side: side.index, index, unit: toCombatUnit(unit), from: dead.uid });

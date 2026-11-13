@@ -18,7 +18,7 @@ export type Keyword =
   | 'cumul'
   /** Toxicité : détruit le premier serviteur qu'il blesse, puis se perd. */
   | 'polemique'
-  /** Réincarnation : meurt, puis revient une fois avec 1 PV, tel qu'il est entré en combat, s'il y a la place. */
+  /** Réincarnation : meurt, puis revient une fois comme sa carte nue, avec 1 PV, s'il y a la place. */
   | 'retour'
   /** Compte comme un serviteur de chaque camp, sauf la Société civile. */
   | 'ni_droite_ni_gauche'
@@ -201,7 +201,7 @@ export type Action =
   | { do: 'gain_debauche' }
   /** Les cibles gagnent +atk/+hp par unité du compteur, une fois, au moment où l'effet joue. */
   | { do: 'buff_compteur'; compteur: Counter; atk: number; hp: number }
-  /** Invoque une Chaise vide Porte-parole qui a les PV de ce politique. */
+  /** Invoque une Chaise vide Porte-parole qui a l'attaque de ce politique et ses PV les plus hauts. */
   | { do: 'chaise_vide' };
 
 export type Effect = {

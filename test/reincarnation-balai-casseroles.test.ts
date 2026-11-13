@@ -12,8 +12,9 @@ import { PARAMS } from '../src/data/params.ts';
 import type { CombatEvent, Effect, HeroMods, Keyword, Minion } from '../src/engine/types.ts';
 
 /**
- * La réincarnation (R20) : le politique meurt pour de bon, son Héritage joue, puis il se réincarne à sa place, s'il y
- * a la place (13 novembre 2026).
+ * La réincarnation (R20) : le politique meurt pour de bon, son Héritage joue, puis il se réincarne à sa place, comme
+ * sa carte nue, s'il y a la place. Le Coup de balai (R21), les défauts des casseroles, l'oubli du peuple, et les cartes
+ * qui s'en servent (13 novembre 2026).
  */
 
 let uid = 1;
@@ -59,31 +60,47 @@ test('Retour en politique : sans place sur le plateau, pas de réincarnation', (
   assert.equal(r.log.filter(isRetour).length, 0, 'plateau plein : il ne revient pas');
 });
 
-test('Retour en politique : il revient tel qu\'il est entré en combat, Polémique comprise', () => {
+test('Retour en politique : il revient comme sa carte nue, avec 1 PV et sa Polémique de carte', () => {
   let seen = 0;
-  for (let seed = 1; seed <= 6; seed++) {
-    const venom = unit(4, 1, ['polemique', 'retour']);
-    const r = fight([venom], [unit(1, 5), unit(1, 5), unit(1, 5)], seed);
-    const back = r.log.find((e): e is Of<'retour'> => isRetour(e) && e.from === venom.uid);
+  for (let seed = 1; seed <= 8; seed++) {
+    // Rima Hassan, 4/6 Polémique, gonflée à 9 et dotée d'Immunité et de Retour pendant la partie.
+    const hassan = { ...makeMinion(CARD_BY_ID.hassan, uid++), atk: 9, hp: 1, keywords: ['polemique', 'immunite', 'retour'] as Keyword[] };
+    const r = fight([hassan], [unit(1, 5), unit(1, 5), unit(1, 5)], seed);
+    const back = r.log.find((e): e is Of<'retour'> => isRetour(e) && e.from === hassan.uid);
     if (!back) continue;
     seen++;
-    assert.ok(back.unit.keywords.includes('polemique'), `graine ${seed} : sa Polémique de départ revient`);
-    assert.equal(back.unit.atk, 4, `graine ${seed} : son attaque de départ`);
+    assert.deepEqual(back.unit.keywords, ['polemique'], `graine ${seed} : les mots-clés de sa carte, sans Retour ni Immunité gagnée`);
+    assert.equal(back.unit.atk, 4, `graine ${seed} : l'attaque de sa carte`);
+    assert.equal(back.unit.hp, 1);
   }
   assert.ok(seen > 0);
 });
 
+test('Retour en politique : un doré revient doré, à l\'attaque doublée de sa carte, sans ses casseroles ni ses Ralliements', () => {
+  const riner = { ...makeMinion(CARD_BY_ID.riner, uid++), golden: true, atk: 40, hp: 1, casseroles: ['karcher'] };
+  riner.effects = [...riner.effects, ...(CARD_BY_ID.darmanin.effects ?? [])];
+  riner.rallied = ['darmanin'];
+  const r = fight([riner, unit(1, 80, ['porte_parole'])], [unit(5, 300)], 6);
+  const back = r.log.find((e): e is Of<'retour'> => isRetour(e) && e.from === riner.uid);
+  assert.ok(back, 'il revient');
+  assert.equal(back.unit.atk, CARD_BY_ID.riner.atk * 2);
+  assert.ok(back.unit.golden);
+  assert.deepEqual(back.unit.casseroles, []);
+  assert.equal(back.unit.effects.length, 0, 'le Ralliement de Darmanin reste au politique du plateau');
+});
+
 test('Retour en politique : les gains du combat ne survivent pas à la mort, ceux pour de bon restent au politique du plateau', () => {
   const guedj = makeMinion(CARD_BY_ID.guedj, uid++);
-  const r = fight([{ ...guedj, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(5, 300)], 6);
+  const r = fight([{ ...guedj, atk: 12, hp: 1 }, unit(1, 80, ['porte_parole'])], [unit(5, 300)], 6);
   const back = r.log.find((e): e is Of<'retour'> => isRetour(e) && e.from === guedj.uid);
   assert.ok(back, 'il revient');
-  assert.equal(back.unit.atk, guedj.atk, 'sa réincarnation a l\'attaque de son entrée en combat');
+  assert.equal(back.unit.atk, CARD_BY_ID.guedj.atk, 'sa réincarnation a l\'attaque de sa carte');
   assert.ok(r.persist[0].buffs.filter((g) => g.uid === guedj.uid).length >= 2, 'ses gains pour de bon vont au Guedj du plateau');
 });
 
 test('le premier mort qui revient (pouvoir de héros) ne se consomme que s\'il revient', () => {
-  const r = fight([unit(1, 1), unit(1, 1)], [unit(5, 200)], 3, { firstDeathRetour: true });
+  const lisnard = () => ({ ...makeMinion(CARD_BY_ID.lisnard, uid++), keywords: [] as Keyword[], hp: 1 });
+  const r = fight([lisnard(), lisnard()], [unit(5, 200)], 3, { firstDeathRetour: true });
   assert.equal(r.log.filter(isRetour).length, 1);
 });
 

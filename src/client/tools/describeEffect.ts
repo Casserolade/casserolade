@@ -299,7 +299,7 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'buff_compteur':
       return `${self ? 'gagne' : `donne ${to(dest)}`} ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
     case 'chaise_vide':
-      return `invoque ${golden ? 'deux Chaises vides' : 'une Chaise vide'} **Porte-parole** qui ${golden ? 'ont' : 'a'} ses PV`;
+      return `invoque ${golden ? 'deux Chaises vides' : 'une Chaise vide'} **Porte-parole** qui ${golden ? 'ont' : 'a'} ses stats`;
   }
 }
 

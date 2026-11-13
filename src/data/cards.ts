@@ -88,14 +88,15 @@ export const CARDS: Card[] = [
   }),
 
   // Socialistes : le retour. La mort comme ressource, et les Suppléants.
-  card('thevenoud', 'Thomas Thévenoud', 'socialistes', 1, 2, 2, { kw: ['retour', 'vedette'], fx: [fx('celebration', 'soi', buff(1, 1))] }),
+  card('thevenoud', 'Thomas Thévenoud', 'socialistes', 1, 2, 3, { kw: ['retour', 'vedette'], fx: [fx('celebration', 'soi', buff(1, 1))] }),
   card('bouamrane', 'Karim Bouamrane', 'socialistes', 1, 2, 2, { fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   // 7 novembre 2026 : le frondeur grandit en attaquant ; avec son Retour, il attaque deux fois par combat (règle R17).
-  // 13 novembre 2026 : sa réincarnation (R20) n'emporte plus les gains du combat (1,09 → 0,58 place). Le compenser
-  // (3/3, ou +1/+1 par attaque) faisait passer les Socialistes, déjà premiers, de 4,56 à 4,39-4,44 en mono-camp.
+  // 13 novembre 2026 : sa réincarnation (R20) revient comme sa carte nue, sans les gains du combat. Les Socialistes,
+  // dont le Retour est le moteur, passaient de premiers (4,59) à derniers (5,20) en mono-camp : +1/+1 par attaque,
+  // Thévenoud 2/3 et Valls 3/3 les ramènent à 4,92, dans le peloton.
   card('guedj', 'Jérôme Guedj', 'socialistes', 2, 3, 2, {
     kw: ['retour'],
-    fx: [fx('meeting', 'soi', buff(1, 0), { perma: true })],
+    fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })],
   }),
   card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'joueur', campBuff(1, 0), { n: 5, camp: 'socialistes' })] }),
   card('cahuzac', 'Jérôme Cahuzac', 'socialistes', 2, 4, 5, {
@@ -103,7 +104,7 @@ export const CARDS: Card[] = [
     fx: [fx('vente', 'joueur', { do: 'budget', value: 2, plus_tard: true }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
   }),
   card('hidalgo', 'Anne Hidalgo', 'socialistes', 4, 7, 7, { fx: [fx('annonce', 'cible', { do: 'sacrifier', echelon: 0 })] }),
-  card('valls', 'Manuel Valls', 'socialistes', 3, 2, 2, { kw: ['retour'], fx: [fx('annonce', 'cible', motCle('retour'))] }),
+  card('valls', 'Manuel Valls', 'socialistes', 3, 3, 3, { kw: ['retour'], fx: [fx('annonce', 'cible', motCle('retour'))] }),
   card('faure', 'Olivier Faure', 'socialistes', 4, 6, 8, { fx: [fx('revanche', 'joueur', campBuff(2, 2), { n: 1, card: 'suppleant' }), fx('droit_de_reponse', 'soi', invoque('suppleant'))] }),
   // Parti du PS en 2022 pour fonder La Convention : un transfuge, qui se rallie (7 novembre 2026).
   card('cazeneuve', 'Bernard Cazeneuve', 'socialistes', 3, 3, 6, { kw: ['ralliement', 'porte_parole'], fx: [fx('heritage', 'soi', invoque('suppleant', 2))] }),
@@ -179,9 +180,11 @@ export const CARDS: Card[] = [
   // La Fête de la musique à l'Élysée, 21 juin 2018 : il fait la fête deux fois plus fort que les autres.
   // Échelon 6, clé de voûte du Ralliement : chaque Ralliement fait gonfler son hôte, d'autant plus qu'il en a déjà
   // reçu. Vedette sans gain : il prend la lumière et double les Célébrations des autres (7 novembre 2026).
+  // 13 novembre 2026 : sans Ralliement sous la main, son moteur ne tournait pas (1,23 place, le plus faible des chefs
+  // de camp). Il amène son transfuge : Gérald Darmanin, qui quitte Les Républicains pour son gouvernement en 2017.
   card('macron', 'Emmanuel Macron', 'macronie', 6, 9, 9, {
     kw: ['ni_droite_ni_gauche', 'vedette'],
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 4, hp: 4 })],
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 4, hp: 4 }), fx('annonce', 'joueur', carte('darmanin'))],
   }),
 
   // Républicains : l'Immunité en combat, les affaires hors combat.
@@ -305,14 +308,25 @@ export const CARDS: Card[] = [
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).
   // Société civile : tout le monde peut les viser, quel que soit son camp.
-  // « Je vous ai compris » (Alger, 4 juin 1958) : chacun a cru qu'il était de son côté.
-  card('de_gaulle', 'Charles de Gaulle', 'civile', 6, 9, 9, { fx: [fx('annonce', 'allies', motCle('ni_droite_ni_gauche')), fx('annonce', 'allies', buff(4, 4))] }),
+  // 13 novembre 2026 : les présidents passent au niveau des chefs de camp (ils gagnaient 1,2 à 2 places, contre 2,3 à
+  // 2,8 pour les chefs).
+  // « Je vous ai compris » (Alger, 4 juin 1958) : chacun a cru qu'il était de son côté, et chaque nouveau venu aussi.
+  card('de_gaulle', 'Charles de Gaulle', 'civile', 6, 9, 9, {
+    fx: [fx('annonce', 'allies', motCle('ni_droite_ni_gauche')), fx('annonce', 'allies', buff(4, 4)), fx('joue', 'joue', motCle('ni_droite_ni_gauche')), fx('joue', 'joue', buff(2, 2))],
+  }),
   // « Au revoir » (19 mai 1981) : il se lève, et la caméra reste sur sa chaise vide. Il est revenu ensuite, longtemps.
-  // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV.
-  card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 13, 16, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
+  // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV. 13 novembre 2026 : à 0 d'attaque, elle ne servait
+  // presque à rien ; elle a ses stats, et lui passe de 13/16 à 10/13. Réincarné comme sa carte, il en relaisse une.
+  card('giscard', 'Valéry Giscard d\'Estaing', 'civile', 6, 10, 13, { kw: ['retour'], fx: [fx('heritage', 'soi', { do: 'chaise_vide' })] }),
   // 3 novembre 2026 : sur 300 parties, une seule finissait avec lui ; son Annonce rejoue tout de suite celles du plateau.
-  card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, { fx: [fx('annonce', 'autres', { do: 'declencher', trigger: 'annonce' }), fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' })] }),
-  card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(4, 4))] }),
+  // 13 novembre 2026 : candidat en 1981, 1988, 1995 et 2002, il revient toujours. Les Annonces du plateau se rejouent
+  // à chaque fin de tour (doublées par lui), le jour de sa pose compris.
+  card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, {
+    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' }), fx('fin_tour', 'autres', { do: 'declencher', trigger: 'annonce' })],
+  }),
+  // « Je crois aux forces de l'esprit et je ne vous quitterai pas » (vœux du 31 décembre 1994) : son Héritage reste,
+  // pour de bon (13 novembre 2026 ; avant, +4/+4 le temps du combat).
+  card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(3, 3), { perma: true })] }),
 ];
 
 // Une carte partage ses effets, par identité, avec chacun de ses serviteurs, dans toutes les parties : figés, rien
