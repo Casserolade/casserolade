@@ -559,11 +559,12 @@ function resolveDeaths(b: Battle, order: [Side, Side]): void {
         for (let r = 0; r < repeats; r++) {
           for (const eff of u.effects) if (eff.when === 'heritage') runEffect(b, side, u, i - 1, eff, undefined, r > 0);
         }
+        // Les Revanches comptent sa mort avant qu'il revienne : sa réincarnation ne venge pas sa propre mort.
+        fireAvenge(b, side, u);
         // Après son Héritage, il se réincarne là où il est tombé, s'il y a la place. Le pouvoir du héros ne se
         // consomme que s'il a servi.
         if (comesBack && reincarnate(b, side, u, i) && !ownRetour) side.deathRetourUsed = true;
         i--;
-        fireAvenge(b, side, u);
       }
     }
     if (!changed) return;

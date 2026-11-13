@@ -231,3 +231,14 @@ test('Barnier : son 49.3 gonfle les autres, puis il est censuré, se réincarne,
   const withBorne = fight([makeMinion(CARD_BY_ID.barnier, uid++), makeMinion(CARD_BY_ID.borne, uid++), other], [unit(0, 80)], 1);
   assert.equal(statsOf(withBorne.log, other.uid).at(-1)?.atk, 1 + 2 + 2 + 2 + 2, 'Barnier deux fois, Borne deux fois');
 });
+
+test('Retour en politique : sa réincarnation ne venge pas sa propre mort', () => {
+  const hollande = { ...makeMinion(CARD_BY_ID.hollande, uid++), hp: 1, keywords: ['retour', 'porte_parole'] as Keyword[] };
+  const r = fight([hollande, unit(0, 50)], [unit(1, 50)], 1);
+  const died = r.log.findIndex((e) => e.e === 'mort' && e.uid === hollande.uid);
+  const back = r.log.findIndex((e) => isRetour(e) && e.from === hollande.uid);
+  assert.ok(died >= 0 && back > died, 'il tombe et revient');
+  const next = r.log.findIndex((e, i) => i > back && e.e === 'attaque');
+  const avenged = r.log.slice(died, next < 0 ? undefined : next).filter((e) => e.e === 'effet' && e.when === 'revanche').length;
+  assert.equal(avenged, 0, 'aucune Revanche pour sa propre mort');
+});
