@@ -773,16 +773,21 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
   "bove": {
     "pose": [
       "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans",
+      "Si le loup risque d'attaquer un troupeau, la meilleure façon de faire, c'est de prendre le fusil et de tirer",
       "Avec le loup, l'élevage devient impossible"
     ],
     "casserole": [
       "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans",
+      "Si le loup risque d'attaquer un troupeau, la meilleure façon de faire, c'est de prendre le fusil et de tirer",
+      "On a retrouvé, quelque temps après, le squelette du loup sur un clapas, et personne ne sait ce qui s'est passé, et c'est très bien comme ça",
       "Merci Madame, vous venez de nous faire gagner dix ans",
       "Avec le loup, l'élevage devient impossible",
       "Je n'élève pas des brebis pour nourrir le loup"
     ],
     "celebration": [
-      "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans"
+      "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans",
+      "Si le loup risque d'attaquer un troupeau, la meilleure façon de faire, c'est de prendre le fusil et de tirer",
+      "On a retrouvé, quelque temps après, le squelette du loup sur un clapas, et personne ne sait ce qui s'est passé, et c'est très bien comme ça"
     ],
     "heros": [
       "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans"
@@ -800,10 +805,15 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "J'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen"
     ],
     "pose": [
+      "J'aimerais voir dans nos rues les enfants de France",
       "J'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen"
     ],
     "heros": [
       "J'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen"
+    ],
+    "celebration": [
+      "J'aimerais voir dans nos rues les enfants de France",
+      "Nous saurons aussi faire s'il ne vient pas"
     ]
   },
   "bardella": {
@@ -1745,6 +1755,7 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
   },
   "juppe": {
     "pose": [
+      "J'ai la pêche. Mais avec vous, c'est la super pêche !",
       "Je suis droit dans mes bottes et je crois en la France"
     ],
     "heros": [
@@ -1754,12 +1765,13 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Pour moi, il est trop tard",
       "Je suis droit dans mes bottes et je crois en la France"
     ],
+    "celebration": [
+      "J'ai la pêche. Mais avec vous, c'est la super pêche !",
+      "Quel gâchis !"
+    ],
     "mort": [
       "Pour moi, il est trop tard",
       "Je confirme une bonne fois pour toutes que je ne serai pas candidat à la présidence de la République",
-      "Quel gâchis !"
-    ],
-    "celebration": [
       "Quel gâchis !"
     ]
   },

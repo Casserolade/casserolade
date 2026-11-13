@@ -1257,6 +1257,22 @@
    "partage_identique": false
   },
   {
+   "id": "barnier.aie",
+   "nom": "Michel Barnier",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://ecoledelartoratoire.com/article/discours-de-michel-barnier/",
+   "partage_identique": false
+  },
+  {
+   "id": "barnier.choc",
+   "nom": "Michel Barnier",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.rfi.fr/fr/france/20241121-france-face-aux-maires-en-colère-le-premier-ministre-michel-barnier-tente-de-jouer-l-apaisement",
+   "partage_identique": false
+  },
+  {
    "id": "barthes.aie",
    "nom": "Yann Barthès",
    "auteur": null,
@@ -1494,6 +1510,30 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.closermag.fr/people/gilles-bouleau-age-taille-salaire-couple-epouse-tf1-laure-tout-savoir-1669678",
+   "partage_identique": false
+  },
+  {
+   "id": "bove.aie",
+   "nom": "José Bové",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.bfmtv.com/politique/colere-des-agriculteurs-jose-bove-plaide-pour-une-charte-intersyndicale_AN-202411270548.html",
+   "partage_identique": false
+  },
+  {
+   "id": "bove.choc",
+   "nom": "José Bové",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.ina.fr/ina-eclaire-actu/video/i09043668/jose-bove-pour-la-desobeissance-civique",
+   "partage_identique": false
+  },
+  {
+   "id": "bove.rire",
+   "nom": "José Bové",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.lapresse.ca/actualites/201610/12/01-5029650-jose-bove-pourra-rester-au-canada-sept-jours.php",
    "partage_identique": false
   },
   {
@@ -2025,6 +2065,14 @@
    "partage_identique": false
   },
   {
+   "id": "dupont_aignan.rire",
+   "nom": "Nicolas Dupont-Aignan",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://actu.fr/normandie/saint-hilaire-du-harcouet_50484/elections-regionales-nicolas-dupont-aignan-en-visite_214117.html",
+   "partage_identique": false
+  },
+  {
    "id": "durif.aie",
    "nom": "Sylvain Durif",
    "auteur": null,
@@ -2209,6 +2257,14 @@
    "partage_identique": false
   },
   {
+   "id": "gueant.rire",
+   "nom": "Claude Guéant",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.purepeople.com/diapo/escroquerie-de-frais-de-campagne-6-mois-de-prison-ferme-amenages-pour-claude-gueant_a500456/1",
+   "partage_identique": false
+  },
+  {
    "id": "guedj.aie",
    "nom": "Jérôme Guedj",
    "auteur": null,
@@ -2222,6 +2278,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.ohmymag.com/people/actu-people/jerome-guedj-candidat-en-2027-vie-privee-parcours-et-ambitions-presidentielles_art179036.html",
+   "partage_identique": false
+  },
+  {
+   "id": "guedj.rire",
+   "nom": "Jérôme Guedj",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.zinfos974.com/presidentielle-2027-le-socialiste-jerome-guedj-annonce-sa-candidature-hors-primaire-de-la-gauche/",
    "partage_identique": false
   },
   {
@@ -2254,6 +2318,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.purepeople.com/diapo/-quel-abruti-un-tare-cyril-hanouna-explose-de-colere-contre-gilles-verdez-dans-tpmp_a483775/1",
+   "partage_identique": false
+  },
+  {
+   "id": "hanouna.choc",
+   "nom": "Cyril Hanouna",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.starmag.com/medias/cyril-hanouna-en-colere-contre-c8-ces-procedes-qui-ne-lui-plaisent-pas-328490.html",
    "partage_identique": false
   },
   {
@@ -2409,6 +2481,14 @@
    "partage_identique": false
   },
   {
+   "id": "jadot.rire",
+   "nom": "Yannick Jadot",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.frenchclasses.com/guinguette/news/des-hauts-et-des-bas-pour-les-deputes-ecologistes-au-parlement-europeen/",
+   "partage_identique": false
+  },
+  {
    "id": "jmlp.aie",
    "nom": "Jean-Marie Le Pen",
    "auteur": null,
@@ -2430,6 +2510,22 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.24heures.ch/le-passage-explosif-de-jean-marie-le-pen-en-suisse-romande-352270644700",
+   "partage_identique": false
+  },
+  {
+   "id": "joly.aie",
+   "nom": "Eva Joly",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.rfi.fr/fr/emission/20120202-presidentielle-eelv-joly-gachis",
+   "partage_identique": false
+  },
+  {
+   "id": "joly.rire",
+   "nom": "Eva Joly",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.parismatch.com/bio/eva-joly",
    "partage_identique": false
   },
   {
@@ -2521,6 +2617,22 @@
    "partage_identique": false
   },
   {
+   "id": "lalanne.choc",
+   "nom": "Francis Lalanne",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://mcetv.ouest-france.fr/2023/tpmp-cyril-hanouna-eclate-de-rire-face-a-la-demande-de-francis-lalanne-09022023/",
+   "partage_identique": false
+  },
+  {
+   "id": "lalanne.rire",
+   "nom": "Francis Lalanne",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.public.fr/diaporamas/francis-lalanne-fait-un-aveu-de-taille-apres-le-divorce-d-avec-la-mere-de-ses-enfants-38-ans-d-ecart-avec-sa-nouvelle-compagne",
+   "partage_identique": false
+  },
+  {
    "id": "lapix.aie",
    "nom": "Anne-Sophie Lapix",
    "auteur": null,
@@ -2553,11 +2665,27 @@
    "partage_identique": false
   },
   {
+   "id": "larcher.rire",
+   "nom": "Gérard Larcher",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.linternaute.com/actualite/politique/4577625-le-droit-du-sol-supprime-dans-tous-les-territoires-d-outre-mer-une-idee-de-gerard-larcher/",
+   "partage_identique": false
+  },
+  {
    "id": "lassalle.aie",
    "nom": "Jean Lassalle",
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.gala.fr/l_actu/news_de_stars/video-javais-peur-jean-lassalle-ses-confidences-hilarantes-sur-sa-participation-a-lemission-les-traitres_524349",
+   "partage_identique": false
+  },
+  {
+   "id": "lassalle.choc",
+   "nom": "Jean Lassalle",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.gqmagazine.fr/pop-culture/news/videos/jean-lassalle-se-met-dans-une-colere-noire-a-lassemblee-nationale/34620",
    "partage_identique": false
   },
   {
@@ -2705,6 +2833,22 @@
    "partage_identique": false
   },
   {
+   "id": "lescure.choc",
+   "nom": "Pierre Lescure",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.closermag.fr/people/pierre-lescure-triste-et-pathetique-lenorme-coup-de-gueule-3594130",
+   "partage_identique": false
+  },
+  {
+   "id": "lescure.rire",
+   "nom": "Pierre Lescure",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.public.fr/diaporamas/photos-ces-animateurs-tele-qui-ont-l-age-de-partir-a-la-retraite",
+   "partage_identique": false
+  },
+  {
    "id": "lisnard.aie",
    "nom": "David Lisnard",
    "auteur": null,
@@ -2785,6 +2929,14 @@
    "partage_identique": false
   },
   {
+   "id": "mamere.rire",
+   "nom": "Noël Mamère",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.france24.com/fr/émissions/avec-judith/20251019-l-écologie-est-un-outil-de-lutte-contre-les-inégalités-noël-mamère-se-confie-à-judith",
+   "partage_identique": false
+  },
+  {
    "id": "marechal.aie",
    "nom": "Marion Maréchal",
    "auteur": null,
@@ -2849,6 +3001,14 @@
    "partage_identique": false
   },
   {
+   "id": "mc_lepen.rire",
+   "nom": "Marie-Caroline Le Pen",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.tatler.com/article/who-is-marie-caroline-le-pen-marie-le-pen-sister",
+   "partage_identique": false
+  },
+  {
    "id": "melenchon.aie",
    "nom": "Jean-Luc Mélenchon",
    "auteur": null,
@@ -2889,6 +3049,14 @@
    "partage_identique": false
   },
   {
+   "id": "messiha.rire",
+   "nom": "Jean Messiha",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.purebreak.com/media/rassemblement-organise-par-jean-messiha-848324.html",
+   "partage_identique": false
+  },
+  {
    "id": "mitterrand.aie",
    "nom": "François Mitterrand",
    "auteur": null,
@@ -2921,6 +3089,14 @@
    "partage_identique": false
   },
   {
+   "id": "morano.rire",
+   "nom": "Nadine Morano",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.nouvelobs.com/politique/20111223.OBS7475/un-cafe-avec-nadine-morano.html",
+   "partage_identique": false
+  },
+  {
    "id": "ndiaye.aie",
    "nom": "Sibeth Ndiaye",
    "auteur": null,
@@ -2950,6 +3126,22 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://favoritehunks.blogspot.com/2025/11/julien-odoul-deputy-disrobed.html",
+   "partage_identique": false
+  },
+  {
+   "id": "odoul.choc",
+   "nom": "Julien Odoul",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.sudradio.fr/linvite-politique/julien-odoul-les-francais-en-ont-marre-de-payer-pour-tout",
+   "partage_identique": false
+  },
+  {
+   "id": "odoul.rire",
+   "nom": "Julien Odoul",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://deputes-rn.fr/depute/julien-odoul",
    "partage_identique": false
   },
   {
@@ -3089,6 +3281,22 @@
    "partage_identique": false
   },
   {
+   "id": "poisson.choc",
+   "nom": "Jean-Frédéric Poisson",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.lefigaro.fr/politique/florian-philippot-et-jean-frederic-poisson-annoncent-une-liste-commune-pour-les-elections-europeennes-20240404",
+   "partage_identique": false
+  },
+  {
+   "id": "poisson.rire",
+   "nom": "Jean-Frédéric Poisson",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.ledauphine.com/politique/2023/06/24/jean-frederic-poisson-on-va-inscrire-le-droit-de-tuer-dans-la-loi",
+   "partage_identique": false
+  },
+  {
    "id": "portes.aie",
    "nom": "Thomas Portes",
    "auteur": null,
@@ -3121,6 +3329,14 @@
    "partage_identique": false
   },
   {
+   "id": "poutou.rire",
+   "nom": "Philippe Poutou",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://actu.fr/occitanie/toulouse_31555/presidentielle-2022-l-anticapitaliste-philippe-poutou-en-meeting-s-a-toulouse_45760622.html",
+   "partage_identique": false
+  },
+  {
    "id": "ppda.aie",
    "nom": "Patrick Poivre d'Arvor",
    "auteur": null,
@@ -3134,6 +3350,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.purepeople.com/media/patrick-poivre-d-arvor-dans-l-emission_m6132365",
+   "partage_identique": false
+  },
+  {
+   "id": "ppda.rire",
+   "nom": "Patrick Poivre d'Arvor",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.telestar.fr/actu-tv/autres-emissions/patrick-poivre-d-arvor-je-n-ai-plus-jamais-regarde-un-journal-depuis-mon-depart-de-tf1-305976",
    "partage_identique": false
   },
   {
@@ -3409,6 +3633,22 @@
    "partage_identique": false
   },
   {
+   "id": "schiappa.choc",
+   "nom": "Marlène Schiappa",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.gala.fr/l_actu/news_de_stars/video-marlene-schiappa-cette-etonnante-revelation-qui-a-surpris-anne-elisabeth-lemoine_455951",
+   "partage_identique": false
+  },
+  {
+   "id": "schiappa.rire",
+   "nom": "Marlène Schiappa",
+   "auteur": "Nantilus",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marl%C3%A8ne_Schiappa,_2017_(cropped).jpg",
+   "partage_identique": true
+  },
+  {
    "id": "tache.aie",
    "nom": "Aurélien Taché",
    "auteur": null,
@@ -3449,6 +3689,22 @@
    "partage_identique": false
   },
   {
+   "id": "thevenot.choc",
+   "nom": "Prisca Thevenot",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.europe1.fr/emissions/lentretien-de-romain-desarbres/prisca-thevenot-letat-se-tiendra-present-pour-rappeler-que-la-laicite-sapplique-a-tous-4238552",
+   "partage_identique": false
+  },
+  {
+   "id": "thevenot.rire",
+   "nom": "Prisca Thevenot",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.purepeople.com/diapo/prisca-thevenot-la-porte-parole-du-gouvernement-poste-beaucoup-de-photos-intimes-elle-reagit-avec-mon-mari_a523172/1",
+   "partage_identique": false
+  },
+  {
    "id": "thevenoud.aie",
    "nom": "Thomas Thévenoud",
    "auteur": null,
@@ -3486,6 +3742,22 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://almouwatin.com/2026/05/01/marine-tondelier-en-colere-contre-les-propos-de-francois-ruffin-sur-limmigration-de-travail-qui-a-convoque-les-sujets-de-lextreme-droite/",
+   "partage_identique": false
+  },
+  {
+   "id": "tondelier.choc",
+   "nom": "Marine Tondelier",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.bfmtv.com/politique/j-ai-du-hausser-le-ton-parfois-m-agacer-me-mettre-en-colere-marine-tondelier-evoque-l-entre-deux-tours-des-legislatives_VN-202407120228.html",
+   "partage_identique": false
+  },
+  {
+   "id": "tondelier.rire",
+   "nom": "Marine Tondelier",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.journaldesfemmes.fr/people/magazine/3244620-la-semaine-des-stars-actu-people-france-octobre-giulia-sarkozy-florent-pagny/3245078-marine-tondelier",
    "partage_identique": false
   },
   {
@@ -3550,6 +3822,14 @@
    "auteur": null,
    "licence": "inconnue",
    "source": "https://www.la-croix.com/europe-1-et-cnews-se-rapprochent-encore-avec-l-emission-face-a-philippe-de-villiers-20240120",
+   "partage_identique": false
+  },
+  {
+   "id": "villiers.rire",
+   "nom": "Philippe de Villiers",
+   "auteur": null,
+   "licence": "inconnue",
+   "source": "https://www.youtube.com/watch?v=wJcbSqwRtA4",
    "partage_identique": false
   },
   {
@@ -3755,12 +4035,28 @@
    "note": "Extrait de 0.01 à 2.43 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "barnier_barnier_agir_que_parler",
+   "nom": "Michel Barnier, « Nous devons et nous allons davantage agir que parler, pour trouver partout les solutions qui marchent »",
+   "auteur": "LCI, « 1er ministre : la passation de pouvoir entre Gabriel Attal et Michel Barnier »",
+   "source": "https://www.youtube.com/watch?v=mU2ZlS-XrzU",
+   "date": "2024-09-05",
+   "note": "Extrait de 1629.95 à 1635.57 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "barnier_barnier_censure_plus_grave",
    "nom": "Michel Barnier, « La censure rendra tout plus difficile et plus grave »",
    "auteur": "Le Nouvel Obs, « Motion de censure : le camp Barnier fait peser la menace du « chaos » à l'Assemblée nationale »",
    "source": "https://www.youtube.com/watch?v=hRdOjvTa6Io",
    "date": "2024-12-03",
    "note": "Extrait de 10.78 à 14.94 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "barnier_barnier_valeur_ajoutee",
+   "nom": "Michel Barnier, « Vous me permettrez d'ajouter ma propre valeur ajoutée »",
+   "auteur": "LCI, « 1er ministre : la passation de pouvoir entre Gabriel Attal et Michel Barnier »",
+   "source": "https://www.youtube.com/watch?v=mU2ZlS-XrzU",
+   "date": "2024-09-05",
+   "note": "Extrait de 1117.8 à 1122.73 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "barthes_barthes_melenchon_fait_des_doigts",
@@ -3803,12 +4099,44 @@
    "note": "Extrait de 18.08 à 23.19 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "borne_borne_pari_retraites",
+   "nom": "Élisabeth Borne, « On ne peut pas faire de pari sur l'avenir de nos retraites, cette réforme est nécessaire »",
+   "auteur": "Sylvain Ernault, « [INTÉGRAL] Élisabeth Borne déclenche le 49.3 sur les retraites / Assemblée nationale - 16 mars 2023 »",
+   "source": "https://www.youtube.com/watch?v=7cfvrQKZMPw",
+   "date": "2023-03-16",
+   "note": "Extrait de 364.55 à 370.05 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "bouamrane_kb_lfi_colonialiste",
    "nom": "Karim Bouamrane, « LFI est un parti colonialiste. »",
    "auteur": "Europe 1, « Karim Bouamrane : « LFI est un parti colonialiste » »",
    "source": "https://www.youtube.com/watch?v=EvZwR4CR-VY",
    "date": "2026-07-06",
    "note": "Extrait de 46.83 à 47.87 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "bove_bove_fusil_loup",
+   "nom": "José Bové, « Si le loup risque d'attaquer un troupeau, la meilleure façon de faire, c'est de prendre le fusil et de tirer »",
+   "auteur": "Sébastien Pasero, « José Bové demande aux éleveurs de tuer le loup et ne rien dire »",
+   "source": "https://www.youtube.com/watch?v=Eba4d6tkH5E",
+   "date": "2012-07-17",
+   "note": "Extrait de 7.39 à 11.84 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "bove_bove_mcdo_merde",
+   "nom": "José Bové, « McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans »",
+   "auteur": "INA Politique, « 1999 : José Bové démonte le McDonald's de Millau | Archive INA »",
+   "source": "https://www.youtube.com/watch?v=qcLnunXjjTU",
+   "date": "1999-08-12",
+   "note": "Extrait de 50.95 à 56.52 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "bove_bove_squelette_loup",
+   "nom": "José Bové, « On a retrouvé, quelque temps après, le squelette du loup sur un clapas, et personne ne sait ce qui s'est passé, et c'est très bien comme ça »",
+   "auteur": "Sébastien Pasero, « José Bové demande aux éleveurs de tuer le loup et ne rien dire »",
+   "source": "https://www.youtube.com/watch?v=Eba4d6tkH5E",
+   "date": "2012-07-17",
+   "note": "Extrait de 40.35 à 47.17 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "cahuzac_jc_bourdin_suisse",
@@ -4451,12 +4779,36 @@
    "note": "Extrait de 48.1 à 59.63 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "joly_joly_enfants_de_france",
+   "nom": "Eva Joly, « J'aimerais voir dans nos rues les enfants de France »",
+   "auteur": "bzhtnt3, « Eva Joly et le défilé du 14 juillet »",
+   "source": "https://www.youtube.com/watch?v=0XIj28GwRlw",
+   "date": "2011-07-14",
+   "note": "Extrait de 31.95 à 35.6 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "joly_joly_sans_hulot",
+   "nom": "Eva Joly, « Nous saurons aussi faire s'il ne vient pas »",
+   "auteur": "bzhtnt3, « Eva Joly et le défilé du 14 juillet »",
+   "source": "https://www.youtube.com/watch?v=0XIj28GwRlw",
+   "date": "2011-07-14",
+   "note": "Extrait de 69.9 à 72.55 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "juppe_juppe_pas_candidat",
    "nom": "Alain Juppé, « Je confirme une bonne fois pour toutes que je ne serai pas candidat à la présidence de la République »",
    "auteur": "TV5MONDE, « Alain Juppé confirme qu'il ne sera pas candidat à la présidentielle »",
    "source": "https://www.youtube.com/watch?v=ucXDHjwq4ow",
    "date": "2017-03-06",
    "note": "Extrait de 22.29 à 29.67 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "juppe_juppe_super_peche",
+   "nom": "Alain Juppé, « J'ai la pêche. Mais avec vous, c'est la super pêche ! »",
+   "auteur": "Dark silver swag, « Alain Juppé a la pêche. »",
+   "source": "https://www.youtube.com/watch?v=YFW52TeW_f4",
+   "date": "2016-11-14",
+   "note": "Extrait de 2.57 à 5.54 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "juppe_juppe_trop_tard",

@@ -543,9 +543,9 @@ export const CASSEROLES: Casserole[] = [
     hp: 1,
     // En scandale, il éclabousse ses voisins : l'écologiste qui vise une espèce protégée.
     splash: 2,
-    citation: 'Avec le loup, l\'élevage devient impossible',
+    citation: 'Si le loup risque d\'attaquer un troupeau, la meilleure façon de faire, c\'est de prendre le fusil et de tirer',
     blague: 'Un écologiste qui veut tirer sur une espèce protégée. Ses voisins de plateau regardent ailleurs.',
-    fait: 'Le 17 juillet 2012, sur Radio Totem, le député européen écologiste appelle à tirer sur les loups qui attaquent un troupeau. Il insiste dans Sud Ouest en août 2017 : la citation en vient.',
+    fait: 'Le 17 juillet 2012, sur Radio Totem, le député européen écologiste appelle à tirer sur les loups qui menacent un troupeau : la citation en vient. Il insiste dans Sud Ouest en août 2017 : « avec le loup, l\'élevage devient impossible ».',
     statut: 'Plainte de l\'Aspas pour incitation à la destruction d\'une espèce protégée, déposée à Mende le 1er août 2012 : classée sans suite.',
     verifie: true,
   },
