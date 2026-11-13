@@ -54,6 +54,7 @@ export const FORCE_CARTES: Record<string, { seul: number; camp: number }> = {
   dupond_moretti: { seul: 1.03, camp: 1.03 },
   lemaire: { seul: 1.18, camp: 1.33 },
   darmanin: { seul: 1.2, camp: 1.68 },
+  lecornu: { seul: 0.91, camp: 1.07 },
   philippe: { seul: 1.24, camp: 1.31 },
   bayrou: { seul: 0.92, camp: 1.34 },
   borne: { seul: 0.84, camp: 1.02 },
