@@ -99,6 +99,11 @@
   "hauteur_visage_source": 232,
   "visages": 1
  },
+ "bove": {
+  "basse_definition": false,
+  "hauteur_visage_source": 593,
+  "visages": 1
+ },
  "boyard": {
   "basse_definition": false,
   "hauteur_visage_source": 528,
@@ -312,6 +317,11 @@
  "jmlp": {
   "basse_definition": false,
   "hauteur_visage_source": 602,
+  "visages": 1
+ },
+ "joly": {
+  "basse_definition": false,
+  "hauteur_visage_source": 562,
   "visages": 1
  },
  "juppe": {

@@ -109,7 +109,7 @@ test('refreshedItem: the card opened follows its thing, or closes when it is gon
   assert.equal(refreshedItem(shopItem, { ...view, shop: [] }), null, 'bought, or a new shop');
   const onBoard = makeMinion(CARD_BY_ID.tiberi, 42);
   const moved = { ...onBoard, atk: 9 };
-  assert.deepEqual(refreshedItem({ from: 'board', minion: onBoard, index: 0 }, { ...view, board: [makeMinion(CARD_BY_ID.lecornu, 1), moved] }), { from: 'board', minion: moved, index: 1 });
+  assert.deepEqual(refreshedItem({ from: 'board', minion: onBoard, index: 0 }, { ...view, board: [makeMinion(CARD_BY_ID.castaner, 1), moved] }), { from: 'board', minion: moved, index: 1 });
   assert.equal(refreshedItem({ from: 'board', minion: onBoard, index: 0 }, { ...view, board: [] }), null, 'sold');
   assert.equal(refreshedItem({ from: 'hand', minion: onBoard }, { ...view, hand: [] }), null, 'laid down');
   const held = { uid: 5, spellId: 'tract', count: 2 };

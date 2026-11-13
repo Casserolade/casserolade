@@ -111,11 +111,11 @@ test('un triple d\'un serviteur déjà en scandale ne compte pas un second scand
 test('un doré rallié garde ses casseroles : son hôte les prend, avec leur bonus de budget', () => {
   const { game, p, buy, pose } = setup();
   buy('cheminade');
-  buy('lecornu');
-  buy('lecornu');
+  buy('castaner');
+  buy('castaner');
   pose('renault', p.board[1]); // +1 budget par manche, compte pour deux : scandale.
   assert.ok(p.board[1].scandal);
-  buy('lecornu', true);
+  buy('castaner', true);
   const golden = p.hand.find((m) => m.golden) as Minion;
   assert.deepEqual(golden.casseroles, ['renault']);
   const host = p.board[0];
@@ -131,10 +131,10 @@ test('un triple d\'un serviteur réduit au silence lui rend, à l\'oubli, les ef
   const { game, p, buy, pose } = setup();
   buy('cheminade');
   const host = p.board[0];
-  buy('berge', true);
+  buy('lemaire', true);
   assert.equal(applyAction(game, 0, { t: 'play', uid: p.hand[0].uid, onto: host.uid }).ok, true);
-  const heritage = CARD_BY_ID.berge.effects?.[0];
-  assert.ok(heritage && host.effects.map(effectOrigin).includes(heritage), 'l\'Héritage de Bergé passe sur l\'hôte, en copie ralliée');
+  const heritage = CARD_BY_ID.lemaire.effects?.[0];
+  assert.ok(heritage && host.effects.map(effectOrigin).includes(heritage), 'l\'effet de Le Maire passe sur l\'hôte, en copie ralliée');
   pose('blancos', host);
   pose('homards', host);
   assert.deepEqual(host.effects, [], 'réduit au silence');
@@ -145,21 +145,21 @@ test('un triple d\'un serviteur réduit au silence lui rend, à l\'oubli, les ef
   resolveRound(game);
   resolveRound(game);
   assert.equal(golden.scandal, undefined);
-  assert.ok(golden.effects.map(effectOrigin).includes(heritage), 'l\'Héritage de Bergé revient avec l\'oubli');
+  assert.ok(golden.effects.map(effectOrigin).includes(heritage), 'l\'effet de Le Maire revient avec l\'oubli');
   for (const e of CARD_BY_ID.cheminade.effects ?? []) assert.equal(golden.effects.filter((x) => x === e).length, 1);
 });
 
 test('un triple garde chaque Ralliement, même celui d\'une carte sur elle-même', () => {
   const { game, p, buy } = setup();
-  buy('berge');
-  buy('berge', true);
+  buy('lemaire');
+  buy('lemaire', true);
   assert.equal(applyAction(game, 0, { t: 'play', uid: p.hand[0].uid, onto: p.board[0].uid }).ok, true);
-  const heritage = CARD_BY_ID.berge.effects?.[0];
+  const heritage = CARD_BY_ID.lemaire.effects?.[0];
   assert.equal(p.board[0].effects.filter((e) => effectOrigin(e) === heritage).length, 2);
-  buy('berge', true);
-  buy('berge', true);
+  buy('lemaire', true);
+  buy('lemaire', true);
   const golden = p.hand.find((m) => m.golden) as Minion;
-  assert.equal(golden.effects.filter((e) => effectOrigin(e) === heritage).length, 2, 'son Héritage, et celui de la Bergé ralliée');
+  assert.equal(golden.effects.filter((e) => effectOrigin(e) === heritage).length, 2, 'son effet, et celui du Le Maire rallié');
 });
 
 test('le tutoriel suit son script quelle que soit la graine : ses camps sont toujours en jeu', () => {
@@ -369,23 +369,23 @@ test('une place, un emplacement ou un uid non entier est refusé sans rien chang
 });
 
 test('un Ralliement qui porte des casseroles ne rejoint pas un jeton ; sans casserole, si (fuzz du 6 novembre 2026)', () => {
-  // Graine 300017 : Lecornu, Ralliement, revenu en main avec ses casseroles, rejoignait un Électeur fantôme, et le jeton
+  // Graine 300017 : un Ralliement, revenu en main avec ses casseroles, rejoignait un Électeur fantôme, et le jeton
   // portait des casseroles, contre la règle : le serveur signalait l'anomalie.
   const { game, p, buy, pose } = setup();
   buy('tiberi');
   const token = p.board.find((m) => m.token);
   assert.ok(token, 'Tiberi invoque un Électeur fantôme');
-  buy('lecornu');
-  const lecornu = p.board.find((m) => m.cardId === 'lecornu') as Minion;
-  pose('blancos', lecornu);
-  p.board = p.board.filter((m) => m !== lecornu);
-  p.hand.push(lecornu);
-  const refused = applyAction(game, 0, { t: 'play', uid: lecornu.uid, onto: token.uid });
+  buy('castaner');
+  const rallied = p.board.find((m) => m.cardId === 'castaner') as Minion;
+  pose('blancos', rallied);
+  p.board = p.board.filter((m) => m !== rallied);
+  p.hand.push(rallied);
+  const refused = applyAction(game, 0, { t: 'play', uid: rallied.uid, onto: token.uid });
   assert.deepEqual(refused, { ok: false, error: 'Un jeton ne peut pas porter de casserole.' });
-  assert.ok(p.hand.includes(lecornu), 'il reste en main');
-  assert.equal(applyAction(game, 0, { t: 'play', uid: lecornu.uid, onto: p.board.find((m) => m.cardId === 'tiberi')?.uid }).ok, true, 'sur un vrai politique, il se rallie');
-  buy('lecornu', true);
-  const clean = p.hand.find((m) => m.cardId === 'lecornu') as Minion;
+  assert.ok(p.hand.includes(rallied), 'il reste en main');
+  assert.equal(applyAction(game, 0, { t: 'play', uid: rallied.uid, onto: p.board.find((m) => m.cardId === 'tiberi')?.uid }).ok, true, 'sur un vrai politique, il se rallie');
+  buy('castaner', true);
+  const clean = p.hand.find((m) => m.cardId === 'castaner') as Minion;
   assert.equal(applyAction(game, 0, { t: 'play', uid: clean.uid, onto: token.uid }).ok, true, 'sans casserole, il rejoint le jeton');
   assert.equal(token.casseroles.length, 0);
 });

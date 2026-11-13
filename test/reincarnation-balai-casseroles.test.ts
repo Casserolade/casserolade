@@ -208,9 +208,9 @@ test('un scandale qui éclabousse : ses voisins ont -2/-2 en combat, pas lui, et
 test('Juppé : quand le peuple oublie un scandale, ce politique revient plus fort, avec l\'Immunité', () => {
   const { game, p, buy, pose } = table();
   buy('juppe');
-  const target = buy('cope');
+  const target = buy('hortefeux');
   pose('homards', target);
-  pose('pain_au_chocolat', target);
+  pose('ballon', target);
   assert.ok(target.scandal);
   const before = { atk: target.atk, hp: target.hp };
   addSpellToHand(game, p, 'bracelet_electronique');

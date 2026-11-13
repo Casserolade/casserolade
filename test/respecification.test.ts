@@ -243,7 +243,7 @@ test('Macron : chaque Ralliement fait gonfler son hôte, d\'autant plus qu\'il e
   lay(game, 'macron');
   const host = lay(game, 'kazib');
   const gains: number[] = [];
-  for (const id of ['castaner', 'berge']) {
+  for (const id of ['castaner', 'dupond_moretti']) {
     assert.ok(take(game, id));
     const rally = addMinionToHand(game, p, id) as Minion;
     const before = host.atk + rally.atk;

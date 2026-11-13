@@ -60,8 +60,6 @@ export const CARDS: Card[] = [
   card('delogu', 'Sébastien Delogu', 'insoumis', 1, 2, 4, { kw: ['porte_parole', 'vedette'], fx: [fx('heritage', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract'))] }),
   card('portes', 'Thomas Portes', 'insoumis', 2, 3, 5, { fx: [fx('fin_tour', 'aleatoire', tract), fx('fin_tour', 'aleatoire', tract)] }),
   card('trouve', 'Aurélie Trouvé', 'insoumis', 3, 1, 4, { fx: [fx('aura', 'soi', compteur('tracts', 1, 1))] }),
-  // Elle a coordonné L'Avenir en commun : celle qui écrit les promesses en distribue.
-  card('guette', 'Clémence Guetté', 'insoumis', 2, 4, 5, { fx: [fx('annonce', 'joueur', carte('promesse'))] }),
   // PS, LREM, EDS, EELV, LFI : il se pose sur n'importe qui.
   card('tache', 'Aurélien Taché', 'insoumis', 2, 1, 2, { kw: ['ralliement'], fx: [fx('fin_tour', 'aleatoire', tract)] }),
   card('chikirou', 'Sophia Chikirou', 'insoumis', 3, 5, 8, { fx: [fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract), fx('annonce', 'aleatoire', tract)] }),
@@ -73,8 +71,6 @@ export const CARDS: Card[] = [
   card('ruffin', 'François Ruffin', 'insoumis', 5, 6, 7, {
     fx: [fx('annonce', 'joueur', carte('tract', 3)), fx('fin_tour', 'joueur', carte('tract', 2)), fx('droit_de_reponse', 'joueur', carte('tract', 2))],
   }),
-  // Les faux billets de 500 € offerts à Juncker : tout le monde en reçoit.
-  card('aubry', 'Manon Aubry', 'insoumis', 4, 6, 7, { fx: [fx('annonce', 'autres', tract)] }),
   // « L'élue la plus poursuivie de la Ve République », dit-elle (octobre 2026) : chaque affaire mobilise les siens, et
   // chacune de ses phrases fait polémique (13 novembre 2026). Les casseroles nourrissent le moteur des Tracts.
   card('hassan', 'Rima Hassan', 'insoumis', 4, 4, 6, { kw: ['polemique'], fx: [fx('casserole_recue', 'joueur', carte('tract', 2))] }),
@@ -141,6 +137,12 @@ export const CARDS: Card[] = [
   card('hurmic', 'Pierre Hurmic', 'ecologistes', 2, 3, 5, { fx: [fx('joue', 'soi', buff(1, 1), { camp: 'ecologistes' })] }),
   card('mamere', 'Noël Mamère', 'ecologistes', 2, 2, 3, { fx: [fx('aura', 'soi', compteur('ecologistes_joues', 1, 1)), fx('droit_de_reponse', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
   card('piolle', 'Éric Piolle', 'ecologistes', 3, 3, 6, { fx: [fx('fin_tour', 'voisins', buff(1, 1))] }),
+  // Le démontage du McDonald's de Millau (12 août 1999), puis les fauchages d'OGM : ce qu'il arrache fait pousser le
+  // reste. Chaque politique renvoyé fait grandir les Écologistes de la boutique (13 novembre 2026).
+  card('bove', 'José Bové', 'ecologistes', 3, 4, 6, { fx: [fx('vente_allie', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
+  // L'ancienne juge d'instruction du pôle financier, celle de l'affaire Elf : avec elle, l'argent revient. Chaque
+  // Écologiste joué rembourse 1 de budget, et le camp peut enfin faire tourner ses politiques (13 novembre 2026).
+  card('joly', 'Eva Joly', 'ecologistes', 3, 3, 4, { fx: [fx('joue', 'joueur', { do: 'budget', value: 1 }, { camp: 'ecologistes' })] }),
   card('duflot', 'Cécile Duflot', 'ecologistes', 4, 6, 7, { fx: [fx('joue', 'joue', buff(3, 3), { camp: 'ecologistes' })] }),
   // Échelon 6, clé de voûte de la Fin de tour. Il comptait les Écologistes du plateau (+7/+7 au plus, la même chose à
   // chaque manche) ; il compte ceux joués dans la partie, comme Mamère : le gain grandit tant qu'on joue des Écologistes
@@ -157,8 +159,8 @@ export const CARDS: Card[] = [
 
   // Macronie : le marché. Le budget, le doré, et le Ralliement. Thevenot et Bregeon sont hors réserve.
   card('ndiaye', 'Sibeth Ndiaye', 'macronie', 1, 2, 4, { kw: ['porte_parole'], fx: [fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
-  // 13 novembre 2026 : +2/+2 par Ralliement (au lieu de +2/+1), Castaner 3/4 et Bergé 4/4. La Macronie, dernière en
-  // mono-camp, avait les Ralliements au corps le plus faible.
+  // 13 novembre 2026 : +2/+2 par Ralliement (au lieu de +2/+1) et Castaner 3/4. La Macronie, dernière en mono-camp,
+  // avait les Ralliements au corps le plus faible.
   card('maillard', 'Sylvain Maillard', 'macronie', 1, 2, 3, { kw: ['ni_droite_ni_gauche'], fx: [fx('rallie', 'joue', buff(2, 2))] }),
   card('oudea', 'Amélie Oudéa-Castéra', 'macronie', 2, 2, 2, { golden: true, fx: [fx('fin_tour', 'dores', buff(1, 0))] }),
   card('rugy', 'François de Rugy', 'macronie', 2, 2, 3, {
@@ -171,15 +173,13 @@ export const CARDS: Card[] = [
     fx: [fx('sort', 'soi', buff(1, 1), { n: 2 }), fx('celebration', 'joueur', carte('sort_aleatoire'))],
   }),
   card('castaner', 'Christophe Castaner', 'macronie', 3, 3, 4, { kw: ['ralliement', 'cumul'] }),
-  card('berge', 'Aurore Bergé', 'macronie', 3, 4, 4, { kw: ['ralliement'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   card('dupond_moretti', 'Éric Dupond-Moretti', 'macronie', 3, 1, 2, { kw: ['ralliement', 'immunite'] }),
   // 5 novembre 2026 : 2 de budget au lieu de 1. Une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie (5,11 en mono-camp).
   card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 2 })] }),
   // 7 novembre 2026 : « le premier flic de France » grandit en attaquant, et rallié, il l'apprend à son hôte. Avec
-  // l'Immunité de Dupond-Moretti, le Cumul de Castaner et le Retour de Lecornu, l'hôte de tête gonfle à chaque coup.
+  // l'Immunité de Dupond-Moretti et le Cumul de Castaner, l'hôte de tête gonfle à chaque coup.
   card('darmanin', 'Gérald Darmanin', 'macronie', 4, 5, 6, { kw: ['ralliement'], fx: [fx('meeting', 'soi', buff(2, 2), { perma: true })] }),
   card('philippe', 'Édouard Philippe', 'macronie', 5, 8, 9, { fx: [fx('annonce', 'cible', { do: 'dorer', maxTier: 4 })] }),
-  card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
   card('bayrou', 'François Bayrou', 'macronie', 4, 6, 8, { kw: ['ni_droite_ni_gauche'], fx: [fx('fin_tour', 'allies', { do: 'buff_par_ralliement', atk: 2, hp: 2 })] }),
   // Vingt-trois 49.3 en vingt mois (2022-2024), le record depuis Rocard : vos 49.3 se déclenchent deux fois, le sien
   // compris (13 novembre 2026). Un corps de multiplicateur, comme Lassalle, Chirac et Mitterrand. Son 49.3 à tous ses
@@ -204,7 +204,6 @@ export const CARDS: Card[] = [
   card('tiberi', 'Jean Tiberi', 'republicains', 1, 2, 3, { fx: [fx('annonce', 'soi', invoque('electeur_fantome'))] }),
   card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
   card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
-  card('cope', 'Jean-François Copé', 'republicains', 2, 3, 4, { kw: ['porte_parole'], fx: [fx('heritage', 'premier_allie', motCle('immunite'))] }),
   card('morano', 'Nadine Morano', 'republicains', 2, 5, 5, { kw: ['vedette'], fx: [fx('celebration', 'aleatoire', motCle('immunite'))] }),
   card('lisnard', 'David Lisnard', 'republicains', 3, 2, 2, { kw: ['immunite'], fx: [fx('fin_tour', 'allie_suivant', motCle('immunite'))] }),
   card('wauquiez', 'Laurent Wauquiez', 'republicains', 3, 4, 7, {
@@ -354,6 +353,22 @@ for (const card of [...CARDS, ...Object.values(TOKENS)]) {
   for (const effect of card.effects ?? []) Object.freeze(effect);
   Object.freeze(card.effects);
 }
+
+/**
+ * La réserve : des politiques sortis du roster. Ils ne sont plus dans la boutique ni au bestiaire, mais leur carte,
+ * leurs casseroles (`RESERVE_CASSEROLES`), leurs phrases, leurs voix et leurs visages restent. Pour un retour, la
+ * ligne remonte dans `CARDS`. Depuis la 0.4.0 (13 novembre 2026) : les camps les plus fournis ont rendu des cartes,
+ * pour que la boutique propose chaque camp à parts plus égales.
+ */
+export const RESERVE_CARDS: Card[] = [
+  // Elle a coordonné L'Avenir en commun : celle qui écrit les promesses en distribue.
+  card('guette', 'Clémence Guetté', 'insoumis', 2, 4, 5, { fx: [fx('annonce', 'joueur', carte('promesse'))] }),
+  // Les faux billets de 500 € offerts à Juncker : tout le monde en reçoit.
+  card('aubry', 'Manon Aubry', 'insoumis', 4, 6, 7, { fx: [fx('annonce', 'autres', tract)] }),
+  card('berge', 'Aurore Bergé', 'macronie', 3, 4, 4, { kw: ['ralliement'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
+  card('lecornu', 'Sébastien Lecornu', 'macronie', 4, 5, 6, { kw: ['ralliement', 'retour'] }),
+  card('cope', 'Jean-François Copé', 'republicains', 2, 3, 4, { kw: ['porte_parole'], fx: [fx('heritage', 'premier_allie', motCle('immunite'))] }),
+];
 
 export const CARD_BY_ID: Record<string, Card> = Object.fromEntries(CARDS.map((c) => [c.id, c]));
 

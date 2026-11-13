@@ -2,8 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { CARDS, TOKENS } from '../src/data/cards.ts';
-import { CASSEROLES } from '../src/data/casseroles.ts';
+import { CARDS, RESERVE_CARDS, TOKENS } from '../src/data/cards.ts';
+import { CASSEROLES, RESERVE_CASSEROLES } from '../src/data/casseroles.ts';
 import { HEROES, HERO_BY_ID, MAX_ARMOR } from '../src/data/heroes.ts';
 import { SPELLS } from '../src/data/sorts.ts';
 import { PARAMS } from '../src/data/params.ts';
@@ -143,4 +143,18 @@ test('tous les héros partent à 30 sondages : seule leur armure, jamais négati
   }
   const game = createGame({ seed: 3 });
   for (const p of game.players) assert.equal(p.hp, PARAMS.startHp + p.hero.armor, p.hero.id);
+});
+
+test('la réserve : des politiques hors du roster, bien formés, avec leurs casseroles', () => {
+  const inPlay = new Set(CARDS.map((c) => c.id));
+  const reserve = new Set(RESERVE_CARDS.map((c) => c.id));
+  assert.equal(reserve.size, RESERVE_CARDS.length, 'un politique n\'est qu\'une fois en réserve');
+  for (const card of RESERVE_CARDS) {
+    assert.ok(!inPlay.has(card.id), `${card.id} est en jeu et en réserve`);
+    assert.ok(Number.isInteger(card.tier) && card.tier >= 1 && card.tier <= 6, `${card.id} : échelon ${card.tier}`);
+  }
+  for (const c of RESERVE_CASSEROLES) assert.ok(reserve.has(c.owner), `${c.id} : ${c.owner} n'est pas en réserve`);
+  for (const c of CASSEROLES) assert.ok(inPlay.has(c.owner), `${c.id} : ${c.owner} n'est plus en jeu`);
+  const game = createGame({ seed: 5 });
+  for (const card of RESERVE_CARDS) assert.equal(game.pool.get(card.id), undefined, `${card.id} est dans la boutique`);
 });

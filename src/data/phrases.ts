@@ -770,6 +770,42 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Je cesse d'exercer mes fonctions de président de la République. Cette décision prend effet aujourd'hui à midi."
     ]
   },
+  "bove": {
+    "pose": [
+      "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans",
+      "Avec le loup, l'élevage devient impossible"
+    ],
+    "casserole": [
+      "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans",
+      "Merci Madame, vous venez de nous faire gagner dix ans",
+      "Avec le loup, l'élevage devient impossible",
+      "Je n'élève pas des brebis pour nourrir le loup"
+    ],
+    "celebration": [
+      "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans"
+    ],
+    "heros": [
+      "McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde et qui veulent faire crever les paysans"
+    ],
+    "prison": [
+      "Merci Madame, vous venez de nous faire gagner dix ans"
+    ],
+    "mort": [
+      "Merci Madame, vous venez de nous faire gagner dix ans",
+      "Je n'élève pas des brebis pour nourrir le loup"
+    ]
+  },
+  "joly": {
+    "casserole": [
+      "J'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen"
+    ],
+    "pose": [
+      "J'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen"
+    ],
+    "heros": [
+      "J'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen"
+    ]
+  },
   "bardella": {
     "pose": [
       "On se croirait en Arabie saoudite, en Iran, au Qatar.",

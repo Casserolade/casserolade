@@ -515,6 +515,73 @@ export const CASSEROLES: Casserole[] = [
     verifie: true,
   },
   {
+    id: 'demontage_mcdo',
+    kind: 'affaire',
+    name: 'Le démontage du McDo',
+    owner: 'bove',
+    cost: 3,
+    ownerBonus: { atk: 3, hp: 3 },
+    atk: 5,
+    hp: 3,
+    // La prison et la caution : en scandale, il ne bouge plus et coûte 1 de budget par manche.
+    locked: true,
+    budgetPerRound: -1,
+    citation: 'McDo est le symbole de ces multinationales qui veulent nous faire bouffer de la merde […]',
+    blague: 'Démonte un McDo en chantier, tracteur à l\'appui. Une caution, puis trois mois ferme : il ne bouge plus, et ça se paie.',
+    fait: 'Le 12 août 1999, avec la Confédération paysanne, il démonte le McDonald\'s en construction de Millau, contre la surtaxe américaine sur le roquefort. Placé en détention provisoire, il sort contre une caution de 105 000 francs, payée par des dons. La citation vient de son discours sur le chantier ; elle finit par « et qui veulent faire crever les paysans ».',
+    statut: 'Condamné à trois mois de prison ferme pour dégradation en réunion ; peine confirmée en appel, puis par la Cour de cassation le 6 février 2002. Incarcéré du 19 juin au 1er août 2002.',
+    verifie: true,
+  },
+  {
+    id: 'tirer_les_loups',
+    kind: 'ridicule',
+    name: 'Tirer sur les loups',
+    owner: 'bove',
+    cost: 2,
+    ownerBonus: { atk: 2, hp: 2 },
+    atk: 4,
+    hp: 1,
+    // En scandale, il éclabousse ses voisins : l'écologiste qui vise une espèce protégée.
+    splash: 2,
+    citation: 'Avec le loup, l\'élevage devient impossible',
+    blague: 'Un écologiste qui veut tirer sur une espèce protégée. Ses voisins de plateau regardent ailleurs.',
+    fait: 'Le 17 juillet 2012, sur Radio Totem, le député européen écologiste appelle à tirer sur les loups qui attaquent un troupeau. Il insiste dans Sud Ouest en août 2017 : la citation en vient.',
+    statut: 'Plainte de l\'Aspas pour incitation à la destruction d\'une espèce protégée, déposée à Mende le 1er août 2012 : classée sans suite.',
+    verifie: true,
+  },
+  {
+    id: 'defile_citoyen',
+    kind: 'ridicule',
+    name: 'Le défilé citoyen',
+    owner: 'joly',
+    cost: 2,
+    ownerBonus: { hp: 4 },
+    hp: 6,
+    // Plus de défilé militaire : en scandale, n'attaque plus.
+    noAttack: true,
+    citation: 'J\'ai rêvé que nous puissions remplacer ce défilé par un défilé citoyen',
+    blague: 'Les chars remplacés par les enfants des écoles et les seniors. Tollé général. Plus de défilé militaire : elle n\'attaque plus.',
+    fait: 'Le 14 juillet 2011, candidate écologiste à la présidentielle, elle propose de remplacer le défilé militaire par un défilé citoyen. Elle précise ensuite à Libération ne pas être contre les défilés militaires, mais pas ce jour-là.',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
+  {
+    id: 'deux_trente_et_un',
+    kind: 'ridicule',
+    name: '2,31 %',
+    owner: 'joly',
+    cost: 2,
+    ownerBonus: { atk: 2, hp: 2 },
+    atk: 3,
+    hp: 3,
+    // -2 sondages par manche de scandale : le score.
+    pollsPerRound: 2,
+    blague: 'Bat Nicolas Hulot à la primaire, puis fait 2,31 % à la présidentielle. Les sondages suivent.',
+    fait: 'Primaire écologiste de 2011 : 58,16 % au second tour contre Nicolas Hulot, le 12 juillet. Présidentielle de 2012 : 2,31 % des voix au premier tour.',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
+  {
     id: 'barbecue',
     kind: 'ridicule',
     name: 'Le barbecue',
@@ -844,22 +911,6 @@ export const CASSEROLES: Casserole[] = [
     verifie: true,
   },
   {
-    id: 'quatorze_heures',
-    kind: 'ridicule',
-    name: 'Le gouvernement de 14 heures',
-    owner: 'lecornu',
-    cost: 3,
-    ownerBonus: { atk: 1, hp: 1 },
-    atk: 1,
-    hp: 1,
-    // Lecornu a déjà le Retour : son gouvernement de 14 heures s'oublie, lui reste.
-    forgetsAll: true,
-    blague: 'Annoncé le soir, démissionnaire le matin, reconduit quatre jours plus tard. Quatorze heures : le peuple a déjà oublié.',
-    fait: 'Démission le 6 octobre 2025, reconduction le 10 octobre.',
-    statut: 'Pas une affaire judiciaire.',
-    verifie: true,
-  },
-  {
     id: 'assumer_mentir',
     kind: 'ridicule',
     name: 'J\'assume de mentir',
@@ -878,21 +929,6 @@ export const CASSEROLES: Casserole[] = [
   },
 
   // Républicains.
-  {
-    id: 'pain_au_chocolat',
-    kind: 'ridicule',
-    name: 'Le pain au chocolat',
-    owner: 'cope',
-    cost: 2,
-    ownerBonus: { atk: 4, hp: 4 },
-    atk: 4,
-    hp: 4,
-    budgetPerRound: -2,
-    blague: 'En 2012, on l\'arrache à un enfant. En 2016, il n\'en connaît pas le prix.',
-    fait: 'Son histoire de goûter arraché en 2012, puis sa bourde sur le prix en 2016.',
-    statut: 'Pas une affaire judiciaire. Plainte du CFCM retirée après ses regrets.',
-    verifie: true,
-  },
   {
     id: 'quand_il_y_en_a_un',
     kind: 'ridicule',
@@ -1470,5 +1506,40 @@ for (const c of CASSEROLES) {
     Object.freeze(list);
   }
 }
+
+/** Les casseroles des politiques de la réserve (`RESERVE_CARDS`) : hors du jeu avec eux, gardées pour leur retour. */
+export const RESERVE_CASSEROLES: Casserole[] = [
+  {
+    id: 'quatorze_heures',
+    kind: 'ridicule',
+    name: 'Le gouvernement de 14 heures',
+    owner: 'lecornu',
+    cost: 3,
+    ownerBonus: { atk: 1, hp: 1 },
+    atk: 1,
+    hp: 1,
+    // Lecornu a déjà le Retour : son gouvernement de 14 heures s'oublie, lui reste.
+    forgetsAll: true,
+    blague: 'Annoncé le soir, démissionnaire le matin, reconduit quatre jours plus tard. Quatorze heures : le peuple a déjà oublié.',
+    fait: 'Démission le 6 octobre 2025, reconduction le 10 octobre.',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
+  {
+    id: 'pain_au_chocolat',
+    kind: 'ridicule',
+    name: 'Le pain au chocolat',
+    owner: 'cope',
+    cost: 2,
+    ownerBonus: { atk: 4, hp: 4 },
+    atk: 4,
+    hp: 4,
+    budgetPerRound: -2,
+    blague: 'En 2012, on l\'arrache à un enfant. En 2016, il n\'en connaît pas le prix.',
+    fait: 'Son histoire de goûter arraché en 2012, puis sa bourde sur le prix en 2016.',
+    statut: 'Pas une affaire judiciaire. Plainte du CFCM retirée après ses regrets.',
+    verifie: true,
+  },
+];
 
 export const CASSEROLE_BY_ID: Record<string, Casserole> = Object.fromEntries(CASSEROLES.map((c) => [c.id, c]));

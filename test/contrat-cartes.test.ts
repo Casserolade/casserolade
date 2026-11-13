@@ -62,9 +62,11 @@ function world(card: Card, when: Trigger, keepTrigger: boolean, variant: number)
     a.atk += 3;
     a.hp += 3;
   }
-  // Le premier allié a rallié Aurore Bergé : un Ralliement pour ce qui les compte, un Héritage pour ce qui les relance.
-  const berge = addMinionToHand(game, p, 'berge');
-  if (berge) applyAction(game, 0, { t: 'play', uid: berge.uid, onto: allies[0].uid });
+  // Le premier allié a rallié Christophe Castaner : un Ralliement pour ce qui les compte. Il porte aussi l'Héritage de
+  // Karim Bouamrane : un Héritage pour ce qui les relance.
+  const rallied = addMinionToHand(game, p, 'castaner');
+  if (rallied) applyAction(game, 0, { t: 'play', uid: rallied.uid, onto: allies[0].uid });
+  allies[0].effects.push(...(CARD_BY_ID.bouamrane.effects ?? []));
   addMinionToHand(game, p, sameCamp);
   addSpellToHand(game, p, 'tract');
   const x = addMinionToHand(game, p, card.id) ?? (() => {
@@ -212,7 +214,7 @@ function fire(w: World, when: Trigger, variant: number): string {
     case 'oubli': {
       // Un scandale, puis le Bracelet électronique : le peuple oublie tout de suite.
       const carrier = variant === 0 ? x : allies[variant % allies.length];
-      for (const id of ['homards', 'pain_au_chocolat']) {
+      for (const id of ['homards', 'ballon']) {
         p.spells.push({ uid: game.nextUid++, casseroleId: id });
         applyAction(game, 0, { t: 'cast', uid: p.spells[p.spells.length - 1].uid, target: carrier.uid });
       }

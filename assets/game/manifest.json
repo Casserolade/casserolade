@@ -3823,6 +3823,56 @@
     }
    }
   },
+  "bove": {
+   "atlas": "personnages/bove.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 323,
+     "h": 370
+    },
+    "machoire": {
+     "x": 327,
+     "y": 0,
+     "w": 189,
+     "h": 88,
+     "pose": [
+      80.0,
+      282.0
+     ],
+     "pivot": [
+      110.0,
+      10.1
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     146.2,
+     193.3,
+     42.4
+    ],
+    "oeil_d": [
+     240.6,
+     193.3,
+     38.5
+    ],
+    "bouche": [
+     190.0,
+     292.1
+    ],
+    "menton": [
+     187.4,
+     360.8
+    ]
+   },
+   "credits": {
+    "auteur": "Frantogian",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:José_Bové_2012.jpg"
+   }
+  },
   "boyard": {
    "atlas": "personnages/boyard.webp",
    "pieces": {
@@ -11907,6 +11957,56 @@
       "source": "https://www.24heures.ch/le-passage-explosif-de-jean-marie-le-pen-en-suisse-romande-352270644700"
      }
     }
+   }
+  },
+  "joly": {
+   "atlas": "personnages/joly.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 379,
+     "h": 378
+    },
+    "machoire": {
+     "x": 383,
+     "y": 0,
+     "w": 207,
+     "h": 103,
+     "pose": [
+      87.0,
+      275.0
+     ],
+     "pivot": [
+      85.0,
+      13.9
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     122.9,
+     195.2,
+     41.8
+    ],
+    "oeil_d": [
+     226.0,
+     195.2,
+     45.8
+    ],
+    "bouche": [
+     172.0,
+     288.9
+    ],
+    "menton": [
+     170.5,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Eva joly 2012",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:EVA_JOLY_011.jpg"
    }
   },
   "juppe": {
