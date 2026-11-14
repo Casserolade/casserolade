@@ -9,18 +9,27 @@ interface PhotoCredit { id: string; auteur: string | null; licence: string | nul
 const credits = JSON.parse(readFileSync('assets/game/credits.json', 'utf8')) as { photos: PhotoCredit[]; illustrations: PhotoCredit[]; cinematiques: PhotoCredit[] };
 const manifest = JSON.parse(readFileSync('assets/game/manifest.json', 'utf8')) as { personnages: Record<string, { visages?: Record<string, unknown> }> };
 /**
- * The one photo kept without a free licence, by a decision of 14 November 2026: the Monaco Grand Prix picture of the
- * casserole « Des Deux-Siciles ». Nothing else joins this list without such a decision.
+ * The photos kept without a free licence, by decisions of 14 November 2026: the Monaco Grand Prix picture of the
+ * casserole « Des Deux-Siciles », and the three heads of Yann Bompard, of whom no free portrait exists (press photos,
+ * each credited to its author and its article). Nothing else joins this list without such a decision.
  */
-const KEPT_WITHOUT_LICENCE = ['des_deux_siciles'];
+const KEPT_WITHOUT_LICENCE = ['des_deux_siciles', 'yann_bompard', 'yann_bompard.aie', 'yann_bompard.rire'];
+const isFree = (photo: PhotoCredit) => photo.licence === 'Public domain' || (photo.licence ?? '') in LICENCE_LINKS;
 const everyPhoto = [...credits.photos, ...credits.illustrations, ...credits.cinematiques];
 
-test('chaque photo du jeu a un auteur, un lien vers sa source et une licence libre, sauf la seule exception décidée', () => {
-  assert.deepEqual(credits.illustrations.map((photo) => photo.id), KEPT_WITHOUT_LICENCE);
-  for (const photo of everyPhoto.filter((entry) => !KEPT_WITHOUT_LICENCE.includes(entry.id))) {
+test('chaque photo du jeu a un auteur, un lien vers sa source et une licence libre, sauf les exceptions décidées', () => {
+  assert.deepEqual(everyPhoto.filter((photo) => !isFree(photo)).map((photo) => photo.id).sort(), [...KEPT_WITHOUT_LICENCE].sort());
+  for (const photo of everyPhoto.filter(isFree)) {
     assert.ok(photo.auteur, `${photo.id} : auteur manquant`);
     assert.match(photo.source ?? '', /^https:\/\//, `${photo.id} : source manquante`);
-    assert.ok(photo.licence === 'Public domain' || (photo.licence ?? '') in LICENCE_LINKS, `${photo.id} : « ${photo.licence} » n'est pas une licence libre connue`);
+  }
+});
+
+test('une photo gardée sans licence libre cite sa source, et son auteur quand c\'est une tête', () => {
+  for (const photo of everyPhoto.filter((entry) => KEPT_WITHOUT_LICENCE.includes(entry.id))) assert.ok(photo.source, `${photo.id} : source manquante`);
+  for (const photo of credits.photos.filter((entry) => KEPT_WITHOUT_LICENCE.includes(entry.id))) {
+    assert.ok(photo.auteur, `${photo.id} : auteur manquant`);
+    assert.match(photo.source ?? '', /^https:\/\//, `${photo.id} : lien manquant`);
   }
 });
 

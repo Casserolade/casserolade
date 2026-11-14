@@ -2108,12 +2108,21 @@
   "recadrage": "assets/photos/base_web/lafont.jpg"
  },
  "yann_bompard": {
+  "fichier": "assets/photos/fournies/yann_bompard/01.jpg",
+  "commons": "https://www.leparisien.fr/elections/municipales/municipales-2026-a-orange-yann-bompard-perd-de-nouveau-son-fauteuil-de-maire-a-deux-jours-de-lelection-13-03-2026-JCGNFUTYTFBN5AJK6YXRWMUXOA.php",
+  "licence": null,
+  "auteur": "Thibaud Moritz / AFP",
+  "portrait": "assets/photos/base/yann_bompard.jpg",
   "name": "Yann Bompard",
-  "dessin": "tools/graphisme/tete_dessinee.py",
-  "licence": "CC0",
-  "auteur": "Casserolade",
-  "commons": "https://github.com/casserolade/casserolade/blob/main/tools/graphisme/tete_dessinee.py",
-  "note": "Aucun portrait sous licence libre (Commons, Flickr : 3 et 14 novembre 2026) : tête dessinée, en attendant une photo libre."
+  "note": "Aucun portrait sous licence libre n'existe (Commons, Wikidata, Openverse, vidéos : 14 novembre 2026). Photo de presse gardée par décision du 14 novembre 2026, créditée à son auteur : photo de Thibaud Moritz (AFP), parue dans Le Parisien du 13 mars 2026.",
+  "recadrage": "assets/photos/base_web/yann_bompard.jpg",
+  "ancien": {
+   "recadrage": "assets/photos/base/yann_bompard_recadre.jpg",
+   "portrait": "assets/photos/base/yann_bompard.jpg",
+   "commons": null,
+   "auteur": null,
+   "licence": "fournie"
+  }
  },
  "poisson": {
   "fichier": "assets/photos/raw/poisson.jpg",

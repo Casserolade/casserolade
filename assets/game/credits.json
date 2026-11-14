@@ -1043,9 +1043,9 @@
   {
    "id": "yann_bompard",
    "nom": "Yann Bompard",
-   "auteur": "Casserolade",
-   "licence": "CC0",
-   "source": "https://github.com/casserolade/casserolade/blob/main/tools/graphisme/tete_dessinee.py",
+   "auteur": "Thibaud Moritz / AFP",
+   "licence": "inconnue",
+   "source": "https://www.leparisien.fr/elections/municipales/municipales-2026-a-orange-yann-bompard-perd-de-nouveau-son-fauteuil-de-maire-a-deux-jours-de-lelection-13-03-2026-JCGNFUTYTFBN5AJK6YXRWMUXOA.php",
    "partage_identique": false
   },
   {
@@ -3238,6 +3238,22 @@
    "auteur": "European People's Party",
    "licence": "CC BY 2.0",
    "source": "https://commons.wikimedia.org/wiki/File:EPP_Summit,_Brussels,_March_2019_(46711131484).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "yann_bompard.aie",
+   "nom": "Yann Bompard",
+   "auteur": "Thibaud Moritz / AFP",
+   "licence": "inconnue",
+   "source": "https://www.lemonde.fr/societe/article/2025/12/18/des-peines-d-ineligibilite-requises-contre-le-maire-d-orange-yann-bompard-et-la-deputee-rn-marie-france-lorho_6658580_3224.html",
+   "partage_identique": false
+  },
+  {
+   "id": "yann_bompard.rire",
+   "nom": "Yann Bompard",
+   "auteur": "Christophe Agostinis / Le Dauphiné Libéré",
+   "licence": "inconnue",
+   "source": "https://www.ledauphine.com/politique/2022/01/28/yann-bompard-maire-d-orange-mon-pere-reste-mon-premier-conseiller",
    "partage_identique": false
   },
   {

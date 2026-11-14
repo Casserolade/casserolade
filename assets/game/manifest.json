@@ -20391,48 +20391,150 @@
     "tete": {
      "x": 0,
      "y": 0,
-     "w": 249,
-     "h": 317
+     "w": 276,
+     "h": 314
     },
     "machoire": {
-     "x": 253,
+     "x": 280,
      "y": 0,
-     "w": 184,
-     "h": 83,
+     "w": 228,
+     "h": 98,
      "pose": [
-      32.0,
-      234.0
+      9.0,
+      215.0
      ],
      "pivot": [
-      92.0,
-      11.0
+      97.9,
+      12.4
      ]
     }
    },
    "ancres": {
     "oeil_g": [
-     84.0,
-     136.0,
-     34
+     70.3,
+     130.6,
+     36.3
     ],
     "oeil_d": [
-     164.0,
-     136.0,
-     34
+     171.1,
+     130.6,
+     41.1
     ],
     "bouche": [
-     124.0,
-     245.0
+     106.9,
+     227.4
     ],
     "menton": [
-     124.0,
-     300.0
+     101.9,
+     299.8
     ]
    },
    "credits": {
-    "auteur": "Casserolade",
-    "licence": "CC0",
-    "source": "https://github.com/casserolade/casserolade/blob/main/tools/graphisme/tete_dessinee.py"
+    "auteur": "Thibaud Moritz / AFP",
+    "licence": null,
+    "source": "https://www.leparisien.fr/elections/municipales/municipales-2026-a-orange-yann-bompard-perd-de-nouveau-son-fauteuil-de-maire-a-deux-jours-de-lelection-13-03-2026-JCGNFUTYTFBN5AJK6YXRWMUXOA.php"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/yann_bompard.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 270,
+       "h": 327
+      },
+      "machoire": {
+       "x": 274,
+       "y": 0,
+       "w": 225,
+       "h": 96,
+       "pose": [
+        17.0,
+        230.0
+       ],
+       "pivot": [
+        102.0,
+        10.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       73.8,
+       143.4,
+       37.1
+      ],
+      "oeil_d": [
+       174.6,
+       143.4,
+       39.4
+      ],
+      "bouche": [
+       119.0,
+       240.7
+      ],
+      "menton": [
+       117.7,
+       313.0
+      ]
+     },
+     "credits": {
+      "auteur": "Thibaud Moritz / AFP",
+      "licence": null,
+      "source": "https://www.lemonde.fr/societe/article/2025/12/18/des-peines-d-ineligibilite-requises-contre-le-maire-d-orange-yann-bompard-et-la-deputee-rn-marie-france-lorho_6658580_3224.html"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/yann_bompard.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 270,
+       "h": 343
+      },
+      "machoire": {
+       "x": 274,
+       "y": 0,
+       "w": 214,
+       "h": 105,
+       "pose": [
+        49.0,
+        205.0
+       ],
+       "pivot": [
+        135.9,
+        9.4
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       131.1,
+       127.9,
+       40.7
+      ],
+      "oeil_d": [
+       220.5,
+       127.9,
+       33.1
+      ],
+      "bouche": [
+       184.9,
+       214.4
+      ],
+      "menton": [
+       194.4,
+       295.8
+      ]
+     },
+     "credits": {
+      "auteur": "Christophe Agostinis / Le Dauphiné Libéré",
+      "licence": null,
+      "source": "https://www.ledauphine.com/politique/2022/01/28/yann-bompard-maire-d-orange-mon-pere-reste-mon-premier-conseiller"
+     }
+    }
    }
   },
   "zemmour": {

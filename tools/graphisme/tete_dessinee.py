@@ -6,7 +6,8 @@ Lancer avec uv, depuis la racine du projet :
     --with "onnxruntime-gpu[cuda,cudnn]" python tools/graphisme/tete_dessinee.py <id> [<id> ...]
 
 Le portrait du personnage (data/collecte/portraits.json) porte alors `dessin` à la place d'une photo : la découpe ne le
-reprend pas. Dès qu'une photo libre existe, elle remplace le dessin par le chemin ordinaire.
+reprend pas. Dès qu'une photo existe, elle remplace le dessin par le chemin ordinaire. Aucun personnage ne s'en sert
+aujourd'hui.
 """
 import sys
 

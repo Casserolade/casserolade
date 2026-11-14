@@ -47,8 +47,8 @@ export const MISES_A_JOUR: PatchNote[] = [
     date: '14 novembre 2026',
     title: 'Photos libres, sources et affaires en cours',
     summary: [
-      'Toutes les têtes du jeu viennent de photos sous licence libre. Chacune est créditée, avec son auteur, sa licence et sa source, dans le bestiaire et sur la page À propos.',
-      'Les têtes sont découpées plus proprement. Quelques visages disparaissent, faute de photo libre : le politique garde alors sa tête de base. Yann Bompard, qui n\'a aucun portrait libre, a une tête dessinée.',
+      'Les têtes du jeu viennent de photos sous licence libre, sauf celles de Yann Bompard, qui n\'a aucun portrait libre. Chacune est créditée, avec son auteur, sa source et sa licence, dans le bestiaire et sur la page À propos.',
+      'Les têtes sont découpées plus proprement. Quelques visages disparaissent, faute de photo libre : le politique garde alors sa tête de base.',
       'Une affaire qui n\'est pas jugée pour de bon le dit dans le texte de sa casserole : appel, pourvoi, enquête en cours, non-lieu.',
       'Les épisodes de la carrière de Sylvain Durif ont de nouvelles têtes.',
       'En carrière, l\'épisode qui clôt un chapitre se joue dès la victoire, avant la soirée électorale.',

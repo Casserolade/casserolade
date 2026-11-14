@@ -5,8 +5,8 @@
 Aucune carte ne change.
 
 **Photos et sources**
-- Toutes les têtes du jeu viennent de photos sous licence libre. Chacune est créditée, avec son auteur, sa licence et sa source, dans le bestiaire et sur la page À propos ; le nom d'une licence mène à son texte.
-- Les têtes sont découpées plus proprement. Quelques visages disparaissent, faute de photo libre : le politique garde alors sa tête de base. Yann Bompard, qui n'a aucun portrait libre, a une tête dessinée.
+- Les têtes du jeu viennent de photos sous licence libre, sauf celles de Yann Bompard, qui n'a aucun portrait libre. Chacune est créditée, avec son auteur, sa source et sa licence, dans le bestiaire et sur la page À propos ; le nom d'une licence mène à son texte.
+- Les têtes sont découpées plus proprement. Quelques visages disparaissent, faute de photo libre : le politique garde alors sa tête de base.
 - Les épisodes de la carrière de Sylvain Durif ont de nouvelles têtes.
 - La page À propos a ses mentions légales : hébergeur, contact, parodie et satire, données personnelles, licences.
 
