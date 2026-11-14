@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.1 — 14 novembre 2026
+
+Aucune carte ne change.
+
+**Photos et sources**
+- Toutes les têtes du jeu viennent de photos sous licence libre. Chacune est créditée, avec son auteur, sa licence et sa source, dans le bestiaire et sur la page À propos ; le nom d'une licence mène à son texte.
+- Les têtes sont découpées plus proprement. Quelques visages disparaissent, faute de photo libre : le politique garde alors sa tête de base. Yann Bompard, qui n'a aucun portrait libre, a une tête dessinée.
+- Les épisodes de la carrière de Sylvain Durif ont de nouvelles têtes.
+- La page À propos a ses mentions légales : hébergeur, contact, parodie et satire, données personnelles, licences.
+
+**Casseroles**
+- Une affaire qui n'est pas jugée pour de bon le dit dans le texte de sa casserole : appel, pourvoi, enquête en cours, non-lieu. Dix-huit textes sont précisés, sans changement de règle.
+
+**Carrière et bots**
+- L'épisode qui clôt un chapitre se joue dès la victoire, avant la soirée électorale.
+- Le bot difficile place mieux ses mots-clés : un Ralliement va là où il sert, jamais deux fois sur le même politique.
+
 ## 0.4.0 — 13 novembre 2026
 
 Le détail, carte par carte, avant et après : https://casserolade.fr/mises-a-jour

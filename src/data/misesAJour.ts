@@ -1,5 +1,6 @@
 import type { Card, Casserole, Spell } from '../engine/types.ts';
 import { CARTES as CARTES_0_4_0 } from './misesAJour/0.4.0.ts';
+import { CARTES as CARTES_0_4_1 } from './misesAJour/0.4.1.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -41,6 +42,23 @@ export interface PatchNote {
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.1',
+    date: '14 novembre 2026',
+    title: 'Photos libres, sources et affaires en cours',
+    summary: [
+      'Toutes les têtes du jeu viennent de photos sous licence libre. Chacune est créditée, avec son auteur, sa licence et sa source, dans le bestiaire et sur la page À propos.',
+      'Les têtes sont découpées plus proprement. Quelques visages disparaissent, faute de photo libre : le politique garde alors sa tête de base. Yann Bompard, qui n\'a aucun portrait libre, a une tête dessinée.',
+      'Une affaire qui n\'est pas jugée pour de bon le dit dans le texte de sa casserole : appel, pourvoi, enquête en cours, non-lieu.',
+      'Les épisodes de la carrière de Sylvain Durif ont de nouvelles têtes.',
+      'En carrière, l\'épisode qui clôt un chapitre se joue dès la victoire, avant la soirée électorale.',
+      'Le bot difficile place mieux ses mots-clés : un Ralliement va là où il sert, jamais deux fois sur le même politique.',
+      'La page À propos a ses mentions légales. Aucune carte ne change.',
+    ],
+    rules: [],
+    why: {},
+    cards: CARTES_0_4_1,
+  },
   {
     version: '0.4.0',
     date: '13 novembre 2026',

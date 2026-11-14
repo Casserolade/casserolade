@@ -20,6 +20,8 @@ import type { Casserole } from '../src/engine/types.ts';
  */
 
 const latest = MISES_A_JOUR[0];
+/** A version with every kind of change, to test how a version is laid out. */
+const overhaul = MISES_A_JOUR.find((note) => note.version === '0.4.0') ?? latest;
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
 function shownCasserole(c: Casserole): CasseroleCard {
@@ -87,12 +89,12 @@ test('casseroleFromCard : la mécanique de la carte, sans fait ni statut', () =>
 });
 
 test('patchNoteSections : les nouveaux à part des retouchés, chacun avec son pourquoi', () => {
-  const sections = patchNoteSections(latest);
+  const sections = patchNoteSections(overhaul);
   assert.deepEqual(sections.newCards.map((c) => c.key).sort(), ['barnier', 'borne', 'bove', 'hassan', 'joly', 'juppe']);
   assert.ok(sections.changedCards.some((c) => c.key === 'berge' && c.before && !c.after), 'un politique retiré : avant seulement');
   assert.ok(sections.changedCards.every((c) => c.before && c.why));
   assert.ok(sections.changedCards.some((c) => c.key === 'giscard'));
-  assert.equal(sections.newCasseroles.length + sections.changedCasseroles.length, latest.cards.casseroles.length);
+  assert.equal(sections.newCasseroles.length + sections.changedCasseroles.length, overhaul.cards.casseroles.length);
   assert.ok(sections.newCasseroles.every((c) => !c.before && c.after?.kind === 'casserole'));
   assert.deepEqual(sections.newSpells.map((s) => s.key).sort(), ['a_la_une', 'fuite_dans_la_presse', 'grand_menage']);
   assert.ok(sections.changedSpells.some((s) => s.key === 'tribune_libre' && s.before && !s.after), 'un sort retiré : avant seulement');
@@ -103,6 +105,6 @@ test('tierChangeLine : un changement d\'échelon se lit en clair, rien sinon', (
   assert.equal(tierChangeLine({ tier: 4 }, { tier: 4 }), undefined);
   assert.equal(tierChangeLine(undefined, { tier: 2 }), undefined);
   assert.equal(tierChangeLine({ tier: 2 }, undefined), undefined);
-  const censure = patchNoteSections(latest).changedSpells.find((s) => s.key === 'motion_de_censure');
+  const censure = patchNoteSections(overhaul).changedSpells.find((s) => s.key === 'motion_de_censure');
   assert.equal(censure?.why, 'Échelon 3 → 2');
 });
