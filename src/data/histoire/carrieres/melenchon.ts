@@ -23,7 +23,7 @@ export const carriere: Carriere = {
     { fait: 'Présidentielle 2012 : 11,10 %, quatrième. Présidentielle 2017 : 19,58 %, quatrième.', source: 'Résultats officiels ; Wikipédia' },
     { fait: 'Législatives de juin 2012 à Hénin-Beaumont (11e du Pas-de-Calais) : Le Pen 42,26 %, Kemel (PS) 23,72 %, Mélenchon 21,46 %, éliminé ; Kemel bat Le Pen de 118 voix au second tour.', source: 'Wikipédia, « Onzième circonscription du Pas-de-Calais » ; Slate, juin 2012' },
     { fait: 'Débat à cinq sur France 3 Nord-Pas-de-Calais le 2 juin 2012, dont Le Pen, Mélenchon et Marine Tondelier (EELV).', source: 'Slate, juin 2012' },
-    { fait: 'Fin mai 2012, un tract « Votons Mélenchon » traduit en arabe approximatif est distribué par les équipes de Le Pen ; elle est condamnée en première instance à Béthune en avril 2014.', source: 'Public Sénat ; Politis, 10 avril 2014' },
+    { fait: 'Fin mai 2012, un tract « Votons Mélenchon » traduit en arabe approximatif est distribué par les équipes de Le Pen ; elle est condamnée en première instance à Béthune en avril 2014, puis relaxée par la cour d\'appel de Douai.', source: 'Politis, 10 avril 2014 ; Public Sénat, 15 février 2017' },
     { fait: 'Le 5 février 2017, son meeting de Lyon est retransmis en hologramme à Aubervilliers ; le 18 avril, à Dijon et dans six autres villes.', source: 'Politis, 6 février 2017 ; Public Sénat' },
     { fait: 'Perquisition du siège de LFI le 16 octobre 2018 (« La République, c\'est moi ! ») ; condamné le 9 décembre 2019 à Bobigny à trois mois avec sursis et 8 000 € d\'amende, sans faire appel.', source: 'Public Sénat, 9 décembre 2019 ; casseroles.ts' },
     { fait: 'Présidentielle 2022 : 21,95 %, troisième, à environ 420 000 voix de Le Pen ; « Faites mieux ! » à la jeunesse ; LFI reproche à Roussel les voix manquantes.', source: 'LCP ; Public Sénat' },
@@ -77,7 +77,7 @@ export const carriere: Carriere = {
       dialogues: [
         { quand: 'debut', qui: 'narrateur', texte: 'Juin 2012. Mélenchon se parachute dans le fief de Marine Le Pen. Au débat de France 3, il y a aussi une écologiste de 25 ans. Personne ne la regarde.' },
         { quand: 'debut', qui: 'lepers', texte: 'Top ! Je suis un bassin minier, et ce soir deux personnes très calmes vont y débattre. Je suis… ?' },
-        { quand: 'combat_perdu', qui: 'narrateur', texte: 'Un tract « Votons Mélenchon », traduit en arabe approximatif, circule dans la circonscription. Il n\'est pas de lui. Le Pen sera condamnée en première instance.' },
+        { quand: 'combat_perdu', qui: 'narrateur', texte: 'Un tract « Votons Mélenchon », traduit en arabe approximatif, circule dans la circonscription. Il n\'est pas de lui. Le Pen sera condamnée en première instance, puis relaxée en appel.' },
         { quand: 'combat_gagne', qui: 'praud', texte: 'Mélenchon gagne. Mes cinq chroniqueurs sont d\'accord : c\'est très inquiétant. Le sixième est d\'accord plus fort.' },
         { quand: 'casserole_posee', qui: 'narrateur', texte: 'Une casserole. Au fer à cheval, elle fait du bruit des deux côtés.' },
         { quand: 'victoire', qui: 'narrateur', texte: 'Au second tour ! En vrai, il a fini troisième, et un socialiste a battu Le Pen de 118 voix. Ici, on refait l\'histoire.' },

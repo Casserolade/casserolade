@@ -270,7 +270,8 @@ export const CARDS: Card[] = [
   // Le stratège numérique de Zemmour, et la cellule WikiZédia : chaque actualisation du fil le fait monter.
   // Il réécrivait aussi chaque boutique (congrès) : Reconquête gagnait une partie sur trois, retiré le 3 novembre 2026.
   card('lafont', 'Samuel Lafont', 'reconquete', 1, 2, 3, { fx: [fx('actualise', 'soi', buff(2, 0))] }),
-  // Maire d'Orange après son père, condamné pour un emploi de collaborateur parlementaire.
+  // Maire d'Orange après son père. Condamné en première instance le 26 janvier 2026 (Marseille) pour un emploi de
+  // collaborateur parlementaire jugé fictif : dix-huit mois avec sursis, cinq ans d'inéligibilité ; il a fait appel.
   card('yann_bompard', 'Yann Bompard', 'reconquete', 1, 3, 3, { fx: [fx('annonce', 'soi', invoque('assistant_fictif'))] }),
   // 7 novembre 2026 : le plus faible de l'échelon 2 (0,39 place) grandit en attaquant.
   card('rigault', 'Stanislas Rigault', 'reconquete', 2, 3, 4, { kw: ['polemique'], fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })] }),

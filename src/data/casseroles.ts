@@ -7,7 +7,9 @@ import type { Casserole } from '../engine/types.ts';
  * ridicules suivent les mêmes règles.
  *
  * Écriture : trash mais vrai. Les statuts sont datés et exacts, une personne en attente de
- * jugement ou qui conteste n'est pas présentée comme coupable. Dernière vérification : 2 novembre 2026.
+ * jugement ou qui conteste n'est pas présentée comme coupable. Tant qu'une affaire n'est pas jugée pour de bon, sa
+ * blague le dit (appel, pourvoi, enquête en cours, non-lieu, relaxe) et attribue les faits à qui les avance : le
+ * parquet, la cour, le fisc, un journal. Dernière vérification : 14 novembre 2026.
  */
 export const CASSEROLES: Casserole[] = [
   // Les affaires.
@@ -42,7 +44,7 @@ export const CASSEROLES: Casserole[] = [
     locked: true,
     // 13 novembre 2026 : en cellule, il n'attaque plus non plus.
     noAttack: true,
-    blague: 'Compte pour deux : il fait scandale à lui tout seul. En cellule, il ne bouge plus et n\'attaque plus. À la sortie, il paraît que ça fait un livre.',
+    blague: 'Écroué sur un jugement de première instance, sorti vingt jours plus tard : l\'appel est en cours. Compte pour deux, il fait scandale à lui tout seul. En cellule, il ne bouge plus et n\'attaque plus. Il paraît que ça fait un livre.',
     fait: 'Sarkozy a passé vingt jours en détention fin 2025 (affaire du financement libyen).',
     statut: 'Condamné en première instance. Arrêt d\'appel attendu le 30 novembre 2026.',
     verifie: true,
@@ -71,9 +73,9 @@ export const CASSEROLES: Casserole[] = [
     instantBudget: 2,
     charges: 2,
     pollsPerRound: 2,
-    blague: 'De l\'argent tout de suite, les ennuis ensuite. Verdict d\'appel le 30 novembre.',
+    blague: 'Cinq ans en première instance pour association de malfaiteurs. Il conteste : verdict d\'appel le 30 novembre. Du budget tout de suite, les ennuis ensuite.',
     fait: 'Soupçons de financement libyen de la campagne de 2007.',
-    statut: 'Condamné à 5 ans en première instance, sept ans requis en appel. Arrêt attendu le 30 novembre 2026.',
+    statut: 'Condamné à 5 ans en première instance (25 septembre 2025) pour association de malfaiteurs, relaxé des autres chefs ; il conteste. Sept ans requis en appel, arrêt attendu le 30 novembre 2026.',
     verifie: true,
   },
   {
@@ -102,9 +104,9 @@ export const CASSEROLES: Casserole[] = [
     atk: -1,
     hp: 10,
     noAttack: true,
-    blague: 'Trois costumes à 13 000 €. « J\'ai eu tort d\'accepter, je les ai rendus. » Sur mesure, comme l\'excuse.',
+    blague: 'Trois costumes à 13 000 €. « J\'ai eu tort d\'accepter, je les ai rendus. » Non-lieu pour le trafic d\'influence. Sur mesure, comme l\'excuse.',
     fait: 'Les costumes offerts par Robert Bourgi, révélés en mars 2017. Le JDD évoque près de 48 500 € de vêtements offerts depuis 2012.',
-    statut: 'Enquête élargie en 2017 pour trafic d\'influence. Pas de condamnation trouvée à ce titre.',
+    statut: 'Enquête élargie en mars 2017 à des soupçons de trafic d\'influence : non-lieu sur ce volet (Public Sénat). Aucune condamnation à ce titre.',
     verifie: true,
   },
   {
@@ -119,7 +121,7 @@ export const CASSEROLES: Casserole[] = [
     budgetPerRound: 1,
     // 13 novembre 2026 : une affaire de parti, qui éclabousse ses voisins (avant : perdait ses effets).
     splash: 2,
-    blague: 'Ils assistaient. Surtout le parti. Pourvoi en cours, et tout le monde autour est éclaboussé.',
+    blague: 'Ils assistaient. Surtout le parti, a jugé la cour d\'appel. Elle conteste : pourvoi en cours, et tout le monde autour est éclaboussé.',
     fait: 'Les assistants parlementaires européens du FN.',
     statut: 'Condamnée en appel le 7 juillet 2026. Pourvoi en cassation, décision attendue début janvier 2027 au plus tard.',
     verifie: true,
@@ -148,7 +150,7 @@ export const CASSEROLES: Casserole[] = [
     atk: 6,
     hp: 6,
     budgetPerRound: -2,
-    blague: 'Ministre de la Transition écologique. Transition vers le homard.',
+    blague: 'Champagne et homards à l\'hôtel de Lassay, révèle Mediapart : il démissionne, sans condamnation. Ministre de la Transition écologique, transition vers le homard.',
     fait: 'Champagne et homards : Rugy démissionne en 2019 après les révélations de Mediapart.',
     statut: 'Démission, sans condamnation.',
     verifie: true,
@@ -179,7 +181,7 @@ export const CASSEROLES: Casserole[] = [
     hpLossOnDeath: 3,
     blague: 'Ils votent très bien, pour des gens qui n\'habitent pas là.',
     fait: 'Les faux électeurs du 5e arrondissement de Paris.',
-    statut: 'Condamnation confirmée en appel, mars 2013.',
+    statut: 'Condamnation définitive : confirmée en appel en mars 2013, pourvoi rejeté par la Cour de cassation le 3 mars 2015.',
     verifie: true,
   },
   {
@@ -261,9 +263,9 @@ export const CASSEROLES: Casserole[] = [
     budgetPerRound: 1,
     charges: 2,
     pollsPerRound: 2,
-    blague: '900 000 € de conseil. Le tribunal cherche toujours le conseil. Quatre ans requis, dont deux ferme.',
+    blague: '900 000 € d\'honoraires de conseil. Le parquet cherche toujours le conseil : quatre ans requis, dont deux ferme. Elle conteste, jugement le 21 janvier 2027.',
     fait: '900 000 € d\'honoraires, que le tribunal doit qualifier.',
-    statut: 'Présumée innocente : jugée en septembre 2026, quatre ans dont deux ferme requis, jugement non trouvé.',
+    statut: 'Présumée innocente : jugée du 16 au 28 septembre 2026 pour corruption et trafic d\'influence, qu\'elle conteste. Quatre ans dont deux ferme, 450 000 € d\'amende et cinq ans d\'inéligibilité requis. Jugement mis en délibéré au 21 janvier 2027 (Presse-citron, 29 septembre 2026).',
     verifie: true,
   },
   {
@@ -379,9 +381,9 @@ export const CASSEROLES: Casserole[] = [
     charges: 2,
     citation: 'À ma connaissance, je ne suis accusée de rien.',
     budgetPerRound: -2,
-    blague: 'De l\'argent public, tout de suite. Le Sénat a plutôt retenu le mot « fiasco ».',
+    blague: 'De l\'argent public, tout de suite. Le Sénat a plutôt retenu le mot « fiasco », et la justice enquête sur le fonds : rien n\'est jugé.',
     fait: 'Le fonds lancé après l\'assassinat de Samuel Paty, et la commission d\'enquête du Sénat de 2023. La citation vient de son audition du 14 juin 2023 (Public Sénat).',
-    statut: 'Responsabilité politique retenue par la commission d\'enquête en juillet 2023. Aucune condamnation trouvée.',
+    statut: 'Responsabilité politique retenue par la commission d\'enquête du Sénat en juillet 2023. Information judiciaire ouverte par le Parquet national financier en mai 2023 sur la gestion du fonds ; aucune poursuite contre elle ni aucun jugement trouvés au 14 novembre 2026.',
     verifie: true,
   },
   {
@@ -739,9 +741,9 @@ export const CASSEROLES: Casserole[] = [
     hp: 6,
     // 13 novembre 2026 : un défaut qui coûte à tout porteur.
     budgetPerRound: -2,
-    blague: 'En déplacement officiel à Tahiti. En scandale, le billet repasse à chaque manche.',
+    blague: 'Mission officielle à Tahiti, vacances au bout. Le parquet financier enquête, rien n\'est jugé. En scandale, le billet repasse à chaque manche.',
     fait: 'Octobre 2023 : une mission officielle en Polynésie, prolongée par des vacances.',
-    statut: 'Commission de déontologie de Paris : conforme. Perquisitions du PNF en mars 2024, issue non trouvée. Pas de condamnation connue.',
+    statut: 'Commission de déontologie de Paris : conforme. Enquête préliminaire du Parquet national financier ouverte en novembre 2023 (prise illégale d\'intérêts, détournement de fonds publics), perquisitions à l\'Hôtel de Ville en mars 2024 ; aucune suite publique trouvée au 14 novembre 2026. Aucune condamnation.',
     verifie: true,
   },
   {
@@ -823,7 +825,7 @@ export const CASSEROLES: Casserole[] = [
     hp: 8,
     citation: 'T\'es une merde.',
     noAttack: true,
-    blague: 'Insulté en direct par Hanouna, qui a payé 2 000 € en appel. Ça encaisse bien.',
+    blague: 'Insulté en direct par Hanouna, condamné en appel à lui verser 2 000 €. Ça encaisse bien.',
     fait: 'Dans TPMP, en novembre 2022. Hanouna a été condamné pour injure.',
     statut: 'Hanouna condamné en appel à verser 2 000 €, mars 2026. Boyard est ici la victime.',
     verifie: true,
@@ -955,7 +957,7 @@ export const CASSEROLES: Casserole[] = [
     aloneBonus: 4,
     citation: 'Quand il y en a un, ça va.',
     pollsPerRound: 2,
-    blague: '+4/+4 s\'il est le seul de son camp sur le plateau. Le ministre a été rassuré.',
+    blague: '+4/+4 s\'il est le seul de son camp sur le plateau. Condamné, puis relaxé en appel : le ministre a été rassuré.',
     fait: 'Filmé en septembre 2009 à l\'université d\'été de l\'UMP, à Seignosse.',
     statut: 'Condamné en première instance, relaxé en appel en 2011 : la partie civile a été jugée irrecevable. Suite en cassation non vérifiée.',
     verifie: true,
@@ -1039,7 +1041,7 @@ export const CASSEROLES: Casserole[] = [
     budgetPerRound: 1,
     // 13 novembre 2026 : une affaire de parti, qui éclabousse ses voisins (avant : perdait ses effets).
     splash: 2,
-    blague: 'Relaxé, puis rejugé. Deux ans avec sursis requis en appel. Sûr de l\'issue.',
+    blague: 'Relaxé, puis rejugé : deux ans avec sursis requis en appel, arrêt le 17 décembre. Sûr de l\'issue.',
     fait: 'Des fonds d\'assistants européens qui auraient payé des collaborateurs du parti.',
     statut: 'Relaxé en première instance. Deux ans avec sursis requis en appel, arrêt attendu le 17 décembre 2026.',
     verifie: true,
@@ -1146,7 +1148,7 @@ export const CASSEROLES: Casserole[] = [
     charges: 2,
     // Assigné à résidence : pendant le scandale, il n'attaque plus. Sur lui, son moteur « Quand il attaque » s'arrête net.
     noAttack: true,
-    blague: 'Menotté devant les caméras du monde entier, puis Rikers Island. Jean-François Kahn y voit « un troussage de domestique », lui « une faute morale ». Assigné à résidence : n\'attaque plus.',
+    blague: 'Menotté devant les caméras du monde entier, puis Rikers Island. Poursuites abandonnées trois mois plus tard. Jean-François Kahn y voit « un troussage de domestique », lui « une faute morale ». Assigné à résidence : n\'attaque plus.',
     fait: 'Arrêté le 14 mai 2011 à New York dans un avion d\'Air France, montré menotté aux caméras, écroué à Rikers Island, puis assigné à résidence sous bracelet électronique dans une maison de TriBeCa louée 50 000 dollars par mois. Il quitte le FMI le 18 mai et ne sera pas candidat à la primaire. Le 16 mai, aux Matins de France Culture, le journaliste Jean-François Kahn parle d\'« un troussage de domestique » ; il s\'en excuse le 19 mai, puis quitte le journalisme. Au 20 heures de TF1, le 18 septembre 2011, Strauss-Kahn parle d\'« une faute morale ».',
     statut: 'Poursuites pénales abandonnées le 23 août 2011 à New York ; procédure civile close par un accord le 10 décembre 2012.',
     verifie: true,
@@ -1192,9 +1194,9 @@ export const CASSEROLES: Casserole[] = [
     budgetPerRound: 2,
     pollsPerRound: 2,
     citation: 'Je suis résident fiscal au Maroc.',
-    blague: '« Je suis résident fiscal au Maroc. » Sa société de conseil de Casablanca, exonérée d\'impôt sur ses bénéfices, a encaissé des millions. Le socialisme, version zone franche.',
+    blague: '« Je suis résident fiscal au Maroc. » Selon les Pandora Papers, sa société de conseil de Casablanca, exonérée d\'impôt sur ses bénéfices, a encaissé des millions. Le parquet financier enquête, rien n\'est jugé. Le socialisme, version zone franche.',
     fait: 'Pandora Papers (octobre 2021) : sa société de conseil Parnasse International, créée en 2013 dans la zone franche Casablanca Finance City et exonérée d\'impôt sur les bénéfices pendant cinq ans, a encaissé des millions d\'euros d\'honoraires.',
-    statut: 'Enquête préliminaire du Parquet national financier pour blanchiment de fraude fiscale aggravée, rendue publique en décembre 2022 ; aucune suite publique trouvée au 7 novembre 2026.',
+    statut: 'Enquête préliminaire du Parquet national financier pour blanchiment de fraude fiscale aggravée, rendue publique en décembre 2022 ; aucune suite publique trouvée au 14 novembre 2026.',
     verifie: true,
   },
   // Teddy Riner, candidat le 9 novembre 2026 : six jours après la publication de son redressement confirmé en appel.
@@ -1209,7 +1211,7 @@ export const CASSEROLES: Casserole[] = [
     hp: 6,
     // Le redressement : pendant le scandale, le fisc repasse à chaque manche.
     budgetPerRound: -2,
-    blague: 'Une Ferrari et une Rolls à louer avec chauffeur : zéro chiffre d\'affaires en deux ans, et un seul conducteur, lui. Ses avocats plaident le « contexte géopolitique ».',
+    blague: 'Une Ferrari et une Rolls à louer avec chauffeur : zéro chiffre d\'affaires en deux ans et un seul conducteur, lui, selon le fisc. Redressement confirmé en appel ; ses avocats plaident le « contexte géopolitique ».',
     fait: 'Sa société Pullman Limousine louait des voitures de luxe avec chauffeur. Sa Ferrari et sa Rolls-Royce Wraith n\'ont généré aucun chiffre d\'affaires en 2016 et 2017 (L\'Informé, 6 novembre 2025), et les contrats d\'assurance le désignaient comme conducteur principal ou exclusif. Le fisc y voit des « rémunérations et avantages occultes », environ 289 000 euros selon la presse, et une « intention délibérée » de « minorer l\'impôt » : supplément d\'impôt et majoration de 40 %. Les avocats de la société ont expliqué le peu de locations par un « contexte géopolitique » (AFP, 3 novembre 2026).',
     statut: 'Redressement fiscal de 2019 (revenus 2016 et 2017), procédure administrative et non pénale : requête rejetée par le tribunal administratif de Cergy-Pontoise en mars 2025, redressement confirmé par la cour administrative d\'appel de Versailles le 15 octobre 2026 (L\'Équipe et AFP, 3 novembre 2026). Pourvoi possible devant le Conseil d\'État ; aucun connu au 9 novembre 2026.',
     verifie: true,
@@ -1229,7 +1231,7 @@ export const CASSEROLES: Casserole[] = [
     // Deux ans d'inéligibilité requis : pendant le scandale, elle n'attaque plus.
     noAttack: true,
     citation: 'L\'élue la plus poursuivie de la Ve République',
-    blague: 'En garde à vue pour un message sur X, elle invoque son immunité de députée européenne. Le parquet répond : flagrant délit. Au procès, elle se dit « l\'élue la plus poursuivie de la Ve République ».',
+    blague: 'En garde à vue pour un message sur X, elle invoque son immunité de députée européenne. Le parquet répond : flagrant délit. Au procès, elle se dit « l\'élue la plus poursuivie de la Ve République ». Jugement le 30 novembre.',
     fait: 'Le 26 mars 2026, elle publie sur X un message, depuis supprimé, citant Kozo Okamoto, l\'un des auteurs de l\'attentat de l\'aéroport de Lod (1972, 26 morts). Placée en garde à vue le 2 avril 2026, elle invoque son immunité parlementaire ; le parquet de Paris retient le flagrant délit. Jugée les 19 et 20 octobre 2026 pour apologie du terrorisme, elle se dit « l\'élue la plus poursuivie de la Ve République » ; le parquet requiert dix mois de prison avec sursis et deux ans d\'inéligibilité (Le Club des juristes, Ouest-France, 20 octobre 2026).',
     statut: 'Jugée les 19 et 20 octobre 2026 ; délibéré le 30 novembre 2026.',
     verifie: true,
@@ -1245,9 +1247,9 @@ export const CASSEROLES: Casserole[] = [
     // Le Parlement européen ouvre une enquête : pendant le scandale, l'affaire éclabousse ses voisins.
     splash: 2,
     citation: 'Tremblez. Ce n\'est qu\'un début.',
-    blague: 'Un message sur X pour François-Xavier Bellamy. Il porte plainte, le Parlement européen ouvre une enquête, et tout son entourage est éclaboussé.',
+    blague: 'Un message sur X pour François-Xavier Bellamy. Il porte plainte, elle aussi ; le Parlement européen ouvre une enquête. Rien n\'est jugé, et tout son entourage est éclaboussé.',
     fait: 'En juillet 2024, après que François-Xavier Bellamy a bloqué son élection à la vice-présidence d\'une sous-commission du Parlement européen en l\'accusant d\'antisémitisme, elle publie sur X « Tremblez. Ce n\'est qu\'un début. » Bellamy porte plainte et la présidente du Parlement, Roberta Metsola, ouvre une enquête ; elle porte plainte à son tour pour diffamation.',
-    statut: 'Plaintes croisées ; pas de jugement connu au 13 novembre 2026.',
+    statut: 'Plaintes croisées ; pas de jugement connu au 14 novembre 2026.',
     verifie: true,
   },
   {
@@ -1410,7 +1412,7 @@ export const CASSEROLES: Casserole[] = [
     hp: 3,
     budgetPerRound: 1,
     pollsPerRound: 2,
-    blague: 'Assistant d\'eurodéputée sur le papier, conseiller spécial de Marine Le Pen au siège. Bruxelles payait.',
+    blague: 'Assistant d\'eurodéputée sur le papier, conseiller spécial de Marine Le Pen au siège, a jugé la cour d\'appel. Bruxelles payait. Pourvoi en cours.',
     fait: 'D\'octobre 2014 à juillet 2015, il est assistant parlementaire de l\'eurodéputée Mylène Troszczynski. La justice juge qu\'il travaillait en réalité au siège du Front national, où l\'organigramme le présentait comme conseiller spécial de Marine Le Pen.',
     statut: 'Condamné en appel le 7 juillet 2026 pour recel de détournement de fonds publics : huit mois avec sursis et un an d\'inéligibilité avec sursis. Pourvoi en cassation, décision attendue au plus tard début avril 2027.',
     verifie: true,
@@ -1427,7 +1429,7 @@ export const CASSEROLES: Casserole[] = [
     // Une affaire d'assistants, comme celle du FN : en scandale, elle éclabousse ses voisins.
     splash: 2,
     citation: 'Si j\'avais voulu faire croire que ces revues de presse étaient dans le formol depuis 2014, je n\'aurais pas écrit « Fait par Timothée Houssin » sur chaque page.',
-    blague: 'Les revues de presse de 2014, mises en page en 2018. « Vous avez fabriqué la réalité que vous décrivez ! », lui dit la présidente.',
+    blague: 'Les revues de presse de 2014, mises en page en 2018. « Vous avez fabriqué la réalité que vous décrivez ! », lui dit la présidente. Condamné en appel, pourvoi en cours.',
     fait: 'Pour prouver le travail de son assistant Timothée Houssin en 2014, il remet en 2018 des revues de presse à la juge d\'instruction. À l\'audience du 23 octobre 2024, il reconnaît les avoir mises en page en 2018.',
     statut: 'Condamné en appel le 7 juillet 2026 pour détournement de fonds publics : un an avec sursis, 5 000 euros d\'amende et deux ans d\'inéligibilité avec sursis. Pourvoi en cassation, décision attendue au plus tard début avril 2027.',
     verifie: true,

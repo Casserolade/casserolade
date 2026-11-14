@@ -177,7 +177,7 @@ export const carriere: Carriere = {
         { quand: 'combat_perdu', qui: 'bouleau', texte: 'Monsieur Mélenchon, on ne crie pas chez les gens. Si, apparemment.' },
         { quand: 'combat_gagne', qui: 'narrateur', texte: 'Mélenchon s\'emporte et exige qu\'on ne le touche pas. Personne ne l\'a touché.' },
         { quand: 'sondages_bas', qui: 'bouleau', texte: 'Il vous reste peu de temps de parole, madame. Et peu de sondages.' },
-        { quand: 'victoire', qui: 'narrateur', texte: 'Élue, à sa quatrième présidentielle. Condamnée pour de bon, et inviolable pour cinq ans.' },
+        { quand: 'victoire', qui: 'narrateur', texte: 'Élue, à sa quatrième présidentielle. Condamnée en appel, et inviolable pour cinq ans.' },
         { quand: 'defaite', qui: 'narrateur', texte: 'Battue au second tour, encore. Elle dit que la victoire n\'est que différée. Le bracelet, lui, ne l\'est plus.' },
       ],
     },
