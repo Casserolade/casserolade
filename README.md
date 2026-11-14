@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.4.0" src="https://img.shields.io/badge/version-0.4.0-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.4.1" src="https://img.shields.io/badge/version-0.4.1-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -42,13 +42,13 @@ Le ton est trash, mais sur le fond, rien n'est inventé. Chaque affaire est rée
 Gratuit, sans publicité, sans inscription, sans rien à vendre.
 
 <p align="center">
-  <img src=".github/captures/combat.webp" alt="Un combat sur CNews, Pascal Praud à son pupitre" width="440">
+  <img src=".github/captures/combat.webp" alt="Un combat sur France 3, Julien Lepers à son pupitre" width="440">
   <img src=".github/captures/bestiaire.webp" alt="Le bestiaire et ses filtres : les politiques des Républicains, avec leurs casseroles et leurs sources" width="440">
 </p>
 
 ## Comment ça se joue
 
-<p align="center"><img src=".github/captures/recrutement.webp" alt="Le recrutement sur le plateau de CNews : la boutique, le plateau et les héros adverses" width="900"></p>
+<p align="center"><img src=".github/captures/recrutement.webp" alt="Le recrutement sur le plateau de Cyril Hanouna : la boutique, le plateau et les héros adverses" width="900"></p>
 
 - **Huit joueurs, un seul survivant.** Chacun choisit son héros parmi trois candidats. Chaque manche, on recrute, puis on affronte un adversaire. Le perdant perd des sondages ; à zéro, il est éliminé.
 - **Le budget ne se garde pas.** 3 au départ, +1 par manche jusqu'à 10 : on recrute un politique (3), on actualise la boutique (1), on monte d'échelon pour des politiques plus forts, on achète des sorts et des casseroles.
@@ -133,6 +133,6 @@ Toute action passe par `applyAction`, et toute information par `viewFor` : ni le
 
 ## Licence
 
-Le code est sous [licence MIT](LICENSE). Les photos, les polices et les sons gardent leur propre licence, indiquée dans `assets/game/credits.json`. Toutes les sources du jeu, phrase par phrase, voix par voix et photo par photo, sont sur [la page À propos](https://casserolade.fr/a-propos) et dans [le bestiaire](https://casserolade.fr/bestiaire).
+Le code est sous [licence MIT](LICENSE). Les photos, les polices et les sons gardent leur propre licence, indiquée dans `assets/game/credits.json`. Une tête découpée (`assets/game/personnages/`) est une photo recadrée et détourée : elle se partage sous la licence de sa photo d'origine, avec son auteur. Toutes les sources du jeu, phrase par phrase, voix par voix et photo par photo, sont sur [la page À propos](https://casserolade.fr/a-propos) et dans [le bestiaire](https://casserolade.fr/bestiaire).
 
 Les changements de chaque version sont dans le [journal des versions](CHANGELOG.md).
