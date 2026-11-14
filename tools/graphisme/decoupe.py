@@ -1,26 +1,30 @@
 """Découpe un portrait en pièces de rig : tête, mâchoire et repères pour les yeux dessinés.
 
 Lancer avec uv :
-  uv run --python 3.11 --with mediapipe --with opencv-python-headless --with pillow --with numpy \
-    python tools/graphisme/decoupe.py macron sarkozy lepen     # ou --all
+  uv run --python 3.11 --with mediapipe --with opencv-python-headless --with pillow --with numpy --with rembg \
+    --with "onnxruntime-gpu[cuda,cudnn]" python tools/graphisme/decoupe.py macron sarkozy lepen     # ou --all
+Sans carte graphique : `--with onnxruntime` à la place, quelques secondes de plus par tête.
 
-Le fond vient de `hyperframes remove-background`, la tête de la segmentation mediapipe (cheveux, peau du
-visage) et la coupe de la mâchoire des repères du visage. Le contour est simplifié en polygone pour donner
-l'effet « découpé aux ciseaux ».
+La silhouette vient du détourage BiRefNet (licence MIT, par rembg) : le crâne, les cheveux et les oreilles, tels
+qu'ils sont. La segmentation mediapipe n'écarte plus que ce qui n'est pas la tête : les vêtements au-dessus de la
+bouche (la veste de quelqu'un debout derrière), et sous la bouche tout ce qui n'est ni visage ni cheveux. La coupe
+de la mâchoire suit les repères du visage. Le contour est simplifié en polygone pour donner l'effet « découpé aux
+ciseaux ». Avant le 14 novembre 2026, la tête n'était que ce que mediapipe lisait comme cheveux ou peau, à 256
+pixels : des cornes sur les crânes dégarnis, des oreilles entaillées, des cheveux longs coupés au carré.
 
 Écrit assets/game/personnages/<id>.webp et assets/game/personnages/<id>.json (fusionné par manifest.py),
 et résume le passage dans data/collecte/decoupe.json : échecs, visages détectés, définition de la source.
 """
 import json
 import os
-import subprocess
 import sys
-import tempfile
+import threading
 
 import cv2
 import mediapipe as mp
 import numpy as np
 from mediapipe.tasks.python import BaseOptions, vision
+from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODELS = os.path.join(ROOT, "tools/graphisme/modeles")
@@ -45,7 +49,17 @@ FACE_OVAL = [10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365
              148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109]
 MOUTH_CUT = [61, 78, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308, 291]  # upper inner lip, image left to right
 # Segmentation classes: 0 background, 1 hair, 2 body skin, 3 face skin, 4 clothes, 5 accessories.
-HAIR, BODY_SKIN, FACE_SKIN, ACCESSORY = 1, 2, 3, 5
+HAIR, BODY_SKIN, FACE_SKIN, CLOTHES, ACCESSORY = 1, 2, 3, 4, 5
+HAIR_BELOW_CHIN = 0.35   # times the face height: where long hair is cut
+TEMPLES_ABOVE_EYES = 0.15  # times the face height: above that line, the head is the matte's outline
+EARS_WIDTH = 1.4           # times half the face width: the ears fit in that band
+MATTE_MODEL = "birefnet-portrait"
+# The matte runs on the graphics card when there is one, one photo at a time, and within 11 GB: left alone, it takes
+# all of a 16 GB card.
+GPU = [("CUDAExecutionProvider", {"arena_extend_strategy": "kSameAsRequested", "gpu_mem_limit": str(11 * 1024 ** 3),
+                                  "cudnn_conv_algo_search": "HEURISTIC", "cudnn_conv_use_max_workspace": "0"}), "CPUExecutionProvider"]
+GPU_LOCK = threading.Lock()
+matte_session = None
 
 
 def detect_landmarks(photo_rgb):
@@ -74,11 +88,18 @@ def segment_classes(photo_rgb):
             for mask in result.confidence_masks]
 
 
-def remove_background(photo_path, directory):
-    matte_path = os.path.join(directory, "matte.png")
-    subprocess.run(["npx", "hyperframes", "remove-background", photo_path, "-o", matte_path, "--json"],
-                   cwd=ROOT, check=True, capture_output=True)
-    return cv2.imread(matte_path, cv2.IMREAD_UNCHANGED)[:, :, 3]
+def remove_background(photo_rgb):
+    """The matte of the people on the photo, by BiRefNet: on the graphics card when there is one. One session for all
+    the cuts of a run, and one photo at a time: two at once do not fit in the card's memory."""
+    global matte_session
+    import onnxruntime
+    from rembg import new_session, remove
+    with GPU_LOCK:
+        if matte_session is None:
+            if hasattr(onnxruntime, "preload_dlls"):
+                onnxruntime.preload_dlls()
+            matte_session = new_session(MATTE_MODEL, providers=GPU)
+        return np.array(remove(Image.fromarray(photo_rgb), session=matte_session, only_mask=True))
 
 
 def face_alignment(landmarks):
@@ -92,52 +113,60 @@ def face_alignment(landmarks):
     return matrix, (1400, 1400)
 
 
-def largest_component(mask):
-    count, labels, stats, _ = cv2.connectedComponentsWithStats(mask, connectivity=8)
-    if count <= 1:
-        return mask
-    best = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
-    return np.where(labels == best, 255, 0).astype(np.uint8)
+def face_component(mask, landmarks):
+    """The piece of the mask that holds the face: a neighbour's head, however large, is not this head."""
+    _, labels = cv2.connectedComponents(mask, connectivity=8)
+    center = ((landmarks[FOREHEAD] + landmarks[CHIN]) / 2).astype(int)
+    return np.where(labels == labels[center[1], center[0]], 255, 0).astype(np.uint8)
 
 
-def build_head_mask(classes, matte, landmarks, size, bald=False):
+def build_head_mask(classes, matte, landmarks, size):
     """Hair, face and ears, without neck or clothes.
 
-    A shaved skull is read as body skin, and its shine as nothing at all: the segmentation cuts the top off. For a bald
-    head (`crane_rase` in portraits.json), the background matte draws the outline above the mouth line.
+    Above the mouth line, the head is the matte itself: a shaved skull, its shine, thin hair and ears are read badly
+    by the segmentation, never by the matte. Clothes are taken out of it: someone standing behind is in the matte too,
+    and their jacket is not a hat. Beside the face, beyond the ears, the matte also holds what is held up to it or
+    stands next to it (a microphone, a collar, a neighbour's shoulder): there, only what the segmentation reads as
+    hair or skin stays. Under the mouth line, only the face and the hair stay: no neck, no collar, and no accessory
+    either (a microphone held under the chin).
     """
-    height, width = size[1], size[0]
-    probability = np.maximum.reduce([classes[HAIR], classes[FACE_SKIN], classes[ACCESSORY]])
-    mask = (probability > 0.5).astype(np.uint8) * 255
-    ears_limit = int(landmarks[MOUTH_CUT[0]][1])
-    ears = (classes[BODY_SKIN] > 0.5).astype(np.uint8) * 255
-    ears[ears_limit:, :] = 0
-    mask = cv2.bitwise_or(mask, ears)
-    if bald:
-        skull = (matte > 128).astype(np.uint8) * 255
-        skull[ears_limit:, :] = 0
-        mask = cv2.bitwise_or(mask, skull)
+    person = (matte > 128).astype(np.uint8) * 255
+    mouth_line = int(landmarks[MOUTH_CUT[0]][1])
+    upper = person.copy()
+    clothes = (classes[CLOTHES] > 0.5).astype(np.uint8)
+    upper[cv2.dilate(clothes, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (13, 13))) > 0] = 0
+    upper[mouth_line:, :] = 0
+    temples = int(min(landmarks[EYE_LEFT_IRIS][1], landmarks[EYE_RIGHT_IRIS][1]) - TEMPLES_ABOVE_EYES * FACE_HEIGHT)
+    oval = landmarks[FACE_OVAL][:, 0]
+    middle, ears = float(oval.min() + oval.max()) / 2, EARS_WIDTH * float(oval.max() - oval.min()) / 2
+    beside = np.zeros_like(person, dtype=bool)
+    beside[max(temples, 0):mouth_line, :] = True
+    beside[:, max(int(middle - ears), 0):int(middle + ears)] = False
+    read_as_head = np.maximum.reduce([classes[HAIR], classes[BODY_SKIN], classes[FACE_SKIN], classes[ACCESSORY]]) > 0.5
+    upper[beside & ~read_as_head] = 0
+    lower = cv2.bitwise_and((np.maximum(classes[HAIR], classes[FACE_SKIN]) > 0.5).astype(np.uint8) * 255, person)
+    lower[:mouth_line, :] = 0
+    mask = cv2.bitwise_or(upper, lower)
     cv2.fillPoly(mask, [landmarks[FACE_OVAL].astype(np.int32)], 255)
-    mask = cv2.bitwise_and(mask, (matte > 128).astype(np.uint8) * 255)
     mask = cv2.bitwise_and(mask, head_zone(landmarks, size))
-    hair_limit = int(landmarks[CHIN][1] + 0.35 * FACE_HEIGHT)
-    mask[min(hair_limit, height):, :] = 0
     # The large opening removes thin hair strands, which would make ugly tails on the cut-out.
     opening = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (21, 21))
     closing = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))
     mask = cv2.morphologyEx(cv2.morphologyEx(mask, cv2.MORPH_OPEN, opening), cv2.MORPH_CLOSE, closing)
-    return largest_component(mask)
+    return face_component(mask, landmarks)
 
 
 def head_zone(landmarks, size):
-    """Where a head can be: a dome over the face and a column below it. Drops vans, walls and neighbours' hair."""
+    """Where a head can be: a dome over the face and a bowl under it. Drops vans, walls and neighbours' hair, and
+    long hair ends in a curve a little below the chin, not in a square."""
     center = (landmarks[FOREHEAD] + landmarks[CHIN]) / 2
     half_width = float(landmarks[FACE_OVAL][:, 0].max() - landmarks[FACE_OVAL][:, 0].min()) / 2
-    radius_x, radius_y = int(half_width * HEAD_ZONE_WIDTH), int(FACE_HEIGHT * HEAD_ZONE_HEIGHT)
+    radius_x, radius_up = int(half_width * HEAD_ZONE_WIDTH), int(FACE_HEIGHT * HEAD_ZONE_HEIGHT)
+    radius_down = int(landmarks[CHIN][1] + HAIR_BELOW_CHIN * FACE_HEIGHT - center[1])
     zone = np.zeros((size[1], size[0]), dtype=np.uint8)
     cx, cy = int(center[0]), int(center[1])
-    cv2.ellipse(zone, (cx, cy), (radius_x, radius_y), 0, 180, 360, 255, -1)
-    zone[cy:, max(cx - radius_x, 0):cx + radius_x] = 255
+    cv2.ellipse(zone, (cx, cy), (radius_x, radius_up), 0, 180, 360, 255, -1)
+    cv2.ellipse(zone, (cx, cy), (radius_x, radius_down), 0, 0, 180, 255, -1)
     return zone
 
 
@@ -209,22 +238,20 @@ def eye_anchor(landmarks, iris, corners):
     return float(landmarks[iris][0]), float(landmarks[iris][1]), width
 
 
-def cut_character(character_id, photo_path, bald=False):
+def cut_character(character_id, photo_path):
     photo = cv2.imread(photo_path)
     photo_rgb = cv2.cvtColor(photo, cv2.COLOR_BGR2RGB)
     landmarks, face_count = detect_landmarks(photo_rgb)
     source_face_height = float(np.linalg.norm(landmarks[FOREHEAD] - landmarks[CHIN]))
-    classes = segment_classes(photo_rgb)
-    with tempfile.TemporaryDirectory() as directory:
-        matte = remove_background(photo_path, directory)
+    matte = remove_background(photo_rgb)
 
     matrix, size = face_alignment(landmarks)
     color = punch_up(cv2.warpAffine(photo, matrix, size, flags=cv2.INTER_CUBIC))
-    aligned_classes = [cv2.warpAffine(mask, matrix, size, flags=cv2.INTER_LINEAR) for mask in classes]
     aligned_matte = cv2.warpAffine(matte, matrix, size, flags=cv2.INTER_LINEAR)
     points = cv2.transform(landmarks[None, :, :], matrix)[0]
 
-    head_mask = build_head_mask(aligned_classes, aligned_matte, points, size, bald)
+    aligned_classes = [cv2.warpAffine(mask, matrix, size, flags=cv2.INTER_LINEAR) for mask in segment_classes(photo_rgb)]
+    head_mask = build_head_mask(aligned_classes, aligned_matte, points, size)
     head_polygon = scissor_polygon(head_mask)
     head_alpha = fill_antialiased([head_polygon], size)
     jaw_polygon = build_jaw_polygon(points)
@@ -292,7 +319,7 @@ def main():
     for character_id in wanted:
         photo = os.path.join(ROOT, portraits[character_id].get("recadrage") or portraits[character_id]["portrait"])
         try:
-            _, report[character_id] = cut_character(character_id, photo, bool(portraits[character_id].get("crane_rase")))
+            _, report[character_id] = cut_character(character_id, photo)
             size = os.path.getsize(os.path.join(OUTPUT_DIR, f"{character_id}.webp"))
             print(character_id, report[character_id], f"{size / 1024:.0f} Ko", flush=True)
         except Exception as error:  # one bad photo must not stop the batch
