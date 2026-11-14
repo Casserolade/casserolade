@@ -267,26 +267,10 @@ def eye_anchor(landmarks, iris, corners):
     return float(landmarks[iris][0]), float(landmarks[iris][1]), width
 
 
-def cut_character(character_id, photo_path):
-    photo = cv2.imread(photo_path)
-    photo_rgb = cv2.cvtColor(photo, cv2.COLOR_BGR2RGB)
-    landmarks, face_count = detect_landmarks(photo_rgb)
-    source_face_height = float(np.linalg.norm(landmarks[FOREHEAD] - landmarks[CHIN]))
-    matte = remove_background(photo_rgb)
-
-    matrix, size = face_alignment(landmarks)
-    color = punch_up(cv2.warpAffine(photo, matrix, size, flags=cv2.INTER_CUBIC))
-    aligned_matte = cv2.warpAffine(matte, matrix, size, flags=cv2.INTER_LINEAR)
-    points = cv2.transform(landmarks[None, :, :], matrix)[0]
-
-    aligned_classes = [cv2.warpAffine(mask, matrix, size, flags=cv2.INTER_LINEAR) for mask in segment_classes(photo_rgb)]
-    head_mask = build_head_mask(aligned_classes, aligned_matte, points, size)
-    head_polygon = scissor_polygon(head_mask)
-    head_alpha = fill_antialiased([head_polygon], size)
-    jaw_polygon = build_jaw_polygon(points)
-    jaw_alpha = cv2.bitwise_and(fill_antialiased([jaw_polygon], size), head_alpha)
-
-    cavity = build_cavity(jaw_alpha, points)
+def save_pieces(character_id, color, cavity, head_alpha, jaw_alpha, eyes, mouth, chin):
+    """Writes a head and its jaw as the game reads them: an atlas of two paper pieces and its description. Under the
+    jaw, the head is painted with `cavity`. `eyes`: the left and the right, each (x, y, width); `mouth` and `chin`:
+    points; all in the pixels of `color`. Used for a photo (cut_character) and for a drawn head (tete_dessinee.py)."""
     jaw_weight = (jaw_alpha.astype(np.float32) / 255)[:, :, None]
     upper_color = (color * (1 - jaw_weight) + cavity * jaw_weight).astype(np.uint8)
 
@@ -306,9 +290,7 @@ def cut_character(character_id, photo_path):
     def in_head(x, y):
         return [round(float(x) - hx0, 1), round(float(y) - hy0, 1)]
 
-    left = eye_anchor(points, EYE_LEFT_IRIS, EYE_LEFT_CORNERS)
-    right = eye_anchor(points, EYE_RIGHT_IRIS, EYE_RIGHT_CORNERS)
-    mouth = points[MOUTH_CUT]
+    left, right = eyes
     description = {
         "atlas": f"personnages/{character_id}.webp",
         "pieces": {
@@ -316,20 +298,46 @@ def cut_character(character_id, photo_path):
             "machoire": {
                 "x": head_w + ATLAS_GAP, "y": 0, "w": jaw_w, "h": jaw_h,
                 "pose": in_head(jx0, jy0),
-                "pivot": [round(float(mouth[:, 0].mean()) - jx0, 1), round(float(mouth[:, 1].mean()) - jy0, 1)],
+                "pivot": [round(float(mouth[0]) - jx0, 1), round(float(mouth[1]) - jy0, 1)],
             },
         },
         "ancres": {
             "oeil_g": in_head(*left[:2]) + [round(left[2], 1)],
             "oeil_d": in_head(*right[:2]) + [round(right[2], 1)],
-            "bouche": in_head(mouth[:, 0].mean(), mouth[:, 1].mean()),
-            "menton": in_head(*points[CHIN]),
+            "bouche": in_head(mouth[0], mouth[1]),
+            "menton": in_head(*chin),
         },
     }
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     cv2.imwrite(os.path.join(OUTPUT_DIR, f"{character_id}.webp"), atlas, [cv2.IMWRITE_WEBP_QUALITY, 86])
     with open(os.path.join(OUTPUT_DIR, f"{character_id}.json"), "w", encoding="utf8") as handle:
         json.dump(description, handle, ensure_ascii=False, indent=1)
+    return description
+
+
+def cut_character(character_id, photo_path):
+    photo = cv2.imread(photo_path)
+    photo_rgb = cv2.cvtColor(photo, cv2.COLOR_BGR2RGB)
+    landmarks, face_count = detect_landmarks(photo_rgb)
+    source_face_height = float(np.linalg.norm(landmarks[FOREHEAD] - landmarks[CHIN]))
+    matte = remove_background(photo_rgb)
+
+    matrix, size = face_alignment(landmarks)
+    color = punch_up(cv2.warpAffine(photo, matrix, size, flags=cv2.INTER_CUBIC))
+    aligned_matte = cv2.warpAffine(matte, matrix, size, flags=cv2.INTER_LINEAR)
+    points = cv2.transform(landmarks[None, :, :], matrix)[0]
+
+    aligned_classes = [cv2.warpAffine(mask, matrix, size, flags=cv2.INTER_LINEAR) for mask in segment_classes(photo_rgb)]
+    head_mask = build_head_mask(aligned_classes, aligned_matte, points, size)
+    head_polygon = scissor_polygon(head_mask)
+    head_alpha = fill_antialiased([head_polygon], size)
+    jaw_polygon = build_jaw_polygon(points)
+    jaw_alpha = cv2.bitwise_and(fill_antialiased([jaw_polygon], size), head_alpha)
+
+    left = eye_anchor(points, EYE_LEFT_IRIS, EYE_LEFT_CORNERS)
+    right = eye_anchor(points, EYE_RIGHT_IRIS, EYE_RIGHT_CORNERS)
+    description = save_pieces(character_id, color, build_cavity(jaw_alpha, points), head_alpha, jaw_alpha, (left, right),
+                              points[MOUTH_CUT].mean(axis=0), points[CHIN])
     return description, {"visages": face_count, "hauteur_visage_source": round(source_face_height),
                          "basse_definition": source_face_height < LOW_DEFINITION_FACE}
 
