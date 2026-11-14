@@ -48,7 +48,7 @@ export const episode = {
     (function () {
           const A = Anime;
           const tl = gsap.timeline({ paused: true });
-          const P = A.puppet("e8p-d", { x: 1150, y: 960, k: 1, faces: ["durif.aie"] });
+          const P = A.puppet("e8p-d", { x: 1150, y: 960, k: 1, faces: ["durif.aie", "durif"] });
           document.getElementById("e8p-puppet").innerHTML = P.markup;
           const r0 = A.rng(12);
           const drops = Array.from({ length: 90 }, () => [r0() * 2000, r0() * 1100, 700 + r0() * 300]);

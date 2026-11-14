@@ -116,12 +116,12 @@ export function createAnime(PUPPET_ART) {
 
     /** The heads, cut out of real photos: size, chin, and the ellipse of the skull, chin at the origin. */
     A.HEADS = {
-      neutre: { w: 398, h: 598, chin: [212.7, 566.7] },
-      cri: { w: 373, h: 574, chin: [166.6, 534.0] },
-      serieux: { w: 414, h: 584, chin: [222.1, 532.7] },
-      rire: { w: 473, h: 604, chin: [197.1, 568.7] },
-      perplexe: { w: 429, h: 514, chin: [195.4, 484.6] },
-      lalanne: { w: 460, h: 576, chin: [321.6, 536.5] },
+      neutre: { w: 408, h: 598, chin: [189.0, 565.1] },
+      cri: { w: 424, h: 693, chin: [195.3, 569.8] },
+      serieux: { w: 415, h: 608, chin: [200.9, 568.7] },
+      rire: { w: 437, h: 637, chin: [194.7, 568.9] },
+      perplexe: { w: 424, h: 602, chin: [208.4, 573.2] },
+      lalanne: { w: 456, h: 578, chin: [344.6, 539.5] },
     };
     A.skull = function (name) {
       const h = A.HEADS[name];
@@ -207,7 +207,8 @@ export function createAnime(PUPPET_ART) {
   })();
 
   /* The game's paper puppet: a cardboard body cut into pieces (the game's own cuts), a head cut out of a photo with
-   * its jaw that talks. Feet at (x, y); k = 1 stands about 590 px tall. Faces come from window.PUPPET_ART. */
+   * its jaw that talks. Feet at (x, y); k = 1 stands about 590 px tall. Faces come from window.PUPPET_ART: a face the
+   * game no longer has is left out, and the puppet keeps the first one it has, as in the game. */
   (function () {
     const A = window.Anime;
     const CUTS = { legfar: [0.22, 0.72, 0.5, 1], armfar: [0.05, 0.27, 0.24, 0.6], torso: [0.235, 0, 0.765, 0.74], legnear: [0.5, 0.72, 0.78, 1], armnear: [0.76, 0.27, 0.95, 0.6] };
@@ -222,6 +223,7 @@ export function createAnime(PUPPET_ART) {
         return `<g id="${id}-${name}"><image href="${body}" x="${left}" y="${top}" width="${W}" height="${H}" clip-path="url(#${id}-c-${name})"/></g>`;
       };
       const jawPivots = {};
+      faces = faces.filter((face) => window.PUPPET_ART[face]);
       const heads = faces.map((face, i) => {
         const art = window.PUPPET_ART[face];
         const hx = x - art.chin[0] * hs, hy = neckY - art.chin[1] * hs;
@@ -247,9 +249,10 @@ export function createAnime(PUPPET_ART) {
       $("legnear").setAttribute("transform", `rotate(${legNear} ${p.pivots.legnear[0]} ${p.pivots.legnear[1]})`);
       $("armfar").setAttribute("transform", `rotate(${armFar} ${p.pivots.armfar[0]} ${p.pivots.armfar[1]})`);
       $("armnear").setAttribute("transform", `rotate(${-armNear} ${p.pivots.armnear[0]} ${p.pivots.armnear[1]})`);
+      const shown = p.faces.includes(face) ? face : p.faces[0];
       for (const f of p.faces) {
         const key = f.replace(".", "-");
-        $(`face-${key}`).setAttribute("opacity", f === face ? 1 : 0);
+        $(`face-${key}`).setAttribute("opacity", f === shown ? 1 : 0);
         const [px, py] = p.pivots.jaw[f];
         $(`jaw-${key}`).setAttribute("transform", `translate(0 ${(open * 22 * p.k).toFixed(1)}) rotate(${(open * 3).toFixed(1)} ${px} ${py})`);
       }
