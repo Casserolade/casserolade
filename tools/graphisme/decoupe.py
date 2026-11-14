@@ -5,8 +5,10 @@ Lancer avec uv :
     --with "onnxruntime-gpu[cuda,cudnn]" python tools/graphisme/decoupe.py macron sarkozy lepen     # ou --all
 Sans carte graphique : `--with onnxruntime` à la place, quelques secondes de plus par tête.
 
-La silhouette vient du détourage BiRefNet (licence MIT, par rembg) : le crâne, les cheveux et les oreilles, tels
-qu'ils sont. La segmentation mediapipe n'écarte plus que ce qui n'est pas la tête : les vêtements au-dessus de la
+La silhouette vient de deux détourages, BiRefNet (licence MIT) et RMBG-2.0 (CC BY-NC 4.0), par rembg, qui télécharge
+leurs poids au premier passage : le crâne, les cheveux et les oreilles, tels qu'ils sont. La tête garde ce que les
+deux gardent : chacun colle parfois un bout de décor ou le visage d'un voisin, rarement le même.
+La segmentation mediapipe n'écarte plus que ce qui n'est pas la tête : les vêtements au-dessus de la
 bouche (la veste de quelqu'un debout derrière), et sous la bouche tout ce qui n'est ni visage ni cheveux. La coupe
 de la mâchoire suit les repères du visage. Le contour est simplifié en polygone pour donner l'effet « découpé aux
 ciseaux ». Avant le 14 novembre 2026, la tête n'était que ce que mediapipe lisait comme cheveux ou peau, à 256
@@ -53,13 +55,15 @@ HAIR, BODY_SKIN, FACE_SKIN, CLOTHES, ACCESSORY = 1, 2, 3, 4, 5
 HAIR_BELOW_CHIN = 0.35   # times the face height: where long hair is cut
 TEMPLES_ABOVE_EYES = 0.15  # times the face height: above that line, the head is the matte's outline
 EARS_WIDTH = 1.4           # times half the face width: the ears fit in that band
-MATTE_MODEL = "birefnet-portrait"
-# The matte runs on the graphics card when there is one, one photo at a time, and within 11 GB: left alone, it takes
+# Two mattes, and the head keeps what both keep. Each model glues a bit of scenery to a head now and then (the face of
+# a neighbour, a slice of backdrop), rarely the same one: on the game's 485 heads, they differ on about twenty.
+MATTE_MODELS = ("birefnet-portrait", "bria-rmbg")
+# A matte runs on the graphics card when there is one, one photo at a time, and within 11 GB: left alone, it takes
 # all of a 16 GB card.
 GPU = [("CUDAExecutionProvider", {"arena_extend_strategy": "kSameAsRequested", "gpu_mem_limit": str(11 * 1024 ** 3),
                                   "cudnn_conv_algo_search": "HEURISTIC", "cudnn_conv_use_max_workspace": "0"}), "CPUExecutionProvider"]
 GPU_LOCK = threading.Lock()
-matte_session = None
+matte_sessions = {}
 
 
 def detect_landmarks(photo_rgb):
@@ -88,18 +92,43 @@ def segment_classes(photo_rgb):
             for mask in result.confidence_masks]
 
 
-def remove_background(photo_rgb):
-    """The matte of the people on the photo, by BiRefNet: on the graphics card when there is one. One session for all
-    the cuts of a run, and one photo at a time: two at once do not fit in the card's memory."""
-    global matte_session
+class GivesMemoryBack:
+    """An ONNX session that hands the card's memory back after each run: two models then share one 16 GB card."""
+
+    def __init__(self, session):
+        import onnxruntime
+        self.session = session
+        self.options = onnxruntime.RunOptions()
+        self.options.add_run_config_entry("memory.enable_memory_arena_shrinkage", "gpu:0")
+
+    def run(self, output_names, inputs):
+        return self.session.run(output_names, inputs, self.options)
+
+    def __getattr__(self, name):
+        return getattr(self.session, name)
+
+
+def matte_model(name):
+    """One model's session, kept for all the cuts of a run."""
     import onnxruntime
-    from rembg import new_session, remove
+    from rembg import new_session
+    if name not in matte_sessions:
+        if not matte_sessions and hasattr(onnxruntime, "preload_dlls"):
+            onnxruntime.preload_dlls()
+        session = new_session(name, providers=GPU)
+        if "CUDAExecutionProvider" in session.inner_session.get_providers():
+            session.inner_session = GivesMemoryBack(session.inner_session)
+        matte_sessions[name] = session
+    return matte_sessions[name]
+
+
+def remove_background(photo_rgb):
+    """The matte of the people on the photo: what every model of MATTE_MODELS keeps. On the graphics card when there
+    is one, and one photo at a time: two at once do not fit in the card's memory."""
+    from rembg import remove
+    image = Image.fromarray(photo_rgb)
     with GPU_LOCK:
-        if matte_session is None:
-            if hasattr(onnxruntime, "preload_dlls"):
-                onnxruntime.preload_dlls()
-            matte_session = new_session(MATTE_MODEL, providers=GPU)
-        return np.array(remove(Image.fromarray(photo_rgb), session=matte_session, only_mask=True))
+        return np.minimum.reduce([np.array(remove(image, session=matte_model(name), only_mask=True)) for name in MATTE_MODELS])
 
 
 def face_alignment(landmarks):
