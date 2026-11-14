@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import type { EntrySources } from '#src/client/tools/personSources.ts';
 import { isWebLink } from '#src/client/tools/isWebLink.ts';
+import { LICENCE_LINKS } from '#src/client/const/licenceLinks.ts';
 
 /** Where a card comes from, folded: its photos, its real voices, its lines, each with its link. Null while loading. */
 const props = defineProps<{ sources: EntrySources | null }>();
@@ -13,7 +14,7 @@ const count = computed(() => (props.sources ? props.sources.photos.length + prop
     <summary>Sources ({{ count }})</summary>
     <ul>
       <li v-for="photo in sources.photos" :key="`photo-${photo.nom}-${photo.source}`">
-        <strong>Photo</strong> {{ photo.nom }}<template v-if="photo.auteur">, par {{ photo.auteur }}</template><template v-if="photo.licence">, {{ photo.licence }}</template>.
+        <strong>Photo</strong> {{ photo.nom }}<template v-if="photo.auteur">, par {{ photo.auteur }}</template><template v-if="photo.licence">, <a v-if="LICENCE_LINKS[photo.licence]" class="licence" :href="LICENCE_LINKS[photo.licence]" target="_blank" rel="noreferrer">{{ photo.licence }}</a><template v-else>{{ photo.licence }}</template></template>.
         <a v-if="isWebLink(photo.source)" :href="photo.source" target="_blank" rel="noreferrer">Source</a>
         <template v-else>{{ photo.source }}</template>
       </li>
@@ -35,4 +36,5 @@ summary { color: var(--color-accent); font-weight: 700; cursor: pointer; }
 ul { display: flex; flex-direction: column; gap: var(--space-2); margin: var(--space-2) 0 0; padding: 0; list-style: none; }
 strong { color: var(--color-text); }
 a { margin-left: var(--space-1); color: var(--color-accent); }
+a.licence { margin-left: 0; }
 </style>

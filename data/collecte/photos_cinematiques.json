@@ -1,0 +1,22 @@
+[
+ {
+  "id": "durif",
+  "personne": "durif",
+  "nom": "Sylvain Durif, dans les épisodes de sa carrière",
+  "fichiers": ["cinematiques/durif/img/neutre.photo.webp", "cinematiques/durif/img/cri.photo.webp", "cinematiques/durif/img/serieux.photo.webp", "cinematiques/durif/img/serieux.vert.webp", "cinematiques/durif/img/rire.photo.webp", "cinematiques/durif/img/perplexe.photo.webp"],
+  "auteur": "chatzefratz",
+  "licence": "CC BY 3.0",
+  "source": "https://www.youtube.com/watch?v=2jJTd2_YL9A",
+  "note": "Images de la vidéo « Rencontre Mystique par Synchronicité avec Le Grand Monarch Sylvain Durif » (9 septembre 2013), publiée sous licence Creative Commons Attribution. Recadrées et détourées ; la mâchoire du cri et du rire est abaissée, une tête est teintée en vert."
+ },
+ {
+  "id": "durif.lalanne",
+  "personne": "lalanne",
+  "nom": "Francis Lalanne, dans la carrière de Sylvain Durif",
+  "fichiers": ["cinematiques/durif/img/lalanne.photo.webp"],
+  "auteur": "Nicolas Richoffer",
+  "licence": "CC BY-SA 4.0",
+  "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne_2017.jpg",
+  "note": "Recadrée et détourée."
+ }
+]

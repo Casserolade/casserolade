@@ -85,7 +85,10 @@ const sources = {
     ...(credits.illustrations ?? []).map((p: Record<string, string | null>) => ({ ...p, casserole: p.id })),
   ].map((p: Record<string, string | null>) => ({
     nom: photoName(p), personne: p.personne ?? '', casserole: p.casserole ?? '', auteur: p.auteur ?? '', licence: p.licence === 'inconnue' ? '' : p.licence ?? '', source: p.source ?? '',
-  })),
+  })).concat((credits.cinematiques ?? []).map((p: Record<string, string>) => ({
+    // The heads of a career's cutscenes: named as they are, under the person they show.
+    nom: p.nom, personne: p.personne, casserole: '', auteur: p.auteur, licence: p.licence, source: p.source,
+  }))),
   logos: credits.logos ?? [],
   polices: credits.polices ?? [],
 };

@@ -5,16 +5,16 @@
    "nom": "Louis Aliot",
    "auteur": "Pablo Tupin-Noriega",
    "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_2015_02_(cropped)_(cropped).jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_2015_02_(cropped).jpg",
    "partage_identique": true
   },
   {
    "id": "aphatie",
    "nom": "Jean-Michel Aphatie",
-   "auteur": "VL.",
-   "licence": "CC BY 3.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Jean-Michel.Aphatie.jpg",
-   "partage_identique": false
+   "auteur": "Sarah Hafiz",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Michel_Aphatie_Sup_de_Pub_2011.jpg",
+   "partage_identique": true
   },
   {
    "id": "arthaud",
@@ -35,17 +35,17 @@
   {
    "id": "attal",
    "nom": "Gabriel Attal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://rmc.bfmtv.com/actualites/economie/travail/sans-ca-on-risque-d-etre-vassalises-le-plan-de-gabriel-attal-pour-faire-exploser-le-salaire-median_AV-202605010407.html",
-   "partage_identique": false
+   "auteur": "Ismail Aissoub",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_2025_redressed_and_cropped.jpg",
+   "partage_identique": true
   },
   {
    "id": "aubry",
    "nom": "Manon Aubry",
-   "auteur": "European Union 2024 - Source : EP",
+   "auteur": "Daina Le Lardic",
    "licence": "European Parliament",
-   "source": "https://commons.wikimedia.org/wiki/File:1720623827463_20190528_AUBRY_Manon_FR_9.jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:1721231387095_20240717_EP-170912A_DLL_169.jpg",
    "partage_identique": false
   },
   {
@@ -67,9 +67,9 @@
   {
    "id": "bardella",
    "nom": "Jordan Bardella",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/jordan-bardella-dorigine-algerienne-il-repond-enfin-oui-je-suis-bien/",
+   "auteur": "European Parliament",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jordan_Bardella_December_2022_(cropped).jpg",
    "partage_identique": false
   },
   {
@@ -99,9 +99,9 @@
   {
    "id": "bay",
    "nom": "Nicolas Bay",
-   "auteur": "European Union 2024 - Source : EP",
-   "licence": "European Parliament",
-   "source": "https://commons.wikimedia.org/wiki/File:1718699899690_20240617_BAY_Nicolas_FR_011.jpg",
+   "auteur": "Anh De France",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_de_Nicolas_Bay,_avril_2022.jpg",
    "partage_identique": false
   },
   {
@@ -123,42 +123,42 @@
   {
    "id": "bertrand",
    "nom": "Xavier Bertrand",
-   "auteur": "Claudio Centonze / European Union, 2025 / EC - Audiovisual Service",
-   "licence": "CC BY 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Xavier_Bertrand_-_2025_(cropped).jpg",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Political_Assembly,_Marseille_(6869676405).jpg",
    "partage_identique": false
   },
   {
    "id": "bompard",
    "nom": "Manuel Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/la-france-insoumise/une-fiction-manuel-bompard-reagit-a-la-sortie-du-livre-enquete-sur-la-france-insoumise_AV-202505060881.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-10-20_19-29-18_MeetingLFI-Montbeliard.jpg",
    "partage_identique": false
   },
   {
    "id": "borne",
    "nom": "Élisabeth Borne",
-   "auteur": "Benoît Granier",
-   "licence": "Licence Ouverte",
-   "source": "https://commons.wikimedia.org/wiki/File:La_Première_ministre_française_Élisabeth_Borne_(cropped).jpg",
+   "auteur": "Prime Minister's Office",
+   "licence": "GODL-India",
+   "source": "https://commons.wikimedia.org/wiki/File:Prime_Minister_of_Bharat,_Shri_Narendra_Damodardas_Modi_and_the_Prime_Minister_of_France,_Ms._%C3%89lisabeth_Borne.jpg",
    "partage_identique": false
   },
   {
    "id": "bouamrane",
    "nom": "Karim Bouamrane",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "http://www.ouragan.cd/2026/04/le-socialiste-karim-bouamrane-dit-quil-pourrait-etre-une-solution-pour-2027",
+   "auteur": "Oumma",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Karim_Bouamrane_en_2026_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "bouleau",
    "nom": "Gilles Bouleau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/primaire-de-la-droite-pecresse-raffarin-et-juppe-ont-fait-rire-twitter-7785970156",
-   "partage_identique": false
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gilles_Bouleau_Cannes_2016.jpg",
+   "partage_identique": true
   },
   {
    "id": "bove",
@@ -171,26 +171,26 @@
   {
    "id": "boyard",
    "nom": "Louis Boyard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/louis-boyard-tacle-par-le-president-argentin-javier-milei-pour-sa-montre-l-insoumis-denonce-une-polemique-ridicule-7900556010",
+   "auteur": "Wyslijp16",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Rassemblement_Nationalisons_ArcelorMittal_le_27_novembre_2025_%C3%A0_Paris_%E2%80%94_036.jpg",
    "partage_identique": false
   },
   {
    "id": "branco",
    "nom": "Juan Branco",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://zanzibar.substack.com/p/coup-detat-de-juan-branco-un-livre",
+   "auteur": "Web Summit",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2019_-_Centre_Stage_-_Day_2_VJR21629_(49024213156).jpg",
    "partage_identique": false
   },
   {
    "id": "braun_pivet",
    "nom": "Yaël Braun-Pivet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/75000-paris/interview-exclusive-yael-braun-pivet-une-presidente-citoyenne-150140.html",
-   "partage_identique": false
+   "auteur": "G.Garitan",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Ya%C3%ABl_Braun-Pivet_4colonnes_19182.jpg",
+   "partage_identique": true
   },
   {
    "id": "bregeon",
@@ -219,9 +219,9 @@
   {
    "id": "cazeneuve",
    "nom": "Bernard Cazeneuve",
-   "auteur": "State Chancellery of Latvia",
+   "auteur": "Jérémy Barande",
    "licence": "CC BY-SA 2.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Ministru_prezidents_Valdis_Dombrovskis_tiekas_ar_Francijas_Eiropas_lietu_ministru_Bern%C4%81ru_Kazen%C4%93vu_(Bernard_Cazeneuve)_(7985359635)_(cropped).jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Bernard_Cazeneuve,_(42399145362)_(cropped).jpg",
    "partage_identique": true
   },
   {
@@ -235,17 +235,17 @@
   {
    "id": "chenu",
    "nom": "Sébastien Chenu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/elections/2026/03/17/sebastien-chenu-a-avignon-ce-mercredi-18-mars-pour-soutenir-la-candidate-rn-anne-sophie-rigault",
-   "partage_identique": false
+   "auteur": "Jérémy-Günther-Heinz Jähnick",
+   "licence": "GFDL 1.2",
+   "source": "https://commons.wikimedia.org/wiki/File:Caudry_-_Grand_go%C3%BBter_patriotique_en_pr%C3%A9sence_de_Florian_Philippot_le_samedi_3_d%C3%A9cembre_2016_(33).JPG",
+   "partage_identique": true
   },
   {
    "id": "chikirou",
    "nom": "Sophia Chikirou",
-   "auteur": "Wyslijp16",
-   "licence": "CC BY 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Manifestation_du_22_novembre_2025_%C3%A0_Paris_contre_les_violences_sexistes,_sexuelles_et_de_genre_%E2%80%94_080.jpg",
+   "auteur": "Tomkiou",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sophia_Chikirou_lors_des_Amfis_en_ao%C3%BBt_2025.jpg",
    "partage_identique": false
   },
   {
@@ -253,128 +253,128 @@
    "nom": "Jacques Chirac",
    "auteur": "Christian Lambiotte",
    "licence": "CC BY 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Jacques_Chirac_(1997)_(cropped).jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Jacques_Chirac_(1997).jpg",
    "partage_identique": false
   },
   {
    "id": "ciotti",
    "nom": "Éric Ciotti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lejdd.fr/politique/recomposition-de-la-droite-le-grand-remplacement-de-lr-par-ludr-est-engage-estime-eric-ciotti-173679",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EPP_Summit,_23_March,_Brussels_(52766122104).jpg",
    "partage_identique": false
   },
   {
    "id": "cohn_bendit",
    "nom": "Daniel Cohn-Bendit",
-   "auteur": "Molgreen",
-   "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:20250426_xl_1415-1505_taz_lab_2025_thema_weiter_machen_%E2%80%93_jenseits_der_empoerung_-_das_vierfuenftel-jahrhundertgespraech_(6).jpg",
+   "auteur": "Heinrich-Böll-Stiftung",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Daniel_Cohn-Bendit.jpg",
    "partage_identique": true
   },
   {
    "id": "cope",
    "nom": "Jean-François Copé",
-   "auteur": "Astrakan25",
-   "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Cop%C3%A9,_D%C3%A9put%C3%A9-maire_de_Meaux_2015_(cropped).jpg",
-   "partage_identique": true
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Cop%C3%A9,_UMP_regional_elections_Paris,_2010_(cropped).jpg",
+   "partage_identique": false
   },
   {
    "id": "coquerel",
    "nom": "Éric Coquerel",
-   "auteur": "Jérémie Silvestro (œuvre dérivée : Keymap9)",
+   "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
    "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Eric_Coquerel_en_2017.jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Marche_des_fiert%C3%A9s_de_Paris_2017-14.jpg",
    "partage_identique": true
   },
   {
    "id": "darmanin",
    "nom": "Gérald Darmanin",
    "auteur": "UK Home Office",
-   "licence": "CC BY 2.5",
-   "source": "https://commons.wikimedia.org/wiki/File:G%C3%A9rald_Darmanin_in_2022.jpg",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:French_Justice_Minister_G%C3%A9rald_Darmanin_in_2025_(cropped_1).jpg",
    "partage_identique": false
   },
   {
    "id": "dati",
    "nom": "Rachida Dati",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/paris/elections-municipales-2026-le-maire-du-17e-arrondissement-de-paris-exhorte-rachida-dati-de-se-plier-a-une-primaire_AN-202507100389.html",
-   "partage_identique": false
+   "auteur": "Laurent Vu",
+   "licence": "CC BY-SA 3.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Rachida_Dati_portrait.jpg",
+   "partage_identique": true
   },
   {
    "id": "de_gaulle",
    "nom": "Charles de Gaulle",
-   "auteur": "Bundesarchiv, B 145 Bild-F015892-0010 / Ludwig Wegmann",
-   "licence": "CC BY-SA 3.0 de",
-   "source": "https://commons.wikimedia.org/wiki/File:Charles_de_Gaulle-1963_(cropped).jpg",
-   "partage_identique": true
+   "auteur": "auteur inconnu",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Correio_da_Manh%C3%A3_AN_411.jpg",
+   "partage_identique": false
   },
   {
    "id": "delogu",
    "nom": "Sébastien Delogu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/marseille/vous-incriminez-quelqu-un-qui-n-a-pas-commis-de-crime-sebastien-delogu-prend-la-defense-du-depute-raphael-arnault-apres-la-mort-de-quentin-deranque_AV-202602190972.html",
+   "auteur": "AN2303",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "doucet",
    "nom": "Grégory Doucet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/gregory-doucet-demande-linterdiction-de-la-marche-pour-quentin-deranque-a-lyon/",
+   "auteur": "Diholol",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gregory-Doucet-10-mars-2019.jpg",
    "partage_identique": false
   },
   {
    "id": "duflot",
    "nom": "Cécile Duflot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://lesjours.fr/obsessions/portrait-yannick-jadot/",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:C%C3%A9cile_Duflot,_2010_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "dupond_moretti",
    "nom": "Éric Dupond-Moretti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://holiplaygames.com/eric-dupond-moretti-augmentation/",
-   "partage_identique": false
+   "auteur": "Linelola54",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Dupond-Moretti_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "dupont_aignan",
    "nom": "Nicolas Dupont-Aignan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/nicolas-dupont-aignan-va-sortir-un-livre-pour-se-purifier-724103",
-   "partage_identique": false
+   "auteur": "G.Garitan",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Dupont_Aignan_19236.jpg",
+   "partage_identique": true
   },
   {
    "id": "durif",
    "nom": "Sylvain Durif",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://lelombrik.net/66164",
+   "auteur": "chatzefratz",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sylvain_Durif,_sur_une_aire_d%27autoroute,_en_2013.png",
    "partage_identique": false
   },
   {
    "id": "faure",
    "nom": "Olivier Faure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.publicsenat.fr/actualites/politique/elections-municipales-jean-luc-melenchon-est-devenu-le-boulet-de-la-gauche-juge-olivier-faure",
+   "auteur": "Theybothreachedforthegun",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pouria_Amirshahi_prise_de_parole_manif.jpg",
    "partage_identique": false
   },
   {
    "id": "ferrari",
    "nom": "Laurence Ferrari",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.cnews.fr/france/2023-11-15/laurence-ferrari-honte-vous-qui-salissez-la-republique-avec-vos-mensonges-et-vos",
-   "partage_identique": false
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Laurence_Ferrari_Cannes_2017.jpg",
+   "partage_identique": true
   },
   {
    "id": "fillon",
@@ -387,9 +387,9 @@
   {
    "id": "fogiel",
    "nom": "Marc-Olivier Fogiel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/exclusif-marc-olivier-fogiel-avant-p_m3972439",
+   "auteur": "ManoSolo13241324",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marc-Olivier_Fogiel_2025.jpg",
    "partage_identique": false
   },
   {
@@ -403,17 +403,17 @@
   {
    "id": "giscard",
    "nom": "Valéry Giscard d'Estaing",
-   "auteur": "Christian Lambiotte",
-   "licence": "CC BY 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9ry_Giscard_d%27Estaing_(1975)_(cropped).jpg",
+   "auteur": "European Communities",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:European_Common_Market_Leaders,_1974.jpg",
    "partage_identique": false
   },
   {
    "id": "glucksmann",
    "nom": "Raphaël Glucksmann",
-   "auteur": "European Union 2024 - Source : EP",
-   "licence": "European Parliament",
-   "source": "https://commons.wikimedia.org/wiki/File:1720448398743_20240708_GLUCKSMANN_Raphael_FR_006.jpg",
+   "auteur": "Mathieu Delmestre",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:2024-03-03_-_Congr%C3%A8s_du_PSE-_105_-_Raphael_Glucksmann.jpg",
    "partage_identique": false
   },
   {
@@ -427,10 +427,10 @@
   {
    "id": "guedj",
    "nom": "Jérôme Guedj",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://france3-regions.franceinfo.fr/paris-ile-de-france/essonne/une-gauche-republicaine-universaliste-et-laique-le-depute-de-l-essonne-jerome-guedj-se-lance-dans-la-course-a-la-presidentielle-3294216.html",
-   "partage_identique": false
+   "auteur": "Audrey AK",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:J%C3%A9r%C3%B4me_Guedj_2010.jpg",
+   "partage_identique": true
   },
   {
    "id": "guette",
@@ -443,7 +443,7 @@
   {
    "id": "hanouna",
    "nom": "Cyril Hanouna",
-   "auteur": "",
+   "auteur": "Cddu46",
    "licence": "CC BY-SA 4.0",
    "source": "https://commons.wikimedia.org/wiki/File:Cyril_Hanouna_lors_d%27un_enregistrement_d%27une_%C3%A9mission_de_radio_(cropped).jpg",
    "partage_identique": true
@@ -459,9 +459,9 @@
   {
    "id": "hidalgo",
    "nom": "Anne Hidalgo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/anne-hidalgo-en-colere-apres-laccord-entre-jean-luc-melenchon-et-le-ps-je-naccepte-pas-cette-injustice_493163",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anne_Hidalgo,_Congr%C3%A8s_des_maires_19_novembre_2019_(cropped).jpg",
    "partage_identique": false
   },
   {
@@ -475,9 +475,9 @@
   {
    "id": "hortefeux",
    "nom": "Brice Hortefeux",
-   "auteur": "Andy Mabbett",
+   "auteur": "Foto-AG Gymnasium Melle",
    "licence": "CC BY-SA 3.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Brice_Hortefeux_01_(cropped).JPG",
+   "source": "https://commons.wikimedia.org/wiki/File:Hortefeux,_Brice-1264_(cropped34).jpg",
    "partage_identique": true
   },
   {
@@ -499,17 +499,17 @@
   {
    "id": "jadot",
    "nom": "Yannick Jadot",
-   "auteur": "greensefa",
-   "licence": "CC BY 2.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Yannick_Jadot,_2014_(cropped).jpg",
-   "partage_identique": false
+   "auteur": "Pymouss",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Yannick_Jadot_-_Parlamentum_europaeum_20110628.jpg",
+   "partage_identique": true
   },
   {
    "id": "jmlp",
    "nom": "Jean-Marie Le Pen",
-   "auteur": "European Parliament Multimedia Centre",
-   "licence": "Attribution",
-   "source": "https://commons.wikimedia.org/wiki/File:Le_Pen_Jean-Marie_1999.jpg",
+   "auteur": "European Union",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:MEP_Jean-Marie_Le_Pen,_1994_(02).jpg",
    "partage_identique": false
   },
   {
@@ -531,10 +531,10 @@
   {
    "id": "kazib",
    "nom": "Anasse Kazib",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.revolutionpermanente.fr/Bataille-des-retraites-ou-va-l-intersyndicale-Decryptage-d-Anasse-Kazib",
-   "partage_identique": false
+   "auteur": "PabloMorao27",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib,_d%C3%A9cembre_2021.jpg",
+   "partage_identique": true
   },
   {
    "id": "knafo",
@@ -555,10 +555,10 @@
   {
    "id": "lalanne",
    "nom": "Francis Lalanne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/exclusif-francis-lalanne-people-a-la_m7345941",
-   "partage_identique": false
+   "auteur": "Olivier Roller, In Libro Veritas",
+   "licence": "FAL",
+   "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne.png",
+   "partage_identique": true
   },
   {
    "id": "lapix",
@@ -581,7 +581,7 @@
    "nom": "Jean Lassalle",
    "auteur": "Antoine Lamielle",
    "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Jean_Lassalle_03_(cropped).jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Lassalle_05_(cropped).jpg",
    "partage_identique": true
   },
   {
@@ -595,17 +595,17 @@
   {
    "id": "leaument",
    "nom": "Antoine Léaument",
-   "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
-   "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument.jpg",
-   "partage_identique": true
+   "auteur": "Tomkiou",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument_le_21_juillet_2024.jpg",
+   "partage_identique": false
   },
   {
    "id": "lecornu",
    "nom": "Sébastien Lecornu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://podcasts.apple.com/ch/podcast/sébastien-lecornu-ministre-des-armées-attentats-déjoués/id1691740320?i=1000698909981",
+   "auteur": "Polish presidency of the Council of the EU 2025",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Lecornu,_April_2025.jpg",
    "partage_identique": false
   },
   {
@@ -627,17 +627,17 @@
   {
    "id": "lepers",
    "nom": "Julien Lepers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/people/la-regle-des-trois-l-en-pleine-affaire-pierre-palmade-julien-lepers-sort-de-sa-r-1698535",
-   "partage_identique": false
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0272.JPG",
+   "partage_identique": true
   },
   {
    "id": "lescure",
    "nom": "Pierre Lescure",
-   "auteur": "Siren-Com",
+   "auteur": "Georges Biard",
    "licence": "CC BY-SA 3.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Pierre_Lescure_2012.jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Pierre_Lescure_Deauville_2013.jpg",
    "partage_identique": true
   },
   {
@@ -651,10 +651,10 @@
   {
    "id": "lucas",
    "nom": "Benjamin Lucas-Lundy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/elections/presidentielle/presidentielle-2027-le-depute-generations-des-yvelines-benjamin-lucas-lundy-candidat-a-la-primaire-de-la-gauche-14-05-2026-5IHSNWGCWZGE3OFOWSWHDVDJ5E.php",
-   "partage_identique": false
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210819_lucas.benjamin_5936.jpg",
+   "partage_identique": true
   },
   {
    "id": "macron",
@@ -667,33 +667,33 @@
   {
    "id": "maillard",
    "nom": "Sylvain Maillard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/elections/municipales/municipales-a-paris-je-ferai-campagne-aux-cotes-de-rachida-dati-annonce-sylvain-maillard-28-10-2025-D3AGOBWGJBGXRD2BL7PBLX2EH4.php",
-   "partage_identique": false
+   "auteur": "Sylvain Maillard",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_Wikipedia_Sylvain_Maillard.jpg",
+   "partage_identique": true
   },
   {
    "id": "mamere",
    "nom": "Noël Mamère",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.radiofrance.fr/personnes/noel-mamere",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Noel.Mamere2006.JPG",
    "partage_identique": false
   },
   {
    "id": "marechal",
    "nom": "Marion Maréchal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudradio.fr/linvite-politique/ce-nest-pas-a-la-france-de-sadapter-a-lislam-affirme-marion-marechal",
-   "partage_identique": false
+   "auteur": "Gauthier Bouchet",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:MMLePen-010912.JPG",
+   "partage_identique": true
   },
   {
    "id": "mariani",
    "nom": "Thierry Mariani",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/thierry-mariani/",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1718282772753_20240611_20240611_MARIANI_Thierry_FR_004.jpg",
    "partage_identique": false
   },
   {
@@ -739,18 +739,18 @@
   {
    "id": "ndiaye",
    "nom": "Sibeth Ndiaye",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gentside.com/news/jet-de-pierres-sur-la-police-sibeth-ndiaye-au-coeur-d-une-nouvelle-polemique-a-cause-d-une-declaration-tronquee_art95376.html",
-   "partage_identique": false
+   "auteur": "Hegor",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:MH-Sibeth_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "odoul",
    "nom": "Julien Odoul",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lyonne.fr/auxerre-89000/actualites/l-heure-du-proces-pour-julien-odoul-dans-l-affaire-des-assistants-parlementaires-du-fn_14570357/",
-   "partage_identique": false
+   "auteur": "Toufik-de-Planoise",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Odoul_-_Besan%C3%A7on_25-04-2019_-_Toufik-de-Planoise.jpg",
+   "partage_identique": true
   },
   {
    "id": "oudea",
@@ -771,9 +771,9 @@
   {
    "id": "pecresse",
    "nom": "Valérie Pécresse",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.radiofrance.fr/franceinter/podcasts/la-grande-matinale/la-grande-matinale-du-lundi-15-decembre-2025-4133900",
+   "auteur": "Scottish Government",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9rie_P%C3%A9cresse_in_Dec_2022_(sq_cropped).jpg",
    "partage_identique": false
   },
   {
@@ -787,17 +787,17 @@
   {
    "id": "philippe",
    "nom": "Édouard Philippe",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://artistes-productions.com/2023/12/20/contacter-edouard-philippe-adresse-e-mail-courrier-numeros-de-telephone/",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Edouard_Philippe-2_(46824610355).jpg",
    "partage_identique": false
   },
   {
    "id": "philippot",
    "nom": "Florian Philippot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leprogres.fr/p/florian-philippot/",
+   "auteur": "tocsin",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Florian_Philippot1.jpg",
    "partage_identique": false
   },
   {
@@ -819,9 +819,9 @@
   {
    "id": "portes",
    "nom": "Thomas Portes",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://fr.linkedin.com/posts/le-point_info-le-point-thomas-portes-nous-met-activity-7347876129669607424-qxR8",
+   "auteur": "Parti communiste français",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thomas_Portes_en_2018.png",
    "partage_identique": false
   },
   {
@@ -829,23 +829,23 @@
    "nom": "Philippe Poutou",
    "auteur": "Patrice CALATAYU from Bordeaux, France",
    "licence": "CC BY-SA 2.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Philippe_Poutou_2020_(cropped).png",
+   "source": "https://commons.wikimedia.org/wiki/File:Les_Gilets_Jaunes_(33249708098).jpg",
    "partage_identique": true
   },
   {
    "id": "ppda",
    "nom": "Patrick Poivre d'Arvor",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ohmymag.com/people/actu-people/patrick-poivre-darvor-deux-nouvelles-plaintes-laffaire-samplifie_art188114.html",
-   "partage_identique": false
+   "auteur": "Babsy",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:PPDA_-_Brive_2011.jpg",
+   "partage_identique": true
   },
   {
    "id": "praud",
    "nom": "Pascal Praud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.melty.fr/people/celine-dion-raillee-par-pascal-praud-elle-prend-3-ce-caprice-dans-un-hotel-5-etoiles-le-rend-hilare-2306587.html",
+   "auteur": "ManoSolo13241324",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pascal_Praud_2025.jpg",
    "partage_identique": false
   },
   {
@@ -867,10 +867,10 @@
   {
    "id": "rigault",
    "nom": "Stanislas Rigault",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/cote-d-azur/nice-des-etudiants-vent-debout-contre-la-venue-de-stanislas-rigault-proche-d-eric-zemmour-a-un-debat-universitaire_AV-202303070442.html",
-   "partage_identique": false
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Stanislas_Rigault_12_novembre_2023.jpg",
+   "partage_identique": true
   },
   {
    "id": "riner",
@@ -883,9 +883,9 @@
   {
    "id": "rousseau",
    "nom": "Sandrine Rousseau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/europe-ecologie-les-verts/je-ne-te-comprends-pas-sandrine-rousseau-repond-a-olivier-faure-sur-le-vote-de-la-partie-recettes-du-budget_AV-202511090245.html",
+   "auteur": "Selbymay",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Huma2023SandrineRousseau.jpg",
    "partage_identique": false
   },
   {
@@ -899,25 +899,25 @@
   {
    "id": "royal",
    "nom": "Ségolène Royal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.starmag.com/actu-people/peopolitique/segolene-royal-candidate-a-la-presidentielle-de-2027-un-depute-se-lache-sil-faut-en-rire-1018632.html",
-   "partage_identique": false
+   "auteur": "Denisjcroux",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Spectacle_d%27Isabelle_Alonso_le_28-09-2014_%C3%A0_la_Nouvelle_Seine_%C3%A0_Paris_-_Alonso_avec_Royal.jpg",
+   "partage_identique": true
   },
   {
    "id": "ruffin",
    "nom": "François Ruffin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/francois-ruffin-veut-re-introduire-les-savoir-faire-pratiques-la-couture-la-cuisine-et-le-bricolage-a-lecole/",
-   "partage_identique": false
+   "auteur": "Thinkerview",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Ruffin_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "rugy",
    "nom": "François de Rugy",
    "auteur": "bruno perroud",
    "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_de_Rugy.jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_FdR.jpg",
    "partage_identique": true
   },
   {
@@ -955,34 +955,34 @@
   {
    "id": "tache",
    "nom": "Aurélien Taché",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lejdd.fr/politique/taiwan-est-chinoise-le-depute-lfi-aurelien-tache-provoque-un-tolle-apres-un-tweet-pro-pekin-164438",
-   "partage_identique": false
+   "auteur": "TrisHR",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
+   "partage_identique": true
   },
   {
    "id": "tanguy",
    "nom": "Jean-Philippe Tanguy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/economie/economie-social/social/c-est-une-injustice-sociale-jean-philippe-tanguy-confirme-que-le-rn-proposera-d-abroger-la-reforme-des-retraites_AV-202409080281.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-02-07_19-22-44_MeetingRN-Belfort_02.jpg",
    "partage_identique": false
   },
   {
    "id": "thevenot",
    "nom": "Prisca Thevenot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lemonde.fr/politique/article/2024/05/02/demissions-en-serie-chez-prisca-thevenot_6231122_823448.html",
-   "partage_identique": false
+   "auteur": "Maxime BOUDET",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Prisca_Thevenot_2023.jpg",
+   "partage_identique": true
   },
   {
    "id": "thevenoud",
    "nom": "Thomas Thévenoud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.unifrance.org/film/54155/de-grandes-esperances",
-   "partage_identique": false
+   "auteur": "Tthevenoud",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thomas_Thevenoud_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "tiberi",
@@ -995,26 +995,26 @@
   {
    "id": "tondelier",
    "nom": "Marine Tondelier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bvoltaire.fr/marine-tondelier-une-fachologue-invitee-sur-le-plateau-de-rmc/",
+   "auteur": "Selbymay",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Huma2023MarineTondelier_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "trouve",
    "nom": "Aurélie Trouvé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://france3-regions.franceinfo.fr/auvergne-rhone-alpes/isere/grenoble/vencorex-le-gouvernement-devra-s-expliquer-une-deputee-demande-une-commission-d-enquete-parlementaire-sur-l-abandon-de-l-usine-3142631.html",
-   "partage_identique": false
+   "auteur": "Toufik-de-Planoise",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Aur%C3%A9lie_Trouv%C3%A9_Besan%C3%A7on_14-01-2022_Toufik-de-Planoise.jpg",
+   "partage_identique": true
   },
   {
    "id": "vallaud",
    "nom": "Boris Vallaud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.liberation.fr/politique/demarchandisation-le-mot-de-boris-vallaud-contre-la-logique-du-profit-20260422_UEUVXYNC3BBMFBGUGWSKEYSSAY/",
-   "partage_identique": false
+   "auteur": "Bloody-libu",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Boris_Vallaud_en_2023.jpg",
+   "partage_identique": true
   },
   {
    "id": "valls",
@@ -1027,9 +1027,9 @@
   {
    "id": "villiers",
    "nom": "Philippe de Villiers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.cnews.fr/france/2026-01-09/colere-des-agriculteurs-il-faut-sortir-de-cette-union-europeenne-sinon-va-etre",
+   "auteur": "Marie-Lan Nguyen (User:Jastrow)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Philippe_de_Villiers_Libertas_2009-05-14.jpg",
    "partage_identique": false
   },
   {
@@ -1043,346 +1043,306 @@
   {
    "id": "yann_bompard",
    "nom": "Yann Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/elections/municipales/municipales-2026-a-orange-yann-bompard-perd-de-nouveau-son-fauteuil-de-maire-a-deux-jours-de-lelection-13-03-2026-JCGNFUTYTFBN5AJK6YXRWMUXOA.php",
+   "auteur": "Casserolade",
+   "licence": "CC0",
+   "source": "https://github.com/casserolade/casserolade/blob/main/tools/graphisme/tete_dessinee.py",
    "partage_identique": false
   },
   {
    "id": "zemmour",
    "nom": "Éric Zemmour",
    "auteur": "Anh De France",
-   "licence": "CC0",
-   "source": "https://commons.wikimedia.org/wiki/File:Portrait_d%27%C3%89ric_Zemmour,_avril_2022.jpg",
-   "partage_identique": false
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Zemmour,_Marion_Mar%C3%A9chal,_Guillaume_Peltier,_Nicolas_Bay,_avril_2022_(52104578565).jpg",
+   "partage_identique": true
   },
   {
    "id": "aliot.aie",
    "nom": "Louis Aliot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://madeinperpignan.com/perpignan-nouveau-proces-louis-aliot-complicite-diffamation-avocat-de-nasdas/",
+   "auteur": "Blandine Le Cain",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_-_Meeting_1er_mai_2012_Front_National,_Paris_(11)_(cropped).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "aliot.choc",
+   "nom": "Louis Aliot",
+   "auteur": "Blandine Le Cain",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_-_Meeting_1er_mai_2012_Front_National,_Paris_(11)_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "aliot.rire",
    "nom": "Louis Aliot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://perpignanmediterraneemetropole.fr/la-communaute-urbaine/les-elus/",
-   "partage_identique": false
-  },
-  {
-   "id": "aphatie.aie",
-   "nom": "Jean-Michel Aphatie",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.tf1.fr/fr-be/tmc/quotidien-avec-yann-barthes/videos/ledito-de-jean-michel-aphatie-retour-du-service-militaire-un-coup-politique-sans-besoin-reel-08312350.html",
-   "partage_identique": false
-  },
-  {
-   "id": "aphatie.choc",
-   "nom": "Jean-Michel Aphatie",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=eTn55dcZE3c",
-   "partage_identique": false
-  },
-  {
-   "id": "aphatie.rire",
-   "nom": "Jean-Michel Aphatie",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.programme-tv.net/news/tv/205549-jean-michel-apathie-pique-un-gros-fou-rire-en-pleine-interview-politique-sur-france-info-video/",
-   "partage_identique": false
+   "auteur": "Pablo Tupin-Noriega",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Aliot_2015_02_(cropped)_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "arthaud.aie",
    "nom": "Nathalie Arthaud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/election-presidentielle-2027-nathalie-arthaud-annonce-sa-candidature-pour-lutte-ouvriere_AD-202512080393.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2016-04-09_18-14-06_fete-lo-montbeliard.jpg",
    "partage_identique": false
   },
   {
    "id": "arthaud.choc",
    "nom": "Nathalie Arthaud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leprogres.fr/politique/2023/09/22/nathalie-arthaud-a-saint-priest-pour-la-fete-de-lutte-ouvriere",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2025-02-22_18-18-11_FeteLO-Montb%C3%A9liard.jpg",
    "partage_identique": false
   },
   {
    "id": "arthaud.rire",
    "nom": "Nathalie Arthaud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/elections/2022/04/01/nathalie-arthaud-a-repondu-a-nos-lecteurs-ce-qu-il-faut-retenir",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2016-04-09_18-49-47_fete-lo-montbeliard.jpg",
    "partage_identique": false
   },
   {
    "id": "asselineau.aie",
    "nom": "François Asselineau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tvl.fr/le-samedi-politique-avec-francois-asselineau-ukraine-dette-macron-humilie-sur-tous-les-fronts",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2024-05-25_15-44-26_ConfAsselineau-Hirsingue.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "asselineau.choc",
+   "nom": "François Asselineau",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2016-11-12_20-05-05_conf-asselineau-belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "asselineau.rire",
    "nom": "François Asselineau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.parlons-politique.fr/elections/le-proces-de-francois-asselineau-relance-la-question-du-consentement-et-du-rapport-dautorite-dans-les-partis-politiques_16096/",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2024-05-25_15-43-59_ConfAsselineau-Hirsingue.jpg",
    "partage_identique": false
   },
   {
    "id": "attal.aie",
    "nom": "Gabriel Attal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://health.victorian-hotel.com/age-de-gabriel-attal-gabriel-attal-et-sa-femme/",
+   "auteur": "Stenbocki maja",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal_and_Kristen_Michal,_04.03.2026_(4).jpg",
    "partage_identique": false
   },
   {
    "id": "attal.choc",
    "nom": "Gabriel Attal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/gabriel-attal-surpris-avec-un-acteur-bien-connu-au-restaurant-leur-echange-savoureux-devoile-20260319",
-   "partage_identique": false
+   "auteur": "Antoine Lamielle",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gabriel_Attal.jpg",
+   "partage_identique": true
   },
   {
    "id": "attal.rire",
    "nom": "Gabriel Attal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.vanityfair.fr/article/gabriel-attal-surpris-en-train-de-montrer-des-photos-de-chiens-a-lassemblee-nationale",
+   "auteur": "DHSgov",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:DHS_Deputy_Secretary_John_Tien_Conducts_Bilat_with_French_Minister_of_Action_and_Public_Accounts_-_52732856550.jpg",
    "partage_identique": false
   },
   {
    "id": "aubry.aie",
    "nom": "Manon Aubry",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/manon-aubry-condamnee-la-peine-est-lourde-la-deputee-europeenne-risque-la-prison-a/",
-   "partage_identique": false
+   "auteur": "Roland Godefroy",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Paris-2023-03-23-manif26.jpg",
+   "partage_identique": true
   },
   {
    "id": "aubry.choc",
    "nom": "Manon Aubry",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.beauxarts.com/grand-format/elections-europeennes-quelles-sont-les-propositions-des-principaux-candidats-en-matiere-de-culture/",
-   "partage_identique": false
+   "auteur": "GUE/NGL",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EP-098381A_Plenary_1_(49413649422).jpg",
+   "partage_identique": true
   },
   {
    "id": "aubry.rire",
    "nom": "Manon Aubry",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://actu.fr/centre-val-de-loire/montargis_45208/grand-rassemblement-et-personnalites-attendues-contre-le-meeting-de-l-extreme-droite-europeenne-dans-le-loiret_62722085.html",
+   "auteur": "Wyslijp16",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Manifestation_du_22_novembre_2025_%C3%A0_Paris_contre_les_violences_sexistes,_sexuelles_et_de_genre_%E2%80%94_083.jpg",
    "partage_identique": false
   },
   {
    "id": "balkany.aie",
    "nom": "Patrick Balkany",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/article/patrick-balkany-s-explique-sur-sa-danse-buzz-dans-les-rues-de-levallois_a393776/1",
-   "partage_identique": false
+   "auteur": "Lelapin31",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Balkany_au_tribunal.jpg",
+   "partage_identique": true
   },
   {
    "id": "balkany.choc",
    "nom": "Patrick Balkany",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://france3-regions.franceinfo.fr/paris-ile-de-france/paris/grand-paris/au-tribunal-patrick-balkany-demande-une-confusion-des-peines-2642948.html",
-   "partage_identique": false
-  },
-  {
-   "id": "balkany.rire",
-   "nom": "Patrick Balkany",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.voici.fr/faits-divers/patrick-balkany-son-portable-sonne-en-plein-proces-et-sa-sonnerie-a-de-quoi-faire-rire-659894",
-   "partage_identique": false
+   "auteur": "Lelapin31",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Balkany_au_tribunal.jpg",
+   "partage_identique": true
   },
   {
    "id": "barbier.aie",
    "nom": "Christophe Barbier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lepoint.fr/societe/l-express-christophe-barbier-va-quitter-la-direction-de-la-redaction-10-10-2016-2074948_23.php",
-   "partage_identique": false
+   "auteur": "AwkwardChester",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Christophe_Barbier_SDL2019.jpg",
+   "partage_identique": true
   },
   {
    "id": "barbier.choc",
    "nom": "Christophe Barbier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/replay-emissions/politique-premiere/l-edito-de-christophe-barbier-la-colere-des-nationalistes-corses_VN-201802080076.html",
-   "partage_identique": false
-  },
-  {
-   "id": "barbier.rire",
-   "nom": "Christophe Barbier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.20minutes.fr/societe/2117399-20170816-video-rap-macron-imagine-christophe-barbier-provoque-malaise-twitter",
-   "partage_identique": false
+   "auteur": "AwkwardChester",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Christophe_Barbier_SDL2019.jpg",
+   "partage_identique": true
   },
   {
    "id": "bardella.aie",
    "nom": "Jordan Bardella",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.msn.com/fr-ch/actualite/other/jordan-bardella-veut-durcir-le-syst%C3%A8me-de-cotisations-pour-la-retraite/ar-AA2gImkj",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2024-03-23_10-26-10_Bardella-Belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "bardella.choc",
    "nom": "Jordan Bardella",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/jordan-bardella-s-attire-les-foudres-d-une-celebre-chanteuse-apres-une-video-tiktok-20251214",
+   "auteur": "European Parliament",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jordan_Bardella_(July_2022).jpg",
    "partage_identique": false
   },
   {
    "id": "bardella.rire",
    "nom": "Jordan Bardella",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/jordan-bardella-marre-de-le-voir-il-na-pas-que-des-amis-dans-le-show-biz-et-les-langues-se-delient/",
-   "partage_identique": false
+   "auteur": "Raphael ATTAL @BootEXE",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jordan_Bardella_-_Strasbourg_European_Parliament_September_2022_(Cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "barnier.aie",
    "nom": "Michel Barnier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://ecoledelartoratoire.com/article/discours-de-michel-barnier/",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_europeanpeoplesparty_-_EPP_Summit_8_March_2007_(58).jpg",
    "partage_identique": false
   },
   {
    "id": "barnier.choc",
    "nom": "Michel Barnier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rfi.fr/fr/france/20241121-france-face-aux-maires-en-colère-le-premier-ministre-michel-barnier-tente-de-jouer-l-apaisement",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_europeanpeoplesparty_-_EPP_Summit_8_March_2007_(58).jpg",
    "partage_identique": false
   },
   {
-   "id": "barthes.aie",
-   "nom": "Yann Barthès",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://populaction.com/yann-barthes-une-figure-emblematique-de-la-television-francaise/",
-   "partage_identique": false
-  },
-  {
-   "id": "barthes.choc",
-   "nom": "Yann Barthès",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://fanzouze.fr/yann-barthes/",
-   "partage_identique": false
-  },
-  {
-   "id": "barthes.rire",
-   "nom": "Yann Barthès",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.programme.tv/news/emissions-tv/174974-l-incontrolable-fou-rire-de-yann-barthes-apres-un-slogan-inattendu-d-un-manifestant-contre-francois-fillon-video/",
+   "id": "barnier.rire",
+   "nom": "Michel Barnier",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Flickr_-_europeanpeoplesparty_-_EPP_Summit_8_March_2007_(58).jpg",
    "partage_identique": false
   },
   {
    "id": "batho.aie",
    "nom": "Delphine Batho",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lereveildumidi.fr/politique/présidentielle-2027-delphine-batho-défend-une-“écologie-des-territoires”-dans-le-gard",
-   "partage_identique": false
+   "auteur": "Thesupermat",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:D%C3%A9bat_sur_la_transition_%C3%A9cologique_-_F%C3%AAte_de_l%27Humanit%C3%A9_2013_-_011.jpg",
+   "partage_identique": true
   },
   {
    "id": "batho.choc",
    "nom": "Delphine Batho",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://france3-regions.franceinfo.fr/nouvelle-aquitaine/deux-sevres/niort/la-deputee-ecologiste-delphine-batho-se-declare-candidate-pour-la-presidentielle-de-2027-3255724.html",
-   "partage_identique": false
+   "auteur": "Thesupermat",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:D%C3%A9bat_sur_la_transition_%C3%A9cologique_-_F%C3%AAte_de_l%27Humanit%C3%A9_2013_-_007.jpg",
+   "partage_identique": true
   },
   {
    "id": "batho.rire",
    "nom": "Delphine Batho",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://sixactualites.fr/politique-religion/delphine-batho-choisie-par-generation-ecologie-comme-candidate-officielle-pour-la-presidentielle-2027/124380/",
-   "partage_identique": false
+   "auteur": "DeuxSevres79",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Delphine_Batho_(cropped-2).png",
+   "partage_identique": true
   },
   {
    "id": "bay.aie",
    "nom": "Nicolas Bay",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ouest-france.fr/politique/rassemblement-national/rassemblement-national-en-normandie-stupeur-et-rancoeurs-apres-la-suspension-de-nicolas-bay-2f0a0cbe-8f51-11ec-ad29-306d7d897d7d",
-   "partage_identique": false
+   "auteur": "Gauthier Bouchet (Jeunes avec Marine )",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Bay.jpg",
+   "partage_identique": true
   },
   {
    "id": "bay.choc",
    "nom": "Nicolas Bay",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lamontagne.fr/paris-75000/politique/nicolas-bay-on-a-une-justice-instrumentalisee_12332300/",
+   "auteur": "European Parliament",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:MEPs_call_for_the_protection_of_fundamental_values_in_the_EU_and_worldwide_-_51298652969.jpg",
    "partage_identique": false
   },
   {
    "id": "bay.rire",
    "nom": "Nicolas Bay",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://francaismeme.com/nicolas-bay-mariage/",
+   "auteur": "European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1718699899690_20240617_BAY_Nicolas_FR_011.jpg",
    "partage_identique": false
   },
   {
    "id": "bayrou.aie",
    "nom": "François Bayrou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/suppression-de-deux-jours-feries-pourquoi-francois-bayrou-sobstine-avec-cette-mesure-controversee/",
+   "auteur": "Antonin Borgeaud",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Bayrou_interview%C3%A9.jpg",
    "partage_identique": false
   },
   {
    "id": "bayrou.choc",
    "nom": "François Bayrou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.humanite.fr/politique/assemblee-nationale/budget-2026-vote-de-confiance-colere-sociale-francois-bayrou-sur-la-corde-raide-face-a-une-france-en-ebullition",
-   "partage_identique": false
+   "auteur": "Guillaume Paumier",
+   "licence": "CC BY-SA 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Bayrou_-_Meeting_Toulouse_2007-02-06_(cropped1).jpg",
+   "partage_identique": true
   },
   {
    "id": "bayrou.rire",
    "nom": "François Bayrou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.letribunaldunet.fr/politique/francois-bayrou-extravagant-sa-surprenante-demande-des-son-arrivee-a-matignon.html",
+   "auteur": "Nicolas Kovarik - European Commission",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Minzatu_Bayrou_2025_(3x4_cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "berge.aie",
    "nom": "Aurore Bergé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/politique/2025/01/31/creches-privees-une-information-judiciaire-ouverte-pour-faux-temoignage-contre-aurore-berge",
-   "partage_identique": false
+   "auteur": "HUGUES DE BEAUCHESNE",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:AURORE_BERG%C3%89_04_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "berge.choc",
    "nom": "Aurore Bergé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.publicsenat.fr/actualites/politique/union-de-la-droite-et-du-centre-il-faut-une-primaire-a-lautomne-plaide-aurore-berge",
-   "partage_identique": false
+   "auteur": "HUGUES DE BEAUCHESNE",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:AURORE_BERG%C3%89_06.jpg",
+   "partage_identique": true
   },
   {
    "id": "berge.rire",
@@ -1395,577 +1355,425 @@
   {
    "id": "bertrand.aie",
    "nom": "Xavier Bertrand",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/presidentielle-xavier-bertrand-fait-du-travail-le-troisieme-grand-axe-de-sa-campagne_AD-202110020130.html",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Political_Assembly,_Marseille_(6869681523).jpg",
    "partage_identique": false
   },
   {
    "id": "bertrand.choc",
    "nom": "Xavier Bertrand",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.tf1info.fr/actualite/xavier-bertrand-11933/",
-   "partage_identique": false
+   "auteur": "Fondapol - Fondation pour l'innovation politique",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Xavier_Bertrand2.jpg",
+   "partage_identique": true
   },
   {
    "id": "bertrand.rire",
    "nom": "Xavier Bertrand",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/xavier-bertrand-candidat-a-la-presidentielle-son-annonce-surprise-qui-va-faire-jaser-1273949",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Political_Assembly,_Marseille_(6869670403).jpg",
    "partage_identique": false
   },
   {
    "id": "bompard.aie",
    "nom": "Manuel Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/manuel-bompard/",
-   "partage_identique": false
+   "auteur": "GUE/NGL",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Strasbourg_Plenary_November_2019_EP-096183A_Plenary_session_(49131737017).jpg",
+   "partage_identique": true
   },
   {
    "id": "bompard.choc",
    "nom": "Manuel Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/la-france-insoumise/manuel-bompard-prend-la-tete-de-la-france-insoumise-a-l-unanimite-de-la-direction_AN-202301050472.html",
-   "partage_identique": false
+   "auteur": "GUE/NGL",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Manuel_Bompard_(49237715272).jpg",
+   "partage_identique": true
   },
   {
    "id": "bompard.rire",
    "nom": "Manuel Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=snny5K6WhI8",
-   "partage_identique": false
+   "auteur": "GUE/NGL",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Manuel_Bompard_(48951549862).jpg",
+   "partage_identique": true
   },
   {
    "id": "borne.aie",
    "nom": "Élisabeth Borne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/elisabeth-borne-ce-surnom-trouve-par-ses-collaborateurs-qui-ne-doit-pas-la-faire-998861",
-   "partage_identique": false
+   "auteur": "Andrea Adriani © European Union 2022",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Elisabeth_Borne_November_2022_close-up.jpg",
+   "partage_identique": true
   },
   {
    "id": "borne.choc",
    "nom": "Élisabeth Borne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.midilibre.fr/2022/12/12/video-pourquoi-avez-vous-peur-du-debat-elisabeth-borne-provoque-un-fou-rire-a-lassemblee-nationale-10863478.php",
+   "auteur": "EU2017EE Estonian Presidency",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Informal_meeting_of_energy_and_transport_ministers_(TTE)._Arrivals,_transport_ministers_Elisabeth_Borne_(37190062412).jpg",
    "partage_identique": false
   },
   {
    "id": "borne.rire",
    "nom": "Élisabeth Borne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://peopleauquotidien.com/actualites/elizabeth-borne-sa-crise-de-rire-en-pleine-assemblee/",
-   "partage_identique": false
-  },
-  {
-   "id": "bouamrane.aie",
-   "nom": "Karim Bouamrane",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/parti-socialiste/la-reponse-est-oui-le-maire-ps-karim-bouamrane-se-dit-en-capacite-d-etre-un-premier-ministre-de-compromis_AD-202408300349.html",
-   "partage_identique": false
-  },
-  {
-   "id": "bouamrane.choc",
-   "nom": "Karim Bouamrane",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/parti-socialiste/video-municipales-2026-il-faut-qu-olivier-faure-demissionne-c-est-un-echec-total-affirme-karim-bouamrane-maire-ps-de-saint-ouen_VN-202603240347.html",
-   "partage_identique": false
-  },
-  {
-   "id": "bouamrane.rire",
-   "nom": "Karim Bouamrane",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/paris/seine-saint-denis/resultats-des-municipales-2026-a-saint-ouen-sur-seine-karim-bouamrane-reste-aux-manettes_AN-202603220655.html",
-   "partage_identique": false
-  },
-  {
-   "id": "bouleau.aie",
-   "nom": "Gilles Bouleau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/jai-eu-une-impression-de-mort-imminente-gilles-bouleau-emu-apres-un-reportage-de-tf1/",
-   "partage_identique": false
-  },
-  {
-   "id": "bouleau.choc",
-   "nom": "Gilles Bouleau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.jeanmarcmorandini.com/article-602392-audiences-20h-le-jt-de-gilles-bouleau-sur-tf1-reste-stable-et-leader-a-51-millions-face-a-anne-sophie-lapix-sur-france-2-loin-derriere-a-38-millions.html",
-   "partage_identique": false
-  },
-  {
-   "id": "bouleau.rire",
-   "nom": "Gilles Bouleau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/people/gilles-bouleau-age-taille-salaire-couple-epouse-tf1-laure-tout-savoir-1669678",
+   "auteur": "© European Union 2024 - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89lisabeth_Borne_in_2023.jpg",
    "partage_identique": false
   },
   {
    "id": "bove.aie",
    "nom": "José Bové",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/colere-des-agriculteurs-jose-bove-plaide-pour-une-charte-intersyndicale_AN-202411270548.html",
-   "partage_identique": false
+   "auteur": "Budotradan",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:MontredonDuLarzac_Jos%C3%A9Bov%C3%A9300708_(13).jpg",
+   "partage_identique": true
   },
   {
    "id": "bove.choc",
    "nom": "José Bové",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ina.fr/ina-eclaire-actu/video/i09043668/jose-bove-pour-la-desobeissance-civique",
-   "partage_identique": false
+   "auteur": "Claude TRUONG-NGOC",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jos%C3%A9_Bov%C3%A9_par_Claude_Truong-Ngoc_2013.jpg",
+   "partage_identique": true
   },
   {
    "id": "bove.rire",
    "nom": "José Bové",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lapresse.ca/actualites/201610/12/01-5029650-jose-bove-pourra-rester-au-canada-sept-jours.php",
+   "auteur": "Marie-Lan Nguyen (User:Jastrow)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Jose_Bove_Europe_Ecologie_2009-06-03_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "boyard.aie",
    "nom": "Louis Boyard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/ils-narriveront-jamais-a-mavoir-louis-boyard-le-fort-en-gueule-de-lfi-15-03-2023-GYPNPJFB55CQBE2YWBZO2ZJIFQ.php",
-   "partage_identique": false
+   "auteur": "Rémi Simonnin",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Boyard_%C3%A0_la_Marche_du_21_janvier_(1).jpg",
+   "partage_identique": true
   },
   {
    "id": "boyard.choc",
    "nom": "Louis Boyard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/paris/val-de-marne/municipales-a-villeneuve-saint-georges-apres-sa-defaite-louis-boyard-cible-les-autres-partis-de-gauche_AN-202502030168.html",
+   "auteur": "jlm2017.fr",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:M%C3%A9lenchon_2027_-_55263030264.jpg",
    "partage_identique": false
+  },
+  {
+   "id": "boyard.rire",
+   "nom": "Louis Boyard",
+   "auteur": "Babar BZH",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Louis_Boyard_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "branco.aie",
    "nom": "Juan Branco",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.valeursactuelles.com/tag/juan-branco",
-   "partage_identique": false
-  },
-  {
-   "id": "branco.choc",
-   "nom": "Juan Branco",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=MeOjREbuPkE",
+   "auteur": "Yale University",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Juan_Branco_portrait.png",
    "partage_identique": false
   },
   {
    "id": "branco.rire",
    "nom": "Juan Branco",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.liberation.fr/international/afrique/expulse-du-senegal-lavocat-juan-branco-de-retour-en-france-20230808_MTVZ3XPRRFANTORPDHSEIY4TCA/",
+   "auteur": "Web Summit",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2019_-_Centre_Stage_-_Day_2_VJR21660_(49024421022).jpg",
    "partage_identique": false
   },
   {
    "id": "braun_pivet.aie",
    "nom": "Yaël Braun-Pivet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/11000-carcassonne/municipales-2026-a-carcassonne-trois-listes-au-coude-a-coude-240946.html",
+   "auteur": "Houses of the Oireachtas from Ireland",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:France_(53219163932).jpg",
    "partage_identique": false
   },
   {
    "id": "braun_pivet.choc",
    "nom": "Yaël Braun-Pivet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/yael-braun-pivet-lassemblee-nest-pas-une-zone-de-non-droit-24-06-2023-4GWRDYRN55EEDM6GWJOEVBCWDM.php",
+   "auteur": "Houses of the Oireachtas",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:France_(53220544685).jpg",
    "partage_identique": false
   },
   {
    "id": "braun_pivet.rire",
    "nom": "Yaël Braun-Pivet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.24heures.ch/france-le-camp-presidentiel-obtient-six-des-huit-commissions-407910244800",
-   "partage_identique": false
-  },
-  {
-   "id": "bregeon.aie",
-   "nom": "Maud Bregeon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tv-programme.com/le-grand-rendez-vous-magazine/replay/la-grande-interview-maud-bregeon-R6972cca9803da",
-   "partage_identique": false
-  },
-  {
-   "id": "bregeon.choc",
-   "nom": "Maud Bregeon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/gouvernement/maud-bregeon-qualifie-la-messe-en-hommage-a-petain-d-evenement-revoltant-jordan-bardella-se-dit-mal-a-l-aise_AD-202511160256.html",
-   "partage_identique": false
-  },
-  {
-   "id": "bregeon.rire",
-   "nom": "Maud Bregeon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.radiofrance.fr/personnes/maud-bregeon",
-   "partage_identique": false
-  },
-  {
-   "id": "cahuzac.aie",
-   "nom": "Jérôme Cahuzac",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.la-croix.com/France/Justice/Trois-ans-prison-requis-contre-Jerome-Cahuzac-2018-02-20-1200915251",
-   "partage_identique": false
-  },
-  {
-   "id": "cahuzac.choc",
-   "nom": "Jérôme Cahuzac",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://quidam-hebdo.com/2024/04/08/jerome-cahuzac-en-reunion-publique-des-projets-sont-a-reprendre-est-ce-que-ce-sera-a-moi-de-le-faire/",
-   "partage_identique": false
-  },
-  {
-   "id": "cahuzac.rire",
-   "nom": "Jérôme Cahuzac",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://brasseriegeslin.com/jerome-cahuzac-peine-jerome-cahuzac-fait-un-retour-surprise-dix-ans-apres-sa-chute/",
-   "partage_identique": false
+   "auteur": "JenMakope",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Esther_Ase_et_la_Pr%C3%A9sidente_de_l%E2%80%99Assembl%C3%A9e_nationale_Madame_Ya%C3%ABl_Braun-Pivet.jpg",
+   "partage_identique": true
   },
   {
    "id": "castaner.aie",
    "nom": "Christophe Castaner",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lemonde.fr/m-actu-chroniques/portfolio/2017/11/27/le-grand-defile-de-christophe-castaner_5221125_4573473.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2018-01-25_19-07-22_meeting-lrem-modem-belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "castaner.choc",
    "nom": "Christophe Castaner",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.causeur.fr/gilets-jaunes-violence-colere-crise-156878",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2018-01-25_19-09-12_meeting-lrem-modem-belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "castaner.rire",
    "nom": "Christophe Castaner",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/video/programme/code-source/podcast-limprobable-destin-de-christophe-castaner-31-05-2019-7BIW43GLVZENDCJIDF6RQIL5K4.php",
-   "partage_identique": false
+   "auteur": "Fabpyr",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Christophe_Castaner.jpg",
+   "partage_identique": true
   },
   {
    "id": "cazeneuve.aie",
    "nom": "Bernard Cazeneuve",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://france3-regions.franceinfo.fr/occitanie/herault/montpellier/politique-110-elus-derriere-bernard-cazeneuve-et-son-projet-de-federation-de-la-gauche-republicaine-2717078.html",
-   "partage_identique": false
+   "auteur": "Gyrostat",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Visite_Cazeneuve_Toulouse_22-12-15,_1720.jpg",
+   "partage_identique": true
   },
   {
    "id": "cazeneuve.choc",
    "nom": "Bernard Cazeneuve",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.dreuz.com/2017/05/cette-etrange-phrase-de-bernard-cazeneuve-qui-espere-gagner-lelection-presidentielle-134026.html",
+   "auteur": "Österreichische Außenministerium (\"Mahmoud\" credited in Flickr description)",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Lopatka_Cazeneuve_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "cazeneuve.rire",
    "nom": "Bernard Cazeneuve",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://aspenfrance.org/bernard-cazeneuve-2/",
+   "auteur": "Österreichische Außenministerium",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:StS_Lopatka_und_franz%C3%B6sischer_Europaminister_Cazeneuve_(8495209528).jpg",
    "partage_identique": false
   },
   {
    "id": "cheminade.aie",
    "nom": "Jacques Cheminade",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=dQmjRquQuGs",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2021-05-29_15-45-51_f%C3%AAte-d%C3%A9moc-Paris.jpg",
    "partage_identique": false
   },
   {
    "id": "cheminade.choc",
    "nom": "Jacques Cheminade",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://sansapriori.net/2022/10/25/5169-se-liberer-du-vieil-ordre-economique-mondial-par-solidarite-et-progres/",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2021-05-29_15-45-51_f%C3%AAte-d%C3%A9moc-Paris.jpg",
    "partage_identique": false
   },
   {
    "id": "cheminade.rire",
    "nom": "Jacques Cheminade",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://solidariteetprogres.fr/la-france-avec-le-sud-planetaire-notre-combat-votre-combat",
-   "partage_identique": false
-  },
-  {
-   "id": "chenu.aie",
-   "nom": "Sébastien Chenu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/front-national/conversation-filmee-entre-journalistes-et-elus-du-ps-sebastien-chenu-annonce-le-depot-d-un-article-40-au-procureur-de-la-republique_AN-202509090941.html",
-   "partage_identique": false
-  },
-  {
-   "id": "chenu.choc",
-   "nom": "Sébastien Chenu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/front-national/sebastien-chenu-salue-la-reconduction-des-deux-vice-presidences-rn-a-l-assemblee-nationale_AV-202309270317.html",
-   "partage_identique": false
+   "auteur": "Fabienkhan",
+   "licence": "CC BY-SA 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Jacques_cheminade_22102209.jpg",
+   "partage_identique": true
   },
   {
    "id": "chenu.rire",
    "nom": "Sébastien Chenu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/photo-marine-le-pen-et-sebastien-chenu-leur-gros-fou-rire-a-leur-arrivee-a-lassemblee-nationale_496479",
-   "partage_identique": false
-  },
-  {
-   "id": "chikirou.aie",
-   "nom": "Sophia Chikirou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/75000-paris/municipales-2026-pierre-yves-bournazel-presente-son-programme-236845.html",
-   "partage_identique": false
-  },
-  {
-   "id": "chikirou.choc",
-   "nom": "Sophia Chikirou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.msn.com/fr-fr/actualite/france/procès-pour-escroquerie-sophia-chikirou-face-à-la-justice-sous-le-feu-des-projecteurs/ar-AA2317Io",
-   "partage_identique": false
+   "auteur": "VenteXe",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien.Chenu_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "chikirou.rire",
    "nom": "Sophia Chikirou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://lcp.fr/programmes/politiques-a-table/sophia-chikirou-deputee-lfi-et-candidate-a-la-mairie-de-paris-427825",
+   "auteur": "SachaLintignat",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sophia-Chikirou.jpg",
    "partage_identique": false
   },
   {
    "id": "chirac.aie",
    "nom": "Jacques Chirac",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://ekredyty.com/jacques-chirac-jerusalem-la-legendaire-colere-de-chirac-a-jerusalem/",
-   "partage_identique": false
+   "auteur": "David Monniaux",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jacques_Chirac_p1040637.jpg",
+   "partage_identique": true
   },
   {
    "id": "chirac.choc",
    "nom": "Jacques Chirac",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://photo.voici.fr/les-20-looks-emblematiques-de-jacques-chirac-34813",
+   "auteur": "kremlin.ru",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Chirac_in_Russia_2001_03.jpg",
    "partage_identique": false
   },
   {
    "id": "chirac.rire",
    "nom": "Jacques Chirac",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/jacques-chirac-tout-juste-elu-maire-de_m990978",
-   "partage_identique": false
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jacques_Chirac_2008.jpg",
+   "partage_identique": true
   },
   {
    "id": "ciotti.aie",
    "nom": "Éric Ciotti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/demission-deshonneur-vague-d-indignation-apres-l-annonce-d-eric-ciotti-200830.html",
-   "partage_identique": false
+   "auteur": "Frantogian",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Ciotti_(2).jpg",
+   "partage_identique": true
   },
   {
    "id": "ciotti.choc",
    "nom": "Éric Ciotti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=mmYYier46wE",
-   "partage_identique": false
+   "auteur": "Frantogian",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_Ciotti_(2).jpg",
+   "partage_identique": true
   },
   {
    "id": "ciotti.rire",
    "nom": "Éric Ciotti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/elections/municipales/emmanuel-gregoire-eric-ciotti-david-guiraud-ces-depute-elus-maire-lors-des-municipales-2026_AN-202603230430.html",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EPP_Summit,_23_March,_Brussels_(52765298047).jpg",
    "partage_identique": false
   },
   {
    "id": "cohn_bendit.aie",
    "nom": "Daniel Cohn-Bendit",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.france.tv/ina/passe-compose-figures-du-siecle/7650479-daniel-cohn-bendit-raconte-mai-68.html",
+   "auteur": "European Union - Source : EP",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:1657700932843_17-12-08_Frasoni_Cohn_Bendit_7_MOBILE.jpg",
    "partage_identique": false
   },
   {
    "id": "cohn_bendit.choc",
    "nom": "Daniel Cohn-Bendit",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/daniel-cohn-bendit_m501773",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Cohn-Bendit_at_Paris_2006.jpg",
    "partage_identique": false
   },
   {
    "id": "cohn_bendit.rire",
    "nom": "Daniel Cohn-Bendit",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/stars_et_gotha/daniel_cohn-bendit",
-   "partage_identique": false
+   "auteur": "N4thaniel",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Dany-Cohn-Bendit-1.jpg",
+   "partage_identique": true
   },
   {
    "id": "cope.aie",
    "nom": "Jean-François Copé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/77100-meaux/municipales-2026-a-meaux-jean-francois-cope-se-rejouit-de-la-chute-des-extremes-242414.html",
-   "partage_identique": false
+   "auteur": "Guillaume Paumier (user:guillom)",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Cop%C3%A9_-_Sarkozy%27s_meeting_in_Toulouse_for_the_2007_French_presidential_election_0089_2007-04-12_cropped.jpg",
+   "partage_identique": true
   },
   {
    "id": "cope.choc",
    "nom": "Jean-François Copé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://rmc.bfmtv.com/actualites/politique/jean-francois-cope-veut-une-presidentielle-anticipee-il-faut-qu-emmanuel-macron-sorte-par-le-haut_AV-202412180510.html",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Fillon_and_Jean-Fran%C3%A7ois_Cop%C3%A9,_UMP_regional_elections_Paris,_2010.jpg",
    "partage_identique": false
   },
   {
    "id": "cope.rire",
    "nom": "Jean-François Copé",
-   "auteur": "Cheep975",
+   "auteur": "Guillaume Paumier (user:guillom)",
    "licence": "CC BY-SA 3.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Cop%C3%A9_octobre_2012.JPG",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fran%C3%A7ois_Cop%C3%A9_-_Sarkozy%27s_meeting_in_Toulouse_for_the_2007_French_presidential_election_0089_2007-04-12_cropped.jpg",
    "partage_identique": true
-  },
-  {
-   "id": "coquerel.aie",
-   "nom": "Éric Coquerel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/les-infos-de-12h30-retraites-eric-coquerel-donne-son-feu-vert-a-l-examen-de-la-proposition-d-abrogation-liot-7900269396",
-   "partage_identique": false
-  },
-  {
-   "id": "coquerel.choc",
-   "nom": "Éric Coquerel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/politique/2024/10/24/pour-eviter-le-49-3-le-nfp-va-essayer-de-retirer-des-amendements",
-   "partage_identique": false
-  },
-  {
-   "id": "coquerel.rire",
-   "nom": "Éric Coquerel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ajef.net/plf-quel-avenir-pour-le-projet-de-budget-2024-eric-coquerel-president-de-la-commission-des-finances-de-lassemblee-nationale-vient-repondre-aux-questions-des-journalistes-membres-de-la/",
-   "partage_identique": false
   },
   {
    "id": "darmanin.aie",
    "nom": "Gérald Darmanin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudradio.fr/emission/le-fait-du-jour-270",
-   "partage_identique": false
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Agn%C3%A8s_Buzyn_G%C3%A9rald_Darmanin_2017.jpg",
+   "partage_identique": true
   },
   {
    "id": "darmanin.choc",
    "nom": "Gérald Darmanin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/police-justice/lutter-contre-le-fleau-de-la-surpopulation-carcerale-gerald-darmanin-se-felicite-d-une-hausse-des-expulsions-de-detenus-etrangers_AD-202604220608.html",
-   "partage_identique": false
+   "auteur": "Gezelin GREE",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Photo_portrait_de_G%C3%A9rald_DARMANIN.jpg",
+   "partage_identique": true
   },
   {
    "id": "darmanin.rire",
    "nom": "Gérald Darmanin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/faits-divers/pas-a-la-hauteur-gerald-darmanin-veut-des-condamnations-fermes-sans-sursis-pour-les-violences-apres-la-victoire-du-psg-03-06-2025-SVQJKBR3TBDPRGF5GAJHJ4B4GE.php",
+   "auteur": "Claudio Centonze / European Union, 2026 / EC - Audiovisual Service",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Visit_of_G%C3%A9rald_Darmanin,_French_Minister_for_Justice,_to_the_European_Commission_-_2026_(06).jpg",
    "partage_identique": false
   },
   {
    "id": "dati.aie",
    "nom": "Rachida Dati",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://es.headtopics.com/news/municipales-2026-a-paris-les-parisiens-veulent-une-75381325",
-   "partage_identique": false
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Rachida_Dati_Garde_des_Sceaux_2009.jpg",
+   "partage_identique": true
   },
   {
    "id": "dati.choc",
    "nom": "Rachida Dati",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tribunedelyon.fr/culture/tnp-cedric-van-styvendael-tres-en-colere-contre-rachida-dati/",
-   "partage_identique": false
-  },
-  {
-   "id": "dati.rire",
-   "nom": "Rachida Dati",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/photos-rachida-dati-hilare-elle-fait-le-show-au-meeting-de-valerie-pecresse_487154",
-   "partage_identique": false
+   "auteur": "Thesupermat",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Festival_automobile_international_2016_-_Photocall_-_043_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "de_gaulle.aie",
    "nom": "Charles de Gaulle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.politis.fr/articles/2015/01/appartenance-irrevocable-a-la-zone-euro-cest-de-la-rigolade-de-gaulle-29521/",
+   "auteur": "auteur inconnu",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Correio_da_Manh%C3%A3_AN_409.jpg",
    "partage_identique": false
   },
   {
    "id": "de_gaulle.choc",
    "nom": "Charles de Gaulle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.charles-de-gaulle.org/les-activites/grand-public/expositions/de-gaulle-de-lappel-a-la-liberation-1940-1945/",
+   "auteur": "SAS Scandinavian Airlines",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Charles_de_Gaulle_(cropped).jpg",
    "partage_identique": false
+  },
+  {
+   "id": "de_gaulle.rire",
+   "nom": "Charles de Gaulle",
+   "auteur": "Ludwig Wegmann",
+   "licence": "CC BY-SA 3.0 de",
+   "source": "https://commons.wikimedia.org/wiki/File:Charles_de_Gaulle-1963_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "delogu.aie",
    "nom": "Sébastien Delogu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lalsace.fr/elections/2025/11/16/sebastien-delogu-(lfi)-officiellement-candidat-a-la-mairie-de-marseille",
+   "auteur": "SachaLintignat",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu_Manifestation.jpg",
    "partage_identique": false
   },
   {
    "id": "delogu.choc",
    "nom": "Sébastien Delogu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/marseille/replay-emissions/bonjour-marseille/video-election-municipale-a-marseille-sebastien-delogu-devoile-son-programme_VN-202601160339.html",
+   "auteur": "AN2303",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9bastien_Delogu.jpg",
    "partage_identique": false
   },
   {
@@ -1979,881 +1787,681 @@
   {
    "id": "doucet.aie",
    "nom": "Grégory Doucet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/lyon/replay-emissions/lyon-politiques/lyon-gregory-doucet-dit-faire-plus-attention-dans-ses-prises-de-parole-pour-eviter-les-polemiques_VN-202306150772.html",
-   "partage_identique": false
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210821_doucet.gregory_6654.jpg",
+   "partage_identique": true
   },
   {
    "id": "doucet.choc",
    "nom": "Grégory Doucet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/elections/municipales/video-on-a-reussi-a-obtenir-la-dissolution-de-groupes-violents-gregory-doucet-union-de-la-gauche-defend-son-bilan-sur-la-lutte-contre-les-violences-des-ultras-a-lyon_VN-202602240906.html",
-   "partage_identique": false
+   "auteur": "CloudMamma",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gr%C3%A9gory_Doucet_(cropped)_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "doucet.rire",
    "nom": "Grégory Doucet",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://actu.fr/auvergne-rhone-alpes/lyon_69123/municipales-2026-a-lyon-gregory-doucet-la-quete-acharnee-du-second-mandat-malgre-polemiques-et-rejet_64037787.html",
-   "partage_identique": false
+   "auteur": "CloudMamma",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Gr%C3%A9gory_Doucet_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "duflot.aie",
    "nom": "Cécile Duflot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lejdd.fr/Politique/cecile-duflot-face-aux-gilets-jaunes-il-faut-repondre-a-la-colere-par-la-justice-fiscale-3815702",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Europe_Ecologie_92_regional_elections_2010-02-05_n12.jpg",
    "partage_identique": false
   },
   {
    "id": "duflot.choc",
    "nom": "Cécile Duflot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.radiofrance.fr/personnes/cecile-duflot",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Europe_Ecologie_closing_rally_regional_elections_2010-03-10_n12.jpg",
    "partage_identique": false
   },
   {
    "id": "duflot.rire",
    "nom": "Cécile Duflot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://pro.publicsenat.fr/photos/cecile-duflot-png-bce4-02e48.html",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Europe_Ecologie_closing_rally_regional_elections_2010-03-10_n10.jpg",
    "partage_identique": false
   },
   {
    "id": "dupond_moretti.aie",
    "nom": "Éric Dupond-Moretti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.letribunaldunet.fr/politique/eric-dupond-moretti-la-declaration-qui-a-surpris-les-francais-video.html",
+   "auteur": "librariemollat",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Dupont-Moretti.jpg",
    "partage_identique": false
   },
   {
    "id": "dupond_moretti.choc",
    "nom": "Éric Dupond-Moretti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.telestar.fr/societe/politique/les-grandes-gueules-eric-dupond-moretti-tres-en-colere-appelle-alain-marschall-en-direct-644365",
-   "partage_identique": false
-  },
-  {
-   "id": "dupond_moretti.rire",
-   "nom": "Éric Dupond-Moretti",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lematin.ch/story/interview-eric-dupond-moretti-se-donne-en-spectacle-a-lausanne-103306822",
-   "partage_identique": false
+   "auteur": "Faculté de droit Paris-Est Créteil",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Colloque_%22La_lutte_contre_les_mafias_-_en_m%C3%A9moire_des_juges_Falcone_et_Borsellino%22_-_52431420471.jpg",
+   "partage_identique": true
   },
   {
    "id": "dupont_aignan.aie",
    "nom": "Nicolas Dupont-Aignan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lechodusud.com/qui-est-nicolas-dupont-aignan/",
-   "partage_identique": false
+   "auteur": "Nono44",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan_11-09-2011.jpg",
+   "partage_identique": true
   },
   {
    "id": "dupont_aignan.choc",
    "nom": "Nicolas Dupont-Aignan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=I1G0Sr1UDLc",
-   "partage_identique": false
+   "auteur": "Debout la France",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Voeux_de_Nicolas_Dupont-Aignan_%C3%A0_la_presse.jpg",
+   "partage_identique": true
   },
   {
    "id": "dupont_aignan.rire",
    "nom": "Nicolas Dupont-Aignan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://actu.fr/normandie/saint-hilaire-du-harcouet_50484/elections-regionales-nicolas-dupont-aignan-en-visite_214117.html",
-   "partage_identique": false
-  },
-  {
-   "id": "durif.aie",
-   "nom": "Sylvain Durif",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.francesoir.fr/politique-france/sylvain-durif-le-christ-cosmique-annonce-sa-candidature-la-presidentielle-2017",
-   "partage_identique": false
-  },
-  {
-   "id": "durif.rire",
-   "nom": "Sylvain Durif",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/channel/UC5Ig1XQWgmXdPg46qlU_kqw",
-   "partage_identique": false
-  },
-  {
-   "id": "faure.aie",
-   "nom": "Olivier Faure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/parti-socialiste/presidentielle-2027-olivier-faure-evoque-la-possibilite-d-une-primaire-pour-designer-un-candidat-commun-de-la-gauche-et-des-ecologistes_AN-202506080097.html",
-   "partage_identique": false
+   "auteur": "Debout la France",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Dupont-Aignan,_homme_politique_fran%C3%A7ais_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "faure.choc",
    "nom": "Olivier Faure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/parti-socialiste/olivier-faure-veut-un-candidat-unique-a-gauche-en-2027-mais-previent-que-le-ps-est-pret-a-partir-seul_AV-202408310286.html",
-   "partage_identique": false
-  },
-  {
-   "id": "faure.rire",
-   "nom": "Olivier Faure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lexpress.fr/politique/ps/olivier-faure-XMEC7MNC55C6RDZ5IXWJ7JPXDA/",
-   "partage_identique": false
-  },
-  {
-   "id": "ferrari.aie",
-   "nom": "Laurence Ferrari",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.cnews.fr/france/2025-12-18/ledito-de-laurence-ferrari-la-colere-des-paysans-resonne-jusqua-bruxelles-1788033",
-   "partage_identique": false
-  },
-  {
-   "id": "ferrari.choc",
-   "nom": "Laurence Ferrari",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.canalplus.com/cf/divertissement/l-edito-de-laurence-ferrari-«il-y-a-des-jours-ou-l-on-se-dit-que-c-est-fichu/h/24943256_50213",
-   "partage_identique": false
-  },
-  {
-   "id": "ferrari.rire",
-   "nom": "Laurence Ferrari",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.challenges.fr/entreprise/media/laurence-ferrari-a-attire-8-3-millions-de-telespectateurs_370336",
+   "auteur": "KimiRaikkonen3",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:OF_MATIGNON_-_MAXIME_CLAM_(cropped).png",
    "partage_identique": false
   },
   {
    "id": "fillon.aie",
    "nom": "François Fillon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.msn.com/fr-fr/politique/gouvernement/françois-fillon-ne-pourra-pas-se-présenter-à-la-prochaine-présidentielle/ar-AA1WtpQq",
+   "auteur": "Jean Weber",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:F.Fillon_Agro_Paris_Tech_13_Sept_2007_Cl_J_Weber31.jpg",
    "partage_identique": false
   },
   {
    "id": "fillon.choc",
    "nom": "François Fillon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/francois-fillon-la-france-n-est-pas-une-nation-multiculturelle-7785965830",
+   "auteur": "Jean Weber",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:F.Fillon_Agro_Paris_Tech_13_Sept_2007_Cl_J_Weber60.jpg",
    "partage_identique": false
   },
   {
    "id": "fillon.rire",
    "nom": "François Fillon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.tf1info.fr/elections/apres-la-demission-express-de-bruno-le-roux-le-ps-re-demande-a-affaire-francois-fillon-de-retirer-sa-candidature-2029897.html",
-   "partage_identique": false
-  },
-  {
-   "id": "fogiel.aie",
-   "nom": "Marc-Olivier Fogiel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/A-la-rentree-marc-olivier-fogiel-continuera-de-presenter-face-a-fogiel-a-8h15-et-lancera-un-podcast-politique-nomme-les-aspirants-marc-olivier-fogiel-sorties-des-obseques-d-isabelle-mergault-a-la-coupole-du-pere-lachaise-a-paris-le-30-mars-2026-C-cyril-moreau-dominique-jacovides-bestimage_m8228040",
-   "partage_identique": false
-  },
-  {
-   "id": "fogiel.rire",
-   "nom": "Marc-Olivier Fogiel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.programme.tv/news/celebrites/265173-marc-olivier-fogiel-qui-est-francois-roelants-son-mari-et-le-pere-de-ses-deux-filles/",
-   "partage_identique": false
-  },
-  {
-   "id": "fournas.aie",
-   "nom": "Grégoire de Fournas",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudouest.fr/gironde/lesparre-medoc/legislatives-en-gironde-cinq-choses-a-savoir-sur-gregoire-de-fournas-nouveau-depute-rn-du-medoc-11356737.php",
-   "partage_identique": false
-  },
-  {
-   "id": "fournas.choc",
-   "nom": "Grégoire de Fournas",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tvl.fr/actus/le-depute-rn-gregoire-de-fournas-se-dit-surpris-par-cette-bronca-de-l-assemblee-apres-avoir-prononce-qu-ils-retournent-en-afrique",
-   "partage_identique": false
+   "auteur": "Alexlabo",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Alexandra_Dublanche_Fran%C3%A7ois_Fillon.jpg",
+   "partage_identique": true
   },
   {
    "id": "giscard.aie",
    "nom": "Valéry Giscard d'Estaing",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.valery-giscarddestaing.org/valery-giscard-d-estaing/vie-valery-giscard-destaing/",
+   "auteur": "Jan Van de Vel",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Plenary_session_of_the_Convention_on_the_future_of_Europe_(P-009300_00-1).jpg",
    "partage_identique": false
   },
   {
    "id": "giscard.choc",
    "nom": "Valéry Giscard d'Estaing",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/video/video-deces-de-valery-giscard-d-estaing-5-moments-qui-ont-marque-sa-vie-politique-02-12-2020-8411953.php",
+   "auteur": "Tobias Kleinschmidt",
+   "licence": "CC BY 3.0 de",
+   "source": "https://commons.wikimedia.org/wiki/File:MSC_2014_GiscardDEstaing_Kleinschmidt_MSC2014_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "giscard.rire",
    "nom": "Valéry Giscard d'Estaing",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://amomama.fr/241740-dcs-de-valry-giscard-destaing-lancien-pr.html",
-   "partage_identique": false
-  },
-  {
-   "id": "glucksmann.aie",
-   "nom": "Raphaël Glucksmann",
-   "auteur": "Port!mimi!able",
-   "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Raphael_glucksman_6.jpg",
-   "partage_identique": true
-  },
-  {
-   "id": "glucksmann.choc",
-   "nom": "Raphaël Glucksmann",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/presidentielle-2027-raphael-glucksmann-presente-son-programme-sans-etre-candidat-7900518399",
-   "partage_identique": false
-  },
-  {
-   "id": "glucksmann.rire",
-   "nom": "Raphaël Glucksmann",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://peopleauquotidien.com/actualites/pujadas-tacle-glucksmann-ca-commence-bien/",
-   "partage_identique": false
-  },
-  {
-   "id": "gueant.aie",
-   "nom": "Claude Guéant",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/claude-gueant-humilie-et-en-colere-il-vit-de-plus-en-plus-mal-la-prison_485430",
-   "partage_identique": false
-  },
-  {
-   "id": "gueant.choc",
-   "nom": "Claude Guéant",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.parismatch.com/Actu/Politique/Nouvelle-mise-en-examen-de-Claude-Gueant-1574852",
-   "partage_identique": false
-  },
-  {
-   "id": "gueant.rire",
-   "nom": "Claude Guéant",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/diapo/escroquerie-de-frais-de-campagne-6-mois-de-prison-ferme-amenages-pour-claude-gueant_a500456/1",
-   "partage_identique": false
-  },
-  {
-   "id": "guedj.aie",
-   "nom": "Jérôme Guedj",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lopinion.fr/politique/jerome-guedj-olivier-faure-a-cree-un-puissant-malaise-par-dela-les-frontieres-de-la-communaute-juive",
-   "partage_identique": false
-  },
-  {
-   "id": "guedj.choc",
-   "nom": "Jérôme Guedj",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ohmymag.com/people/actu-people/jerome-guedj-candidat-en-2027-vie-privee-parcours-et-ambitions-presidentielles_art179036.html",
-   "partage_identique": false
-  },
-  {
-   "id": "guedj.rire",
-   "nom": "Jérôme Guedj",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.zinfos974.com/presidentielle-2027-le-socialiste-jerome-guedj-annonce-sa-candidature-hors-primaire-de-la-gauche/",
+   "auteur": "Jan Van de Vel",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Plenary_session_of_the_Convention_on_the_future_of_Europe_(P-009300_00-4).jpg",
    "partage_identique": false
   },
   {
    "id": "guette.aie",
    "nom": "Clémence Guetté",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/elections/legislatives/direct-legislatives-thevenot-agressee-pendant-sa-campagne-glucksmann-sur-france-2-ce-jeudi-soir-04-07-2024-7L6HGZ5EKVBYRLHGYF7KB6JJV4.php",
+   "auteur": "Clément Agostini",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Cl%C3%A9mence_Guett%C3%A9.jpg",
    "partage_identique": false
   },
   {
    "id": "guette.choc",
    "nom": "Clémence Guetté",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.radiofrance.fr/franceinter/podcasts/le-6-9/le-6-9-du-dimanche-14-juillet-2024-6129249",
+   "auteur": "Guallendra",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument_et_Cl%C3%A9mence_Guett%C3%A9_mars_2025_manif_contre_le_racisme.jpg",
    "partage_identique": false
   },
   {
    "id": "guette.rire",
    "nom": "Clémence Guetté",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudradio.fr/politique/melenchon-peut-etre-premier-ministre-affirme-clemence-guette",
-   "partage_identique": false
+   "auteur": "Clément Agostini",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Cl%C3%A9mence_Guett%C3%A9_(cropped)_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "hanouna.aie",
    "nom": "Cyril Hanouna",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/diapo/-quel-abruti-un-tare-cyril-hanouna-explose-de-colere-contre-gilles-verdez-dans-tpmp_a483775/1",
-   "partage_identique": false
+   "auteur": "Julien Morvan",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pieds_dans_le_plat_hanouna.jpg",
+   "partage_identique": true
   },
   {
    "id": "hanouna.choc",
    "nom": "Cyril Hanouna",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.starmag.com/medias/cyril-hanouna-en-colere-contre-c8-ces-procedes-qui-ne-lui-plaisent-pas-328490.html",
-   "partage_identique": false
+   "auteur": "Julien Morvan",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pieds_dans_le_plat_hanouna_2_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "hanouna.rire",
    "nom": "Cyril Hanouna",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://toutelatele.ouest-france.fr/cyril-hanouna-son-fou-rire-apres-l-enorme-gaffe-d-une-femme-dans-le-public-185434",
-   "partage_identique": false
+   "auteur": "Julien Morvan",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pieds_dans_le_plat_hanouna_3.jpg",
+   "partage_identique": true
   },
   {
    "id": "hassan.aie",
    "nom": "Rima Hassan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.brut.media/fr/articles/l-eurodeputee-rima-hassan-en-garde-a-vue-pour-apologie-du-terrorisme",
-   "partage_identique": false
-  },
-  {
-   "id": "hassan.choc",
-   "nom": "Rima Hassan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/politique/2025/03/05/des-eurodeputes-demandent-la-levee-de-l-immunite-parlementaire-de-rima-hassan",
+   "auteur": "Frank Barat",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Rima_Hassan.jpg",
    "partage_identique": false
   },
   {
    "id": "hassan.rire",
    "nom": "Rima Hassan",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://peopleauquotidien.com/celebrites/rima-hassan-denonce-un-harcelement-judiciaire-et-politique-va-t-elle-rester-a-lfi/",
+   "auteur": "European Union",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:Rima_Hassan_MEP_(2024).jpg",
    "partage_identique": false
   },
   {
    "id": "hidalgo.aie",
    "nom": "Anne Hidalgo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.parismatch.com/Actu/Societe/Anne-Hidalgo-en-colere-contre-Fox-News-Paris-va-porter-plainte-contre-la-chaine-americaine-693986",
+   "auteur": "Diario de Madrid",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Carmena,_Hidalgo_y_Raggi_reivindican_insertar_las_estrategias_de_paz_en_las_pol%C3%ADticas_municipales_(01).jpg",
    "partage_identique": false
   },
   {
    "id": "hidalgo.choc",
    "nom": "Anne Hidalgo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/75000-paris/anne-hidalgo-devoile-les-grands-projets-qui-vont-rythmer-paris-en-2025-214420.html",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Parti_socialiste_Paris_rally_regional_elections_2010-03-11_n01.jpg",
    "partage_identique": false
   },
   {
    "id": "hidalgo.rire",
    "nom": "Anne Hidalgo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.starmag.com/actu-people/peopolitique/anne-hidalgo-sattire-colere-internautes-apres-photo-ne-passe-241774.html",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:(Anne_Hidalgo)_2020._Jacques_Paquier._P%C3%A9cresse_-_Ollier_-_Hidalgo_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "hollande.aie",
    "nom": "François Hollande",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.terrafemina.com/article/francois-hollande-la-photo-qui-fait-rire-le-web_a240862/1",
+   "auteur": "Ministry of External Affairs",
+   "licence": "GODL-India",
+   "source": "https://commons.wikimedia.org/wiki/File:Francois_Hollande_laying_wreath_at_the_Samadhi_of_Mahatma_Gandhi,_at_Rajghat,_in_Delhi._The_Minister_of_State_for_Environment,_Forest_and_Climate_Change_(Independent_Charge),_Shri_Prakash_Javadekar_is_also_seen.jpg",
    "partage_identique": false
   },
   {
    "id": "hollande.choc",
    "nom": "François Hollande",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.letribunaldunet.fr/humour/50-meilleurs-blagues-carambar-mourir-de-rire.html",
-   "partage_identique": false
+   "auteur": "Remi Jouan",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Hollande_(4).JPG",
+   "partage_identique": true
   },
   {
    "id": "hollande.rire",
    "nom": "François Hollande",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=dfjRcmmDSgk",
+   "auteur": "Joao Pedro Correia - www.joaomakesphotos.com",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Hollande_-_2017_(39617330342)_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "hortefeux.aie",
    "nom": "Brice Hortefeux",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://frejus-saintraphael.maville.com/actu/actudet_-proces-en-appel-du-financement-libyen-brice-hortefeux-repete-avoir-ete-piege-_54135-7251276_actu.Htm",
+   "auteur": "Prime Minister's Office",
+   "licence": "GODL-India",
+   "source": "https://commons.wikimedia.org/wiki/File:The_Prime_Minister,_Dr._Manmohan_Singh_with_the_Minister_for_Immigration,_Integration_and_National_Identity,_Mr._Brice_Hortefeux,_during_the_Ceremonial_Reception,_at_Orly_Airport,_in_Paris_on_September_29,_2008_(3).jpg",
    "partage_identique": false
   },
   {
    "id": "hortefeux.choc",
    "nom": "Brice Hortefeux",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/police-justice/video-nicolas-sarkozy-condamne-brice-hortefeux-se-dit-affecte-et-en-colere-apres-sa-condamnation_VN-202509250839.html",
-   "partage_identique": false
+   "auteur": "Andy Mabbett",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Brice_Hortefeux_01_(cropped).JPG",
+   "partage_identique": true
   },
   {
-   "id": "houssin.aie",
-   "nom": "Timothée Houssin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ici.fr/normandie/seine-maritime-76/timothee-houssin-m-a-aide-dans-mes-activites-politiques-nationales-reconnait-l-ex-eurodepute-normand-rn-nicolas-bay-7821300",
-   "partage_identique": false
-  },
-  {
-   "id": "houssin.rire",
-   "nom": "Timothée Houssin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://actu.fr/normandie/les-andelys_27016/affaire-des-assistants-parlementaires-europeens-du-fn-le-depute-de-leure-timothee-houssin-devant-la-justice_61714559.html",
-   "partage_identique": false
-  },
-  {
-   "id": "hurmic.aie",
-   "nom": "Pierre Hurmic",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/elections/municipales-2026-a-bordeaux-pierre-hurmic-en-tete-au-premier-tour-devant-thomas-cazenave-selon-un-sondage-10-03-2026-XWKWRPJX6BGOPIEDAP2RRLSZSQ.php",
-   "partage_identique": false
-  },
-  {
-   "id": "hurmic.choc",
-   "nom": "Pierre Hurmic",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.20minutes.fr/bordeaux/2928279-20201209-envie-bordeaux-banale-banlieue-deux-heures-paris-lance-maire-eelv-pierre-hurmic",
-   "partage_identique": false
-  },
-  {
-   "id": "hurmic.rire",
-   "nom": "Pierre Hurmic",
-   "auteur": "Lelefa",
-   "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Portrait_Pierre_Hurmic_(cropped).jpg",
+   "id": "hortefeux.rire",
+   "nom": "Brice Hortefeux",
+   "auteur": "Foto-AG Gymnasium Melle",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Hortefeux,_Brice-1264.jpg",
    "partage_identique": true
   },
   {
    "id": "jadot.aie",
    "nom": "Yannick Jadot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://atlantico.fr/article/rdv/jadot-met-la-gauche-en-colere-pecresse-decourage-la-droite-macron-agace-les-contribuables-veronique-reille-soult",
-   "partage_identique": false
+   "auteur": "Tifeco76",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Yannick_Jadot_JDE_Lorient_2016_2.jpg",
+   "partage_identique": true
   },
   {
    "id": "jadot.choc",
    "nom": "Yannick Jadot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lepoint.fr/politique/municipales-a-paris-yannick-jadot-dans-le-lac-aux-requins-21-01-2025-2580419_20.php",
+   "auteur": "Theybothreachedforthegun",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pouria_Amirshahi-manifestation.jpg",
    "partage_identique": false
   },
   {
    "id": "jadot.rire",
    "nom": "Yannick Jadot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.frenchclasses.com/guinguette/news/des-hauts-et-des-bas-pour-les-deputes-ecologistes-au-parlement-europeen/",
-   "partage_identique": false
+   "auteur": "Eric Coquelin",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2014-Yannick_Jadot,_d%C3%A9put%C3%A9_europ%C3%A9en_EELV.jpg",
+   "partage_identique": true
   },
   {
    "id": "jmlp.aie",
    "nom": "Jean-Marie Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://legrandcontinent.eu/es/2025/01/07/jean-marie-le-pen-1928-2025-la-sombra-de-la-republica/",
+   "auteur": "Marie-Lan Nguyen (User:Jastrow)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Le_Pen_Paris_2007_05_01_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "jmlp.choc",
    "nom": "Jean-Marie Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://recette.humanite.fr/politique/antisemitisme/jvais-te-faire-courir-moi-tu-vas-voir-le-rouquin-la-bas-hein-pede-les-pires-sorties-de-jean-marie-le-pen",
+   "auteur": "Blandine Le Cain",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Meeting_1er_mai_2012_Front_National,_Paris_(8)_-_cropped.jpg",
    "partage_identique": false
   },
   {
    "id": "jmlp.rire",
    "nom": "Jean-Marie Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.24heures.ch/le-passage-explosif-de-jean-marie-le-pen-en-suisse-romande-352270644700",
+   "auteur": "European Union",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:MEP_Jean-Marie_Le_Pen,_1994_(02).jpg",
    "partage_identique": false
   },
   {
    "id": "joly.aie",
    "nom": "Eva Joly",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rfi.fr/fr/emission/20120202-presidentielle-eelv-joly-gachis",
+   "auteur": "Eva_Joly_Europe_Ecologie_2009-06-03.jpg: Marie-Lan Nguyen (User:Jastrow)\nderivative work: Furfur (talk)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Eva_Joly_Europe_Ecologie_2009-06-03-cropped.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "joly.choc",
+   "nom": "Eva Joly",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Europe_Ecologie_closing_rally_regional_elections_2010-03-10_n16.jpg",
    "partage_identique": false
   },
   {
    "id": "joly.rire",
    "nom": "Eva Joly",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.parismatch.com/bio/eva-joly",
-   "partage_identique": false
+   "auteur": "Eric Coquelin",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EVA_JOLY_002.jpg",
+   "partage_identique": true
   },
   {
    "id": "juppe.aie",
    "nom": "Alain Juppé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.20minutes.fr/bordeaux/1761991-20160108-bordeaux-alain-juppe-assure-vouloir-personne-etre-bonifie-age",
-   "partage_identique": false
+   "auteur": "MEDEF",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Alain_Jupp%C3%A9_2008.jpg",
+   "partage_identique": true
   },
   {
    "id": "juppe.choc",
    "nom": "Alain Juppé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lemonde.fr/idees/article/2016/11/22/la-dramatique-erreur-d-alain-juppe_5035723_3232.html",
+   "auteur": "R. D. Ward",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Defense.gov_News_Photo_110208-D-9880W-170_-_French_Minister_of_Defense_Alain_Juppe_responds_to_a_reporter_s_question_during_a_joint_media_availability_in_the_Pentagon_with_Secretary_of.jpg",
    "partage_identique": false
   },
   {
    "id": "juppe.rire",
    "nom": "Alain Juppé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://enap.ca/evenements/classe-maitre-regard-alain-juppe-echanges-atlantiques",
+   "auteur": "Florencecassisi",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Alain_Jupp%C3%A9_%C3%A0_Qu%C3%A9bec_en_2015_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "kazib.aie",
    "nom": "Anasse Kazib",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.francemag.fr/article/3032/anasse-kazib-relance-sa-candidature-a-la-presidentielle-malgre-un-premier-echec-et-un-proces-a-venir",
+   "auteur": "La Voce delle Lotte",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib_-_La_Voce_delle_Lotte_2020_(cropped).png",
    "partage_identique": false
   },
   {
    "id": "kazib.choc",
    "nom": "Anasse Kazib",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lemonde.fr/societe/article/2026/06/26/le-proces-du-militant-trotskiste-anasse-kazib-pour-apologie-du-terrorisme-est-renvoye-apres-la-remise-en-cause-d-une-des-parties-civiles_6715808_3224.html",
+   "auteur": "La Voce delle Lotte",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib_-_La_Voce_delle_Lotte_2020_(cropped).png",
+   "partage_identique": false
+  },
+  {
+   "id": "kazib.rire",
+   "nom": "Anasse Kazib",
+   "auteur": "La Voce delle Lotte",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anasse_Kazib_-_La_Voce_delle_Lotte_2020_(cropped).png",
    "partage_identique": false
   },
   {
    "id": "knafo.aie",
    "nom": "Sarah Knafo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.nextplz.fr/societe/530275-elle-a-dilapide-largent-des-parisiens-sarah-knafo-brutalement-honnete-sur-anne-hidalgo-en-pleine-campagne-pous-les-municipales",
-   "partage_identique": false
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sarah_Knafo_le_9_mars_2026_(crop).jpg",
+   "partage_identique": true
   },
   {
    "id": "knafo.choc",
    "nom": "Sarah Knafo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.franceinfo.fr/politique/a-droite-je-fais-partie-de-ceux-qui-aimeraient-qu-on-travaille-tous-ensemble-assure-sarah-knafo_7671139.html",
-   "partage_identique": false
+   "auteur": "Anh De France",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sarah_Knafo,_d%C3%A9cembre_2021_(52104057536).jpg",
+   "partage_identique": true
   },
   {
    "id": "knafo.rire",
    "nom": "Sarah Knafo",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://presseagence.fr/paris-sarah-knafo-rejoignez-moi/",
-   "partage_identique": false
-  },
-  {
-   "id": "lafont.aie",
-   "nom": "Samuel Lafont",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.connexionfrance.com/news/local-elections-in-france-new-bids-to-allow-non-eu-foreigners-to-vote/771451",
-   "partage_identique": false
-  },
-  {
-   "id": "lafont.choc",
-   "nom": "Samuel Lafont",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/samuel-lafont-j-espere-que-le-csa-va-reculer-et-va-arreter-de-prendre-eric-zemmour-candidat-potentiel-comme-un-candidat-pour-essayer-de-le-faire-taire_VN-202109090492.html",
-   "partage_identique": false
+   "auteur": "Siren-Com",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:S_Knafo_meeting_9-03-26_J.jpg",
+   "partage_identique": true
   },
   {
    "id": "lalanne.aie",
    "nom": "Francis Lalanne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.msn.com/fr-fr/divertissement/celebrites/il-m-a-empoigné-un-chroniqueur-fait-des-révélations-choquantes-sur-francis-lalanne/ar-AA1R6MKi",
-   "partage_identique": false
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne_2017.jpg",
+   "partage_identique": true
   },
   {
    "id": "lalanne.choc",
    "nom": "Francis Lalanne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mcetv.ouest-france.fr/2023/tpmp-cyril-hanouna-eclate-de-rire-face-a-la-demande-de-francis-lalanne-09022023/",
-   "partage_identique": false
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne_2017.jpg",
+   "partage_identique": true
   },
   {
    "id": "lalanne.rire",
    "nom": "Francis Lalanne",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.public.fr/diaporamas/francis-lalanne-fait-un-aveu-de-taille-apres-le-divorce-d-avec-la-mere-de-ses-enfants-38-ans-d-ecart-avec-sa-nouvelle-compagne",
-   "partage_identique": false
+   "auteur": "Tilly antoine",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Avec_Francis_Lalanne_le_8_ao%C3%BBt_2025,_pr%C3%A8s_de_Rennes..jpg",
+   "partage_identique": true
   },
   {
    "id": "lapix.aie",
    "nom": "Anne-Sophie Lapix",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.programme-tv.net/news/tv/354694-on-se-posait-la-question-surprise-a-faire-une-grimace-en-pleine-soiree-electorale-de-france-2-anne-sophie-lapix-s-explique-en-direct/",
-   "partage_identique": false
+   "auteur": "Marc Lévy (Cramos)",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anne-Sophie_Lapix_par_Cramos.JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "lapix.choc",
+   "nom": "Anne-Sophie Lapix",
+   "auteur": "Marc Lévy (Cramos)",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anne-Sophie_Lapix_par_Cramos.JPG",
+   "partage_identique": true
   },
   {
    "id": "lapix.rire",
    "nom": "Anne-Sophie Lapix",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.voici.fr/television/video-anne-sophie-lapix-recoit-un-sextoy-en-cadeau-dans-c-a-vous-elle-est-hilare-618451",
-   "partage_identique": false
+   "auteur": "Marc Lévy (Cramos)",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Anne-Sophie_Lapix_par_Cramos.JPG",
+   "partage_identique": true
   },
   {
    "id": "larcher.aie",
    "nom": "Gérard Larcher",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.latribune.fr/la-tribune-dimanche/politique/gerard-larcher-l-important-c-est-la-ligne-politique-qui-sera-proposee-par-francois-bayrou-1013978.html",
+   "auteur": "Remi Jouan",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Edouard_Philippe_(3).JPG",
    "partage_identique": false
   },
   {
    "id": "larcher.choc",
    "nom": "Gérard Larcher",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.tf1info.fr/actualite/gerard-larcher-10526/3/",
+   "auteur": "EU2016 SK",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Press_Conference_-_Bratislava_Informal_Parliamentary_Summit_2016-10-07_(30057421012)_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "larcher.rire",
    "nom": "Gérard Larcher",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.linternaute.com/actualite/politique/4577625-le-droit-du-sol-supprime-dans-tous-les-territoires-d-outre-mer-une-idee-de-gerard-larcher/",
+   "auteur": "EU2016 SK",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:HANDSHAKE_-_BRATISLAVA_INFORMAL_PARLIAMENTARY_SUMMIT_2016-10-07_(30082374841).jpg",
    "partage_identique": false
   },
   {
    "id": "lassalle.aie",
    "nom": "Jean Lassalle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/video-javais-peur-jean-lassalle-ses-confidences-hilarantes-sur-sa-participation-a-lemission-les-traitres_524349",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2022-02-11_19-41-27_meeting-Lassalle-Onans.jpg",
    "partage_identique": false
   },
   {
    "id": "lassalle.choc",
    "nom": "Jean Lassalle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gqmagazine.fr/pop-culture/news/videos/jean-lassalle-se-met-dans-une-colere-noire-a-lassemblee-nationale/34620",
-   "partage_identique": false
+   "auteur": "Antoine Lamielle",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Lassalle_2017.jpg",
+   "partage_identique": true
   },
   {
    "id": "lassalle.rire",
    "nom": "Jean Lassalle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.linfo.re/france/politique/la-tres-grosse-colere-de-jean-lassalle-a-l-assemblee-nationale",
-   "partage_identique": false
-  },
-  {
-   "id": "lavalette.aie",
-   "nom": "Laure Lavalette",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.francebleu.fr/provence-alpes-cote-d-azur/var-83/toulon/municipale-2026-a-toulon-laure-lavalette-recoit-le-soutien-de-miss-var-8458188",
-   "partage_identique": false
-  },
-  {
-   "id": "lavalette.choc",
-   "nom": "Laure Lavalette",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.cnews.fr/france/2024-07-07/ce-nest-pas-la-victoire-que-nous-esperions-mais-cela-reste-une-victoire-sans",
-   "partage_identique": false
-  },
-  {
-   "id": "lavalette.rire",
-   "nom": "Laure Lavalette",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mesinfos.fr/provence-alpes-cote-d-azur/une-enquete-ouverte-contre-var-matin-apres-une-plainte-de-la-deputee-laure-lavalette-232035.html",
-   "partage_identique": false
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Francois_Bayrou-IMG_4498.JPG",
+   "partage_identique": true
   },
   {
    "id": "leaument.aie",
    "nom": "Antoine Léaument",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.businessbourse.com/2023/05/10/antoine-leaument-depute-quand-un-gouvernement-viole-les-droits-du-peuple-linsurrection-est-pour-le-peuple-le-plus-sacre-des-droits-et-le-plus-indispensable-des-devoirs/",
-   "partage_identique": false
+   "auteur": "Maxime Viancin",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument_aux_AMFis_de_la_France_insoumise_(2020).jpg",
+   "partage_identique": true
   },
   {
    "id": "leaument.choc",
    "nom": "Antoine Léaument",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lexpress.fr/societe/entre-la-france-insoumise-et-la-police-un-conflit-manifeste-2EY2BSNAVJHZNKTFGB2USD2N6Y/",
+   "auteur": "Guallendra",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument_et_Cl%C3%A9mence_Guett%C3%A9_mars_2025_manif_contre_le_racisme.jpg",
    "partage_identique": false
   },
   {
    "id": "leaument.rire",
    "nom": "Antoine Léaument",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lejdd.fr/politique/assemblee-nationale-antoine-leaument-accuse-davoir-menace-physiquement-sebastien-chenu-166112",
+   "auteur": "Guallendra",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Antoine_L%C3%A9aument_et_Cl%C3%A9mence_Guett%C3%A9_mars_2025_manif_contre_le_racisme.jpg",
    "partage_identique": false
   },
   {
    "id": "lecornu.aie",
    "nom": "Sébastien Lecornu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=tZxc6JVnNsg",
-   "partage_identique": false
+   "auteur": "Ecole  polytechnique from Paris",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:C%C3%A9r%C3%A9monie_militaire_%C3%A0_l%27Ecole_polytechnique_le_14_10_2022,_pr%C3%A9sid%C3%A9e_par_S%C3%A9bastien_Lecornu,_ministre_des_arm%C3%A9es_(52433356412).jpg",
+   "partage_identique": true
   },
   {
    "id": "lecornu.choc",
    "nom": "Sébastien Lecornu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://fr.news.yahoo.com/sébastien-lecornu-dit-très-lucide-184629786.html",
+   "auteur": "U.S. Secretary of Defense",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:250213-D-PM193-1374_(54325253610).jpg",
    "partage_identique": false
   },
   {
    "id": "lecornu.rire",
    "nom": "Sébastien Lecornu",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/sebastien-lecornu-le-premier-ministre-reconnait-ne-pas-avoir-fini-le-cursus-mentionne-sur-son-cv/",
-   "partage_identique": false
+   "auteur": "© Patrice Normand/Leextra via opale",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_officiel_de_S%C3%A9bastien_Lecornu_-_Ministre_des_Arm%C3%A9es.jpg",
+   "partage_identique": true
   },
   {
    "id": "lemaire.aie",
    "nom": "Bruno Le Maire",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lexpress.fr/politique/notation-de-la-france-la-rencontre-de-bruno-le-maire-avec-standard-and-poors-FE2VLNOAGFF3RHZTECOLEC5LYE/",
+   "auteur": "Jacques Paquier",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Bruno_Lemaire-2_(46824610735)_(cropped).jpg",
    "partage_identique": false
+  },
+  {
+   "id": "lemaire.choc",
+   "nom": "Bruno Le Maire",
+   "auteur": "Bruno Le Maire from Evreux, France",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Bruno_le_maire_(2308207714).jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "lemaire.rire",
+   "nom": "Bruno Le Maire",
+   "auteur": "Photo Claude TRUONG-NGOC",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:R%C3%A9union_publique_Bruno_Le_Maire_Strasbourg_21_novembre_2014_01_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "lepen.aie",
    "nom": "Marine Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.public.fr/grossiere-anne-claire-coudray-a-mis-marine-le-pen-tres-en-colere-sur-tf1",
+   "auteur": "Blandine Le Cain",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Meeting_1er_mai_2012_Front_National,_Paris_(20)_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "lepen.choc",
    "nom": "Marine Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.public.fr/marine-le-pen-a-la-piscine-du-maillot-trempe-et-des-fous-rires-les-photos-qui-surprennent",
+   "auteur": "Blandine Le Cain",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Meeting_1er_mai_2012_Front_National,_Paris_(44)_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "lepen.rire",
    "nom": "Marine Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://thoughts.united4safety.org/qui-est-l-ainee-de-marine-le-pen/",
+   "auteur": "Vox España",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marine_Le_Pen_VIVA_24_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "lepers.aie",
    "nom": "Julien Lepers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://cultinfos.com/buzz/1635684-lex-animateur-tele-julien-lepers-accuse-descroquerie-pres-de-400",
-   "partage_identique": false
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0325.JPG",
+   "partage_identique": true
   },
   {
    "id": "lepers.choc",
    "nom": "Julien Lepers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ladepeche.fr/article/2014/06/26/1907699-incident-julien-lepers-devient-fou-zapping-tele-mercredi.html",
-   "partage_identique": false
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0284.JPG",
+   "partage_identique": true
   },
   {
    "id": "lepers.rire",
    "nom": "Julien Lepers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.voici.fr/television/un-peu-moins-de-10-000-euros-par-mois-julien-lepers-se-confie-sur-ses-enormes-droits-d-auteur-818503",
-   "partage_identique": false
+   "auteur": "Rama",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Julien_Lepers-IMG_0326.JPG",
+   "partage_identique": true
   },
   {
    "id": "lescure.aie",
    "nom": "Pierre Lescure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tvmag.lefigaro.fr/programme-tv/actu-tele/des-reactions-outrancieres-pierre-lescure-retropedale-et-renonce-finalement-a-rejoindre-sud-radio-20250904",
-   "partage_identique": false
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pierre_Lescure_Thierry_Fr%C3%A9maux_C%C3%A9sar_2016_2.jpg",
+   "partage_identique": true
   },
   {
    "id": "lescure.choc",
    "nom": "Pierre Lescure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/people/pierre-lescure-triste-et-pathetique-lenorme-coup-de-gueule-3594130",
-   "partage_identique": false
+   "auteur": "ActuaLitté",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pierre_Lescure_-_Voeux_2014_Minist%C3%A8re_de_la_Culture_et_de_la_Communication_(12067907586).jpg",
+   "partage_identique": true
   },
   {
    "id": "lescure.rire",
    "nom": "Pierre Lescure",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.public.fr/diaporamas/photos-ces-animateurs-tele-qui-ont-l-age-de-partir-a-la-retraite",
-   "partage_identique": false
+   "auteur": "CsdemFrance",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pcmlescurecamile.jpg",
+   "partage_identique": true
   },
   {
    "id": "lisnard.aie",
    "nom": "David Lisnard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://echosplus.com/2026/03/25/presidentielle-2027-david-lisnard-quitte-lr-et-denonce-un-vote-truque/",
+   "auteur": "Abxbay",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:D_Lisnard_11_nov_2024_Cannes.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "lisnard.choc",
+   "nom": "David Lisnard",
+   "auteur": "Abxbay",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:D_Lisnard_11_nov_2024_Cannes.jpg",
    "partage_identique": false
   },
   {
@@ -2867,50 +2475,34 @@
   {
    "id": "macron.aie",
    "nom": "Emmanuel Macron",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.viepratique.fr/insolite/emmanuel-macron-surpris-dans-une-charcuterie-la-reaction-etonnante-du-boucher-756597.html",
+   "auteur": "Влада на Република Северна Македонија",
+   "licence": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Emmanuel_Macron_June_2021_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "macron.choc",
    "nom": "Emmanuel Macron",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.viepratique.fr/insolite/emmanuel-macron-surpris-dans-une-charcuterie-la-reaction-etonnante-du-boucher-756597.html",
+   "auteur": "Quirinale",
+   "licence": "Attribution",
+   "source": "https://commons.wikimedia.org/wiki/File:Emmanuel_Macron_2023_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "macron.rire",
    "nom": "Emmanuel Macron",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lejdd.fr/Politique/merde-on-dirait-un-fou-furieux-quand-macron-se-revoit-hurler-en-meeting-3332426",
-   "partage_identique": false
-  },
-  {
-   "id": "maillard.aie",
-   "nom": "Sylvain Maillard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lefigaro.fr/politique/sylvain-maillard-la-loi-paris-lyon-marseille-est-une-veritable-avancee-democratique-20260414",
-   "partage_identique": false
-  },
-  {
-   "id": "maillard.choc",
-   "nom": "Sylvain Maillard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.canalplus.com/actualites/la-grande-interview-sylvain-maillard/h/42359245_50213",
+   "auteur": "PRESIDENT OF UKRAINE  VOLODYMYR ZELENSKYY Official website",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Emmanuel_Macron_June_2022_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "maillard.rire",
    "nom": "Sylvain Maillard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://rh.newstank.fr/article/view/296221/assemblee-nationale-sylvain-maillard-elu-presidence-groupe-renaissance.html",
-   "partage_identique": false
+   "auteur": "Sylvain Maillard",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_Wikipedia_Sylvain_Maillard.jpg",
+   "partage_identique": true
   },
   {
    "id": "mamere.aie",
@@ -2923,346 +2515,266 @@
   {
    "id": "mamere.choc",
    "nom": "Noël Mamère",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ici.fr/infos/politique/voeux-du-president-difficile-d-envisager-un-avenir-radieux-estime-noel-mamere-1609409301",
+   "auteur": "Marie-Lan Nguyen (User:Jastrow)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Noel_Mamere_Europe_Ecologie_2009-06-03_n2.jpg",
    "partage_identique": false
   },
   {
    "id": "mamere.rire",
    "nom": "Noël Mamère",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.france24.com/fr/émissions/avec-judith/20251019-l-écologie-est-un-outil-de-lutte-contre-les-inégalités-noël-mamère-se-confie-à-judith",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:NoelMamerejanvier2006.jpg",
    "partage_identique": false
   },
   {
    "id": "marechal.aie",
    "nom": "Marion Maréchal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lefigaro.fr/politique/europeennes-le-plan-de-marion-marechal-pour-rebondir-20231031",
-   "partage_identique": false
+   "auteur": "Gage Skidmore from Peoria, AZ, United States of America",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marion_Mar%C3%A9chal-Le_Pen_(39775546604).jpg",
+   "partage_identique": true
   },
   {
    "id": "marechal.choc",
    "nom": "Marion Maréchal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://etreheureux.net/meme-les-francais-dorigine-immigree-sont-marion-marechal-assume-ses-convictions-en-direct/",
-   "partage_identique": false
+   "auteur": "Gage Skidmore from Peoria, AZ, United States of America",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marion_Mar%C3%A9chal-Le_Pen_(40485922481).jpg",
+   "partage_identique": true
   },
   {
    "id": "marechal.rire",
    "nom": "Marion Maréchal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://photo.gala.fr/photos-marion-marechal-et-eric-zemmour-calins-et-eclats-de-rire-pour-le-nouveau-duo-fort-de-reconquete-48257",
+   "auteur": "Anh De France",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_de_Marion_Mar%C3%A9chal,_avril_2022.jpg",
    "partage_identique": false
   },
   {
    "id": "mariani.aie",
    "nom": "Thierry Mariani",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lalsace.fr/politique/2021/06/27/resultats-en-provence-alpes-cote-d-azur-renaud-muselier-l-emporterait-sur-thierry-mariani",
-   "partage_identique": false
+   "auteur": "OSCE Parliamentary Assembly from Copenhagen, Denmark",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thierry_Mariani_(France),_4_July_2016.jpg",
+   "partage_identique": true
   },
   {
    "id": "mariani.choc",
    "nom": "Thierry Mariani",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.midilibre.fr/2026/01/30/municipales-2026-a-paris-il-veut-instaurer-la-priorite-nationale-dans-lacces-au-logement-social-thierry-mariani-rn-vise-par-une-plainte-13197890.php",
-   "partage_identique": false
-  },
-  {
-   "id": "mariani.rire",
-   "nom": "Thierry Mariani",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/front-national/thierry-mariani-rn-pour-moi-l-ennemi-de-la-france-c-est-l-islamisme-ce-n-est-pas-la-russie_VN-201906140167.html",
-   "partage_identique": false
-  },
-  {
-   "id": "mc_lepen.aie",
-   "nom": "Marie-Caroline Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/resultats-legislatives-2024-marie-caroline-le-pen-battue-par-la-depute-sortante-elise-leboucher-7900401197",
-   "partage_identique": false
-  },
-  {
-   "id": "mc_lepen.choc",
-   "nom": "Marie-Caroline Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ici.fr/infos/politique/legislatives-2024-je-ne-me-sens-pas-parachutee-dit-marie-caroline-le-pen-candidate-rn-en-sarthe-2103343",
-   "partage_identique": false
-  },
-  {
-   "id": "mc_lepen.rire",
-   "nom": "Marie-Caroline Le Pen",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.tatler.com/article/who-is-marie-caroline-le-pen-marie-le-pen-sister",
-   "partage_identique": false
+   "auteur": "ФРД",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thierry.Mariani.jpg",
+   "partage_identique": true
   },
   {
    "id": "melenchon.aie",
    "nom": "Jean-Luc Mélenchon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.rtl.fr/actu/politique/les-infos-de-6h-bloquons-tout-le-10-septembre-jean-luc-melenchon-appelle-a-la-greve-generale-7900532559",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Luc_M%C3%A9lenchon_2022_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "melenchon.choc",
    "nom": "Jean-Luc Mélenchon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/jean-luc-melenchon/",
+   "auteur": "European Union 2016 - Source : EP - Fred MARVAUX",
+   "licence": "European Parliament",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Luc_MELENCHON_2016_2_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "melenchon.rire",
    "nom": "Jean-Luc Mélenchon",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=Znmq3ckh-MI",
-   "partage_identique": false
-  },
-  {
-   "id": "messiha.aie",
-   "nom": "Jean Messiha",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://georgesgononguillermas.fr/2021/02/20/jean-messiha/",
-   "partage_identique": false
-  },
-  {
-   "id": "messiha.choc",
-   "nom": "Jean Messiha",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://oumma.com/messiha-en-colere-a-cause-du-ramadan-il-n-y-a-plus-de-livreurs-musulmans-pour-lui-fournir-son-petit-plat/",
-   "partage_identique": false
-  },
-  {
-   "id": "messiha.rire",
-   "nom": "Jean Messiha",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purebreak.com/media/rassemblement-organise-par-jean-messiha-848324.html",
+   "auteur": "jlm2017.fr",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Portrait_officiel_JLM_11-05-2026.png",
    "partage_identique": false
   },
   {
    "id": "mitterrand.aie",
    "nom": "François Mitterrand",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.20minutes.fr/politique/1950315-20161026-quand-hollande-rend-hommage-mitterrand-rend-aussi-hommage",
-   "partage_identique": false
+   "auteur": "Philippe Roos from Strasbourg",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Mitterrand_%26_Alain_Bombard_-_1981.jpg",
+   "partage_identique": true
   },
   {
    "id": "mitterrand.choc",
    "nom": "François Mitterrand",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://vl-media.fr/cetait-le-8-janvier-1996-la-disparition-de-francois-mitterrand/",
+   "auteur": "Lombalgie77",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Alphonse_Niangoula_et_Fran%C3%A7ois_Mitterrand.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "mitterrand.rire",
+   "nom": "François Mitterrand",
+   "auteur": "Jean-Louis Debaize /  European Communities, 1977 /  EC - Audiovisual Service",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Mitterrand_talking_to_the_press_-_1977.jpg",
    "partage_identique": false
   },
   {
    "id": "morano.aie",
    "nom": "Nadine Morano",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/nadine-morano-reunion-du-bureau-du-par_m7747472",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2014-05-14_11-50-05_nadine-morano.jpg",
    "partage_identique": false
   },
   {
    "id": "morano.choc",
    "nom": "Nadine Morano",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/nadine-morano-tres-en-colere-apres-avoir-perdu-son-proces-contre-guy-bedos-648222",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2014-05-14_11-49-33_nadine-morano.jpg",
    "partage_identique": false
   },
   {
    "id": "morano.rire",
    "nom": "Nadine Morano",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.nouvelobs.com/politique/20111223.OBS7475/un-cafe-avec-nadine-morano.html",
-   "partage_identique": false
-  },
-  {
-   "id": "ndiaye.aie",
-   "nom": "Sibeth Ndiaye",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.jeanmarcmorandini.com/article-424555-l-image-de-sibeth-ndiaye-en-train-de-fumer-dans-son-bureau-diffusee-en-direct-ce-midi-par-bfm-tv-provoque-la-colere-des-internautes-sur-les-reseaux-sociaux-video.html",
-   "partage_identique": false
-  },
-  {
-   "id": "ndiaye.choc",
-   "nom": "Sibeth Ndiaye",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.parismatch.com/Actu/Politique/Sibeth-Ndiaye-emue-pour-ses-premiers-pas-au-gouvernement-1616303",
-   "partage_identique": false
-  },
-  {
-   "id": "ndiaye.rire",
-   "nom": "Sibeth Ndiaye",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://humoursmeme.blogspot.com/2019/09/chronique-humour-france-inter.html",
-   "partage_identique": false
-  },
-  {
-   "id": "odoul.aie",
-   "nom": "Julien Odoul",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://favoritehunks.blogspot.com/2025/11/julien-odoul-deputy-disrobed.html",
-   "partage_identique": false
-  },
-  {
-   "id": "odoul.choc",
-   "nom": "Julien Odoul",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudradio.fr/linvite-politique/julien-odoul-les-francais-en-ont-marre-de-payer-pour-tout",
-   "partage_identique": false
-  },
-  {
-   "id": "odoul.rire",
-   "nom": "Julien Odoul",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://deputes-rn.fr/depute/julien-odoul",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2014-05-14_11-23-22_nadine-morano.jpg",
    "partage_identique": false
   },
   {
    "id": "oudea.aie",
    "nom": "Amélie Oudéa-Castéra",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://infodujour.fr/politique/etat/73221-le-gouvernement-de-gabriel-attal-enfin-au-complet",
-   "partage_identique": false
-  },
-  {
-   "id": "panot.aie",
-   "nom": "Mathilde Panot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bvoltaire.fr/satire-a-vue-mathilde-panot-fee-du-logis-de-la-gauche/",
-   "partage_identique": false
-  },
-  {
-   "id": "panot.choc",
-   "nom": "Mathilde Panot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.petitbleu.fr/2024/10/02/la-colere-de-la-france-insoumise-12234027.php",
-   "partage_identique": false
-  },
-  {
-   "id": "panot.rire",
-   "nom": "Mathilde Panot",
-   "auteur": "Jérémie Silvestro (If you can improve this photo development, ask me the RAW.)",
+   "auteur": "Gail Leenstra",
    "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Marche_des_fiert%C3%A9s_de_Paris_2017-21.jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Am%C3%A9lie_Oud%C3%A9a-Cast%C3%A9ra_at_a_2024_Paralympic_Games_media_conference_in_2024_2.jpg",
    "partage_identique": true
+  },
+  {
+   "id": "oudea.choc",
+   "nom": "Amélie Oudéa-Castéra",
+   "auteur": "Gail Leenstra",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Am%C3%A9lie_Oud%C3%A9a-Cast%C3%A9ra_at_a_2024_Paralympic_Games_media_conference_in_2024.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "oudea.rire",
+   "nom": "Amélie Oudéa-Castéra",
+   "auteur": "belgium24.eu",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Belgian_Presidency_of_the_Council_of_the_European_Union_-_Education,_Youth,_Culture_and_Sport_Council_on_13_May_2024_-_EU2024BE_240513_EYCS_European_Council_-_81.jpg",
+   "partage_identique": false
   },
   {
    "id": "pecresse.aie",
    "nom": "Valérie Pécresse",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.opinion-internationale.com/2024/04/16/la-region-va-financer-plus-de-cent-zones-de-celebration-dans-toute-lile-de-france-pour-que-ce-soit-la-fete-partout-entretien-exclusif-avec-valerie-pecresse_120874.html",
+   "auteur": "Jean Weber",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:F.Fillon_Agro_Paris_Tech_13_Sept_2007_Cl_J_Weber43.jpg",
    "partage_identique": false
   },
   {
    "id": "pecresse.choc",
    "nom": "Valérie Pécresse",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/shorts/yrmICWw5fSQ",
+   "auteur": "Jean Weber",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:F.Fillon_Agro_Paris_Tech_13_Sept_2007_Cl_J_Weber55.jpg",
    "partage_identique": false
   },
   {
    "id": "pecresse.rire",
    "nom": "Valérie Pécresse",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lopinion.fr/politique/comment-valerie-pecresse-est-devenue-un-sujet-de-raillerie",
-   "partage_identique": false
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Val%C3%A9rie_P%C3%A9cresse_Cannes_2016.jpg",
+   "partage_identique": true
   },
   {
    "id": "peltier.aie",
    "nom": "Guillaume Peltier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/guillaume-peltier-je-me-considere-comme-travailliste-15-02-2019-8013126.php",
-   "partage_identique": false
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:GuillaumePeltier2006.jpg",
+   "partage_identique": true
   },
   {
    "id": "peltier.choc",
    "nom": "Guillaume Peltier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lanouvellerepublique.fr/romorantin/il-y-aura-un-candidat-lr-a-romorantin",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:GuillaumePeltier2006.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "peltier.rire",
+   "nom": "Guillaume Peltier",
+   "auteur": "Kenji-Baptiste OIKAWA",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Guillaume_Peltier_au_meeting_du_MPF_en_2005.JPG",
    "partage_identique": false
   },
   {
    "id": "philippe.aie",
    "nom": "Édouard Philippe",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/douard-philippe-loin-de-matignon-sa-derniere-apparition-surprise-fait-sensation-1142110",
+   "auteur": "Maxime Davaine",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Edouard_Philippe_en_2025.png",
    "partage_identique": false
   },
   {
    "id": "philippe.choc",
    "nom": "Édouard Philippe",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.huffingtonpost.fr/politique/article/edouard-philippe-face-a-la-colere-et-une-popularite-en-berne-defend-la-tenacite-du-gouvernement_126810.html",
+   "auteur": "Remi Jouan",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Edouard_Philippe_(3).JPG",
    "partage_identique": false
   },
   {
    "id": "philippe.rire",
    "nom": "Édouard Philippe",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.nextplz.fr/people/266983-edouard-philippe-metamorphose-nouveau-visage-surprend-internautes",
-   "partage_identique": false
+   "auteur": "Jérémy Barande",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89douard_Philippe_2021_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "philippot.aie",
    "nom": "Florian Philippot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.radiofrance.fr/franceinter/podcasts/l-invite-de-7h50/florian-philippot-nous-assumons-de-mettre-la-priorite-nationale-dans-la-constitution-3495501",
+   "auteur": "Jérémy-Günther-Heinz Jähnick",
+   "licence": "GFDL 1.2",
+   "source": "https://commons.wikimedia.org/wiki/File:Caudry_-_Grand_go%C3%BBter_patriotique_en_pr%C3%A9sence_de_Florian_Philippot_le_samedi_3_d%C3%A9cembre_2016_(36).JPG",
+   "partage_identique": true
+  },
+  {
+   "id": "philippot.choc",
+   "nom": "Florian Philippot",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2021-03-27_15-11-46_manif-Strasbourg.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "philippot.rire",
+   "nom": "Florian Philippot",
+   "auteur": "Jérémy-Günther-Heinz Jähnick",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Florian_Philippot_(cropped).JPG",
    "partage_identique": false
   },
   {
    "id": "piolle.aie",
    "nom": "Éric Piolle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=ZDjcU_emfUs",
-   "partage_identique": false
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210820_piolle.eric_6295b.jpg",
+   "partage_identique": true
   },
   {
    "id": "piolle.choc",
    "nom": "Éric Piolle",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/politique/2023/05/28/isere-metropole-de-grenoble-clash-a-la-metro-eric-piolle-choque",
-   "partage_identique": false
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210820_piolle.eric_6316b.jpg",
+   "partage_identique": true
   },
   {
    "id": "piolle.rire",
@@ -3275,226 +2787,146 @@
   {
    "id": "poisson.aie",
    "nom": "Jean-Frédéric Poisson",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.businessbourse.com/2021/12/28/jean-frederic-poisson-retour-de-linfantilisation-dans-la-strategie-gouvernementale-cette-etape-necessaire-au-processus-de-culpabilisation-de-masse-propre-au-regime-totalitaire-ce-qui-se/",
-   "partage_identique": false
+   "auteur": "This illustration was made by Peter Potrowl.\nPlease credit this with : © Peter Potrowl in the immediate vicinity of the image. A link to my website sitemai.eu w",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fr%C3%A9d%C3%A9ric_Poisson_-_Manifestation_%C2%AB_Marchons_Enfants_%C2%BB_contre_la_PMA_et_la_GPA_-_12_(cropped).jpg",
+   "partage_identique": true
   },
   {
    "id": "poisson.choc",
    "nom": "Jean-Frédéric Poisson",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lefigaro.fr/politique/florian-philippot-et-jean-frederic-poisson-annoncent-une-liste-commune-pour-les-elections-europeennes-20240404",
-   "partage_identique": false
+   "auteur": "This illustration was made by Peter Potrowl.\nPlease credit this with : © Peter Potrowl in the immediate vicinity of the image. A link to my website sitemai.eu w",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Paris_-_Marche_pour_la_Vie_2019_-_22.jpg",
+   "partage_identique": true
   },
   {
    "id": "poisson.rire",
    "nom": "Jean-Frédéric Poisson",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/politique/2023/06/24/jean-frederic-poisson-on-va-inscrire-le-droit-de-tuer-dans-la-loi",
+   "auteur": "Anh De France",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean-Fr%C3%A9d%C3%A9ric_Poisson_(52075229845).jpg",
    "partage_identique": false
   },
   {
-   "id": "portes.aie",
+   "id": "portes.rire",
    "nom": "Thomas Portes",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.cnews.fr/france/2025-10-01/gaza-16-deputes-saisissent-la-justice-contre-leur-collegue-de-lfi-thomas-portes",
-   "partage_identique": false
-  },
-  {
-   "id": "portes.choc",
-   "nom": "Thomas Portes",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=vE9dgH1XhaM",
+   "auteur": "JROhara",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Thomas_Portes_lors_d%27une_manifestation.jpg",
    "partage_identique": false
   },
   {
    "id": "poutou.aie",
    "nom": "Philippe Poutou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/elections/2021/11/24/isere-le-8-decembre-philippe-poutou-en-meeting-a-grenoble",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2022-02-23_20-30-45_meeting-Poutou-Audincourt.jpg",
    "partage_identique": false
   },
   {
    "id": "poutou.choc",
    "nom": "Philippe Poutou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/philippe-poutou-chez-laurent-ruquier-ce-jour-ou-il-a-ete-humilie-sur-son-plateau_488987",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2022-02-22_21-36-33_meeting-Poutou-Mulhouse.jpg",
    "partage_identique": false
   },
   {
    "id": "poutou.rire",
    "nom": "Philippe Poutou",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://actu.fr/occitanie/toulouse_31555/presidentielle-2022-l-anticapitaliste-philippe-poutou-en-meeting-s-a-toulouse_45760622.html",
-   "partage_identique": false
+   "auteur": "Patrice CALATAYU from Bordeaux, France",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:C%27%C3%A9tait_un_14_Janvier_2020_(49385538518).png",
+   "partage_identique": true
   },
   {
    "id": "ppda.aie",
    "nom": "Patrick Poivre d'Arvor",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://photo.voici.fr/la-carriere-en-images-de-patrick-poivre-darvor-50827",
-   "partage_identique": false
+   "auteur": "Frantogian",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Patrick_Poivre_d%27Arvor_Cannes_3.jpg",
+   "partage_identique": true
   },
   {
    "id": "ppda.choc",
    "nom": "Patrick Poivre d'Arvor",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/patrick-poivre-d-arvor-dans-l-emission_m6132365",
-   "partage_identique": false
-  },
-  {
-   "id": "ppda.rire",
-   "nom": "Patrick Poivre d'Arvor",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.telestar.fr/actu-tv/autres-emissions/patrick-poivre-d-arvor-je-n-ai-plus-jamais-regarde-un-journal-depuis-mon-depart-de-tf1-305976",
-   "partage_identique": false
-  },
-  {
-   "id": "praud.aie",
-   "nom": "Pascal Praud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.letribunaldunet.fr/insolite/pascal-praud-surpris-en-train-de-se-curer-le-nez-sur-europe-1-les-internautes-ecoeures.html",
-   "partage_identique": false
-  },
-  {
-   "id": "praud.choc",
-   "nom": "Pascal Praud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://risibank.fr/media/140102-choque-lunette-surpris-praud-pro-tele-pascal-costume-choc-serieux-risitas",
-   "partage_identique": false
-  },
-  {
-   "id": "praud.rire",
-   "nom": "Pascal Praud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://risibank.fr/media/353154-praud-pascal-baille-grimace-bouche-ouverte-cnews-heure-des-pros-gaucho-gauchiste",
-   "partage_identique": false
-  },
-  {
-   "id": "pujadas.aie",
-   "nom": "David Pujadas",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.public.fr/geraldine-maillet-ancienne-mannequin-cette-photo-tres-tres-etrange-de-la-chroniqueuse-de-tpmp-qui-refait-surface",
-   "partage_identique": false
-  },
-  {
-   "id": "pujadas.choc",
-   "nom": "David Pujadas",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/culture-loisirs/tv/video-france-2-saute-d-humeur-de-david-pujadas-au-20-heures-lundi-31-05-2016-5845447.php",
-   "partage_identique": false
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:PPDA_Cannes_2016.jpg",
+   "partage_identique": true
   },
   {
    "id": "pujadas.rire",
    "nom": "David Pujadas",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.telestar.fr/people/david-pujadas-ce-qui-s-est-passe-apres-son-ultime-jt-283810",
-   "partage_identique": false
+   "auteur": "Coccico2345",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:David_Pujadas_USA.jpg",
+   "partage_identique": true
   },
   {
    "id": "retailleau.aie",
    "nom": "Bruno Retailleau",
-   "auteur": "Anthonymontardyfr",
+   "auteur": "Thomas Bresson",
    "licence": "CC BY 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Bruno_Retailleau_-_Ministre_de_l%27Int%C3%A9rieur_fran%C3%A7ais.jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:2025-03-24_19-00-40_BRetailleau-Belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "retailleau.choc",
    "nom": "Bruno Retailleau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/bruno-retailleau-se-lance-dans-la-course-a-lelysee-par-devoir/",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2025-03-24_19-14-18_BRetailleau-Belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "retailleau.rire",
    "nom": "Bruno Retailleau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.letelegramme.fr/elections/presidentielle/apres-dix-ans-den-marche-plus-rien-ne-marche-bruno-retailleau-dynamise-ses-troupes-pour-son-premier-meeting-de-campagne-7067721.php",
-   "partage_identique": false
-  },
-  {
-   "id": "rigault.aie",
-   "nom": "Stanislas Rigault",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leprogres.fr/elections/2022/06/12/vaucluse-stanislas-rigault-proche-d-eric-zemmour-severement-battu",
-   "partage_identique": false
-  },
-  {
-   "id": "rigault.choc",
-   "nom": "Stanislas Rigault",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://mediasinfosblog.wordpress.com/2022/10/19/coup-de-gueule-de-bruce-toussaint-qui-sest-emporte-face-a-stanislas-rigault-a-propos-de-laffaire-lola-en-direct-sur-bfmtv/",
-   "partage_identique": false
-  },
-  {
-   "id": "rigault.rire",
-   "nom": "Stanislas Rigault",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=sxYwQj6RjxU",
+   "auteur": "© European Union, 1998 – 2025",
+   "licence": "Attribution",
+   "source": "https://commons.wikimedia.org/wiki/File:Bruno_RETAILLEAU_(Minister_for_the_Interior,_France).jpg",
    "partage_identique": false
   },
   {
    "id": "riner.aie",
    "nom": "Teddy Riner",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ladepeche.fr/article/2010/09/14/906418-teddy-riner-crie-sa-colere.html",
+   "auteur": "National Olympic Committee of the Republic of Uzbekistan",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Alisher_Yusupov_at_the_2024_Summer_Olympics_04.jpg",
    "partage_identique": false
   },
   {
    "id": "riner.choc",
    "nom": "Teddy Riner",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/jo-paris-2024/judo/2028-je-nai-pas-dit-non-teddy-riner-se-voit-bien-continuer-apres-les-jeux-de-paris-04-03-2023-FMEGNGBJBJG3HK7IGHWNT6I5JI.php",
-   "partage_identique": false
+   "auteur": "Jean-Marie Coustal",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Coustal.jpg",
+   "partage_identique": true
   },
   {
    "id": "riner.rire",
    "nom": "Teddy Riner",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leprogres.fr/sport/2024/08/02/teddy-riner-se-sait-attendu-il-faudra-etre-le-plus-malin",
-   "partage_identique": false
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Teddy_Riner_2009.jpg",
+   "partage_identique": true
   },
   {
    "id": "rousseau.aie",
    "nom": "Sandrine Rousseau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/cadavres-danimaux-au-lieu-de-steaks-la-proposition-de-sandrine-rousseau-pour-les-menus-des-restaurants/",
-   "partage_identique": false
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210820_rousseau.s_6445.jpg",
+   "partage_identique": true
   },
   {
    "id": "rousseau.choc",
    "nom": "Sandrine Rousseau",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tuni-news.com/cadavres-danimaux-au-lieu-de-steaks-la-proposition-de-sandrine-rousseau-pour-les-menus-des-restaurants/",
-   "partage_identique": false
+   "auteur": "FreCha",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Manifestation_du_17_octobre_2026_%C3%A0_Paris_10.jpg",
+   "partage_identique": true
   },
   {
    "id": "rousseau.rire",
@@ -3505,379 +2937,323 @@
    "partage_identique": true
   },
   {
-   "id": "roussel.aie",
+   "id": "roussel.choc",
    "nom": "Fabien Roussel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/grand-lille/resultats-des-municipales-2026-a-saint-amand-les-eaux-fabien-roussel-annonce-son-election-des-le-premier-tour_AN-202603150449.html",
+   "auteur": "NakaraZn",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fabien_Roussel_au_40e_Congr%C3%A8s_du_PCF_%C3%A0_Lille.jpg",
    "partage_identique": false
   },
   {
-   "id": "roussel.choc",
+   "id": "roussel.rire",
    "nom": "Fabien Roussel",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudouest.fr/elections/presidentielle/presidentielle-2022-fabien-roussel-du-journalisme-au-parti-communiste-9572863.php",
-   "partage_identique": false
+   "auteur": "Zouhair NAKARA",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Roussel_Fabien_3.jpg",
+   "partage_identique": true
   },
   {
    "id": "royal.aie",
    "nom": "Ségolène Royal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.huffingtonpost.fr/politique/article/segolene-royal-en-colere-contre-la-fermeture-des-librairies-et-petits-commerces_172962.html",
+   "auteur": "The making of this document was supported by Wikimédia France. (Submit your project!)",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal,_Socialist_rally,_Z%C3%A9nith,_2007_05_29_n13.jpg",
    "partage_identique": false
   },
   {
    "id": "royal.choc",
    "nom": "Ségolène Royal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.nextplz.fr/people/517364-segolene-royal-72-ans-huee-par-des-femmes-voilees-en-plein-meeting-casse-toi",
-   "partage_identique": false
+   "auteur": "Safia Otokoré",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:S%C3%A9gol%C3%A8ne_Royal_%C3%A0_Marcoussis.jpg",
+   "partage_identique": true
   },
   {
    "id": "royal.rire",
    "nom": "Ségolène Royal",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudouest.fr/politique/segolene-royal/segolene-royal-la-blonde-va-surprendre-9704163.php",
+   "auteur": "Pascal Bastien / European Union, 2014 / EC - Audiovisual Service",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Pope_Francis_with_S%C3%A9gol%C3%A8ne_Royal,_French_Minister_for_Ecology,_Sustainable_Development_and_Energy_-_2014.jpg",
    "partage_identique": false
   },
   {
    "id": "ruffin.aie",
    "nom": "François Ruffin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://rmc.bfmtv.com/actualites/politique/francois-ruffin-lance-son-mouvement-debout-pour-ceux-qui-puent-un-peu-sous-les-bras_AV-202507010531.html",
-   "partage_identique": false
+   "auteur": "BB 22385",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Direct_France3_avec_Fran%C3%A7ois_Ruffin_%C3%A0_Longueau_11092020.jpg",
+   "partage_identique": true
   },
   {
    "id": "ruffin.choc",
    "nom": "François Ruffin",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/francois-ruffin-hors-de-lui-la-grosse-colere-du-depute-a-l-assemblee-1119624",
-   "partage_identique": false
+   "auteur": "BB 22385",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Direct_France3_avec_Fran%C3%A7ois_Ruffin_%C3%A0_Longueau_11092020.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "ruffin.rire",
+   "nom": "François Ruffin",
+   "auteur": "BB 22385",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Fran%C3%A7ois_Ruffin_lors_du_D%C3%A9pu%27tour_le_11_septembre_2020.jpg",
+   "partage_identique": true
   },
   {
    "id": "rugy.aie",
    "nom": "François de Rugy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lejdd.fr/Politique/a-lassemblee-entre-le-foot-et-francois-de-rugy-il-faut-choisir-3694160",
+   "auteur": "FDR - François de Rugy",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Corinne_Bouchoux_-_FDR_-Eva_Joly_-_Noel_Mamere_(Photo_G_Fillon).jpg",
    "partage_identique": false
   },
   {
    "id": "rugy.choc",
    "nom": "François de Rugy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.parismatch.com/Actu/Politique/Ou-s-arretera-l-acharnement-la-colere-de-Francois-de-Rugy-apres-un-nouvel-article-de-Mediapart-1636888",
+   "auteur": "FDR - François de Rugy",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Corinne_Bouchoux_-_FDR_-Eva_Joly_-_Noel_Mamere_(Photo_G_Fillon).jpg",
    "partage_identique": false
   },
   {
-   "id": "salame.aie",
-   "nom": "Léa Salamé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=PBRYBXrMysw",
-   "partage_identique": false
-  },
-  {
-   "id": "salame.choc",
-   "nom": "Léa Salamé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.jeanmarcmorandini.com/article-327815-le-coup-de-colere-de-lea-salame-hier-face-a-melenchon-chez-ruquier-regardez.html",
-   "partage_identique": false
-  },
-  {
-   "id": "salame.rire",
-   "nom": "Léa Salamé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lematin.ch/story/le-lapsus-coquin-de-lea-salame-dans-on-est-en-direct-186141798353",
+   "id": "rugy.rire",
+   "nom": "François de Rugy",
+   "auteur": "Remi Jouan",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Edouard_Philippe_(3).JPG",
    "partage_identique": false
   },
   {
    "id": "sarkozy.aie",
    "nom": "Nicolas Sarkozy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.zinfos974.com/nicolas-sarkozy-sera-incarcere-le-21-octobre/",
+   "auteur": "This illustration was made by Peter Potrowl.\nPlease credit this with : © Peter Potrowl in the immediate vicinity of the image. A link to my website sitemai.eu w",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:R%C3%A9ception_pour_les_Fran%C3%A7ais_de_Shanghai_20100430_-_25.jpg",
    "partage_identique": false
   },
   {
    "id": "sarkozy.choc",
    "nom": "Nicolas Sarkozy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.sudouest.fr/politique/nicolas-sarkozy/video-sarkozy-sa-phrase-incomprehensible-qui-fait-rire-le-web-7535540.php",
+   "auteur": "This illustration was made by Peter Potrowl.\nPlease credit this with : © Peter Potrowl in the immediate vicinity of the image. A link to my website sitemai.eu w",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:R%C3%A9ception_pour_les_Fran%C3%A7ais_de_Shanghai_20100430_-_4.jpg",
    "partage_identique": false
   },
   {
    "id": "sarkozy.rire",
    "nom": "Nicolas Sarkozy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/media/nicolas-sarkozy-tout-sourire-a-paris-pou_m7551017",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Nicolas_Sarkozy_October_2015_(cropped).jpg",
    "partage_identique": false
   },
   {
    "id": "schiappa.aie",
    "nom": "Marlène Schiappa",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/marleneschiappaen-colere-elle-dement-formellement-le-vol-de-son-disque-durexterne-1324659",
-   "partage_identique": false
+   "auteur": "Nantilus",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marl%C3%A8ne_Schiappa_%C3%A0_son_bureau.jpg",
+   "partage_identique": true
   },
   {
    "id": "schiappa.choc",
    "nom": "Marlène Schiappa",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.gala.fr/l_actu/news_de_stars/video-marlene-schiappa-cette-etonnante-revelation-qui-a-surpris-anne-elisabeth-lemoine_455951",
-   "partage_identique": false
+   "auteur": "GregRoquette",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Diaryatou_Bah_Ordre_du_M%C3%A9rite.jpg",
+   "partage_identique": true
   },
   {
    "id": "schiappa.rire",
    "nom": "Marlène Schiappa",
-   "auteur": "Nantilus",
+   "auteur": "Gabsch34",
    "licence": "CC BY-SA 4.0",
-   "source": "https://commons.wikimedia.org/wiki/File:Marl%C3%A8ne_Schiappa,_2017_(cropped).jpg",
+   "source": "https://commons.wikimedia.org/wiki/File:Alexandra_Louis_Marl%C3%A8ne_Schiappa.jpg",
    "partage_identique": true
   },
   {
    "id": "tache.aie",
    "nom": "Aurélien Taché",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.causeur.fr/lachez-leur-le-hijab-aurelien-tache-nativisme-jacobinisme-charlie-220542",
-   "partage_identique": false
+   "auteur": "TrisHR",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
+   "partage_identique": true
   },
   {
    "id": "tache.choc",
    "nom": "Aurélien Taché",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lefigaro.fr/politique/le-depute-ecologiste-aurelien-tache-suspendu-apres-l-annonce-de-son-soutien-a-lfi-aux-europeennes-20240313",
-   "partage_identique": false
+   "auteur": "TrisHR",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "tache.rire",
+   "nom": "Aurélien Taché",
+   "auteur": "TrisHR",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20250709-P1240323_Tache_Aurelien_Wikipedia.jpg",
+   "partage_identique": true
   },
   {
    "id": "tanguy.aie",
    "nom": "Jean-Philippe Tanguy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.tf1.fr/fr-be/tmc/quotidien-avec-yann-barthes/videos/lincroyable-talent-du-rn-jean-philippe-tanguy-a-ses-limites-05328244.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-02-07_19-25-27_MeetingRN-Belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "tanguy.choc",
    "nom": "Jean-Philippe Tanguy",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/gouvernement/video-budget-2026-il-faut-reorganiser-les-soins-affirme-jean-philippe-tanguy-depute-de-la-somme-rn_VN-202507160642.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-02-07_19-10-06_MeetingRN-Belfort.jpg",
    "partage_identique": false
   },
   {
-   "id": "thevenot.aie",
-   "nom": "Prisca Thevenot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lanouvellerepublique.fr/indre-et-loire/commune/nouatre/crue-de-la-vienne-en-indre-et-loire-la-ministre-prisca-thevenot-vient-soutenir-les-sinistres",
-   "partage_identique": false
-  },
-  {
-   "id": "thevenot.choc",
-   "nom": "Prisca Thevenot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.europe1.fr/emissions/lentretien-de-romain-desarbres/prisca-thevenot-letat-se-tiendra-present-pour-rappeler-que-la-laicite-sapplique-a-tous-4238552",
-   "partage_identique": false
-  },
-  {
-   "id": "thevenot.rire",
-   "nom": "Prisca Thevenot",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.purepeople.com/diapo/prisca-thevenot-la-porte-parole-du-gouvernement-poste-beaucoup-de-photos-intimes-elle-reagit-avec-mon-mari_a523172/1",
-   "partage_identique": false
-  },
-  {
-   "id": "thevenoud.aie",
-   "nom": "Thomas Thévenoud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.closermag.fr/politique/thomas-thevenoud-met-un-terme-a-sa-carriere-politique-708721",
-   "partage_identique": false
-  },
-  {
-   "id": "thevenoud.choc",
-   "nom": "Thomas Thévenoud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=qDymWeMYPe0",
-   "partage_identique": false
-  },
-  {
-   "id": "thevenoud.rire",
-   "nom": "Thomas Thévenoud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.leparisien.fr/politique/cette-annee-thomas-thevenoud-a-rempli-sa-declaration-d-impots-dans-les-temps-07-06-2016-5864165.php",
+   "id": "tanguy.rire",
+   "nom": "Jean-Philippe Tanguy",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-02-07_19-10-09_MeetingRN-Belfort.jpg",
    "partage_identique": false
   },
   {
    "id": "tiberi.aie",
    "nom": "Jean Tiberi",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ohmymag.com/people/actu-people/mort-de-jean-tiberi-a-90-ans-retour-sur-la-vie-de-l-ancien-maire-de-paris_art169999.html",
-   "partage_identique": false
+   "auteur": "David Monniaux",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Tiberi_p1140494.jpg",
+   "partage_identique": true
+  },
+  {
+   "id": "tiberi.choc",
+   "nom": "Jean Tiberi",
+   "auteur": "David Monniaux",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Jean_Tiberi_p1140494.jpg",
+   "partage_identique": true
   },
   {
    "id": "tondelier.aie",
    "nom": "Marine Tondelier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://almouwatin.com/2026/05/01/marine-tondelier-en-colere-contre-les-propos-de-francois-ruffin-sur-limmigration-de-travail-qui-a-convoque-les-sujets-de-lextreme-droite/",
-   "partage_identique": false
+   "auteur": "Greenbox",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:20210819_tondelier.m_5730.jpg",
+   "partage_identique": true
   },
   {
    "id": "tondelier.choc",
    "nom": "Marine Tondelier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/j-ai-du-hausser-le-ton-parfois-m-agacer-me-mettre-en-colere-marine-tondelier-evoque-l-entre-deux-tours-des-legislatives_VN-202407120228.html",
+   "auteur": "Supporterhéninois",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marine_Tondelier_mars_2015_1.jpg",
    "partage_identique": false
   },
   {
    "id": "tondelier.rire",
    "nom": "Marine Tondelier",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.journaldesfemmes.fr/people/magazine/3244620-la-semaine-des-stars-actu-people-france-octobre-giulia-sarkozy-florent-pagny/3245078-marine-tondelier",
+   "auteur": "Supporterhéninois",
+   "licence": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Marine_Tondelier_mars_2015_2.jpg",
    "partage_identique": false
   },
   {
    "id": "trouve.aie",
    "nom": "Aurélie Trouvé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/il-faut-gagner-cette-presidence-de-l-assemblee-nationale-declare-aurelie-trouve-deputee-lfi-nouveau-front-populaire_VN-202407170501.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-10-20_20-26-13_MeetingLFI-Montbeliard.jpg",
    "partage_identique": false
   },
   {
    "id": "trouve.choc",
    "nom": "Aurélie Trouvé",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/la-france-insoumise/video-colere-agricole-ca-fait-dix-ans-que-le-president-macron-aurait-pu-s-opposer-a-ce-traite-de-mercosur-pointe-aurelie-trouve-deputee-lfi_VN-202601080761.html",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-10-20_20-18-16_MeetingLFI-Montbeliard.jpg",
    "partage_identique": false
   },
   {
-   "id": "vallaud.aie",
-   "nom": "Boris Vallaud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lexpress.fr/politique/il-veut-renverser-la-table-socialiste-boris-vallaud-de-sa-permanence-des-landes-jusqua-lelysee-P4ESNKUEHRB6PFKJZKTMXMBIMI/",
-   "partage_identique": false
-  },
-  {
-   "id": "vallaud.choc",
-   "nom": "Boris Vallaud",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.bfmtv.com/politique/parlement/un-grand-moment-de-deshonneur-colere-a-gauche-apres-l-accord-sur-la-loi-immigration_AV-202312190687.html",
+   "id": "trouve.rire",
+   "nom": "Aurélie Trouvé",
+   "auteur": "Thomas Bresson",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:2026-10-20_20-26-13_MeetingLFI-Montbeliard.jpg",
    "partage_identique": false
   },
   {
    "id": "valls.aie",
    "nom": "Manuel Valls",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.huffingtonpost.fr/actualites/article/manuel-valls-en-colere-apres-des-fuites-dans-la-presse_23412.html",
-   "partage_identique": false
+   "auteur": "Claude Truong-Ngoc",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Strasbourg_22_juillet_2012_inauguration_All%C3%A9e_des_Justes_02.JPG",
+   "partage_identique": true
   },
   {
    "id": "valls.choc",
    "nom": "Manuel Valls",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lopinion.fr/politique/texto-coup-de-colere-de-manuel-valls-jean-christophe-lagarde-cest-facile-dattaquer-et-dagresser-un-depute",
-   "partage_identique": false
+   "auteur": "Niccolò Caranti",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Manuel_Valls_and_Matteo_Renzi_-_Festival_Economia_2015.JPG",
+   "partage_identique": true
   },
   {
    "id": "villiers.aie",
    "nom": "Philippe de Villiers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://tv-programme.com/face-a-philippe-de-villiers-magazine/replay/face-a-philippe-de-villiers-emission-du-07-02-2025-R67bc1f20528b5",
-   "partage_identique": false
+   "auteur": "Guillaume Paumier",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Philippe_de_Villiers_-_Meeting_in_Toulouse_for_the_2007_French_presidential_election_0165_2007-04-16_cropped.jpg",
+   "partage_identique": true
   },
   {
    "id": "villiers.choc",
    "nom": "Philippe de Villiers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.la-croix.com/europe-1-et-cnews-se-rapprochent-encore-avec-l-emission-face-a-philippe-de-villiers-20240120",
-   "partage_identique": false
+   "auteur": "Emiliano  García-Page Sánchez from Toledo, España",
+   "licence": "CC BY-SA 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Proyecto_del_parque_tem%C3%A1tico_del_grupo_Puy_du_Fou_(33958143562).jpg",
+   "partage_identique": true
   },
   {
    "id": "villiers.rire",
    "nom": "Philippe de Villiers",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.youtube.com/watch?v=wJcbSqwRtA4",
-   "partage_identique": false
+   "auteur": "The original uploader was Newberlin at French Wikipedia.",
+   "licence": "CC BY-SA 2.0 fr",
+   "source": "https://commons.wikimedia.org/wiki/File:Philippe_de_Villiers_voeux_2006.jpg",
+   "partage_identique": true
   },
   {
    "id": "wauquiez.aie",
    "nom": "Laurent Wauquiez",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://lesjours.fr/personnages/laurent-wauquiez/",
+   "auteur": "This illustration was made by Peter Potrowl.\nPlease credit this with : © Peter Potrowl in the immediate vicinity of the image. A link to my website sitemai.eu w",
+   "licence": "CC BY 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Villeneuve-d%27Ascq_-_Laurent_Wauquiez_at_IEMN_-_1.jpg",
    "partage_identique": false
   },
   {
-   "id": "yann_bompard.aie",
-   "nom": "Yann Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.lemonde.fr/societe/article/2025/12/18/des-peines-d-ineligibilite-requises-contre-le-maire-d-orange-yann-bompard-et-la-deputee-rn-marie-france-lorho_6658580_3224.html",
-   "partage_identique": false
-  },
-  {
-   "id": "yann_bompard.rire",
-   "nom": "Yann Bompard",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.ledauphine.com/politique/2022/01/28/yann-bompard-maire-d-orange-mon-pere-reste-mon-premier-conseiller",
+   "id": "wauquiez.rire",
+   "nom": "Laurent Wauquiez",
+   "auteur": "European People's Party",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:EPP_Summit,_Brussels,_March_2019_(46711131484).jpg",
    "partage_identique": false
   },
   {
    "id": "zemmour.aie",
    "nom": "Éric Zemmour",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.dailymotion.com/video/x8aaqu8",
-   "partage_identique": false
+   "auteur": "Port!mimi!able",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:%C3%89ric_zemmour_18.jpg",
+   "partage_identique": true
   },
   {
    "id": "zemmour.choc",
    "nom": "Éric Zemmour",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://www.telestar.fr/people/eric-zemmour-en-colere-contre-audrey-crespo-mara-sur-le-plateau-de-lci-video-58483",
-   "partage_identique": false
-  },
-  {
-   "id": "zemmour.rire",
-   "nom": "Éric Zemmour",
-   "auteur": null,
-   "licence": "inconnue",
-   "source": "https://risibank.fr/media/252855-politic-mariniere-2022-rire-president-eric-zemmour-france-candidat-z0zz-cnews",
+   "auteur": "Anh De France",
+   "licence": "CC BY 2.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Cl%C3%B4ture_(52073706157).jpg",
    "partage_identique": false
   }
  ],
@@ -6162,6 +5538,24 @@
    "source": "Photo du Grand Prix de Monaco, 7 juin 2026",
    "auteur": null,
    "licence": null
+  }
+ ],
+ "cinematiques": [
+  {
+   "id": "durif",
+   "personne": "durif",
+   "nom": "Sylvain Durif, dans les épisodes de sa carrière",
+   "auteur": "chatzefratz",
+   "licence": "CC BY 3.0",
+   "source": "https://www.youtube.com/watch?v=2jJTd2_YL9A"
+  },
+  {
+   "id": "durif.lalanne",
+   "personne": "lalanne",
+   "nom": "Francis Lalanne, dans la carrière de Sylvain Durif",
+   "auteur": "Nicolas Richoffer",
+   "licence": "CC BY-SA 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Francis_Lalanne_2017.jpg"
   }
  ]
 }

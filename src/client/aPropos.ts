@@ -3,10 +3,11 @@ import { whenOpened } from '#src/client/services/whenOpened.ts';
 import { loadSources } from '#src/client/services/loadSources.ts';
 import type { GameSources } from '#src/client/services/loadSources.ts';
 import { sourceMatches } from '#src/client/tools/sourceMatches.ts';
+import { LICENCE_LINKS } from '#src/client/const/licenceLinks.ts';
 
 type Sources = GameSources;
 
-type Part = string | { lien: string } | { gras: string };
+type Part = string | { lien: string; texte?: string } | { gras: string };
 
 /** One line of the list, built from text and links only: nothing from the data is read as HTML. */
 function item(parts: Part[]): HTMLLIElement {
@@ -14,7 +15,7 @@ function item(parts: Part[]): HTMLLIElement {
   for (const part of parts) {
     if (typeof part === 'string') li.append(part);
     else if ('gras' in part) li.append(Object.assign(document.createElement('strong'), { textContent: part.gras }));
-    else li.append(Object.assign(document.createElement('a'), { href: part.lien, textContent: 'source', target: '_blank', rel: 'noreferrer' }));
+    else li.append(Object.assign(document.createElement('a'), { href: part.lien, textContent: part.texte ?? 'source', target: '_blank', rel: 'noreferrer' }));
   }
   return li;
 }
@@ -23,13 +24,19 @@ function links(urls: (string | undefined)[]): Part[] {
   return urls.filter((url): url is string => Boolean(url)).flatMap((url) => [' · ', { lien: url }]);
 }
 
+/** A licence by its name, which opens its text when it has one. */
+function licence(name: string | undefined): Part[] {
+  if (!name) return [];
+  return [', ', LICENCE_LINKS[name] ? { lien: LICENCE_LINKS[name], texte: name } : name];
+}
+
 function categories(sources: Sources): [string, HTMLLIElement[]][] {
   return [
     ['Les phrases du jeu', sources.phrases.map((p) => item([{ gras: p.qui }, ` : « ${p.texte} »`, p.date ? ` (${p.date})` : '', ...links(p.sources)]))],
     ['Les casseroles', sources.casseroles.map((c) => item([{ gras: `${c.qui}, « ${c.nom} »` }, c.citation ? ` « ${c.citation} »` : '', ` ${c.fait} Statut : ${c.statut}`]))],
     ['Les vraies voix', sources.voix.map((v) => item([{ gras: v.nom }, v.auteur ? ` : ${v.auteur}` : '', v.date ? ` (${v.date})` : '', ...links([v.source])]))],
-    ['Les photos', sources.photos.map((p) => item([{ gras: p.nom }, p.auteur ? `, par ${p.auteur}` : '', p.licence ? `, ${p.licence}` : '', ...links([p.source])]))],
-    ['Les logos des chaînes', sources.logos.map((l) => item([{ gras: l.id }, l.auteur ? `, ${l.auteur}` : '', l.licence ? `, ${l.licence}` : '', ...links([l.source])]))],
+    ['Les photos', sources.photos.map((p) => item([{ gras: p.nom }, p.auteur ? `, par ${p.auteur}` : '', ...licence(p.licence), ...links([p.source])]))],
+    ['Les logos des chaînes', sources.logos.map((l) => item([{ gras: l.id }, l.auteur ? `, ${l.auteur}` : '', ...licence(l.licence), ...links([l.source])]))],
     ['Les polices', sources.polices.map((f) => item([{ gras: f.nom }, `, ${f.licence}`]))],
   ];
 }

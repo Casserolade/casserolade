@@ -1,4 +1,5 @@
-"""Écrit assets/game/credits.json : l'auteur et la licence de chaque photo utilisée, des logos des chaînes, plus les polices.
+"""Écrit assets/game/credits.json : l'auteur et la licence de chaque photo utilisée (têtes, illustrations, cinématiques),
+des logos des chaînes, plus les polices.
 
 Usage : python3 tools/graphisme/credits.py
 `partage_identique` signale les licences qui, en principe, s'étendent aux images dérivées : à trancher.
@@ -36,9 +37,14 @@ def main():
                            "licence": licence, "source": credit.get("source"),
                            "partage_identique": any(mark in licence for mark in SHARE_ALIKE_MARKS)})
     # The real photos cut out for casserole cards (tools/graphisme/illustration_casserole.py).
-    with open(os.path.join(ROOT, "data/collecte/illustrations_casseroles.json"), encoding="utf8") as handle:
-        illustrations = [{"id": illustration_id, "source": spec["source"], "auteur": spec.get("auteur"), "licence": spec.get("licence")}
-                         for illustration_id, spec in sorted(json.load(handle).items()) if illustration_id in manifest.get("casseroles", {})]
+    illustrations = []
+    if manifest.get("casseroles"):
+        with open(os.path.join(ROOT, "data/collecte/illustrations_casseroles.json"), encoding="utf8") as handle:
+            illustrations = [{"id": illustration_id, "source": spec["source"], "auteur": spec.get("auteur"), "licence": spec.get("licence")}
+                             for illustration_id, spec in sorted(json.load(handle).items()) if illustration_id in manifest["casseroles"]]
+    # The heads of the career cutscenes, cut from free photos and videos: one credit per source.
+    with open(os.path.join(ROOT, "data/collecte/photos_cinematiques.json"), encoding="utf8") as handle:
+        cutscenes = [{key: entry[key] for key in ("id", "personne", "nom", "auteur", "licence", "source")} for entry in json.load(handle)]
     path = os.path.join(ROOT, "assets/game/credits.json")
     # The other sections (the voices' `sons`, written by tools/collecte/voix_jeu.py) are kept as they are.
     previous = {}
@@ -46,7 +52,8 @@ def main():
         with open(path, encoding="utf8") as handle:
             previous = json.load(handle)
     with open(path, "w", encoding="utf8") as handle:
-        json.dump({**previous, "photos": photos, "illustrations": illustrations, "logos": logos, "polices": FONTS}, handle, ensure_ascii=False, indent=1)
+        json.dump({**previous, "photos": photos, "illustrations": illustrations, "cinematiques": cutscenes, "logos": logos, "polices": FONTS}, handle,
+                  ensure_ascii=False, indent=1)
     shared = sum(photo["partage_identique"] for photo in photos)
     missing = [photo["id"] for photo in photos if not photo["auteur"] or not photo["source"]]
     print(f"{len(photos)} photos, {len(logos)} logos, {shared} photos à partage à l'identique, sans auteur ou source : {missing}")
