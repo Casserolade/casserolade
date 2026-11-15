@@ -8,6 +8,7 @@ import StoryFlow from '#src/client/screens/story/StoryFlow.vue';
 import TutorialFlow from '#src/client/screens/tutorial/TutorialFlow.vue';
 import { SCREEN_SET } from '#src/client/const/screenSet.ts';
 import type { ScreenSet } from '#src/client/const/screenSet.ts';
+import { AWAY_FROM_HOME } from '#src/client/const/awayFromHome.ts';
 import { createLocalTransport } from '#src/client/services/createLocalTransport.ts';
 import { counter } from '#src/client/services/counter.ts';
 import { createWebSocketTransport } from '#src/client/services/createWebSocketTransport.ts';
@@ -133,6 +134,11 @@ function leaveGame(): void {
   isLocal.value = false;
   clearLocalGame();
 }
+
+/** On a phone, away from the home screen: the back gesture stays in the game, and the game takes the whole screen. */
+const awayHooks = inject(AWAY_FROM_HOME, null);
+const awayFromHome = computed(() => Boolean(store.value) || elsewhere.value !== null);
+watch(awayFromHome, (away) => (away ? awayHooks?.leaveHome() : awayHooks?.backHome()), { immediate: true });
 
 /** The cinema cheat listens from the start, on every screen: it is typed anywhere. */
 cinemaCheat.listen();

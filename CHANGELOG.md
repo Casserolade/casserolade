@@ -31,6 +31,11 @@ Aucune carte ne change. Le détail : https://casserolade.fr/mises-a-jour
 - Deux leçons de plus : la Célébration avec Nadine Morano, et le renvoi quand le plateau est plein.
 - Les adversaires du tutoriel ont un peu moins de budget : qui suit les leçons gagne la plupart de ses combats.
 
+**Accueil et téléphone (correctif du 15 novembre)**
+- La bande-annonce sur l'accueil, sous le Discord, quand aucun direct Twitch n'est en cours. Le lecteur de YouTube ne se charge qu'au clic.
+- Sur téléphone, le geste retour ne fait plus sortir du jeu pendant une partie, une carrière ou le tutoriel.
+- Sur téléphone, la partie passe en plein écran, et un réglage le coupe ou le remet. Ajouté à l'écran d'accueil, le jeu s'ouvre en plein écran, iPhone compris.
+
 ## 0.4.1 — 14 novembre 2026
 
 Aucune carte ne change.

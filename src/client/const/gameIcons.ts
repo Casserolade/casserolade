@@ -57,6 +57,10 @@ export const GAME_ICONS = {
   effectsOn: 'M10 2l1.9 5.6L17.5 9.5l-5.6 1.9L10 17l-1.9-5.6L2.5 9.5l5.6-1.9ZM18.5 13l1 2.9 2.9 1-2.9 1-1 2.9-1-2.9-2.9-1 2.9-1ZM18 1.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7Z',
   /** A crescent moon: a steady, dimmed set, without flashes. */
   effectsOff: 'M14.5 2.5a9.5 9.5 0 1 0 7 15.6A8 8 0 0 1 14.5 2.5Z',
+  /** Four corners pointing out: the game takes the whole screen. */
+  fullscreenOn: 'M3 3h7v2.4H5.4V10H3Zm11 0h7v7h-2.4V5.4H14ZM3 14h2.4v4.6H10V21H3Zm15.6 0H21v7h-7v-2.4h4.6Z',
+  /** Four corners pointing in: the browser keeps its bars. */
+  fullscreenOff: 'M7.6 3H10v7H3V7.6h4.6Zm6.4 0h2.4v4.6H21V10h-7ZM3 14h7v7H7.6v-4.6H3Zm11 0h7v2.4h-4.6V21H14Z',
 } as const;
 
 export type GameIconName = keyof typeof GAME_ICONS;

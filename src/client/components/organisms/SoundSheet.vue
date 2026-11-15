@@ -2,6 +2,7 @@
 import SettingRow from '#src/client/components/atoms/SettingRow.vue';
 import VolumeSlider from '#src/client/components/atoms/VolumeSlider.vue';
 import MobileSheet from '#src/client/components/molecules/MobileSheet.vue';
+import { fullscreenMode } from '#src/client/stores/fullscreenMode.ts';
 import { useSoundControls } from '#src/client/stores/useSoundControls.ts';
 
 /**
@@ -15,6 +16,7 @@ const {
   musicOn, musicPercent, musicLabel, track, toggleMusic, slideMusic,
   effectsOn, effectsLabel, toggleEffects,
 } = useSoundControls();
+const fullscreenOn = fullscreenMode.active;
 </script>
 
 <template>
@@ -28,6 +30,7 @@ const {
         <VolumeSlider class="slider" :percent="musicOn ? musicPercent : 0" label="Volume de la musique" @slide="slideMusic" />
       </SettingRow>
       <SettingRow :icon="effectsOn ? 'effectsOn' : 'effectsOff'" :label="effectsLabel" :on="effectsOn" name="Effets visuels" :state="effectsOn ? 'Activés' : 'Coupés'" note="Flashs, secousses, lumières qui vacillent" @toggle="toggleEffects" />
+      <SettingRow v-if="fullscreenMode.supported" :icon="fullscreenOn ? 'fullscreenOn' : 'fullscreenOff'" :label="fullscreenOn ? 'Quitter le plein écran' : 'Passer en plein écran'" :on="fullscreenOn" name="Plein écran" :state="fullscreenOn ? 'Activé' : 'Coupé'" note="Sans les barres du navigateur" @toggle="fullscreenMode.toggle()" />
       <slot />
     </section>
   </MobileSheet>
