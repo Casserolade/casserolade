@@ -29,9 +29,11 @@ export function explodeDeath(card: CombatCard, scene: DeathScene, blow: KillingB
   smokePuff(scene.particles, x, y - size * 0.2, 6, '#4a4450', size * 0.9);
   // The blast carries its own light: a short flash only, never a white blob over the fire.
   scene.lights.hit(x, y, 1.2, card.scale);
+  // The same star as every other burst, under the rendered blast: one family of explosions.
+  scene.impact(x, y, 2.6, card.scale);
   scene.shockwave(x, y, card.scale);
   scene.shake(0.6);
-  scene.sound('boom', 1.2);
+  scene.sound('boom', 0.9);
   const pieces = breakMedallion(card, scene, blow, { wedges: 7, power: 2.3, tint: '#8a6a5e', life: 1.2 });
   let blastLeft = blast !== null;
   return {

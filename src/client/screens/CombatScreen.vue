@@ -2,6 +2,7 @@
 import { computed, useTemplateRef } from 'vue';
 import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import PollsCrash from '#src/client/components/atoms/PollsCrash.vue';
 import SeatTag from '#src/client/components/atoms/SeatTag.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
@@ -13,6 +14,7 @@ import MedallionToken from '#src/client/components/molecules/MedallionToken.vue'
 import GameTable from '#src/client/components/organisms/GameTable.vue';
 import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 
 /**
@@ -25,7 +27,7 @@ const emit = defineEmits<{ close: [] }>();
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
 const {
   SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
-  notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
+  notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, pollsLost, curveFalls, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
 } = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') });
 
@@ -82,6 +84,7 @@ const speechStyle = computed(() => {
 
     <template #front>
       <CelebrationNotices :notices="notices" :side="props.combat.side" :heads="noticeHeads" />
+      <PollsCrash v-if="curveFalls && pollsLost" class="polls-crash" :lost="pollsLost" :still="visualEffects.calm.value" />
       <div v-if="resultShown" class="outcome" :class="{ won, lost: lost || eliminated }" role="status">
         <strong class="result">{{ eliminated ? 'Éliminé !' : won ? 'Victoire !' : lost ? 'Défaite…' : 'Égalité' }}</strong>
         <span class="detail">{{ outcome }}</span>
@@ -93,7 +96,7 @@ const speechStyle = computed(() => {
       <div ref="stageHost" class="stage-host" aria-hidden="true" />
       <div v-if="speech" :key="`${speech.kind}-${speech.uid}`" class="speech" :class="[speech.kind, { below: speech.below }]" :style="speechStyle" role="status">
         <ConfettiBurst v-if="speech.kind === 'celebration'" class="confetti" />
-        <span v-if="speech.kind === 'celebration'" class="speed-lines" aria-hidden="true" />
+        <span v-if="speech.kind === 'celebration' && visualEffects.on.value" class="speed-lines" aria-hidden="true" />
         <span class="speech-bubble">
           <HeadPortrait v-if="!speech.at" class="speaker" :puppet="speakerPuppet" />
           <SpeechBubble v-if="speechText" :tail="speech.below ? 'up' : 'down'" :shout="speech.kind === 'celebration'">{{ speechText }}</SpeechBubble>
@@ -188,9 +191,12 @@ const speechStyle = computed(() => {
   height: calc(var(--s) * 600);
   background: repeating-conic-gradient(from 0deg, rgb(255 255 255 / 0.55) 0 1.5deg, transparent 1.5deg 9deg);
   mask: radial-gradient(circle, transparent 22%, #000 40%, transparent 70%);
-  animation: speed-lines 0.25s steps(2, end) infinite;
+  /* Two jolts a second at most: a faster flicker is hard on the eyes. */
+  animation: speed-lines 0.5s steps(2, end) infinite;
 }
 .outcome.won { top: calc(var(--s) * 300); }
+/* The polls' curve falls across the table, behind the word of the result. */
+.polls-crash { position: absolute; left: calc(var(--s) * 580); top: calc(var(--s) * 250); z-index: 19; }
 /* The breaking news runs at the foot of the table, between your hero and the corner. */
 .breaking-news { position: absolute; left: calc(var(--s) * 300); bottom: calc(var(--s) * 120); z-index: 21; max-width: calc(var(--s) * 1320); }
 .outcome.lost { top: calc(var(--s) * 610); }

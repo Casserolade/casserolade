@@ -10,6 +10,7 @@ export function shatterDeath(card: CombatCard, scene: DeathScene, blow: KillingB
   sparkBurst(scene.particles, x, y, blow.dirX, blow.dirY, blow.strength + 0.6, 1.4, undefined, card.scale);
   chipBurst(scene.particles, x, y, 10, card.color, 1 + blow.strength * 0.2, card.scale);
   scene.lights.hit(x, y, blow.strength + 0.6, card.scale);
+  scene.impact(x, y, blow.strength + 0.8, card.scale);
   scene.sound('shatter', 0.9 + blow.strength * 0.2);
   scene.shake(0.3);
   return breakMedallion(card, scene, blow, { wedges: 5, power: 0.8 + blow.strength * 0.25, life: 1.2 });

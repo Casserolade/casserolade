@@ -11,6 +11,8 @@ export interface ParticleTextures {
   chip: Texture;
   /** A gold coin, seen from the side or the front as it spins. */
   coin: Texture;
+  /** A ballot paper, folded once: white, its lines of print, the tricolour in a corner. */
+  ballot: Texture;
 }
 
 function canvasTexture(width: number, height: number, draw: (context: CanvasRenderingContext2D) => void): Texture {
@@ -88,6 +90,28 @@ function drawCoin(context: CanvasRenderingContext2D): void {
   context.fillText('€', 16, 17);
 }
 
+function drawBallot(context: CanvasRenderingContext2D): void {
+  context.fillStyle = '#fbfaf4';
+  context.strokeStyle = 'rgba(20,20,30,0.85)';
+  context.lineWidth = 2;
+  context.beginPath();
+  context.roundRect(2, 2, 36, 28, 2);
+  context.fill();
+  context.stroke();
+  // The fold, and three lines of print.
+  context.strokeStyle = 'rgba(20,20,30,0.18)';
+  context.beginPath();
+  context.moveTo(20, 3);
+  context.lineTo(20, 29);
+  context.stroke();
+  context.fillStyle = 'rgba(20,20,30,0.6)';
+  for (const [y, width] of [[10, 22], [15, 26], [20, 16]]) context.fillRect(8, y, width, 2);
+  for (const [x, color] of [[26, '#2a4bbf'], [30, '#fbfaf4'], [34, '#d3202c']] as const) {
+    context.fillStyle = color;
+    context.fillRect(x - 1, 4, 4, 4);
+  }
+}
+
 /** Drawn once per combat, on canvases: every particle is one of these, tinted. */
 export function createParticleTextures(): ParticleTextures {
   return {
@@ -96,6 +120,7 @@ export function createParticleTextures(): ParticleTextures {
     smoke: canvasTexture(64, 64, drawSmoke),
     chip: canvasTexture(24, 24, drawChip),
     coin: canvasTexture(32, 32, drawCoin),
+    ballot: canvasTexture(40, 32, drawBallot),
   };
 }
 

@@ -6,7 +6,10 @@ import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
 import { CombatCard } from '#src/client/pixi/combatCard.ts';
 import type { SheetFrames } from '#src/client/pixi/deaths/deathScene.ts';
 import { playDeath } from '#src/client/pixi/deaths/playDeath.ts';
+import { GENKIDAMA_LANDS_MS } from '#src/client/const/genkidama.ts';
+import { genkidama } from '#src/client/pixi/genkidama.ts';
 import { STRIKE_LANDS_MS, heroStrike } from '#src/client/pixi/heroStrike.ts';
+import { tractRain } from '#src/client/pixi/particleBursts.ts';
 import type { StrikeTarget } from '#src/client/pixi/heroStrike.ts';
 import { loadCombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
 import type { CombatTextures } from '#src/client/pixi/loadCombatTextures.ts';
@@ -19,6 +22,7 @@ import { deathPlayed } from '#src/client/tools/deathPlayed.ts';
 import { orderWithCorpses } from '#src/client/tools/orderWithCorpses.ts';
 import type { DeathPlan } from '#src/client/tools/planDeaths.ts';
 import { statsChangeLabel } from '#src/client/tools/statsChangeLabel.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import type { CombatSides } from '#src/engine/replay.ts';
 import type { CombatEvent, CombatUnit } from '#src/engine/types.ts';
 
@@ -65,7 +69,8 @@ export class CombatStage {
   private readonly cardLayer = new Container();
   private fx!: StageFx;
   private blows!: StageBlows;
-  private readonly reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /** The player's setting, read when the stage is built: a calm stage shakes little, flashes less and dies quietly. */
+  private readonly reducedMotion = visualEffects.calm.value;
   private readonly cards = new Map<number, CombatCard>();
   /** Dead, still playing their death where they stood: their place in the row waits. */
   private readonly corpses = new Set<number>();
@@ -180,6 +185,31 @@ export class CombatStage {
     const color = winner === 'own' ? STRIKE_COLORS.own : STRIKE_COLORS.enemy;
     this.fx.play(heroStrike(this.fx, sources, target, color, this.options.playSound));
     return STRIKE_LANDS_MS / this.options.speed();
+  }
+
+  /** A rout: leaflets of every camp rain over the whole table. Nothing on a calm stage. */
+  rainTracts(): void {
+    if (!this.isStarted || this.reducedMotion) return;
+    const { width, height } = this.app.renderer.screen;
+    tractRain(this.fx.particles, width, 46, Math.min(width / 1920, height / 1080) * 1.3);
+  }
+
+  /** A calm stage plays none of the big effects (the player's setting, read when it was built). */
+  get calm(): boolean {
+    return this.reducedMotion;
+  }
+
+  /**
+   * The blow that eliminates a hero: the set charges a ball of votes over the table and throws it at the beaten hero's
+   * portrait (`target`, on the page). Returns how long until it lands, in page milliseconds; 0 when the stage is not
+   * ready or the player asked for less motion.
+   */
+  genkidama(winner: 'own' | 'enemy', target: StrikeTarget): number {
+    if (!this.isStarted || this.reducedMotion) return 0;
+    const { width, height } = this.app.renderer.screen;
+    const color = winner === 'own' ? STRIKE_COLORS.own : STRIKE_COLORS.enemy;
+    this.fx.play(genkidama(this.fx, { x: width / 2, y: height * 0.47 }, target, color, Math.min(width / 1920, height / 1080), this.options.playSound));
+    return GENKIDAMA_LANDS_MS / this.options.speed();
   }
 
   destroy(): void {

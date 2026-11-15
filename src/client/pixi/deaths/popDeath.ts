@@ -22,6 +22,7 @@ export function popDeath(card: CombatCard, scene: DeathScene, blow: KillingBlowF
       card.view.visible = false;
       chipBurst(scene.particles, card.view.x, card.view.y, 12, card.color, 0.8 + blow.strength * 0.2, scale);
       smokePuff(scene.particles, card.view.x, card.view.y, 3, '#d8d4e0', 60 * scale);
+      scene.impact(card.view.x, card.view.y, 0.8, scale);
       scene.sound('pop', 1);
       return false;
     },

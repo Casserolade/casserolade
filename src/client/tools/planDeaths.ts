@@ -16,8 +16,8 @@ interface Fall {
 
 /**
  * How each politician of the combat dies (deathKind), read from the whole journal before it plays: by uid. A Retour en
- * politique dies for good too, and its reincarnation is a new unit, with its own uid. The last death of the beaten side is the finale, and it explodes (a Polémique
- * still burns).
+ * politique dies for good too, and its reincarnation is a new unit, with its own uid. The last death of the beaten side is the finale: it dies its own death, in
+ * slow motion (it no longer explodes by right: only a critical blow does, 15 November 2026).
  */
 export function planDeaths(log: CombatEvent[]): Map<number, DeathPlan> {
   const units = new Map<number, { unit: CombatUnit; side: 0 | 1 }>();
@@ -63,6 +63,6 @@ export function planDeaths(log: CombatEvent[]): Map<number, DeathPlan> {
     }
   }
   const finale = falls.findLast((fall) => (beaten === null ? emptied[0] && emptied[1] : emptied[beaten] && fall.side === beaten));
-  if (finale) finale.plan = { kind: finale.plan.kind === 'burn' ? 'burn' : 'explode', finale: true };
+  if (finale) finale.plan = { ...finale.plan, finale: true };
   return new Map(falls.map((fall) => [fall.uid, fall.plan]));
 }

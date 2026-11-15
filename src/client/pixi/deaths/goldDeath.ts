@@ -12,6 +12,7 @@ export function goldDeath(card: CombatCard, scene: DeathScene, blow: KillingBlow
   coinShower(scene.particles, x, y, 16, card.scale);
   sparkBurst(scene.particles, x, y, 0, -1, 1.6, Math.PI, GOLD_SPARKS, card.scale);
   scene.lights.gain(x, y, '#ffd84a', card.scale);
+  scene.impact(x, y, 1.6, card.scale);
   scene.lights.death(x, y, card.scale * 1.2);
   scene.sound('coins', 1);
   scene.shake(0.3);

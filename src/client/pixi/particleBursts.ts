@@ -90,3 +90,37 @@ export function coinShower(layer: ParticleLayer, x: number, y: number, count: nu
     });
   }
 }
+
+/**
+ * A wad of ballot papers bursting out of a hero that is struck: thrown up and out in a fan, tumbling, and growing as
+ * they come, as if they flew at the viewer's face. `strength` from 0.5 to 2: more papers, thrown harder.
+ */
+export function ballotBurst(layer: ParticleLayer, x: number, y: number, strength: number, scale = 1): void {
+  const count = Math.round(5 + strength * 5);
+  for (let index = 0; index < count; index++) {
+    const angle = between(-Math.PI * 0.95, -Math.PI * 0.05);
+    const speed = between(380, 900) * (0.7 + strength * 0.3) * scale;
+    layer.spawn({
+      texture: 'ballot', x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, life: between(1, 1.6),
+      size: [between(26, 36) * scale, between(110, 170) * scale], alpha: [1, 0.9], gravity: 1300 * scale, drag: 1.1,
+      rotation: between(0, Math.PI * 2), spin: between(-7, 7), flip: between(0.8, 2.2), delay: between(0, 0.08),
+    });
+  }
+}
+
+/** The colours of the leaflets: every camp prints its own. */
+const TRACT_COLORS = ['#ffffff', '#ffe27a', '#ff8a8a', '#9fc4ff', '#a8e6a1', '#e3b3ff'];
+
+/**
+ * Leaflets raining over the whole table after a crushing win: they fall from above the stage, `width` wide, swaying
+ * and tumbling, in the colours of every camp. `count` of them, spread over a second.
+ */
+export function tractRain(layer: ParticleLayer, width: number, count: number, scale = 1): void {
+  for (let index = 0; index < count; index++) {
+    layer.spawn({
+      texture: 'ballot', x: between(0, width), y: between(-90, -20) * scale, vx: between(-90, 90) * scale, vy: between(260, 520) * scale,
+      life: between(2.2, 3.2), size: [between(34, 52) * scale, between(34, 52) * scale], alpha: [1, 0.9], gravity: 160 * scale, drag: 0.5,
+      rotation: between(0, Math.PI * 2), spin: between(-3, 3), flip: between(0.5, 1.4), color: TRACT_COLORS[index % TRACT_COLORS.length], delay: between(0, 1),
+    });
+  }
+}

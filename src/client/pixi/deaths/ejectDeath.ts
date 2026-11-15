@@ -42,6 +42,7 @@ export function ejectDeath(card: CombatCard, scene: DeathScene, blow: KillingBlo
   let sinceGhost = 0;
   sparkBurst(scene.particles, card.view.x, card.view.y, rawX / length, rawY / length, blow.strength + 0.5, 0.6, undefined, card.scale);
   scene.lights.hit(card.view.x, card.view.y, blow.strength + 0.4, card.scale);
+  scene.impact(card.view.x, card.view.y, blow.strength + 0.6, card.scale);
   scene.sound('bumper', 0.9);
   scene.shake(0.22);
 

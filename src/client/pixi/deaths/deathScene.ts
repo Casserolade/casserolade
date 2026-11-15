@@ -37,5 +37,7 @@ export interface DeathScene {
   sheet(name: string): SheetFrames | null;
   sound(name: SynthName, strength?: number): void;
   shake(amount: number): void;
+  /** The manga star of a blow, the same for every burst of the combat: `strength` from 0.5 to 3, `scale` the medallion's. */
+  impact(x: number, y: number, strength: number, scale?: number): void;
   shockwave(x: number, y: number, power: number): void;
 }

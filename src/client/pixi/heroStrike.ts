@@ -1,6 +1,6 @@
 import { Container, Sprite } from 'pixi.js';
 import type { StageEffect } from '#src/client/pixi/deaths/deathScene.ts';
-import { sparkBurst } from '#src/client/pixi/particleBursts.ts';
+import { ballotBurst, sparkBurst } from '#src/client/pixi/particleBursts.ts';
 import type { StageFx } from '#src/client/pixi/stageFx.ts';
 import type { SynthName } from '#src/client/services/synthSounds.ts';
 
@@ -44,7 +44,8 @@ function cometView(fx: StageFx, color: string, scale: number): Container {
 
 /**
  * The winners strike the beaten hero, as in Battlegrounds: a comet of light leaves each surviving medallion, bows
- * across the table and crashes into the hero's portrait, one after the other, each with its sparks and its jolt.
+ * across the table and crashes into the hero's portrait, one after the other, each with its sparks, its jolt and the
+ * ballots it knocks out of the hero.
  * `color` is the side's: gold for yours, red for the rival's.
  */
 export function heroStrike(
@@ -76,7 +77,10 @@ export function heroStrike(
     comet.landed = true;
     comet.view.visible = false;
     fx.lights.hit(target.x, target.y, 1.6, comet.scale);
+    fx.impacts.add(target.x, target.y, 1.8, comet.scale);
     sparkBurst(fx.particles, target.x, target.y, 0, 1, 1.6, Math.PI, ['#ffffff', color], comet.scale);
+    // The votes it loses fly out of it: a wad of ballots at each blow.
+    ballotBurst(fx.particles, target.x, target.y, 1, comet.scale);
     fx.addShake(0.3);
     playSound('hit', 1.3);
   }

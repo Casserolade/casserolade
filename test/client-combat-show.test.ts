@@ -182,8 +182,12 @@ const unit = (uid: number, extra: Partial<CombatUnit> = {}): CombatUnit => ({
 test('each death fits its blow and its politician', () => {
   assert.equal(deathKind(unit(1), { value: 3, before: 3 }, false), 'eject');
   assert.equal(deathKind(unit(1), { value: 6, before: 3 }, false), 'shatter');
-  assert.equal(deathKind(unit(1), { value: 9, before: 1 }, false), 'explode');
+  // Only a critical blow explodes: more than 40 points past the health that was left.
+  assert.equal(deathKind(unit(1), { value: 9, before: 1 }, false), 'shatter');
   assert.equal(deathKind(unit(1), { value: 9, before: 5 }, false), 'shatter');
+  assert.equal(deathKind(unit(1), { value: 43, before: 3 }, false), 'shatter');
+  assert.equal(deathKind(unit(1), { value: 44, before: 3 }, false), 'explode');
+  assert.equal(deathKind(unit(1), { value: 120, before: 60 }, false), 'explode');
   assert.equal(deathKind(unit(1), { value: 1, before: 1 }, true), 'burn');
   assert.equal(deathKind(unit(1, { golden: true }), { value: 2, before: 2 }, false), 'gold');
   assert.equal(deathKind(unit(1, { keywords: ['vedette'] }), { value: 2, before: 2 }, false), 'tv-off');
@@ -218,9 +222,10 @@ test('the last death of the beaten side is the finale; a Retour en politique die
     { e: 'fin', winner: 0, sides: [[unit(1)], []] },
   ];
   const plan = planDeaths(log);
-  assert.deepEqual(plan.get(2), { kind: 'explode', finale: false });
+  assert.deepEqual(plan.get(2), { kind: 'shatter', finale: false });
   assert.equal(plan.get(3)?.finale, false);
-  assert.deepEqual(plan.get(30), { kind: 'explode', finale: true });
+  // The finale dies its own death: it no longer explodes by right.
+  assert.deepEqual(plan.get(30), { kind: 'eject', finale: true });
   assert.equal(plan.size, 3);
 });
 

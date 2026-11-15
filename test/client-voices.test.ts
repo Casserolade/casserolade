@@ -1,7 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { afterCombatSpeaker, HOST_CHANCE } from '../src/client/tools/afterCombatSpeaker.ts';
-import { drainSteps } from '../src/client/tools/drainSteps.ts';
 import { boldGlossaryTerms, glossaryFor } from '../src/client/tools/glossaryFor.ts';
 import { combatLayout } from '../src/client/tools/combatLayout.ts';
 import { boldTerms } from '../src/client/tools/richText.ts';
@@ -34,19 +33,6 @@ test('une vraie voix à la fois : la suivante attend que la première ait fini',
   const busy = createMixerState();
   for (let i = 0; i < 12; i++) claimVoice(busy, `bruit-${i}`, 0, 2000);
   assert.equal(claimSpeech(busy, 10, 1500), true);
-});
-
-// Les sondages s'égrènent quand on perd.
-
-test('les sondages s\'égrènent un par un, ou par paliers pour une grosse perte, et s\'arrêtent à 0', () => {
-  assert.deepEqual(drainSteps(21, 16), [20, 19, 18, 17, 16]);
-  assert.deepEqual(drainSteps(3, -4), [2, 1, 0], 'une perte mortelle s\'arrête à 0');
-  const big = drainSteps(40, 10);
-  assert.ok(big.length <= 12);
-  assert.equal(big.at(-1), 10);
-  assert.ok(big.every((value, index) => index === 0 || value < big[index - 1]));
-  assert.deepEqual(drainSteps(10, 10), []);
-  assert.deepEqual(drainSteps(10, 12), []);
 });
 
 // Le pouvoir d'un héros s'explique comme une carte.

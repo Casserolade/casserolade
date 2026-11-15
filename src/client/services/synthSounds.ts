@@ -29,7 +29,9 @@ export type SynthName =
   | 'zap'
   | 'pop'
   | 'sizzle'
-  | 'coins';
+  | 'coins'
+  | 'charge'
+  | 'blast';
 
 export interface SynthOptions {
   /** Multiplies every frequency: the slight variation of each play. */
@@ -270,9 +272,9 @@ export const SYNTH_SOUNDS: Record<SynthName, { seconds: number; play: Recipe }> 
   boom: {
     seconds: 0.9,
     play: (c, o, t, v) => {
-      tone(c, o, t, v, { from: 120, to: 32, duration: 0.5, gain: 0.55 });
-      noise(c, o, t, v, { filter: 'lowpass', from: 2400, to: 140, duration: 0.85, gain: 0.5, attack: 0.005 });
-      noise(c, o, t, v, { filter: 'highpass', from: 3500, start: 0.02, duration: 0.18, gain: 0.12 });
+      tone(c, o, t, v, { from: 110, to: 34, duration: 0.5, gain: 0.38, attack: 0.012 });
+      noise(c, o, t, v, { filter: 'lowpass', from: 1500, to: 120, duration: 0.8, gain: 0.3, attack: 0.02 });
+      noise(c, o, t, v, { filter: 'highpass', from: 3500, start: 0.03, duration: 0.14, gain: 0.05 });
     },
   },
   // A medallion broken like glass: bright inharmonic tinkles over a crack.
@@ -325,6 +327,25 @@ export const SYNTH_SOUNDS: Record<SynthName, { seconds: number; play: Recipe }> 
       noise(c, o, t, v, { filter: 'highpass', from: 3000, duration: 0.05, gain: 0.2 });
       [2637, 3136, 2794, 3520, 2349, 3951, 2960].forEach((from, index) =>
         tone(c, o, t, v, { type: 'triangle', from, start: 0.03 + index * 0.075, duration: 0.12, gain: 0.07 }));
+    },
+  },
+  // A ball of energy that charges: a hum that climbs for more than a second, a whistle rising over it.
+  charge: {
+    seconds: 1.5,
+    play: (c, o, t, v) => {
+      tone(c, o, t, v, { type: 'sawtooth', from: 70, to: 420, duration: 1.4, gain: 0.1, attack: 0.5 });
+      tone(c, o, t, v, { type: 'triangle', from: 140, to: 1250, duration: 1.4, gain: 0.12, attack: 0.9 });
+      noise(c, o, t, v, { filter: 'bandpass', from: 300, to: 5200, duration: 1.4, gain: 0.14, attack: 1.1, q: 3 });
+    },
+  },
+  // It lands: a crack, a very deep thump, and a long rumble rolling away.
+  blast: {
+    seconds: 1.6,
+    play: (c, o, t, v) => {
+      noise(c, o, t, v, { filter: 'highpass', from: 2800, duration: 0.12, gain: 0.35 });
+      tone(c, o, t, v, { from: 150, to: 26, duration: 0.9, gain: 0.7 });
+      tone(c, o, t, v, { type: 'triangle', from: 90, to: 38, start: 0.05, duration: 1.1, gain: 0.3 });
+      noise(c, o, t, v, { filter: 'lowpass', from: 3200, to: 90, duration: 1.5, gain: 0.55, attack: 0.006 });
     },
   },
 };

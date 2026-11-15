@@ -76,6 +76,7 @@ export class StageFx {
       sheet: this.options.sheet,
       sound: this.options.sound,
       shake: (amount) => this.addShake(amount),
+      impact: (x, y, strength, scale) => this.impacts.add(x, y, strength, scale),
       shockwave: (x, y, power) => this.shockwave(x, y, power),
     };
   }

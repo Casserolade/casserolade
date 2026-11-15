@@ -14,10 +14,11 @@ export interface KillingBlow {
   before: number;
 }
 
-/** A blow this far past the health it took blows the politician up… */
-const EXPLODING_EXCESS = 6;
-/** …as long as it is also this many times that health: a 9 on a 1 explodes, a 9 on a 5 does not. */
-const EXPLODING_RATIO = 2;
+/**
+ * A critical blow blows the politician up: more than this many points past the health it had left (15 November 2026:
+ * the explosion, loud and brutal, came far too often; it is kept for the blows that deserve it).
+ */
+const CRITICAL_EXCESS = 40;
 /** Past this excess, or from this blow, the medallion breaks to pieces instead of flying off whole. */
 const SHATTERING_EXCESS = 3;
 const SHATTERING_BLOW = 8;
@@ -28,7 +29,7 @@ export function deathKind(unit: Pick<CombatUnit, 'golden' | 'keywords' | 'token'
   if (unit?.golden) return 'gold';
   if (!blow) return 'light';
   const excess = blow.value - Math.max(0, blow.before);
-  if (excess >= EXPLODING_EXCESS && blow.value >= EXPLODING_RATIO * Math.max(1, blow.before)) return 'explode';
+  if (excess > CRITICAL_EXCESS) return 'explode';
   if (unit?.keywords.includes('vedette')) return 'tv-off';
   if (unit?.token) return 'pop';
   if (excess >= SHATTERING_EXCESS || blow.value >= SHATTERING_BLOW) return 'shatter';

@@ -2,6 +2,7 @@
 import { computed, useTemplateRef } from 'vue';
 import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
+import PollsCrash from '#src/client/components/atoms/PollsCrash.vue';
 import SeatTag from '#src/client/components/atoms/SeatTag.vue';
 import SheetSprite from '#src/client/components/atoms/SheetSprite.vue';
 import SpeechBubble from '#src/client/components/atoms/SpeechBubble.vue';
@@ -11,9 +12,11 @@ import CelebrationNotices from '#src/client/components/molecules/CelebrationNoti
 import HostLectern from '#src/client/components/molecules/HostLectern.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
 import MobileHeroBadge from '#src/client/components/molecules/MobileHeroBadge.vue';
+import StudioBand from '#src/client/components/organisms/StudioBand.vue';
 import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { studioShock } from '#src/client/stores/studioShock.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 import { portraitCombatLayout } from '#src/client/tools/portraitCombatLayout.ts';
@@ -29,7 +32,7 @@ const emit = defineEmits<{ close: [] }>();
 const stageHost = useTemplateRef<HTMLElement>('stageHost');
 const {
   SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
-  notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
+  notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, pollsLost, curveFalls, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
 } = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') }, portraitCombatLayout);
 
@@ -50,6 +53,7 @@ const speechStyle = computed(() => {
 <template>
   <div class="mobile-combat">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
+    <StudioBand class="channel-band" :plateau-id="plateauId" />
     <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
     <div ref="rivalHero" class="rival" :class="{ shaken: rivalShaken }">
       <MobileHeroBadge :hero-id="combat.opponent.ghostOf ?? combat.opponent.heroId" :ghost="combat.opponent.seat < 0" :hp="opponentHp ?? 0" :start-hp="view?.params.startHp ?? 30" />
@@ -86,6 +90,7 @@ const speechStyle = computed(() => {
     <div class="notices-spot">
       <CelebrationNotices :notices="notices" :side="props.combat.side" :heads="noticeHeads" />
     </div>
+    <PollsCrash v-if="curveFalls && pollsLost" class="polls-crash" :lost="pollsLost" :still="visualEffects.calm.value" />
     <div v-if="resultShown" class="outcome" :class="{ won, lost: lost || eliminated }" role="status">
       <strong class="result">{{ eliminated ? 'Éliminé !' : won ? 'Victoire !' : lost ? 'Défaite…' : 'Égalité' }}</strong>
       <span class="detail">{{ outcome }}</span>
@@ -106,9 +111,11 @@ const speechStyle = computed(() => {
 
 <style scoped>
 /* --s sizes what was drawn for the computer's table (bubbles, notices): at a reading size on a phone. */
-.mobile-combat { --s: 0.62px; position: fixed; inset: 0; overflow: hidden; background: #0b0e18; color: var(--color-text); user-select: none; -webkit-user-select: none; }
+.mobile-combat { --s: 0.62px; --band-height: 23px; position: fixed; inset: 0; overflow: hidden; background: #0b0e18; color: var(--color-text); user-select: none; -webkit-user-select: none; }
 .decor { position: absolute; inset: -2%; background: center / cover no-repeat; filter: blur(2px) brightness(0.55) saturate(1.1); }
 .flicker { z-index: 1; }
+/* The channel's ticker, at the foot of the screen as on television: what stands at the bottom stands on it (--band-height). */
+.channel-band { --s: 0.6px; position: absolute; z-index: 19; left: 0; right: 0; bottom: env(safe-area-inset-bottom); }
 /* The breaking news, under the rival and the host, above its row, at a reading size. */
 .breaking-news { --s: 0.62px; position: absolute; z-index: 21; left: 8px; right: 8px; top: calc(env(safe-area-inset-top) + 15%); }
 .rival { --u: 0.6px; --badge-size: 56px; position: absolute; z-index: 25; left: 50%; top: calc(env(safe-area-inset-top) + 8px); translate: -50% 0; }
@@ -121,7 +128,7 @@ const speechStyle = computed(() => {
 .booth { position: absolute; z-index: 24; left: 6px; top: calc(env(safe-area-inset-top) + 2px); }
 .host { --lectern-width: 84px; }
 .host-line { position: absolute; left: 6px; top: calc(100% + 6px); width: max-content; max-width: 62vw; }
-.me { --badge-size: 64px; position: absolute; z-index: 25; left: 10px; bottom: calc(env(safe-area-inset-bottom) + 14px); transform-origin: 0 100%; transition: transform 0.25s cubic-bezier(0.3, 1.4, 0.5, 1); }
+.me { --badge-size: 64px; position: absolute; z-index: 25; left: 10px; bottom: calc(env(safe-area-inset-bottom) + var(--band-height) + 10px); transform-origin: 0 100%; transition: transform 0.25s cubic-bezier(0.3, 1.4, 0.5, 1); }
 /* The loss is felt: the hero comes forward while its polls drain, then flashes red and shakes. */
 .me.draining { transform: scale(1.35); }
 .me.hurt { animation: hurt-shake 0.45s linear; }
@@ -134,13 +141,13 @@ const speechStyle = computed(() => {
 .plain-row { position: absolute; left: 0; right: 0; display: flex; justify-content: center; gap: 5px; margin: 0; padding: 0; list-style: none; translate: 0 -50%; }
 .plain-row.enemy { top: 36%; }
 .plain-row.own { top: 63%; }
-.controls { position: absolute; z-index: 20; right: 8px; bottom: calc(env(safe-area-inset-bottom) + 14px); display: flex; gap: 6px; }
+.controls { position: absolute; z-index: 20; right: 8px; bottom: calc(env(safe-area-inset-bottom) + var(--band-height) + 10px); display: flex; gap: 6px; }
 .control { min-width: 44px; min-height: 40px; padding: 0 10px; border-radius: 999px; border: 2px solid var(--color-frame); background: linear-gradient(#2a3a6a, #121a38); color: #fff; font: 400 1.05rem / 1 var(--font-number); letter-spacing: 1px; }
 .control[aria-pressed='true'] { background: linear-gradient(#ffe27a, #e8a612); color: var(--color-ink); }
 .stage-loading { position: absolute; z-index: 5; left: 50%; top: 50%; translate: -50% -50%; color: var(--color-title); font: 400 1.6rem / 1 var(--font-number); letter-spacing: 1px; white-space: nowrap; -webkit-text-stroke: 4px var(--color-ink); paint-order: stroke fill; pointer-events: none; animation: stage-loading 1.2s ease-in-out infinite; }
-.waiting-next { position: absolute; z-index: 5; left: 50%; bottom: calc(env(safe-area-inset-bottom) + 96px); translate: -50% 0; padding: 6px 14px; border-radius: 20px; background: rgb(10 12 22 / 0.88); color: #c9cfdc; font: 700 0.95rem / 1.2 var(--font-card); white-space: nowrap; pointer-events: none; }
+.waiting-next { position: absolute; z-index: 5; left: 50%; bottom: calc(env(safe-area-inset-bottom) + var(--band-height) + 92px); translate: -50% 0; padding: 6px 14px; border-radius: 20px; background: rgb(10 12 22 / 0.88); color: #c9cfdc; font: 700 0.95rem / 1.2 var(--font-card); white-space: nowrap; pointer-events: none; }
 /* The Célébrations, above the controls, at a reading size. */
-.notices-spot { --s: 0.78px; position: absolute; z-index: 21; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + 64px); height: 0; }
+.notices-spot { --s: 0.78px; position: absolute; z-index: 21; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom) + var(--band-height) + 60px); height: 0; }
 .outcome { position: absolute; z-index: 20; left: 50%; top: 49.5%; translate: -50% -50%; display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; animation: outcome-in 0.4s cubic-bezier(0.3, 1.6, 0.5, 1); }
 .result { color: #e8ecf4; font: 400 3.4rem / 1 var(--font-number); letter-spacing: 2px; white-space: nowrap; -webkit-text-stroke: 8px var(--color-ink); paint-order: stroke fill; rotate: -3deg; }
 .won .result { color: #ffd84a; }
@@ -164,6 +171,8 @@ const speechStyle = computed(() => {
   animation: speed-lines 0.25s steps(2, end) infinite;
 }
 .outcome.won { top: 30%; }
+/* The polls' curve, across the middle of the phone's table: drawn for 760 units, it fits in the width. */
+.polls-crash { --s: calc(100vw / 980); position: absolute; z-index: 19; left: 8vw; top: 36%; }
 .outcome.lost { top: 70%; }
 @keyframes stage-loading { 50% { opacity: 0.5; } }
 @keyframes outcome-in { from { transform: scale(0.3); opacity: 0; } }

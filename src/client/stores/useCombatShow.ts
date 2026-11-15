@@ -2,7 +2,8 @@ import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from 'vue';
 import type { Ref } from 'vue';
 import { ANSWER_MOMENTS, CELEBRATION_MOMENTS } from '#src/client/const/speechMoments.ts';
 import type { CombatStage } from '#src/client/pixi/combatStage.ts';
-import { playSound, playVoice, preloadVoice, stopVoice } from '#src/client/services/soundEffects.ts';
+import { GENKIDAMA_LANDS_MS } from '#src/client/const/genkidama.ts';
+import { playSample, playSound, playVoice, preloadVoice, stopVoice } from '#src/client/services/soundEffects.ts';
 import { COMBAT_SPEEDS, combatSpeed } from '#src/client/stores/combatSpeed.ts';
 import { CombatPlayback } from '#src/client/stores/createCombatPlayback.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
@@ -20,7 +21,6 @@ import { celebrationNotices } from '#src/client/tools/celebrationNotices.ts';
 import { combatCharacterIds } from '#src/client/tools/combatCharacterIds.ts';
 import { combatHp } from '#src/client/tools/combatHp.ts';
 import { combatLayout } from '#src/client/tools/combatLayout.ts';
-import { drainSteps } from '#src/client/tools/drainSteps.ts';
 import { freshVoice } from '#src/client/tools/freshVoice.ts';
 import { hostQuote } from '#src/client/tools/hostQuote.ts';
 import { hurryStep } from '#src/client/tools/hurryStep.ts';
@@ -31,6 +31,7 @@ import { quotesFor } from '#src/client/tools/quotesFor.ts';
 import { readingDelayMs } from '#src/client/tools/readingDelayMs.ts';
 import { rivalLineForCombat } from '#src/client/tools/rivalLineForCombat.ts';
 import { sheetSpriteStyle } from '#src/client/tools/sheetSpriteStyle.ts';
+import { eliminationScreams } from '#src/client/tools/eliminationScreams.ts';
 import { summarizeCombatOutcome } from '#src/client/tools/summarizeCombatOutcome.ts';
 import { voicedSpeaker } from '#src/client/tools/voicedSpeaker.ts';
 import { voixPourPhrase } from '#src/data/trouverVoix.ts';
@@ -47,8 +48,15 @@ const RESULT_DELAY_MS = 450;
 const WAIT_HINT_MS = 1500;
 /** A speaker whose top is in the upper part of the screen, as a share of its height, speaks below itself. */
 const HIGH_SPEAKER = 0.4;
-/** The polls a loss takes drain one by one under a zoom: the zoom first, then each step, then the blow. */
-const DRAIN = { zoomMs: 250, stepMs: 130, hurtMs: 550 };
+/**
+ * The polls a loss takes: the hero comes forward under a zoom, the polls' curve falls across the table (PollsCrash), and
+ * the count changes once, when the curve lands; then the blow.
+ */
+const DRAIN = { zoomMs: 250, curveMs: 1000, hurtMs: 550 };
+/** A combat that takes this many polls from the rival is a rout: leaflets rain on the winner's table. */
+const ROUT_POLLS = 8;
+/** The Wilhelm scream, the cinema's stock scream since 1951: a human player eliminated on a critical blow, once in a while. */
+const SCREAM = { sample: 'wilhelm', gain: 0.6 };
 /** The giant casserole of the fatal blow, in table pixels, and how long the rival shakes under it. */
 const FATAL_BLOW = { width: 200, shakeMs: 450, afterMs: 600 };
 /** A Célébration is short: a recording of 6 seconds at most first (5 November 2026: Morano's took 8), a longer one when none is left. */
@@ -59,6 +67,8 @@ export interface CombatShowProps {
   combat: CombatView;
   view: PlayerView | null;
   line: string | null;
+  /** Online, the rival's pseudo: a human plays it (a bot has none). */
+  rivalName?: string | null;
   /** Out of the game, the survivor whose combat this is: the result names it instead of « vous ». */
   watching?: string | null;
 }
@@ -153,6 +163,9 @@ export function useCombatShow(
   });
   let drainTimers: number[] = [];
   const eliminated = polls?.eliminated ?? false;
+  /** The polls this combat costs the player, 0 when none: the screen draws their fall once `curveFalls`. */
+  const pollsLost = polls ? Math.max(0, polls.own.before - Math.max(0, polls.own.after)) : 0;
+  const curveFalls = ref(false);
   const outcome = computed(() => summarizeCombatOutcome(props.combat, { eliminated, who: props.watching ?? null }));
   const rivalLine = computed(() => rivalLineForCombat(props.combat, polls?.enemy?.before ?? null));
   /** The set and its host stay those of this round: the next round's view may arrive before the end. */
@@ -171,31 +184,43 @@ export function useCombatShow(
   });
 
   /**
-   * When a combat costs polls, they drain on screen with the result, one by one under a zoom, with a tick
-   * each, then a red blow; the rival's go at the same pace. Never below 0: an elimination drains to 0.
-   * Returns how long it lasts, so that the result stays at least that long.
+   * When a combat costs polls, the result shows it: the loser's hero comes forward, the polls' curve falls across the
+   * table with the points lost (15 November 2026: the curve, not a counter running down with a tick at each point),
+   * the count changes once when it lands, then a red blow. Never below 0. Returns how long it lasts, so that the
+   * result stays at least that long.
    */
   function drainPolls(): number {
     if (!polls) return 0;
-    const own = drainSteps(polls.own.before, polls.own.after);
-    const enemy = polls.enemy ? drainSteps(polls.enemy.before, polls.enemy.after) : [];
-    // The winners strike first: the polls drain once their comets land.
-    const strikeMs = strikeBeatenHero(own.length > 0, enemy.length > 0);
+    const ownAfter = Math.max(0, polls.own.after);
+    const ownLoses = ownAfter < polls.own.before;
+    const enemyAfter = polls.enemy ? Math.max(0, polls.enemy.after) : null;
+    const enemyLoses = polls.enemy !== null && enemyAfter !== null && enemyAfter < polls.enemy.before;
+    // The winners strike first: the polls fall once their comets land.
+    const strikeMs = strikeBeatenHero(ownLoses, enemyLoses);
     const at = (ms: number, callback: () => void) => drainTimers.push(window.setTimeout(callback, strikeMs + ms));
-    enemy.forEach((value, index) => at(DRAIN.zoomMs + index * DRAIN.stepMs, () => (opponentHp.value = value)));
-    const enemyEnd = strikeMs + (enemy.length ? DRAIN.zoomMs + enemy.length * DRAIN.stepMs : 0);
-    const blowEnd = won.value && polls.enemy && polls.enemy.after <= 0 ? dropFatalBlow(enemyEnd) : 0;
-    if (own.length === 0) return Math.max(enemyEnd, blowEnd);
-    // The hero comes forward once struck: the comets land on it where it stands.
-    at(0, () => (draining.value = true));
-    own.forEach((value, index) => at(DRAIN.zoomMs + index * DRAIN.stepMs, () => {
-      ownHp.value = value;
-      playSound('tick', 0.7);
-    }));
-    const end = DRAIN.zoomMs + own.length * DRAIN.stepMs;
+    if (enemyLoses) at(DRAIN.zoomMs, () => (opponentHp.value = enemyAfter));
+    const enemyEnd = strikeMs + (enemyLoses ? DRAIN.zoomMs : 0);
+    // The rival is out: the set throws its ball of votes at it, and the giant casserole falls where it landed.
+    const rivalOut = won.value && Boolean(polls.enemy) && (polls.enemy?.after ?? 1) <= 0;
+    // A rout of the rival: leaflets rain over the table as the comets land.
+    if (won.value && polls.enemy && polls.enemy.before - polls.enemy.after >= ROUT_POLLS) drainTimers.push(window.setTimeout(() => stage?.rainTracts(), strikeMs));
+    const rivalScreams = rivalOut && eliminationScreams({ human: Boolean(props.rivalName), after: polls.enemy?.after ?? 0 }, Math.random());
+    const blowEnd = rivalOut ? dropFatalBlow(enemyEnd + throwGenkidama('own', enemyEnd), rivalScreams) : 0;
+    if (!ownLoses) return Math.max(enemyEnd, blowEnd);
+    // The hero comes forward once struck, and the curve falls: the count follows when it lands.
+    at(0, () => {
+      draining.value = true;
+      curveFalls.value = true;
+    });
+    at(DRAIN.zoomMs + DRAIN.curveMs, () => (ownHp.value = ownAfter));
+    // The player is out: the rival's ball of votes lands on its hero before the red blow.
+    const screams = eliminated && eliminationScreams({ human: !props.watching, after: polls.own.after }, Math.random());
+    const drained = DRAIN.zoomMs + DRAIN.curveMs;
+    const end = drained + (eliminated ? throwGenkidama('enemy', strikeMs + drained) : 0);
     at(end, () => {
       hurt.value = true;
       playSound('hit', 0.8);
+      if (screams) playSample(SCREAM.sample, SCREAM.gain);
     });
     at(end + DRAIN.hurtMs, () => {
       hurt.value = false;
@@ -212,10 +237,22 @@ export function useCombatShow(
   }
 
   /**
-   * The one big gag of the game (rule of 3 November 2026): once the rival's polls are gone, a giant
-   * casserole, rendered in 3D, falls on its head; « clang » and a shake at the impact. Returns when it is over.
+   * The genkidama, the blow that eliminates a hero (15 November 2026): `startMs` from now, the set charges a ball of
+   * votes and throws it at the beaten hero. Returns how long it takes to land, 0 when it does not play (a calm stage).
    */
-  function dropFatalBlow(startMs: number): number {
+  function throwGenkidama(winner: 'own' | 'enemy', startMs: number): number {
+    const target = middleOf((winner === 'own' ? heroSpots.rival : heroSpots.own).value);
+    if (!stage || stage.calm || !target) return 0;
+    drainTimers.push(window.setTimeout(() => stage?.genkidama(winner, target), startMs));
+    return GENKIDAMA_LANDS_MS / speed.value;
+  }
+
+  /**
+   * The one big gag of the game (rule of 3 November 2026): once the rival's polls are gone, a giant
+   * casserole, rendered in 3D, falls on its head; « clang » and a shake at the impact. `screams`: the rival
+   * cries out under it. Returns when it is over.
+   */
+  function dropFatalBlow(startMs: number, screams: boolean): number {
     const art = gameArt.manifest.value.effets.coup_fatal;
     if (!art?.atlas) return 0;
     const frameMs = 1000 / (art.fps ?? 12);
@@ -223,6 +260,7 @@ export function useCombatShow(
     drainTimers.push(window.setTimeout(() => (fatalBlow.value = true), startMs));
     drainTimers.push(window.setTimeout(() => {
       playSound('clang');
+      if (screams) playSample(SCREAM.sample, SCREAM.gain);
       rivalShaken.value = true;
     }, impactMs));
     drainTimers.push(window.setTimeout(() => (rivalShaken.value = false), impactMs + FATAL_BLOW.shakeMs));
@@ -433,7 +471,7 @@ export function useCombatShow(
 
   return {
     SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
-    notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, outcome, rivalLine,
+    notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, pollsLost, curveFalls, outcome, rivalLine,
     host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
   };
 }
