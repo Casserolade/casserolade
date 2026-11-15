@@ -1,7 +1,7 @@
 import type { Camp, Casserole, CombatPersist, Counter, Effect, EndOfTurnNote, EndOfTurnStep, Keyword, Minion, Trigger } from './types.ts';
 import type { Game, Offer, Player, StatGain } from './state.ts';
 import { isCamp as isCampOf } from './camps.ts';
-import { MAX_STAT, effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
+import { MAX_STAT, cardOf, effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { CARDS, CARD_BY_ID } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
@@ -1045,16 +1045,39 @@ export function refreshShop(game: Game, p: Player, camp?: Camp): void {
   fireBoard(game, p, 'actualise', {});
 }
 
-/** Détruit un allié au recrutement : il rend ses exemplaires, et son Héritage se déclenche. */
+/**
+ * Un politique détruit hors combat (Hidalgo, la Primaire) meurt comme en combat (15 novembre 2026, retour de partie :
+ * « ça devrait déclencher les héritages / réincarnation ») : son Héritage joue, puis, s'il a le Retour en politique et
+ * qu'il reste de la place, il se réincarne là où il est tombé (règle R20, étendue au recrutement).
+ */
 export function destroy(game: Game, p: Player, m: Minion): void {
   const index = p.board.indexOf(m);
   if (index < 0) return;
   p.board.splice(index, 1);
-  releaseMinion(game, m);
   const repeats = repeatCount(p, 'heritage');
   for (let r = 0; r < repeats; r++) {
     for (const eff of m.effects) if (eff.when === 'heritage') applyEffect(game, p, m, eff, { replay: r > 0 }, index);
   }
+  if (!m.keywords.includes('retour') || !reincarnate(game, p, m, index)) releaseMinion(game, m);
+}
+
+/**
+ * Le Retour en politique au recrutement, comme en combat : le politique revient **comme sa carte nue**, avec 1 PV, sans
+ * Retour : l'attaque de sa carte (doublée s'il est doré), plus les gains de camp du joueur, comme un nouveau venu. Ses
+ * gains, ses casseroles et ses Ralliements partent avec lui : les cartes ralliées retournent à la réserve, ses propres
+ * exemplaires restent en jeu. Faux s'il n'y a plus de place : il est alors parti pour de bon.
+ */
+function reincarnate(game: Game, p: Player, dead: Minion, at: number): boolean {
+  if (p.board.length >= boardLimit(game, p)) return false;
+  const card = cardOf(dead);
+  const bare: Minion = { ...makeMinion(card, game.nextUid++), camp: dead.camp, golden: dead.golden, copies: dead.copies, simple: dead.simple };
+  bare.keywords = bare.keywords.filter((k) => k !== 'retour');
+  bare.atk = card.atk * (dead.golden ? 2 : 1);
+  welcome(game, p, bare);
+  bare.hp = 1;
+  for (const id of dead.merged) returnToPool(game, id, 1);
+  p.board.splice(Math.max(0, Math.min(at, p.board.length)), 0, bare);
+  return true;
 }
 
 /** Déclenche un type d'effet sur tout le plateau, de gauche à droite. */

@@ -626,6 +626,62 @@ test('Primaire : détruire un allié déclenche son Héritage au recrutement, pu
   assert.ok(p.discover && p.discover.options.length > 0);
 });
 
+/** Le compte des exemplaires de la réserve : ces tests remplissent la boutique à la main, on le compare avant et après. */
+const poolCount = (game: Game) => invariantViolations(game).filter((line) => line.startsWith('exemplaires'));
+
+test('Retour en politique au recrutement : détruit par la Primaire, il revient comme sa carte nue, 1 PV, sans Retour', () => {
+  const { game, p, buy } = setup();
+  buy('thevenoud'); // Retour en politique, sans Héritage.
+  const before = p.board[0];
+  before.atk += 5;
+  before.hp += 5;
+  p.spells.push({ uid: 9001, spellId: 'primaire' });
+  const pool = poolCount(game);
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: 9001, target: before.uid }).ok, true);
+  assert.equal(p.board.length, 1);
+  const back = p.board[0];
+  assert.notEqual(back.uid, before.uid, 'une nouvelle incarnation');
+  assert.deepEqual([back.cardId, back.atk, back.hp], ['thevenoud', CARD_BY_ID.thevenoud.atk, 1]);
+  assert.ok(!back.keywords.includes('retour'), 'il ne revient qu\'une fois');
+  assert.ok(p.discover && p.discover.options.length > 0, 'la Primaire découvre toujours');
+  assert.deepEqual(poolCount(game), pool, 'la réserve garde son compte : son exemplaire est resté en jeu');
+});
+
+test('Retour en politique au recrutement : l\'Héritage joue d\'abord, puis il revient à sa place', () => {
+  const { game, p, buy } = setup();
+  buy('bertrand');
+  buy('giscard'); // Retour, et Héritage : une Chaise vide qui tient ses stats.
+  const giscard = p.board[1];
+  p.spells.push({ uid: 9001, spellId: 'primaire' });
+  const pool = poolCount(game);
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: 9001, target: giscard.uid }).ok, true);
+  assert.deepEqual(p.board.map((m) => m.cardId), ['bertrand', 'giscard', 'chaise_vide']);
+  assert.equal(p.board[1].hp, 1);
+  assert.deepEqual(poolCount(game), pool);
+});
+
+test('Retour en politique au recrutement : un doré revient doré, et sans place il part pour de bon', () => {
+  const { game, p, buy } = setup();
+  buy('thevenoud');
+  const golden = p.board[0];
+  golden.golden = true;
+  golden.copies = 3;
+  p.spells.push({ uid: 9001, spellId: 'primaire' });
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: 9001, target: golden.uid }).ok, true);
+  assert.deepEqual([p.board[0].golden, p.board[0].atk, p.board[0].hp, p.board[0].copies], [true, CARD_BY_ID.thevenoud.atk * 2, 1, 3]);
+  // Plus de place : Giscard laisse sa Chaise vide sur un plateau plein, et ne revient pas.
+  const full = setup();
+  full.buy('giscard');
+  // Six politiques différents : trois exemplaires du même fusionneraient et libéreraient des places.
+  for (const id of ['bertrand', 'gueant', 'hortefeux', 'morano', 'ciotti', 'pecresse']) full.buy(id);
+  assert.equal(full.p.board.length, 7);
+  full.p.spells.push({ uid: 9002, spellId: 'primaire' });
+  const target = full.p.board.find((m) => m.cardId === 'giscard') as Minion;
+  assert.equal(applyAction(full.game, 0, { t: 'cast', uid: 9002, target: target.uid }).ok, true);
+  assert.equal(full.p.board.filter((m) => m.cardId === 'giscard').length, 0);
+  assert.equal(full.p.board.filter((m) => m.cardId === 'chaise_vide').length, 1);
+});
+
 test('Lassalle double les Fins de tour', () => {
   const { game, p, buy } = setup();
   buy('doucet');
