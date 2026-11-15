@@ -149,7 +149,7 @@ export function texteObjectif(o: Objectif): string {
 }
 
 /** Les mêmes politiques, dans un autre ordre : l'un d'eux a été déplacé. */
-function memesPolitiquesAutrement(avant: number[], apres: number[]): boolean {
+export function memesPolitiquesAutrement(avant: number[], apres: number[]): boolean {
   return apres.length === avant.length && apres.every((uid) => avant.includes(uid)) && apres.some((uid, i) => uid !== avant[i]);
 }
 

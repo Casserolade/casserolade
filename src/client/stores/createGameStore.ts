@@ -34,6 +34,13 @@ export interface MmrChange {
  * A local game may refuse a gesture before it leaves: the tutorial, on rails. The reason is told to the player, and
  * nothing is sent.
  */
+/** The buttons of the host's desk that do nothing for now. */
+export interface DeskLocks {
+  upgrade: boolean;
+  roll: boolean;
+  freeze: boolean;
+}
+
 export interface ActionGuard {
   refusal(action: PlayerAction | 'pret'): string | null;
 }
@@ -73,6 +80,11 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   const readyRefusal = computed(() => (view.value ? (transport.refusal?.('pret') ?? null) : null));
   /** Gestures refused before they left: the tutorial's guide shakes at each one. */
   const refusals = ref(0);
+  /** The desk's gestures the guard refuses for now (the tutorial's rails): their buttons go dull, like one that costs too much. */
+  const deskLocks = computed<DeskLocks>(() => {
+    const locked = (action: PlayerAction) => view.value !== null && (transport.refusal?.(action) ?? null) !== null;
+    return { upgrade: locked({ t: 'upgrade' }), roll: locked({ t: 'roll' }), freeze: locked({ t: 'freeze' }) };
+  });
   /** The public queue as the server last showed it; null before its first answer. */
   const queue = shallowRef<VueFile | null>(null);
   /** In the public queue, or on the way there. */
@@ -458,7 +470,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     room, roomGone, refused, connection, connectionLost, retry, createRoom, joinRoom, launchRoom, updateRoomSettings,
     queue, queueing, queueLost, queueLostReason, queueSeenAt, mmrChange, joinQueue, voteQueue, chat, canChat, sendChat,
     names, following, spectating, follow,
-    view, combat, combatView, endOfTurn, ranking, showRanking, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, readyRefusal, refusals, screen, act, endRecruitment, closeCombat, leave,
+    view, combat, combatView, endOfTurn, ranking, showRanking, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, readyRefusal, deskLocks, refusals, screen, act, endRecruitment, closeCombat, leave,
   };
 }
 

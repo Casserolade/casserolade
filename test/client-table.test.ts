@@ -15,6 +15,7 @@ import { handCards } from '../src/client/tools/handCards.ts';
 import { medallionMarks } from '../src/client/tools/medallionMarks.ts';
 import { allyTargets, annonceNeedsTarget, spellNeedsTarget, spellTargets } from '../src/client/tools/playTargets.ts';
 import { boldTerms, parseRichText } from '../src/client/tools/richText.ts';
+import { gluePunctuation } from '../src/client/tools/gluePunctuation.ts';
 import { casseroleCardLines, spellCardLines } from '../src/client/tools/spellCardLines.ts';
 import { cardRuleLines } from '../src/client/tools/describeEffect.ts';
 import { describeOwnerBonus } from '../src/client/tools/describeOwnerBonus.ts';
@@ -40,6 +41,12 @@ test('parseRichText splits card text into plain and bold runs', () => {
   ]);
   assert.deepEqual(parseRichText('Rien en gras.'), [{ text: 'Rien en gras.', bold: false }]);
   assert.deepEqual(boldTerms(['**Tract**, **Tract** et **Vente**']), ['Tract', 'Vente']);
+});
+
+test('gluePunctuation keeps French punctuation with the word before it', () => {
+  assert.equal(gluePunctuation('un **doré** : stats doublées ! Vraiment ?'), 'un **doré**\u00a0: stats doublées\u00a0! Vraiment\u00a0?');
+  assert.equal(gluePunctuation('« actualisez », puis Prêt.'), '«\u00a0actualisez\u00a0», puis Prêt.');
+  assert.equal(gluePunctuation('Rien à coller.'), 'Rien à coller.');
 });
 
 test('glossaryFor explains every bold word of every card, spell and casserole', () => {

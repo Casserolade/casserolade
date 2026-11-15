@@ -385,6 +385,10 @@ export function offerMinions(game: Game, p: Player, tier: number, camp?: Camp, t
   const triggerOk = (id: string) => !trigger || (CARD_BY_ID[id].effects ?? []).some((e) => e.when === trigger);
   const inPool = [...game.pool.entries()].filter(([id, n]) => n > 0 && id !== source).map(([id]) => id);
   const candidates = discoverCandidates(inPool, (id) => campOk(id) && triggerOk(id), target, game.params.tierMax);
+  // Le tutoriel écrit ce que propose la découverte de sa manche : ses cartes, tant que la réserve en a.
+  const scripted = game.script?.seat === p.seat ? (game.script.decouvertes?.[game.round] ?? []) : [];
+  const written = scripted.filter((id) => take(game, id));
+  if (written.length > 0) return queueOffer(p, { options: written, kind: 'serviteur' });
   const options = game.rng.shuffle(candidates).slice(0, 3);
   for (const id of options) take(game, id);
   queueOffer(p, { options, kind: 'serviteur' });

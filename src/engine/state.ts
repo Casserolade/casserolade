@@ -141,6 +141,8 @@ export interface ShopScript {
   sorts?: Record<number, string[]>;
   /** Manche → casserole proposée. */
   casseroles?: Record<number, string>;
+  /** Manche → les politiques que propose une découverte de politiques (l'Investiture du tutoriel). */
+  decouvertes?: Record<number, string[]>;
   /**
    * Manche → ce qui arrive au siège au début de cette manche, dans une carrière : un autre pouvoir (`mods`), des points
    * de sondage en plus ou en moins. Le Pen joue avec le pouvoir de Bardella jusqu'à l'arrêt d'appel, puis reprend le sien.

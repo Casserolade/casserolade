@@ -6,7 +6,6 @@ import { TUTORIEL } from '#src/data/histoire/tutoriel.ts';
 import { PLATEAUX, SECOND_TOUR } from '#src/data/plateaux.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 import type { PlayerAction } from '#src/engine/types.ts';
-import type { ResultatCombat } from '#src/histoire/campagne.ts';
 import { composerTutoriel, creerGuide, refusTutoriel } from '#src/histoire/tutoriel.ts';
 import type { Consigne } from '#src/histoire/tutoriel.ts';
 import type { ClientMessage, ServerMessage } from '#src/protocol/messages.ts';
@@ -34,7 +33,6 @@ export class TutorialRun implements Transport, ActionGuard {
   private readonly view = shallowRef<PlayerView | null>(null);
   private readonly inner: Transport;
   private readonly plateau = PLATEAUX.find((p) => p.id === TUTORIEL.plateau) ?? SECOND_TOUR;
-  private pendingCombat: ResultatCombat | undefined;
   private listener: (message: ServerMessage) => void = () => {};
 
   constructor(seed = generateSeed()) {
@@ -78,10 +76,6 @@ export class TutorialRun implements Transport, ActionGuard {
       this.listener({ ...message, vue });
       return;
     }
-    if (message.type === 'combat') {
-      const { winner, side } = message.combat;
-      this.pendingCombat = { gagne: winner === side, perdu: winner !== null && winner !== side };
-    }
     if (message.type === 'fin') {
       this.place.value = message.classement.find((row) => row.seat === HUMAN_SEAT)?.place ?? message.classement.length;
       this.step.value = null;
@@ -90,8 +84,7 @@ export class TutorialRun implements Transport, ActionGuard {
   }
 
   private follow(view: PlayerView): void {
-    const next = this.guide.observer(view, this.pendingCombat);
-    this.pendingCombat = undefined;
+    const next = this.guide.observer(view);
     this.view.value = view;
     this.step.value = next;
     if (next.cle === LAST_STEP) this.learned.value = true;

@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import RichText from '#src/client/components/atoms/RichText.vue';
 import { TUTORIAL_TARGETS } from '#src/client/const/tutorialTargets.ts';
+import { gluePunctuation } from '#src/client/tools/gluePunctuation.ts';
 import type { Consigne } from '#src/histoire/tutoriel.ts';
 
 const MEASURE_MS = 200;
@@ -21,7 +22,7 @@ defineEmits<{ career: [] }>();
 interface Ring { left: number; top: number; width: number; height: number; below: boolean }
 const rings = ref<Ring[]>([]);
 /** The reminders between two lessons. */
-const reminder = computed(() => props.step !== null && ['choix', 'plein', 'sorts', 'budget', 'pret'].includes(props.step.cle));
+const reminder = computed(() => props.step?.rappel ?? false);
 /** On a phone, the instruction never covers what it points at: below the table when the first ring is in the upper half. */
 const atBottom = computed(() => {
   const first = rings.value[0];
@@ -85,7 +86,7 @@ function ringStyle(ring: Ring): Record<string, string> {
       <Transition name="say" mode="out-in">
         <div v-if="step" :key="step.cle" class="bubble" :class="{ last: learned, 'at-bottom': atBottom, shaking }" :style="bubbleTop">
           <span class="kicker">{{ learned ? 'Bravo' : reminder ? 'Rappel' : 'Tutoriel' }}</span>
-          <p><RichText :text="step.texte" /></p>
+          <p><RichText :text="gluePunctuation(step.texte)" /></p>
           <AppButton v-if="learned" class="career" primary @click="$emit('career')">Passer à la carrière</AppButton>
         </div>
       </Transition>

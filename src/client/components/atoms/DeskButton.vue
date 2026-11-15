@@ -74,5 +74,7 @@ withDefaults(defineProps<{ icon: GameIconName; label: string; cost?: number | nu
 .desk-button:disabled { cursor: not-allowed; }
 .desk-button:disabled .medal { filter: grayscale(0.85) brightness(0.55); }
 .desk-button:disabled .cost { filter: grayscale(1); }
+/* Held down and locked (a frozen shop the tutorial keeps frozen): it stays lit, it only stops answering. */
+.desk-button[aria-pressed='true']:disabled .medal { filter: none; }
 .desk-button[aria-pressed='true'] .medal { border-color: #bfe8ff; box-shadow: 0 0 calc(var(--s) * 18) rgb(150 210 255 / 0.9), inset 0 calc(var(--s) * 3) 0 rgb(255 255 255 / 0.3); }
 </style>

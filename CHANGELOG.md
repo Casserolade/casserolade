@@ -24,6 +24,13 @@ Aucune carte ne change. Le détail : https://casserolade.fr/mises-a-jour
 **Règles**
 - Détruit pendant le recrutement, un politique qui a le Retour en politique se réincarne comme en combat : après son Héritage, comme sa carte nue avec 1 PV, s'il reste de la place.
 
+**Le tutoriel (correctif du 15 novembre)**
+- Geler la boutique garde vraiment ses cartes : les deux Anasse Kazib gelés à la manche 4 sont là à la manche 5, et le troisième en fait un politique doré.
+- Le tutoriel est réécrit manche par manche : chaque leçon arrive avec sa carte, et le budget tombe juste à chaque manche.
+- Seul le geste demandé passe, et les boutons du pupitre qui ne servent pas à la leçon sont grisés.
+- Deux leçons de plus : la Célébration avec Nadine Morano, et le renvoi quand le plateau est plein.
+- Les adversaires du tutoriel ont un peu moins de budget : qui suit les leçons gagne la plupart de ses combats.
+
 ## 0.4.1 — 14 novembre 2026
 
 Aucune carte ne change.

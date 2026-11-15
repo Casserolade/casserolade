@@ -10,6 +10,7 @@ import { hostQuote } from '#src/client/tools/hostQuote.ts';
 import { longTextBonusMs } from '#src/client/tools/longTextBonusMs.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { voixPourPhrase } from '#src/data/trouverVoix.ts';
+import type { DeskLocks } from '#src/client/stores/createGameStore.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 import type { PlayerAction } from '#src/engine/types.ts';
 
@@ -21,7 +22,9 @@ const IDLE_MS = 25_000;
  * The host, small, behind its desk at the top of the table, like the tavern keeper. The desk holds
  * the tier and its upgrade on the left, refresh and freeze on the right. The host talks in bubbles that go away.
  */
-const props = defineProps<{ view: PlayerView; line: string | null; lineCount: number; act: (action: PlayerAction) => void }>();
+const props = withDefaults(defineProps<{ view: PlayerView; line: string | null; lineCount: number; act: (action: PlayerAction) => void; locks?: DeskLocks }>(), {
+  locks: () => ({ upgrade: false, roll: false, freeze: false }),
+});
 
 const puppet = computed(() => puppetStyle(gameArt.manifest.value, props.view.animateur.id, 'civile'));
 const archImage = computed(() => cssImage(gameArt.manifest.value.carte.arche));
@@ -111,7 +114,7 @@ function roll(): void {
         data-control="upgrade"
         :label="view.upgradeLock ?? (canUpgrade ? `Monter à l'échelon ${view.tier + 1}` : 'Échelon maximum')"
         :cost="canUpgrade && !view.upgradeLock ? view.upgradeCost : null"
-        :disabled="!canUpgrade || Boolean(view.upgradeLock) || view.budget < view.upgradeCost"
+        :disabled="!canUpgrade || Boolean(view.upgradeLock) || view.budget < view.upgradeCost || locks.upgrade"
         @click="act({ t: 'upgrade' })"
       />
       <span class="tier-spot">
@@ -128,7 +131,7 @@ function roll(): void {
         :label="rollLabel"
         :cost="view.rollCost"
         :free-left="view.freeRolls"
-        :disabled="view.budget < view.rollCost"
+        :disabled="view.budget < view.rollCost || locks.roll"
         @click="roll"
       />
       <DeskButton
@@ -137,6 +140,7 @@ function roll(): void {
         data-control="freeze"
         :label="view.frozen ? 'Dégeler la boutique' : 'Geler la boutique'"
         :pressed="view.frozen"
+        :disabled="locks.freeze"
         @click="act({ t: 'freeze' })"
       />
     </div>

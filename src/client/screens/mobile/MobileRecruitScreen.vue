@@ -108,7 +108,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
     <MobileTopBar :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :budget="view.budget" :max-budget="view.maxBudget" @hero="heroOpen = true" />
     <MobileOpponents :table="view.table" :seat="view.seat" :start-hp="view.params.startHp" :names="store.names.value" :next="view.nextOpponent" />
     <div class="desk-band">
-      <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
+      <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" :locks="store.deskLocks.value" />
     </div>
     <StudioBand class="channel-band" :plateau-id="view.plateau.id" />
     <div class="shop-band" :style="{ '--shop-count': Math.max(3, view.shop.length) }">

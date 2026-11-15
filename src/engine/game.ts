@@ -261,8 +261,9 @@ export function chooseRemainingHeroes(game: Game): void {
 
 
 /**
- * Le tutoriel remplace la boutique de cette manche par la sienne, prise dans la réserve. Gelée, elle garde ses cartes,
- * et le script ne fait que compléter ce qui lui manque : deux Cheminade gardés, le troisième arrive.
+ * Le tutoriel écrit la boutique de cette manche, prise dans la réserve. Gelée, elle garde toutes ses cartes, à leur
+ * place : le gel est une promesse, que le script ne reprend jamais. Il n'ajoute que celles des siennes qui manquent,
+ * dans l'ordre, tant qu'il reste des places : deux Kazib gardés, les deux autres cartes écrites arrivent à côté.
  */
 function followScript(game: Game, p: Player, kept: string[] | null): void {
   const script = game.script;
@@ -270,13 +271,14 @@ function followScript(game: Game, p: Player, kept: string[] | null): void {
   const minions = script.boutique?.[game.round];
   if (minions) {
     for (const id of p.shop) returnToPool(game, id);
+    const frozen = kept ?? [];
     const missing = [...minions];
-    for (const id of kept ?? []) {
+    for (const id of frozen) {
       const at = missing.indexOf(id);
       if (at >= 0) missing.splice(at, 1);
     }
-    const room = Math.max(minions.length, game.params.shopSize[p.tier]) - missing.length;
-    p.shop = [...(kept ?? []).slice(0, Math.max(0, room)), ...missing].filter((id) => take(game, id));
+    const places = Math.max(minions.length, game.params.shopSize[p.tier], frozen.length);
+    p.shop = [...frozen, ...missing].slice(0, places).filter((id) => take(game, id));
   }
   const spells = script.sorts?.[game.round];
   if (spells) p.shopSpells = [...spells];
