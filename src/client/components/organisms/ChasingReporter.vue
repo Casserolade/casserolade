@@ -11,6 +11,7 @@ import type { ChaseMood } from '#src/client/tools/chaseMood.ts';
 import { chaseStep } from '#src/client/tools/chaseStep.ts';
 import type { Chaser } from '#src/client/tools/chaseStep.ts';
 import { pickOne } from '#src/client/tools/pickOne.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 
 /** Beside the pointer, not under it: it runs to stand just below and to the left. */
@@ -88,7 +89,7 @@ function hidingPlace(): { x: number; y: number } | null {
 }
 
 onMounted(() => {
-  enabled.value = window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  enabled.value = window.matchMedia('(pointer: fine)').matches && visualEffects.on.value;
   if (!enabled.value) return;
   const hidden = hidingPlace();
   if (hidden) {

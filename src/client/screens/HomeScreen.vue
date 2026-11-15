@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import type { BotLevel } from '#src/bots/bots.ts';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
-import SoundControl from '#src/client/components/atoms/SoundControl.vue';
+import SoundControl from '#src/client/components/organisms/SoundControl.vue';
 import TipLink from '#src/client/components/molecules/TipLink.vue';
 import LocalModes from '#src/client/components/organisms/LocalModes.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';

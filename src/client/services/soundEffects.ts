@@ -11,7 +11,12 @@ export type { SynthName } from '#src/client/services/synthSounds.ts';
 
 const MUTED_KEY = 'casserolade-son-coupe';
 const VOLUME_KEY = 'casserolade-volume';
+const MUSIC_KEY = 'casserolade-musique';
+const MUSIC_VOLUME_KEY = 'casserolade-volume-musique';
 const DEFAULT_VOLUME = 0.6;
+const DEFAULT_MUSIC_VOLUME = 0.5;
+/** The music has its own volume: at its default it sits where it was mixed, under everything; at the top, twice as loud. */
+const MUSIC_CEILING = 1.7;
 /** The recipes are written quiet; at the default volume they peak around -15 dB, under the voices. */
 const MASTER_CEILING = 1.4;
 /**
@@ -53,30 +58,60 @@ function store(key: string, value: string): void {
   }
 }
 
-function readVolume(): number {
-  const stored = readStored(VOLUME_KEY);
+function readVolume(key: string, fallback: number): number {
+  const stored = readStored(key);
   const value = stored === null || stored === '' ? Number.NaN : Number(stored);
-  return Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : DEFAULT_VOLUME;
+  return Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : fallback;
 }
 
-/** Shared by every sound control of the page: muting in combat mutes the home screen too. */
-export const soundSettings = { muted: ref(readStored(MUTED_KEY) === '1'), volume: ref(readVolume()) };
+/** The music is on for a new player; one who had cut the sound before the music came keeps the silence chosen. */
+function readMusicOn(): boolean {
+  const stored = readStored(MUSIC_KEY);
+  return stored === null || stored === '' ? readStored(MUTED_KEY) !== '1' : stored !== '0';
+}
+
+/**
+ * Shared by every sound control of the page: what is set in combat is set on the home screen too. Two sounds, each
+ * with its switch and its volume, and neither moves the other: the game's (`muted`, `volume`: the table's sounds, the
+ * voices, the cutscenes) and the background music's (`music`, `musicVolume`).
+ */
+export const soundSettings = {
+  muted: ref(readStored(MUTED_KEY) === '1'),
+  volume: ref(readVolume(VOLUME_KEY, DEFAULT_VOLUME)),
+  music: ref(readMusicOn()),
+  musicVolume: ref(readVolume(MUSIC_VOLUME_KEY, DEFAULT_MUSIC_VOLUME)),
+};
 
 let context: AudioContext | null = null;
 let master: GainNode | null = null;
+/** The background music's own way out, beside the master: neither the game's volume nor its switch reaches it. */
+let musicBus: GainNode | null = null;
 const mixer = createMixerState();
 /** The real voice that speaks now: cut short when the player passes its line. */
 let speaking: { source: AudioBufferSourceNode; level: GainNode } | null = null;
 /** Bumped at each cut: a voice still loading when its line was passed never starts. */
 let voiceGeneration = 0;
 const samples = new Map<string, Promise<AudioBuffer | null>>();
+/** Who wants to know that a real voice starts, and for how long (the music steps back under it). */
+const voiceListeners: ((milliseconds: number) => void)[] = [];
+
+/** Calls `listener` each time a real voice starts, with how long it speaks, in milliseconds. */
+export function onVoiceStart(listener: (milliseconds: number) => void): void {
+  voiceListeners.push(listener);
+}
 
 function masterLevel(): number {
   return soundSettings.muted.value ? 0 : soundSettings.volume.value * MASTER_CEILING;
 }
 
+function musicLevel(): number {
+  return soundSettings.musicVolume.value * MUSIC_CEILING;
+}
+
 function applyLevel(): void {
-  if (context && master) master.gain.setTargetAtTime(masterLevel(), context.currentTime, 0.02);
+  if (!context) return;
+  master?.gain.setTargetAtTime(masterLevel(), context.currentTime, 0.02);
+  musicBus?.gain.setTargetAtTime(musicLevel(), context.currentTime, 0.02);
 }
 
 export function isSoundMuted(): boolean {
@@ -88,6 +123,19 @@ export function setSoundMuted(value: boolean): void {
   store(MUTED_KEY, value ? '1' : '0');
   applyLevel();
   if (value) welcomeVoice?.pause();
+}
+
+/** The background music, on or off, apart from the game's sounds: kept for the next visit (services/music.ts plays it). */
+export function setMusicOn(value: boolean): void {
+  soundSettings.music.value = value;
+  store(MUSIC_KEY, value ? '1' : '0');
+}
+
+/** The background music's volume, apart from the game's: kept for the next visit. */
+export function setMusicVolume(value: number): void {
+  soundSettings.musicVolume.value = Math.min(1, Math.max(0, value));
+  store(MUSIC_VOLUME_KEY, String(soundSettings.musicVolume.value));
+  applyLevel();
 }
 
 export function setSoundVolume(value: number): void {
@@ -112,6 +160,9 @@ function audio(): { context: AudioContext; master: GainNode } | null {
     master = context.createGain();
     master.gain.value = masterLevel();
     master.connect(limiter);
+    musicBus = context.createGain();
+    musicBus.gain.value = musicLevel();
+    musicBus.connect(limiter);
     limiter.connect(context.destination);
     return { context, master };
   } catch (error) {
@@ -126,6 +177,15 @@ function audio(): { context: AudioContext; master: GainNode } | null {
  */
 export function soundOutput(): { context: AudioContext; master: GainNode } | null {
   return soundSettings.muted.value ? null : audio();
+}
+
+/**
+ * The output for the background music: the audio context and the music's own bus, which carries the music's volume
+ * (the game's volume and its switch do not reach it). Null when audio cannot play.
+ */
+export function musicOutput(): { context: AudioContext; bus: GainNode } | null {
+  const graph = audio();
+  return graph && musicBus ? { context: graph.context, bus: musicBus } : null;
 }
 
 /**
@@ -204,6 +264,7 @@ export async function playVoice(key: string | null): Promise<number> {
     console.error('Voice could not play', key, error);
     return 0;
   }
+  for (const listener of voiceListeners) listener(seconds * 1000);
   return seconds * 1000;
 }
 

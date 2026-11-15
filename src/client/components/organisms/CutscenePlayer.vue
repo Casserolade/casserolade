@@ -3,8 +3,10 @@ import { onMounted, onUnmounted, ref, useTemplateRef } from 'vue';
 import type { PlayableCutscene } from '#src/client/cutscenes/PlayableCutscene.ts';
 import { createPlayableCutscene } from '#src/client/cutscenes/createPlayableCutscene.ts';
 import { CutsceneSound } from '#src/client/cutscenes/cutsceneSound.ts';
+import { music } from '#src/client/services/music.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { isHurryKey } from '#src/client/tools/isHurryKey.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import type { Scene } from '#src/data/histoire/cinematique.ts';
 
 /** The stage of a cutscene, drawn for this size and fitted to the window. */
@@ -68,13 +70,15 @@ function handleKey(event: KeyboardEvent): void {
 }
 
 onMounted(async () => {
+  // A cutscene has its own soundtrack: the table's music waits.
+  music.hold();
   fit();
   window.addEventListener('resize', fit);
   window.addEventListener('keydown', handleKey);
   await document.fonts.ready;
   if (ended || !frame.value) return;
   sound = new CutsceneSound();
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = visualEffects.calm.value;
   const built = await createPlayableCutscene(frame.value, props.cinematique, { manifest: gameArt.manifest.value, onCue: (cue) => sound?.cue(cue), reducedMotion }).catch((error: unknown) => {
     console.error('Cutscene could not be built', error);
     return null;
@@ -95,6 +99,7 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKey);
   cutscene?.destroy();
   sound?.stop();
+  music.release();
 });
 </script>
 

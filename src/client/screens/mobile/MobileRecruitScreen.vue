@@ -13,6 +13,7 @@ import MobileDiscover from '#src/client/components/organisms/MobileDiscover.vue'
 import MobileHand from '#src/client/components/organisms/MobileHand.vue';
 import MobileHeroSheet from '#src/client/components/organisms/MobileHeroSheet.vue';
 import ShopRow from '#src/client/components/organisms/ShopRow.vue';
+import StudioBand from '#src/client/components/organisms/StudioBand.vue';
 import { preloadCombat } from '#src/client/pixi/preloadCombat.ts';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
@@ -109,6 +110,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
     <div class="desk-band">
       <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" />
     </div>
+    <StudioBand class="channel-band" :plateau-id="view.plateau.id" />
     <div class="shop-band" :style="{ '--shop-count': Math.max(3, view.shop.length) }">
       <ShopRow class="shop" :view="view" :gestures="gestures" />
     </div>
@@ -164,6 +166,9 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
 /* The host's desk, scaled to the width of the screen. */
 .desk-band { --s: calc((100vw - 16px) / 800); display: flex; justify-content: center; flex: none; }
 .desk-place { position: relative; }
+/* The channel's ticker, under its host, from edge to edge of the screen; a short phone keeps its height for the shop. */
+.channel-band { --s: 0.6px; flex: none; margin: 0 -8px; }
+@media (max-height: 700px) { .channel-band { display: none; } }
 /* The host's lines: under the desk, across the screen, at a reading size (on a computer, beside the desk). */
 .desk-place :deep(.talk) { z-index: 40; left: 50%; top: calc(100% + 4px); max-width: calc(100vw - 24px); translate: -50% 0; }
 .desk-place :deep(.talk .bubble) { font-size: 0.95rem; }

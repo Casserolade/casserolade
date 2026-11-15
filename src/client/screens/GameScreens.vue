@@ -9,6 +9,7 @@ import QueueScreen from '#src/client/screens/QueueScreen.vue';
 import WaitingRoomScreen from '#src/client/screens/WaitingRoomScreen.vue';
 import { SCREEN_SET } from '#src/client/const/screenSet.ts';
 import type { ScreenSet } from '#src/client/const/screenSet.ts';
+import { music } from '#src/client/services/music.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { seatLabel } from '#src/client/tools/seatNames.ts';
 import type { Succes } from '#src/data/succes.ts';
@@ -38,6 +39,9 @@ const canReplay = computed(() => (room.value ? isHost.value && !isPublic.value :
 const replayHint = computed(() => (room.value && !isHost.value && !isPublic.value ? 'L\'hôte peut relancer une partie.' : null));
 /** Playing: the door to leave is in the corner. Out of the game, the screens have their own way back. */
 const inGame = computed(() => ['hero', 'recruit', 'combat'].includes(props.store.screen.value));
+// The background music follows the game: it plays from the choice of the hero to the last combat.
+watch(inGame, (playing) => (playing ? music.play() : music.stop()), { immediate: true });
+watch(() => (inGame.value ? (props.store.view.value?.hp ?? null) : null), (polls) => music.setHeroPolls(polls), { immediate: true });
 const combatView = computed(() => props.store.combatView.value ?? props.store.view.value);
 /** Online, the rival's pseudo under its portrait (a bot has none). */
 const rivalName = computed(() => {
@@ -59,7 +63,10 @@ watch(() => props.store.screen.value === 'loading', (loading) => {
   slowLoading.value = false;
   if (loading) loadingTimer = window.setTimeout(() => (slowLoading.value = true), SLOW_LOADING_MS);
 }, { immediate: true });
-onUnmounted(() => window.clearTimeout(loadingTimer));
+onUnmounted(() => {
+  window.clearTimeout(loadingTimer);
+  music.stop();
+});
 
 function again(): void {
   if (room.value) props.store.launchRoom();

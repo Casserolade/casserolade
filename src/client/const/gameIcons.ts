@@ -47,6 +47,16 @@ export const GAME_ICONS = {
   exit: 'M3 2h11v5h-2.4V4.4H5.4v15.2h6.2V17H14v5H3ZM15.5 6.5 21 12l-5.5 5.5v-3.8H8.5v-3.4h7Z',
   soundOn: 'M3 9v6h4l5 5V4L7 9H3Zm13.5 3A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4ZM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6Z',
   soundOff: 'M16.5 12A4.5 4.5 0 0 0 14 8v2.2l2.5 2.5V12ZM19 12a7 7 0 0 1-.6 2.8l1.5 1.5A9 9 0 0 0 14 3.2v2.1a7 7 0 0 1 5 6.7ZM4.3 3 3 4.3 7.7 9H3v6h4l5 5v-6.7l4.3 4.3a7 7 0 0 1-2.3 1.2v2.1a9 9 0 0 0 3.7-1.8l2 2 1.3-1.3ZM12 4 9.9 6.1 12 8.2Z',
+  /** Two beamed notes: the background music. */
+  /** Three sliders: the settings. */
+  settings: 'M3 5h8.2a2.5 2.5 0 0 1 4.6 0H21v2h-5.2a2.5 2.5 0 0 1-4.6 0H3ZM3 11h2.7a2.5 2.5 0 0 1 4.6 0H21v2H10.3a2.5 2.5 0 0 1-4.6 0H3ZM3 17h10.7a2.5 2.5 0 0 1 4.6 0H21v2h-2.7a2.5 2.5 0 0 1-4.6 0H3Z',
+  musicOn: 'M9 3.5 21 1.5v14.2a3.3 3.3 0 1 1-2-3V6.2l-8 1.4v10.1a3.3 3.3 0 1 1-2-3Z',
+  /** The same notes, struck through: the music is off. */
+  musicOff: 'M9 3.5 21 1.5v14.2a3.3 3.3 0 1 1-2-3V6.2l-8 1.4v10.1a3.3 3.3 0 1 1-2-3ZM2.6 3.4 4 2l18 18-1.4 1.4Z',
+  /** Sparkles: the show of lights, flashes and bursts. */
+  effectsOn: 'M10 2l1.9 5.6L17.5 9.5l-5.6 1.9L10 17l-1.9-5.6L2.5 9.5l5.6-1.9ZM18.5 13l1 2.9 2.9 1-2.9 1-1 2.9-1-2.9-2.9-1 2.9-1ZM18 1.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7Z',
+  /** A crescent moon: a steady, dimmed set, without flashes. */
+  effectsOff: 'M14.5 2.5a9.5 9.5 0 1 0 7 15.6A8 8 0 0 1 14.5 2.5Z',
 } as const;
 
 export type GameIconName = keyof typeof GAME_ICONS;

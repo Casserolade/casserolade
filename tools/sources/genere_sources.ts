@@ -3,6 +3,7 @@
  * - les phrases que le jeu affiche (src/data/phrases.ts), chacune avec sa source dans la collecte ;
  * - les vraies voix, les photos et les illustrations, d'après assets/game/credits.json ;
  * - les casseroles, avec leur fait et leur statut datés (src/data/casseroles.ts) ;
+ * - les musiques et les bruitages qui ont un auteur (src/data/musiques.ts) ;
  * - les logos et les polices.
  * À lancer après tools/phrases/genere.ts et tools/graphisme/credits.py : node tools/sources/genere_sources.ts
  */
@@ -10,6 +11,7 @@ import fs from 'node:fs';
 import { CARD_BY_ID } from '../../src/data/cards.ts';
 import { CASSEROLES } from '../../src/data/casseroles.ts';
 import { HERO_BY_ID } from '../../src/data/heroes.ts';
+import { BRUITAGES_CREDITES, MUSIQUES } from '../../src/data/musiques.ts';
 import { ANIMATEURS } from '../../src/data/animateurs.ts';
 import { PHRASES } from '../../src/data/phrases.ts';
 import { VOIX } from '../../src/data/voix.ts';
@@ -89,6 +91,7 @@ const sources = {
     // The heads of a career's cutscenes: named as they are, under the person they show.
     nom: p.nom, personne: p.personne, casserole: '', auteur: p.auteur, licence: p.licence, source: p.source,
   }))),
+  musiques: [...MUSIQUES, ...BRUITAGES_CREDITES].map((m) => ({ titre: m.titre, auteur: m.auteur, licence: m.licence, source: m.source ?? '' })),
   logos: credits.logos ?? [],
   polices: credits.polices ?? [],
 };

@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import SoundControl from '#src/client/components/atoms/SoundControl.vue';
+import SoundControl from '#src/client/components/organisms/SoundControl.vue';
 import StudioFlicker from '#src/client/components/atoms/StudioFlicker.vue';
 import StudioLife from '#src/client/components/atoms/StudioLife.vue';
+import StudioDetails from '#src/client/components/organisms/StudioDetails.vue';
 import StudioScreens from '#src/client/components/organisms/StudioScreens.vue';
 import { DEFAULT_STUDIO_LOOK, STUDIO_LOOKS } from '#src/client/const/studioLights.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { studioShock } from '#src/client/stores/studioShock.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 
 /**
  * The table, the same for recruiting and fighting: the TV set all around, blurred into the background,
  * and in the middle one even surface where everything is played. Drawn for 1920×1080, scaled by --s.
- * The set lives: its screens show the candidates (`faces`, character ids), and its lights falter with the combat's
- * big shocks.
+ * The set lives: its screens show the candidates (`faces`, character ids), its lights falter with the combat's big
+ * shocks, and the channel dresses it with its ticker and its card (StudioDetails).
  */
 const props = withDefaults(defineProps<{ plateauId: string; faces?: string[] }>(), { faces: () => [] });
 
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.plateauId]?.decor));
 const accent = computed(() => (STUDIO_LOOKS[props.plateauId] ?? DEFAULT_STUDIO_LOOK).colors[0]);
-const shock = computed(() => studioShock.last.value);
+/** With the visual effects off, the set feels no shock: no faltering lights, no flare. */
+const shock = computed(() => (visualEffects.on.value ? studioShock.last.value : { count: 0, strength: 0 }));
 </script>
 
 <template>
@@ -28,6 +31,7 @@ const shock = computed(() => studioShock.last.value);
     <StudioLife :plateau-id="plateauId" />
     <StudioScreens class="screens" :plateau-id="plateauId" :faces="faces" />
     <div class="vignette" aria-hidden="true" />
+    <StudioDetails class="details" :plateau-id="plateauId" />
     <StudioFlicker class="flicker" :count="shock.count" :strength="shock.strength" />
     <div class="stage">
       <div class="mat" aria-hidden="true" />
@@ -58,6 +62,8 @@ const shock = computed(() => studioShock.last.value);
 }
 .table :deep(.screens) { z-index: -2; }
 .table :deep(.flicker) { z-index: -1; }
+/* The channel's dressing, over the set and its vignette, under everything that is played. */
+.table :deep(.details) { z-index: -1; }
 /*
  * The set is drawn larger than the table (2560×1440 around its 1920×1080) and scaled with it, not with the window:
  * the logo in a corner stays where the table leaves room for it, on any screen. A little dimmed, so the play surface leads.

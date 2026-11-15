@@ -83,7 +83,9 @@ def main():
         "sons": {"citations": files_by_stem("sons/citations", "*.mp3"),
                  "bruitages": files_by_stem("sons/bruitages", "*.mp3"),
                  # The welcome shout, kept apart: the clean-up of the quotes' voices never touches it.
-                 "accueil": files_by_stem("sons/accueil", "*.mp3")},
+                 "accueil": files_by_stem("sons/accueil", "*.mp3"),
+                 # The background music of the table (src/data/musiques.ts credits each track).
+                 "musique": files_by_stem("sons/musique", "*.mp3")},
         "casseroles": files_by_stem("casseroles", "*.webp"),
         "carte": card_parts(),
     }

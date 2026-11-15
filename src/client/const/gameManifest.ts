@@ -43,7 +43,7 @@ export interface GameManifest {
   yeux: Record<string, string>;
   effets: Record<string, EffectArt>;
   plateaux: Record<string, { decor: string; jingle?: string }>;
-  sons: { citations?: Record<string, string>; bruitages?: Record<string, string>; accueil?: Record<string, string> };
+  sons: { citations?: Record<string, string>; bruitages?: Record<string, string>; accueil?: Record<string, string>; musique?: Record<string, string> };
   /** A real photo cut out with scissors for a casserole card, by casserole id (tools/graphisme/illustration_casserole.py). */
   casseroles?: Record<string, string>;
   carte: {

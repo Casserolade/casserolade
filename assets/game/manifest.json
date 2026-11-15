@@ -21245,10 +21245,23 @@
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",
-   "masse": "sons/bruitages/masse.mp3"
+   "masse": "sons/bruitages/masse.mp3",
+   "wilhelm": "sons/bruitages/wilhelm.mp3"
   },
   "accueil": {
    "cest_notre_projet_complet": "sons/accueil/cest_notre_projet_complet.mp3"
+  },
+  "musique": {
+   "armee_sur_la_pointe_des_pieds": "sons/musique/armee_sur_la_pointe_des_pieds.mp3",
+   "auberge_de_la_vieille_tour": "sons/musique/auberge_de_la_vieille_tour.mp3",
+   "biere_et_ragtime": "sons/musique/biere_et_ragtime.mp3",
+   "comedie_acoustique": "sons/musique/comedie_acoustique.mp3",
+   "conte_du_barde": "sons/musique/conte_du_barde.mp3",
+   "danse_du_menestrel": "sons/musique/danse_du_menestrel.mp3",
+   "delicieusement_acide": "sons/musique/delicieusement_acide.mp3",
+   "dilemme_au_cirque": "sons/musique/dilemme_au_cirque.mp3",
+   "quijada": "sons/musique/quijada.mp3",
+   "taverne_tapageuse": "sons/musique/taverne_tapageuse.mp3"
   }
  },
  "casseroles": {

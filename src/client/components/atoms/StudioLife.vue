@@ -1,18 +1,24 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { DEFAULT_STUDIO_LOOK, STUDIO_LOOKS } from '#src/client/const/studioLights.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import { studioElements } from '#src/client/tools/studioElements.ts';
 
-/** What moves on the TV set: spotlights sweeping and camera flashes. The audience is in the set itself. Everything in CSS. */
+/**
+ * What moves on the TV set: spotlights sweeping and camera flashes. The audience is in the set itself. Everything in
+ * CSS. With the visual effects off, the spotlights stand still and no camera flashes.
+ */
 const props = defineProps<{ plateauId: string }>();
 
 const elements = computed(() => studioElements(STUDIO_LOOKS[props.plateauId] ?? DEFAULT_STUDIO_LOOK));
 </script>
 
 <template>
-  <div class="life" aria-hidden="true">
+  <div class="life" :class="{ still: visualEffects.calm.value }" aria-hidden="true">
     <span v-for="(style, index) in elements.beams" :key="`beam-${index}`" class="beam" :style="style" />
-    <span v-for="(style, index) in elements.flashes" :key="`flash-${index}`" class="flash" :style="style" />
+    <template v-if="visualEffects.on.value">
+      <span v-for="(style, index) in elements.flashes" :key="`flash-${index}`" class="flash" :style="style" />
+    </template>
   </div>
 </template>
 
@@ -51,6 +57,7 @@ const elements = computed(() => studioElements(STUDIO_LOOKS[props.plateauId] ?? 
   0%, 96%, 100% { opacity: 0; }
   97% { opacity: 1; }
 }
+.still .beam { animation: none; }
 @media (prefers-reduced-motion: reduce) {
   .beam, .flash { animation: none; }
 }

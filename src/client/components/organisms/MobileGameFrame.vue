@@ -1,19 +1,26 @@
 <script setup lang="ts">
 import LeaveGameButton from '#src/client/components/atoms/LeaveGameButton.vue';
 import ChatPanel from '#src/client/components/organisms/ChatPanel.vue';
+import SettingsButton from '#src/client/components/organisms/SettingsButton.vue';
 import type { MessageChat } from '#src/protocol/messages.ts';
 
 /**
- * The frame of the phone's game screens: the door to leave in the top right corner, at the end of the bar, the chat at
- * the bottom left, opening upward, under the thumb, and a word to hold the phone upright when it is held sideways.
+ * The frame of the phone's game screens: one button in the top right corner, at the end of the bar, which opens the
+ * settings (the sounds, the music, the visual effects) with the door to leave at their foot; the chat at the bottom
+ * left, opening upward, under the thumb; and a word to hold the phone upright when it is held sideways.
  */
 defineProps<{ inGame: boolean; showChat: boolean; messages: MessageChat[]; seat: number }>();
 const emit = defineEmits<{ leave: []; send: [text: string] }>();
 </script>
 
 <template>
-  <div v-if="inGame" class="door">
-    <LeaveGameButton class="leave" @leave="emit('leave')" />
+  <div v-if="inGame" class="menu">
+    <SettingsButton label="Réglages et sortie : sons du jeu, musique, effets visuels, quitter la partie">
+      <p class="leave-row">
+        <LeaveGameButton @leave="emit('leave')" />
+        <span class="leave-name">Quitter la partie</span>
+      </p>
+    </SettingsButton>
   </div>
   <p v-if="inGame" class="upright" role="status">Tenez votre téléphone droit : la table se joue en hauteur.</p>
   <div v-if="showChat" class="chat-spot">
@@ -22,7 +29,11 @@ const emit = defineEmits<{ leave: []; send: [text: string] }>();
 </template>
 
 <style scoped>
-.door { position: fixed; z-index: 60; top: calc(env(safe-area-inset-top) + 6px); right: 8px; --leave-size: 38px; }
+.menu { position: fixed; z-index: 60; top: calc(env(safe-area-inset-top) + 6px); right: 8px; --size: 38px; }
+/* The door, at the foot of the settings: a row like theirs; its question takes the row when it asks. */
+.leave-row { --leave-size: 2.6rem; display: flex; align-items: center; gap: 0.8rem; margin: 0; padding-top: 1rem; border-top: 2px solid rgb(255 255 255 / 0.14); }
+.leave-name { color: var(--color-title); font: 400 1.35rem / 1.1 var(--font-number); letter-spacing: 0.04em; }
+.leave-row:has(.asking) .leave-name { display: none; }
 /* The chat's toggle at the bottom left; its panel opens above it, in the phone's sizes (--s). */
 .chat-spot { --s: 0.62px; position: fixed; z-index: 61; left: 8px; bottom: calc(env(safe-area-inset-bottom) + 12px); }
 .chat-spot :deep(.chat.floating) { position: relative; left: 0; top: 0; flex-direction: column-reverse; }

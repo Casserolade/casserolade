@@ -5,6 +5,7 @@ import { DEFAULT_STUDIO_LOOK, STUDIO_LOOKS } from '#src/client/const/studioLight
 import { DEFAULT_STUDIO_SCREENS, STUDIO_SCREENS } from '#src/client/const/studioScreens.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { studioShock } from '#src/client/stores/studioShock.ts';
+import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import { screenFaces } from '#src/client/tools/screenFaces.ts';
 import { screenPlacement } from '#src/client/tools/screenPlacement.ts';
@@ -18,7 +19,7 @@ const props = defineProps<{ plateauId: string; faces: string[] }>();
 const spots = computed(() => STUDIO_SCREENS[props.plateauId] ?? DEFAULT_STUDIO_SCREENS);
 const accent = computed(() => (STUDIO_LOOKS[props.plateauId] ?? DEFAULT_STUDIO_LOOK).colors[0]);
 const puppets = computed(() => props.faces.map((id) => puppetStyle(gameArt.manifest.value, id, 'civile')).filter((style) => style['--atlas-image']));
-const shocks = computed(() => studioShock.last.value.count);
+const shocks = computed(() => (visualEffects.on.value ? studioShock.last.value.count : 0));
 </script>
 
 <template>

@@ -36,6 +36,7 @@ function categories(sources: Sources): [string, HTMLLIElement[]][] {
     ['Les casseroles', sources.casseroles.map((c) => item([{ gras: `${c.qui}, « ${c.nom} »` }, c.citation ? ` « ${c.citation} »` : '', ` ${c.fait} Statut : ${c.statut}`]))],
     ['Les vraies voix', sources.voix.map((v) => item([{ gras: v.nom }, v.auteur ? ` : ${v.auteur}` : '', v.date ? ` (${v.date})` : '', ...links([v.source])]))],
     ['Les photos', sources.photos.map((p) => item([{ gras: p.nom }, p.auteur ? `, par ${p.auteur}` : '', ...licence(p.licence), ...links([p.source])]))],
+    ['Les musiques et les bruitages', (sources.musiques ?? []).map((m) => item([{ gras: m.titre }, `, par ${m.auteur}`, ...licence(m.licence), ...links([m.source])]))],
     ['Les logos des chaînes', sources.logos.map((l) => item([{ gras: l.id }, l.auteur ? `, ${l.auteur}` : '', ...licence(l.licence), ...links([l.source])]))],
     ['Les polices', sources.polices.map((f) => item([{ gras: f.nom }, `, ${f.licence}`]))],
   ];

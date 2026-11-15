@@ -9,7 +9,7 @@ import { splitPolls } from '#src/client/tools/splitPolls.ts';
 
 /**
  * The bar on top of the phone's table: your hero and its polls (a touch tells its power), and the budget of the
- * round. The door to leave stands at its right end, drawn by the game's frame.
+ * round. The settings' button, which also holds the door to leave, stands at its right end, drawn by the game's frame.
  */
 const props = defineProps<{ heroId: string; hp: number; startHp: number; budget: number; maxBudget: number }>();
 const emit = defineEmits<{ hero: [] }>();

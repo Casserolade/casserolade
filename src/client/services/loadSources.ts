@@ -9,6 +9,9 @@ export interface VoiceSource { nom: string; phrase: string; personne: string; ca
 /** A photo: a face of `personne`, or the illustration of `casserole`. */
 export interface PhotoSource { nom: string; personne: string; casserole: string; auteur: string; licence: string; source: string }
 
+/** A piece of music or a recorded sound effect: its title, who made it, under which licence. */
+export interface MusicSource { titre: string; auteur: string; licence: string; source: string }
+
 /** assets/game/sources.json, written by tools/sources/genere_sources.ts. */
 export interface GameSources {
   genere: string;
@@ -16,6 +19,7 @@ export interface GameSources {
   casseroles: CasseroleSource[];
   voix: VoiceSource[];
   photos: PhotoSource[];
+  musiques?: MusicSource[];
   logos: { id: string; source?: string; licence?: string; auteur?: string }[];
   polices: { nom: string; licence: string }[];
 }
