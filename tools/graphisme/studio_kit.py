@@ -65,6 +65,16 @@ def picture(name, path, strength):
     return mat
 
 
+def painted(name, path, roughness=0.6, coat=0.0):
+    """Une surface peinte d'une image, éclairée par le plateau (un lambris, un tableau) : ce n'est pas un écran."""
+    mat = surface(name, "#ffffff", roughness, 0.0, coat)
+    nodes = mat.node_tree.nodes
+    texture = nodes.new("ShaderNodeTexImage")
+    texture.image = bpy.data.images.load(path)
+    mat.node_tree.links.new(texture.outputs["Color"], nodes["Principled BSDF"].inputs["Base Color"])
+    return mat
+
+
 def beam(name, color, strength=0.5, opacity=0.1):
     """Un faisceau visible, sans le prix d'un vrai volume."""
     mat = bpy.data.materials.new(name)
@@ -137,6 +147,62 @@ def sphere(name, location, radius, mat, scale=(1, 1, 1), segments=24):
         polygon.use_smooth = True
     obj.data.materials.append(mat)
     return obj
+
+
+def disc(name, center, radius, mat, rotation=(0.0, 0.0, 0.0), segments=64):
+    """Un disque droit face à la caméra, avec ses UV pour une image ronde (une enseigne, un cadran)."""
+    verts = [(0.0, 0.0, 0.0)] + [(radius * math.cos(2 * math.pi * i / segments), 0.0, radius * math.sin(2 * math.pi * i / segments)) for i in range(segments)]
+    faces = [(0, 1 + i, 1 + (i + 1) % segments) for i in range(segments)]
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(verts, [], faces)
+    layer = mesh.uv_layers.new()
+    for loop in mesh.loops:
+        x, _, z = verts[loop.vertex_index]
+        layer.data[loop.index].uv = (0.5 + x / (2 * radius), 0.5 + z / (2 * radius))
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = center
+    obj.rotation_euler = rotation
+    obj.data.materials.append(mat)
+    return link(obj)
+
+
+def ring_sector(name, center, inner, outer, start_angle, end_angle, z, mat, steps=48):
+    """Un morceau d'anneau posé à plat : le dessus d'une marche de gradin en arc. Angles en degrés, 0 vers le fond."""
+    cx, cy = center
+    verts, faces = [], []
+    for i in range(steps + 1):
+        a = math.radians(start_angle + (end_angle - start_angle) * i / steps)
+        verts += [(cx + inner * math.sin(a), cy + inner * math.cos(a), z), (cx + outer * math.sin(a), cy + outer * math.cos(a), z)]
+    for i in range(steps):
+        faces.append((2 * i, 2 * i + 1, 2 * i + 3, 2 * i + 2))
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(verts, [], faces)
+    obj = bpy.data.objects.new(name, mesh)
+    obj.data.materials.append(mat)
+    return link(obj)
+
+
+def fluted_column(name, location, radius, height, mat, flutes=18):
+    """Une colonne cannelée, de pierre claire : son fût creusé de cannelures, sa base et son chapiteau."""
+    x, y, z = location
+    count = flutes * 4
+    # Le profil du fût : chaque cannelure creuse le cercle d'un dixième du rayon.
+    ring = [(radius * (1 - 0.1 * (0.5 - 0.5 * math.cos(2 * math.pi * flutes * i / count))), 2 * math.pi * i / count) for i in range(count)]
+    verts = [(r * math.cos(a), r * math.sin(a), h) for h in (0.0, height) for r, a in ring]
+    faces = [(i, (i + 1) % count, count + (i + 1) % count, count + i) for i in range(count)]
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(verts, [], faces)
+    for polygon in mesh.polygons:
+        polygon.use_smooth = True
+    shaft = bpy.data.objects.new(name, mesh)
+    shaft.location = (x, y, z)
+    shaft.data.materials.append(mat)
+    link(shaft)
+    cylinder(f"{name}_base", (x, y, z), radius * 1.28, 0.32, mat)
+    cylinder(f"{name}_tore", (x, y, z + 0.32), radius * 1.14, 0.16, mat)
+    cylinder(f"{name}_collier", (x, y, z + height - 0.5), radius * 1.1, 0.14, mat)
+    cylinder(f"{name}_chapiteau", (x, y, z + height - 0.36), radius * 1.08, 0.36, mat, radius_top=radius * 1.36)
+    return shaft
 
 
 def torus(name, location, major, minor, mat, rotation=(0.0, 0.0, 0.0)):
