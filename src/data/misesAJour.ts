@@ -1,6 +1,7 @@
 import type { Card, Casserole, Spell } from '../engine/types.ts';
 import { CARTES as CARTES_0_4_0 } from './misesAJour/0.4.0.ts';
 import { CARTES as CARTES_0_4_1 } from './misesAJour/0.4.1.ts';
+import { CARTES as CARTES_0_4_2 } from './misesAJour/0.4.2.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -42,6 +43,29 @@ export interface PatchNote {
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.2',
+    date: '15 novembre 2026',
+    title: 'Nouveaux plateaux, musique et réglages',
+    summary: [
+      'Les quatorze plateaux télé sont refaits, chacun d\'après le vrai plateau de son émission : l\'arène de Quotidien, les murs d\'écrans de « Tout beau, tout neuf », les hémicycles de l\'Assemblée et du Sénat, la « fenêtre sur le monde » du 20 heures, la cour de l\'Élysée du débat.',
+      'Chaque plateau a son habillage d\'antenne : un bandeau qui défile au pied de l\'écran, avec les bêtises de la chaîne, tirées au hasard à chaque visite, et un carton dans le coin. De temps en temps, quelque chose passe sur le bandeau.',
+      'Une musique de fond accompagne la partie : dix morceaux, dans un ordre tiré au hasard. Elle s\'efface sous les vraies voix.',
+      'Les sons du jeu et la musique ont chacun leur interrupteur et leur volume. Un nouveau réglage coupe les effets visuels : flashs, lumières qui vacillent, secousses. Sur téléphone, un bouton ouvre ces réglages en bas d\'écran.',
+      'Les sondages perdus se lisent sur une courbe qui tombe en travers de la table, d\'autant plus bas que la perte est lourde.',
+      'Le coup qui élimine un héros se charge sur le plateau : une boule de votes, puis la casserole. Des bulletins jaillissent du héros battu, des tracts pleuvent sur une déroute.',
+      'Un politique n\'explose plus que sur un coup critique. Aucune carte ne change.',
+    ],
+    rules: [
+      {
+        term: 'Retour en politique',
+        before: 'Meurt, puis se réincarne une fois à sa place, comme sa carte nue avec 1 PV : après son Héritage, s\'il reste de la place.',
+        after: 'Meurt, puis se réincarne une fois à sa place, comme sa carte nue avec 1 PV : après son Héritage, s\'il reste de la place. Détruit au recrutement, il revient de même.',
+      },
+    ],
+    why: {},
+    cards: CARTES_0_4_2,
+  },
   {
     version: '0.4.1',
     date: '14 novembre 2026',

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.4.2 — 15 novembre 2026
+
+Aucune carte ne change. Le détail : https://casserolade.fr/mises-a-jour
+
+**Plateaux**
+- Les quatorze plateaux télé sont refaits, chacun d'après le vrai plateau de son émission : l'arène de Quotidien et ses pions de couleur, les murs d'écrans roses de « Tout beau, tout neuf », Paris en mosaïque sur CNews, les hémicycles de l'Assemblée et du Sénat, le plateau blanc de « 24 h Pujadas », les totems de « Face à BFM », le loft de C à vous, la « fenêtre sur le monde » du 20 heures, la cour de l'Élysée du débat.
+- Chaque plateau a son habillage d'antenne : un bandeau qui défile au pied de l'écran, avec les bêtises de la chaîne, tirées au hasard à chaque visite, et un carton dans le coin (un panneau, un compteur, un chrono). Sur téléphone, le bandeau de la chaîne.
+- De temps en temps, quelque chose passe sur le bandeau : le tracteur de France 3, la flèche de LCI, le micro rouge de Quotidien.
+
+**Musique et réglages**
+- Une musique de fond accompagne la partie, du choix du héros au dernier combat : dix morceaux, dans un ordre tiré au hasard, tous crédités sur la page À propos. Elle s'efface sous les vraies voix.
+- Les sons du jeu et la musique ont chacun leur interrupteur et leur volume, et l'un ne bouge pas l'autre.
+- Un nouveau réglage coupe les effets visuels : flashs, lumières qui vacillent, secousses. Il est coupé d'office quand l'appareil demande moins de mouvement.
+- Sur téléphone, un bouton ouvre ces réglages en bas d'écran, avec de gros curseurs ; « Quitter la partie » s'y trouve aussi.
+
+**Combat**
+- Les sondages perdus se lisent sur une courbe qui tombe en travers de la table, d'autant plus bas que la perte est lourde. Le compteur ne s'égrène plus point par point.
+- Le coup qui élimine un héros se charge sur le plateau : une boule de votes, puis la casserole. Des bulletins jaillissent du héros battu, et des tracts pleuvent sur une déroute.
+- Un politique n'explose plus que sur un coup critique, et moins fort.
+- Le cri de Wilhelm se fait parfois entendre quand un joueur est éliminé sur un coup critique.
+
+**Règles**
+- Détruit pendant le recrutement, un politique qui a le Retour en politique se réincarne comme en combat : après son Héritage, comme sa carte nue avec 1 PV, s'il reste de la place.
+
 ## 0.4.1 — 14 novembre 2026
 
 Aucune carte ne change.
