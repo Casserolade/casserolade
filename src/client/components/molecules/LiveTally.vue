@@ -13,10 +13,10 @@ defineProps<{ items: LiveTallyItem[] }>();
 </template>
 
 <style scoped>
-.live-tally { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.9rem; margin: 0; color: var(--color-text); font-weight: 700; }
-.on-air { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.15em 0.6em; border-radius: 6px; background: var(--color-on-air); color: #fff; font: 400 1.05rem / 1.2 var(--font-number); letter-spacing: 1px; text-transform: uppercase; }
+.live-tally { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.8rem; margin: 0; color: var(--color-text); font-size: 0.92rem; font-weight: 700; }
+.on-air { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.12em 0.55em; border-radius: 5px; background: var(--color-on-air); color: #fff; font: 400 0.92rem / 1.2 var(--font-number); letter-spacing: 1px; text-transform: uppercase; }
 .dot { width: 0.55em; height: 0.55em; border-radius: 50%; background: #fff; animation: on-air 1.4s ease-in-out infinite; }
-.item strong { color: var(--color-title); font: 400 1.5rem / 1 var(--font-number); letter-spacing: 1px; }
+.item strong { color: var(--color-title); font: 400 1.25rem / 1 var(--font-number); letter-spacing: 1px; }
 @keyframes on-air { 50% { opacity: 0.25; } }
 @media (prefers-reduced-motion: reduce) { .dot { animation: none; } }
 </style>

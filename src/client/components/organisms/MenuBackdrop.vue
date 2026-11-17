@@ -4,8 +4,11 @@ import StudioLife from '#src/client/components/atoms/StudioLife.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 
-/** The screens around a game: the TV set of the final debate behind, blurred, and the page on top of it. */
-const props = withDefaults(defineProps<{ plateauId?: string }>(), { plateauId: 'tf1_second_tour' });
+/**
+ * The screens around a game: the TV set of the final debate behind, blurred, and the page on top of it. `fitted`: a
+ * page that means to hold in the screen without scrolling, with thinner margins.
+ */
+const props = withDefaults(defineProps<{ plateauId?: string; fitted?: boolean }>(), { plateauId: 'tf1_second_tour', fitted: false });
 
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.plateauId]?.decor));
 </script>
@@ -15,7 +18,7 @@ const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.plat
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
     <StudioLife :plateau-id="plateauId" />
     <div class="shade" aria-hidden="true" />
-    <main class="page"><slot /></main>
+    <main class="page" :class="{ fitted }"><slot /></main>
   </div>
 </template>
 
@@ -28,4 +31,6 @@ const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.plat
 :where(.page) :deep(:where(h2)) { color: #fff; font: 400 1.7rem / 1.1 var(--font-number); letter-spacing: 1px; }
 :where(.page) :deep(:where(.muted)) { color: #c9cfdc; }
 .page { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; max-width: 1400px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+/* As tall as the screen at least: what it holds may share out the height left. */
+.fitted { max-width: none; min-height: 100%; padding: 0.8rem 1rem; }
 </style>

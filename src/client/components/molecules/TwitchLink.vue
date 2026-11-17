@@ -16,7 +16,7 @@ import { TWITCH_URL } from '#src/protocol/twitch.ts';
 </template>
 
 <style scoped>
-.twitch-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.8rem; border-radius: 14px; border: 2px solid rgb(145 70 255 / 0.45); background: rgb(145 70 255 / 0.12); color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.3; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
+.twitch-link { display: flex; align-items: center; gap: 0.7rem; padding: 0.35rem 0.7rem; border-radius: 10px; border: 1px solid rgb(145 70 255 / 0.5); background: rgb(145 70 255 / 0.12); color: var(--color-text-muted); font-size: 0.85rem; line-height: 1.25; text-decoration: none; transition: background 0.15s, border-color 0.15s; }
 .twitch-link:hover, .twitch-link:focus-visible { border-color: var(--color-twitch); background: rgb(145 70 255 / 0.24); color: var(--color-text); }
 .words { display: flex; flex-direction: column; gap: 0.15rem; }
 .riddle { color: #c9a8ff; font-style: italic; }

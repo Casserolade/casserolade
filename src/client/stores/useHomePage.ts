@@ -2,6 +2,7 @@ import { computed, ref, watch } from 'vue';
 import { TAGLINES } from '#src/client/const/taglines.ts';
 import { savePseudo, savedPseudo } from '#src/client/services/localProfile.ts';
 import { useLiveCount } from '#src/client/stores/useLiveCount.ts';
+import { usePublicRooms } from '#src/client/stores/usePublicRooms.ts';
 import { discordMembersLabel } from '#src/client/tools/discordMembersLabel.ts';
 import { liveTallyItems } from '#src/client/tools/liveTallyItems.ts';
 import { pickOne } from '#src/client/tools/pickOne.ts';
@@ -10,7 +11,7 @@ import { PLATEAUX, SECOND_TOUR } from '#src/data/plateaux.ts';
 /**
  * What every home page shares, on a computer or a phone: the pseudo typed once and kept for the next visit, one of
  * the game's TV sets behind, and one of its subtitles under the logo, both drawn at each visit, and the life on the
- * server (the games in progress, the players online, the Discord's members).
+ * server (the games in progress, the players online, the public rooms open right now, the Discord's members).
  */
 export function useHomePage() {
   const pseudo = ref(savedPseudo());
@@ -18,9 +19,10 @@ export function useHomePage() {
   const plateauId = pickOne([...PLATEAUX, SECOND_TOUR].map((plateau) => plateau.id), Math.random()) ?? SECOND_TOUR.id;
   const tagline = pickOne(TAGLINES, Math.random()) ?? TAGLINES[0];
   const { count } = useLiveCount();
+  const { rooms } = usePublicRooms();
   const live = computed(() => liveTallyItems(count.value));
   const discordMembers = computed(() => discordMembersLabel(count.value?.discord ?? null));
   /** The Twitch channel is live: the online side shows its link. */
   const twitchLive = computed(() => count.value?.twitch ?? false);
-  return { pseudo, plateauId, tagline, live, discordMembers, twitchLive };
+  return { pseudo, plateauId, tagline, live, rooms, discordMembers, twitchLive };
 }

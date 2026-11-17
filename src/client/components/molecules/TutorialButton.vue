@@ -2,7 +2,7 @@
 import AppButton from '#src/client/components/atoms/AppButton.vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 
-/** The tutorial, first of the home page's extras: for a newcomer, it is the button that shines. */
+/** The tutorial: first of the home page's extras, and for a newcomer the button that shines, at the top of the page. */
 withDefaults(defineProps<{ newcomer?: boolean }>(), { newcomer: false });
 const emit = defineEmits<{ open: [] }>();
 </script>

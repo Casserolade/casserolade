@@ -29,33 +29,34 @@ defineProps<{ members: string | null }>();
 
 <style scoped>
 /* A band on a wide side: the mark, the words, the button on the right. On a narrow one, the button goes under. */
-.discord-call { container-type: inline-size; }
+/* A slim band: it takes the height its row gives it, its words centred. */
+.discord-call { container-type: inline-size; display: grid; }
 .band {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.7rem 1.1rem;
-  padding: 0.9rem 1.2rem;
-  border-radius: 18px;
-  border: 3px solid rgb(255 255 255 / 0.35);
+  gap: 0.4rem 0.9rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 14px;
+  border: 2px solid rgb(255 255 255 / 0.3);
   background: radial-gradient(circle at 8% 20%, rgb(255 255 255 / 0.18), transparent 50%), linear-gradient(135deg, var(--color-discord), var(--color-discord-dark));
-  box-shadow: 0 10px 26px rgb(20 24 90 / 0.55);
+  box-shadow: 0 6px 16px rgb(20 24 90 / 0.45);
   color: #fff;
 }
-.mark { width: 3.8rem; height: 3.8rem; filter: drop-shadow(0 4px 0 rgb(0 0 0 / 0.25)); animation: wobble 3.2s ease-in-out infinite; }
-.words { display: flex; flex-direction: column; gap: 0.25rem; }
-.kicker { margin: 0; color: rgb(255 255 255 / 0.8); font-size: var(--font-size-small); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-h3 { margin: 0; font: 400 1.9rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 5px rgb(20 22 70 / 0.9); paint-order: stroke fill; }
-.words p:last-child { margin: 0; color: rgb(255 255 255 / 0.92); line-height: 1.25; text-wrap: pretty; }
-.action { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-.discord-call .join { background: #fff; border-color: rgb(20 22 70 / 0.9); color: var(--color-discord-dark); text-shadow: none; font-size: 1.5rem; white-space: nowrap; }
-.members { margin: 0; font-weight: 700; }
-@container (max-width: 760px) {
+.mark { width: 2.5rem; height: 2.5rem; filter: drop-shadow(0 3px 0 rgb(0 0 0 / 0.25)); animation: wobble 3.2s ease-in-out infinite; }
+.words { display: flex; flex-direction: column; gap: 0.1rem; }
+.kicker { margin: 0; color: rgb(255 255 255 / 0.8); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+h3 { margin: 0; font: 400 1.3rem / 1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 3px rgb(20 22 70 / 0.9); paint-order: stroke fill; }
+.words p:last-child { margin: 0; color: rgb(255 255 255 / 0.92); font-size: 0.9rem; line-height: 1.25; text-wrap: pretty; }
+.action { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.discord-call .join { background: #fff; border-color: rgb(20 22 70 / 0.9); color: var(--color-discord-dark); text-shadow: none; font-size: 1.1rem; white-space: nowrap; }
+.members { margin: 0; font-size: 0.9rem; font-weight: 700; }
+@container (max-width: 40rem) {
   .band { grid-template-columns: auto minmax(0, 1fr); }
   .action { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
 }
 /* On a phone, the words take the whole width: the button carries the mark. */
-@container (max-width: 480px) {
+@container (max-width: 26rem) {
   .band { grid-template-columns: minmax(0, 1fr); }
   .mark { display: none; }
 }

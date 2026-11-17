@@ -3,6 +3,20 @@
 /* Every text follows the screen: 20px on a large one. */
 html { font-size: clamp(15px, min(1.05vw, 1.9dvh), 24px); }
 
+/*
+ * Wherever something scrolls: a thin bar in the game's own tones, without arrows nor a white track. Chrome and Safari
+ * draw it piece by piece; Firefox, which has no such pieces, takes the two standard properties (given to Chrome, they
+ * would bring its arrows back).
+ */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-thumb { border-radius: 4px; background: rgb(255 255 255 / 0.28); }
+::-webkit-scrollbar-thumb:hover { background: rgb(255 255 255 / 0.45); }
+::-webkit-scrollbar-button { display: none; }
+@supports not selector(::-webkit-scrollbar) {
+  * { scrollbar-width: thin; scrollbar-color: rgb(255 255 255 / 0.3) transparent; }
+}
+
 body {
   margin: 0;
   background: var(--color-background);
@@ -39,6 +53,15 @@ button { font: inherit; color: inherit; }
   gap: var(--space-2);
   align-items: stretch;
 }
+
+/*
+ * A field and the button that sends it, on one line: the field takes what the button leaves. The button's column has
+ * a set width, so that two such forms, one above the other, line up; in a narrow container, the button goes under.
+ */
+.field-row { display: grid; grid-template-columns: minmax(0, 1fr) var(--field-row-button, 12rem); align-items: end; gap: var(--space-2) var(--space-3); }
+.field-row > .app-button { justify-self: stretch; }
+.field-row input { width: 100%; min-width: 0; }
+@container (max-width: 20rem) { .field-row { grid-template-columns: minmax(0, 1fr); } }
 
 .muted { color: var(--color-text-muted); }
 .small { font-size: var(--font-size-small); }
