@@ -145,14 +145,14 @@ test('une majorité stricte lance la table avec des bots, à un niveau suivant l
     assert.equal(t.file(c), null);
     const salon = t.dernier(c, 'salon')?.salon;
     assert.equal(salon?.etat, 'en_jeu');
-    assert.equal(salon?.publique, true);
+    assert.equal(salon?.classee, true);
     assert.equal(salon?.joueurs.filter((j) => j.bot).length, SIEGES - 3);
     assert.equal(salon?.options.niveauBots, 'moyen');
     assert.equal(salon?.options.minuteur, true);
   }
-  // Une table publique ne se règle ni ne se relance.
+  // Une table classée ne se règle ni ne se relance.
   t.dire('a', { type: 'regler_salon', options: { bots: 0, niveauBots: 'facile', minuteur: false } });
-  assert.match(t.dernier('a', 'erreur')?.erreur ?? '', /publique/);
+  assert.match(t.dernier('a', 'erreur')?.erreur ?? '', /classée/);
   t.lobby.destroy();
 });
 

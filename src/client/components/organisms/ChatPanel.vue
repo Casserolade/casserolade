@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, nextTick, onUnmounted, ref, useTemplateRef, watch } from 'vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
+import ChatPeople from '#src/client/components/molecules/ChatPeople.vue';
+import type { ModerablePlayer } from '#src/client/tools/moderablePlayers.ts';
+import { isOwnChatLine } from '#src/client/tools/isOwnChatLine.ts';
 import { CHAT_LONGUEUR } from '#src/protocol/messages.ts';
 import type { MessageChat } from '#src/protocol/messages.ts';
 
@@ -10,10 +13,13 @@ const PEEK_MS = 5000;
 /**
  * The chat between players. `docked`: always open, in the waiting room's layout. `floating`: in game,
  * a button in the corner of the table that the player opens and closes; nothing ever opens by itself,
- * and a new line only peeks out for a few seconds. Lines are plain text, never interpreted.
+ * and a new line only peeks out for a few seconds. Lines are plain text, never interpreted. `me`: the reader's
+ * pseudo in the room, which marks their own lines. What the room says itself (who comes in, who leaves) is set apart.
+ * `muted`: the host cut the reader's chat, the field says so. `people`: for the host, in a game, the players it may
+ * mute or put out, from the chat itself.
  */
-const props = withDefaults(defineProps<{ messages: MessageChat[]; seat: number; floating?: boolean }>(), { floating: false });
-const emit = defineEmits<{ send: [text: string] }>();
+const props = withDefaults(defineProps<{ messages: MessageChat[]; me: string; floating?: boolean; muted?: boolean; people?: ModerablePlayer[] }>(), { floating: false, muted: false, people: () => [] });
+const emit = defineEmits<{ send: [text: string]; mute: [pseudo: string, muted: boolean]; kick: [pseudo: string] }>();
 
 const draft = ref('');
 const open = ref(!props.floating);
@@ -23,7 +29,7 @@ const list = useTemplateRef<HTMLElement>('list');
 const field = useTemplateRef<HTMLInputElement>('field');
 let peekTimer = 0;
 
-const unread = computed(() => (open.value ? 0 : props.messages.filter((line) => line.id > seenId.value && line.siege !== props.seat).length));
+const unread = computed(() => (open.value ? 0 : props.messages.filter((line) => line.id > seenId.value && !isOwnChatLine(line, props.me)).length));
 
 function scrollDown(): void {
   void nextTick(() => {
@@ -39,7 +45,7 @@ watch(() => props.messages.at(-1)?.id, (last) => {
     return;
   }
   const line = props.messages.at(-1);
-  if (!line || line.siege === props.seat) return;
+  if (!line || isOwnChatLine(line, props.me)) return;
   peek.value = line;
   window.clearTimeout(peekTimer);
   peekTimer = window.setTimeout(() => (peek.value = null), PEEK_MS);
@@ -79,13 +85,15 @@ scrollDown();
       <GameIcon name="speech" />
       <span v-if="unread" class="badge">{{ unread > 9 ? '9+' : unread }}</span>
     </button>
-    <p v-if="floating && !open && peek" class="peek" aria-hidden="true"><strong>{{ peek.pseudo }}</strong> {{ peek.texte }}</p>
+    <p v-if="floating && !open && peek" class="peek" aria-hidden="true"><strong v-if="!peek.annonce">{{ peek.pseudo }}</strong> {{ peek.texte }}</p>
     <section v-if="open" class="panel" aria-label="Chat">
       <h2 v-if="!floating">Chat</h2>
+      <ChatPeople :people="people" @mute="(pseudo, on) => emit('mute', pseudo, on)" @kick="(pseudo) => emit('kick', pseudo)" />
       <ol ref="list" class="lines" role="log" aria-live="polite">
         <li v-if="messages.length === 0" class="empty">Personne n'a encore rien dit.</li>
-        <li v-for="line in messages" :key="line.id" :class="{ mine: line.siege === seat }">
-          <strong class="who">{{ line.pseudo }}</strong> <span class="text">{{ line.texte }}</span>
+        <li v-for="line in messages" :key="line.id" :class="{ mine: isOwnChatLine(line, me), said: line.annonce }">
+          <template v-if="line.annonce">{{ line.texte }}</template>
+          <template v-else><strong class="who">{{ line.pseudo }}</strong> <span class="text">{{ line.texte }}</span></template>
         </li>
       </ol>
       <form class="write" @submit.prevent="send">
@@ -95,12 +103,13 @@ scrollDown();
           class="field"
           type="text"
           :maxlength="CHAT_LONGUEUR"
-          placeholder="Écrire à la table…"
+          :placeholder="muted ? 'L\'hôte a coupé votre chat.' : 'Écrire à la table…'"
+          :disabled="muted"
           aria-label="Message pour la table"
           autocomplete="off"
           @keydown="onKey"
         />
-        <button type="submit" class="send" :disabled="!draft.trim()">Envoyer</button>
+        <button type="submit" class="send" :disabled="muted || !draft.trim()">Envoyer</button>
       </form>
     </section>
   </div>
@@ -109,15 +118,16 @@ scrollDown();
 <style scoped>
 .chat { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
 .panel { display: flex; flex-direction: column; gap: 0.5rem; min-height: 0; }
-h2 { color: #fff; font: 400 1.7rem / 1 var(--font-number); letter-spacing: 1px; }
+h2 { color: #fff; font: 400 1.35rem / 1 var(--font-number); letter-spacing: 1px; }
 .lines { display: flex; flex-direction: column; gap: 0.3rem; max-height: 14rem; overflow-y: auto; margin: 0; padding: 0.5rem 0.7rem; list-style: none; border-radius: 12px; background: rgb(0 0 0 / 0.35); color: #e8ebf3; font-size: 1rem; line-height: 1.3; overflow-wrap: anywhere; }
 .who { color: #8fc4ff; }
 .mine .who { color: #ffe27a; }
-.empty { color: #9aa3b8; font-style: italic; }
+.empty, .said { color: #9aa3b8; font-style: italic; }
 .write { display: flex; gap: 0.5rem; }
 .field { flex: 1; min-width: 0; padding: 0.45rem 0.7rem; border-radius: 10px; border: 2px solid rgb(255 255 255 / 0.2); background: rgb(8 12 26 / 0.9); color: #fff; font-size: 1rem; }
 .send { padding: 0.45rem 0.9rem; border-radius: 10px; border: 3px solid var(--color-ink); background: #ffe27a; color: var(--color-ink); font-weight: 800; cursor: pointer; }
 .send:disabled { opacity: 0.5; cursor: default; }
+.field:disabled { border-style: dashed; cursor: not-allowed; }
 
 /* In game: table coordinates (--s), top left corner, over the decor. */
 .floating { position: absolute; left: calc(var(--s) * 26); top: calc(var(--s) * 22); width: auto; gap: calc(var(--s) * 10); pointer-events: none; }
@@ -174,6 +184,6 @@ h2 { color: #fff; font: 400 1.7rem / 1 var(--font-number); letter-spacing: 1px; 
   box-shadow: 0 calc(var(--s) * 12) calc(var(--s) * 30) rgb(0 0 0 / 0.5);
 }
 .floating .lines { max-height: calc(var(--s) * 360); font-size: calc(var(--s) * 20); }
-.floating .field, .floating .send { font-size: calc(var(--s) * 20); }
+.floating .field, .floating .send, .floating :deep(.people) { font-size: calc(var(--s) * 20); }
 @keyframes peek { from { opacity: 0; translate: calc(var(--s) * -10) 0; } }
 </style>

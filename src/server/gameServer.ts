@@ -14,6 +14,7 @@ import type { CounterEvent } from '../protocol/counterEvent.ts';
 import { LIVE_COUNT_PATH } from '../protocol/liveCount.ts';
 import type { ClientMessage, ServerMessage } from '../protocol/messages.ts';
 import { MAX_MESSAGE_BYTES, parseClientMessage } from '../protocol/parseClientMessage.ts';
+import { PUBLIC_ROOMS_PATH } from '../protocol/publicRooms.ts';
 import type { Clock, RoomIncident } from './room.ts';
 import { counterEventLabel } from './counterEventLabel.ts';
 import { DASHBOARD_NAMES } from './dashboardNames.ts';
@@ -146,7 +147,8 @@ const GAMES_EVERY_MS = 2_000;
 const STREAMED_DAYS = 60;
 /** The container's health check asks here, and is counted nowhere. */
 export const HEALTH_PATH = '/sante';
-const LIVE_COUNT_HEADERS = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
+/** What the home page reads again and again: the life on the server, the public rooms. Never kept by a browser. */
+const LIVE_JSON_HEADERS = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
 
 const HEURE_DE_PARIS = new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', dateStyle: 'short', timeStyle: 'medium' });
 
@@ -220,6 +222,8 @@ export class GameServer {
       ...options.lobby,
       clock: realClock,
       send: (id, message) => this.send(id, message),
+      // A player put out of a room does not come back by another connection: its address, in memory only, like the others here.
+      origine: (id) => this.connections.get(id)?.address ?? id,
       signaler: (incident, code) => this.recordIncident(incident, code),
       evenement: (evenement) => this.lobbyEvent(evenement),
     });
@@ -236,7 +240,11 @@ export class GameServer {
         return;
       }
       if (path === LIVE_COUNT_PATH) {
-        this.serveLiveCount(request, response);
+        this.serveLiveJson(request, response, () => buildLiveCount(this.liveStats(), this.lobby.partiesEnLigne, this.discord?.current ?? null, this.twitch?.live ?? false));
+        return;
+      }
+      if (path === PUBLIC_ROOMS_PATH) {
+        this.serveLiveJson(request, response, () => this.lobby.salonsPublics);
         return;
       }
       if (!staticDir) {
@@ -408,7 +416,10 @@ export class GameServer {
     switch (evenement.type) {
       case 'salon_cree':
         this.stats.salonCree();
-        this.live.event('salon', 'Salon privé créé');
+        this.live.event('salon', evenement.nomPublic === null ? 'Salon privé créé' : `Salon public créé : « ${evenement.nomPublic} »`);
+        return;
+      case 'salon_public':
+        this.live.event('salon', `Salon ouvert au public : « ${evenement.nom} »`);
         return;
       case 'partie': {
         this.stats.partie(evenement.publique, evenement.humains);
@@ -466,14 +477,16 @@ export class GameServer {
     }
   }
 
-  /** The life on the server, for the home page: totals only, read again every half minute by each open home page. */
-  private serveLiveCount(request: IncomingMessage, response: ServerResponse): void {
+  /**
+   * What each open home page reads again and again, as JSON: the life on the server (totals only, every half minute)
+   * and the public rooms (every few seconds).
+   */
+  private serveLiveJson(request: IncomingMessage, response: ServerResponse, read: () => unknown): void {
     if (request.method !== 'GET' && request.method !== 'HEAD') {
-      response.writeHead(405, LIVE_COUNT_HEADERS).end();
+      response.writeHead(405, LIVE_JSON_HEADERS).end();
       return;
     }
-    const count = buildLiveCount(this.liveStats(), this.lobby.partiesEnLigne, this.discord?.current ?? null, this.twitch?.live ?? false);
-    response.writeHead(200, LIVE_COUNT_HEADERS).end(request.method === 'GET' ? JSON.stringify(count) : undefined);
+    response.writeHead(200, LIVE_JSON_HEADERS).end(request.method === 'GET' ? JSON.stringify(read()) : undefined);
   }
 
   /** An event of a page: added to the day, and shown in the dashboard's feed. Who is here right now stays in memory. */

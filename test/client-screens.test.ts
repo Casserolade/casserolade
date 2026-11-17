@@ -8,13 +8,14 @@ import { createAchievements } from '../src/client/stores/achievements.ts';
 import type { ProfileStorage } from '../src/client/services/localProfile.ts';
 import { readProgress } from '../src/client/services/progressStorage.ts';
 import { TUTORIAL_TARGETS } from '../src/client/const/tutorialTargets.ts';
-import { CARD_BY_ID } from '../src/data/cards.ts';
+import { CARD_BY_ID, CARDS } from '../src/data/cards.ts';
 import { CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
 import { TUTORIEL } from '../src/data/histoire/tutoriel.ts';
 import { SUCCES } from '../src/data/succes.ts';
 import { PARAMS } from '../src/data/params.ts';
 import { PHRASES } from '../src/data/phrases.ts';
 import { makeMinion } from '../src/engine/minion.ts';
+import { createGame, viewFor } from '../src/engine/game.ts';
 import type { PlayerView } from '../src/engine/game.ts';
 import type { Minion } from '../src/engine/types.ts';
 
@@ -59,36 +60,75 @@ function memoryStorage(): ProfileStorage & { data: Map<string, string> } {
   return { data, getItem: (k) => data.get(k) ?? null, setItem: (k, v) => void data.set(k, v) };
 }
 
-const STATS: PlayerView['stats'] = { casseroles: 0, scandals: 0, forgotten: 0, triples: 0, spells: 0 };
+/** An ordinary board of the end of a game: seven politicians of three camps, none of them a president. */
+function ordinaryBoard(): PlayerView['board'] {
+  const of = (camp: string, n: number) => CARDS.filter((card) => card.camp === camp && card.tier <= 3).slice(0, n);
+  return [...of('insoumis', 3), ...of('socialistes', 2), ...of('macronie', 2)].map((card, index) => makeMinion(card, index + 1));
+}
 
-test('succès : une victoire solo débloque, se garde, et donne un titre', () => {
+/** The last view of an ordinary game won: a full board, the top tier, gestures at the desk, polls lost on the way. */
+function wonView(): PlayerView {
+  const view = viewFor(createGame({ seed: 7 }), 0);
+  return { ...view, heroId: 'hollande', round: 15, hp: 12, tier: 6, board: ordinaryBoard(), stats: { ...view.stats, casseroles: 4, spells: 20, rolls: 12, sold: 5, spent: 120 } };
+}
+
+test('succès : une victoire en difficile débloque, se garde, et donne un titre', () => {
   const storage = memoryStorage();
   const board = createAchievements(storage);
   board.startGame();
-  const unlocked = board.recordGame([{ seat: 0, pseudo: 'Vous', heroId: 'hollande', place: 1 }], { stats: STATS } as PlayerView);
-  assert.ok(unlocked.some((s) => s.id === 'premier_mandat'));
-  assert.deepEqual(board.fresh.value.map((s) => s.id), unlocked.map((s) => s.id), 'l\'écran de fin les montre');
+  const view = wonView();
+  board.observe({ ...view, round: 1, hp: 30 });
+  board.observe(view);
+  const unlocked = board.recordGame(view, { place: 1, seats: 8, niveau: 'difficile' });
+  assert.deepEqual(unlocked.map((s) => s.id), ['premier_mandat']);
+  assert.deepEqual(board.fresh.value.map((s) => s.id), ['premier_mandat'], 'l\'écran de fin les montre');
   assert.ok(board.earnedTitles.value.includes('L\'Élu'));
-  assert.equal(readProgress(storage).victoires, 1, 'gardé dans le navigateur');
+  assert.equal(readProgress(storage).victoiresParNiveau.difficile, 1, 'gardé dans le navigateur');
+  assert.deepEqual(readProgress(storage).herosVainqueurs, ['hollande']);
   board.startGame();
   assert.deepEqual(board.fresh.value, [], 'la partie suivante repart de zéro');
   // Un tableau rouvert retrouve tout.
-  assert.equal(createAchievements(storage).progress.value.obtenus.length, unlocked.length);
+  assert.deepEqual(createAchievements(storage).progress.value.obtenus, ['premier_mandat']);
+});
+
+test('succès : ce que la partie a montré en route compte, et la partie suivante repart de rien', () => {
+  const board = createAchievements(memoryStorage());
+  const view = wonView();
+  board.startGame();
+  board.observe({ ...view, round: 1, hp: 30 });
+  board.observe({ ...view, hp: 30, board: [...view.board.slice(1), { ...makeMinion(CARD_BY_ID.valls, 99), atk: 2300, hp: 2050 }] });
+  // Le monstre est renvoyé avant la fin : le succès l'a vu passer.
+  assert.deepEqual(board.recordGame({ ...view, hp: 30 }, { place: 1, seats: 8, niveau: 'facile' }).map((s) => s.id), ['sans_opposition', 'bete_politique']);
+  board.startGame();
+  board.observe({ ...view, round: 1, hp: 30 });
+  board.observe({ ...view, hp: 29 });
+  assert.deepEqual(board.recordGame({ ...view, hp: 29 }, { place: 1, seats: 8, niveau: 'moyen' }), [], 'un sondage perdu en route : pas d\'état de grâce');
+  assert.deepEqual(board.recordGame(null, { place: 1, seats: 8 }), [], 'sans vue, rien à compter');
+});
+
+test('succès : une partie en ligne compte, avec les humains de sa table', () => {
+  const board = createAchievements(memoryStorage());
+  board.startGame();
+  board.observe({ ...wonView(), round: 1, hp: 30 });
+  board.observe(wonView());
+  const unlocked = board.recordGame(wonView(), { place: 1, seats: 8, humans: 8, publicHost: true });
+  assert.deepEqual(unlocked.map((s) => s.id), ['suffrage_universel', 'grand_debat', 'reunion_publique']);
+  assert.equal(board.progress.value.victoiresEnLigne, 1);
 });
 
 test('succès : le titre choisi s\'affiche seulement s\'il est gagné, et un stockage abîmé repart à zéro', () => {
   const storage = memoryStorage();
   const board = createAchievements(storage);
-  board.chooseTitle('Le Stagiaire');
+  board.chooseTitle('Président de la République');
   assert.equal(board.title.value, null, 'pas encore gagné');
-  board.record({ tutoriel: true });
-  assert.deepEqual(board.earnedTitles.value, ['Le Stagiaire']);
-  assert.equal(board.title.value, 'Le Stagiaire');
-  assert.equal(createAchievements(storage).title.value, 'Le Stagiaire');
+  board.record({ chapitre: 'second_tour' });
+  assert.deepEqual(board.earnedTitles.value, ['Président de la République']);
+  assert.equal(board.title.value, 'Président de la République');
+  assert.equal(createAchievements(storage).title.value, 'Président de la République');
   storage.data.set('casserolade.progres', '{pas du json');
   assert.equal(readProgress(storage).obtenus.length, 0);
   const broken: ProfileStorage = { getItem: () => { throw new Error('bloqué'); }, setItem: () => { throw new Error('bloqué'); } };
-  assert.doesNotThrow(() => createAchievements(broken).record({ place: 1, stats: STATS }));
+  assert.doesNotThrow(() => createAchievements(broken).record({ tutoriel: true }));
 });
 
 test('rewardLabel : chaque récompense se dit en quelques mots', () => {

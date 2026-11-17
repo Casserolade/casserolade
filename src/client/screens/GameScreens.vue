@@ -9,8 +9,10 @@ import QueueScreen from '#src/client/screens/QueueScreen.vue';
 import WaitingRoomScreen from '#src/client/screens/WaitingRoomScreen.vue';
 import { SCREEN_SET } from '#src/client/const/screenSet.ts';
 import type { ScreenSet } from '#src/client/const/screenSet.ts';
+import { savePseudo } from '#src/client/services/localProfile.ts';
 import { music } from '#src/client/services/music.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
+import { moderablePlayers } from '#src/client/tools/moderablePlayers.ts';
 import { seatLabel } from '#src/client/tools/seatNames.ts';
 import type { Succes } from '#src/data/succes.ts';
 
@@ -32,11 +34,18 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{ leave: []; queue: []; again: [] }>();
 
 const room = computed(() => props.store.room.value);
-const isPublic = computed(() => Boolean(room.value?.publique));
-const isHost = computed(() => room.value !== null && room.value.siege === room.value.hote);
+/** A table of the ranked queue: it does not restart, its players go back to the queue. */
+const isRanked = computed(() => Boolean(room.value?.classee));
+const isHost = computed(() => room.value?.estHote ?? false);
+/** In a game, the host moderates from the chat: the players it may mute or put out. */
+const people = computed(() => moderablePlayers(room.value));
+/** The host cut this player's chat. */
+const chatMuted = computed(() => room.value?.muets?.includes(room.value.moi) ?? false);
 const seat = computed(() => room.value?.siege ?? props.store.view.value?.seat ?? 0);
-const canReplay = computed(() => (room.value ? isHost.value && !isPublic.value : props.canRestart));
-const replayHint = computed(() => (room.value && !isHost.value && !isPublic.value ? 'L\'hôte peut relancer une partie.' : null));
+/** A room of friends or a public one, after its game: its players may go back to it, and find who came in since. */
+const hasRoom = computed(() => room.value !== null && !isRanked.value);
+const canReplay = computed(() => (room.value ? isHost.value && !isRanked.value : props.canRestart));
+const replayHint = computed(() => (hasRoom.value && !isHost.value ? 'L\'hôte peut relancer une partie.' : null));
 /** Playing: the door to leave is in the corner. Out of the game, the screens have their own way back. */
 const inGame = computed(() => ['hero', 'recruit', 'combat'].includes(props.store.screen.value));
 // The background music follows the game: it plays from the choice of the hero to the last combat.
@@ -68,6 +77,12 @@ onUnmounted(() => {
   music.stop();
 });
 
+/** A pseudo chosen from inside the room: the room takes it, and the next visit finds it in the home page's field. */
+function rename(pseudo: string): void {
+  savePseudo(pseudo);
+  props.store.renameSelf(pseudo);
+}
+
 function again(): void {
   if (room.value) props.store.launchRoom();
   else emit('again');
@@ -92,9 +107,13 @@ function again(): void {
     :seat="seat"
     :can-replay="canReplay"
     :replay-hint="replayHint"
-    :public-game="isPublic"
+    :ranked-game="isRanked"
+    :has-room="hasRoom"
+    :view="store.view.value"
+    :pseudo="room?.moi ?? null"
     :mmr="store.mmrChange.value"
     @again="again"
+    @room="store.backToRoom()"
     @queue="$emit('queue')"
     @leave="$emit('leave')"
   >
@@ -115,6 +134,9 @@ function again(): void {
     :room="room"
     :messages="store.chat.value"
     @chat="(text) => store.sendChat(text)"
+    @rename="rename"
+    @mute="(pseudo, muted) => store.mutePlayer(pseudo, muted)"
+    @kick="(pseudo) => store.kickPlayer(pseudo)"
     @launch="store.launchRoom()"
     @leave="$emit('leave')"
     @settings="(options) => store.updateRoomSettings(options)"
@@ -141,7 +163,19 @@ function again(): void {
       <AppButton @click="$emit('leave')">Retour à l'accueil</AppButton>
     </template>
   </MenuBackdrop>
-  <component :is="screens.frame" :in-game="inGame" :show-chat="showChat" :messages="store.chat.value" :seat="seat" @leave="$emit('leave')" @send="(text: string) => store.sendChat(text)" />
+  <component
+    :is="screens.frame"
+    :in-game="inGame"
+    :show-chat="showChat"
+    :messages="store.chat.value"
+    :me="room?.moi ?? ''"
+    :muted="chatMuted"
+    :people="people"
+    @leave="$emit('leave')"
+    @send="(text: string) => store.sendChat(text)"
+    @mute="(pseudo: string, muted: boolean) => store.mutePlayer(pseudo, muted)"
+    @kick="(pseudo: string) => store.kickPlayer(pseudo)"
+  />
   <p v-if="store.connection.value === 'reconnecting'" class="reconnecting game-reconnecting" role="status">Connexion perdue : reconnexion en cours…</p>
   <p v-if="store.notice.value" class="notice game-notice" role="status">{{ store.notice.value }}</p>
 </template>

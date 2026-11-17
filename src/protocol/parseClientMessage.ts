@@ -27,6 +27,11 @@ export function isPlayerId(value: unknown): value is string {
   return typeof value === 'string' && PLAYER_ID.test(value);
 }
 
+/** The id that rates a room's player, when the message carries a valid one: without it, the player is not rated. */
+function ratedPlayer(value: unknown): { joueur?: string } {
+  return isPlayerId(value) ? { joueur: value } : {};
+}
+
 /** Un nombre entier optionnel : absent, ou un compte valide. Faux si le champ est présent et invalide. */
 function optionalCount(value: unknown): boolean {
   return value === undefined || isCount(value);
@@ -77,12 +82,14 @@ function parseOptions(raw: Record<string, unknown>): OptionsSalon | null {
   if (typeof raw.minuteur !== 'boolean') return null;
   if (raw.contexte !== undefined && !isShortText(raw.contexte)) return null;
   if (raw.table !== undefined && (!isCount(raw.table) || raw.table < MIN_TABLE || raw.table > MAX_TABLE)) return null;
+  if (raw.nomPublic !== undefined && !isShortText(raw.nomPublic)) return null;
   return {
     bots: raw.bots,
     niveauBots: raw.niveauBots as BotLevel,
     minuteur: raw.minuteur,
     ...(raw.contexte ? { contexte: raw.contexte as string } : {}),
     ...(raw.table !== undefined ? { table: raw.table } : {}),
+    ...(raw.nomPublic !== undefined ? { nomPublic: raw.nomPublic as string } : {}),
   };
 }
 
@@ -107,10 +114,10 @@ function parseFields(raw: Record<string, unknown>): ClientMessage | null {
     }
     case 'creer_salon': {
       const options = isRecord(raw.options) ? parseOptions(raw.options) : null;
-      return options && isShortText(raw.pseudo) ? { type: 'creer_salon', pseudo: raw.pseudo, options } : null;
+      return options && isShortText(raw.pseudo) ? { type: 'creer_salon', pseudo: raw.pseudo, options, ...ratedPlayer(raw.joueur) } : null;
     }
     case 'rejoindre':
-      return isShortText(raw.code) && isShortText(raw.pseudo) ? { type: 'rejoindre', code: raw.code, pseudo: raw.pseudo } : null;
+      return isShortText(raw.code) && isShortText(raw.pseudo) ? { type: 'rejoindre', code: raw.code, pseudo: raw.pseudo, ...ratedPlayer(raw.joueur) } : null;
     case 'reprendre':
       return isShortText(raw.jeton) ? { type: 'reprendre', jeton: raw.jeton } : null;
     case 'file_rejoindre':
@@ -119,6 +126,12 @@ function parseFields(raw: Record<string, unknown>): ClientMessage | null {
       return typeof raw.oui === 'boolean' ? { type: 'file_vote', oui: raw.oui } : null;
     case 'suivre':
       return raw.siege === null || isCount(raw.siege) ? { type: 'suivre', siege: raw.siege as number | null } : null;
+    case 'renommer':
+      return isShortText(raw.pseudo) ? { type: 'renommer', pseudo: raw.pseudo } : null;
+    case 'muet':
+      return isShortText(raw.pseudo) && typeof raw.oui === 'boolean' ? { type: 'muet', pseudo: raw.pseudo, oui: raw.oui } : null;
+    case 'exclure':
+      return isShortText(raw.pseudo) ? { type: 'exclure', pseudo: raw.pseudo } : null;
     case 'chat':
       return typeof raw.texte === 'string' && raw.texte.length > 0 && raw.texte.length <= CHAT_LONGUEUR ? { type: 'chat', texte: raw.texte } : null;
     default:

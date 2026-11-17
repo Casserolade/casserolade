@@ -50,14 +50,16 @@ function queueView(partial: Partial<VueFile> = {}): VueFile {
   };
 }
 
-const PUBLIC_ROOM: VueSalon = {
+const RANKED_ROOM: VueSalon = {
   code: 'ABC234',
   siege: 0,
+  moi: 'Marianne',
   hote: 0,
+  estHote: false,
   etat: 'en_jeu',
   options: { bots: 0, niveauBots: 'moyen', minuteur: true },
   joueurs: [{ siege: 0, pseudo: 'Marianne', bot: false, connecte: true }],
-  publique: true,
+  classee: true,
 };
 
 test('playerId : un identifiant anonyme créé une fois, gardé, et accepté par le serveur', () => {
@@ -112,7 +114,7 @@ test('la file publique : entrer, voir sa table, voter, puis la table part et le 
   assert.equal(store.queue.value?.groupe.find((seat) => seat.moi)?.vote, true);
 
   receive({ type: 'file', file: null });
-  receive({ type: 'salon', salon: PUBLIC_ROOM, jeton: 'jeton' });
+  receive({ type: 'salon', salon: RANKED_ROOM, jeton: 'jeton' });
   assert.equal(store.queueing.value, false);
   assert.notEqual(store.screen.value, 'queue');
   store.leave();
@@ -121,7 +123,7 @@ test('la file publique : entrer, voir sa table, voter, puis la table part et le 
 test('après une partie publique : le MMR s\'affiche, et on retourne dans la file', () => {
   const { transport, sent, receive } = fakeTransport();
   const store = createGameStore(transport);
-  receive({ type: 'salon', salon: { ...PUBLIC_ROOM, etat: 'fini' }, jeton: 'jeton' });
+  receive({ type: 'salon', salon: { ...RANKED_ROOM, etat: 'fini' }, jeton: 'jeton' });
   receive({ type: 'fin', classement: [{ seat: 0, pseudo: 'Marianne', heroId: 'hollande', place: 2 }] });
   receive({ type: 'mmr', avant: 1000, apres: 1021 });
   assert.equal(store.screen.value, 'end');

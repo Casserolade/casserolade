@@ -2,11 +2,12 @@ import { computed, ref, shallowRef } from 'vue';
 import type { ConnectionStatus, ConnectionWatch } from '#src/client/services/connectionStatus.ts';
 import { EndOfTurnPlayback } from '#src/client/stores/createEndOfTurnPlayback.ts';
 import { hostQuote } from '#src/client/tools/hostQuote.ts';
+import { roomHumans } from '#src/client/tools/roomHumans.ts';
 import { seatNames } from '#src/client/tools/seatNames.ts';
 import { spectatorView } from '#src/client/tools/spectatorView.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 import type { PlayerAction } from '#src/engine/types.ts';
-import { CHAT_LONGUEUR, PARTIE_DISPARUE, PARTIE_PLANTEE } from '#src/protocol/messages.ts';
+import { CHAT_LONGUEUR, EXCLU_DU_SALON, PARTIE_DISPARUE, PARTIE_PLANTEE } from '#src/protocol/messages.ts';
 import type { Classement, MessageChat, OptionsSalon, ServerMessage, VueFile, VueSalon } from '#src/protocol/messages.ts';
 import type { Transport } from '#src/protocol/transport.ts';
 import { heardVoices } from '#src/client/stores/heardVoices.ts';
@@ -24,7 +25,7 @@ const CHAT_KEEP = 100;
 
 export type GameScreen = 'loading' | 'queue' | 'waiting' | 'hero' | 'recruit' | 'combat' | 'eliminated' | 'end';
 
-/** A public game changes the MMR: before and after, sent with the ranking. */
+/** A game between humans changes the rating: before and after, sent with the ranking. */
 export interface MmrChange {
   avant: number;
   apres: number;
@@ -100,8 +101,11 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   const chat = shallowRef<MessageChat[]>([]);
   /** Each seat named: the hero, and online the pseudo. */
   const names = computed(() => seatNames(view.value?.table ?? [], room.value));
-  /** At least two people to talk: a room alone with bots, or a solo game, has no chat. */
-  const canChat = computed(() => (room.value?.joueurs.filter((player) => !player.bot).length ?? 0) > 1 || chat.value.length > 0);
+  /**
+   * At least two people to talk, at the table or waiting for the next game: a room alone with bots, or a solo game,
+   * has no chat.
+   */
+  const canChat = computed(() => roomHumans(room.value) > 1 || chat.value.length > 0);
   /** The eliminated screen is shown, for a while, before a ranking already known. */
   const eliminationHold = ref(false);
   let nextSeq = 1;
@@ -125,7 +129,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     if (combat.value) return 'combat';
     if (ranking.value) return eliminationHold.value && view.value && !view.value.alive ? 'eliminated' : 'end';
     if (queueing.value && !room.value) return 'queue';
-    if (room.value && room.value.etat !== 'en_jeu') return 'waiting';
+    // The room between two games; or its game is on without us: we came in since, and wait there for the next one.
+    if (room.value && (room.value.etat !== 'en_jeu' || room.value.siege < 0)) return 'waiting';
     if (!view.value) return 'loading';
     if (!view.value.alive) return 'eliminated';
     return view.value.phase === 'choix_heros' ? 'hero' : 'recruit';
@@ -259,8 +264,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
       roomGone.value = true;
       return;
     }
-    // A bug stopped this game only: back home, with the server's apology.
-    if (text === PARTIE_PLANTEE) {
+    // A bug stopped this game only, or the host put us out of the room: back home, with what the server said.
+    if (text === PARTIE_PLANTEE || text === EXCLU_DU_SALON) {
       refused.value = text;
       return;
     }
@@ -403,12 +408,13 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     noteElimination();
   }
 
-  function createRoom(pseudo: string, options: OptionsSalon): void {
-    transport.send({ type: 'creer_salon', pseudo, options });
+  /** `playerId`, here and to walk into a room: the browser's anonymous id, by which the server rates this player. */
+  function createRoom(pseudo: string, options: OptionsSalon, playerId?: string): void {
+    transport.send({ type: 'creer_salon', pseudo, options, ...(playerId ? { joueur: playerId } : {}) });
   }
 
-  function joinRoom(code: string, pseudo: string): void {
-    transport.send({ type: 'rejoindre', code, pseudo });
+  function joinRoom(code: string, pseudo: string, playerId?: string): void {
+    transport.send({ type: 'rejoindre', code, pseudo, ...(playerId ? { joueur: playerId } : {}) });
   }
 
   /** Into the public queue: from the home screen, or back from the end of a public game. */
@@ -435,8 +441,32 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     transport.send({ type: 'lancer' });
   }
 
+  /** A new pseudo for oneself, from inside the room: for whoever walked in without choosing one. */
+  function renameSelf(pseudo: string): void {
+    transport.send({ type: 'renommer', pseudo });
+  }
+
+  /** The host mutes a player's chat, or gives it back: at any time, in the room or in a game. */
+  function mutePlayer(pseudo: string, muted: boolean): void {
+    transport.send({ type: 'muet', pseudo, oui: muted });
+  }
+
+  /** The host puts a player out of the room, for good. */
+  function kickPlayer(pseudo: string): void {
+    transport.send({ type: 'exclure', pseudo });
+  }
+
   function updateRoomSettings(options: OptionsSalon): void {
     transport.send({ type: 'regler_salon', options });
+  }
+
+  /**
+   * After a game, back to the room: who is still there, who came in since, the chat, and for the host the settings
+   * and the next game. The ranking is left behind.
+   */
+  function backToRoom(): void {
+    if (!room.value || room.value.etat === 'en_jeu') return;
+    resetGame();
   }
 
   /** The player does not wait for the end of the eliminated screen: the ranking, already known, comes now. */
@@ -467,10 +497,10 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   transport.onStatus?.((status) => (connection.value = status));
 
   return {
-    room, roomGone, refused, connection, connectionLost, retry, createRoom, joinRoom, launchRoom, updateRoomSettings,
+    room, roomGone, refused, connection, connectionLost, retry, createRoom, joinRoom, launchRoom, updateRoomSettings, renameSelf, mutePlayer, kickPlayer,
     queue, queueing, queueLost, queueLostReason, queueSeenAt, mmrChange, joinQueue, voteQueue, chat, canChat, sendChat,
     names, following, spectating, follow,
-    view, combat, combatView, endOfTurn, ranking, showRanking, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, readyRefusal, deskLocks, refusals, screen, act, endRecruitment, closeCombat, leave,
+    view, combat, combatView, endOfTurn, ranking, showRanking, backToRoom, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, readyRefusal, deskLocks, refusals, screen, act, endRecruitment, closeCombat, leave,
   };
 }
 

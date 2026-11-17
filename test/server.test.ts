@@ -616,6 +616,37 @@ test('the home page\'s live count: rooms and games in the pages, players online,
   await server.stop();
 });
 
+test('the public rooms of the home page: listed under their name over HTTP, joined with the code the list gives, never the private ones', async () => {
+  const { server, port, url } = await startServer({}, { statsToken: 'jeton-secret' });
+  const base = `http://127.0.0.1:${port}`;
+  const rooms = async () => (await fetch(`${base}/salons`)).json() as Promise<{ code: string; nom: string; hote: string; joueurs: number; places: number; manche: number | null; nouveau?: true }[]>;
+  assert.deepEqual(await rooms(), []);
+  const friends = await connect(url);
+  friends.send({ type: 'creer_salon', pseudo: 'Entre nous', options: OPTIONS });
+  await friends.waitFor((m) => m.type === 'salon', 'salon privé');
+  const host = await connect(url);
+  host.send({ type: 'creer_salon', pseudo: 'Marianne', options: { ...OPTIONS, nomPublic: 'Soirée 49.3' } });
+  await host.waitFor((m) => m.type === 'salon', 'salon public');
+  const [listed] = await rooms();
+  assert.deepEqual({ ...listed, code: '' }, { code: '', nom: 'Soirée 49.3', hote: 'Marianne', joueurs: 1, places: 8, manche: null, nouveau: true });
+  assert.equal((await rooms()).length, 1, 'the private room is not listed');
+  const guest = await connect(url);
+  guest.send({ type: 'rejoindre', code: listed.code, pseudo: 'Passant' });
+  await guest.waitFor((m) => m.type === 'salon', 'entrée');
+  assert.equal((await rooms())[0].joueurs, 2);
+  host.send({ type: 'lancer' });
+  await guest.waitFor((m) => m.type === 'vue', 'vue');
+  assert.equal((await rooms())[0].manche, 0, 'a room that plays says so');
+  const answer = await fetch(`${base}/salons`);
+  assert.equal(answer.headers.get('cache-control'), 'no-store');
+  assert.equal(answer.headers.get('content-type'), 'application/json');
+  assert.equal((await fetch(`${base}/salons`, { method: 'POST' })).status, 405);
+  const json = await (await fetch(`${base}/stats/jeton-secret.json`)).json() as { events: { type: string; texte: string }[] };
+  assert.ok(json.events.some((event) => event.type === 'salon' && event.texte === 'Salon public créé : « Soirée 49.3 »'), 'the feed names the public room');
+  for (const client of [friends, host, guest]) client.socket.close();
+  await server.stop();
+});
+
 test('the games launched in the last hour: one per player of a room, one per game in a page, kept over a restart', async () => {
   const presenceFile = join(mkdtempSync(join(tmpdir(), 'presences-')), 'presences.json');
   const first = await startServer({}, { presenceFile });

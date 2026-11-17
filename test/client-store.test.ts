@@ -392,7 +392,7 @@ test('le chat : l\'historique remplace, une ligne reçue deux fois ne s\'affiche
     type: 'salon' as const,
     jeton: 'j',
     salon: {
-      code, siege: 0, hote: 0, etat: 'attente' as const, options: { bots: 0, niveauBots: 'moyen' as const, minuteur: true },
+      code, siege: 0, moi: 'P0', hote: 0, estHote: true, etat: 'attente' as const, options: { bots: 0, niveauBots: 'moyen' as const, minuteur: true },
       joueurs: Array.from({ length: 8 }, (_, siege) => ({ siege, pseudo: `P${siege}`, bot: siege >= humains, connecte: true })),
     },
   });

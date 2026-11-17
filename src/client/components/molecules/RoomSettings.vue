@@ -9,9 +9,14 @@ import { botsAtTableLabel } from '#src/client/tools/botsAtTableLabel.ts';
 import { RANDOM_CONTEXT } from '#src/data/heroes.ts';
 import type { OptionsSalon } from '#src/protocol/messages.ts';
 
+/**
+ * The settings of a room's games, which its host chooses and the others read: the table, its bots, the day's rule,
+ * the timer. Among strangers, in a public room, the timer is always on.
+ */
 const props = defineProps<{ options: OptionsSalon; isHost: boolean; humanCount: number }>();
 const emit = defineEmits<{ update: [options: OptionsSalon] }>();
 
+const isPublic = computed(() => props.options.nomPublic !== undefined);
 const level = computed<BotLevel>({
   get: () => props.options.niveauBots,
   set: (niveauBots) => emit('update', { ...props.options, niveauBots }),
@@ -33,17 +38,23 @@ const useTimer = computed<boolean>({
 </script>
 
 <template>
-  <div class="stack">
-    <TableSizeSelect v-model="tableSize" :disabled="!isHost" />
+  <div class="settings">
+    <div class="pair">
+      <TableSizeSelect v-model="tableSize" :disabled="!isHost" />
+      <BotLevelSelect v-if="bots > 0" v-model="level" :disabled="!isHost" />
+    </div>
     <p class="muted small">{{ botsLabel }}</p>
-    <BotLevelSelect v-if="bots > 0" v-model="level" :disabled="!isHost" />
     <ContextSelect v-model="contexte" :disabled="!isHost" />
-    <label class="check"><input v-model="useTimer" type="checkbox" :disabled="!isHost" /> Avec minuteur</label>
-    <p v-if="humanCount === 1" class="muted small">Seul à table, vous jouerez sans minuteur.</p>
+    <label class="check"><input v-model="useTimer" type="checkbox" :disabled="!isHost || isPublic" /> Avec minuteur</label>
+    <p v-if="isPublic" class="muted small">Entre inconnus, toujours avec minuteur.</p>
+    <p v-else-if="humanCount === 1" class="muted small">Seul à table, vous jouerez sans minuteur.</p>
   </div>
 </template>
 
 <style scoped>
+.settings { display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem; width: 100%; }
+/* The table's size and its bots' level, side by side. */
+.pair { display: flex; flex-wrap: wrap; gap: 0.45rem 1rem; }
 .check { flex-direction: row; align-items: center; gap: 0.5rem; cursor: pointer; }
-.check input { width: 1.3rem; height: 1.3rem; accent-color: var(--color-accent); }
+.check input { width: 1.15rem; height: 1.15rem; accent-color: var(--color-accent); }
 </style>

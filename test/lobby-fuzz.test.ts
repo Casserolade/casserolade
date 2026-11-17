@@ -66,7 +66,7 @@ function fuzz(seed: number, pas: number): void {
   try {
     for (let n = 0; n < pas; n++) {
       const c = rng.pick(connexions);
-      const options = { bots: 0, niveauBots: rng.pick(NIVEAUX), minuteur: rng.next() < 0.7 };
+      const options = { bots: 0, niveauBots: rng.pick(NIVEAUX), minuteur: rng.next() < 0.7, ...(rng.next() < 0.4 ? { nomPublic: `Salon ${n}` } : {}) };
       const messages: (() => ClientMessage)[] = [
         () => ({ type: 'creer_salon', pseudo: `P${n}`, options }),
         () => ({ type: 'rejoindre', code: codes.length && rng.next() < 0.8 ? rng.pick(codes) : 'ZZZZZZ', pseudo: `J${n}` }),
@@ -76,6 +76,8 @@ function fuzz(seed: number, pas: number): void {
         () => ({ type: 'quitter' }),
         () => ({ type: 'file_rejoindre', pseudo: `F${n}`, joueur: rng.pick(joueurs) }),
         () => ({ type: 'file_vote', oui: rng.next() < 0.6 }),
+        () => ({ type: 'muet', pseudo: `J${rng.int(pas)}`, oui: rng.next() < 0.7 }),
+        () => ({ type: 'exclure', pseudo: rng.next() < 0.5 ? `J${Math.max(0, n - 1 - rng.int(12))}` : `P${rng.int(pas)}` }),
         () => ({ type: 'pret' }),
         () => ({ type: 'vu' }),
         () => ({ type: 'action', seq: n, action: { t: 'hero', i: rng.int(4) } }),
@@ -92,6 +94,7 @@ function fuzz(seed: number, pas: number): void {
       }
       // Une connexion n'est jamais à la fois dans la file et à une table qu'elle voit encore.
       assert.ok(lobby.nombreEnFile >= 0 && lobby.nombreEnFile <= connexions.length);
+      for (const salon of lobby.salonsPublics) assert.ok(salon.joueurs >= 1 && salon.joueurs <= salon.places, `salon public ${salon.nom} : ${salon.joueurs} joueurs`);
       for (const j of joueurs) {
         const v = mmr.lire(j);
         if (v !== undefined) assert.ok(Number.isFinite(v) && v >= 0, `MMR invalide pour ${j} : ${v}`);

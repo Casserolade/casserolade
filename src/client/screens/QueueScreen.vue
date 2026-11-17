@@ -35,7 +35,7 @@ const voteLine = computed(() => {
 
 <template>
   <MenuBackdrop>
-    <h1 class="title">Partie publique</h1>
+    <h1 class="title">Partie classée</h1>
     <template v-if="lost">
       <p class="lost" role="status">{{ reason ?? 'La file vous a laissé partir : vous l\'avez sans doute rejointe depuis un autre onglet.' }}</p>
       <div class="actions">
