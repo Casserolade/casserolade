@@ -177,7 +177,7 @@ export function createGame(opts: GameOptions): Game {
       quest: null,
       comebackUsed: false,
       events: [],
-      stats: { casseroles: 0, scandals: 0, forgotten: 0, triples: 0, spells: 0 },
+      stats: { casseroles: 0, scandals: 0, forgotten: 0, triples: 0, spells: 0, rolls: 0, sold: 0, frozen: 0 },
     });
   }
 
@@ -517,6 +517,7 @@ function sell(game: Game, p: Player, uid: number): ActionResult {
   if (!m) return fail(p.hand.some((x) => x.uid === uid) ? 'Posez-le d\'abord : on ne renvoie que depuis le plateau.' : 'Politique introuvable.');
   if (m.bracelet) return fail('Sous bracelet : il ne peut pas être renvoyé avant la prochaine manche.');
   p.board = p.board.filter((x) => x !== m);
+  p.stats.sold++;
   releaseMinion(game, m);
   p.budget += game.params.sellValue + (p.hero.mods.sellBonus ?? 0) + sellBonus(game, p, m);
   for (const eff of m.effects) if (eff.when === 'vente') applyEffect(game, p, m, eff);
@@ -588,12 +589,14 @@ export function applyAction(game: Game, seat: number, a: PlayerAction): ActionRe
       if (p.budget < cost) return fail('Budget insuffisant.');
       if (p.freeRolls > 0) p.freeRolls--;
       else p.rollsThisRound++;
+      p.stats.rolls++;
       spend(game, p, cost);
       refreshShop(game, p);
       return OK;
     }
     case 'freeze':
       p.frozen = !p.frozen;
+      if (p.frozen) p.stats.frozen++;
       return OK;
     case 'upgrade': {
       if (p.tier >= game.params.tierMax) return fail('Échelon maximum atteint.');
@@ -674,8 +677,8 @@ export interface PlayerView {
   /** Ce que donne un Tract. */
   tract: { atk: number; hp: number };
   counters: Record<Counter, number>;
-  /** Ses propres chiffres de la partie : casseroles, scandales, oublis, triples, sorts. */
-  stats: Player['stats'];
+  /** Ses propres chiffres de la partie : casseroles, scandales, oublis, triples, sorts, gestes au pupitre, et le budget dépensé. */
+  stats: Player['stats'] & { spent: number };
   camps: Camp[];
   contextId: string;
   params: Params;
@@ -783,7 +786,7 @@ export function viewFor(game: Game, seat: number): PlayerView {
     discoverKind: p.discover?.kind ?? null,
     tract: { ...p.tract },
     counters: { ...p.counters },
-    stats: { ...p.stats },
+    stats: { ...p.stats, spent: p.spent },
     camps: [...game.camps],
     contextId: game.ctx.id,
     params: structuredClone(game.params),

@@ -41,12 +41,17 @@ const countedChapter = computed(() => (campaign.value && chapter.value ? idCompt
 /** The election night comes once the game screens are done: after the combat, and after the elimination. */
 const resultShown = computed(() => Boolean(bilan.value && (!store.value || store.value.screen.value === 'end')));
 
+/** Each view feeds the achievements: the polls lost on the way and the biggest politician are read from them. */
+watch(() => store.value?.view.value, (view) => achievements.observe(view ?? null));
+
 /** A chapter played to the end counts as a game; won, it counts as the chapter too. */
 watch(bilan, (result) => {
   if (!result || !store.value || !chapter.value) return;
   const ranking = store.value.ranking.value;
+  const place = ranking?.find((row) => row.seat === (store.value?.view.value?.seat ?? 0))?.place;
   if (ranking) {
-    achievements.recordGame(ranking, store.value.view.value, result.reussi ? { chapitre: chapter.value.id } : {});
+    const won = result.reussi ? { chapitre: chapter.value.id, carriere: campaign.value?.carriere ? campaign.value.heroId : undefined } : {};
+    if (place !== undefined) achievements.recordGame(store.value.view.value, { place, seats: ranking.length, ...won });
     counter.gameEnded({ mode: 'carriere', chapitre: countedChapter.value }, ranking, store.value.view.value, result.reussi);
   }
   clearLocalGame();

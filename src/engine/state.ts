@@ -82,8 +82,12 @@ export interface Player {
   comebackUsed: boolean;
   /** Ce qui lui est arrivé depuis le début de la manche, dans une carrière : la campagne le raconte. */
   events: ScriptEventNote[];
-  /** Ce que le joueur a fait dans la partie : les succès s'en nourrissent. */
-  stats: { casseroles: number; scandals: number; forgotten: number; triples: number; spells: number };
+  /**
+   * Ce que le joueur a fait dans la partie : les succès s'en nourrissent. Casseroles posées, scandales, oublis du
+   * peuple, triples, sorts lancés ; et ses gestes au pupitre : actualisations de la boutique (gratuites comprises),
+   * politiques renvoyés, boutiques gelées.
+   */
+  stats: { casseroles: number; scandals: number; forgotten: number; triples: number; spells: number; rolls: number; sold: number; frozen: number };
 }
 
 export interface CombatRecord {

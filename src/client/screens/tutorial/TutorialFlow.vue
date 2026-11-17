@@ -18,13 +18,11 @@ achievements.startGame();
 markLocalGame({ kind: 'tutoriel' });
 counter.gameStarted({ mode: 'tutoriel' });
 
-/** Every step seen: the tutorial is done, even before the game ends. */
-watch(() => run.value.learned.value, (learned) => {
-  if (learned) achievements.record({ tutoriel: true });
-});
+// Opened once, even left half way: the home page stops pushing it, its big shining button gives way to a plain one.
+achievements.record({ tutoriel: true });
+/** The tutorial's own game is a training: it counts neither as a game nor for an achievement. */
 watch(() => store.value.ranking.value, (ranking) => {
   if (!ranking) return;
-  achievements.recordGame(ranking, store.value.view.value);
   counter.gameEnded({ mode: 'tutoriel' }, ranking, store.value.view.value, run.value.learned.value);
   clearLocalGame();
 });
