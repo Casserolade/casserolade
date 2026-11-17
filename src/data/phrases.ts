@@ -45,6 +45,31 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "La résignation n'est pas une option."
     ]
   },
+  "polony": {
+    "heros": [
+      "Oui, je suis candidate à l'élection présidentielle.",
+      "La situation m'oblige.",
+      "Nous sommes la France."
+    ],
+    "pose": [
+      "Oui, je suis candidate à l'élection présidentielle.",
+      "La situation m'oblige.",
+      "Moi, je ne peux pas continuer à regarder mon pays s'effondrer."
+    ],
+    "celebration": [
+      "La situation m'oblige.",
+      "Nous sommes la France."
+    ],
+    "mort": [
+      "Moi, je ne peux pas continuer à regarder mon pays s'effondrer."
+    ],
+    "defaite": [
+      "Moi, je ne peux pas continuer à regarder mon pays s'effondrer."
+    ],
+    "victoire": [
+      "Nous sommes la France."
+    ]
+  },
   "thevenoud": {
     "casserole": [
       "J'ai soigné ma phobie administrative.",
@@ -2395,14 +2420,15 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
   },
   "branco": {
     "celebration": [
-      "Votre émission est pornographique !",
-      "Comment fabriquer une guillotine.",
+      "Dans une société où tout est pornographique, à commencer par des émissions comme celle-ci, la question ne se pose pas tant que cela.",
+      "Normal, on est au sein de la République de l'impunité.",
       "Ils ne sont pas corrompus, ils sont la corruption.",
       "2027, c'est demain !"
     ],
     "pose": [
-      "Votre émission est pornographique !",
+      "Dans une société où tout est pornographique, à commencer par des émissions comme celle-ci, la question ne se pose pas tant que cela.",
       "Ils ne sont pas corrompus, ils sont la corruption.",
+      "Normal, on est au sein de la République de l'impunité.",
       "Comment fabriquer une guillotine"
     ],
     "heros": [

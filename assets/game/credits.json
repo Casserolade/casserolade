@@ -817,6 +817,14 @@
    "partage_identique": true
   },
   {
+   "id": "polony",
+   "nom": "Natacha Polony",
+   "auteur": "Georges Biard",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Natacha_Polony_Cannes_2015.jpg",
+   "partage_identique": true
+  },
+  {
    "id": "portes",
    "nom": "Thomas Portes",
    "auteur": "Parti communiste français",
@@ -2809,6 +2817,30 @@
    "partage_identique": false
   },
   {
+   "id": "polony.aie",
+   "nom": "Natacha Polony",
+   "auteur": "Thinkerview",
+   "licence": "CC BY 3.0",
+   "source": "https://www.youtube.com/watch?v=RYAL1TSFq2U&t=1782s",
+   "partage_identique": false
+  },
+  {
+   "id": "polony.choc",
+   "nom": "Natacha Polony",
+   "auteur": "Thinkerview",
+   "licence": "CC BY 3.0",
+   "source": "https://www.youtube.com/watch?v=RYAL1TSFq2U&t=538s",
+   "partage_identique": false
+  },
+  {
+   "id": "polony.rire",
+   "nom": "Natacha Polony",
+   "auteur": "Thinkerview",
+   "licence": "CC BY 3.0",
+   "source": "https://www.youtube.com/watch?v=RYAL1TSFq2U&t=1808s",
+   "partage_identique": false
+  },
+  {
    "id": "portes.rire",
    "nom": "Thomas Portes",
    "auteur": "JROhara",
@@ -3529,6 +3561,30 @@
    "source": "https://www.youtube.com/watch?v=Eba4d6tkH5E",
    "date": "2012-07-17",
    "note": "Extrait de 40.35 à 47.17 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "branco_branco_impunite",
+   "nom": "Juan Branco, « Normal, on est au sein de la République de l'impunité. »",
+   "auteur": "Juan Branco, « 2027, c'est demain ! »",
+   "source": "https://www.youtube.com/watch?v=nbXABuYJinM",
+   "date": "2026-05-21",
+   "note": "Extrait de 28.01 à 30.48 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "branco_branco_la_corruption",
+   "nom": "Juan Branco, « Ils ne sont pas corrompus, ils sont la corruption. »",
+   "auteur": "Juan Branco (d'après la collecte précédente), « non relevé (la citation figure dans le titre, d'après la collecte précédente) »",
+   "source": "https://www.youtube.com/watch?v=SyhNFUisoD4",
+   "date": "2019-02-11",
+   "note": "Extrait de 0.01 à 2.75 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "branco_branco_pornographique",
+   "nom": "Juan Branco, « Dans une société où tout est pornographique, à commencer par des émissions comme celle-ci, la question ne se pose pas tant que cela. »",
+   "auteur": "TPMP (d'après la collecte précédente), « non relevé (la citation figure dans le titre, d'après la collecte précédente) »",
+   "source": "https://www.youtube.com/watch?v=TyfI3TAHqx8",
+   "date": "2020",
+   "note": "Extrait de 36.82 à 42.69 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "cahuzac_jc_bourdin_suisse",
@@ -4881,6 +4937,38 @@
    "source": "https://www.youtube.com/watch?v=Y9BzUI8AteQ",
    "date": "2016-11-16",
    "note": "Extrait de 161.3 à 164.24 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "polony_candidate",
+   "nom": "Natacha Polony, « Oui, je suis candidate à l'élection présidentielle. »",
+   "auteur": "France Inter, « \"Je suis candidate à l'élection présidentielle\", annonce l'éditorialiste Natacha Polony »",
+   "source": "https://www.youtube.com/watch?v=0w984HvdcjE",
+   "date": "2026-10-14",
+   "note": "Extrait de 51.31 à 54.61 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "polony_nous_sommes_la_france",
+   "nom": "Natacha Polony, « Nous sommes la France. »",
+   "auteur": "Natacha Polony, « Natacha Polony - Ma déclaration de candidature à l'élection présidentielle de 2027 »",
+   "source": "https://www.youtube.com/watch?v=tQ45aZtNEHk",
+   "date": "2026-10-14",
+   "note": "Extrait de 80.71 à 81.67 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "polony_pays_s_effondrer",
+   "nom": "Natacha Polony, « Moi, je ne peux pas continuer à regarder mon pays s'effondrer. »",
+   "auteur": "France Inter, « \"Je suis candidate à l'élection présidentielle\", annonce l'éditorialiste Natacha Polony »",
+   "source": "https://www.youtube.com/watch?v=0w984HvdcjE",
+   "date": "2026-10-14",
+   "note": "Extrait de 171.63 à 175.2 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "polony_situation_oblige",
+   "nom": "Natacha Polony, « La situation m'oblige. »",
+   "auteur": "France Inter, « \"Je suis candidate à l'élection présidentielle\", annonce l'éditorialiste Natacha Polony »",
+   "source": "https://www.youtube.com/watch?v=0w984HvdcjE",
+   "date": "2026-10-14",
+   "note": "Extrait de 49.66 à 51.05 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "portes_portes_israeliens_pas_bienvenus",

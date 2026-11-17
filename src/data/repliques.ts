@@ -181,6 +181,18 @@ export const REPLIQUES: Record<string, Record<EvenementReplique, string>> = {
     defaite: 'Tomber, se relever. Toujours.',
     elimine: 'Bon. Il reste Los Angeles 2028.',
   },
+  branco: {
+    debut: '2027, c\'est demain !',
+    victoire: 'Ce sera dans le tome 2 de Crépuscule.',
+    defaite: 'Ils ne sont pas corrompus, ils sont la corruption.',
+    elimine: 'Lecture intégrale ce soir, sur ma chaîne.',
+  },
+  polony: {
+    debut: 'Nous sommes la France.',
+    victoire: 'La situation m\'obligeait.',
+    defaite: 'Je ne peux pas continuer à regarder ce plateau s\'effondrer.',
+    elimine: '2,24 %. Comme en 2002.',
+  },
   giscard: {
     debut: 'Je vous avais dit au revoir. Pas adieu.',
     victoire: 'Vous n\'avez pas le monopole du caveau.',

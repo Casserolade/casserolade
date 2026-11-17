@@ -16243,6 +16243,208 @@
     }
    }
   },
+  "polony": {
+   "atlas": "personnages/polony.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 309,
+     "h": 381
+    },
+    "machoire": {
+     "x": 313,
+     "y": 0,
+     "w": 179,
+     "h": 99,
+     "pose": [
+      77.0,
+      282.0
+     ],
+     "pivot": [
+      55.8,
+      10.5
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     87.7,
+     199.0,
+     33.7
+    ],
+    "oeil_d": [
+     171.2,
+     199.0,
+     42.1
+    ],
+    "bouche": [
+     132.8,
+     292.5
+    ],
+    "menton": [
+     131.6,
+     367.7
+    ]
+   },
+   "credits": {
+    "auteur": "Georges Biard",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Natacha_Polony_Cannes_2015.jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/polony.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 297,
+       "h": 377
+      },
+      "machoire": {
+       "x": 301,
+       "y": 0,
+       "w": 170,
+       "h": 96,
+       "pose": [
+        68.0,
+        280.0
+       ],
+       "pivot": [
+        90.8,
+        12.1
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       108.2,
+       197.6,
+       39.8
+      ],
+      "oeil_d": [
+       201.1,
+       197.6,
+       37.5
+      ],
+      "bouche": [
+       158.8,
+       292.1
+      ],
+      "menton": [
+       163.2,
+       366.9
+      ]
+     },
+     "credits": {
+      "auteur": "Thinkerview",
+      "licence": "CC BY 3.0",
+      "source": "https://www.youtube.com/watch?v=RYAL1TSFq2U&t=1782s"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/polony.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 282,
+       "h": 375
+      },
+      "machoire": {
+       "x": 286,
+       "y": 0,
+       "w": 158,
+       "h": 82,
+       "pose": [
+        65.0,
+        293.0
+       ],
+       "pivot": [
+        104.5,
+        10.6
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       121.5,
+       195.1,
+       41.4
+      ],
+      "oeil_d": [
+       209.9,
+       195.1,
+       33.2
+      ],
+      "bouche": [
+       169.5,
+       303.6
+      ],
+      "menton": [
+       168.4,
+       366.9
+      ]
+     },
+     "credits": {
+      "auteur": "Thinkerview",
+      "licence": "CC BY 3.0",
+      "source": "https://www.youtube.com/watch?v=RYAL1TSFq2U&t=538s"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/polony.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 289,
+       "h": 382
+      },
+      "machoire": {
+       "x": 293,
+       "y": 0,
+       "w": 179,
+       "h": 105,
+       "pose": [
+        60.0,
+        275.0
+       ],
+       "pivot": [
+        100.1,
+        12.6
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       115.2,
+       194.4,
+       37.3
+      ],
+      "oeil_d": [
+       206.3,
+       194.4,
+       33.2
+      ],
+      "bouche": [
+       160.1,
+       287.6
+      ],
+      "menton": [
+       168.5,
+       367.9
+      ]
+     },
+     "credits": {
+      "auteur": "Thinkerview",
+      "licence": "CC BY 3.0",
+      "source": "https://www.youtube.com/watch?v=RYAL1TSFq2U&t=1808s"
+     }
+    }
+   }
+  },
   "portes": {
    "atlas": "personnages/portes.webp",
    "pieces": {
@@ -21241,7 +21443,14 @@
    "zemmour_zemmour_corinne": "sons/citations/zemmour_zemmour_corinne.mp3",
    "zemmour_zemmour_milipol": "sons/citations/zemmour_zemmour_milipol.mp3",
    "zemmour_zemmour_petain_onpc": "sons/citations/zemmour_zemmour_petain_onpc.mp3",
-   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3"
+   "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3",
+   "branco_branco_la_corruption": "sons/citations/branco_branco_la_corruption.mp3",
+   "branco_branco_impunite": "sons/citations/branco_branco_impunite.mp3",
+   "branco_branco_pornographique": "sons/citations/branco_branco_pornographique.mp3",
+   "polony_candidate": "sons/citations/polony_candidate.mp3",
+   "polony_nous_sommes_la_france": "sons/citations/polony_nous_sommes_la_france.mp3",
+   "polony_pays_s_effondrer": "sons/citations/polony_pays_s_effondrer.mp3",
+   "polony_situation_oblige": "sons/citations/polony_situation_oblige.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",

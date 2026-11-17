@@ -27,6 +27,8 @@ function play(game: Game, cardId: string): Minion {
   const p = game.players[0];
   const m = addMinionToHand(game, p, cardId) as Minion;
   assert.ok(applyAction(game, 0, { t: 'play', uid: m.uid }).ok, `${cardId} ne se pose pas`);
+  // Une Annonce qui découvre (Branco) attend un choix avant tout autre geste : on prend la première carte.
+  for (let guard = 0; p.discover && guard < 10; guard++) applyAction(game, 0, { t: 'discover', i: 0 });
   const placed = p.board.find((x) => x.uid === m.uid) as Minion;
   placed.atk += 5;
   placed.hp += 5;

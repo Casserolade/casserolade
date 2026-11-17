@@ -1636,5 +1636,18 @@
   "commons": "https://commons.wikimedia.org/wiki/File:Anne-Sophie_Lapix_Cannes_2018.jpg",
   "statut": "ok",
   "images_wikidata": 1
+ },
+ {
+  "id": "polony",
+  "name": "Natacha Polony",
+  "group": "civile",
+  "qid": "Q941949",
+  "description": "journaliste et essayiste française, candidate à la présidentielle de 2027",
+  "file": "assets/photos/raw/polony.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Georges Biard",
+  "commons": "https://commons.wikimedia.org/wiki/File:Natacha_Polony_Cannes_2015.jpg",
+  "statut": "ok",
+  "images_wikidata": 1
  }
 ]

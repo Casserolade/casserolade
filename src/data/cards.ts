@@ -325,6 +325,9 @@ export const CARDS: Card[] = [
   // Candidat le 9 novembre 2026 : « ni de droite, ni de gauche », et « Je sais ce que c'est de se battre, de tomber,
   // de se relever toujours » (vidéo de sa candidature). Il compte pour chaque parti, et se relève une fois.
   card('riner', 'Teddy Riner', 'civile', 4, 6, 9, { kw: ['ni_droite_ni_gauche', 'retour'] }),
+  // Candidate le 14 octobre 2026 (France Inter) : « Nous sommes la France », un rassemblement des « orphelins de la
+  // politique » venus de tous les partis. Elle grandit de chaque camp réuni sur le plateau.
+  card('polony', 'Natacha Polony', 'civile', 4, 4, 6, { fx: [fx('fin_tour', 'soi', { do: 'buff_par_camp', atk: 1, hp: 1 })] }),
   card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { kw: ['vedette'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).

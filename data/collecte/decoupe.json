@@ -509,6 +509,11 @@
   "hauteur_visage_source": 533,
   "visages": 1
  },
+ "polony": {
+  "basse_definition": false,
+  "hauteur_visage_source": 257,
+  "visages": 1
+ },
  "portes": {
   "basse_definition": false,
   "hauteur_visage_source": 251,

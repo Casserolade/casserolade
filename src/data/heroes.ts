@@ -41,6 +41,12 @@ export const HEROES: Hero[] = [
   // Candidat le 9 novembre 2026. « C'est un candidat… de poids » (Édouard Philippe, BFMTV, le jour même) ; « tomber,
   // se relever toujours » (sa vidéo de candidature).
   { id: 'riner', name: 'Teddy Riner', power: 'Candidat de poids', desc: 'Votre premier politique gagne +2 PV à chaque combat, et le premier politique à mourir se réincarne (comme sa carte, avec 1 PV).', armor: 6, mods: { frontHp: 2, firstDeathRetour: true } },
+  // Candidat le 19 décembre 2025 (Radio Sud), avec Les Ruches. Son pamphlet « Crépuscule » (2019) étalait les réseaux
+  // du pouvoir : chez lui, les casseroles coûtent moins cher, et la colère paie après une défaite.
+  { id: 'branco', name: 'Juan Branco', power: 'Crépuscule', desc: 'Les casseroles coûtent 1 de moins, et +1 budget à la manche suivante après une défaite.', armor: 3, mods: { casseroleDiscount: 1, lossBudget: 1 } },
+  // Candidate le 14 octobre 2026 (France Inter), slogan « Nous sommes la France » : un rassemblement qui se construit
+  // manche après manche.
+  { id: 'polony', name: 'Natacha Polony', power: 'Nous sommes la France', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et la première actualisation de chaque manche est gratuite.', armor: 0, mods: { frontGrowth: 1, freeRollsPerRound: 1 } },
 ];
 
 /** Les boss du mode histoire y figurent pour leur nom, mais ne sont jamais tirés ni proposés : ils sont hors de HEROES. */

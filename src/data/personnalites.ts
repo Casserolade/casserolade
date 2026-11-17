@@ -58,6 +58,10 @@ const LIGNES: Personnalite[] = [
   { heroId: 'lalanne', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.5, gouts: { effets: { transmettre: 2 }, camps: { civile: 2 } } },
   // Candidat le 9 novembre 2026, « ni de droite, ni de gauche » : aucun camp, ceux qui se relèvent.
   { heroId: 'riner', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.2, gouts: { motsCles: { retour: 3, ni_droite_ni_gauche: 2 }, camps: { civile: 2 } } },
+  // Branco : les casseroles moins chères, il en prend volontiers.
+  { heroId: 'branco', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.7, gouts: { camps: { civile: 2 } } },
+  // Polony : le rassemblement, des politiques de tous les camps.
+  { heroId: 'polony', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.2, gouts: { effets: { buff_par_camp: 2 }, camps: { civile: 1 } } },
 ];
 
 export const PERSONNALITES: Record<string, Personnalite> = Object.fromEntries(LIGNES.map((p) => [p.heroId, p]));

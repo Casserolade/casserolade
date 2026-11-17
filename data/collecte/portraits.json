@@ -2441,5 +2441,14 @@
   "portrait": "assets/photos/base/joly.jpg",
   "name": "Eva Joly",
   "note": "Février 2011, pendant la campagne de la primaire écologiste. Choisi à la main : de face, les lunettes rouges."
+ },
+ "polony": {
+  "fichier": "assets/photos/raw/polony.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Natacha_Polony_Cannes_2015.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Georges Biard",
+  "portrait": "assets/photos/base/polony.jpg",
+  "name": "Natacha Polony",
+  "note": "Festival de Cannes, mai 2015. Choisie à la main : la plus nette des six photos de Commons, cheveux courts comme aujourd'hui."
  }
 }
