@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.4.2" src="https://img.shields.io/badge/version-0.4.2-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.4.3" src="https://img.shields.io/badge/version-0.4.3-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -65,14 +65,14 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 
 | | |
 |---|---|
-| **29 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
-| **110 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
-| **91 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
+| **31 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
+| **111 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
+| **94 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
 | **26 sorts** | Tract, Note de frais, Fuite dans la presse, Remaniement, Congrès… |
 | **675 répliques** | Toutes sourcées, dont 259 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |
-| **Des modes** | Seul contre l'ordinateur, la carrière, et des salons entre amis par lien, de 2 à 8 joueurs, les bots aux places vides. La partie classée ouvrira quand il y aura assez de monde en ligne. |
+| **Des modes** | Seul contre l'ordinateur, la carrière, et des salons de 2 à 8 joueurs, les bots aux places vides : publics, affichés sur l'accueil pour qui veut entrer, ou entre amis, par lien. Un chat dans chaque salon, du premier arrivé à la fin de la partie. Entre joueurs, la partie compte pour un rang, de la Salle des fêtes à l'Élysée : sans compte, et le profil se sauvegarde dans un fichier. |
 | **Les carrières** | Mélenchon et Marine Le Pen rejouent leur histoire en six chapitres, jusqu'au débat de TF1 l'un contre l'autre, avec des cinématiques en marionnettes. Sylvain Durif, le Christ cosmique, vit la sienne en épisodes d'anime, de la fin du monde à Bugarach jusqu'au duel contre Francis Lalanne. Chaque chapitre a sa règle de tour. Les autres candidats remontent sept élections, du conseil municipal au second tour. |
 | **Sur téléphone** | Une version tenue en hauteur, faite pour le pouce (casserolade.fr/m/) : les téléphones y arrivent tout seuls. |
 | **[Le bestiaire](https://casserolade.fr/bestiaire)** | Tout le jeu, avec des filtres : mots-clés, héros, politiques, casseroles, sorts, jetons, contextes. Chaque fiche donne ses sources. |
@@ -98,7 +98,7 @@ Il faut [Node.js](https://nodejs.org) 22.18 ou plus, qui exécute directement le
 ```sh
 npm install
 npm run dev        # le jeu dans le navigateur (sa version téléphone sur /m/) ; le solo et la carrière tournent dans la page
-npm run server     # le serveur des parties en ligne (WebSocket, port 8080), pour les salons et les parties publiques
+npm run server     # le serveur des parties en ligne (WebSocket, port 8080), pour les salons, publics ou entre amis
 npm test           # le moteur, les données, le protocole, le salon, le client
 npm run typecheck  # TypeScript et gabarits Vue
 node tools/histoire/valider_carrieres.ts lepen   # une carrière : tout ce qu'elle nomme existe, ses cinématiques tiennent

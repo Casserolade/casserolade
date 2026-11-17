@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.4.3 — 18 novembre 2026
+
+Le détail, et les cartes : https://casserolade.fr/mises-a-jour
+
+**Salons publics**
+- Un salon peut s'ouvrir à tous : il s'affiche sur l'accueil, dans la liste des salons publics, sous le nom que lui donne son hôte, avec son nombre de joueurs. On y entre d'un clic.
+- Le chat est là dès l'entrée, et l'hôte lance quand il veut : les bots prennent les places vides. Entre inconnus, le minuteur est toujours là.
+- Un salon reste privé si on le veut : on y entre par son lien ou par son code. Tant que la partie n'est pas lancée, l'hôte peut l'ouvrir au public, ou le refermer.
+- On entre dans un salon même pendant sa partie : on discute avec ceux qui jouent, et on joue la suivante. Si plus personne ne joue, le salon revient à ceux qui attendent.
+- Dans un salon qui attend, un son et le titre de l'onglet préviennent quand quelqu'un entre.
+- L'hôte tient son salon : il peut couper le chat d'un joueur, ou l'exclure, à tout moment, dans le salon comme en partie. Un joueur exclu n'y revient pas ; en partie, un bot tient son siège.
+
+**Classement**
+- Les parties de salon comptent pour un classement, dès que deux joueurs s'y affrontent. Chacun gagne ou perd des points selon sa place face aux autres joueurs : battre un joueur mieux classé rapporte plus, perdre contre un joueur moins bien classé coûte plus. Les bots ne comptent jamais.
+- Chaque joueur affronté pèse autant : entre joueurs de même cote, un duel vaut 5 points, une première place devant sept joueurs en vaut 32.
+- La cote donne un rang, de la Salle des fêtes à l'Élysée, en passant par le Conseil municipal (le départ, à 1000), la Mairie, l'Assemblée, le Sénat, le Gouvernement et Matignon. Le rang s'affiche à côté du pseudo sur l'accueil, sur chaque siège du salon et à la fin de la partie.
+- Toujours sans compte : le rang est gardé par le serveur, sous une clé que seul votre navigateur connaît. Sur l'écran des succès, « Sauvegarder mon profil » télécharge un fichier qui porte cette clé, vos succès et votre carrière vers un autre navigateur, et « Restaurer une sauvegarde » le remet.
+
+**Chat**
+- Le chat suit la table, du salon à la fin de la partie, sur ordinateur comme sur téléphone, et dit qui entre et qui part.
+- Sur téléphone, une nouvelle ligne s'affiche au-dessus du bouton du chat, sans couvrir la table.
+
+**Accueil et salon**
+- L'accueil est refait, et tient dans l'écran sans défiler, même sur un petit portable : le pseudo et le tutoriel en haut à gauche, les succès et le bestiaire en haut à droite, les salons publics et les salons entre amis dans un seul panneau, la carrière puis la partie rapide à côté, le Discord et la bande-annonce dessous.
+- Un seul bouton est plein sur la page : celui qu'elle désigne, le premier salon à rejoindre, ou « Ouvrir au public » quand il n'y en a aucun.
+- L'accueil invite à choisir un pseudo. Sans pseudo, le premier geste en ligne le demande une fois, et on peut continuer sans. Entré dans un salon sans pseudo, on le choisit sur place, et le chat l'annonce ; il est gardé pour les visites suivantes.
+- Le tutoriel n'est mis en avant que tant qu'il n'a jamais été ouvert.
+- Le lien de soutien sur Ko-fi rejoint les liens du pied de page, et les barres de défilement prennent les tons du jeu.
+- Dans le salon, « Lancer la partie » est au pied de la table, toujours en vue ; sur téléphone, la table et le chat passent avant les réglages.
+- Après une partie, « Retour au salon » ramène à la table : qui est là, le chat, les réglages.
+
+**Succès**
+- Le tableau des succès est refait : 67 succès, en huit rayons, durs et bêtes. Monter un politique à 2000/2000, gagner sans perdre un seul sondage (un succès par niveau de bots), gagner sans actualiser la boutique, finir avec pile 289 d'attaque, finir deuxième trois fois de suite…
+- Les parties en ligne comptent pour les succès, et ont leur rayon : la première victoire contre un autre joueur, le duel, la table de huit sans un bot.
+- Les anciens succès faciles sont retirés, celui du tutoriel aussi ; ceux de la carrière restent, et les carrières de Mélenchon, Le Pen et Durif ont chacune le leur.
+
+**Partager son plateau**
+- À la première place, l'écran de fin montre votre plateau en carte de victoire : votre héros, la manche, vos sondages, chaque politique avec ses stats.
+- Un bouton copie l'image pour la coller sur Discord, un autre ouvre un post sur X, un troisième la télécharge ; sur téléphone, le partage de l'appareil la prend.
+
+**Héros et cartes**
+- Juan Branco devient un héros, « Crépuscule » : les casseroles coûtent 1 de moins, et une défaite rapporte 1 de budget à la manche suivante. Sa première casserole : La cavale de Dakar.
+- Natacha Polony devient une héroïne, « Nous sommes la France » : à chaque fin de recrutement, votre premier politique gagne +1/+1, et la première actualisation de chaque manche est gratuite.
+- Natacha Polony entre aussi en boutique, à l'échelon 4 de la Société civile : 4/6, et +1/+1 par camp différent sur votre plateau à chaque fin de recrutement. Ses casseroles : La robe en chocolat et « Des salauds face à d'autres salauds ».
+- 31 héros, 111 politiques, 94 casseroles.
+
 ## 0.4.2 — 15 novembre 2026
 
 Aucune carte ne change. Le détail : https://casserolade.fr/mises-a-jour

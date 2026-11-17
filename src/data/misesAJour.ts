@@ -2,6 +2,7 @@ import type { Card, Casserole, Spell } from '../engine/types.ts';
 import { CARTES as CARTES_0_4_0 } from './misesAJour/0.4.0.ts';
 import { CARTES as CARTES_0_4_1 } from './misesAJour/0.4.1.ts';
 import { CARTES as CARTES_0_4_2 } from './misesAJour/0.4.2.ts';
+import { CARTES as CARTES_0_4_3 } from './misesAJour/0.4.3.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -43,6 +44,34 @@ export interface PatchNote {
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.3',
+    date: '18 novembre 2026',
+    title: 'Salons publics, classement et deux candidats de plus',
+    summary: [
+      'Les salons publics : un salon ouvert à tous s\'affiche sur l\'accueil, sous le nom que lui donne son hôte. On y entre d\'un clic, on y discute tout de suite, et l\'hôte lance quand il veut : les bots prennent les places vides.',
+      'Un salon reste privé si on le veut : on y entre par son lien ou par son code. Tant que la partie n\'est pas lancée, l\'hôte peut l\'ouvrir au public, ou le refermer.',
+      'On entre dans un salon même pendant sa partie : on discute avec ceux qui jouent, et on joue la suivante. Le chat suit la table, du salon à la fin de la partie, et dit qui entre et qui part.',
+      'L\'hôte tient son salon : il peut couper le chat d\'un joueur, ou l\'exclure, à tout moment, dans le salon comme en partie.',
+      'Les parties de salon comptent pour un classement, dès que deux joueurs s\'y affrontent : battre un joueur mieux classé rapporte plus, perdre contre un joueur moins bien classé coûte plus, et les bots ne comptent jamais. La cote donne un rang, de la Salle des fêtes à l\'Élysée, affiché à côté du pseudo.',
+      'Toujours sans compte : sur l\'écran des succès, « Sauvegarder mon profil » télécharge un fichier qui porte votre rang, vos succès et votre carrière vers un autre navigateur.',
+      'Après une partie, « Retour au salon » ramène à la table : qui est là, le chat, les réglages, et la partie suivante.',
+      'L\'accueil est refait, et tient dans l\'écran sans défiler : les salons publics et les salons entre amis dans un seul panneau, la carrière puis la partie rapide à côté. Une première visite commence par le tutoriel.',
+      'L\'accueil invite à choisir un pseudo ; entré dans un salon sans pseudo, on le choisit sur place.',
+      'Les succès sont refaits : 67, en huit rayons, durs et bêtes. Un politique à 2000/2000, une victoire sans perdre un seul sondage, sans actualiser la boutique, avec pile 289 d\'attaque… Les parties en ligne comptent, et ont leur rayon.',
+      'À la première place, l\'écran de fin montre votre plateau en carte de victoire, à copier pour Discord, à poster sur X ou à télécharger.',
+      'Deux candidats de plus parmi les héros. Juan Branco, « Crépuscule » : les casseroles coûtent 1 de moins, et une défaite rapporte 1 de budget à la manche suivante. Natacha Polony, « Nous sommes la France » : à chaque fin de recrutement, votre premier politique gagne +1/+1, et la première actualisation de chaque manche est gratuite.',
+      'Natacha Polony entre aussi en boutique, à l\'échelon 4 de la Société civile. Trois casseroles arrivent : une pour Juan Branco, deux pour elle.',
+    ],
+    rules: [],
+    why: {
+      polony: 'Candidate d\'un rassemblement « venu de tous les partis » : à chaque fin de recrutement, elle grandit de +1/+1 par camp différent sur votre plateau.',
+      cavale_de_dakar: 'Juan Branco n\'avait pas de casserole.',
+      robe_en_chocolat: 'Le Salon du chocolat de 2013 : en scandale, elle fond et tache ses voisins.',
+      salauds_face_a_salauds: 'Sa phrase sur le Rwanda, pour laquelle elle a été relaxée : la plus forte de ses deux casseroles, et la plus coûteuse en scandale.',
+    },
+    cards: CARTES_0_4_3,
+  },
   {
     version: '0.4.2',
     date: '15 novembre 2026',
