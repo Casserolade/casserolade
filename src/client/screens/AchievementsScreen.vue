@@ -1,73 +1,80 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import AppButton from '#src/client/components/atoms/AppButton.vue';
-import GameIcon from '#src/client/components/atoms/GameIcon.vue';
+import RankBadge from '#src/client/components/atoms/RankBadge.vue';
+import AchievementItem from '#src/client/components/molecules/AchievementItem.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
+import ProfileSave from '#src/client/components/organisms/ProfileSave.vue';
 import { achievements } from '#src/client/stores/achievements.ts';
-import { rewardLabel } from '#src/client/tools/rewardLabel.ts';
+import { achievementShelves } from '#src/client/tools/achievementShelves.ts';
 import { SUCCES } from '#src/data/succes.ts';
 
-/** The achievements board: all of them, won or not, what they give, and the title to show. */
+/**
+ * The achievements board: all of them, shelf by shelf, won or not, what they give, and the title to show. There
+ * are many, and they are hard: the board scrolls. It is also where the profile is: the rank in the rooms (`rating`,
+ * null before a first game against another human), and what saves the profile to a file or puts one back.
+ */
+withDefaults(defineProps<{ rating?: number | null }>(), { rating: null });
 defineEmits<{ leave: [] }>();
 
 const { progress, earnedTitles, title } = achievements;
-const board = computed(() => SUCCES.map((item) => ({ ...item, won: progress.value.obtenus.includes(item.id) })));
-const wonCount = computed(() => board.value.filter((item) => item.won).length);
+const shelves = computed(() => achievementShelves(progress.value.obtenus));
+const shownTitle = computed<string>({
+  get: () => title.value ?? '',
+  set: (next) => achievements.chooseTitle(next || null),
+});
+/** A restored profile is read again from the start: every store that keeps a part of it loads it anew. */
+function reloadPage(): void {
+  window.location.reload();
+}
 </script>
 
 <template>
-  <MenuBackdrop>
-    <h1 class="title">Succès</h1>
-    <ul class="facts">
-      <li><strong>{{ wonCount }}</strong> sur {{ SUCCES.length }}</li>
-      <li><strong>{{ progress.parties }}</strong> {{ progress.parties > 1 ? 'parties' : 'partie' }}</li>
-      <li><strong>{{ progress.victoires }}</strong> {{ progress.victoires > 1 ? 'victoires' : 'victoire' }}</li>
-    </ul>
+  <MenuBackdrop fitted>
+    <header class="top">
+      <h1 class="title">Succès</h1>
+      <RankBadge v-if="rating !== null" class="rank" :mmr="rating" detailed />
+      <ul class="facts">
+        <li><strong>{{ progress.obtenus.length }}</strong> sur {{ SUCCES.length }}</li>
+        <li><strong>{{ progress.parties }}</strong> {{ progress.parties > 1 ? 'parties' : 'partie' }}</li>
+        <li><strong>{{ progress.victoires }}</strong> {{ progress.victoires > 1 ? 'victoires' : 'victoire' }}</li>
+        <li><strong>{{ progress.victoiresEnLigne }}</strong> en ligne</li>
+      </ul>
+      <label class="shown-title">
+        Votre titre
+        <select v-model="shownTitle" :disabled="earnedTitles.length === 0">
+          <option value="">{{ earnedTitles.length === 0 ? 'Aucun titre gagné' : 'Aucun' }}</option>
+          <option v-for="earned in earnedTitles" :key="earned" :value="earned">« {{ earned }} »</option>
+        </select>
+      </label>
+      <AppButton class="back" @click="$emit('leave')">Accueil</AppButton>
+    </header>
+    <p class="note">Ils se gagnent en partie rapide, en carrière et en ligne, et restent dans ce navigateur. Ils ne donnent que des titres, à afficher à côté de votre pseudo.</p>
+    <ProfileSave class="save" @restored="reloadPage" />
 
-    <section class="panel titles" aria-labelledby="titles-heading">
-      <h2 id="titles-heading">Votre titre</h2>
-      <p v-if="earnedTitles.length === 0" class="muted">Aucun titre pour l'instant : certains succès en donnent un, affiché à côté de votre pseudo.</p>
-      <div v-else class="choices" role="group" aria-label="Titre affiché">
-        <AppButton :pressed="title === null" @click="achievements.chooseTitle(null)">Aucun</AppButton>
-        <AppButton v-for="earned in earnedTitles" :key="earned" :pressed="title === earned" @click="achievements.chooseTitle(earned)">« {{ earned }} »</AppButton>
-      </div>
+    <section v-for="shelf in shelves" :key="shelf.id" class="shelf" :aria-labelledby="`shelf-${shelf.id}`">
+      <h2 :id="`shelf-${shelf.id}`">{{ shelf.name }} <span class="count">{{ shelf.wonCount }} / {{ shelf.items.length }}</span></h2>
+      <ol class="items">
+        <AchievementItem v-for="item in shelf.items" :key="item.id" :item="item" :won="item.won" />
+      </ol>
     </section>
-
-    <ol class="board">
-      <li v-for="item in board" :key="item.id" class="item" :class="{ won: item.won }">
-        <span class="medal" aria-hidden="true"><GameIcon :name="item.won ? 'star' : 'lock'" /></span>
-        <span class="text">
-          <strong>{{ item.nom }}<span class="sr-only">{{ item.won ? ' : obtenu' : ' : pas encore' }}</span></strong>
-          <span class="desc">{{ item.description }}</span>
-          <span v-if="item.recompense" class="reward">{{ rewardLabel(item.recompense) }}</span>
-        </span>
-      </li>
-    </ol>
-    <p class="muted note">Les succès se gagnent en solo, au tutoriel et en carrière, et restent dans ce navigateur. En ligne, tout le monde joue à armes égales.</p>
-    <AppButton @click="$emit('leave')">Accueil</AppButton>
   </MenuBackdrop>
 </template>
 
 <style scoped>
-.title { font-size: 3.4rem; rotate: -1.5deg; }
-.facts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; }
-.facts li { padding: 0.35rem 1.1rem; border-radius: 999px; border: 3px solid rgb(255 255 255 / 0.14); background: rgb(12 16 32 / 0.92); color: #c9cfdc; }
-.facts strong { color: #ffe27a; font: 400 1.7rem / 1 var(--font-number); letter-spacing: 1px; }
-.panel { width: min(1200px, 94vw); padding: 1rem 1.3rem; border-radius: 22px; border: 3px solid rgb(255 255 255 / 0.14); background: linear-gradient(rgb(22 30 58 / 0.94), rgb(11 15 32 / 0.94)); }
-.panel h2 { margin-bottom: 0.6rem; }
-.choices { display: flex; flex-wrap: wrap; gap: 0.6rem; }
-.choices :deep(.app-button) { font-size: 1.15rem; }
-.board { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0.7rem; width: min(1200px, 94vw); }
-.item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.7rem 0.9rem; border-radius: 18px; border: 3px solid rgb(255 255 255 / 0.1); background: rgb(8 11 24 / 0.88); }
-.item.won { border-color: #d8b450; background: linear-gradient(100deg, rgb(60 44 8 / 0.92), rgb(16 16 28 / 0.92)); box-shadow: 0 0 18px rgb(255 200 60 / 0.2); }
-.medal { flex: none; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: #2a2f40; color: #6b7385; font-size: 1.3rem; }
-.won .medal { background: radial-gradient(circle at 40% 30%, #fff6c4, #f2c230 45%, #9a6a08); color: #fff; box-shadow: 0 0 12px rgb(255 210 60 / 0.7); }
-.text { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; line-height: 1.2; }
-.text strong { color: #8a90a2; font: 400 1.35rem / 1.05 var(--font-number); letter-spacing: 1px; }
-.won .text strong { color: #fff; }
-.desc { color: #9aa0b0; font-size: 0.95rem; }
-.won .desc { color: #e0d8c0; }
-.reward { color: #b89a4a; font-size: 0.9rem; font-weight: 700; }
-.won .reward { color: #ffe27a; }
-.note { max-width: 46rem; text-align: center; }
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem 1.2rem; width: min(86rem, 96vw); }
+.title { font-size: 2.2rem; -webkit-text-stroke: 5px var(--color-ink); }
+.facts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem; }
+.facts li { padding: 0.15rem 0.8rem; border-radius: 999px; border: 1px solid rgb(255 255 255 / 0.16); background: rgb(12 16 32 / 0.92); color: #c9cfdc; font-size: 0.92rem; }
+.facts strong { color: var(--color-title); font: 400 1.2rem / 1 var(--font-number); letter-spacing: 1px; }
+.shown-title { flex-direction: row; align-items: center; gap: 0.6rem; font-size: 0.92rem; }
+.shown-title select { max-width: 18rem; padding-block: 0.25rem; }
+.back.app-button { padding: 0.36em 0.95em; border-width: 2px; font-size: 1.05rem; }
+.save { margin-bottom: -0.4rem; }
+.rank { font-size: 0.95rem; }
+.note { margin: -1rem 0 -0.6rem; max-width: 60rem; color: var(--color-text-muted); font-size: 0.9rem; text-align: center; text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
+.shelf { display: flex; flex-direction: column; gap: 0.5rem; width: min(86rem, 96vw); margin-bottom: -0.6rem; padding: 0.7rem 0.9rem 0.9rem; border-radius: 16px; border: 2px solid rgb(255 255 255 / 0.14); background: var(--panel-background); box-shadow: var(--panel-shadow); }
+h2 { color: #fff; font: 400 1.35rem / 1 var(--font-number); letter-spacing: 1px; }
+.count { margin-left: 0.4rem; color: var(--color-title); font-size: 0.8em; }
+.items { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 0.45rem; }
 </style>

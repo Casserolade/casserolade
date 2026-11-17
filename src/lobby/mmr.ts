@@ -7,6 +7,11 @@ const ECHELLE = 400;
  * joueurs de même niveau : + K/2. Dernier : - K/2.
  */
 export const K_MMR = 64;
+/**
+ * Les adversaires d'une table pleine. Chaque humain affronté pèse K sur ce nombre, que la table en compte un ou
+ * sept : battre un seul joueur, le reste de la table tenu par des bots, rapporte sept fois moins que finir devant sept.
+ */
+const ADVERSAIRES_TABLE_PLEINE = 7;
 
 export interface ResultatMmr {
   mmr: number;
@@ -20,10 +25,10 @@ export function chanceDevant(a: number, b: number): number {
 }
 
 /**
- * Les variations de MMR après une partie publique, dans l'ordre des joueurs reçus. Chaque
- * humain est comparé deux à deux à chaque autre, à la manière d'un Elo : finir devant un
- * joueur mieux classé rapporte plus. Les bots ne sont jamais passés ici. Seul, on ne
- * gagne ni ne perd rien.
+ * Les variations de MMR après une partie entre humains (un salon, une table de la file), dans l'ordre des joueurs
+ * reçus. Chaque humain est comparé deux à deux à chaque autre, à la manière d'un Elo : finir devant un joueur mieux
+ * classé rapporte plus, et chaque joueur affronté pèse autant, quelle que soit la table. Les bots ne sont jamais
+ * passés ici. Seul, on ne gagne ni ne perd rien.
  */
 export function variationsMmr(joueurs: readonly ResultatMmr[], k = K_MMR): number[] {
   const n = joueurs.length;
@@ -35,7 +40,7 @@ export function variationsMmr(joueurs: readonly ResultatMmr[], k = K_MMR): numbe
       const score = moi.place < autre.place ? 1 : moi.place === autre.place ? 0.5 : 0;
       ecart += score - chanceDevant(moi.mmr, autre.mmr);
     });
-    return Math.round((k * ecart) / (n - 1));
+    return Math.round((k * ecart) / ADVERSAIRES_TABLE_PLEINE);
   });
 }
 
