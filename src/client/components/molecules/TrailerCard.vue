@@ -1,21 +1,19 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { TRAILER_LENGTH, TRAILER_PICTURE, TRAILER_PLAYER_URL } from '#src/client/const/trailer.ts';
+import { useTemplateRef } from 'vue';
+import TrailerPlayer from '#src/client/components/molecules/TrailerPlayer.vue';
+import { TRAILER_LENGTH, TRAILER_PICTURE } from '#src/client/const/trailer.ts';
 import { assetUrl } from '#src/client/tools/assetUrl.ts';
 
 /**
- * The trailer, under the Discord while no live is on: a small picture first, and YouTube's player only once asked
- * for, in its place.
+ * The trailer, beside the Discord while no live is on: a small picture, and YouTube's player only once asked for,
+ * in a window in the middle of the page that closes again.
  */
-const playing = ref(false);
+const player = useTemplateRef<{ open: () => void }>('player');
 </script>
 
 <template>
   <div class="trailer-card">
-    <div v-if="playing" class="player">
-      <iframe :src="TRAILER_PLAYER_URL" title="La bande-annonce de Casserolade" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" />
-    </div>
-    <button v-else type="button" class="teaser" @click="playing = true">
+    <button type="button" class="teaser" @click="player?.open()">
       <span class="picture"><img :src="assetUrl(TRAILER_PICTURE)" alt="" width="480" height="270" /><span class="play" aria-hidden="true" /></span>
       <span class="words">
         <span class="kicker">La bande-annonce</span>
@@ -23,6 +21,7 @@ const playing = ref(false);
         <span class="length">{{ TRAILER_LENGTH }} · sur YouTube</span>
       </span>
     </button>
+    <TrailerPlayer ref="player" />
   </div>
 </template>
 
@@ -39,6 +38,4 @@ const playing = ref(false);
 .kicker { color: var(--color-text-muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 strong { font-size: 0.98rem; }
 .length { color: var(--color-text-muted); font-size: 0.85rem; }
-.player { aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; }
-.player iframe { display: block; width: 100%; height: 100%; border: 0; }
 </style>

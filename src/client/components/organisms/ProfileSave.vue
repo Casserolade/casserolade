@@ -50,7 +50,7 @@ function restore(): void {
       <AppButton @click="save">Sauvegarder mon profil</AppButton>
       <AppButton @click="picker?.click()">Restaurer une sauvegarde</AppButton>
       <input ref="picker" class="picker" type="file" accept=".json,application/json" aria-label="Fichier de sauvegarde" tabindex="-1" @change="choose" />
-      <p class="notice" role="status">{{ notice || 'Sans compte : un fichier porte votre rang, vos succès et votre carrière vers un autre navigateur.' }}</p>
+      <p class="notice" role="status">{{ notice || 'Sans compte : un fichier emporte votre profil vers un autre navigateur.' }}</p>
     </template>
   </div>
 </template>

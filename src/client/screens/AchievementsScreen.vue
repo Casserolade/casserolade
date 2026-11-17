@@ -4,15 +4,14 @@ import AppButton from '#src/client/components/atoms/AppButton.vue';
 import RankBadge from '#src/client/components/atoms/RankBadge.vue';
 import AchievementItem from '#src/client/components/molecules/AchievementItem.vue';
 import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
-import ProfileSave from '#src/client/components/organisms/ProfileSave.vue';
 import { achievements } from '#src/client/stores/achievements.ts';
 import { achievementShelves } from '#src/client/tools/achievementShelves.ts';
 import { SUCCES } from '#src/data/succes.ts';
 
 /**
  * The achievements board: all of them, shelf by shelf, won or not, what they give, and the title to show. There
- * are many, and they are hard: the board scrolls. It is also where the profile is: the rank in the rooms (`rating`,
- * null before a first game against another human), and what saves the profile to a file or puts one back.
+ * are many, and they are hard: the board scrolls. The rank in the rooms heads it (`rating`, null before a first game
+ * against another human).
  */
 withDefaults(defineProps<{ rating?: number | null }>(), { rating: null });
 defineEmits<{ leave: [] }>();
@@ -23,10 +22,6 @@ const shownTitle = computed<string>({
   get: () => title.value ?? '',
   set: (next) => achievements.chooseTitle(next || null),
 });
-/** A restored profile is read again from the start: every store that keeps a part of it loads it anew. */
-function reloadPage(): void {
-  window.location.reload();
-}
 </script>
 
 <template>
@@ -50,7 +45,6 @@ function reloadPage(): void {
       <AppButton class="back" @click="$emit('leave')">Accueil</AppButton>
     </header>
     <p class="note">Ils se gagnent en partie rapide, en carrière et en ligne, et restent dans ce navigateur. Ils ne donnent que des titres, à afficher à côté de votre pseudo.</p>
-    <ProfileSave class="save" @restored="reloadPage" />
 
     <section v-for="shelf in shelves" :key="shelf.id" class="shelf" :aria-labelledby="`shelf-${shelf.id}`">
       <h2 :id="`shelf-${shelf.id}`">{{ shelf.name }} <span class="count">{{ shelf.wonCount }} / {{ shelf.items.length }}</span></h2>
@@ -70,7 +64,6 @@ function reloadPage(): void {
 .shown-title { flex-direction: row; align-items: center; gap: 0.6rem; font-size: 0.92rem; }
 .shown-title select { max-width: 18rem; padding-block: 0.25rem; }
 .back.app-button { padding: 0.36em 0.95em; border-width: 2px; font-size: 1.05rem; }
-.save { margin-bottom: -0.4rem; }
 .rank { font-size: 0.95rem; }
 .note { margin: -1rem 0 -0.6rem; max-width: 60rem; color: var(--color-text-muted); font-size: 0.9rem; text-align: center; text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
 .shelf { display: flex; flex-direction: column; gap: 0.5rem; width: min(86rem, 96vw); margin-bottom: -0.6rem; padding: 0.7rem 0.9rem 0.9rem; border-radius: 16px; border: 2px solid rgb(255 255 255 / 0.14); background: var(--panel-background); box-shadow: var(--panel-shadow); }

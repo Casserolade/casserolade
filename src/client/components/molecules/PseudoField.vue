@@ -8,7 +8,7 @@ const MAX_PSEUDO_LENGTH = 24;
  * The pseudo, once for everything online, kept from one visit to the next. Empty, the field calls for it: it asks
  * to choose one, in the game's gold, and says what it is for. `asking`: an online gesture was just held back for
  * want of a pseudo; Enter, or the button that shows then, goes on (`confirm`), with a pseudo or without.
- * `focus()` puts the cursor in it.
+ * Once a pseudo is chosen, the line under the field is the screen's (default slot). `focus()` puts the cursor in it.
  */
 const props = withDefaults(defineProps<{ asking?: boolean }>(), { asking: false });
 const emit = defineEmits<{ confirm: [] }>();
@@ -30,6 +30,7 @@ defineExpose({ focus: () => field.value?.focus() });
     <p id="pseudo-field-hint" class="hint" role="status">
       <template v-if="props.asking && missing">Sans pseudo, vous serez « Sans étiquette ».</template>
       <template v-else-if="missing">C'est le nom que les autres joueurs verront.</template>
+      <slot v-else />
     </p>
   </form>
 </template>

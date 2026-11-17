@@ -13,6 +13,7 @@ import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
 import RankBadge from '#src/client/components/atoms/RankBadge.vue';
 import TutorialButton from '#src/client/components/molecules/TutorialButton.vue';
 import PseudoField from '#src/client/components/molecules/PseudoField.vue';
+import ProfileDialog from '#src/client/components/organisms/ProfileDialog.vue';
 import WatchCard from '#src/client/components/molecules/WatchCard.vue';
 import { useHomePage } from '#src/client/stores/useHomePage.ts';
 import { usePseudoNudge } from '#src/client/stores/usePseudoNudge.ts';
@@ -59,6 +60,8 @@ const emit = defineEmits<{
 const { pseudo, plateauId, tagline, live, rooms, discordMembers, twitchLive } = useHomePage();
 /** Online without a pseudo: the first gesture is held back once, and the field is pointed at. */
 const pseudoField = useTemplateRef<{ focus: () => void }>('pseudoField');
+/** The profile's window: the rank, and what saves the profile to a file or puts one back. */
+const profile = useTemplateRef<{ open: () => void }>('profile');
 const { asking, withPseudo, resume: resumeGesture } = usePseudoNudge(pseudo, () => pseudoField.value?.focus());
 /** A touch screen that chose this version, a tablet or a phone: the phone version stays one link away. */
 const touchScreen = window.matchMedia('(pointer: coarse)').matches;
@@ -84,7 +87,9 @@ const suitcases = ref(0);
       <header class="top">
         <!-- Who plays: the pseudo, once for everything online, and the way to learn the game. -->
         <div class="me">
-          <PseudoField ref="pseudoField" v-model="pseudo" class="pseudo" :asking="asking" @confirm="resumeGesture" />
+          <PseudoField ref="pseudoField" v-model="pseudo" class="pseudo" :asking="asking" @confirm="resumeGesture">
+            <button type="button" class="link" @click="profile?.open()">Sauvegarder mon profil</button>
+          </PseudoField>
           <p class="learn">
             <RankBadge v-if="rating !== null" :mmr="rating" detailed />
             <span v-if="title" class="title-badge">« {{ title }} »</span>
@@ -131,6 +136,7 @@ const suitcases = ref(0);
       <footer class="foot">
         <nav class="links" aria-label="Le projet">
           <TipLink :caught="suitcases" />
+          <button type="button" class="link" @click="profile?.open()">Sauvegarder mon profil</button>
           <a :href="DISCORD_URL" target="_blank" rel="noopener">Le Discord</a>
           <a href="/a-propos">À propos</a>
           <a :href="CODE_URL">Le code sur GitHub</a>
@@ -141,6 +147,7 @@ const suitcases = ref(0);
       </footer>
     </div>
     <ChasingReporter :host-id="hostId" :reactions="reactions" @delivered="suitcases++" />
+    <ProfileDialog ref="profile" :rating="rating" />
   </MenuBackdrop>
 </template>
 
@@ -165,9 +172,10 @@ const suitcases = ref(0);
 .logo-button { padding: 0; border: 0; background: none; cursor: pointer; line-height: 0; }
 .logo-button:active img { transform: scale(0.96) rotate(-2deg); }
 /* The logo takes the height the page can spare: small on a small laptop, large where there is room. */
-.logo img { width: auto; height: clamp(8rem, 100dvh - 37rem, 13rem); max-width: 60vw; object-fit: contain; filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.65)); animation: logo-in 0.7s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.logo img { width: auto; height: clamp(8rem, 100dvh - 37.8rem, 13rem); max-width: 60vw; object-fit: contain; filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.65)); animation: logo-in 0.7s cubic-bezier(0.3, 1.5, 0.5, 1); }
 /* A subtitle drawn at random: a long one wraps, in two even, centred lines. */
-.tagline { margin-top: -0.3rem; color: var(--color-title); font: 400 1.3rem / 1 var(--font-number); letter-spacing: 1px; text-align: center; text-wrap: balance; -webkit-text-stroke: 4px var(--color-ink); paint-order: stroke fill; }
+/* Clear of the logo's lowest drawings: the subtitle is a line of its own, not a caption stuck to them. */
+.tagline { margin-top: 0.45rem; color: var(--color-title); font: 400 1.3rem / 1 var(--font-number); letter-spacing: 1px; text-align: center; text-wrap: balance; -webkit-text-stroke: 4px var(--color-ink); paint-order: stroke fill; }
 .tools { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; min-width: 0; }
 .shortcuts { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.5rem; }
 .count { margin-left: 0.5em; padding: 0 0.45em; border-radius: 999px; background: var(--color-title); color: var(--color-ink); font-size: 0.85em; }
@@ -186,8 +194,10 @@ const suitcases = ref(0);
 .sides:has(.watch iframe) .discord { align-self: start; }
 .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.4rem 1.6rem; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem 1.4rem; }
-.links a { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
-.links a:hover, .links a:focus-visible { color: var(--color-text); }
+.links a, .link { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
+.links a:hover, .links a:focus-visible, .link:hover, .link:focus-visible { color: var(--color-text); }
+/* A button that leads to a screen of the game, among the links: it looks like them. */
+.link { padding: 0; border: 0; background: none; font-family: inherit; text-decoration: underline; cursor: pointer; }
 @keyframes logo-in { from { transform: scale(0.6) rotate(-4deg); opacity: 0; } }
 /* A narrower screen: the game first, then who plays and the tools side by side; one side under the other. */
 @media (max-width: 1100px) {

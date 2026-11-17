@@ -4,6 +4,11 @@
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour
 
+**Correctif du 18 novembre 2026**
+- La bande-annonce s'ouvre dans une fenêtre au milieu de la page, qui se ferme par son bouton, d'un clic autour ou avec Échap.
+- La sauvegarde du profil s'ouvre depuis l'accueil, sous le pseudo, avec le rang.
+- Le sous-titre de l'accueil ne touche plus le logo.
+
 **Salons publics**
 - Un salon peut s'ouvrir à tous : il s'affiche sur l'accueil, dans la liste des salons publics, sous le nom que lui donne son hôte, avec son nombre de joueurs. On y entre d'un clic.
 - Le chat est là dès l'entrée, et l'hôte lance quand il veut : les bots prennent les places vides. Entre inconnus, le minuteur est toujours là.
@@ -16,7 +21,7 @@ Le détail, et les cartes : https://casserolade.fr/mises-a-jour
 - Les parties de salon comptent pour un classement, dès que deux joueurs s'y affrontent. Chacun gagne ou perd des points selon sa place face aux autres joueurs : battre un joueur mieux classé rapporte plus, perdre contre un joueur moins bien classé coûte plus. Les bots ne comptent jamais.
 - Chaque joueur affronté pèse autant : entre joueurs de même cote, un duel vaut 5 points, une première place devant sept joueurs en vaut 32.
 - La cote donne un rang, de la Salle des fêtes à l'Élysée, en passant par le Conseil municipal (le départ, à 1000), la Mairie, l'Assemblée, le Sénat, le Gouvernement et Matignon. Le rang s'affiche à côté du pseudo sur l'accueil, sur chaque siège du salon et à la fin de la partie.
-- Toujours sans compte : le rang est gardé par le serveur, sous une clé que seul votre navigateur connaît. Sur l'écran des succès, « Sauvegarder mon profil » télécharge un fichier qui porte cette clé, vos succès et votre carrière vers un autre navigateur, et « Restaurer une sauvegarde » le remet.
+- Toujours sans compte : le rang est gardé par le serveur, sous une clé que seul votre navigateur connaît. Sur l'accueil, sous le pseudo, « Sauvegarder mon profil » ouvre votre profil : un fichier emporte cette clé, vos succès et votre carrière vers un autre navigateur, et « Restaurer une sauvegarde » le remet.
 
 **Chat**
 - Le chat suit la table, du salon à la fin de la partie, sur ordinateur comme sur téléphone, et dit qui entre et qui part.

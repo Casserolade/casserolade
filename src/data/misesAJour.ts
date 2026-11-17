@@ -54,7 +54,7 @@ export const MISES_A_JOUR: PatchNote[] = [
       'On entre dans un salon même pendant sa partie : on discute avec ceux qui jouent, et on joue la suivante. Le chat suit la table, du salon à la fin de la partie, et dit qui entre et qui part.',
       'L\'hôte tient son salon : il peut couper le chat d\'un joueur, ou l\'exclure, à tout moment, dans le salon comme en partie.',
       'Les parties de salon comptent pour un classement, dès que deux joueurs s\'y affrontent : battre un joueur mieux classé rapporte plus, perdre contre un joueur moins bien classé coûte plus, et les bots ne comptent jamais. La cote donne un rang, de la Salle des fêtes à l\'Élysée, affiché à côté du pseudo.',
-      'Toujours sans compte : sur l\'écran des succès, « Sauvegarder mon profil » télécharge un fichier qui porte votre rang, vos succès et votre carrière vers un autre navigateur.',
+      'Toujours sans compte : sur l\'accueil, « Sauvegarder mon profil » télécharge un fichier qui emporte votre rang, vos succès et votre carrière vers un autre navigateur.',
       'Après une partie, « Retour au salon » ramène à la table : qui est là, le chat, les réglages, et la partie suivante.',
       'L\'accueil est refait, et tient dans l\'écran sans défiler : les salons publics et les salons entre amis dans un seul panneau, la carrière puis la partie rapide à côté. Une première visite commence par le tutoriel.',
       'L\'accueil invite à choisir un pseudo ; entré dans un salon sans pseudo, on le choisit sur place.',

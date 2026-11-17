@@ -11,6 +11,7 @@ import MenuBackdrop from '#src/client/components/organisms/MenuBackdrop.vue';
 import OnlineModes from '#src/client/components/organisms/OnlineModes.vue';
 import RankBadge from '#src/client/components/atoms/RankBadge.vue';
 import PseudoField from '#src/client/components/molecules/PseudoField.vue';
+import ProfileDialog from '#src/client/components/organisms/ProfileDialog.vue';
 import TutorialButton from '#src/client/components/molecules/TutorialButton.vue';
 import WatchCard from '#src/client/components/molecules/WatchCard.vue';
 import { CHANGELOG_URL, CODE_URL } from '#src/client/const/codeLinks.ts';
@@ -52,6 +53,8 @@ const emit = defineEmits<{
 const { pseudo, plateauId, tagline, live, rooms, discordMembers, twitchLive } = useHomePage();
 /** Online without a pseudo: the first gesture is held back once, and the field is pointed at. */
 const pseudoField = useTemplateRef<{ focus: () => void }>('pseudoField');
+/** The profile's window: the rank, and what saves the profile to a file or puts one back. */
+const profile = useTemplateRef<{ open: () => void }>('profile');
 const { asking, withPseudo, resume: resumeGesture } = usePseudoNudge(pseudo, () => pseudoField.value?.focus());
 </script>
 
@@ -75,7 +78,9 @@ const { asking, withPseudo, resume: resumeGesture } = usePseudoNudge(pseudo, () 
         <span>Première visite ? Quelques minutes pour apprendre à jouer.</span>
         <TutorialButton newcomer @open="emit('tutorial')" />
       </p>
-      <PseudoField ref="pseudoField" v-model="pseudo" class="pseudo" :asking="asking" @confirm="resumeGesture" />
+      <PseudoField ref="pseudoField" v-model="pseudo" class="pseudo" :asking="asking" @confirm="resumeGesture">
+            <button type="button" class="link" @click="profile?.open()">Sauvegarder mon profil</button>
+          </PseudoField>
       <OnlineModes
         :pseudo="pseudo"
         :invite-code="inviteCode"
@@ -96,6 +101,7 @@ const { asking, withPseudo, resume: resumeGesture } = usePseudoNudge(pseudo, () 
       </nav>
       <nav class="links" aria-label="Le projet">
         <TipLink :caught="0" />
+        <button type="button" class="link" @click="profile?.open()">Sauvegarder mon profil</button>
         <a :href="DISCORD_URL" target="_blank" rel="noopener">Le Discord</a>
         <a href="/a-propos">À propos</a>
         <a :href="CODE_URL">Le code</a>
@@ -103,6 +109,7 @@ const { asking, withPseudo, resume: resumeGesture } = usePseudoNudge(pseudo, () 
         <a href="/" @click="chooseVersion('ordinateur')">Version ordinateur</a>
       </nav>
     </div>
+    <ProfileDialog ref="profile" :rating="rating" />
   </MenuBackdrop>
 </template>
 
@@ -128,5 +135,7 @@ const { asking, withPseudo, resume: resumeGesture } = usePseudoNudge(pseudo, () 
 .extras .tutorial { grid-column: 1 / -1; }
 .count { margin-left: 0.4em; padding: 0 0.45em; border-radius: 999px; background: var(--color-title); color: var(--color-ink); font-size: 0.85em; }
 .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1.2rem; }
-.links a { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
+.links a, .link { color: var(--color-text-muted); font-size: var(--font-size-small); text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
+/* A button that leads to a screen of the game, among the links: it looks like them. */
+.link { padding: 0; border: 0; background: none; font-family: inherit; text-decoration: underline; cursor: pointer; }
 </style>
