@@ -1,7 +1,7 @@
 /**
- * La musique de fond de la table : des morceaux libres d'OpenGameArt et un morceau du jeu. `fichier` est son nom dans
- * assets/game/sons/musique (sans l'extension). Chaque morceau est crédité sur la page À propos, comme ses licences le
- * demandent ; le bouton de la musique dit celui qui joue.
+ * La musique de fond de la table : des morceaux de Kevin MacLeod (incompetech.com), sous licence Creative Commons
+ * Attribution 4.0, et un morceau du jeu. `fichier` est son nom dans assets/game/sons/musique (sans l'extension). Chaque
+ * morceau est crédité sur la page À propos, comme sa licence le demande ; le bouton de la musique dit celui qui joue.
  */
 export interface Musique {
   fichier: string;
@@ -14,17 +14,22 @@ export interface Musique {
   dernierSouffle?: boolean;
 }
 
+/** L'auteur tel qu'il demande à être cité, et la page de chacun de ses morceaux, par son numéro ISRC. */
+const KEVIN_MACLEOD = 'Kevin MacLeod (incompetech.com)';
+const INCOMPETECH = 'https://incompetech.com/music/royalty-free/index.html?isrc=';
+
 export const MUSIQUES: Musique[] = [
   { fichier: 'quijada', titre: 'Quijada', auteur: 'Casserolade', licence: '© Casserolade', dernierSouffle: true },
-  { fichier: 'comedie_acoustique', titre: 'Comedy Funny Background Song', auteur: 'Almitory', licence: 'CC BY 4.0', source: 'https://opengameart.org/content/comedy-funny-background-song' },
-  { fichier: 'biere_et_ragtime', titre: 'Ale \'n\' a Rag', auteur: 'JSKNYC', licence: 'CC BY 3.0', source: 'https://opengameart.org/content/ale-n-a-rag' },
-  { fichier: 'dilemme_au_cirque', titre: 'Circus Dilemma', auteur: 'Matthew Pablo', licence: 'CC BY 3.0', source: 'https://opengameart.org/content/circus-dilemma' },
-  { fichier: 'delicieusement_acide', titre: 'Deliciously Sour', auteur: 'Matthew Pablo', licence: 'CC BY 3.0', source: 'https://opengameart.org/content/deliciously-sour' },
-  { fichier: 'armee_sur_la_pointe_des_pieds', titre: 'Tiptoe Army', auteur: 'Alexandr Zhelanov', licence: 'CC BY 4.0', source: 'https://opengameart.org/content/tiptoe-army' },
-  { fichier: 'taverne_tapageuse', titre: 'The Rowdy Tavern', auteur: 'Snabisch', licence: 'CC BY 3.0', source: 'https://opengameart.org/content/the-rowdy-tavern' },
-  { fichier: 'danse_du_menestrel', titre: 'Minstrel Dance', auteur: 'RandomMind', licence: 'CC0', source: 'https://opengameart.org/content/medieval-minstrel-dance' },
-  { fichier: 'conte_du_barde', titre: 'The Bard\'s Tale', auteur: 'RandomMind', licence: 'CC0', source: 'https://opengameart.org/content/medieval-the-bards-tale' },
-  { fichier: 'auberge_de_la_vieille_tour', titre: 'The Old Tower Inn', auteur: 'RandomMind', licence: 'CC0', source: 'https://opengameart.org/content/medieval-the-old-tower-inn' },
+  { fichier: 'petit_mouchard', titre: 'Sneaky Snitch', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1100772` },
+  { fichier: 'fouine_intrigante', titre: 'Scheming Weasel (faster version)', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1100085` },
+  { fichier: 'agenda_cache', titre: 'Hidden Agenda', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1200102` },
+  { fichier: 'enquetes', titre: 'Investigations', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1100646` },
+  { fichier: 'marty_a_un_plan', titre: 'Marty Gots a Plan', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1500015` },
+  { fichier: 'singes_qui_tournent', titre: 'Monkeys Spinning Monkeys', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1400011` },
+  { fichier: 'canard_ebouriffe', titre: 'Fluffing a Duck', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1100768` },
+  { fichier: 'le_batisseur', titre: 'The Builder', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1400016` },
+  { fichier: 'jeu_televise', titre: 'Happy Happy Game Show', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1600006` },
+  { fichier: 'meteo_locale', titre: 'Local Forecast - Elevator', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1300012` },
 ];
 
 /** Les bruitages enregistrés qui ont un auteur à citer. */

@@ -4,6 +4,9 @@
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour
 
+**Correctif du 19 novembre 2026**
+- La musique change : dix morceaux de Kevin MacLeod (incompetech.com), sous licence Creative Commons Attribution 4.0, remplacent les anciens. Chacun est crédité sur la page À propos, avec sa source.
+
 **Suivre un survivant**
 - Éliminé, on suit un survivant pendant son recrutement aussi : sa table passe en direct, telle qu'il la voit (sa boutique, sa main, ses découvertes, son budget), puis sa Fin de tour et son débat.
 - On n'y touche à rien. Une plaque « En direct » dit qui l'on suit, et « Changer » ramène à la liste des survivants.
