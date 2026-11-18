@@ -107,10 +107,13 @@ useArrivalNotice(humanCount);
 .code { color: var(--color-title); letter-spacing: 0.12em; }
 .kind { margin: 0; color: var(--color-text); font-size: 0.95rem; font-weight: 700; text-align: center; text-shadow: 0 1px 3px rgb(0 0 0 / 0.8); }
 .columns { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) minmax(0, 2.4fr); gap: 0.7rem; width: min(82rem, 96vw); }
-/* The chat takes the height of the table beside it, instead of pushing the buttons off the screen. */
+/*
+ * The chat takes the height of the table beside it, instead of pushing the buttons off the screen: its lines count
+ * for nothing in that height (a basis of zero), fill what the column leaves them, and scroll.
+ */
 .chat-column { align-items: stretch; }
 .chat-column :deep(.chat), .chat-column :deep(.panel) { flex: 1; min-height: 0; }
-.chat-column :deep(.lines) { flex: 1; max-height: none; min-height: 7rem; font-size: 0.95rem; }
+.chat-column :deep(.lines) { flex: 1 1 0; max-height: none; min-height: 7rem; font-size: 0.95rem; }
 .chat-column :deep(.field) { font-size: 0.95rem; }
 .side { display: flex; flex-direction: column; gap: 0.7rem; }
 /* A container: a field and its button lay themselves out by the panel's width. */
@@ -128,7 +131,8 @@ h2 { color: #fff; font: 400 1.35rem / 1 var(--font-number); letter-spacing: 1px;
 @media (max-width: 1100px) {
   .columns { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); width: min(1200px, 94vw); }
   .chat-column { grid-column: 1 / -1; }
-  .chat-column :deep(.lines) { max-height: 8rem; }
+  /* Alone on its row, the chat has no neighbour to follow: its lines take their own height, up to a few. */
+  .chat-column :deep(.lines) { flex-basis: auto; max-height: 8rem; }
 }
 /* On a phone, one under the other: the table and what launches it first, then the chat, then the settings. */
 @media (max-width: 900px) {
