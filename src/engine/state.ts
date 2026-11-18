@@ -6,6 +6,20 @@ export interface Offer {
   kind: 'serviteur' | 'sort' | 'casserole';
 }
 
+/** Un combat d'un joueur, tel que toute la table le sait, comme à Battlegrounds : contre qui, l'issue, les sondages. */
+export interface Fight {
+  round: number;
+  /** Le siège affronté, ou -1 pour un fantôme. */
+  against: number;
+  /** Le héros affronté ; pour un fantôme, celui dont il a les traits. */
+  heroId: string;
+  result: 'gagne' | 'perdu' | 'egalite';
+  /** Les sondages que ce combat lui a coûtés. */
+  lost: number;
+  /** Ceux qu'il a coûtés à son adversaire (rien à un fantôme). */
+  dealt: number;
+}
+
 /** Un gain permanent, par camp ou pour tous. */
 export interface StatGain {
   camp?: Camp;
@@ -13,6 +27,8 @@ export interface StatGain {
   card?: string;
   atk: number;
   hp: number;
+  /** D'où il vient, pour le registre des gains de chaque politique qui le reçoit (`gains.ts`). */
+  source: string;
 }
 
 export interface Player {
@@ -73,6 +89,8 @@ export interface Player {
   opponents: number[];
   /** Plateaux adverses vus en combat : la seule information sur les autres. */
   seen: { seat: number; heroId: string; round: number; board: Minion[] }[];
+  /** Ses derniers combats, le plus récent d'abord : toute la table les voit. */
+  fights: Fight[];
   lostLast: boolean;
   /** Les politiques partis pour un temps (en cellule, enlevés par une soucoupe) : ils reviennent à la manche `back`. */
   away: AwayMinion[];

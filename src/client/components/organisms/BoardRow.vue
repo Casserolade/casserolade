@@ -45,7 +45,7 @@ function endOfTurnNote(uid: number): string | null {
 }
 
 const preview = computed(() => props.gestures.boardPreview.value);
-/** Who would answer a defeat after the next combat: every Vedette celebrates, but one only answers. */
+/** Who would answer a defeat after the next combat: every Célébration plays, but one politician only answers aloud. */
 const responder = computed(() => boardResponder(props.board));
 /** The politician just laid down, or just caught with a casserole, says a real line of theirs. */
 const quip = useBoardQuips(() => props.board);
@@ -106,7 +106,7 @@ function inspectedCard(minion: Minion, casseroleIndex: number | null): ShownCard
     scandalThreshold: props.scandalThreshold,
     scandalLeft: scandalLeft(minion, props.round),
   });
-  return { kind: 'minion', face, onBoard: true };
+  return { kind: 'minion', face, onBoard: true, gains: minion.gains };
 }
 
 /** Over the medallion or one of its casseroles: the card comes up beside the slot, the same place for both. */

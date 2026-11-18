@@ -16,5 +16,6 @@ export function handCardShown(card: HandCard, view: Pick<PlayerView, 'board' | '
   return {
     kind: 'minion',
     face: minionFace(minion, { copies: copies >= 2 ? copies : 0, charges: minion.charges, scandalThreshold: view.scandalThreshold, scandalLeft: scandalLeft(minion, view.round) }),
+    gains: minion.gains,
   };
 }

@@ -1,4 +1,4 @@
-import { KEYWORD_RULES, TERM_RULES } from '#src/client/const/keywordRules.ts';
+import { KEYWORD_RULES, RETIRED_KEYWORD_RULES, TERM_RULES } from '#src/client/const/keywordRules.ts';
 import { boldTerms } from '#src/client/tools/richText.ts';
 
 export interface GlossaryEntry {
@@ -17,6 +17,8 @@ const BASE_FORMS: Record<string, string> = {
 
 const RULES_BY_TERM = new Map<string, GlossaryEntry>([
   ...Object.values(KEYWORD_RULES).map(({ label, rule }) => [label.toLowerCase(), { term: label, rule }] as const),
+  // A card of a past version may still carry a keyword the game no longer has: its rule says so.
+  ...Object.values(RETIRED_KEYWORD_RULES).map(({ label, rule }) => [label.toLowerCase(), { term: label, rule }] as const),
   ...Object.entries(TERM_RULES).map(([term, rule]) => [term.toLowerCase(), { term: term.charAt(0).toUpperCase() + term.slice(1), rule }] as const),
 ]);
 

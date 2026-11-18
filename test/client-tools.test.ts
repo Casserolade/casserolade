@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { HERO_BY_ID } from '../src/data/heroes.ts';
 import { CARD_LAYOUT } from '../src/client/const/cardLayout.ts';
 import { EMPTY_MANIFEST } from '../src/client/const/gameManifest.ts';
 import type { GameManifest } from '../src/client/const/gameManifest.ts';
@@ -341,7 +342,7 @@ test('statsChangeLabel says what changed, or nothing', () => {
 });
 
 test('combatCharacterIds lists the units and those summoned later, once each', () => {
-  const unit = (uid: number, cardId: string) => ({ uid, cardId, name: cardId, camp: 'rn', tier: 1, atk: 1, hp: 1, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0 }) as CombatUnit;
+  const unit = (uid: number, cardId: string) => ({ uid, cardId, name: cardId, camp: 'rn', tier: 1, atk: 1, hp: 1, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, gains: [] }) as CombatUnit;
   const log: CombatEvent[] = [
     { e: 'debut', first: 0, sides: [[unit(1, 'a')], [unit(2, 'b'), unit(3, 'a')]] },
     { e: 'invocation', side: 0, index: 1, unit: unit(4, 'suppleant') },
@@ -361,7 +362,7 @@ test('sheetSpriteStyle keeps the cell proportions and plays once unless the effe
 });
 
 test('fittedRulesSize keeps short rules large, and shrinks long or many lines', () => {
-  assert.equal(fittedRulesSize(['Vedette.']), 42);
+  assert.equal(fittedRulesSize(['Polémique.']), 42);
   const long = 'Célébration : vos 2 prochaines actualisations sont gratuites.';
   assert.ok(fittedRulesSize([long, long]) < fittedRulesSize([long]));
   assert.ok(fittedRulesSize(['a', 'b', 'c', 'd', 'e']) < fittedRulesSize(['a']), 'many short lines shrink too');
@@ -766,7 +767,7 @@ test('typedTail keeps the last letters typed, in lower case, and ignores the oth
 });
 
 test('the next opponent is marked on its row; a ghost on the eliminated seat it wears, or apart before the first elimination', () => {
-  const row = (seat: number, heroId: string, alive: boolean) => ({ seat, heroId, hp: alive ? 20 : 0, tier: 2, alive, boardSize: 3, place: alive ? 0 : 5, triples: 0 });
+  const row = (seat: number, heroId: string, alive: boolean) => ({ seat, heroId, hp: alive ? 20 : 0, tier: 2, alive, boardSize: 3, place: alive ? 0 : 5, triples: 0, fights: [] });
   const table = [row(0, 'macron', true), row(1, 'bardella', true), row(2, 'ruffin', false)];
   assert.equal(nextOpponentSeat(table, { seat: 1, heroId: 'bardella' }), 1);
   assert.equal(nextOpponentSeat(table, { seat: -1, heroId: 'fantome', ghostOf: 'ruffin' }), 2);
@@ -776,4 +777,124 @@ test('the next opponent is marked on its row; a ghost on the eliminated seat it 
   assert.equal(facelessGhostNext(table, { seat: -1, heroId: 'fantome', ghostOf: 'ruffin' }), false);
   assert.equal(facelessGhostNext(table, { seat: 1, heroId: 'bardella' }), false);
   assert.equal(facelessGhostNext(table, null), false);
+});
+
+test('gainSourceLabel names who gave a bonus: the card, the spell and its count, the casserole, the rallied card, the hero', async () => {
+  const { gainSourceLabel } = await import('../src/client/tools/gainSourceLabel.ts');
+  assert.equal(gainSourceLabel('carte:gueant'), 'Claude Guéant');
+  assert.equal(gainSourceLabel('sort:tract', 14), 'Tract ×14');
+  assert.equal(gainSourceLabel('sort:tract', 1), 'Tract');
+  assert.equal(gainSourceLabel('casserole:ecoutes'), 'Les écoutes (casserole)');
+  assert.equal(gainSourceLabel('ralliement:tache'), 'Rallié : Aurélien Taché');
+  assert.equal(gainSourceLabel('heros:lepen'), 'TVA à 5,5 % (héros)');
+  assert.equal(gainSourceLabel('retour'), 'Retour en politique');
+  assert.equal(gainSourceLabel('carriere'), 'Carrière');
+  assert.equal(gainSourceLabel('debat'), 'Ce débat');
+  assert.equal(gainSourceLabel('autre'), 'Autres');
+  // A card that left the game since still has a name; a card nobody knows keeps its id.
+  assert.equal(gainSourceLabel('carte:cope'), 'Jean-François Copé');
+  assert.equal(gainSourceLabel('carte:inconnu'), 'inconnu');
+});
+
+test('gainLines: one line per source, the heaviest first, the combat last, and the total', async () => {
+  const { gainLines } = await import('../src/client/tools/gainLines.ts');
+  assert.equal(gainLines([], ['immunite']), null, 'a card that only has its own text');
+  const list = gainLines(
+    [
+      { source: 'ralliement:tache', atk: 1, hp: 2, times: 1, keywords: ['polemique', 'cumul'] },
+      { source: 'sort:tract', atk: 14, hp: 14, times: 14, keywords: [] },
+      { source: 'carte:royal', atk: 0, hp: 0, times: 0, keywords: ['retour'] },
+      { source: 'carte:valls', atk: 0, hp: 0, times: 0, keywords: ['retour'] },
+    ],
+    ['polemique', 'retour'],
+    { atk: 3, hp: 0 },
+  );
+  assert.deepEqual(list, {
+    total: '+18/+16',
+    lines: [
+      { label: 'Tract ×14', stats: '+14/+14', keywords: [] },
+      // The Cumul it gave is gone since: it is no longer said.
+      { label: 'Rallié : Aurélien Taché', stats: '+1/+2', keywords: ['Polémique'] },
+      { label: 'Ségolène Royal', stats: '', keywords: ['Retour en politique'] },
+      { label: 'Manuel Valls', stats: '', keywords: ['Retour en politique'] },
+      { label: 'Ce débat', stats: '+3/+0', keywords: [] },
+    ],
+  });
+  // A keyword given, then lost, with nothing else: no line at all.
+  assert.equal(gainLines([{ source: 'carte:royal', atk: 0, hp: 0, times: 0, keywords: ['retour'] }], []), null);
+  // A loss is said with its sign, and big numbers are written short.
+  assert.deepEqual(gainLines([{ source: 'retour', atk: 0, hp: -7, times: 1, keywords: [] }, { source: 'carte:sarkozy', atk: 1500, hp: 2999, times: 3, keywords: [] }], [])?.lines.map((line) => line.stats), ['+1,5k/+2,9k', '+0/-7']);
+});
+
+test('gainLines keeps the sheet short: past eight sources, the smallest ones are said together', async () => {
+  const { gainLines } = await import('../src/client/tools/gainLines.ts');
+  const gains = Array.from({ length: 11 }, (_, i) => ({ source: `carte:c${i}`, atk: i + 1, hp: 0, times: 1, keywords: [] }));
+  const list = gainLines(gains, []);
+  assert.equal(list?.lines.length, 8);
+  assert.deepEqual(list?.lines.at(0), { label: 'c10', stats: '+11/+0', keywords: [] });
+  assert.deepEqual(list?.lines.at(-1), { label: '… et 4 autres', stats: '+10/+0', keywords: [] });
+  assert.equal(list?.total, '+66/+0');
+});
+
+test('debateGains: what the combat gave each unit so far, never the damage', async () => {
+  const { debateGains } = await import('../src/client/tools/debateGains.ts');
+  const unit = (uid: number, atk: number, hp: number) => ({ uid, cardId: 'gueant', name: 'G', camp: 'rn', tier: 1, atk, hp, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, gains: [] }) as CombatUnit;
+  const log: CombatEvent[] = [
+    { e: 'debut', first: 0, sides: [[unit(1, 3, 2)], [unit(2, 5, 9)]] },
+    { e: 'stats', uid: 1, atk: 4, hp: 2 },
+    { e: 'degats', uid: 2, value: 4, hp: 5 },
+    { e: 'stats', uid: 2, atk: 7, hp: 8 },
+    { e: 'invocation', side: 0, index: 1, unit: unit(3, 1, 1) },
+    { e: 'stats', uid: 3, atk: 2, hp: 3 },
+  ];
+  assert.deepEqual([...debateGains(log, 1)], []);
+  assert.deepEqual([...debateGains(log, 2)], [[1, { atk: 1, hp: 0 }]]);
+  // Hit down to 5 PV, then +2/+3: the gain is +2/+3, not the damage.
+  assert.deepEqual(debateGains(log, 4).get(2), { atk: 2, hp: 3 });
+  assert.deepEqual(debateGains(log, 6).get(3), { atk: 1, hp: 2 }, 'a unit summoned counts from its arrival');
+});
+
+test('combatUnitShown: a unit of the combat as its full card shows it, with its bonuses and what the combat gave', async () => {
+  const { combatUnitShown } = await import('../src/client/tools/combatUnitShown.ts');
+  const gains = [{ source: 'sort:tract', atk: 1, hp: 1, times: 1, keywords: [] }];
+  const unit = { uid: 1, cardId: 'gueant', name: 'Claude Guéant', camp: 'republicains', tier: 1, atk: 5, hp: -2, keywords: ['immunite'], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, gains } as CombatUnit;
+  const shown = combatUnitShown(unit, { atk: 1, hp: 0 });
+  assert.ok(shown.kind === 'minion');
+  assert.equal(shown.face.hp, 0, 'never a negative health on a card');
+  assert.deepEqual(shown.gains, gains);
+  assert.deepEqual(shown.debate, { atk: 1, hp: 0 });
+  assert.equal('debate' in combatUnitShown(unit, null), false);
+});
+
+test('fightLine words a past combat: its round, its outcome, its rival and the polls it moved', async () => {
+  const { fightLine } = await import('../src/client/tools/fightLine.ts');
+  assert.deepEqual(fightLine({ round: 12, against: 3, heroId: 'sarkozy', result: 'perdu', lost: 7, dealt: 0 }), { round: 'M12', outcome: 'Défaite', against: 'contre Nicolas Sarkozy', polls: '7 sondages perdus' });
+  assert.deepEqual(fightLine({ round: 11, against: 2, heroId: 'roussel', result: 'gagne', lost: 0, dealt: 1 }), { round: 'M11', outcome: 'Victoire', against: 'contre Fabien Roussel', polls: '1 sondage pris' });
+  assert.deepEqual(fightLine({ round: 10, against: 5, heroId: 'lepen', result: 'egalite', lost: 0, dealt: 0 }), { round: 'M10', outcome: 'Égalité', against: 'contre Marine Le Pen', polls: null });
+  // A ghost wears the face of a hero, or none; beating it takes nothing from anybody.
+  assert.deepEqual(fightLine({ round: 9, against: -1, heroId: 'roussel', result: 'gagne', lost: 0, dealt: 0 }), { round: 'M9', outcome: 'Victoire', against: 'contre le fantôme de Fabien Roussel', polls: null });
+  assert.equal(fightLine({ round: 8, against: -1, heroId: 'fantome', result: 'perdu', lost: 3, dealt: 0 }).against, 'contre un fantôme');
+});
+
+test('opponentAbout: what the sheet of a player of the table says, for this reader', async () => {
+  const { opponentAbout } = await import('../src/client/tools/opponentAbout.ts');
+  const fights = [{ round: 4, against: 0, heroId: 'macron', result: 'gagne' as const, lost: 0, dealt: 5 }];
+  const row = (seat: number, heroId: string | null) => ({ seat, heroId, hp: 21, tier: 3, alive: true, boardSize: 4, place: 0, triples: 2, fights });
+  const seen = [{ seat: 1, heroId: 'bardella', round: 4, board: [] }];
+  const online = new Map([[0, { hero: 'Emmanuel Macron', pseudo: 'Léa', bot: false }], [1, { hero: 'Jordan Bardella', pseudo: null, bot: true }]]);
+  const reader = { seat: 0, startHp: 30, names: online, seen, nextSeat: 1 };
+  const rival = opponentAbout(row(1, 'bardella'), reader);
+  assert.equal(rival.name, 'Jordan Bardella');
+  assert.equal(rival.player, 'Bot');
+  assert.equal(rival.power?.name, HERO_BY_ID.bardella.power);
+  assert.deepEqual([rival.tier, rival.hp, rival.startHp, rival.triples, rival.alive], [3, 21, 30, 2, true]);
+  assert.equal(rival.seen, seen[0], 'its board the last time the reader faced it');
+  assert.equal(rival.fights, fights);
+  assert.deepEqual([rival.isOwn, rival.next], [false, true]);
+  const own = opponentAbout(row(0, 'macron'), reader);
+  assert.deepEqual([own.name, own.player, own.isOwn, own.next, own.seen], ['Emmanuel Macron', 'Vous', true, false, null]);
+  // A game in this page: no pseudo, the reader is « Vous »; a hero still to choose has no power yet.
+  const solo = { ...reader, names: new Map() };
+  assert.deepEqual([opponentAbout(row(0, 'macron'), solo).name, opponentAbout(row(0, 'macron'), solo).player], ['Vous', null]);
+  assert.deepEqual([opponentAbout(row(2, null), solo).name, opponentAbout(row(2, null), solo).power], ['…', null]);
 });

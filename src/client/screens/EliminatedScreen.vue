@@ -17,7 +17,7 @@ import type { PlayerView } from '#src/engine/game.ts';
 /**
  * Out of the game: the hero, greyed, and the table that plays on. The end screen comes by itself.
  * The player may leave for home now; when the ranking is already known, see it now. While the game goes on, a
- * survivor may be followed: its combats then show live, one after the other, until the end or until it falls.
+ * survivor may be followed: its recruitment table and its combats then show live, until the end or until it falls.
  */
 const props = withDefaults(defineProps<{ view: PlayerView; rankingReady?: boolean; names?: Map<number, SeatName>; following?: number | null }>(), {
   rankingReady: false,
@@ -61,8 +61,8 @@ function toggle(seat: number): void {
     <h1 class="title">Éliminé, {{ view.place }}<sup>{{ ordinalSuffix(view.place) }}</sup></h1>
     <p class="muted">{{ rankingReady ? 'La partie est jouée : le classement final arrive tout seul.' : 'La partie continue sans vous : le classement final arrive tout seul.' }}</p>
     <p v-if="canFollow" class="follow-hint" role="status">
-      <template v-if="followed">Vous suivez <strong>{{ followed }}</strong> : ses débats passent ici, en direct.</template>
-      <template v-else>Choisissez un survivant pour regarder ses débats en direct.</template>
+      <template v-if="followed">Vous suivez <strong>{{ followed }}</strong> : son recrutement et ses débats passent ici, en direct.</template>
+      <template v-else>Choisissez un survivant pour regarder son recrutement et ses débats en direct.</template>
     </p>
     <ol class="table">
       <li v-for="row in rows" :key="row.seat" class="row" :class="{ own: row.seat === view.seat, out: !row.alive, followed: row.seat === following }">

@@ -10,6 +10,7 @@ import DropLine from '#src/client/components/molecules/DropLine.vue';
 import EndOfTurnBanner from '#src/client/components/molecules/EndOfTurnBanner.vue';
 import HeroCorner from '#src/client/components/molecules/HeroCorner.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
+import WatchPlate from '#src/client/components/molecules/WatchPlate.vue';
 import BoardRow from '#src/client/components/organisms/BoardRow.vue';
 import CarriedItem from '#src/client/components/organisms/CarriedItem.vue';
 import CardInspector from '#src/client/components/organisms/CardInspector.vue';
@@ -35,10 +36,14 @@ import type { PlayerView } from '#src/engine/game.ts';
 
 const TRIPLE_MS = 1700;
 
-const props = withDefaults(defineProps<{ view: PlayerView; store: GameStore; powerNote?: string | null }>(), { powerNote: null });
+/**
+ * `watching`: out of the game, this table is the survivor's followed live, named here: everything shows as that
+ * survivor sees it, and nothing on it can be played.
+ */
+const props = withDefaults(defineProps<{ view: PlayerView; store: GameStore; powerNote?: string | null; watching?: string | null }>(), { powerNote: null, watching: null });
 
 const secondsLeft = useCountdown(props.store.deadline);
-const gestures = useTableGestures({ view: () => props.view, act: (action) => props.store.act(action) });
+const gestures = useTableGestures({ view: () => props.view, act: (action) => props.store.act(action), locked: () => props.watching !== null });
 useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 /** While something is carried: the counter line says what a drop across it does. */
@@ -95,7 +100,8 @@ watch(tripleCount, (count, before) => {
     <div class="story-line-place"><slot name="story-line" /></div>
     <div class="story-quest-place"><slot name="story-quest" /></div>
     <div class="right-rail">
-      <ReadyButton :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" :refusal="store.readyRefusal.value" @ready="store.endRecruitment()" />
+      <WatchPlate v-if="watching" :name="watching" :seconds-left="secondsLeft" @change="store.follow(null)" />
+      <ReadyButton v-else :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" :refusal="store.readyRefusal.value" @ready="store.endRecruitment()" />
       <CampChips class="camps" :camps="view.camps" vertical />
       <ContextBadge :context-id="view.contextId" compact />
     </div>
@@ -111,7 +117,7 @@ watch(tripleCount, (count, before) => {
       <CarriedItem :gestures="gestures" :scandal-threshold="view.scandalThreshold" :round="view.round" />
       <FxLayer />
       <CardInspector />
-      <DiscoverOverlay v-if="view.discover" :key="view.discover.join()" :choices="view.discover" :kind="view.discoverKind" @choose="(i) => store.act({ t: 'discover', i })" />
+      <DiscoverOverlay v-if="view.discover" :key="view.discover.join()" :choices="view.discover" :kind="view.discoverKind" :chooser="watching" @choose="(i) => store.act({ t: 'discover', i })" />
     </template>
   </GameTable>
 </template>

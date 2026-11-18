@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import RichText from '#src/client/components/atoms/RichText.vue';
+import GainList from '#src/client/components/molecules/GainList.vue';
+import { gainLines } from '#src/client/tools/gainLines.ts';
 import { glossaryFor } from '#src/client/tools/glossaryFor.ts';
 import { shownCardLines } from '#src/client/tools/shownCard.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
 import { wornCasseroleLines } from '#src/client/tools/wornCasseroleLines.ts';
 
 const POINT_HINT = 'Pointez une casserole sous le médaillon pour voir son effet.';
+const SPELL_HINT = 'Une casserole est un sort : la poser compte comme un sort lancé.';
 
 /**
- * Beside a card: what each of its keywords means, one entry a line or two. A casserole pointed on the board says
- * first what it does now; a casserole also tells its joke. A politician of the board with casseroles says they can be
- * pointed at.
+ * Beside a card: what each of its keywords means, one entry a line or two. A politician in play says first where its
+ * bonuses come from, one line per source. A casserole pointed on the board says first what it does now; a casserole
+ * also tells its joke. A politician of the board with casseroles says they can be pointed at.
  */
 const props = defineProps<{ card: ShownCard }>();
 
@@ -20,15 +23,21 @@ const remembered = computed(() => props.card.kind === 'minion' && (props.card.fa
 const worn = computed(() => (props.card.kind === 'casserole' && props.card.worn ? wornCasseroleLines(props.card.casserole, props.card.worn) : []));
 const entries = computed(() => glossaryFor([...worn.value, ...shownCardLines(props.card), ...(remembered.value ? ['**Scandale**'] : [])]));
 const joke = computed(() => (props.card.kind === 'casserole' ? props.card.casserole : null));
+/** Where its bonuses come from, and in a combat what that combat gave it: nothing for a card that only has its own text. */
+const bonuses = computed(() => (props.card.kind === 'minion' ? gainLines(props.card.gains ?? [], props.card.face.keywords ?? [], props.card.debate ?? null) : null));
+/** A casserole still to lay (the shop, the hand, a choice): it says it counts as a spell. Worn, it says what it does now instead. */
+const countsAsSpell = computed(() => props.card.kind === 'casserole' && !props.card.worn);
 const pointable = computed(() => props.card.kind === 'minion' && Boolean(props.card.onBoard) && (props.card.face.casseroles?.length ?? 0) > 0);
 </script>
 
 <template>
-  <span v-if="worn.length || entries.length || joke || pointable" class="glossary">
+  <span v-if="bonuses || worn.length || entries.length || joke || pointable" class="glossary">
+    <GainList v-if="bonuses" class="entry bonuses" :list="bonuses" />
     <span v-if="worn.length" class="entry worn"><RichText v-for="line in worn" :key="line" class="worn-line" :text="line" /></span>
     <span v-for="entry in entries" :key="entry.term" class="entry"><strong>{{ entry.term }}</strong> {{ entry.rule }}</span>
     <span v-if="joke" class="entry joke">{{ joke.blague }}</span>
     <span v-if="joke?.citation" class="entry quote">« {{ joke.citation }} »</span>
+    <span v-if="countsAsSpell" class="entry hint">{{ SPELL_HINT }}</span>
     <span v-if="pointable" class="entry hint">{{ POINT_HINT }}</span>
   </span>
 </template>
@@ -54,6 +63,9 @@ const pointable = computed(() => props.card.kind === 'minion' && Boolean(props.c
 /* What a pointed casserole does now, set apart from the glossary under it. */
 .worn { display: flex; flex-direction: column; gap: calc(var(--s) * 4); padding-bottom: calc(var(--s) * 8); border-bottom: calc(var(--s) * 2) solid rgb(255 255 255 / 0.14); color: #fff; font-weight: 600; }
 .worn-line { display: block; }
+/* Its bonuses, set apart from the glossary under them. */
+.bonuses { display: flex; padding-bottom: calc(var(--s) * 8); border-bottom: calc(var(--s) * 2) solid rgb(255 255 255 / 0.14); }
+.bonuses:last-child { padding-bottom: 0; border-bottom: none; }
 .worn :deep(strong) { color: var(--color-accent); }
 .joke { font-style: italic; color: #fff; }
 .quote { color: var(--color-accent); }

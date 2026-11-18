@@ -3,7 +3,8 @@ import { onMounted, useTemplateRef } from 'vue';
 
 /**
  * A sheet rising from the bottom of the phone, over a darkened table: whatever it holds, a touch outside it or Escape
- * closes it. Opened by the player, it never stops the game: the round's time goes on.
+ * closes it. Opened by the player, it never stops the game: the round's time goes on. Its touches are its own: none
+ * hurries the show behind it.
  */
 defineProps<{ label: string }>();
 const emit = defineEmits<{ close: [] }>();
@@ -19,7 +20,7 @@ onMounted(() => dialog.value?.showModal());
 </script>
 
 <template>
-  <dialog ref="dialog" class="sheet" :aria-label="label" @cancel.prevent="emit('close')" @click="closeOutside">
+  <dialog ref="dialog" class="sheet" :aria-label="label" data-no-hurry @cancel.prevent="emit('close')" @click="closeOutside">
     <div class="content"><slot /></div>
   </dialog>
 </template>

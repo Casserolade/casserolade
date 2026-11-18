@@ -126,8 +126,9 @@ export type ClientMessage =
    */
   | { type: 'exclure'; pseudo: string }
   /**
-   * Out of the game, follow a survivor: each of its combats is shown live (`spectacle`), from now on. Null stops.
-   * The follower's « vu » counts like a player's: the round waits for it, up to the combat's own timer.
+   * Out of the game, follow a survivor: its recruitment table (`suivi`) and each of its combats (`spectacle`) are shown
+   * live, from now on. Null stops. The follower's « vu » counts like a player's: the round waits for it, up to the
+   * combat's own timer.
    */
   | { type: 'suivre'; siege: number | null };
 
@@ -146,5 +147,10 @@ export type ServerMessage =
   | { type: 'mmr'; avant: number; apres: number }
   /** The combat of the survivor this eliminated player follows (`suivre`), seen from that survivor's side. */
   | { type: 'spectacle'; siege: number; combat: CombatView }
+  /**
+   * The recruitment table of the survivor this eliminated player follows, as that survivor sees it: its shop, its
+   * hand, its choices. Sent at each of its gestures; `reste_ms` as for `vue`.
+   */
+  | { type: 'suivi'; siege: number; vue: PlayerView; reste_ms: number | null }
   /** New chat lines. `historique`: the room's last lines, sent on arrival or return, which replace the client's. */
   | { type: 'chat'; messages: MessageChat[]; historique?: boolean };

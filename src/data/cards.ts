@@ -54,10 +54,10 @@ export const TOKENS: Record<string, Card> = {
  */
 export const CARDS: Card[] = [
   // Insoumis : la rue. Les Tracts, sorts gratuits qu'on améliore pour la partie.
-  card('boyard', 'Louis Boyard', 'insoumis', 2, 4, 5, { kw: ['vedette'], fx: [fx('annonce', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract', 2))] }),
+  card('boyard', 'Louis Boyard', 'insoumis', 2, 4, 5, { fx: [fx('annonce', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract', 2))] }),
   card('leaument', 'Antoine Léaument', 'insoumis', 1, 3, 4, { fx: [fx('vente', 'joueur', carte('tract', 2)), fx('droit_de_reponse', 'joueur', carte('tract'))] }),
   // L'ancien garde du corps de Mélenchon : il protège, et le drapeau reste.
-  card('delogu', 'Sébastien Delogu', 'insoumis', 1, 2, 4, { kw: ['porte_parole', 'vedette'], fx: [fx('heritage', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract'))] }),
+  card('delogu', 'Sébastien Delogu', 'insoumis', 1, 2, 4, { kw: ['porte_parole'], fx: [fx('heritage', 'joueur', carte('tract')), fx('celebration', 'joueur', carte('tract'))] }),
   card('portes', 'Thomas Portes', 'insoumis', 2, 3, 5, { fx: [fx('fin_tour', 'aleatoire', tract), fx('fin_tour', 'aleatoire', tract)] }),
   card('trouve', 'Aurélie Trouvé', 'insoumis', 3, 1, 4, { fx: [fx('aura', 'soi', compteur('tracts', 1, 1))] }),
   // PS, LREM, EDS, EELV, LFI : il se pose sur n'importe qui.
@@ -79,12 +79,12 @@ export const CARDS: Card[] = [
   // la valeur des Tracts payait trop tard, -0,09 place offert à la manche 9). « Qu'ils s'en aillent tous ! » (son livre
   // de 2010) : le Coup de balai, depuis le 13 novembre 2026.
   card('melenchon', 'Jean-Luc Mélenchon', 'insoumis', 6, 7, 7, {
-    kw: ['vedette', 'balai'],
+    kw: ['balai'],
     fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'meeting' }), fx('meeting', 'camp', tract, { camp: 'insoumis', perma: true })],
   }),
 
   // Socialistes : le retour. La mort comme ressource, et les Suppléants.
-  card('thevenoud', 'Thomas Thévenoud', 'socialistes', 1, 2, 3, { kw: ['retour', 'vedette'], fx: [fx('celebration', 'soi', buff(1, 1))] }),
+  card('thevenoud', 'Thomas Thévenoud', 'socialistes', 1, 2, 3, { kw: ['retour'], fx: [fx('celebration', 'soi', buff(1, 1))] }),
   card('bouamrane', 'Karim Bouamrane', 'socialistes', 1, 2, 2, { fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   // 7 novembre 2026 : le frondeur grandit en attaquant ; avec son Retour, il attaque deux fois par combat (règle R17).
   // 13 novembre 2026 : sa réincarnation (R20) revient comme sa carte nue, sans les gains du combat. Les Socialistes,
@@ -99,7 +99,6 @@ export const CARDS: Card[] = [
   // Socialistes passent de 5,19 à 4,84 de place moyenne en mono-camp (3 000 parties).
   card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'soi', buff(1, 1), { n: 1, perma: true })] }),
   card('cahuzac', 'Jérôme Cahuzac', 'socialistes', 2, 4, 5, {
-    kw: ['vedette'],
     fx: [fx('vente', 'joueur', { do: 'budget', value: 2, plus_tard: true }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
   }),
   card('hidalgo', 'Anne Hidalgo', 'socialistes', 4, 7, 7, { fx: [fx('annonce', 'cible', { do: 'sacrifier', echelon: 0 })] }),
@@ -108,7 +107,6 @@ export const CARDS: Card[] = [
   // Parti du PS en 2022 pour fonder La Convention : un transfuge, qui se rallie (7 novembre 2026).
   card('cazeneuve', 'Bernard Cazeneuve', 'socialistes', 3, 3, 6, { kw: ['ralliement', 'porte_parole'], fx: [fx('heritage', 'soi', invoque('suppleant', 2))] }),
   card('royal', 'Ségolène Royal', 'socialistes', 5, 7, 8, {
-    kw: ['vedette'],
     fx: [fx('annonce', 'aleatoire', motCle('retour')), fx('annonce', 'aleatoire', motCle('retour')), fx('celebration', 'allie_suivant', buff(2, 2))],
   }),
   card('glucksmann', 'Raphaël Glucksmann', 'socialistes', 5, 9, 12, {
@@ -130,8 +128,8 @@ export const CARDS: Card[] = [
   }),
 
   // Écologistes : la pousse. La Fin de tour, et la boutique qu'on fait grandir.
-  // « Le Tour de France est machiste et polluant » : le gag écologiste, en Vedette.
-  card('doucet', 'Grégory Doucet', 'ecologistes', 1, 1, 3, { kw: ['vedette'], fx: [fx('fin_tour', 'soi', buff(1, 1)), fx('celebration', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
+  // « Le Tour de France est machiste et polluant » : le gag écologiste.
+  card('doucet', 'Grégory Doucet', 'ecologistes', 1, 1, 3, { fx: [fx('fin_tour', 'soi', buff(1, 1)), fx('celebration', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
   card('lucas', 'Benjamin Lucas-Lundy', 'ecologistes', 1, 2, 3, { fx: [fx('vente', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
   card('batho', 'Delphine Batho', 'ecologistes', 2, 3, 3, { fx: [fx('fin_tour', 'joueur', boutique(1, 1), { camp: 'ecologistes' })] }),
   card('hurmic', 'Pierre Hurmic', 'ecologistes', 2, 3, 5, { fx: [fx('joue', 'soi', buff(1, 1), { camp: 'ecologistes' })] }),
@@ -150,7 +148,6 @@ export const CARDS: Card[] = [
   card('cohn_bendit', 'Daniel Cohn-Bendit', 'ecologistes', 6, 6, 8, { fx: [fx('fin_tour', 'camp', { do: 'buff_compteur', compteur: 'ecologistes_joues', atk: 1, hp: 1 }, { camp: 'ecologistes' })] }),
   card('jadot', 'Yannick Jadot', 'ecologistes', 4, 7, 9, { fx: [fx('fin_tour', 'voisins', { do: 'declencher', trigger: 'fin_tour' })] }),
   card('rousseau', 'Sandrine Rousseau', 'ecologistes', 5, 6, 6, {
-    kw: ['vedette'],
     fx: [fx('fin_tour', 'autres_camp', buff(1, 1), { camp: 'ecologistes' }), fx('celebration', 'joueur', campBuff(1, 1), { camp: 'ecologistes' })],
   }),
   card('tondelier', 'Marine Tondelier', 'ecologistes', 5, 5, 5, {
@@ -164,12 +161,11 @@ export const CARDS: Card[] = [
   card('maillard', 'Sylvain Maillard', 'macronie', 1, 2, 3, { kw: ['ni_droite_ni_gauche'], fx: [fx('rallie', 'joue', buff(2, 2))] }),
   card('oudea', 'Amélie Oudéa-Castéra', 'macronie', 2, 2, 2, { golden: true, fx: [fx('fin_tour', 'dores', buff(1, 0))] }),
   card('rugy', 'François de Rugy', 'macronie', 2, 2, 3, {
-    kw: ['vedette'],
     fx: [fx('depense', 'soi', buff(1, 1), { n: 5 }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
   }),
   // 7 novembre 2026 : grandit tous les deux sorts. À chaque Tract, un échelon 2 dépassait les légendes.
   card('schiappa', 'Marlène Schiappa', 'macronie', 2, 2, 3, {
-    kw: ['ni_droite_ni_gauche', 'vedette'],
+    kw: ['ni_droite_ni_gauche'],
     fx: [fx('sort', 'soi', buff(1, 1), { n: 2 }), fx('celebration', 'joueur', carte('sort_aleatoire'))],
   }),
   card('castaner', 'Christophe Castaner', 'macronie', 3, 3, 4, { kw: ['ralliement', 'cumul'] }),
@@ -190,11 +186,11 @@ export const CARDS: Card[] = [
   card('attal', 'Gabriel Attal', 'macronie', 5, 8, 8, { fx: [fx('aura', 'soi', compteur('dores_joues', 6, 6))] }),
   // La Fête de la musique à l'Élysée, 21 juin 2018 : il fait la fête deux fois plus fort que les autres.
   // Échelon 6, clé de voûte du Ralliement : chaque Ralliement fait gonfler son hôte, d'autant plus qu'il en a déjà
-  // reçu. Vedette sans gain : il prend la lumière et double les Célébrations des autres (7 novembre 2026).
+  // reçu. Sans gain à lui : il double les Célébrations des autres (7 novembre 2026).
   // 13 novembre 2026 : sans Ralliement sous la main, son moteur ne tournait pas (1,23 place, le plus faible des chefs
   // de camp). Il amène son transfuge : Gérald Darmanin, qui quitte Les Républicains pour son gouvernement en 2017.
   card('macron', 'Emmanuel Macron', 'macronie', 6, 9, 9, {
-    kw: ['ni_droite_ni_gauche', 'vedette'],
+    kw: ['ni_droite_ni_gauche'],
     fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'celebration' }), fx('rallie', 'joue', { do: 'buff_par_ralliement', atk: 4, hp: 4 }), fx('annonce', 'joueur', carte('darmanin'))],
   }),
 
@@ -206,7 +202,7 @@ export const CARDS: Card[] = [
   card('tiberi', 'Jean Tiberi', 'republicains', 1, 2, 3, { fx: [fx('annonce', 'soi', invoque('electeur_fantome'))] }),
   card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
   card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
-  card('morano', 'Nadine Morano', 'republicains', 2, 5, 5, { kw: ['vedette'], fx: [fx('celebration', 'aleatoire', motCle('immunite'))] }),
+  card('morano', 'Nadine Morano', 'republicains', 2, 5, 5, { fx: [fx('celebration', 'aleatoire', motCle('immunite'))] }),
   card('lisnard', 'David Lisnard', 'republicains', 3, 2, 2, { kw: ['immunite'], fx: [fx('fin_tour', 'allie_suivant', motCle('immunite'))] }),
   card('wauquiez', 'Laurent Wauquiez', 'republicains', 3, 4, 7, {
     kw: ['porte_parole'],
@@ -239,7 +235,7 @@ export const CARDS: Card[] = [
   // 13 novembre 2026 : chaque débauchage fait grossir le RN de la boutique, donc le débauchage suivant. Avec Marine
   // Le Pen, le camp ne dépassait pas 450 de stats : la boutique ne grandissait pas. (Avant : +1/+1 à l'allié suivant
   // quand il attaque, 0,47 place, l'une des cartes les plus faibles de l'échelon 2.)
-  card('odoul', 'Julien Odoul', 'rn', 2, 4, 5, { kw: ['vedette'], fx: [fx('debauche', 'joueur', boutique(1, 1), { camp: 'rn' }), fx('celebration', 'aleatoire', buff(1, 1), { camp: 'rn' })] }),
+  card('odoul', 'Julien Odoul', 'rn', 2, 4, 5, { fx: [fx('debauche', 'joueur', boutique(1, 1), { camp: 'rn' }), fx('celebration', 'aleatoire', buff(1, 1), { camp: 'rn' })] }),
   card('houssin', 'Timothée Houssin', 'rn', 1, 1, 1, { fx: [fx('annonce', 'soi', debauche('plus_fort'))] }),
   // « Que de la main-d'œuvre locale », puis des travailleurs détachés à 5 € de l'heure : il embauche le moins cher, un autre en profite.
   card('fournas', 'Grégoire de Fournas', 'rn', 1, 1, 1, { fx: [fx('annonce', 'aleatoire', debauche('plus_fort'))] }),
@@ -254,7 +250,6 @@ export const CARDS: Card[] = [
   card('mariani', 'Thierry Mariani', 'rn', 3, 4, 5, { kw: ['ralliement'], fx: [fx('annonce', 'soi', debauche('plus_fort'))] }),
   card('marechal', 'Marion Maréchal', 'rn', 4, 5, 5, { kw: ['retour'], fx: [fx('heritage', 'allie_suivant', buff(1, 1), { perma: true })] }),
   card('bardella', 'Jordan Bardella', 'rn', 5, 8, 8, {
-    kw: ['vedette'],
     fx: [fx('annonce', 'cible', debauche('plus_fort')), fx('annonce', 'cible', debauche('plus_fort')), fx('celebration', 'main', debauche('plus_fort'))],
   }),
   // 7 novembre 2026 : monte à l'échelon 5, et la dynastie garde ce qu'il transmet.
@@ -266,7 +261,7 @@ export const CARDS: Card[] = [
   // 3 novembre 2026 : Reconquête vit de l'actualisation, qui coûte ; ses cartes la rendent gratuite ou la remboursent.
   card('bay', 'Nicolas Bay', 'reconquete', 2, 4, 4, { fx: [fx('annonce', 'joueur', { do: 'actualisations_gratuites', value: 3 })] }),
   // Rallié à Marine Le Pen en 2017, Premier ministre annoncé : un Ralliement (7 novembre 2026).
-  card('dupont_aignan', 'Nicolas Dupont-Aignan', 'reconquete', 2, 3, 3, { kw: ['ralliement', 'vedette'], fx: [fx('actualise', 'soi', buff(1, 1)), fx('celebration', 'joueur', { do: 'actualisations_gratuites', value: 1 })] }),
+  card('dupont_aignan', 'Nicolas Dupont-Aignan', 'reconquete', 2, 3, 3, { kw: ['ralliement'], fx: [fx('actualise', 'soi', buff(1, 1)), fx('celebration', 'joueur', { do: 'actualisations_gratuites', value: 1 })] }),
   // Le stratège numérique de Zemmour, et la cellule WikiZédia : chaque actualisation du fil le fait monter.
   // Il réécrivait aussi chaque boutique (congrès) : Reconquête gagnait une partie sur trois, retiré le 3 novembre 2026.
   card('lafont', 'Samuel Lafont', 'reconquete', 1, 2, 3, { fx: [fx('actualise', 'soi', buff(2, 0))] }),
@@ -275,7 +270,7 @@ export const CARDS: Card[] = [
   card('yann_bompard', 'Yann Bompard', 'reconquete', 1, 3, 3, { fx: [fx('annonce', 'soi', invoque('assistant_fictif'))] }),
   // 7 novembre 2026 : le plus faible de l'échelon 2 (0,39 place) grandit en attaquant.
   card('rigault', 'Stanislas Rigault', 'reconquete', 2, 3, 4, { kw: ['polemique'], fx: [fx('meeting', 'soi', buff(1, 1), { perma: true })] }),
-  card('asselineau', 'François Asselineau', 'reconquete', 3, 3, 4, { kw: ['vedette'], fx: [fx('actualise', 'aleatoire', buff(1, 1), { camp: 'reconquete' }), fx('celebration', 'joueur', carte('sort_aleatoire'))] }),
+  card('asselineau', 'François Asselineau', 'reconquete', 3, 3, 4, { fx: [fx('actualise', 'aleatoire', buff(1, 1), { camp: 'reconquete' }), fx('celebration', 'joueur', carte('sort_aleatoire'))] }),
   // 1,45 % à la primaire de 2016, rallié à Zemmour en 2021 : on le renvoie, il ramène quelqu'un.
   card('poisson', 'Jean-Frédéric Poisson', 'reconquete', 2, 5, 5, { fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'serviteur', camp: 'reconquete', echelon: 0 })] }),
   // De LR à Reconquête : il se rallie, et apporte sa Polémique à son hôte (7 novembre 2026).
@@ -288,21 +283,23 @@ export const CARDS: Card[] = [
   // grandir un autre politique de Reconquête.
   card('knafo', 'Sarah Knafo', 'reconquete', 5, 7, 7, { fx: [fx('actualise', 'aleatoire', buff(2, 2), { camp: 'reconquete' })] }),
   card('villiers', 'Philippe de Villiers', 'reconquete', 5, 6, 8, {
-    kw: ['vedette'],
     fx: [fx('debut_combat', 'tous_ennemis', { do: 'degats', value: 2 }), fx('celebration', 'joueur', { do: 'actualisations_gratuites', value: 2 })],
   }),
-  // Échelon 6, clé de voûte de l'actualisation : il grandit au carré, de +1/+1 par actualisation de la partie (7 novembre 2026).
+  // Échelon 6, clé de voûte de l'actualisation : il grandit au carré. Jusqu'au 18 novembre 2026, de +1/+1 par
+  // actualisation de la partie : seul, sans montage, il passait loin devant les autres camps (plafond de 1 486 à la
+  // manche 13 contre 239 à 841, et en ligne deux exemplaires à 2 200/2 200 à la manche 12). Désormais +3/+3 par
+  // actualisation de la manche, le compte repartant de zéro à chaque manche : 671, 905 et 1 117 aux manches 13, 14 et 15,
+  // comme les Socialistes, les Écologistes et le RN (`node src/sim/bilan_plafonds.ts`).
   card('zemmour', 'Éric Zemmour', 'reconquete', 6, 8, 9, {
-    kw: ['polemique', 'vedette'],
-    fx: [fx('actualise', 'soi', { do: 'buff_compteur', compteur: 'actualisations', atk: 1, hp: 1 })],
+    kw: ['polemique'],
+    fx: [fx('actualise', 'soi', { do: 'buff_compteur', compteur: 'actualisations_manche', atk: 3, hp: 3 })],
   }),
 
   // Société civile : sans étiquette. Les pièces qu'on ajoute à n'importe quel moteur.
   card('kazib', 'Anasse Kazib', 'civile', 1, 3, 2, { fx: [fx('annonce', 'joueur', carte('tract'))] }),
-  card('cheminade', 'Jacques Cheminade', 'civile', 1, 2, 3, { kw: ['vedette'], fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 }), fx('celebration', 'joueur', carte('sort_aleatoire'))] }),
+  card('cheminade', 'Jacques Cheminade', 'civile', 1, 2, 3, { fx: [fx('vente', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 }), fx('celebration', 'joueur', carte('sort_aleatoire'))] }),
   // Le Christ cosmique bénit : après une victoire, un autre politique au hasard grandit.
   card('durif', 'Sylvain Durif', 'civile', 2, 2, 3, {
-    kw: ['vedette'],
     fx: [fx('fin_tour', 'aleatoire', buff(1, 1)), fx('fin_tour', 'aleatoire', buff(1, 1)), fx('celebration', 'aleatoire', buff(2, 2))],
   }),
   // Le chanteur en tête de la liste « Alliance jaune » aux européennes de 2019 : un ridicule en attire un autre, il
@@ -311,24 +308,23 @@ export const CARDS: Card[] = [
   // vainqueurs à 5/6, 19 % à 4/4). Le soir même : ses Ridicules coûtent 2 ou moins, sans les plus forts, et sa
   // Célébration donne le Retour en politique, comme sa chanson de 1986, « On se retrouvera ».
   card('lalanne', 'Francis Lalanne', 'civile', 2, 4, 4, {
-    kw: ['vedette'],
     fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'casserole', genre: 'ridicule', coutMax: 2 }), fx('celebration', 'aleatoire', motCle('retour'))],
   }),
-  card('arthaud', 'Nathalie Arthaud', 'civile', 3, 5, 7, { kw: ['vedette'], fx: [fx('annonce', 'joueur', boutique(1, 1)), fx('celebration', 'joueur', boutique(1, 1))] }),
+  card('arthaud', 'Nathalie Arthaud', 'civile', 3, 5, 7, { fx: [fx('annonce', 'joueur', boutique(1, 1)), fx('celebration', 'joueur', boutique(1, 1))] }),
   card('branco', 'Juan Branco', 'civile', 2, 3, 2, {
     fx: [fx('annonce', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 }), fx('droit_de_reponse', 'joueur', { do: 'decouvrir', quoi: 'sort', echelon: 0 })],
   }),
   card('roussel', 'Fabien Roussel', 'civile', 3, 1, 3, { fx: [fx('sort', 'allies', buff(1, 0))] }),
   // « Nous, on n'a pas d'immunité ouvrière » : il répond quand on perd. Au débat du 4 avril 2017, il tape sur Fillon et
   // sur Le Pen d'un même élan : le Coup de balai (13 novembre 2026).
-  card('poutou', 'Philippe Poutou', 'civile', 3, 2, 6, { kw: ['vedette', 'balai'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
+  card('poutou', 'Philippe Poutou', 'civile', 3, 2, 6, { kw: ['balai'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
   // Candidat le 9 novembre 2026 : « ni de droite, ni de gauche », et « Je sais ce que c'est de se battre, de tomber,
   // de se relever toujours » (vidéo de sa candidature). Il compte pour chaque parti, et se relève une fois.
   card('riner', 'Teddy Riner', 'civile', 4, 6, 9, { kw: ['ni_droite_ni_gauche', 'retour'] }),
   // Candidate le 14 octobre 2026 (France Inter) : « Nous sommes la France », un rassemblement des « orphelins de la
   // politique » venus de tous les partis. Elle grandit de chaque camp réuni sur le plateau.
   card('polony', 'Natacha Polony', 'civile', 4, 4, 6, { fx: [fx('fin_tour', 'soi', { do: 'buff_par_camp', atk: 1, hp: 1 })] }),
-  card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { kw: ['vedette'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
+  card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).
   // Société civile : tout le monde peut les viser, quel que soit son camp.

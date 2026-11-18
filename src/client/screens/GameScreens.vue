@@ -47,7 +47,7 @@ const hasRoom = computed(() => room.value !== null && !isRanked.value);
 const canReplay = computed(() => (room.value ? isHost.value && !isRanked.value : props.canRestart));
 const replayHint = computed(() => (hasRoom.value && !isHost.value ? 'L\'hôte peut relancer une partie.' : null));
 /** Playing: the door to leave is in the corner. Out of the game, the screens have their own way back. */
-const inGame = computed(() => ['hero', 'recruit', 'combat'].includes(props.store.screen.value));
+const inGame = computed(() => ['hero', 'recruit', 'watching', 'combat'].includes(props.store.screen.value));
 // The background music follows the game: it plays from the choice of the hero to the last combat.
 watch(inGame, (playing) => (playing ? music.play() : music.stop()), { immediate: true });
 watch(() => (inGame.value ? (props.store.view.value?.hp ?? null) : null), (polls) => music.setHeroPolls(polls), { immediate: true });
@@ -62,8 +62,13 @@ const watching = computed(() => {
   const seat = props.store.spectating.value;
   return seat === null ? null : seatLabel(props.store.names.value.get(seat));
 });
+/** Out of the game, the survivor whose recruitment table is on screen. */
+const watchedName = computed(() => {
+  const seat = props.store.following.value;
+  return seat === null ? null : seatLabel(props.store.names.value.get(seat));
+});
 /** The chat follows the table through the game, and stays for the « gg » at the end. Never in solo. */
-const showChat = computed(() => props.store.canChat.value && ['hero', 'recruit', 'combat', 'eliminated', 'end'].includes(props.store.screen.value));
+const showChat = computed(() => props.store.canChat.value && ['hero', 'recruit', 'watching', 'combat', 'eliminated', 'end'].includes(props.store.screen.value));
 
 const slowLoading = ref(false);
 let loadingTimer = 0;
@@ -146,6 +151,7 @@ function again(): void {
     <template #story-line><slot name="recruit-line" /></template>
     <template #story-quest><slot name="recruit-quest" /></template>
   </component>
+  <component :is="screens.recruit" v-else-if="store.screen.value === 'watching' && store.watched.value" :view="store.watched.value" :store="store" :watching="watchedName" />
   <EliminatedScreen
     v-else-if="store.screen.value === 'eliminated' && store.view.value"
     :view="store.view.value"

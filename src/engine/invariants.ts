@@ -10,13 +10,14 @@ import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { SPELL_BY_ID } from '../data/sorts.ts';
 import { effectOrigin } from './minion.ts';
+import { baseStats, recordedStats } from './gains.ts';
 import { boardLimit, handCount } from './recruit.ts';
 import type { Game, Player } from './state.ts';
 import type { Effect, Keyword, Minion } from './types.ts';
 
 /** Tous les mots-clés : le compilateur refuse cette table si un mot-clé est ajouté sans elle. */
 const KNOWN_KEYWORDS: Record<Keyword, true> = {
-  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true, balai: true,
+  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, balai: true,
 };
 
 /** Les exemplaires de chaque carte, où qu'ils soient : la réserve, les boutiques, les choix, les plateaux et les mains. */
@@ -65,6 +66,12 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
   for (const id of m.merged) check(Boolean(CARD_BY_ID[id]), `carte ralliée inconnue ${id}`);
   for (const id of m.rallied) check(Boolean(CARD_BY_ID[id]), `Ralliement inconnu ${id}`);
   if (!card) return out;
+
+  // Le registre de ses gains explique ses stats : la base de sa carte, plus chaque ligne. Aucun gain ne s'ajoute sans dire d'où il vient.
+  const base = baseStats(m);
+  const known = recordedStats(m.gains);
+  if (base) check(m.atk === base.atk + known.atk && m.hp === base.hp + known.hp, `${m.atk}/${m.hp}, mais sa carte (${base.atk}/${base.hp}) et le registre de ses gains (${known.atk}/${known.hp}) disent autre chose`);
+  check(new Set(m.gains.map((gain) => gain.source)).size === m.gains.length, 'une source en double au registre des gains');
 
   // Les casseroles, le scandale et l'oubli du peuple.
   for (const id of m.casseroles) check(Boolean(CASSEROLE_BY_ID[id]), `casserole inconnue ${id}`);

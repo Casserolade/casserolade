@@ -103,13 +103,15 @@ export interface GestureOptions {
   zoneAt?: (point: Point) => Zone | null;
   /** A click on something of the table. The computer acts at once (`actOn`); the phone opens its card first. */
   onTap?: (item: GestureItem, source: Element | null) => void;
+  /** Someone else's table, only watched: nothing is carried and no click plays; a card still opens (`onTap`). */
+  locked?: () => boolean;
 }
 
 /**
  * Every gesture of the recruitment: pick up, carry, drop, click, and aim at an ally.
  * Nothing changes in the game before the drop; every action goes through `act`, so the engine decides.
  */
-export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, onTap }: GestureOptions) {
+export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, onTap, locked = () => false }: GestureOptions) {
   const dragging = shallowRef<Dragging | null>(null);
   const targeting = shallowRef<Targeting | null>(null);
   const pointer = ref<Point>({ x: 0, y: 0 });
@@ -269,6 +271,7 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
 
   /** What a click does on the computer, and the phone's card once its button is pressed: buy, lay down, cast. */
   function actOn(item: GestureItem, source: Element | null): void {
+    if (locked()) return;
     if (item.from === 'hand' && !isPlayable(item.minion.uid, view().hand.some((m) => m.uid === item.minion.uid))) return;
     if (item.from === 'hand-spell' && !isPlayable(item.held.uid, view().spells.some((s) => s.uid === item.held.uid))) return;
     const from = centerOf(source);
@@ -302,13 +305,14 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
 
   /** Sent back from its card on the phone: the coins burst from the button pressed. */
   function sendBack(minion: Minion, source: Element | null): void {
+    if (locked()) return;
     sell(minion, centerOf(source) ?? pointer.value);
   }
 
   // —— Carrying ——
 
   function press(event: PointerEvent, item: GestureItem): void {
-    if (event.button !== 0 || targeting.value) return;
+    if (locked() || event.button !== 0 || targeting.value) return;
     pressed = { item, start: { x: event.clientX, y: event.clientY }, pointerId: event.pointerId, source: event.currentTarget as Element };
     window.addEventListener('pointermove', handleMove);
     window.addEventListener('pointerup', handleUp);

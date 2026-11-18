@@ -21,7 +21,7 @@ const BANALE: Faits = {
   casseroles: 6, scandales: 1, oublis: 1, triples: 1, sorts: 20, actualisations: 12, renvois: 5, gels: 0, depenses: 110,
   plus_gros: 60, sondages_perdus: 38, sondages_au_plus_bas: -2, sondages: -2, manches: 14, echelon: 6,
   politiques: 7, dores: 2, camps: 3, meme_camp: 3, gauche_plurielle: 0, union_des_droites: 0, presidents: 0,
-  porte_parole: 2, immunites: 1, vedettes: 2, casseroles_sur_un: 2, attaque_totale: 180,
+  porte_parole: 2, immunites: 1, celebrations: 2, casseroles_sur_un: 2, attaque_totale: 180,
 };
 /** Une victoire ordinaire : il lui reste des sondages, et elle en a perdu. */
 const VICTOIRE: Faits = { ...BANALE, place: 1, sondages: 14, sondages_au_plus_bas: 14, sondages_perdus: 23, manches: 15 };
@@ -139,7 +139,7 @@ test('le plateau de la fin : parti unique, gauche plurielle, dîner d\'État', (
   assert.deepEqual(ids(progresVierge(), victoire({ union_des_droites: 2 })), ['union_des_droites']);
   assert.deepEqual(ids(progresVierge(), victoire({ camps: 6, presidents: 4 })), ['cohabitation', 'diner_d_etat']);
   assert.deepEqual(ids(progresVierge(), partie({ dores: 7 })), ['bling_bling', 'age_d_or']);
-  assert.deepEqual(ids(progresVierge(), victoire({ porte_parole: 7, immunites: 7, vedettes: 6 })), ['langue_de_bois', 'immunite_parlementaire', 'peopolisation']);
+  assert.deepEqual(ids(progresVierge(), victoire({ porte_parole: 7, immunites: 7, celebrations: 6 })), ['langue_de_bois', 'immunite_parlementaire', 'peopolisation']);
   assert.deepEqual(ids(progresVierge(), partie({ place: 2, meme_camp: 7 })), [], 'tous demandent de gagner');
 });
 

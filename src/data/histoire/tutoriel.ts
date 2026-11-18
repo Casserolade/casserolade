@@ -256,7 +256,7 @@ export const TUTORIEL = {
       permis: ['echelon'],
     },
     celebration: {
-      texte: 'Nadine Morano est une **Vedette**. Si vous gagnez le combat et qu\'elle tient debout, sa **Célébration** joue : l\'Immunité pour un allié au hasard. Achetez-la et posez-la.',
+      texte: 'Nadine Morano a une **Célébration**. Si vous gagnez le combat et qu\'elle tient debout, elle joue : l\'Immunité pour un allié au hasard. Achetez-la et posez-la.',
       si: ['carte:morano'],
       permis: ['achat:morano'],
     },

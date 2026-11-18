@@ -12,6 +12,8 @@ import { lastSpokenLines } from '#src/client/stores/lastSpokenLines.ts';
 import { startedCombats } from '#src/client/stores/startedCombats.ts';
 import { studioShock } from '#src/client/stores/studioShock.ts';
 import { useHurry } from '#src/client/stores/useHurry.ts';
+import { useUnitCards } from '#src/client/stores/useUnitCards.ts';
+import type { ShownCard } from '#src/client/tools/shownCard.ts';
 import { afterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import type { AfterCombatSpeaker } from '#src/client/tools/afterCombatSpeaker.ts';
 import { speechForEvent } from '#src/client/tools/afterCombatSpeech.ts';
@@ -89,7 +91,8 @@ function middleOf(element: HTMLElement | null): { x: number; y: number } | null 
  * Everything a combat screen plays, whatever its layout: the stage drawn in `stageHost` with `layout`, the journal
  * played event by event, the voices and the bubbles, the Célébrations, the result, the strike on the beaten hero and
  * the polls that drain. The screen only places it: the computer's table, or the phone held upright. `onClose` is called
- * once it is all seen.
+ * once it is all seen. The mouse over a unit brings its full card up; `openCard`: on a phone, a touch on a unit opens
+ * its card through this instead of hurrying the show.
  */
 export function useCombatShow(
   props: CombatShowProps,
@@ -97,6 +100,7 @@ export function useCombatShow(
   stageHost: Readonly<Ref<HTMLElement | null>>,
   heroSpots: HeroSpots,
   layout: typeof combatLayout = combatLayout,
+  openCard: ((card: ShownCard) => void) | null = null,
 ) {
   let stage: CombatStage | null = null;
   let hasLeft = false;
@@ -123,6 +127,8 @@ export function useCombatShow(
   const speech = shallowRef<(CombatSpeech & { at: { x: number; y: number } | null; below: boolean }) | null>(null);
   /** Drawn once per combat: which of its quotes the celebrant (and the one who answers) says, so that the voice loaded ahead is the one heard. */
   const speechRoll = Math.random();
+  /** Drawn once per combat too: who takes the floor when the one chosen has no voice left to be heard and several others do. */
+  const standInRoll = Math.random();
   /** A single politician is heard after the combat: the one who celebrates, or else the one who answers. */
   let politicianHeard = false;
   /** Already started before this mount (a hot reload on the dev server): it is not played again from the top. */
@@ -302,7 +308,17 @@ export function useCombatShow(
     }
     return step !== null;
   }
-  useHurry(hurry);
+  /** The full card of each unit, as the combat stands: under the mouse, or opened by a touch. */
+  const unitCards = useUnitCards({ log: props.combat.log, played, sides, unitAt: (x, y) => stage?.unitAt(x, y) ?? null });
+
+  /** A touch on a unit opens its card (`openCard`): that press hurries nothing. */
+  function opensCard(event: PointerEvent): boolean {
+    const card = openCard ? unitCards.cardAt(event.clientX, event.clientY) : null;
+    if (!card) return false;
+    openCard?.(card);
+    return true;
+  }
+  useHurry(hurry, opensCard);
 
   /** The speech that plays now ends at once, its voice cut: heard, that voice never plays again in this game. */
   function endSpeech(): void {
@@ -361,7 +377,7 @@ export function useCombatShow(
     if (event.e !== 'celebration' && event.e !== 'reponse') return null;
     const moments = event.e === 'celebration' ? CELEBRATION_MOMENTS : ANSWER_MOMENTS;
     const canVoice = (cardId: string, line: string) => voiceFor(cardId, line, maxSeconds) !== null;
-    const speaker = voicedSpeaker(event, props.combat.log, (cardId) => quotesFor(cardId, moments).some((line) => canVoice(cardId, line)));
+    const speaker = voicedSpeaker(event, props.combat.log, (cardId) => quotesFor(cardId, moments).some((line) => canVoice(cardId, line)), standInRoll);
     return speechForEvent(speaker, speechRoll, lastSpokenLines.lastOf(speaker.cardId), canVoice);
   }
 
@@ -472,6 +488,6 @@ export function useCombatShow(
   return {
     SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
     notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, pollsLost, curveFalls, outcome, rivalLine,
-    host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
+    host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic, unitCards,
   };
 }

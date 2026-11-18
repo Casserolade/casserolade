@@ -113,3 +113,39 @@ test('une casserole économique ne rapporte pas plus que son prix plus un, ou pl
     assert.ok(gain <= c.cost + (hasDefect ? 2 : 1), `« ${c.name} » coûte ${c.cost} et rapporte ${gain} tout de suite`);
   }
 });
+
+test('une casserole est un sort : la poser compte comme un sort lancé (18 novembre 2026)', async () => {
+  const { createGame, applyAction } = await import('../src/engine/game.ts');
+  const { addMinionToHand, take } = await import('../src/engine/recruit.ts');
+  const game = createGame({ seed: 7, seats: 2, heroes: ['philippe', 'philippe'], activeCamps: ['macronie', 'republicains', 'socialistes', 'insoumis', 'reconquete'] });
+  const p = game.players[0];
+  p.budget = 500;
+  const lay = (cardId: string) => {
+    assert.ok(take(game, cardId));
+    const m = addMinionToHand(game, p, cardId);
+    assert.ok(m && applyAction(game, 0, { t: 'play', uid: m.uid }).ok, `${cardId} posé`);
+    return p.board.find((x) => x.uid === m?.uid) ?? m;
+  };
+  // Roussel : après chaque sort lancé, +1/+0 à vos politiques. Schiappa : tous les deux sorts, +1/+1.
+  const roussel = lay('roussel');
+  const schiappa = lay('schiappa');
+  assert.ok(roussel && schiappa);
+  const pose = (casseroleId: string) => {
+    p.casseroleOffer = casseroleId;
+    assert.equal(applyAction(game, 0, { t: 'buy_casserole' }).ok, true);
+    const held = p.spells.find((s) => s.casseroleId === casseroleId) as { uid: number };
+    assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid, target: roussel.uid }).ok, true, `${casseroleId} posée`);
+  };
+  const spells = p.stats.spells;
+  const before = { roussel: roussel.atk, schiappa: [schiappa.atk, schiappa.hp] };
+  pose('playboy');
+  assert.equal(p.stats.spells, spells + 1, 'un sort de plus au compteur');
+  pose('fonds_marianne');
+  assert.equal(p.stats.spells, spells + 2);
+  // Schiappa a vu passer deux sorts : +1/+1 une fois, plus les deux +1/+0 de Roussel.
+  assert.deepEqual([schiappa.atk - before.schiappa[0], schiappa.hp - before.schiappa[1]], [3, 1]);
+  assert.ok(roussel.gains.some((gain) => gain.source === 'carte:roussel' && gain.atk === 2 && gain.times === 2), 'Roussel se sert lui-même, deux fois');
+  assert.ok(roussel.atk > before.roussel);
+  const { invariantViolations } = await import('../src/engine/invariants.ts');
+  assert.deepEqual(invariantViolations(game), []);
+});

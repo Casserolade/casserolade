@@ -1,3 +1,4 @@
+import { CAREER_SOURCE } from './gains.ts';
 import { addStats, boardLimit, dropDiscovers, handIsFull, makeGolden, releaseMinion, returnToPool } from './recruit.ts';
 import { copyMinion } from './game.ts';
 import { CARD_BY_ID } from '../data/cards.ts';
@@ -82,7 +83,7 @@ function comeBack(game: Game, p: Player): void {
     if (!toBoard && handIsFull(game, p)) continue;
     const m = away.minion;
     if (away.golden && !m.golden && CARD_BY_ID[m.cardId]) makeGolden(p, m);
-    if (away.bonus) addStats(m, away.bonus, away.bonus);
+    if (away.bonus) addStats(m, away.bonus, away.bonus, CAREER_SOURCE);
     (toBoard ? p.board : p.hand).push(m);
     p.away = p.away.filter((x) => x !== away);
     p.events.push({ key: 'revient', cardId: m.cardId });

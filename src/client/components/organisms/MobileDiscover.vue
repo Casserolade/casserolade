@@ -9,9 +9,10 @@ import { shownCardLines } from '#src/client/tools/shownCard.ts';
 
 /**
  * A discovery on a phone: the three cards one under the other, each with its text at a reading size beside it.
- * A touch on one takes it. It is a real choice of the game: nothing to close.
+ * A touch on one takes it. It is a real choice of the game: nothing to close. `chooser`: the choice is the survivor's
+ * followed from outside the game, named here: its cards are read, not taken.
  */
-const props = defineProps<{ choices: string[]; kind: PlayerView['discoverKind'] }>();
+const props = withDefaults(defineProps<{ choices: string[]; kind: PlayerView['discoverKind']; chooser?: string | null }>(), { chooser: null });
 const emit = defineEmits<{ choose: [index: number] }>();
 
 const chosen = ref<number | null>(null);
@@ -24,7 +25,7 @@ function nameOf(index: number): string {
 }
 
 function choose(index: number): void {
-  if (chosen.value !== null) return;
+  if (chosen.value !== null || props.chooser) return;
   chosen.value = index;
   playSound('buy');
   emit('choose', index);
@@ -34,11 +35,11 @@ onMounted(() => playSound('discover'));
 </script>
 
 <template>
-  <div class="discover" role="dialog" aria-modal="true" aria-label="Découvrez : choisissez une carte">
-    <p class="title" aria-hidden="true">Découvrez !</p>
+  <div class="discover" role="dialog" aria-modal="true" :aria-label="chooser ? `${chooser} choisit une carte` : 'Découvrez : choisissez une carte'">
+    <p class="title" aria-hidden="true">{{ chooser ? `${chooser} choisit…` : 'Découvrez !' }}</p>
     <ol class="choices">
       <li v-for="(entry, index) in cards" :key="`${choices[index]}-${index}`" class="choice" :class="{ chosen: chosen === index, gone: chosen !== null && chosen !== index }" :style="{ '--i': index }">
-        <button v-if="entry" type="button" class="pick" :aria-label="`Prendre ${nameOf(index)}`" @click="choose(index)">
+        <button v-if="entry" type="button" class="pick" :aria-label="chooser ? nameOf(index) : `Prendre ${nameOf(index)}`" @click="choose(index)">
           <ShownCardFace class="face" :card="entry.card" />
           <span class="text">
             <strong class="name">{{ nameOf(index) }}</strong>

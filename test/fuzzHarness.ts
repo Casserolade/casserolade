@@ -25,14 +25,14 @@ import { SPELLS, SPELL_BY_ID } from '../src/data/sorts.ts';
  * (FUZZ_SEED décale les graines).
  */
 export const MAX_ROUNDS = 45;
-const KEYWORDS: Keyword[] = ['immunite', 'porte_parole', 'cumul', 'polemique', 'retour', 'ni_droite_ni_gauche', 'ralliement', 'vedette'];
+const KEYWORDS: Keyword[] = ['immunite', 'porte_parole', 'cumul', 'polemique', 'retour', 'ni_droite_ni_gauche', 'ralliement'];
 const VIEW_KEYS = [
   'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'upgradeLock', 'buyCost',
   'rollCost', 'freeRolls', 'relaunched', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
   'shopSpells', 'shopSpellCosts', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'discoverKind', 'tract', 'counters', 'stats', 'camps',
   'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents', 'nextOpponent', 'onceThisRound',
 ].sort();
-const TABLE_KEYS = ['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples'].sort();
+const TABLE_KEYS = ['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples', 'fights'].sort();
 
 /** Ce que le fuzz a fait passer par le moteur, toutes parties confondues. */
 export interface Coverage {

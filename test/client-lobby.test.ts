@@ -49,8 +49,8 @@ test('speakerName : le narrateur n\'a pas de nom', () => {
 test('cardRulesLines : le texte du politique s\'affiche en combat, mots-clés en gras, et aucune carte n\'est vide', () => {
   const villiers = CARDS.find((c) => c.id === 'villiers') as (typeof CARDS)[number];
   const lines = cardRulesLines({ keywords: villiers.keywords ?? [], effects: villiers.effects ?? [], bonus: 2 });
-  assert.match(lines[0], /\*\*Vedette\*\*/);
-  assert.match(lines[1], /\*\*49\.3\*\* : inflige 2 dégâts à tous les ennemis/);
+  assert.match(lines[0], /\*\*49\.3\*\* : inflige 2 dégâts à tous les ennemis/);
+  assert.match(lines[1], /\*\*Célébration\*\* : vos 2 prochaines actualisations sont gratuites/);
   assert.equal(lines.at(-1), 'Seul de son camp : +2/+2');
   for (const card of CARDS) {
     const text = cardRulesLines({ keywords: card.keywords ?? [], effects: card.effects ?? [], bonus: 0 });

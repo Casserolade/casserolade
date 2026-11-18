@@ -1,7 +1,7 @@
 import { Filter, GlProgram, defaultFilterVert } from 'pixi.js';
 
 /**
- * A Vedette goes off the air like an old television: snow eats the picture, it squashes into a white line, the line
+ * A politician with a Célébration goes off the air like an old television: snow eats the picture, it squashes into a white line, the line
  * shrinks to a dot, and the dot goes out. Drawn over the medallion's own box (the filter's frame), `uProgress` from 0
  * to 1.
  */

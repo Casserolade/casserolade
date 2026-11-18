@@ -6,8 +6,11 @@ import ShownCardFace from '#src/client/components/molecules/ShownCardFace.vue';
 import { discoverCards } from '#src/client/tools/discoverCards.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
-/** A real choice: three big cards in the middle of a darkened table. One click takes one; nothing to close. */
-const props = defineProps<{ choices: string[]; kind: PlayerView['discoverKind'] }>();
+/**
+ * A real choice: three big cards in the middle of a darkened table. One click takes one; nothing to close.
+ * `chooser`: the choice is the survivor's followed from outside the game, named here: its cards are read, not taken.
+ */
+const props = withDefaults(defineProps<{ choices: string[]; kind: PlayerView['discoverKind']; chooser?: string | null }>(), { chooser: null });
 const emit = defineEmits<{ choose: [index: number] }>();
 
 const chosen = ref<number | null>(null);
@@ -15,7 +18,7 @@ const hovered = ref<number | null>(null);
 const cards = computed(() => discoverCards(props.choices, props.kind));
 
 function choose(index: number): void {
-  if (chosen.value !== null) return;
+  if (chosen.value !== null || props.chooser) return;
   chosen.value = index;
   playSound('buy');
   emit('choose', index);
@@ -25,8 +28,8 @@ onMounted(() => playSound('discover'));
 </script>
 
 <template>
-  <div class="discover" role="dialog" aria-modal="true" aria-label="Découvrez : choisissez une carte">
-    <p class="title" aria-hidden="true">Découvrez !</p>
+  <div class="discover" :class="{ watched: chooser }" role="dialog" aria-modal="true" :aria-label="chooser ? `${chooser} choisit une carte` : 'Découvrez : choisissez une carte'">
+    <p class="title" aria-hidden="true">{{ chooser ? `${chooser} choisit…` : 'Découvrez !' }}</p>
     <ol class="choices">
       <li
         v-for="(card, index) in cards"
@@ -76,6 +79,8 @@ onMounted(() => playSound('discover'));
    it grows upward; the last card has it on its left. */
 .glossary { position: absolute; z-index: 1; bottom: calc(var(--s) * 30); left: calc(100% + var(--s) * 12); width: calc(var(--s) * 360); rotate: calc(var(--fan) * -4deg); pointer-events: none; }
 .choice:last-child:not(:first-child) .glossary { left: auto; right: calc(100% + var(--s) * 12); }
+/* Someone else's choice: the cards are read, they do not answer the hand. */
+.watched .pick { cursor: default; }
 .chosen .pick { animation: picked 0.4s ease-in forwards; }
 .gone { opacity: 0; transition: opacity 0.25s; }
 @keyframes darken { from { opacity: 0; } }

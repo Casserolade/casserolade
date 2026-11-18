@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.4.4 — 19 novembre 2026
+
+Le détail, et les cartes : https://casserolade.fr/mises-a-jour
+
+**Suivre un survivant**
+- Éliminé, on suit un survivant pendant son recrutement aussi : sa table passe en direct, telle qu'il la voit (sa boutique, sa main, ses découvertes, son budget), puis sa Fin de tour et son débat.
+- On n'y touche à rien. Une plaque « En direct » dit qui l'on suit, et « Changer » ramène à la liste des survivants.
+- Après son débat, l'écran y reste jusqu'à sa table suivante.
+
+**La fiche d'un politique**
+- Elle dit d'où viennent ses bonus : une ligne par source (un Tract, un autre politique, un Ralliement, une casserole, le pouvoir d'un héros), avec le total.
+- En combat, la souris sur un politique, le vôtre ou celui du rival, ouvre sa fiche, avec ce que le débat lui a donné. Sur téléphone, on le touche ; toucher ailleurs accélère toujours.
+
+**La fiche d'un adversaire**
+- Au survol d'un joueur du classement : son plateau la dernière fois que vous l'avez affronté, dessiné comme sur la table, avec la manche.
+- Et ses trois derniers débats : contre qui, gagné ou perdu, les sondages pris ou perdus.
+- Sur téléphone, on touche son visage.
+
+**Règles**
+- Le mot-clé Vedette disparaît : il ne décidait que de celui qui parlait. Après une victoire, un survivant tiré au hasard prononce sa petite phrase, sans priorité, et chaque Célébration joue comme avant.
+- L'étoile des Vedettes quitte les médaillons. Le succès « Peopolisation » demande six politiques qui ont une Célébration.
+- Une casserole est un sort : la poser compte comme un sort lancé, pour « Après que vous lancez un sort » comme pour le compte des sorts.
+
+**Équilibrage**
+- Éric Zemmour : « Quand vous actualisez la boutique, gagne +3/+3 par actualisation faite cette manche », au lieu de +1/+1 par actualisation faite depuis le début de la partie. Seul, il passait loin devant les autres camps.
+
+**Salon**
+- Le chat défile dans sa colonne au lieu d'allonger la page.
+
 ## 0.4.3 — 18 novembre 2026
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour

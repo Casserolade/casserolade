@@ -275,7 +275,7 @@ test('à une table impaire, le joueur en trop affronte un fantôme qui a un visa
   assert.ok(ghost.ghostOf && others.includes(ghost.ghostOf), `visage du fantôme : ${ghost.ghostOf}`);
 });
 
-test('out of the game, a player follows a survivor: its combats come live, and the round waits for them', async () => {
+test('out of the game, a player follows a survivor: its recruitment table and its combats come live, and the round waits for them', async () => {
   const { retire } = await import('../src/engine/script.ts');
   const { room, inbox, lastView } = createRoom({ humans: 2, recruitMs: null });
   room.start();
@@ -287,17 +287,30 @@ test('out of the game, a player follows a survivor: its combats come live, and t
   room.handleMessage(1, { type: 'suivre', siege: 99 });
   room.handleMessage(0, { type: 'suivre', siege: 3 });
   room.handleMessage(1, { type: 'suivre', siege: 3 });
+  // In the middle of the recruitment, the survivor's table comes at once, as that survivor sees it.
+  const table = inbox.get(1)?.at(-1);
+  assert.ok(table?.type === 'suivi', 'the follower gets the survivor\'s recruitment table');
+  assert.equal(table.siege, 3);
+  assert.equal(table.vue.seat, 3);
+  assert.equal(table.vue.phase, 'recrutement');
+  assert.deepEqual(table.vue.shop, JSON.parse(JSON.stringify(room.game.players[3].shop)), 'its shop, as it sees it');
   room.handleMessage(0, { type: 'pret' });
   const shown = inbox.get(1)?.at(-1);
   assert.ok(shown?.type === 'spectacle', 'the follower gets the survivor\'s combat');
   assert.equal(shown.siege, 3);
   assert.equal(shown.combat.round, 1);
-  assert.deepEqual(shown.combat.endOfTurn, [], 'never the survivor\'s own end of turn');
-  assert.ok(!(inbox.get(0) ?? []).some((m) => m.type === 'spectacle'), 'a player still in the game follows nobody');
+  assert.deepEqual(shown.combat.endOfTurn, JSON.parse(JSON.stringify(room.game.players[3].endOfTurnSteps)), 'with the end of turn that plays on its table');
+  assert.ok(!(inbox.get(0) ?? []).some((m) => m.type === 'spectacle' || m.type === 'suivi'), 'a player still in the game follows nobody');
   room.handleMessage(0, { type: 'vu' });
   assert.equal(lastView(0).round, 1, 'the round waits for the follower');
   room.handleMessage(1, { type: 'vu' });
   assert.equal(lastView(0).round, 2);
+  // The next recruitment: the survivor's new table comes with it, and again when the follower returns.
+  const next = inbox.get(1)?.at(-1);
+  assert.ok(next?.type === 'suivi' && next.vue.round === 2, 'the survivor\'s table of the next round');
+  room.setConnected(1, false);
+  room.setConnected(1, true);
+  assert.equal(inbox.get(1)?.at(-1)?.type, 'suivi', 'back in the middle of a recruitment, the table again');
   // Back in the middle of the combats, the follower finds the combat again; « null » stops following.
   room.handleMessage(0, { type: 'pret' });
   room.setConnected(1, false);
@@ -307,4 +320,33 @@ test('out of the game, a player follows a survivor: its combats come live, and t
   room.handleMessage(0, { type: 'vu' });
   room.handleMessage(0, { type: 'pret' });
   assert.equal(inbox.get(1)?.at(-1)?.type, 'vue', 'no more combats once it stops');
+});
+
+test('a followed human: each of its gestures shows on its followers\' table; who stops following is no longer waited for', async () => {
+  const { retire } = await import('../src/engine/script.ts');
+  const { room, inbox, lastView } = createRoom({ humans: 3, recruitMs: null });
+  room.start();
+  for (const seat of [0, 1, 2]) room.handleMessage(seat, { type: 'action', seq: 1, action: { t: 'hero', i: 0 } });
+  retire(room.game, room.game.players[1], 8);
+  room.handleMessage(1, { type: 'suivre', siege: 0 });
+  const followed = () => (inbox.get(1) ?? []).filter((m) => m.type === 'suivi');
+  const before = followed().length;
+  assert.equal(before, 1);
+  // Seat 0 freezes its shop: its follower sees the table change; seat 2's gestures are nobody's business.
+  room.handleMessage(0, { type: 'action', seq: 2, action: { t: 'freeze' } });
+  assert.equal(followed().length, before + 1);
+  const last = followed().at(-1);
+  assert.ok(last?.type === 'suivi' && last.siege === 0 && last.vue.frozen, 'the frozen shop shows');
+  room.handleMessage(2, { type: 'action', seq: 2, action: { t: 'freeze' } });
+  assert.equal(followed().length, before + 1);
+  // The combats: the follower is waited for, until it stops following.
+  room.handleMessage(0, { type: 'pret' });
+  room.handleMessage(2, { type: 'pret' });
+  assert.equal(inbox.get(1)?.at(-1)?.type, 'spectacle');
+  room.handleMessage(0, { type: 'vu' });
+  room.handleMessage(2, { type: 'vu' });
+  assert.equal(lastView(0).round, 1, 'the round waits for the follower');
+  room.handleMessage(1, { type: 'suivre', siege: null });
+  assert.equal(lastView(0).round, 2, 'it stopped following: the round goes on');
+  assert.equal(followed().length, before + 1, 'and no table comes any more');
 });

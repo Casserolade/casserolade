@@ -98,10 +98,7 @@ const SETUPS: Setup[] = [
     board: ['zemmour', 'knafo', 'messiha', 'villiers', 'asselineau', 'dupont_aignan', 'lafont'],
     keystone: 'zemmour',
     carrier: 'zemmour',
-    note: 'Zemmour ; 25 actualisations faites avant la manche 11 ; tout le budget en actualisations',
-    before: (p) => {
-      p.counters.actualisations = 25;
-    },
+    note: 'Zemmour ; tout le budget en actualisations, la Matinale dès qu\'elle passe',
     turn: (game, p) => {
       for (let i = 0; i < 80 && (p.freeRolls > 0 || p.budget >= 1); i++) {
         const matinale = buySpell(game, p, 'matinale');

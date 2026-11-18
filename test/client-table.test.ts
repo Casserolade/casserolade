@@ -164,16 +164,16 @@ test('the celebrant draws among its recorded quotes when it has some, among all 
 });
 
 function combatUnit(uid: number, cardId: string, extra: Partial<CombatUnit> = {}): CombatUnit {
-  return { uid, cardId, name: cardId, camp: 'civile', tier: 1, atk: 1, hp: 1, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, ...extra };
+  return { uid, cardId, name: cardId, camp: 'civile', tier: 1, atk: 1, hp: 1, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, gains: [], ...extra };
 }
 
-test('speechStandIns: the winner\'s survivors, Vedettes first; the loser\'s Droits de réponse', () => {
+test('speechStandIns: the winner\'s survivors, in no order of precedence; the loser\'s Droits de réponse', () => {
   const answer = { when: 'droit_de_reponse', to: 'soi', do: 'buff', atk: 1, hp: 1 } as unknown as CombatUnit['effects'][number];
   const log: CombatEvent[] = [
     { e: 'debut', first: 0, sides: [[combatUnit(1, 'a'), combatUnit(2, 'b', { effects: [answer] })], [combatUnit(3, 'c')]] },
-    { e: 'fin', winner: 1, sides: [[], [combatUnit(3, 'c'), combatUnit(4, 'd', { keywords: ['vedette'] }), combatUnit(5, 'e', { hp: 0 })]] },
+    { e: 'fin', winner: 1, sides: [[], [combatUnit(3, 'c'), combatUnit(4, 'd'), combatUnit(5, 'e', { hp: 0 })]] },
   ];
-  assert.deepEqual(speechStandIns({ e: 'celebration', side: 1, uid: 3, cardId: 'c' }, log).map((u) => u.uid), [4, 3]);
+  assert.deepEqual(speechStandIns({ e: 'celebration', side: 1, uid: 3, cardId: 'c' }, log).map((u) => u.uid), [3, 4]);
   assert.deepEqual(speechStandIns({ e: 'reponse', side: 0, uid: 2, cardId: 'b' }, log).map((u) => u.uid), [2]);
 });
 
@@ -183,6 +183,10 @@ test('voicedSpeaker gives the floor to a survivor with a recorded line, and keep
   assert.deepEqual(voicedSpeaker(celebration, log, (id) => id === 'bavard'), { ...celebration, uid: 2, cardId: 'bavard' });
   assert.equal(voicedSpeaker(celebration, log, () => true), celebration);
   assert.equal(voicedSpeaker(celebration, log, () => false), celebration);
+  // Several others have a voice: one of them, drawn, never the first by rule.
+  const many: CombatEvent[] = [{ e: 'fin', winner: 0, sides: [[combatUnit(1, 'muet'), combatUnit(2, 'un'), combatUnit(3, 'deux'), combatUnit(4, 'trois')], []] }];
+  const drawn = [0, 0.4, 0.99].map((roll) => voicedSpeaker(celebration, many, (id) => id !== 'muet', roll).uid);
+  assert.deepEqual(drawn, [2, 3, 4]);
 });
 
 test('hasRecordedLine: true for someone whose line was recorded, false for a card without any quote', () => {

@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.4.3" src="https://img.shields.io/badge/version-0.4.3-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.4.4" src="https://img.shields.io/badge/version-0.4.4-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -57,7 +57,7 @@ Gratuit, sans publicité, sans inscription, sans rien à vendre.
 - **Les camps se parlent par le texte des cartes** : Annonces, Fins de tour, Héritages, Ralliements, Tracts, Revanches… Les moteurs se croisent, et les plateaux grandissent au recrutement.
 - **Le combat est automatique**, de gauche à droite, avec des cibles tirées au hasard, sauf le **Porte-parole**, qu'on doit attaquer d'abord. Le **Coup de balai** frappe aussi les voisins de sa cible, et le **Retour en politique** réincarne un politique à sa place, après son Héritage.
 - **Les casseroles** donnent un avantage tout de suite, et un bonus de plus sur leur propriétaire. Leur défaut dort jusqu'au scandale, et il fait mal : budget, sondages, plus d'attaque, ou les voisins éclaboussés. Puis le peuple oublie, et certains en reviennent plus forts.
-- **Après une victoire, la Célébration** : un survivant prononce sa petite phrase, une Vedette d'abord, et chaque survivant qui a une Célébration en tire un gain. **Après une défaite, le Droit de réponse** : chaque politique qui en a un joue le sien, et le plus à gauche répond.
+- **Après une victoire, la Célébration** : un survivant tiré au hasard prononce sa petite phrase, et chaque survivant qui a une Célébration en tire un gain. **Après une défaite, le Droit de réponse** : chaque politique qui en a un joue le sien, et le plus à gauche répond.
 
 Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/bestiaire?type=mot_cle), et à côté de chaque carte qu'on pointe en jeu. Une casserole pointée sous son politique montre sa carte, et dit où elle en est : défaut qui dort, scandale en cours ou casserole oubliée.
 

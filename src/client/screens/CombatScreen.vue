@@ -11,15 +11,18 @@ import CelebrationNotices from '#src/client/components/molecules/CelebrationNoti
 import HeroCorner from '#src/client/components/molecules/HeroCorner.vue';
 import HostLectern from '#src/client/components/molecules/HostLectern.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
+import CardInspector from '#src/client/components/organisms/CardInspector.vue';
 import GameTable from '#src/client/components/organisms/GameTable.vue';
 import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
 import { visualEffects } from '#src/client/stores/visualEffects.ts';
+import { toCardProps } from '#src/client/tools/toCardProps.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 
 /**
  * `view`: the player's view when the combat began. The next round's view never changes what is shown here. Online,
- * `rivalName` names the rival under its portrait; out of the game, `watching` names the survivor followed live.
+ * `rivalName` names the rival under its portrait; out of the game, `watching` names the survivor followed live. The
+ * mouse over a politician, yours or the rival's, brings its full card up, with where its bonuses come from.
  */
 const props = withDefaults(defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null; rivalName?: string | null; watching?: string | null }>(), { rivalName: null, watching: null });
 const emit = defineEmits<{ close: [] }>();
@@ -28,7 +31,7 @@ const stageHost = useTemplateRef<HTMLElement>('stageHost');
 const {
   SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, pollsLost, curveFalls, outcome, rivalLine,
-  host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
+  host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic, unitCards,
 } = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') });
 
 /** The set's screens show the face-to-face: yours, then the rival's. */
@@ -67,10 +70,10 @@ const speechStyle = computed(() => {
 
     <div v-if="!stageReady" class="plain" :class="{ loading: !stageFailed }">
       <ol class="plain-row enemy">
-        <li v-for="unit in enemy" :key="unit.uid"><MedallionToken v-bind="unit" /></li>
+        <li v-for="unit in enemy" :key="unit.uid" @pointerenter="unitCards.pointAt(unit.uid, $event.currentTarget as Element)" @pointerleave="unitCards.leave()"><MedallionToken v-bind="toCardProps(unit)" /></li>
       </ol>
       <ol class="plain-row own">
-        <li v-for="unit in own" :key="unit.uid"><MedallionToken v-bind="unit" /></li>
+        <li v-for="unit in own" :key="unit.uid" @pointerenter="unitCards.pointAt(unit.uid, $event.currentTarget as Element)" @pointerleave="unitCards.leave()"><MedallionToken v-bind="toCardProps(unit)" /></li>
       </ol>
     </div>
 
@@ -94,6 +97,7 @@ const speechStyle = computed(() => {
 
     <template #overlay>
       <div ref="stageHost" class="stage-host" aria-hidden="true" />
+      <CardInspector />
       <div v-if="speech" :key="`${speech.kind}-${speech.uid}`" class="speech" :class="[speech.kind, { below: speech.below }]" :style="speechStyle" role="status">
         <ConfettiBurst v-if="speech.kind === 'celebration'" class="confetti" />
         <span v-if="speech.kind === 'celebration' && visualEffects.on.value" class="speed-lines" aria-hidden="true" />

@@ -1,8 +1,9 @@
-import type { Card, Casserole, Spell } from '../engine/types.ts';
+import type { Card, Casserole, Keyword, Spell } from '../engine/types.ts';
 import { CARTES as CARTES_0_4_0 } from './misesAJour/0.4.0.ts';
 import { CARTES as CARTES_0_4_1 } from './misesAJour/0.4.1.ts';
 import { CARTES as CARTES_0_4_2 } from './misesAJour/0.4.2.ts';
 import { CARTES as CARTES_0_4_3 } from './misesAJour/0.4.3.ts';
+import { CARTES as CARTES_0_4_4 } from './misesAJour/0.4.4.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -16,8 +17,14 @@ export type CasseroleCard = Omit<Casserole, 'blague' | 'citation' | 'fait' | 'st
 /** Une carte qui arrive (après seulement), qui change (avant et après), ou qui part (avant seulement). */
 export type CardChange<T> = { before?: T; after: T } | { before: T; after?: undefined };
 
+/** Un mot-clé d'une carte d'époque : ceux du jeu, et ceux qui en ont été retirés depuis (Vedette, le 18 novembre 2026). */
+export type PastKeyword = Keyword | 'vedette';
+
+/** Une carte telle qu'une version la définissait, avec ses mots-clés d'alors. */
+export type PastCard = Omit<Card, 'keywords'> & { keywords?: PastKeyword[] };
+
 export interface VersionCards {
-  cards: CardChange<Card>[];
+  cards: CardChange<PastCard>[];
   casseroles: CardChange<CasseroleCard>[];
   spells: CardChange<Spell>[];
 }
@@ -42,8 +49,71 @@ export interface PatchNote {
   cards: VersionCards;
 }
 
+/** Ce que disent les cartes qui ne perdent que le mot-clé Vedette, à la 0.4.4. */
+const VEDETTE_AVEC_CELEBRATION = 'Le mot-clé Vedette est retiré. Sa Célébration joue comme avant.';
+const VEDETTE_SEULE = 'Le mot-clé Vedette est retiré. Rien d\'autre ne change.';
+
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.4',
+    date: '19 novembre 2026',
+    title: 'Suivre un survivant, les bonus sur la fiche, Vedette retiré',
+    summary: [
+      'Éliminé, on suit un survivant pendant son recrutement aussi : sa table passe en direct, telle qu\'il la voit, puis sa Fin de tour et son débat. On n\'y touche à rien, et « Changer » ramène à la liste des survivants.',
+      'La fiche d\'un politique dit d\'où viennent ses bonus : une ligne par source (un Tract, un autre politique, un Ralliement, une casserole), avec le total.',
+      'En combat, la souris sur un politique, le vôtre ou celui du rival, ouvre sa fiche, avec ce que le débat lui a donné. Sur téléphone, on le touche ; toucher ailleurs accélère toujours.',
+      'Au survol d\'un joueur du classement : son plateau la dernière fois que vous l\'avez affronté, dessiné comme sur la table, et ses trois derniers débats (contre qui, gagné ou perdu, les sondages pris ou perdus). Sur téléphone, on touche son visage.',
+      'Le mot-clé Vedette disparaît : il ne décidait que de celui qui parlait. Après une victoire, un survivant tiré au hasard prononce sa petite phrase, et chaque Célébration joue comme avant.',
+      'Une casserole est un sort : la poser compte comme un sort lancé.',
+      'Éric Zemmour grandit moins vite : +3/+3 par actualisation faite dans la manche, au lieu de +1/+1 par actualisation faite depuis le début de la partie.',
+      'Dans un salon, le chat défile dans sa colonne au lieu d\'allonger la page.',
+    ],
+    rules: [
+      {
+        term: 'Vedette',
+        before: 'Après une victoire, la Vedette survivante la plus à gauche prononce sa petite phrase.',
+        after: 'Mot-clé retiré. Après une victoire, un survivant tiré au hasard prononce sa petite phrase, sans priorité.',
+      },
+      {
+        term: 'Célébration',
+        before: 'Après un combat gagné, s\'il a survécu. Chaque Célébration joue ; la Vedette prend la parole.',
+        after: 'Après un combat gagné, s\'il a survécu. Chaque Célébration joue.',
+      },
+      {
+        term: 'Casserole',
+        before: 'La poser ne comptait pas comme un sort lancé.',
+        after: 'Une casserole est un sort : la poser compte comme un sort lancé.',
+      },
+    ],
+    why: {
+      zemmour: 'Seul, sans rien autour, il passait loin devant les autres camps : deux exemplaires à 2 200/2 200 dès la manche 12. Son compte d\'actualisations repart maintenant de zéro à chaque manche. Le mot-clé Vedette est retiré.',
+      boyard: VEDETTE_AVEC_CELEBRATION,
+      delogu: VEDETTE_AVEC_CELEBRATION,
+      thevenoud: VEDETTE_AVEC_CELEBRATION,
+      cahuzac: VEDETTE_AVEC_CELEBRATION,
+      royal: VEDETTE_AVEC_CELEBRATION,
+      doucet: VEDETTE_AVEC_CELEBRATION,
+      rousseau: VEDETTE_AVEC_CELEBRATION,
+      rugy: VEDETTE_AVEC_CELEBRATION,
+      schiappa: VEDETTE_AVEC_CELEBRATION,
+      morano: VEDETTE_AVEC_CELEBRATION,
+      odoul: VEDETTE_AVEC_CELEBRATION,
+      bardella: VEDETTE_AVEC_CELEBRATION,
+      dupont_aignan: VEDETTE_AVEC_CELEBRATION,
+      asselineau: VEDETTE_AVEC_CELEBRATION,
+      villiers: VEDETTE_AVEC_CELEBRATION,
+      cheminade: VEDETTE_AVEC_CELEBRATION,
+      durif: VEDETTE_AVEC_CELEBRATION,
+      lalanne: VEDETTE_AVEC_CELEBRATION,
+      arthaud: VEDETTE_AVEC_CELEBRATION,
+      melenchon: VEDETTE_SEULE,
+      macron: VEDETTE_SEULE,
+      poutou: VEDETTE_SEULE,
+      lassalle: VEDETTE_SEULE,
+    },
+    cards: CARTES_0_4_4,
+  },
   {
     version: '0.4.3',
     date: '18 novembre 2026',

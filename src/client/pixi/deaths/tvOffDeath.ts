@@ -6,7 +6,7 @@ const TV_OFF_SECONDS = 0.9;
 /** When the line shrinks to a dot, the dot flashes once before it goes out. */
 const DOT_AT = 0.86;
 
-/** A Vedette goes off the air: snow, a white line, a dot, then nothing. Its show is over. */
+/** A politician with a Célébration goes off the air: snow, a white line, a dot, then nothing. Its show is over. */
 export function tvOffDeath(card: CombatCard, scene: DeathScene, blow: KillingBlowFx): StageEffect {
   const filter = createTvOffFilter();
   const uniforms = tvOffUniforms(filter);

@@ -19,6 +19,11 @@ const TAKEOVER_LEVEL: BotLevel = 'moyen';
  */
 const COMBAT_MARGIN_MS = 25_000;
 
+/** How long a combat takes to watch: its end of turn plays on the table first, then its events. */
+function showDurationMs(combat: CombatView): number {
+  return endOfTurnDurationMs(combat.endOfTurn) + combat.log.reduce((sum, event) => sum + combatEventDuration(event), 0);
+}
+
 /** No Node API here: the same room runs behind WebSocket and inside the browser for solo games. */
 export interface Clock {
   now(): number;
@@ -263,15 +268,13 @@ export class GameRoom {
       const combat = combatViewFor(this.game, seat);
       if (!combat) continue;
       this.options.send(seat, { type: 'combat', combat });
-      // The end of turn plays on the table first, then the combat.
-      const watched = endOfTurnDurationMs(combat.endOfTurn) + combat.log.reduce((sum, event) => sum + combatEventDuration(event), 0);
-      longest = Math.max(longest, watched);
+      longest = Math.max(longest, showDurationMs(combat));
       if (this.connected.has(seat)) this.waitingForCombat.add(seat);
     }
-    // Those who are out and follow a survivor watch its combat live: the round waits for them too.
+    // Those who are out and follow a survivor watch its end of turn and its combat live: the round waits for them too.
     for (const [seat, target] of this.following) {
       const combat = this.connected.has(seat) ? this.showFollowed(seat, target) : null;
-      if (combat) longest = Math.max(longest, combat.log.reduce((sum, event) => sum + combatEventDuration(event), 0));
+      if (combat) longest = Math.max(longest, showDurationMs(combat));
     }
     // Nobody has a combat to watch: every human is out, the bots finish the game at full speed.
     if (longest === 0) this.closeRound();
@@ -325,35 +328,56 @@ export class GameRoom {
   }
 
   /**
-   * Out of the game, a player follows a survivor (null: nobody). In the middle of the combats, the survivor's combat
-   * shows at once; from then on, each of its combats.
+   * Out of the game, a player follows a survivor (null: nobody). The survivor's table shows at once: its recruitment,
+   * or in the middle of the combats its combat; from then on, each of its gestures and each of its combats. Who stops
+   * following in the middle of the combats is no longer waited for.
    */
   private follow(seat: number, target: number | null): void {
     if (this.options.seats[seat].level || this.game.players[seat].alive) return;
-    if (target === null || target === seat || !this.game.players[target]?.alive) {
+    const followed = target !== null && target !== seat && this.game.players[target]?.alive ? target : null;
+    if (followed === null) {
       this.following.delete(seat);
+      this.acknowledgeCombat(seat);
       return;
     }
-    this.following.set(seat, target);
-    if (this.game.phase === 'combat') this.showFollowed(seat, target);
+    this.following.set(seat, followed);
+    if (this.game.phase === 'combat') this.showFollowed(seat, followed);
+    else this.showRecruitment(seat, followed);
   }
 
   /**
-   * Sends the followed survivor's combat, seen from its side; the round waits for the follower's « vu », unless `wait`
-   * is false (back in the middle of the combats, like a player). A survivor out of the game is no longer followed.
+   * Sends the followed survivor's combat, seen from its side, with the end of turn that plays on its table before it;
+   * the round waits for the follower's « vu », unless `wait` is false (back in the middle of the combats, like a
+   * player). A survivor out of the game is no longer followed.
    */
   private showFollowed(seat: number, target: number, wait = true): CombatView | null {
     if (!this.game.players[target].alive) {
       this.following.delete(seat);
       return null;
     }
-    const seen = combatViewFor(this.game, target);
-    if (!seen) return null;
-    // Without its end of turn: that one plays on the survivor's own recruitment table, which the follower does not see.
-    const combat = { ...seen, endOfTurn: [] };
+    const combat = combatViewFor(this.game, target);
+    if (!combat) return null;
     this.options.send(seat, { type: 'spectacle', siege: target, combat });
     if (wait && this.connected.has(seat)) this.waitingForCombat.add(seat);
     return combat;
+  }
+
+  /**
+   * Sends the followed survivor's recruitment table, as that survivor sees it: its shop, its hand, its choices. Only
+   * during the recruitment, to a follower who is there; a survivor out of the game is no longer followed.
+   */
+  private showRecruitment(seat: number, target: number): void {
+    if (this.game.phase !== 'recrutement' || !this.connected.has(seat)) return;
+    if (!this.game.players[target].alive) {
+      this.following.delete(seat);
+      return;
+    }
+    this.options.send(seat, { type: 'suivi', siege: target, vue: viewFor(this.game, target), reste_ms: this.timeLeft() });
+  }
+
+  /** The table of this seat changed: those who follow it see it change. */
+  private sendFollowers(target: number): void {
+    for (const [seat, followed] of this.following) if (followed === target) this.showRecruitment(seat, target);
   }
 
   private acknowledgeCombat(seat: number): void {
@@ -372,6 +396,7 @@ export class GameRoom {
     if (this.game.phase === 'choix_heros') this.handleHeroTakeover(seat, bot);
     else if (this.game.phase === 'recrutement') {
       this.playSeat(seat, bot);
+      this.sendFollowers(seat);
       this.endRecruitmentIfAllReady();
     }
   }
@@ -415,25 +440,37 @@ export class GameRoom {
     return this.humanSeats().filter((seat) => this.game.players[seat].alive && !this.bots.has(seat));
   }
 
+  /** Each human gets its view; each follower, the table of the survivor it follows (a bot's too, already played). */
   private sendViews(): void {
     for (const seat of this.humanSeats()) this.sendView(seat);
+    for (const [seat, target] of this.following) this.showRecruitment(seat, target);
+  }
+
+  /** Time left in the current phase, null without a timer. */
+  private timeLeft(): number | null {
+    return this.deadline === null ? null : Math.max(0, this.deadline - this.options.clock.now());
   }
 
   private sendView(seat: number): void {
-    const left = this.deadline === null ? null : Math.max(0, this.deadline - this.options.clock.now());
-    this.options.send(seat, { type: 'vue', vue: viewFor(this.game, seat), reste_ms: left });
+    this.options.send(seat, { type: 'vue', vue: viewFor(this.game, seat), reste_ms: this.timeLeft() });
   }
 
+  /** After a gesture of this seat, or its return: its view, the combat it was watching, and its table to its followers. */
   private sendState(seat: number): void {
     this.sendView(seat);
-    if (this.game.phase !== 'combat') return;
+    this.sendFollowers(seat);
+    const target = this.following.get(seat);
+    if (this.game.phase !== 'combat') {
+      // Back in the middle of a recruitment, a follower finds the survivor's table again.
+      if (target !== undefined) this.showRecruitment(seat, target);
+      return;
+    }
     const combat = combatViewFor(this.game, seat);
     if (combat) {
       this.options.send(seat, { type: 'combat', combat });
       return;
     }
     // Back in the middle of the combats, a follower finds the survivor's combat again; the round does not wait for it.
-    const target = this.following.get(seat);
     if (target !== undefined) this.showFollowed(seat, target, false);
   }
 

@@ -123,18 +123,29 @@ test('le combat ne modifie pas les plateaux', () => {
   assert.equal(b[0].hp, 3);
 });
 
-test('la Célébration : la Vedette survivante la plus à gauche, sinon le survivant le plus à gauche', () => {
-  const plain = unit(5, 50);
-  const star = unit(5, 50, ['vedette']);
-  const r = fight([plain, star], [unit(1, 1)]);
-  assert.equal(r.celebrant?.uid, star.uid);
-  assert.equal(r.log.at(-1)?.e === 'celebration' || r.log.at(-2)?.e === 'celebration', true);
-  const noStar = fight([plain, unit(5, 50)], [unit(1, 1)]);
-  assert.equal(noStar.celebrant?.uid, plain.uid);
+test('la petite phrase : un survivant du vainqueur au hasard, sans priorité, et le même à combat égal', () => {
+  const spoke = new Set<number>();
+  for (let extra = 0; extra < 40; extra++) {
+    // Sept survivants, à des stats qui changent d'un combat à l'autre : chacun finit par prendre la parole.
+    const board = Array.from({ length: 7 }, (_, i) => unit(5, 50 + extra + i));
+    const r = fight(board, [unit(1, 1)]);
+    const place = board.findIndex((m) => m.uid === r.celebrant?.uid);
+    assert.ok(place >= 0, 'celui qui parle a survécu');
+    assert.equal(r.log.at(-1)?.e === 'celebration' || r.log.at(-2)?.e === 'celebration', true);
+    spoke.add(place);
+  }
+  assert.ok(spoke.size >= 6, `places qui ont parlé : ${[...spoke].sort().join(', ')}`);
+  // Le tirage ne prend rien au hasard de la partie : deux fois le même combat, la même voix.
+  const again = () => {
+    uid = 1000;
+    return fight([unit(5, 50), unit(5, 51), unit(5, 52)], [unit(1, 1)]).celebrant?.uid;
+  };
+  assert.equal(again(), again());
   assert.equal(fight([unit(1, 1)], [unit(1, 1)]).celebrant, null, 'pas de vainqueur, pas de Célébration');
+  assert.ok(HEROES.length >= 8);
 });
 
-test('chaque Vedette survivante applique sa Célébration, une seule prononce sa phrase (3 novembre 2026)', async () => {
+test('chaque survivant qui a une Célébration l\'applique, un seul prononce sa phrase (3 novembre 2026)', async () => {
   const { applyAction, createGame, startCombats } = await import('../src/engine/game.ts');
   const { addMinionToHand } = await import('../src/engine/recruit.ts');
   const game = createGame({ seed: 4, seats: 2, heroes: ['philippe', 'philippe'], activeCamps: ['reconquete', 'insoumis', 'rn', 'socialistes', 'ecologistes'], combatLog: true });
@@ -808,10 +819,10 @@ test('les données sont cohérentes', () => {
   assert.ok(HEROES.length >= 8);
 });
 
-test('chaque camp a au moins une Vedette avec une Célébration', () => {
+test('chaque camp a au moins une Célébration', () => {
   const camps = new Set(CARDS.map((c) => c.camp));
   for (const camp of camps) {
-    const stars = CARDS.filter((c) => c.camp === camp && c.keywords?.includes('vedette') && c.effects?.some((e) => e.when === 'celebration'));
+    const stars = CARDS.filter((c) => c.camp === camp && c.effects?.some((e) => e.when === 'celebration'));
     assert.ok(stars.length > 0, camp);
   }
 });
@@ -1098,4 +1109,25 @@ test('geler puis monter d\'échelon : la manche suivante a les places du nouvel 
   assert.deepEqual(p.shop.slice(0, kept.length), kept);
   assert.equal(p.shop.length, game.params.shopSize[p.tier]);
   assert.ok(game.params.shopSize[p.tier] > kept.length, 'l\'échelon 2 a plus de places que le 1');
+});
+
+test('les derniers combats de chaque joueur sont publics : contre qui, l\'issue, les sondages, trois au plus', () => {
+  const game = createGame({ seed: 5, seats: 2, heroes: ['philippe', 'attal'] });
+  const [a, b] = game.players;
+  assert.deepEqual(viewFor(game, 0).table.map((row) => row.fights), [[], []]);
+  // Le siège 0 a un plateau, le siège 1 n'a rien : il perd, manche après manche.
+  a.board = [makeMinion({ id: 'gueant', name: 'G', camp: 'republicains', tier: 1, atk: 3, hp: 2 }, game.nextUid++)];
+  for (let round = 1; round <= 4; round++) {
+    const before = b.hp;
+    resolveRound(game);
+    const [mine, theirs] = viewFor(game, 1).table.map((row) => row.fights);
+    assert.deepEqual(mine[0], { round, against: 1, heroId: 'attal', result: 'gagne', lost: 0, dealt: before - b.hp });
+    assert.deepEqual(theirs[0], { round, against: 0, heroId: 'philippe', result: 'perdu', lost: before - b.hp, dealt: 0 });
+    assert.ok(before - b.hp > 0, 'la défaite coûte des sondages');
+    assert.equal(mine.length, Math.min(round, 3), 'trois combats au plus, le plus récent d\'abord');
+    if (!b.alive) break;
+  }
+  // La vue ne tient rien de la partie : la modifier ne change pas l'histoire du joueur.
+  viewFor(game, 0).table[0].fights[0].result = 'perdu';
+  assert.equal(a.fights[0].result, 'gagne');
 });

@@ -165,7 +165,6 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
       'is-reborn': has('retour'),
       'is-toxic': has('polemique'),
       'is-windfury': has('cumul'),
-      'is-star': has('vedette'),
       'is-both': has('ni_droite_ni_gauche'),
       'is-scandal': inScandal,
       'with-tier': showTier && tier,
@@ -192,7 +191,6 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
     <span v-if="has('immunite')" class="bubble" aria-hidden="true"><span class="glint" /></span>
     <template v-if="has('cumul')"><span class="sash one" aria-hidden="true" /><span class="sash two" aria-hidden="true" /></template>
     <span v-if="has('retour')" class="comeback" aria-hidden="true"><GameIcon name="comeback" /></span>
-    <span v-if="has('vedette')" class="star" aria-hidden="true"><GameIcon name="star" /></span>
     <span v-if="has('balai')" class="broom" aria-hidden="true"><GameIcon name="broom" /></span>
     <span v-if="hasMarks" class="marks" aria-hidden="true">
       <GameIcon v-if="marks.heritage" class="mark skull" name="skull" />
@@ -398,18 +396,6 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
   pointer-events: none;
 }
 .sash.two { inset: calc(var(--mu) * -6) calc(var(--mu) * -22); animation-duration: 1.7s; animation-direction: reverse; }
-/* Vedette: a star over its head. */
-.star {
-  left: 50%;
-  top: calc(var(--mu) * -30);
-  translate: -50% 0;
-  font-size: calc(var(--mu) * 40);
-  color: #ffd84a;
-  filter: drop-shadow(0 0 calc(var(--mu) * 6) rgb(255 220 80 / 0.9));
-  animation: star-bob 1.8s ease-in-out infinite;
-}
-/* With the tier pennant over its head, the Vedette's star moves to the side. */
-.with-tier .star { left: auto; right: calc(var(--mu) * -10); translate: 0 0; font-size: calc(var(--mu) * 34); }
 /* The tier, as in a tavern: a pennant in the camp's colour, one gold star per tier. */
 .tier {
   --star: calc(var(--mu) * 21);
@@ -610,12 +596,11 @@ const isMinted = (index: number) => minted.value !== null && index >= minted.val
 @keyframes halo-pulse { 50% { transform: scale(1.04); opacity: 0.75; } }
 @keyframes whirl { to { rotate: 360deg; } }
 @keyframes drip { 0% { transform: scaleY(0.4); opacity: 0; } 20% { opacity: 1; } 70% { transform: scaleY(1.25) translateY(calc(var(--mu) * 6)); opacity: 1; } 100% { transform: scaleY(0.6) translateY(calc(var(--mu) * 24)); opacity: 0; } }
-@keyframes star-bob { 50% { transform: translateY(calc(var(--mu) * -5)) rotate(12deg) scale(1.08); } }
 @keyframes stat-pop { 0% { transform: scale(1); } 35% { transform: scale(1.55); } 100% { transform: scale(1); } }
 @keyframes stamp { from { transform: scale(2.4); opacity: 0; } }
 @keyframes pan-swing { 0%, 100% { rotate: -9deg; } 50% { rotate: 9deg; } }
 @media (prefers-reduced-motion: reduce) {
-  .sheen, .bubble, .halo, .slime i, .sash, .star, .broom, .pan, .clang, .pan img, .scandal { animation: none !important; }
+  .sheen, .bubble, .halo, .slime i, .sash, .broom, .pan, .clang, .pan img, .scandal { animation: none !important; }
   .clang, .puff, .glint, .oubli { display: none; }
 }
 </style>

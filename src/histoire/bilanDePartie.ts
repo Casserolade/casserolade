@@ -68,7 +68,7 @@ export function bilanDePartie(view: PlayerView, suivi: SuiviDePartie | null, tab
     presidents: board.filter((m) => PRESIDENTS.has(m.cardId)).length,
     porte_parole: avec('porte_parole'),
     immunites: avec('immunite'),
-    vedettes: avec('vedette'),
+    celebrations: board.filter((m) => m.effects.some((effect) => effect.when === 'celebration')).length,
     casseroles_sur_un: Math.max(0, ...board.map((m) => m.casseroles.length)),
     attaque_totale: board.reduce((sum, m) => sum + m.atk, 0),
   };

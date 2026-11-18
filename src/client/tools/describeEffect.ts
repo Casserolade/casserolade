@@ -1,8 +1,9 @@
 import type { Camp, Card, Counter, Effect, Keyword, Spell, Target, Trigger } from '#src/engine/types.ts';
-import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
+import { KEYWORD_RULES, keywordLabel } from '#src/client/const/keywordRules.ts';
 import { mergeSameRecipient } from '#src/client/tools/mergeSameRecipient.ts';
 import { signed } from '#src/client/tools/signed.ts';
 import { CARD_BY_ID, TOKENS } from '#src/data/cards.ts';
+import type { PastKeyword } from '#src/data/misesAJour.ts';
 import { SPELL_BY_ID } from '#src/data/sorts.ts';
 
 /**
@@ -50,13 +51,22 @@ const COUNTER_TEXT: Record<Counter, string> = {
   casseroles: 'casserole reçue par vos politiques',
   debauchages: 'débauchage',
   actualisations: 'actualisation faite',
+  actualisations_manche: 'actualisation faite',
 };
+
+/** Ceux des compteurs qui repartent de zéro à chaque manche ; les autres comptent toute la partie. */
+const ROUND_COUNTERS: Counter[] = ['actualisations_manche'];
+
+/** « actualisation faite cette manche », « **Tract** lancé cette partie » : ce qu'un compteur compte, et depuis quand. */
+function counted(counter: Counter): string {
+  return `${COUNTER_TEXT[counter]} ${ROUND_COUNTERS.includes(counter) ? 'cette manche' : 'cette partie'}`;
+}
 
 const TRIGGER_WORD: Partial<Record<Trigger, string>> = { annonce: 'Annonce', heritage: 'Héritage', fin_tour: 'Fin de tour' };
 const TRIGGER_WORDS: Partial<Record<Trigger, string>> = { annonce: 'Annonces', heritage: 'Héritages', fin_tour: 'Fins de tour', celebration: 'Célébrations', debut_combat: '49.3' };
 
-function keyword(k: Keyword): string {
-  return `**${KEYWORD_RULES[k].label}**`;
+function keyword(k: PastKeyword): string {
+  return `**${keywordLabel(k)}**`;
 }
 
 function stats(atk: number, hp: number): string {
@@ -272,7 +282,7 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
       if (e.trigger === 'meeting') return `vos effets « Quand il attaque » se déclenchent ${golden ? 'trois' : 'deux'} fois`;
       return `vos **${TRIGGER_WORDS[e.trigger]}** se déclenchent ${golden ? 'trois' : 'deux'} fois`;
     case 'compteur':
-      return `a ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
+      return `a ${stats(e.atk, e.hp)} par ${counted(e.compteur)}`;
     case 'scandale_plus':
       return e.value > 1 ? `il faut ${e.value} casseroles de plus à vos politiques pour faire scandale` : 'il faut une casserole de plus à vos politiques pour faire scandale';
     case 'actualiser':
@@ -303,8 +313,8 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'gain_debauche':
       return `${e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques'}, partout, gagnent ${golden ? 'deux fois ' : ''}les stats du débauché pour le reste de la partie`;
     case 'buff_compteur':
-      if (dest.startsWith('vos ')) return `${dest} gagnent ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
-      return `${self ? 'gagne' : `donne ${to(dest)}`} ${stats(e.atk, e.hp)} par ${COUNTER_TEXT[e.compteur]} cette partie`;
+      if (dest.startsWith('vos ')) return `${dest} gagnent ${stats(e.atk, e.hp)} par ${counted(e.compteur)}`;
+      return `${self ? 'gagne' : `donne ${to(dest)}`} ${stats(e.atk, e.hp)} par ${counted(e.compteur)}`;
     case 'chaise_vide':
       return `invoque ${golden ? 'deux Chaises vides' : 'une Chaise vide'} **Porte-parole** qui ${golden ? 'ont' : 'a'} ses stats`;
   }
@@ -399,7 +409,7 @@ const TIMES: Record<number, string> = { 2: 'deux fois', 3: 'trois fois', 4: 'qua
  * montré : doré, les effets de sa carte jouent deux fois plus fort, et son texte le dit. Un effet qui dit
  * sa puissance (`power`, dans les vues et les combats) la garde : un Ralliement doré, une casserole.
  */
-export function cardRuleLines(card: Pick<Card, 'keywords' | 'effects' | 'golden'>, { isGolden = false }: { isGolden?: boolean } = {}): string[] {
+export function cardRuleLines(card: Pick<Card, 'effects' | 'golden'> & { keywords?: PastKeyword[] }, { isGolden = false }: { isGolden?: boolean } = {}): string[] {
   const lines: string[] = [];
   const keywords = (card.keywords ?? []).map((k) => `${keyword(k)}.`);
   if (card.golden) keywords.unshift('Toujours doré.');

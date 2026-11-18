@@ -97,8 +97,8 @@ export class ParticlePreview {
     const scale = Math.min(width / 1920, height / 1080);
     fx.setScale(scale);
     const unit: CombatUnit = {
-      uid: this.nextUid++, cardId: VICTIM, name: 'Emmanuel Macron', camp: 'macronie', tier: 6, atk: 8, hp: 8, keywords: kind === 'tv-off' ? ['vedette'] : [],
-      golden: kind === 'gold', token: kind === 'pop', noAttack: false, casseroles: [], effects: [], bonus: 0,
+      uid: this.nextUid++, cardId: VICTIM, name: 'Emmanuel Macron', camp: 'macronie', tier: 6, atk: 8, hp: 8, keywords: [],
+      golden: kind === 'gold', token: kind === 'pop', noAttack: false, casseroles: [], effects: kind === 'tv-off' ? [{ when: 'celebration', to: 'soi', do: 'buff', atk: 1, hp: 1 }] : [], bonus: 0, gains: [],
     };
     const card = new CombatCard(unit, this.options.manifest, textures);
     card.moveTo(width / 2, height * 0.5, scale);

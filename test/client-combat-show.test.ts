@@ -176,7 +176,7 @@ test('the combat clock freezes on a blow and crawls in slow motion', () => {
 });
 
 const unit = (uid: number, extra: Partial<CombatUnit> = {}): CombatUnit => ({
-  uid, cardId: 'x', name: 'X', camp: 'insoumis', tier: 1, atk: 1, hp: 3, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, ...extra,
+  uid, cardId: 'x', name: 'X', camp: 'insoumis', tier: 1, atk: 1, hp: 3, keywords: [], golden: false, token: false, noAttack: false, casseroles: [], effects: [], bonus: 0, gains: [], ...extra,
 });
 
 test('each death fits its blow and its politician', () => {
@@ -190,7 +190,7 @@ test('each death fits its blow and its politician', () => {
   assert.equal(deathKind(unit(1), { value: 120, before: 60 }, false), 'explode');
   assert.equal(deathKind(unit(1), { value: 1, before: 1 }, true), 'burn');
   assert.equal(deathKind(unit(1, { golden: true }), { value: 2, before: 2 }, false), 'gold');
-  assert.equal(deathKind(unit(1, { keywords: ['vedette'] }), { value: 2, before: 2 }, false), 'tv-off');
+  assert.equal(deathKind(unit(1, { effects: [{ when: 'celebration', to: 'soi', do: 'buff', atk: 1, hp: 1 }] }), { value: 2, before: 2 }, false), 'tv-off');
   assert.equal(deathKind(unit(1, { token: true }), { value: 2, before: 2 }, false), 'pop');
   assert.equal(deathKind(unit(1), undefined, false), 'light');
 });
@@ -239,7 +239,7 @@ test('no finale when nobody is wiped out', () => {
 });
 
 test('the set shows you, then the candidates still in the race, the best polled first', () => {
-  const row = (seat: number, heroId: string | null, hp: number, alive = true) => ({ seat, heroId, hp, alive, tier: 1, boardSize: 0, place: 0, triples: 0 });
+  const row = (seat: number, heroId: string | null, hp: number, alive = true) => ({ seat, heroId, hp, alive, tier: 1, boardSize: 0, place: 0, triples: 0, fights: [] });
   const table = [row(0, 'macron', 20), row(1, 'le_pen', 12), row(2, 'melenchon', 30), row(3, 'zemmour', 0, false), row(4, null, 25)];
   assert.deepEqual(candidateFaces(table, 0), ['macron', 'melenchon', 'le_pen']);
   assert.deepEqual(screenFaces(['a', 'b', 'c'], 1, 0), ['a', 'b', 'c']);

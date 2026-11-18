@@ -4,6 +4,7 @@ import ReadyButton from '#src/client/components/atoms/ReadyButton.vue';
 import EndOfTurnBanner from '#src/client/components/molecules/EndOfTurnBanner.vue';
 import MobileOpponents from '#src/client/components/molecules/MobileOpponents.vue';
 import MobileTopBar from '#src/client/components/molecules/MobileTopBar.vue';
+import WatchPlate from '#src/client/components/molecules/WatchPlate.vue';
 import BoardRow from '#src/client/components/organisms/BoardRow.vue';
 import CarriedItem from '#src/client/components/organisms/CarriedItem.vue';
 import FxLayer from '#src/client/components/organisms/FxLayer.vue';
@@ -12,6 +13,7 @@ import MobileCardSheet from '#src/client/components/organisms/MobileCardSheet.vu
 import MobileDiscover from '#src/client/components/organisms/MobileDiscover.vue';
 import MobileHand from '#src/client/components/organisms/MobileHand.vue';
 import MobileHeroSheet from '#src/client/components/organisms/MobileHeroSheet.vue';
+import MobileOpponentSheet from '#src/client/components/organisms/MobileOpponentSheet.vue';
 import ShopRow from '#src/client/components/organisms/ShopRow.vue';
 import StudioBand from '#src/client/components/organisms/StudioBand.vue';
 import { preloadCombat } from '#src/client/pixi/preloadCombat.ts';
@@ -26,6 +28,8 @@ import type { GestureItem, Zone } from '#src/client/stores/useTableGestures.ts';
 import { cardSheetFor } from '#src/client/tools/cardSheetFor.ts';
 import type { CardSheet } from '#src/client/tools/cardSheetFor.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
+import { nextOpponentSeat } from '#src/client/tools/nextOpponentSeat.ts';
+import { opponentAbout } from '#src/client/tools/opponentAbout.ts';
 import { refreshedItem } from '#src/client/tools/refreshedItem.ts';
 import type { SheetAction } from '#src/client/tools/sheetAction.ts';
 import { zoneAroundBand } from '#src/client/tools/zoneAroundBand.ts';
@@ -39,12 +43,20 @@ const PRELOAD_AFTER_MS = 1500;
  * and the shop, your board, your hand, and « Prêt ! ». A touch opens a card, to read it and play it; a drag buys, lays
  * down, moves or sends back, as on a computer. The same game: every action goes through the store.
  */
-const props = withDefaults(defineProps<{ view: PlayerView; store: GameStore; powerNote?: string | null }>(), { powerNote: null });
+/** `watching`: out of the game, this table is the survivor's followed live, named here: cards open to be read, nothing plays. */
+const props = withDefaults(defineProps<{ view: PlayerView; store: GameStore; powerNote?: string | null; watching?: string | null }>(), { powerNote: null, watching: null });
 
 const secondsLeft = useCountdown(props.store.deadline);
 const sheet = shallowRef<CardSheet | null>(null);
 const heroOpen = ref(false);
-const gestures = useTableGestures({ view: () => props.view, act: (action) => props.store.act(action), zoneAt: zoneOnPhone, onTap: openSheet });
+/** The player of the table whose sheet is open, by its seat. */
+const opponentSeat = ref<number | null>(null);
+const opponentShown = computed(() => {
+  const row = props.view.table.find((entry) => entry.seat === opponentSeat.value);
+  const { seat, params, seen, table, nextOpponent } = props.view;
+  return row ? opponentAbout(row, { seat, startHp: params.startHp, names: props.store.names.value, seen, nextSeat: nextOpponentSeat(table, nextOpponent) }) : null;
+});
+const gestures = useTableGestures({ view: () => props.view, act: (action) => props.store.act(action), zoneAt: zoneOnPhone, onTap: openSheet, locked: () => props.watching !== null });
 useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.view.plateau.id]?.decor));
@@ -60,8 +72,14 @@ function zoneOnPhone(point: Point): Zone | null {
   return band ? zoneAroundBand(point.y, band) : null;
 }
 
+/** The card of something on the table; on a table only watched, a card to read, without its buttons. */
+function sheetOf(item: GestureItem, view: PlayerView): CardSheet {
+  const opened = cardSheetFor(item, view);
+  return props.watching ? { ...opened, actions: [] } : opened;
+}
+
 function openSheet(item: GestureItem): void {
-  sheet.value = cardSheetFor(item, props.view);
+  sheet.value = sheetOf(item, props.view);
 }
 
 /** The card's button: sent back with its coins, or played as a click plays it on a computer. */
@@ -78,7 +96,7 @@ watch(() => props.view, (view) => {
   const opened = sheet.value;
   if (!opened) return;
   const item = view.discover ? null : refreshedItem(opened.item, view);
-  sheet.value = item ? cardSheetFor(item, view) : null;
+  sheet.value = item ? sheetOf(item, view) : null;
 });
 
 let preloadTimer = 0;
@@ -106,7 +124,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
   <div class="mobile-recruit" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
     <MobileTopBar :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :budget="view.budget" :max-budget="view.maxBudget" @hero="heroOpen = true" />
-    <MobileOpponents :table="view.table" :seat="view.seat" :start-hp="view.params.startHp" :names="store.names.value" :next="view.nextOpponent" />
+    <MobileOpponents :table="view.table" :seat="view.seat" :start-hp="view.params.startHp" :names="store.names.value" :next="view.nextOpponent" @inspect="(seat) => (opponentSeat = seat)" />
     <div class="desk-band">
       <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" :locks="store.deskLocks.value" />
     </div>
@@ -124,17 +142,19 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
       <div v-else class="hint">
         <slot name="story-quest" />
         <strong>Manche {{ view.round }}</strong>
-        <slot name="story-line">Touchez une carte pour la lire ; glissez-la pour la jouer.</slot>
+        <slot name="story-line">{{ watching ? 'Sa table, en direct : touchez une carte pour la lire.' : 'Touchez une carte pour la lire ; glissez-la pour la jouer.' }}</slot>
       </div>
-      <ReadyButton class="ready" :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" :refusal="store.readyRefusal.value" @ready="store.endRecruitment()" />
+      <WatchPlate v-if="watching" class="watch" :name="watching" :seconds-left="secondsLeft" @change="store.follow(null)" />
+      <ReadyButton v-else class="ready" :seconds-left="secondsLeft" :done="store.hasEndedRecruitment.value" :refusal="store.readyRefusal.value" @ready="store.endRecruitment()" />
     </footer>
     <EndOfTurnBanner v-if="store.endOfTurn.value?.banner.value" class="end-banner" />
     <div v-if="showTriple" :key="triples" class="triple" aria-live="polite"><strong>Triple !</strong></div>
 
     <CarriedItem :gestures="gestures" :scandal-threshold="view.scandalThreshold" :round="view.round" />
     <FxLayer />
-    <MobileDiscover v-if="view.discover" :key="view.discover.join()" :choices="view.discover" :kind="view.discoverKind" @choose="(i) => store.act({ t: 'discover', i })" />
+    <MobileDiscover v-if="view.discover" :key="view.discover.join()" :choices="view.discover" :kind="view.discoverKind" :chooser="watching" @choose="(i) => store.act({ t: 'discover', i })" />
     <MobileCardSheet v-if="sheet" :card="sheet.card" :actions="sheet.actions" :casseroles="sheet.casseroles" @choose="chooseAction" @close="sheet = null" />
+    <MobileOpponentSheet v-if="opponentShown" :about="opponentShown" @close="opponentSeat = null" />
     <MobileHeroSheet v-if="heroOpen" :hero-id="view.heroId" :power-note="powerNote" @close="heroOpen = false" />
   </div>
 </template>
@@ -198,6 +218,8 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
 .hint :deep(.feed .speaker) { display: inline; margin: 0 4px 0 0; font-size: 0.95rem; }
 .aim-hint { color: #ffe066; font: 400 1.25rem / 1.1 var(--font-number); letter-spacing: 1px; -webkit-text-stroke: 3px var(--color-ink); paint-order: stroke fill; }
 .ready { flex: none; }
+/* The plate of a table only watched, in the footer's corner: read at a phone's size. */
+.watch { --s: 0.6px; flex: none; }
 .aiming .shop-band, .aiming .hand { filter: brightness(0.55) saturate(0.6); transition: filter 0.2s; }
 /* The end of turn plays on the board only: the shop and the hand step back. */
 .ending-turn .shop-band, .ending-turn .hand, .ending-turn .desk-band { filter: brightness(0.4) saturate(0.4); pointer-events: none; transition: filter 0.3s; }

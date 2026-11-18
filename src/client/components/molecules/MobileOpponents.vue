@@ -12,26 +12,29 @@ import { seatLabel } from '#src/client/tools/seatNames.ts';
 import type { SeatName } from '#src/client/tools/seatNames.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
-/** How long a touched face keeps its name: nothing to close, it goes away by itself. */
+/** How long the faceless ghost keeps its name once touched: nothing to close, it goes away by itself. */
 const NAME_MS = 2500;
 
 /**
  * The other candidates, in a strip under the bar: the healthiest first, the eliminated last, with their place. Under
- * each face, its polls, and its electoral base (its armor) while some is left. A touch
- * on a face names it (the hero, and online the pseudo), for a moment. During recruitment, the next opponent wears a red
- * ring and a sword, as on the desktop table; a ghost without a face yet has a place of its own, at the end.
+ * each face, its polls, and its electoral base (its armor) while some is left. A touch on a face asks for its sheet
+ * (`inspect`: the hero and who plays it, its power, its last board met, its last combats). During recruitment, the
+ * next opponent wears a red ring and a sword, as on the desktop table; a ghost without a face yet has a place of its
+ * own, at the end, and a touch only names it, for a moment.
  */
 const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; startHp: number; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
   names: () => new Map(),
   next: null,
 });
 
+const emit = defineEmits<{ inspect: [seat: number] }>();
+
 const rows = computed(() => props.table.filter((row) => row.seat !== props.seat).sort((a, b) => Number(b.alive) - Number(a.alive) || b.hp - a.hp));
 const nextSeat = computed(() => nextOpponentSeat(props.table, props.next));
 const facelessGhost = computed(() => facelessGhostNext(props.table, props.next));
-/** The faceless ghost's place in `named`: no seat stands for it. */
+/** The faceless ghost: no seat stands for it. */
 const GHOST = -1;
-const named = ref<number | null>(null);
+const ghostNamed = ref(false);
 let nameTimer = 0;
 
 function nameOf(seat: number): string {
@@ -41,10 +44,10 @@ function nameOf(seat: number): string {
   return props.table.find((row) => row.seat === seat)?.alive ? `${name}, votre prochain adversaire` : `Le fantôme de ${name}, votre prochain adversaire`;
 }
 
-function show(seat: number): void {
+function nameGhost(): void {
   window.clearTimeout(nameTimer);
-  named.value = named.value === seat ? null : seat;
-  nameTimer = window.setTimeout(() => (named.value = null), NAME_MS);
+  ghostNamed.value = !ghostNamed.value;
+  nameTimer = window.setTimeout(() => (ghostNamed.value = false), NAME_MS);
 }
 onUnmounted(() => window.clearTimeout(nameTimer));
 </script>
@@ -53,20 +56,19 @@ onUnmounted(() => window.clearTimeout(nameTimer));
   <ol class="opponents" aria-label="Les autres candidats">
     <li v-for="row in rows" :key="row.seat" class="opponent" :class="{ out: !row.alive, next: row.seat === nextSeat }">
       <GameIcon v-if="row.seat === nextSeat" class="next-mark" name="sword" />
-      <button type="button" class="face-button" :aria-label="`${nameOf(row.seat)} : ${row.alive ? `${pollsLabel(row.hp, startHp)}, échelon ${row.tier}` : `${row.place}e, éliminé`}`" @click="show(row.seat)">
+      <button type="button" class="face-button" :aria-label="`${nameOf(row.seat)} : ${row.alive ? `${pollsLabel(row.hp, startHp)}, échelon ${row.tier}` : `${row.place}e, éliminé`}`" @click="emit('inspect', row.seat)">
         <HeadPortrait v-if="row.heroId" class="face" :puppet="puppetStyle(gameArt.manifest.value, row.heroId, 'civile')" />
         <span v-else class="face empty" />
         <PollsCount v-if="row.alive" class="polls" look="pills" :hp="row.hp" :start-hp="startHp" />
         <span v-else class="place">{{ row.place }}<sup>{{ ordinalSuffix(row.place) }}</sup></span>
       </button>
-      <span v-if="named === row.seat" class="name" role="status">{{ nameOf(row.seat) }}</span>
     </li>
     <li v-if="facelessGhost" class="opponent next">
       <GameIcon class="next-mark" name="sword" />
-      <button type="button" class="face-button" :aria-label="nameOf(GHOST)" @click="show(GHOST)">
+      <button type="button" class="face-button" :aria-label="nameOf(GHOST)" @click="nameGhost">
         <span class="face empty ghost">?</span>
       </button>
-      <span v-if="named === GHOST" class="name" role="status">{{ nameOf(GHOST) }}</span>
+      <span v-if="ghostNamed" class="name" role="status">{{ nameOf(GHOST) }}</span>
     </li>
   </ol>
 </template>

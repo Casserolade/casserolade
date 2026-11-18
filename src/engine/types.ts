@@ -24,8 +24,6 @@ export type Keyword =
   | 'ni_droite_ni_gauche'
   /** Magnétique : depuis la main, peut se poser sur un allié pour fusionner avec lui. */
   | 'ralliement'
-  /** Célèbre en priorité, s'il survit. */
-  | 'vedette'
   /** Le coup de balai (Cleave) : ses attaques touchent aussi les voisins de sa cible. */
   | 'balai';
 
@@ -127,7 +125,8 @@ export type Target =
 export type ShopPick = 'plus_faible' | 'plus_fort';
 
 /** Ce qu'un joueur compte pendant la partie : les cartes « cette partie » le lisent. */
-export type Counter = 'tracts' | 'ecologistes_joues' | 'dores_joues' | 'casseroles' | 'debauchages' | 'actualisations';
+/** Ce que le joueur a fait depuis le début de la partie ; `actualisations_manche` repart de zéro à chaque manche. */
+export type Counter = 'tracts' | 'ecologistes_joues' | 'dores_joues' | 'casseroles' | 'debauchages' | 'actualisations' | 'actualisations_manche';
 
 export type Action =
   | { do: 'buff'; atk: number; hp: number }
@@ -363,6 +362,21 @@ export interface Scandal {
   splash: number;
 }
 
+/**
+ * Ce qu'un politique a reçu d'une même source, en plus de sa carte : une ligne du registre de ses gains. Les lignes
+ * s'additionnent source par source ; avec la base de sa carte, leur somme fait ses stats hors combat.
+ */
+export interface MinionGain {
+  /** « carte:gueant », « sort:tract », « casserole:… », « heros:… », « ralliement:… », « carriere », « retour ». */
+  source: string;
+  atk: number;
+  hp: number;
+  /** Combien de fois cette source a donné des stats. */
+  times: number;
+  /** Les mots-clés qu'elle a donnés. */
+  keywords: Keyword[];
+}
+
 export interface Minion {
   uid: number;
   cardId: string;
@@ -403,6 +417,8 @@ export interface Minion {
   aloneBonus: number;
   /** Ce doré a déjà donné son Investiture : il n'en redonne pas. */
   investi?: boolean;
+  /** D'où viennent ses stats et ses mots-clés au-delà de sa carte, une ligne par source (`gains.ts`). */
+  gains: MinionGain[];
 }
 
 export interface HeroMods {
@@ -534,20 +550,21 @@ export interface CombatSide {
   /** Ce que donne un Tract de ce joueur. */
   tract?: { atk: number; hp: number };
   /** Ses gains de camp pour le reste de la partie : les serviteurs invoqués en combat en profitent. */
-  campBuffs?: { camp?: Camp; card?: string; atk: number; hp: number }[];
+  campBuffs?: { camp?: Camp; card?: string; atk: number; hp: number; source?: string }[];
 }
 
 /** Ce qu'un combat laisse derrière lui, pour un camp : les gains permanents et les cartes gagnées. */
+/** Chaque gain qui survit au combat dit sa source (`gains.ts`) : le registre du politique la garde. */
 export interface CombatPersist {
-  buffs: { uid: number; atk: number; hp: number }[];
+  buffs: { uid: number; atk: number; hp: number; source: string }[];
   /** Gains pour la main : `all` pour toute la main, sinon un serviteur au hasard. */
-  handBuffs: { all: boolean; atk: number; hp: number }[];
-  campBuffs: { camp?: Camp; card?: string; atk: number; hp: number }[];
+  handBuffs: { all: boolean; atk: number; hp: number; source: string }[];
+  campBuffs: { camp?: Camp; card?: string; atk: number; hp: number; source: string }[];
   cards: string[];
   /** Les copies simples gagnées : jamais dorées, hors réserve (règle R3). */
   copies: string[];
   /** Les politiques qui doublent pour de bon après le combat, une fois par entrée, dans l'ordre. */
-  doubles: number[];
+  doubles: { uid: number; source: string }[];
   /** Ce que vos Tracts gagnent pour le reste de la partie, pendant le combat (Mélenchon, quand il attaque). */
   tractBonus: { atk: number; hp: number };
   /** Les Tracts joués pendant le combat : chacun compte comme un sort lancé, une fois le combat fini (règle R5). */
@@ -574,6 +591,8 @@ export interface CombatUnit {
   bonus: number;
   /** En scandale : sa marionnette garde sa tête de choc tout le combat. */
   scandal?: boolean;
+  /** D'où viennent ses stats et ses mots-clés au-delà de sa carte, tels qu'il entre en combat. */
+  gains: MinionGain[];
 }
 
 /**

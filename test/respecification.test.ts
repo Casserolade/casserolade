@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { applyAction, createGame, startRound, viewFor } from '../src/engine/game.ts';
+import { applyAction, createGame, resolveRound, startRound, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { resolveCombat } from '../src/engine/combat.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
@@ -317,14 +317,26 @@ test('Marine Le Pen : chaque débauché donne ses stats à tout le RN, pour la p
   assert.ok(p.campBuffs.some((g) => g.camp === 'rn' && g.atk === chirac.atk && g.hp === chirac.hp), 'pour la partie : ceux à venir aussi');
 });
 
-test('Zemmour grandit au carré : +1/+1 par actualisation faite cette partie', () => {
+test('Zemmour grandit au carré dans la manche : +3/+3 par actualisation faite cette manche, et le compte repart à la suivante', () => {
   const game = startTable(['reconquete', 'macronie', 'republicains', 'socialistes', 'ecologistes']);
   const p = game.players[0];
+  // Des actualisations faites avant lui dans la manche comptent ; celles des manches d'avant, non.
+  p.counters.actualisations = 40;
+  assert.equal(applyAction(game, 0, { t: 'roll' }).ok, true);
   const zemmour = lay(game, 'zemmour');
-  const before = zemmour.atk;
+  const before = [zemmour.atk, zemmour.hp];
   for (let i = 0; i < 3; i++) assert.equal(applyAction(game, 0, { t: 'roll' }).ok, true);
-  const rolls = p.counters.actualisations;
-  assert.equal(zemmour.atk - before, rolls * (rolls + 1) / 2 - (rolls - 3) * (rolls - 2) / 2, '1 + 2 + 3 pour trois actualisations de suite');
+  assert.equal(p.counters.actualisations_manche, 4);
+  assert.deepEqual([zemmour.atk - before[0], zemmour.hp - before[1]], [27, 27], '3 × (2 + 3 + 4) pour trois actualisations après une première');
+  assert.deepEqual(zemmour.gains, [{ source: 'carte:zemmour', atk: 27, hp: 27, times: 3, keywords: [] }]);
+  // La manche suivante : le compte repart de zéro, celui de la partie continue.
+  resolveRound(game);
+  assert.equal(p.counters.actualisations_manche, 0);
+  assert.equal(p.counters.actualisations, 44);
+  const next = [zemmour.atk, zemmour.hp];
+  p.budget = 5;
+  assert.equal(applyAction(game, 0, { t: 'roll' }).ok, true);
+  assert.deepEqual([zemmour.atk - next[0], zemmour.hp - next[1]], [3, 3], 'la première actualisation de la manche donne +3/+3');
 });
 
 test('Giscard : sa Chaise vide tient ses PV', () => {
@@ -393,7 +405,7 @@ test('une casserole qui fait taire l\'attaque : en scandale, il n\'attaque plus,
 
 test('les stats plafonnent à un milliard', () => {
   const m = unit(MAX_STAT - 1, MAX_STAT - 1);
-  doubleStats(m, 3);
+  doubleStats(m, 3, 'carte:sarkozy');
   assert.deepEqual([m.atk, m.hp], [MAX_STAT, MAX_STAT]);
 });
 

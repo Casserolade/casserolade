@@ -13,8 +13,10 @@ import type {
   Params,
   Rng,
 } from './types.ts';
+import { RETURN_SOURCE, UNKNOWN_SOURCE, copyGains, effectSource, recordGain, settleGain } from './gains.ts';
 import { MAX_STAT, cardOf, effectPower, makeMinion, makeToken } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
+import { createRng } from './rng.ts';
 import { isCamp as isCampOf } from './camps.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 
@@ -53,7 +55,7 @@ interface Side {
   penalty: number;
   persist: CombatPersist;
   /** Gains de camp du joueur, et ceux obtenus pendant ce combat : les serviteurs invoqués en profitent. */
-  campBuffs: { camp?: Camp; card?: string; atk: number; hp: number }[];
+  campBuffs: { camp?: Camp; card?: string; atk: number; hp: number; source?: string }[];
 }
 
 interface Battle {
@@ -136,13 +138,14 @@ function lose(b: Battle, u: Minion, k: Keyword): void {
   if (b.logging) b.log.push({ e: 'mot_cle', uid: u.uid, keyword: k, gain: false });
 }
 
-function addStats(b: Battle, side: Side, u: Unit, atk: number, hp: number, perma = false): void {
+/** `keeps` : la source d'un gain qui reste après le combat (`gains.ts`) ; null, il ne vaut que pour ce combat. */
+function addStats(b: Battle, side: Side, u: Unit, atk: number, hp: number, keeps: string | null = null): void {
   if (atk === 0 && hp === 0) return;
   u.atk = Math.min(MAX_STAT, u.atk + atk);
   u.hp = Math.min(MAX_STAT, u.hp + hp);
   u.peak = Math.max(u.peak, u.hp);
   if (b.logging) b.log.push({ e: 'stats', uid: u.uid, atk: u.atk, hp: u.hp });
-  if (perma && u.origin < b.firstSummonUid) side.persist.buffs.push({ uid: u.origin, atk, hp });
+  if (keeps !== null && u.origin < b.firstSummonUid) side.persist.buffs.push({ uid: u.origin, atk, hp, source: keeps });
 }
 
 /** Ses effets tels que le client les lit : chacun dit sa puissance, l'identité des effets ne voyage pas. */
@@ -167,6 +170,7 @@ function toCombatUnit(u: Unit): CombatUnit {
     effects: withPower(u),
     bonus: u.bonus,
     ...(u.scandal ? { scandal: true } : {}),
+    gains: copyGains(u.gains),
   };
 }
 
@@ -326,40 +330,43 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
   // La main ne combat pas : ce qui la vise est mis de côté et appliqué après le combat.
   if (eff.to === 'main' || eff.to === 'toute_la_main') {
     const all = eff.to === 'toute_la_main';
-    if (eff.do === 'buff') side.persist.handBuffs.push({ all, atk: eff.atk * k, hp: eff.hp * k });
-    if (eff.do === 'jouer_tract') side.persist.handBuffs.push({ all, atk: side.tract.atk * k, hp: side.tract.hp * k });
-    if (eff.do === 'butin' && trigger) side.persist.handBuffs.push({ all, atk: eff.part === 'tout' ? trigger.atk * k : 0, hp: trigger.peak * k });
+    const source = effectSource(self, eff);
+    if (eff.do === 'buff') side.persist.handBuffs.push({ all, atk: eff.atk * k, hp: eff.hp * k, source });
+    if (eff.do === 'jouer_tract') side.persist.handBuffs.push({ all, atk: side.tract.atk * k, hp: side.tract.hp * k, source });
+    if (eff.do === 'butin' && trigger) side.persist.handBuffs.push({ all, atk: eff.part === 'tout' ? trigger.atk * k : 0, hp: trigger.peak * k, source });
     return;
   }
+  /** Un gain « pour de bon » revient du combat avec sa source : le registre du politique la garde. */
+  const keeps = eff.perma ? effectSource(self, eff) : null;
   switch (eff.do) {
     case 'butin':
       if (!trigger) break;
       for (const u of allyTargets(b, side, self, index, { ...eff, to: eff.to === 'declencheur' ? 'soi' : eff.to }, trigger)) {
-        addStats(b, side, u, eff.part === 'tout' ? trigger.atk * k : 0, trigger.peak * k, eff.perma);
+        addStats(b, side, u, eff.part === 'tout' ? trigger.atk * k : 0, trigger.peak * k, keeps);
       }
       break;
     case 'buff':
-      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * k, eff.hp * k, eff.perma);
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * k, eff.hp * k, keeps);
       break;
     case 'buff_par_allie': {
       const n = side.units.filter((u) => u.hp > 0 && u !== self).length;
-      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, eff.perma);
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, keeps);
       break;
     }
     case 'buff_par_camp': {
       const n = new Set(side.units.filter((u) => u.hp > 0 && u.camp !== 'civile').map((u) => u.camp)).size;
-      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, eff.perma);
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, keeps);
       break;
     }
     case 'jouer_tract':
       // Un Tract joué par un effet compte comme un sort lancé, en combat aussi (règle R5) : compté après le combat.
       for (const u of allyTargets(b, side, self, index, eff, trigger)) {
-        addStats(b, side, u, side.tract.atk * k, side.tract.hp * k, eff.perma);
+        addStats(b, side, u, side.tract.atk * k, side.tract.hp * k, keeps);
         side.persist.tracts++;
       }
       break;
     case 'camp_buff': {
-      const gain = { camp: eff.camp, card: eff.card, atk: eff.atk * k, hp: eff.hp * k };
+      const gain = { camp: eff.camp, card: eff.card, atk: eff.atk * k, hp: eff.hp * k, source: effectSource(self, eff) };
       side.persist.campBuffs.push(gain);
       side.campBuffs.push(gain);
       for (const u of side.units) {
@@ -392,12 +399,12 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
     }
     case 'transmettre':
       if (eff.to === 'allie_suivant') {
-        transmit(b, side, self, index, eff.tout ?? false, k, eff.perma ?? false);
+        transmit(b, side, self, index, eff.tout ?? false, k, keeps);
         break;
       }
       // À plusieurs cibles : Strauss-Kahn lègue ses stats à chacun de ses autres Socialistes.
       for (const u of allyTargets(b, side, self, index, eff, trigger)) {
-        if (u !== self) addStats(b, side, u, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.peak) * k : 0, eff.perma);
+        if (u !== self) addStats(b, side, u, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.peak) * k : 0, keeps);
       }
       break;
     case 'invoquer':
@@ -429,7 +436,7 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       for (const u of allyTargets(b, side, self, index, eff, trigger)) {
         for (let i = 0; i < k; i++) {
           addStats(b, side, u, u.atk, u.hp);
-          if (eff.perma && u.origin < b.firstSummonUid) side.persist.doubles.push(u.origin);
+          if (keeps !== null && u.origin < b.firstSummonUid) side.persist.doubles.push({ uid: u.origin, source: keeps });
         }
       }
       break;
@@ -450,7 +457,7 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
       break;
     case 'buff_par_membre': {
       const n = side.units.filter((u) => u.hp > 0 && isCampOf(u, eff.camp ?? self.camp, b.ctx?.extremesAllied ?? false)).length;
-      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, eff.perma);
+      for (const u of allyTargets(b, side, self, index, eff, trigger)) addStats(b, side, u, eff.atk * n * k, eff.hp * n * k, keeps);
       break;
     }
     default:
@@ -459,21 +466,25 @@ function runEffect(b: Battle, side: Side, self: Unit, index: number, eff: Effect
   }
 }
 
-/** Transmet son attaque (ou toutes ses stats) à l'allié suivant ; `perma` : il les garde après le combat (Jean-Marie Le Pen). */
-function transmit(b: Battle, side: Side, self: Unit, index: number, all: boolean, k: number, perma = false): void {
+/** Transmet son attaque (ou toutes ses stats) à l'allié suivant ; `keeps` : la source de ce qu'il garde après le combat (Jean-Marie Le Pen). */
+function transmit(b: Battle, side: Side, self: Unit, index: number, all: boolean, k: number, keeps: string | null = null): void {
   const next = side.units.slice(index + 1).find((u) => u.hp > 0) ?? side.units.find((u) => u.hp > 0 && u !== self);
   if (!next) return;
   const atk = Math.max(1, self.atk) * k;
-  addStats(b, side, next, atk, all ? Math.max(1, self.peak) * k : 0, perma);
+  addStats(b, side, next, atk, all ? Math.max(1, self.peak) * k : 0, keeps);
 }
 
-/** Les gains de camp du joueur qui valent pour ce nouveau venu : un jeton invoqué, une réincarnation. */
+/**
+ * Les gains de camp du joueur qui valent pour ce nouveau venu (un jeton invoqué, une réincarnation), notés à son
+ * registre source par source : sa fiche les dit pendant le combat.
+ */
 function campGains(b: Battle, side: Side, m: Minion): { atk: number; hp: number } {
   const total = { atk: 0, hp: 0 };
   for (const gain of side.campBuffs) {
     if ((!gain.camp || isCampOf(m, gain.camp, b.ctx?.extremesAllied ?? false)) && (!gain.card || m.cardId === gain.card)) {
       total.atk += gain.atk;
       total.hp += gain.hp;
+      recordGain(m, gain.source ?? UNKNOWN_SOURCE, gain.atk, gain.hp);
     }
   }
   return total;
@@ -550,6 +561,8 @@ function reincarnate(b: Battle, side: Side, dead: Unit, at: number): boolean {
   bare.keywords = bare.keywords.filter((k) => k !== 'retour');
   bare.atk = Math.min(MAX_STAT, card.atk * (dead.golden ? 2 : 1) + campGains(b, side, bare).atk);
   bare.hp = 1;
+  // Revenu à 1 PV, sans les PV de ses gains de camp : ce qui lui manque se lit au registre.
+  settleGain(bare, RETURN_SOURCE);
   const unit: Unit = { ...bare, attacked: false, origin: dead.origin, bonus: 0, board: { atk: bare.atk, hp: 1 }, avenge: 0, peak: 1 };
   const index = Math.max(0, Math.min(at, side.units.length));
   side.units.splice(index, 0, unit);
@@ -805,11 +818,17 @@ export function resolveCombat(a: CombatSide, c: CombatSide, opts: CombatOptions)
   };
 }
 
-/** Qui prononce la petite phrase : la Vedette survivante la plus à gauche, sinon le survivant le plus à gauche. */
+/**
+ * Qui prononce la petite phrase : un survivant du vainqueur, au hasard, sans priorité (18 novembre 2026 : le mot-clé
+ * Vedette, qui ne servait qu'à passer devant, est retiré). Le tirage a sa propre graine, faite des survivants : c'est
+ * un choix de mise en scène, il ne prend rien au hasard de la partie, que seul le jeu consomme.
+ */
 function pickCelebrant(side: Side): { side: 0 | 1; uid: number; cardId: string } | null {
   const survivors = side.units.filter((u) => u.hp > 0);
-  const star = survivors.find((u) => has(u, 'vedette')) ?? survivors[0];
-  return star ? { side: side.index, uid: star.uid, cardId: star.cardId } : null;
+  if (survivors.length === 0) return null;
+  const seed = survivors.reduce((mix, u) => Math.imul(mix, 31) + u.uid + u.atk + u.hp, survivors.length);
+  const speaker = createRng(seed).pick(survivors);
+  return { side: side.index, uid: speaker.uid, cardId: speaker.cardId };
 }
 
 /** Qui répond pour le perdant : le plus à gauche de son plateau de départ qui a un Droit de réponse. */

@@ -31,6 +31,7 @@ export function makeMinion(card: Card, uid: number): Minion {
     hpLossOnDeath: 0,
     budgetPerRound: 0,
     aloneBonus: 0,
+    gains: [],
   };
 }
 

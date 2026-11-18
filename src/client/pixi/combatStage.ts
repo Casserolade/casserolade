@@ -2,6 +2,7 @@ import 'pixi.js/unsafe-eval';
 import { Application, Assets, Container, TextureSource } from 'pixi.js';
 import { TRIGGER_LABELS } from '#src/client/const/effectLabels.ts';
 import type { GameManifest } from '#src/client/const/gameManifest.ts';
+import { MEDALLION_LAYOUT } from '#src/client/const/medallionLayout.ts';
 import { KEYWORD_RULES } from '#src/client/const/keywordRules.ts';
 import { CombatCard } from '#src/client/pixi/combatCard.ts';
 import type { SheetFrames } from '#src/client/pixi/deaths/deathScene.ts';
@@ -154,6 +155,25 @@ export class CombatStage {
     const card = this.cards.get(uid);
     if (!card) return null;
     return { x: card.centerX(), y: card.centerY(), top: card.view.y };
+  }
+
+  /**
+   * The unit drawn under a point of the screen, with the box of its medallion there: its card comes up beside it.
+   * Never a corpse still falling.
+   */
+  unitAt(x: number, y: number): { uid: number; box: { left: number; top: number; right: number; bottom: number } } | null {
+    if (!this.isStarted) return null;
+    const canvas = this.app.canvas.getBoundingClientRect();
+    for (const [uid, card] of this.cards) {
+      if (this.corpses.has(uid)) continue;
+      const halfWidth = (MEDALLION_LAYOUT.width * card.scale) / 2;
+      const halfHeight = (MEDALLION_LAYOUT.height * card.scale) / 2;
+      const left = canvas.left + card.centerX() - halfWidth;
+      const top = canvas.top + card.centerY() - halfHeight;
+      if (x < left || x > left + 2 * halfWidth || y < top || y > top + 2 * halfHeight) continue;
+      return { uid, box: { left, top, right: left + 2 * halfWidth, bottom: top + 2 * halfHeight } };
+    }
+    return null;
   }
 
   /** The survivor who celebrates the victory: big, talking, for as long as its line lasts. */

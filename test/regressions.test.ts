@@ -189,7 +189,7 @@ test('un Suppléant invoqué en combat a les gains de Faure des combats précéd
   const game = createGame({ seed: 3, seats: 2, heroes: ['attal', 'attal'], combatLog: true });
   const [a, b] = game.players;
   // Faure a déjà fait grandir les Suppléants pour la partie.
-  a.campBuffs.push({ card: 'suppleant', atk: 5, hp: 5 });
+  a.campBuffs.push({ card: 'suppleant', atk: 5, hp: 5, source: 'carte:faure' });
   a.board = [{ ...makeMinion(CARD_BY_ID.bouamrane, 9001), hp: 1 }];
   b.board = [{ ...makeMinion(CARD_BY_ID.cheminade, 9002), atk: 1, hp: 50 }];
   startCombats(game);

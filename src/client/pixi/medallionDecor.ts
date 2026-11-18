@@ -67,7 +67,6 @@ export class MedallionDecor {
     if (has('immunite')) this.addBubble();
     if (has('cumul')) this.addSashes();
     if (has('retour')) this.addComebackBadge();
-    if (has('vedette')) this.addStar();
     if (has('balai')) this.addBroomBadge();
     this.addMarks(effects);
   }
@@ -173,18 +172,6 @@ export class MedallionDecor {
     this.front.addChild(badge);
     this.animations.push((time) => {
       badge.rotation = (Math.sin((time / 1.4) * Math.PI * 2) * 10 * Math.PI) / 180;
-    });
-  }
-
-  /** The Vedette's star over its head (`.star`), bobbing. */
-  private addStar(): void {
-    const star = icon('star', 40, '#ffd84a', '#3a2a00');
-    this.front.addChild(star);
-    this.animations.push((time) => {
-      const wave = (1 - Math.cos((time / 1.8) * Math.PI * 2)) / 2;
-      star.position.set(CX, -10 - 5 * wave);
-      star.rotation = (12 * wave * Math.PI) / 180;
-      star.scale.set(((1 + 0.08 * wave) * 40) / 24);
     });
   }
 

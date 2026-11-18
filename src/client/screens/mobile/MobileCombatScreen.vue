@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, useTemplateRef } from 'vue';
+import { computed, shallowRef, useTemplateRef } from 'vue';
 import ConfettiBurst from '#src/client/components/atoms/ConfettiBurst.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
 import PollsCrash from '#src/client/components/atoms/PollsCrash.vue';
@@ -12,6 +12,7 @@ import CelebrationNotices from '#src/client/components/molecules/CelebrationNoti
 import HostLectern from '#src/client/components/molecules/HostLectern.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
 import MobileHeroBadge from '#src/client/components/molecules/MobileHeroBadge.vue';
+import MobileCardSheet from '#src/client/components/organisms/MobileCardSheet.vue';
 import StudioBand from '#src/client/components/organisms/StudioBand.vue';
 import { BREAKING_NEWS_SETS } from '#src/client/const/breakingNewsSets.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
@@ -20,11 +21,14 @@ import { visualEffects } from '#src/client/stores/visualEffects.ts';
 import { useCombatShow } from '#src/client/stores/useCombatShow.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
 import { portraitCombatLayout } from '#src/client/tools/portraitCombatLayout.ts';
+import type { ShownCard } from '#src/client/tools/shownCard.ts';
+import { toCardProps } from '#src/client/tools/toCardProps.ts';
 import type { CombatView, PlayerView } from '#src/engine/game.ts';
 
 /**
  * The combat on a phone held upright: the rival and the host on top, the two rows of medallions in the middle, your
- * hero at the bottom. The same show as on a computer (useCombatShow): only the places change.
+ * hero at the bottom. The same show as on a computer (useCombatShow): only the places change. A touch on a
+ * politician opens its card, with where its bonuses come from; a touch anywhere else hurries the show.
  */
 const props = withDefaults(defineProps<{ combat: CombatView; view: PlayerView | null; line: string | null; rivalName?: string | null; watching?: string | null }>(), { rivalName: null, watching: null });
 const emit = defineEmits<{ close: [] }>();
@@ -34,7 +38,13 @@ const {
   SPEEDS, playback, chooseSpeed, narration, finished, speed, stageReady, stageFailed, waitingNext, resultShown, speaker, speech, speakerPuppet, speechText,
   notices, noticeHeads, own, enemy, ownHp, opponentHp, draining, hurt, fatalBlow, rivalShaken, fatalSprite, eliminated, pollsLost, curveFalls, outcome, rivalLine,
   host, won, lost, hostLine, plateauId, hostPuppet, hostTalking, lecternMic,
-} = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') }, portraitCombatLayout);
+} = useCombatShow(props, () => emit('close'), stageHost, { own: useTemplateRef<HTMLElement>('ownHero'), rival: useTemplateRef<HTMLElement>('rivalHero') }, portraitCombatLayout, openCard);
+
+/** The card of the politician touched, yours or the rival's: read while the combat goes on behind it. */
+const sheet = shallowRef<ShownCard | null>(null);
+function openCard(card: ShownCard): void {
+  sheet.value = card;
+}
 
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[plateauId]?.decor));
 /** The set's lights falter with the combat's big shocks, as on a computer. */
@@ -72,10 +82,10 @@ const speechStyle = computed(() => {
 
     <div v-if="!stageReady" class="plain" :class="{ loading: !stageFailed }">
       <ol class="plain-row enemy">
-        <li v-for="unit in enemy" :key="unit.uid"><MedallionToken v-bind="unit" /></li>
+        <li v-for="unit in enemy" :key="unit.uid"><MedallionToken v-bind="toCardProps(unit)" /></li>
       </ol>
       <ol class="plain-row own">
-        <li v-for="unit in own" :key="unit.uid"><MedallionToken v-bind="unit" /></li>
+        <li v-for="unit in own" :key="unit.uid"><MedallionToken v-bind="toCardProps(unit)" /></li>
       </ol>
     </div>
 
@@ -106,6 +116,7 @@ const speechStyle = computed(() => {
         <SpeechBubble v-if="speechText" :tail="speech.below ? 'up' : 'down'" :shout="speech.kind === 'celebration'">{{ speechText }}</SpeechBubble>
       </span>
     </div>
+    <MobileCardSheet v-if="sheet" :card="sheet" @close="sheet = null" />
   </div>
 </template>
 

@@ -33,10 +33,10 @@ const ACTIONS: Record<Action['do'], true> = {
   doubler_stats: true, buff_par_membre: true, gain_debauche: true, buff_compteur: true, chaise_vide: true,
 };
 const KEYWORDS: Record<Keyword, true> = {
-  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, vedette: true, balai: true,
+  immunite: true, porte_parole: true, cumul: true, polemique: true, retour: true, ni_droite_ni_gauche: true, ralliement: true, balai: true,
 };
 const CAMPS: Record<Camp, true> = { insoumis: true, socialistes: true, ecologistes: true, macronie: true, republicains: true, rn: true, reconquete: true, civile: true };
-const COUNTERS: Record<Counter, true> = { tracts: true, ecologistes_joues: true, dores_joues: true, casseroles: true, debauchages: true, actualisations: true };
+const COUNTERS: Record<Counter, true> = { tracts: true, ecologistes_joues: true, dores_joues: true, casseroles: true, debauchages: true, actualisations: true, actualisations_manche: true };
 
 const cardIds = new Set(CARDS.map((c) => c.id));
 const tokenIds = new Set(Object.keys(TOKENS));

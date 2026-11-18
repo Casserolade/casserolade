@@ -23,7 +23,7 @@ export type Fait =
   | 'plus_gros' | 'sondages_perdus' | 'sondages_au_plus_bas' | 'sondages' | 'manches' | 'echelon'
   // Son plateau de la fin.
   | 'politiques' | 'dores' | 'camps' | 'meme_camp' | 'gauche_plurielle' | 'union_des_droites' | 'presidents'
-  | 'porte_parole' | 'immunites' | 'vedettes' | 'casseroles_sur_un' | 'attaque_totale';
+  | 'porte_parole' | 'immunites' | 'celebrations' | 'casseroles_sur_un' | 'attaque_totale';
 
 /** Le niveau des bots d'une partie rapide. Une carrière et le tutoriel n'en ont pas. */
 export type Niveau = 'facile' | 'moyen' | 'difficile';
@@ -148,7 +148,7 @@ export const SUCCES: Succes[] = [
   { id: 'age_d_or', rayon: 'plateau', nom: 'Les Trente Glorieuses', description: 'Finir une partie avec sept politiques dorés.', condition: { type: 'partie', faits: { dores: { min: 7 } } } },
   { id: 'langue_de_bois', rayon: 'plateau', nom: 'Langue de bois', description: 'Gagner avec sept Porte-parole.', condition: { type: 'partie', faits: { place: GAGNER, porte_parole: { min: 7 } } } },
   { id: 'immunite_parlementaire', rayon: 'plateau', nom: 'Immunité parlementaire', description: 'Gagner avec sept politiques sous Immunité.', condition: { type: 'partie', faits: { place: GAGNER, immunites: { min: 7 } } }, recompense: titre('L\'Intouchable') },
-  { id: 'peopolisation', rayon: 'plateau', nom: 'Peopolisation', description: 'Gagner avec six Vedettes.', condition: { type: 'partie', faits: { place: GAGNER, vedettes: { min: 6 } } } },
+  { id: 'peopolisation', rayon: 'plateau', nom: 'Peopolisation', description: 'Gagner avec six politiques qui ont une Célébration.', condition: { type: 'partie', faits: { place: GAGNER, celebrations: { min: 6 } } } },
   { id: 'plafond_de_verre', rayon: 'plateau', nom: 'Plafond de verre', description: 'Gagner une partie sans dépasser l\'échelon 4.', condition: { type: 'partie', faits: { place: GAGNER, echelon: { max: 4 } } } },
 
   // Le pupitre : s'acharner sur les boutons, ou ne jamais y toucher.

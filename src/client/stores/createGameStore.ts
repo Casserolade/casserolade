@@ -23,7 +23,8 @@ export const RECONNECTING_NOTICE = 'Connexion perdue : reconnexion en cours…';
 /** Chat lines kept on screen: the server keeps its own last 50 for whoever comes back. */
 const CHAT_KEEP = 100;
 
-export type GameScreen = 'loading' | 'queue' | 'waiting' | 'hero' | 'recruit' | 'combat' | 'eliminated' | 'end';
+/** `watching`: out of the game, the recruitment table of the survivor followed. */
+export type GameScreen = 'loading' | 'queue' | 'waiting' | 'hero' | 'recruit' | 'watching' | 'combat' | 'eliminated' | 'end';
 
 /** A game between humans changes the rating: before and after, sent with the ranking. */
 export interface MmrChange {
@@ -57,8 +58,12 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   const endOfTurn = shallowRef<EndOfTurnPlayback | null>(null);
   /** The view the combat started from: what the combat shows does not move when the next round's view comes in. */
   const combatView = shallowRef<PlayerView | null>(null);
-  /** Out of the game, the survivor followed (`suivre`): each of its combats is shown live. */
+  /** Out of the game, the survivor followed (`suivre`): its recruitment and each of its combats are shown live. */
   const following = ref<number | null>(null);
+  /** The followed survivor's recruitment table, as that survivor sees it (`suivi`). */
+  const followedView = shallowRef<PlayerView | null>(null);
+  /** The table to watch now: the followed survivor's, while it recruits. */
+  const watched = computed(() => (following.value !== null && followedView.value?.phase === 'recrutement' ? followedView.value : null));
   /** The combat on screen is the followed survivor's, not ours: its seat. */
   const spectating = ref<number | null>(null);
   const ranking = shallowRef<Classement | null>(null);
@@ -83,6 +88,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   const refusals = ref(0);
   /** The desk's gestures the guard refuses for now (the tutorial's rails): their buttons go dull, like one that costs too much. */
   const deskLocks = computed<DeskLocks>(() => {
+    // A survivor's table, only watched: nothing of its desk is ours to press.
+    if (watched.value) return { upgrade: true, roll: true, freeze: true };
     const locked = (action: PlayerAction) => view.value !== null && (transport.refusal?.(action) ?? null) !== null;
     return { upgrade: locked({ t: 'upgrade' }), roll: locked({ t: 'roll' }), freeze: locked({ t: 'freeze' }) };
   });
@@ -123,6 +130,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   let seenCombatRound = -1;
   /** The round whose end of turn is playing or has played: its combat comes once, after it. */
   let endOfTurnRound = -1;
+  /** The end of turn playing is the followed survivor's, on its table: it stops with the following. */
+  let watchedEndOfTurn = false;
   let eliminationShown = false;
 
   const screen = computed<GameScreen>(() => {
@@ -132,7 +141,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     // The room between two games; or its game is on without us: we came in since, and wait there for the next one.
     if (room.value && (room.value.etat !== 'en_jeu' || room.value.siege < 0)) return 'waiting';
     if (!view.value) return 'loading';
-    if (!view.value.alive) return 'eliminated';
+    if (!view.value.alive) return watched.value ? 'watching' : 'eliminated';
     return view.value.phase === 'choix_heros' ? 'hero' : 'recruit';
   });
 
@@ -146,13 +155,24 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   function releaseCombat(): void {
     const shown = combat.value;
     if (!shown || !combatSeen) return;
-    const next = view.value;
-    if (!ranking.value && (!next || (next.round <= shown.round && next.alive))) return;
+    if (!ranking.value && !hasMovedOn(shown.round)) return;
     clearTimeout(combatTimer);
     dropCombat();
   }
 
+  /**
+   * What comes after the combat of this round is there: our next round or our fall; for a survivor still followed,
+   * its next recruitment table, so that its old one never shows in between.
+   */
+  function hasMovedOn(round: number): boolean {
+    if (spectating.value !== null && following.value !== null) return (followedView.value?.round ?? -1) > round;
+    const next = view.value;
+    return next !== null && (next.round > round || !next.alive);
+  }
+
   function dropCombat(): void {
+    // The followed table this combat came from is over: it never shows again.
+    if (combat.value && followedView.value && followedView.value.round <= combat.value.round) followedView.value = null;
     combat.value = null;
     combatView.value = null;
     spectating.value = null;
@@ -177,9 +197,27 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     }
     pendingHostLine = null;
     // A survivor who falls out is no longer followed: the server stops too.
-    if (following.value !== null && !next.table.some((row) => row.seat === following.value && row.alive)) following.value = null;
+    if (following.value !== null && !next.table.some((row) => row.seat === following.value && row.alive)) stopFollowing();
     view.value = next;
     deadline.value = timeLeft === null ? null : Date.now() + timeLeft;
+  }
+
+  /** Out of the game, the followed survivor's recruitment table, live: its shop, its hand, its choices, as it sees them. */
+  function receiveFollowed(seat: number, next: PlayerView, timeLeft: number | null): void {
+    const own = view.value;
+    if (!own || own.alive || following.value !== seat) return;
+    followedView.value = next;
+    deadline.value = timeLeft === null ? null : Date.now() + timeLeft;
+  }
+
+  /** Nobody is followed any more: the table watched goes, with the end of turn playing on it. */
+  function stopFollowing(): void {
+    following.value = null;
+    followedView.value = null;
+    if (!watchedEndOfTurn) return;
+    watchedEndOfTurn = false;
+    endOfTurn.value?.destroy();
+    endOfTurn.value = null;
   }
 
   function receiveCombat(next: CombatView): void {
@@ -190,13 +228,18 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
       showCombat(next);
       return;
     }
-    // The end of turn plays on the table first: the recruitment's last view is the board before it.
+    watchedEndOfTurn = false;
+    playEndOfTurn(next, () => showCombat(next));
+  }
+
+  /** The end of turn plays on the table first (the recruitment's last view is the board before it), then `show` opens its combat. */
+  function playEndOfTurn(next: CombatView, show: () => void): void {
     endOfTurnRound = next.round;
     hasEndedRecruitment.value = true;
     const playback = new EndOfTurnPlayback(next.endOfTurn, () => {
       if (endOfTurn.value !== playback) return;
       endOfTurn.value = null;
-      showCombat(next);
+      show();
     });
     endOfTurn.value = playback;
     playback.start();
@@ -210,23 +253,43 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   }
 
   /**
-   * Out of the game, the followed survivor's combat, live: shown from its side, with its hero and its polls. A combat
-   * of ours still on screen (the one that eliminated us) is not cut; the same one sent again is not replayed.
+   * Out of the game, the followed survivor's combat, live: shown from its side, with its hero and its polls. Its end
+   * of turn plays first on its table, when that table is the one on screen. A combat of ours still on screen (the one
+   * that eliminated us) is not cut; the same one sent again is not replayed.
    */
   function receiveSpectacle(seat: number, next: CombatView): void {
     const own = view.value;
     if (!own || own.alive) return;
     following.value = seat;
     if (combat.value && (spectating.value === null || (spectating.value === seat && combat.value.round === next.round))) return;
+    if (watchedEndOfTurn && next.round === endOfTurnRound) return;
+    const table = watched.value?.seat === seat && watched.value.round === next.round ? watched.value : null;
+    const show = () => showFollowedCombat(seat, next, table ?? spectatorView(own, seat));
+    // Its table is not on screen (followed since the combats began, or its last combat still plays): the combat comes at once.
+    if (!table || combat.value || next.endOfTurn.length === 0) {
+      show();
+      return;
+    }
+    watchedEndOfTurn = true;
+    playEndOfTurn(next, show);
+  }
+
+  /** `from`: the survivor's own table when it was on screen, or ours wearing its seat. */
+  function showFollowedCombat(seat: number, next: CombatView, from: PlayerView): void {
+    watchedEndOfTurn = false;
     clearTimeout(combatTimer);
     combatSeen = false;
     spectating.value = seat;
-    combatView.value = spectatorView(own, seat);
+    combatView.value = from;
     combat.value = next;
   }
 
-  /** Out of the game, follow a survivor, or nobody (null). Its combat shows as soon as the server sends it. */
+  /**
+   * Out of the game, follow a survivor, or nobody (null). Its table shows as soon as the server sends it: its
+   * recruitment, then its combat.
+   */
   function follow(seat: number | null): void {
+    stopFollowing();
     following.value = seat;
     transport.send({ type: 'suivre', siege: seat });
   }
@@ -238,7 +301,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
     endOfTurnRound = -1;
     view.value = null;
     dropCombat();
-    following.value = null;
+    stopFollowing();
     ranking.value = null;
     combatSeen = false;
     seenCombatRound = -1;
@@ -293,6 +356,9 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
         break;
       case 'spectacle':
         receiveSpectacle(message.siege, message.combat);
+        break;
+      case 'suivi':
+        receiveFollowed(message.siege, message.vue, message.reste_ms);
         break;
       case 'fin':
         ranking.value = message.classement;
@@ -372,6 +438,8 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
 
   /** Sends the action. False when it did not leave: no connection, or refused on the spot. */
   function act(action: PlayerAction): boolean {
+    // Out of the game, the table on screen is a survivor's: nothing on it is ours to play.
+    if (view.value && !view.value.alive) return false;
     // Sent now, it would be played later on a table that has moved on: the player is told instead.
     if (connection.value !== 'open') {
       showNotice(RECONNECTING_NOTICE);
@@ -499,7 +567,7 @@ export function createGameStore(transport: Transport & Partial<ConnectionWatch> 
   return {
     room, roomGone, refused, connection, connectionLost, retry, createRoom, joinRoom, launchRoom, updateRoomSettings, renameSelf, mutePlayer, kickPlayer,
     queue, queueing, queueLost, queueLostReason, queueSeenAt, mmrChange, joinQueue, voteQueue, chat, canChat, sendChat,
-    names, following, spectating, follow,
+    names, following, spectating, watched, follow,
     view, combat, combatView, endOfTurn, ranking, showRanking, backToRoom, notice, hostLine, hostLineCount, deadline, hasEndedRecruitment, readyRefusal, deskLocks, refusals, screen, act, endRecruitment, closeCombat, leave,
   };
 }

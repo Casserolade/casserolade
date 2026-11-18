@@ -43,6 +43,13 @@ function combatOf(partial: Partial<CombatView> = {}): CombatView {
   return { round: 1, side: 0, opponent: { seat: 1, heroId: 'hollande' }, log: [], winner: 1, damage: [3, 0], endOfTurn: [], ...partial };
 }
 
+/** The end of turn plays on the page's clock (`window.setTimeout`): here, the test's own, mocked with the others. */
+function withPageClock(t: { after(fn: () => void): void }): void {
+  const page = globalThis as { window?: unknown };
+  page.window = globalThis;
+  t.after(() => delete page.window);
+}
+
 function memoryMarks(): MarkStorage & { data: Map<string, string> } {
   const data = new Map<string, string>();
   return { data, getItem: (k) => data.get(k) ?? null, setItem: (k, v) => void data.set(k, v), removeItem: (k) => void data.delete(k) };
@@ -336,11 +343,78 @@ test('éliminé, on suit un survivant : son combat passe en direct, vu de son c�
   assert.equal(summarizeCombatOutcome(combatOf(), { who: 'Léa' }), 'Perdu : Léa perd 3 points de sondage.');
   store.closeCombat();
   assert.deepEqual(sent.at(-1), { type: 'vu' }, 'the round waits for the follower');
-  assert.equal(store.screen.value, 'eliminated');
-  assert.equal(store.spectating.value, null);
-  // The survivor falls out: nobody is followed any more.
+  assert.equal(store.screen.value, 'combat', 'the combat holds until the survivor\'s next table is there');
+  // The survivor falls out: nobody is followed any more, and the eliminated screen comes back.
   receive({ type: 'vue', vue: { ...own, table: own.table.map((row) => (row.seat === 3 ? { ...row, alive: false, place: 6 } : row)) }, reste_ms: null });
   assert.equal(store.following.value, null);
+  assert.equal(store.screen.value, 'eliminated');
+  assert.equal(store.spectating.value, null);
+  store.leave();
+});
+
+test('éliminé, on suit un survivant pendant son recrutement : sa table en direct, sa Fin de tour, son combat, puis sa table suivante', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  withPageClock(t);
+  const { transport, sent, receive } = fakeTransport();
+  const store = createGameStore(transport);
+  const own = baseView({ alive: false, place: 7 });
+  const survivorTable = (round: number, partial: Partial<PlayerView> = {}): PlayerView => ({ ...viewFor(createGame({ seed: 7 }), 3), round, ...partial });
+  receive({ type: 'vue', vue: own, reste_ms: null });
+  // A table nobody asked for is not shown.
+  receive({ type: 'suivi', siege: 3, vue: survivorTable(1), reste_ms: null });
+  assert.equal(store.screen.value, 'eliminated');
+  store.follow(3);
+  receive({ type: 'suivi', siege: 3, vue: survivorTable(1, { frozen: true }), reste_ms: 30_000 });
+  assert.equal(store.screen.value, 'watching');
+  assert.equal(store.watched.value?.seat, 3);
+  assert.equal(store.watched.value?.frozen, true, 'its table as it sees it');
+  assert.ok(store.deadline.value !== null, 'its time left');
+  // Nothing on it is ours to play: no gesture leaves, and its desk is dull.
+  const before = sent.length;
+  assert.equal(store.act({ t: 'roll' }), false);
+  assert.equal(sent.length, before);
+  assert.deepEqual(store.deskLocks.value, { upgrade: true, roll: true, freeze: true });
+  // Its end of turn plays on its table, then its combat opens, seen from its own table.
+  const endOfTurn = [{ source: null, changes: [], notes: [] }];
+  receive({ type: 'spectacle', siege: 3, combat: combatOf({ endOfTurn }) });
+  assert.equal(store.screen.value, 'watching', 'the end of turn plays on the table first');
+  assert.ok(store.endOfTurn.value);
+  // The banner, the step, the last frame: one timer after the other.
+  for (let i = 0; i < 4; i++) t.mock.timers.tick(1_000);
+  assert.equal(store.screen.value, 'combat');
+  assert.equal(store.spectating.value, 3);
+  assert.equal(store.combatView.value?.seat, 3);
+  // Seen, the combat holds until the next table comes: the old one never shows in between.
+  store.closeCombat();
+  assert.equal(store.screen.value, 'combat');
+  receive({ type: 'vue', vue: { ...own, round: 2 }, reste_ms: null });
+  assert.equal(store.screen.value, 'combat');
+  receive({ type: 'suivi', siege: 3, vue: survivorTable(2), reste_ms: null });
+  assert.equal(store.screen.value, 'watching');
+  assert.equal(store.watched.value?.round, 2);
+  // « Changer »: back to the list of survivors, and the server is told.
+  store.follow(null);
+  assert.deepEqual(sent.at(-1), { type: 'suivre', siege: null });
+  assert.equal(store.screen.value, 'eliminated');
+  assert.equal(store.watched.value, null);
+  store.leave();
+});
+
+test('éliminé, on cesse de suivre pendant la Fin de tour du survivant : elle s\'arrête, et son combat ne s\'ouvre pas', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  withPageClock(t);
+  const { transport, receive } = fakeTransport();
+  const store = createGameStore(transport);
+  receive({ type: 'vue', vue: baseView({ alive: false, place: 7 }), reste_ms: null });
+  store.follow(3);
+  receive({ type: 'suivi', siege: 3, vue: { ...viewFor(createGame({ seed: 7 }), 3), round: 1 }, reste_ms: null });
+  receive({ type: 'spectacle', siege: 3, combat: combatOf({ endOfTurn: [{ source: null, changes: [], notes: [] }] }) });
+  assert.ok(store.endOfTurn.value);
+  store.follow(null);
+  assert.equal(store.endOfTurn.value, null);
+  for (let i = 0; i < 4; i++) t.mock.timers.tick(1_000);
+  assert.equal(store.screen.value, 'eliminated');
+  assert.equal(store.combat.value, null);
   store.leave();
 });
 

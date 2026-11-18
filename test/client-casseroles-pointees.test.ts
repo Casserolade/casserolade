@@ -87,7 +87,7 @@ test('describeCasserole prints the défauts casseroleDefects lists, after « Sca
 
 test('a golden politician with four keywords and three casseroles fits its card, casseroles flowing on two rows', () => {
   assert.equal(casseroleFlowLine(['Une ministre libre', 'Fonds Marianne']), '·· Une ministre libre  ·· Fonds Marianne');
-  const schiappa = { ...CARD_BY_ID.schiappa, keywords: ['ni_droite_ni_gauche', 'vedette', 'retour', 'porte_parole'] as Minion['keywords'] };
+  const schiappa = { ...CARD_BY_ID.schiappa, keywords: ['ni_droite_ni_gauche', 'cumul', 'retour', 'porte_parole'] as Minion['keywords'] };
   const lines = cardRuleLines(schiappa, { isGolden: true });
   const names = ['playboy', 'fonds_marianne', 'bygmalion'].map((id) => CASSEROLE_BY_ID[id].name);
   const size = fittedRulesSize([...lines, casseroleFlowLine(names)]);

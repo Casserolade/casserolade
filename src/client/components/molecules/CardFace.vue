@@ -21,7 +21,8 @@ import { statFontScale } from '#src/client/tools/statFontScale.ts';
 import { statTones } from '#src/client/tools/statTone.ts';
 import { CARD_BY_ID } from '#src/data/cards.ts';
 import { CASSEROLE_BY_ID } from '#src/data/casseroles.ts';
-import type { Camp, Effect, Keyword } from '#src/engine/types.ts';
+import type { PastKeyword } from '#src/data/misesAJour.ts';
+import type { Camp, Effect } from '#src/engine/types.ts';
 
 /** The full card of a minion: the puppet in its window, its name, its rules with the keywords in bold. */
 const props = withDefaults(
@@ -32,7 +33,8 @@ const props = withDefaults(
     tier: number;
     atk: number;
     hp: number;
-    keywords?: Keyword[];
+    /** A card of a past version (the updates page) may carry a keyword the game no longer has. */
+    keywords?: PastKeyword[];
     effects?: Effect[];
     casseroles?: string[];
     golden?: boolean;

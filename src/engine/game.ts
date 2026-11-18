@@ -1,7 +1,8 @@
 import type { Camp, Casserole, CasseroleBonus, CombatEvent, CombatSide, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
-import type { CombatRecord, Game, GamePhase, Player, Quest, ScriptEventNote, ShopScript } from './state.ts';
+import type { CombatRecord, Fight, Game, GamePhase, Player, Quest, ScriptEventNote, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
+import { casseroleSource, copyGains, recordKeyword, settleGain, spellSource } from './gains.ts';
 import { canRallyOnto, effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
 import { lostSpellReason } from './lostSpellReason.ts';
 import { insertAroundLocked, reorderAroundLocked } from './reorderAroundLocked.ts';
@@ -9,6 +10,7 @@ import { afterScriptedCombats, afterScriptedEliminations, followEvents, retire, 
 import {
   addMinionToHand,
   addSpellToHand,
+  addStats,
   afterCombatSpeech,
   afterSpell,
   announce,
@@ -42,6 +44,7 @@ import {
   returnToPool,
   settleDiscovers,
   shopCardGain,
+  shopGainsFor,
   spellRelaunches,
   spellCost,
   spend,
@@ -92,7 +95,7 @@ const PHASE_ERRORS: Record<Exclude<GamePhase, 'recrutement'>, string> = {
   combat: 'Le recrutement est terminé.',
   fini: 'La partie est terminée.',
 };
-const NO_COUNTERS: Record<Counter, number> = { tracts: 0, ecologistes_joues: 0, dores_joues: 0, casseroles: 0, debauchages: 0, actualisations: 0 };
+const NO_COUNTERS: Record<Counter, number> = { tracts: 0, ecologistes_joues: 0, dores_joues: 0, casseroles: 0, debauchages: 0, actualisations: 0, actualisations_manche: 0 };
 
 /** `hasard` draws one of the contexts with a rule; an unknown or missing id is ordinary political life. */
 function contextFor(id: string | undefined, rng: Rng): Context {
@@ -172,6 +175,7 @@ export function createGame(opts: GameOptions): Game {
       place: 0,
       opponents: [],
       seen: [],
+      fights: [],
       lostLast: false,
       away: [],
       quest: null,
@@ -385,7 +389,7 @@ function playFromHand(game: Game, p: Player, m: Minion, to: number, targetUid?: 
   return OK;
 }
 
-/** Lancer un sort de la main, ou poser une casserole. */
+/** Lancer un sort de la main, ou poser une casserole, qui en est un. */
 function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): ActionResult {
   const held = p.spells.find((x) => x.uid === uid);
   if (!held) return fail('Carte introuvable.');
@@ -396,6 +400,9 @@ function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): A
     if (m.token) return fail('Un jeton ne peut pas porter de casserole.');
     p.spells = p.spells.filter((x) => x !== held);
     applyCasserole(game, p, m, c);
+    // Une casserole est un sort : la poser compte comme un sort lancé (18 novembre 2026), pour les compteurs comme
+    // pour « Après que vous lancez un sort ».
+    afterSpell(game, p, c.id);
     return OK;
   }
   const spell = SPELL_BY_ID[held.spellId as string];
@@ -415,15 +422,15 @@ function castFromHand(game: Game, p: Player, uid: number, targetUid?: number): A
   if (lost) return fail(lost);
   if (held.count && held.count > 1) held.count--;
   else p.spells = p.spells.filter((x) => x !== held);
+  const source = spellSource(spell.id);
   if (spell.id === 'tract' && target) {
-    target.atk += p.tract.atk;
-    target.hp += p.tract.hp;
+    addStats(target, p.tract.atk, p.tract.hp, source);
   } else if (spell.id === 'investiture') {
     // L'échelon a été fixé à la pose du doré (règle R2).
     const echelon = (held.tier ?? p.tier + 1) - p.tier;
-    for (const eff of spell.effects) applyEffect(game, p, null, eff.do === 'decouvrir' ? { ...eff, echelon } : eff, { target });
+    for (const eff of spell.effects) applyEffect(game, p, null, eff.do === 'decouvrir' ? { ...eff, echelon } : eff, { target, source });
   } else {
-    for (const eff of spell.effects) applyEffect(game, p, null, eff, { target });
+    for (const eff of spell.effects) applyEffect(game, p, null, eff, { target, source });
   }
   afterSpell(game, p, spell.id);
   return OK;
@@ -438,9 +445,12 @@ function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
   const owned = m.cardId === c.owner;
   m.casseroles.push(c.id);
   if (owned) m.ownerCasseroles.push(c.id);
-  gainAdvantage(p, m, c);
-  if (owned) gainAdvantage(p, m, c.ownerBonus);
+  const source = casseroleSource(c.id);
+  gainAdvantage(p, m, c, source);
+  if (owned) gainAdvantage(p, m, c.ownerBonus, source);
   if (c.swapStats) [m.atk, m.hp] = [Math.max(0, m.hp), Math.max(1, m.atk)];
+  // Ses stats ont été bornées, peut-être échangées : ce qu'elles doivent à cette casserole se lit sur une ligne.
+  settleGain(m, source);
   // « Quel compte Facebook ? » : ni vu ni connu, tout est oublié.
   if (c.forgetsAll) {
     peopleForget(game, p, m);
@@ -461,10 +471,14 @@ function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
 }
 
 /** Ce qu'un avantage donne tout de suite : stats, mots-clés, effets, budget par manche, dégâts au héros, solitude, budget. */
-function gainAdvantage(p: Player, m: Minion, gain: CasseroleBonus): void {
+function gainAdvantage(p: Player, m: Minion, gain: CasseroleBonus, source: string): void {
   m.atk = Math.max(0, m.atk + (gain.atk ?? 0));
   m.hp = Math.max(1, m.hp + (gain.hp ?? 0));
-  for (const k of gain.keywords ?? []) if (!m.keywords.includes(k)) m.keywords.push(k);
+  for (const k of gain.keywords ?? []) {
+    if (m.keywords.includes(k)) continue;
+    m.keywords.push(k);
+    recordKeyword(m, source, k);
+  }
   if (gain.effects) m.effects = [...m.effects, ...gain.effects];
   // Le budget par manche : le gain tout de suite, la perte seulement pendant un scandale.
   m.budgetPerRound += Math.max(0, gain.budgetPerRound ?? 0);
@@ -546,11 +560,11 @@ export function applyAction(game: Game, seat: number, a: PlayerAction): ActionRe
       const staysInHand = a.main || completesTriple || p.board.length >= boardLimit(game, p);
       const to = a.to ?? p.board.length;
       if (!staysInHand && !insertAroundLocked(p.board, makeMinion(CARD_BY_ID[cardId], -1), to, (x) => x.locked)) return fail('Place invalide.');
-      const gain = shopCardGain(game, p, cardId);
+      const gains = shopGainsFor(game, p, cardId);
       spend(game, p, cost);
       p.buysThisRound++;
       p.shop.splice(a.slot, 1);
-      const m = addMinionToHand(game, p, cardId, gain);
+      const m = addMinionToHand(game, p, cardId, gains);
       if (m && !staysInHand && p.hand.includes(m)) playFromHand(game, p, m, to);
       return OK;
     }
@@ -690,8 +704,8 @@ export interface PlayerView {
   evenements: ScriptEventNote[];
   /** Ses politiques partis pour un temps (en cellule, enlevés). */
   absents: number;
-  /** Informations publiques sur chaque joueur, comme à Battlegrounds : sondages, échelon, triples. */
-  table: { seat: number; heroId: string | null; hp: number; tier: number; alive: boolean; boardSize: number; place: number; triples: number }[];
+  /** Informations publiques sur chaque joueur, comme à Battlegrounds : sondages, échelon, triples, derniers combats. */
+  table: { seat: number; heroId: string | null; hp: number; tier: number; alive: boolean; boardSize: number; place: number; triples: number; fights: Fight[] }[];
   /** Pendant le recrutement, l'adversaire du prochain combat, comme à Battlegrounds ; null hors recrutement. */
   nextOpponent: Opponent | null;
 }
@@ -723,7 +737,8 @@ export interface CombatView {
 /**
  * Une copie qui ne partage rien de modifiable avec l'original : un plateau vu en combat ne doit pas
  * suivre le scandale de l'adversaire après coup. Les effets restent les objets des cartes, que le
- * moteur ne modifie jamais et dont il compare l'identité (casseroles d'un effet, silence).
+ * moteur ne modifie jamais et dont il compare l'identité (casseroles d'un effet, silence). Le registre de ses gains se
+ * partage aussi : ses lignes ne se modifient jamais en place (`gains.ts`).
  */
 export function copyMinion(m: Minion): Minion {
   const copy: Minion = { ...m, keywords: [...m.keywords], effects: [...m.effects], casseroles: [...m.casseroles], merged: [...m.merged], rallied: [...m.rallied], ownerCasseroles: [...m.ownerCasseroles] };
@@ -738,6 +753,7 @@ export function copyMinion(m: Minion): Minion {
 function viewMinion(m: Minion): Minion {
   const copy = copyMinion(m);
   copy.effects = m.effects.map((e) => ({ ...e, power: effectPower(m, e) }));
+  copy.gains = copyGains(m.gains);
   if (m.scandal?.silenced && copy.scandal) copy.scandal.silenced = m.scandal.silenced.map((e) => ({ ...e, power: effectPower(m, e) }));
   return copy;
 }
@@ -804,6 +820,7 @@ export function viewFor(game: Game, seat: number): PlayerView {
       boardSize: x.board.length,
       place: x.place,
       triples: x.stats.triples,
+      fights: x.fights.map((fight) => ({ ...fight })),
     })),
     nextOpponent: nextOpponentOf(game, p),
   };
@@ -1049,6 +1066,8 @@ export function startCombats(game: Game): void {
     if (pb) pb.hp -= result.deathPenalty[1];
     if (result.winner === 0 && pb) damage[1] += hit(game, pa.tier, pb, result, 0);
     if (result.winner === 1) damage[0] += hit(game, opponent.tier ?? GHOST_TIER, pa, result, 1);
+    noteFight(pa, { round: game.round, against: sb ?? GHOST, heroId: pb?.hero.id ?? ghost?.heroId ?? 'fantome', result: outcomeFor(result.winner, 0), lost: damage[0], dealt: damage[1] });
+    if (pb) noteFight(pb, { round: game.round, against: sa, heroId: pa.hero.id, result: outcomeFor(result.winner, 1), lost: damage[1], dealt: damage[0] });
 
     afterCombat(game, pa, 0, record);
     if (pb) afterCombat(game, pb, 1, record);
@@ -1091,6 +1110,19 @@ function ghostFor(game: Game, facing: Player): { heroId: string; side: CombatSid
   const withBoard = others.filter((p) => p.board.length > 0);
   const lender = game.rng.pick(withBoard.length ? withBoard : others);
   return { heroId: lender.hero.id, side: { ...combatSide(lender), minions: lender.board.map(copyMinion) } };
+}
+
+/** Combien de combats de chaque joueur la table garde en vue. */
+const FIGHTS_KEPT = 3;
+
+/** Le combat qu'un joueur vient de livrer rejoint ses derniers combats, le plus récent d'abord. */
+function noteFight(p: Player, fight: Fight): void {
+  p.fights = [fight, ...p.fights].slice(0, FIGHTS_KEPT);
+}
+
+function outcomeFor(winner: 0 | 1 | null, side: 0 | 1): Fight['result'] {
+  if (winner === null) return 'egalite';
+  return winner === side ? 'gagne' : 'perdu';
 }
 
 /** Le dernier plateau vu de chaque adversaire, le plus récent d'abord : un par siège, le fantôme compris. */

@@ -1,11 +1,15 @@
 import type { Camp, Casserole, CombatPersist, Counter, Effect, EndOfTurnNote, EndOfTurnStep, Keyword, Minion, Trigger } from './types.ts';
 import type { Game, Offer, Player, StatGain } from './state.ts';
 import { isCamp as isCampOf } from './camps.ts';
+import { RETURN_SOURCE, contextSource, effectSource, heroSource, mergeGains, rallySource, recordGain, recordKeyword, settleGain, spellSource } from './gains.ts';
 import { MAX_STAT, cardOf, effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { CARDS, CARD_BY_ID } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { SPELL_BY_ID, shopSpells } from '../data/sorts.ts';
+
+/** Un Tract joué, par le joueur ou par un effet : une seule ligne au registre des gains, quel que soit l'effet qui le joue. */
+const TRACT_SOURCE = spellSource('tract');
 
 /**
  * Le recrutement : la boutique, la main, les découvertes, et tous les effets hors combat.
@@ -16,6 +20,8 @@ import { SPELL_BY_ID, shopSpells } from '../data/sorts.ts';
 export interface EffectContext {
   target?: Minion | null;
   played?: Minion | null;
+  /** D'où vient l'effet quand aucun politique ne le porte et que les données ne le disent pas (`gains.ts`). */
+  source?: string;
   /**
    * L'effet est rejoué : par un doré, un multiplicateur (Lassalle, Chirac, Mitterrand, Macron) ou une relance.
    * Rejoué, un mot-clé ou une dorure que la cible a déjà passe à un autre allié, et un sacrifice ne détruit plus.
@@ -160,21 +166,29 @@ function fillShopSpells(game: Game, p: Player): void {
   if (empty && p.shopSpells.length > 0 && braceletTarget(p) && game.rng.next() < game.params.braceletChance) p.shopSpells[0] = 'bracelet_electronique';
 }
 
-function sumGains(game: Game, gains: StatGain[], m: Pick<Minion, 'camp' | 'keywords' | 'cardId'>): { atk: number; hp: number } {
+/** Ceux de ces gains qui valent pour ce serviteur : son camp, sa carte. */
+function gainsFor(game: Game, gains: StatGain[], m: Pick<Minion, 'camp' | 'keywords' | 'cardId'>): StatGain[] {
+  return gains.filter((g) => (!g.camp || isCamp(game, m, g.camp)) && (!g.card || m.cardId === g.card));
+}
+
+function sumGains(gains: StatGain[]): { atk: number; hp: number } {
   let atk = 0;
   let hp = 0;
   for (const g of gains) {
-    if (g.camp && !isCamp(game, m, g.camp)) continue;
-    if (g.card && (m as Minion).cardId !== g.card) continue;
     atk += g.atk;
     hp += g.hp;
   }
   return { atk, hp };
 }
 
+/** Les gains de boutique qui valent pour cette carte, chacun avec sa source. */
+export function shopGainsFor(game: Game, p: Player, cardId: string): StatGain[] {
+  return gainsFor(game, p.shopBuffs, makeMinion(CARD_BY_ID[cardId], -1));
+}
+
 /** Ce que gagne un serviteur de la boutique, gains de boutique compris. */
 export function shopCardGain(game: Game, p: Player, cardId: string): { atk: number; hp: number } {
-  return sumGains(game, p.shopBuffs, makeMinion(CARD_BY_ID[cardId], -1));
+  return sumGains(shopGainsFor(game, p, cardId));
 }
 
 export function spellCost(game: Game, cost: number): number {
@@ -202,16 +216,12 @@ export function spend(game: Game, p: Player, amount: number): void {
 // Les compteurs « cette partie ».
 
 /** Ce qu'un serviteur gagne de ses compteurs en arrivant : il rattrape toute la partie. */
-function counterGain(p: Player, m: Minion): { atk: number; hp: number } {
-  let atk = 0;
-  let hp = 0;
+function catchUpCounters(p: Player, m: Minion): void {
   for (const eff of m.effects) {
     if (eff.when !== 'aura' || eff.do !== 'compteur') continue;
     const k = effectPower(m, eff);
-    atk += eff.atk * p.counters[eff.compteur] * k;
-    hp += eff.hp * p.counters[eff.compteur] * k;
+    addStats(m, eff.atk * p.counters[eff.compteur] * k, eff.hp * p.counters[eff.compteur] * k, effectSource(m, eff));
   }
-  return { atk, hp };
 }
 
 export function incrementCounter(p: Player, counter: Counter, by = 1): void {
@@ -221,7 +231,7 @@ export function incrementCounter(p: Player, counter: Counter, by = 1): void {
     for (const eff of m.effects) {
       if (eff.when !== 'aura' || eff.do !== 'compteur' || eff.compteur !== counter) continue;
       const k = effectPower(m, eff);
-      addStats(m, eff.atk * by * k, eff.hp * by * k);
+      addStats(m, eff.atk * by * k, eff.hp * by * k, effectSource(m, eff));
     }
   }
 }
@@ -230,9 +240,8 @@ export function incrementCounter(p: Player, counter: Counter, by = 1): void {
 
 /** Un nouveau serviteur reçoit les gains de camp et de compteurs déjà acquis. */
 export function welcome(game: Game, p: Player, m: Minion): Minion {
-  const gain = sumGains(game, p.campBuffs, m);
-  const counted = counterGain(p, m);
-  addStats(m, gain.atk + counted.atk, gain.hp + counted.hp);
+  for (const gain of gainsFor(game, p.campBuffs, m)) addStats(m, gain.atk, gain.hp, gain.source);
+  catchUpCounters(p, m);
   return m;
 }
 
@@ -243,14 +252,14 @@ export function handHasRoomFor(game: Game, p: Player, cardId: string): boolean {
   return handCount(p) - freed < game.params.handSize;
 }
 
-/** Ajoute un serviteur déjà sorti de la réserve. Main pleine, il y retourne. */
-export function addMinionToHand(game: Game, p: Player, cardId: string, extra = { atk: 0, hp: 0 }): Minion | null {
+/** Ajoute un serviteur déjà sorti de la réserve. Main pleine, il y retourne. `extra` : ses gains de boutique, à l'achat. */
+export function addMinionToHand(game: Game, p: Player, cardId: string, extra: StatGain[] = []): Minion | null {
   if (!handHasRoomFor(game, p, cardId)) {
     returnToPool(game, cardId);
     return null;
   }
   const m = welcome(game, p, makeMinion(CARD_BY_ID[cardId], game.nextUid++));
-  addStats(m, extra.atk, extra.hp);
+  for (const gain of extra) addStats(m, gain.atk, gain.hp, gain.source);
   p.hand.push(m);
   fuseIfTriple(game, p, cardId);
   return m;
@@ -332,6 +341,8 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   const buffHp = parts.reduce((s, m) => s + (m.hp - card.hp), 0);
   golden.atk = card.atk * 2 + buffAtk;
   golden.hp = card.hp * 2 + buffHp;
+  // Ce que chacun des trois avait reçu, source par source : le doré le garde.
+  golden.gains = mergeGains(parts);
   golden.golden = true;
   golden.copies = 3;
   golden.keywords = [...new Set(parts.flatMap((m) => m.keywords))];
@@ -568,9 +579,14 @@ export function peopleForget(game: Game, p: Player, m: Minion): void {
  */
 export function rally(game: Game, p: Player, host: Minion, m: Minion): Effect[] {
   const ongoing = liftScandal(m);
-  host.atk += m.atk;
-  host.hp += m.hp;
-  for (const k of m.keywords) if (k !== 'ralliement' && !host.keywords.includes(k)) host.keywords.push(k);
+  // Tout ce que le rallié apporte se lit sur une ligne du registre de l'hôte : ses stats, ses mots-clés.
+  const source = rallySource(m.cardId);
+  addStats(host, m.atk, m.hp, source);
+  for (const k of m.keywords) {
+    if (k === 'ralliement' || host.keywords.includes(k)) continue;
+    host.keywords.push(k);
+    recordKeyword(host, source, k);
+  }
   const carried = m.effects.map((e) => rallyEffect(m, e));
   host.effects = [...host.effects, ...carried];
   host.merged = [...host.merged, ...Array.from({ length: m.copies }, () => m.cardId), ...m.merged];
@@ -666,14 +682,17 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
   }
 }
 
-export function addStats(m: Minion, atk: number, hp: number): void {
+/** Un gain de stats, plafonné, et sa ligne au registre : `source` dit d'où il vient (`gains.ts`). */
+export function addStats(m: Minion, atk: number, hp: number, source: string): void {
+  const before = { atk: m.atk, hp: m.hp };
   m.atk = Math.min(MAX_STAT, m.atk + atk);
   m.hp = Math.min(MAX_STAT, m.hp + hp);
+  recordGain(m, source, m.atk - before.atk, m.hp - before.hp);
 }
 
 /** Doublez : il gagne son attaque et ses PV actuels, `times` fois de suite (un doré double deux fois). */
-export function doubleStats(m: Minion, times = 1): void {
-  for (let i = 0; i < times; i++) addStats(m, m.atk, m.hp);
+export function doubleStats(m: Minion, times: number, source: string): void {
+  for (let i = 0; i < times; i++) addStats(m, m.atk, m.hp, source);
 }
 
 /**
@@ -778,13 +797,13 @@ function poachFromShop(game: Game, p: Player, pick: 'plus_faible' | 'plus_fort')
 export function applyCampBuff(game: Game, p: Player, gain: StatGain): void {
   p.campBuffs.push(gain);
   for (const m of [...p.board, ...p.hand]) {
-    if ((!gain.camp || isCamp(game, m, gain.camp)) && (!gain.card || m.cardId === gain.card)) addStats(m, gain.atk, gain.hp);
+    if ((!gain.camp || isCamp(game, m, gain.camp)) && (!gain.card || m.cardId === gain.card)) addStats(m, gain.atk, gain.hp, gain.source);
   }
 }
 
 /** Joue un Tract : il compte comme un sort lancé (règle R5). */
 export function playTract(game: Game, p: Player, target: Minion, k = 1): void {
-  addStats(target, p.tract.atk * k, p.tract.hp * k);
+  addStats(target, p.tract.atk * k, p.tract.hp * k, TRACT_SOURCE);
   afterSpell(game, p, 'tract');
 }
 
@@ -805,23 +824,25 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
   }
   const k = self ? effectPower(self, eff) : 1;
   const targets = () => targetsOf(game, p, self, eff, ctx, index);
+  /** D'où viennent les gains de cet effet : sa carte, sa casserole, son sort. */
+  const source = () => (self ? effectSource(self, eff) : (ctx.source ?? effectSource(null, eff)));
   switch (eff.do) {
     case 'buff':
-      for (const t of targets()) addStats(t, eff.atk * k, eff.hp * k);
+      for (const t of targets()) addStats(t, eff.atk * k, eff.hp * k, source());
       break;
     case 'buff_par_allie': {
       const n = others(p, self).length;
-      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k);
+      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k, source());
       break;
     }
     case 'buff_par_camp': {
       const n = new Set(p.board.filter((m) => m.camp !== 'civile').map((m) => m.camp)).size;
-      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k);
+      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k, source());
       break;
     }
     case 'buff_par_ralliement':
       // Un Ralliement compte pour un, même doré : ce sont les Ralliements reçus, pas les exemplaires.
-      for (const t of targets()) addStats(t, eff.atk * t.rallied.length * k, eff.hp * t.rallied.length * k);
+      for (const t of targets()) addStats(t, eff.atk * t.rallied.length * k, eff.hp * t.rallied.length * k, source());
       break;
     case 'jouer_tract':
       for (const t of targets()) playTract(game, p, t, k);
@@ -839,10 +860,17 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
     }
     case 'mot_cle':
       // Doré, il le donne deux fois : la deuxième, comme un effet rejoué, va à un autre allié si la cible l'a déjà.
-      for (let i = 0; i < k; i++) for (const t of targets()) giveKeyword(game, p, self, t, eff.keyword, ctx.replay || i > 0);
+      for (let i = 0; i < k; i++) for (const t of targets()) giveKeyword(game, p, self, t, eff.keyword, ctx.replay || i > 0, source());
       break;
     case 'basculer':
-      for (const t of targets()) t.keywords = t.keywords.includes(eff.keyword) ? t.keywords.filter((k) => k !== eff.keyword) : [...t.keywords, eff.keyword];
+      for (const t of targets()) {
+        if (t.keywords.includes(eff.keyword)) {
+          t.keywords = t.keywords.filter((k) => k !== eff.keyword);
+          continue;
+        }
+        t.keywords = [...t.keywords, eff.keyword];
+        recordKeyword(t, source(), eff.keyword);
+      }
       break;
     case 'carte':
       for (let i = 0; i < eff.count * k; i++) addCard(game, p, eff.card, self);
@@ -857,10 +885,10 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       }
       break;
     case 'camp_buff':
-      applyCampBuff(game, p, { camp: eff.camp, card: eff.card, atk: eff.atk * k, hp: eff.hp * k });
+      applyCampBuff(game, p, { camp: eff.camp, card: eff.card, atk: eff.atk * k, hp: eff.hp * k, source: source() });
       break;
     case 'boutique_buff':
-      p.shopBuffs.push({ camp: eff.camp, atk: eff.atk * k, hp: eff.hp * k });
+      p.shopBuffs.push({ camp: eff.camp, atk: eff.atk * k, hp: eff.hp * k, source: source() });
       break;
     case 'tract_bonus':
       p.tract = { atk: p.tract.atk + eff.atk * k, hp: p.tract.hp + eff.hp * k };
@@ -870,25 +898,25 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       if (list.length === 0) break;
       const stats = poachFromShop(game, p, eff.pick);
       if (!stats) break;
-      for (const t of list) addStats(t, stats.atk * k, stats.hp * k);
+      for (const t of list) addStats(t, stats.atk * k, stats.hp * k, source());
       incrementCounter(p, 'debauchages');
       fireBoard(game, p, 'debauche', { poached: stats });
       break;
     }
     case 'doubler_stats':
-      for (const t of targets()) doubleStats(t, k);
+      for (const t of targets()) doubleStats(t, k, source());
       break;
     case 'buff_par_membre': {
       const n = p.board.filter((m) => isCamp(game, m, eff.camp ?? self?.camp ?? 'civile')).length;
-      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k);
+      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k, source());
       break;
     }
     case 'gain_debauche':
-      if (ctx.poached) applyCampBuff(game, p, { camp: eff.camp, atk: ctx.poached.atk * k, hp: ctx.poached.hp * k });
+      if (ctx.poached) applyCampBuff(game, p, { camp: eff.camp, atk: ctx.poached.atk * k, hp: ctx.poached.hp * k, source: source() });
       break;
     case 'buff_compteur': {
       const n = p.counters[eff.compteur];
-      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k);
+      for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k, source());
       break;
     }
     case 'chaise_vide': {
@@ -899,6 +927,7 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
         // Ses stats, comme en combat : son attaque et ses PV.
         chair.atk = Math.max(chair.atk, self?.atk ?? 0);
         chair.hp = Math.max(chair.hp, self?.hp ?? 0);
+        settleGain(chair, source());
         p.board.splice(Math.min(at, p.board.length), 0, chair);
       }
       break;
@@ -964,7 +993,7 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       // (Jean-Marie Le Pen), ou à chacune de ses cibles (Strauss-Kahn et ses autres Socialistes).
       const heirs = eff.to === 'allie_suivant' ? [nextAlly(p.board, self, index)] : targets();
       for (const heir of heirs) {
-        if (heir && heir !== self) addStats(heir, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.hp) * k : 0);
+        if (heir && heir !== self) addStats(heir, Math.max(1, self.atk) * k, eff.tout ? Math.max(1, self.hp) * k : 0, source());
       }
       break;
     }
@@ -985,14 +1014,20 @@ function nextAlly(board: Minion[], self: Minion | null, index: number): Minion |
  * Donne un mot-clé. Rejoué (doré, multiplicateur, relance), il ne se perd pas sur un allié qui l'a déjà : il passe à
  * un autre allié au hasard qui ne l'a pas.
  */
-function giveKeyword(game: Game, p: Player, self: Minion | null, t: Minion, keyword: Keyword, replay: boolean): void {
+function giveKeyword(game: Game, p: Player, self: Minion | null, t: Minion, keyword: Keyword, replay: boolean, source: string): void {
   if (!t.keywords.includes(keyword)) {
-    t.keywords.push(keyword);
+    grantKeyword(t, keyword, source);
     return;
   }
   if (!replay) return;
   const lacking = p.board.filter((m) => m !== self && !m.keywords.includes(keyword));
-  if (lacking.length > 0) game.rng.pick(lacking).keywords.push(keyword);
+  if (lacking.length > 0) grantKeyword(game.rng.pick(lacking), keyword, source);
+}
+
+/** Le mot-clé, et sa ligne au registre de celui qui le reçoit. */
+function grantKeyword(m: Minion, keyword: Keyword, source: string): void {
+  m.keywords.push(keyword);
+  recordKeyword(m, source, keyword);
 }
 
 /** Peut-il être rendu doré par un effet ? Ni déjà doré, ni jeton, ni copie simple, et d'un échelon assez bas. */
@@ -1008,11 +1043,15 @@ function gild(game: Game, p: Player, self: Minion | null, t: Minion, maxTier: nu
   if (others.length > 0) makeGolden(p, game.rng.pick(others));
 }
 
-/** Rendre doré par un effet : stats de base doublées, effets doublés, mais pas d'Investiture (règle R3). */
+/**
+ * Rendre doré par un effet : stats de base doublées, effets doublés, mais pas d'Investiture (règle R3). C'est la base
+ * de sa carte qui double : le registre de ses gains ne bouge pas.
+ */
 export function makeGolden(p: Player, m: Minion): void {
   const card = CARD_BY_ID[m.cardId];
   m.golden = true;
-  addStats(m, card.atk, card.hp);
+  m.atk = Math.min(MAX_STAT, m.atk + card.atk);
+  m.hp = Math.min(MAX_STAT, m.hp + card.hp);
   incrementCounter(p, 'dores_joues');
 }
 
@@ -1043,6 +1082,7 @@ function relaunch(game: Game, p: Player, source: Minion | null, t: Minion, trigg
  */
 export function refreshShop(game: Game, p: Player, camp?: Camp): void {
   incrementCounter(p, 'actualisations');
+  incrementCounter(p, 'actualisations_manche');
   p.frozen = false;
   refillShop(game, p, camp);
   if (game.params.casseroleOnRoll) offerCasserole(game, p);
@@ -1079,6 +1119,8 @@ function reincarnate(game: Game, p: Player, dead: Minion, at: number): boolean {
   bare.atk = card.atk * (dead.golden ? 2 : 1);
   welcome(game, p, bare);
   bare.hp = 1;
+  // Revenu à 1 PV : ce qui lui manque face à sa carte se lit au registre.
+  settleGain(bare, RETURN_SOURCE);
   for (const id of dead.merged) returnToPool(game, id, 1);
   p.board.splice(Math.max(0, Math.min(at, p.board.length)), 0, bare);
   return true;
@@ -1127,7 +1169,7 @@ function roped(game: Game, p: Player): void {
   const first = p.board[0];
   if (!gain || !first) return;
   const before = tableState(p);
-  addStats(first, gain.atk, gain.hp);
+  addStats(first, gain.atk, gain.hp, contextSource(game.ctx.id));
   p.endOfTurnSteps.push(stepBetween(first.uid, before, tableState(p)));
 }
 
@@ -1176,8 +1218,7 @@ export function heroEndOfTurn(p: Player): void {
   const front = p.board[0];
   if (!growth || !front) return;
   const before = tableState(p);
-  front.atk += growth;
-  front.hp += growth;
+  addStats(front, growth, growth, heroSource(p.hero.id));
   p.endOfTurnSteps.push(stepBetween(null, before, tableState(p)));
 }
 
@@ -1186,6 +1227,8 @@ export function startOfTurn(game: Game, p: Player): void {
   p.retriggered = new Set();
   p.onceThisRound = new Set();
   p.annoncesThisRound = 0;
+  // Les actualisations de la manche repartent de zéro : Zemmour ne compte que celles-là.
+  p.counters.actualisations_manche = 0;
   for (let i = 0; i < (p.hero.mods.startTracts ?? 0); i++) addSpellToHand(game, p, 'tract');
   fireBoard(game, p, 'debut_tour', {});
 }
@@ -1218,11 +1261,11 @@ const MAX_COMBAT_TRACTS = 500;
 export function applyPersist(game: Game, p: Player, persist: CombatPersist): void {
   for (const gain of persist.buffs) {
     const m = p.board.find((x) => x.uid === gain.uid);
-    if (m) addStats(m, gain.atk, gain.hp);
+    if (m) addStats(m, gain.atk, gain.hp, gain.source);
   }
-  for (const uid of persist.doubles) {
-    const m = p.board.find((x) => x.uid === uid);
-    if (m) doubleStats(m);
+  for (const double of persist.doubles) {
+    const m = p.board.find((x) => x.uid === double.uid);
+    if (m) doubleStats(m, 1, double.source);
   }
   if (persist.tractBonus.atk || persist.tractBonus.hp) {
     p.tract = { atk: Math.min(MAX_STAT, p.tract.atk + persist.tractBonus.atk), hp: Math.min(MAX_STAT, p.tract.hp + persist.tractBonus.hp) };
@@ -1236,7 +1279,7 @@ export function applyPersist(game: Game, p: Player, persist: CombatPersist): voi
   for (const gain of persist.handBuffs) {
     if (p.hand.length === 0) break;
     const list = gain.all ? p.hand : [game.rng.pick(p.hand)];
-    for (const m of list) addStats(m, gain.atk, gain.hp);
+    for (const m of list) addStats(m, gain.atk, gain.hp, gain.source);
   }
 }
 

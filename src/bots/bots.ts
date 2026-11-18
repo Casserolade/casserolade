@@ -142,7 +142,6 @@ const KEYWORD_VALUE: Record<Keyword, number> = {
   retour: 3,
   ni_droite_ni_gauche: 1,
   ralliement: 0,
-  vedette: 1,
   /** Un Coup de balai frappe trois politiques au lieu d'un : vaut presque un Cumul des mandats, sans la riposte en plus. */
   balai: 3,
 };
@@ -271,7 +270,8 @@ function actionValue(e: Effect): number {
     case 'gain_debauche':
       return 16;
     case 'buff_compteur':
-      return (e.atk + e.hp) * 6;
+      // Un compte qui repart de zéro à chaque manche pèse trois fois moins, à chiffres égaux, qu'un compte de la partie.
+      return (e.atk + e.hp) * (e.compteur === 'actualisations_manche' ? 2 : 6);
     // Une Chaise vide qui a ses stats : un second corps, Porte-parole (13 novembre 2026).
     case 'chaise_vide':
       return 14;

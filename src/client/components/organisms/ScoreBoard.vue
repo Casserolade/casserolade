@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import GameIcon from '#src/client/components/atoms/GameIcon.vue';
 import HeadPortrait from '#src/client/components/atoms/HeadPortrait.vue';
 import PollsCount from '#src/client/components/atoms/PollsCount.vue';
 import OpponentSheet from '#src/client/components/molecules/OpponentSheet.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
 import { facelessGhostNext, nextOpponentSeat } from '#src/client/tools/nextOpponentSeat.ts';
+import { opponentAbout } from '#src/client/tools/opponentAbout.ts';
+import type { ReaderTable } from '#src/client/tools/opponentAbout.ts';
 import { ordinalSuffix } from '#src/client/tools/ordinalSuffix.ts';
 import { puppetStyle } from '#src/client/tools/puppetStyle.ts';
 import type { SeatName } from '#src/client/tools/seatNames.ts';
-import { HERO_BY_ID } from '#src/data/heroes.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
 /**
  * The eight players down the side of the table: a face, the polls and beside them the electoral base (the armor)
- * that is left, the tier, and online the pseudo. On hover, a sheet:
- * the hero and who plays it, power, triples, last board seen. During recruitment, the next opponent is marked, as in
- * Battlegrounds; a ghost on the eliminated seat it wears, or on a row of its own before the first elimination.
+ * that is left, the tier, and online the pseudo. On hover, a sheet, as in Battlegrounds: the hero and who plays it,
+ * its power, its triples, its board at the last combat against it and its last combats. During recruitment, the next
+ * opponent is marked; a ghost on the eliminated seat it wears, or on a row of its own before the first elimination.
  */
 const props = withDefaults(defineProps<{ table: PlayerView['table']; seat: number; startHp: number; seen?: PlayerView['seen']; names?: Map<number, SeatName>; next?: PlayerView['nextOpponent'] }>(), {
   seen: () => [],
@@ -28,32 +29,16 @@ const rows = computed(() => [...props.table].sort((a, b) => Number(b.alive) - Nu
 const nextSeat = computed(() => nextOpponentSeat(props.table, props.next));
 const facelessGhost = computed(() => facelessGhostNext(props.table, props.next));
 
-function nameOf(row: PlayerView['table'][number]): string {
-  return props.names.get(row.seat)?.hero ?? (row.heroId ? (HERO_BY_ID[row.heroId]?.name ?? '…') : '…');
-}
-
-/** Who plays it, online: « Vous », a pseudo, or « Bot ». Nobody in a game of this page. */
-function playerOf(row: PlayerView['table'][number]): string | null {
-  const name = props.names.get(row.seat);
-  if (row.seat === props.seat) return name?.pseudo ? 'Vous' : null;
-  return name?.pseudo ?? (name?.bot ? 'Bot' : null);
-}
-
-/** The last board seen of this seat: `seen` holds one per opponent, most recent first. */
-function lastSeen(seat: number): PlayerView['seen'][number] | null {
-  return props.seen.find((entry) => entry.seat === seat) ?? null;
-}
-
-function powerOf(heroId: string | null): { name: string; desc: string } | null {
-  const hero = heroId ? HERO_BY_ID[heroId] : null;
-  return hero ? { name: hero.power, desc: hero.desc } : null;
-}
+/** The row under the pointer: its sheet, with a board drawn in it, is only built while it shows. */
+const pointed = ref<number | null>(null);
+/** The table as this reader sees it: what each player's sheet is written from. */
+const reader = computed<ReaderTable>(() => ({ seat: props.seat, startHp: props.startHp, names: props.names, seen: props.seen, nextSeat: nextSeat.value }));
 </script>
 
 <template>
   <section class="scoreboard" aria-label="Classement">
     <ol class="list">
-      <li v-for="row in rows" :key="row.seat" class="player" :class="{ own: row.seat === seat, out: !row.alive, next: row.seat === nextSeat }">
+      <li v-for="(row, index) in rows" :key="row.seat" class="player" :class="{ own: row.seat === seat, out: !row.alive, next: row.seat === nextSeat, low: index >= rows.length / 2 }" @pointerenter="pointed = row.seat" @pointerleave="pointed = null">
         <span v-if="row.seat === nextSeat" class="next-tag"><GameIcon name="sword" />{{ row.alive ? 'Prochain adversaire' : 'Prochain : son fantôme' }}</span>
         <HeadPortrait v-if="row.heroId" class="face" :puppet="puppetStyle(gameArt.manifest.value, row.heroId, 'civile')" />
         <span v-else class="face empty" />
@@ -63,20 +48,7 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
           <span v-if="names.get(row.seat)?.pseudo && row.seat !== seat" class="who">{{ names.get(row.seat)?.pseudo }}</span>
         </span>
         <span v-if="row.alive" class="tier" :aria-label="`Échelon ${row.tier}`">{{ row.tier }}</span>
-        <OpponentSheet
-          class="about"
-          :name="row.seat === seat && !playerOf(row) ? 'Vous' : nameOf(row)"
-          :player="playerOf(row)"
-          :power="powerOf(row.heroId)"
-          :tier="row.tier"
-          :hp="row.hp"
-          :start-hp="startHp"
-          :triples="row.triples"
-          :alive="row.alive"
-          :seen="lastSeen(row.seat)"
-          :is-own="row.seat === seat"
-          :next="row.seat === nextSeat"
-        />
+        <OpponentSheet v-if="pointed === row.seat" class="about" :about="opponentAbout(row, reader)" />
       </li>
       <li v-if="facelessGhost" class="player next ghost">
         <span class="next-tag"><GameIcon name="sword" />Prochain adversaire</span>
@@ -146,5 +118,8 @@ function powerOf(heroId: string | null): { name: string; desc: string } | null {
   pointer-events: none;
 }
 .ghost-name { color: #c9cfdc; font: 800 calc(var(--s) * 20) / 1.1 var(--font-card); }
-.player:hover .about { visibility: visible; }
+/* The sheet of the player pointed at, beside its row: it hangs down from the upper rows and stands up from the lower
+   ones, so that a tall sheet (a full board, three combats) stays on the screen. */
+.about { position: absolute; z-index: 30; left: calc(100% + var(--s) * 12); top: calc(var(--s) * -8); pointer-events: none; }
+.low .about { top: auto; bottom: calc(var(--s) * -8); }
 </style>

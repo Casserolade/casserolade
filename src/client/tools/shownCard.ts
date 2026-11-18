@@ -2,7 +2,8 @@ import { cardRuleLines } from '#src/client/tools/describeEffect.ts';
 import { casseroleCardLines, spellCardLines } from '#src/client/tools/spellCardLines.ts';
 import type { WornCasserole } from '#src/client/tools/wornCasserole.ts';
 import { CARD_BY_ID } from '#src/data/cards.ts';
-import type { Camp, Casserole, Effect, Keyword, Spell } from '#src/engine/types.ts';
+import type { PastKeyword } from '#src/data/misesAJour.ts';
+import type { Camp, Casserole, Effect, MinionGain, Spell } from '#src/engine/types.ts';
 
 export interface MinionFace {
   cardId: string;
@@ -11,7 +12,8 @@ export interface MinionFace {
   tier: number;
   atk: number;
   hp: number;
-  keywords?: Keyword[];
+  /** Its keywords; a card of a past version (the updates page) may carry one the game no longer has. */
+  keywords?: PastKeyword[];
   effects?: Effect[];
   casseroles?: string[];
   golden?: boolean;
@@ -39,10 +41,12 @@ export function scandalLeft(minion: { scandal?: { until: number } }, round: numb
 
 /**
  * Any card the table can show in full: a minion, a spell, or a casserole. A minion of the board has its casseroles
- * hanging under it, each one pointable; a casserole pointed there says what it does now (`worn`).
+ * hanging under it, each one pointable; a casserole pointed there says what it does now (`worn`). A minion in play
+ * says where its bonuses come from (`gains`, one line per source), and in a combat what that combat gave it so far
+ * (`debate`).
  */
 export type ShownCard =
-  | { kind: 'minion'; face: MinionFace; onBoard?: boolean }
+  | { kind: 'minion'; face: MinionFace; onBoard?: boolean; gains?: MinionGain[]; debate?: { atk: number; hp: number } }
   | { kind: 'spell'; spell: Spell; count?: number; tier?: number; tract?: { atk: number; hp: number } }
   | { kind: 'casserole'; casserole: Casserole; worn?: WornCasserole };
 

@@ -11,11 +11,12 @@ function isFree(target: EventTarget | null): boolean {
 /**
  * A tap, a click or a key (space, enter, right arrow) anywhere on the table hurries the show along. Never needed: the
  * game goes on by itself. `hurry` says whether there was something to hurry; when there was not, the gesture goes on
- * to whatever else listens to it.
+ * to whatever else listens to it. `takes`: this press is for something else on the table (a medallion a finger opens),
+ * which answers it: it hurries nothing.
  */
-export function useHurry(hurry: () => boolean): void {
+export function useHurry(hurry: () => boolean, takes: (event: PointerEvent) => boolean = () => false): void {
   function handlePointer(event: PointerEvent): void {
-    if (event.button === 0 && isFree(event.target)) hurry();
+    if (event.button === 0 && isFree(event.target) && !takes(event)) hurry();
   }
 
   function handleKey(event: KeyboardEvent): void {
