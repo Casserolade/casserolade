@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.5 — 20 novembre 2026
+
+Le détail, et les cartes : https://casserolade.fr/mises-a-jour
+
+**Dominique de Villepin, candidat**
+- Dominique de Villepin s'est déclaré candidat le 20 novembre 2026 : il devient un héros, « Le pouvoir de dire non ». À chaque combat, la première Polémique adverse ne vous tue personne, et il faut une casserole de plus pour faire scandale.
+- Il entre aussi en boutique, à l'échelon 5 de la Société civile : 5/8, et un 49.3 qui donne la Polémique à ses voisins.
+- Ses casseroles : Le CPE, Les statuettes de Napoléon, Le croc de boucher et Jamais élu.
+- Onze de ses phrases avec sa vraie voix, du Conseil de sécurité de l'ONU en 2003 à sa déclaration de candidature.
+
+**Jordan Bardella**
+- Une casserole de plus : « Où trouve-t-il toute cette énergie ? », sa question à Nicolas Sarkozy, puis à Donald Trump, dans « Quelle époque ! ». Elle donne Cumul.
+- Deux phrases de plus avec sa vraie voix.
+
+**Le jeu en chiffres**
+- 32 héros, 112 politiques, 99 casseroles.
+
 ## 0.4.4 — 19 novembre 2026
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour

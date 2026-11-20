@@ -193,6 +193,12 @@ export const REPLIQUES: Record<string, Record<EvenementReplique, string>> = {
     defaite: 'Je ne peux pas continuer à regarder ce plateau s\'effondrer.',
     elimine: '2,24 %. Comme en 2002.',
   },
+  villepin: {
+    debut: 'Et c\'est un vieux pays qui vous le dit.',
+    victoire: 'Au Conseil de sécurité, on m\'a applaudi pour moins que ça.',
+    defaite: 'Cette défaite est promulguée. Elle ne sera pas appliquée.',
+    elimine: 'Jamais élu, certes. Mais jamais battu non plus.',
+  },
   giscard: {
     debut: 'Je vous avais dit au revoir. Pas adieu.',
     victoire: 'Vous n\'avez pas le monopole du caveau.',

@@ -1649,5 +1649,18 @@
   "commons": "https://commons.wikimedia.org/wiki/File:Natacha_Polony_Cannes_2015.jpg",
   "statut": "ok",
   "images_wikidata": 1
+ },
+ {
+  "id": "villepin",
+  "name": "Dominique de Villepin",
+  "group": "civile",
+  "qid": "Q131660",
+  "description": "diplomate et homme politique français, ancien Premier ministre, candidat à la présidentielle de 2027",
+  "file": "assets/photos/raw/villepin.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Georges Seguin (Okki)",
+  "commons": "https://commons.wikimedia.org/wiki/File:Dominique_de_Villepin_20100330_Salon_du_livre_de_Paris_2_cropped.jpg",
+  "statut": "ok",
+  "images_wikidata": 2
  }
 ]

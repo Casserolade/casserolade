@@ -20233,6 +20233,208 @@
     }
    }
   },
+  "villepin": {
+   "atlas": "personnages/villepin.webp",
+   "pieces": {
+    "tete": {
+     "x": 0,
+     "y": 0,
+     "w": 303,
+     "h": 377
+    },
+    "machoire": {
+     "x": 307,
+     "y": 0,
+     "w": 171,
+     "h": 91,
+     "pose": [
+      66.0,
+      286.0
+     ],
+     "pivot": [
+      99.6,
+      15.2
+     ]
+    }
+   },
+   "ancres": {
+    "oeil_g": [
+     123.8,
+     198.5,
+     41.5
+    ],
+    "oeil_d": [
+     218.3,
+     198.5,
+     39.9
+    ],
+    "bouche": [
+     165.6,
+     301.2
+    ],
+    "menton": [
+     165.3,
+     368.0
+    ]
+   },
+   "credits": {
+    "auteur": "Georges Seguin (Okki)",
+    "licence": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dominique_de_Villepin_20100330_Salon_du_livre_de_Paris_2_cropped.jpg"
+   },
+   "visages": {
+    "aie": {
+     "atlas": "personnages/villepin.aie.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 326,
+       "h": 407
+      },
+      "machoire": {
+       "x": 330,
+       "y": 0,
+       "w": 238,
+       "h": 106,
+       "pose": [
+        42.0,
+        263.0
+       ],
+       "pivot": [
+        124.8,
+        16.5
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       110.9,
+       174.8,
+       44.6
+      ],
+      "oeil_d": [
+       216.9,
+       174.8,
+       43.0
+      ],
+      "bouche": [
+       166.8,
+       279.5
+      ],
+      "menton": [
+       170.1,
+       356.0
+      ]
+     },
+     "credits": {
+      "auteur": "Marie-Lan Nguyen",
+      "licence": "CC BY 2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Launch_Republique_Solidaire_2010-06-19_n06.jpg"
+     }
+    },
+    "choc": {
+     "atlas": "personnages/villepin.choc.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 269,
+       "h": 374
+      },
+      "machoire": {
+       "x": 273,
+       "y": 0,
+       "w": 199,
+       "h": 92,
+       "pose": [
+        11.0,
+        267.0
+       ],
+       "pivot": [
+        60.4,
+        10.7
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       47.4,
+       174.8,
+       31.2
+      ],
+      "oeil_d": [
+       135.3,
+       174.8,
+       40.4
+      ],
+      "bouche": [
+       71.4,
+       277.7
+      ],
+      "menton": [
+       60.8,
+       345.0
+      ]
+     },
+     "credits": {
+      "auteur": "Marie-Lan Nguyen",
+      "licence": "CC BY 2.5",
+      "source": "https://commons.wikimedia.org/wiki/File:Launch_Republique_Solidaire_2010-06-19_n04.jpg"
+     }
+    },
+    "rire": {
+     "atlas": "personnages/villepin.rire.webp",
+     "pieces": {
+      "tete": {
+       "x": 0,
+       "y": 0,
+       "w": 327,
+       "h": 383
+      },
+      "machoire": {
+       "x": 331,
+       "y": 0,
+       "w": 183,
+       "h": 104,
+       "pose": [
+        79.0,
+        277.0
+       ],
+       "pivot": [
+        96.6,
+        13.0
+       ]
+      }
+     },
+     "ancres": {
+      "oeil_g": [
+       120.1,
+       196.6,
+       38.2
+      ],
+      "oeil_d": [
+       213.6,
+       196.6,
+       36.6
+      ],
+      "bouche": [
+       175.6,
+       290.0
+      ],
+      "menton": [
+       179.7,
+       367.9
+      ]
+     },
+     "credits": {
+      "auteur": "Ezequiel Scagnetti / European Communities, 2005 / EC - Audiovisual Service",
+      "licence": "CC BY 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Visit_by_Jos%C3%A9_Manuel_Barroso,_President_of_the_EC,_to_France_-_2005_(2).jpg"
+     }
+    }
+   }
+  },
   "villiers": {
    "atlas": "personnages/villiers.webp",
    "pieces": {
@@ -21198,6 +21400,9 @@
    "bove_bove_fusil_loup": "sons/citations/bove_bove_fusil_loup.mp3",
    "bove_bove_mcdo_merde": "sons/citations/bove_bove_mcdo_merde.mp3",
    "bove_bove_squelette_loup": "sons/citations/bove_bove_squelette_loup.mp3",
+   "branco_branco_impunite": "sons/citations/branco_branco_impunite.mp3",
+   "branco_branco_la_corruption": "sons/citations/branco_branco_la_corruption.mp3",
+   "branco_branco_pornographique": "sons/citations/branco_branco_pornographique.mp3",
    "cahuzac_jc_bourdin_suisse": "sons/citations/cahuzac_jc_bourdin_suisse.mp3",
    "cahuzac_jc_jamais_eu_de_compte": "sons/citations/cahuzac_jc_jamais_eu_de_compte.mp3",
    "castaner_aucun_policier": "sons/citations/castaner_aucun_policier.mp3",
@@ -21369,6 +21574,10 @@
    "philippot_philippot_menteur_interieur": "sons/citations/philippot_philippot_menteur_interieur.mp3",
    "pisse_dessus": "sons/citations/pisse_dessus.mp3",
    "poisson_poisson_quitte_le_plateau": "sons/citations/poisson_poisson_quitte_le_plateau.mp3",
+   "polony_candidate": "sons/citations/polony_candidate.mp3",
+   "polony_nous_sommes_la_france": "sons/citations/polony_nous_sommes_la_france.mp3",
+   "polony_pays_s_effondrer": "sons/citations/polony_pays_s_effondrer.mp3",
+   "polony_situation_oblige": "sons/citations/polony_situation_oblige.mp3",
    "portes_portes_israeliens_pas_bienvenus": "sons/citations/portes_portes_israeliens_pas_bienvenus.mp3",
    "portes_portes_pas_de_ballon": "sons/citations/portes_portes_pas_de_ballon.mp3",
    "poutou_poutou_caisses_europe": "sons/citations/poutou_poutou_caisses_europe.mp3",
@@ -21444,13 +21653,19 @@
    "zemmour_zemmour_milipol": "sons/citations/zemmour_zemmour_milipol.mp3",
    "zemmour_zemmour_petain_onpc": "sons/citations/zemmour_zemmour_petain_onpc.mp3",
    "zemmour_zemmour_trafiquants": "sons/citations/zemmour_zemmour_trafiquants.mp3",
-   "branco_branco_la_corruption": "sons/citations/branco_branco_la_corruption.mp3",
-   "branco_branco_impunite": "sons/citations/branco_branco_impunite.mp3",
-   "branco_branco_pornographique": "sons/citations/branco_branco_pornographique.mp3",
-   "polony_candidate": "sons/citations/polony_candidate.mp3",
-   "polony_nous_sommes_la_france": "sons/citations/polony_nous_sommes_la_france.mp3",
-   "polony_pays_s_effondrer": "sons/citations/polony_pays_s_effondrer.mp3",
-   "polony_situation_oblige": "sons/citations/polony_situation_oblige.mp3"
+   "villepin_vieux_pays": "sons/citations/villepin_vieux_pays.mp3",
+   "villepin_gardiens_ideal": "sons/citations/villepin_gardiens_ideal.mp3",
+   "villepin_usage_de_la_force": "sons/citations/villepin_usage_de_la_force.mp3",
+   "villepin_construire_la_paix": "sons/citations/villepin_construire_la_paix.mp3",
+   "villepin_acharnement": "sons/citations/villepin_acharnement.mp3",
+   "villepin_libre_et_blanchi": "sons/citations/villepin_libre_et_blanchi.mp3",
+   "villepin_candidat_2027": "sons/citations/villepin_candidat_2027.mp3",
+   "villepin_probleme_de_la_france": "sons/citations/villepin_probleme_de_la_france.mp3",
+   "bardella_toute_cette_energie": "sons/citations/bardella_toute_cette_energie.mp3",
+   "bardella_jusqu_ou": "sons/citations/bardella_jusqu_ou.mp3",
+   "villepin_demission_demain": "sons/citations/villepin_demission_demain.mp3",
+   "villepin_pas_les_bras": "sons/citations/villepin_pas_les_bras.mp3",
+   "villepin_vent_mauvais": "sons/citations/villepin_vent_mauvais.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",

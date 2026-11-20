@@ -70,6 +70,61 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Nous sommes la France."
     ]
   },
+  "villepin": {
+    "heros": [
+      "Et c'est un vieux pays, la France, d'un vieux continent comme le mien, l'Europe, qui vous le dit aujourd'hui.",
+      "Dans ce temple des Nations unies, nous sommes les gardiens d'un idéal, nous sommes les gardiens d'une conscience.",
+      "Je suis candidat à l'élection présidentielle de 2027."
+    ],
+    "celebration": [
+      "Et c'est un vieux pays, la France, d'un vieux continent comme le mien, l'Europe, qui vous le dit aujourd'hui.",
+      "N'oublions pas qu'après avoir gagné la guerre, il faut construire la paix.",
+      "Nicolas Sarkozy est aujourd'hui un des problèmes de la France."
+    ],
+    "victoire": [
+      "Et c'est un vieux pays, la France, d'un vieux continent comme le mien, l'Europe, qui vous le dit aujourd'hui.",
+      "N'oublions pas qu'après avoir gagné la guerre, il faut construire la paix.",
+      "Nicolas Sarkozy est aujourd'hui un des problèmes de la France."
+    ],
+    "pose": [
+      "Et c'est un vieux pays, la France, d'un vieux continent comme le mien, l'Europe, qui vous le dit aujourd'hui.",
+      "Dans ce temple des Nations unies, nous sommes les gardiens d'un idéal, nous sommes les gardiens d'une conscience.",
+      "Je suis candidat à l'élection présidentielle de 2027.",
+      "Je suis pour la justice sociale, ce qui me met à gauche. Je suis pour l'ordre républicain, ce qui me met à droite."
+    ],
+    "attente": [
+      "Dans ce temple des Nations unies, nous sommes les gardiens d'un idéal, nous sommes les gardiens d'une conscience."
+    ],
+    "mort": [
+      "L'usage de la force ne se justifie pas aujourd'hui.",
+      "Je suis ici par la volonté d'un homme. Je suis ici par l'acharnement d'un homme, Nicolas Sarkozy.",
+      "Le Conseil constitutionnel, qui prendra sa démission demain…",
+      "Face au chômage des jeunes, je ne baisserai pas les bras.",
+      "Ce vent mauvais de la mort."
+    ],
+    "defaite": [
+      "L'usage de la force ne se justifie pas aujourd'hui.",
+      "J'en sortirai libre et blanchi.",
+      "Le Conseil constitutionnel, qui prendra sa démission demain…",
+      "Face au chômage des jeunes, je ne baisserai pas les bras."
+    ],
+    "casserole": [
+      "Je suis ici par la volonté d'un homme. Je suis ici par l'acharnement d'un homme, Nicolas Sarkozy.",
+      "J'en sortirai libre et blanchi.",
+      "Le Conseil constitutionnel, qui prendra sa démission demain…"
+    ],
+    "prison": [
+      "Je suis ici par la volonté d'un homme. Je suis ici par l'acharnement d'un homme, Nicolas Sarkozy.",
+      "J'en sortirai libre et blanchi."
+    ],
+    "elimination": [
+      "J'en sortirai libre et blanchi.",
+      "Ce vent mauvais de la mort."
+    ],
+    "achat": [
+      "Je suis pour la justice sociale, ce qui me met à gauche. Je suis pour l'ordre républicain, ce qui me met à droite."
+    ]
+  },
   "thevenoud": {
     "casserole": [
       "J'ai soigné ma phobie administrative.",
@@ -851,14 +906,25 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Je ne crois pas que Jean-Marie Le Pen était antisémite.",
       "Ce que fait Mediapart, c'est un feuilleton.",
       "Quelques brebis galeuses.",
+      "Où est-ce qu'il trouve toute cette énergie ?",
       "Des faux grossiers."
     ],
     "celebration": [
       "Bravo Jean Moulin !",
+      "Où est-ce qu'il trouve toute cette énergie ?",
       "Le meilleur allié de l'écologie, c'est la frontière."
     ],
     "heros": [
       "Je ne crois pas que Jean-Marie Le Pen était antisémite."
+    ],
+    "achat": [
+      "Où est-ce qu'il trouve toute cette énergie ?"
+    ],
+    "attente": [
+      "Jusqu'où va-t-il aller ?"
+    ],
+    "actualiser": [
+      "Jusqu'où va-t-il aller ?"
     ]
   },
   "cheminade": {

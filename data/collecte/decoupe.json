@@ -644,6 +644,11 @@
   "hauteur_visage_source": 538,
   "visages": 1
  },
+ "villepin": {
+  "basse_definition": false,
+  "hauteur_visage_source": 1161,
+  "visages": 1
+ },
  "villiers": {
   "basse_definition": false,
   "hauteur_visage_source": 610,

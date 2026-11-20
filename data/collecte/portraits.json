@@ -2450,5 +2450,14 @@
   "portrait": "assets/photos/base/polony.jpg",
   "name": "Natacha Polony",
   "note": "Festival de Cannes, mai 2015. Choisie à la main : la plus nette des six photos de Commons, cheveux courts comme aujourd'hui."
+ },
+ "villepin": {
+  "fichier": "assets/photos/raw/villepin.jpg",
+  "commons": "https://commons.wikimedia.org/wiki/File:Dominique_de_Villepin_20100330_Salon_du_livre_de_Paris_2_cropped.jpg",
+  "licence": "CC BY-SA 3.0",
+  "auteur": "Georges Seguin (Okki)",
+  "portrait": "assets/photos/base/villepin.jpg",
+  "name": "Dominique de Villepin",
+  "note": "Salon du livre de Paris, 30 mars 2010, en dédicace. Choisie à la main parmi les photos de Commons : de face, bouche fermée, la mèche argentée. Aucune photo libre plus récente dans sa catégorie."
  }
 }

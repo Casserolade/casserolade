@@ -47,6 +47,9 @@ export const HEROES: Hero[] = [
   // Candidate le 14 octobre 2026 (France Inter), slogan « Nous sommes la France » : un rassemblement qui se construit
   // manche après manche.
   { id: 'polony', name: 'Natacha Polony', power: 'Nous sommes la France', desc: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et la première actualisation de chaque manche est gratuite.', armor: 0, mods: { frontGrowth: 1, freeRollsPerRound: 1 } },
+  // Candidat le 20 novembre 2026 (Maison de l'Amérique latine, Paris). « Le Pouvoir de dire non » est son livre de
+  // 2025 : le non à la guerre en Irak, à l'ONU, le 14 février 2003. Il dit non à la première Polémique, et aux scandales.
+  { id: 'villepin', name: 'Dominique de Villepin', power: 'Le pouvoir de dire non', desc: 'À chaque combat, la première Polémique adverse ne vous tue personne, et il faut une casserole de plus pour faire scandale.', armor: 14, mods: { firstPolemiqueResist: true, scandalThresholdDelta: 1 } },
 ];
 
 /** Les boss du mode histoire y figurent pour leur nom, mais ne sont jamais tirés ni proposés : ils sont hors de HEROES. */

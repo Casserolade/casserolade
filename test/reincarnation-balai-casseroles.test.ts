@@ -258,6 +258,17 @@ test('Barnier : son 49.3 gonfle les autres, puis il est censuré, se réincarne,
   assert.equal(statsOf(withBorne.log, other.uid).at(-1)?.atk, 1 + 2 + 2 + 2 + 2, 'Barnier deux fois, Borne deux fois');
 });
 
+test('Villepin : son 49.3 donne la Polémique à ses voisins, et Borne l\'étend à un allié de plus', () => {
+  const gifts = (log: CombatEvent[]) => log.filter((e): e is Of<'mot_cle'> => e.e === 'mot_cle' && e.gain && e.keyword === 'polemique').map((e) => e.uid).sort();
+  const [left, right, far] = [unit(1, 10), unit(1, 10), unit(1, 10)];
+  const r = fight([left, makeMinion(CARD_BY_ID.villepin, uid++), right, far], [unit(0, 50)], 1);
+  assert.deepEqual(gifts(r.log), [left.uid, right.uid].sort(), 'ses deux voisins, pas le troisième');
+  // Rejoué par Borne, un mot-clé déjà là passe à un allié qui ne l'a pas : elle-même, seule à ne pas l'avoir.
+  const borne = makeMinion(CARD_BY_ID.borne, uid++);
+  const doubled = fight([left, makeMinion(CARD_BY_ID.villepin, uid++), right, borne], [unit(0, 50)], 1);
+  assert.deepEqual(gifts(doubled.log), [left.uid, right.uid, borne.uid].sort());
+});
+
 test('Retour en politique : sa réincarnation ne venge pas sa propre mort', () => {
   const hollande = { ...makeMinion(CARD_BY_ID.hollande, uid++), hp: 1, keywords: ['retour', 'porte_parole'] as Keyword[] };
   const r = fight([hollande, unit(0, 50)], [unit(1, 50)], 1);

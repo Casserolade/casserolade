@@ -4,6 +4,7 @@ import { CARTES as CARTES_0_4_1 } from './misesAJour/0.4.1.ts';
 import { CARTES as CARTES_0_4_2 } from './misesAJour/0.4.2.ts';
 import { CARTES as CARTES_0_4_3 } from './misesAJour/0.4.3.ts';
 import { CARTES as CARTES_0_4_4 } from './misesAJour/0.4.4.ts';
+import { CARTES as CARTES_0_4_5 } from './misesAJour/0.4.5.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -55,6 +56,28 @@ const VEDETTE_SEULE = 'Le mot-clé Vedette est retiré. Rien d\'autre ne change.
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.5',
+    date: '20 novembre 2026',
+    title: 'Dominique de Villepin, candidat',
+    summary: [
+      'Dominique de Villepin s\'est déclaré candidat le 20 novembre 2026 : il entre parmi les héros. « Le pouvoir de dire non » : à chaque combat, la première Polémique adverse ne vous tue personne, et il faut une casserole de plus pour faire scandale.',
+      'Il entre aussi en boutique, à l\'échelon 5 de la Société civile : 5/8, et un 49.3 qui donne la Polémique à ses voisins.',
+      'Quatre casseroles pour lui : Le CPE, Les statuettes de Napoléon, Le croc de boucher et Jamais élu.',
+      'Une casserole de plus pour Jordan Bardella : « Où trouve-t-il toute cette énergie ? ».',
+      'Treize vraies voix de plus : onze de Dominique de Villepin, du Conseil de sécurité de l\'ONU en 2003 à sa déclaration de candidature, et deux de Jordan Bardella.',
+    ],
+    rules: [],
+    why: {
+      villepin: 'Premier ministre, il fait passer le CPE par le 49.3 en 2006. Son 49.3 donne la Polémique à ses deux voisins, le temps du combat.',
+      toute_cette_energie: 'Sa question à Nicolas Sarkozy, puis à Donald Trump, dans « Quelle époque ! », en décembre 2025. Toute cette énergie : elle donne Cumul.',
+      cpe: 'Passé au 49.3, jamais appliqué, retiré. En scandale, il n\'attaque plus, et la rue coûte 2 sondages par manche.',
+      statuettes_napoleon: 'Deux cadeaux reçus au Quai d\'Orsay, rendus depuis ; le parquet financier enquête, rien n\'est jugé. En scandale, les cadeaux se remboursent.',
+      croc_de_boucher: 'Clearstream : relaxé en 2010, puis en appel en 2011. Elle donne l\'Immunité.',
+      jamais_elu: 'Toujours nommé, jamais élu : +4/+4 s\'il est le seul de son camp sur le plateau.',
+    },
+    cards: CARTES_0_4_5,
+  },
   {
     version: '0.4.4',
     date: '19 novembre 2026',

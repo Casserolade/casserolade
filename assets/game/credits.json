@@ -1033,6 +1033,14 @@
    "partage_identique": true
   },
   {
+   "id": "villepin",
+   "nom": "Dominique de Villepin",
+   "auteur": "Georges Seguin (Okki)",
+   "licence": "CC BY-SA 3.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Dominique_de_Villepin_20100330_Salon_du_livre_de_Paris_2_cropped.jpg",
+   "partage_identique": true
+  },
+  {
    "id": "villiers",
    "nom": "Philippe de Villiers",
    "auteur": "Marie-Lan Nguyen (User:Jastrow)",
@@ -3233,6 +3241,30 @@
    "partage_identique": true
   },
   {
+   "id": "villepin.aie",
+   "nom": "Dominique de Villepin",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Launch_Republique_Solidaire_2010-06-19_n06.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "villepin.choc",
+   "nom": "Dominique de Villepin",
+   "auteur": "Marie-Lan Nguyen",
+   "licence": "CC BY 2.5",
+   "source": "https://commons.wikimedia.org/wiki/File:Launch_Republique_Solidaire_2010-06-19_n04.jpg",
+   "partage_identique": false
+  },
+  {
+   "id": "villepin.rire",
+   "nom": "Dominique de Villepin",
+   "auteur": "Ezequiel Scagnetti / European Communities, 2005 / EC - Audiovisual Service",
+   "licence": "CC BY 4.0",
+   "source": "https://commons.wikimedia.org/wiki/File:Visit_by_Jos%C3%A9_Manuel_Barroso,_President_of_the_EC,_to_France_-_2005_(2).jpg",
+   "partage_identique": false
+  },
+  {
    "id": "villiers.aie",
    "nom": "Philippe de Villiers",
    "auteur": "Guillaume Paumier",
@@ -3457,6 +3489,22 @@
    "source": "https://www.youtube.com/watch?v=a7Y9Nm68lOM",
    "date": "2023-11-05",
    "note": "Extrait de 0.01 à 2.43 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "bardella_jusqu_ou",
+   "nom": "Jordan Bardella, « Jusqu'où va-t-il aller ? »",
+   "auteur": "Plexiglas91, « Jordan Bardella dans Quelle Epoque (Décembre 2025) »",
+   "source": "https://www.youtube.com/watch?v=MHlQKlfBv-4",
+   "date": "2025-12-13",
+   "note": "Extrait de 356.96 à 360.62 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "bardella_toute_cette_energie",
+   "nom": "Jordan Bardella, « Où est-ce qu'il trouve toute cette énergie ? »",
+   "auteur": "Plexiglas91, « Jordan Bardella dans Quelle Epoque (Décembre 2025) »",
+   "source": "https://www.youtube.com/watch?v=MHlQKlfBv-4",
+   "date": "2025-12-13",
+   "note": "Extrait de 83.62 à 85.45 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "barnier_barnier_agir_que_parler",
@@ -5513,6 +5561,94 @@
    "source": "https://www.youtube.com/watch?v=62KGF_EoaoM",
    "date": "2013-09-24",
    "note": "Extrait de 21.16 à 26.56 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_acharnement",
+   "nom": "Dominique de Villepin, « Je suis ici par la volonté d'un homme. Je suis ici par l'acharnement d'un homme, Nicolas Sarkozy. »",
+   "auteur": "AFP, « Procès clearstream, Villepin attaque Sarkozy »",
+   "source": "https://www.youtube.com/watch?v=Z4Za7u2d2CU",
+   "date": "2009-09-21",
+   "note": "Extrait de 10.33 à 17.96 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_candidat_2027",
+   "nom": "Dominique de Villepin, « Je suis candidat à l'élection présidentielle de 2027. »",
+   "auteur": "LeHuffPost, « Dominique de Villepin officialise sa candidature à la présidentielle 2027 »",
+   "source": "https://www.youtube.com/watch?v=prbh2hfSAJA",
+   "date": "2026-11-20",
+   "note": "Extrait de 26.02 à 31.95 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_construire_la_paix",
+   "nom": "Dominique de Villepin, « N'oublions pas qu'après avoir gagné la guerre, il faut construire la paix. »",
+   "auteur": "Leo Nell, « Discours de Villepin à l'ONU contre la guerre en Irak »",
+   "source": "https://www.youtube.com/watch?v=RNxU-tN8qNc",
+   "date": "2003-02-14",
+   "note": "Extrait de 493.03 à 499.11 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_demission_demain",
+   "nom": "Dominique de Villepin, « Le Conseil constitutionnel, qui prendra sa démission demain… »",
+   "auteur": "INA Politique, « Dossier CPE : lapsus de Dominique De Villepin et réaction des politiques »",
+   "source": "https://www.youtube.com/watch?v=r0TWxlY3eao",
+   "date": "2006-03-29",
+   "note": "Extrait de 5.1 à 12.67 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_gardiens_ideal",
+   "nom": "Dominique de Villepin, « Dans ce temple des Nations unies, nous sommes les gardiens d'un idéal, nous sommes les gardiens d'une conscience. »",
+   "auteur": "Leo Nell, « Discours de Villepin à l'ONU contre la guerre en Irak »",
+   "source": "https://www.youtube.com/watch?v=RNxU-tN8qNc",
+   "date": "2003-02-14",
+   "note": "Extrait de 834.45 à 842.11 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_libre_et_blanchi",
+   "nom": "Dominique de Villepin, « J'en sortirai libre et blanchi. »",
+   "auteur": "AFP, « Procès clearstream, Villepin attaque Sarkozy »",
+   "source": "https://www.youtube.com/watch?v=Z4Za7u2d2CU",
+   "date": "2009-09-21",
+   "note": "Extrait de 25.39 à 30.01 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_pas_les_bras",
+   "nom": "Dominique de Villepin, « Face au chômage des jeunes, je ne baisserai pas les bras. »",
+   "auteur": "INA Politique, « Dossier CPE : lapsus de Dominique De Villepin et réaction des politiques »",
+   "source": "https://www.youtube.com/watch?v=r0TWxlY3eao",
+   "date": "2006-03-29",
+   "note": "Extrait de 99.53 à 104.72 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_probleme_de_la_france",
+   "nom": "Dominique de Villepin, « Nicolas Sarkozy est aujourd'hui un des problèmes de la France. »",
+   "auteur": "FrenchPolitics, « \"Nicolas Sarkozy est l'un des problèmes de la France\" »",
+   "source": "https://www.youtube.com/watch?v=_2BRqI8YUas",
+   "date": "2010-11-07",
+   "note": "Extrait de 14.39 à 17.5 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_usage_de_la_force",
+   "nom": "Dominique de Villepin, « L'usage de la force ne se justifie pas aujourd'hui. »",
+   "auteur": "Leo Nell, « Discours de Villepin à l'ONU contre la guerre en Irak »",
+   "source": "https://www.youtube.com/watch?v=RNxU-tN8qNc",
+   "date": "2003-02-14",
+   "note": "Extrait de 600.44 à 605.64 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_vent_mauvais",
+   "nom": "Dominique de Villepin, « Ce vent mauvais de la mort. »",
+   "auteur": "LeHuffPost, « Dominique de Villepin officialise sa candidature à la présidentielle 2027 »",
+   "source": "https://www.youtube.com/watch?v=prbh2hfSAJA",
+   "date": "2026-11-20",
+   "note": "Extrait de 281.69 à 285.92 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "villepin_vieux_pays",
+   "nom": "Dominique de Villepin, « Et c'est un vieux pays, la France, d'un vieux continent comme le mien, l'Europe, qui vous le dit aujourd'hui. »",
+   "auteur": "TV5MONDE Info, « Dominique de Villepin : le discours de l'ONU »",
+   "source": "https://www.youtube.com/watch?v=Y6jZ6t9QtUo",
+   "date": "2003-02-14",
+   "note": "Extrait de 60.2 à 68.68 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "wauquiez_wauquiez_saint_pierre",

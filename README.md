@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.4.4" src="https://img.shields.io/badge/version-0.4.4-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.4.5" src="https://img.shields.io/badge/version-0.4.5-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -65,9 +65,9 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 
 | | |
 |---|---|
-| **31 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
-| **111 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
-| **94 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
+| **32 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
+| **112 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
+| **99 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
 | **26 sorts** | Tract, Note de frais, Fuite dans la presse, Remaniement, Congrès… |
 | **675 répliques** | Toutes sourcées, dont 259 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |

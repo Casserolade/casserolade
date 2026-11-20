@@ -62,6 +62,8 @@ const LIGNES: Personnalite[] = [
   { heroId: 'branco', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.7, gouts: { camps: { civile: 2 } } },
   // Polony : le rassemblement, des politiques de tous les camps.
   { heroId: 'polony', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.2, gouts: { effets: { buff_par_camp: 2 }, camps: { civile: 1 } } },
+  // Villepin : sans parti, la Polémique autour de lui, et des casseroles qu'il supporte mieux qu'un autre.
+  { heroId: 'villepin', camp: null, purete: 0, fidelite: 0.3, tempo: 0, casseroles: 0.6, gouts: { motsCles: { polemique: 2 }, camps: { civile: 1 } } },
 ];
 
 export const PERSONNALITES: Record<string, Personnalite> = Object.fromEntries(LIGNES.map((p) => [p.heroId, p]));

@@ -325,6 +325,10 @@ export const CARDS: Card[] = [
   // politique » venus de tous les partis. Elle grandit de chaque camp réuni sur le plateau.
   card('polony', 'Natacha Polony', 'civile', 4, 4, 6, { fx: [fx('fin_tour', 'soi', { do: 'buff_par_camp', atk: 1, hp: 1 })] }),
   card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
+  // Candidat le 20 novembre 2026, avec La France humaniste. Premier ministre, il fait passer le CPE par le 49.3 en
+  // février 2006 : un à trois millions de manifestants, et le contrat retiré le 10 avril. Son 49.3 met le feu autour
+  // de lui : ses voisins ont la Polémique, le temps du combat. Borne le double, comme les autres 49.3.
+  card('villepin', 'Dominique de Villepin', 'civile', 5, 5, 8, { fx: [fx('debut_combat', 'voisins', motCle('polemique'))] }),
 
   // Échelon 6, le Panthéon : les anciens présidents, au-dessus des partis (la doctrine de De Gaulle).
   // Société civile : tout le monde peut les viser, quel que soit son camp.

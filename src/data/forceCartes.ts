@@ -112,6 +112,7 @@ export const FORCE_CARTES: Record<string, { seul: number; camp: number }> = {
   poutou: { seul: 1.41, camp: 1.41 },
   riner: { seul: 0.95, camp: 0.95 },
   lassalle: { seul: 1.21, camp: 1.21 },
+  villepin: { seul: 1.24, camp: 1.24 },
   de_gaulle: { seul: 2.56, camp: 2.56 },
   giscard: { seul: 2.6, camp: 2.6 },
   chirac: { seul: 2, camp: 2 },

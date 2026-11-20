@@ -147,7 +147,9 @@ test('le tutoriel montre du doigt chaque consigne et chaque rappel, sauf la dern
 });
 
 test('boardQuip : le politique posé fait son entrée, celui qui prend une casserole se défend, en vrai', () => {
-  const speaker = Object.keys(PHRASES).find((id) => CARD_BY_ID[id] && PHRASES[id].pose?.some((l) => l.length <= 90) && PHRASES[id].casserole?.some((l) => l.length <= 90));
+  // Une bulle ne prend qu'une phrase courte, parmi les trois du tour : on choisit quelqu'un dont toutes le sont.
+  const short = (lines?: string[]) => Boolean(lines?.length) && lines!.every((l) => l.length <= 90);
+  const speaker = Object.keys(PHRASES).find((id) => CARD_BY_ID[id] && short(PHRASES[id].pose) && short(PHRASES[id].casserole));
   assert.ok(speaker, 'un politique a une phrase de pose et une de casserole');
   const before = [minion('boyard', 1)];
   const placed = [...before, minion(speaker, 7)];
