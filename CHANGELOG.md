@@ -4,6 +4,10 @@
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour
 
+**Correctif du 20 novembre 2026 : Teddy Riner**
+- Trois casseroles de plus, sur sa première semaine de campagne. Trois tweets et Juste pour faire chier le maire : deux mots que Le Canard enchaîné prête à son conseiller santé, parti au bout de quatre jours. J'ai fini : sa réponse à un journaliste, au salon du Made in France.
+- Cinq phrases de plus avec sa vraie voix, dont « Il va falloir arrêter de me couper. — Allez-y. — J'ai fini. ».
+
 **Correctif du 20 novembre 2026**
 - L'extrait « Vous m'avez manqué ! » de Valérie Pécresse était coupé avant la fin du mot : il va maintenant au bout de sa phrase.
 
@@ -18,7 +22,7 @@ Le détail, et les cartes : https://casserolade.fr/mises-a-jour
 - Deux phrases de plus avec sa vraie voix.
 
 **Le jeu en chiffres**
-- 32 héros, 112 politiques, 99 casseroles.
+- 32 héros, 112 politiques, 102 casseroles.
 
 ## 0.4.4 — 19 novembre 2026
 

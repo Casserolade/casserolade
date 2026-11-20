@@ -5155,6 +5155,22 @@
    "note": "Extrait de 28.76 à 36.6 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "riner_arreter_de_me_couper",
+   "nom": "Teddy Riner, « Il va falloir arrêter de me couper. — Allez-y. — J'ai fini. »",
+   "auteur": "franceinfo, « Teddy Riner recadre un journaliste : \"Il va falloir arrêter de me couper la parole\" »",
+   "source": "https://www.youtube.com/watch?v=Dj16Rm8LzRM",
+   "date": "2026-11-14",
+   "note": "Extrait de 262.8 à 267.75 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_baiser_mortel",
+   "nom": "Teddy Riner, « Personne ne m'a dit « tu vas travailler pour moi », et ça, je tenais à le clarifier. Donc oui, c'est un baiser mortel. »",
+   "auteur": "franceinfo, « Teddy Riner recadre un journaliste : \"Il va falloir arrêter de me couper la parole\" »",
+   "source": "https://www.youtube.com/watch?v=Dj16Rm8LzRM",
+   "date": "2026-11-14",
+   "note": "Extrait de 64.81 à 70.47 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "riner_cote_a_cote",
    "nom": "Teddy Riner, « Aujourd'hui, on vit côte à côte. Je crains que demain, on doive vivre face à face. »",
    "auteur": "Le Huffington Post, « Teddy Riner déclare sa candidature à l'élection présidentielle »",
@@ -5179,6 +5195,22 @@
    "note": "Extrait de 256.48 à 260.93 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
+   "id": "riner_marionnettes",
+   "nom": "Teddy Riner, « Je ne suis pas instrumentalisé. Personne ne joue les marionnettes avec moi. »",
+   "auteur": "franceinfo, « Teddy Riner recadre un journaliste : \"Il va falloir arrêter de me couper la parole\" »",
+   "source": "https://www.youtube.com/watch?v=Dj16Rm8LzRM",
+   "date": "2026-11-14",
+   "note": "Extrait de 137.14 à 140.37 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_pas_de_ma_bouche",
+   "nom": "Teddy Riner, « Tant que ça ne vient pas de ma bouche, ne reprenez pas les dires de certaines personnes qui se disent dans mon équipe ou qui se disent porte-parole. »",
+   "auteur": "franceinfo, « Teddy Riner recadre un journaliste : \"Il va falloir arrêter de me couper la parole\" »",
+   "source": "https://www.youtube.com/watch?v=Dj16Rm8LzRM",
+   "date": "2026-11-14",
+   "note": "Extrait de 321.74 à 328.11 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
    "id": "riner_politicien_professionnel",
    "nom": "Teddy Riner, « La France n'a pas besoin d'un politicien professionnel qui récite des leçons et se querelle à longueur de journée. »",
    "auteur": "AFP, « Teddy Riner annonce sa candidature à la présidentielle »",
@@ -5193,6 +5225,14 @@
    "source": "https://www.youtube.com/watch?v=Fx0hC0SLJOc",
    "date": "2025-05-19",
    "note": "Extrait de 397.8 à 402.9 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
+  },
+  {
+   "id": "riner_programme_deja_la",
+   "nom": "Teddy Riner, « Mon programme, si je veux, je vous donne le programme. Il est déjà là. »",
+   "auteur": "franceinfo, « Teddy Riner recadre un journaliste : \"Il va falloir arrêter de me couper la parole\" »",
+   "source": "https://www.youtube.com/watch?v=Dj16Rm8LzRM",
+   "date": "2026-11-14",
+   "note": "Extrait de 191.74 à 194.56 s, calé sur la phrase avec WhisperX, volume normalisé. Jugé « bon » à l'écoute (data/collecte/ecoute_saillies.json)."
   },
   {
    "id": "riner_tatami_melenchon",

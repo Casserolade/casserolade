@@ -1237,6 +1237,60 @@ export const CASSEROLES: Casserole[] = [
     statut: 'Redressement fiscal de 2019 (revenus 2016 et 2017), procédure administrative et non pénale : requête rejetée par le tribunal administratif de Cergy-Pontoise en mars 2025, redressement confirmé par la cour administrative d\'appel de Versailles le 15 octobre 2026 (L\'Équipe et AFP, 3 novembre 2026). Pourvoi possible devant le Conseil d\'État ; aucun connu au 9 novembre 2026.',
     verifie: true,
   },
+  // Sa première semaine de campagne (20 novembre 2026). Les deux premières tiennent à des mots que Le Canard enchaîné
+  // (n° 5532) prête en privé à François Braun, son conseiller santé parti au bout de quatre jours : la blague les
+  // attribue à l'hebdomadaire, personne ne les a confirmés en public.
+  {
+    id: 'trois_tweets',
+    kind: 'ridicule',
+    name: 'Trois tweets',
+    owner: 'riner',
+    cost: 2,
+    ownerBonus: { atk: 3, hp: 3 },
+    atk: 3,
+    hp: 3,
+    // « Entourage toxique » : pendant le scandale, ce sont ses voisins qui trinquent.
+    splash: 2,
+    blague: 'Son conseiller santé, l\'ex-ministre François Braun, tient quatre jours. Le Canard enchaîné lui prête ce mot sur l\'entourage du judoka : des génies « juste parce qu\'ils font trois tweets ». En scandale, entourage toxique : ses voisins ont -2/-2.',
+    fait: 'François Braun, ancien ministre de la Santé (2022-2023), est annoncé dans son équipe au lancement de la campagne, le 9 novembre 2026. Quatre jours plus tard, il dit faire « un pas de côté » et « prendre du recul » (AFP, 14 novembre 2026). Selon Le Canard enchaîné (n° 5532, en ligne le 17 novembre 2026, « Teddy Riner a un tout petit tas d\'amis »), il n\'a pas apprécié que son nom soit cité une demi-heure après avoir appris sa désignation (« une maladresse », concède un proche du candidat) et dénonce en privé l\'« entourage toxique de Riner, qui n\'écoute pas. Ses proches se pensent des génies juste parce qu\'ils font trois tweets ». L\'hebdomadaire ajoute que Philippe Véran, à la tête de l\'association de financement de la campagne, pourrait le suivre. Ces propos ne sont rapportés que par Le Canard : ni Braun ni l\'équipe du candidat ne les ont confirmés en public. Le 14 novembre, au salon du Made in France, Riner demande à la presse de ne pas reprendre ceux qui se disent de son équipe ou ses porte-parole tant que cela ne vient pas de sa bouche (franceinfo).',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
+  {
+    id: 'faire_chier_le_maire',
+    kind: 'ridicule',
+    name: 'Juste pour faire chier le maire',
+    owner: 'riner',
+    cost: 2,
+    ownerBonus: { hp: 6 },
+    hp: 6,
+    keywords: ['porte_parole'],
+    // « Sans rien avoir à annoncer » : pendant le scandale, il n'a plus rien à dire.
+    silence: true,
+    pollsPerRound: 2,
+    blague: 'Trois heures à l\'hôpital de Saint-Denis, rien à annoncer. Selon Le Canard enchaîné, son conseiller santé, déjà parti, y voit une visite « juste pour faire chier le maire » insoumis. Porte-parole. En scandale, rien à annoncer : il perd ses effets, et 2 sondages par manche.',
+    fait: 'Le 13 novembre 2026, pour son premier déplacement de campagne, il passe près de trois heures à l\'hôpital Delafontaine de Saint-Denis (Seine-Saint-Denis), en commençant par les urgences pédiatriques. Il repart sans annonce ni réponse aux journalistes : « J\'ai écouté, j\'ai noté, le temps de la réflexion va venir » (AFP, 13 novembre 2026). Selon Le Canard enchaîné (n° 5532, en ligne le 17 novembre 2026), François Braun, ancien ministre de la Santé qui vient de quitter son équipe, n\'a pas goûté qu\'il s\'y rende « sans rien avoir à annoncer, juste pour faire chier le maire (LFI), Bally Bagayoko ». Des propos tenus en privé, rapportés par le seul Canard, que ni Braun ni l\'équipe du candidat n\'ont confirmés.',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
+  {
+    id: 'jai_fini',
+    kind: 'ridicule',
+    name: 'J\'ai fini',
+    owner: 'riner',
+    cost: 2,
+    ownerBonus: { atk: 2, hp: 2 },
+    atk: 2,
+    hp: 2,
+    keywords: ['immunite'],
+    // « J'ai fini » : pendant le scandale, il n'attaque plus.
+    noAttack: true,
+    citation: 'Il va falloir arrêter de me couper. — Allez-y. — J\'ai fini.',
+    blague: 'Un journaliste le relance en pleine réponse. « Il va falloir arrêter de me couper ! » On lui rend la parole : il n\'a plus rien à dire. On ne le coupe pas : Immunité. En scandale, il a fini : il n\'attaque plus.',
+    fait: 'Le 14 novembre 2026, au salon du Made in France (Paris, porte de Versailles), son deuxième déplacement de campagne, il répond à la presse au milieu d\'une nuée de micros. Un journaliste le relance pendant sa réponse sur la jeunesse. Il s\'arrête : « Il va falloir arrêter de me couper. » Le journaliste : « Allez-y. » Lui : « J\'ai fini. » franceinfo diffuse la séquence sous le titre « Teddy Riner recadre un journaliste », et elle tourne sur les réseaux (Jean-Marc Morandini, 15 novembre 2026 : « Mais pourquoi est-il aussi agressif ? »).',
+    statut: 'Pas une affaire judiciaire.',
+    verifie: true,
+  },
   // Juan Branco, candidat le 19 décembre 2025 : sa carte n'avait pas de casserole. Ni l'affaire Griveaux (vidéos intimes),
   // ni l'enquête pour viol et la suspension du barreau qui en découle : hors de la ligne éditoriale.
   {

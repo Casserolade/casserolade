@@ -12,6 +12,7 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Je m'appelle Teddy Riner, et aujourd'hui, je vous le dis les yeux dans les yeux : je suis candidat à l'élection présidentielle de 2027.",
       "La France n'a pas besoin d'un politicien professionnel qui récite des leçons et se querelle à longueur de journée.",
       "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République.",
+      "Je ne suis pas instrumentalisé. Personne ne joue les marionnettes avec moi.",
       "La résignation n'est pas une option.",
       "Je suis candidat à l'élection présidentielle de 2027"
     ],
@@ -23,26 +24,40 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
       "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République.",
       "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire.",
       "Moi je lui répondrai que je vais l'inviter sur un tatami et qu'on va trouver les moyens après.",
+      "Il va falloir arrêter de me couper. — Allez-y. — J'ai fini.",
+      "Je ne suis pas instrumentalisé. Personne ne joue les marionnettes avec moi.",
       "La résignation n'est pas une option.",
       "Je suis candidat à l'élection présidentielle de 2027",
       "Ce combat pour redresser la France, je ne le ferai pas pour vous en restant en haut."
     ],
     "casserole": [
-      "Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires."
+      "Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires.",
+      "Il va falloir arrêter de me couper. — Allez-y. — J'ai fini.",
+      "Personne ne m'a dit « tu vas travailler pour moi », et ça, je tenais à le clarifier. Donc oui, c'est un baiser mortel.",
+      "Tant que ça ne vient pas de ma bouche, ne reprenez pas les dires de certaines personnes qui se disent dans mon équipe ou qui se disent porte-parole."
     ],
     "defaite": [
-      "Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires."
+      "Ça serait mentir de dire que je ne me suis jamais planté, que ce soit dans le sport ou dans les affaires.",
+      "Personne ne m'a dit « tu vas travailler pour moi », et ça, je tenais à le clarifier. Donc oui, c'est un baiser mortel.",
+      "Tant que ça ne vient pas de ma bouche, ne reprenez pas les dires de certaines personnes qui se disent dans mon équipe ou qui se disent porte-parole."
     ],
     "echelon": [
-      "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République."
+      "Si demain, je rentre en politique, ce n'est pas pour être ministre des Sports. C'est pour être président de la République.",
+      "Mon programme, si je veux, je vous donne le programme. Il est déjà là."
     ],
     "achat": [
-      "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire."
+      "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire.",
+      "Je ne suis pas instrumentalisé. Personne ne joue les marionnettes avec moi.",
+      "Mon programme, si je veux, je vous donne le programme. Il est déjà là."
     ],
     "celebration": [
       "Moi, je crois en la magie de la France, en notre triple A, j'ai envie de dire.",
       "Moi je lui répondrai que je vais l'inviter sur un tatami et qu'on va trouver les moyens après.",
+      "Il va falloir arrêter de me couper. — Allez-y. — J'ai fini.",
       "La résignation n'est pas une option."
+    ],
+    "attente": [
+      "Mon programme, si je veux, je vous donne le programme. Il est déjà là."
     ]
   },
   "polony": {

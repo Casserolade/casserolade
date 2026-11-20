@@ -66,6 +66,8 @@ export const MISES_A_JOUR: PatchNote[] = [
       'Quatre casseroles pour lui : Le CPE, Les statuettes de Napoléon, Le croc de boucher et Jamais élu.',
       'Une casserole de plus pour Jordan Bardella : « Où trouve-t-il toute cette énergie ? ».',
       'Treize vraies voix de plus : onze de Dominique de Villepin, du Conseil de sécurité de l\'ONU en 2003 à sa déclaration de candidature, et deux de Jordan Bardella.',
+      'Correctif du 20 novembre 2026 : trois casseroles de plus pour Teddy Riner, sur sa première semaine de campagne : Trois tweets, Juste pour faire chier le maire et J\'ai fini.',
+      'Cinq phrases de plus avec la vraie voix de Teddy Riner, dont « Il va falloir arrêter de me couper. — Allez-y. — J\'ai fini. ».',
     ],
     rules: [],
     why: {
@@ -75,6 +77,9 @@ export const MISES_A_JOUR: PatchNote[] = [
       statuettes_napoleon: 'Deux cadeaux reçus au Quai d\'Orsay, rendus depuis ; le parquet financier enquête, rien n\'est jugé. En scandale, les cadeaux se remboursent.',
       croc_de_boucher: 'Clearstream : relaxé en 2010, puis en appel en 2011. Elle donne l\'Immunité.',
       jamais_elu: 'Toujours nommé, jamais élu : +4/+4 s\'il est le seul de son camp sur le plateau.',
+      trois_tweets: 'Son conseiller santé part au bout de quatre jours ; Le Canard enchaîné lui prête un mot sur l\'entourage du candidat. En scandale, ses voisins ont -2/-2.',
+      faire_chier_le_maire: 'Trois heures à l\'hôpital de Saint-Denis, rien à annoncer : Le Canard enchaîné prête le mot à son ancien conseiller. Elle donne Porte-parole.',
+      jai_fini: '« Il va falloir arrêter de me couper. — Allez-y. — J\'ai fini. », au salon du Made in France. Elle donne l\'Immunité.',
     },
     cards: CARTES_0_4_5,
   },

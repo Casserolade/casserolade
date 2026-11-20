@@ -21665,7 +21665,12 @@
    "bardella_jusqu_ou": "sons/citations/bardella_jusqu_ou.mp3",
    "villepin_demission_demain": "sons/citations/villepin_demission_demain.mp3",
    "villepin_pas_les_bras": "sons/citations/villepin_pas_les_bras.mp3",
-   "villepin_vent_mauvais": "sons/citations/villepin_vent_mauvais.mp3"
+   "villepin_vent_mauvais": "sons/citations/villepin_vent_mauvais.mp3",
+   "riner_arreter_de_me_couper": "sons/citations/riner_arreter_de_me_couper.mp3",
+   "riner_baiser_mortel": "sons/citations/riner_baiser_mortel.mp3",
+   "riner_marionnettes": "sons/citations/riner_marionnettes.mp3",
+   "riner_pas_de_ma_bouche": "sons/citations/riner_pas_de_ma_bouche.mp3",
+   "riner_programme_deja_la": "sons/citations/riner_programme_deja_la.mp3"
   },
   "bruitages": {
    "coup": "sons/bruitages/coup.mp3",
