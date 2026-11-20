@@ -199,7 +199,7 @@ export const DUREES_VOIX: Record<string, number> = {
   "pecresse_boite_pecresse_debout": 1.0,
   "pecresse_boite_pecresse_la_queue_du_chien": 3.3,
   "pecresse_boite_pecresse_metaverse": 1.6,
-  "pecresse_boite_pecresse_vous_mavez_manque": 0.8,
+  "pecresse_boite_pecresse_vous_mavez_manque": 1.4,
   "pecresse_pecresse_cinq_millions": 3.8,
   "peltier_peltier_adversaire_gauche": 1.4,
   "peltier_peltier_dubai_aubrac": 7.0,

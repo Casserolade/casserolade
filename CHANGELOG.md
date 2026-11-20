@@ -4,6 +4,9 @@
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour
 
+**Correctif du 20 novembre 2026**
+- L'extrait « Vous m'avez manqué ! » de Valérie Pécresse était coupé avant la fin du mot : il va maintenant au bout de sa phrase.
+
 **Dominique de Villepin, candidat**
 - Dominique de Villepin s'est déclaré candidat le 20 novembre 2026 : il devient un héros, « Le pouvoir de dire non ». À chaque combat, la première Polémique adverse ne vous tue personne, et il faut une casserole de plus pour faire scandale.
 - Il entre aussi en boutique, à l'échelon 5 de la Société civile : 5/8, et un 49.3 qui donne la Polémique à ses voisins.
