@@ -284,7 +284,7 @@ export const VOIX: Voix[] = [
   { fichier: 'tanguy_flagrant_delit_faillite', personne: 'tanguy', phrase: 'Il y a un flagrant délit de faillite, vous êtes de toute évidence coupable.' },
   { fichier: 'tanguy_personne_ne_le_sait', personne: 'tanguy', phrase: 'Personne ne le sait à part Jean-Marie Le Pen lui-même.' },
   { fichier: 'tanguy_quarteron_de_juges', personne: 'tanguy', phrase: 'Voilà qu\'un quarteron de procureurs et de juges prétend sortir du droit pour exercer la vendetta du système contre son seul opposant !' },
-  { fichier: 'tanguy_travail_rend_libre', personne: 'tanguy', phrase: 'Oui, le travail rend libre.' },
+  { fichier: 'tanguy_travail_rend_libre', personne: 'tanguy', phrase: 'Oui, le travail rend libre.', casserole: 'travail_rend_libre' },
   { fichier: 'thevenoud_tt_phobie_administrative', personne: 'thevenoud', phrase: 'Phobie administrative.' },
   { fichier: 'tondelier_mt_compte_penibilite', personne: 'tondelier', phrase: 'Je vais vous ajouter à mon compte pénibilité si on n\'abroge pas la réforme des retraites.' },
   { fichier: 'tondelier_mt_souffre_en_vous_ecoutant', personne: 'tondelier', phrase: 'Je souffre en vous écoutant à chaque seconde, je confirme.' },
