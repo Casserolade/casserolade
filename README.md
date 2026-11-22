@@ -9,7 +9,7 @@
 
 <p align="center">
   <a href="https://casserolade.fr"><strong>▶ Jouer sur casserolade.fr</strong></a>
-  · <a href="https://www.youtube.com/watch?v=TzZk_kNq-7A">La bande-annonce</a>
+  · <a href="https://www.youtube.com/watch?v=3jxFzwu0UPs">La bande-annonce</a>
   · <a href="https://casserolade.fr/bestiaire">Le bestiaire</a>
   · <a href="https://casserolade.fr/a-propos">À propos</a>
   · <a href="#contribuer">Contribuer</a>
@@ -23,7 +23,7 @@
   <a href="CHANGELOG.md"><img alt="Version 0.4.5" src="https://img.shields.io/badge/version-0.4.5-6b3fa0"></a>
 </p>
 
-<p align="center"><a href="https://www.youtube.com/watch?v=TzZk_kNq-7A"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
+<p align="center"><a href="https://www.youtube.com/watch?v=3jxFzwu0UPs"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
 
 ## Ce que c'est
 
