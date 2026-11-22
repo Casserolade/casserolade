@@ -11,7 +11,7 @@ import fs from 'node:fs';
 import { CARD_BY_ID } from '../../src/data/cards.ts';
 import { CASSEROLES } from '../../src/data/casseroles.ts';
 import { HERO_BY_ID } from '../../src/data/heroes.ts';
-import { BRUITAGES_CREDITES, MUSIQUES } from '../../src/data/musiques.ts';
+import { BRUITAGES_CREDITES, MUSIQUES, MUSIQUES_DES_CINEMATIQUES } from '../../src/data/musiques.ts';
 import { ANIMATEURS } from '../../src/data/animateurs.ts';
 import { PHRASES } from '../../src/data/phrases.ts';
 import { VOIX } from '../../src/data/voix.ts';
@@ -91,7 +91,7 @@ const sources = {
     // The heads of a career's cutscenes: named as they are, under the person they show.
     nom: p.nom, personne: p.personne, casserole: '', auteur: p.auteur, licence: p.licence, source: p.source,
   }))),
-  musiques: [...MUSIQUES, ...BRUITAGES_CREDITES].map((m) => ({ titre: m.titre, auteur: m.auteur, licence: m.licence, source: m.source ?? '' })),
+  musiques: [...MUSIQUES, ...MUSIQUES_DES_CINEMATIQUES, ...BRUITAGES_CREDITES].map((m) => ({ titre: m.titre, auteur: m.auteur, licence: m.licence, source: m.source ?? '' })),
   logos: credits.logos ?? [],
   polices: credits.polices ?? [],
 };

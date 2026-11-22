@@ -258,6 +258,8 @@ export function createAnime(PUPPET_ART) {
       }
       document.getElementById(id).setAttribute("transform", `translate(${dx.toFixed(1)} ${dy.toFixed(1)}) rotate(${sway.toFixed(2)} ${p.pivots.feet[0]} ${p.pivots.feet[1]})`);
     };
+    /** The measures of one of the game's heads (atlas, head, jaw, pivots, chin), for a career's own toolkit. */
+    A.art = (face) => window.PUPPET_ART[face];
     /** A jaw envelope (30 values a second) read at t seconds after the line starts. */
     A.jawAt = (env, t) => { const i = Math.floor(t * 30); return i >= 0 && i < env.length ? env[i] : 0; };
   })();

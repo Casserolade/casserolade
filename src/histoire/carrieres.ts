@@ -4,15 +4,16 @@ import { CHAPITRES, OUTRE_TOMBE } from '../data/histoire/chapitres.ts';
 import type { Chapitre } from '../data/histoire/chapitres.ts';
 import type { Moment, Scene } from '../data/histoire/cinematique.ts';
 import { carriere as durif } from '../data/histoire/carrieres/durif.ts';
+import { carriere as glucksmann } from '../data/histoire/carrieres/glucksmann.ts';
 import { carriere as lepen } from '../data/histoire/carrieres/lepen.ts';
 import { carriere as melenchon } from '../data/histoire/carrieres/melenchon.ts';
 
 /**
  * Les carrières qu'on peut jouer : écrites, avec leurs cinématiques, et validées une à une (8 novembre 2026 : « faisons
- * politique par politique », Mélenchon d'abord, puis Le Pen ; Durif le 9 novembre, en épisodes de shōnen). Les autres
- * héros jouent la carrière générique de chapitres.ts.
+ * politique par politique », Mélenchon d'abord, puis Le Pen ; Durif le 9 novembre, en épisodes de shōnen ; Glucksmann le
+ * 22, en rapports de laboratoire). Les autres héros jouent la carrière générique de chapitres.ts.
  */
-export const CARRIERES: Carriere[] = [melenchon, lepen, durif];
+export const CARRIERES: Carriere[] = [melenchon, lepen, durif, glucksmann];
 
 export const CARRIERE_PAR_HEROS: Record<string, Carriere> = Object.fromEntries(CARRIERES.map((c) => [c.heros, c]));
 

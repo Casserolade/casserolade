@@ -32,6 +32,15 @@ export const MUSIQUES: Musique[] = [
   { fichier: 'meteo_locale', titre: 'Local Forecast - Elevator', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1300012` },
 ];
 
+/**
+ * Les musiques mixées dans le son des cinématiques : celles qui ont un auteur à citer, et celle du jeu. `fichier` est le
+ * dossier des épisodes, sous assets/game/cinematiques.
+ */
+export const MUSIQUES_DES_CINEMATIQUES: Musique[] = [
+  { fichier: 'glucksmann', titre: 'Gearhead', auteur: KEVIN_MACLEOD, licence: 'CC BY 4.0', source: `${INCOMPETECH}USUAN1100221` },
+  { fichier: 'glucksmann', titre: 'Final Fight', auteur: 'Casserolade', licence: '© Casserolade' },
+];
+
 /** Les bruitages enregistrés qui ont un auteur à citer. */
 export const BRUITAGES_CREDITES: Musique[] = [
   {

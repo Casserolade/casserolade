@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.6 — 22 novembre 2026
+
+Le détail : https://casserolade.fr/mises-a-jour
+
+**La carrière de Raphaël Glucksmann**
+- Raphaël Glucksmann a sa carrière : « La Cuisine de recherche du vote utile ». Le laboratoire du Parti socialiste y cuit un candidat : de la farine et un peu d'eau plate, puis de la glu, du gluten, une pâte dans le moule de la primaire, un soufflé, et enfin un homme.
+- Six chapitres, de Tbilissi en 2008 au duel contre Jean-Luc Mélenchon, chacun avec sa règle : pas d'échelon avant la manche 5 aux européennes de 2019, du budget en plus en 2024, une primaire à deux camps à gagner, un premier tour qui s'arrête après la manche 12.
+- Huit cinématiques courtes, avec ses vraies phrases et sa vraie voix.
+
+**Correctif**
+- Dans les cinématiques de Sylvain Durif, une voix s'entendait dans le bruit d'explosion. Elle n'y est plus.
+
 ## 0.4.5 — 20 novembre 2026
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour
