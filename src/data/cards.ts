@@ -171,7 +171,8 @@ export const CARDS: Card[] = [
   card('castaner', 'Christophe Castaner', 'macronie', 3, 3, 4, { kw: ['ralliement', 'cumul'] }),
   card('dupond_moretti', 'Éric Dupond-Moretti', 'macronie', 3, 1, 2, { kw: ['ralliement', 'immunite'] }),
   // 5 novembre 2026 : 2 de budget au lieu de 1. Une affaire n'arrivant plus qu'une fois, la Macronie perdait son économie (5,11 en mono-camp).
-  card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 2 })] }),
+  // 22 novembre 2026 : 1 de budget par manche au lieu de 2, trop pour un échelon 3 qui se rallie (+1,47 place dans son camp, +1,11 depuis).
+  card('lemaire', 'Bruno Le Maire', 'macronie', 3, 1, 3, { kw: ['ralliement'], fx: [fx('debut_tour', 'joueur', { do: 'budget', value: 1 })] }),
   // 7 novembre 2026 : « le premier flic de France » grandit en attaquant, et rallié, il l'apprend à son hôte. Avec
   // l'Immunité de Dupond-Moretti, le Cumul de Castaner et le Retour de Lecornu, l'hôte de tête gonfle à chaque coup.
   card('darmanin', 'Gérald Darmanin', 'macronie', 4, 5, 6, { kw: ['ralliement'], fx: [fx('meeting', 'soi', buff(2, 2), { perma: true })] }),
@@ -203,7 +204,9 @@ export const CARDS: Card[] = [
   card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
   card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
   card('morano', 'Nadine Morano', 'republicains', 2, 5, 5, { fx: [fx('celebration', 'aleatoire', motCle('immunite'))] }),
-  card('lisnard', 'David Lisnard', 'republicains', 3, 2, 2, { kw: ['immunite'], fx: [fx('fin_tour', 'allie_suivant', motCle('immunite'))] }),
+  // 22 novembre 2026 : il donnait l'Immunité à chaque fin de tour, et tout le plateau finissait immunisé (+1,40 place
+  // à l'échelon 3, plus que Pécresse à l'échelon 5). Une Annonce, comme Bertrand : +1,03, au niveau de son échelon.
+  card('lisnard', 'David Lisnard', 'republicains', 3, 2, 2, { kw: ['immunite'], fx: [fx('annonce', 'allie_suivant', motCle('immunite'))] }),
   card('wauquiez', 'Laurent Wauquiez', 'republicains', 3, 4, 7, {
     kw: ['porte_parole'],
     fx: [fx('riposte', 'soi', buff(1, 1)), fx('droit_de_reponse', 'joueur', campBuff(1, 0), { camp: 'republicains' })],

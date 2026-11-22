@@ -87,7 +87,7 @@ function isReal(minion: Minion): boolean {
 }
 
 function copiesOf(minion: Minion): number {
-  const copies = minion.golden || minion.token ? 0 : tripleCopies(props.owned, minion.cardId).length;
+  const copies = minion.golden ? 0 : tripleCopies(props.owned, minion.cardId).length;
   return copies >= 2 ? copies : 0;
 }
 

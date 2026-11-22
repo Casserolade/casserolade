@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { applyAction, createGame, resolveRound, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { createRng } from '../src/engine/rng.ts';
+import { addSpellToHand } from '../src/engine/recruit.ts';
 import { CARD_BY_ID } from '../src/data/cards.ts';
 import { PARAMS } from '../src/data/params.ts';
 
@@ -121,6 +122,124 @@ test('l\'Investiture se fixe à la pose du doré : le garder pour monter d\'abor
   applyAction(game, 0, { t: 'upgrade' });
   assert.equal(applyAction(game, 0, { t: 'cast', uid: investiture!.uid }).ok, true);
   for (const id of p.discover?.options ?? []) assert.equal(CARD_BY_ID[id].tier, 4, 'l\'échelon reste celui de la pose');
+});
+
+test('trois jetons identiques fusionnent en un jeton doré, qui arrive en main et donne une Investiture', () => {
+  const { game, p, buy } = setup();
+  const sellYann = () => applyAction(game, 0, { t: 'sell', uid: p.board.find((m) => m.cardId === 'yann_bompard')!.uid });
+  // Annonce de Yann Bompard : invoque un Assistant fictif.
+  buy('yann_bompard');
+  sellYann();
+  buy('yann_bompard');
+  sellYann();
+  assert.deepEqual(p.board.map((m) => m.cardId), ['assistant_fictif', 'assistant_fictif']);
+  buy('yann_bompard');
+  assert.deepEqual(p.board.map((m) => m.cardId), ['yann_bompard'], 'les trois jetons ont quitté le plateau');
+  const golden = p.hand[0];
+  assert.deepEqual([golden.cardId, golden.token, golden.golden, golden.copies, golden.atk, golden.hp], ['assistant_fictif', true, true, 0, 0, 2]);
+  assert.equal(p.stats.triples, 1);
+  assert.equal(applyAction(game, 0, { t: 'play', uid: golden.uid }).ok, true);
+  assert.equal(p.spells.find((s) => s.spellId === 'investiture')?.tier, 2, 'l\'Investiture, à l\'échelon du joueur plus un');
+  // Doré, son effet double : renvoyé, il rapporte 2 de budget en plus du renvoi.
+  const budget = p.budget;
+  applyAction(game, 0, { t: 'sell', uid: golden.uid });
+  assert.equal(p.budget, budget + 3);
+});
+
+test('un quatrième jeton reste sur le plateau, et les jetons dorés ne refusionnent pas', () => {
+  const { game, p, buy } = setup();
+  // Trois Yann Bompard font un doré, dont l'Annonce invoque deux Assistants.
+  for (let i = 0; i < 3; i++) buy('yann_bompard', { main: true });
+  applyAction(game, 0, { t: 'play', uid: p.hand[0].uid });
+  assert.deepEqual(p.board.map((m) => m.cardId), ['yann_bompard', 'assistant_fictif', 'assistant_fictif']);
+  buy('yann_bompard');
+  buy('yann_bompard');
+  assert.equal(p.board.filter((m) => m.token && !m.golden).length, 1, 'quatre jetons : trois fusionnent, un reste');
+  assert.equal(p.hand.filter((m) => m.token && m.golden).length, 1);
+});
+
+test('main pleine, la fusion des jetons attend qu\'une place se libère', () => {
+  const { game, p, buy } = setup();
+  buy('yann_bompard');
+  buy('yann_bompard');
+  for (const id of ['cheminade', 'durif', 'arthaud', 'branco', 'roussel', 'poutou', 'lassalle', 'chirac', 'houssin', 'guedj']) buy(id, { main: true });
+  assert.equal(p.hand.length, PARAMS.handSize);
+  // Un troisième Assistant arrive sur le plateau, la main pleine.
+  p.board.push({ ...p.board.find((m) => m.token)!, uid: game.nextUid++ });
+  applyAction(game, 0, { t: 'freeze' });
+  assert.equal(p.board.filter((m) => m.token).length, 3, 'pas de place en main : les trois jetons attendent');
+  // Poser une carte libère une place : ils fusionnent, et le doré la prend.
+  applyAction(game, 0, { t: 'play', uid: p.hand.find((m) => m.cardId === 'houssin')!.uid });
+  assert.equal(p.board.filter((m) => m.token).length, 0);
+  assert.equal(p.hand.filter((m) => m.token && m.golden).length, 1);
+});
+
+test('des jetons arrivés en fin de tour combattent, et ne fusionnent qu\'au début de la manche suivante', () => {
+  const { game, p, buy } = setup();
+  buy('yann_bompard');
+  buy('yann_bompard');
+  // Un troisième Assistant arrive hors de toute action du joueur, comme par une Fin de tour.
+  const third = { ...p.board.find((m) => m.token)!, uid: game.nextUid++ };
+  p.board.push(third);
+  assert.equal(p.board.filter((m) => m.token).length, 3);
+  resolveRound(game);
+  assert.equal(p.hand.filter((m) => m.token && m.golden).length, 1, 'fusionnés au début de la manche');
+  assert.equal(p.board.filter((m) => m.token).length, 0);
+});
+
+test('toute la pile de Tracts part sur un seul politique, chaque Tract compté comme un sort', () => {
+  const { game, p, buy, tracts } = setup();
+  buy('kazib');
+  buy('kazib', { main: true });
+  buy('cheminade');
+  // Six Tracts : l'Annonce de Kazib, et cinq donnés un par un.
+  for (let i = 0; i < 5; i++) addSpellToHand(game, p, 'tract');
+  assert.equal(tracts(), 6);
+  const target = p.board[1];
+  const [atk, hp, spells, counted] = [target.atk, target.hp, p.stats.spells, p.counters.tracts];
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: p.spells[0].uid, target: target.uid, all: true }).ok, true);
+  assert.deepEqual([target.atk, target.hp], [atk + 6 * p.tract.atk, hp + 6 * p.tract.hp]);
+  assert.equal(tracts(), 0);
+  assert.equal(p.spells.length, 0, 'la pile a quitté la main');
+  assert.equal(p.stats.spells, spells + 6);
+  assert.equal(p.counters.tracts, counted + 6);
+});
+
+test('« tout lancer » ne vaut que pour une pile de Tracts : un autre sort ne part qu\'une fois', () => {
+  const { game, p, buy } = setup();
+  buy('kazib');
+  p.shopSpells = ['temps_de_parole'];
+  applyAction(game, 0, { t: 'buy_spell', slot: 0 });
+  const held = p.spells.find((s) => s.spellId === 'temps_de_parole')!;
+  assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid, target: p.board[0].uid, all: true }).ok, true);
+  assert.equal(p.spells.some((s) => s.uid === held.uid), false);
+});
+
+test('les Tracts de toutes les sources vont dans la même pile', () => {
+  const game = createGame({ seed: 5, heroes: Array(8).fill('melenchon') });
+  const p = game.players[0];
+  p.budget = 100;
+  const buy = (cardId: string, extra: { main?: boolean } = {}) => {
+    p.shop = [cardId];
+    return applyAction(game, 0, { t: 'buy', slot: 0, ...extra });
+  };
+  const piles = () => p.spells.filter((s) => s.spellId === 'tract');
+  const count = () => piles()[0]?.count ?? 0;
+  assert.equal(count(), 1, 'le héros : un Tract au début de la manche');
+  buy('kazib'); // Annonce : un Tract.
+  buy('boyard'); // Annonce : un Tract ; Célébration : deux.
+  buy('leaument'); // Renvoyé : deux Tracts ; Droit de réponse : un.
+  assert.equal(count(), 3);
+  applyAction(game, 0, { t: 'sell', uid: p.board.find((m) => m.cardId === 'leaument')!.uid });
+  assert.equal(count(), 5);
+  p.shopSpells = ['promesse'];
+  applyAction(game, 0, { t: 'buy_spell', slot: 0 });
+  applyAction(game, 0, { t: 'cast', uid: p.spells.find((s) => s.spellId === 'promesse')!.uid });
+  assert.equal(count(), 7, 'un sort de la boutique : deux Tracts');
+  resolveRound(game);
+  // Le débat (Célébration ou rien), puis le héros au début de la manche : toujours une seule pile.
+  assert.equal(piles().length, 1);
+  assert.ok(count() >= 8, `${count()} Tracts`);
 });
 
 test('un doré créé par un effet ne donne pas d\'Investiture', () => {

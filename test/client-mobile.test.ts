@@ -10,6 +10,8 @@ import { prefersPhoneVersion } from '../src/client/tools/prefersPhoneVersion.ts'
 import { refreshedItem } from '../src/client/tools/refreshedItem.ts';
 import { sellAction } from '../src/client/tools/sellAction.ts';
 import { wornCasseroles } from '../src/client/tools/wornCasseroles.ts';
+import { aimHint } from '../src/client/tools/aimHint.ts';
+import { tractPileSize } from '../src/client/tools/tractPileSize.ts';
 import { zoneAroundBand } from '../src/client/tools/zoneAroundBand.ts';
 import { MEDALLION_LAYOUT } from '../src/client/const/medallionLayout.ts';
 import { CARD_BY_ID } from '../src/data/cards.ts';
@@ -77,6 +79,10 @@ test('cardSheetFor: the card a touch opens, with its button, for the shop, the h
   const tract = { uid: 70, spellId: 'tract' };
   const tractSheet = cardSheetFor({ from: 'hand-spell', held: tract, card: { kind: 'spell', spell: SPELL_BY_ID.tract } }, view);
   assert.deepEqual(tractSheet.actions.map((a) => [a.id, a.label]), [['cast', 'Lancer']]);
+  // A pile of Tracts: a second button sends it whole on one politician.
+  const pile = { uid: 72, spellId: 'tract', count: 6 };
+  const pileSheet = cardSheetFor({ from: 'hand-spell', held: pile, card: { kind: 'spell', spell: SPELL_BY_ID.tract, count: 6 } }, { ...view, spells: [pile] });
+  assert.deepEqual(pileSheet.actions.map((a) => [a.id, a.label, a.primary]), [['cast', 'Lancer', true], ['cast_all', 'Les 6 sur le même politique', false]]);
   const casserole = CASSEROLE_BY_ID.playboy;
   const held = { uid: 71, casseroleId: 'playboy' };
   const empty = cardSheetFor({ from: 'hand-spell', held, card: { kind: 'casserole', casserole } }, { ...view, board: [] });
@@ -90,6 +96,27 @@ test('cardSheetFor: the card a touch opens, with its button, for the shop, the h
   assert.deepEqual(boardSheet.actions.map((a) => a.id), ['sell']);
   assert.deepEqual(boardSheet.casseroles.map((pan) => [pan.casserole.id, pan.worn.state, pan.worn.owned]), [['playboy', 'forgotten', true], ['bygmalion', 'dormant', false]]);
   assert.equal(boardSheet.card.kind === 'minion' && boardSheet.card.onBoard, undefined, 'no « pointez » hint: the phone lists its casseroles');
+});
+
+test('aimHint: the question of an aim, and how a pile of Tracts goes whole on one politician', () => {
+  const pile = { uid: 72, spellId: 'tract', count: 6 };
+  const card = { kind: 'spell' as const, spell: SPELL_BY_ID.tract, count: 6 };
+  const aim = { kind: 'cast' as const, held: pile, card, valid: [1, 2], origin: { x: 0, y: 0 } };
+  assert.equal(aimHint(null, [pile], false), null);
+  assert.deepEqual(aimHint(aim, [pile], false), { ask: 'Sur qui ?', tip: 'Recliquez la pile : les 6 Tracts sur le même.' });
+  assert.deepEqual(aimHint(aim, [pile], true), { ask: 'Sur qui ? Touchez un politique.', tip: 'Retouchez la pile : les 6 Tracts sur le même.' });
+  assert.deepEqual(aimHint({ ...aim, all: true }, [pile], false), { ask: 'Sur qui, les 6 Tracts ?', tip: null });
+  // The pile as the game shows it now, not as it was when the aim began.
+  assert.deepEqual(aimHint({ ...aim, all: true }, [{ ...pile, count: 4 }], true), { ask: 'Sur qui, les 4 Tracts ? Touchez un politique.', tip: null });
+  assert.equal(aimHint(aim, [{ ...pile, count: 1 }], false)?.tip, null, 'a lone Tract has nothing more to give');
+  const bracelet = { uid: 73, spellId: 'bracelet' };
+  assert.deepEqual(aimHint({ ...aim, held: bracelet }, [pile, bracelet], false), { ask: 'Sur qui ?', tip: null });
+  const minion = makeMinion(CARD_BY_ID.valls, 5);
+  assert.deepEqual(aimHint({ kind: 'play', minion, to: 0, valid: [1] }, [], true), { ask: 'Quel allié ? Touchez-le.', tip: null });
+  assert.equal(tractPileSize([pile, bracelet], 72), 6);
+  assert.equal(tractPileSize([pile, bracelet], 73), 0, 'not a pile of Tracts');
+  assert.equal(tractPileSize([{ uid: 74, spellId: 'tract' }], 74), 1);
+  assert.equal(tractPileSize([], 72), 0, 'gone');
 });
 
 test('wornCasseroles and boardMinionShown: what a board politician shows on the phone', () => {

@@ -30,6 +30,7 @@ import { useCountdown } from '#src/client/stores/useCountdown.ts';
 import { useEndOfTurnHurry } from '#src/client/stores/useEndOfTurnHurry.ts';
 import { useTableGestures } from '#src/client/stores/useTableGestures.ts';
 import { candidateFaces } from '#src/client/tools/candidateFaces.ts';
+import { aimHint } from '#src/client/tools/aimHint.ts';
 import { dropGuideFor } from '#src/client/tools/dropGuideFor.ts';
 import { minionFace } from '#src/client/tools/shownCard.ts';
 import type { PlayerView } from '#src/engine/game.ts';
@@ -48,11 +49,9 @@ useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 /** While something is carried: the counter line says what a drop across it does. */
 const dropGuide = computed(() => dropGuideFor(gestures.dragging.value, props.view));
-const aimHint = computed(() => {
-  const aim = gestures.targeting.value;
-  if (!aim) return null;
-  return aim.kind === 'cast' ? 'Sur qui ?' : 'Quel allié ?';
-});
+/** A table laid out for a computer but touched (a tablet): one touches instead of clicking. */
+const TOUCH = typeof window !== 'undefined' && 'matchMedia' in window && window.matchMedia('(hover: none)').matches;
+const hint = computed(() => aimHint(gestures.targeting.value, props.view.spells, TOUCH));
 
 // What changed may be the card under the pointer: it comes up again on the next hover, up to date.
 watch(() => props.view, () => cardInspector.hide());
@@ -109,7 +108,7 @@ watch(tripleCount, (count, before) => {
     <RecruitRope :seconds-left="secondsLeft" />
     <DropLine v-if="dropGuide" :guide="dropGuide" />
 
-    <p v-if="aimHint" class="aim-hint" aria-live="polite">{{ aimHint }}</p>
+    <p v-if="hint" class="aim-hint" aria-live="polite">{{ hint.ask }}<small v-if="hint.tip">{{ hint.tip }}</small></p>
     <div v-if="showTriple" :key="triples" class="triple" aria-live="polite"><span class="rays" /><strong>Triple !</strong></div>
 
     <template #overlay>
@@ -145,6 +144,15 @@ watch(tripleCount, (count, before) => {
   paint-order: stroke fill;
   pointer-events: none;
   animation: hint-bob 0.9s ease-in-out infinite;
+  text-align: center;
+  white-space: nowrap;
+}
+/* How to give a whole pile of Tracts to one politician: smaller, under the question. */
+.aim-hint small {
+  display: block;
+  margin-top: calc(var(--s) * 10);
+  font-size: calc(var(--s) * 27);
+  -webkit-text-stroke-width: calc(var(--s) * 5);
 }
 .aiming :deep(.shop-zone), .aiming :deep(.hand-zone) { filter: brightness(0.55) saturate(0.6); transition: filter 0.2s; }
 /* The end of turn plays on the board only: the shop and the hand step back, nothing there can be touched. */

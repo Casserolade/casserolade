@@ -5,6 +5,7 @@ import { CARTES as CARTES_0_4_2 } from './misesAJour/0.4.2.ts';
 import { CARTES as CARTES_0_4_3 } from './misesAJour/0.4.3.ts';
 import { CARTES as CARTES_0_4_4 } from './misesAJour/0.4.4.ts';
 import { CARTES as CARTES_0_4_5 } from './misesAJour/0.4.5.ts';
+import { CARTES as CARTES_0_4_7 } from './misesAJour/0.4.7.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -56,6 +57,34 @@ const VEDETTE_SEULE = 'Le mot-clé Vedette est retiré. Rien d\'autre ne change.
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.7',
+    date: '22 novembre 2026',
+    title: 'Les jetons font des triples, la pile de Tracts d\'un seul geste',
+    summary: [
+      'Trois jetons identiques sur votre plateau (Assistants fictifs, Électeurs fantômes, Suppléants, Hologrammes, Chaises vides) fusionnent en un jeton doré, qui arrive en main. Le poser donne une Investiture, comme tout doré né d\'un triple.',
+      'Une pile de Tracts peut partir entière sur un seul politique : cliquez la pile, recliquez-la (ou double-cliquez), puis choisissez le politique. Sur téléphone, la fiche de la pile a un second bouton, et retoucher la pile pendant la visée fait pareil.',
+      'David Lisnard ne donne plus l\'Immunité à chaque fin de tour : c\'est une Annonce, à l\'allié suivant, quand on le pose.',
+      'Bruno Le Maire rapporte 1 de budget au début du tour, au lieu de 2.',
+    ],
+    rules: [
+      {
+        term: 'Triple',
+        before: 'Les jetons ne comptaient pas pour un triple.',
+        after: 'Trois jetons identiques sur le plateau fusionnent en un jeton doré, qui arrive en main et donne une Investiture quand on le pose. Main pleine, la fusion attend une place. Elle se fait après une action ou au début de la manche, jamais juste avant un débat.',
+      },
+      {
+        term: 'Tract',
+        before: 'Un Tract à la fois.',
+        after: 'Une pile peut partir entière sur un seul politique. Chaque Tract compte toujours comme un sort lancé.',
+      },
+    ],
+    why: {
+      lisnard: 'L\'Immunité donnée à chaque fin de tour finissait par couvrir tout le plateau, pour une carte d\'échelon 3.',
+      lemaire: '2 de budget par manche, c\'était trop pour une carte d\'échelon 3 qui se rallie.',
+    },
+    cards: CARTES_0_4_7,
+  },
   {
     version: '0.4.6',
     date: '22 novembre 2026',

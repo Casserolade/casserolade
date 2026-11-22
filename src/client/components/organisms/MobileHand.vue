@@ -50,6 +50,7 @@ function nameOf(card: HandCard): string {
         class="card"
         :class="{ carried: isCarried(card), golden: card.kind === 'minion' && card.minion.golden, spell: card.kind !== 'minion' }"
         :style="{ '--i': index }"
+        :data-hand-uid="card.uid"
         :data-card="card.kind === 'minion' ? card.minion.cardId : card.kind === 'casserole' ? 'casserole' : card.spell.id"
         tabindex="0"
         role="button"

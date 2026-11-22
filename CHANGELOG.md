@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.4.7 — 22 novembre 2026
+
+Le détail : https://casserolade.fr/mises-a-jour
+
+**Les jetons font des triples**
+- Trois jetons identiques sur le plateau (Assistants fictifs, Électeurs fantômes, Suppléants, Hologrammes, Chaises vides) fusionnent en un jeton doré, qui arrive en main. Le poser donne une Investiture, comme tout doré né d'un triple.
+- Main pleine, la fusion attend une place. Elle se fait après une action ou au début de la manche, jamais juste avant un débat.
+
+**Toute la pile de Tracts d'un seul geste**
+- Sur ordinateur : cliquez la pile, recliquez-la (ou double-cliquez), puis choisissez le politique. La table le rappelle pendant la visée.
+- Sur téléphone : la fiche de la pile a un second bouton, « Les N sur le même politique ».
+- Chaque Tract compte toujours comme un sort lancé.
+
+**Équilibrage**
+- David Lisnard ne donne plus l'Immunité à chaque fin de tour : c'est une Annonce, à l'allié suivant, quand on le pose.
+- Bruno Le Maire rapporte 1 de budget au début du tour, au lieu de 2.
+
 ## 0.4.6 — 22 novembre 2026
 
 Le détail : https://casserolade.fr/mises-a-jour

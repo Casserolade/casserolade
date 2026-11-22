@@ -3,6 +3,7 @@ import { boardMinionShown } from '#src/client/tools/boardMinionShown.ts';
 import { buyAction } from '#src/client/tools/buyAction.ts';
 import { handCardShown } from '#src/client/tools/handCardShown.ts';
 import { sellAction } from '#src/client/tools/sellAction.ts';
+import { tractPileSize } from '#src/client/tools/tractPileSize.ts';
 import type { SheetAction } from '#src/client/tools/sheetAction.ts';
 import { minionFace } from '#src/client/tools/shownCard.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
@@ -36,7 +37,11 @@ export function cardSheetFor(item: GestureItem, view: PlayerView): CardSheet {
     case 'hand-spell': {
       const casserole = item.card.kind === 'casserole';
       const reason = casserole && view.board.length === 0 ? 'Aucun politique sur le plateau' : null;
-      return { item, card: item.card, actions: [{ id: 'cast', label: casserole ? 'Poser sur un politique' : 'Lancer', reason, primary: true }], casseroles: [] };
+      const cast: SheetAction = { id: 'cast', label: casserole ? 'Poser sur un politique' : 'Lancer', reason, primary: true };
+      // A pile of Tracts: a second button sends it whole on one politician.
+      const pile = tractPileSize(view.spells, item.held.uid);
+      const all: SheetAction[] = pile > 1 ? [{ id: 'cast_all', label: `Les ${pile} sur le même politique`, reason: view.board.length === 0 ? 'Aucun politique sur le plateau' : null, primary: false }] : [];
+      return { item, card: item.card, actions: [cast, ...all], casseroles: [] };
     }
     case 'board':
       return { item, card: boardMinionShown(item.minion, view), actions: [sellAction(view, item.minion)], casseroles: wornCasseroles(item.minion, view.round) };

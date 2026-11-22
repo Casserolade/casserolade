@@ -4,7 +4,7 @@ import { isCamp as isCampOf } from './camps.ts';
 import { RETURN_SOURCE, contextSource, effectSource, heroSource, mergeGains, rallySource, recordGain, recordKeyword, settleGain, spellSource } from './gains.ts';
 import { MAX_STAT, cardOf, effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
-import { CARDS, CARD_BY_ID } from '../data/cards.ts';
+import { CARDS, CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { SPELL_BY_ID, shopSpells } from '../data/sorts.ts';
 
@@ -327,11 +327,11 @@ function addCard(game: Game, p: Player, cardId: string, source: Minion | null): 
   }
 }
 
-/** Trois exemplaires, en main ou sur le plateau, fusionnent en un doré qui arrive en main. */
+/** Trois exemplaires, en main ou sur le plateau, fusionnent en un doré qui arrive en main. Trois jetons aussi. */
 export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   const copies = tripleCopies([...p.board, ...p.hand], cardId);
   if (copies.length < 3) return;
-  const card = CARD_BY_ID[cardId];
+  const card = CARD_BY_ID[cardId] ?? TOKENS[cardId];
   const parts = copies.slice(0, 3);
   // Les défauts d'un scandale en cours ne passent pas tels quels : le doré les reprend tous, jusqu'à la même date.
   // Un exemplaire réduit au silence rend d'abord ses effets, Ralliements compris.
@@ -344,7 +344,8 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   // Ce que chacun des trois avait reçu, source par source : le doré le garde.
   golden.gains = mergeGains(parts);
   golden.golden = true;
-  golden.copies = 3;
+  // Un jeton ne vient pas de la réserve : doré, il n'y compte toujours pour rien.
+  golden.copies = card.token ? 0 : 3;
   golden.keywords = [...new Set(parts.flatMap((m) => m.keywords))];
   const base = card.effects ?? [];
   golden.effects = [...base, ...parts.flatMap((m) => withoutBase(m.effects, base))];
@@ -372,6 +373,19 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   p.hand = p.hand.filter((m) => !parts.includes(m));
   p.hand.push(golden);
   p.stats.triples++;
+}
+
+/**
+ * Trois jetons identiques du plateau fusionnent en un jeton doré, qui arrive en main et donne une Investiture quand on
+ * le pose, comme tout doré né d'un triple (22 novembre 2026). Main pleine, la fusion attend qu'une place se libère.
+ * Elle se fait une fois l'action jouée et au début de la manche, jamais au milieu d'un effet ni juste avant un combat.
+ */
+export function fuseTokenTriples(game: Game, p: Player): void {
+  for (let guard = 0; guard < 10 && !handIsFull(game, p); guard++) {
+    const tokenId = Object.keys(TOKENS).find((id) => tripleCopies(p.board, id).length >= 3);
+    if (!tokenId) return;
+    fuseIfTriple(game, p, tokenId);
+  }
 }
 
 // Les découvertes.
@@ -1231,6 +1245,8 @@ export function startOfTurn(game: Game, p: Player): void {
   p.counters.actualisations_manche = 0;
   for (let i = 0; i < (p.hero.mods.startTracts ?? 0); i++) addSpellToHand(game, p, 'tract');
   fireBoard(game, p, 'debut_tour', {});
+  // Les jetons arrivés depuis la dernière manche (fin de tour, après le débat) fusionnent maintenant.
+  fuseTokenTriples(game, p);
 }
 
 /**

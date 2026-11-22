@@ -59,9 +59,12 @@ export function poolCopies(m: Minion): [string, number][] {
   return out;
 }
 
-/** Les exemplaires qui comptent pour un triple : ni dorés, ni jetons, ni copies simples. */
+/**
+ * Les exemplaires qui comptent pour un triple : ni dorés, ni copies simples. Les jetons comptent entre eux, comme à
+ * Battlegrounds (22 novembre 2026, retour de partie : quatre Assistants fictifs côte à côte sans triple).
+ */
 export function tripleCopies(board: Minion[], cardId: string): Minion[] {
-  return board.filter((m) => m.cardId === cardId && !m.golden && !m.token && !m.simple);
+  return board.filter((m) => m.cardId === cardId && !m.golden && !m.simple);
 }
 
 /** Les effets que ce serviteur tient de sa propre carte : ceux qu'un doré joue doublés. */

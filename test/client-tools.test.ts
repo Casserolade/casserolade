@@ -55,7 +55,7 @@ import { applyAction, combatViewFor, createGame, finishRound, startCombats, view
 import type { CombatView } from '../src/engine/game.ts';
 import { applyCombatEvent } from '../src/engine/replay.ts';
 import type { CombatSides } from '../src/engine/replay.ts';
-import { makeMinion, tripleCopies } from '../src/engine/minion.ts';
+import { makeMinion, makeToken, tripleCopies } from '../src/engine/minion.ts';
 import { createRng } from '../src/engine/rng.ts';
 
 const BROKEN_TEXT = /undefined|null|NaN|\[object/;
@@ -196,13 +196,15 @@ test('describeTripleProgress says how close a card is to a triple', () => {
   assert.match(describeTripleProgress(2), /[Tt]riple/);
 });
 
-test('tripleCopies ignores golden minions and tokens', () => {
+test('tripleCopies ignores golden minions and simple copies, and counts tokens among themselves', () => {
   const card = CARDS[0];
   const plain = makeMinion(card, 1);
   const golden = { ...makeMinion(card, 2), golden: true };
-  const token = { ...makeMinion(card, 3), token: true };
+  const simple = { ...makeMinion(card, 3), simple: true };
   const other = makeMinion(CARDS[1], 4);
-  assert.deepEqual(tripleCopies([plain, golden, token, other], card.id), [plain]);
+  assert.deepEqual(tripleCopies([plain, golden, simple, other], card.id), [plain]);
+  const tokens = [makeToken('suppleant', 'socialistes', 5), makeToken('suppleant', 'macronie', 6), { ...makeToken('suppleant', 'socialistes', 7), golden: true }];
+  assert.deepEqual(tripleCopies([...tokens, plain], 'suppleant'), tokens.slice(0, 2));
 });
 
 test('buying the third copy makes a golden minion with doubled stats, and playing it gives an Investiture', () => {

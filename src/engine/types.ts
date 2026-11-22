@@ -524,8 +524,11 @@ export type PlayerAction =
    * `onto` : un Ralliement fusionne avec cet allié au lieu de prendre une place.
    */
   | { t: 'play'; uid: number; to?: number; target?: number; onto?: number }
-  /** Lance un sort ou pose une casserole de la main, sur l'allié `target` s'il en demande un. */
-  | { t: 'cast'; uid: number; target?: number }
+  /**
+   * Lance un sort ou pose une casserole de la main, sur l'allié `target` s'il en demande un. `all` : toute la pile de
+   * Tracts sur ce même allié, d'un seul geste.
+   */
+  | { t: 'cast'; uid: number; target?: number; all?: boolean }
   /** Renvoie un serviteur du plateau ou de la main. */
   | { t: 'sell'; uid: number }
   | { t: 'roll' }

@@ -25,6 +25,7 @@ import { useCountdown } from '#src/client/stores/useCountdown.ts';
 import { useEndOfTurnHurry } from '#src/client/stores/useEndOfTurnHurry.ts';
 import { useTableGestures } from '#src/client/stores/useTableGestures.ts';
 import type { GestureItem, Zone } from '#src/client/stores/useTableGestures.ts';
+import { aimHint } from '#src/client/tools/aimHint.ts';
 import { cardSheetFor } from '#src/client/tools/cardSheetFor.ts';
 import type { CardSheet } from '#src/client/tools/cardSheetFor.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
@@ -60,11 +61,7 @@ const gestures = useTableGestures({ view: () => props.view, act: (action) => pro
 useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.view.plateau.id]?.decor));
-const aimHint = computed(() => {
-  const aim = gestures.targeting.value;
-  if (!aim) return null;
-  return aim.kind === 'cast' ? 'Sur qui ? Touchez un politique.' : 'Quel allié ? Touchez-le.';
-});
+const hint = computed(() => aimHint(gestures.targeting.value, props.view.spells, true));
 
 /** The zone under a finger: around the board's band, the shop above it and the hand below it. */
 function zoneOnPhone(point: Point): Zone | null {
@@ -88,7 +85,7 @@ function chooseAction(id: SheetAction['id'], source: Element | null): void {
   sheet.value = null;
   if (!opened) return;
   if (id === 'sell' && opened.item.from === 'board') gestures.sendBack(opened.item.minion, source);
-  else gestures.actOn(opened.item, source);
+  else gestures.actOn(opened.item, source, id === 'cast_all');
 }
 
 /** A new state of the game: the card opened follows what it shows, or closes when it is gone or a choice comes up. */
@@ -137,7 +134,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
     </div>
     <MobileHand class="hand" :view="view" :gestures="gestures" />
     <footer class="bottom">
-      <p v-if="aimHint" class="aim-hint" aria-live="polite">{{ aimHint }}</p>
+      <p v-if="hint" class="aim-hint" aria-live="polite">{{ hint.ask }}</p>
       <!-- A career's quest and line take the place of the advice, under the round: nothing covers the cards. -->
       <div v-else class="hint">
         <slot name="story-quest" />

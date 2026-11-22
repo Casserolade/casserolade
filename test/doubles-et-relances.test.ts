@@ -122,15 +122,24 @@ test('un Bertrand doré donne l\'Immunité à sa cible et à un autre allié', (
   assert.equal([b, c].filter((m) => m.keywords.includes('immunite')).length, 1, 'et un autre allié, un seul');
 });
 
-test('Lassalle double la Fin de tour de Lisnard : l\'allié suivant a déjà l\'Immunité, un autre la reçoit', () => {
+test('Chirac double l\'Annonce de Lisnard : l\'allié suivant a déjà l\'Immunité, un autre la reçoit', () => {
+  const game = table(['republicains', 'macronie', 'socialistes', 'rn', 'insoumis']);
+  const next = lay(game, 'retailleau'); // Porte-parole, Immunité : il l'a déjà.
+  const others = [lay(game, 'kazib'), lay(game, 'cheminade'), lay(game, 'chirac')];
+  lay(game, 'lisnard', { to: 0 });
+  assert.ok(next.keywords.includes('immunite'));
+  assert.equal(others.filter((m) => m.keywords.includes('immunite')).length, 1, 'l\'Annonce rejouée ne se perd pas');
+});
+
+test('Lisnard ne donne l\'Immunité qu\'à sa pose, plus à chaque fin de tour', () => {
   const game = table(['republicains', 'macronie', 'socialistes', 'rn', 'insoumis']);
   const p = game.players[0];
-  lay(game, 'lisnard');
-  const next = lay(game, 'retailleau'); // Porte-parole, Immunité : il l'a déjà.
-  const others = [lay(game, 'kazib'), lay(game, 'cheminade'), lay(game, 'lassalle')];
+  const first = lay(game, 'kazib');
+  lay(game, 'lisnard', { to: 0 });
+  assert.ok(first.keywords.includes('immunite'), 'son Annonce : l\'allié suivant');
+  const later = lay(game, 'cheminade', { to: 1 });
   endOfTurn(game, p);
-  assert.ok(next.keywords.includes('immunite'));
-  assert.equal(others.filter((m) => m.keywords.includes('immunite')).length, 1, 'la Fin de tour rejouée ne se perd pas');
+  assert.equal(later.keywords.includes('immunite'), false, 'le nouvel allié suivant ne reçoit rien en fin de tour');
 });
 
 test('les deux Retours de Royal vont à deux alliés différents', () => {
@@ -189,7 +198,7 @@ test('un Ralliement garde sa puissance : doré sur un hôte normal, normal sur u
   const income = host.effects.find((e) => e.when === 'debut_tour') as Effect;
   const before = p.budget;
   applyEffect(game, p, host, income);
-  assert.equal(p.budget - before, 4, 'le Le Maire doré rallié rapporte le double, 4');
+  assert.equal(p.budget - before, 2, 'le Le Maire doré rallié rapporte le double, 2');
 
   assert.deepEqual(invariantViolations(game), []);
 
@@ -234,7 +243,10 @@ test('les hologrammes de Mélenchon : son bonus de propriétaire en invoque un d
   assert.equal(game.players[0].board.filter((x) => x.cardId === 'hologramme').length, 2);
   const stranger = lay(game, 'kazib');
   pose(game, 'hologramme', stranger);
-  assert.equal(game.players[0].board.filter((x) => x.cardId === 'hologramme').length, 3, 'un seul ailleurs');
+  // Un seul ailleurs : le troisième Hologramme, et les trois fusionnent en un doré, qui arrive en main.
+  const p = game.players[0];
+  assert.equal(p.board.filter((x) => x.cardId === 'hologramme').length, 0);
+  assert.deepEqual(p.hand.filter((x) => x.cardId === 'hologramme').map((x) => [x.golden, x.atk, x.hp]), [[true, 6, 2]]);
 });
 
 test('la boutique ne propose que des casseroles dont le propriétaire est dans la partie', () => {

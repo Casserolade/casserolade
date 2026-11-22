@@ -13,6 +13,7 @@ import type { SlotBox } from '#src/client/tools/nearestSlotIndex.ts';
 import { zoneForTableY } from '#src/client/tools/zoneForTableY.ts';
 import { allyTargets, annonceNeedsTarget, destroysTarget, heldSpellEffects, spellNeedsTarget, spellTargets } from '#src/client/tools/playTargets.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
+import { tractPileSize } from '#src/client/tools/tractPileSize.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 import { insertAroundLocked, reorderAroundLocked } from '#src/engine/reorderAroundLocked.ts';
 import type { Casserole, HandSpell, Minion, PlayerAction, Spell } from '#src/engine/types.ts';
@@ -45,10 +46,10 @@ export interface Aim {
   uid: number | null;
 }
 
-/** The player has laid something down, and now points at the ally it is for. */
+/** The player has laid something down, and now points at the ally it is for. `all`: a whole pile of Tracts goes on it. */
 export type Targeting =
   | { kind: 'play'; minion: Minion; to: number; onto?: number; valid: number[] }
-  | { kind: 'cast'; held: HandSpell; card: ShownCard; valid: number[]; origin: Point };
+  | { kind: 'cast'; held: HandSpell; card: ShownCard; valid: number[]; origin: Point; all?: boolean };
 
 export interface Dragging {
   item: GestureItem;
@@ -212,25 +213,32 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
     startTargeting({ kind: 'play', minion, to, onto, valid });
   }
 
-  function cast(held: HandSpell, card: ShownCard, target: number | undefined, from: Point | null): void {
+  /** `all`: the whole pile of Tracts on this ally, in one action. */
+  function cast(held: HandSpell, card: ShownCard, target: number | undefined, from: Point | null, all = false): void {
     const to = target === undefined ? null : centerOf(boardElement(target));
     if (from && to) tableFx.add({ kind: 'spell', from, to, card });
     else if (from) tableFx.add({ kind: 'burst', at: from, color: '#ffd84a' });
     playSound('spell');
     if (target !== undefined) tableFx.jolt(target);
-    send(target === undefined ? { t: 'cast', uid: held.uid } : { t: 'cast', uid: held.uid, target });
+    send(target === undefined ? { t: 'cast', uid: held.uid } : { t: 'cast', uid: held.uid, target, ...(all ? { all: true } : {}) });
   }
 
-  /** A spell that needs a minion: straight on it if there is only one and it loses nothing, else the player points. */
-  function aimSpell(held: HandSpell, card: ShownCard, origin: Point): void {
+  /**
+   * A spell that needs a minion: straight on it if there is only one and it loses nothing, else the player points.
+   * A whole pile of Tracts (`all`) always waits for the player to point: it cannot be taken back.
+   */
+  function aimSpell(held: HandSpell, card: ShownCard, origin: Point, all = false): void {
     const valid = spellTargets(held, board(), spellTable());
     if (valid.length === 0) {
-      send({ t: 'cast', uid: held.uid });
+      if (!all) send({ t: 'cast', uid: held.uid });
       return;
     }
-    if (valid.length === 1 && !destroysTarget(heldSpellEffects(held))) cast(held, card, valid[0], origin);
-    else startTargeting({ kind: 'cast', held, card, valid, origin });
+    if (!all && valid.length === 1 && !destroysTarget(heldSpellEffects(held))) cast(held, card, valid[0], origin);
+    else startTargeting({ kind: 'cast', held, card, valid, origin, ...(all ? { all: true } : {}) });
   }
+
+  /** How many Tracts are left in this pile of the hand, as the game shows it now. */
+  const pileSize = (uid: number): number => tractPileSize(view().spells, uid);
 
   // —— Aiming at an ally ——
 
@@ -248,7 +256,7 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
       tableFx.add({ kind: 'burst', at: centerOf(boardElement(uid)) ?? pointer.value, color: '#ffe680' });
       layDown({ t: 'play', uid: current.minion.uid, ...where, target: uid });
     } else {
-      cast(current.held, current.card, uid, current.origin);
+      cast(current.held, current.card, uid, current.origin, current.all);
     }
   }
 
@@ -264,13 +272,27 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
    * the one that took its place, and a double click bought or played two cards (8 November 2026).
    */
   function click(item: GestureItem, source: Element, clicksInARow = 1): void {
-    if (clicksInARow > 1 || performance.now() < swallowUntil || targeting.value) return;
+    if (performance.now() < swallowUntil) return;
+    const aim = targeting.value;
+    if (aim) {
+      // The pile of Tracts being aimed, clicked or touched again: the whole pile will go on the ally chosen.
+      if (aim.kind === 'cast' && !aim.all && item.from === 'hand-spell' && item.held.uid === aim.held.uid && pileSize(aim.held.uid) > 1) targeting.value = { ...aim, all: true };
+      return;
+    }
+    if (clicksInARow > 1) {
+      // A double click on a pile whose first Tract went straight on a lone ally: the rest waits for the player to point.
+      if (!onTap && !locked() && item.from === 'hand-spell' && (item.held.count ?? 1) > 1 && pileSize(item.held.uid) > 0) aimSpell(item.held, item.card, centerOf(source) ?? pointer.value, true);
+      return;
+    }
     if (onTap) onTap(item, source);
     else actOn(item, source);
   }
 
-  /** What a click does on the computer, and the phone's card once its button is pressed: buy, lay down, cast. */
-  function actOn(item: GestureItem, source: Element | null): void {
+  /**
+   * What a click does on the computer, and the phone's card once its button is pressed: buy, lay down, cast.
+   * `all`: the phone's second button on a pile of Tracts, the whole pile on the ally to point at.
+   */
+  function actOn(item: GestureItem, source: Element | null, all = false): void {
     if (locked()) return;
     if (item.from === 'hand' && !isPlayable(item.minion.uid, view().hand.some((m) => m.uid === item.minion.uid))) return;
     if (item.from === 'hand-spell' && !isPlayable(item.held.uid, view().spells.some((s) => s.uid === item.held.uid))) return;
@@ -285,7 +307,7 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
         play(item.minion, board().length);
         return;
       case 'hand-spell':
-        if (spellNeedsTarget(item.held)) aimSpell(item.held, item.card, from ?? pointer.value);
+        if (spellNeedsTarget(item.held)) aimSpell(item.held, item.card, from ?? pointer.value, all);
         else cast(item.held, item.card, undefined, from);
         return;
       case 'board':
@@ -501,6 +523,10 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
     const target = (event.target as Element | null)?.closest('[data-board-uid]') as HTMLElement | null;
     const uid = target ? Number(target.dataset.boardUid) : null;
     if (uid !== null && targeting.value.valid.includes(uid)) return;
+    // The pile of Tracts being aimed, pressed again: its click asks for the whole pile, it does not cancel.
+    const aim = targeting.value;
+    const pressedCard = (event.target as Element | null)?.closest('[data-hand-uid]') as HTMLElement | null;
+    if (aim.kind === 'cast' && !aim.all && pressedCard && Number(pressedCard.dataset.handUid) === aim.held.uid && pileSize(aim.held.uid) > 1) return;
     // Anywhere else cancels, and that click does nothing more.
     event.stopPropagation();
     event.preventDefault();

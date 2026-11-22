@@ -239,8 +239,8 @@ test('a card says how many times an effect repeats, and a golden card always say
 test('an effect that tells its power keeps it: a golden Ralliement on a plain host, a casserole on a golden one', () => {
   const income = CARD_BY_ID.lemaire.effects?.[0];
   assert.ok(income);
-  assert.deepEqual(cardRuleLines({ effects: [{ ...income, power: 2 }] }), ['Au début de votre tour, gagnez 4 budget.']);
-  assert.deepEqual(cardRuleLines({ effects: [{ ...income, power: 1 }] }, { isGolden: true }), ['Au début de votre tour, gagnez 2 budget.']);
+  assert.deepEqual(cardRuleLines({ effects: [{ ...income, power: 2 }] }), ['Au début de votre tour, gagnez 2 budget.']);
+  assert.deepEqual(cardRuleLines({ effects: [{ ...income, power: 1 }] }, { isGolden: true }), ['Au début de votre tour, gagnez 1 budget.']);
 });
 
 test('a relaunch spell only lands on a minion that has something to relaunch', () => {

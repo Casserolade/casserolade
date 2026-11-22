@@ -63,7 +63,8 @@ function parseAction(raw: Record<string, unknown>): PlayerAction | null {
       };
     case 'cast':
       if (!isCount(raw.uid) || !optionalCount(raw.target)) return null;
-      return { t: 'cast', uid: raw.uid, ...(raw.target !== undefined ? { target: raw.target as number } : {}) };
+      if (raw.all !== undefined && typeof raw.all !== 'boolean') return null;
+      return { t: 'cast', uid: raw.uid, ...(raw.target !== undefined ? { target: raw.target as number } : {}), ...(raw.all ? { all: true } : {}) };
     case 'sell':
       return isCount(raw.uid) ? { t: 'sell', uid: raw.uid } : null;
     case 'move':

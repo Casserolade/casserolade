@@ -23,6 +23,7 @@ import {
   endOfTurn,
   fireBoard,
   fuseIfTriple,
+  fuseTokenTriples,
   handHasRoomFor,
   handIsFull,
   heroEndOfTurn,
@@ -381,7 +382,8 @@ function playFromHand(game: Game, p: Player, m: Minion, to: number, targetUid?: 
   if (!target && needsTarget(effects)) target = p.board.find((x) => x !== host) ?? null;
   if (m.golden) incrementCounter(p, 'dores_joues');
   // L'Investiture avant l'Annonce : le doré vient de quitter la main, elle y trouve toujours sa place.
-  if (m.golden && m.copies === 3 && !m.investi) {
+  // Né d'un triple : trois exemplaires de la réserve, ou trois jetons (un jeton ne devient doré qu'ainsi).
+  if (m.golden && (m.copies === 3 || m.token) && !m.investi) {
     m.investi = true;
     addSpellToHand(game, p, 'investiture', Math.min(p.tier + 1, game.params.tierMax));
   }
@@ -540,7 +542,18 @@ function sell(game: Game, p: Player, uid: number): ActionResult {
 }
 
 /** Point d'entrée unique : toute action de joueur ou de bot passe ici et y est validée. */
+/** Une pile de Tracts lancée d'un seul geste ne dépasse pas ce nombre, par sûreté. */
+const MAX_TRACTS_AT_ONCE = 1000;
+
 export function applyAction(game: Game, seat: number, a: PlayerAction): ActionResult {
+  const result = performAction(game, seat, a);
+  // Trois jetons identiques fusionnent une fois l'action jouée, tous ses effets passés.
+  const p = game.players[seat];
+  if (result.ok && p?.alive && game.phase === 'recrutement') fuseTokenTriples(game, p);
+  return result;
+}
+
+function performAction(game: Game, seat: number, a: PlayerAction): ActionResult {
   // Le protocole ne laisse passer que des entiers ; le moteur ne compte pas dessus.
   for (const v of Object.values(a)) if (typeof v === 'number' && !Number.isInteger(v)) return fail('Valeur invalide.');
   const p = game.players[seat];
@@ -594,8 +607,17 @@ export function applyAction(game: Game, seat: number, a: PlayerAction): ActionRe
       if (!m) return fail('Carte introuvable.');
       return playFromHand(game, p, m, a.to ?? p.board.length, a.target, a.onto);
     }
-    case 'cast':
-      return castFromHand(game, p, a.uid, a.target);
+    case 'cast': {
+      const first = castFromHand(game, p, a.uid, a.target);
+      if (!first.ok || !a.all || a.target === undefined) return first;
+      // Toute la pile de Tracts sur le même politique : chaque Tract compte comme lancé un par un. Un choix à faire
+      // (une découverte gagnée en route) arrête la série : le reste de la pile attend en main.
+      for (let n = 1; n < MAX_TRACTS_AT_ONCE && !p.discover; n++) {
+        const held = p.spells.find((x) => x.uid === a.uid);
+        if (held?.spellId !== 'tract' || !castFromHand(game, p, a.uid, a.target).ok) break;
+      }
+      return OK;
+    }
     case 'sell':
       return sell(game, p, a.uid);
     case 'roll': {

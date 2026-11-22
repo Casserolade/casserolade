@@ -59,10 +59,11 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
   check(Boolean(card), `carte inconnue ${m.cardId}`);
   check(new Set(m.keywords).size === m.keywords.length, `mot-clé en double ${m.keywords}`);
   for (const k of m.keywords) check(k in KNOWN_KEYWORDS, `mot-clé inconnu ${k}`);
-  if (inHand) check(!m.token, 'un jeton en main');
+  if (inHand) check(!m.token || m.golden, 'un jeton non doré en main');
   if (m.token) check(m.casseroles.length === 0, 'un jeton porte une casserole');
   if (m.simple) check(m.copies === 0 && !m.golden, 'copie simple dorée ou comptée dans la réserve');
-  if (m.golden) check([1, 3].includes(m.copies) || m.simple, `doré avec ${m.copies} exemplaires`);
+  if (m.golden) check([1, 3].includes(m.copies) || m.simple || m.token, `doré avec ${m.copies} exemplaires`);
+  if (m.token) check(m.copies === 0, `jeton compté ${m.copies} fois dans la réserve`);
   for (const id of m.merged) check(Boolean(CARD_BY_ID[id]), `carte ralliée inconnue ${id}`);
   for (const id of m.rallied) check(Boolean(CARD_BY_ID[id]), `Ralliement inconnu ${id}`);
   if (!card) return out;

@@ -8,6 +8,7 @@ import { handCards } from '#src/client/tools/handCards.ts';
 import type { HandCard } from '#src/client/tools/handCards.ts';
 import { handCardShown } from '#src/client/tools/handCardShown.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
+import { tractPileSize } from '#src/client/tools/tractPileSize.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
 /** In design pixels of the 1920×1080 table. */
@@ -75,6 +76,12 @@ function isCarried(card: HandCard): boolean {
   return props.gestures.isCarried((other) => (other.from === 'hand' && other.minion.uid === card.uid) || (other.from === 'hand-spell' && other.held.uid === card.uid));
 }
 
+/** The pile of Tracts being aimed, one Tract at a time: clicked again, the whole pile goes on the ally chosen. */
+function isAimedPile(card: HandCard): boolean {
+  const aim = props.gestures.targeting.value;
+  return aim?.kind === 'cast' && !aim.all && aim.held.uid === card.uid && tractPileSize(props.view.spells, card.uid) > 1;
+}
+
 /** What a screen reader says of a card of the hand. */
 function nameOf(card: HandCard): string {
   if (card.kind === 'minion') return card.minion.name;
@@ -99,7 +106,8 @@ function leave(index: number): void {
         :key="card.uid"
         class="card"
         :data-card="card.kind === 'minion' ? card.minion.cardId : card.kind === 'casserole' ? 'casserole' : card.spell.id"
-        :class="{ hovered: index === hovered, golden: card.kind === 'minion' && card.minion.golden, carried: isCarried(card), spell: card.kind !== 'minion' }"
+        :data-hand-uid="card.uid"
+        :class="{ hovered: index === hovered, golden: card.kind === 'minion' && card.minion.golden, carried: isCarried(card), 'aimed-pile': isAimedPile(card), spell: card.kind !== 'minion' }"
         :style="cardStyle(index)"
         tabindex="0"
         role="button"
@@ -144,6 +152,8 @@ function leave(index: number): void {
 .hovered > :first-child { filter: drop-shadow(0 calc(var(--s) * 16) calc(var(--s) * 26) rgb(0 0 0 / 0.75)); }
 .golden > :first-child { filter: drop-shadow(0 0 calc(var(--s) * 14) rgb(255 210 60 / 0.95)); }
 .carried { opacity: 0.25; }
+/* The pile being aimed stays in sight: clicked again, it gives all its Tracts to the same politician. */
+.carried.aimed-pile { opacity: 0.85; cursor: pointer; filter: drop-shadow(0 0 calc(var(--s) * 10) #ffe066); }
 /*
  * Each card is placed by its inline transform, and its own transition carries it to a new place. Vue's move animation
  * would overwrite that transform, then clear it: in Firefox, a drop during a card's transition did so, and the hand
