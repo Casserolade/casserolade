@@ -9,8 +9,9 @@ Le détail : https://casserolade.fr/mises-a-jour
 - Six chapitres, de Tbilissi en 2008 au duel contre Jean-Luc Mélenchon, chacun avec sa règle : pas d'échelon avant la manche 5 aux européennes de 2019, du budget en plus en 2024, une primaire à deux camps à gagner, un premier tour qui s'arrête après la manche 12.
 - Huit cinématiques courtes, avec ses vraies phrases et sa vraie voix.
 
-**Correctif**
+**Correctifs**
 - Dans les cinématiques de Sylvain Durif, une voix s'entendait dans le bruit d'explosion. Elle n'y est plus.
+- La casserole « Le travail rend libre » de Jean-Philippe Tanguy joue maintenant sa vraie voix : « Oui, le travail rend libre. »
 
 ## 0.4.5 — 20 novembre 2026
 
