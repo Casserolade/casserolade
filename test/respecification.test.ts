@@ -118,10 +118,10 @@ test('R18 : avec Lassalle, Conseil des ministres joue chaque Fin de tour deux fo
   assert.deepEqual([kazib.atk - before[0], kazib.hp - before[1]], [2, 2], 'la Fin de tour de Piolle, relancée deux fois');
 });
 
-test('R18 : en combat, Glucksmann relance les Héritages deux fois quand Mitterrand vit', () => {
+test('R18 : en combat, Glucksmann relance les Héritages deux fois quand Riner vit', () => {
   const unitOf = (id: string) => makeMinion(CARD_BY_ID[id], uid++);
-  const count = (withMitterrand: boolean) => {
-    const ours = [unitOf('glucksmann'), unitOf('bouamrane'), withMitterrand ? unitOf('mitterrand') : unitOf('kazib')];
+  const count = (withRiner: boolean) => {
+    const ours = [unitOf('glucksmann'), unitOf('bouamrane'), withRiner ? unitOf('riner') : unitOf('kazib')];
     const r = fight(ours, [unit(1, 500)], 5);
     const firstDeath = r.log.findIndex((e) => e.e === 'mort');
     const upTo = firstDeath < 0 ? r.log : r.log.slice(0, firstDeath);
@@ -217,7 +217,8 @@ test('Strauss-Kahn : sacrifié au recrutement, il lègue ses stats aux Socialist
   const hidalgo = addMinionToHand(game, p, 'hidalgo') as Minion;
   assert.equal(applyAction(game, 0, { t: 'play', uid: hidalgo.uid, target: dsk.uid }).ok, true);
   assert.ok(!p.board.some((m) => m.uid === dsk.uid), 'Hidalgo l\'a sacrifié');
-  assert.deepEqual([vallaud.atk, vallaud.hp, durif.atk, durif.hp], [before[0] + dsk.atk, before[1] + dsk.hp, before[2], before[3]]);
+  // Hidalgo fait aussi gagner +2/+2 au camp du détruit, pour la partie.
+  assert.deepEqual([vallaud.atk, vallaud.hp, durif.atk, durif.hp], [before[0] + dsk.atk + 2, before[1] + dsk.hp + 2, before[2], before[3]]);
 });
 
 test('Jean-Marie Le Pen ne lègue toujours qu\'à l\'allié suivant', () => {
@@ -439,7 +440,7 @@ test('à la manche suivante, la relance repart', () => {
   p.budget = 500;
   const before = kazib.atk;
   cast(game, 'seconde_deliberation', deGaulle);
-  assert.equal(kazib.atk - before, 4, 'l\'Annonce de De Gaulle, +4/+4 à vos politiques');
+  assert.equal(kazib.atk - before, 3, 'l\'Annonce de De Gaulle, +3/+3 à vos politiques');
 });
 
 test('Conseil des ministres sans Fin de tour à relancer est refusé', () => {

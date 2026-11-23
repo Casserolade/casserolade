@@ -7,7 +7,7 @@ import { tierChangeLine } from '../src/client/tools/tierChangeLine.ts';
 import { KEYWORD_RULES } from '../src/client/const/keywordRules.ts';
 import { MISES_A_JOUR } from '../src/data/misesAJour.ts';
 import type { CasseroleCard } from '../src/data/misesAJour.ts';
-import { CARD_BY_ID } from '../src/data/cards.ts';
+import { CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
 import { CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
 import { SPELL_BY_ID } from '../src/data/sorts.ts';
 import { VERSION } from '../src/protocol/version.ts';
@@ -34,10 +34,12 @@ test('la dernière version est celle du jeu', () => {
   assert.equal(latest.version, VERSION);
 });
 
-test('l\'« après » de la dernière version est le jeu tel qu\'il est : politiques, casseroles, sorts', () => {
+test('l\'« après » de la dernière version est le jeu tel qu\'il est : politiques, jetons, casseroles, sorts', () => {
+  // Un jeton retouché se range avec les politiques.
+  const inGame = (id: string) => CARD_BY_ID[id] ?? TOKENS[id];
   for (const { before, after } of latest.cards.cards) {
-    if (after) assert.ok(same(cardFace(after), cardFace(CARD_BY_ID[after.id])), `${after.id} a changé depuis`);
-    else assert.equal(CARD_BY_ID[before.id], undefined, `${before.id} n'est pas retiré`);
+    if (after) assert.ok(same(cardFace(after), cardFace(inGame(after.id))), `${after.id} a changé depuis`);
+    else assert.equal(inGame(before.id), undefined, `${before.id} n'est pas retiré`);
   }
   for (const { before, after } of latest.cards.casseroles) {
     if (after) assert.ok(same(after, shownCasserole(CASSEROLE_BY_ID[after.id])), `${after.id} a changé depuis`);

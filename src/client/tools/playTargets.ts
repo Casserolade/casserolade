@@ -16,7 +16,7 @@ export function annonceNeedsTarget(effects: Effect[]): boolean {
  * even when it is the only one. A bonus may go straight to a lone ally; a loss may not.
  */
 export function destroysTarget(effects: Effect[]): boolean {
-  return effects.some((effect) => effect.to === 'cible' && (effect.do === 'detruire' || effect.do === 'sacrifier'));
+  return effects.some((effect) => effect.to === 'cible' && (effect.do === 'detruire' || effect.do === 'sacrifier' || effect.do === 'sacrifier_camp'));
 }
 
 /** The effects a spell of the hand applies when cast: none for a casserole. */

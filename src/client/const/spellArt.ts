@@ -33,6 +33,7 @@ export const SPELL_ART: Record<string, SpellArt> = {
   seconde_deliberation: { color: '#7a3fc0', icon: 'refresh' },
   cumul_des_mandats: { color: '#c0582a', icon: 'chevrons' },
   congres: { color: '#2a4aa8', icon: 'column' },
+  fusible: { color: '#e08a1a', icon: 'bolt' },
   grand_debat: { color: '#d8343c', icon: 'megaphone' },
   conseil_des_ministres: { color: '#2b7fd0', icon: 'bolt' },
   grand_menage: { color: '#4b5a78', icon: 'broom' },

@@ -181,6 +181,8 @@ export type Action =
   | { do: 'detruire' }
   /** Détruit la cible alliée, puis découvre un serviteur de son camp. Rejouée, elle ne détruit plus : elle redécouvre. */
   | { do: 'sacrifier'; echelon?: number }
+  /** Détruit la cible alliée, puis ceux de son camp, partout, gagnent +atk/+hp pour le reste de la partie. Rejouée, elle ne détruit plus : le camp regagne. */
+  | { do: 'sacrifier_camp'; atk: number; hp: number }
   /** Déclenche les effets `trigger` des cibles, une fois par manche au plus pour chacune (règle R4). Doré, il les joue deux fois. */
   | { do: 'declencher'; trigger: 'annonce' | 'heritage' | 'fin_tour' }
   /** Aura : vos effets `trigger` se déclenchent deux fois (trois, s'il est doré). `meeting` : « Quand il attaque » ; `debut_combat` : les 49.3. */

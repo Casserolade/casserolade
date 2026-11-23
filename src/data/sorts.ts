@@ -56,6 +56,9 @@ export const SPELLS: Spell[] = [
   spell('seconde_deliberation', 'Seconde délibération', 4, 3, true, [fx('cible', { do: 'declencher', trigger: 'annonce' })]),
   spell('cumul_des_mandats', 'Cumul des mandats', 4, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'cumul' })]),
   spell('congres', 'Congrès', 4, 2, true, [fx('cible', { do: 'congres' })]),
+  // Le fusible qui saute pour protéger les siens (23 novembre 2026) : un politique tombe, son camp grandit pour la partie.
+  // Un jeton, un Héritage ou un Retour en politique en font le combustible : les jetons n'avaient aucun usage tard.
+  spell('fusible', 'Fusible', 4, 2, true, [fx('cible', { do: 'sacrifier_camp', atk: 2, hp: 2 })]),
 
   // Échelon 5
   spell('immunite_parlementaire', 'Immunité parlementaire', 5, 3, true, [fx('cible', { do: 'mot_cle', keyword: 'immunite' })]),

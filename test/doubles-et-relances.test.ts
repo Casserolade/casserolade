@@ -122,10 +122,10 @@ test('un Bertrand doré donne l\'Immunité à sa cible et à un autre allié', (
   assert.equal([b, c].filter((m) => m.keywords.includes('immunite')).length, 1, 'et un autre allié, un seul');
 });
 
-test('Chirac double l\'Annonce de Lisnard : l\'allié suivant a déjà l\'Immunité, un autre la reçoit', () => {
+test('Polony double l\'Annonce de Lisnard : l\'allié suivant a déjà l\'Immunité, un autre la reçoit', () => {
   const game = table(['republicains', 'macronie', 'socialistes', 'rn', 'insoumis']);
   const next = lay(game, 'retailleau'); // Porte-parole, Immunité : il l'a déjà.
-  const others = [lay(game, 'kazib'), lay(game, 'cheminade'), lay(game, 'chirac')];
+  const others = [lay(game, 'kazib'), lay(game, 'cheminade'), lay(game, 'polony')];
   lay(game, 'lisnard', { to: 0 });
   assert.ok(next.keywords.includes('immunite'));
   assert.equal(others.filter((m) => m.keywords.includes('immunite')).length, 1, 'l\'Annonce rejouée ne se perd pas');
@@ -160,23 +160,94 @@ test('un Philippe doré rend dorés deux alliés', () => {
   assert.equal(allies.filter((m) => m.golden).length, 2);
 });
 
-test('une Hidalgo dorée découvre deux fois, et Chirac fait redécouvrir sans détruire une deuxième fois', () => {
+test('une Hidalgo dorée fait gagner le double au camp du détruit, et Polony le fait regagner sans détruire une deuxième fois', () => {
   const game = table(['socialistes', 'macronie', 'republicains', 'rn', 'insoumis']);
   const p = game.players[0];
   const fodder = lay(game, 'gueant');
+  const mate = lay(game, 'morano');
+  const stranger = lay(game, 'kazib');
+  const before = [mate.atk, mate.hp, stranger.atk, stranger.hp];
   const gold = golden(game, 'hidalgo');
   assert.equal(applyAction(game, 0, { t: 'play', uid: gold.uid, target: fodder.uid }).ok, true);
-  assert.equal(offers(game), 2);
-  settle(game);
+  assert.ok(!p.board.includes(fodder), 'le Républicain est tombé');
+  assert.deepEqual([mate.atk, mate.hp, stranger.atk, stranger.hp], [before[0] + 4, before[1] + 4, before[2], before[3]], 'les siens gagnent +4/+4, pas les autres');
 
   const other = table(['socialistes', 'macronie', 'republicains', 'rn', 'insoumis']);
-  lay(other, 'chirac');
+  lay(other, 'polony');
   const victim = lay(other, 'gueant');
-  const kept = lay(other, 'kazib');
+  const kept = lay(other, 'morano');
+  const start = [kept.atk, kept.hp];
   lay(other, 'hidalgo', { target: victim.uid });
-  assert.equal(offers(other), 2, 'deux découvertes');
+  assert.deepEqual([kept.atk, kept.hp], [start[0] + 4, start[1] + 4], 'l\'Annonce compte deux fois');
   assert.ok(!other.players[0].board.includes(victim) && other.players[0].board.includes(kept), 'une seule victime');
-  assert.ok(p.board.length > 0);
+});
+
+test('le Fusible : un politique tombe, et son camp gagne pour la partie, où qu\'il soit, arrivants et jetons compris', () => {
+  const game = table(['socialistes', 'macronie', 'republicains', 'rn', 'insoumis']);
+  const p = game.players[0];
+  const bouamrane = lay(game, 'bouamrane');
+  const vallaud = lay(game, 'vallaud');
+  const stranger = lay(game, 'gueant');
+  const held = recruit(game, 'guedj');
+  const before = [vallaud.atk, vallaud.hp, stranger.atk, stranger.hp, held.atk, held.hp];
+  assert.equal(castSpell(game, 'fusible', bouamrane).ok, true);
+  assert.ok(!p.board.includes(bouamrane), 'Bouamrane est tombé');
+  assert.deepEqual([vallaud.atk, vallaud.hp, held.atk, held.hp], [before[0] + 2, before[1] + 2, before[4] + 2, before[5] + 2], 'le plateau et la main');
+  assert.deepEqual([stranger.atk, stranger.hp], [before[2], before[3]], 'pas un autre camp');
+  const substitute = p.board.find((m) => m.cardId === 'suppleant') as Minion;
+  assert.ok(substitute, 'son Héritage a joué : un Suppléant reste sur le plateau');
+  assert.deepEqual([substitute.camp, substitute.atk, substitute.hp], ['socialistes', 3, 3], 'un Socialiste, qui reçoit le gain');
+
+  // Plus tard : un Socialiste acheté et un Suppléant invoqué arrivent avec le gain de la partie.
+  const late = lay(game, 'thevenoud');
+  assert.deepEqual([late.atk, late.hp], [CARD_BY_ID.thevenoud.atk + 2, CARD_BY_ID.thevenoud.hp + 2]);
+  assert.equal(castSpell(game, 'fusible', substitute).ok, true, 'le jeton sert de combustible');
+  assert.deepEqual([late.atk, late.hp], [CARD_BY_ID.thevenoud.atk + 4, CARD_BY_ID.thevenoud.hp + 4]);
+  const next = lay(game, 'bouamrane');
+  const r = resolveCombat(
+    { minions: [{ ...next, hp: 1 }], mods: {}, hp: 30, campBuffs: p.campBuffs },
+    { minions: [{ ...makeMinion(CARD_BY_ID.chirac, 9002), atk: 1, hp: 60 }], mods: {}, hp: 30 },
+    { params: PARAMS, ctx: null, rng: createRng(1), log: true },
+  );
+  const summoned = r.log.find((e) => e.e === 'invocation' && e.unit.cardId === 'suppleant');
+  // Deux gains de camp, plus l'attaque que lui laisse le Suppléant tombé au recrutement.
+  assert.ok(summoned && summoned.e === 'invocation' && summoned.unit.atk === 6 && summoned.unit.hp === 5, 'en combat, le Suppléant arrive à 6/5');
+  assert.deepEqual(invariantViolations(game), []);
+});
+
+test('un Suppléant qui tombe arme les suivants, pour la partie : en combat, le deuxième arrive plus fort', () => {
+  const fallen = (uid: number) => ({ ...makeMinion(CARD_BY_ID.bouamrane, uid), atk: 1, hp: 1 });
+  const wall = { ...makeMinion(CARD_BY_ID.chirac, 9100), atk: 5, hp: 500 };
+  const r = resolveCombat({ minions: [fallen(9001), fallen(9002)], mods: {}, hp: 30 }, { minions: [wall], mods: {}, hp: 30 }, { params: PARAMS, ctx: null, rng: createRng(3), log: true });
+  const arrivals = r.log.filter((e) => e.e === 'invocation' && e.unit.cardId === 'suppleant').map((e) => (e.e === 'invocation' ? [e.unit.atk, e.unit.hp] : []));
+  assert.equal(arrivals.length, 2, 'un Suppléant par Bouamrane');
+  assert.deepEqual(arrivals.map(([atk, hp]) => atk + hp).sort(), [2, 3], 'le premier à 1/1, celui qui suit sa chute à 2/1');
+  const kept = r.persist[0].campBuffs.filter((g) => g.card === 'suppleant');
+  assert.deepEqual(kept.map((g) => [g.atk, g.hp]), [[1, 0], [1, 0]], 'deux Suppléants tombés : +2/+0 gardés pour la partie');
+  assert.equal(effectPower({ ...makeMinion(TOKENS.suppleant, 1), golden: true }, TOKENS.suppleant.effects![0]), 2, 'doré, il arme deux fois');
+});
+
+test('le Fusible ramène un Retour en politique, et Riner double l\'Héritage de celui qui tombe', () => {
+  const game = table(['socialistes', 'macronie', 'republicains', 'rn', 'insoumis']);
+  const p = game.players[0];
+  const thevenoud = lay(game, 'thevenoud');
+  lay(game, 'vallaud');
+  lay(game, 'guedj');
+  assert.equal(castSpell(game, 'fusible', thevenoud).ok, true);
+  const back = p.board.find((m) => m.cardId === 'thevenoud') as Minion;
+  assert.ok(back && back.uid !== thevenoud.uid && !back.keywords.includes('retour'), 'il revient, sans son Retour');
+  assert.deepEqual([back.atk, back.hp], [CARD_BY_ID.thevenoud.atk + 2, 1 + 2], 'sa carte nue à 1 PV, plus le gain du camp');
+
+  const other = table(['socialistes', 'macronie', 'republicains', 'rn', 'insoumis']);
+  lay(other, 'riner');
+  const cazeneuve = lay(other, 'cazeneuve');
+  assert.equal(castSpell(other, 'fusible', cazeneuve).ok, true);
+  // Son Héritage joue deux fois : deux Suppléants, socialistes comme lui, qui reçoivent le gain du camp en arrivant.
+  const q = other.players[0];
+  const deputies = q.board.filter((m) => m.cardId === 'suppleant');
+  assert.equal(deputies.length, 2);
+  assert.deepEqual(deputies.map((m) => [m.atk, m.hp]), [[3, 3], [3, 3]]);
+  assert.deepEqual(invariantViolations(other), []);
 });
 
 test('un Jadot doré joue deux fois la Fin de tour de ses voisins', () => {
@@ -432,7 +503,7 @@ const IN_COMBAT: Record<Action['do'], boolean> = {
   buff: true, buff_par_allie: true, buff_par_camp: true, buff_par_ralliement: false, degats: true, invoquer: true, budget: false,
   mot_cle: true, retirer: true, basculer: false, exiler: true, oublier: false, transmettre: true, carte: true, decouvrir: false,
   camp_buff: true, boutique_buff: false, tract_bonus: true, jouer_tract: true, debaucher: false, dorer: false, detruire: true,
-  sacrifier: false, declencher: true, doubler: true, compteur: true, scandale_plus: true, actualiser: false, actualisations_gratuites: false,
+  sacrifier: false, sacrifier_camp: false, declencher: true, doubler: true, compteur: true, scandale_plus: true, actualiser: false, actualisations_gratuites: false,
   budget_max: false, pari_defaite: false, congres: false, butin: true,
   doubler_stats: true, buff_par_membre: true, gain_debauche: false, buff_compteur: false, chaise_vide: true,
 };
@@ -469,9 +540,9 @@ test('Chirac relance en fin de tour une Annonce qui rapporte du budget : il arri
   p.budget = 2;
   p.nextBudgetBonus = 0;
   endOfTurn(game, p);
-  // Coquerel donne 3 de budget, deux fois avec Chirac : rien à dépenser ce tour, tout à la manche suivante.
+  // Coquerel donne 3 de budget, que Chirac rejoue : rien à dépenser ce tour, tout à la manche suivante.
   assert.equal(p.budget, 2);
-  assert.equal(p.nextBudgetBonus, 6);
+  assert.equal(p.nextBudgetBonus, 3);
   assert.ok(p.endOfTurnSteps.some((step) => step.notes.includes('budget')), 'la Fin de tour le montre');
 });
 
@@ -509,9 +580,9 @@ test('R4 : Seconde délibération et Chirac relancent chacun l\'Annonce du même
   lay(game, 'chirac');
   const start = tracts(game);
   assert.equal(castSpell(game, 'seconde_deliberation', kazib).ok, true);
-  assert.equal(tracts(game) - start, 2, 'le sort relance Kazib, deux fois avec Chirac');
+  assert.equal(tracts(game) - start, 1, 'le sort relance Kazib');
   endOfTurn(game, p);
-  assert.equal(tracts(game) - start, 4, 'Chirac le relance encore en fin de tour : le sort n\'est pas perdu');
+  assert.equal(tracts(game) - start, 2, 'Chirac le relance encore en fin de tour : le sort n\'est pas perdu');
   assert.equal(castSpell(game, 'seconde_deliberation', kazib).ok, false, 'le même sort ne le relance pas deux fois dans la manche');
 });
 
@@ -525,8 +596,8 @@ test('R4 : Lassalle fait rejouer la Fin de tour de Chirac, qui relance encore le
     endOfTurn(game, game.players[0]);
     return tracts(game) - start;
   };
-  assert.equal(gained(false), 2);
-  assert.equal(gained(true), 4, 'doubler rapporte toujours');
+  assert.equal(gained(false), 1);
+  assert.equal(gained(true), 2, 'doubler rapporte toujours');
 });
 
 test('Chirac ne relance que les Annonces de ses voisins', () => {
@@ -546,7 +617,7 @@ test('Chirac ne relance que les Annonces de ses voisins', () => {
   lay(other, 'boyard');
   const near = tracts(other);
   endOfTurn(other, other.players[0]);
-  assert.equal(tracts(other) - near, 4, 'Kazib et Boyard, de chaque côté : un Tract chacun, deux fois');
+  assert.equal(tracts(other) - near, 2, 'Kazib et Boyard, de chaque côté : un Tract chacun');
 });
 
 test('R4 : Conseil des ministres rapporte aussi aux voisins de Jadot', () => {
@@ -588,11 +659,11 @@ test('une découverte née de la Fin de tour attend le joueur au recrutement sui
   resolveRound(game);
   assert.equal(game.phase, 'recrutement');
   assert.ok(p.discover && p.discover.kind === 'sort', 'le choix est resté ouvert');
-  assert.equal(offers(game), 2, 'Chirac a relancé deux fois l\'Annonce de Branco');
+  assert.equal(offers(game), 1, 'Chirac a relancé l\'Annonce de Branco');
   assert.equal(p.spells.length, held, 'rien n\'a été pris d\'office');
   assert.equal(applyAction(game, 0, { t: 'roll' }).ok, false, 'il choisit d\'abord');
   settle(game);
-  assert.equal(p.spells.length, held + 2);
+  assert.equal(p.spells.length, held + 1);
   assert.deepEqual(invariantViolations(game), []);
 });
 

@@ -175,11 +175,11 @@ test('le Droit de réponse : le perdant le plus à gauche qui en a un répond', 
   assert.equal(r.responder?.uid, answer.uid);
 });
 
-test('Mitterrand double les Héritages, tant qu\'il est vivant', () => {
+test('Riner double les Héritages, tant qu\'il est vivant', () => {
   const heritage: Effect = { when: 'heritage', to: 'joueur', do: 'carte', card: 'tract', count: 1 };
   const dies = unit(1, 1, [], 'socialistes', [heritage]);
-  const mitterrand = { ...makeMinion(CARD_BY_ID.mitterrand, uid++) };
-  const r = fight([dies, mitterrand], [unit(1, 100)]);
+  const riner = { ...makeMinion(CARD_BY_ID.riner, uid++) };
+  const r = fight([dies, riner], [unit(1, 100)]);
   assert.equal(r.persist[0].cards.length >= 2, true);
 });
 

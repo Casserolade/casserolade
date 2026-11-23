@@ -30,7 +30,10 @@ const compteur = (c: Counter, atk: number, hp: number) => ({ do: 'compteur', com
 const tract = { do: 'jouer_tract' };
 
 export const TOKENS: Record<string, Card> = {
-  suppleant: { id: 'suppleant', name: 'Suppléant', camp: 'civile', tier: 1, atk: 1, hp: 1, token: true },
+  // 23 novembre 2026 : chaque Suppléant qui tombe arme les suivants, pour la partie. Invoqué en combat, un Suppléant
+  // arrivait à 1/1 à toutes les manches, face à des ennemis de 9, 18 puis 37 de stats : il n'en faisait tomber qu'un
+  // sur dix (node src/sim/bilan_jetons.ts). L'attaque seule : il frappe fort et tombe au premier coup.
+  suppleant: { id: 'suppleant', name: 'Suppléant', camp: 'civile', tier: 1, atk: 1, hp: 1, token: true, effects: [fx('heritage', 'joueur', campBuff(1, 0), { card: 'suppleant' })] },
   electeur_fantome: { id: 'electeur_fantome', name: 'Électeur fantôme', camp: 'civile', tier: 1, atk: 1, hp: 1, token: true },
   hologramme: { id: 'hologramme', name: 'Hologramme', camp: 'civile', tier: 1, atk: 3, hp: 1, token: true },
   chaise_vide: { id: 'chaise_vide', name: 'Chaise vide', camp: 'civile', tier: 1, atk: 0, hp: 8, token: true, keywords: ['porte_parole'], feminin: true },
@@ -97,15 +100,22 @@ export const CARDS: Card[] = [
   // 13 novembre 2026 : le camp n'avait rien qui grandisse hors du combat de tête. Chaque allié tombé le fait grandir
   // pour de bon, dès l'échelon 2 (avant : +1/+0 aux Socialistes après cinq morts, presque jamais atteint). Les
   // Socialistes passent de 5,19 à 4,84 de place moyenne en mono-camp (3 000 parties).
-  card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'soi', buff(1, 1), { n: 1, perma: true })] }),
+  // 23 novembre 2026 : tous les deux alliés tombés, plus à chacun. Les Suppléants pèsent désormais en combat, et les
+  // Socialistes purs passaient de 4,80 à 4,17 de place moyenne : avec ce réglage, 4,58.
+  card('vallaud', 'Boris Vallaud', 'socialistes', 2, 1, 3, { fx: [fx('revanche', 'soi', buff(1, 1), { n: 2, perma: true })] }),
   card('cahuzac', 'Jérôme Cahuzac', 'socialistes', 2, 4, 5, {
     fx: [fx('vente', 'joueur', { do: 'budget', value: 2, plus_tard: true }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
   }),
-  card('hidalgo', 'Anne Hidalgo', 'socialistes', 4, 7, 7, { fx: [fx('annonce', 'cible', { do: 'sacrifier', echelon: 0 })] }),
+  // 23 novembre 2026 : elle détruit toujours un allié, mais pour les siens : son camp grandit pour la partie, où qu'ils
+  // soient, jetons à venir compris. Avant l'échelon 6 (Hollande), rien ne donnait ce gain : les Suppléants arrivaient nus.
+  // Le détruit joue son Héritage et son Retour : un Suppléant resté sur le plateau sert au coup suivant.
+  card('hidalgo', 'Anne Hidalgo', 'socialistes', 4, 7, 7, { fx: [fx('annonce', 'cible', { do: 'sacrifier_camp', atk: 2, hp: 2 })] }),
   card('valls', 'Manuel Valls', 'socialistes', 3, 3, 3, { kw: ['retour'], fx: [fx('annonce', 'cible', motCle('retour'))] }),
   card('faure', 'Olivier Faure', 'socialistes', 4, 6, 8, { fx: [fx('revanche', 'joueur', campBuff(2, 2), { n: 1, card: 'suppleant' }), fx('droit_de_reponse', 'soi', invoque('suppleant'))] }),
   // Parti du PS en 2022 pour fonder La Convention : un transfuge, qui se rallie (7 novembre 2026).
-  card('cazeneuve', 'Bernard Cazeneuve', 'socialistes', 3, 3, 6, { kw: ['ralliement', 'porte_parole'], fx: [fx('heritage', 'soi', invoque('suppleant', 2))] }),
+  // 23 novembre 2026 : un Suppléant au lieu de deux. Depuis que chaque Suppléant tombé arme les suivants, il était le
+  // plus fort de l'échelon 3 dans son camp (+1,37 place) et les Socialistes purs passaient premiers de 0,14 place.
+  card('cazeneuve', 'Bernard Cazeneuve', 'socialistes', 3, 3, 6, { kw: ['ralliement', 'porte_parole'], fx: [fx('heritage', 'soi', invoque('suppleant'))] }),
   card('royal', 'Ségolène Royal', 'socialistes', 5, 7, 8, {
     fx: [fx('annonce', 'aleatoire', motCle('retour')), fx('annonce', 'aleatoire', motCle('retour')), fx('celebration', 'allie_suivant', buff(2, 2))],
   }),
@@ -323,10 +333,14 @@ export const CARDS: Card[] = [
   card('poutou', 'Philippe Poutou', 'civile', 3, 2, 6, { kw: ['balai'], fx: [fx('vente_allie', 'soi', buff(2, 2)), fx('droit_de_reponse', 'joueur', { do: 'budget', value: 1, plus_tard: true })] }),
   // Candidat le 9 novembre 2026 : « ni de droite, ni de gauche », et « Je sais ce que c'est de se battre, de tomber,
   // de se relever toujours » (vidéo de sa candidature). Il compte pour chaque parti, et se relève une fois.
-  card('riner', 'Teddy Riner', 'civile', 4, 6, 9, { kw: ['ni_droite_ni_gauche', 'retour'] }),
+  // 23 novembre 2026 : ce qui double une mécanique se trouve à l'échelon 5, à la Société civile, donc dans toutes les
+  // parties : Lassalle les Fins de tour, Polony les Annonces, Riner les Héritages. Il monte de l'échelon 4 (6/9, sans
+  // effet) : +0,89 place offert à la manche 5, une pièce de montage plus qu'un corps.
+  card('riner', 'Teddy Riner', 'civile', 5, 6, 11, { kw: ['ni_droite_ni_gauche', 'retour'], fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' })] }),
   // Candidate le 14 octobre 2026 (France Inter) : « Nous sommes la France », un rassemblement des « orphelins de la
   // politique » venus de tous les partis. Elle grandit de chaque camp réuni sur le plateau.
-  card('polony', 'Natacha Polony', 'civile', 4, 4, 6, { fx: [fx('fin_tour', 'soi', { do: 'buff_par_camp', atk: 1, hp: 1 })] }),
+  // 23 novembre 2026 : elle monte à l'échelon 5 et double les Annonces, ce que faisait Chirac (+1,34 place).
+  card('polony', 'Natacha Polony', 'civile', 5, 4, 6, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' }), fx('fin_tour', 'soi', { do: 'buff_par_camp', atk: 1, hp: 1 })] }),
   card('lassalle', 'Jean Lassalle', 'civile', 5, 6, 11, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'fin_tour' })] }),
   // Candidat le 20 novembre 2026, avec La France humaniste. Premier ministre, il fait passer le CPE par le 49.3 en
   // février 2006 : un à trois millions de manifestants, et le contrat retiré le 10 avril. Son 49.3 met le feu autour
@@ -338,8 +352,10 @@ export const CARDS: Card[] = [
   // 13 novembre 2026 : les présidents passent au niveau des chefs de camp (ils gagnaient 1,2 à 2 places, contre 2,3 à
   // 2,8 pour les chefs).
   // « Je vous ai compris » (Alger, 4 juin 1958) : chacun a cru qu'il était de son côté, et chaque nouveau venu aussi.
+  // 23 novembre 2026 : son Annonce donne +3/+3 au lieu de +4/+4. Il était sur près d'un plateau vainqueur sur deux
+  // des bots moyens (47 %), loin devant les autres légendes ; à +3/+3, sur un tiers (36 %), et il vaut +2,06 place.
   card('de_gaulle', 'Charles de Gaulle', 'civile', 6, 9, 9, {
-    fx: [fx('annonce', 'allies', motCle('ni_droite_ni_gauche')), fx('annonce', 'allies', buff(4, 4)), fx('joue', 'joue', motCle('ni_droite_ni_gauche')), fx('joue', 'joue', buff(2, 2))],
+    fx: [fx('annonce', 'allies', motCle('ni_droite_ni_gauche')), fx('annonce', 'allies', buff(3, 3)), fx('joue', 'joue', motCle('ni_droite_ni_gauche')), fx('joue', 'joue', buff(2, 2))],
   }),
   // « Au revoir » (19 mai 1981) : il se lève, et la caméra reste sur sa chaise vide. Il est revenu ensuite, longtemps.
   // 7 novembre 2026 : la chaise vide tient ce qu'il tenait, ses PV. 13 novembre 2026 : à 0 d'attaque, elle ne servait
@@ -350,12 +366,13 @@ export const CARDS: Card[] = [
   // fin de tour (doublées par lui), le jour de sa pose compris. Celles de ses voisins seulement, comme Jadot pour les
   // Fins de tour : quand il rejouait toutes les Annonces du plateau, il était sur 48 % des plateaux vainqueurs, le plus
   // souvent avec de Gaulle (+8/+8 à tous à chaque manche). On choisit les deux Annonces qu'on place à côté de lui.
-  card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, {
-    fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'annonce' }), fx('fin_tour', 'voisins', { do: 'declencher', trigger: 'annonce' })],
-  }),
+  // 23 novembre 2026 : il ne double plus les Annonces, c'est Polony, à l'échelon 5. À côté d'elle, il vaut ce qu'il valait.
+  card('chirac', 'Jacques Chirac', 'civile', 6, 16, 16, { fx: [fx('fin_tour', 'voisins', { do: 'declencher', trigger: 'annonce' })] }),
   // « Je crois aux forces de l'esprit et je ne vous quitterai pas » (vœux du 31 décembre 1994) : son Héritage reste,
   // pour de bon (13 novembre 2026 ; avant, +4/+4 le temps du combat).
-  card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('aura', 'joueur', { do: 'doubler', trigger: 'heritage' }), fx('heritage', 'allies', buff(3, 3), { perma: true })] }),
+  // 23 novembre 2026 : il ne double plus les Héritages, c'est Riner, à l'échelon 5 ; le sien passe de +3/+3 à +4/+4
+  // (+2,50 place offert à la manche 5, +2,55 avant).
+  card('mitterrand', 'François Mitterrand', 'civile', 6, 6, 10, { fx: [fx('heritage', 'allies', buff(4, 4), { perma: true })] }),
 ];
 
 // Une carte partage ses effets, par identité, avec chacun de ses serviteurs, dans toutes les parties : figés, rien

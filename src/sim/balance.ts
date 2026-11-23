@@ -13,6 +13,9 @@ import { HEROES, MAX_ARMOR } from '../data/heroes.ts';
 const { values } = parseArgs({
   options: {
     games: { type: 'string', default: '1500' },
+    /** Une autre graine tire d'autres parties : à 1 500 parties, un camp se lit à ± 0,09 place près. Pour un écart plus
+     * fin, additionner quatre graines (6 000 parties, ± 0,04). */
+    graine: { type: 'string', default: '1' },
     level: { type: 'string', default: 'moyen' },
     tune: { type: 'string', default: '0' },
     /** Chaque bot joue le personnage de son héros : c'est ce qu'on affronte à table. */
@@ -90,7 +93,7 @@ for (let pass = 0; pass < Number(values.tune); pass++) {
   }
 }
 
-const results = run(games, overrides, 1);
+const results = run(games, overrides, Number(values.graine));
 const seats = results.flatMap((r) => r.seats);
 const pct = (x: number) => `${(x * 100).toFixed(1)} %`;
 

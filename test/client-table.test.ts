@@ -106,7 +106,7 @@ test('targets follow the rules the engine checks', () => {
 test('medallionMarks shows what the card hides', () => {
   assert.deepEqual(medallionMarks(CARD_BY_ID.bouamrane.effects ?? []), { heritage: true, triggered: false, revanche: null, celebration: false, reponse: false });
   const vallaud = medallionMarks(CARD_BY_ID.vallaud.effects ?? []);
-  assert.equal(vallaud.revanche, 1);
+  assert.equal(vallaud.revanche, 2);
   assert.ok(medallionMarks(CARD_BY_ID.boyard.effects ?? []).celebration);
   assert.ok(medallionMarks(CARD_BY_ID.portes.effects ?? []).triggered);
   assert.ok(medallionMarks(CARD_BY_ID.ndiaye.effects ?? []).reponse);
@@ -232,7 +232,7 @@ test('a card says how many times an effect repeats, and a golden card always say
   assert.deepEqual(cardRuleLines(CARD_BY_ID.bertrand, { isGolden: true }), ['**Annonce** : donne **Immunité** à un autre allié, et à un deuxième au hasard.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.morano, { isGolden: true }).at(-1), '**Célébration** : donne **Immunité** à deux autres alliés au hasard.');
   assert.deepEqual(cardRuleLines(CARD_BY_ID.philippe, { isGolden: true }), ['**Annonce** : rend doré un autre allié d\'échelon 4 ou moins, et un deuxième au hasard.']);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.hidalgo, { isGolden: true }), ['**Annonce** : détruisez un autre allié et **découvrez** deux fois un politique de son camp, de votre échelon.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.hidalgo, { isGolden: true }), ['**Annonce** : détruisez un autre allié : ceux de son camp, partout, gagnent +4/+4 pour le reste de la partie.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.jadot, { isGolden: true }), ['**Fin de tour** : déclenche deux fois la **Fin de tour** de ses voisins.']);
 });
 

@@ -315,13 +315,14 @@ test('trois exemplaires, dont deux gagnés par une Célébration qui se copie, f
 test('en combat, les invocations respectent la taille du plateau des règles, pas 7 en dur', () => {
   const params = { ...PARAMS, boardSize: 2 };
   const allie = makeMinion({ id: 'test', name: 'Test', camp: 'civile', tier: 1, atk: 0, hp: 50 }, 2);
-  const cazeneuve = { ...makeMinion(CARD_BY_ID.cazeneuve, 1), hp: 1 }; // Héritage : deux Suppléants.
+  // Un Héritage qui invoque deux Suppléants : un de trop pour ce plateau.
+  const summoner = makeMinion({ id: 'test_heritage', name: 'Test', camp: 'civile', tier: 1, atk: 1, hp: 1, effects: [{ when: 'heritage', to: 'soi', do: 'invoquer', token: 'suppleant', count: 2 }] }, 1);
   const r = resolveCombat(
-    { minions: [cazeneuve, allie], mods: {}, hp: 10 },
+    { minions: [summoner, allie], mods: {}, hp: 10 },
     { minions: [{ ...makeMinion({ id: 'test', name: 'Test', camp: 'civile', tier: 1, atk: 1, hp: 100 }, 3), keywords: [] }], mods: {}, hp: 10 },
     { params, ctx: null, rng: createRng(2), log: true },
   );
-  const ours = new Set([cazeneuve.uid, allie.uid]);
+  const ours = new Set([summoner.uid, allie.uid]);
   let size = 2;
   for (const e of r.log) {
     if (e.e === 'mort' && ours.delete(e.uid)) size--;
@@ -331,6 +332,7 @@ test('en combat, les invocations respectent la taille du plateau des règles, pa
     }
     assert.ok(size <= params.boardSize, `plateau à ${size} en combat`);
   }
+  assert.equal(r.log.filter((e) => e.e === 'invocation' && e.side === 0).length, 1, 'un seul des deux Suppléants trouve sa place');
 });
 
 test('un héros imposé à un siège n\'est jamais proposé aux autres', () => {

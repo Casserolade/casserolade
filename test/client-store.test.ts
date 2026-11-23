@@ -263,7 +263,7 @@ test('Hidalgo et la Primaire détruisent leur cible : elle se choisit toujours, 
 test('le texte d\'un politique doré double ce que le moteur double', () => {
   assert.ok(cardRuleLines(CARD_BY_ID.cheminade, { isGolden: true }).includes('**Vente** : **découvrez** un sort, deux fois.'));
   assert.ok(cardRuleLines(CARD_BY_ID.doucet, { isGolden: true }).includes('**Fin de tour** : gagne +2/+2.'));
-  assert.match(cardRuleLines(CARD_BY_ID.chirac, { isGolden: true }).join(' '), /trois fois/);
+  assert.match(cardRuleLines(CARD_BY_ID.polony, { isGolden: true }).join(' '), /trois fois/);
   assert.match(cardRuleLines(CARD_BY_ID.oudea).join(' '), /Toujours doré.*\+1\/\+0/);
   assert.match(cardRuleLines(CARD_BY_ID.oudea, { isGolden: true }).join(' '), /\+2\/\+0/);
   assert.ok(cardRuleLines(CARD_BY_ID.doucet).includes('**Fin de tour** : gagne +1/+1.'), 'un politique simple garde son texte');

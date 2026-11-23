@@ -4,7 +4,7 @@ import type { Card, Casserole, Spell } from '../../src/engine/types.ts';
 
 /**
  * Fige les cartes d'une version, avant et après, pour la page des mises à jour (/mises-a-jour) : les politiques, les
- * casseroles et les sorts nouveaux ou changés depuis la version précédente. L'ancienne version se lit dans une copie
+ * jetons, les casseroles et les sorts nouveaux ou changés depuis la version précédente. L'ancienne version se lit dans une copie
  * du dépôt à son commit :
  *   git worktree add /tmp/v-avant <commit de la version précédente>
  *   node tools/mises_a_jour/instantane.ts /tmp/v-avant 0.4.0
@@ -21,10 +21,11 @@ const newRoot = path.resolve(import.meta.dirname, '../..');
 interface GameData { cards: Card[]; casseroles: Casserole[]; spells: Spell[] }
 
 async function load(root: string): Promise<GameData> {
-  const { CARDS } = await import(path.join(root, 'src/data/cards.ts'));
+  const { CARDS, TOKENS } = await import(path.join(root, 'src/data/cards.ts'));
   const { CASSEROLES } = await import(path.join(root, 'src/data/casseroles.ts'));
   const { SPELLS } = await import(path.join(root, 'src/data/sorts.ts'));
-  return { cards: CARDS, casseroles: CASSEROLES, spells: SPELLS };
+  // Un jeton est une carte : celui qui change se montre à la suite des politiques.
+  return { cards: [...CARDS, ...Object.values((TOKENS ?? {}) as Record<string, Card>)], casseroles: CASSEROLES, spells: SPELLS };
 }
 
 /** Ce que montre une carte de politique. */

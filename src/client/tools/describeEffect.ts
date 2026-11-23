@@ -167,6 +167,7 @@ function goldenEffect(e: Effect): Effect {
     case 'buff_par_camp':
     case 'buff_par_ralliement':
     case 'camp_buff':
+    case 'sacrifier_camp':
     case 'boutique_buff':
     case 'tract_bonus':
     case 'compteur':
@@ -275,6 +276,8 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
     case 'sacrifier':
       // L'échelon se dit, comme pour toute découverte : celui du joueur, pas celui du politique détruit.
       return `détruisez ${dest} et **découvrez** ${twice}un politique de son camp${e.echelon === 1 ? ', de l\'échelon au-dessus du vôtre' : ', de votre échelon'}`;
+    case 'sacrifier_camp':
+      return `détruisez ${dest} : ceux de son camp, partout, gagnent ${stats(e.atk, e.hp)} pour le reste de la partie`;
     case 'declencher':
       return `déclenche ${twice}${e.trigger === 'fin_tour' ? 'la ' : 'l\''}**${TRIGGER_WORD[e.trigger]}** ${of(dest)}`;
     case 'doubler':

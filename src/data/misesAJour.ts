@@ -6,6 +6,7 @@ import { CARTES as CARTES_0_4_3 } from './misesAJour/0.4.3.ts';
 import { CARTES as CARTES_0_4_4 } from './misesAJour/0.4.4.ts';
 import { CARTES as CARTES_0_4_5 } from './misesAJour/0.4.5.ts';
 import { CARTES as CARTES_0_4_7 } from './misesAJour/0.4.7.ts';
+import { CARTES as CARTES_0_4_8 } from './misesAJour/0.4.8.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -57,6 +58,33 @@ const VEDETTE_SEULE = 'Le mot-clé Vedette est retiré. Rien d\'autre ne change.
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.4.8',
+    date: '23 novembre 2026',
+    title: 'Annonces et Héritages doublés à l\'échelon 5, des Suppléants qui s\'arment',
+    summary: [
+      'Ce qui double une mécanique se trouve désormais à l\'échelon 5, dans la Société civile : Natacha Polony double vos Annonces, Teddy Riner vos Héritages, et Jean Lassalle double toujours vos Fins de tour.',
+      'Jacques Chirac et François Mitterrand restent à l\'échelon 6, sans doublement : Chirac déclenche toujours l\'Annonce de ses voisins en fin de tour, et l\'Héritage de Mitterrand donne +4/+4 pour de bon, au lieu de +3/+3.',
+      'Charles de Gaulle donne +3/+3 à vos politiques quand on le pose, au lieu de +4/+4.',
+      'Les Suppléants s\'arment entre eux : chaque Suppléant qui tombe donne +1/+0 à vos Suppléants, partout, pour le reste de la partie. Ceux qui sont invoqués ensuite arrivent avec.',
+      'Détruire un des siens pour renforcer son camp : Anne Hidalgo le fait en Annonce, et un nouveau sort aussi, le Fusible (échelon 4, 2 de budget). Ceux du camp du politique détruit gagnent +2/+2, partout, pour le reste de la partie : ceux qui arrivent ensuite, et leurs jetons, le reçoivent aussi.',
+      'Chez les Socialistes, Boris Vallaud grandit tous les deux alliés tombés, et Bernard Cazeneuve invoque un Suppléant au lieu de deux.',
+    ],
+    rules: [],
+    why: {
+      polony: 'Elle monte à l\'échelon 5 et double vos Annonces, ce que faisait Jacques Chirac. Sa Fin de tour ne change pas.',
+      riner: 'Il monte à l\'échelon 5, gagne 2 PV et double vos Héritages, ce que faisait François Mitterrand.',
+      chirac: 'Le doublement des Annonces passe à Natacha Polony. Il garde sa Fin de tour.',
+      mitterrand: 'Le doublement des Héritages passe à Teddy Riner. Son Héritage donne +4/+4 au lieu de +3/+3.',
+      de_gaulle: 'Posé tôt, il décidait trop souvent de la partie à lui seul : +3/+3 au lieu de +4/+4.',
+      vallaud: 'Les Suppléants tombent en nombre : il grandit tous les deux alliés tombés, au lieu de chacun.',
+      hidalgo: 'Elle ne découvre plus : l\'allié détruit renforce son camp pour le reste de la partie. Avec Natacha Polony, le camp gagne deux fois, et un seul allié est détruit.',
+      cazeneuve: 'Un Suppléant au lieu de deux : depuis qu\'ils s\'arment entre eux, deux d\'un coup, c\'était trop pour l\'échelon 3.',
+      suppleant: 'Le jeton des Socialistes. Il arrivait à 1/1 à toutes les manches : chaque Suppléant tombé arme désormais les suivants. Ils frappent fort et tombent au premier coup.',
+      fusible: 'Un des vôtres saute, son camp en profite pour le reste de la partie. Le politique détruit joue son Héritage. Pour tous les camps.',
+    },
+    cards: CARTES_0_4_8,
+  },
   {
     version: '0.4.7',
     date: '22 novembre 2026',

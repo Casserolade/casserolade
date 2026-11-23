@@ -27,7 +27,7 @@ test('the legends say what they do, on attack and with their camp', () => {
     'Quand il attaque, gagne +3/+3 par Socialiste de votre plateau pour de bon.',
     '**Héritage** : donne ses stats à vos autres Socialistes pour de bon.',
   ]);
-  assert.deepEqual(cardRuleLines(CARD_BY_ID.vallaud), ['Après la mort d\'un allié, gagne +1/+1 pour de bon.']);
+  assert.deepEqual(cardRuleLines(CARD_BY_ID.vallaud), ['Après la mort de 2 alliés, gagne +1/+1 pour de bon.']);
   assert.match(cardRuleLines(CARD_BY_ID.odoul).join(' '), /Après que vous \*\*débauchez\*\*, les politiques du RN de la boutique ont \+1\/\+1 pour le reste de la partie/);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.hollande), ['Après la mort d\'un allié, vos Socialistes, partout, gagnent +1/+1 pour le reste de la partie.']);
   assert.deepEqual(cardRuleLines(CARD_BY_ID.melenchon), [

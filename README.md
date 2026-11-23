@@ -20,7 +20,7 @@
   <img alt="Licence MIT" src="https://img.shields.io/badge/licence-MIT-ffc53d">
   <img alt="Gratuit, sans publicité, sans inscription" src="https://img.shields.io/badge/gratuit-sans%20pub%20ni%20inscription-2f9e5a">
   <img alt="Dans le navigateur" src="https://img.shields.io/badge/jeu-navigateur-4d8dff">
-  <a href="CHANGELOG.md"><img alt="Version 0.4.5" src="https://img.shields.io/badge/version-0.4.5-6b3fa0"></a>
+  <a href="CHANGELOG.md"><img alt="Version 0.4.8" src="https://img.shields.io/badge/version-0.4.8-6b3fa0"></a>
 </p>
 
 <p align="center"><a href="https://www.youtube.com/watch?v=3jxFzwu0UPs"><img src=".github/captures/bande-annonce.webp" alt="La bande-annonce sur YouTube : « Attrapez-les tous ! »" width="900"></a></p>
@@ -55,6 +55,7 @@ Gratuit, sans publicité, sans inscription, sans rien à vendre.
 - **Une réserve partagée**, comme dans Battlegrounds : chaque politique existe en nombre limité pour les huit joueurs, de 15 exemplaires à l'échelon 1 à 7 au 6. Ce que les autres prennent sort moins chez vous.
 - **Trois exemplaires du même politique** en font un doré, qui donne une **Investiture** : la découverte d'un politique de l'échelon au-dessus.
 - **Les camps se parlent par le texte des cartes** : Annonces, Fins de tour, Héritages, Ralliements, Tracts, Revanches… Les moteurs se croisent, et les plateaux grandissent au recrutement.
+- **Des plateaux qui s'emballent** : à l'échelon 5, Natacha Polony double vos Annonces, Teddy Riner vos Héritages, Jean Lassalle vos Fins de tour. Et détruire un des siens (Anne Hidalgo, le sort Fusible) renforce son camp pour le reste de la partie : même les jetons qui arrivent ensuite.
 - **Le combat est automatique**, de gauche à droite, avec des cibles tirées au hasard, sauf le **Porte-parole**, qu'on doit attaquer d'abord. Le **Coup de balai** frappe aussi les voisins de sa cible, et le **Retour en politique** réincarne un politique à sa place, après son Héritage.
 - **Les casseroles** donnent un avantage tout de suite, et un bonus de plus sur leur propriétaire. Leur défaut dort jusqu'au scandale, et il fait mal : budget, sondages, plus d'attaque, ou les voisins éclaboussés. Puis le peuple oublie, et certains en reviennent plus forts.
 - **Après une victoire, la Célébration** : un survivant tiré au hasard prononce sa petite phrase, et chaque survivant qui a une Célébration en tire un gain. **Après une défaite, le Droit de réponse** : chaque politique qui en a un joue le sien, et le plus à gauche répond.
@@ -68,7 +69,7 @@ Tous les mots-clés sont expliqués dans [le bestiaire](https://casserolade.fr/b
 | **32 héros** | Les candidats déclarés à la présidentielle de 2027, et quelques autres. Chacun a son pouvoir. |
 | **112 politiques** | Sept partis, plus la Société civile. À l'échelon 6, le chef de chaque camp rejoint le Panthéon des anciens présidents. |
 | **102 casseroles** | Les affaires et les ridicules publics, datés et sourcés dans `src/data/casseroles.ts`. |
-| **26 sorts** | Tract, Note de frais, Fuite dans la presse, Remaniement, Congrès… |
+| **30 sorts** | Tract, Note de frais, Fuite dans la presse, Remaniement, Congrès, Fusible… |
 | **675 répliques** | Toutes sourcées, dont 259 avec la vraie voix, en effets sonores courts. |
 | **14 plateaux télé** | De France 3 jusqu'au débat de TF1, chacun avec son animateur à son pupitre. |
 | **Des contextes** | La règle du jour, tirée pour la partie, comme les Anomalies de Battlegrounds. |

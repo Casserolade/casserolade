@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.8 — 23 novembre 2026
+
+Le détail, et les cartes : https://casserolade.fr/mises-a-jour
+
+**Ce qui double une mécanique est à l'échelon 5**
+- Natacha Polony monte à l'échelon 5 : vos Annonces se déclenchent deux fois. Sa Fin de tour ne change pas.
+- Teddy Riner monte à l'échelon 5, à 6/11 : vos Héritages se déclenchent deux fois.
+- Jean Lassalle double toujours vos Fins de tour. Les trois sont de la Société civile : ils vont avec tous les camps.
+- Jacques Chirac et François Mitterrand restent à l'échelon 6, sans doublement. Chirac déclenche toujours l'Annonce de ses voisins en fin de tour ; l'Héritage de Mitterrand donne +4/+4 pour de bon, au lieu de +3/+3.
+- Charles de Gaulle donne +3/+3 à vos politiques quand on le pose, au lieu de +4/+4.
+
+**Les Suppléants s'arment entre eux**
+- Le Suppléant a un Héritage : vos Suppléants, partout, gagnent +1/+0 pour le reste de la partie. Ceux qui sont invoqués ensuite arrivent avec.
+
+**Détruire un des siens pour renforcer son camp**
+- Anne Hidalgo, en Annonce : détruisez un autre allié, ceux de son camp, partout, gagnent +2/+2 pour le reste de la partie. Elle ne découvre plus.
+- Un nouveau sort, le Fusible (échelon 4, 2 de budget), fait de même pour tous les camps.
+- Ceux qui arrivent ensuite, et les jetons du camp, reçoivent aussi le gain. Le politique détruit joue son Héritage.
+
+**Équilibrage des Socialistes**
+- Boris Vallaud grandit tous les deux alliés tombés, au lieu de chacun.
+- Bernard Cazeneuve invoque un Suppléant au lieu de deux.
+
 ## 0.4.7 — 22 novembre 2026
 
 Le détail : https://casserolade.fr/mises-a-jour

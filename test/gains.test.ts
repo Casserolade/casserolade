@@ -73,7 +73,7 @@ test('l\'Annonce d\'une carte laisse sa ligne sur chaque allié, stats et mot-cl
   const game = table();
   const gueant = lay(game, 'gueant');
   lay(game, 'de_gaulle');
-  assert.deepEqual(line(gueant, 'carte:de_gaulle'), { source: 'carte:de_gaulle', atk: 4, hp: 4, times: 1, keywords: ['ni_droite_ni_gauche'] });
+  assert.deepEqual(line(gueant, 'carte:de_gaulle'), { source: 'carte:de_gaulle', atk: 3, hp: 3, times: 1, keywords: ['ni_droite_ni_gauche'] });
   assert.deepEqual(invariantViolations(game), []);
 });
 

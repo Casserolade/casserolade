@@ -1,10 +1,11 @@
 import type { Card, Casserole, CasseroleBonus, Effect, HandSpell, Keyword, Minion, PlayerAction, Rng, Spell, Target, Trigger } from '../engine/types.ts';
 import type { PlayerView } from '../engine/game.ts';
+import { isCamp } from '../engine/camps.ts';
 import { resolveCombat } from '../engine/combat.ts';
 import { makeMinion } from '../engine/minion.ts';
 import { relaunchable } from '../engine/relaunch.ts';
 import { createRng } from '../engine/rng.ts';
-import { CARD_BY_ID, TOKENS } from '../data/cards.ts';
+import { CARDS, CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { lostSpellReason } from '../engine/lostSpellReason.ts';
 import { CONTEXTS } from '../data/heroes.ts';
@@ -50,6 +51,12 @@ export interface BotState {
    * voisinage, le gel de la boutique, l'ordre de pose.
    */
   combos: boolean;
+  /**
+   * Les montages : ce que vaut un multiplicateur (Lassalle, Polony, Riner) ou un relanceur, avec ce que le plateau tient
+   * déjà et ce que les camps de la partie permettent de réunir ; et ce que vaut de plus une carte dont un multiplicateur
+   * du plateau double l'effet. Le moyen et le difficile les connaissent : ils revendent pour s'articuler autour.
+   */
+  engines: boolean;
   /** Un mot-clé va là où il sert (Ralliement, sort) : pas sur un politique qui l'a déjà, la Polémique pas sur le plus gros. */
   keywordFit: boolean;
   /** Le facile, distrait certaines manches : le budget qu'il oubliera de dépenser (0 s'il ne l'est pas). */
@@ -71,6 +78,8 @@ export interface BotStyle {
   rollDown?: boolean;
   /** Mesure : les combos de casseroles, au difficile par défaut ; `false` les retire pour comparer. */
   combos?: boolean;
+  /** Mesure : les montages autour des multiplicateurs, au moyen et au difficile par défaut ; `false` les retire. */
+  engines?: boolean;
   /** Mesure : les mots-clés posés là où ils servent, avec les combos par défaut ; `false` les rend au plus fort. */
   keywordFit?: boolean;
 }
@@ -100,6 +109,7 @@ export function createBot(level: BotLevel, seed: number, style: BotStyle = {}): 
     place: style.place ?? false,
     rollDown: style.rollDown ?? false,
     combos: style.combos ?? level === 'difficile',
+    engines: style.engines ?? level !== 'facile',
     keywordFit: style.keywordFit ?? style.combos ?? level === 'difficile',
     forgets: 0,
   };
@@ -239,6 +249,8 @@ function actionValue(e: Effect): number {
       return 0;
     case 'sacrifier':
       return 4;
+    case 'sacrifier_camp':
+      return (e.atk + e.hp) * 3;
     case 'declencher':
       return 4 * r;
     case 'doubler':
@@ -339,6 +351,9 @@ function spellWorth(spell: Spell, view: PlayerView, bot: BotState | null): numbe
         return sum + e.value * BUDGET_WORTH * 0.5;
       case 'declencher':
         return sum + engines(e.trigger === 'annonce' ? 'annonce' : e.trigger === 'heritage' ? 'heritage' : 'fin_tour') * (e.to === 'allies' ? 2 : 1);
+      case 'sacrifier_camp':
+        // Ne vaut que ce que le camp y gagne, une fois payé celui qui tombe : rien sans personne à sacrifier.
+        return sum + (campSacrifice(board, e)?.gain ?? 0);
       case 'congres':
         // Une actualisation : les « Quand vous actualisez » du plateau jouent aussi.
         return sum + BUDGET_WORTH + (bot?.commitment ? 3 : 0) + rollEngine(view);
@@ -422,7 +437,8 @@ function knownForce(cardId: string, view: PlayerView, bot: BotState): number {
 
 function cardScore(card: Card, view: PlayerView, bot: BotState): number {
   let v = cardPower(card) + campScore(card, view, bot);
-  if (bot.combos) v += doublerWorth(card.effects ?? [], view) + engineWorth(card.effects ?? [], Boolean(card.golden), view) + knownForce(card.id, view, bot);
+  if (bot.combos) v += doublerWorth(card.effects ?? [], view) + knownForce(card.id, view, bot);
+  if (bot.engines) v += engineWorth(card.effects ?? [], Boolean(card.golden), view);
   const copies = owned(view, card.id);
   if (copies === 2) v += 20;
   else if (copies === 1) v += 4;
@@ -436,7 +452,7 @@ function cardScore(card: Card, view: PlayerView, bot: BotState): number {
  */
 function boardScore(m: Minion, view: PlayerView, bot: BotState): number {
   const card = CARD_BY_ID[m.cardId];
-  const combo = bot.combos ? doublerWorth(m.effects, view) + engineWorth(m.effects, m.golden, view, m.uid) + (m.token ? 0 : knownForce(m.cardId, view, bot)) : 0;
+  const combo = (bot.combos ? doublerWorth(m.effects, view) + (m.token ? 0 : knownForce(m.cardId, view, bot)) : 0) + (bot.engines ? engineWorth(m.effects, m.golden, view, m.uid) : 0);
   return minionPower(m) + (card ? campScore(card, view, bot) : 0) + combo;
 }
 
@@ -613,6 +629,21 @@ function triggerWorth(view: PlayerView, trigger: Multiplied, except?: number): n
   return v;
 }
 
+/** La part de ce qu'un joueur réunit de ce qu'il peut espérer : il ne trouve pas toutes les pièces. */
+const REACH = 0.6;
+
+/**
+ * Ce qu'un joueur peut espérer réunir d'un déclencheur avec les camps de la partie : les trois meilleurs effets parmi
+ * les cartes de son échelon ou moins. Un multiplicateur vaut déjà par là, avant que le plateau ait ses pièces.
+ */
+function reachableWorth(view: PlayerView, trigger: Multiplied): number {
+  const worths = CARDS.filter((c) => c.tier <= view.tier && (c.camp === 'civile' || view.camps.includes(c.camp)))
+    .map((c) => (c.effects ?? []).reduce((sum, e) => sum + (e.when === trigger ? Math.max(0, effectValue(e)) : 0), 0))
+    .filter((worth) => worth > 0)
+    .sort((a, b) => b - a);
+  return REACH * worths.slice(0, 3).reduce((sum, worth) => sum + worth, 0);
+}
+
 /**
  * Ce qu'une carte ajoute aux moteurs du plateau : un multiplicateur, ce qu'il double de plus ; un relanceur (« déclenche
  * l'Annonce de vos autres politiques »), ce qu'il relance ; un effet déjà doublé, sa valeur une fois de plus.
@@ -624,7 +655,8 @@ function engineWorth(effects: Effect[], golden: boolean, view: PlayerView, self?
     if (e.when === 'aura' && e.do === 'doubler') {
       const now = multiplier(view.board.filter((m) => m.uid !== self), e.trigger);
       const next = Math.max(now, power(e) > 1 ? 3 : 2);
-      v += triggerWorth(view, e.trigger, self) * (next - now) - actionValue(e);
+      // Ce qu'il double déjà, ou ce que les camps de la partie permettent de réunir autour de lui.
+      v += Math.max(triggerWorth(view, e.trigger, self), reachableWorth(view, e.trigger)) * (next - now) - actionValue(e);
     } else if (e.do === 'declencher') {
       const relaunched = e.to === 'voisins' ? 0.4 : e.to === 'autres' ? 1 : 0.3;
       v += triggerWorth(view, e.trigger, self) * relaunched * power(e) - actionValue(e);
@@ -783,6 +815,28 @@ function sacrificial(board: Minion[], except?: Minion): Minion | null {
   return best;
 }
 
+/** Un gain de camp vaut pour la partie : ceux qui arriveront ensuite le reçoivent aussi. */
+const LASTING = 1.5;
+
+/**
+ * Qui tombe pour son camp (le Fusible, Hidalgo), et ce que le plateau y gagne une fois sa perte payée. Un jeton ne coûte
+ * presque rien, un Héritage joue en tombant, un Retour en politique revient : ce sont eux qu'on sacrifie. `body` est ce
+ * que pèse le politique qui arrive avec cette Annonce : il compense une perte. Null : personne ne vaut le coup, on attend.
+ */
+function campSacrifice(board: Minion[], e: { atk: number; hp: number }, body = 0): { victim: Minion; gain: number } | null {
+  let best: { victim: Minion; gain: number } | null = null;
+  for (const m of board) {
+    if (m.golden || m.bracelet) continue;
+    const mates = board.filter((x) => x !== m && isCamp(x, m.camp)).length;
+    if (body === 0 && mates < 2) continue;
+    const back = m.keywords.includes('retour') ? 0.5 : 1;
+    const loss = minionPower(m) * back - (m.effects.some((x) => x.when === 'heritage') ? 8 : 0);
+    const gain = (e.atk + e.hp) * mates * LASTING - Math.max(0, loss) + body;
+    if (gain > 0 && (!best || gain > best.gain)) best = { victim: m, gain };
+  }
+  return best;
+}
+
 /** La cible d'un ensemble d'effets « cible ». Null : rien de bon à viser. */
 function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxTier?: number, fitted = false): Minion | null {
   const aimed = effects.filter((e) => e.to === 'cible');
@@ -792,6 +846,8 @@ function targetFor(effects: Effect[], board: Minion[], self: Minion | null, maxT
     case 'detruire':
     case 'sacrifier':
       return sacrificial(board, self ?? undefined);
+    case 'sacrifier_camp':
+      return campSacrifice(board, first, self ? minionPower(self) / 2 : 0)?.victim ?? null;
     case 'dorer': {
       const limit = maxTier ?? first.maxTier;
       const eligible = board.filter((m) => m !== self && !m.golden && !m.token && !m.simple && m.tier <= limit);
@@ -852,7 +908,7 @@ function handMove(view: PlayerView, bot: BotState, margin = 3): PlayerAction | n
     const target = targetFor(annonce, view.board, m, undefined, bot.keywordFit);
     if (target) return { t: 'play', uid: m.uid, target: target.uid };
     // Sans bonne cible, une Annonce qui détruit viserait le premier allié, souvent le meilleur : le politique attend.
-    const destroys = annonce.some((e) => e.to === 'cible' && (e.do === 'detruire' || e.do === 'sacrifier'));
+    const destroys = annonce.some((e) => e.to === 'cible' && (e.do === 'detruire' || e.do === 'sacrifier' || e.do === 'sacrifier_camp'));
     if (!destroys || view.board.length === 0) return { t: 'play', uid: m.uid };
     bot.kept.add(m.uid);
     return handMove(view, bot, margin);
@@ -950,7 +1006,7 @@ function freezeMove(view: PlayerView, bot: BotState): PlayerAction | null {
 function worstMinion(view: PlayerView, bot?: BotState): Minion | null {
   // Un bot pur garde son camp, sauf ce qui rapporte à la revente (Poisson) : le vendre, c'est jouer la carte.
   const sellsWell = (m: Minion) => m.effects.some((e) => e.when === 'vente');
-  const combo = (m: Minion) => (bot?.combos ? doublerWorth(m.effects, view) + engineWorth(m.effects, m.golden, view, m.uid) + (m.token ? 0 : knownForce(m.cardId, view, bot)) : 0);
+  const combo = (m: Minion) => (bot?.combos ? doublerWorth(m.effects, view) + (m.token ? 0 : knownForce(m.cardId, view, bot)) : 0) + (bot?.engines ? engineWorth(m.effects, m.golden, view, m.uid) : 0);
   const keep = (m: Minion) => (bot?.pure && m.camp === bot.commitment && !sellsWell(m) ? 100 : 0) + minionPower(m) + combo(m);
   let worst: Minion | null = null;
   for (const m of view.board) {

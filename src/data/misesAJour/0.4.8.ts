@@ -1,0 +1,22 @@
+import type { VersionCards } from '../misesAJour.ts';
+
+/** Les cartes de la version 0.4.8, avant et après. Fichier généré par tools/mises_a_jour/instantane.ts. */
+export const CARTES: VersionCards = {
+  cards: [
+    {"before":{"id":"vallaud","name":"Boris Vallaud","camp":"socialistes","tier":2,"atk":1,"hp":3,"keywords":[],"effects":[{"when":"revanche","to":"soi","do":"buff","atk":1,"hp":1,"n":1,"perma":true}]},"after":{"id":"vallaud","name":"Boris Vallaud","camp":"socialistes","tier":2,"atk":1,"hp":3,"keywords":[],"effects":[{"when":"revanche","to":"soi","do":"buff","atk":1,"hp":1,"n":2,"perma":true}]}},
+    {"before":{"id":"hidalgo","name":"Anne Hidalgo","camp":"socialistes","tier":4,"atk":7,"hp":7,"keywords":[],"effects":[{"when":"annonce","to":"cible","do":"sacrifier","echelon":0}]},"after":{"id":"hidalgo","name":"Anne Hidalgo","camp":"socialistes","tier":4,"atk":7,"hp":7,"keywords":[],"effects":[{"when":"annonce","to":"cible","do":"sacrifier_camp","atk":2,"hp":2}]}},
+    {"before":{"id":"cazeneuve","name":"Bernard Cazeneuve","camp":"socialistes","tier":3,"atk":3,"hp":6,"keywords":["ralliement","porte_parole"],"effects":[{"when":"heritage","to":"soi","do":"invoquer","token":"suppleant","count":2}]},"after":{"id":"cazeneuve","name":"Bernard Cazeneuve","camp":"socialistes","tier":3,"atk":3,"hp":6,"keywords":["ralliement","porte_parole"],"effects":[{"when":"heritage","to":"soi","do":"invoquer","token":"suppleant","count":1}]}},
+    {"before":{"id":"riner","name":"Teddy Riner","camp":"civile","tier":4,"atk":6,"hp":9,"keywords":["ni_droite_ni_gauche","retour"],"effects":[]},"after":{"id":"riner","name":"Teddy Riner","camp":"civile","tier":5,"atk":6,"hp":11,"keywords":["ni_droite_ni_gauche","retour"],"effects":[{"when":"aura","to":"joueur","do":"doubler","trigger":"heritage"}]}},
+    {"before":{"id":"polony","name":"Natacha Polony","camp":"civile","tier":4,"atk":4,"hp":6,"keywords":[],"effects":[{"when":"fin_tour","to":"soi","do":"buff_par_camp","atk":1,"hp":1}]},"after":{"id":"polony","name":"Natacha Polony","camp":"civile","tier":5,"atk":4,"hp":6,"keywords":[],"effects":[{"when":"aura","to":"joueur","do":"doubler","trigger":"annonce"},{"when":"fin_tour","to":"soi","do":"buff_par_camp","atk":1,"hp":1}]}},
+    {"before":{"id":"de_gaulle","name":"Charles de Gaulle","camp":"civile","tier":6,"atk":9,"hp":9,"keywords":[],"effects":[{"when":"annonce","to":"allies","do":"mot_cle","keyword":"ni_droite_ni_gauche"},{"when":"annonce","to":"allies","do":"buff","atk":4,"hp":4},{"when":"joue","to":"joue","do":"mot_cle","keyword":"ni_droite_ni_gauche"},{"when":"joue","to":"joue","do":"buff","atk":2,"hp":2}]},"after":{"id":"de_gaulle","name":"Charles de Gaulle","camp":"civile","tier":6,"atk":9,"hp":9,"keywords":[],"effects":[{"when":"annonce","to":"allies","do":"mot_cle","keyword":"ni_droite_ni_gauche"},{"when":"annonce","to":"allies","do":"buff","atk":3,"hp":3},{"when":"joue","to":"joue","do":"mot_cle","keyword":"ni_droite_ni_gauche"},{"when":"joue","to":"joue","do":"buff","atk":2,"hp":2}]}},
+    {"before":{"id":"chirac","name":"Jacques Chirac","camp":"civile","tier":6,"atk":16,"hp":16,"keywords":[],"effects":[{"when":"aura","to":"joueur","do":"doubler","trigger":"annonce"},{"when":"fin_tour","to":"voisins","do":"declencher","trigger":"annonce"}]},"after":{"id":"chirac","name":"Jacques Chirac","camp":"civile","tier":6,"atk":16,"hp":16,"keywords":[],"effects":[{"when":"fin_tour","to":"voisins","do":"declencher","trigger":"annonce"}]}},
+    {"before":{"id":"mitterrand","name":"François Mitterrand","camp":"civile","tier":6,"atk":6,"hp":10,"keywords":[],"effects":[{"when":"aura","to":"joueur","do":"doubler","trigger":"heritage"},{"when":"heritage","to":"allies","do":"buff","atk":3,"hp":3,"perma":true}]},"after":{"id":"mitterrand","name":"François Mitterrand","camp":"civile","tier":6,"atk":6,"hp":10,"keywords":[],"effects":[{"when":"heritage","to":"allies","do":"buff","atk":4,"hp":4,"perma":true}]}},
+    {"before":{"id":"suppleant","name":"Suppléant","camp":"civile","tier":1,"atk":1,"hp":1,"keywords":[],"effects":[]},"after":{"id":"suppleant","name":"Suppléant","camp":"civile","tier":1,"atk":1,"hp":1,"keywords":[],"effects":[{"when":"heritage","to":"joueur","do":"camp_buff","atk":1,"hp":0,"card":"suppleant"}]}},
+  ],
+  casseroles: [
+
+  ],
+  spells: [
+    {"after":{"id":"fusible","name":"Fusible","tier":4,"cost":2,"target":true,"effects":[{"when":"annonce","to":"cible","do":"sacrifier_camp","atk":2,"hp":2}]}},
+  ],
+};

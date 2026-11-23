@@ -964,6 +964,17 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       for (let i = 0; i < k; i++) offerMinions(game, p, p.tier + (eff.echelon ?? 0), camp);
       break;
     }
+    case 'sacrifier_camp': {
+      // Le politique tombe pour les siens : son Héritage joue, son Retour le ramène, puis son camp gagne pour la partie,
+      // revenant et jetons compris. Rejoué, il ne détruit pas une deuxième fois : la victime est partie, le camp regagne.
+      const victim = targets()[0] ?? null;
+      const gone = !victim && ctx.target && !p.board.includes(ctx.target) ? ctx.target : null;
+      const camp = (victim ?? gone)?.camp;
+      if (!camp) break;
+      if (victim) destroy(game, p, victim);
+      applyCampBuff(game, p, { camp, atk: eff.atk * k, hp: eff.hp * k, source: source() });
+      break;
+    }
     case 'declencher':
       for (const t of targets()) {
         // Règle R4 : un relanceur ne relance pas deux fois le même politique par passage de son effet.

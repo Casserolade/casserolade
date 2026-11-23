@@ -2,7 +2,7 @@ import type { Effect, Trigger } from './types.ts';
 
 /** Un effet qui détruit l'allié visé (Hidalgo, Primaire) : il demande toujours un choix du joueur. */
 export function destroysAlly(eff: Effect): boolean {
-  return eff.do === 'sacrifier' || eff.do === 'detruire';
+  return eff.do === 'sacrifier' || eff.do === 'sacrifier_camp' || eff.do === 'detruire';
 }
 
 /**

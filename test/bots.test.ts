@@ -198,17 +198,17 @@ test('difficile : sans budget, il gèle la boutique qui complète un triple', ()
   assert.ok(!botTurn(sans.game, false).some((a) => a.t === 'freeze'), 'sans les combos, jamais');
 });
 
-test('difficile : il sait que Zemmour gagne des parties, plus que Mitterrand que la formule préfère', () => {
+test('difficile : il sait que Sarkozy gagne des parties, plus que Rousseau que la formule préfère', () => {
   const choix = (combos: boolean) => {
     const { game } = tableAvec(['maillard', 'ndiaye'], ['macronie', 'reconquete', 'socialistes', 'republicains', 'ecologistes']);
     const p = game.players[0];
-    p.shop = ['mitterrand', 'zemmour'];
+    p.shop = ['rousseau', 'sarkozy'];
     p.budget = 3;
     botTurn(game, combos);
-    return [...p.board, ...p.hand].map((m) => m.cardId).find((id) => id === 'mitterrand' || id === 'zemmour');
+    return [...p.board, ...p.hand].map((m) => m.cardId).find((id) => id === 'rousseau' || id === 'sarkozy');
   };
-  assert.equal(choix(true), 'zemmour');
-  assert.equal(choix(false), 'mitterrand', 'sans la table de force, la formule prend Mitterrand');
+  assert.equal(choix(true), 'sarkozy');
+  assert.equal(choix(false), 'rousseau', 'sans la table de force, la formule prend Rousseau');
 });
 
 test('facile distrait : il oublie ses derniers sous, sans rien refuser', () => {
@@ -221,4 +221,36 @@ test('facile distrait : il oublie ses derniers sous, sans rien refuser', () => {
   bot.forgets = 0;
   const action = decide(view, bot);
   assert.ok(action && action.t === 'buy', JSON.stringify(action));
+});
+
+test('le Fusible : un bot fait tomber le jeton pour les siens, et garde le sort quand personne n\'y gagne', () => {
+  const game = createGame({ seed: 11, seats: 2, heroes: ['philippe', 'philippe'], activeCamps: ['socialistes', 'macronie', 'republicains', 'rn', 'insoumis'] as Camp[] });
+  const p = game.players[0];
+  p.budget = 500;
+  const lay = (id: string) => {
+    assert.ok(take(game, id));
+    const m = addMinionToHand(game, p, id) as Minion;
+    assert.equal(applyAction(game, 0, { t: 'play', uid: m.uid }).ok, true);
+    return p.board.find((x) => x.uid === m.uid) as Minion;
+  };
+  // Trois Républicains, dont l'Électeur fantôme de Tiberi, et un Socialiste seul de son camp.
+  lay('tiberi');
+  lay('morano');
+  const alone = lay('vallaud');
+  const ghost = p.board.find((m) => m.cardId === 'electeur_fantome') as Minion;
+  p.shop = [];
+  p.shopSpells = [];
+  p.budget = 0;
+  addSpellToHand(game, p, 'fusible');
+  const bot = createBot('moyen', 3);
+  const action = decide(viewFor(game, 0), bot);
+  assert.deepEqual(action, { t: 'cast', uid: p.spells[0].uid, target: ghost.uid }, 'le jeton, pas un politique');
+  assert.equal(applyAction(game, 0, action as PlayerAction).ok, true);
+  assert.ok(!p.board.includes(ghost));
+
+  // Un seul politique par camp : personne ne gagne à en perdre un, le sort attend en main.
+  p.board = [alone, p.board.find((m) => m.cardId === 'morano') as Minion];
+  addSpellToHand(game, p, 'fusible');
+  const waiting = decide(viewFor(game, 0), createBot('moyen', 3));
+  assert.ok(!waiting || waiting.t !== 'cast', 'il ne le lance pas');
 });

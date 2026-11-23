@@ -28,7 +28,7 @@ const TARGETS: Record<Target, true> = {
 const ACTIONS: Record<Action['do'], true> = {
   buff: true, buff_par_allie: true, buff_par_camp: true, buff_par_ralliement: true, degats: true, invoquer: true, budget: true, mot_cle: true,
   retirer: true, basculer: true, exiler: true, oublier: true, transmettre: true, carte: true, decouvrir: true, camp_buff: true, boutique_buff: true,
-  tract_bonus: true, jouer_tract: true, debaucher: true, dorer: true, detruire: true, sacrifier: true, declencher: true, doubler: true,
+  tract_bonus: true, jouer_tract: true, debaucher: true, dorer: true, detruire: true, sacrifier: true, sacrifier_camp: true, declencher: true, doubler: true,
   compteur: true, scandale_plus: true, actualiser: true, actualisations_gratuites: true, budget_max: true, pari_defaite: true, congres: true, butin: true,
   doubler_stats: true, buff_par_membre: true, gain_debauche: true, buff_compteur: true, chaise_vide: true,
 };

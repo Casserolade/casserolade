@@ -95,7 +95,7 @@ test('Retour en politique : un doré revient doré, à l\'attaque doublée de sa
   assert.equal(back.unit.atk, CARD_BY_ID.riner.atk * 2);
   assert.ok(back.unit.golden);
   assert.deepEqual(back.unit.casseroles, []);
-  assert.equal(back.unit.effects.length, 0, 'le Ralliement de Darmanin reste au politique du plateau');
+  assert.deepEqual(back.unit.effects.map((e) => e.do), (CARD_BY_ID.riner.effects ?? []).map((e) => e.do), 'il ne garde que les effets de sa carte : le Ralliement de Darmanin reste au politique du plateau');
 });
 
 test('Retour en politique : les gains du combat ne survivent pas à la mort, ceux pour de bon restent au politique du plateau', () => {
