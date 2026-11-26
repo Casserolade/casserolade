@@ -214,6 +214,8 @@ export type Action =
   | { do: 'gain_debauche' }
   /** Les cibles gagnent +atk/+hp par unité du compteur, une fois, au moment où l'effet joue. */
   | { do: 'buff_compteur'; compteur: Counter; atk: number; hp: number }
+  /** Gagnez `value` budget par unité du compteur, tout de suite (Balkany : par casserole posée cette partie). */
+  | { do: 'budget_compteur'; compteur: Counter; value: number }
   /** Invoque une Chaise vide Porte-parole qui a l'attaque de ce politique et ses PV les plus hauts. */
   | { do: 'chaise_vide' };
 
@@ -286,6 +288,11 @@ export interface Casserole {
   id: string;
   name: string;
   owner: string;
+  /**
+   * Son grade, de 1 (la gaffe) à 6 (la chute), d'après la gravité de l'affaire (26 novembre 2026) : la boutique et les
+   * découvertes ne proposent que les casseroles de l'échelon du joueur ou en dessous. Le prix suit le grade.
+   */
+  echelon: number;
   cost: number;
   atk?: number;
   hp?: number;
@@ -421,6 +428,8 @@ export interface Minion {
   investi?: boolean;
   /** D'où viennent ses stats et ses mots-clés au-delà de sa carte, une ligne par source (`gains.ts`). */
   gains: MinionGain[];
+  /** Ceux de ses mots-clés qui ne tiennent que jusqu'à la fin du prochain combat (le pouvoir de Zemmour). */
+  tempKeywords?: Keyword[];
 }
 
 export interface HeroMods {
@@ -444,6 +453,36 @@ export interface HeroMods {
   firstDeathTransmit?: boolean;
   freeRollsPerRound?: number;
   sellBonus?: number;
+  /** Chaque casserole posée donne aussi ces stats au politique qui la reçoit (Sarkozy, au palier). */
+  casseroleBonus?: { atk: number; hp: number };
+  /** La première casserole posée de chaque manche donne ses stats deux fois, bonus de propriétaire compris (Macron, au palier). */
+  firstCasseroleTwice?: boolean;
+}
+
+/**
+ * Un pouvoir qui monte d'un cran (26 novembre 2026) : une fois `casseroles` casseroles posées dans la partie, ses
+ * règles s'ajoutent à celles du héros, jusqu'à la fin.
+ */
+export interface HeroPalier {
+  casseroles: number;
+  mods: HeroMods;
+}
+
+/**
+ * Un pouvoir activable (26 novembre 2026) : un sort qui reste sur le portrait du héros. Il se paie
+ * (0 ou 1), sert une fois par manche ou une fois dans la partie, vise parfois un de vos politiques, et ses effets
+ * s'écrivent avec le vocabulaire des cartes (`cible` : celui qu'on vise ; `joueur` : le reste). Ce n'est pas un sort
+ * lancé : ni les compteurs de sorts ni « Après que vous lancez un sort » ne le voient, et rien ne le rejoue.
+ */
+export interface HeroPower {
+  cost: number;
+  frequency: 'manche' | 'partie';
+  target: boolean;
+  /** Échelon maximum de la cible, qui ne doit être ni dorée, ni un jeton (Hollande). */
+  maxTargetTier?: number;
+  effects: Effect[];
+  /** Les mots-clés qu'il donne ne tiennent que jusqu'à la fin du prochain combat (Zemmour). */
+  temporaire?: boolean;
 }
 
 export interface Hero {
@@ -457,6 +496,10 @@ export interface Hero {
    */
   armor: number;
   mods: HeroMods;
+  /** Le cran que son pouvoir passif gagne au bout de quelques casseroles posées. */
+  palier?: HeroPalier;
+  /** Son pouvoir, quand il s'active au lieu de jouer tout seul : `power` est son nom, `desc` dit ce qu'il fait. */
+  pouvoir?: HeroPower;
 }
 
 export interface Params {
@@ -538,7 +581,9 @@ export type PlayerAction =
   | { t: 'upgrade' }
   | { t: 'move'; uid: number; to: number }
   | { t: 'discover'; i: number }
-  | { t: 'hero'; i: number };
+  | { t: 'hero'; i: number }
+  /** Active le pouvoir du héros, sur l'allié `target` s'il en demande un. */
+  | { t: 'pouvoir'; target?: number };
 
 export interface Rng {
   next(): number;

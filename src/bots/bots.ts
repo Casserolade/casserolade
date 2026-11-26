@@ -8,13 +8,14 @@ import { createRng } from '../engine/rng.ts';
 import { CARDS, CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { lostSpellReason } from '../engine/lostSpellReason.ts';
+import { FIRST_CASSEROLE, discountedCasseroleCost, powerRefusal, powerTableOf } from '../engine/heroPower.ts';
 import { CONTEXTS } from '../data/heroes.ts';
 import { FORCE_CARTES } from '../data/forceCartes.ts';
 import { PERSONNALITES } from '../data/personnalites.ts';
 import type { Personnalite } from '../data/personnalites.ts';
 import { SPELL_BY_ID } from '../data/sorts.ts';
 import { keywordFit } from './keywordFit.ts';
-import { rallyHost } from './rallyHost.ts';
+import { rallyGain, rallyHost } from './rallyHost.ts';
 
 /** « debutant » ne joue jamais à table : il imite un joueur humain qui découvre, pour mesurer les autres. */
 export type BotLevel = 'debutant' | 'facile' | 'moyen' | 'difficile';
@@ -219,6 +220,8 @@ function actionValue(e: Effect): number {
     }
     case 'budget':
       return e.value * 2;
+    case 'budget_compteur':
+      return e.value * 8;
     case 'mot_cle':
     case 'basculer':
       return KEYWORD_VALUE[e.keyword] * r;
@@ -436,13 +439,25 @@ function knownForce(cardId: string, view: PlayerView, bot: BotState): number {
 }
 
 function cardScore(card: Card, view: PlayerView, bot: BotState): number {
-  let v = cardPower(card) + campScore(card, view, bot);
+  let v = cardPower(card) + campScore(card, view, bot) + rallyWorth(card, view);
   if (bot.combos) v += doublerWorth(card.effects ?? [], view) + knownForce(card.id, view, bot);
   if (bot.engines) v += engineWorth(card.effects ?? [], Boolean(card.golden), view);
   const copies = owned(view, card.id);
   if (copies === 2) v += 20;
   else if (copies === 1) v += 4;
   return v;
+}
+
+/**
+ * Un Ralliement vaut ce qu'il apporterait au meilleur hôte du plateau (ses mots-clés et son « Quand il attaque »), à la
+ * place de la valeur fixe de ses mots-clés : une Immunité sur un monstre vaut bien plus que sur un 2/2.
+ */
+function rallyWorth(card: Card, view: PlayerView): number {
+  const keywords = card.keywords ?? [];
+  if (!keywords.includes('ralliement')) return 0;
+  const gain = rallyGain(view.board, makeMinion(card, -1));
+  const flat = keywords.reduce((sum, k) => sum + KEYWORD_VALUE[k], 0);
+  return Math.max(0, gain - flat);
 }
 
 /**
@@ -486,9 +501,27 @@ function casseroleValue(c: Casserole, m: Minion, view: PlayerView): number {
   if (c.swapStats) v += Math.max(0, m.hp - m.atk) * 0.5;
   // Les Républicains se nourrissent des affaires.
   v += view.board.filter((o) => o.effects.some((e) => e.when === 'casserole_recue' || (e.do === 'compteur' && e.compteur === 'casseroles'))).length * 2;
-  v -= Math.max(0, c.cost - (view.mods.casseroleDiscount ?? 0)) * 0.5;
+  v -= discountedCasseroleCost(c.cost, view.mods.casseroleDiscount ?? 0) * 0.5;
+  return v + palierValue(c, m, view);
+}
+
+/**
+ * Ce que vaut une casserole de plus pour le pouvoir du héros (26 novembre 2026) : un pas vers le palier, ou, une fois
+ * atteint, la Récidive de Sarkozy et la première casserole de la manche que Macron double. Balkany en encaissera une
+ * de plus.
+ */
+function palierValue(c: Casserole, m: Minion, view: PlayerView): number {
+  let v = 0;
+  if (view.palier && view.counters.casseroles < view.palier.casseroles) v += 3;
+  const bonus = view.mods.casseroleBonus;
+  if (bonus) v += bonus.atk + bonus.hp;
+  if (view.mods.firstCasseroleTwice && !view.onceThisRound.includes(FIRST_CASSEROLE)) {
+    v += Math.max(0, (c.atk ?? 0) + (m.cardId === c.owner ? (c.ownerBonus.atk ?? 0) : 0)) + Math.max(0, (c.hp ?? 0) + (m.cardId === c.owner ? (c.ownerBonus.hp ?? 0) : 0));
+  }
+  if (view.pouvoir?.effects.some((e) => e.do === 'budget_compteur') && !view.powerUsed) v += BUDGET_WORTH;
   return v;
 }
+
 
 /** Ce que coûte le défaut d'une casserole pendant un scandale de deux manches. */
 function defectCost(c: Casserole, m: Minion): number {
@@ -955,6 +988,45 @@ function castAction(view: PlayerView, bot: BotState, held: HandSpell): PlayerAct
   return { t: 'cast', uid: held.uid, target: target.uid };
 }
 
+/**
+ * Le pouvoir activable du héros (26 novembre 2026), aux moments qui rapportent le plus. « debut » : ce qui gagne à
+ * servir tôt (découvrir, taxer la boutique, l'une-fois-par-partie quand son heure est venue), payé seulement s'il reste
+ * de quoi recruter deux politiques. « fin » : le reste, une fois le plateau fait, avec la monnaie qui reste (le pari de
+ * Bertrand ne se prend qu'en fin de tour).
+ */
+function powerMove(view: PlayerView, bot: BotState, when: 'debut' | 'fin'): PlayerAction | null {
+  const power = view.pouvoir;
+  if (!power || view.powerUsed) return null;
+  const late = when === 'fin';
+  if (power.frequency === 'partie' && !oncePerGameReady(view, power)) return null;
+  const early = power.frequency === 'partie' || power.effects.some((e) => e.do === 'decouvrir' || e.do === 'debaucher');
+  if (!late && !early) return null;
+  if (!late && power.cost > 0 && view.budget < power.cost + 2 * view.buyCost) return null;
+  if (!late && power.effects.some((e) => e.do === 'pari_defaite')) return null;
+  const hero = { id: view.heroId, power: '' };
+  const table = powerTableOf(view);
+  if (!power.target) return powerRefusal(hero, power, null, table) ? null : { t: 'pouvoir' };
+  const candidates = view.board.filter((m) => powerRefusal(hero, power, m, table) === null);
+  // Un bonus plus fort sur un camp (la veste verte de Tondelier) va d'abord à un politique de ce camp.
+  const favoured = power.effects.find((e) => e.to === 'cible' && e.camp)?.camp;
+  const pool = favoured && candidates.some((m) => m.camp === favoured) ? candidates.filter((m) => m.camp === favoured) : candidates;
+  const target = targetFor(power.effects, pool, null, power.maxTargetTier, bot.keywordFit);
+  return target ? { t: 'pouvoir', target: target.uid } : null;
+}
+
+/**
+ * Le moment d'un pouvoir d'une fois par partie : Balkany encaisse ses casseroles quand elles pèsent (six, ou deux en
+ * fin de partie) ; l'Immunité de Mélenchon dès la manche 3, la dorure de Hollande dès la 4 (les moments mesurés les meilleurs).
+ */
+function oncePerGameReady(view: PlayerView, power: NonNullable<PlayerView['pouvoir']>): boolean {
+  const counted = power.effects.find((e) => e.do === 'budget_compteur');
+  if (counted?.do === 'budget_compteur') {
+    const n = view.counters[counted.compteur];
+    return n >= 6 || (view.round >= 12 && n >= 2);
+  }
+  return view.round >= (power.effects.some((e) => e.do === 'dorer') ? 4 : 3);
+}
+
 /** Le sort de la boutique, s'il rapporte assez pour son prix. */
 function spellBuy(view: PlayerView, reserve: number, bot: BotState): PlayerAction | null {
   if (handCount(view) >= view.handLimit) return null;
@@ -1102,6 +1174,11 @@ function easyTurn(view: PlayerView, bot: BotState): PlayerAction | null {
   }
   const spell = spellBuy(view, 0, bot);
   if (spell && bot.rng.next() < 0.5) return spell;
+  // Son pouvoir de héros, quand il y pense.
+  if (view.pouvoir && !view.powerUsed && bot.rng.next() < 0.6) {
+    const power = powerMove(view, bot, 'fin');
+    if (power) return power;
+  }
   if (view.budget >= view.rollCost + view.buyCost && bot.rolls < 1) {
     bot.rolls++;
     return { t: 'roll' };
@@ -1141,6 +1218,11 @@ function debutantTurn(view: PlayerView, bot: BotState): PlayerAction | null {
     if (view.board.length + view.hand.length < view.boardLimit && handRoom(view, view.shop[slot])) return { t: 'buy', slot, main: true };
     const worst = view.board.filter((m) => !m.bracelet).sort((x, y) => stats(x) - stats(y))[0];
     if (worst && stats(CARD_BY_ID[view.shop[slot]]) > stats(worst) + 3) return { t: 'sell', uid: worst.uid };
+  }
+  // Le bouton de son pouvoir, qui brille à côté du portrait : il le presse une manche sur deux, au jugé.
+  if (view.pouvoir && !view.powerUsed && bot.rng.next() < 0.5) {
+    const power = powerMove(view, bot, 'fin');
+    if (power) return power;
   }
   if (bot.place) {
     const move = firstOrderingMove(view.board, preferredOrder(view.board));
@@ -1189,6 +1271,8 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
   if (fromHand) return fromHand;
   const cast = castMove(view, bot);
   if (cast) return cast;
+  const earlyPower = powerMove(view, bot, 'debut');
+  if (earlyPower) return earlyPower;
   const combo = casseroleCombo(view, bot);
   if (combo) return combo;
 
@@ -1237,6 +1321,13 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
     }
   }
 
+  // Une casserole de grade 4 ou plus passe avant le moteur d'actualisation et les sorts (26 novembre 2026) : aucun
+  // joueur ne laisse filer un Financement libyen pour une actualisation de plus. Sans ça, le bot de Reconquête, qui
+  // actualise tout son budget, n'en posait que 2,3 par partie (6 à 8 dans les autres camps), et le camp reculait.
+  if (view.casseroleOffer && CASSEROLE_BY_ID[view.casseroleOffer].echelon >= 4 && view.casseroleCost !== null && view.budget >= view.casseroleCost && handCount(view) < view.handLimit) {
+    if (casseroleTarget(view, CASSEROLE_BY_ID[view.casseroleOffer], bot)) return { t: 'buy_casserole' };
+  }
+
   // Un moteur d'actualisation (Reconquête) : chaque actualisation fait grandir le plateau, elle passe avant les sorts
   // et la casserole. Sans lui, le bot n'actualisait que cinq fois par partie, et le camp semblait le plus faible.
   const keep = view.board.length < view.boardLimit ? view.buyCost : 0;
@@ -1268,6 +1359,9 @@ export function decide(view: PlayerView, bot: BotState): PlayerAction | null {
 
   const lastSpell = spellBuy(view, 0, bot);
   if (lastSpell) return lastSpell;
+
+  const latePower = powerMove(view, bot, 'fin');
+  if (latePower) return latePower;
 
   const freeze = freezeMove(view, bot);
   if (freeze) return freeze;

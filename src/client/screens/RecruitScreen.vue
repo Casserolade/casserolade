@@ -9,6 +9,7 @@ import ContextBadge from '#src/client/components/molecules/ContextBadge.vue';
 import DropLine from '#src/client/components/molecules/DropLine.vue';
 import EndOfTurnBanner from '#src/client/components/molecules/EndOfTurnBanner.vue';
 import HeroCorner from '#src/client/components/molecules/HeroCorner.vue';
+import HeroPowerButton from '#src/client/components/molecules/HeroPowerButton.vue';
 import MedallionToken from '#src/client/components/molecules/MedallionToken.vue';
 import WatchPlate from '#src/client/components/molecules/WatchPlate.vue';
 import BoardRow from '#src/client/components/organisms/BoardRow.vue';
@@ -32,6 +33,9 @@ import { useTableGestures } from '#src/client/stores/useTableGestures.ts';
 import { candidateFaces } from '#src/client/tools/candidateFaces.ts';
 import { aimHint } from '#src/client/tools/aimHint.ts';
 import { dropGuideFor } from '#src/client/tools/dropGuideFor.ts';
+import { heroPowerStatus } from '#src/client/tools/heroPowerStatus.ts';
+import { centerOf } from '#src/client/stores/tableFx.ts';
+import { HERO_BY_ID } from '#src/data/heroes.ts';
 import { minionFace } from '#src/client/tools/shownCard.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 
@@ -52,6 +56,8 @@ const dropGuide = computed(() => dropGuideFor(gestures.dragging.value, props.vie
 /** A table laid out for a computer but touched (a tablet): one touches instead of clicking. */
 const TOUCH = typeof window !== 'undefined' && 'matchMedia' in window && window.matchMedia('(hover: none)').matches;
 const hint = computed(() => aimHint(gestures.targeting.value, props.view.spells, TOUCH));
+/** The hero's activable power, when it has one: what its button can do now. */
+const powerStatus = computed(() => heroPowerStatus(props.view, HERO_BY_ID[props.view.heroId]?.power ?? 'Pouvoir'));
 
 // What changed may be the card under the pointer: it comes up again on the next hover, up to date.
 watch(() => props.view, () => cardInspector.hide());
@@ -91,8 +97,9 @@ watch(tripleCount, (count, before) => {
     <EndOfTurnBanner v-if="store.endOfTurn.value?.banner.value" />
 
     <div class="hero-spot">
-      <HeroCorner :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :power-note="powerNote" />
+      <HeroCorner :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :power-note="powerNote" :casseroles="view.counters.casseroles" :palier="view.palier?.casseroles ?? null" />
     </div>
+    <HeroPowerButton v-if="powerStatus && !watching" class="power-spot" :status="powerStatus" @use="(source) => gestures.usePower(powerStatus?.name ?? '', centerOf(source) ?? gestures.pointer.value)" />
     <HandFan :view="view" :gestures="gestures" />
 
     <!-- A career's line (narrator, host) in the free top-left corner, its quest above the ready button: the rail keeps its size. -->
@@ -127,6 +134,8 @@ watch(tripleCount, (count, before) => {
 .shop-place { position: absolute; left: calc(var(--s) * 326); top: calc(var(--s) * 174); width: calc(var(--s) * 1268); height: calc(var(--s) * 252); }
 .board-place { position: absolute; left: calc(var(--s) * 316); top: calc(var(--s) * 452); width: calc(var(--s) * 1288); height: calc(var(--s) * 300); }
 .hero-spot { position: absolute; left: calc(var(--s) * 52); bottom: calc(var(--s) * 22); }
+/* Beside the portrait, above the studio's card at the bottom: the hand starts further right. */
+.power-spot { position: absolute; left: calc(var(--s) * 222); bottom: calc(var(--s) * 96); }
 .story-line-place { position: absolute; left: calc(var(--s) * 16); top: calc(var(--s) * 14); width: calc(var(--s) * 530); }
 .story-quest-place { position: absolute; right: calc(var(--s) * 40); top: calc(var(--s) * 172); width: calc(var(--s) * 220); }
 .right-rail { position: absolute; right: calc(var(--s) * 40); top: calc(var(--s) * 300); width: calc(var(--s) * 220); display: flex; flex-direction: column; align-items: center; gap: calc(var(--s) * 30); }

@@ -311,5 +311,6 @@ export const VOIX: Voix[] = [
   { fichier: 'zemmour_zemmour_corinne', personne: 'zemmour', phrase: 'Corinne, ça vous irait très bien.' },
   { fichier: 'zemmour_zemmour_milipol', personne: 'zemmour', phrase: 'Ça rigole plus, là ? Poussez-vous ! Reculez !', casserole: 'milipol' },
   { fichier: 'zemmour_zemmour_petain_onpc', personne: 'zemmour', phrase: 'Pétain a sauvé les Juifs français !' },
+  { fichier: 'zemmour_zemmour_precisez_francais', personne: 'zemmour', phrase: 'Vous avez osé dire que Pétain avait sauvé les juifs. — Français, précisez, précisez français. — Ou avait sauvé les juifs français, c\'est une monstruosité', casserole: 'precisez_francais' },
   { fichier: 'zemmour_zemmour_trafiquants', personne: 'zemmour', phrase: 'Pourquoi on est contrôlé 17 fois ? Mais parce que la plupart des trafiquants sont noirs et arabes, c\'est comme ça, c\'est un fait.' },
 ];

@@ -60,11 +60,15 @@ export function composerTable(chapitre: Chapitre, heroId: string, seed: number, 
       ...hero,
       armor: id === bossId ? hero.armor : Math.round(hero.armor * echelle),
       mods: chapitre.pouvoirs ? hero.mods : {},
+      // Sans pouvoirs, ni palier ni pouvoir activable.
+      palier: chapitre.pouvoirs ? hero.palier : undefined,
+      pouvoir: chapitre.pouvoirs ? hero.pouvoir : undefined,
     };
   }
   // A career's scripted round: the player starts with another hero's power, and gets things back on given rounds.
   const scenario = chapitre.scenario;
   const lent = scenario?.pouvoirDe ? HERO_BY_ID[scenario.pouvoirDe] : undefined;
+  // Seul le pouvoir passif se prête : le chapitre le rend à la manche dite (`pouvoirPropre`), comme il l'a pris.
   if (lent && chapitre.pouvoirs) heroOverrides[heroId] = { ...heroOverrides[heroId], mods: lent.mods };
   const evenements = Object.fromEntries(Object.entries(scenario?.manches ?? {}).map(([manche, { pouvoirPropre, ...change }]) => [
     Number(manche),

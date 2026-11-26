@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { applyAction, createGame, resolveRound, startCombats, viewFor } from '../src/engine/game.ts';
 import type { Minion } from '../src/engine/types.ts';
+import { CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
 import { CARD_BY_ID, TOKENS } from '../src/data/cards.ts';
 import { effectOrigin, makeMinion } from '../src/engine/minion.ts';
 import { resolveCombat } from '../src/engine/combat.ts';
@@ -113,16 +114,17 @@ test('un doré rallié garde ses casseroles : son hôte les prend, avec leur bon
   buy('cheminade');
   buy('castaner');
   buy('castaner');
-  pose('renault', p.board[1]); // +1 budget par manche, compte pour deux : scandale.
+  pose('primes', p.board[1]); // Du budget à chaque manche.
+  pose('renault', p.board[1]); // Compte pour deux : scandale.
   assert.ok(p.board[1].scandal);
   buy('castaner', true);
   const golden = p.hand.find((m) => m.golden) as Minion;
-  assert.deepEqual(golden.casseroles, ['renault']);
+  assert.deepEqual(golden.casseroles, ['primes', 'renault']);
   const host = p.board[0];
   assert.equal(applyAction(game, 0, { t: 'play', uid: golden.uid, onto: host.uid }).ok, true);
-  assert.deepEqual(host.casseroles, ['renault'], 'la casserole suit le doré sur son hôte');
-  assert.equal(host.charges, 2);
-  assert.equal(host.budgetPerRound, 1, 'l\'avantage reste');
+  assert.deepEqual(host.casseroles, ['primes', 'renault'], 'les casseroles suivent le doré sur son hôte');
+  assert.equal(host.charges, 3);
+  assert.equal(host.budgetPerRound, CASSEROLE_BY_ID.primes.budgetPerRound, 'l\'avantage reste');
   assert.ok(host.scandal, 'le scandale ne s\'efface pas en ralliant');
   assert.equal(p.stats.scandals, 1, 'c\'est le même scandale');
 });
@@ -172,17 +174,18 @@ test('le tutoriel suit son script quelle que soit la graine : ses camps sont tou
 });
 
 test('le jeton d\'une casserole reçoit les gains de camp déjà acquis, comme tout serviteur à venir', () => {
-  const { p, buy, pose } = setup();
+  const { game, p, buy, pose } = setup();
   buy('fillon'); // Quand un allié reçoit une casserole : les Républicains ont +1/+1 pour la partie, une fois par manche.
   buy('cheminade');
   pose('homards', p.board[1]);
   assert.equal(p.campBuffs.length, 1);
-  pose('emploi_fictif', p.board[0]); // Invoque un Assistant fictif, Républicain comme Fillon.
-  const assistant = p.board.find((m) => m.cardId === 'assistant_fictif') as Minion;
-  assert.ok(assistant);
-  assert.equal(assistant.camp, 'republicains');
-  const gain = p.campBuffs.reduce((s, g) => ({ atk: s.atk + g.atk, hp: s.hp + g.hp }), { atk: 0, hp: 0 });
-  assert.deepEqual([assistant.atk, assistant.hp], [TOKENS.assistant_fictif.atk + gain.atk, TOKENS.assistant_fictif.hp + gain.hp]);
+  pose('hologramme', p.board[0]); // Invoque un Hologramme à côté de Fillon : Républicain comme lui.
+  const token = p.board.find((m) => m.cardId === 'hologramme') as Minion;
+  assert.ok(token);
+  assert.equal(token.camp, 'republicains');
+  const gain = p.campBuffs.filter((g) => !g.camp || g.camp === 'republicains').reduce((s, g) => ({ atk: s.atk + g.atk, hp: s.hp + g.hp }), { atk: 0, hp: 0 });
+  assert.ok(gain.atk + gain.hp > 0);
+  assert.deepEqual([token.atk, token.hp], [TOKENS.hologramme.atk + gain.atk, TOKENS.hologramme.hp + gain.hp]);
 });
 
 test('un Suppléant invoqué en combat a les gains de Faure des combats précédents', () => {

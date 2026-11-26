@@ -106,6 +106,13 @@ export function recordKeyword(m: Minion, source: string, keyword: Keyword): void
   m.gains = withLine(m.gains, { ...line, keywords: [...line.keywords, keyword] });
 }
 
+/** Oublie un mot-clé qui ne tenait qu'un temps : il quitte les lignes qui le donnaient, et une ligne vide s'en va. */
+export function forgetKeyword(m: Minion, keyword: Keyword): void {
+  m.gains = m.gains
+    .map((gain) => (gain.keywords.includes(keyword) ? { ...gain, keywords: gain.keywords.filter((k) => k !== keyword) } : gain))
+    .filter((gain) => gain.atk !== 0 || gain.hp !== 0 || gain.keywords.length > 0);
+}
+
 /** Ce que le registre explique déjà de ses stats, au-delà de sa carte. */
 export function recordedStats(gains: readonly MinionGain[]): { atk: number; hp: number } {
   let atk = 0;

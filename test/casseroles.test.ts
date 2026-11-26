@@ -78,7 +78,8 @@ test('aucune casserole ne donne à son propriétaire un mot-clé qu\'il a déjà
 test('chaque casserole a un propriétaire en jeu, et rien n\'y est une valeur de blague', () => {
   for (const c of CASSEROLES) {
     assert.ok(CARD_BY_ID[c.owner], `« ${c.name} » : propriétaire ${c.owner} inconnu`);
-    for (const key of ['atk', 'hp'] as const) assert.ok(Math.abs(c[key] ?? 0) <= 16, `« ${c.name} » : ${key} ${c[key]}`);
+    // Les grades 5 et 6 arrivent en fin de partie, où des stats seules ne pèsent presque plus (26 novembre 2026).
+    for (const key of ['atk', 'hp'] as const) assert.ok(Math.abs(c[key] ?? 0) <= (c.echelon >= 5 ? 40 : 20), `« ${c.name} » : ${key} ${c[key]}`);
   }
 });
 

@@ -186,21 +186,22 @@ function table(seed = 21): { game: Game; p: Game['players'][number]; buy: (id: s
   return { game, p, buy, pose };
 }
 
-test('un scandale qui éclabousse : ses voisins ont -2/-2 en combat, pas lui, et rien ne reste après', () => {
+test('un scandale qui éclabousse : ses voisins ont -N/-N en combat, pas lui, et rien ne reste après', () => {
   const { p, buy, pose } = table();
   const left = buy('lucas');
   const marine = buy('lepen');
   const right = buy('doucet');
   pose('assistants_rn', marine);
   pose('homards', marine);
-  assert.equal(marine.scandal?.splash, 2);
+  const splash = CASSEROLES.find((c) => c.id === 'assistants_rn')?.splash as number;
+  assert.equal(marine.scandal?.splash, splash);
   const r = resolveCombat({ minions: p.board, mods: {}, hp: 30 }, { minions: [unit(0, 50)], mods: {}, hp: 30 }, { params: PARAMS, ctx: null, rng: createRng(1), log: true });
   const opening = r.log[0] as Of<'debut'>;
   assert.deepEqual(opening.sides[0].map((u) => u.atk), [left.atk, marine.atk, right.atk], 'le début montre le plateau');
   const fin = r.log.find((e): e is Of<'fin'> => e.e === 'fin');
   const after = new Map(fin?.sides[0].map((u) => [u.uid, u]));
-  assert.equal(after.get(left.uid)?.atk, Math.max(0, left.atk - 2));
-  assert.equal(after.get(right.uid)?.atk, Math.max(0, right.atk - 2));
+  assert.equal(after.get(left.uid)?.atk, Math.max(0, left.atk - splash));
+  assert.equal(after.get(right.uid)?.atk, Math.max(0, right.atk - splash));
   assert.equal(after.get(marine.uid)?.atk, marine.atk);
   assert.ok(r.log.some((e) => e.e === 'effet' && e.uid === marine.uid && e.casserole === 'assistants_rn'), 'on voit qui éclabousse');
 });

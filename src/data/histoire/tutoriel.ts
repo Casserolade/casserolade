@@ -162,13 +162,16 @@ export const TUTORIEL = {
   decouvertes: { 5: ['chikirou', 'piolle', 'arthaud'] } as Record<number, string[]>,
   /** Les sorts : le Bracelet électronique quand le scandale éclate. */
   sorts: { 7: ['bracelet_electronique'] } as Record<number, string[]>,
-  /** La première casserole est un bonus ; la deuxième, sur le même politique, fait scandale et le cloue sur place. */
+  /**
+   * La première casserole est un bonus ; la deuxième, sur le même politique, fait scandale et le cloue sur place.
+   * Depuis les grades (26 novembre 2026), le Dîner aux homards coûte 2 et le ballon de Dussopt 1.
+   */
   casseroles: { 6: 'homards', 7: 'ballon' } as Record<number, string>,
   /**
    * Le programme de chaque manche, dans l'ordre, et ce qu'il coûte. Au-delà de la dernière, la dernière.
    * M1 (3) : un politique (3). M2 (4) : Kazib (3), actualiser (1). M3 (5) : l'échelon (1), Delogu (3), actualiser (1).
    * M4 (6) : Guéant (3), Durif (3), le gel. M5 (7) : deux Kazib (6), actualiser (1). M6 (8) : la casserole (2),
-   * l'échelon (2), Morano (3), actualiser (1). M7 (9) : la casserole (2), le Bracelet (1), un renvoi (+1), et 7 à soi.
+   * l'échelon (2), Morano (3), actualiser (1). M7 (9) : la casserole (1), le Bracelet (1), un renvoi (+1), et 8 à soi.
    */
   programme: {
     1: ['premier_achat', 'premiere_pose', 'combat'],

@@ -14,6 +14,7 @@ import { baseStats, recordedStats } from './gains.ts';
 import { boardLimit, handCount } from './recruit.ts';
 import type { Game, Player } from './state.ts';
 import type { Effect, Keyword, Minion } from './types.ts';
+import { heroMods } from './heroPower.ts';
 
 /** Tous les mots-clés : le compilateur refuse cette table si un mot-clé est ajouté sans elle. */
 const KNOWN_KEYWORDS: Record<Keyword, true> = {
@@ -58,6 +59,8 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
   const card = CARD_BY_ID[m.cardId] ?? TOKENS[m.cardId];
   check(Boolean(card), `carte inconnue ${m.cardId}`);
   check(new Set(m.keywords).size === m.keywords.length, `mot-clé en double ${m.keywords}`);
+  // Un mot-clé temporaire (le pouvoir de Zemmour) est un mot-clé qu'il a, et il ne survit pas à la manche suivante.
+  for (const k of m.tempKeywords ?? []) check(m.keywords.includes(k), `mot-clé temporaire ${k} absent de ses mots-clés`);
   for (const k of m.keywords) check(k in KNOWN_KEYWORDS, `mot-clé inconnu ${k}`);
   if (inHand) check(!m.token || m.golden, 'un jeton non doré en main');
   if (m.token) check(m.casseroles.length === 0, 'un jeton porte une casserole');
@@ -105,7 +108,7 @@ function minionViolations(game: Game, p: Player, m: Minion, where: string, inHan
     if (game.phase === 'recrutement') {
       check(s.until > game.round && s.until <= game.round + game.params.scandalRounds, `scandale jusqu'à la manche ${s.until}, manche ${game.round}`);
     }
-    const base = game.params.scandalThreshold + (p.hero.mods.scandalThresholdDelta ?? 0);
+    const base = game.params.scandalThreshold + (heroMods(p).scandalThresholdDelta ?? 0);
     check(m.charges >= base, `en scandale avec ${m.charges} charges, seuil ${base}`);
     if (s.locked) check(m.locked, 'un scandale qui cloue, sur un politique libre');
     if (live.some((c) => c.locked)) check(m.locked, 'le défaut « ne bouge plus » n\'est pas appliqué');

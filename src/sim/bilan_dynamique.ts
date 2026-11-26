@@ -19,6 +19,7 @@ import { createRng } from '../engine/rng.ts';
 import type { Minion, Params } from '../engine/types.ts';
 import { createBot, decide } from '../bots/bots.ts';
 import type { BotLevel } from '../bots/bots.ts';
+import { heroMods } from '../engine/heroPower.ts';
 
 const MAX_ROUNDS = 40;
 const MAX_ACTIONS = 60;
@@ -96,8 +97,8 @@ function winChance(game: Game, seatA: number, seatB: number, boardA: Minion[], b
   let score = 0;
   for (let k = 0; k < replays; k++) {
     const r = resolveCombat(
-      { minions: boardA, mods: pa.hero.mods, hp: pa.hp, tier: pa.tier, tract: pa.tract, campBuffs: pa.campBuffs },
-      { minions: boardB, mods: pb.hero.mods, hp: pb.hp, tier: pb.tier, tract: pb.tract, campBuffs: pb.campBuffs },
+      { minions: boardA, mods: heroMods(pa), hp: pa.hp, tier: pa.tier, tract: pa.tract, campBuffs: pa.campBuffs },
+      { minions: boardB, mods: heroMods(pb), hp: pb.hp, tier: pb.tier, tract: pb.tract, campBuffs: pb.campBuffs },
       { params: game.params, ctx: game.ctx, rng: createRng(salt * 7919 + k * 104729 + 1) },
     );
     score += r.winner === 0 ? 1 : r.winner === null ? 0.5 : 0;

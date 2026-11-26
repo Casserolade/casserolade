@@ -216,7 +216,8 @@ test('« tout lancer » ne vaut que pour une pile de Tracts : un autre sort ne p
 });
 
 test('les Tracts de toutes les sources vont dans la même pile', () => {
-  const game = createGame({ seed: 5, heroes: Array(8).fill('melenchon') });
+  // Un héros qui reçoit un Tract au début de chaque manche (l'ancien pouvoir de Mélenchon, devenu activable le 26 novembre 2026).
+  const game = createGame({ seed: 5, heroes: Array(8).fill('melenchon'), heroOverrides: { melenchon: { mods: { startTracts: 1 }, pouvoir: undefined } } });
   const p = game.players[0];
   p.budget = 100;
   const buy = (cardId: string, extra: { main?: boolean } = {}) => {
@@ -376,7 +377,7 @@ test('fuzz : aucun exemplaire ne se perd, et une action refusée ne change rien'
           assert.ok(p.hand.length + p.spells.length <= PARAMS.handSize, 'main trop grande');
           const uidsNow = [...p.board, ...p.hand].map((m) => m.uid);
           assert.equal(new Set(uidsNow).size, uidsNow.length, 'identifiants en double');
-          for (const m of p.hand) assert.ok(!m.token, 'un jeton en main');
+          for (const m of p.hand) assert.ok(!m.token || m.golden, 'un jeton non doré en main');
           const now = census(game);
           for (const [id, count] of total) assert.equal(now.get(id) ?? 0, count, `exemplaires de ${id} perdus ou créés après ${JSON.stringify(action)}`);
         }

@@ -4,6 +4,7 @@ import { applyAction, createGame, resolveRound } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
 import { addMinionToHand, take } from '../src/engine/recruit.ts';
+import { PARAMS } from '../src/data/params.ts';
 import { CARD_BY_ID, PARTY_CAMPS } from '../src/data/cards.ts';
 import { CASSEROLES } from '../src/data/casseroles.ts';
 import type { Minion } from '../src/engine/types.ts';
@@ -51,6 +52,8 @@ function lay(game: Game, cardId: string): Minion {
 
 function pose(game: Game, casseroleId: string, target: Minion, step: string): void {
   const p = game.players[0];
+  // Les sorts découverts en route (la Revue de presse en découvre un à chaque manche) : un joueur les aurait lancés.
+  if (p.hand.length + p.spells.length >= PARAMS.handSize) p.spells = p.spells.filter((s) => s.casseroleId);
   p.casseroleOffer = casseroleId;
   const bought = applyAction(game, 0, { t: 'buy_casserole' });
   assert.equal(bought.ok, true, `${step} : achat (${bought.ok ? '' : bought.error} ; main ${p.hand.length + p.spells.length}, plateau ${p.board.length})`);

@@ -6,6 +6,7 @@ import { baseStats, recordedStats } from '../src/engine/gains.ts';
 import { invariantViolations } from '../src/engine/invariants.ts';
 import { makeMinion } from '../src/engine/minion.ts';
 import { addMinionToHand, addSpellToHand, take } from '../src/engine/recruit.ts';
+import { CASSEROLE_BY_ID } from '../src/data/casseroles.ts';
 import { CARD_BY_ID } from '../src/data/cards.ts';
 import type { Camp, Minion, MinionGain } from '../src/engine/types.ts';
 
@@ -110,11 +111,11 @@ test('une casserole laisse sa ligne, bonus de propriétaire compris', () => {
   const game = table();
   const p = game.players[0];
   const gueant = lay(game, 'gueant');
-  p.casseroleOffer = 'ecoutes';
+  p.casseroleOffer = 'mandat_depot';
   assert.equal(applyAction(game, 0, { t: 'buy_casserole' }).ok, true);
-  const held = p.spells.find((s) => s.casseroleId === 'ecoutes') as { uid: number };
+  const held = p.spells.find((s) => s.casseroleId === 'mandat_depot') as { uid: number };
   assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid, target: gueant.uid }).ok, true);
-  assert.deepEqual(line(gueant, 'casserole:ecoutes'), { source: 'casserole:ecoutes', atk: 6, hp: 6, times: 1, keywords: [] });
+  assert.deepEqual(line(gueant, 'casserole:mandat_depot'), { source: 'casserole:mandat_depot', atk: CASSEROLE_BY_ID.mandat_depot.atk, hp: CASSEROLE_BY_ID.mandat_depot.hp, times: 1, keywords: ['porte_parole', 'retour'] });
   assert.deepEqual(invariantViolations(game), []);
 });
 

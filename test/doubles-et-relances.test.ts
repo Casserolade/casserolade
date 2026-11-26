@@ -298,12 +298,14 @@ test('un Darmanin doré qui porte sa casserole se rallie sans anomalie : son bon
   const game = table();
   const darmanin = lay(game, 'darmanin');
   pose(game, 'faux_billets', darmanin);
-  assert.equal(darmanin.bonusDamage, 6, 'son affaire, et son bonus de propriétaire');
+  const billets = CASSEROLE_BY_ID.faux_billets;
+  const bonus = (billets.bonusDamage ?? 0) + (billets.ownerBonus.bonusDamage ?? 0);
+  assert.equal(darmanin.bonusDamage, bonus, 'son affaire, et son bonus de propriétaire');
   const gold = golden(game, 'darmanin');
   assert.deepEqual(gold.ownerCasseroles, ['faux_billets']);
   const host = lay(game, 'retailleau');
   assert.equal(applyAction(game, 0, { t: 'play', uid: gold.uid, onto: host.uid }).ok, true);
-  assert.equal(host.bonusDamage, 6);
+  assert.equal(host.bonusDamage, bonus);
   assert.deepEqual(invariantViolations(game), []);
 });
 
@@ -381,15 +383,16 @@ test('un scandale coûte ses deux manches de budget', () => {
   const game = table(['republicains', 'macronie', 'socialistes', 'rn', 'insoumis']);
   const p = game.players[0];
   const m = lay(game, 'gueant');
-  pose(game, 'bygmalion', m); // −2 par manche en scandale
-  pose(game, 'homards', m); // −2 (re-spécification du 7 novembre 2026 : les défauts font mal)
+  pose(game, 'bygmalion', m); // du budget en moins à chaque manche de scandale
+  pose(game, 'homards', m); // aussi (re-spécification du 7 novembre 2026 : les défauts font mal)
+  const cost = -((CASSEROLE_BY_ID.bygmalion.budgetPerRound ?? 0) + (CASSEROLE_BY_ID.homards.budgetPerRound ?? 0));
   const base = (round: number) => Math.min(PARAMS.maxBudget, PARAMS.startBudget + (round - 1) * PARAMS.budgetPerRound) + 1; // + le pouvoir de Philippe
   const paid: number[] = [];
   for (let i = 0; i < 3; i++) {
     resolveRound(game);
     paid.push(base(game.round) - p.budget);
   }
-  assert.deepEqual(paid, [4, 4, 0]);
+  assert.deepEqual(paid, [cost, cost, 0]);
   assert.equal(m.scandal, undefined);
 });
 
@@ -400,9 +403,12 @@ test('un politique en main paie aussi son budget par manche', () => {
   pose(game, 'compte_suisse', cahuzac);
   golden(game, 'cahuzac');
   assert.equal(p.board.length, 0);
-  assert.equal(p.hand[0].budgetPerRound, 4, 'son compte, et son bonus de propriétaire');
+  const compte = CASSEROLE_BY_ID.compte_suisse;
+  const perRound = (compte.budgetPerRound ?? 0) + (compte.ownerBonus.budgetPerRound ?? 0);
+  assert.ok(perRound > 0);
+  assert.equal(p.hand[0].budgetPerRound, perRound, 'son compte, et son bonus de propriétaire');
   resolveRound(game);
-  assert.equal(p.budget, Math.min(PARAMS.maxBudget, PARAMS.startBudget + 1) + 1 + 4);
+  assert.equal(p.budget, Math.min(PARAMS.maxBudget, PARAMS.startBudget + 1) + 1 + perRound);
 });
 
 // Les autres règles, lues pareil partout.
@@ -505,7 +511,7 @@ const IN_COMBAT: Record<Action['do'], boolean> = {
   camp_buff: true, boutique_buff: false, tract_bonus: true, jouer_tract: true, debaucher: false, dorer: false, detruire: true,
   sacrifier: false, sacrifier_camp: false, declencher: true, doubler: true, compteur: true, scandale_plus: true, actualiser: false, actualisations_gratuites: false,
   budget_max: false, pari_defaite: false, congres: false, butin: true,
-  doubler_stats: true, buff_par_membre: true, gain_debauche: false, buff_compteur: false, chaise_vide: true,
+  doubler_stats: true, buff_par_membre: true, gain_debauche: false, buff_compteur: false, budget_compteur: false, chaise_vide: true,
 };
 const COMBAT_TRIGGERS: Trigger[] = ['debut_combat', 'heritage', 'riposte', 'meeting', 'tue', 'revanche', 'immunite_perdue'];
 

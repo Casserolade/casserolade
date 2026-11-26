@@ -15,6 +15,7 @@ export interface AimHint {
 export function aimHint(aim: Targeting | null, spells: readonly HandSpell[], touch: boolean): AimHint | null {
   if (!aim) return null;
   if (aim.kind === 'play') return { ask: touch ? 'Quel allié ? Touchez-le.' : 'Quel allié ?', tip: null };
+  if (aim.kind === 'power') return { ask: `${aim.name} : sur qui ?${touch ? ' Touchez un politique.' : ''}`, tip: null };
   const pile = tractPileSize(spells, aim.held.uid);
   const pointing = touch ? ' Touchez un politique.' : '';
   if (aim.all) return { ask: `Sur qui, les ${pile} Tracts ?${pointing}`, tip: null };

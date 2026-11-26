@@ -1,12 +1,13 @@
 import type { Camp, Casserole, CombatPersist, Counter, Effect, EndOfTurnNote, EndOfTurnStep, Keyword, Minion, Trigger } from './types.ts';
 import type { Game, Offer, Player, StatGain } from './state.ts';
 import { isCamp as isCampOf } from './camps.ts';
-import { RETURN_SOURCE, contextSource, effectSource, heroSource, mergeGains, rallySource, recordGain, recordKeyword, settleGain, spellSource } from './gains.ts';
+import { RETURN_SOURCE, contextSource, effectSource, forgetKeyword, heroSource, mergeGains, rallySource, recordGain, recordKeyword, settleGain, spellSource } from './gains.ts';
 import { MAX_STAT, cardOf, effectPower, makeMinion, makeSimpleCopy, makeToken, poolCopies, rallyEffect, tripleCopies } from './minion.ts';
 import { relaunchable } from './relaunch.ts';
 import { CARDS, CARD_BY_ID, TOKENS } from '../data/cards.ts';
 import { CASSEROLES, CASSEROLE_BY_ID } from '../data/casseroles.ts';
 import { SPELL_BY_ID, shopSpells } from '../data/sorts.ts';
+import { heroMods } from './heroPower.ts';
 
 /** Un Tract joué, par le joueur ou par un effet : une seule ligne au registre des gains, quel que soit l'effet qui le joue. */
 const TRACT_SOURCE = spellSource('tract');
@@ -56,7 +57,7 @@ export function isCamp(game: Game, m: Pick<Minion, 'camp' | 'keywords'>, camp: C
 }
 
 export function boardLimit(game: Game, p: Player): number {
-  return game.params.boardSize + (p.hero.mods.boardDelta ?? 0);
+  return game.params.boardSize + (heroMods(p).boardDelta ?? 0);
 }
 
 /** Les cartes en main : serviteurs, sorts, casseroles. Une pile de Tracts compte pour une. */
@@ -347,6 +348,10 @@ export function fuseIfTriple(game: Game, p: Player, cardId: string): void {
   // Un jeton ne vient pas de la réserve : doré, il n'y compte toujours pour rien.
   golden.copies = card.token ? 0 : 3;
   golden.keywords = [...new Set(parts.flatMap((m) => m.keywords))];
+  // Un mot-clé temporaire le reste s'il ne l'était chez aucun des trois pour de bon.
+  const temp = golden.keywords.filter((k) => parts.every((m) => !m.keywords.includes(k) || m.tempKeywords?.includes(k)));
+  if (temp.length > 0) golden.tempKeywords = temp;
+  else delete golden.tempKeywords;
   const base = card.effects ?? [];
   golden.effects = [...base, ...parts.flatMap((m) => withoutBase(m.effects, base))];
   golden.merged = parts.flatMap((m) => m.merged);
@@ -490,7 +495,7 @@ export function scandalThreshold(game: Game, p: Player): number {
   for (const m of p.board) {
     for (const eff of m.effects) if (eff.when === 'aura' && eff.do === 'scandale_plus') extra = Math.max(extra, eff.value * effectPower(m, eff));
   }
-  return game.params.scandalThreshold + (p.hero.mods.scandalThresholdDelta ?? 0) + extra;
+  return game.params.scandalThreshold + (heroMods(p).scandalThresholdDelta ?? 0) + extra;
 }
 
 /** Les effets que ses casseroles lui ont donnés, bonus de propriétaire compris : un silence ne les touche pas. */
@@ -597,9 +602,15 @@ export function rally(game: Game, p: Player, host: Minion, m: Minion): Effect[] 
   const source = rallySource(m.cardId);
   addStats(host, m.atk, m.hp, source);
   for (const k of m.keywords) {
-    if (k === 'ralliement' || host.keywords.includes(k)) continue;
+    if (k === 'ralliement') continue;
+    const lasting = !m.tempKeywords?.includes(k);
+    if (host.keywords.includes(k)) {
+      if (lasting) keepKeyword(host, k, source);
+      continue;
+    }
     host.keywords.push(k);
     recordKeyword(host, source, k);
+    if (!lasting) host.tempKeywords = [...(host.tempKeywords ?? []), k];
   }
   const carried = m.effects.map((e) => rallyEffect(m, e));
   host.effects = [...host.effects, ...carried];
@@ -671,7 +682,8 @@ function targetsOf(game: Game, p: Player, self: Minion | null, eff: Effect, ctx:
     case 'dores':
       return board.filter((m) => m.golden);
     case 'cible':
-      return ctx.target && board.includes(ctx.target) ? [ctx.target] : [];
+      // Un filtre de camp ne garde la cible que si elle en est (la veste verte de Tondelier, plus forte sur un Écologiste).
+      return ctx.target && board.includes(ctx.target) && (!eff.camp || isCamp(game, ctx.target, eff.camp)) ? [ctx.target] : [];
     case 'aleatoire': {
       // Un mot-clé au hasard va à un allié qui ne l'a pas encore : Royal ne donne pas deux fois son Retour au même.
       // Une relance au hasard vise un allié qu'elle peut relancer : il a cet effet, et personne ne l'a relancé dans la manche.
@@ -715,13 +727,14 @@ export function doubleStats(m: Minion, times: number, source: string): void {
  * son bonus de propriétaire ne servirait jamais. Jamais une casserole que le joueur a déjà.
  */
 /**
- * Les casseroles que ce joueur peut recevoir : celles des politiques de la partie, sauf celles qu'il a déjà, en main ou
- * sur un de ses politiques. Une affaire n'arrive qu'une fois : sans ça, Cahuzac revoyait son compte en Suisse une fois
- * sur deux, sept comptes, 28 de budget par manche.
+ * Les casseroles que ce joueur peut recevoir : celles des politiques de la partie, de son échelon ou en dessous, sauf
+ * celles qu'il a déjà, en main ou sur un de ses politiques. Une affaire n'arrive qu'une fois : sans ça, Cahuzac revoyait
+ * son compte en Suisse une fois sur deux, sept comptes, 28 de budget par manche. L'échelon (26 novembre 2026) : sans
+ * lui, une Fuite dans la presse à la manche 3 offrait le Kärcher ou Sofitel, +1,2 place, autant qu'un politique offert.
  */
 function casserolesFor(game: Game, p: Player): Casserole[] {
   const had = new Set([...p.spells.map((s) => s.casseroleId), ...[...p.board, ...p.hand].flatMap((m) => m.casseroles)]);
-  return CASSEROLES.filter((c) => game.poolTotal.has(c.owner) && !had.has(c.id));
+  return CASSEROLES.filter((c) => c.echelon <= p.tier && game.poolTotal.has(c.owner) && !had.has(c.id));
 }
 
 /**
@@ -765,11 +778,21 @@ export function offerCasserole(game: Game, p: Player): void {
  * Trois casseroles à choisir (13 novembre 2026) : d'un genre (les Ridicules de Lalanne), ou d'abord celles de vos
  * politiques, complétées par d'autres (« À la une »). Les autres viennent camp par camp, comme en boutique.
  */
-function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false, maxCost = Infinity): void {
+/** Les casseroles qu'une découverte peut encore proposer à ce joueur. */
+function discoverableCasseroles(game: Game, p: Player, kind?: Casserole['kind'], maxCost = Infinity): Casserole[] {
   // Une affaire n'arrive qu'une fois : ni celle de la boutique, ni une casserole d'un choix qui attend déjà (un Lalanne
   // doré découvre deux fois, et la même casserole se prenait dans les deux choix).
   const waiting = new Set([p.casseroleOffer, ...[p.discover, ...p.discoverQueue].flatMap((offer) => (offer?.kind === 'casserole' ? offer.options : []))]);
-  const present = casserolesFor(game, p).filter((c) => (!kind || c.kind === kind) && c.cost <= maxCost && !waiting.has(c.id));
+  return casserolesFor(game, p).filter((c) => (!kind || c.kind === kind) && c.cost <= maxCost && !waiting.has(c.id));
+}
+
+/** Plus rien à découvrir : le pouvoir de Branco serait payé pour rien, il est refusé. */
+export function casseroleDiscoveryEmpty(game: Game, p: Player): boolean {
+  return discoverableCasseroles(game, p).length === 0;
+}
+
+function offerCasseroles(game: Game, p: Player, kind?: Casserole['kind'], yours = false, maxCost = Infinity): void {
+  const present = discoverableCasseroles(game, p, kind, maxCost);
   const owned = new Set([...p.board, ...p.hand].map((m) => m.cardId));
   const first = yours ? game.rng.shuffle(present.filter((c) => owned.has(c.owner))) : [];
   const rest = drawByCamp(game, present.filter((c) => !first.includes(c)));
@@ -880,6 +903,11 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       for (const t of targets()) {
         if (t.keywords.includes(eff.keyword)) {
           t.keywords = t.keywords.filter((k) => k !== eff.keyword);
+          // Retiré, il ne l'a plus, même pour un combat (le Porte-parole de Retailleau repris par Temps de parole).
+          if (t.tempKeywords?.includes(eff.keyword)) {
+            t.tempKeywords = t.tempKeywords.filter((k) => k !== eff.keyword);
+            if (t.tempKeywords.length === 0) delete t.tempKeywords;
+          }
           continue;
         }
         t.keywords = [...t.keywords, eff.keyword];
@@ -933,6 +961,9 @@ export function applyEffect(game: Game, p: Player, self: Minion | null, eff: Eff
       for (const t of targets()) addStats(t, eff.atk * n * k, eff.hp * n * k, source());
       break;
     }
+    case 'budget_compteur':
+      p.budget += eff.value * p.counters[eff.compteur] * k;
+      break;
     case 'chaise_vide': {
       // Giscard : la caméra reste sur sa chaise vide, qui tient ce qu'il tenait.
       const at = self && p.board.includes(self) ? p.board.indexOf(self) + 1 : Math.max(0, index);
@@ -1044,6 +1075,7 @@ function giveKeyword(game: Game, p: Player, self: Minion | null, t: Minion, keyw
     grantKeyword(t, keyword, source);
     return;
   }
+  if (keepKeyword(t, keyword, source)) return;
   if (!replay) return;
   const lacking = p.board.filter((m) => m !== self && !m.keywords.includes(keyword));
   if (lacking.length > 0) grantKeyword(game.rng.pick(lacking), keyword, source);
@@ -1239,7 +1271,7 @@ function stepBetween(source: number | null, before: TableState, after: TableStat
 
 /** Le pouvoir de héros qui joue en fin de recrutement (Tondelier), noté comme une étape de Fin de tour. */
 export function heroEndOfTurn(p: Player): void {
-  const growth = p.hero.mods.frontGrowth;
+  const growth = heroMods(p).frontGrowth;
   const front = p.board[0];
   if (!growth || !front) return;
   const before = tableState(p);
@@ -1247,14 +1279,36 @@ export function heroEndOfTurn(p: Player): void {
   p.endOfTurnSteps.push(stepBetween(null, before, tableState(p)));
 }
 
+/**
+ * Une source durable donne un mot-clé qu'il n'avait que pour un combat (la Polémique de Zemmour, puis un Ralliement
+ * Polémique) : il le garde pour de bon, au nom de cette source. Vrai si c'était le cas.
+ */
+export function keepKeyword(m: Minion, keyword: Keyword, source: string): boolean {
+  if (!m.tempKeywords?.includes(keyword)) return false;
+  m.tempKeywords = m.tempKeywords.filter((k) => k !== keyword);
+  if (m.tempKeywords.length === 0) delete m.tempKeywords;
+  recordKeyword(m, source, keyword);
+  return true;
+}
+
+/** Les mots-clés qui ne tenaient que jusqu'à la fin du combat (le pouvoir de Zemmour) s'en vont. */
+export function stripTempKeywords(m: Minion): void {
+  if (!m.tempKeywords) return;
+  for (const k of m.tempKeywords) forgetKeyword(m, k);
+  m.keywords = m.keywords.filter((k) => !m.tempKeywords?.includes(k));
+  delete m.tempKeywords;
+}
+
 /** Le début du recrutement : les relances se rechargent, les effets jouent. */
 export function startOfTurn(game: Game, p: Player): void {
   p.retriggered = new Set();
   p.onceThisRound = new Set();
+  // Un pouvoir de chaque manche se recharge ; celui d'une fois par partie, jamais.
+  if (p.hero.pouvoir?.frequency !== 'partie') p.powerUsed = false;
   p.annoncesThisRound = 0;
   // Les actualisations de la manche repartent de zéro : Zemmour ne compte que celles-là.
   p.counters.actualisations_manche = 0;
-  for (let i = 0; i < (p.hero.mods.startTracts ?? 0); i++) addSpellToHand(game, p, 'tract');
+  for (let i = 0; i < (heroMods(p).startTracts ?? 0); i++) addSpellToHand(game, p, 'tract');
   fireBoard(game, p, 'debut_tour', {});
   // Les jetons arrivés depuis la dernière manche (fin de tour, après le débat) fusionnent maintenant.
   fuseTokenTriples(game, p);
@@ -1266,7 +1320,7 @@ export function startOfTurn(game: Game, p: Player): void {
  */
 export function announce(game: Game, p: Player, self: Minion, effects: Effect[], played: Minion, target: Minion | null): void {
   let repeats = repeatCount(p, 'annonce');
-  if (p.hero.mods.firstAnnonceTwice && p.annoncesThisRound === 0) repeats++;
+  if (heroMods(p).firstAnnonceTwice && p.annoncesThisRound === 0) repeats++;
   const annonces = effects.filter((e) => e.when === 'annonce');
   if (annonces.length > 0) p.annoncesThisRound++;
   for (let r = 0; r < repeats && annonces.length > 0; r++) {

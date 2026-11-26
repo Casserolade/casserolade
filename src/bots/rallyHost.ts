@@ -40,3 +40,13 @@ export function rallyHost(board: Minion[], rallying: Minion, boardFull: boolean)
   if (fitted && fit(rallying, fitted) > 0) return fitted;
   return boardFull ? best(hosts, size) : null;
 }
+
+/**
+ * Ce que ce Ralliement apporterait au meilleur hôte du plateau, au-delà de ses stats : la boutique le note ainsi
+ * (26 novembre 2026 : une Immunité valait 3 points, sur un 2/2 comme sur un monstre, et le bot laissait passer
+ * Dupond-Moretti quand son plus gros politique l'attendait). Zéro sans hôte.
+ */
+export function rallyGain(board: Minion[], rallying: Minion): number {
+  const hosts = board.filter((m) => !m.token && m.uid !== rallying.uid);
+  return hosts.reduce((most, m) => Math.max(most, fit(rallying, m)), 0);
+}

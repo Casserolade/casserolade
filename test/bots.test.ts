@@ -2,12 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createBot, decide } from '../src/bots/bots.ts';
 import { HEROES } from '../src/data/heroes.ts';
+import { CARD_BY_ID } from '../src/data/cards.ts';
 import { PERSONNALITES } from '../src/data/personnalites.ts';
 import { REPLIQUES } from '../src/data/repliques.ts';
 import { applyAction, createGame, viewFor } from '../src/engine/game.ts';
 import type { Game } from '../src/engine/game.ts';
 import { addMinionToHand, addSpellToHand, take } from '../src/engine/recruit.ts';
 import type { Camp, Minion, PlayerAction } from '../src/engine/types.ts';
+import { makeMinion } from '../src/engine/minion.ts';
 import { playGame } from '../src/sim/simulate.ts';
 
 const PERSONNAGES = Array(8).fill({ personnage: true });
@@ -54,19 +56,22 @@ test('le bot choisit un héros proposé, sans lire autre chose que sa vue', () =
   assert.ok((action as { i: number }).i < (view.heroOffers as string[]).length);
 });
 
-test('Balkany revend plus que les autres : il exploite son pouvoir', () => {
-  const balkany = moyenne(partiesAvecHeros('balkany', 'lepen').map((s) => s.actions.sell ?? 0));
+test('Ruffin revend plus que les autres : il exploite son pouvoir', () => {
+  // Balkany revendait plus jusqu'au 26 novembre 2026 ; il encaisse désormais ses casseroles. Ruffin garde le bonus.
+  const ruffin = moyenne(partiesAvecHeros('ruffin', 'lepen').map((s) => s.actions.sell ?? 0));
   const retailleau = moyenne(partiesAvecHeros('retailleau', 'lepen').map((s) => s.actions.sell ?? 0));
-  assert.ok(balkany > retailleau, `${balkany} contre ${retailleau}`);
+  assert.ok(ruffin > retailleau, `${ruffin} contre ${retailleau}`);
 });
 
-test('Lassalle actualise plus que les autres, et Sarkozy pose plus de casseroles', () => {
+test('Lassalle actualise plus que les autres, et Sarkozy atteint son palier dans la plupart des parties', () => {
   const lassalle = moyenne(partiesAvecHeros('lassalle', 'lepen').map((s) => s.actions.roll ?? 0));
   const philippe = moyenne(partiesAvecHeros('philippe', 'lepen').map((s) => s.actions.roll ?? 0));
   assert.ok(lassalle > philippe, `${lassalle} contre ${philippe}`);
-  const sarkozy = moyenne(partiesAvecHeros('sarkozy', 'lepen').map((s) => s.casseroles));
-  const tondelier = moyenne(partiesAvecHeros('tondelier', 'lepen').map((s) => s.casseroles));
-  assert.ok(sarkozy > tondelier, `${sarkozy} contre ${tondelier}`);
+  // Depuis les grades, presque toutes les casseroles coûtent 1 : sa remise ne lui en fait plus poser davantage, son
+  // palier (six posées) compte (26 novembre 2026).
+  const sarkozy = partiesAvecHeros('sarkozy', 'lepen');
+  const reached = sarkozy.filter((s) => s.casseroles >= 6).length / sarkozy.length;
+  assert.ok(reached > 0.6, `palier atteint dans ${Math.round(reached * 100)} % des parties`);
 });
 
 test('Zemmour tient son camp quand il est en jeu', () => {
@@ -130,7 +135,7 @@ test('combos : la casserole du doublement de Sarkozy va sur le plus gros politiq
   const { game, big } = tableSarkozy();
   const p = game.players[0];
   p.casseroleOffer = 'homards';
-  p.budget = 2;
+  p.budget = 3;
   botTurn(game, true);
   assert.equal(p.casseroleOffer, null, 'la casserole est achetée');
   assert.ok(big.casseroles.includes('homards'), 'posée sur le gros');
@@ -144,7 +149,7 @@ test('combos : avec un Bracelet en main, le scandale du doublement est effacé d
   big.charges = 1;
   addSpellToHand(game, p, 'bracelet_electronique');
   p.casseroleOffer = 'homards';
-  p.budget = 2;
+  p.budget = 3;
   const actions = botTurn(game, true);
   assert.ok(big.casseroles.includes('homards'), 'la casserole va sur le gros malgré le scandale');
   assert.ok(big.atk >= 80, 'doublé');
@@ -253,4 +258,19 @@ test('le Fusible : un bot fait tomber le jeton pour les siens, et garde le sort 
   addSpellToHand(game, p, 'fusible');
   const waiting = decide(viewFor(game, 0), createBot('moyen', 3));
   assert.ok(!waiting || waiting.t !== 'cast', 'il ne le lance pas');
+});
+
+test('un Ralliement Immunité se note à ce qu\'il apporte au plus gros : le bot ne le laisse plus passer', () => {
+  // 26 novembre 2026 : une Immunité valait 3 points en boutique, sur un 2/2 comme sur un monstre.
+  const game = createGame({ seed: 4, seats: 2, heroes: ['lepen', 'attal'], activeCamps: ['macronie', 'republicains', 'rn', 'socialistes', 'ecologistes'] });
+  const p = game.players[0];
+  const big = makeMinion(CARD_BY_ID.fillon, game.nextUid++);
+  big.atk = 60;
+  big.hp = 70;
+  big.gains = [{ source: 'autre', atk: 60 - CARD_BY_ID.fillon.atk, hp: 70 - CARD_BY_ID.fillon.hp, times: 1, keywords: [] }];
+  p.board = [big, makeMinion(CARD_BY_ID.morano, game.nextUid++)];
+  p.tier = 3;
+  p.budget = 3;
+  p.shop = ['dupond_moretti', 'wauquiez', 'bertrand'];
+  assert.deepEqual(decide(viewFor(game, 0), createBot('moyen', 3)), { t: 'buy', slot: 0, main: true });
 });

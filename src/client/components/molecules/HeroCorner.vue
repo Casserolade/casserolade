@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import ArchPortrait from '#src/client/components/atoms/ArchPortrait.vue';
+import CasseroleTally from '#src/client/components/atoms/CasseroleTally.vue';
 import PollsBadge from '#src/client/components/atoms/PollsBadge.vue';
 import RichText from '#src/client/components/atoms/RichText.vue';
 import { gameArt } from '#src/client/stores/gameArt.ts';
@@ -11,9 +12,13 @@ import { HERO_BY_ID } from '#src/data/heroes.ts';
 
 /**
  * A hero in its niche, with its polls. Its power is told on hover only: nothing to read while playing. `ghost`: the
- * ghost of an odd table, wearing this hero's face, faded, with neither polls nor power.
+ * ghost of an odd table, wearing this hero's face, faded, with neither polls nor power. `casseroles`: the casseroles
+ * laid this game, hanging from the other corner (`palier`: how many its power waits for).
  */
-const props = withDefaults(defineProps<{ heroId: string; hp: number; startHp: number; powerNote?: string | null; showPower?: boolean; ghost?: boolean }>(), { powerNote: null, showPower: true, ghost: false });
+const props = withDefaults(
+  defineProps<{ heroId: string; hp: number; startHp: number; powerNote?: string | null; showPower?: boolean; ghost?: boolean; casseroles?: number | null; palier?: number | null }>(),
+  { powerNote: null, showPower: true, ghost: false, casseroles: null, palier: null },
+);
 
 const hero = computed(() => HERO_BY_ID[props.heroId]);
 const name = computed(() => {
@@ -31,6 +36,7 @@ const glossary = computed(() => glossaryFor([powerText.value]));
   <div class="hero-corner" :class="{ ghost }">
     <ArchPortrait class="arch" :puppet="puppet" :name="name" :frame-image="archImage" hide-name>
       <PollsBadge v-if="!ghost" class="polls" :hp="hp" :start-hp="startHp" />
+      <CasseroleTally v-if="casseroles !== null && !ghost" class="tally" :count="casseroles" :goal="palier" />
     </ArchPortrait>
     <span v-if="showPower && hero && !ghost" class="power" role="tooltip">
       <strong>{{ hero.power }}</strong>
@@ -46,6 +52,7 @@ const glossary = computed(() => glossaryFor([powerText.value]));
 .arch { --arch-width: calc(var(--s) * 150); }
 .arch :deep(.name) { font-size: calc(var(--s) * 20); }
 .polls { --polls-scale: 1; }
+.tally { position: absolute; left: -18%; bottom: 10%; font-size: calc(var(--s) * 30); }
 .power {
   position: absolute;
   left: calc(100% + var(--s) * 30);

@@ -23,7 +23,7 @@ const origin = computed(() => {
   const aim = props.gestures.targeting.value;
   if (!aim) return null;
   void frame.value;
-  if (aim.kind === 'cast') return aim.origin;
+  if (aim.kind === 'cast' || aim.kind === 'power') return aim.origin;
   if (aim.onto !== undefined) return centerOf(document.querySelector(`[data-board-uid="${aim.onto}"]`));
   return centerOf(document.querySelector('[data-incoming]'));
 });

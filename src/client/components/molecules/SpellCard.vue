@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<{
 const art = computed(() => (props.spell ? (SPELL_ART[props.spell.id] ?? DEFAULT_SPELL_ART) : DEFAULT_SPELL_ART));
 const color = computed(() => (props.casserole ? CASSEROLE_COLORS[props.casserole.kind] : art.value.color));
 const owner = computed(() => (props.casserole ? CARD_BY_ID[props.casserole.owner] : null));
-const frameTier = computed(() => props.spell?.tier ?? owner.value?.tier ?? 1);
+const frameTier = computed(() => props.spell?.tier ?? props.casserole?.echelon ?? 1);
 const faceStyle = computed(() => ({
   ...cardFaceStyle(gameArt.manifest.value, 'civile', frameTier.value, props.spell?.id === 'investiture'),
   '--camp-color': color.value,

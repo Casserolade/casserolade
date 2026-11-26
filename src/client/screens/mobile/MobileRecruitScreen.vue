@@ -20,6 +20,7 @@ import { preloadCombat } from '#src/client/pixi/preloadCombat.ts';
 import { playSound } from '#src/client/services/soundEffects.ts';
 import type { GameStore } from '#src/client/stores/createGameStore.ts';
 import { gameArt } from '#src/client/stores/gameArt.ts';
+import { centerOf } from '#src/client/stores/tableFx.ts';
 import type { Point } from '#src/client/stores/tableFx.ts';
 import { useCountdown } from '#src/client/stores/useCountdown.ts';
 import { useEndOfTurnHurry } from '#src/client/stores/useEndOfTurnHurry.ts';
@@ -29,6 +30,8 @@ import { aimHint } from '#src/client/tools/aimHint.ts';
 import { cardSheetFor } from '#src/client/tools/cardSheetFor.ts';
 import type { CardSheet } from '#src/client/tools/cardSheetFor.ts';
 import { cssImage } from '#src/client/tools/cssImage.ts';
+import { heroPowerStatus } from '#src/client/tools/heroPowerStatus.ts';
+import { HERO_BY_ID } from '#src/data/heroes.ts';
 import { nextOpponentSeat } from '#src/client/tools/nextOpponentSeat.ts';
 import { opponentAbout } from '#src/client/tools/opponentAbout.ts';
 import { refreshedItem } from '#src/client/tools/refreshedItem.ts';
@@ -62,6 +65,15 @@ useEndOfTurnHurry(props.store);
 const owned = computed(() => [...props.view.board, ...props.view.hand]);
 const decor = computed(() => cssImage(gameArt.manifest.value.plateaux[props.view.plateau.id]?.decor));
 const hint = computed(() => aimHint(gestures.targeting.value, props.view.spells, true));
+/** The hero's activable power, when it has one: what its button can do now. */
+const powerStatus = computed(() => heroPowerStatus(props.view, HERO_BY_ID[props.view.heroId]?.power ?? 'Pouvoir'));
+
+/** The power's button of the hero's card: the card closes, then the power goes off or waits for a politician. */
+function usePowerFrom(source: Element): void {
+  heroOpen.value = false;
+  const status = powerStatus.value;
+  if (status) gestures.usePower(status.name, centerOf(source) ?? gestures.pointer.value);
+}
 
 /** The zone under a finger: around the board's band, the shop above it and the hand below it. */
 function zoneOnPhone(point: Point): Zone | null {
@@ -120,7 +132,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
 <template>
   <div class="mobile-recruit" :class="{ aiming: gestures.targeting.value, 'ending-turn': store.endOfTurn.value }">
     <div class="decor" :style="{ backgroundImage: decor }" aria-hidden="true" />
-    <MobileTopBar :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :budget="view.budget" :max-budget="view.maxBudget" @hero="heroOpen = true" />
+    <MobileTopBar :hero-id="view.heroId" :hp="view.hp" :start-hp="view.params.startHp" :budget="view.budget" :max-budget="view.maxBudget" :casseroles="view.counters.casseroles" :palier="view.palier?.casseroles ?? null" :power-ready="Boolean(powerStatus && !powerStatus.refusal && !watching)" @hero="heroOpen = true" />
     <MobileOpponents :table="view.table" :seat="view.seat" :start-hp="view.params.startHp" :names="store.names.value" :next="view.nextOpponent" @inspect="(seat) => (opponentSeat = seat)" />
     <div class="desk-band">
       <HostDesk class="desk-place" :view="view" :line="store.hostLine.value" :line-count="store.hostLineCount.value" :act="store.act" :locks="store.deskLocks.value" />
@@ -152,7 +164,7 @@ onUnmounted(() => window.clearTimeout(tripleTimer));
     <MobileDiscover v-if="view.discover" :key="view.discover.join()" :choices="view.discover" :kind="view.discoverKind" :chooser="watching" @choose="(i) => store.act({ t: 'discover', i })" />
     <MobileCardSheet v-if="sheet" :card="sheet.card" :actions="sheet.actions" :casseroles="sheet.casseroles" @choose="chooseAction" @close="sheet = null" />
     <MobileOpponentSheet v-if="opponentShown" :about="opponentShown" @close="opponentSeat = null" />
-    <MobileHeroSheet v-if="heroOpen" :hero-id="view.heroId" :power-note="powerNote" @close="heroOpen = false" />
+    <MobileHeroSheet v-if="heroOpen" :hero-id="view.heroId" :power-note="powerNote" :casseroles="view.counters.casseroles" :palier="view.palier?.casseroles ?? null" :power="watching ? null : powerStatus" @power="usePowerFrom" @close="heroOpen = false" />
   </div>
 </template>
 

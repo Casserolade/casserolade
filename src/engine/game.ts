@@ -1,8 +1,8 @@
-import type { Camp, Casserole, CasseroleBonus, CombatEvent, CombatSide, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, Minion, Params, PlayerAction, Rng } from './types.ts';
+import type { Camp, Casserole, CasseroleBonus, CombatEvent, CombatSide, Context, Counter, Effect, EndOfTurnStep, HandSpell, Hero, HeroMods, HeroPalier, HeroPower, Minion, Params, PlayerAction, Rng } from './types.ts';
 import type { CombatRecord, Fight, Game, GamePhase, Player, Quest, ScriptEventNote, ShopScript } from './state.ts';
 import { createRng } from './rng.ts';
 import { resolveCombat } from './combat.ts';
-import { casseroleSource, copyGains, recordKeyword, settleGain, spellSource } from './gains.ts';
+import { casseroleSource, copyGains, heroSource, recordKeyword, settleGain, spellSource } from './gains.ts';
 import { canRallyOnto, effectPower, makeMinion, makeToken, tripleCopies } from './minion.ts';
 import { lostSpellReason } from './lostSpellReason.ts';
 import { insertAroundLocked, reorderAroundLocked } from './reorderAroundLocked.ts';
@@ -49,6 +49,9 @@ import {
   spellRelaunches,
   spellCost,
   spend,
+  stripTempKeywords,
+  keepKeyword,
+  casseroleDiscoveryEmpty,
   startOfTurn,
   take,
   topUpShop,
@@ -64,6 +67,7 @@ import { enterPhase } from './phases.ts';
 import type { Plateau } from '../data/plateaux.ts';
 import { animateurFor } from '../data/animateurs.ts';
 import type { Animateur } from '../data/animateurs.ts';
+import { FIRST_CASSEROLE, discountedCasseroleCost, heroMods, powerRefusal } from './heroPower.ts';
 
 export type { CombatRecord, Game, GamePhase, Offer, Player, ShopScript } from './state.ts';
 
@@ -170,6 +174,7 @@ export function createGame(opts: GameOptions): Game {
       buysThisRound: 0,
       rollsThisRound: 0,
       annoncesThisRound: 0,
+      powerUsed: false,
       retriggered: new Set(),
       onceThisRound: new Set(),
       alive: true,
@@ -297,13 +302,15 @@ export function startRound(game: Game): void {
   const { params, round } = game;
   for (const p of game.players) {
     if (!p.alive) continue;
+    // Les mots-clés du pouvoir de Zemmour ont tenu leur combat.
+    for (const m of [...p.board, ...p.hand]) stripTempKeywords(m);
     const dissolved = game.ctx.dissolutionRound === round;
     if (dissolved && p.board.length > 0) releaseMinion(game, p.board.pop() as Minion);
     // Le budget avant l'oubli du peuple : un scandale coûte ses deux manches de budget. Un politique en main paie aussi.
     const perRound = [...p.board, ...p.hand].reduce((sum, m) => sum + m.budgetPerRound, 0);
     const base = Math.min(maxBudget(game, p), params.startBudget + (round - 1) * params.budgetPerRound);
     const trickle = game.ctx.lastPlaceBudget && isLastInPolls(game, p) ? game.ctx.lastPlaceBudget : 0;
-    p.budget = Math.max(0, base + (p.hero.mods.budgetPerRound ?? 0) + perRound + p.nextBudgetBonus + trickle);
+    p.budget = Math.max(0, base + (heroMods(p).budgetPerRound ?? 0) + perRound + p.nextBudgetBonus + trickle);
     p.nextBudgetBonus = 0;
     // Les sondages baissent pendant l'affaire, au même moment que le budget : jamais sous 1 de cette façon.
     const polls = [...p.board, ...p.hand].reduce((sum, m) => sum + (m.scandal?.polls ?? 0), 0);
@@ -469,7 +476,61 @@ function applyCasserole(game: Game, p: Player, m: Minion, c: Casserole): void {
   if (owned) summonAndRecruit(game, p, m, c.ownerBonus);
   p.stats.casseroles++;
   incrementCounter(p, 'casseroles');
+  casserolePalier(p, m, c, owned);
   fireBoard(game, p, 'casserole_recue', { played: m });
+}
+
+/**
+ * Les paliers des héros des casseroles (26 novembre 2026), une fois le compteur passé, la casserole qui l'atteint
+ * comprise : Sarkozy donne des stats en plus à chaque casserole, Macron double les stats de la première de la manche.
+ */
+function casserolePalier(p: Player, m: Minion, c: Casserole, owned: boolean): void {
+  const mods = heroMods(p);
+  const source = heroSource(p.hero.id);
+  if (mods.casseroleBonus) addStats(m, mods.casseroleBonus.atk, mods.casseroleBonus.hp, source);
+  // Chez un héros qui double la première casserole, toute casserole marque la manche, même avant le palier : celle qui
+  // l'atteint n'est doublée que si elle est la première.
+  if (!p.hero.mods.firstCasseroleTwice && !p.hero.palier?.mods.firstCasseroleTwice) return;
+  const first = !p.onceThisRound.has(FIRST_CASSEROLE);
+  p.onceThisRound.add(FIRST_CASSEROLE);
+  if (mods.firstCasseroleTwice && first) {
+    const atk = Math.max(0, (c.atk ?? 0) + (owned ? (c.ownerBonus.atk ?? 0) : 0));
+    const hp = Math.max(0, (c.hp ?? 0) + (owned ? (c.ownerBonus.hp ?? 0) : 0));
+    addStats(m, atk, hp, source);
+  }
+}
+
+
+/**
+ * Le pouvoir activable du héros : refusé s'il ne ferait rien, payé, puis ses effets jouent comme ceux d'un sort, sans
+ * compter comme un sort lancé. Les mots-clés d'un pouvoir temporaire ne tiennent que jusqu'à la fin du prochain combat.
+ */
+function useHeroPower(game: Game, p: Player, targetUid?: number): ActionResult {
+  const power = p.hero.pouvoir;
+  if (!power) return fail('Ce héros n\'a pas de pouvoir à activer.');
+  const target = power.target ? (p.board.find((x) => x.uid === targetUid) ?? null) : null;
+  const refusal = powerRefusal(p.hero, power, target, {
+    board: p.board,
+    shopSize: p.shop.length,
+    boardLimit: boardLimit(game, p),
+    relaunched: spellRelaunches(p),
+    budget: p.budget,
+    used: p.powerUsed,
+    handFull: handIsFull(game, p),
+    counters: p.counters,
+  });
+  if (refusal) return fail(refusal);
+  if (power.effects.some((e) => e.do === 'decouvrir' && e.quoi === 'casserole') && casseroleDiscoveryEmpty(game, p)) return fail('Plus aucune casserole à découvrir.');
+  spend(game, p, power.cost);
+  p.powerUsed = true;
+  const before = target ? [...target.keywords] : [];
+  const source = heroSource(p.hero.id);
+  for (const eff of power.effects) applyEffect(game, p, null, eff, { target, source });
+  if (power.temporaire && target) {
+    const added = target.keywords.filter((k) => !before.includes(k));
+    if (added.length > 0) target.tempKeywords = [...(target.tempKeywords ?? []), ...added];
+  }
+  return OK;
 }
 
 /** Ce qu'un avantage donne tout de suite : stats, mots-clés, effets, budget par manche, dégâts au héros, solitude, budget. */
@@ -477,7 +538,10 @@ function gainAdvantage(p: Player, m: Minion, gain: CasseroleBonus, source: strin
   m.atk = Math.max(0, m.atk + (gain.atk ?? 0));
   m.hp = Math.max(1, m.hp + (gain.hp ?? 0));
   for (const k of gain.keywords ?? []) {
-    if (m.keywords.includes(k)) continue;
+    if (m.keywords.includes(k)) {
+      keepKeyword(m, k, source);
+      continue;
+    }
     m.keywords.push(k);
     recordKeyword(m, source, k);
   }
@@ -501,17 +565,19 @@ function summonAndRecruit(game: Game, p: Player, m: Minion, gain: CasseroleBonus
 }
 
 export function casseroleCost(p: Player, c: Casserole): number {
-  return Math.max(0, c.cost - (p.hero.mods.casseroleDiscount ?? 0));
+  // La remise de Sarkozy ne descend pas sous 1 : depuis les grades (26 novembre 2026), 65 casseroles coûtent 1, et elles
+  // lui devenaient gratuites (−0,5 place).
+  return discountedCasseroleCost(c.cost, heroMods(p).casseroleDiscount ?? 0);
 }
 
 export function buyCost(game: Game, p: Player): number {
-  const discount = p.buysThisRound === 0 ? (p.hero.mods.firstBuyDiscount ?? 0) : 0;
+  const discount = p.buysThisRound === 0 ? (heroMods(p).firstBuyDiscount ?? 0) : 0;
   return Math.max(0, game.params.buyCost - discount);
 }
 
 export function rollCost(game: Game, p: Player): number {
   if (p.freeRolls > 0) return 0;
-  return p.rollsThisRound < (p.hero.mods.freeRollsPerRound ?? 0) ? 0 : game.params.rollCost;
+  return p.rollsThisRound < (heroMods(p).freeRollsPerRound ?? 0) ? 0 : game.params.rollCost;
 }
 
 function moveMinion(p: Player, uid: number, to: number): ActionResult {
@@ -535,7 +601,7 @@ function sell(game: Game, p: Player, uid: number): ActionResult {
   p.board = p.board.filter((x) => x !== m);
   p.stats.sold++;
   releaseMinion(game, m);
-  p.budget += game.params.sellValue + (p.hero.mods.sellBonus ?? 0) + sellBonus(game, p, m);
+  p.budget += game.params.sellValue + (heroMods(p).sellBonus ?? 0) + sellBonus(game, p, m);
   for (const eff of m.effects) if (eff.when === 'vente') applyEffect(game, p, m, eff);
   fireBoard(game, p, 'vente_allie', {});
   return OK;
@@ -652,11 +718,13 @@ function performAction(game: Game, seat: number, a: PlayerAction): ActionResult 
       chooseDiscover(game, p, a.i);
       return OK;
     }
+    case 'pouvoir':
+      return useHeroPower(game, p, a.target);
   }
 }
 
 export function upgradeCostFor(p: Player): number {
-  return Math.max(0, p.upgradeCost - (p.hero.mods.upgradeDiscount ?? 0));
+  return Math.max(0, p.upgradeCost - (heroMods(p).upgradeDiscount ?? 0));
 }
 
 /** Ce qu'un siège a le droit de savoir. Le serveur n'envoie jamais rien d'autre. */
@@ -692,7 +760,13 @@ export interface PlayerView {
   boardLimit: number;
   scandalThreshold: number;
   heroId: string;
+  /** Les règles de son pouvoir à cet instant, palier compris. */
   mods: HeroMods;
+  /** Son pouvoir activable, tel que la partie le lui donne (une carrière peut le retirer), et s'il a déjà servi. */
+  pouvoir: HeroPower | null;
+  powerUsed: boolean;
+  /** Le cran de son pouvoir au bout de quelques casseroles posées ; `counters.casseroles` dit où il en est. */
+  palier: HeroPalier | null;
   board: Minion[];
   hand: Minion[];
   /** Sorts, piles de Tracts et casseroles en main. */
@@ -764,6 +838,7 @@ export interface CombatView {
  */
 export function copyMinion(m: Minion): Minion {
   const copy: Minion = { ...m, keywords: [...m.keywords], effects: [...m.effects], casseroles: [...m.casseroles], merged: [...m.merged], rallied: [...m.rallied], ownerCasseroles: [...m.ownerCasseroles] };
+  if (m.tempKeywords) copy.tempKeywords = [...m.tempKeywords];
   if (m.scandal) copy.scandal = { ...m.scandal, silenced: m.scandal.silenced ? [...m.scandal.silenced] : null };
   return copy;
 }
@@ -808,7 +883,10 @@ export function viewFor(game: Game, seat: number): PlayerView {
     boardLimit: boardLimit(game, p),
     scandalThreshold: scandalThreshold(game, p),
     heroId: p.hero.id,
-    mods: { ...p.hero.mods },
+    mods: structuredClone(heroMods(p)),
+    pouvoir: p.hero.pouvoir ? structuredClone(p.hero.pouvoir) : null,
+    powerUsed: p.powerUsed,
+    palier: p.hero.palier ? structuredClone(p.hero.palier) : null,
     board: p.board.map(viewMinion),
     hand: p.hand.map(viewMinion),
     spells: p.spells.map((s) => ({ ...s })),
@@ -1101,7 +1179,8 @@ export function startCombats(game: Game): void {
     for (const p of game.players) if (p.alive) p.hp -= loss;
   }
   for (const p of game.players) {
-    if (p.alive && p.lostLast && p.hero.mods.lossBudget) p.nextBudgetBonus += p.hero.mods.lossBudget;
+    const lossBudget = heroMods(p).lossBudget ?? 0;
+    if (p.alive && p.lostLast && lossBudget) p.nextBudgetBonus += lossBudget;
   }
   afterScriptedCombats(game);
   game.hpSnapshot.set(game.round, game.players.map((p) => (p.alive ? p.hp : -999)));
@@ -1112,7 +1191,7 @@ export function startCombats(game: Game): void {
 
 /** Un joueur tel qu'il entre en combat. */
 function combatSide(p: Player): CombatSide {
-  return { minions: p.board, mods: p.hero.mods, hp: p.hp, tier: p.tier, tract: p.tract, campBuffs: p.campBuffs };
+  return { minions: p.board, mods: heroMods(p), hp: p.hp, tier: p.tier, tract: p.tract, campBuffs: p.campBuffs };
 }
 
 /** L'échelon du fantôme d'un éliminé : en combat, et pour les dégâts quand il gagne. */
@@ -1160,7 +1239,9 @@ function settleEliminations(game: Game, before: number[]): void {
   const allDead = dead.length === alive;
   dead.forEach((p, i) => retire(game, p, alive - i));
   const last = dead[dead.length - 1];
+  // Son fantôme rejoue son plateau sans les mots-clés qui ne tenaient qu'un combat.
   game.lastEliminated = { heroId: last.hero.id, board: last.board.map(copyMinion) };
+  for (const m of game.lastEliminated.board) stripTempKeywords(m);
   if (allDead) {
     const best = dead[dead.length - 1];
     best.place = 1;

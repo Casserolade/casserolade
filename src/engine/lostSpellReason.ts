@@ -32,6 +32,8 @@ export function lostSpellReason(spell: Spell, target: Minion | null, table: Spel
       return 'Plateau complet : ce qu\'il invoque n\'aurait pas de place.';
     }
   }
-  if (target && keywordsAlreadyThere(spell.effects, target.keywords)) return 'Ce politique l\'a déjà : le sort serait perdu.';
+  // Un mot-clé qui ne tient qu'un combat (le pouvoir de Zemmour) ne compte pas : le sort le rend durable.
+  const lasting = target ? target.keywords.filter((k) => !target.tempKeywords?.includes(k)) : [];
+  if (target && keywordsAlreadyThere(spell.effects, lasting)) return 'Ce politique l\'a déjà : le sort serait perdu.';
   return null;
 }

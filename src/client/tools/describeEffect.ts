@@ -73,6 +73,11 @@ function stats(atk: number, hp: number): string {
   return `${signed(atk)}/${signed(hp)}`;
 }
 
+/** A token's name in the plural, word by word: « Assistant fictif » → « Assistants fictifs ». */
+function tokenNames(name: string): string {
+  return name.split(' ').map((word) => (/[sxz]$/.test(word) ? word : `${word}s`)).join(' ');
+}
+
 function plural(n: number, one: string, many: string): string {
   return n > 1 ? `${n} ${many}` : one;
 }
@@ -175,6 +180,7 @@ function goldenEffect(e: Effect): Effect {
     case 'buff_par_membre':
       return { ...e, atk: e.atk * 2, hp: e.hp * 2 };
     case 'budget':
+    case 'budget_compteur':
     case 'degats':
     case 'actualisations_gratuites':
     case 'pari_defaite':
@@ -227,6 +233,8 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
       return `invoque ${tokenText(e.token, e.count)}`;
     case 'budget':
       return `gagnez ${e.value} budget${e.plus_tard ? ' à la prochaine manche' : ''}`;
+    case 'budget_compteur':
+      return `gagnez ${e.value} budget par ${counted(e.compteur)}`;
     case 'mot_cle':
       if (golden) return goldenKeyword(e, dest);
       return self ? `gagne ${keyword(e.keyword)}` : `donne ${keyword(e.keyword)} ${to(dest)}`;
@@ -257,7 +265,7 @@ function action(raw: Effect, onSpell: boolean, golden = false): string {
       return `**découvrez** un politique${e.camp ? ` ${CAMP_OF[e.camp]}` : ''}${tier}${again}`;
     }
     case 'camp_buff': {
-      const group = e.card ? `vos ${TOKENS[e.card]?.name ?? e.card}s` : e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques';
+      const group = e.card ? `vos ${tokenNames(TOKENS[e.card]?.name ?? e.card)}` : e.camp ? `vos ${CAMP_MANY[e.camp]}` : 'vos politiques';
       return `${group}, partout, gagnent ${stats(e.atk, e.hp)} pour le reste de la partie`;
     }
     case 'boutique_buff':

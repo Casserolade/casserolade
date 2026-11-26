@@ -14,6 +14,7 @@ import { zoneForTableY } from '#src/client/tools/zoneForTableY.ts';
 import { allyTargets, annonceNeedsTarget, destroysTarget, heldSpellEffects, spellNeedsTarget, spellTargets } from '#src/client/tools/playTargets.ts';
 import type { ShownCard } from '#src/client/tools/shownCard.ts';
 import { tractPileSize } from '#src/client/tools/tractPileSize.ts';
+import { heroPowerStatus } from '#src/client/tools/heroPowerStatus.ts';
 import type { PlayerView } from '#src/engine/game.ts';
 import { insertAroundLocked, reorderAroundLocked } from '#src/engine/reorderAroundLocked.ts';
 import type { Casserole, HandSpell, Minion, PlayerAction, Spell } from '#src/engine/types.ts';
@@ -46,10 +47,14 @@ export interface Aim {
   uid: number | null;
 }
 
-/** The player has laid something down, and now points at the ally it is for. `all`: a whole pile of Tracts goes on it. */
+/**
+ * The player has laid something down, and now points at the ally it is for. `all`: a whole pile of Tracts goes on it.
+ * `power`: the hero's activable power, named, aimed from its button.
+ */
 export type Targeting =
   | { kind: 'play'; minion: Minion; to: number; onto?: number; valid: number[] }
-  | { kind: 'cast'; held: HandSpell; card: ShownCard; valid: number[]; origin: Point; all?: boolean };
+  | { kind: 'cast'; held: HandSpell; card: ShownCard; valid: number[]; origin: Point; all?: boolean }
+  | { kind: 'power'; name: string; valid: number[]; origin: Point };
 
 export interface Dragging {
   item: GestureItem;
@@ -237,6 +242,31 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
     else startTargeting({ kind: 'cast', held, card, valid, origin, ...(all ? { all: true } : {}) });
   }
 
+  /** The hero's power goes off, on this ally or on none: a flash from its button, and the game decides. */
+  function firePower(target: number | undefined, origin: Point): void {
+    const to = target === undefined ? null : centerOf(boardElement(target));
+    tableFx.add({ kind: 'burst', at: to ?? origin, color: '#ffd84a' });
+    playSound('spell');
+    if (target !== undefined) tableFx.jolt(target);
+    act(target === undefined ? { t: 'pouvoir' } : { t: 'pouvoir', target });
+  }
+
+  /**
+   * The hero's activable power, from its button: at once when it needs nobody, straight on a lone ally, otherwise the
+   * player points. A refused power does nothing: its button already says why.
+   */
+  function usePower(name: string, origin: Point): void {
+    if (locked()) return;
+    const status = heroPowerStatus(view(), name);
+    if (!status || status.refusal) return;
+    if (!status.power.target) {
+      firePower(undefined, origin);
+      return;
+    }
+    if (status.targets.length === 1) firePower(status.targets[0], origin);
+    else startTargeting({ kind: 'power', name, valid: status.targets, origin });
+  }
+
   /** How many Tracts are left in this pile of the hand, as the game shows it now. */
   const pileSize = (uid: number): number => tractPileSize(view().spells, uid);
 
@@ -255,6 +285,8 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
       const where = current.onto === undefined ? { to: current.to } : { onto: current.onto };
       tableFx.add({ kind: 'burst', at: centerOf(boardElement(uid)) ?? pointer.value, color: '#ffe680' });
       layDown({ t: 'play', uid: current.minion.uid, ...where, target: uid });
+    } else if (current.kind === 'power') {
+      firePower(uid, current.origin);
     } else {
       cast(current.held, current.card, uid, current.origin, current.all);
     }
@@ -556,7 +588,7 @@ export function useTableGestures({ view, act: sendToGame, zoneAt = tableZoneAt, 
     window.removeEventListener('keydown', handleKey);
   });
 
-  return { dragging, targeting, pointer, boardPreview, press, click, actOn, sendBack, clickBoardMinion, chooseTarget, cancelTargeting, isCarried };
+  return { dragging, targeting, pointer, boardPreview, press, click, actOn, sendBack, clickBoardMinion, chooseTarget, cancelTargeting, isCarried, usePower };
 }
 
 export type TableGestures = ReturnType<typeof useTableGestures>;

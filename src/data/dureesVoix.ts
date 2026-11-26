@@ -300,5 +300,6 @@ export const DUREES_VOIX: Record<string, number> = {
   "zemmour_zemmour_corinne": 1.5,
   "zemmour_zemmour_milipol": 4.0,
   "zemmour_zemmour_petain_onpc": 1.4,
+  "zemmour_zemmour_precisez_francais": 7.9,
   "zemmour_zemmour_trafiquants": 6.9,
 };

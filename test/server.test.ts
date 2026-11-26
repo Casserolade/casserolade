@@ -134,7 +134,7 @@ function autoPlay(client: Client): void {
 }
 
 const FORBIDDEN_KEYS = new Set(['seed', 'graine', 'rng', 'pool', 'reserve', 'players', 'nextUid', 'hpSnapshot', 'roundCombats', 'jeu', 'game', 'log_actions']);
-const VIEW_KEYS = new Set(['seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'upgradeCost', 'buyCost', 'rollCost', 'boardLimit', 'scandalThreshold', 'stats', 'heroId', 'mods', 'board', 'hand', 'handLimit', 'shop', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'camps', 'maxBudget', 'nextBudget', 'freeRolls', 'relaunched', 'spells', 'shopGains', 'shopSpells', 'shopSpellCosts', 'discoverKind', 'tract', 'counters', 'contextId', 'params', 'seen', 'table', 'upgradeLock', 'quete', 'evenements', 'absents', 'nextOpponent', 'onceThisRound']);
+const VIEW_KEYS = new Set(['seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'upgradeCost', 'buyCost', 'rollCost', 'boardLimit', 'scandalThreshold', 'stats', 'heroId', 'mods', 'board', 'hand', 'handLimit', 'shop', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'camps', 'maxBudget', 'nextBudget', 'freeRolls', 'relaunched', 'spells', 'shopGains', 'shopSpells', 'shopSpellCosts', 'discoverKind', 'tract', 'counters', 'contextId', 'params', 'seen', 'table', 'upgradeLock', 'quete', 'evenements', 'absents', 'nextOpponent', 'onceThisRound', 'pouvoir', 'powerUsed', 'palier']);
 const TABLE_KEYS = new Set(['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples', 'fights']);
 
 function assertNoForbiddenKey(value: unknown, path = ''): void {
@@ -269,7 +269,8 @@ test('two people play a full game online, and no message reveals hidden informat
   for (const combat of combatsOf(host)) {
     const opening = combat.log[0];
     assert.ok(opening.e === 'debut');
-    if (combat.opponent.seat !== seat[1]) {
+    // A ghost is the last board of someone eliminated, fought in the open: the guest's own, once it is out.
+    if (combat.opponent.seat !== seat[1] && combat.opponent.seat !== -1) {
       const guestUids = guestUidsByRound.get(combat.round) ?? new Set<number>();
       for (const unit of opening.sides.flat()) assert.ok(!guestUids.has(unit.uid), 'the combat log revealed a third party\'s board');
     }

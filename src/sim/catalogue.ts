@@ -72,10 +72,10 @@ lines.push('⚠ signale un fait ou une formulation encore à recouper.', '');
 for (const [camp, label] of CAMPS) {
   const list = CASSEROLES.filter((c) => CARD_BY_ID[c.owner].camp === camp);
   lines.push(`## ${label}`, '');
-  lines.push('| Casserole | Propriétaire | Coût | Effet | Sur la carte | Statut |', '|---|---|---|---|---|---|');
+  lines.push('| Casserole | Propriétaire | Échelon | Coût | Effet | Sur la carte | Statut |', '|---|---|---|---|---|---|---|');
   for (const c of list) {
     const text = c.citation ? `« ${c.citation} » ${c.blague}` : c.blague;
-    lines.push(`| **${cell(c.name)}**${c.verifie ? '' : ' ⚠'} | ${CARD_BY_ID[c.owner].name} | ${c.cost} | ${cell(summary(c))} | ${cell(text)} | ${cell(c.statut)} |`);
+    lines.push(`| **${cell(c.name)}**${c.verifie ? '' : ' ⚠'} | ${CARD_BY_ID[c.owner].name} | ${c.echelon} | ${c.cost} | ${cell(summary(c))} | ${cell(text)} | ${cell(c.statut)} |`);
   }
   lines.push('');
 }

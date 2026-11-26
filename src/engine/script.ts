@@ -1,5 +1,5 @@
 import { CAREER_SOURCE } from './gains.ts';
-import { addStats, boardLimit, dropDiscovers, handIsFull, makeGolden, releaseMinion, returnToPool } from './recruit.ts';
+import { addStats, boardLimit, dropDiscovers, handIsFull, makeGolden, releaseMinion, returnToPool, stripTempKeywords } from './recruit.ts';
 import { copyMinion } from './game.ts';
 import { CARD_BY_ID } from '../data/cards.ts';
 import type { CombatRecord, Game, Player, Quest, ScriptEvent, ScriptRules } from './state.ts';
@@ -96,6 +96,7 @@ function abandon(game: Game, p: Player): void {
   const leaving = [...game.players].reverse().find((x) => x.alive && x !== p);
   if (!leaving || alive.length < 3) return;
   game.lastEliminated = { heroId: leaving.hero.id, board: leaving.board.map(copyMinion) };
+  for (const m of game.lastEliminated.board) stripTempKeywords(m);
   retire(game, leaving, alive.length);
   p.events.push({ key: 'abandon' });
 }

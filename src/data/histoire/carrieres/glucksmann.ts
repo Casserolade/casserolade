@@ -11,7 +11,7 @@ import { CINEMATIQUES_GLUCKSMANN } from '../cinematiques/glucksmann.ts';
 export const carriere: Carriere = {
   heros: 'glucksmann',
   difficulte: 3,
-  pourquoi: 'Trois chapitres doux, puis une primaire à gagner sur une table fermée, un premier tour à sept qui s\'arrête à la manche 12, et Mélenchon en duel : son pouvoir ne rapporte qu\'après une défaite.',
+  pourquoi: 'Trois chapitres doux, puis une primaire à gagner sur une table fermée, un premier tour à sept qui s\'arrête à la manche 12, et Mélenchon en duel. La taxe Zucman coûte 1 à chaque manche : gardez de quoi la payer.',
   accroche: 'De la farine. Un peu d\'eau plate. Le laboratoire du Parti socialiste cherche un candidat qui tienne à la cuisson.',
   boss: 'melenchon',
   fiction: true,

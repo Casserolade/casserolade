@@ -1,5 +1,34 @@
 # Changelog
 
+## 0.5.0 — 26 novembre 2026
+
+**Une version importante.** Casserolade ne prend parti pour personne : tous les camps prennent les mêmes coups. Mais toutes les casseroles ne se valent pas. Une gaffe n'est pas une condamnation, un mot malheureux n'est pas un financement libyen. Désormais, le jeu le dit : chaque casserole a un grade, selon la gravité de l'affaire.
+
+Le détail, et les cartes : https://casserolade.fr/mises-a-jour
+
+**Les casseroles ont un grade**
+- Six grades, selon la gravité de l'affaire : la gaffe, le dérapage, le scandale, l'affaire, le gros dossier, la chute. La boutique et les découvertes ne proposent que les casseroles de votre échelon ou en dessous. Le grade se lit aux cocardes de la carte.
+- Le prix suit le grade : 1 aux grades 1 et 2, 2 aux grades 3 et 4, 3 aux grades 5 et 6. Les stats et le défaut aussi.
+- Les grandes affaires ont un effet qui leur est propre, souvent un 49.3 : avec le Financement libyen, toute la campagne double ses stats ; le Compte en Suisse double celles de son politique à chaque manche ; les Écoutes donnent l'Immunité à tout le plateau ; l'Emploi fictif laisse une chaise vide.
+- Éric Zemmour reçoit « Précisez français » : sa condamnation définitive du 24 novembre 2026.
+
+**Les héros comptent leurs casseroles**
+- Le nombre de casseroles posées dans la partie s'affiche sur le portrait du héros.
+- Nicolas Sarkozy : à partir de la 6e casserole posée, chacune donne aussi +2/+2 au politique qui la reçoit.
+- Emmanuel Macron : à partir de la 5e, la première casserole de chaque manche donne ses stats deux fois.
+- François de Rugy gagne +1/+1 par casserole posée dans la partie. Patrick Balkany (la carte) +1/+0, au lieu de +1/+1.
+
+**Dix pouvoirs de héros s'activent**
+- Un bouton à côté du portrait, et sur téléphone dans la fiche du héros : gratuit ou pour 1, une fois par manche ou une fois dans la partie. Un pouvoir qui ne ferait rien est refusé, et ne compte pas comme servi.
+- Gratuits, une fois par manche : Éric Zemmour (Polémique à un politique, jusqu'à la fin du prochain combat), Bruno Retailleau (+0/+2, et Porte-parole jusqu'à la fin du prochain combat), Marine Tondelier (+1/+1, +2/+2 sur un Écologiste), Natacha Polony (+1/+1 par camp différent sur votre plateau).
+- Pour 1, une fois par manche : Raphaël Glucksmann (le plus fort de la boutique est taxé, un de vos politiques prend ses stats), Juan Branco (découvrez une casserole), Xavier Bertrand (3 budget si vous perdez le prochain combat).
+- Gratuits, une fois par partie : Jean-Luc Mélenchon (Immunité pour de bon), François Hollande (un politique d'échelon 4 ou moins devient doré), Patrick Balkany (1 budget par casserole posée).
+- Les armures de ces héros sont réglées de nouveau, et celles de Philippot, Villepin, Riner, Dupont-Aignan, Lassalle, Philippe et Bouamrane, que les grades ont déplacés.
+
+**Les bots**
+- Ils se servent des pouvoirs : au bon moment, sur la bonne cible.
+- Un Ralliement en boutique vaut pour eux ce qu'il apporterait à leur meilleur politique : ils ne laissent plus passer une Immunité quand un gros politique l'attend.
+
 ## 0.4.8 — 23 novembre 2026
 
 Le détail, et les cartes : https://casserolade.fr/mises-a-jour

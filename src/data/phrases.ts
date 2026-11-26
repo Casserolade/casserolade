@@ -1220,6 +1220,7 @@ export const PHRASES: Record<string, Partial<Record<Moment, string[]>>> = {
     ],
     "casserole": [
       "Ben voyons !",
+      "Vous avez osé dire que Pétain avait sauvé les juifs. — Français, précisez, précisez français. — Ou avait sauvé les juifs français, c'est une monstruosité",
       "Ils n'ont rien à faire ici, ils sont voleurs, ils sont assassins, ils sont violeurs, c'est tout ce qu'ils sont.",
       "C'est votre prénom qui est une insulte à la France, parce que la France n'est pas une terre vierge.",
       "C'est encore une fois le réel, je suis désolé."

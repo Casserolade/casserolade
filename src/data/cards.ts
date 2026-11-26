@@ -170,8 +170,10 @@ export const CARDS: Card[] = [
   // avait les Ralliements au corps le plus faible.
   card('maillard', 'Sylvain Maillard', 'macronie', 1, 2, 3, { kw: ['ni_droite_ni_gauche'], fx: [fx('rallie', 'joue', buff(2, 2))] }),
   card('oudea', 'Amélie Oudéa-Castéra', 'macronie', 2, 2, 2, { golden: true, fx: [fx('fin_tour', 'dores', buff(1, 0))] }),
+  // 26 novembre 2026 : les homards. La Macronie compte aussi ses casseroles : +1/+1 par casserole posée dans la partie
+  // (au lieu de +1/+1 tous les 5 de budget dépensés).
   card('rugy', 'François de Rugy', 'macronie', 2, 2, 3, {
-    fx: [fx('depense', 'soi', buff(1, 1), { n: 5 }), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
+    fx: [fx('aura', 'soi', compteur('casseroles', 1, 1)), fx('celebration', 'joueur', { do: 'budget', value: 1, plus_tard: true })],
   }),
   // 7 novembre 2026 : grandit tous les deux sorts. À chaque Tract, un échelon 2 dépassait les légendes.
   card('schiappa', 'Marlène Schiappa', 'macronie', 2, 2, 3, {
@@ -211,7 +213,9 @@ export const CARDS: Card[] = [
   // tiennent en 0,15 place en mono-camp (7 novembre 2026).
   card('gueant', 'Claude Guéant', 'republicains', 1, 3, 2, { kw: ['immunite'], fx: [fx('meeting', 'soi', buff(1, 0), { perma: true, once: 'combat' })] }),
   card('tiberi', 'Jean Tiberi', 'republicains', 1, 2, 3, { fx: [fx('annonce', 'soi', invoque('electeur_fantome'))] }),
-  card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 1))] }),
+  // 26 novembre 2026 : +1/+0 par casserole (au lieu de +1/+1). Depuis les grades, 65 casseroles coûtent 1, il s'en pose
+  // une de plus par partie, et Balkany offert à la manche 5 passait de +0,52 à +1,16 place.
+  card('balkany', 'Patrick Balkany', 'republicains', 2, 2, 2, { kw: ['immunite'], fx: [fx('aura', 'soi', compteur('casseroles', 1, 0))] }),
   card('hortefeux', 'Brice Hortefeux', 'republicains', 2, 3, 4, { fx: [fx('immunite_perdue', 'soi', buff(1, 1), { perma: true })] }),
   card('morano', 'Nadine Morano', 'republicains', 2, 5, 5, { fx: [fx('celebration', 'aleatoire', motCle('immunite'))] }),
   // 22 novembre 2026 : il donnait l'Immunité à chaque fin de tour, et tout le plateau finissait immunisé (+1,40 place

@@ -72,6 +72,9 @@ function parseAction(raw: Record<string, unknown>): PlayerAction | null {
     case 'discover':
     case 'hero':
       return isCount(raw.i) ? { t: raw.t, i: raw.i } : null;
+    case 'pouvoir':
+      if (!optionalCount(raw.target)) return null;
+      return { t: 'pouvoir', ...(raw.target !== undefined ? { target: raw.target as number } : {}) };
     default:
       return null;
   }

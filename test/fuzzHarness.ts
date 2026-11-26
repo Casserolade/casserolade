@@ -30,7 +30,7 @@ const VIEW_KEYS = [
   'seat', 'round', 'phase', 'plateau', 'animateur', 'heroOffers', 'alive', 'place', 'hp', 'tier', 'budget', 'maxBudget', 'nextBudget', 'upgradeCost', 'upgradeLock', 'buyCost',
   'rollCost', 'freeRolls', 'relaunched', 'boardLimit', 'scandalThreshold', 'heroId', 'mods', 'board', 'hand', 'spells', 'handLimit', 'shop', 'shopGains',
   'shopSpells', 'shopSpellCosts', 'frozen', 'casseroleOffer', 'casseroleCost', 'discover', 'discoverKind', 'tract', 'counters', 'stats', 'camps',
-  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents', 'nextOpponent', 'onceThisRound',
+  'contextId', 'params', 'seen', 'table', 'quete', 'evenements', 'absents', 'nextOpponent', 'onceThisRound', 'pouvoir', 'powerUsed', 'palier',
 ].sort();
 const TABLE_KEYS = ['seat', 'heroId', 'hp', 'tier', 'alive', 'boardSize', 'place', 'triples', 'fights'].sort();
 
@@ -321,7 +321,8 @@ function randomAction(game: Game, p: Player, h: Rng): PlayerAction {
   if (r < 78) return { t: 'roll' };
   if (r < 81) return { t: 'freeze' };
   if (r < 87) return { t: 'upgrade' };
-  if (r < 96) return { t: 'move', uid: boardUid(), to: randomSlot(h, p.board.length - 1) };
+  if (r < 92) return { t: 'move', uid: boardUid(), to: randomSlot(h, p.board.length - 1) };
+  if (r < 96) return h.next() < 0.8 ? { t: 'pouvoir', target: boardUid() } : { t: 'pouvoir' };
   if (r < 98) return { t: 'discover', i: h.int(4) - 1 };
   return { t: 'hero', i: h.int(3) };
 }

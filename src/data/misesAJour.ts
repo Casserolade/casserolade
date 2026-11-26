@@ -7,6 +7,7 @@ import { CARTES as CARTES_0_4_4 } from './misesAJour/0.4.4.ts';
 import { CARTES as CARTES_0_4_5 } from './misesAJour/0.4.5.ts';
 import { CARTES as CARTES_0_4_7 } from './misesAJour/0.4.7.ts';
 import { CARTES as CARTES_0_4_8 } from './misesAJour/0.4.8.ts';
+import { CARTES as CARTES_0_5_0 } from './misesAJour/0.5.0.ts';
 
 /**
  * Les mises à jour et équilibrages, version par version, tels que la page /mises-a-jour les montre : en bref, les
@@ -14,8 +15,11 @@ import { CARTES as CARTES_0_4_8 } from './misesAJour/0.4.8.ts';
  * tools/mises_a_jour/instantane.ts ; le texte s'écrit ici, court. À tenir à jour à chaque version.
  */
 
-/** Une carte de casserole telle qu'elle se montre : sa mécanique, sans son fait ni son statut. */
-export type CasseroleCard = Omit<Casserole, 'blague' | 'citation' | 'fait' | 'statut' | 'verifie'>;
+/**
+ * Une carte de casserole telle qu'elle se montre : sa mécanique, sans son fait ni son statut. Sans échelon dans les
+ * versions d'avant le 26 novembre 2026.
+ */
+export type CasseroleCard = Omit<Casserole, 'blague' | 'citation' | 'fait' | 'statut' | 'verifie' | 'echelon'> & { echelon?: number };
 
 /** Une carte qui arrive (après seulement), qui change (avant et après), ou qui part (avant seulement). */
 export type CardChange<T> = { before?: T; after: T } | { before: T; after?: undefined };
@@ -58,6 +62,44 @@ const VEDETTE_SEULE = 'Le mot-clé Vedette est retiré. Rien d\'autre ne change.
 
 /** De la plus récente à la plus ancienne. */
 export const MISES_A_JOUR: PatchNote[] = [
+  {
+    version: '0.5.0',
+    date: '26 novembre 2026',
+    title: 'Les casseroles ont un grade, et dix héros un pouvoir à activer',
+    summary: [
+      'Une version importante. Le jeu ne prend parti pour personne, et tous les camps prennent les mêmes coups ; mais toutes les casseroles ne se valent pas. Une gaffe n\'est pas une condamnation, un mot malheureux n\'est pas un financement libyen : désormais, le jeu le dit.',
+      'Chaque casserole a un grade, selon la gravité de l\'affaire : la gaffe, le dérapage, le scandale, l\'affaire, le gros dossier, la chute. La boutique et les découvertes ne proposent que celles de votre échelon ou en dessous, et le grade se lit aux cocardes de la carte.',
+      'Le prix suit le grade : 1 aux grades 1 et 2, 2 aux grades 3 et 4, 3 aux grades 5 et 6. Les stats et le défaut grandissent avec lui.',
+      'Les grandes affaires ont un effet qui leur est propre, souvent un 49.3 : avec le Financement libyen, toute la campagne double ses stats ; le Compte en Suisse double celles de son politique à chaque manche ; les Écoutes donnent l\'Immunité à tout le plateau ; l\'Emploi fictif laisse une chaise vide.',
+      'Éric Zemmour reçoit une quatrième casserole, « Précisez français » : la condamnation définitive du 24 novembre 2026.',
+      'Le nombre de casseroles posées dans la partie s\'affiche sur le portrait du héros. Nicolas Sarkozy et Emmanuel Macron gagnent un palier en les posant, Patrick Balkany les encaisse, et François de Rugy grandit avec elles.',
+      'Dix héros ont désormais un pouvoir à activer, gratuit ou pour 1, une fois par manche ou une fois dans la partie : un bouton à côté du portrait, et sur téléphone dans la fiche du héros. Un pouvoir qui ne ferait rien est refusé et ne compte pas comme servi.',
+      'Les armures (le socle électoral) sont réglées de nouveau : celles des héros dont le pouvoir change, et de quelques autres que les grades ont déplacés (Philippot, Villepin, Riner, Dupont-Aignan, Lassalle, Philippe, Bouamrane).',
+    ],
+    rules: [
+      { term: 'Le grade d\'une casserole', after: 'De 1 à 6, selon la gravité de l\'affaire. Il fait le prix, les stats et le défaut, et la casserole n\'est proposée qu\'à partir de cet échelon.' },
+      { term: 'Pouvoir à activer', after: 'Un bouton à côté du portrait du héros : il se paie (gratuit ou 1), sert une fois par manche ou une fois par partie, et vise parfois un de vos politiques. Ce n\'est pas un sort.' },
+      { term: 'Nicolas Sarkozy, Casier', before: 'Les casseroles coûtent 1 de moins, et il en faut une de plus pour faire scandale.', after: 'Les casseroles coûtent 1 de moins (jamais moins de 1), et il en faut une de plus pour faire scandale. À partir de la 6e casserole posée, chacune donne aussi +2/+2 au politique qui la reçoit.' },
+      { term: 'Emmanuel Macron, En même temps', before: 'La première Annonce de chaque manche se déclenche deux fois.', after: 'La première Annonce de chaque manche se déclenche deux fois. À partir de la 5e casserole posée, la première casserole de chaque manche donne ses stats deux fois.' },
+      { term: 'Patrick Balkany, Villa Pamplemousse', before: 'Blanchiment : renvoyer un politique rapporte 1 de plus.', after: 'Une fois par partie, gratuit : gagnez 1 budget par casserole posée cette partie.' },
+      { term: 'Éric Zemmour, Ben voyons', before: 'Polémique permanente : votre premier politique a Polémique à chaque combat.', after: 'Une fois par manche, gratuit : donne Polémique à un politique, jusqu\'à la fin du prochain combat.' },
+      { term: 'Jean-Luc Mélenchon, Ma personne est sacrée', before: 'La rue : au début de chaque manche, ajoutez un Tract à votre main.', after: 'Une fois par partie, gratuit : donne Immunité à un politique, pour de bon.' },
+      { term: 'François Hollande, Moi président', before: 'Le retour : à chaque combat, le premier politique à mourir se réincarne.', after: 'Une fois par partie, gratuit : un politique d\'échelon 4 ou moins devient doré.' },
+      { term: 'Bruno Retailleau, L\'ordre', before: 'Votre premier politique gagne +4 PV à chaque combat.', after: 'Une fois par manche, gratuit : +0/+2 à un politique, et Porte-parole jusqu\'à la fin du prochain combat.' },
+      { term: 'Marine Tondelier, La veste verte', before: 'Première République écologique : à chaque fin de recrutement, votre premier politique gagne +1/+1.', after: 'Une fois par manche, gratuit : +1/+1 à un politique, +2/+2 si c\'est un Écologiste.' },
+      { term: 'Natacha Polony, Nous sommes la France', before: 'À chaque fin de recrutement, votre premier politique gagne +1/+1, et la première actualisation de chaque manche est gratuite.', after: 'Une fois par manche, gratuit : +1/+1 à un politique par camp différent sur votre plateau.' },
+      { term: 'Raphaël Glucksmann, Taxe Zucman', before: '+2 budget à la manche suivante après une défaite.', after: 'Une fois par manche, pour 1 : le politique le plus fort de la boutique est taxé, il part, et un de vos politiques prend ses stats.' },
+      { term: 'Juan Branco, Crépuscule', before: 'Les casseroles coûtent 1 de moins, et +1 budget à la manche suivante après une défaite.', after: 'Une fois par manche, pour 1 : découvrez une casserole de votre échelon ou moins.' },
+      { term: 'Xavier Bertrand, Toujours candidat', before: 'Les échelons coûtent 1 de moins, et votre premier politique gagne +2 PV à chaque combat.', after: 'Une fois par manche, pour 1 : si vous perdez le prochain combat, gagnez 3 budget.' },
+    ],
+    why: {
+      rugy: 'La Macronie compte aussi ses casseroles : +1/+1 par casserole posée dans la partie, au lieu de grandir avec le budget dépensé.',
+      balkany: 'Avec les grades, il se pose plus de casseroles : +1/+0 par casserole, au lieu de +1/+1.',
+      precisez_francais: 'Condamnation définitive le 24 novembre 2026 (Cour de cassation). Relaxé deux fois avant : Immunité, et la première qui tombe dans le combat revient.',
+    },
+    casserolesWhy: 'Chaque casserole a désormais un grade, selon la gravité de l\'affaire : son prix, ses stats et son défaut le suivent, et les grandes affaires ont un effet qui leur est propre.',
+    cards: CARTES_0_5_0,
+  },
   {
     version: '0.4.8',
     date: '23 novembre 2026',

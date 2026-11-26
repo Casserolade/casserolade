@@ -79,6 +79,8 @@ export interface Player {
   rollsThisRound: number;
   /** Annonces déclenchées pendant cette manche. */
   annoncesThisRound: number;
+  /** Son pouvoir activable a servi : dans la manche, ou dans la partie s'il ne sert qu'une fois. */
+  powerUsed: boolean;
   /** Les relances déjà faites cette manche, une clé par relanceur, passage et politique relancé (règle R4). */
   retriggered: Set<string>;
   /** Les effets « une fois par manche » déjà joués : `uid:index`. */

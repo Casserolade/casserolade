@@ -266,7 +266,8 @@ test('une casserole seule : son avantage tout de suite, son défaut dort', () =>
   const m = p.board[0];
   const avant = { atk: m.atk, hp: m.hp };
   poseCasserole(game, 'homards', m);
-  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 6, hp: avant.hp + 6 });
+  const h = CASSEROLE_BY_ID.homards as { atk: number; hp: number };
+  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + h.atk, hp: avant.hp + h.hp });
   assert.equal(m.scandal, undefined);
   assert.equal(m.budgetPerRound, 0, 'le budget perdu dort tant qu\'il n\'y a pas de scandale');
 });
@@ -279,7 +280,8 @@ test('deux casseroles : scandale deux manches, puis l\'oubli du peuple efface le
   for (let i = 0; i < 2; i++) poseCasserole(game, 'homards', m);
   assert.equal(viewFor(game, 0).scandalThreshold, 2);
   assert.ok(m.scandal);
-  assert.equal(m.budgetPerRound, -4, 'pendant le scandale, les deux défauts s\'appliquent');
+  const h = CASSEROLE_BY_ID.homards as { atk: number; hp: number; budgetPerRound: number };
+  assert.equal(m.budgetPerRound, 2 * h.budgetPerRound, 'pendant le scandale, les deux défauts s\'appliquent');
   assert.equal(p.board.includes(m), true, 'le scandale ne l\'éloigne pas du plateau');
   manche(game);
   assert.ok(m.scandal, 'encore en scandale à la deuxième manche');
@@ -288,7 +290,7 @@ test('deux casseroles : scandale deux manches, puis l\'oubli du peuple efface le
   assert.equal(m.budgetPerRound, 0);
   assert.equal(m.oublie, 2);
   assert.equal(m.charges, 0);
-  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 12, hp: avant.hp + 12 }, 'les avantages restent');
+  assert.deepEqual({ atk: m.atk, hp: m.hp }, { atk: avant.atk + 2 * h.atk, hp: avant.hp + 2 * h.hp }, 'les avantages restent');
   // Une nouvelle casserole repart seule : pas de scandale. Le scandale a mangé le budget de la manche.
   p.budget = 100;
   poseCasserole(game, 'homards', m);
@@ -366,6 +368,8 @@ test('la boutique tire un camp d\'abord, puis une de ses casseroles : celles de 
   const { game, p, buy } = setup(11);
   buy('sarkozy');
   game.round = game.params.casseroleFromRound;
+  // À l'échelon 6, toutes les casseroles de la partie peuvent sortir, quel que soit leur grade.
+  p.tier = 6;
   const inGame = CASSEROLES.filter((c) => game.poolTotal.has(c.owner));
   const campOf = (c: { owner: string }) => CARD_BY_ID[c.owner].camp;
   const camps = new Set(inGame.map(campOf)).size;
@@ -383,6 +387,8 @@ test('la boutique tire un camp d\'abord, puis une de ses casseroles : celles de 
 
 test('« À la une » découvre d\'abord les casseroles de vos politiques, complétées par d\'autres', () => {
   const { game, p, buy } = setup(11);
+  // Le Compte en Suisse est une casserole de grade 5 : elle ne sort qu'à partir de l'échelon 5.
+  p.tier = 6;
   buy('cahuzac');
   addSpellToHand(game, p, 'a_la_une');
   const held = p.spells.find((s) => s.spellId === 'a_la_une') as { uid: number };
@@ -429,6 +435,36 @@ test('Lalanne découvre trois Ridicules à 2 ou moins, jamais une casserole que 
     assert.ok(offer.options.every((id) => CASSEROLE_BY_ID[id].cost <= 2), `pas les plus chers : ${offer.options.join()}`);
     assert.ok(offer.options.every((id) => game.poolTotal.has(CASSEROLE_BY_ID[id].owner)), 'seulement celles de la partie');
   }
+});
+
+test('la boutique et les découvertes ne proposent que les casseroles de l\'échelon du joueur ou en dessous', () => {
+  for (const tier of [1, 2, 3, 4, 5, 6]) {
+    const { game, p } = setup(tier);
+    game.round = 5;
+    p.tier = tier;
+    const seen = new Set<number>();
+    for (let i = 0; i < 60; i++) {
+      offerCasserole(game, p);
+      seen.add(CASSEROLE_BY_ID[p.casseroleOffer as string].echelon);
+      p.discover = null;
+      p.discoverQueue = [];
+      addSpellToHand(game, p, 'fuite_dans_la_presse');
+      const held = p.spells.find((x) => x.spellId === 'fuite_dans_la_presse') as { uid: number };
+      assert.equal(applyAction(game, 0, { t: 'cast', uid: held.uid }).ok, true);
+      for (const id of (p.discover as { options: string[] } | null)?.options ?? []) seen.add(CASSEROLE_BY_ID[id].echelon);
+    }
+    assert.ok([...seen].every((t) => t <= tier), `à l'échelon ${tier} : ${[...seen].sort()}`);
+    assert.ok(seen.has(tier), `à l'échelon ${tier}, on voit aussi celles de son grade`);
+  }
+});
+
+test('une casserole a un grade de 1 à 6, et coûte 1, 2 ou 3 selon lui ; « 1,75 % » est gratuite, c\'est sa blague', () => {
+  for (const c of CASSEROLES) {
+    assert.ok([1, 2, 3, 4, 5, 6].includes(c.echelon), `${c.id} : grade ${c.echelon}`);
+    assert.equal(c.cost, c.id === 'un_virgule_75' ? 0 : Math.ceil(c.echelon / 2), c.id);
+  }
+  const grade = (id: string) => CASSEROLE_BY_ID[id].echelon;
+  assert.ok(grade('valise_libyenne') > grade('la_republique_cest_moi'), 'le Financement libyen pèse plus qu\'un coup de gueule');
 });
 
 test('Fillon repousse le scandale, et « Quel compte Facebook ? » fait tout oublier', () => {
@@ -746,15 +782,17 @@ test('Durif, à chaque fin de tour, donne deux fois +1/+1 à un autre allié', (
   assert.equal(target.atk, CARD_BY_ID.cheminade.atk + 2, 'le seul autre allié reçoit les deux');
 });
 
-test('la Dépense : Rugy grandit chaque fois que vous avez dépensé 5', () => {
+test('la Dépense : un politique grandit chaque fois que vous avez dépensé 5', () => {
+  // Rugy la portait jusqu'au 26 novembre 2026 (il compte désormais les casseroles) : le mécanisme reste au moteur.
   const { game, p, buy } = setup();
   buy('rugy');
   const rugy = p.board[0];
+  const perStep: Effect = { when: 'depense', to: 'soi', do: 'buff', atk: 1, hp: 1, n: 5 };
+  rugy.effects = [perStep];
   const atk = rugy.atk;
   for (let i = 0; i < 4; i++) applyAction(game, 0, { t: 'roll' });
   buy('cheminade');
-  const perStep = (CARD_BY_ID.rugy.effects ?? [])[0] as Effect & { atk: number };
-  assert.equal(rugy.atk, atk + 2 * perStep.atk, 'dépensé 3, puis 4 actualisations et un achat : les tranches de 5 et de 10');
+  assert.equal(rugy.atk, atk + 2, 'dépensé 3, puis 4 actualisations et un achat : les tranches de 5 et de 10');
 });
 
 test('les cartes « cette partie » : Trouvé grandit à chaque Tract, même arrivée tard', () => {
@@ -847,7 +885,7 @@ test('une même graine donne la même partie', () => {
 test('la Fin de tour est notée effet par effet, et part avec la vue du combat (3 novembre 2026)', async () => {
   const { applyAction, combatViewFor, createGame, startCombats } = await import('../src/engine/game.ts');
   const { addMinionToHand } = await import('../src/engine/recruit.ts');
-  const game = createGame({ seed: 9, seats: 2, heroes: ['tondelier', 'philippe'], activeCamps: ['ecologistes', 'macronie', 'insoumis', 'rn', 'socialistes'], combatLog: true });
+  const game = createGame({ seed: 9, seats: 2, heroes: ['arthaud', 'philippe'], activeCamps: ['ecologistes', 'macronie', 'insoumis', 'rn', 'socialistes'], combatLog: true });
   const p = game.players[0];
   p.budget = 20;
   const placed = ['doucet', 'bayrou'].map((id) => {
@@ -865,8 +903,8 @@ test('la Fin de tour est notée effet par effet, et part avec la vue du combat (
   const idle = steps.find((s) => s.source === bayrou.uid);
   assert.ok(idle && idle.changes.length === 0 && idle.notes.length === 0, 'Bayrou sans Ralliement : rien à faire, et ça se voit');
   const hero = steps.find((s) => s.source === null);
-  assert.ok(hero, 'le pouvoir de Tondelier est une étape');
-  assert.deepEqual(hero.changes[0], { uid: p.board[0].uid, atk: before.atk + 2, hp: before.hp + 2, keywords: p.board[0].keywords }, 'Doucet +1/+1, puis Tondelier +1/+1 sur le premier');
+  assert.ok(hero, 'le pouvoir d\'Arthaud est une étape');
+  assert.deepEqual(hero.changes[0], { uid: p.board[0].uid, atk: before.atk + 2, hp: before.hp + 2, keywords: p.board[0].keywords }, 'Doucet +1/+1, puis Arthaud +1/+1 sur le premier');
   const view = combatViewFor(game, 0);
   assert.equal(view?.endOfTurn.length, steps.length);
   assert.ok(!view?.log.some((e) => e.e === 'effet' && e.when === 'fin_tour'), 'le combat ne rejoue plus la Fin de tour');
